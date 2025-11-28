@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -13,6 +13,7 @@ import { loginSchema, type LoginFormData } from "@/utils/schemas";
 const AuthPage = () => {
   const router = useRouter();
   const {
+    control,
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
@@ -109,24 +110,31 @@ const AuthPage = () => {
             Password
           </label>
           <div className="w-full">
-            <Password
-              id="password"
-              {...register("password")}
-              placeholder="Enter Your Password"
-              className={`w-full`}
-              inputClassName="w-full"
-              toggleMask
-              invalid={!!errors.password?.message}
-              feedback={false}
-              inputStyle={{
-                padding: "0.875rem",
-                fontSize: "0.875rem",
-                width: "100%",
-                borderRadius: "0",
-              }}
-              style={{
-                width: "100%",
-              }}
+            <Controller
+              name="password"
+              control={control}
+              render={({ field: { onChange, value } }) => (
+                <Password
+                  id="password"
+                  value={value}
+                  onInput={onChange}
+                  placeholder="Enter Your Password"
+                  className={`w-full`}
+                  inputClassName="w-full"
+                  toggleMask
+                  invalid={!!errors.password?.message}
+                  feedback={false}
+                  inputStyle={{
+                    padding: "0.875rem",
+                    fontSize: "0.875rem",
+                    width: "100%",
+                    borderRadius: "0",
+                  }}
+                  style={{
+                    width: "100%",
+                  }}
+                />
+              )}
             />
           </div>
           {!!errors.password?.message && (
