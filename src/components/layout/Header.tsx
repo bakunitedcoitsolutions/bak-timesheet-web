@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { Menu } from "primereact/menu";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { classNames } from "primereact/utils";
 import { MenuItem, MenuItemOptions } from "primereact/menuitem";
 
@@ -13,7 +13,26 @@ interface HeaderProps {
 
 export default function Header({ collapsed, setCollapsed }: HeaderProps) {
   const router = useRouter();
+  const pathname = usePathname();
   const menuRight = useRef<Menu | null>(null);
+
+  const getPageTitle = (path: string) => {
+    if (path === "/") return "Dashboard";
+
+    // Remove leading slash and split
+    const segments = path.substring(1).split("/");
+
+    // Get the first segment (e.g., "employees" from "/employees/123")
+    const mainSection = segments[0];
+
+    // Format: "employee-cards" -> "Employee Cards"
+    return mainSection
+      .split("-")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+  };
+
+  const pageTitle = getPageTitle(pathname);
 
   const menuItem = [
     {
@@ -46,15 +65,19 @@ export default function Header({ collapsed, setCollapsed }: HeaderProps) {
       <div className="flex items-center gap-4">
         <button
           onClick={() => setCollapsed(!collapsed)}
-          className="w-10 h-10 flex items-center justify-center cursor-pointer rounded-full bg-primary-50 text-primary focus:outline-none transition-colors"
+          className="w-10 h-10 flex items-center justify-center cursor-pointer rounded-full bg-primary-50 text-primary focus:outline-none transition-colors shadow-sm hover:bg-primary-100"
         >
           <i
-            className={classNames("pi pi-chevron-left duration-200", {
-              "rotate-0": !collapsed,
-              "rotate-180": collapsed,
+            className={classNames("pi duration-200", {
+              "rotate-0 pi-chevron-left": !collapsed,
+              "rotate-180 pi-bars": collapsed,
             })}
           />
         </button>
+
+        <div className="h-6 w-px bg-gray-200 mx-1"></div>
+
+        <h1 className="text-lg font-semibold tracking-wide">{pageTitle}</h1>
       </div>
 
       <div className="flex items-center gap-4">

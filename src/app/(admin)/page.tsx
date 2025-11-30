@@ -62,7 +62,9 @@ const HomePage = () => {
               <h3 className="text-3xl font-bold text-gray-800 mb-1">
                 {stat.value}
               </h3>
-              <p className="text-gray-500 text-sm font-medium">{stat.title}</p>
+              <p className="text-gray-500 text-sm font-semibold">
+                {stat.title}
+              </p>
             </div>
           </div>
         ))}

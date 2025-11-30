@@ -49,16 +49,16 @@ const AuthPage = () => {
               className="mx-auto mb-6 object-contain"
               src="/assets/images/bak_transparent_logo.png"
             />
-            <h1 className="text-3xl font-normal hidden lg:block text-gray-800">
+            <h1 className="text-3xl font-semibold hidden lg:block text-gray-800">
               SIGN IN
             </h1>
-            <h1 className="text-3xl font-normal block lg:hidden text-gray-800">
+            <h1 className="text-3xl font-semibold block lg:hidden text-gray-800">
               BAK TIMESHEET
             </h1>
           </div>
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-            <div className="text-sm text-gray-500 text-center mb-6">
+            <div className="text-sm font-medium text-gray-500 text-center mb-6">
               By entering your email address and password, you get access to the
               system.
             </div>
@@ -142,11 +142,11 @@ const AuthPage = () => {
             </div>
           </div>
 
-          <h2 className="text-2xl font-normal text-gray-800 mt-8 mb-4">
+          <h2 className="text-2xl font-semibold text-gray-800 mt-8 mb-4">
             BAK Timesheet - Human Resources System
           </h2>
 
-          <p className="text-gray-500 text-sm mb-4 leading-relaxed">
+          <p className="text-gray-600 text-sm mb-4 leading-relaxed">
             Welcome to BAK United. Since 2008, we have been a trusted name in
             construction across Saudi Arabia. We are dedicated to delivering
             excellence in every project, from residential developments to

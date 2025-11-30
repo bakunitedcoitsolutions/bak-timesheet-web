@@ -132,18 +132,28 @@ export default function Sidebar({ collapsed, setCollapsed }: SidebarProps) {
 
   const renderMenuItem = (item: MenuItem) => {
     const isActive =
-      item.href === pathname ||
-      (item.items && item.items.some((sub) => sub.href === pathname));
+      (item.href &&
+        (item.href === "/"
+          ? pathname === "/"
+          : pathname.startsWith(item.href))) ||
+      (item.items &&
+        item.items.some(
+          (sub) =>
+            sub.href &&
+            (sub.href === "/"
+              ? pathname === "/"
+              : pathname.startsWith(sub.href))
+        ));
     const hasSubmenu = item.items && item.items.length > 0;
     const expanded = isExpanded(item.label);
 
     return (
-      <li key={item.label} className="mb-3" title={item.label}>
+      <li key={item.label} className="mb-1.5" title={item.label}>
         <div
           className={classNames(
             "flex items-center py-2.5 px-4 rounded-xl mx-auto cursor-pointer transition-colors duration-200 justify-between text-[15px]",
             {
-              "bg-primary/10 text-primary": isActive,
+              "bg-primary/10 text-primary shadow-lg": isActive,
               "bg-transparent text-gray-800 hover:text-primary": !isActive,
               "w-[90%]": !collapsed,
               "w-[65%]": collapsed,
@@ -169,7 +179,7 @@ export default function Sidebar({ collapsed, setCollapsed }: SidebarProps) {
             >
               <i className={classNames(item.icon, "text-xl!")}></i>
               {!collapsed && (
-                <span className="ml-4 font-medium">{item.label}</span>
+                <span className="ml-4 font-semibold">{item.label}</span>
               )}
             </Link>
           ) : (
@@ -177,7 +187,9 @@ export default function Sidebar({ collapsed, setCollapsed }: SidebarProps) {
               <i className={classNames(item.icon, "text-xl!")}></i>
               {!collapsed && (
                 <>
-                  <span className="ml-4 font-medium flex-1">{item.label}</span>
+                  <span className="ml-4 font-semibold flex-1">
+                    {item.label}
+                  </span>
                   {hasSubmenu && (
                     <i
                       className={classNames(
@@ -198,7 +210,7 @@ export default function Sidebar({ collapsed, setCollapsed }: SidebarProps) {
         {/* Submenu */}
         <div
           className={classNames(
-            "overflow-hidden transition-all duration-300 ease-in-out",
+            "overflow-hidden mt-2 transition-all duration-300 ease-in-out",
             {
               "max-h-0": !expanded || collapsed,
               "max-h-[1000px]": expanded && !collapsed && hasSubmenu,
@@ -207,7 +219,10 @@ export default function Sidebar({ collapsed, setCollapsed }: SidebarProps) {
         >
           <ul className="list-none p-0 m-0 bg-secondary-white">
             {item.items?.map((subItem) => {
-              const isSubActive = pathname === subItem.href;
+              const isSubActive =
+                subItem.href === "/"
+                  ? pathname === "/"
+                  : pathname.startsWith(subItem.href || "");
               return (
                 <li key={subItem.label}>
                   <Link
@@ -215,7 +230,7 @@ export default function Sidebar({ collapsed, setCollapsed }: SidebarProps) {
                     className={classNames(
                       "flex items-center pl-15 pr-6 py-3 cursor-pointer transition-colors duration-200",
                       {
-                        "text-primary font-medium": isSubActive,
+                        "text-primary font-semibold": isSubActive,
                         "text-gray-500 hover:text-gray-900": !isSubActive,
                       }
                     )}
