@@ -1,4 +1,5 @@
 import { PrimeReactProvider } from "primereact/api";
+import { ToastProvider } from "@/context";
 
 const Providers = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -7,7 +8,7 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
         unstyled: false,
       }}
     >
-      {children}
+      <ToastProvider>{children}</ToastProvider>
     </PrimeReactProvider>
   );
 };

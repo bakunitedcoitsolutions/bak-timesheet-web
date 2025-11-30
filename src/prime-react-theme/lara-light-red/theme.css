@@ -8124,13 +8124,13 @@
   }
   .p-toast .p-toast-message.p-toast-message-info {
     background: rgba(219, 234, 254, 0.7);
-    border: solid #d41124;
+    border: solid #2647e4;
     border-width: 0 0 0 6px;
-    color: #d41124;
+    color: #2647e4;
   }
   .p-toast .p-toast-message.p-toast-message-info .p-toast-message-icon,
   .p-toast .p-toast-message.p-toast-message-info .p-toast-icon-close {
-    color: #d41124;
+    color: #2647e4;
   }
   .p-toast .p-toast-message.p-toast-message-success {
     background: rgba(228, 248, 240, 0.7);
