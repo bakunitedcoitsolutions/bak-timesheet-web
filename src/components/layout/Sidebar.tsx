@@ -14,11 +14,17 @@ interface MenuItem {
 
 interface SidebarProps {
   collapsed: boolean;
+  setCollapsed: (collapsed: boolean) => void;
 }
 
 const menuItems: MenuItem[] = [
-  { label: "Dashboard", icon: "pi pi-microsoft", href: "/" },
-  { label: "User Management", icon: "pi pi-users", href: "/users" },
+  { label: "Dashboard", icon: "pi pi-objects-column", href: "/" },
+  {
+    label: "Timesheet",
+    icon: "pi pi-calendar",
+    href: "/timesheet",
+  },
+  { label: "Employees", icon: "pi pi-id-card", href: "/employees" },
   { label: "Projects", icon: "pi pi-briefcase", href: "/projects" },
   { label: "Loans", icon: "pi pi-money-bill", href: "/loans" },
   {
@@ -27,12 +33,8 @@ const menuItems: MenuItem[] = [
     href: "/challans",
   },
   { label: "Exit Re-entry", icon: "pi pi-directions", href: "/exit-reentry" },
-  {
-    label: "Timesheet",
-    icon: "pi pi-calendar",
-    href: "/timesheet",
-  },
   { label: "Payroll", icon: "pi pi-wallet", href: "/payroll" },
+  { label: "User Management", icon: "pi pi-users", href: "/users" },
   {
     label: "Reports",
     icon: "pi pi-chart-bar",
@@ -105,9 +107,18 @@ const menuItems: MenuItem[] = [
   },
 ];
 
-export default function Sidebar({ collapsed }: SidebarProps) {
+export default function Sidebar({ collapsed, setCollapsed }: SidebarProps) {
   const pathname = usePathname();
   const [expandedMenus, setExpandedMenus] = useState<string[]>([]);
+
+  // Auto-expand submenu if active on mount
+  useState(() => {
+    menuItems.forEach((item) => {
+      if (item.items && item.items.some((sub) => sub.href === pathname)) {
+        setExpandedMenus((prev) => [...prev, item.label]);
+      }
+    });
+  });
 
   const toggleSubmenu = (label: string) => {
     setExpandedMenus((prev) =>
@@ -127,25 +138,35 @@ export default function Sidebar({ collapsed }: SidebarProps) {
     const expanded = isExpanded(item.label);
 
     return (
-      <li key={item.label} className="mb-1" title={item.label}>
+      <li key={item.label} className="mb-3" title={item.label}>
         <div
           className={classNames(
-            "flex items-center px-6 py-3 cursor-pointer transition-colors duration-200 justify-between",
+            "flex items-center py-2.5 px-4 rounded-xl mx-auto cursor-pointer transition-colors duration-200 justify-between text-[15px]",
             {
-              "bg-primary/10 text-primary border-r-4 border-primary":
-                isActive && !hasSubmenu,
-              "text-gray-600 hover:text-primary": !isActive,
-              "justify-center": collapsed,
+              "bg-primary/10 text-primary": isActive,
+              "bg-transparent text-gray-800 hover:text-primary": !isActive,
+              "w-[90%]": !collapsed,
+              "w-[65%]": collapsed,
             }
           )}
           onClick={() => {
-            if (hasSubmenu && !collapsed) {
-              toggleSubmenu(item.label);
+            if (hasSubmenu) {
+              if (collapsed) {
+                setCollapsed(false);
+                if (!expanded) {
+                  toggleSubmenu(item.label);
+                }
+              } else {
+                toggleSubmenu(item.label);
+              }
             }
           }}
         >
           {item.href && !hasSubmenu ? (
-            <Link href={item.href} className="flex items-center w-full">
+            <Link
+              href={item.href}
+              className="flex text-center items-center w-full"
+            >
               <i className={classNames(item.icon, "text-xl!")}></i>
               {!collapsed && (
                 <span className="ml-4 font-medium">{item.label}</span>
@@ -160,13 +181,13 @@ export default function Sidebar({ collapsed }: SidebarProps) {
                   {hasSubmenu && (
                     <i
                       className={classNames(
-                        "pi transition-all duration-300 ease-in-out",
+                        "pi pi-chevron-down text-sm! duration-200",
                         {
-                          "pi-chevron-up": expanded,
-                          "pi-chevron-down": !expanded,
+                          "rotate-0": !expanded,
+                          "rotate-180": expanded,
                         }
                       )}
-                    ></i>
+                    />
                   )}
                 </>
               )}
@@ -180,11 +201,11 @@ export default function Sidebar({ collapsed }: SidebarProps) {
             "overflow-hidden transition-all duration-300 ease-in-out",
             {
               "max-h-0": !expanded || collapsed,
-              "max-h-[1000px]": expanded && !collapsed && hasSubmenu, // Increased max-height for large submenus
+              "max-h-[1000px]": expanded && !collapsed && hasSubmenu,
             }
           )}
         >
-          <ul className="list-none p-0 m-0 bg-gray-50">
+          <ul className="list-none p-0 m-0 bg-secondary-white">
             {item.items?.map((subItem) => {
               const isSubActive = pathname === subItem.href;
               return (
@@ -192,7 +213,7 @@ export default function Sidebar({ collapsed }: SidebarProps) {
                   <Link
                     href={subItem.href || "#"}
                     className={classNames(
-                      "flex items-center pl-12 pr-6 py-2 cursor-pointer transition-colors duration-200",
+                      "flex items-center pl-15 pr-6 py-3 cursor-pointer transition-colors duration-200",
                       {
                         "text-primary font-medium": isSubActive,
                         "text-gray-500 hover:text-gray-900": !isSubActive,
@@ -224,16 +245,13 @@ export default function Sidebar({ collapsed }: SidebarProps) {
       {/* Logo Area */}
       <div
         className={classNames(
-          "flex items-center justify-center border-b border-gray-100 transition-all duration-300 h-20"
+          "flex items-center justify-center transition-all duration-300 h-20"
         )}
       >
         <img
           src="/assets/images/bak_transparent_logo.png"
           alt="BAK Logo"
-          className={classNames("transition-all duration-300", {
-            "h-18": !collapsed,
-            "h-14": collapsed,
-          })}
+          className={classNames("transition-all h-16 duration-300", {})}
         />
       </div>
 
@@ -242,29 +260,6 @@ export default function Sidebar({ collapsed }: SidebarProps) {
         <ul className="list-none p-0 m-0">
           {menuItems.map((item) => renderMenuItem(item))}
         </ul>
-      </div>
-
-      {/* User Profile (Optional Footer) */}
-      <div className="p-4 border-t border-gray-100">
-        <div
-          className={classNames("flex items-center", {
-            "justify-center": collapsed,
-          })}
-        >
-          <img
-            src="/assets/images/profile.png"
-            alt="User"
-            className="w-10 h-10 rounded-full"
-          />
-          {!collapsed && (
-            <div className="ml-3">
-              <p className="text-sm font-semibold text-gray-800">
-                Shariq Ahmed
-              </p>
-              <p className="text-xs text-primary">Admin</p>
-            </div>
-          )}
-        </div>
       </div>
     </div>
   );

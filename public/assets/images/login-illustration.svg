@@ -1,0 +1,1322 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 374 305" width="374" height="305">
+	<defs>
+		<linearGradient id="g1" x2="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(0,.302,-7.218,0,288.35,256.113)">
+			<stop offset="0" stop-color="#e29b37"/>
+			<stop offset="1" stop-color="#d57c27"/>
+		</linearGradient>
+		<linearGradient id="g2" x2="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(.897,2.19,-1.469,.602,104.598,219.21)">
+			<stop offset="0" stop-color="#e29b37"/>
+			<stop offset="1" stop-color="#d57c27"/>
+		</linearGradient>
+		<linearGradient id="g3" x2="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(-1.913,8.747,-4.155,-0.909,49.96,251.508)">
+			<stop offset="0" stop-color="#70cde4"/>
+			<stop offset="1" stop-color="#43a4b7"/>
+		</linearGradient>
+		<linearGradient id="g4" x2="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(-0.296,.701,-4.164,-1.76,136.391,272.668)">
+			<stop offset="0" stop-color="#e29b37"/>
+			<stop offset="1" stop-color="#d57c27"/>
+		</linearGradient>
+	</defs>
+	<style>
+		.s0 { opacity: .5;fill: #b7dae9 } 
+		.s1 { fill: #649abc } 
+		.s2 { fill: #82a5ba } 
+		.s3 { fill: #687b87 } 
+		.s4 { fill: #455965 } 
+		.s5 { fill: #ffffff } 
+		.s6 { fill: #4d5e6a } 
+		.s7 { fill: #293d47 } 
+		.s8 { fill: #628d9b } 
+		.s9 { fill: #1b2d37 } 
+		.s10 { fill: #bdd5de } 
+		.s11 { fill: #92b7d1 } 
+		.s12 { fill: #6292b4 } 
+		.s13 { fill: #719eba } 
+		.s14 { fill: #437794 } 
+		.s15 { fill: #235e78 } 
+		.s16 { fill: #c27028 } 
+		.s17 { fill: #f89942 } 
+		.s18 { fill: none;stroke: #000b1b;stroke-miterlimit:10;stroke-width: .5 } 
+		.s19 { fill: #a35924 } 
+		.s20 { fill: #8a4d1e } 
+		.s21 { fill: none;stroke: #c27028;stroke-miterlimit:10;stroke-width: 1.4 } 
+		.s22 { fill: none;stroke: #f89942;stroke-miterlimit:10;stroke-width: 1.4 } 
+		.s23 { fill: #f89c4d } 
+		.s24 { fill: #89adc7 } 
+		.s25 { fill: #375972 } 
+		.s26 { fill: #5e7c9a } 
+		.s27 { fill: #fec03f } 
+		.s28 { fill: #faa527 } 
+		.s29 { fill: #cd8127 } 
+		.s30 { fill: #142445 } 
+		.s31 { fill: #000004 } 
+		.s32 { fill: url(#g1) } 
+		.s33 { fill: none;stroke: #804a1b;stroke-miterlimit:10;stroke-width: .4 } 
+		.s34 { fill: #c66c28 } 
+		.s35 { fill: #1f2222 } 
+		.s36 { fill: #3c9dd7 } 
+		.s37 { fill: #804a1b } 
+		.s38 { fill: #a5a9aa } 
+		.s39 { fill: #9d5e2b } 
+		.s40 { fill: #d1d3d4 } 
+		.s41 { fill: #041021 } 
+		.s42 { fill: #1e2b3e } 
+		.s43 { fill: #f09c33 } 
+		.s44 { fill: #5d3110 } 
+		.s45 { fill: #a76425 } 
+		.s46 { fill: #bdd8e9 } 
+		.s47 { fill: #ee3430 } 
+		.s48 { fill: #fdbc4e } 
+		.s49 { fill: #df3638 } 
+		.s50 { fill: #f79226 } 
+		.s51 { fill: #e14930 } 
+		.s52 { fill: #00001a } 
+		.s53 { fill: #000002 } 
+		.s54 { fill: url(#g2) } 
+		.s55 { fill: #c76928 } 
+		.s56 { fill: #646869 } 
+		.s57 { fill: #191c1f } 
+		.s58 { fill: #000321 } 
+		.s59 { fill: url(#g3) } 
+		.s60 { fill: #474849 } 
+		.s61 { fill: #6d7172 } 
+		.s62 { fill: url(#g4) } 
+		.s63 { fill: #b8e3ed } 
+		.s64 { fill: #2f3f63 } 
+	</style>
+	<g>
+		<g>
+			<path class="s0" d="m320.96 291.06c20.59-27.67 32.77-61.95 32.77-99.08 0-91.76-74.38-166.13-166.13-166.13-91.75 0-166.13 74.37-166.13 166.13 0 37.13 12.19 71.41 32.77 99.08z"/>
+			<g style="opacity: .3">
+				<g>
+					<path class="s1" d="m329.81 289.35v-52.57h-15.68v-20.49h-12.13v-7.89h-11.28v-21.47h-19.57v-22.79l-5.89-11.99v-25.12h-17.94v59.9h-6.77v-45.71h-9.28v-31.13h-20.57v28.37h-8.27v14.19h-12.67v23.71h-7.53v-55.44h-1.82v-7.68h-2.31v-5.32h-1.89v-8.08h-2.07v-2.56h-16.05v2.56h-2.07v8.08h-1.88v5.32h-2.32v7.68h-1.82v33.89h-12.92v28.37h-9.82v-47.02h-17.98v54.91h-6.18v-33.76h-7.61v-13.4h-14.89v30.34h-3.43v62.52h-1.75v-32.31h-1.13v-8.67h-1.8v8.67h-0.46v-8.67h-1.8v8.67h-0.57v-8.67h-1.81v8.67h-1.13v12.88h-1.86v-8.94h-1.8v8.94h-0.46v-8.94h-1.8v8.94h-0.57v-8.94h-1.8v8.94h-0.74v-12.88h-1.13v-9.45h-1.8v9.45h-0.45v-9.45h-1.81v9.45h-0.56v-9.45h-1.81v9.45h-1.13v32.31h-3.6v52.58c0 0 284.41 0 284.41 0zm-48.37-88.93c0-2.33 1.2-4.23 2.69-4.23 1.49 0 2.7 1.9 2.7 4.23v42.56q0 0.15-0.01 0.3h-5.38q0-0.15 0-0.3c0 0 0-42.56 0-42.56zm-8.28 0c0-2.33 1.21-4.23 2.69-4.23 1.49 0 2.7 1.9 2.7 4.23v42.56q0 0.15-0.01 0.3h-5.37q-0.01-0.15-0.01-0.3c0 0 0-42.56 0-42.56zm-9.66 31.1h-2.01v-18.13h2.01zm-0.06-20.75h-2.01v-18.13h2.01zm-0.06-20.75h-2.01v-18.13h2.01zm-0.07-20.75h-2v-18.13h2zm-2.07-38.88h2.01v18.13h-2.01zm-0.75 101.14h-2.01v-18.13h2.01zm-0.06-20.75h-2.01v-18.13h2.01zm-0.07-20.76h-2v-18.12h2zm-0.06-20.76h-2v-18.12h2zm-2.07-38.89h2.01v18.13h-2.01zm-0.75 101.14h-2v-18.13h2zm-0.06-20.75h-2.01v-18.13h2.01zm-0.06-20.75h-2.01v-18.13h2.01zm-0.07-20.75h-2v-18.13h2zm-2.06-38.88h2v18.13h-2zm-0.76 101.14h-2.01v-18.13h2.01zm-0.06-20.75h-2.01v-18.13h2.01zm-0.06-20.76h-2.01v-18.12h2.01zm-0.07-20.76h-2v-18.12h2zm-2.07-38.88h2.01v18.12h-2.01zm-0.75 101.14h-2v-18.12h2zm-0.06-20.76h-2.01v-18.13h2.01zm-0.06-20.75h-2.01v-18.13h2.01zm-0.07-20.75h-2v-18.13h2zm-2.07-38.88h2.01v18.13h-2.01zm-87.1 66.99h-1.88v-7.88h1.88zm7.65 8.79h-1.88v-7.88h1.88zm5.52-79.14h1.88v7.88h-1.88zm0 33.17h1.88v7.88h-1.88zm0 44.27h1.88v7.88h-1.88zm-0.25-22.33v7.88h-1.88v-7.88zm-3.76-45.98h1.88v7.88h-1.88zm-1.51 22.6h-1.88v-7.88h1.88zm-3.64-31.73h1.89v7.89h-1.89zm-0.93 44.13h1.88v7.88h-1.88zm-4.96-32.7h1.88v7.88h-1.88zm-0.94 25.68h1.88v7.87h-1.88zm-1.88 49.78h1.88v7.88h-1.88zm-3.26-86.88h1.88v7.88h-1.88zm0 69.81h1.88v7.88h-1.88zm-29.98-57.14h1.51v9.73h-1.51zm0 12.21h1.51v9.72h-1.51zm0 12.22h1.51v9.72h-1.51zm0 12.21h1.51v9.72h-1.51zm0 12.22h1.51v9.72h-1.51zm0 12.21h1.51v9.72h-1.51zm0 12.21h1.51v9.73h-1.51zm-2.26-73.29h1.51v9.72h-1.51zm0 12.21h1.51v9.72h-1.51zm0 12.22h1.51v9.72h-1.51zm0 12.22h1.51v9.71h-1.51zm0 12.22h1.51v9.72h-1.51zm0 12.21h1.51v9.72h-1.51zm0 12.22h1.51v9.72h-1.51zm-2.25-73.29h1.5v9.72h-1.5zm0 12.22h1.5v9.72h-1.5zm0 12.21h1.5v9.72h-1.5zm0 12.22h1.5v9.72h-1.5zm0 12.21h1.5v9.72h-1.5zm0 12.21h1.5v9.73h-1.5zm0 12.21h1.5v9.73h-1.5zm-2.26-73.3h1.51v9.72h-1.51zm0 12.22h1.51v9.72h-1.51zm0 12.22h1.51v9.72h-1.51zm0 12.21h1.51v9.72h-1.51zm0 12.22h1.51v9.71h-1.51zm0 12.22h1.51v9.72h-1.51zm0 12.21h1.51v9.73h-1.51zm-2.26-73.29h1.51v9.72h-1.51zm0 12.21h1.51v9.72h-1.51zm0 12.22h1.51v9.72h-1.51zm0 12.21h1.51v9.72h-1.51zm0 12.22h1.51v9.72h-1.51zm0 12.21h1.51v9.72h-1.51zm0 12.22h1.51v9.72h-1.51zm-2.25-73.29h1.5v9.72h-1.5zm0 12.22h1.5v9.72h-1.5zm0 12.21h1.5v9.72h-1.5zm0 12.22h1.5v9.72h-1.5zm0 12.21h1.5v9.72h-1.5zm0 12.21h1.5v9.72h-1.5zm0 12.22h1.5v9.72h-1.5zm-2.26-73.29h1.5v9.72h-1.5zm0 12.22h1.5v9.72h-1.5zm0 12.22h1.5v9.72h-1.5zm0 12.21h1.5v9.72h-1.5zm0 12.22h1.5v9.71h-1.5zm0 12.22h1.5v9.72h-1.5zm0 12.21h1.5v9.73h-1.5z"/>
+				</g>
+			</g>
+			<path class="s2" d="m118.9 176.06v0.86h-0.99v-4.61-1.32h-1.71-3.3v-2.11h-5.01v-2.11h-7.65v-1.58h-8.83v2.37h-6.86v-1.45h-6.46v-4.35h-12.27v4.35h-3.69v4.88h-0.92-3.03-1.59-1.84v1.32h1.84v4.61h-5.93v1.85h3.03v3.95h-2.24v1.45h2.24v6.46h-1.45v1.19h-1.58v2.11h3.03v9.89h-1.58v1.45h1.58v6.99h-1.58v1.19h1.58v5.67h-1.51v1.45h1.51v6.99h-1.51v1.18h1.51v5.67h-1.45v1.45h1.45v6.99h-1.45v1.19h1.45v1.12h-1.38v1.45h1.39v11.54h-1.39v1.18h1.39v3.83 1.84h-1.32v1.45h1.32v6.99h-1.32v1.19h1.32v3.76 1.58h-1.59v3.16h1.59v7.92h1.05v-7.92h1.85v7.92h1.58v-7.92h3.03v7.92h3.56v-7.92h7.52v7.92h1.45v-7.92h2.11v7.92h1.71v-7.92h8.11v7.92h7.19 1.71v-7.92h15.3v7.92h1.71v-7.92h4.62v7.92h1.71v-7.92h0.99v7.06h1.19v-114.13zm-46.62 102.33h-7.51v-3.76h7.51c0 0 0 3.76 0 3.76zm37.58-94.22v6.47h-6.99v-2.38h-2.63v-2.11h-5.67v-1.98zm9.03 28.09h-0.99v-6.99h0.99zm0 15.3h-0.99v-6.99h0.99zm-2.7 0h-4.62v-6.99h4.62zm2.7 15.3h-0.99v-6.99h0.99zm-2.7 0h-4.62v-6.99h4.62zm2.7 15.29h-0.99v-11.53h0.99zm-2.7 0h-3.04v-3.43h-1.58v-8.11h4.62zm-30.53 12.4h-8.11v-4.09h8.11zm-6.4-98.24h1.72v4.61h-1.72zm-0.65 4.62h-1.06v-4.62h1.06zm2.37 1.85h1.19 10.68v3.96h-7.19v-2.38h-8.11v-1.58zm18.2 0v0.66h-1.85v-0.66zm-1.85-1.85v-4.61h1.85v4.61zm-0.56 2.51h-0.89v3.3h-1.32v-3.96h2.21zm-3.92 14.5v1.98h-9.23v2.51h-2.64v5.41h-3.43v-9.9zm-8.7 34.81h1.52v5.67h-1.52zm8.7-23.47v2.25h-0.92v-2.25zm0 8.18v4.22h-2.11v-4.22zm1.71 22.41h3.43v6.99h-3.43zm3.43-1.45h-3.43v-5.67h3.43zm-3.43-9.36v-4.48h3.43v4.48zm0-5.93v-1.45-4.22h1.32 1.45 0.66v5.67zm0-11.6v-2.25h1.32v2.25zm8.31-5.67v-3.43h-3.69v-2.51h-4.62v-1.98h10.68v7.92c0 0-2.37 0-2.37 0zm-12.13 3.42v2.25h-5.08v4.74h-2.7v-2.74h-5.41v-4.25zm-3.96 8.18v4.22h-1.12v1.45h-2.04v-3.3h-5.01v3.3h-1.06v-5.67zm-1.12 7.12v6.99h-1.51v-6.33h-1.19v6.33h-1.39v-3.69h-2.3v3.69h-0.66v-2.01h-1.06v-4.98zm-7.05 8.17h4.35v5.67h-1.22v-2.37h-4.19v-3.3zm7.06 7.12v1.98h-8.11v-1.98zm-8.11 8.18h8.11v1.12h-8.11zm8.11 2.57v11.54h-2.05v-3.43h-6.06v-8.11zm0 12.72v2.11h-8.11v-2.11zm8.9-5.4v-7.32h3.42v7.32zm0-8.77v-1.12h3.43v1.12zm4.29-1.12h11.01v1.12h-11.01zm7.85-1.19v-5.01h-6.22v5.01h-1.63v-6.99h11.01v6.99zm-4.15-8.44v-3.56h-3.69v-2.11h11.01v5.67zm7.32-11.47h-3.9v4.62h-0.72v-2.51h-6.4v-4.48h11.01c0 0 0 2.37 0.01 2.37zm-11.02-3.82v-5.67h11.02v5.67zm9.03-8.23v-3.38h-10.55v-2.24h12.53v5.62zm3.69-9.05v-7.91h4.61v9.89h-2.24v-1.98zm-1.71 0h-3.17v-7.91h3.17zm-21.49-15.69v2.11h-4.75v2.37h-6.07v-6.46h15.3v1.98zm-12.53-1.98v6.46h-2.11v-6.46zm0 9.76v5.93h-2.11v-5.93zm0 11.34v4.25h-2.11v-4.25zm0 8.18v5.67h-2.11v-5.67zm0 7.11v4.98h-2.11v-4.98zm0 8.18v3.3h-2.11v-3.3zm0 7.12v6.99h-2.11v-6.99zm0 8.18v1.12h-2.11v-1.12zm0 2.57v8.11h-2.11v-8.11zm0 12.72v2.11h-2.11v-2.11zm0 7.12v4.09h-2.11v-4.09zm18.72 0h3.43v4.09h-3.43zm0-1.45v-5.67h3.43v5.67zm4.29-11.07v-7.32h11.01v8.11h-3.17v3.43h-3.29v-4.22zm12.72-8.77v-1.12h4.62v1.12zm0-10.75v-5.67h4.61v5.67zm0-15.29v-5.67h4.62v5.67zm3.16-6.86v-1.37h-3.16v-5.62h4.61v6.99zm4.16-8.44h-0.99v-9.89h0.99zm-17.81-24.4v-0.66h1.13v0.66zm0-2.5v-4.62h1.12v4.62zm-4.32-4.62v4.62h-2.21v-4.62zm-3.93 1.98h-7.97v2.64h-2.71v-4.62h10.68zm-17-1.97v4.61h-2.11v-4.61zm0 6.46v1.58h-2.11v-1.58zm-3.57 5.41v6.46h-7.51v-6.46zm0 9.75v5.94h-5.14v3.95h-2.38v-9.89zm0 11.34v4.25h-5.14v2.74h-2.37v-6.99zm0 8.18v5.67h-7.52v-5.67zm0 7.12v4.97h-4.48v2.01h-3.04v-6.98zm-4.48 8.17h4.48v3.3h-5.14v2.37h-2.37v-5.67zm4.48 7.12v6.99h-7.51v-6.99zm0 8.18v1.12h-7.52v-1.12zm0 2.57v8.11h-7.52v-8.11zm0 12.72v2.11h-7.51v-2.11zm0 7.12v4.09h-7.52v-4.09zm26.57 4.09v-4.09h11.01v4.09zm0-5.54v-5.67h7.85 3.16v5.67zm12.73-5.67h1.58 3.03v5.67h-4.61zm6.33 0h0.99v5.67h-0.99zm0-14.17v-1.12h0.99v1.12zm0-10.75v-5.67h0.98v5.67zm0-15.29v-5.67h0.99v5.67zm0.99-28.48h-0.99v-6.46h0.99zm-2.7 0h-4.62v-6.47h4.62zm-3.3-7.91v-3.29h-1.32v-0.66h4.62v3.95zm-3.04-3.29h-4.61v3.29h-1.71v-3.29h-0.66v-0.66h6.98zm-6.98-2.51v-4.61h6.98v4.61zm-30.59-4.61v4.61h-7.51v-4.61zm0 6.46v1.58h-3.96v2.37h-3.56v-3.95zm-11.08 3.95h-3.03v-3.95h3.03zm0 1.45v6.46h-3.03v-6.46zm0 9.76v9.89h-3.03v-9.89zm0 11.34v5.01h-3.03v-5.01zm0 8.17v5.67h-3.03v-5.67zm0 7.12v6.99h-3.04v-6.99zm0 8.18v5.67h-3.03v-5.67zm0 7.11v6.99h-3.03v-6.99zm0 8.18v1.12h-3.03v-1.12zm0 2.57v8.11h-3.03v-8.11zm0 12.73v2.11h-3.04v-2.11zm0 7.12v4.09h-3.03v-4.09zm0 8.17v3.76h-3.03v-3.76zm50.37-4.08v-4.09h4.62v6.99h-2.25v-2.9zm6.33-4.09h0.99v6.98h-0.99zm0.99-87.68v3.96h-0.98v-3.96zm-2.71-1.85h-4.61v-4.61h4.61zm-58.02-4.62h3.04v4.62h-3.04zm-3.43 6.46h1.85v3.96h-1.85zm0 5.4h1.85v6.46h-1.85zm0 9.76h1.85v9.89h-1.85zm0 11.34h1.85v6.99h-1.85zm0 8.17h1.85v5.67h-1.85zm0 7.12h1.85v6.99h-1.85zm0 8.18h1.85v5.67h-1.85zm0 7.12h1.85v6.99h-1.85zm0 8.17h1.85v1.12h-1.85zm1.85 2.57v8.11h-1.85v-8.11zm-1.84 12.73h1.84v2.11h-1.31v1.71h-0.53c0 0 0-3.82 0-3.82zm1.84 7.12v4.09h-1.84v-4.09zm-1.85 8.17h1.85v3.76h-1.85zm18.99 5.34v-5.34h2.11v5.34zm9.89 0v-2.37h-3.2v2.37h-2.86v-5.34h8.11v5.34zm10.94 0v-5.34h2.21v5.34zm8.83 0v-5.34h6.47v2.67h-3.89v2.67zm8.17 0v-5.34h4.62v5.34zm6.33 0v-5.34h0.98v5.34z"/>
+			<path class="s2" d="m315.3 288.72v-11.43-0.92-21.73-0.92-53.98-0.92-1.5h-0.86v1.5h-3.28v-4.57h-1.01-4.76v-3.66h4.76v-0.92h-4.76v-3.65h4.76v-0.92h-4.76-0.77-1.45-0.76-1.03v-1.11h-13.25-1.29v-0.55h14.54v-1.78h-29.18v1.78h4.05v0.55h-4.05v1.11h4.05v9.7h-2.24-0.92-2.09-0.92-2v1.1h2v4.49h-2.49v0.92h2.49v2.48h-8.11v1.08h0.5v5.55h-1.05v1.02h1.05v4.23h-0.89v1.02h0.89v4.6h-1.05v1.02h1.05v4.6h-1.21v1.01h1.21v4.61h-1.37v1.01h1.37v4.61h-1.53v1.01h1.53v4.61h-1.69v1.01h1.69v4.61h-1.85v1.01h1.85v4.6h-2.01v1.02h2.01v4.6h-2.17v1.02h2.17v4.6h-2.33v1.01h2.33v4.61h-2.48v1.01h2.48v4.61h-2.64v1.01h2.64v4.61h-2.8v1.01h2.8v4.6h-2.96v1.02h2.96 0.67 3.71 1.48 1.75 0.92 2.09 0.92 2.24 0.74 0.98 0.73 1.6 2.52 1.44 0.65 0.92 1.01 1.29 13.25 1.03 0.76 1.45 0.77 4.76 1.01 5.56v-1.02c0 0-1.42 0-1.42 0.01zm-5.15-85.33h-4.76v-3.65h3.53 1.23zm4.29 45.75h-3.28v-3.65h3.28zm0 22.76h-3.28v-3.55h3.28zm-31.62 9.86v-3.27h1.44v3.27zm0-4.28v-4.61h1.44v4.61zm18.57-77.1v-0.64h1.02v3.65h-1.02v-2.09zm13.06 39.61h-3.29v-3.65h3.29zm0 27.44h-3.29v-3.65h3.29zm-4.3 0h-4.76v-3.65h4.76zm-5.53 0h-1.44v-3.65h1.44zm-20.35-56v4.23h-1.44v-4.23zm0 5.25v2.44h-1.45v-2.44zm0.65 30.94v-2.85h0.92v2.85zm0-3.86v-4.61h0.92v4.61zm0-5.62v-4.61h0.93v4.61zm0-5.62v-4.61h0.92v4.61zm0.92-10.22v3.08h-0.92v-3.08zm1.01 5.61h1.29v4.61h-1.29zm0.97-1.01v-1.52h-0.97v-3.09h1.29v4.61c0 0-0.32 0-0.32 0zm-3.55-4.61v3.09h-1.44v-3.09zm0 5.62v4.6h-1.44v-4.6zm0 5.62v4.6h-0.88v-1.98h-0.57v-2.62zm0 5.62v4.6h-1.44v-4.6zm0 5.61v2.86h-1.44v-2.86zm0 5.62v4.61h-1.45v-4.61zm0 5.62v1.66h-1.44v-1.66zm0.64 1.66v-1.66h0.93v1.66zm0-2.67v-4.61h0.92v4.61c0 0-0.92 0-0.92 0zm1.93-4.61h1.29v4.61h-1.29zm0.46-1.02v-1.75h-0.46v-2.85h1.29v4.6zm-0.46-5.61v-4.61h1.29v4.61zm0-5.62v-4.61h1.29v4.61zm0-16.86v-2.16-2.44h1.29v4.6zm-1.01-2.16h-0.92v-2.44h0.92zm-5.53 7.78h-1.59v-4.6h1.59zm0 1.01v2.92h-1.59v-2.92zm0 5.62v4.6h-1.6v-4.6zm0 5.62v2.71h-1.6v-2.71zm0 5.61v4.61h-1.59v-4.61zm0 5.62v3.32h-1.6v-3.32zm0 5.62v4.61h-1.6v-4.61zm0 5.62v3.13h-1.6v-3.13zm2.52 3.32v-3.32h1.44v3.32zm4.03-7.28v-1.66h1.29v4.61h-0.83v-2.95zm14.54-25.91h1.02v3.65h-1.02zm0-0.92v-3.65h1.02v3.65zm1.79-3.65h1.45v3.65h-1.45zm0-0.92v-3.66h1.45v3.66zm-0.77 0h-1.02v-3.66h1.02zm-1.02-4.57v-0.4-3.25h1.02v3.65zm-13.25-6.02h-1.29v-4.23h1.29zm-2.3 0h-0.93v-4.24h0.93zm-0.93-5.25v-5.56h0.93v5.56zm-0.65-5.56v3.56h-1.44v-3.56zm-3.96 6.57v4.24h-1.6v-4.24zm0 5.25v3.6h-1.6v-3.6zm-2.33 10.23h-0.98v-4.61h0.98zm0 1.01v2.92h-0.98v-2.92zm0 5.62v4.61h-0.98v-4.61zm0 5.62v2.72h-0.99v-2.72zm0 5.62v4.61h-0.98v-4.61zm0 5.62v3.31h-0.98v-3.31zm0 5.62v4.6h-0.99v-4.6zm0 5.62v3.13h-0.98v-3.13zm6.94 3.31v-3.31h0.92v4.6h-0.46v-1.29zm1.94-3.31h1.29v4.6h-1.29zm14.54 5.8v-3.65h1.02v3.65zm1.02 0.93v3.54h-1.02v-3.54zm-1.02-5.5v-3.65h1.02v3.65zm0-4.57v-3.66h1.02v3.66zm0-4.58v-3.65h1.03v3.65zm0-4.57v-3.66h1.02v3.66zm0-4.58v-3.65h1.02v3.65zm0-4.57v-3.66h1.02v3.66zm1.8-3.66h1.44v3.66h-1.44zm0-0.92v-3.66h1.44v3.66zm2.21-3.66h4.76v3.66h-4.76zm0-0.92v-3.66h4.76v3.66zm0-4.58v-3.65h4.76v3.65zm0-4.57v-3.66h4.76v3.66zm-0.76 0h-1.45v-3.66h1.45zm-1.45-4.57v-3.65h1.45v3.65zm-0.77 0h-1.03v-3.65h1.03zm-1.03-4.58v-1.11-1.01-1.53h1.03v3.65zm-13.25-2.12h-1.29v-5.56h1.29zm-7.83-9.11v2.48h-1.6v-2.48zm0 3.56v4.02h-1.6v-4.02zm-2.33 6.57v4.23h-0.98v-4.23zm0 5.24v3.6h-0.99v-3.6zm-1.72 10.23h-2.24v-4.6h2.24zm0 1.01v2.92h-1.79v1.68h-0.45v-4.6c0 0 2.24 0 2.24 0zm0 5.62v4.6h-2.24v-4.6zm0 5.62v2.71h-1.29v1.89h-0.95v-4.6c0 0 2.24 0 2.24 0zm0 5.61v4.61h-2.24v-4.61zm0 5.62v3.32h-1.29v1.29h-0.95v-4.61zm0 5.62v4.6h-2.24v-4.6zm0 5.62v3.13h-1.79v1.47h-0.45v-4.6c0 0 2.24 0 2.24 0zm0 5.62v4.6h-2.24v-4.6zm0.74 0h0.98v4.6h-0.98zm1.72 0h1.6v4.61h-1.6zm4.11 0h1.45v4.6h-1.45zm2.09 0h0.92v4.61h-0.92zm1.94 0h1.29v4.6h-1.29zm14.54 5.58h1.02v3.54h-1.02zm1.79 0h1.44v3.55h-1.44zm0-0.92v-3.55h1.44v3.55zm0-9.05v-3.65h1.45v3.65zm0-4.57v-3.66h1.44v3.66zm0-4.58v-3.65h1.45v3.65zm0-4.57v-3.65h1.44v3.65zm0-4.58v-3.65h1.45v3.65zm2.21-3.65h4.76v3.65h-4.76zm0-0.92v-3.65h4.76v3.65zm9.06-4.57h-3.29v-3.66h3.29zm0-4.57h-3.29v-3.65h3.29zm0-4.58h-3.29v-3.65h3.29zm0-4.58h-3.29v-3.65h3.29zm0-4.57h-3.29v-3.66h3.29zm-4.3 0h-4.76v-3.65h4.76zm-4.76-4.58v-3.65h4.76v3.65zm-0.77 0h-1.44v-3.65h1.44zm-1.44-4.58v-3.65h1.44v3.65zm-0.76 0h-1.03v-3.1-0.55h1.03zm-14.28-4.17h-1.01v-1.16h-0.28v-1.33h1.29zm-2.3-1.15h-0.92v-1.34h0.92zm-1.57 0h-1.44v-1.33h1.44zm-1.44-2.26v-4.48h1.44v4.48zm-4.85 0.93v2.48h-0.98v-2.48zm0 3.56v4.02h-0.98v-4.02zm-1.72 6.57v4.23h-2.24v-4.23zm0 5.24v3.6h-1.8v1.01h-0.44v-4.6c0 0 2.24 0 2.24-0.01zm-3.17 4.61h-2.08v-4.61h2.08zm0 1.02v4.6h-2.08v-4.6zm0 5.62v4.6h-2.09v-4.6zm0 5.61v4.61h-2.09v-4.61zm0 5.62v4.61h-2.09v-4.61zm0 5.62v4.61h-2.09v-4.61zm0 5.62v4.6h-2.08v-4.6zm0 5.62v4.6h-2.09v-4.6zm0 5.62v4.6h-2.09v-4.6zm0 5.62v4.6h-2.09v-4.6zm0 5.61v4.61h-2.09v-4.61zm0.93 0h2.24v4.61h-2.24zm2.97 0h0.99v4.6h-0.99zm1.72 0h1.6v4.61h-1.6zm6.2 0h0.93v4.6h-0.93zm1.94 0h1.29v4.61h-1.29zm14.54 4.42h1.02v3.54h-1.02zm1.79 0h1.45v3.55h-1.45zm2.21 0h4.76v3.54h-4.76zm0-0.92v-3.54h4.76v3.54zm0-4.46v-3.55h4.76v3.55zm9.06-9.05h-3.28v-3.65h3.28zm-4.3 0h-4.76v-3.65h4.76zm-4.76-4.57v-3.66h4.76v3.66zm0-4.58v-3.65h4.76v3.65zm0-4.57v-3.66h4.76v3.66zm5.78-4.58v-3.65h3.28v3.65zm0-32.02v-3.65h3.29v3.65zm3.28-4.57h-3.28v-3.66h3.28zm-4.3 0h-4.76v-3.65h4.76zm-5.52-4.57h-1.45v-3.66h1.45zm-1.45-4.57v-3.65h1.45v3.65zm-0.77 0h-1.03v-3.65h1.03zm-1.03-4.58v-3.65h1.03v3.65zm-13.25 6.14h-1.29v-4.48h1.29zm-2.31 0h-0.92v-4.48h0.92zm-0.92-5.59v-9.7h0.92v9.7zm-0.64 0h-1.44v-9.7h1.44zm-1.44-10.81v-0.55h1.44v0.55zm-2.52 0h-1.59v-0.55h1.59zm0 1.1v9.71h-1.59v-9.71zm0 10.81v3.15h-1.6v-3.15zm-2.33 3.15h-0.99v-3.15h0.99zm-1.72 2.26v2.49h-2.24v-2.49zm0 3.56v4.02h-1.39v1.54h-0.85v-5.56c0 0 2.24 0 2.24 0zm-3.17 5.56h-2.08v-5.56h2.08zm0 1.01v4.24h-2.08v-4.24zm-3.01 4.24h-1.75v-4.24h1.75zm0 1.02v4.6h-1.75v-4.6zm0 5.62v4.6h-1.75v-4.6zm0 5.61v4.61h-1.75v-4.61zm0 5.62v4.61h-1.75v-4.61zm0 5.62v4.61h-1.75v-4.61zm0 5.62v4.6h-1.75v-4.6zm0 5.62v4.6h-1.75v-4.6zm0 5.62v4.6h-1.75v-4.6zm0 5.62v4.6h-1.75v-4.6zm0 5.61v4.61h-1.75v-4.61zm0 5.62v4.61h-1.75v-4.61zm0 5.62v4.61h-1.75v-4.61zm0.92 0h2.09v4.61h-2.09zm3.01 0h2.24v4.6h-2.24zm2.97 0h0.99v4.6h-0.99zm1.72 0h1.6v4.6h-1.6zm6.2 3.27v-3.26h0.93v4.6h-0.46v-1.34zm1.93-3.27h1.29v4.61h-1.29zm14.54 3.27h1.03v3.54h-1.03zm1.79 0h1.45v3.55h-1.45zm2.22 0h4.76v3.54h-4.76zm5.77 0h3.28v3.55h-3.28zm3.28-0.93h-3.28v-3.54h3.28zm-3.28-4.47v-3.54h3.28v3.54zm3.29-18.08h-3.29v-3.65h3.29zm-3.29-4.58v-3.65h3.29v3.65zm3.28-53.97v3.65h-3.28v-3.65zm-4.3-4.58v3.65h-1.23-3.53v-3.65zm-5.53-0.92h-1.44v-3.65h1.44zm0-8.23v3.65h-1.44v-3.65zm-2.21 0v3.65h-1.03v-3.65zm-14.27-0.92v9.7h-1.29v-9.7zm-2.3-1.11h-0.93v-0.55h0.93zm-8.85-0.55h0.99v0.55h-0.99zm0 1.66h0.99v9.7h-0.99zm-0.73 10.81v3.15h-1.2v1.33h-1.04v-4.48zm-5.25 0h2.09v4.48h-2.09zm0 5.41h2.09v2.48h-2.09zm-0.92 3.56v5.56h-1.75v-5.56zm-6.94 0h3.71v5.56h-3.71zm0 6.57h3.71v4.24h-3.71zm0 5.24h3.71v4.61h-3.71zm0 5.62h3.71v4.61h-3.71zm0 5.61h3.71v4.61h-3.71zm0 5.62h3.71v4.6h-3.71zm0 5.62h3.71v4.61h-3.71zm0 5.61h3.71v4.61h-3.71zm0 5.62h3.71v4.6h-3.71zm0 5.62h3.71v4.61h-3.71zm0 5.62h3.71v4.6h-3.71zm0 5.62h3.71v4.6h-3.71zm0 5.62h3.71v4.61h-3.71zm0 5.62h3.71v4.6h-3.71zm0 10.22v-4.6h3.71v4.6zm5.19 0v-4.6h1.75v4.6zm2.67 0v-4.6h2.09v4.6zm3.01 0v-4.6h2.24v4.6zm2.97 0v-4.6h0.99v4.6zm1.72 0v-4.6h1.59v4.6zm4.12 0v-4.6h1.44v4.6zm2.09 0v-4.6h0.92v4.6zm1.94 0v-4.6h1.29v4.6zm14.54 0v-2.48h1.02v2.48zm1.79 0v-2.48h1.45v2.48zm2.21 0v-2.48h4.76v2.48zm5.77-2.49h3.29v2.49h-3.29z"/>
+			<g>
+				<g>
+					<g>
+						<g>
+							<path fill-rule="evenodd" class="s3" d="m158.38 180.48h62.74v108.35h-62.74z"/>
+							<g>
+								<path fill-rule="evenodd" class="s4" d="m162.4 185.43h15.4v12.59h-15.4z"/>
+								<path fill-rule="evenodd" class="s4" d="m182.04 185.43h15.41v12.59h-15.41z"/>
+								<path fill-rule="evenodd" class="s4" d="m201.69 185.43h15.41v12.59h-15.41z"/>
+							</g>
+							<g>
+								<path fill-rule="evenodd" class="s4" d="m162.4 204.27h15.4v12.59h-15.4z"/>
+								<path fill-rule="evenodd" class="s4" d="m182.04 204.27h15.41v12.59h-15.41z"/>
+								<path fill-rule="evenodd" class="s4" d="m201.69 204.27h15.41v12.59h-15.41z"/>
+							</g>
+							<g>
+								<path fill-rule="evenodd" class="s4" d="m162.4 223.1h15.4v12.59h-15.4z"/>
+								<path fill-rule="evenodd" class="s4" d="m182.04 223.1h15.41v12.59h-15.41z"/>
+								<path fill-rule="evenodd" class="s4" d="m201.69 223.1h15.41v12.59h-15.41z"/>
+							</g>
+							<g>
+								<path fill-rule="evenodd" class="s4" d="m162.4 241.94h15.4v12.59h-15.4z"/>
+								<path fill-rule="evenodd" class="s4" d="m182.04 241.94h15.41v12.59h-15.41z"/>
+								<path fill-rule="evenodd" class="s4" d="m201.69 241.94h15.41v12.59h-15.41z"/>
+							</g>
+							<g>
+								<path fill-rule="evenodd" class="s4" d="m162.4 260.77h15.4v12.59h-15.4z"/>
+								<path fill-rule="evenodd" class="s4" d="m182.04 260.77h15.41v12.59h-15.41z"/>
+								<path fill-rule="evenodd" class="s4" d="m201.69 260.77h15.41v12.59h-15.41z"/>
+							</g>
+						</g>
+						<path fill-rule="evenodd" class="s5" d="m158.38 165.99h4.02v14.49h-4.02z"/>
+						<path fill-rule="evenodd" class="s5" d="m177.8 165.99h4.02v14.49h-4.02z"/>
+						<path fill-rule="evenodd" class="s5" d="m197.23 165.99h4.02v14.49h-4.02z"/>
+						<path fill-rule="evenodd" class="s5" d="m216.65 165.99h4.02v14.49h-4.02z"/>
+					</g>
+					<g>
+						<g>
+							<path fill-rule="evenodd" class="s6" d="m221.12 180.48h32.61v108.35h-32.61z"/>
+							<g>
+								<path fill-rule="evenodd" class="s7" d="m223.21 185.43h8v12.59h-8z"/>
+								<path fill-rule="evenodd" class="s7" d="m233.42 185.43h8v12.59h-8z"/>
+								<path fill-rule="evenodd" class="s7" d="m243.63 185.43h8.01v12.59h-8.01z"/>
+							</g>
+							<g>
+								<path fill-rule="evenodd" class="s7" d="m223.21 204.27h8v12.59h-8z"/>
+								<path fill-rule="evenodd" class="s7" d="m233.42 204.27h8v12.59h-8z"/>
+								<path fill-rule="evenodd" class="s7" d="m243.63 204.27h8.01v12.59h-8.01z"/>
+							</g>
+							<g>
+								<path fill-rule="evenodd" class="s7" d="m223.21 223.1h8v12.59h-8z"/>
+								<path fill-rule="evenodd" class="s7" d="m233.42 223.1h8v12.59h-8z"/>
+								<path fill-rule="evenodd" class="s7" d="m243.63 223.1h8.01v12.59h-8.01z"/>
+							</g>
+							<g>
+								<path fill-rule="evenodd" class="s7" d="m223.21 241.94h8v12.59h-8z"/>
+								<path fill-rule="evenodd" class="s7" d="m233.42 241.94h8v12.59h-8z"/>
+								<path fill-rule="evenodd" class="s7" d="m243.63 241.94h8.01v12.59h-8.01z"/>
+							</g>
+							<g>
+								<path fill-rule="evenodd" class="s7" d="m223.21 260.77h8v12.59h-8z"/>
+								<path fill-rule="evenodd" class="s7" d="m233.42 260.77h8v12.59h-8z"/>
+								<path fill-rule="evenodd" class="s7" d="m243.63 260.77h8.01v12.59h-8.01z"/>
+							</g>
+						</g>
+						<path fill-rule="evenodd" class="s8" d="m220.67 165.99h2.54v14.49h-2.54z"/>
+						<path fill-rule="evenodd" class="s8" d="m231.21 165.99h2.09v14.49h-2.09z"/>
+						<path fill-rule="evenodd" class="s8" d="m241.31 165.99h2.09v14.49h-2.09z"/>
+						<path fill-rule="evenodd" class="s8" d="m251.41 165.99h2.08v14.49h-2.08z"/>
+					</g>
+					<path fill-rule="evenodd" class="s9" d="m229.58 185.43h1.63v12.59h-1.63z"/>
+					<path fill-rule="evenodd" class="s9" d="m223.21 185.43h8v1.29h-8z"/>
+					<path fill-rule="evenodd" class="s9" d="m239.79 185.43h1.63v12.59h-1.63z"/>
+					<path fill-rule="evenodd" class="s9" d="m233.42 185.43h8v1.29h-8z"/>
+					<path fill-rule="evenodd" class="s9" d="m250 185.43h1.64v12.59h-1.64z"/>
+					<path fill-rule="evenodd" class="s9" d="m243.63 185.43h8.01v1.29h-8.01z"/>
+					<path fill-rule="evenodd" class="s9" d="m250 204.27h1.64v12.59h-1.64z"/>
+					<path fill-rule="evenodd" class="s9" d="m243.63 204.27h8.01v1.29h-8.01z"/>
+					<path fill-rule="evenodd" class="s9" d="m239.79 204.27h1.63v12.59h-1.63z"/>
+					<path fill-rule="evenodd" class="s9" d="m233.42 204.27h8v1.29h-8z"/>
+					<path fill-rule="evenodd" class="s9" d="m229.58 204.27h1.63v12.59h-1.63z"/>
+					<path fill-rule="evenodd" class="s9" d="m223.21 204.27h8v1.29h-8z"/>
+					<path fill-rule="evenodd" class="s9" d="m229.58 223.1h1.63v12.59h-1.63z"/>
+					<path fill-rule="evenodd" class="s9" d="m223.21 223.1h8v1.29h-8z"/>
+					<path fill-rule="evenodd" class="s9" d="m239.79 223.1h1.63v12.59h-1.63z"/>
+					<path fill-rule="evenodd" class="s9" d="m233.42 223.1h8v1.29h-8z"/>
+					<path fill-rule="evenodd" class="s9" d="m250 223.1h1.64v12.59h-1.64z"/>
+					<path fill-rule="evenodd" class="s9" d="m243.63 223.1h8.01v1.29h-8.01z"/>
+					<path fill-rule="evenodd" class="s9" d="m250 241.94h1.64v12.59h-1.64z"/>
+					<path fill-rule="evenodd" class="s9" d="m243.63 241.94h8.01v1.29h-8.01z"/>
+					<path fill-rule="evenodd" class="s9" d="m250 260.77h1.64v12.59h-1.64z"/>
+					<path fill-rule="evenodd" class="s9" d="m243.63 260.77h8.01v1.3h-8.01z"/>
+					<path fill-rule="evenodd" class="s9" d="m239.79 260.77h1.63v12.59h-1.63z"/>
+					<path fill-rule="evenodd" class="s9" d="m233.42 260.77h8v1.3h-8z"/>
+					<path fill-rule="evenodd" class="s9" d="m229.58 260.77h1.63v12.59h-1.63z"/>
+					<path fill-rule="evenodd" class="s9" d="m223.21 260.77h8v1.3h-8z"/>
+					<path fill-rule="evenodd" class="s9" d="m229.58 241.94h1.63v12.59h-1.63z"/>
+					<path fill-rule="evenodd" class="s9" d="m223.21 241.94h8v1.29h-8z"/>
+					<path fill-rule="evenodd" class="s9" d="m239.79 241.94h1.63v12.59h-1.63z"/>
+					<path fill-rule="evenodd" class="s9" d="m233.42 241.94h8v1.29h-8z"/>
+				</g>
+				<path fill-rule="evenodd" class="s10" d="m158.38 165.99h42.87v2.48h-42.87z"/>
+				<path class="s5" d="m158.38 148.04v20.43h23.44v-20.43zm19.43 16.93h-15.41v-13.43h15.41z"/>
+				<path class="s5" d="m177.8 148.04v20.43h23.45v-20.43zm19.42 16.93h-15.4v-13.43h15.4z"/>
+				<path class="s5" d="m158.38 131.17v20.43h23.44v-20.43zm19.43 16.93h-15.41v-13.43h15.41z"/>
+				<path fill-rule="evenodd" class="s8" d="m231.21 165.99h22.28v1.23h-22.28z"/>
+				<path class="s8" d="m241.31 153.34v13.88h12.19v-13.88zm10.09 12.38h-8.01v-10.88h8.01z"/>
+			</g>
+			<g>
+				<g>
+					<g>
+						<path fill-rule="evenodd" class="s11" d="m95.94 201.98h51.93v89.68h-51.93z"/>
+						<g>
+							<path fill-rule="evenodd" class="s12" d="m99.27 206.08h12.75v10.42h-12.75z"/>
+							<path fill-rule="evenodd" class="s12" d="m115.53 206.08h12.75v10.42h-12.75z"/>
+							<path fill-rule="evenodd" class="s12" d="m131.79 206.08h12.75v10.42h-12.75z"/>
+						</g>
+						<g>
+							<path fill-rule="evenodd" class="s12" d="m99.27 221.67h12.75v10.42h-12.75z"/>
+							<path fill-rule="evenodd" class="s12" d="m115.53 221.67h12.75v10.42h-12.75z"/>
+							<path fill-rule="evenodd" class="s12" d="m131.79 221.67h12.75v10.42h-12.75z"/>
+						</g>
+						<g>
+							<path fill-rule="evenodd" class="s12" d="m99.27 237.26h12.75v10.42h-12.75z"/>
+							<path fill-rule="evenodd" class="s12" d="m115.53 237.26h12.75v10.42h-12.75z"/>
+							<path fill-rule="evenodd" class="s12" d="m131.79 237.26h12.75v10.42h-12.75z"/>
+						</g>
+						<g>
+							<path fill-rule="evenodd" class="s12" d="m99.27 252.85h12.75v10.42h-12.75z"/>
+							<path fill-rule="evenodd" class="s12" d="m115.53 252.85h12.75v10.42h-12.75z"/>
+							<path fill-rule="evenodd" class="s12" d="m131.79 252.85h12.75v10.42h-12.75z"/>
+						</g>
+						<g>
+							<path fill-rule="evenodd" class="s12" d="m99.27 268.43h12.75v10.42h-12.75z"/>
+							<path fill-rule="evenodd" class="s12" d="m115.53 268.43h12.75v10.42h-12.75z"/>
+							<path fill-rule="evenodd" class="s12" d="m131.79 268.43h12.75v10.42h-12.75z"/>
+						</g>
+					</g>
+					<path fill-rule="evenodd" class="s5" d="m95.94 195.15h3.33v6.83h-3.33z"/>
+					<path fill-rule="evenodd" class="s5" d="m112.02 195.15h3.33v6.83h-3.33z"/>
+					<path fill-rule="evenodd" class="s5" d="m128.1 195.15h3.32v6.83h-3.32z"/>
+					<path fill-rule="evenodd" class="s5" d="m144.17 195.15h3.33v6.83h-3.33z"/>
+				</g>
+				<g>
+					<g>
+						<path fill-rule="evenodd" class="s13" d="m147.87 201.98h26.99v89.68h-26.99z"/>
+						<g>
+							<path fill-rule="evenodd" class="s14" d="m149.6 206.08h6.62v10.42h-6.62z"/>
+							<path fill-rule="evenodd" class="s14" d="m158.05 206.08h6.63v10.42h-6.63z"/>
+							<path fill-rule="evenodd" class="s14" d="m166.5 206.08h6.63v10.42h-6.63z"/>
+						</g>
+						<g>
+							<path fill-rule="evenodd" class="s14" d="m149.6 221.67h6.62v10.42h-6.62z"/>
+							<path fill-rule="evenodd" class="s14" d="m158.05 221.67h6.63v10.42h-6.63z"/>
+							<path fill-rule="evenodd" class="s14" d="m166.5 221.67h6.63v10.42h-6.63z"/>
+						</g>
+						<g>
+							<path fill-rule="evenodd" class="s14" d="m149.6 237.26h6.62v10.42h-6.62z"/>
+							<path fill-rule="evenodd" class="s14" d="m158.05 237.26h6.63v10.42h-6.63z"/>
+							<path fill-rule="evenodd" class="s14" d="m166.5 237.26h6.63v10.42h-6.63z"/>
+						</g>
+						<g>
+							<path fill-rule="evenodd" class="s14" d="m149.6 252.85h6.62v10.42h-6.62z"/>
+							<path fill-rule="evenodd" class="s14" d="m158.05 252.85h6.63v10.42h-6.63z"/>
+							<path fill-rule="evenodd" class="s14" d="m166.5 252.85h6.63v10.42h-6.63z"/>
+						</g>
+						<g>
+							<path fill-rule="evenodd" class="s14" d="m149.6 268.43h6.62v10.42h-6.62z"/>
+							<path fill-rule="evenodd" class="s14" d="m158.05 268.43h6.63v10.42h-6.63z"/>
+							<path fill-rule="evenodd" class="s14" d="m166.5 268.43h6.63v10.42h-6.63z"/>
+						</g>
+					</g>
+					<path fill-rule="evenodd" class="s8" d="m147.5 195.15h2.1v6.83h-2.1z"/>
+					<path fill-rule="evenodd" class="s8" d="m156.22 195.15h1.73v6.83h-1.73z"/>
+					<path fill-rule="evenodd" class="s8" d="m164.58 195.15h1.73v6.83h-1.73z"/>
+					<path fill-rule="evenodd" class="s8" d="m172.94 195.15h1.73v6.83h-1.73z"/>
+				</g>
+				<path fill-rule="evenodd" class="s15" d="m154.88 206.08h1.34v10.42h-1.34z"/>
+				<path fill-rule="evenodd" class="s15" d="m149.6 206.08h6.62v1.07h-6.62z"/>
+				<path fill-rule="evenodd" class="s15" d="m163.32 206.08h1.36v10.42h-1.36z"/>
+				<path fill-rule="evenodd" class="s15" d="m158.05 206.08h6.63v1.07h-6.63z"/>
+				<path fill-rule="evenodd" class="s15" d="m171.78 206.08h1.35v10.42h-1.35z"/>
+				<path fill-rule="evenodd" class="s15" d="m166.5 206.08h6.63v1.07h-6.63z"/>
+				<path fill-rule="evenodd" class="s15" d="m171.78 221.67h1.35v10.42h-1.35z"/>
+				<path fill-rule="evenodd" class="s15" d="m166.5 221.67h6.63v1.07h-6.63z"/>
+				<path fill-rule="evenodd" class="s15" d="m163.32 221.67h1.36v10.42h-1.36z"/>
+				<path fill-rule="evenodd" class="s15" d="m158.05 221.67h6.63v1.07h-6.63z"/>
+				<path fill-rule="evenodd" class="s15" d="m154.88 221.67h1.34v10.42h-1.34z"/>
+				<path fill-rule="evenodd" class="s15" d="m149.6 221.67h6.62v1.07h-6.62z"/>
+				<path fill-rule="evenodd" class="s15" d="m154.88 237.26h1.34v10.42h-1.34z"/>
+				<path fill-rule="evenodd" class="s15" d="m149.6 237.26h6.62v1.06h-6.62z"/>
+				<path fill-rule="evenodd" class="s15" d="m163.32 237.26h1.36v10.42h-1.36z"/>
+				<path fill-rule="evenodd" class="s15" d="m158.05 237.26h6.63v1.06h-6.63z"/>
+				<path fill-rule="evenodd" class="s15" d="m171.78 237.26h1.35v10.42h-1.35z"/>
+				<path fill-rule="evenodd" class="s15" d="m166.5 237.26h6.63v1.06h-6.63z"/>
+				<path fill-rule="evenodd" class="s15" d="m171.78 252.85h1.35v10.42h-1.35z"/>
+				<path fill-rule="evenodd" class="s15" d="m166.5 252.85h6.63v1.06h-6.63z"/>
+				<path fill-rule="evenodd" class="s15" d="m171.78 268.43h1.35v10.42h-1.35z"/>
+				<path fill-rule="evenodd" class="s15" d="m166.5 268.43h6.63v1.07h-6.63z"/>
+				<path fill-rule="evenodd" class="s15" d="m163.32 268.43h1.36v10.42h-1.36z"/>
+				<path fill-rule="evenodd" class="s15" d="m158.05 268.43h6.63v1.07h-6.63z"/>
+				<path fill-rule="evenodd" class="s15" d="m154.88 268.43h1.34v10.42h-1.34z"/>
+				<path fill-rule="evenodd" class="s15" d="m149.6 268.43h6.62v1.07h-6.62z"/>
+				<path fill-rule="evenodd" class="s15" d="m154.88 252.85h1.34v10.42h-1.34z"/>
+				<path fill-rule="evenodd" class="s15" d="m149.6 252.85h6.62v1.06h-6.62z"/>
+				<path fill-rule="evenodd" class="s15" d="m163.32 252.85h1.36v10.42h-1.36z"/>
+				<path fill-rule="evenodd" class="s15" d="m158.05 252.85h6.63v1.06h-6.63z"/>
+			</g>
+			<g>
+				<g>
+					<path class="s16" d="m171.99 109.68c0 1.11-0.9 2.01-2.01 2.01-1.11 0-2.01-0.9-2.01-2.01 0-1.11 0.9-2.01 2.01-2.01 1.11 0 2.01 0.9 2.01 2.01z"/>
+					<path class="s17" d="m171.27 109.68c0 1.11-0.9 2.01-2.01 2.01-1.11 0-2.01-0.9-2.01-2.01 0-1.11 0.9-2.01 2.01-2.01 1.11 0 2.01 0.9 2.01 2.01z"/>
+				</g>
+				<path fill-rule="evenodd" class="s16" d="m169.28 103.57h6.11v4.63h-6.11z"/>
+				<path fill-rule="evenodd" class="s18" d="m169.54 70.04v28.94"/>
+				<path fill-rule="evenodd" class="s18" d="m169.47 71.17l5.73 27.81"/>
+				<path fill-rule="evenodd" class="s18" d="m169.47 71.17l-5.29 27.81"/>
+				<path fill-rule="evenodd" class="s18" d="m172.32 59.56l115.66-42.35"/>
+				<path fill-rule="evenodd" class="s18" d="m287.45 17.21l-83.7 41"/>
+				<path fill-rule="evenodd" class="s18" d="m291.25 17.21l34.62 41"/>
+				<path fill-rule="evenodd" class="s18" d="m287.45 17.21l-34.62 41"/>
+				<path fill-rule="evenodd" class="s19" d="m320.24 60.7h11.26v3.25h-11.26z"/>
+				<path fill-rule="evenodd" class="s16" d="m316.98 60.7h11.26v3.25h-11.26z"/>
+				<g>
+					<g>
+						<path fill-rule="evenodd" class="s20" d="m281.99 66.98h15.01v1.52h-15.01z"/>
+					</g>
+					<g>
+						<path fill-rule="evenodd" class="s20" d="m281.99 80.66h15.01v1.52h-15.01z"/>
+					</g>
+					<g>
+						<path fill-rule="evenodd" class="s20" d="m281.99 91.9h15.01v1.51h-15.01z"/>
+					</g>
+					<g>
+						<path fill-rule="evenodd" class="s16" d="m296.13 60.7h1.75v40.51h-1.75z"/>
+					</g>
+					<g>
+						<g>
+							<g>
+								<path fill-rule="evenodd" class="s16" d="m289.74 67.46l6.81-5.94 0.92 1.05-6.81 5.94z"/>
+							</g>
+							<g>
+								<path fill-rule="evenodd" class="s16" d="m289.7 68.48l0.99-0.99 6.54 6.55-0.98 0.99z"/>
+							</g>
+						</g>
+						<g>
+							<g>
+								<path fill-rule="evenodd" class="s16" d="m289.74 79.96l6.81-5.93 0.91 1.05-6.81 5.94z"/>
+							</g>
+							<g>
+								<path fill-rule="evenodd" class="s16" d="m289.7 80.97l0.98-0.99 6.55 6.55-0.99 0.99z"/>
+							</g>
+						</g>
+						<g>
+							<g>
+								<path fill-rule="evenodd" class="s16" d="m289.73 92.43l6.81-5.93 0.92 1.05-6.81 5.94z"/>
+							</g>
+							<g>
+								<path fill-rule="evenodd" class="s16" d="m289.7 93.45l0.98-0.99 6.55 6.55-0.99 0.99z"/>
+							</g>
+						</g>
+						<g>
+							<g>
+								<path fill-rule="evenodd" class="s16" d="m296.11 101.21l1.35-1.17-0.91-1.06-2.56 2.23z"/>
+							</g>
+						</g>
+					</g>
+					<g>
+						<path fill-rule="evenodd" class="s17" d="m288.45 60.7h1.74v40.51h-1.74z"/>
+					</g>
+					<g>
+						<path fill-rule="evenodd" class="s17" d="m281.11 60.7h1.75v40.51h-1.75z"/>
+					</g>
+					<g>
+						<g>
+							<g>
+								<path fill-rule="evenodd" class="s17" d="m281.53 62.62l0.92-1.05 6.81 5.94-0.92 1.05z"/>
+							</g>
+							<g>
+								<path fill-rule="evenodd" class="s17" d="m281.77 74.08l6.56-6.55 0.98 0.99-6.55 6.55z"/>
+							</g>
+						</g>
+						<g>
+							<g>
+								<path fill-rule="evenodd" class="s17" d="m281.53 75.11l0.92-1.05 6.81 5.94-0.92 1.05z"/>
+							</g>
+							<g>
+								<path fill-rule="evenodd" class="s17" d="m281.75 86.58l6.56-6.54 0.98 0.98-6.55 6.55z"/>
+							</g>
+						</g>
+						<g>
+							<g>
+								<path fill-rule="evenodd" class="s17" d="m281.53 87.6l0.92-1.06 6.81 5.94-0.92 1.06z"/>
+							</g>
+							<g>
+								<path fill-rule="evenodd" class="s17" d="m281.75 99.06l6.56-6.54 0.98 0.99-6.55 6.54z"/>
+							</g>
+						</g>
+						<g>
+							<g>
+								<path fill-rule="evenodd" class="s17" d="m284.95 101.21l-2.51-2.18-0.91 1.05 1.29 1.13z"/>
+							</g>
+						</g>
+					</g>
+				</g>
+				<g>
+					<path fill-rule="evenodd" class="s20" d="m281.99 108.2h15.01v1.51h-15.01z"/>
+					<path fill-rule="evenodd" class="s20" d="m281.99 121.88h15.01v1.51h-15.01z"/>
+					<path fill-rule="evenodd" class="s20" d="m281.99 133.11h15.01v1.52h-15.01z"/>
+					<path fill-rule="evenodd" class="s20" d="m281.99 145.74h15.01v1.52h-15.01z"/>
+					<path fill-rule="evenodd" class="s20" d="m281.99 158.7h15.01v1.51h-15.01z"/>
+					<path fill-rule="evenodd" class="s20" d="m281.99 171.15h15.01v1.52h-15.01z"/>
+					<path fill-rule="evenodd" class="s20" d="m281.99 183.61h15.01v1.51h-15.01z"/>
+					<path fill-rule="evenodd" class="s20" d="m281.99 195.72h15.01v1.51h-15.01z"/>
+					<path fill-rule="evenodd" class="s20" d="m281.99 208.35h15.01v1.52h-15.01z"/>
+					<path fill-rule="evenodd" class="s20" d="m281.99 220.63h15.01v1.52h-15.01z"/>
+					<path fill-rule="evenodd" class="s20" d="m281.99 233.09h15.01v1.52h-15.01z"/>
+					<path fill-rule="evenodd" class="s20" d="m281.81 245.79h15.02v1.52h-15.02z"/>
+					<path fill-rule="evenodd" class="s20" d="m281.64 258.49h15.01v1.52h-15.01z"/>
+					<path fill-rule="evenodd" class="s20" d="m281.46 271.19h15.02v1.52h-15.02z"/>
+					<path fill-rule="evenodd" class="s20" d="m281.29 283.89h15.01v1.52h-15.01z"/>
+					<path fill-rule="evenodd" class="s16" d="m296.13 101.91h1.75v190h-1.75z"/>
+					<g>
+						<g>
+							<path fill-rule="evenodd" class="s21" d="m297 103.26l-6.81 5.94"/>
+							<path fill-rule="evenodd" class="s21" d="m290.19 109.2l6.55 6.55"/>
+						</g>
+						<g>
+							<path fill-rule="evenodd" class="s21" d="m297 115.75l-6.81 5.94"/>
+							<path fill-rule="evenodd" class="s21" d="m290.19 121.69l6.55 6.55"/>
+						</g>
+						<g>
+							<path fill-rule="evenodd" class="s21" d="m297 128.24l-6.81 5.93"/>
+							<path fill-rule="evenodd" class="s21" d="m290.19 134.17l6.55 6.55"/>
+						</g>
+						<g>
+							<path fill-rule="evenodd" class="s21" d="m297 140.72l-6.81 5.94"/>
+							<path fill-rule="evenodd" class="s21" d="m290.19 146.66l6.55 6.55"/>
+						</g>
+						<g>
+							<path fill-rule="evenodd" class="s21" d="m297 153.21l-6.81 5.94"/>
+							<path fill-rule="evenodd" class="s21" d="m290.19 159.15l6.55 6.54"/>
+						</g>
+						<g>
+							<path fill-rule="evenodd" class="s21" d="m297 165.69l-6.81 5.94"/>
+							<path fill-rule="evenodd" class="s21" d="m290.19 171.63l6.55 6.55"/>
+						</g>
+						<g>
+							<path fill-rule="evenodd" class="s21" d="m297 178.18l-6.81 5.94"/>
+							<path fill-rule="evenodd" class="s21" d="m290.19 184.12l6.55 6.55"/>
+						</g>
+						<g>
+							<path fill-rule="evenodd" class="s21" d="m297 190.67l-6.81 5.93"/>
+							<path fill-rule="evenodd" class="s21" d="m290.19 196.6l6.55 6.55"/>
+						</g>
+						<g>
+							<path fill-rule="evenodd" class="s21" d="m297 203.15l-6.81 5.94"/>
+							<path fill-rule="evenodd" class="s21" d="m290.19 209.09l6.55 6.55"/>
+						</g>
+						<g>
+							<path fill-rule="evenodd" class="s21" d="m297 215.64l-6.81 5.94"/>
+							<path fill-rule="evenodd" class="s21" d="m290.19 221.58l6.55 6.54"/>
+						</g>
+						<g>
+							<path fill-rule="evenodd" class="s21" d="m297 228.13l-6.81 5.93"/>
+							<path fill-rule="evenodd" class="s21" d="m290.19 234.06l6.55 6.55"/>
+						</g>
+						<g>
+							<path fill-rule="evenodd" class="s21" d="m297 240.61l-6.81 5.94"/>
+							<path fill-rule="evenodd" class="s21" d="m290.19 246.55l6.55 6.55"/>
+						</g>
+						<g>
+							<path fill-rule="evenodd" class="s21" d="m297 253.1l-6.81 5.94"/>
+							<path fill-rule="evenodd" class="s21" d="m290.19 259.04l6.55 6.54"/>
+						</g>
+						<g>
+							<path fill-rule="evenodd" class="s21" d="m297 265.58l-6.81 5.94"/>
+							<path fill-rule="evenodd" class="s21" d="m290.19 271.52l6.55 6.55"/>
+						</g>
+						<g>
+							<path fill-rule="evenodd" class="s21" d="m297 278.07l-6.81 5.94"/>
+							<path fill-rule="evenodd" class="s21" d="m290.19 284.01l6.55 6.55"/>
+						</g>
+					</g>
+					<path fill-rule="evenodd" class="s17" d="m288.45 101.91h1.74v190h-1.74z"/>
+					<path fill-rule="evenodd" class="s17" d="m281.11 101.91h1.75v190h-1.75z"/>
+					<g>
+						<g>
+							<path fill-rule="evenodd" class="s22" d="m281.99 103.31l6.81 5.94"/>
+							<path fill-rule="evenodd" class="s22" d="m288.8 109.25l-6.55 6.54"/>
+						</g>
+						<g>
+							<path fill-rule="evenodd" class="s22" d="m281.99 115.79l6.81 5.94"/>
+							<path fill-rule="evenodd" class="s22" d="m288.8 121.73l-6.55 6.55"/>
+						</g>
+						<g>
+							<path fill-rule="evenodd" class="s22" d="m281.99 128.28l6.81 5.94"/>
+							<path fill-rule="evenodd" class="s22" d="m288.8 134.22l-6.55 6.55"/>
+						</g>
+						<g>
+							<path fill-rule="evenodd" class="s22" d="m281.99 140.77l6.81 5.93"/>
+							<path fill-rule="evenodd" class="s22" d="m288.8 146.7l-6.55 6.55"/>
+						</g>
+						<g>
+							<path fill-rule="evenodd" class="s22" d="m281.99 153.25l6.81 5.94"/>
+							<path fill-rule="evenodd" class="s22" d="m288.8 159.19l-6.55 6.55"/>
+						</g>
+						<g>
+							<path fill-rule="evenodd" class="s22" d="m281.99 165.74l6.81 5.94"/>
+							<path fill-rule="evenodd" class="s22" d="m288.8 171.68l-6.55 6.54"/>
+						</g>
+						<g>
+							<path fill-rule="evenodd" class="s22" d="m281.99 178.22l6.81 5.94"/>
+							<path fill-rule="evenodd" class="s22" d="m288.8 184.16l-6.55 6.55"/>
+						</g>
+						<g>
+							<path fill-rule="evenodd" class="s22" d="m281.99 190.71l6.81 5.94"/>
+							<path fill-rule="evenodd" class="s22" d="m288.8 196.65l-6.55 6.55"/>
+						</g>
+						<g>
+							<path fill-rule="evenodd" class="s22" d="m281.99 203.2l6.81 5.94"/>
+							<path fill-rule="evenodd" class="s22" d="m288.8 209.13l-6.55 6.55"/>
+						</g>
+						<g>
+							<path fill-rule="evenodd" class="s22" d="m281.99 215.68l6.81 5.94"/>
+							<path fill-rule="evenodd" class="s22" d="m288.8 221.62l-6.55 6.55"/>
+						</g>
+						<g>
+							<path fill-rule="evenodd" class="s22" d="m281.99 228.17l6.81 5.94"/>
+							<path fill-rule="evenodd" class="s22" d="m288.8 234.11l-6.55 6.55"/>
+						</g>
+						<g>
+							<path fill-rule="evenodd" class="s22" d="m281.99 240.66l6.81 5.93"/>
+							<path fill-rule="evenodd" class="s22" d="m288.8 246.59l-6.55 6.55"/>
+						</g>
+						<g>
+							<path fill-rule="evenodd" class="s22" d="m281.99 253.14l6.81 5.94"/>
+							<path fill-rule="evenodd" class="s22" d="m288.8 259.08l-6.55 6.55"/>
+						</g>
+						<g>
+							<path fill-rule="evenodd" class="s22" d="m281.99 265.63l6.81 5.94"/>
+							<path fill-rule="evenodd" class="s22" d="m288.8 271.57l-6.55 6.55"/>
+						</g>
+						<g>
+							<path fill-rule="evenodd" class="s22" d="m281.99 278.12l6.81 5.93"/>
+							<path fill-rule="evenodd" class="s22" d="m288.8 284.05l-6.55 6.55"/>
+						</g>
+					</g>
+				</g>
+				<path fill-rule="evenodd" class="s16" d="m274.17 98.24h30.65v7.34h-30.65z"/>
+				<path fill-rule="evenodd" class="s17" d="m274.17 98.24h16.61v7.34h-16.61z"/>
+				<path fill-rule="evenodd" class="s17" d="m270.09 95.12h37.19v3.12h-37.19z"/>
+				<path fill-rule="evenodd" class="s16" d="m292.62 95.12h14.66v3.12h-14.66z"/>
+				<path fill-rule="evenodd" class="s17" d="m284.23 95.12h-12.83v-11.39l4.71-9.14h8.12z"/>
+				<path fill-rule="evenodd" class="s16" d="m284.23 74.59h6.55v20.53h-6.55z"/>
+				<path fill-rule="evenodd" class="s17" d="m168.47 58.21h168.35v2.7h-168.35z"/>
+				<path fill-rule="evenodd" class="s16" d="m330.07 58.21h6.75v2.7h-6.75z"/>
+				<path fill-rule="evenodd" class="s17" d="m310.95 63.95h25.87v13.6h-25.87z"/>
+				<path fill-rule="evenodd" class="s16" d="m328.76 63.95h8.06v13.6h-8.06z"/>
+				<g>
+					<path fill-rule="evenodd" class="s16" d="m288.74 21.4h2.34v39.3h-2.34z"/>
+					<path fill-rule="evenodd" class="s17" d="m287.28 21.4h2.34v39.3h-2.34z"/>
+				</g>
+				<g>
+					<path fill-rule="evenodd" class="s17" d="m286.35 13.02h3.27v8.38h-3.27z"/>
+					<path fill-rule="evenodd" class="s16" d="m289.62 13.02h3.26v8.38h-3.26z"/>
+				</g>
+				<g>
+					<g>
+						<g>
+							<path fill-rule="evenodd" class="s20" d="m274.03 60.47h1.6v7.36h-1.6z"/>
+						</g>
+						<g>
+							<path fill-rule="evenodd" class="s20" d="m259.62 60.47h1.59v7.36h-1.59z"/>
+						</g>
+						<g>
+							<path fill-rule="evenodd" class="s20" d="m247.78 60.47h1.6v7.36h-1.6z"/>
+						</g>
+						<g>
+							<path fill-rule="evenodd" class="s20" d="m234.48 60.47h1.59v7.36h-1.59z"/>
+						</g>
+						<g>
+							<path fill-rule="evenodd" class="s20" d="m220.83 60.47h1.6v7.36h-1.6z"/>
+						</g>
+						<g>
+							<path fill-rule="evenodd" class="s20" d="m207.71 60.47h1.59v7.36h-1.59z"/>
+						</g>
+						<g>
+							<path fill-rule="evenodd" class="s20" d="m194.59 60.47h1.59v7.36h-1.59z"/>
+						</g>
+						<g>
+							<path fill-rule="evenodd" class="s20" d="m181.83 60.47h1.59v7.36h-1.59z"/>
+						</g>
+						<g>
+							<path fill-rule="evenodd" class="s20" d="m169.52 60.47h0.6v7.36h-0.6z"/>
+						</g>
+						<g>
+							<g>
+								<g>
+									<path fill-rule="evenodd" class="s16" d="m280.27 68.06l-6.26-3.34 1.11-0.45 6.26 3.34z"/>
+								</g>
+								<g>
+									<path fill-rule="evenodd" class="s16" d="m268.19 67.94l-1.04-0.48 6.9-3.21 1.04 0.48z"/>
+								</g>
+							</g>
+							<g>
+								<g>
+									<path fill-rule="evenodd" class="s16" d="m267.11 68.06l-6.25-3.34 1.11-0.45 6.25 3.34z"/>
+								</g>
+								<g>
+									<path fill-rule="evenodd" class="s16" d="m255.04 67.94l-1.05-0.48 6.9-3.21 1.04 0.48z"/>
+								</g>
+							</g>
+							<g>
+								<g>
+									<path fill-rule="evenodd" class="s16" d="m253.96 68.06l-6.26-3.34 1.11-0.45 6.26 3.34z"/>
+								</g>
+								<g>
+									<path fill-rule="evenodd" class="s16" d="m241.88 67.94l-1.04-0.48 6.9-3.21 1.04 0.48z"/>
+								</g>
+							</g>
+							<g>
+								<g>
+									<path fill-rule="evenodd" class="s16" d="m240.81 68.06l-6.26-3.34 1.11-0.45 6.26 3.34z"/>
+								</g>
+								<g>
+									<path fill-rule="evenodd" class="s16" d="m228.73 67.94l-1.04-0.48 6.9-3.21 1.04 0.48z"/>
+								</g>
+							</g>
+							<g>
+								<g>
+									<path fill-rule="evenodd" class="s16" d="m227.65 68.06l-6.25-3.34 1.11-0.45 6.25 3.34z"/>
+								</g>
+								<g>
+									<path fill-rule="evenodd" class="s16" d="m215.57 67.94l-1.04-0.48 6.9-3.21 1.04 0.48z"/>
+								</g>
+							</g>
+							<g>
+								<g>
+									<path fill-rule="evenodd" class="s16" d="m214.5 68.06l-6.26-3.34 1.11-0.45 6.26 3.34z"/>
+								</g>
+								<g>
+									<path fill-rule="evenodd" class="s16" d="m202.42 67.94l-1.04-0.48 6.9-3.21 1.04 0.48z"/>
+								</g>
+							</g>
+							<g>
+								<g>
+									<path fill-rule="evenodd" class="s16" d="m201.35 68.06l-6.26-3.34 1.11-0.45 6.26 3.34z"/>
+								</g>
+								<g>
+									<path fill-rule="evenodd" class="s16" d="m189.27 67.94l-1.04-0.48 6.89-3.21 1.05 0.48z"/>
+								</g>
+							</g>
+							<g>
+								<g>
+									<path fill-rule="evenodd" class="s16" d="m188.19 68.06l-6.25-3.34 1.11-0.45 6.25 3.34z"/>
+								</g>
+								<g>
+									<path fill-rule="evenodd" class="s16" d="m176.11 67.94l-1.04-0.48 6.9-3.21 1.04 0.48z"/>
+								</g>
+							</g>
+							<g>
+								<g>
+									<path fill-rule="evenodd" class="s16" d="m169.89 64.27l-0.37 0.15v0.69l5.52 2.95 1.11-0.45z"/>
+								</g>
+							</g>
+						</g>
+						<g>
+							<path fill-rule="evenodd" class="s17" d="m169.52 63.64h112.73v0.85h-112.73z"/>
+						</g>
+						<g>
+							<path fill-rule="evenodd" class="s17" d="m169.52 60.04h112.73v0.86h-112.73z"/>
+						</g>
+						<g>
+							<g>
+								<g>
+									<path fill-rule="evenodd" class="s17" d="m275.08 64.03l-1.11-0.45 6.25-3.33 1.11 0.44z"/>
+								</g>
+								<g>
+									<path fill-rule="evenodd" class="s17" d="m274 64.05l-6.9-3.21 1.04-0.48 6.9 3.21z"/>
+								</g>
+							</g>
+							<g>
+								<g>
+									<path fill-rule="evenodd" class="s17" d="m261.92 64.03l-1.11-0.45 6.26-3.33 1.11 0.44z"/>
+								</g>
+								<g>
+									<path fill-rule="evenodd" class="s17" d="m260.85 64.05l-6.9-3.21 1.04-0.48 6.9 3.21z"/>
+								</g>
+							</g>
+							<g>
+								<g>
+									<path fill-rule="evenodd" class="s17" d="m248.77 64.03l-1.11-0.45 6.25-3.33 1.11 0.44z"/>
+								</g>
+								<g>
+									<path fill-rule="evenodd" class="s17" d="m247.69 64.05l-6.89-3.21 1.04-0.48 6.89 3.21z"/>
+								</g>
+							</g>
+							<g>
+								<g>
+									<path fill-rule="evenodd" class="s17" d="m235.62 64.03l-1.11-0.45 6.25-3.33 1.11 0.44z"/>
+								</g>
+								<g>
+									<path fill-rule="evenodd" class="s17" d="m234.54 64.05l-6.9-3.21 1.04-0.48 6.9 3.21z"/>
+								</g>
+							</g>
+							<g>
+								<g>
+									<path fill-rule="evenodd" class="s17" d="m222.46 64.03l-1.11-0.45 6.26-3.33 1.11 0.44z"/>
+								</g>
+								<g>
+									<path fill-rule="evenodd" class="s17" d="m221.39 64.05l-6.9-3.21 1.04-0.48 6.9 3.21z"/>
+								</g>
+							</g>
+							<g>
+								<g>
+									<path fill-rule="evenodd" class="s17" d="m209.31 64.03l-1.11-0.45 6.25-3.33 1.11 0.44z"/>
+								</g>
+								<g>
+									<path fill-rule="evenodd" class="s17" d="m208.23 64.05l-6.9-3.21 1.05-0.48 6.89 3.21z"/>
+								</g>
+							</g>
+							<g>
+								<g>
+									<path fill-rule="evenodd" class="s17" d="m196.15 64.03l-1.11-0.45 6.26-3.33 1.11 0.44z"/>
+								</g>
+								<g>
+									<path fill-rule="evenodd" class="s17" d="m195.08 64.05l-6.9-3.21 1.04-0.48 6.9 3.21z"/>
+								</g>
+							</g>
+							<g>
+								<g>
+									<path fill-rule="evenodd" class="s17" d="m183 64.03l-1.11-0.45 6.26-3.33 1.11 0.44z"/>
+								</g>
+								<g>
+									<path fill-rule="evenodd" class="s17" d="m181.93 64.05l-6.9-3.21 1.04-0.48 6.9 3.21z"/>
+								</g>
+							</g>
+							<g>
+								<g>
+									<path fill-rule="evenodd" class="s17" d="m174.99 60.25l-5.47 2.91v0.74l0.33 0.13 6.25-3.34z"/>
+								</g>
+							</g>
+						</g>
+					</g>
+					<g>
+						<path fill-rule="evenodd" class="s17" d="m156.34 67.4h125.91v0.86h-125.91z"/>
+					</g>
+				</g>
+				<path fill-rule="evenodd" class="s17" d="m168.47 58.21h1.65v10.05h-1.65z"/>
+				<path fill-rule="evenodd" class="s17" d="m160.51 67.83l-1.9 0.02 9.88-9.64 0.91 0.94z"/>
+				<path fill-rule="evenodd" class="s17" d="m164.01 67.85h11.06v4.37h-11.06z"/>
+				<path fill-rule="evenodd" class="s17" d="m163.06 98.98h12.57v4.59h-12.57z"/>
+				<path fill-rule="evenodd" class="s16" d="m171.97 98.98h5.67v4.59h-5.67z"/>
+				<path fill-rule="evenodd" class="s17" d="m165.24 103.57h6.11v4.63h-6.11z"/>
+				<path class="s17" d="m169.79 111.21q0 0.01 0 0.04 0 0.05-0.01 0.14-0.02 0.18 0.01 0.49c0.02 0.21 0.06 0.44 0.17 0.64q0.04 0.07 0.09 0.13 0.02 0.03 0.05 0.06l0.03 0.03 0.01 0.01 0.01 0.01c-0.02-0.03 0 0-0.01-0.01q0.1 0.11 0.2 0.21 0.1 0.1 0.21 0.2 0.45 0.46 0.93 1.1 0.24 0.33 0.45 0.71 0.1 0.19 0.21 0.39 0.09 0.21 0.17 0.43c0.22 0.58 0.36 1.25 0.35 1.94q-0.01 0.26-0.03 0.51-0.04 0.26-0.08 0.52-0.06 0.25-0.14 0.49l-0.07 0.25-0.03 0.07-0.01 0.02-0.01 0.02-0.02 0.05-0.04 0.09-0.02 0.05-0.01 0.03-0.02 0.03-0.09 0.16q-0.09 0.17-0.18 0.29l-0.18 0.24-0.21 0.22q-0.43 0.42-0.93 0.68-0.5 0.25-1.01 0.37-0.51 0.12-1 0.12c-0.65 0.01-1.28-0.12-1.84-0.35-0.56-0.23-1.04-0.58-1.4-1-0.36-0.41-0.58-0.89-0.66-1.31-0.09-0.43-0.07-0.79-0.03-1.07q0.08-0.42 0.17-0.63 0.08-0.2 0.08-0.2c0.07-0.18 0.28-0.27 0.46-0.2 0.13 0.05 0.21 0.17 0.22 0.3v0.05q0 0 0.02 0.18 0 0.19 0.06 0.5 0.06 0.32 0.24 0.65 0.19 0.34 0.55 0.59 0.37 0.25 0.89 0.37 0.53 0.11 1.12 0.04c0.39-0.05 0.77-0.17 1.07-0.36q0.22-0.13 0.38-0.31 0.04-0.04 0.08-0.08 0.03-0.05 0.06-0.09 0.03-0.05 0.04-0.07 0.01-0.01 0.02-0.02v-0.01l0.01-0.02 0.02-0.05 0.05-0.09 0.02-0.05 0.01-0.02v-0.02c-0.01 0.02 0.03-0.07-0.02 0.05l0.05-0.15q0.05-0.15 0.09-0.3 0.02-0.16 0.06-0.31 0.01-0.15 0.03-0.3 0.03-0.61-0.12-1.22-0.16-0.61-0.45-1.19-0.28-0.57-0.6-1.1-0.09-0.15-0.17-0.28-0.08-0.14-0.14-0.27c-0.01 0 0.01 0.01-0.02-0.02v-0.01l-0.02-0.03-0.02-0.04-0.04-0.1q-0.05-0.09-0.07-0.19-0.07-0.18-0.09-0.36c-0.06-0.46 0.01-0.82 0.09-1.1q0.13-0.41 0.25-0.61 0.05-0.09 0.09-0.15 0.03-0.05 0.03-0.05l0.01-0.01c0.13-0.16 0.35-0.19 0.51-0.07q0.15 0.15 0.12 0.35z"/>
+			</g>
+			<path fill-rule="evenodd" class="s23" d="m9.1 288.88h357v6.48h-357z"/>
+		</g>
+	</g>
+	<g>
+		<path class="s5" d="m273.92 273.89c0 1.09-0.41 1.97-0.91 1.97-0.51 0-0.91-0.88-0.91-1.97 0-1.09 0.4-1.97 0.91-1.97 0.5 0 0.91 0.88 0.91 1.97z"/>
+		<path class="s24" d="m274.01 275.94q-0.01 0.09-0.11 0.1h-1.14q-0.09-0.01-0.1-0.1v-4.07q0.01-0.1 0.1-0.11h1.14q0.1 0.01 0.11 0.11z"/>
+		<path class="s25" d="m348.04 284q-0.01 0.1-0.11 0.11h-58.3q-0.1-0.01-0.11-0.11v-3.9q0.01-0.1 0.11-0.11h58.3q0.1 0.01 0.11 0.11z"/>
+		<path fill-rule="evenodd" class="s26" d="m354.42 274.72h-5.45l-0.8-5.3h7.05z"/>
+		<g>
+			<path class="s27" d="m346.75 249.46c-4.69-4.12-11.92-6.21-19.6-5.08-6.64 0.98-12.26 4.17-15.8 8.44v20.53c4.58 5.02 12.52 7.72 21.02 6.46 7.68-1.13 14-5.22 17.31-10.51z"/>
+			<path class="s28" d="m348.12 258.73l-36.77 7.16v7.46c4.58 5.02 12.52 7.72 21.02 6.46 7.68-1.13 14-5.22 17.31-10.51z"/>
+			<path class="s29" d="m349.68 269.3l-0.61-4.14-36.48 6.46-0.78 2.22c4.64 4.7 12.34 7.19 20.57 5.98 7.67-1.14 13.99-5.23 17.3-10.52z"/>
+			<path class="s30" d="m327.15 244.38l8.15 32.4 2.66-0.02-8-32.68c0 0-1.1-1.52-2.81 0.3z"/>
+			<path fill-rule="evenodd" class="s24" d="m316.15 277.9l-6.71-2.54-2.84-19.28 5.69-4.38z"/>
+			<path fill-rule="evenodd" class="s26" d="m346.53 249.35l3.47-0.51 2.98 20.21-3.47 0.51z"/>
+			<path fill-rule="evenodd" class="s24" d="m339.84 276.34l12.23-12.14h3.86v1.61l-10.01 10.53z"/>
+		</g>
+		<g>
+			<g>
+				<path fill-rule="evenodd" class="s26" d="m302.44 265.99h5.91v10.63h-5.91z"/>
+				<path fill-rule="evenodd" class="s25" d="m304.73 265.06h3.62v0.93h-3.62z"/>
+				<path fill-rule="evenodd" class="s25" d="m301.8 259.82l3.84 4.78h2.71l0.39-5.98z"/>
+				<path fill-rule="evenodd" class="s26" d="m304.11 264.38h4.23v0.93h-4.23z"/>
+				<g>
+					<g>
+						<path class="s25" d="m297.88 259.82h-1.28v-6.17c0-1.28 1.05-2.33 2.33-2.33h0.99v1.27h-0.99c-0.58 0-1.06 0.48-1.06 1.06z"/>
+						<path fill-rule="evenodd" class="s26" d="m296.34 255.63h1.81v7.91h-1.81z"/>
+					</g>
+					<path fill-rule="evenodd" class="s26" d="m294.98 260.46h3.99v17.02h-3.99z"/>
+					<g>
+						<path fill-rule="evenodd" class="s31" d="m291.41 276.52h58.76v6.61h-58.76z"/>
+						<g>
+							<path class="s32" d="m295.58 256.36c0 0.16-0.14 0.3-0.31 0.3h-13.85c-0.16 0-0.3-0.14-0.3-0.3 0-0.17 0.14-0.3 0.3-0.3h13.85c0.17 0 0.31 0.13 0.31 0.3z"/>
+							<g>
+								<path class="s27" d="m275.7 265.43l5.46-8.6 14.42 0.02v18.2l-22.26 2.9v-5.76c0 0 0-3.22 2.38-6.76z"/>
+								<path fill-rule="evenodd" class="s33" d="m277.77 269.95v7.16h4.3l7.65-2.72 3.32-0.07v-7.04h-5.77l-6.21 2.6z"/>
+								<g>
+									<path class="s30" d="m296.31 282.16c0 0.53-0.74 0.95-1.66 0.95h-20.79c-0.92 0-1.67-0.42-1.67-0.95v-4.53c0-0.53 0.75-0.96 1.67-0.96h8.04l7.46-3.93h2.4 4.01c0.68 0 0.54 4.36 0.54 4.89z"/>
+									<g>
+										<path class="s24" d="m293.58 283.12q0.06-0.42 0.06-0.87c0-3.43-2.73-6.21-6.08-6.21-3.36 0-6.08 2.78-6.08 6.21q0 0.54 0.09 1.04z"/>
+										<path class="s31" d="m293.15 283.11q0.06-0.4 0.06-0.81c0-3.19-2.53-5.78-5.65-5.78-3.12 0-5.65 2.59-5.65 5.78q0 0.49 0.08 0.96z"/>
+									</g>
+									<path class="s34" d="m275.8 281.95c0 0.17-0.14 0.3-0.3 0.3h-1.19c-0.17 0-0.3-0.13-0.3-0.3 0-0.17 0.14-0.3 0.3-0.3h1.19c0.16 0 0.3 0.13 0.3 0.3z"/>
+								</g>
+								<g>
+									<path fill-rule="evenodd" class="s35" d="m282.01 257.81l-4.4 9.12v3.34h3.11l6.44-2.68h6v-3.7l-1.57-6.08z"/>
+									<path fill-rule="evenodd" class="s36" d="m282.41 258.62l-4.28 8.31v2.81h2.47l6.54-2.81h2.38l-0.03-8.31z"/>
+									<path fill-rule="evenodd" class="s36" d="m288.79 258.62l-0.28 8.31h4.06v-2.75l-1.37-5.56z"/>
+								</g>
+								<g>
+									<path class="s37" d="m290.59 269.96c-0.12 0-0.21-0.09-0.21-0.2 0-0.12 0.09-0.21 0.21-0.21h1.64c0.11 0 0.21 0.09 0.21 0.21 0 0.11-0.1 0.2-0.21 0.2z"/>
+									<path class="s38" d="m290.59 269.74c-0.12 0-0.21-0.09-0.21-0.21 0-0.11 0.09-0.21 0.21-0.21h1.64c0.11 0 0.21 0.1 0.21 0.21 0 0.12-0.1 0.21-0.21 0.21z"/>
+								</g>
+							</g>
+							<path fill-rule="evenodd" class="s39" d="m281.12 256.44h14.46v0.41h-14.46z"/>
+						</g>
+						<g>
+							<g>
+								<g>
+									<path class="s24" d="m320.83 283.22q0.06-0.43 0.06-0.87c0-3.43-2.72-6.21-6.07-6.21-3.36 0-6.08 2.78-6.08 6.21q0 0.53 0.08 1.04z"/>
+									<path class="s31" d="m320.41 283.2q0.05-0.4 0.05-0.81c0-3.19-2.52-5.77-5.64-5.77-3.12 0-5.65 2.58-5.65 5.77q0 0.5 0.08 0.97z"/>
+								</g>
+							</g>
+						</g>
+						<g>
+							<g>
+								<g>
+									<g>
+										<path class="s31" d="m331.11 283.2q-0.05-0.4-0.05-0.81c0-3.19 2.53-5.77 5.65-5.77 3.12 0 5.65 2.58 5.65 5.77q-0.01 0.5-0.08 0.97z"/>
+									</g>
+								</g>
+							</g>
+							<path class="s24" d="m349.15 276.6c3.12 0 5.64 2.59 5.64 5.78q0 0.4-0.05 0.79l0.42 0.03q0.06-0.42 0.06-0.87c0-3.43-2.72-6.21-6.07-6.21h-12.45c-3.36 0-6.08 2.78-6.08 6.21q0 0.45 0.06 0.87l0.42-0.03q-0.05-0.39-0.05-0.79c0-3.19 2.53-5.78 5.65-5.78z"/>
+						</g>
+						<g>
+							<path fill-rule="evenodd" class="s25" d="m322.09 282.94h0.53v2.73h-0.53z"/>
+							<path fill-rule="evenodd" class="s25" d="m328.64 282.94h0.53v2.73h-0.53z"/>
+							<path fill-rule="evenodd" class="s24" d="m321.45 282.72h8.51v0.82h-8.51z"/>
+							<path fill-rule="evenodd" class="s26" d="m321.45 282.99h8.51v0.55h-8.51z"/>
+							<path fill-rule="evenodd" class="s24" d="m321.45 284.13h8.51v0.81h-8.51z"/>
+							<path fill-rule="evenodd" class="s26" d="m321.45 284.39h8.51v0.55h-8.51z"/>
+							<path fill-rule="evenodd" class="s24" d="m321.45 285.53h8.51v0.82h-8.51z"/>
+							<path fill-rule="evenodd" class="s26" d="m321.45 285.8h8.51v0.55h-8.51z"/>
+						</g>
+					</g>
+					<path fill-rule="evenodd" class="s24" d="m295.58 260.46h3.73v6.93h-3.73z"/>
+				</g>
+				<g>
+					<path class="s26" d="m309.06 258.27c0 2.21-1.78 3.99-3.99 3.99-2.2 0-3.99-1.78-3.99-3.99 0-2.2 1.79-3.99 3.99-3.99 2.21 0 3.99 1.79 3.99 3.99z"/>
+					<path class="s40" d="m308.35 258.27c0 1.81-1.47 3.28-3.28 3.28-1.8 0-3.27-1.47-3.27-3.28 0-1.8 1.47-3.27 3.27-3.27 1.81 0 3.28 1.47 3.28 3.27z"/>
+				</g>
+			</g>
+		</g>
+		<path class="s24" d="m347.7 252.7l0.98 5.92 7.94-2.02c0 0-1.11-2.89-1.82-2.89-0.71 0-7.1-1.01-7.1-1.01z"/>
+		<g>
+			<g>
+				<path class="s41" d="m354.12 283.06q0-0.01 0-0.21-0.01-0.09-0.02-0.21 0-0.12-0.02-0.25-0.03-0.25-0.07-0.45-0.05-0.19-0.05-0.2l0.24-0.06q0 0-0.03-0.13-0.04-0.12-0.09-0.28-0.05-0.16-0.1-0.28-0.05-0.12-0.05-0.12l-0.33 0.14 0.1-0.05q0 0-0.02-0.05-0.02-0.05-0.06-0.14-0.02-0.04-0.04-0.09-0.03-0.05-0.05-0.1-0.05-0.11-0.12-0.22-0.13-0.22-0.24-0.38-0.11-0.17-0.12-0.17l0.2-0.15q0 0-0.02-0.03-0.03-0.03-0.06-0.08-0.08-0.1-0.19-0.23-0.05-0.06-0.1-0.11-0.05-0.06-0.1-0.1-0.08-0.1-0.09-0.1l-0.17 0.17q-0.01 0-0.15-0.14-0.07-0.07-0.16-0.14-0.09-0.08-0.19-0.16c-0.26-0.2-0.55-0.38-0.55-0.38l0.13-0.21q-0.01 0-0.12-0.06-0.05-0.03-0.12-0.07-0.07-0.04-0.14-0.07-0.15-0.08-0.26-0.13-0.06-0.02-0.09-0.04-0.04-0.01-0.04-0.01l-0.09 0.23q-0.01-0.01-0.19-0.08-0.19-0.07-0.44-0.14c-0.32-0.09-0.65-0.14-0.65-0.14l-0.02 0.12 0.06-0.36q-0.01 0-0.14-0.02-0.06-0.01-0.13-0.02-0.08-0.01-0.16-0.01-0.08-0.01-0.16-0.01-0.07 0-0.13-0.01-0.13 0-0.14 0v0.25q-0.01 0-0.21 0-0.09 0-0.21 0.01-0.12 0.01-0.24 0.03-0.26 0.03-0.45 0.07-0.2 0.05-0.21 0.05l-0.05-0.24q-0.01 0-0.13 0.03-0.13 0.03-0.29 0.09-0.16 0.05-0.27 0.1-0.12 0.04-0.13 0.05l0.14 0.33-0.04-0.11q-0.01 0-0.06 0.03-0.05 0.02-0.13 0.06-0.05 0.02-0.1 0.04-0.04 0.02-0.1 0.05-0.1 0.05-0.21 0.12-0.23 0.13-0.39 0.24-0.16 0.11-0.17 0.12l-0.15-0.2q0 0-0.03 0.02-0.03 0.02-0.07 0.06-0.1 0.08-0.23 0.19-0.06 0.05-0.12 0.1-0.05 0.05-0.1 0.1-0.09 0.08-0.1 0.09l0.26 0.26-0.08-0.09q-0.01 0.01-0.15 0.15-0.06 0.07-0.14 0.16-0.08 0.09-0.15 0.19c-0.21 0.26-0.38 0.55-0.38 0.55l-0.21-0.13q-0.01 0.01-0.07 0.12-0.03 0.05-0.07 0.12-0.03 0.06-0.07 0.14-0.07 0.15-0.12 0.26-0.03 0.06-0.04 0.09-0.02 0.04-0.02 0.04l0.23 0.09q0 0.01-0.08 0.19-0.06 0.19-0.14 0.44c-0.09 0.32-0.14 0.65-0.14 0.65l0.12 0.02-0.36-0.06q0 0.01-0.02 0.14 0 0.06-0.02 0.13 0 0.08-0.01 0.16 0 0.08-0.01 0.16 0 0.07 0 0.13-0.01 0.13-0.01 0.14h0.25q0 0.01 0.01 0.2 0 0.1 0.01 0.22 0.01 0.12 0.02 0.24 0.04 0.26 0.07 0.45 0.05 0.19 0.05 0.2l-0.24 0.06q0 0.01 0.04 0.13 0.03 0.13 0.08 0.29 0.05 0.16 0.1 0.27 0.05 0.12 0.05 0.13l0.34-0.14-0.11 0.04q0 0 0.02 0.06 0.02 0.05 0.07 0.13 0.01 0.05 0.04 0.09 0.02 0.05 0.05 0.11 0.05 0.1 0.11 0.21 0.13 0.23 0.24 0.39 0.12 0.16 0.12 0.17l-0.19 0.15q0 0 0.02 0.03 0.02 0.02 0.06 0.07 0.07 0.1 0.18 0.23 0.06 0.06 0.11 0.12 0.05 0.05 0.09 0.1 0.09 0.09 0.09 0.09l0.18-0.17q0.01 0.01 0.15 0.14 0.07 0.07 0.16 0.14 0.09 0.08 0.19 0.16c0.26 0.21 0.54 0.38 0.54 0.38l0.06-0.1-0.19 0.31q0.01 0 0.12 0.07 0.05 0.03 0.12 0.06 0.07 0.04 0.14 0.08 0.15 0.07 0.27 0.12 0.05 0.03 0.09 0.04 0.03 0.02 0.03 0.02l0.09-0.23q0.01 0 0.2 0.07 0.18 0.07 0.43 0.14c0.32 0.09 0.65 0.14 0.65 0.14l0.02-0.11-0.05 0.36q0 0 0.13 0.01 0.06 0.01 0.14 0.02 0.07 0.01 0.15 0.01 0.08 0.01 0.16 0.01 0.08 0.01 0.14 0.01 0.12 0 0.13 0v-0.25q0.01 0.01 0.21 0 0.09 0 0.21-0.01 0.12-0.01 0.24-0.03 0.26-0.03 0.46-0.07 0.19-0.04 0.2-0.05l0.06 0.24q0 0 0.13-0.03 0.12-0.03 0.28-0.08 0.16-0.06 0.28-0.11 0.11-0.04 0.12-0.04l-0.14-0.34 0.05 0.11q0 0 0.05-0.02 0.05-0.03 0.14-0.07 0.04-0.02 0.09-0.04 0.05-0.02 0.1-0.05 0.1-0.05 0.22-0.12 0.22-0.12 0.38-0.24 0.16-0.11 0.17-0.12l0.15 0.2q0 0 0.03-0.02 0.03-0.02 0.08-0.06 0.1-0.08 0.22-0.19 0.07-0.05 0.12-0.1 0.06-0.05 0.1-0.09 0.1-0.09 0.1-0.1l-0.26-0.25 0.09 0.08q0-0.01 0.14-0.15 0.07-0.07 0.14-0.16 0.08-0.09 0.16-0.19c0.2-0.26 0.38-0.55 0.38-0.55l0.21 0.13q0-0.01 0.06-0.12 0.03-0.05 0.07-0.12 0.03-0.06 0.07-0.14 0.08-0.14 0.13-0.26 0.02-0.06 0.04-0.09 0.01-0.03 0.01-0.03l-0.23-0.1q0.01-0.01 0.08-0.19 0.07-0.19 0.14-0.44c0.09-0.32 0.14-0.65 0.14-0.65l-0.12-0.02 0.36 0.06q0-0.01 0.02-0.13 0.01-0.07 0.02-0.14 0-0.08 0.01-0.16 0.01-0.08 0.01-0.15 0-0.08 0-0.14 0.01-0.13 0.01-0.14c0 0-0.25 0-0.25 0.01z"/>
+			</g>
+			<path class="s42" d="m353.32 283.06c0 2.58-2.1 4.68-4.68 4.68-2.58 0-4.67-2.1-4.67-4.68 0-2.58 2.09-4.68 4.67-4.68 2.59 0 4.68 2.1 4.68 4.68z"/>
+			<g>
+				<path class="s43" d="m351.51 282.98c0 1.47-1.19 2.67-2.66 2.67-1.47 0-2.66-1.2-2.66-2.67 0-1.47 1.19-2.66 2.66-2.66 1.47 0 2.66 1.19 2.66 2.66z"/>
+				<path class="s37" d="m351.03 282.98c0 1.21-0.98 2.18-2.18 2.18-1.2 0-2.18-0.97-2.18-2.18 0-1.2 0.98-2.18 2.18-2.18 1.2 0 2.18 0.98 2.18 2.18z"/>
+				<path class="s44" d="m350.6 282.98c0 0.97-0.78 1.75-1.75 1.75-0.97 0-1.75-0.78-1.75-1.75 0-0.96 0.78-1.75 1.75-1.75 0.97 0 1.75 0.79 1.75 1.75z"/>
+				<path class="s45" d="m349.98 282.98c0 0.63-0.51 1.13-1.13 1.13-0.62 0-1.13-0.5-1.13-1.13 0-0.62 0.51-1.13 1.13-1.13 0.62 0 1.13 0.51 1.13 1.13z"/>
+				<path class="s28" d="m349.67 282.98c0 0.45-0.37 0.82-0.82 0.82-0.45 0-0.81-0.37-0.81-0.82 0-0.45 0.36-0.81 0.81-0.81 0.45 0 0.82 0.36 0.82 0.81z"/>
+			</g>
+		</g>
+		<g>
+			<g>
+				<path class="s41" d="m342.49 283.06q0-0.01 0-0.21-0.01-0.09-0.02-0.21 0-0.12-0.02-0.25-0.03-0.25-0.07-0.45-0.04-0.19-0.05-0.2l0.24-0.06q0 0-0.03-0.13-0.03-0.12-0.09-0.28-0.05-0.16-0.1-0.28-0.04-0.12-0.05-0.12l-0.33 0.14 0.11-0.05q0 0-0.03-0.05-0.02-0.05-0.06-0.14-0.02-0.04-0.04-0.09-0.03-0.05-0.05-0.1-0.06-0.11-0.12-0.22-0.13-0.22-0.24-0.38-0.11-0.17-0.12-0.17l0.2-0.15q0 0-0.02-0.03-0.02-0.03-0.06-0.08-0.08-0.1-0.19-0.23-0.05-0.06-0.1-0.11-0.05-0.06-0.1-0.1-0.09-0.1-0.09-0.1l-0.18 0.17q0 0-0.15-0.14-0.07-0.07-0.16-0.14-0.08-0.08-0.18-0.16c-0.26-0.2-0.55-0.38-0.55-0.38l0.13-0.21q-0.01 0-0.12-0.06-0.05-0.03-0.12-0.07-0.07-0.04-0.14-0.07-0.15-0.08-0.26-0.13-0.06-0.02-0.09-0.04-0.04-0.01-0.04-0.01l-0.09 0.23q-0.01-0.01-0.19-0.08-0.19-0.07-0.44-0.14c-0.32-0.09-0.65-0.14-0.65-0.14l-0.02 0.12 0.06-0.36q-0.01 0-0.14-0.02-0.06-0.01-0.13-0.02-0.08-0.01-0.16-0.01-0.08-0.01-0.16-0.01-0.07 0-0.13-0.01-0.13 0-0.14 0v0.25q-0.01 0-0.21 0-0.09 0-0.21 0.01-0.12 0.01-0.24 0.03-0.26 0.03-0.45 0.07-0.2 0.05-0.21 0.05l-0.06-0.24q0 0-0.12 0.03-0.13 0.03-0.28 0.09-0.17 0.05-0.28 0.1-0.12 0.04-0.13 0.05l0.14 0.33-0.04-0.11q0 0-0.06 0.03-0.05 0.02-0.13 0.06-0.05 0.02-0.1 0.04-0.04 0.02-0.1 0.05-0.1 0.05-0.21 0.12-0.23 0.13-0.39 0.24-0.16 0.11-0.17 0.12l-0.15-0.2q0 0-0.03 0.02-0.03 0.02-0.07 0.06-0.1 0.08-0.23 0.19-0.06 0.05-0.12 0.1-0.05 0.05-0.1 0.1-0.09 0.08-0.1 0.09l0.26 0.26-0.08-0.09q-0.01 0.01-0.15 0.15-0.06 0.07-0.14 0.16-0.08 0.09-0.15 0.19c-0.21 0.26-0.38 0.55-0.38 0.55l-0.21-0.13q0 0.01-0.07 0.12-0.03 0.05-0.07 0.12-0.03 0.06-0.07 0.14-0.08 0.15-0.12 0.26-0.03 0.06-0.04 0.09-0.02 0.04-0.02 0.04l0.23 0.09q0 0.01-0.08 0.19-0.06 0.19-0.13 0.44c-0.09 0.32-0.15 0.65-0.15 0.65l0.12 0.02-0.36-0.06q0 0.01-0.02 0.14-0.01 0.06-0.01 0.13-0.01 0.08-0.02 0.16 0 0.08-0.01 0.16 0 0.07 0 0.13 0 0.13 0 0.14h0.24q0 0.01 0.01 0.2 0 0.1 0.01 0.22 0.01 0.12 0.02 0.24 0.04 0.26 0.08 0.45 0.04 0.19 0.04 0.2l-0.23 0.06q0 0.01 0.03 0.13 0.03 0.13 0.08 0.29 0.05 0.16 0.1 0.27 0.05 0.12 0.05 0.13l0.34-0.14-0.11 0.04q0 0 0.02 0.06 0.03 0.05 0.07 0.13 0.01 0.05 0.04 0.09 0.02 0.05 0.05 0.11 0.05 0.1 0.11 0.21 0.13 0.23 0.24 0.39 0.12 0.16 0.12 0.17l-0.19 0.15q0 0 0.02 0.03 0.02 0.02 0.06 0.07 0.07 0.1 0.19 0.23 0.05 0.06 0.1 0.12 0.05 0.05 0.09 0.1 0.09 0.09 0.1 0.09l0.17-0.17q0.01 0.01 0.15 0.14 0.07 0.07 0.16 0.14 0.09 0.08 0.19 0.16c0.26 0.21 0.55 0.38 0.55 0.38l0.06-0.1-0.19 0.31q0 0 0.11 0.07 0.06 0.03 0.12 0.06 0.07 0.04 0.14 0.08 0.15 0.07 0.27 0.12 0.06 0.03 0.09 0.04 0.03 0.02 0.03 0.02l0.1-0.23q0.01 0 0.19 0.07 0.19 0.07 0.44 0.14c0.32 0.09 0.65 0.14 0.65 0.14l0.01-0.11-0.05 0.36q0.01 0 0.13 0.01 0.06 0.01 0.14 0.02 0.08 0.01 0.16 0.01 0.08 0.01 0.15 0.01 0.08 0.01 0.14 0.01 0.13 0 0.13 0v-0.25q0.02 0.01 0.21 0 0.1 0 0.22-0.01 0.11-0.01 0.24-0.03 0.26-0.03 0.45-0.07 0.19-0.04 0.2-0.05l0.06 0.24q0.01 0 0.13-0.03 0.12-0.03 0.28-0.08 0.16-0.06 0.28-0.11 0.12-0.04 0.13-0.04l-0.14-0.34 0.04 0.11q0 0 0.05-0.02 0.05-0.03 0.14-0.07 0.04-0.02 0.09-0.04 0.05-0.02 0.1-0.05 0.11-0.05 0.22-0.12 0.22-0.12 0.39-0.24 0.16-0.11 0.17-0.12l0.14 0.2q0.01 0 0.03-0.02 0.03-0.02 0.08-0.06 0.1-0.08 0.23-0.19 0.06-0.05 0.12-0.1 0.05-0.05 0.1-0.09 0.09-0.09 0.09-0.1l-0.25-0.25 0.08 0.08q0.01-0.01 0.14-0.15 0.07-0.07 0.15-0.16 0.07-0.09 0.15-0.19c0.21-0.26 0.38-0.55 0.38-0.55l0.21 0.13q0-0.01 0.07-0.12 0.03-0.05 0.06-0.12 0.04-0.06 0.08-0.14 0.07-0.14 0.12-0.26 0.03-0.06 0.04-0.09 0.01-0.03 0.02-0.03l-0.23-0.1q0-0.01 0.07-0.19 0.07-0.19 0.14-0.44c0.1-0.32 0.14-0.65 0.14-0.65l-0.11-0.02 0.36 0.06q0-0.01 0.02-0.13 0-0.07 0.01-0.14 0.01-0.08 0.02-0.16 0-0.08 0.01-0.15 0-0.08 0-0.14 0-0.13 0-0.14c0 0-0.25 0-0.25 0.01z"/>
+			</g>
+			<path class="s42" d="m341.69 283.06c0 2.58-2.09 4.68-4.68 4.68-2.58 0-4.67-2.1-4.67-4.68 0-2.58 2.09-4.68 4.67-4.68 2.59 0 4.68 2.1 4.68 4.68z"/>
+			<g>
+				<path class="s43" d="m339.89 282.98c0 1.47-1.2 2.67-2.67 2.67-1.47 0-2.66-1.2-2.66-2.67 0-1.47 1.19-2.66 2.66-2.66 1.47 0 2.67 1.19 2.67 2.66z"/>
+				<path class="s37" d="m339.4 282.98c0 1.21-0.97 2.18-2.18 2.18-1.2 0-2.18-0.97-2.18-2.18 0-1.2 0.98-2.18 2.18-2.18 1.21 0 2.18 0.98 2.18 2.18z"/>
+				<path class="s44" d="m338.97 282.98c0 0.97-0.78 1.75-1.75 1.75-0.97 0-1.75-0.78-1.75-1.75 0-0.96 0.78-1.75 1.75-1.75 0.97 0 1.75 0.79 1.75 1.75z"/>
+				<path class="s45" d="m338.35 282.98c0 0.63-0.5 1.13-1.13 1.13-0.62 0-1.13-0.5-1.13-1.13 0-0.62 0.51-1.13 1.13-1.13 0.63 0 1.13 0.51 1.13 1.13z"/>
+				<path class="s28" d="m338.04 282.98c0 0.45-0.37 0.82-0.82 0.82-0.45 0-0.81-0.37-0.81-0.82 0-0.45 0.36-0.81 0.81-0.81 0.45 0 0.82 0.36 0.82 0.81z"/>
+			</g>
+		</g>
+		<g>
+			<g>
+				<path class="s41" d="m320.29 283.06q0-0.01 0-0.21 0-0.09-0.01-0.21-0.01-0.12-0.03-0.25-0.03-0.25-0.07-0.45-0.04-0.19-0.05-0.2l0.24-0.06q0 0-0.03-0.13-0.03-0.12-0.09-0.28-0.05-0.16-0.1-0.28-0.04-0.12-0.05-0.12l-0.33 0.14 0.11-0.05q0 0-0.03-0.05-0.02-0.05-0.06-0.14-0.02-0.04-0.04-0.09-0.03-0.05-0.05-0.1-0.05-0.11-0.12-0.22-0.13-0.22-0.24-0.38-0.11-0.17-0.12-0.17l0.2-0.15q0 0-0.02-0.03-0.03-0.03-0.06-0.08-0.08-0.1-0.19-0.23-0.05-0.06-0.1-0.11-0.05-0.06-0.1-0.1-0.08-0.1-0.09-0.1l-0.17 0.17q-0.01 0-0.15-0.14-0.07-0.07-0.16-0.14-0.09-0.08-0.19-0.16c-0.26-0.2-0.55-0.38-0.55-0.38l0.13-0.21q-0.01 0-0.12-0.06-0.05-0.03-0.11-0.07-0.07-0.04-0.15-0.07-0.14-0.08-0.26-0.13-0.06-0.02-0.09-0.04-0.03-0.01-0.04-0.01l-0.09 0.23q-0.01-0.01-0.19-0.08-0.19-0.07-0.44-0.14c-0.32-0.09-0.65-0.14-0.65-0.14l-0.02 0.12 0.06-0.36q-0.01 0-0.13-0.02-0.07-0.01-0.14-0.02-0.08-0.01-0.16-0.01-0.08-0.01-0.15-0.01-0.08 0-0.14-0.01-0.13 0-0.14 0v0.25q-0.01 0-0.2 0-0.1 0-0.22 0.01-0.12 0.01-0.24 0.03-0.26 0.03-0.45 0.07-0.19 0.05-0.2 0.05l-0.06-0.24q-0.01 0-0.13 0.03-0.13 0.03-0.29 0.09-0.16 0.05-0.27 0.1-0.12 0.04-0.13 0.05l0.14 0.33-0.04-0.11q0 0-0.06 0.03-0.05 0.02-0.13 0.06-0.05 0.02-0.09 0.04-0.05 0.02-0.11 0.05-0.1 0.05-0.21 0.12-0.23 0.13-0.39 0.24-0.16 0.11-0.17 0.12l-0.15-0.2q0 0-0.03 0.02-0.03 0.02-0.07 0.06-0.1 0.08-0.23 0.19-0.06 0.05-0.12 0.1-0.05 0.05-0.1 0.1-0.09 0.08-0.1 0.09l0.26 0.26-0.08-0.09q-0.01 0.01-0.15 0.15-0.06 0.07-0.14 0.16-0.08 0.09-0.15 0.19c-0.21 0.26-0.38 0.55-0.38 0.55l-0.21-0.13q-0.01 0.01-0.07 0.12-0.03 0.05-0.07 0.12-0.03 0.06-0.07 0.14-0.07 0.15-0.12 0.26-0.03 0.06-0.04 0.09-0.02 0.04-0.02 0.04l0.23 0.09q0 0.01-0.07 0.19-0.07 0.19-0.14 0.44c-0.09 0.32-0.14 0.65-0.14 0.65l0.11 0.02-0.36-0.06q0 0.01-0.02 0.14 0 0.06-0.01 0.13-0.01 0.08-0.02 0.16 0 0.08-0.01 0.16 0 0.07 0 0.13 0 0.13 0 0.14h0.24q0 0.01 0.01 0.2 0 0.1 0.01 0.22 0.01 0.12 0.03 0.24 0.03 0.26 0.07 0.45 0.04 0.19 0.05 0.2l-0.24 0.06q-0.01 0.01 0.03 0.13 0.03 0.13 0.08 0.29 0.06 0.16 0.1 0.27 0.05 0.12 0.05 0.13l0.34-0.14-0.11 0.04q0 0 0.02 0.06 0.03 0.05 0.07 0.13 0.02 0.05 0.04 0.09 0.02 0.05 0.05 0.11 0.05 0.1 0.11 0.21 0.13 0.23 0.24 0.39 0.12 0.16 0.13 0.17l-0.2 0.15q0 0 0.02 0.03 0.02 0.02 0.06 0.07 0.07 0.1 0.18 0.23 0.06 0.06 0.11 0.12 0.05 0.05 0.09 0.1 0.09 0.09 0.1 0.09l0.17-0.17q0.01 0.01 0.15 0.14 0.07 0.07 0.16 0.14 0.09 0.08 0.19 0.16c0.26 0.21 0.54 0.38 0.54 0.38l0.07-0.1-0.19 0.31q0 0 0.11 0.07 0.06 0.03 0.12 0.06 0.07 0.04 0.14 0.08 0.15 0.07 0.27 0.12 0.05 0.03 0.09 0.04 0.03 0.02 0.03 0.02l0.1-0.23q0.01 0 0.19 0.07 0.19 0.07 0.44 0.14c0.32 0.09 0.65 0.14 0.65 0.14l0.01-0.11-0.05 0.36q0.01 0 0.13 0.01 0.06 0.01 0.14 0.02 0.08 0.01 0.16 0.01 0.08 0.01 0.15 0.01 0.08 0.01 0.14 0.01 0.13 0 0.13 0v-0.25q0.01 0.01 0.21 0 0.1 0 0.21-0.01 0.12-0.01 0.25-0.03 0.26-0.03 0.45-0.07 0.19-0.04 0.2-0.05l0.06 0.24q0.01 0 0.13-0.03 0.12-0.03 0.28-0.08 0.16-0.06 0.28-0.11 0.12-0.04 0.12-0.04l-0.14-0.34 0.05 0.11q0 0 0.05-0.02 0.05-0.03 0.14-0.07 0.04-0.02 0.09-0.04 0.05-0.02 0.1-0.05 0.11-0.05 0.22-0.12 0.22-0.12 0.39-0.24 0.16-0.11 0.17-0.12l0.14 0.2q0 0 0.03-0.02 0.03-0.02 0.08-0.06 0.1-0.08 0.23-0.19 0.06-0.05 0.12-0.1 0.05-0.05 0.1-0.09 0.09-0.09 0.09-0.1l-0.25-0.25 0.08 0.08q0.01-0.01 0.14-0.15 0.07-0.07 0.14-0.16 0.08-0.09 0.16-0.19c0.21-0.26 0.38-0.55 0.38-0.55l0.21 0.13q0-0.01 0.07-0.12 0.03-0.05 0.06-0.12 0.04-0.06 0.07-0.14 0.08-0.14 0.13-0.26 0.03-0.06 0.04-0.09 0.01-0.03 0.02-0.03l-0.23-0.1q0-0.01 0.07-0.19 0.07-0.19 0.14-0.44c0.09-0.32 0.14-0.65 0.14-0.65l-0.11-0.02 0.36 0.06q0-0.01 0.01-0.13 0.01-0.07 0.02-0.14 0.01-0.08 0.01-0.16 0.01-0.08 0.02-0.15 0-0.08 0-0.14 0-0.13 0-0.14c0 0-0.25 0-0.25 0.01z"/>
+			</g>
+			<path class="s42" d="m319.49 283.06c0 2.58-2.09 4.68-4.68 4.68-2.58 0-4.67-2.1-4.67-4.68 0-2.58 2.09-4.68 4.67-4.68 2.59 0 4.68 2.1 4.68 4.68z"/>
+			<g>
+				<path class="s43" d="m317.69 282.98c0 1.47-1.19 2.67-2.67 2.67-1.47 0-2.66-1.2-2.66-2.67 0-1.47 1.19-2.66 2.66-2.66 1.47 0 2.67 1.19 2.67 2.66z"/>
+				<path class="s37" d="m317.2 282.98c0 1.21-0.97 2.18-2.18 2.18-1.2 0-2.18-0.97-2.18-2.18 0-1.2 0.98-2.18 2.18-2.18 1.21 0 2.18 0.98 2.18 2.18z"/>
+				<path class="s44" d="m316.77 282.98c0 0.97-0.78 1.75-1.75 1.75-0.96 0-1.75-0.78-1.75-1.75 0-0.96 0.79-1.75 1.75-1.75 0.97 0 1.75 0.79 1.75 1.75z"/>
+				<path class="s45" d="m316.15 282.98c0 0.63-0.5 1.13-1.13 1.13-0.62 0-1.13-0.5-1.13-1.13 0-0.62 0.51-1.13 1.13-1.13 0.63 0 1.13 0.51 1.13 1.13z"/>
+				<path class="s28" d="m315.84 282.98c0 0.45-0.37 0.82-0.82 0.82-0.45 0-0.81-0.37-0.81-0.82 0-0.45 0.36-0.81 0.81-0.81 0.45 0 0.82 0.36 0.82 0.81z"/>
+			</g>
+		</g>
+		<g>
+			<g>
+				<path class="s41" d="m293.04 283.06q0-0.01-0.01-0.21 0-0.09-0.01-0.21-0.01-0.12-0.03-0.25-0.03-0.25-0.07-0.45-0.04-0.19-0.04-0.2l0.23-0.06q0 0-0.03-0.13-0.03-0.12-0.08-0.28-0.05-0.16-0.1-0.28-0.05-0.12-0.05-0.12l-0.34 0.14 0.11-0.05q0 0-0.02-0.05-0.03-0.05-0.06-0.14-0.03-0.04-0.05-0.09-0.02-0.05-0.05-0.1-0.05-0.11-0.11-0.22-0.13-0.22-0.24-0.38-0.12-0.17-0.12-0.17l0.19-0.15q0 0-0.02-0.03-0.02-0.03-0.06-0.08-0.07-0.1-0.19-0.23-0.05-0.06-0.1-0.11-0.05-0.06-0.09-0.1-0.09-0.1-0.1-0.1l-0.17 0.17q-0.01 0-0.15-0.14-0.07-0.07-0.16-0.14-0.09-0.08-0.19-0.16c-0.26-0.2-0.55-0.38-0.55-0.38l0.13-0.21q0 0-0.11-0.06-0.06-0.03-0.12-0.07-0.07-0.04-0.14-0.07-0.15-0.08-0.27-0.13-0.06-0.02-0.09-0.04-0.03-0.01-0.03-0.01l-0.1 0.23q-0.01-0.01-0.19-0.08-0.18-0.07-0.44-0.14c-0.32-0.09-0.65-0.14-0.65-0.14l-0.01 0.12 0.05-0.36q-0.01 0-0.13-0.02-0.06-0.01-0.14-0.02-0.07-0.01-0.15-0.01-0.08-0.01-0.16-0.01-0.08 0-0.14-0.01-0.13 0-0.13 0v0.25q-0.01 0-0.21 0-0.1 0-0.21 0.01-0.12 0.01-0.25 0.03-0.25 0.03-0.45 0.07-0.19 0.05-0.2 0.05l-0.06-0.24q-0.01 0-0.13 0.03-0.12 0.03-0.28 0.09-0.16 0.05-0.28 0.1-0.12 0.04-0.12 0.05l0.14 0.33-0.05-0.11q0 0-0.05 0.03-0.05 0.02-0.14 0.06-0.04 0.02-0.09 0.04-0.05 0.02-0.1 0.05-0.11 0.05-0.22 0.12-0.22 0.13-0.39 0.24-0.16 0.11-0.17 0.12l-0.14-0.2q0 0-0.03 0.02-0.03 0.02-0.08 0.06-0.1 0.08-0.23 0.19-0.06 0.05-0.12 0.1-0.05 0.05-0.1 0.1-0.09 0.08-0.09 0.09l0.26 0.26-0.09-0.09q-0.01 0.01-0.14 0.15-0.07 0.07-0.14 0.16-0.08 0.09-0.16 0.19c-0.21 0.26-0.38 0.55-0.38 0.55l-0.21-0.13q0 0.01-0.07 0.12-0.03 0.05-0.06 0.12-0.04 0.06-0.07 0.14-0.08 0.15-0.13 0.26-0.03 0.06-0.04 0.09-0.01 0.04-0.01 0.04l0.22 0.09q0 0.01-0.07 0.19-0.07 0.19-0.14 0.44c-0.09 0.32-0.14 0.65-0.14 0.65l0.11 0.02-0.35-0.06q-0.01 0.01-0.02 0.14-0.01 0.06-0.02 0.13-0.01 0.08-0.01 0.16-0.01 0.08-0.01 0.16-0.01 0.07-0.01 0.13 0 0.13 0 0.14h0.25q0 0.01 0 0.2 0 0.1 0.01 0.22 0.01 0.12 0.03 0.24 0.03 0.26 0.07 0.45 0.04 0.19 0.05 0.2l-0.24 0.06q0 0.01 0.03 0.13 0.03 0.13 0.09 0.29 0.05 0.16 0.1 0.27 0.04 0.12 0.05 0.13l0.33-0.14-0.11 0.04q0 0 0.03 0.06 0.02 0.05 0.06 0.13 0.02 0.05 0.04 0.09 0.02 0.05 0.05 0.11 0.05 0.1 0.12 0.21 0.13 0.23 0.24 0.39 0.11 0.16 0.12 0.17l-0.2 0.15q0 0 0.02 0.03 0.02 0.02 0.06 0.07 0.08 0.1 0.19 0.23 0.05 0.06 0.1 0.12 0.05 0.05 0.09 0.1 0.09 0.09 0.1 0.09l0.17-0.17q0.01 0.01 0.15 0.14 0.07 0.07 0.16 0.14 0.09 0.08 0.19 0.16c0.26 0.21 0.55 0.38 0.55 0.38l0.06-0.1-0.19 0.31q0 0 0.11 0.07 0.06 0.03 0.12 0.06 0.07 0.04 0.14 0.08 0.15 0.07 0.27 0.12 0.06 0.03 0.09 0.04 0.03 0.02 0.03 0.02l0.1-0.23q0.01 0 0.19 0.07 0.19 0.07 0.44 0.14c0.32 0.09 0.65 0.14 0.65 0.14l0.02-0.11-0.06 0.36q0.01 0 0.13 0.01 0.07 0.01 0.14 0.02 0.08 0.01 0.16 0.01 0.08 0.01 0.15 0.01 0.08 0.01 0.14 0.01 0.13 0 0.13 0v-0.25q0.01 0.01 0.21 0 0.1 0 0.22-0.01 0.11-0.01 0.24-0.03 0.26-0.03 0.45-0.07 0.19-0.04 0.2-0.05l0.06 0.24q0.01 0 0.13-0.03 0.13-0.03 0.28-0.08 0.16-0.06 0.28-0.11 0.12-0.04 0.13-0.04l-0.14-0.34 0.04 0.11q0 0 0.05-0.02 0.05-0.03 0.14-0.07 0.04-0.02 0.09-0.04 0.05-0.02 0.1-0.05 0.11-0.05 0.22-0.12 0.22-0.12 0.39-0.24 0.16-0.11 0.17-0.12l0.14 0.2q0.01 0 0.03-0.02 0.03-0.02 0.08-0.06 0.1-0.08 0.23-0.19 0.06-0.05 0.12-0.1 0.05-0.05 0.1-0.09 0.09-0.09 0.09-0.1l-0.25-0.25 0.08 0.08q0.01-0.01 0.14-0.15 0.07-0.07 0.14-0.16 0.08-0.09 0.16-0.19c0.21-0.26 0.38-0.55 0.38-0.55l0.21 0.13q0-0.01 0.06-0.12 0.03-0.05 0.07-0.12 0.04-0.06 0.07-0.14 0.08-0.14 0.13-0.26 0.03-0.06 0.04-0.09 0.01-0.03 0.01-0.03l-0.22-0.1q0-0.01 0.07-0.19 0.07-0.19 0.14-0.44c0.09-0.32 0.14-0.65 0.14-0.65l-0.11-0.02 0.36 0.06q0-0.01 0.01-0.13 0.01-0.07 0.02-0.14 0.01-0.08 0.01-0.16 0.01-0.08 0.01-0.15 0.01-0.08 0.01-0.14 0-0.13 0-0.14c0 0-0.24 0-0.24 0.01z"/>
+			</g>
+			<path class="s42" d="m292.23 283.06c0 2.58-2.09 4.68-4.67 4.68-2.59 0-4.68-2.1-4.68-4.68 0-2.58 2.1-4.68 4.68-4.68 2.58 0 4.67 2.1 4.67 4.68z"/>
+			<g>
+				<path class="s43" d="m290.43 282.98c0 1.47-1.19 2.67-2.66 2.67-1.47 0-2.67-1.2-2.67-2.67 0-1.47 1.2-2.66 2.67-2.66 1.47 0 2.66 1.19 2.66 2.66z"/>
+				<path class="s37" d="m289.94 282.98c0 1.21-0.97 2.18-2.18 2.18-1.2 0-2.17-0.97-2.17-2.18 0-1.2 0.97-2.18 2.17-2.18 1.21 0 2.18 0.98 2.18 2.18z"/>
+				<path class="s44" d="m289.52 282.98c0 0.97-0.79 1.75-1.75 1.75-0.97 0-1.75-0.78-1.75-1.75 0-0.96 0.78-1.75 1.75-1.75 0.96 0 1.75 0.79 1.75 1.75z"/>
+				<path class="s45" d="m288.89 282.98c0 0.63-0.5 1.13-1.12 1.13-0.63 0-1.13-0.5-1.13-1.13 0-0.62 0.5-1.13 1.13-1.13 0.62 0 1.12 0.51 1.12 1.13z"/>
+				<path class="s28" d="m288.58 282.98c0 0.45-0.36 0.82-0.81 0.82-0.45 0-0.82-0.37-0.82-0.82 0-0.45 0.37-0.81 0.82-0.81 0.45 0 0.81 0.36 0.81 0.81z"/>
+			</g>
+		</g>
+		<path fill-rule="evenodd" class="s46" d="m301.63 273.17h11.21v1.4h-11.21z"/>
+		<path fill-rule="evenodd" class="s24" d="m301.84 274.57h2.51v1.95h-2.51z"/>
+		<path fill-rule="evenodd" class="s24" d="m306.17 274.57h2.51v1.95h-2.51z"/>
+		<path fill-rule="evenodd" class="s47" d="m298.15 278.99h5.96v4.15h-5.96z"/>
+		<path fill-rule="evenodd" class="s26" d="m297.83 278.46h6.59v1.28h-6.59z"/>
+		<path fill-rule="evenodd" class="s30" d="m299.73 278.46h0.41v4.68h-0.41z"/>
+		<path fill-rule="evenodd" class="s30" d="m302.44 278.46h0.41v4.68h-0.41z"/>
+		<path class="s47" d="m322.94 278.48q-0.01 0.09-0.11 0.1h-1.93q-0.1-0.01-0.11-0.1v-0.87q0.01-0.1 0.11-0.11h1.93q0.1 0.01 0.11 0.11z"/>
+		<path class="s47" d="m307.42 278.48q-0.01 0.09-0.1 0.1h-1.94q-0.09-0.01-0.1-0.1v-0.87q0.01-0.1 0.1-0.11h1.94q0.09 0.01 0.1 0.11z"/>
+		<path class="s47" d="m329.42 278.48q-0.01 0.09-0.1 0.1h-1.94q-0.1-0.01-0.11-0.1v-0.87q0.01-0.1 0.11-0.11h1.94q0.09 0.01 0.1 0.11z"/>
+	</g>
+	<g>
+		<path fill-rule="evenodd" class="s30" d="m199.14 274.38h29.81v2.26h-29.81z"/>
+		<path class="s48" d="m256.78 273.44c0 0.72 0.32 1.3 0.71 1.3 0.39 0 0.71-0.58 0.71-1.3 0-0.72-0.32-1.3-0.71-1.3-0.39 0-0.71 0.59-0.71 1.3z"/>
+		<path fill-rule="evenodd" class="s5" d="m256.78 272h0.92v2.87h-0.92z"/>
+		<g>
+			<path fill-rule="evenodd" class="s49" d="m192.4 275.04l0.01-17.82h18.72l4.42-4.2h19.88v1.46h-6.03v20.56z"/>
+			<g>
+				<g>
+					<g>
+						<g>
+							<path class="s24" d="m231.96 259.31h1.32v-6.4c0-1.33-1.09-2.42-2.42-2.42h-1.02v1.32h1.02c0.61 0 1.1 0.49 1.1 1.1z"/>
+							<path fill-rule="evenodd" class="s26" d="m231.68 254.96h1.87v8.21h-1.87z"/>
+						</g>
+						<path fill-rule="evenodd" class="s26" d="m230.82 259.98h4.14v17.65h-4.14z"/>
+						<g>
+							<path class="s31" d="m194.14 280.7v2.79h44.53v-6.85h-40.77c-1.78 0.69-3.18 2.19-3.76 4.06z"/>
+							<g>
+								<g>
+									<path class="s50" d="m256.71 269.17l-7.41-12.97-14.96 0.02v24.1l23.09 0.48v-9.08c0 0.01 0.07-1.17-0.72-2.55z"/>
+									<path fill-rule="evenodd" class="s33" d="m252.82 269.82v7.42h-3.46l-1.44-2.81-10.94-0.08v-7.3h5.98l6.44 2.69z"/>
+									<path fill-rule="evenodd" class="s37" d="m253.74 279.89v-11.27l1.63-1.8 0.12 0.2-1.52 1.69v11.18z"/>
+									<g>
+										<path class="s30" d="m233.55 283.41c0 0.12 0.1 0.22 0.22 0.22h24.61c0.12 0 0.22-0.1 0.22-0.22v-3.3c0-0.12-0.1-0.22-0.22-0.22h-24.61c-0.12 0-0.22 0.1-0.22 0.22z"/>
+										<path class="s30" d="m235.5 280.69c-0.22 0.64 0.16 1.16 0.83 1.16h12.35c0.67 0 1.05-0.52 0.84-1.16l-1.5-4.48c-0.21-0.64-0.94-1.17-1.61-1.17h-7.8c-0.68 0-1.4 0.53-1.62 1.17z"/>
+										<g>
+											<path class="s24" d="m236.42 283.48q-0.06-0.44-0.06-0.9c0-3.56 2.82-6.44 6.3-6.44 3.48 0 6.31 2.88 6.31 6.44q0 0.55-0.09 1.08z"/>
+											<path class="s31" d="m236.86 283.47q-0.06-0.42-0.06-0.84c0-3.31 2.62-5.99 5.86-5.99 3.24 0 5.86 2.68 5.86 5.99q0 0.51-0.08 1z"/>
+										</g>
+										<path class="s34" d="m254.86 282.27c0 0.17 0.14 0.31 0.31 0.31h1.23c0.18 0 0.32-0.14 0.32-0.31 0-0.18-0.14-0.32-0.32-0.32h-1.23c-0.17 0-0.31 0.14-0.31 0.32z"/>
+									</g>
+									<g>
+										<path class="s35" d="m248.11 257.22c0.17 0 0.37 0.13 0.44 0.28l4.3 8.91c0.08 0.15 0.14 0.41 0.14 0.58v2.85c0 0.17-0.14 0.31-0.31 0.31h-2.62c-0.17 0-0.43-0.05-0.59-0.12l-6.11-2.54c-0.16-0.07-0.42-0.12-0.59-0.12h-5.61c-0.17 0-0.31-0.14-0.31-0.31v-9.53c0-0.17 0.14-0.31 0.31-0.31z"/>
+									</g>
+									<g>
+										<path class="s37" d="m239.52 269.83c0.12 0 0.22-0.09 0.22-0.21 0-0.12-0.1-0.22-0.22-0.22h-1.7c-0.12 0-0.22 0.1-0.22 0.22 0 0.12 0.1 0.21 0.22 0.21z"/>
+										<path class="s5" d="m239.52 269.6c0.12 0 0.22-0.1 0.22-0.22 0-0.12-0.1-0.21-0.22-0.21h-1.7c-0.12 0-0.22 0.09-0.22 0.21 0 0.12 0.1 0.22 0.22 0.22z"/>
+									</g>
+								</g>
+							</g>
+						</g>
+						<path fill-rule="evenodd" class="s24" d="m230.47 259.98h3.87v7.18h-3.87z"/>
+					</g>
+				</g>
+			</g>
+			<path fill-rule="evenodd" class="s40" d="m221.38 254.9h6.38v18.72h-6.38z"/>
+			<path fill-rule="evenodd" class="s40" d="m215.64 254.9h3.35v18.72h-3.35z"/>
+			<path fill-rule="evenodd" class="s40" d="m210.57 259.07h3.7v14.55h-3.7z"/>
+			<path fill-rule="evenodd" class="s40" d="m202.32 259.07h6.38v14.55h-6.38z"/>
+			<path fill-rule="evenodd" class="s40" d="m193.54 259.07h6.39v14.55h-6.39z"/>
+		</g>
+		<g>
+			<path class="s24" d="m193.84 282.66q0 0.46 0.06 0.9l0.44-0.03q-0.01-0.02-0.01-0.04-0.05-0.39-0.05-0.78c0-3.31 2.62-5.99 5.86-5.99h12.92c3.23 0 5.86 2.68 5.86 5.99q0 0.4-0.05 0.78-0.01 0.02-0.01 0.04l0.44 0.03q0-0.03 0.01-0.07 0.05-0.41 0.05-0.83c0-2.75-1.69-5.1-4.07-6.02q-1.04-0.41-2.23-0.42h-12.92q-1.19 0.01-2.24 0.42c-1.78 0.69-3.18 2.19-3.76 4.06q-0.3 0.93-0.3 1.96z"/>
+		</g>
+		<g>
+			<g>
+				<g>
+					<path class="s41" d="m195.63 283.06q0-0.01 0-0.21 0-0.09 0.01-0.21 0.01-0.12 0.03-0.24 0.03-0.26 0.07-0.46 0.04-0.19 0.05-0.2l-0.24-0.06q0 0 0.03-0.13 0.03-0.12 0.08-0.28 0.06-0.16 0.1-0.28 0.05-0.11 0.05-0.12l0.34 0.14-0.11-0.05q0 0 0.02-0.05 0.03-0.05 0.07-0.14 0.02-0.04 0.04-0.09 0.02-0.05 0.05-0.1 0.05-0.11 0.12-0.21 0.12-0.23 0.23-0.39 0.12-0.16 0.13-0.17l-0.2-0.15q0 0 0.02-0.03 0.02-0.03 0.06-0.08 0.08-0.1 0.19-0.22 0.05-0.06 0.1-0.12 0.05-0.06 0.09-0.1 0.09-0.1 0.1-0.1l0.17 0.18q0.01-0.01 0.15-0.15 0.07-0.06 0.16-0.14 0.09-0.08 0.19-0.15c0.26-0.21 0.55-0.38 0.55-0.38l-0.13-0.21q0.01-0.01 0.11-0.07 0.06-0.03 0.12-0.07 0.07-0.03 0.14-0.07 0.15-0.08 0.27-0.13 0.06-0.02 0.09-0.04 0.03-0.01 0.03-0.01l0.1 0.23q0.01-0.01 0.19-0.08 0.19-0.07 0.44-0.14c0.32-0.09 0.65-0.14 0.65-0.14l0.02 0.12-0.06-0.36q0.01 0 0.13-0.02 0.07-0.01 0.14-0.02 0.08 0 0.16-0.01 0.08-0.01 0.15-0.01 0.08 0 0.14 0 0.13-0.01 0.14-0.01v0.25q0.01 0 0.2 0 0.1 0.01 0.22 0.02 0.12 0.01 0.24 0.02 0.26 0.03 0.45 0.07 0.19 0.05 0.2 0.05l0.06-0.24q0.01 0 0.13 0.04 0.13 0.03 0.28 0.08 0.17 0.05 0.28 0.1 0.12 0.05 0.13 0.05l-0.14 0.34 0.04-0.11q0 0 0.05 0.02 0.06 0.02 0.14 0.06 0.05 0.02 0.09 0.04 0.05 0.03 0.11 0.05 0.1 0.06 0.21 0.12 0.23 0.13 0.39 0.24 0.16 0.11 0.17 0.12l0.15-0.2q0 0 0.02 0.02 0.03 0.03 0.08 0.06 0.1 0.08 0.23 0.19 0.06 0.05 0.12 0.1 0.05 0.06 0.1 0.1 0.09 0.09 0.09 0.09l-0.25 0.26 0.08-0.08q0.01 0 0.14 0.15 0.07 0.07 0.15 0.16 0.07 0.08 0.15 0.18c0.21 0.27 0.38 0.55 0.38 0.55l0.21-0.12q0 0 0.07 0.11 0.03 0.05 0.06 0.12 0.04 0.07 0.08 0.14 0.07 0.15 0.12 0.27 0.03 0.05 0.04 0.09 0.02 0.03 0.02 0.03l-0.23 0.09q0 0.01 0.07 0.2 0.07 0.18 0.14 0.43c0.09 0.32 0.14 0.65 0.14 0.65l-0.11 0.02 0.36-0.05q0 0 0.01 0.13 0.01 0.06 0.02 0.13 0.01 0.08 0.01 0.16 0.01 0.08 0.02 0.16 0 0.07 0 0.14 0 0.12 0 0.13h-0.24q0 0.01-0.01 0.21 0 0.09-0.01 0.21-0.01 0.12-0.02 0.24-0.04 0.26-0.08 0.45-0.04 0.2-0.04 0.21l0.23 0.06q0 0-0.03 0.13-0.03 0.12-0.08 0.28-0.05 0.16-0.1 0.27-0.05 0.12-0.05 0.13l-0.34-0.14 0.11 0.04q0 0.01-0.02 0.06-0.02 0.05-0.07 0.14-0.01 0.04-0.04 0.09-0.02 0.04-0.05 0.1-0.05 0.1-0.11 0.21-0.13 0.23-0.24 0.39-0.12 0.16-0.12 0.17l0.19 0.15q0 0-0.02 0.03-0.02 0.03-0.06 0.07-0.07 0.1-0.18 0.23-0.06 0.06-0.11 0.12-0.05 0.05-0.09 0.1-0.09 0.09-0.09 0.1l-0.18-0.18q-0.01 0.01-0.15 0.15-0.07 0.06-0.16 0.14-0.09 0.08-0.19 0.15c-0.26 0.21-0.54 0.38-0.54 0.38l-0.06-0.1 0.18 0.31q0 0.01-0.11 0.07-0.05 0.03-0.12 0.07-0.07 0.03-0.14 0.07-0.15 0.07-0.27 0.12-0.05 0.03-0.09 0.04-0.03 0.02-0.03 0.02l-0.1-0.23q0 0-0.19 0.08-0.18 0.07-0.43 0.14c-0.33 0.09-0.65 0.14-0.65 0.14l-0.02-0.12 0.05 0.36q0 0-0.13 0.02-0.06 0-0.14 0.02-0.07 0-0.15 0.01-0.08 0-0.16 0.01-0.08 0-0.14 0-0.13 0-0.13 0v-0.24q-0.01 0-0.21-0.01-0.1 0-0.21-0.01-0.12-0.01-0.25-0.02-0.25-0.04-0.45-0.08-0.19-0.04-0.2-0.04l-0.06 0.24q-0.01 0-0.13-0.04-0.12-0.03-0.28-0.08-0.16-0.05-0.28-0.1-0.12-0.05-0.12-0.05l0.14-0.34-0.05 0.11q0 0-0.05-0.02-0.05-0.02-0.14-0.06-0.04-0.02-0.09-0.04-0.05-0.03-0.1-0.06-0.11-0.05-0.22-0.11-0.22-0.13-0.39-0.24-0.16-0.12-0.16-0.12l-0.15 0.2q0-0.01-0.03-0.03-0.03-0.02-0.08-0.06-0.1-0.07-0.23-0.18-0.06-0.06-0.11-0.11-0.06-0.05-0.1-0.09-0.1-0.09-0.1-0.09l0.26-0.26-0.09 0.08q0-0.01-0.14-0.15-0.07-0.07-0.14-0.16-0.08-0.09-0.16-0.19c-0.2-0.26-0.38-0.55-0.38-0.55l-0.21 0.13q0 0-0.06-0.11-0.03-0.06-0.07-0.12-0.04-0.07-0.07-0.14-0.08-0.15-0.13-0.27-0.02-0.05-0.04-0.09-0.01-0.03-0.01-0.03l0.23-0.1q-0.01-0.01-0.08-0.19-0.07-0.18-0.14-0.44c-0.09-0.32-0.14-0.65-0.14-0.65l0.12-0.01-0.36 0.05q0-0.01-0.02-0.13-0.01-0.06-0.02-0.14 0-0.07-0.01-0.15-0.01-0.08-0.01-0.16 0-0.08 0-0.14-0.01-0.13-0.01-0.13c0 0 0.25 0 0.25 0z"/>
+				</g>
+				<path class="s42" d="m196.43 283.06c0 2.58 2.09 4.68 4.67 4.68 2.59 0 4.68-2.1 4.68-4.68 0-2.58-2.09-4.68-4.68-4.68-2.58 0-4.67 2.1-4.67 4.68z"/>
+				<g>
+					<path class="s43" d="m198.23 282.98c0 1.48 1.19 2.67 2.67 2.67 1.47 0 2.66-1.19 2.66-2.67 0-1.47-1.19-2.66-2.66-2.66-1.48 0-2.67 1.19-2.67 2.66z"/>
+					<path class="s37" d="m198.72 282.98c0 1.21 0.97 2.18 2.18 2.18 1.2 0 2.18-0.97 2.18-2.18 0-1.2-0.98-2.18-2.18-2.18-1.21 0-2.18 0.98-2.18 2.18z"/>
+					<path class="s44" d="m199.14 282.98c0 0.97 0.79 1.75 1.75 1.75 0.97 0 1.75-0.78 1.75-1.75 0-0.96-0.78-1.75-1.75-1.75-0.96 0-1.75 0.79-1.75 1.75z"/>
+					<path class="s45" d="m199.77 282.98c0 0.63 0.5 1.13 1.13 1.13 0.62 0 1.12-0.5 1.12-1.13 0-0.62-0.5-1.13-1.12-1.13-0.63 0-1.13 0.51-1.13 1.13z"/>
+					<path class="s28" d="m200.08 282.98c0 0.45 0.36 0.82 0.81 0.82 0.45 0 0.82-0.37 0.82-0.82 0-0.45-0.36-0.81-0.82-0.81-0.45 0-0.81 0.36-0.81 0.81z"/>
+				</g>
+			</g>
+			<g>
+				<g>
+					<path class="s41" d="m207.25 283.06q0-0.01 0.01-0.21 0-0.09 0.01-0.21 0.01-0.12 0.02-0.24 0.04-0.26 0.08-0.46 0.04-0.19 0.04-0.2l-0.24-0.06q0 0 0.04-0.13 0.03-0.12 0.08-0.28 0.05-0.16 0.1-0.28 0.05-0.11 0.05-0.12l0.34 0.14-0.11-0.05q0 0 0.02-0.05 0.02-0.05 0.06-0.14 0.02-0.04 0.05-0.09 0.02-0.05 0.05-0.1 0.05-0.11 0.11-0.21 0.13-0.23 0.24-0.39 0.12-0.16 0.12-0.17l-0.19-0.15q0 0 0.02-0.03 0.02-0.03 0.06-0.08 0.07-0.1 0.18-0.22 0.06-0.06 0.11-0.12 0.05-0.06 0.09-0.1 0.09-0.1 0.1-0.1l0.17 0.18q0.01-0.01 0.15-0.15 0.07-0.06 0.16-0.14 0.09-0.08 0.19-0.15c0.26-0.21 0.54-0.38 0.54-0.38l-0.13-0.21q0.01-0.01 0.12-0.07 0.05-0.03 0.12-0.07 0.07-0.03 0.14-0.07 0.15-0.08 0.27-0.13 0.05-0.02 0.08-0.04 0.04-0.01 0.04-0.01l0.09 0.23q0.02-0.01 0.2-0.08 0.18-0.07 0.43-0.14c0.32-0.09 0.65-0.14 0.65-0.14l0.02 0.12-0.05-0.36q0 0 0.13-0.02 0.06-0.01 0.14-0.02 0.07 0 0.15-0.01 0.08-0.01 0.16-0.01 0.08 0 0.14 0 0.12-0.01 0.13-0.01v0.25q0.01 0 0.21 0 0.1 0.01 0.21 0.02 0.12 0.01 0.24 0.02 0.26 0.03 0.46 0.07 0.19 0.05 0.2 0.05l0.06-0.24q0.01 0 0.13 0.04 0.12 0.03 0.28 0.08 0.16 0.05 0.28 0.1 0.12 0.05 0.12 0.05l-0.14 0.34 0.05-0.11q0 0 0.05 0.02 0.05 0.02 0.14 0.06 0.04 0.02 0.09 0.04 0.05 0.03 0.1 0.05 0.11 0.06 0.22 0.12 0.22 0.13 0.38 0.24 0.17 0.11 0.18 0.12l0.14-0.2q0 0 0.03 0.02 0.03 0.03 0.08 0.06 0.1 0.08 0.23 0.19 0.06 0.05 0.11 0.1 0.06 0.06 0.1 0.1 0.1 0.09 0.1 0.09l-0.26 0.26 0.09-0.08q0 0 0.14 0.15 0.06 0.07 0.14 0.16 0.08 0.08 0.16 0.18c0.2 0.27 0.37 0.55 0.37 0.55l0.22-0.12q0 0 0.06 0.11 0.03 0.05 0.07 0.12 0.03 0.07 0.07 0.14 0.08 0.15 0.13 0.27 0.02 0.05 0.04 0.09 0.01 0.03 0.01 0.03l-0.23 0.09q0.01 0.01 0.08 0.2 0.07 0.18 0.14 0.43c0.09 0.32 0.14 0.65 0.14 0.65l-0.12 0.02 0.36-0.05q0 0 0.02 0.13 0.01 0.06 0.02 0.13 0 0.08 0.01 0.16 0.01 0.08 0.01 0.16 0 0.07 0 0.14 0.01 0.12 0.01 0.13h-0.25q0 0.01-0.01 0.21 0 0.09-0.01 0.21 0 0.12-0.02 0.24-0.03 0.26-0.07 0.45-0.05 0.2-0.05 0.21l0.24 0.06q0 0-0.03 0.13-0.04 0.12-0.09 0.28-0.05 0.16-0.1 0.27-0.04 0.12-0.05 0.13l-0.34-0.14 0.11 0.04q0 0.01-0.02 0.06-0.02 0.05-0.06 0.14-0.02 0.04-0.04 0.09-0.03 0.04-0.05 0.1-0.06 0.1-0.12 0.21-0.13 0.23-0.24 0.39-0.11 0.16-0.12 0.17l0.2 0.15q0 0-0.02 0.03-0.03 0.03-0.06 0.07-0.08 0.1-0.19 0.23-0.05 0.06-0.1 0.12-0.05 0.05-0.1 0.1-0.09 0.09-0.09 0.1l-0.18-0.18q0 0.01-0.15 0.15-0.06 0.06-0.15 0.14-0.09 0.08-0.19 0.15c-0.26 0.21-0.55 0.38-0.55 0.38l-0.06-0.1 0.19 0.31q-0.01 0.01-0.12 0.07-0.05 0.03-0.12 0.07-0.07 0.03-0.14 0.07-0.15 0.07-0.26 0.12-0.06 0.03-0.09 0.04-0.04 0.02-0.04 0.02l-0.09-0.23q-0.01 0-0.19 0.08-0.19 0.07-0.44 0.14c-0.32 0.09-0.65 0.14-0.65 0.14l-0.02-0.12 0.06 0.36q-0.01 0-0.14 0.02-0.06 0-0.13 0.02-0.08 0-0.16 0.01-0.08 0-0.16 0.01-0.07 0-0.13 0-0.13 0-0.14 0v-0.24q-0.01 0-0.21-0.01-0.09 0-0.21-0.01-0.12-0.01-0.24-0.02-0.26-0.04-0.45-0.08-0.2-0.04-0.21-0.04l-0.05 0.24q-0.01 0-0.13-0.04-0.13-0.03-0.29-0.08-0.16-0.05-0.27-0.1-0.12-0.05-0.13-0.05l0.14-0.34-0.04 0.11q0 0-0.06-0.02-0.05-0.02-0.13-0.06-0.05-0.02-0.1-0.04-0.04-0.03-0.1-0.06-0.1-0.05-0.21-0.11-0.23-0.13-0.39-0.24-0.16-0.12-0.17-0.12l-0.15 0.2q0-0.01-0.03-0.03-0.03-0.02-0.07-0.06-0.1-0.07-0.23-0.18-0.06-0.06-0.12-0.11-0.05-0.05-0.1-0.09-0.09-0.09-0.1-0.09l0.26-0.26-0.08 0.08q-0.01-0.01-0.15-0.15-0.06-0.07-0.14-0.16-0.08-0.09-0.15-0.19c-0.21-0.26-0.38-0.55-0.38-0.55l-0.21 0.13q-0.01 0-0.07-0.11-0.03-0.06-0.07-0.12-0.03-0.07-0.07-0.14-0.08-0.15-0.12-0.27-0.03-0.05-0.04-0.09-0.02-0.03-0.02-0.03l0.23-0.1q0-0.01-0.07-0.19-0.07-0.18-0.15-0.44c-0.09-0.32-0.14-0.65-0.14-0.65l0.12-0.01-0.36 0.05q0-0.01-0.02-0.13 0-0.06-0.01-0.14-0.01-0.07-0.02-0.15 0-0.08-0.01-0.16 0-0.08 0-0.14 0-0.13 0-0.13c0 0 0.24 0 0.24 0z"/>
+				</g>
+				<path class="s42" d="m208.05 283.06c0 2.58 2.1 4.68 4.68 4.68 2.58 0 4.68-2.1 4.68-4.68 0-2.58-2.1-4.68-4.68-4.68-2.58 0-4.68 2.1-4.68 4.68z"/>
+				<g>
+					<path class="s43" d="m209.86 282.98c0 1.48 1.19 2.67 2.66 2.67 1.47 0 2.67-1.19 2.67-2.67 0-1.47-1.2-2.66-2.67-2.66-1.47 0-2.66 1.19-2.66 2.66z"/>
+					<path class="s37" d="m210.34 282.98c0 1.21 0.98 2.18 2.18 2.18 1.21 0 2.18-0.97 2.18-2.18 0-1.2-0.97-2.18-2.18-2.18-1.2 0-2.18 0.98-2.18 2.18z"/>
+					<path class="s44" d="m210.77 282.98c0 0.97 0.79 1.75 1.75 1.75 0.97 0 1.75-0.78 1.75-1.75 0-0.96-0.78-1.75-1.75-1.75-0.96 0-1.75 0.79-1.75 1.75z"/>
+					<path class="s45" d="m211.39 282.98c0 0.63 0.51 1.13 1.13 1.13 0.63 0 1.13-0.5 1.13-1.13 0-0.62-0.5-1.13-1.13-1.13-0.62 0-1.13 0.51-1.13 1.13z"/>
+					<path class="s28" d="m211.71 282.98c0 0.45 0.36 0.82 0.81 0.82 0.45 0 0.82-0.37 0.82-0.82 0-0.45-0.37-0.81-0.82-0.81-0.45 0-0.81 0.36-0.81 0.81z"/>
+				</g>
+			</g>
+		</g>
+		<g>
+			<g>
+				<path class="s41" d="m237.19 283.06q0-0.01 0-0.21 0-0.09 0.01-0.21 0.01-0.12 0.03-0.24 0.03-0.26 0.07-0.46 0.04-0.19 0.04-0.2l-0.23-0.06q0 0 0.03-0.13 0.03-0.12 0.08-0.28 0.06-0.16 0.1-0.28 0.05-0.11 0.05-0.12l0.34 0.14-0.11-0.05q0 0 0.02-0.05 0.03-0.05 0.07-0.14 0.02-0.04 0.04-0.09 0.02-0.05 0.05-0.1 0.05-0.11 0.11-0.21 0.13-0.23 0.24-0.39 0.12-0.16 0.13-0.17l-0.2-0.15q0 0 0.02-0.03 0.02-0.03 0.06-0.08 0.08-0.1 0.19-0.22 0.05-0.06 0.1-0.12 0.05-0.06 0.09-0.1 0.09-0.1 0.1-0.1l0.17 0.18q0.01-0.01 0.15-0.15 0.07-0.06 0.16-0.14 0.09-0.08 0.19-0.15c0.26-0.21 0.55-0.38 0.55-0.38l-0.13-0.21q0-0.01 0.11-0.07 0.06-0.03 0.12-0.07 0.07-0.03 0.14-0.07 0.15-0.08 0.27-0.13 0.06-0.02 0.09-0.04 0.03-0.01 0.03-0.01l0.1 0.23q0.01-0.01 0.19-0.08 0.19-0.07 0.44-0.14c0.32-0.09 0.65-0.14 0.65-0.14l0.02 0.12-0.06-0.36q0.01 0 0.13-0.02 0.06-0.01 0.14-0.02 0.08 0 0.16-0.01 0.08-0.01 0.15-0.01 0.08 0 0.14 0 0.13-0.01 0.13-0.01v0.25q0.01 0 0.21 0 0.1 0.01 0.21 0.02 0.12 0.01 0.25 0.02 0.26 0.03 0.45 0.07 0.19 0.05 0.2 0.05l0.06-0.24q0.01 0 0.13 0.04 0.13 0.03 0.28 0.08 0.16 0.05 0.28 0.1 0.12 0.05 0.12 0.05l-0.14 0.34 0.05-0.11q0 0 0.05 0.02 0.05 0.02 0.14 0.06 0.04 0.02 0.09 0.04 0.05 0.03 0.1 0.05 0.11 0.06 0.22 0.12 0.22 0.13 0.39 0.24 0.16 0.11 0.17 0.12l0.14-0.2q0 0 0.03 0.02 0.03 0.03 0.08 0.06 0.1 0.08 0.23 0.19 0.06 0.05 0.12 0.1 0.05 0.06 0.1 0.1 0.09 0.09 0.09 0.09l-0.25 0.26 0.08-0.08q0.01 0 0.14 0.15 0.07 0.07 0.14 0.16 0.08 0.08 0.16 0.18c0.21 0.27 0.38 0.55 0.38 0.55l0.21-0.12q0 0 0.06 0.11 0.04 0.05 0.07 0.12 0.04 0.07 0.07 0.14 0.08 0.15 0.13 0.27 0.03 0.05 0.04 0.09 0.01 0.03 0.01 0.03l-0.22 0.09q0 0.01 0.07 0.2 0.07 0.18 0.14 0.43c0.09 0.32 0.14 0.65 0.14 0.65l-0.11 0.02 0.35-0.05q0.01 0 0.02 0.13 0.01 0.06 0.02 0.13 0.01 0.08 0.01 0.16 0.01 0.08 0.01 0.16 0.01 0.07 0.01 0.14 0 0.12 0 0.13h-0.25q0 0.01 0 0.21 0 0.09-0.01 0.21-0.01 0.12-0.03 0.24-0.03 0.26-0.07 0.45-0.04 0.2-0.05 0.21l0.24 0.06q0 0-0.03 0.13-0.03 0.12-0.09 0.28-0.05 0.16-0.1 0.27-0.04 0.12-0.05 0.13l-0.33-0.14 0.11 0.04q0 0.01-0.02 0.06-0.03 0.05-0.07 0.14-0.02 0.04-0.04 0.09-0.02 0.04-0.05 0.1-0.05 0.1-0.11 0.21-0.13 0.23-0.25 0.39-0.11 0.16-0.12 0.17l0.2 0.15q0 0-0.02 0.03-0.02 0.03-0.06 0.07-0.08 0.1-0.19 0.23-0.05 0.06-0.1 0.12-0.05 0.05-0.09 0.1-0.09 0.09-0.1 0.1l-0.17-0.18q-0.01 0.01-0.15 0.15-0.07 0.06-0.16 0.14-0.09 0.08-0.19 0.15c-0.26 0.21-0.55 0.38-0.55 0.38l-0.06-0.1 0.19 0.31q0 0.01-0.11 0.07-0.06 0.03-0.12 0.07-0.07 0.03-0.14 0.07-0.15 0.07-0.27 0.12-0.06 0.03-0.09 0.04-0.03 0.02-0.03 0.02l-0.1-0.23q-0.01 0-0.19 0.08-0.19 0.07-0.44 0.14c-0.32 0.09-0.65 0.14-0.65 0.14l-0.01-0.12 0.05 0.36q-0.01 0-0.13 0.02-0.06 0-0.14 0.02-0.08 0-0.16 0.01-0.08 0-0.15 0.01-0.08 0-0.14 0-0.13 0-0.14 0v-0.24q-0.01 0-0.2-0.01-0.1 0-0.22-0.01-0.11-0.01-0.24-0.02-0.26-0.04-0.45-0.08-0.19-0.04-0.2-0.04l-0.06 0.24q-0.01 0-0.13-0.04-0.13-0.03-0.28-0.08-0.16-0.05-0.28-0.1-0.12-0.05-0.13-0.05l0.14-0.34-0.04 0.11q0 0-0.05-0.02-0.05-0.02-0.14-0.06-0.04-0.02-0.09-0.04-0.05-0.03-0.1-0.06-0.11-0.05-0.22-0.11-0.22-0.13-0.39-0.24-0.16-0.12-0.17-0.12l-0.14 0.2q-0.01-0.01-0.03-0.03-0.03-0.02-0.08-0.06-0.1-0.07-0.23-0.18-0.06-0.06-0.12-0.11-0.05-0.05-0.1-0.09-0.09-0.09-0.09-0.09l0.25-0.26-0.08 0.08q-0.01-0.01-0.14-0.15-0.07-0.07-0.15-0.16-0.07-0.09-0.15-0.19c-0.21-0.26-0.38-0.55-0.38-0.55l-0.21 0.13q0 0-0.07-0.11-0.03-0.06-0.06-0.12-0.04-0.07-0.08-0.14-0.07-0.15-0.12-0.27-0.03-0.05-0.04-0.09-0.01-0.03-0.02-0.03l0.23-0.1q0-0.01-0.07-0.19-0.07-0.18-0.14-0.44c-0.1-0.32-0.14-0.65-0.14-0.65l0.11-0.01-0.36 0.05q0-0.01-0.02-0.13 0-0.06-0.01-0.14-0.01-0.07-0.01-0.15-0.01-0.08-0.02-0.16 0-0.08 0-0.14 0-0.13 0-0.13c0 0 0.25 0 0.25 0z"/>
+			</g>
+			<path class="s42" d="m237.99 283.06c0 2.58 2.09 4.68 4.67 4.68 2.58 0 4.68-2.1 4.68-4.68 0-2.58-2.1-4.68-4.68-4.68-2.58 0-4.67 2.1-4.67 4.68z"/>
+			<g>
+				<path class="s43" d="m239.79 282.98c0 1.48 1.19 2.67 2.66 2.67 1.48 0 2.67-1.19 2.67-2.67 0-1.47-1.19-2.66-2.67-2.66-1.47 0-2.66 1.19-2.66 2.66z"/>
+				<path class="s37" d="m240.28 282.98c0 1.21 0.97 2.18 2.17 2.18 1.21 0 2.18-0.97 2.18-2.18 0-1.2-0.97-2.18-2.18-2.18-1.2 0-2.17 0.98-2.17 2.18z"/>
+				<path class="s44" d="m240.71 282.98c0 0.97 0.78 1.75 1.75 1.75 0.96 0 1.75-0.78 1.75-1.75 0-0.96-0.79-1.75-1.75-1.75-0.97 0-1.75 0.79-1.75 1.75z"/>
+				<path class="s45" d="m241.33 282.98c0 0.63 0.5 1.13 1.12 1.13 0.63 0 1.13-0.5 1.13-1.13 0-0.62-0.5-1.13-1.13-1.13-0.62 0-1.12 0.51-1.12 1.13z"/>
+				<path class="s28" d="m241.64 282.98c0 0.45 0.37 0.82 0.82 0.82 0.45 0 0.81-0.37 0.81-0.82 0-0.45-0.36-0.81-0.81-0.81-0.45 0-0.82 0.36-0.82 0.81z"/>
+			</g>
+		</g>
+		<g>
+			<path class="s35" d="m248.11 257.22c0.17 0 0.37 0.13 0.44 0.28l4.3 8.91c0.08 0.15 0.14 0.41 0.14 0.58v2.85c0 0.17-0.14 0.31-0.31 0.31h-2.62c-0.17 0-0.43-0.05-0.59-0.12l-6.11-2.54c-0.16-0.07-0.42-0.12-0.59-0.12h-5.61c-0.17 0-0.31-0.14-0.31-0.31v-9.53c0-0.17 0.14-0.31 0.31-0.31z"/>
+		</g>
+		<g>
+			<path class="s36" d="m247.77 257.7c0.15 0 0.33 0.11 0.39 0.25l3.84 7.95c0.07 0.13 0.12 0.37 0.12 0.52v2.55c0 0.15-0.12 0.27-0.27 0.27h-2.34c-0.15 0-0.39-0.05-0.53-0.11l-5.45-2.27c-0.14-0.05-0.38-0.1-0.53-0.1h-5c-0.16 0-0.28-0.12-0.28-0.27v-8.52c0-0.15 0.12-0.27 0.28-0.27 0 0 9.77 0 9.77 0z"/>
+		</g>
+		<path class="s50" d="m233.93 256.35c0 0.12 0.1 0.21 0.22 0.21h15.48c0.12 0 0.22-0.09 0.22-0.21v-0.38c0-0.12-0.1-0.22-0.22-0.22h-15.48c-0.12 0-0.22 0.1-0.22 0.22z"/>
+		<path class="s35" d="m254.61 273.14c0 0.12 0.1 0.21 0.22 0.21h1.67c0.12 0 0.22-0.09 0.22-0.21v-0.78c0-0.12-0.1-0.22-0.22-0.22h-1.67c-0.12 0-0.22 0.1-0.22 0.22z"/>
+		<path class="s51" d="m254.87 272.94c0 0.06 0.08 0.11 0.17 0.11h1.26c0.08 0 0.16-0.05 0.16-0.11v-0.39c0-0.06-0.08-0.1-0.16-0.1h-1.26c-0.09 0-0.17 0.04-0.17 0.1z"/>
+	</g>
+	<g>
+		<g>
+			<g>
+				<path fill-rule="evenodd" class="s30" d="m118.13 256.62h0.63l0.55 1.81-2.91 0.82-1.01-1.85 0.42-1.07z"/>
+				<path fill-rule="evenodd" class="s52" d="m114.11 271.15l0.18-2.42-0.57-0.77-1.17 1.31-0.45-0.72 0.71-2.49-2.18-5.09 0.46-1.67-1.42-0.22 0.3-1.09 2.61-0.27 4.52 8.46z"/>
+				<path class="s30" d="m119.37 258.14c0 0 1.59 4.14 0.58 6.92-0.72 2-5.29 6.65-5.29 6.65l-0.55-0.56 0.9-3.17-4.54-8.52 0.32-1.11-1.64 0.44 0.34-1.2 4.48-0.97z"/>
+				<g>
+					<g>
+						<path class="s53" d="m111.51 258.37l2.54-0.79 0.01-0.01 0.02 0.01q1.23 0.46 2.43 0.97 1.21 0.49 2.4 1.06l0.06 0.02 0.01 0.07c0.23 1.06 0.37 2.14 0.35 3.23-0.02 1.08-0.17 2.21-0.75 3.18v0.01q-1.85 2.45-3.76 4.87 1.74-2.54 3.54-5.03h-0.01c0.53-0.89 0.67-1.98 0.67-3.03q0.01-1.6-0.31-3.16l0.07 0.09c-1.56-0.76-3.15-1.46-4.73-2.18h0.03z"/>
+					</g>
+				</g>
+				<g>
+					<g>
+						<path fill-rule="evenodd" class="s26" d="m115.18 244.66l5.69 13.75 0.73-0.49-5.69-13.76z"/>
+						<path fill-rule="evenodd" class="s24" d="m114.51 244.98l0.68 1.67 1.92-1.13-0.67-1.67z"/>
+					</g>
+					<g>
+						<path fill-rule="evenodd" class="s26" d="m93.96 224.27l11.53-3.66-0.67-1.36-11.52 3.66z"/>
+						<g>
+							<path class="s54" d="m104.38 218.63c0.59-0.24 1.27 0.05 1.51 0.65l0.87 2.15-2.16 0.86-0.87-2.15c-0.24-0.59 0.05-1.27 0.65-1.51z"/>
+							<path class="s55" d="m109.69 222.74l7.05 21.48-1.33 1.09 2.84 9.65c0 0 0.5 1.41 0 2.27-0.42 0.73-1.73 1.07-2.7-0.07-0.14-0.16-0.36-0.29-0.49-0.52-2.81-5.09-11.28-27.48-11.28-27.48v-6.8l3.39-1.13z"/>
+							<path class="s56" d="m104.17 219.71c0 0.36 0.29 0.65 0.64 0.65 0.36 0 0.65-0.29 0.65-0.65 0-0.36-0.29-0.65-0.65-0.65-0.35 0-0.64 0.29-0.64 0.65z"/>
+						</g>
+						<path fill-rule="evenodd" class="s24" d="m94.15 224.66l1.82-0.58-1.04-2.13-1.82 0.58z"/>
+						<path fill-rule="evenodd" class="s55" d="m75.51 230.58l19.4-5.99-1.14-2.4-19.4 5.99z"/>
+					</g>
+					<g>
+						<g>
+							<path fill-rule="evenodd" class="s37" d="m64.74 228.77l-1.88 0.6-7.58 3.83-6.25 14.28h5.39z"/>
+							<path class="s50" d="m57.75 248.19l2.78-6.82 44.21-12.15c0 0 2.94-4.17-1.93-4.29l-38.34 3.84-8.08 4.29-7.47 16.54z"/>
+						</g>
+						<g>
+							<path fill-rule="evenodd" class="s24" d="m65.5 239.93l3.22-5.25 0.79 0.48-3.22 5.25z"/>
+							<path fill-rule="evenodd" class="s24" d="m65.27 239.79l0.51-0.83 1.22 0.76-0.51 0.83z"/>
+							<path fill-rule="evenodd" class="s50" d="m59.92 248.17l5.49-8.76 1.37 0.87-5.49 8.75z"/>
+							<path fill-rule="evenodd" class="s57" d="m62.41 249.43l0.73-2.81-2.09-1.12-1.36 1.98z"/>
+						</g>
+						<g>
+							<path fill-rule="evenodd" class="s58" d="m25.72 274.03h34.65v2.26h-34.65z"/>
+							<g>
+								<g>
+									<g>
+										<g>
+											<path class="s50" d="m22.48 257.92c-0.79 0.08-1.44 0.8-1.44 1.6v6.95c0 0.79 0.65 1.45 1.45 1.46l20.68 0.15c0.8 0.01 1.45-0.64 1.45-1.44v-9.48c0-0.79-0.65-1.38-1.44-1.31z"/>
+											<path class="s55" d="m64.74 255.83c0 0 1.85 0.98 2.19 1.46v15.12h-2.46z"/>
+											<path fill-rule="evenodd" class="s50" d="m43.44 255.83l4.53-8.86h13.75l3.57 8.86v14.32h-21.85z"/>
+											<path fill-rule="evenodd" class="s59" d="m51.21 249.6l-0.33 11.87h-5v-5.48l3.01-6.39z"/>
+											<path fill-rule="evenodd" class="s36" d="m45.88 256.09l3.01-6.49h1.99l0.01-0.71 8.63-0.38 3.29 7.06-0.65 6.4h-11.43l0.01-0.5h-4.86z"/>
+											<g>
+												<path class="s35" d="m44.98 255.4c-0.15 0.29-0.26 0.78-0.26 1.1v4.39c0 0.32 0 0.85 0 1.16v2.37c0 0.32 0.26 0.58 0.58 0.58h5c0.32 0 0.65 0 0.75 0 0.09 0 0.42 0 0.74 0h0.01c0.31 0 0.83-0.06 1.14-0.13l9.96-2.28c0.31-0.07 0.56-0.18 0.56-0.25 0-0.07 0-0.19 0-0.25 0-0.07 0-0.38 0-0.7v-5.4c0-0.32-0.1-0.82-0.22-1.11l-2.63-6.16c-0.12-0.29-0.49-0.53-0.81-0.53h-10.67c-0.32 0-0.7 0.23-0.84 0.52zm1.49 5.71c-0.32 0-0.58-0.26-0.58-0.58v-3.86c0-0.32 0.11-0.82 0.24-1.11l2.55-5.44c0.13-0.29 0.51-0.53 0.82-0.53h9.55c0.32 0 0.68 0.24 0.81 0.54l2.07 4.88c0.13 0.29 0.23 0.8 0.23 1.11v4.39c0 0.32-0.26 0.58-0.58 0.58z"/>
+											</g>
+											<path fill-rule="evenodd" class="s50" d="m43.44 262.46h21.85v9.95h-21.85z"/>
+											<path class="s27" d="m42 264.65c0.79-0.03 1.44 0.6 1.44 1.39v6.11c0 0.8-0.65 1.45-1.44 1.45l-24.59 0.43c-0.8 0-1.36-0.64-1.24-1.43 0 0 0.57-5.36 0.66-5.94 0.09-0.58 0.82-1.08 1.61-1.11z"/>
+											<g>
+												<g>
+													<path fill-rule="evenodd" class="s35" d="m60.8 260.05h1.61v-3.73l-1.03 0.13-0.58 0.81z"/>
+													<path class="s38" d="m61.3 259.19c0 0.12 0.09 0.22 0.21 0.22 0.12 0 0.21-0.1 0.21-0.22v-1.69c0-0.11-0.09-0.21-0.21-0.21-0.12 0-0.21 0.1-0.21 0.21z"/>
+												</g>
+											</g>
+											<g>
+												<path fill-rule="evenodd" class="s37" d="m44.58 270.36h2.61v0.19h-2.61z"/>
+												<path fill-rule="evenodd" class="s37" d="m44.58 270.67h2.61v0.2h-2.61z"/>
+												<path fill-rule="evenodd" class="s37" d="m44.58 270.98h2.61v0.19h-2.61z"/>
+												<path fill-rule="evenodd" class="s37" d="m44.58 271.29h2.61v0.2h-2.61z"/>
+											</g>
+										</g>
+										<g>
+											<path fill-rule="evenodd" class="s37" d="m37.75 264.17h0.27"/>
+										</g>
+									</g>
+									<path class="s30" d="m67.25 274.7h-51.78c-0.36-1.22 0-2.29 0-2.29h51.78c0 0 0.93 1.07 0 2.29z"/>
+								</g>
+							</g>
+						</g>
+						<path class="s57" d="m68.82 233c0 0.92 0.75 1.67 1.67 1.67 0.92 0 1.67-0.75 1.67-1.67 0-0.92-0.75-1.67-1.67-1.67-0.92 0-1.67 0.75-1.67 1.67z"/>
+						<path class="s26" d="m70.03 232.3h0.01c0.19-0.29 0.57-0.37 0.86-0.19 0.28 0.18 0.37 0.56 0.2 0.85l-3.11 4.96-1.06-0.67z"/>
+					</g>
+					<path class="s50" d="m121.97 257.24c0.3 0.56 0.08 1.27-0.49 1.57l-2.04 1.09-1.09-2.06 2.04-1.09c0.57-0.3 1.27-0.08 1.58 0.49z"/>
+					<path class="s58" d="m120.87 257.14c-0.36 0.04-0.62 0.36-0.58 0.71 0.04 0.36 0.36 0.62 0.71 0.58 0.36-0.04 0.62-0.36 0.58-0.71-0.04-0.36-0.36-0.62-0.71-0.58z"/>
+				</g>
+			</g>
+			<path class="s41" d="m8.4 281.99h0.62c0 0-0.01-0.83 0.23-1.63 0.2-0.8 0.64-1.51 0.64-1.51l0.2 0.12-0.74-0.44c0 0 0.28-0.48 0.64-0.91 0.35-0.43 0.78-0.8 0.78-0.8l0.4 0.47c0 0 0.62-0.56 1.38-0.9 0.75-0.37 1.57-0.49 1.57-0.49l0.05 0.29-0.14-0.91c0 0 0.14-0.01 0.35-0.04 0.2-0.02 0.52-0.04 0.76-0.03 0.48 0 0.96 0 0.96 0v0.62h3.15v-0.62h1.93v0.62h3.14v-0.62h1.94v0.62h3.14v-0.62h1.94v0.62h3.14v-0.62h1.93v0.62h3.15v-0.62h1.93v0.62h3.14v-0.62h1.94v0.62h3.14v-0.62h1.94v0.62h3.14v-0.62h1.93v0.62h3.14v-0.62h1.94v0.62h3.14v-0.62h1.94v0.62c0 0 0.2 0 0.49 0 0.29 0 0.68-0.02 1.1 0.02 0.84 0.06 1.61 0.38 1.61 0.38l0.23-0.58c0 0 0.53 0.21 1 0.51 0.49 0.29 0.91 0.66 0.91 0.66l-0.57 0.65 0.16-0.18c0 0 0.63 0.54 1.08 1.23 0.47 0.69 0.73 1.48 0.73 1.48l-0.23 0.08 0.82-0.28c0 0 0.19 0.52 0.28 1.08 0.1 0.55 0.09 1.11 0.09 1.11h-0.63c0 0 0.01 0.84-0.22 1.63-0.21 0.81-0.64 1.52-0.64 1.52l-0.2-0.12 0.74 0.43c-0.01 0-0.28 0.49-0.64 0.91-0.36 0.44-0.78 0.81-0.78 0.81l-0.41-0.48c0 0-0.62 0.56-1.38 0.91-0.74 0.37-1.57 0.49-1.57 0.49l-0.05-0.29 0.15 0.9c0 0-0.15 0.02-0.35 0.05-0.21 0.02-0.52 0.03-0.76 0.03-0.49 0-0.97 0-0.97 0v-0.62h-3.14v0.62h-1.94v-0.62h-3.14v0.62h-1.93v-0.62h-3.14v0.62h-1.94v-0.62h-3.14v0.62h-1.94v-0.62h-3.14v0.62h-1.94v-0.62h-3.14v0.62h-1.93v-0.62h-3.14v0.62h-1.94v-0.62h-3.14v0.62h-1.94v-0.62h-3.13v0.62h-1.94v-0.62h-3.14v0.62h-1.94v-0.62c0 0-0.19 0-0.49 0-0.29 0-0.68 0.01-1.1-0.02-0.84-0.06-1.61-0.39-1.61-0.39l-0.23 0.58c0 0-0.52-0.2-1-0.5-0.49-0.29-0.9-0.67-0.9-0.67l0.56-0.65-0.16 0.18c0 0-0.63-0.53-1.08-1.23-0.47-0.68-0.73-1.47-0.73-1.47l0.23-0.08-0.82 0.28c0 0-0.19-0.53-0.27-1.08-0.11-0.55-0.1-1.12-0.1-1.12z"/>
+			<g>
+				<path class="s42" d="m10.41 282.15c0 2.76 2.46 5 5.5 5h51.14c3.04 0 5.5-2.24 5.5-5v-0.31c0-2.77-2.46-5-5.5-5h-51.14c-3.04 0-5.5 2.23-5.5 5z"/>
+			</g>
+			<g>
+				<path class="s43" d="m13.23 281.99c0 2.44 1.98 4.41 4.41 4.41 2.44 0 4.41-1.97 4.41-4.41 0-2.43-1.97-4.4-4.41-4.4-2.43 0-4.41 1.97-4.41 4.4z"/>
+				<path class="s37" d="m13.81 281.99c0 2.12 1.72 3.83 3.83 3.83 2.11 0 3.83-1.71 3.83-3.83 0-2.11-1.72-3.82-3.83-3.82-2.11 0-3.83 1.71-3.83 3.82z"/>
+				<path class="s44" d="m14.91 281.99c0 1.51 1.22 2.74 2.73 2.74 1.51 0 2.74-1.23 2.74-2.74 0-1.51-1.23-2.73-2.74-2.73-1.51 0-2.73 1.22-2.73 2.73z"/>
+				<path class="s43" d="m15.43 281.99c0 1.23 0.99 2.22 2.21 2.22 1.23 0 2.22-0.99 2.22-2.22 0-1.22-0.99-2.21-2.22-2.21-1.22 0-2.21 0.99-2.21 2.21z"/>
+			</g>
+			<g>
+				<path class="s43" d="m61.11 281.99c0 2.44 1.97 4.41 4.41 4.41 2.43 0 4.4-1.97 4.4-4.41 0-2.43-1.97-4.4-4.4-4.4-2.44 0-4.41 1.97-4.41 4.4z"/>
+				<path class="s37" d="m61.69 281.99c0 2.12 1.71 3.83 3.83 3.83 2.11 0 3.82-1.71 3.82-3.83 0-2.11-1.71-3.82-3.82-3.82-2.12 0-3.83 1.71-3.83 3.82z"/>
+				<path class="s44" d="m62.78 281.99c0 1.51 1.23 2.74 2.74 2.74 1.51 0 2.73-1.23 2.73-2.74 0-1.51-1.22-2.73-2.73-2.73-1.51 0-2.74 1.22-2.74 2.73z"/>
+				<path class="s43" d="m63.3 281.99c0 1.23 0.99 2.22 2.22 2.22 1.22 0 2.22-0.99 2.22-2.22 0-1.22-1-2.21-2.22-2.21-1.23 0-2.22 0.99-2.22 2.21z"/>
+			</g>
+			<g>
+				<path class="s57" d="m55.61 281.17c0 0.73 0.59 1.33 1.32 1.33 0.73 0 1.33-0.6 1.33-1.33 0-0.73-0.6-1.32-1.33-1.32-0.73 0-1.32 0.59-1.32 1.32z"/>
+				<path class="s60" d="m55.78 281.17c0 0.64 0.52 1.15 1.15 1.15 0.64 0 1.15-0.51 1.15-1.15 0-0.63-0.51-1.15-1.15-1.15-0.63 0-1.15 0.52-1.15 1.15z"/>
+				<path class="s57" d="m56.11 281.17c0 0.46 0.37 0.82 0.82 0.82 0.46 0 0.82-0.36 0.82-0.82 0-0.45-0.36-0.82-0.82-0.82-0.45 0-0.82 0.37-0.82 0.82z"/>
+				<path class="s61" d="m56.27 281.17c0 0.37 0.3 0.67 0.66 0.67 0.37 0 0.67-0.3 0.67-0.67 0-0.37-0.3-0.66-0.67-0.66-0.36 0-0.66 0.29-0.66 0.66z"/>
+			</g>
+			<g>
+				<path class="s57" d="m53.04 282.89c0 0.73 0.6 1.32 1.33 1.32 0.73 0 1.32-0.59 1.32-1.32 0-0.73-0.59-1.33-1.32-1.33-0.73 0-1.33 0.59-1.33 1.33z"/>
+				<path class="s60" d="m53.22 282.89c0 0.63 0.51 1.15 1.15 1.15 0.63 0 1.15-0.52 1.15-1.15 0-0.64-0.52-1.15-1.15-1.15-0.64 0-1.15 0.51-1.15 1.15z"/>
+				<path class="s57" d="m53.55 282.89c0 0.45 0.36 0.82 0.82 0.82 0.45 0 0.82-0.37 0.82-0.82 0-0.46-0.37-0.82-0.82-0.82-0.46 0-0.82 0.36-0.82 0.82z"/>
+				<path class="s61" d="m53.7 282.89c0 0.36 0.3 0.66 0.67 0.66 0.36 0 0.66-0.3 0.66-0.66 0-0.37-0.3-0.67-0.66-0.67-0.37 0-0.67 0.3-0.67 0.67z"/>
+			</g>
+			<g>
+				<path fill-rule="evenodd" class="s57" d="m51.56 282.67c-0.74 0-1.33-0.59-1.33-1.32 0-0.74 0.59-1.33 1.33-1.33 0.73 0 1.32 0.59 1.32 1.33 0 0.73-0.59 1.32-1.32 1.32z"/>
+				<path class="s60" d="m50.41 281.35c0 0.63 0.51 1.15 1.15 1.15 0.63 0 1.15-0.52 1.15-1.15 0-0.64-0.52-1.15-1.15-1.15-0.64 0-1.15 0.51-1.15 1.15z"/>
+				<path class="s57" d="m50.73 281.35c0.01 0.45 0.37 0.82 0.82 0.82 0.46 0 0.83-0.37 0.83-0.82 0-0.46-0.37-0.82-0.83-0.82-0.45-0.01-0.81 0.36-0.81 0.82z"/>
+				<path class="s61" d="m50.89 281.35c0 0.36 0.3 0.66 0.67 0.66 0.36 0 0.66-0.3 0.66-0.66 0-0.37-0.3-0.67-0.66-0.67-0.37 0-0.67 0.3-0.67 0.67z"/>
+			</g>
+			<g>
+				<path class="s60" d="m27.66 282.05c0 0.59-0.48 1.06-1.07 1.06-0.59 0-1.06-0.47-1.06-1.06 0-0.59 0.47-1.07 1.06-1.07 0.59 0 1.07 0.48 1.07 1.07z"/>
+				<path class="s60" d="m30.5 282.05c0 0.59-0.47 1.06-1.06 1.06-0.59 0-1.07-0.47-1.07-1.06 0-0.59 0.48-1.07 1.07-1.07 0.59 0 1.06 0.48 1.06 1.07z"/>
+				<path class="s60" d="m33.35 282.05c0 0.59-0.48 1.06-1.07 1.06-0.59 0-1.06-0.47-1.06-1.06 0-0.59 0.48-1.07 1.06-1.07 0.59 0 1.07 0.48 1.07 1.07z"/>
+			</g>
+		</g>
+		<path class="s55" d="m42 261.86q0.01 0.1 0.1 0.1h0.17q0.1 0 0.11-0.1v-3.58q-0.01-0.09-0.11-0.1h-0.17q-0.09 0.01-0.1 0.1z"/>
+		<path class="s55" d="m41.3 261.86q0.01 0.1 0.1 0.1h0.17q0.1 0 0.1-0.1v-3.58q0-0.09-0.1-0.1h-0.17q-0.09 0.01-0.1 0.1z"/>
+		<path class="s55" d="m40.6 261.86q0.01 0.1 0.1 0.1h0.18q0.09 0 0.1-0.1v-3.58q-0.01-0.09-0.1-0.1h-0.18q-0.09 0.01-0.1 0.1z"/>
+		<path class="s55" d="m39.9 261.86q0.01 0.1 0.1 0.1h0.17q0.1 0 0.11-0.1v-3.58q-0.01-0.09-0.11-0.1h-0.17q-0.09 0.01-0.1 0.1z"/>
+		<path class="s43" d="m23.4 281.99c0 2.12 1.71 3.83 3.82 3.83h28.41c2.11 0 3.83-1.71 3.83-3.83 0-2.11-1.72-3.82-3.83-3.82h-28.4c-2.12 0-3.83 1.71-3.83 3.82z"/>
+		<path class="s37" d="m24.11 281.99c0 1.72 1.65 3.1 3.68 3.1h27.27c2.04 0 3.68-1.38 3.68-3.1 0-1.71-1.64-3.1-3.68-3.1h-27.27c-2.03 0-3.68 1.39-3.68 3.1z"/>
+		<path class="s50" d="m47.39 246.97c0 0.27 0.22 0.5 0.5 0.5h13.77c0.27 0 0.5-0.23 0.5-0.5 0-0.28-0.23-0.5-0.5-0.5h-13.77c-0.28 0-0.5 0.22-0.5 0.5z"/>
+		<g>
+			<g>
+				<path class="s43" d="m53.36 280.93c0 0.92 0.75 1.67 1.67 1.67 0.93 0 1.67-0.75 1.67-1.67 0-0.92-0.74-1.67-1.67-1.67-0.92 0-1.67 0.75-1.67 1.67z"/>
+				<path class="s37" d="m53.58 280.93c0 0.8 0.65 1.45 1.45 1.45 0.8 0 1.45-0.65 1.45-1.45 0-0.8-0.65-1.45-1.45-1.45-0.8 0-1.45 0.65-1.45 1.45z"/>
+				<path class="s44" d="m54 280.93c0 0.57 0.46 1.04 1.03 1.04 0.57 0 1.04-0.47 1.04-1.04 0-0.57-0.46-1.04-1.04-1.04-0.57 0-1.03 0.47-1.03 1.04z"/>
+				<path class="s43" d="m54.19 280.93c0 0.46 0.38 0.84 0.84 0.84 0.47 0 0.84-0.38 0.84-0.84 0-0.46-0.37-0.84-0.84-0.84-0.46 0-0.84 0.37-0.84 0.84z"/>
+			</g>
+			<g>
+				<path class="s43" d="m50.2 283.22c0 0.92 0.75 1.67 1.67 1.67 0.93 0 1.68-0.75 1.68-1.67 0-0.92-0.75-1.67-1.68-1.67-0.92 0-1.67 0.75-1.67 1.67z"/>
+				<path class="s37" d="m50.42 283.22c0 0.8 0.65 1.45 1.45 1.45 0.81 0 1.46-0.65 1.46-1.45 0-0.8-0.65-1.45-1.46-1.45-0.8 0-1.45 0.65-1.45 1.45z"/>
+				<path class="s44" d="m50.84 283.22c0 0.57 0.46 1.03 1.03 1.03 0.58 0 1.04-0.46 1.04-1.03 0-0.57-0.46-1.04-1.04-1.04-0.57 0-1.03 0.47-1.03 1.04z"/>
+				<path class="s43" d="m51.04 283.22c0 0.46 0.37 0.84 0.84 0.84 0.46 0 0.84-0.38 0.84-0.84 0-0.47-0.38-0.84-0.84-0.84-0.47 0-0.84 0.37-0.84 0.84z"/>
+			</g>
+			<g>
+				<path class="s43" d="m46.89 280.93c0 0.92 0.75 1.67 1.67 1.67 0.93 0 1.67-0.75 1.67-1.67 0-0.92-0.74-1.67-1.67-1.67-0.92 0-1.67 0.75-1.67 1.67z"/>
+				<path class="s37" d="m47.11 280.93c0 0.8 0.65 1.45 1.45 1.45 0.8 0 1.45-0.65 1.45-1.45 0-0.8-0.65-1.45-1.45-1.45-0.8 0-1.45 0.65-1.45 1.45z"/>
+				<path class="s44" d="m47.53 280.93c0 0.57 0.46 1.04 1.03 1.04 0.57 0 1.04-0.47 1.04-1.04 0-0.57-0.47-1.04-1.04-1.04-0.57 0-1.03 0.47-1.03 1.04z"/>
+				<path class="s43" d="m47.72 280.93c0 0.46 0.38 0.84 0.84 0.84 0.47 0 0.84-0.38 0.84-0.84 0-0.46-0.37-0.84-0.84-0.84-0.46 0-0.84 0.37-0.84 0.84z"/>
+			</g>
+		</g>
+		<g>
+			<g>
+				<path class="s43" d="m40.48 280.82c0 0.92 0.75 1.67 1.67 1.67 0.92 0 1.67-0.75 1.67-1.67 0-0.92-0.75-1.67-1.67-1.67-0.92 0-1.67 0.75-1.67 1.67z"/>
+				<path class="s37" d="m40.7 280.82c0 0.8 0.65 1.45 1.45 1.45 0.8 0 1.45-0.65 1.45-1.45 0-0.8-0.65-1.45-1.45-1.45-0.8 0-1.45 0.65-1.45 1.45z"/>
+				<path class="s44" d="m41.12 280.82c0 0.57 0.46 1.04 1.03 1.04 0.57 0 1.04-0.47 1.04-1.04 0-0.57-0.47-1.04-1.04-1.04-0.57 0-1.03 0.47-1.03 1.04z"/>
+				<path class="s43" d="m41.31 280.82c0 0.46 0.38 0.84 0.84 0.84 0.47 0 0.84-0.38 0.84-0.84 0-0.46-0.37-0.84-0.84-0.84-0.46 0-0.84 0.38-0.84 0.84z"/>
+			</g>
+			<g>
+				<path fill-rule="evenodd" class="s43" d="m38.99 284.78c-0.92 0-1.67-0.75-1.67-1.67 0-0.92 0.75-1.67 1.67-1.67 0.93 0 1.67 0.75 1.67 1.67 0 0.92-0.74 1.67-1.67 1.67z"/>
+				<path class="s37" d="m37.54 283.11c0 0.8 0.65 1.45 1.45 1.45 0.81 0 1.45-0.65 1.45-1.45 0-0.8-0.65-1.45-1.45-1.45-0.8 0-1.45 0.65-1.45 1.45z"/>
+				<path class="s44" d="m37.96 283.11c0 0.57 0.46 1.03 1.03 1.03 0.58 0 1.04-0.46 1.04-1.03 0-0.57-0.46-1.04-1.04-1.04-0.57 0-1.03 0.47-1.03 1.04z"/>
+				<path class="s43" d="m38.15 283.11c0 0.46 0.38 0.84 0.84 0.84 0.47 0 0.84-0.38 0.84-0.84 0-0.47-0.37-0.84-0.84-0.84-0.46 0-0.84 0.38-0.84 0.84z"/>
+			</g>
+			<g>
+				<path fill-rule="evenodd" class="s43" d="m35.68 282.49c-0.92 0-1.67-0.75-1.67-1.67 0-0.92 0.75-1.67 1.67-1.67 0.92 0 1.67 0.75 1.67 1.67 0 0.92-0.75 1.67-1.67 1.67z"/>
+				<path class="s37" d="m34.23 280.82c0 0.8 0.65 1.45 1.45 1.45 0.8 0 1.45-0.65 1.45-1.45 0-0.8-0.65-1.45-1.45-1.45-0.8 0-1.45 0.65-1.45 1.45z"/>
+				<path class="s44" d="m34.65 280.82c0 0.57 0.46 1.04 1.03 1.04 0.57 0 1.04-0.47 1.04-1.04 0-0.57-0.47-1.04-1.04-1.04-0.57 0-1.03 0.47-1.03 1.04z"/>
+				<path class="s43" d="m34.84 280.82c0 0.46 0.38 0.84 0.84 0.84 0.47 0 0.84-0.38 0.84-0.84 0-0.46-0.37-0.84-0.84-0.84-0.46 0-0.84 0.38-0.84 0.84z"/>
+			</g>
+			<g>
+				<path class="s43" d="m28.72 283c0 0.92-0.75 1.67-1.67 1.67-0.92 0-1.67-0.75-1.67-1.67 0-0.92 0.75-1.67 1.67-1.67 0.92 0 1.67 0.75 1.67 1.67z"/>
+				<path class="s37" d="m28.5 283c0 0.8-0.65 1.45-1.45 1.45-0.8 0-1.45-0.65-1.45-1.45 0-0.8 0.65-1.45 1.45-1.45 0.8 0 1.45 0.65 1.45 1.45z"/>
+				<path class="s44" d="m28.09 283c0 0.57-0.47 1.04-1.04 1.04-0.57 0-1.04-0.47-1.04-1.04 0-0.57 0.47-1.04 1.04-1.04 0.57 0 1.04 0.47 1.04 1.04z"/>
+				<path class="s43" d="m27.89 283c0 0.46-0.38 0.84-0.84 0.84-0.46 0-0.84-0.38-0.84-0.84 0-0.46 0.38-0.84 0.84-0.84 0.46 0 0.84 0.38 0.84 0.84z"/>
+			</g>
+			<g>
+				<path class="s43" d="m32.03 280.71c0 0.92-0.74 1.67-1.67 1.67-0.92 0-1.67-0.75-1.67-1.67 0-0.92 0.75-1.67 1.67-1.67 0.93 0 1.67 0.75 1.67 1.67z"/>
+				<path class="s37" d="m31.81 280.71c0 0.8-0.65 1.45-1.45 1.45-0.8 0-1.45-0.65-1.45-1.45 0-0.8 0.65-1.45 1.45-1.45 0.8 0 1.45 0.65 1.45 1.45z"/>
+				<path class="s44" d="m31.4 280.71c0 0.57-0.46 1.04-1.04 1.04-0.57 0-1.03-0.47-1.03-1.04 0-0.57 0.46-1.03 1.03-1.03 0.58 0 1.04 0.46 1.04 1.03z"/>
+				<path class="s43" d="m31.2 280.71c0 0.47-0.37 0.84-0.84 0.84-0.46 0-0.84-0.37-0.84-0.84 0-0.46 0.38-0.84 0.84-0.84 0.47 0 0.84 0.38 0.84 0.84z"/>
+			</g>
+		</g>
+	</g>
+	<g>
+		<path class="s30" d="m180.39 284.93q-0.01 0.08-0.08 0.08h-32.19q-0.08 0-0.08-0.08v-1.42q0-0.08 0.08-0.08h32.19q0.07 0 0.08 0.08z"/>
+		<path class="s50" d="m154.37 283.82q0 0.07-0.08 0.08h-13.84q-0.08-0.01-0.09-0.08v-12.66q0.01-0.07 0.09-0.08h13.84q0.08 0.01 0.08 0.08z"/>
+		<path class="s27" d="m182.89 284.05q-0.01 0.07-0.08 0.08h-8.64q-0.07-0.01-0.08-0.08v-1.53q0.01-0.07 0.08-0.08h8.64q0.07 0.01 0.08 0.08z"/>
+		<g>
+			<g>
+				<path fill-rule="evenodd" class="s26" d="m127.35 270.17l0.31-0.73 4.81 2.03-0.3 0.72z"/>
+				<path fill-rule="evenodd" class="s24" d="m131.34 272.06l0.48-1.13 0.76 0.32-0.48 1.13z"/>
+				<path fill-rule="evenodd" class="s62" d="m139.89 275.67l-8.11-3.32 0.52-1.27 8.11 3.32z"/>
+				<path fill-rule="evenodd" class="s57" d="m138.71 275.93l-1.3-1 1.34-1.7 0.72 0.5z"/>
+			</g>
+			<g>
+				<path class="s55" d="m124.29 280.64l-1.34-2.81 4.22-8.58c1.33-0.93 1.68 0.55 1.68 0.55l-0.09 5.04-0.41 2.23c0 0-1.74 2.1-4.06 3.57z"/>
+				<path class="s28" d="m124.04 280.64l-1.34-2.81 4.22-8.58c1.33-0.93 1.68 0.55 1.68 0.55l-0.09 5.04-0.42 2.23c0 0-1.73 2.1-4.05 3.57z"/>
+				<path class="s57" d="m128.09 270.11c0 0.24-0.19 0.44-0.43 0.44-0.25 0-0.44-0.2-0.44-0.44 0-0.24 0.19-0.43 0.44-0.43 0.24 0 0.43 0.19 0.43 0.43z"/>
+			</g>
+			<g>
+				<path fill-rule="evenodd" class="s52" d="m121.8 274.52l-0.39 1.89-0.61 0.47-0.61-1.26-0.49 0.45v2.07l-2.78 3.42v1.38l-1.14-0.14v0.9l1.94 0.78 5.29-5.51z"/>
+				<g>
+					<path class="s28" d="m143.13 267.79c0 0-6.05 0.19-10.16 3.72l-5.7 10.88-2.43 0.08-1.32 2.55 4.55-0.02c0 0 1.6 0.09 2.8-1.5 1.2-1.59 8.32-9.93 8.32-9.93l5.06-4.56z"/>
+					<g>
+						<g>
+							<g>
+								<g>
+									<g>
+										<g>
+											<path class="s35" d="m169.01 268.88h-1.03v-4.98c0-1.04 0.85-1.88 1.88-1.88h0.8v1.02h-0.8c-0.47 0-0.85 0.39-0.85 0.86 0 0 0 4.98 0 4.98z"/>
+										</g>
+										<path fill-rule="evenodd" class="s26" d="m167.77 265.5h1.46v6.39h-1.46z"/>
+									</g>
+									<g>
+										<path fill-rule="evenodd" class="s28" d="m153.43 273.09h15.75v10.71h-15.75z"/>
+										<path fill-rule="evenodd" class="s30" d="m163.12 272.82h2.57v3.93h-2.57z"/>
+										<path fill-rule="evenodd" class="s36" d="m157.67 258.07l-3.54 7.6 0.71 6.89 11.34-0.34v-13.74z"/>
+										<path class="s30" d="m166.07 257.72c-0.38 0-1.01 0-1.39 0h-7.24c-0.38 0-0.81 0.28-0.96 0.63l-2.78 6.51c-0.15 0.35-0.27 0.95-0.27 1.33v5.01c0 0.38 0 0.9 0 1.15 0 0.26 0 0.56 0 0.67 0 0.11 0.31 0.2 0.69 0.2h10.56c0.38 0 0.7 0.32 0.7 0.7v0.62c0 0.38 0.31 0.69 0.69 0.69h0.22c0.38 0 0.69-0.31 0.69-0.69v-14.61c0-0.38 0-1 0-1.39v-0.13c0-0.38-0.31-0.69-0.69-0.69zm-0.69 13.48c0 0.38-0.31 0.69-0.69 0.69h-9.15c-0.39 0-0.7-0.31-0.7-0.69v-4.86c0-0.38 0.12-0.98 0.27-1.33l2.19-5.14c0.15-0.35 0.58-0.63 0.96-0.63h6.43c0.38 0 0.69 0.31 0.69 0.69 0 0 0 11.27 0 11.27z"/>
+										<path fill-rule="evenodd" class="s30" d="m156.3 270.49h-1.74v-4.02l1.12 0.15 0.62 0.87z"/>
+										<path class="s63" d="m155.76 269.57c0 0.13-0.1 0.23-0.23 0.23-0.12 0-0.22-0.1-0.22-0.23v-1.82c0-0.13 0.1-0.23 0.22-0.23 0.13 0 0.23 0.1 0.23 0.23z"/>
+										<path fill-rule="evenodd" class="s55" d="m153.13 284.3h11.61v-7.01h-11.55z"/>
+										<path fill-rule="evenodd" class="s27" d="m152.59 276.92h11.32v0.95h-11.32z"/>
+										<path fill-rule="evenodd" class="s27" d="m152.59 279.09h11.32v0.95h-11.32z"/>
+										<path fill-rule="evenodd" class="s27" d="m152.59 281.26h11.32v0.94h-11.32z"/>
+										<path fill-rule="evenodd" class="s27" d="m152.59 283.43h11.32v0.94h-11.32z"/>
+										<g>
+											<path class="s28" d="m180.4 269.75h-14.03v9.62l14.03 0.77c0.63 0.03 1.15-0.46 1.15-1.09v-8.14c0-0.64-0.52-1.16-1.15-1.16z"/>
+											<path class="s27" d="m182.89 280.64c0 0.38-0.31 0.69-0.69 0.69h-11.28c-0.38 0-0.69-0.31-0.69-0.69v-3.38c0-0.38 0.31-0.69 0.69-0.69h11.28c0.38 0 0.69 0.31 0.69 0.69z"/>
+											<path class="s30" d="m183.71 282.58q0 0.07-0.08 0.08h-11.95q-0.07-0.01-0.08-0.08v-2.2q0.01-0.07 0.08-0.08h11.95q0.08 0.01 0.08 0.08z"/>
+											<path class="s64" d="m183.71 280.96v-0.58q0-0.07-0.08-0.08h-11.95q-0.07 0.01-0.08 0.08v0.58z"/>
+										</g>
+										<path class="s30" d="m178.18 278.97c-1.54-3.11-4.7-5.24-8.34-5.24-3.79 0-7.06 2.3-8.52 5.62l8.88 2.97z"/>
+										<path class="s31" d="m178.14 284.18q0.08-0.58 0.08-1.19c0-4.69-3.72-8.48-8.31-8.48-4.58 0-8.3 3.8-8.3 8.48q0 0.73 0.12 1.42z"/>
+										<path class="s30" d="m144.29 282.32l7.98-3.35c-1.54-3.11-4.69-5.24-8.34-5.24-3.06 0-5.77 1.5-7.48 3.82l0.69 0.48c0 0 0.85-1.22 2.06-1.96 1.22-0.73 0 0 0 0z"/>
+										<path class="s31" d="m144.29 284.48l7.94-0.3q0.08-0.58 0.08-1.19c0-4.69-3.71-8.48-8.3-8.48-2.1 0-3.83 0.58-5.3 1.9z"/>
+										<g>
+											<g>
+												<g>
+													<path fill-rule="evenodd" class="s31" d="m174.77 277.55h-0.15l-0.53 1.52 0.59 0.83h0.18z"/>
+												</g>
+												<g>
+													<path fill-rule="evenodd" class="s31" d="m166.62 278.22l0.82-0.61v-0.17l-2.34 0.11v0.15"/>
+												</g>
+												<g>
+													<path fill-rule="evenodd" class="s31" d="m176.75 282.39l-0.1-0.1-1.46 0.69-0.17 1 0.13 0.13"/>
+												</g>
+											</g>
+										</g>
+										<g>
+											<path class="s37" d="m169.18 272.99c0 0.12-0.1 0.22-0.22 0.22-0.12 0-0.22-0.1-0.22-0.22v-2.46c0-0.12 0.1-0.22 0.22-0.22 0.12 0 0.22 0.1 0.22 0.22z"/>
+											<path class="s37" d="m169.96 272.99c0 0.12-0.1 0.22-0.22 0.22-0.12 0-0.22-0.1-0.22-0.22v-2.46c0-0.12 0.1-0.22 0.22-0.22 0.12 0 0.22 0.1 0.22 0.22z"/>
+											<path class="s37" d="m170.82 272.99c0 0.12-0.1 0.22-0.22 0.22-0.12 0-0.21-0.1-0.21-0.22v-2.46c0-0.12 0.09-0.22 0.21-0.22 0.12 0 0.22 0.1 0.22 0.22z"/>
+											<path class="s37" d="m171.6 272.99c0 0.12-0.1 0.22-0.22 0.22-0.11 0-0.21-0.1-0.21-0.22v-2.46c0-0.12 0.1-0.22 0.21-0.22 0.12 0 0.22 0.1 0.22 0.22z"/>
+										</g>
+									</g>
+								</g>
+							</g>
+						</g>
+						<g>
+							<g>
+								<path class="s41" d="m150.87 282.39q0-0.01-0.01-0.26 0-0.12-0.02-0.27-0.01-0.15-0.02-0.3-0.05-0.32-0.1-0.57-0.05-0.24-0.05-0.25l0.3-0.07q0-0.01-0.05-0.16-0.04-0.16-0.1-0.36-0.07-0.2-0.13-0.34-0.05-0.15-0.06-0.16l-0.42 0.18 0.14-0.06q0 0-0.03-0.07-0.03-0.06-0.08-0.17-0.02-0.05-0.05-0.11-0.03-0.06-0.06-0.13-0.07-0.13-0.15-0.27-0.16-0.28-0.3-0.48-0.14-0.2-0.15-0.21l0.25-0.19q0 0-0.03-0.03-0.02-0.04-0.07-0.1-0.1-0.13-0.23-0.28-0.07-0.08-0.13-0.15-0.07-0.07-0.12-0.13-0.11-0.11-0.12-0.12l-0.21 0.22q-0.01-0.01-0.19-0.18-0.09-0.08-0.2-0.17-0.11-0.1-0.24-0.2c-0.32-0.26-0.68-0.47-0.68-0.47l0.16-0.26q-0.01-0.01-0.14-0.09-0.07-0.03-0.15-0.08-0.09-0.05-0.18-0.09-0.19-0.1-0.33-0.16-0.07-0.03-0.11-0.05-0.04-0.02-0.04-0.02l-0.12 0.29q-0.01-0.01-0.24-0.1-0.24-0.08-0.55-0.17c-0.4-0.11-0.81-0.18-0.81-0.18l-0.02 0.15 0.07-0.45q-0.01 0-0.17-0.02-0.08-0.01-0.17-0.02-0.1-0.01-0.2-0.02-0.1-0.01-0.19-0.01-0.1-0.01-0.17-0.01-0.16 0-0.17 0v0.31q-0.01 0-0.26 0-0.12 0.01-0.26 0.02-0.15 0.01-0.31 0.03-0.32 0.04-0.56 0.09-0.24 0.05-0.25 0.06l-0.08-0.3q-0.01 0-0.16 0.04-0.15 0.04-0.35 0.11-0.2 0.06-0.35 0.12-0.15 0.06-0.15 0.06l0.17 0.42-0.06-0.13q0 0-0.06 0.03-0.07 0.02-0.17 0.07-0.06 0.03-0.12 0.05-0.06 0.04-0.12 0.07-0.14 0.06-0.27 0.14-0.28 0.16-0.49 0.3-0.2 0.15-0.21 0.15l-0.18-0.24q0 0-0.04 0.02-0.03 0.03-0.09 0.08-0.13 0.09-0.29 0.23-0.08 0.07-0.15 0.13-0.07 0.06-0.12 0.12-0.12 0.11-0.12 0.11l0.32 0.32-0.1-0.1q-0.01 0.01-0.18 0.19-0.08 0.08-0.18 0.2-0.1 0.11-0.19 0.23c-0.26 0.33-0.48 0.68-0.48 0.68l-0.26-0.16q0 0.01-0.08 0.15-0.04 0.07-0.09 0.15-0.04 0.08-0.09 0.17-0.09 0.19-0.16 0.34-0.03 0.07-0.05 0.11-0.01 0.04-0.01 0.04l0.28 0.12q0 0.01-0.09 0.24-0.09 0.23-0.18 0.54c-0.11 0.4-0.17 0.81-0.17 0.81l0.14 0.03-0.45-0.07q0 0.01-0.02 0.16-0.01 0.08-0.02 0.17-0.01 0.1-0.02 0.2-0.01 0.1-0.01 0.2 0 0.09 0 0.17-0.01 0.16-0.01 0.16h0.31q0 0.02 0.01 0.26 0 0.12 0.01 0.27 0.01 0.15 0.03 0.3 0.04 0.32 0.09 0.57 0.06 0.24 0.06 0.25l-0.3 0.07q0 0.01 0.04 0.17 0.04 0.15 0.11 0.35 0.06 0.2 0.12 0.35 0.06 0.14 0.06 0.15l0.43-0.17-0.14 0.05q0 0 0.03 0.07 0.02 0.06 0.07 0.17 0.03 0.05 0.06 0.11 0.03 0.06 0.06 0.13 0.06 0.13 0.14 0.27 0.17 0.28 0.3 0.48 0.15 0.2 0.15 0.21l-0.24 0.19q0 0 0.02 0.04 0.03 0.03 0.08 0.09 0.09 0.13 0.23 0.29 0.07 0.07 0.13 0.14 0.06 0.07 0.12 0.13 0.11 0.11 0.11 0.12l0.22-0.22q0.01 0.01 0.19 0.18 0.09 0.08 0.2 0.18 0.11 0.09 0.23 0.19c0.33 0.26 0.68 0.47 0.68 0.47l0.08-0.12-0.23 0.39q0 0 0.14 0.08 0.07 0.04 0.15 0.08 0.09 0.05 0.17 0.09 0.19 0.1 0.34 0.16 0.07 0.03 0.11 0.05 0.04 0.02 0.04 0.02l0.12-0.29q0.01 0.01 0.24 0.1 0.23 0.09 0.54 0.18c0.4 0.11 0.81 0.17 0.81 0.17l0.03-0.15-0.07 0.45q0.01 0.01 0.17 0.02 0.07 0.01 0.17 0.03 0.09 0 0.19 0.01 0.1 0.01 0.2 0.01 0.09 0.01 0.17 0.01 0.16 0 0.17 0v-0.3q0.01 0 0.26-0.01 0.11 0 0.26-0.02 0.15-0.01 0.3-0.03 0.33-0.04 0.57-0.09 0.24-0.05 0.25-0.06l0.07 0.3q0.01 0 0.17-0.04 0.15-0.04 0.35-0.1 0.2-0.07 0.34-0.13 0.15-0.06 0.16-0.06l-0.17-0.42 0.05 0.13q0.01 0.01 0.07-0.02 0.06-0.03 0.17-0.08 0.05-0.02 0.12-0.05 0.06-0.03 0.12-0.07 0.13-0.06 0.27-0.14 0.28-0.16 0.48-0.3 0.21-0.14 0.22-0.15l0.18 0.25q0 0 0.04-0.03 0.03-0.03 0.09-0.07 0.13-0.1 0.29-0.24 0.07-0.06 0.14-0.13 0.07-0.06 0.13-0.11 0.11-0.11 0.12-0.12l-0.32-0.32 0.1 0.1q0.01-0.01 0.18-0.19 0.08-0.08 0.18-0.19 0.1-0.11 0.19-0.24c0.26-0.32 0.47-0.68 0.47-0.68l0.27 0.16q0-0.01 0.08-0.15 0.04-0.07 0.09-0.15 0.04-0.08 0.09-0.17 0.09-0.19 0.15-0.33 0.04-0.07 0.06-0.11 0.01-0.05 0.01-0.05l-0.28-0.12q0-0.01 0.09-0.24 0.09-0.23 0.18-0.54c0.11-0.4 0.17-0.81 0.17-0.81l-0.14-0.02 0.45 0.06q0-0.01 0.02-0.16 0.01-0.08 0.02-0.17 0.01-0.1 0.01-0.2 0.01-0.1 0.02-0.19 0-0.1 0-0.18 0-0.15 0-0.16z"/>
+							</g>
+							<path class="s42" d="m149.87 282.39c0 3.22-2.62 5.84-5.84 5.84-3.23 0-5.84-2.62-5.84-5.84 0-3.23 2.61-5.84 5.84-5.84 3.22 0 5.84 2.61 5.84 5.84z"/>
+							<g>
+								<path class="s43" d="m147.61 282.29c0 1.84-1.49 3.33-3.32 3.33-1.84 0-3.33-1.49-3.33-3.33 0-1.84 1.49-3.32 3.33-3.32 1.83 0 3.32 1.48 3.32 3.32z"/>
+								<path class="s37" d="m147.01 282.29c0 1.5-1.22 2.72-2.72 2.72-1.5 0-2.72-1.22-2.72-2.72 0-1.5 1.22-2.72 2.72-2.72 1.5 0 2.72 1.22 2.72 2.72z"/>
+								<path class="s44" d="m146.47 282.29c0 1.21-0.97 2.19-2.18 2.19-1.21 0-2.19-0.98-2.19-2.19 0-1.21 0.98-2.18 2.19-2.18 1.2 0 2.18 0.97 2.18 2.18z"/>
+								<path class="s45" d="m145.69 282.29c0 0.78-0.63 1.41-1.4 1.41-0.78 0-1.41-0.63-1.41-1.41 0-0.78 0.63-1.41 1.41-1.41 0.78 0 1.4 0.63 1.4 1.41z"/>
+								<path class="s28" d="m145.3 282.29c0 0.56-0.45 1.02-1.01 1.02-0.56 0-1.02-0.46-1.02-1.02 0-0.56 0.46-1.02 1.02-1.02 0.56 0 1.01 0.46 1.01 1.02z"/>
+							</g>
+						</g>
+					</g>
+					<g>
+						<path class="s37" d="m151.47 274.54c0 0.09-0.07 0.16-0.16 0.16-0.09 0-0.16-0.07-0.16-0.16v-1.86c0-0.08 0.07-0.16 0.16-0.16 0.09 0 0.16 0.08 0.16 0.16z"/>
+						<path class="s37" d="m150.78 274.54c0 0.09-0.08 0.16-0.17 0.16-0.09 0-0.16-0.07-0.16-0.16v-1.86c0-0.08 0.07-0.16 0.16-0.16 0.09 0 0.17 0.08 0.17 0.16z"/>
+						<path class="s37" d="m152.06 274.54c0 0.09-0.07 0.16-0.16 0.16-0.09 0-0.17-0.07-0.17-0.16v-1.86c0-0.08 0.08-0.16 0.17-0.16 0.09 0 0.16 0.08 0.16 0.16z"/>
+						<path class="s37" d="m152.71 274.54c0 0.09-0.08 0.16-0.17 0.16-0.09 0-0.16-0.07-0.16-0.16v-1.86c0-0.08 0.07-0.16 0.16-0.16 0.09 0 0.17 0.08 0.17 0.16z"/>
+					</g>
+				</g>
+				<g>
+					<path fill-rule="evenodd" class="s25" d="m143.21 268.19l1.21-0.73 0.49 0.81-1.21 0.74z"/>
+					<path fill-rule="evenodd" class="s50" d="m143.43 268.97l1.61-0.98 0.69 1.14-1.61 0.98z"/>
+					<path class="s28" d="m145.85 273.45c0.34 0.56 1.06 0.74 1.62 0.4 0.55-0.34 0.73-1.06 0.4-1.62l-2.22-3.66-2.01 1.22z"/>
+				</g>
+				<path class="s33" d="m143.13 268.23c0 0-5.21 0.33-9.85 3.66l-5.4 10.85-3.21 0.06"/>
+				<path class="s30" d="m123.01 285.62c0 0 2.11-2.83 1.94-5.17-0.12-1.69-2.61-6.24-2.61-6.24l-0.54 0.31v2.62l-5.32 5.54v0.93l-1.15-0.7v0.99l3.22 1.72c0 0 4.46 0 4.46 0z"/>
+			</g>
+			<path fill-rule="evenodd" class="s26" d="m142.58 267.57l1.62-0.98 0.54 0.91-1.61 0.98z"/>
+			<g>
+				<g>
+					<path class="s53" d="m117.04 283.75l1.82 1.08-0.03-0.01c0.68-0.12 1.37-0.18 2.06-0.3l2.04-0.34-0.07 0.05q0.58-1.13 0.92-2.35c0.23-0.81 0.36-1.67 0.16-2.48v0.01q-0.85-2.3-1.64-4.62 0.94 2.26 1.81 4.55l0.01 0.01c0.23 0.86 0.11 1.76-0.1 2.59-0.22 0.84-0.57 1.63-0.98 2.39l-0.02 0.05-0.05 0.01c-1.38 0.18-2.75 0.4-4.13 0.51l-0.01 0.01-0.02-0.01z"/>
+				</g>
+			</g>
+		</g>
+		<path fill-rule="evenodd" class="s50" d="m166.98 258.07h-11.67l0.01-0.81h11.66z"/>
+		<g>
+			<g>
+				<path class="s41" d="m176.84 282.39q0-0.01-0.01-0.26 0-0.12-0.01-0.27-0.01-0.15-0.03-0.3-0.04-0.32-0.09-0.57-0.06-0.24-0.06-0.25l0.3-0.07q0-0.01-0.04-0.16-0.05-0.16-0.11-0.36-0.06-0.2-0.12-0.34-0.06-0.15-0.07-0.16l-0.42 0.18 0.14-0.06q0 0-0.03-0.07-0.03-0.06-0.07-0.17-0.03-0.05-0.06-0.11-0.03-0.06-0.06-0.13-0.06-0.13-0.14-0.27-0.17-0.28-0.3-0.48-0.15-0.2-0.15-0.21l0.24-0.19q0 0-0.02-0.03-0.03-0.04-0.08-0.1-0.09-0.13-0.23-0.28-0.07-0.08-0.13-0.15-0.06-0.07-0.12-0.13-0.11-0.11-0.11-0.12l-0.22 0.22q-0.01-0.01-0.19-0.18-0.09-0.08-0.2-0.17-0.11-0.1-0.23-0.2c-0.33-0.26-0.69-0.47-0.69-0.47l0.16-0.26q-0.01-0.01-0.14-0.09-0.07-0.03-0.15-0.08-0.09-0.05-0.18-0.09-0.18-0.1-0.33-0.16-0.07-0.03-0.11-0.05-0.04-0.02-0.04-0.02l-0.12 0.29q-0.01-0.01-0.24-0.1-0.23-0.08-0.54-0.17c-0.4-0.11-0.82-0.18-0.82-0.18l-0.02 0.15 0.07-0.45q-0.01 0-0.17-0.02-0.07-0.01-0.17-0.02-0.09-0.01-0.19-0.02-0.1 0-0.2-0.01-0.1 0-0.17 0-0.16-0.01-0.17-0.01v0.31q-0.01 0-0.26 0.01-0.12 0-0.26 0.01-0.15 0.01-0.31 0.03-0.32 0.04-0.56 0.09-0.24 0.06-0.25 0.06l-0.08-0.3q-0.01 0-0.16 0.04-0.15 0.04-0.35 0.11-0.2 0.06-0.35 0.12-0.15 0.06-0.15 0.07l0.17 0.42-0.06-0.14q0 0-0.06 0.03-0.07 0.03-0.17 0.07-0.06 0.03-0.12 0.06-0.06 0.03-0.12 0.06-0.13 0.07-0.27 0.15-0.28 0.16-0.49 0.3-0.2 0.14-0.21 0.15l-0.18-0.25q0 0-0.04 0.02-0.03 0.03-0.09 0.08-0.13 0.1-0.29 0.23-0.08 0.07-0.15 0.13-0.07 0.07-0.12 0.12-0.12 0.11-0.12 0.11l0.32 0.33-0.1-0.11q-0.01 0.01-0.18 0.19-0.09 0.09-0.18 0.2-0.1 0.11-0.19 0.23c-0.26 0.33-0.48 0.69-0.48 0.69l-0.26-0.16q-0.01 0-0.08 0.14-0.04 0.07-0.09 0.15-0.04 0.09-0.09 0.18-0.09 0.18-0.16 0.33-0.03 0.07-0.05 0.11-0.01 0.04-0.01 0.04l0.28 0.12q0 0.01-0.1 0.24-0.08 0.23-0.17 0.55c-0.11 0.39-0.17 0.81-0.17 0.81l0.14 0.02-0.45-0.07q0 0.01-0.02 0.17-0.01 0.07-0.02 0.17-0.01 0.09-0.02 0.19 0 0.1-0.01 0.2 0 0.09 0 0.17-0.01 0.16-0.01 0.17h0.31q0 0.01 0.01 0.26 0 0.11 0.01 0.26 0.01 0.15 0.03 0.31 0.04 0.32 0.09 0.56 0.06 0.24 0.06 0.25l-0.3 0.08q0 0.01 0.04 0.16 0.05 0.15 0.11 0.35 0.07 0.2 0.12 0.35 0.06 0.15 0.07 0.15l0.42-0.17-0.14 0.06q0 0 0.03 0.06 0.03 0.06 0.07 0.17 0.03 0.06 0.06 0.12 0.03 0.06 0.06 0.12 0.07 0.13 0.14 0.27 0.17 0.28 0.31 0.49 0.14 0.2 0.15 0.21l-0.25 0.18q0 0 0.03 0.04 0.02 0.03 0.07 0.09 0.1 0.13 0.23 0.29 0.07 0.08 0.13 0.15 0.07 0.07 0.12 0.12 0.11 0.11 0.11 0.12l0.22-0.22q0.01 0.01 0.19 0.18 0.09 0.08 0.2 0.18 0.11 0.1 0.23 0.19c0.33 0.26 0.69 0.47 0.69 0.47l0.07-0.12-0.23 0.39q0.01 0 0.14 0.08 0.07 0.04 0.15 0.09 0.09 0.04 0.18 0.09 0.18 0.09 0.33 0.15 0.07 0.04 0.11 0.05 0.04 0.02 0.04 0.02l0.12-0.28q0.01 0 0.24 0.09 0.23 0.09 0.55 0.18c0.39 0.11 0.81 0.17 0.81 0.17l0.02-0.14-0.07 0.45q0.01 0 0.17 0.02 0.07 0.01 0.17 0.02 0.09 0.01 0.19 0.01 0.1 0.01 0.2 0.02 0.09 0 0.17 0 0.16 0.01 0.17 0.01v-0.31q0.01 0 0.26-0.01 0.11 0 0.26-0.01 0.15-0.01 0.31-0.03 0.32-0.05 0.56-0.09 0.24-0.06 0.25-0.06l0.08 0.3q0 0 0.16-0.05 0.15-0.04 0.35-0.1 0.2-0.07 0.35-0.13 0.15-0.05 0.15-0.06l-0.17-0.42 0.06 0.14q0 0 0.06-0.03 0.06-0.03 0.17-0.08 0.05-0.02 0.12-0.05 0.06-0.03 0.12-0.06 0.13-0.07 0.27-0.15 0.28-0.16 0.49-0.3 0.2-0.14 0.21-0.15l0.18 0.25q0 0 0.04-0.03 0.03-0.02 0.09-0.07 0.13-0.1 0.29-0.23 0.07-0.07 0.15-0.13 0.06-0.07 0.12-0.12 0.11-0.11 0.12-0.12l-0.32-0.32 0.1 0.11q0.01-0.01 0.18-0.19 0.08-0.09 0.18-0.2 0.1-0.11 0.19-0.24c0.26-0.32 0.47-0.68 0.47-0.68l0.27 0.16q0.01-0.01 0.08-0.15 0.04-0.06 0.09-0.14 0.04-0.09 0.09-0.18 0.09-0.18 0.15-0.33 0.03-0.07 0.06-0.11 0.01-0.04 0.01-0.04l-0.28-0.12q0-0.01 0.09-0.24 0.09-0.23 0.18-0.55c0.11-0.4 0.17-0.81 0.17-0.81l-0.14-0.02 0.45 0.07q0-0.01 0.02-0.17 0.01-0.07 0.02-0.17 0.01-0.09 0.01-0.2 0.01-0.1 0.02-0.19 0-0.1 0-0.17 0.01-0.16 0.01-0.17c0 0-0.31 0-0.31 0z"/>
+			</g>
+			<path class="s42" d="m175.84 282.39c0 3.22-2.62 5.84-5.84 5.84-3.22 0-5.84-2.62-5.84-5.84 0-3.23 2.62-5.84 5.84-5.84 3.22 0 5.84 2.61 5.84 5.84z"/>
+			<g>
+				<path class="s43" d="m173.59 282.29c0 1.84-1.49 3.33-3.33 3.33-1.84 0-3.32-1.49-3.32-3.33 0-1.84 1.48-3.32 3.32-3.32 1.84 0 3.33 1.48 3.33 3.32z"/>
+				<path class="s37" d="m172.98 282.29c0 1.5-1.22 2.72-2.72 2.72-1.5 0-2.72-1.22-2.72-2.72 0-1.5 1.22-2.72 2.72-2.72 1.5 0 2.72 1.22 2.72 2.72z"/>
+				<path class="s44" d="m172.44 282.29c0 1.21-0.97 2.19-2.18 2.19-1.21 0-2.19-0.98-2.19-2.19 0-1.21 0.98-2.18 2.19-2.18 1.21 0 2.18 0.97 2.18 2.18z"/>
+				<path class="s45" d="m171.67 282.29c0 0.78-0.63 1.41-1.41 1.41-0.78 0-1.41-0.63-1.41-1.41 0-0.78 0.63-1.41 1.41-1.41 0.78 0 1.41 0.63 1.41 1.41z"/>
+				<path class="s28" d="m171.28 282.29c0 0.56-0.46 1.02-1.02 1.02-0.56 0-1.02-0.46-1.02-1.02 0-0.56 0.46-1.02 1.02-1.02 0.56 0 1.02 0.46 1.02 1.02z"/>
+			</g>
+		</g>
+	</g>
+</svg>

@@ -1186,7 +1186,7 @@
       color 0.2s,
       border-color 0.2s,
       box-shadow 0.2s;
-    border-radius: 6px;
+    border-radius: 12px;
     outline-color: transparent;
   }
   .p-dropdown:not(.p-disabled):hover {
@@ -1243,7 +1243,7 @@
     background: #ffffff;
     color: #4b5563;
     border: 0 none;
-    border-radius: 6px;
+    border-radius: 12px;
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
   }
   .p-dropdown-panel .p-dropdown-header {
@@ -1252,8 +1252,8 @@
     color: #374151;
     background: #f9fafb;
     margin: 0;
-    border-top-right-radius: 6px;
-    border-top-left-radius: 6px;
+    border-top-right-radius: 12px;
+    border-top-left-radius: 12px;
   }
   .p-dropdown-panel .p-dropdown-header .p-dropdown-filter {
     padding-right: 1.75rem;
@@ -1462,10 +1462,10 @@
   .p-inputtext {
     font-family: var(--font-family);
     font-feature-settings: var(--font-feature-settings, normal);
-    font-size: 1rem;
+    font-size: 0.95rem;
     color: #4b5563;
     background: #ffffff;
-    padding: 0.75rem 0.75rem;
+    padding: 0.6rem 0.75rem;
     border: 1px solid #d1d5db;
     transition:
       background-color 0.2s,
@@ -1473,7 +1473,7 @@
       border-color 0.2s,
       box-shadow 0.2s;
     appearance: none;
-    border-radius: 6px;
+    border-radius: 12px;
     outline-color: transparent;
   }
   .p-inputtext:enabled:hover {
@@ -1819,7 +1819,7 @@
       color 0.2s,
       border-color 0.2s,
       box-shadow 0.2s;
-    border-radius: 6px;
+    border-radius: 12px;
     outline-color: transparent;
   }
   .p-multiselect:not(.p-disabled):hover {
@@ -1880,7 +1880,7 @@
     background: #ffffff;
     color: #4b5563;
     border: 0 none;
-    border-radius: 6px;
+    border-radius: 12px;
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
   }
   .p-multiselect-panel .p-multiselect-header {
@@ -1889,8 +1889,8 @@
     color: #374151;
     background: #f9fafb;
     margin: 0;
-    border-top-right-radius: 6px;
-    border-top-left-radius: 6px;
+    border-top-right-radius: 12px;
+    border-top-left-radius: 12px;
   }
   .p-multiselect-panel
     .p-multiselect-header

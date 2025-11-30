@@ -14,8 +14,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Bak Timesheet",
-  description: "Bak Timesheet - HR System",
+  title: "BAK Timesheet - Human Resources System",
+  description:
+    "Welcome to BAK United. Since 2008, we have been a trusted name in construction across Saudi Arabia. We are dedicated to delivering excellence in every project, from residential developments to industrial complexes, driven by integrity and quality craftsmanship.",
 };
 
 export default function RootLayout({

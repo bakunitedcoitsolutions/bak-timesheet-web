@@ -5,7 +5,7 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #323239;
 }
 
 @theme inline {
@@ -14,14 +14,15 @@
   --color-primary-text: var(--primary-color-text);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-secondary-white: #f8fafd;
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #ffffff;
+    --foreground: #323239;
   }
 }
 
@@ -33,29 +34,4 @@ body {
 
 #password > div {
   width: 100% !important;
-}
-
-/* Login Page Container */
-.login-page-container {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  position: relative;
-}
-
-/* Login Page Overlay */
-.login-background-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 1;
-  pointer-events: none;
 }
