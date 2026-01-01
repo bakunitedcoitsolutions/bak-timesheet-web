@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { Controller, useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
+import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Button } from "primereact/button";
@@ -35,35 +35,59 @@ const AuthPage = () => {
     }
   };
 
-  return (
-    <div className="bg-white w-full h-screen flex flex-row overflow-hidden">
-      {/* Left Panel - Form */}
-      <div className="w-full lg:w-3/5 p-8 lg:p-12 flex flex-col justify-center items-center relative overflow-y-auto">
-        <div className="w-full max-w-md">
-          <div className="text-center mb-10">
-            <Image
-              priority
-              width={150}
-              height={60}
-              alt="BAK Logo"
-              className="mx-auto mb-6 object-contain"
-              src="/assets/images/bak_transparent_logo.png"
-            />
-            <h1 className="text-3xl font-semibold hidden lg:block text-gray-800">
-              SIGN IN
-            </h1>
-            <h1 className="text-3xl font-semibold block lg:hidden text-gray-800">
-              BAK TIMESHEET
-            </h1>
-          </div>
+  const renderBottomPanel = () => (
+    <div
+      style={{
+        background:
+          "linear-gradient(121.88deg, #AF1E2E 23.85%, #490D13 122.09%)",
+      }}
+      className="w-full h-[180px] bg-primary flex-row relative overflow-hidden rounded-t-[16px] flex"
+    >
+      <div className="text-left flex flex-col justify-center text-white px-10">
+        <p className="text-lg">BAK HR Module</p>
+        <p className="text-xs font-light mt-2">
+          Welcome to BAK United. Since 2008, we have been a trusted name in
+          construction across Saudi Arabia. We are dedicated to delivering
+          excellence in every project, from residential developments to
+          industrial complexes, driven by integrity and quality craftsmanship.
+        </p>
+      </div>
+      {/* Center Placeholder - Geometric Pattern */}
+      <div className="absolute inset-0 flex items-center justify-center z-0">
+        <div className="relative w-[90%] h-[90%]">
+          <div
+            className="absolute -right-10 -top-[15px] w-[263px] h-[263px] border-60 border-solid border-[#FAE7E908]"
+            style={{
+              transform: "rotate(45deg)",
+            }}
+          />
+        </div>
+      </div>
+    </div>
+  );
 
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-            <div className="text-sm font-medium text-gray-500 text-center mb-6">
-              By entering your email address and password, you get access to the
-              system.
-            </div>
+  const renderLeftPanel = () => (
+    <div
+      style={{
+        background: "linear-gradient(180deg, #FFFFFF 0%, #F4F7FB 110.36%)",
+      }}
+      className="w-full lg:w-[35%] min-w-full lg:min-w-[500px] h-full rounded-tr-[36px] rounded-br-[36px] flex flex-col justify-center z-30"
+    >
+      <div className="px-5 lg:px-10 flex items-center flex-1 py-5 w-full lg:w-[90%] xl:w-[80%] self-center max-w-[450px]">
+        <div className="text-center w-full lg:text-left">
+          <Image
+            priority
+            width={95}
+            height={60}
+            alt="BAK Logo"
+            className="mb-6 object-contain mx-auto lg:mx-0"
+            src="/assets/images/bak_transparent_logo.png"
+          />
+          <p className="text-[26px] font-semibold text-primary">HR MODULE</p>
+          <p className="text-2xl font-semibold mt-1">Sign In</p>
 
-            <div className="space-y-2">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 mt-6">
+            <div className="space-y-1 text-left">
               <label
                 htmlFor="email"
                 className="block text-sm text-gray-600 ml-0.5"
@@ -73,10 +97,10 @@ const AuthPage = () => {
               <InputText
                 id="email"
                 {...register("email")}
-                className={`w-full p-3 border border-gray-300 rounded-md focus:ring-1 transition-colors ${
+                className={`w-full p-3 border border-gray-300 rounded-xl focus:ring-1 transition-colors ${
                   errors.email ? "p-invalid" : ""
                 }`}
-                placeholder="Enter your email"
+                placeholder="username@domain.com"
               />
               {errors.email && (
                 <small className="text-red-500 text-xs block mt-2 ml-1">
@@ -85,7 +109,7 @@ const AuthPage = () => {
               )}
             </div>
 
-            <div className="space-y-2">
+            <div className="space-y-1 text-left">
               <label
                 htmlFor="password"
                 className="block text-sm text-gray-600 ml-0.5"
@@ -102,10 +126,10 @@ const AuthPage = () => {
                     toggleMask
                     feedback={false}
                     className="w-full"
-                    inputClassName={`w-full p-3 border border-gray-300 rounded-md focus:ring-1 transition-colors ${
+                    inputClassName={`w-full p-3 border border-gray-300 rounded-xl focus:ring-1 transition-colors ${
                       errors.password ? "p-invalid" : ""
                     }`}
-                    placeholder="Enter your password"
+                    placeholder="xxxxxxxx"
                   />
                 )}
               />
@@ -118,61 +142,80 @@ const AuthPage = () => {
 
             <Button
               type="submit"
-              loading={isSubmitting}
-              label={isSubmitting ? "Signing in..." : "Sign in"}
-              style={{ borderRadius: "100px" }}
               className="w-full"
+              loading={isSubmitting}
+              style={{ borderRadius: "12px" }}
+              label={isSubmitting ? "Processing..." : "Sign In"}
             />
           </form>
         </div>
       </div>
+      <div className="block lg:hidden">{renderBottomPanel()}</div>
+    </div>
+  );
 
-      {/* Right Panel - Info */}
-      <div className="hidden lg:flex lg:w-2/5 bg-secondary-white p-8 lg:p-12 flex-col justify-center items-center overflow-y-auto">
-        <div className="w-full max-w-md text-left">
-          <div className="relative w-full">
-            <div className="w-auto h-auto rounded-lg">
-              <Image
-                priority
-                width={400}
-                height={300}
-                alt="Login Illustration"
-                src="/assets/images/login-illustration.svg"
+  return (
+    <div className="w-full h-screen">
+      <div
+        style={{
+          background:
+            "linear-gradient(121.88deg, #AF1E2E 23.85%, #490D13 122.09%)",
+        }}
+        className="w-full h-full flex-row relative overflow-hidden hidden lg:flex"
+      >
+        <div className="absolute z-20 bottom-7 right-7">
+          <img
+            src={"/assets/images/bak-logo-white-text.png"}
+            className="h-[12vh] w-[12vh] object-contain"
+          />
+        </div>
+
+        {renderLeftPanel()}
+        <div className="w-[65%] h-full flex flex-col items-center justify-center">
+          <div className="max-w-[600px] text-left text-white px-10">
+            <p className="text-4xl font-semibold">
+              Welcome to
+              <br />
+              BAK HR Module
+            </p>
+            <p className="text-sm mt-2">
+              Welcome to BAK United. Since 2008, we have been a trusted name in
+              construction across Saudi Arabia. We are dedicated to delivering
+              excellence in every project, from residential developments to
+              industrial complexes, driven by integrity and quality
+              craftsmanship.
+            </p>
+          </div>
+        </div>
+        {/* Center Placeholder - Geometric Pattern */}
+        <div className="absolute inset-0 flex items-center justify-center z-0">
+          <div className="relative w-[80vw] h-[80vw]">
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div
+                className="absolute border-[#FAE7E90F]"
+                style={{
+                  width: "110vh",
+                  height: "110vh",
+                  transform: "rotate(45deg)",
+                  borderWidth: "120px",
+                  borderStyle: "solid",
+                }}
+              />
+              <div
+                className="absolute border-[#FAE7E908]"
+                style={{
+                  width: "60vh",
+                  height: "60vh",
+                  transform: "rotate(45deg)",
+                  borderWidth: "120px",
+                  borderStyle: "solid",
+                }}
               />
             </div>
           </div>
-
-          <h2 className="text-2xl font-semibold text-gray-800 mt-8 mb-4">
-            BAK Timesheet - Human Resources System
-          </h2>
-
-          <p className="text-gray-600 text-sm mb-4 leading-relaxed">
-            Welcome to BAK United. Since 2008, we have been a trusted name in
-            construction across Saudi Arabia. We are dedicated to delivering
-            excellence in every project, from residential developments to
-            industrial complexes, driven by integrity and quality craftsmanship.
-          </p>
-
-          <ul className="text-left text-sm text-gray-600 space-y-3 inline-block">
-            <li className="flex items-center gap-2">
-              <span className="w-1.5 h-1.5 bg-gray-400 rounded-full"></span>
-              Comprehensive Construction Services
-            </li>
-            <li className="flex items-center gap-2">
-              <span className="w-1.5 h-1.5 bg-gray-400 rounded-full"></span>
-              Residential & Commercial Projects
-            </li>
-            <li className="flex items-center gap-2">
-              <span className="w-1.5 h-1.5 bg-gray-400 rounded-full"></span>
-              Quality Craftsmanship
-            </li>
-            <li className="flex items-center gap-2">
-              <span className="w-1.5 h-1.5 bg-gray-400 rounded-full"></span>
-              Client-Centric Approach
-            </li>
-          </ul>
         </div>
       </div>
+      <div className="flex lg:hidden w-full h-full">{renderLeftPanel()}</div>
     </div>
   );
 };
