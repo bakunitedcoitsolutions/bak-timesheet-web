@@ -86,7 +86,7 @@ const AuthPage = () => {
           <p className="text-[26px] font-semibold text-primary">HR MODULE</p>
           <p className="text-2xl font-semibold mt-1">Sign In</p>
 
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 mt-6">
+          <form className="space-y-6 mt-6">
             <div className="space-y-1 text-left">
               <label
                 htmlFor="email"
@@ -94,13 +94,19 @@ const AuthPage = () => {
               >
                 Email
               </label>
-              <InputText
-                id="email"
-                {...register("email")}
-                className={`w-full p-3 border border-gray-300 rounded-xl focus:ring-1 transition-colors ${
-                  errors.email ? "p-invalid" : ""
-                }`}
-                placeholder="username@domain.com"
+              <Controller
+                name="email"
+                control={control}
+                render={({ field }) => (
+                  <InputText
+                    id="email"
+                    {...field}
+                    className={`w-full p-3 border border-gray-300 rounded-xl focus:ring-1 transition-colors ${
+                      errors.email ? "p-invalid" : ""
+                    }`}
+                    placeholder="username@domain.com"
+                  />
+                )}
               />
               {errors.email && (
                 <small className="text-red-500 text-xs block mt-2 ml-1">
@@ -141,11 +147,12 @@ const AuthPage = () => {
             </div>
 
             <Button
-              type="submit"
+              type="button"
               className="w-full"
               loading={isSubmitting}
               style={{ borderRadius: "12px" }}
               label={isSubmitting ? "Processing..." : "Sign In"}
+              onClick={handleSubmit(onSubmit)}
             />
           </form>
         </div>
