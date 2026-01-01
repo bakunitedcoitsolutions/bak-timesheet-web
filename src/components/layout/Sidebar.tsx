@@ -1,14 +1,15 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { classNames } from "primereact/utils";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 interface MenuItem {
-  label: string;
   icon: string;
   href?: string;
+  label: string;
+  divider?: boolean;
   items?: MenuItem[];
 }
 
@@ -16,91 +17,129 @@ interface SidebarProps {
   collapsed: boolean;
   setCollapsed: (collapsed: boolean) => void;
 }
-
 const menuItems: MenuItem[] = [
-  { label: "Dashboard", icon: "pi pi-objects-column", href: "/" },
+  { label: "Dashboard", icon: "fa-regular fa-layer-group text-xl!", href: "/" },
+  {
+    label: "Employees",
+    icon: "fa-light fa-address-card text-xl!",
+    href: "/employees",
+  },
+  // { label: "Employees", icon: "pi pi-users text-xl!", href: "/employees" },
   {
     label: "Timesheet",
-    icon: "pi pi-calendar",
+    icon: "fa-light fa-calendar text-xl!",
     href: "/timesheet",
   },
-  { label: "Employees", icon: "pi pi-id-card", href: "/employees" },
-  { label: "Projects", icon: "pi pi-briefcase", href: "/projects" },
-  { label: "Loans", icon: "pi pi-money-bill", href: "/loans" },
+  {
+    label: "Projects",
+    icon: "fa-light fa-building text-xl!",
+    href: "/projects",
+  },
+  { label: "Loans", icon: "fa-light fa-money-bills text-xl!", href: "/loans" },
+  {
+    divider: true,
+    label: "",
+    icon: "",
+  },
   {
     label: "Traffic Challans",
-    icon: "pi pi-exclamation-triangle",
+    icon: "fa-light fa-ticket text-xl!",
     href: "/challans",
   },
-  { label: "Exit Re-entry", icon: "pi pi-directions", href: "/exit-reentry" },
-  { label: "Payroll", icon: "pi pi-wallet", href: "/payroll" },
-  { label: "User Management", icon: "pi pi-users", href: "/users" },
+  {
+    label: "Exit Re-entry",
+    icon: "fa-light fa-diamond-turn-right text-xl!",
+    href: "/exit-reentry",
+  },
+  {
+    label: "Payroll",
+    icon: "fa-sharp fa-light fa-book-open-reader text-xl!",
+    href: "/payroll",
+  },
+  {
+    label: "Ledger",
+    icon: "fa-light fa-book-open-lines text-xl!",
+    href: "/ledger",
+  },
+  { label: "Users Mgmt.", icon: "pi pi-users text-2xl!", href: "/users" },
   {
     label: "Reports",
-    icon: "pi pi-chart-bar",
+    icon: "fa-sharp fa-light fa-file-chart-column text-xl!",
     items: [
-      { label: "Employee", icon: "pi pi-user", href: "/reports/employee" },
       {
-        label: "Salary Slip",
-        icon: "pi pi-file",
-        href: "/reports/salary-slip",
+        label: "Employees",
+        icon: "fa-light fa-user-group text-base!",
+        href: "/reports/employees",
+      },
+      {
+        label: "Salary Slips",
+        icon: "fa-light fa-receipt text-lg!",
+        href: "/reports/salary-slips",
       },
       {
         label: "Payroll Report",
-        icon: "pi pi-table",
+        icon: "fa-light fa-file-contract text-lg!",
         href: "/reports/payroll",
       },
       {
         label: "Site Wise Report",
-        icon: "pi pi-map",
+        icon: "fa-light fa-file-invoice text-lg!",
         href: "/reports/site-wise",
       },
       {
         label: "Master Payroll Report",
-        icon: "pi pi-list",
+        icon: "fa-light fa-file-chart-column text-lg!",
         href: "/reports/master-payroll",
       },
       {
-        label: "Employee Leave Statement",
-        icon: "pi pi-file-o",
-        href: "/reports/leave-statement",
+        label: "Emp Leave Statement",
+        icon: "fa-light fa-file-chart-pie text-lg!",
+        href: "/reports/employee-leave-statement",
       },
       {
         label: "Monthly Timesheet",
-        icon: "pi pi-calendar-plus",
+        icon: "fa-light fa-calendar-check text-lg!",
         href: "/reports/monthly-timesheet",
       },
       {
         label: "Daily Timesheet",
-        icon: "pi pi-clock",
+        icon: "fa-light fa-calendar-circle-plus text-lg!",
         href: "/reports/daily-timesheet",
       },
       {
         label: "Employee Cards",
-        icon: "pi pi-id-card",
+        icon: "fa-light fa-address-card text-lg!",
         href: "/reports/employee-cards",
       },
     ],
   },
   {
     label: "Setup",
-    icon: "pi pi-cog",
+    icon: "fa-light fa-gear text-xl!",
     items: [
-      { label: "Countries", icon: "pi pi-globe", href: "/setup/countries" },
-      { label: "Cities", icon: "pi pi-building", href: "/setup/cities" },
+      {
+        label: "Countries",
+        icon: "fa-light fa-globe text-lg!",
+        href: "/setup/countries",
+      },
+      {
+        label: "Cities",
+        icon: "fa-light fa-city text-lg!",
+        href: "/setup/cities",
+      },
       {
         label: "Designation",
-        icon: "pi pi-briefcase",
+        icon: "fa-light fa-briefcase text-lg!",
         href: "/setup/designation",
       },
       {
         label: "Payroll Sections",
-        icon: "pi pi-wallet",
+        icon: "fa-light fa-wallet text-lg!",
         href: "/setup/payroll-sections",
       },
       {
         label: "Employee Statuses",
-        icon: "pi pi-info-circle",
+        icon: "fa-light fa-user-check text-lg!",
         href: "/setup/employee-statuses",
       },
     ],
@@ -131,6 +170,14 @@ export default function Sidebar({ collapsed, setCollapsed }: SidebarProps) {
   const isExpanded = (label: string) => expandedMenus.includes(label);
 
   const renderMenuItem = (item: MenuItem) => {
+    if (item.divider) {
+      return (
+        <li
+          key={item.label}
+          className="mt-2 mb-4 px-4 border-b w-[90%] mx-auto border-[#E0E6EB]"
+        ></li>
+      );
+    }
     const isActive =
       (item.href &&
         (item.href === "/"
@@ -148,13 +195,14 @@ export default function Sidebar({ collapsed, setCollapsed }: SidebarProps) {
     const expanded = isExpanded(item.label);
 
     return (
-      <li key={item.label} className="mb-1.5" title={item.label}>
+      <li key={item.label} title={item.label}>
         <div
           className={classNames(
-            "flex items-center py-2.5 px-4 rounded-xl mx-auto cursor-pointer transition-colors duration-200 justify-between text-[15px]",
+            "flex items-center h-[44px] px-4 rounded-xl mx-auto cursor-pointer transition-colors duration-200 justify-between text-[15px] group",
             {
-              "bg-primary/10 text-primary shadow-lg": isActive,
-              "bg-transparent text-gray-800 hover:text-primary": !isActive,
+              "bg-primary text-white shadow-[0px_8px_20px_-8px_#4D5BEC3B]!":
+                isActive,
+              "bg-transparent text-black": !isActive,
               "w-[90%]": !collapsed,
               "w-[65%]": collapsed,
             }
@@ -175,19 +223,44 @@ export default function Sidebar({ collapsed, setCollapsed }: SidebarProps) {
           {item.href && !hasSubmenu ? (
             <Link
               href={item.href}
-              className="flex text-center items-center w-full"
+              className={classNames(
+                "flex text-center items-center w-full gap-x-3"
+              )}
             >
-              <i className={classNames(item.icon, "text-xl!")}></i>
+              <i
+                className={classNames(item.icon, {
+                  "text-white!": isActive,
+                  "text-[#98A4AE] group-hover:text-primary!": !isActive,
+                })}
+              />
               {!collapsed && (
-                <span className="ml-4 font-semibold">{item.label}</span>
+                <span
+                  className={classNames({
+                    "font-semibold": isActive,
+                    "font-normal group-hover:text-primary!": !isActive,
+                  })}
+                >
+                  {item.label}
+                </span>
               )}
             </Link>
           ) : (
-            <div className="flex items-center w-full">
-              <i className={classNames(item.icon, "text-xl!")}></i>
+            <div className="flex items-center w-full gap-x-3">
+              <i
+                className={classNames(item.icon, {
+                  "text-white!": isActive,
+                  "text-[#98A4AE] group-hover:text-primary!": !isActive,
+                })}
+              />
               {!collapsed && (
                 <>
-                  <span className="ml-4 font-semibold flex-1">
+                  <span
+                    className={classNames("font-normal flex-1", {
+                      "text-white! font-semibold": isActive,
+                      "text-black font-normal group-hover:text-primary!":
+                        !isActive,
+                    })}
+                  >
                     {item.label}
                   </span>
                   {hasSubmenu && (
@@ -197,6 +270,8 @@ export default function Sidebar({ collapsed, setCollapsed }: SidebarProps) {
                         {
                           "rotate-0": !expanded,
                           "rotate-180": expanded,
+                          "text-white!": isActive,
+                          "text-[#98A4AE] group-hover:text-primary!": !isActive,
                         }
                       )}
                     />
@@ -210,14 +285,14 @@ export default function Sidebar({ collapsed, setCollapsed }: SidebarProps) {
         {/* Submenu */}
         <div
           className={classNames(
-            "overflow-hidden mt-2 transition-all duration-300 ease-in-out",
+            "overflow-hidden transition-all duration-300 ease-in-out",
             {
               "max-h-0": !expanded || collapsed,
               "max-h-[1000px]": expanded && !collapsed && hasSubmenu,
             }
           )}
         >
-          <ul className="list-none p-0 m-0 bg-secondary-white">
+          <ul className="list-none p-0 m-0">
             {item.items?.map((subItem) => {
               const isSubActive =
                 subItem.href === "/"
@@ -228,15 +303,27 @@ export default function Sidebar({ collapsed, setCollapsed }: SidebarProps) {
                   <Link
                     href={subItem.href || "#"}
                     className={classNames(
-                      "flex items-center pl-15 pr-6 py-3 cursor-pointer transition-colors duration-200",
+                      "flex items-center pl-15 pr-1 h-[40px] cursor-pointer transition-colors duration-200 group gap-x-2",
                       {
                         "text-primary font-semibold": isSubActive,
-                        "text-gray-500 hover:text-gray-900": !isSubActive,
+                        "text-black": !isSubActive,
                       }
                     )}
                   >
-                    <i className={classNames(subItem.icon, "text-lg mr-3")}></i>
-                    <span className="text-sm">{subItem.label}</span>
+                    <i
+                      className={classNames(subItem.icon, {
+                        "text-primary": isSubActive,
+                        "text-[#98A4AE] group-hover:text-primary!":
+                          !isSubActive,
+                      })}
+                    />
+                    <span
+                      className={classNames("text-xs font-normal", {
+                        "group-hover:text-primary!": !isSubActive,
+                      })}
+                    >
+                      {subItem.label}
+                    </span>
                   </Link>
                 </li>
               );
@@ -266,13 +353,16 @@ export default function Sidebar({ collapsed, setCollapsed }: SidebarProps) {
         <img
           src="/assets/images/bak_transparent_logo.png"
           alt="BAK Logo"
-          className={classNames("transition-all h-16 duration-300", {})}
+          className={classNames("transition-all h-14 duration-300", {})}
         />
+        {!collapsed && (
+          <p className="text-xl ml-2 text-primary font-semibold">HR Module</p>
+        )}
       </div>
 
       {/* Menu Items */}
-      <div className="flex-1 overflow-y-auto py-4 custom-scrollbar">
-        <ul className="list-none p-0 m-0">
+      <div className="flex-1 w-full overflow-y-auto py-4 custom-scrollbar">
+        <ul className="list-none p-0 m-0 space-y-0.75">
           {menuItems.map((item) => renderMenuItem(item))}
         </ul>
       </div>

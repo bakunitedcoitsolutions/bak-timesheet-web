@@ -2,8 +2,8 @@
 
 import { useRef } from "react";
 import { Menu } from "primereact/menu";
-import { useRouter, usePathname } from "next/navigation";
 import { classNames } from "primereact/utils";
+import { useRouter, usePathname } from "next/navigation";
 import { MenuItem, MenuItemOptions } from "primereact/menuitem";
 
 interface HeaderProps {
@@ -33,11 +33,10 @@ export default function Header({ collapsed, setCollapsed }: HeaderProps) {
   };
 
   const pageTitle = getPageTitle(pathname);
-
   const menuItem = [
     {
-      label: "Sign Out",
-      icon: "pi pi-sign-out",
+      label: "Profile",
+      icon: "fa-regular fa-arrow-right-from-bracket text-base!",
       command: () => {
         router.replace("/login");
       },
@@ -47,13 +46,39 @@ export default function Header({ collapsed, setCollapsed }: HeaderProps) {
             onClick={(e) => options.onClick(e)}
             className={classNames(
               options.className,
-              "w-full flex p-2 pl-4 text-primary hover:bg-primary/10 cursor-pointer"
+              "w-full h-14 flex p-2 pl-4 cursor-pointer rounded-t-xl items-center gap-x-2 bg-primary-light"
+            )}
+          >
+            <img
+              src="/assets/images/profile.png"
+              alt="User"
+              className="w-9 h-9 rounded-full border border-primary/60"
+            />
+            <div>
+              <p className="font-medium text-sm">Shariq Ahmed</p>
+              <p className="font-medium text-xs text-foreground/70">Admin</p>
+            </div>
+          </div>
+        );
+      },
+    },
+    {
+      label: "Logout",
+      icon: "fa-regular fa-arrow-right-from-bracket text-base!",
+      command: () => {
+        router.replace("/login");
+      },
+      template: (item: MenuItem, options: MenuItemOptions) => {
+        return (
+          <div
+            onClick={(e) => options.onClick(e)}
+            className={classNames(
+              options.className,
+              "w-full flex h-12 p-2 pl-4 cursor-pointer rounded-b-xl"
             )}
           >
             <span className={classNames(item.icon, "mr-2")}></span>
-            <span className="font-medium text-sm lg:text-base">
-              {item.label}
-            </span>
+            <p className="font-medium text-sm">{item.label}</p>
           </div>
         );
       },
@@ -65,12 +90,18 @@ export default function Header({ collapsed, setCollapsed }: HeaderProps) {
       <div className="flex items-center gap-4">
         <button
           onClick={() => setCollapsed(!collapsed)}
-          className="w-10 h-10 flex items-center justify-center cursor-pointer rounded-full bg-primary-50 text-primary focus:outline-none transition-colors shadow-sm hover:bg-primary-100"
+          className={classNames(
+            "w-10 h-10 flex items-center justify-center cursor-pointer rounded-full  focus:outline-none transition-all duration-300",
+            {
+              "bg-primary shadow-sm text-white": !collapsed,
+              "bg-transparent text-primary hover:bg-primary/10": collapsed,
+            }
+          )}
         >
           <i
             className={classNames("pi duration-200", {
               "rotate-0 pi-chevron-left": !collapsed,
-              "rotate-180 pi-bars": collapsed,
+              "rotate-180 pi-bars text-xl!": collapsed,
             })}
           />
         </button>
@@ -82,7 +113,7 @@ export default function Header({ collapsed, setCollapsed }: HeaderProps) {
 
       <div className="flex items-center gap-4">
         <div
-          className={classNames("flex items-center cursor-pointer", {
+          className={classNames("flex items-center cursor-pointer gap-x-1", {
             "justify-center": collapsed,
           })}
           onClick={(event) => menuRight?.current?.toggle?.(event)}
@@ -92,15 +123,7 @@ export default function Header({ collapsed, setCollapsed }: HeaderProps) {
             alt="User"
             className="w-10 h-10 rounded-full"
           />
-          <div className="ml-3 max-w-[150px] hidden lg:block">
-            <p className="text-sm truncate font-semibold text-gray-800">
-              Shariq Ahmed
-            </p>
-            <p className="text-xs text-primary">Admin</p>
-          </div>
-          <div className="ml-3">
-            <i className={classNames("pi text-xs! pi-chevron-down")} />
-          </div>
+          <i className="fa-sharp fa-solid fa-caret-down text-foreground/70" />
         </div>
         <Menu
           popup
@@ -108,7 +131,7 @@ export default function Header({ collapsed, setCollapsed }: HeaderProps) {
           model={menuItem}
           id="popup_menu_right"
           popupAlignment="right"
-          className="mt-2 shadow-lg"
+          className="mt-2 shadow-lg rounded-xl! p-0!"
         />
       </div>
     </header>
