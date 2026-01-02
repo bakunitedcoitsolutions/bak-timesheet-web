@@ -43,6 +43,12 @@
   --color-secondary-white: #f4f7fb;
   --font-sans: var(--font-century-gothic);
   --color-text-gray: #98a4ae;
+
+  --color-theme-green: #36c76c;
+  --color-theme-light-green: #ebfaf0;
+
+  --color-theme-red: #da4470;
+  --color-theme-light-red: #ffe5ed;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -76,4 +82,109 @@ body {
 .custom-scrollbar {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+}
+
+/* Small dropdown styles */
+.dropdown-small .p-dropdown-label,
+.dropdown-small .p-dropdown-trigger {
+  font-size: 0.875rem;
+  padding: 0.5rem;
+}
+
+.dropdown-small.p-dropdown .p-dropdown-label {
+  font-size: 0.875rem;
+}
+
+/* Make font size small for p-dropdown-label.p-inputtext */
+body .p-dropdown.dropdown-small .p-dropdown-label.p-inputtext {
+  font-size: 0.875rem !important;
+}
+
+/* Reduce padding for input text in small dropdown */
+.dropdown-small .p-inputtext,
+.dropdown-small.p-dropdown .p-inputtext {
+  padding: 0.375rem 0.5rem !important;
+}
+
+/* Target the filter input in dropdown panel (element has both p-dropdown-filter and p-inputtext classes) */
+body .p-dropdown-panel.dropdown-small-panel .p-dropdown-filter.p-inputtext {
+  padding: 0.375rem 0.5rem !important;
+}
+
+/* Target the dropdown panel items when dropdown-small is used */
+body .p-dropdown-panel.dropdown-small-panel .p-dropdown-item,
+body
+  .p-dropdown-panel.dropdown-small-panel
+  .p-dropdown-items-wrapper
+  .p-dropdown-item {
+  font-size: 0.875rem;
+  padding: 0.5rem 0.75rem;
+}
+
+/* Target the dropdown empty message when dropdown-small is used */
+body .p-dropdown-panel.dropdown-small-panel .p-dropdown-empty-message {
+  font-size: 0.875rem;
+  text-align: center;
+  padding: 0.5rem 0.75rem;
+}
+
+/* Custom button styles */
+body .p-button {
+  height: 44px !important;
+  min-height: 44px !important;
+  max-height: 44px !important;
+  border-radius: 8px !important;
+  padding: 0.5rem 1rem !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-sizing: border-box !important;
+  gap: 0.5rem !important;
+}
+
+body .p-button .p-button-label {
+  line-height: 1 !important;
+  padding: 0 !important;
+}
+
+body .p-button .p-button-icon {
+  margin: 0 !important;
+  flex-shrink: 0 !important;
+}
+
+body .p-button .p-button-icon-left {
+  margin-right: 0 !important;
+  order: -1 !important;
+}
+
+body .p-button .p-button-icon-right {
+  margin-left: 0 !important;
+  order: 1 !important;
+}
+
+/* Custom button active state */
+.p-button.active-button {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.p-button.active-button:not(:disabled):hover {
+  opacity: 0.9;
+}
+
+/* Custom table header styles - only for tables with custom-header class */
+body .p-datatable.custom-header .p-datatable-thead > tr > th {
+  background-color: transparent !important;
+  font-weight: 600 !important;
+  font-size: 15px !important;
+  color: var(--color-foreground) !important;
+}
+
+/* Custom table row borders - only for tables with custom-header class */
+body .p-datatable.custom-header .p-datatable-tbody > tr > td {
+  border-bottom: 1px solid #f4f7fb !important;
+}
+
+body .p-datatable.custom-header .p-datatable-tbody > tr:last-child > td {
+  border-bottom: none !important;
 }
