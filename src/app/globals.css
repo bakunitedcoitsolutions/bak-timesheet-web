@@ -42,6 +42,7 @@
   --color-foreground: var(--foreground);
   --color-secondary-white: #f4f7fb;
   --font-sans: var(--font-century-gothic);
+  --color-text-gray: #98a4ae;
 }
 
 @media (prefers-color-scheme: dark) {

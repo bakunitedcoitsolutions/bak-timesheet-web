@@ -24,7 +24,6 @@ const menuItems: MenuItem[] = [
     icon: "fa-light fa-address-card text-xl!",
     href: "/employees",
   },
-  // { label: "Employees", icon: "pi pi-users text-xl!", href: "/employees" },
   {
     label: "Timesheet",
     icon: "fa-light fa-calendar text-xl!",
@@ -35,7 +34,7 @@ const menuItems: MenuItem[] = [
     icon: "fa-light fa-building text-xl!",
     href: "/projects",
   },
-  { label: "Loans", icon: "fa-light fa-money-bills text-xl!", href: "/loans" },
+  { label: "Loans", icon: "fa-light fa-newspaper text-xl!", href: "/loans" },
   {
     divider: true,
     label: "",

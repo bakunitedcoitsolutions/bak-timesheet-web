@@ -29,7 +29,7 @@ export default function AdminLayout({
   }, []);
 
   return (
-    <div className="min-h-screen bg-white flex">
+    <div className="min-h-[90vh] bg-white flex">
       <Sidebar collapsed={collapsed} setCollapsed={setCollapsed} />
 
       <div
@@ -42,7 +42,7 @@ export default function AdminLayout({
         )}
       >
         <Header collapsed={collapsed} setCollapsed={setCollapsed} />
-        <main className="px-6 pt-6 flex-1 overflow-x-hidden bg-secondary-white rounded-tl-xl">
+        <main className="px-6 py-6 flex-1 overflow-x-hidden bg-secondary-white rounded-tl-xl">
           {children}
         </main>
       </div>
