@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, ReactNode } from "react";
+import React, { useState, ReactNode, useRef } from "react";
 import {
   DataTable,
   DataTableProps,
@@ -11,6 +11,14 @@ import { InputIcon } from "primereact/inputicon";
 import { FilterMatchMode } from "primereact/api";
 import { Column, ColumnProps } from "primereact/column";
 import { smallTextFilterTemplate } from "./filter-templates";
+
+export interface CustomHeaderProps {
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  exportCSV: () => void;
+  exportExcel: () => void;
+  exportPdf: () => void;
+}
 
 export interface TableColumn<T = any> extends Omit<
   ColumnProps,
@@ -64,7 +72,12 @@ export interface CustomTableProps<
   customHeader?: (props: {
     value: string;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    exportCSV: (selectionOnly?: boolean) => void;
+    exportExcel: () => void;
+    exportPdf: () => void;
   }) => ReactNode;
+  exportable?: boolean;
+  exportColumns?: Array<{ title: string; dataKey: string }>;
 }
 
 export default function CustomTable<
@@ -88,10 +101,13 @@ export default function CustomTable<
   selection,
   tableClassName,
   customHeader,
+  exportable = false,
+  exportColumns,
   ...rest
 }: CustomTableProps<T>) {
   const [filters, setFilters] = useState<DataTableFilterMeta>({});
   const [globalFilterValue, setGlobalFilterValue] = useState<string>("");
+  const dt = useRef<DataTable<any>>(null);
 
   // Initialize filters based on columns
   React.useEffect(() => {
@@ -135,11 +151,115 @@ export default function CustomTable<
     setGlobalFilterValue(value);
   };
 
+  // Export functions
+  const exportCSV = (selectionOnly?: boolean) => {
+    if (dt.current) {
+      dt.current.exportCSV({ selectionOnly: selectionOnly || false });
+    }
+  };
+
+  const exportPdf = async () => {
+    try {
+      // IMPORTANT: Import jspdf-autotable FIRST to extend jsPDF prototype
+      await import("jspdf-autotable");
+      
+      // Then import jsPDF
+      const jsPDFModule = await import("jspdf");
+      const jsPDF = jsPDFModule.default;
+      const doc = new jsPDF("p", "mm");
+      const cols =
+        exportColumns ||
+        columns.map((col) => ({
+          title: col.header,
+          dataKey: col.field as string,
+        }));
+
+      // Map data to match column structure
+      const bodyData = data.map((row: any) => {
+        return cols.map((col) => {
+          const value = row[col.dataKey];
+          // Handle nested values, objects, and format them
+          if (value === null || value === undefined) {
+            return "";
+          }
+          if (typeof value === "object") {
+            return JSON.stringify(value);
+          }
+          return String(value);
+        });
+      });
+
+      // Use autoTable with proper format
+      if (typeof (doc as any).autoTable === "function") {
+        (doc as any).autoTable({
+          head: [cols.map((col) => col.title)],
+          body: bodyData,
+        });
+        doc.save("export.pdf");
+      } else {
+        console.error("autoTable is not available. Make sure jspdf-autotable is installed.");
+      }
+    } catch (error) {
+      console.error("Error exporting PDF:", error);
+    }
+  };
+
+  const exportExcel = () => {
+    import("xlsx").then((xlsx) => {
+      // Get column mappings
+      const cols =
+        exportColumns ||
+        columns.map((col) => ({
+          title: col.header,
+          dataKey: col.field as string,
+        }));
+
+      // Map data to use column headers
+      const mappedData = data.map((row: any) => {
+        const mappedRow: any = {};
+        cols.forEach((col) => {
+          mappedRow[col.title] = row[col.dataKey];
+        });
+        return mappedRow;
+      });
+
+      const worksheet = xlsx.utils.json_to_sheet(mappedData);
+      const workbook = { Sheets: { data: worksheet }, SheetNames: ["data"] };
+      const excelBuffer = xlsx.write(workbook, {
+        bookType: "xlsx",
+        type: "array",
+      });
+
+      saveAsExcelFile(excelBuffer, "export");
+    });
+  };
+
+  const saveAsExcelFile = (buffer: any, fileName: string) => {
+    import("file-saver").then((module) => {
+      if (module && module.default) {
+        const EXCEL_TYPE =
+          "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8";
+        const EXCEL_EXTENSION = ".xlsx";
+        const data = new Blob([buffer], {
+          type: EXCEL_TYPE,
+        });
+
+        module.default.saveAs(
+          data,
+          fileName + "_export_" + new Date().getTime() + EXCEL_EXTENSION
+        );
+      }
+    });
+  };
+
   const renderHeader = () => {
     if (customHeader) {
       return customHeader({
         value: globalFilterValue,
         onChange: onGlobalFilterChange,
+        exportCSV,
+        exportExcel,
+        exportPdf,
       });
     }
 
@@ -183,6 +303,7 @@ export default function CustomTable<
   return (
     <div className="card">
       <DataTable
+        ref={dt}
         value={data as any}
         paginator={pagination}
         rows={rowsPerPage}

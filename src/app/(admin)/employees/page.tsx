@@ -10,6 +10,8 @@ import {
   TableActions,
   TableColumn,
 } from "@/components";
+import ExportOptions from "@/components/common/export-option";
+import { CustomHeaderProps } from "@/components/forms/table";
 
 const commonColumnProps = {
   sortable: true,
@@ -271,10 +273,9 @@ const EmployeesPage = () => {
   const renderHeader = ({
     value,
     onChange,
-  }: {
-    value: string;
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  }) => {
+    exportCSV,
+    exportExcel,
+  }: CustomHeaderProps) => {
     return (
       <div className="flex flex-col md:flex-row justify-between items-center gap-3 flex-1 w-full">
         <div className="w-full md:w-auto">
@@ -288,16 +289,21 @@ const EmployeesPage = () => {
             setSelectedItem={setSelectedDesignation}
           />
         </div>
-        <div className="w-full md:w-auto">
-          <Input
-            small
-            className="w-full"
-            value={value}
-            icon="pi pi-search"
-            iconPosition="left"
-            onChange={onChange}
-            placeholder="Search"
-          />
+        <div className="flex items-center gap-3 w-full md:w-auto">
+          <div>
+            <ExportOptions exportCSV={exportCSV} exportExcel={exportExcel} />
+          </div>
+          <div className="w-full md:w-auto">
+            <Input
+              small
+              className="w-full"
+              value={value}
+              icon="pi pi-search"
+              iconPosition="left"
+              onChange={onChange}
+              placeholder="Search"
+            />
+          </div>
         </div>
       </div>
     );
