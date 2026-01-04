@@ -356,9 +356,12 @@ export default function Sidebar({ collapsed, setCollapsed }: SidebarProps) {
         >
           <div className="flex items-center justify-center">
             <img
-              src="/assets/images/bak_transparent_logo.png"
               alt="BAK Logo"
-              className={classNames("transition-all h-14 duration-300", {})}
+              src="/assets/images/bak_transparent_logo.png"
+              className={classNames(
+                "transition-all h-14 duration-300 object-contain",
+                {}
+              )}
             />
             {!collapsed && (
               <p className="text-xl ml-2 text-primary font-semibold">

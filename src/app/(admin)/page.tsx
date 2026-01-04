@@ -94,6 +94,7 @@ const HomePage = () => {
       ),
     },
   ];
+
   return (
     <div className="flex flex-col gap-6 overflow-hidden!">
       {/* Stats Grid */}
@@ -193,7 +194,7 @@ const HomePage = () => {
                 icon="pi pi-th-large"
                 onClick={() => setStatusFilter("all")}
                 variant={statusFilter === "all" ? "solid" : "outlined"}
-                className="focus:shadow-none! w-full lg:w-32 lg:flex-1 lg:flex"
+                className="focus:shadow-none! w-full lg:w-32 lg:flex-1 lg:flex gap-2 justify-center items-center h-[44px]! rounded-lg!"
               >
                 All
               </Button>
@@ -203,7 +204,7 @@ const HomePage = () => {
                 iconPosition="left"
                 onClick={() => setStatusFilter("active")}
                 className={classNames(
-                  "border-theme-green! focus:shadow-none! w-full lg:w-32 lg:flex-1 lg:flex",
+                  "border-theme-green! focus:shadow-none! w-full lg:w-32 lg:flex-1 lg:flex gap-2 justify-center items-center h-[44px]! rounded-lg!",
                   {
                     "bg-theme-green! hover:text-white!":
                       statusFilter === "active",
@@ -220,7 +221,7 @@ const HomePage = () => {
                 iconPosition="left"
                 onClick={() => setStatusFilter("inactive")}
                 className={classNames(
-                  "border-theme-red! focus:shadow-none! w-full lg:w-32 lg:flex-1 lg:flex",
+                  "border-theme-red! focus:shadow-none! w-full lg:w-32 lg:flex-1 lg:flex gap-2 justify-center items-center h-[44px]! rounded-lg!",
                   {
                     "bg-theme-red! hover:text-white!":
                       statusFilter === "inactive",

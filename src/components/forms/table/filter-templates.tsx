@@ -2,10 +2,14 @@
 import React from "react";
 import { Dropdown, DropdownChangeEvent } from "primereact/dropdown";
 import { MultiSelect, MultiSelectChangeEvent } from "primereact/multiselect";
-import { TriStateCheckbox, TriStateCheckboxChangeEvent } from "primereact/tristatecheckbox";
+import {
+  TriStateCheckbox,
+  TriStateCheckboxChangeEvent,
+} from "primereact/tristatecheckbox";
 import { InputText } from "primereact/inputtext";
 import { ColumnFilterElementTemplateOptions } from "primereact/column";
 import { Tag } from "primereact/tag";
+import Input from "../input";
 
 interface FilterOption {
   label: string;
@@ -25,7 +29,9 @@ export const dropdownFilterTemplate = (
     <Dropdown
       value={options.value}
       options={filterOptions}
-      onChange={(e: DropdownChangeEvent) => options.filterApplyCallback(e.value)}
+      onChange={(e: DropdownChangeEvent) =>
+        options.filterApplyCallback(e.value)
+      }
       itemTemplate={itemTemplate}
       placeholder="Select One"
       className="p-column-filter"
@@ -49,7 +55,9 @@ export const multiSelectFilterTemplate = (
       value={options.value}
       options={filterOptions}
       itemTemplate={itemTemplate}
-      onChange={(e: MultiSelectChangeEvent) => options.filterApplyCallback(e.value)}
+      onChange={(e: MultiSelectChangeEvent) =>
+        options.filterApplyCallback(e.value)
+      }
       optionLabel={optionLabel}
       placeholder="Any"
       className="p-column-filter"
@@ -62,11 +70,15 @@ export const multiSelectFilterTemplate = (
 /**
  * Boolean filter template using TriStateCheckbox
  */
-export const booleanFilterTemplate = (options: ColumnFilterElementTemplateOptions) => {
+export const booleanFilterTemplate = (
+  options: ColumnFilterElementTemplateOptions
+) => {
   return (
     <TriStateCheckbox
       value={options.value}
-      onChange={(e: TriStateCheckboxChangeEvent) => options.filterApplyCallback(e.value)}
+      onChange={(e: TriStateCheckboxChangeEvent) =>
+        options.filterApplyCallback(e.value)
+      }
     />
   );
 };
@@ -91,12 +103,38 @@ export const textFilterTemplate = (
 };
 
 /**
+ * Small text filter template using custom Input component
+ */
+export const smallTextFilterTemplate = (
+  options: ColumnFilterElementTemplateOptions,
+  placeholder: string = "Search",
+  icon?: string
+) => {
+  return (
+    <Input
+      small
+      icon={icon ?? "pi pi-search text-text-gray!"}
+      iconPosition="left"
+      value={options.value || ""}
+      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+        options.filterApplyCallback(e.target.value)
+      }
+      placeholder={placeholder}
+      className="p-column-filter placeholder:text-text-gray!"
+      style={{ width: "100%", maxWidth: "100%" }}
+    />
+  );
+};
+
+/**
  * Status filter template with tags
  */
 export const statusFilterTemplate = (
   options: ColumnFilterElementTemplateOptions,
   statuses: string[],
-  getSeverity?: (status: string) => "success" | "info" | "warning" | "danger" | null
+  getSeverity?: (
+    status: string
+  ) => "success" | "info" | "warning" | "danger" | null
 ) => {
   const statusItemTemplate = (option: string) => {
     return <Tag value={option} severity={getSeverity?.(option)} />;
@@ -108,4 +146,3 @@ export const statusFilterTemplate = (
     (option) => statusItemTemplate(option.value)
   );
 };
-

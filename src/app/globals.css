@@ -128,48 +128,43 @@ body .p-dropdown-panel.dropdown-small-panel .p-dropdown-empty-message {
   padding: 0.5rem 0.75rem;
 }
 
-/* Custom button styles */
-body .p-button {
-  height: 44px !important;
-  min-height: 44px !important;
-  max-height: 44px !important;
-  border-radius: 8px !important;
-  padding: 0.5rem 1rem !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
+/* Small input styles */
+body .input-small.p-inputtext,
+body .input-small.p-inputtext.p-component {
+  font-size: 0.875rem !important;
+  padding: 0.5rem !important;
+  height: auto !important;
+}
+
+/* Ensure filter inputs don't exceed column width */
+body .p-datatable .p-column-filter {
+  width: 100% !important;
+  max-width: 100% !important;
   box-sizing: border-box !important;
-  gap: 0.5rem !important;
 }
 
-body .p-button .p-button-label {
-  line-height: 1 !important;
-  padding: 0 !important;
+/* Filter row background color - try all possible selectors */
+/* Target by nth-child if filter row is second row in thead */
+body .p-datatable .p-datatable-thead > tr:nth-child(2) th,
+body .p-datatable .p-datatable-thead > tr:nth-child(2) td {
+  background-color: white !important;
+  background: white !important;
 }
 
-body .p-button .p-button-icon {
-  margin: 0 !important;
-  flex-shrink: 0 !important;
+/* Small input with icon - add padding to prevent overlap */
+body .p-icon-field-left .input-small.p-inputtext,
+body .p-icon-field-left .input-small.p-inputtext.p-component {
+  padding-left: 2.5rem !important;
 }
 
-body .p-button .p-button-icon-left {
-  margin-right: 0 !important;
-  order: -1 !important;
+body .p-icon-field-right .input-small.p-inputtext,
+body .p-icon-field-right .input-small.p-inputtext.p-component {
+  padding-right: 2.5rem !important;
 }
 
-body .p-button .p-button-icon-right {
-  margin-left: 0 !important;
-  order: 1 !important;
-}
-
-/* Custom button active state */
-.p-button.active-button {
-  opacity: 1;
-  transform: scale(1);
-}
-
-.p-button.active-button:not(:disabled):hover {
-  opacity: 0.9;
+body .input-small .p-icon-field-left .p-input-icon,
+body .input-small .p-icon-field-right .p-input-icon {
+  font-size: 0.875rem;
 }
 
 /* Custom table header styles - only for tables with custom-header class */

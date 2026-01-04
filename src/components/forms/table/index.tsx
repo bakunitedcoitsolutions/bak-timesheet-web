@@ -2,14 +2,15 @@
 import React, { useState, ReactNode } from "react";
 import {
   DataTable,
-  DataTableFilterMeta,
   DataTableProps,
+  DataTableFilterMeta,
 } from "primereact/datatable";
-import { Column, ColumnProps } from "primereact/column";
 import { InputText } from "primereact/inputtext";
 import { IconField } from "primereact/iconfield";
 import { InputIcon } from "primereact/inputicon";
 import { FilterMatchMode } from "primereact/api";
+import { Column, ColumnProps } from "primereact/column";
+import { smallTextFilterTemplate } from "./filter-templates";
 
 export interface TableColumn<T = any> extends Omit<
   ColumnProps,
@@ -22,6 +23,9 @@ export interface TableColumn<T = any> extends Omit<
   filterType?: "text" | "dropdown" | "multiselect" | "boolean" | "custom";
   filterOptions?: any[];
   filterElement?: (options: any) => ReactNode;
+  filterPlaceholder?: string;
+  filterIcon?: string;
+  smallFilter?: boolean;
   body?: (rowData: T) => ReactNode;
   style?: React.CSSProperties;
   className?: string;
@@ -57,6 +61,10 @@ export interface CustomTableProps<
   selectionMode?: "single" | "multiple" | "checkbox" | "radiobutton";
   selection?: T | T[];
   tableClassName?: string;
+  customHeader?: (props: {
+    value: string;
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  }) => ReactNode;
 }
 
 export default function CustomTable<
@@ -79,6 +87,7 @@ export default function CustomTable<
   selectionMode,
   selection,
   tableClassName,
+  customHeader,
   ...rest
 }: CustomTableProps<T>) {
   const [filters, setFilters] = useState<DataTableFilterMeta>({});
@@ -127,6 +136,13 @@ export default function CustomTable<
   };
 
   const renderHeader = () => {
+    if (customHeader) {
+      return customHeader({
+        value: globalFilterValue,
+        onChange: onGlobalFilterChange,
+      });
+    }
+
     if (!globalSearch) return null;
 
     return (
@@ -195,6 +211,9 @@ export default function CustomTable<
             filterType,
             filterOptions,
             filterElement,
+            filterPlaceholder,
+            filterIcon,
+            smallFilter,
             filterable,
             sortable,
             body,
@@ -208,6 +227,21 @@ export default function CustomTable<
           const isFilterable = filterable !== false;
           const isSortable = sortable !== false;
 
+          // Use small filter template if smallFilter is true and no custom filterElement
+          const finalFilterElement =
+            filterElement ||
+            (smallFilter &&
+            filterType !== "dropdown" &&
+            filterType !== "multiselect" &&
+            filterType !== "boolean"
+              ? (options: any) =>
+                  smallTextFilterTemplate(
+                    options,
+                    filterPlaceholder || "Search",
+                    filterIcon
+                  )
+              : undefined);
+
           return (
             <Column
               key={index}
@@ -215,7 +249,7 @@ export default function CustomTable<
               header={header}
               sortable={isSortable}
               filter={isFilterable}
-              filterElement={filterElement}
+              filterElement={finalFilterElement}
               body={body}
               style={style}
               className={className}
