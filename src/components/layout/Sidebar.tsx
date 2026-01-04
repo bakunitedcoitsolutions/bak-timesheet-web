@@ -334,37 +334,56 @@ export default function Sidebar({ collapsed, setCollapsed }: SidebarProps) {
   };
 
   return (
-    <div
-      className={classNames(
-        "fixed left-0 top-0 h-screen bg-white transition-all duration-300 ease-in-out z-20 flex flex-col",
-        {
-          "w-64": !collapsed,
-          "w-20": collapsed,
-        }
+    <>
+      {/* Backdrop for mobile drawer */}
+      {!collapsed && (
+        <div className="fixed inset-0 bg-black/20 z-20 md:hidden" />
       )}
-    >
-      {/* Logo Area */}
       <div
         className={classNames(
-          "flex items-center justify-center transition-all duration-300 h-20"
+          "fixed left-0 top-0 h-screen bg-white transition-all duration-300 ease-in-out z-20 flex flex-col",
+          {
+            "w-64 translate-x-0": !collapsed,
+            "-translate-x-full md:translate-x-0 w-0 md:w-20": collapsed,
+          }
         )}
       >
-        <img
-          src="/assets/images/bak_transparent_logo.png"
-          alt="BAK Logo"
-          className={classNames("transition-all h-14 duration-300", {})}
-        />
-        {!collapsed && (
-          <p className="text-xl ml-2 text-primary font-semibold">HR Module</p>
-        )}
-      </div>
+        {/* Logo Area */}
+        <div
+          className={classNames(
+            "flex items-center justify-between transition-all duration-300 h-20 px-4"
+          )}
+        >
+          <div className="flex items-center justify-center">
+            <img
+              src="/assets/images/bak_transparent_logo.png"
+              alt="BAK Logo"
+              className={classNames("transition-all h-14 duration-300", {})}
+            />
+            {!collapsed && (
+              <p className="text-xl ml-2 text-primary font-semibold">
+                HR Module
+              </p>
+            )}
+          </div>
+          {!collapsed && (
+            <button
+              onClick={() => setCollapsed(true)}
+              className="left-50! top-5! absolute w-8 h-8 flex md:hidden items-center justify-center rounded-full bg-primary-light transition-all duration-1000 cursor-pointer z-40"
+              aria-label="Close sidebar"
+            >
+              <i className="pi pi-times text-xl text-primary"></i>
+            </button>
+          )}
+        </div>
 
-      {/* Menu Items */}
-      <div className="flex-1 w-full overflow-y-auto py-4 custom-scrollbar">
-        <ul className="list-none p-0 m-0 space-y-0.75">
-          {menuItems.map((item) => renderMenuItem(item))}
-        </ul>
+        {/* Menu Items */}
+        <div className="flex-1 w-full overflow-y-auto py-4 custom-scrollbar">
+          <ul className="list-none p-0 m-0 space-y-0.75">
+            {menuItems.map((item) => renderMenuItem(item))}
+          </ul>
+        </div>
       </div>
-    </div>
+    </>
   );
 }

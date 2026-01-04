@@ -36,8 +36,8 @@ export default function AdminLayout({
         className={classNames(
           "flex-1 flex flex-col min-w-0 transition-all duration-300 ease-in-out",
           {
-            "ml-64": !collapsed,
-            "ml-20": collapsed,
+            "md:ml-64": !collapsed,
+            "md:ml-20": collapsed,
           }
         )}
       >

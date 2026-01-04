@@ -1,23 +1,23 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 import { useState, useMemo } from "react";
 import { classNames } from "primereact/utils";
-import Image from "next/image";
 
 import {
-  projects,
   stats,
-  expensesByProject,
-  branches,
   months,
+  projects,
+  branches,
   ProjectExpense,
+  expensesByProject,
 } from "@/utils/dummy";
 import {
-  BarChart,
-  Dropdown,
-  PieChart,
-  Button,
   Table,
+  Button,
+  BarChart,
+  PieChart,
+  Dropdown,
   TableColumn,
 } from "@/components";
 
@@ -53,7 +53,7 @@ const HomePage = () => {
       sortable: false,
       filterable: false,
       body: (rowData) => (
-        <div className="flex items-center gap-3">
+        <div className="flex min-w-64 items-center gap-3">
           <div className="relative w-12 h-12 rounded-xl overflow-hidden shrink-0">
             <Image
               src={rowData.image}
@@ -182,19 +182,18 @@ const HomePage = () => {
       {/* Expenses by Project Table */}
       <div className="bg-white w-full rounded-xl p-6">
         {/* Header Section */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
-          <div className="flex flex-col gap-4">
-            <h3 className="text-xl font-semibold text-gray-800">
-              Expenses by Project
-            </h3>
-            {/* Status Filter Buttons */}
-            <div className="flex items-center gap-3">
+        <div className="flex flex-col gap-4 mb-6">
+          <h3 className="text-xl text-center lg:text-left font-semibold text-gray-800">
+            Expenses by Project
+          </h3>
+          <div className="flex flex-col flex-1 w-full lg:flex-row items-center justify-between gap-4">
+            <div className="flex flex-1 lg:flex-none w-full lg:w-auto items-center gap-3">
               <Button
-                icon="pi pi-th-large"
                 iconPosition="left"
-                variant={statusFilter === "all" ? "solid" : "outlined"}
+                icon="pi pi-th-large"
                 onClick={() => setStatusFilter("all")}
-                className="focus:shadow-none!"
+                variant={statusFilter === "all" ? "solid" : "outlined"}
+                className="focus:shadow-none! w-full lg:w-32 lg:flex-1 lg:flex"
               >
                 All
               </Button>
@@ -204,7 +203,7 @@ const HomePage = () => {
                 iconPosition="left"
                 onClick={() => setStatusFilter("active")}
                 className={classNames(
-                  "border-theme-green! focus:shadow-none!",
+                  "border-theme-green! focus:shadow-none! w-full lg:w-32 lg:flex-1 lg:flex",
                   {
                     "bg-theme-green! hover:text-white!":
                       statusFilter === "active",
@@ -220,33 +219,41 @@ const HomePage = () => {
                 icon="pi pi-times-circle"
                 iconPosition="left"
                 onClick={() => setStatusFilter("inactive")}
-                className={classNames("border-theme-red! focus:shadow-none!", {
-                  "bg-theme-red! hover:text-white!":
-                    statusFilter === "inactive",
-                  "bg-theme-light-red! text-theme-red! hover:text-theme-red!":
-                    statusFilter !== "inactive",
-                })}
+                className={classNames(
+                  "border-theme-red! focus:shadow-none! w-full lg:w-32 lg:flex-1 lg:flex",
+                  {
+                    "bg-theme-red! hover:text-white!":
+                      statusFilter === "inactive",
+                    "bg-theme-light-red! text-theme-red! hover:text-theme-red!":
+                      statusFilter !== "inactive",
+                  }
+                )}
               >
                 Inactive
               </Button>
             </div>
-          </div>
-          {/* Right Side Dropdowns */}
-          <div className="flex items-center gap-3">
-            <Dropdown
-              small
-              options={branches}
-              placeholder="All Branches"
-              selectedItem={selectedBranch}
-              setSelectedItem={setSelectedBranch}
-            />
-            <Dropdown
-              small
-              options={months}
-              placeholder="Dec 2025"
-              selectedItem={selectedMonth}
-              setSelectedItem={setSelectedMonth}
-            />
+            <div className="flex flex-1 lg:flex-none w-full lg:w-auto items-center gap-3">
+              <div className="flex flex-1 lg:flex-none">
+                <Dropdown
+                  small
+                  className="w-full"
+                  options={branches}
+                  placeholder="All Branches"
+                  selectedItem={selectedBranch}
+                  setSelectedItem={setSelectedBranch}
+                />
+              </div>
+              <div className="flex flex-1 lg:flex-none">
+                <Dropdown
+                  small
+                  options={months}
+                  className="w-full"
+                  placeholder="Dec 2025"
+                  selectedItem={selectedMonth}
+                  setSelectedItem={setSelectedMonth}
+                />
+              </div>
+            </div>
           </div>
         </div>
 
