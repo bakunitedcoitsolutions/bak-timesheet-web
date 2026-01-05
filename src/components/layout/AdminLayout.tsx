@@ -29,7 +29,7 @@ export default function AdminLayout({
   }, []);
 
   return (
-    <div className="min-h-[90vh] bg-white flex">
+    <div className="min-h-screen bg-white flex">
       <Sidebar collapsed={collapsed} setCollapsed={setCollapsed} />
 
       <div

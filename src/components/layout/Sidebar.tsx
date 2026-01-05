@@ -173,7 +173,7 @@ export default function Sidebar({ collapsed, setCollapsed }: SidebarProps) {
       return (
         <li
           key={item.label}
-          className="mt-2 mb-4 px-4 border-b w-[90%] mx-auto border-[#E0E6EB]"
+          className="mt-2 mb-4 px-4 border-b w-[90%] mx-auto border-theme-border"
         ></li>
       );
     }
@@ -337,11 +337,11 @@ export default function Sidebar({ collapsed, setCollapsed }: SidebarProps) {
     <>
       {/* Backdrop for mobile drawer */}
       {!collapsed && (
-        <div className="fixed inset-0 bg-black/20 z-20 md:hidden" />
+        <div className="fixed inset-0 bg-black/20 z-21 md:hidden" />
       )}
       <div
         className={classNames(
-          "fixed left-0 top-0 h-screen bg-white transition-all duration-300 ease-in-out z-20 flex flex-col",
+          "fixed left-0 top-0 h-screen bg-white transition-all duration-300 ease-in-out z-21 flex flex-col",
           {
             "w-64 translate-x-0": !collapsed,
             "-translate-x-full md:translate-x-0 w-0 md:w-20": collapsed,

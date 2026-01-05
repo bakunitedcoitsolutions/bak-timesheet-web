@@ -29,7 +29,7 @@ export default function CustomButton({
   const isText = variant === "text";
 
   // Build className with active state
-  const buttonClassName = classNames(className, {
+  const buttonClassName = classNames("rounded-lg!", className, {
     "active-button": active && variant === "solid",
   });
 

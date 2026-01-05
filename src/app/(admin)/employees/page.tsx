@@ -12,6 +12,7 @@ import {
 } from "@/components";
 import ExportOptions from "@/components/common/export-option";
 import { CustomHeaderProps } from "@/components/forms/table";
+import { useRouter } from "next/navigation";
 
 const commonColumnProps = {
   sortable: true,
@@ -247,6 +248,7 @@ const columns = (
 ];
 
 const EmployeesPage = () => {
+  const router = useRouter();
   const [selectedDesignation, setSelectedDesignation] = useState<any>("0");
 
   const handlePrint = (employee: Employee) => {
@@ -326,6 +328,7 @@ const EmployeesPage = () => {
             variant="solid"
             icon="pi pi-plus"
             label="New Employee"
+            onClick={() => router.push("/employees/new")}
           />
         </div>
       </div>

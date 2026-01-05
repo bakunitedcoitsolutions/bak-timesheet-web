@@ -86,7 +86,7 @@ export default function Header({ collapsed, setCollapsed }: HeaderProps) {
   ];
 
   return (
-    <header className="h-16 bg-white flex items-center justify-between px-6 sticky top-0 z-10 transition-all duration-300 ease-in-out">
+    <header className="h-16 bg-white flex items-center justify-between px-6 sticky top-0 z-20 transition-all duration-300 ease-in-out">
       <div className="flex items-center gap-4">
         <button
           onClick={() => setCollapsed(!collapsed)}

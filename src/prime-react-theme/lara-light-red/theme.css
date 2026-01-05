@@ -1180,7 +1180,7 @@
   }
   .p-dropdown {
     background: #ffffff;
-    border: 1px solid #d1d5db;
+    border: 1px solid var(--color-theme-border);
     transition:
       background-color 0.2s,
       color 0.2s,
@@ -1461,11 +1461,11 @@
   .p-inputtext {
     font-family: var(--font-family);
     font-feature-settings: var(--font-feature-settings, normal);
-    font-size: 0.95rem;
+    font-size: 14px;
     color: #4b5563;
     background: #ffffff;
     padding: 0.6rem 0.75rem;
-    border: 1px solid #d1d5db;
+    border: 1px solid var(--color-theme-border);
     transition:
       background-color 0.2s,
       color 0.2s,

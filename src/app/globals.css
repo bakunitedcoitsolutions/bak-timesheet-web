@@ -49,6 +49,8 @@
 
   --color-theme-red: #da4470;
   --color-theme-light-red: #ffe5ed;
+
+  --color-theme-border: #e0e6eb;
 }
 
 @media (prefers-color-scheme: dark) {

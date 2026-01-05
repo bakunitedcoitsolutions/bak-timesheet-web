@@ -12,6 +12,8 @@ interface DropdownOption {
 }
 
 interface ModifiedDropdownProps extends Omit<DropdownProps, "onChange"> {
+  label?: string;
+  error?: string;
   options: DropdownOption[];
   small?: boolean;
   placeholder: string;
@@ -20,6 +22,8 @@ interface ModifiedDropdownProps extends Omit<DropdownProps, "onChange"> {
 }
 
 export default function ModifiedDropdown({
+  label,
+  error,
   options,
   small = false,
   placeholder,
@@ -56,18 +60,28 @@ export default function ModifiedDropdown({
   };
 
   return (
-    <Dropdown
-      options={options}
-      filterDelay={400}
-      value={selectedItem}
-      optionLabel="label"
-      className={className}
-      placeholder={placeholder}
-      itemTemplate={itemTemplate}
-      valueTemplate={valueTemplate}
-      panelClassName={isSmall ? "dropdown-small-panel" : undefined}
-      onChange={handleChange}
-      {...rest}
-    />
+    <div className="space-y-1">
+      {label && (
+        <label htmlFor={rest.id} className={`block text-[15px] ml-1 mb-1`}>
+          {label}
+        </label>
+      )}
+      <Dropdown
+        options={options}
+        filterDelay={400}
+        value={selectedItem}
+        optionLabel="label"
+        className={className}
+        placeholder={placeholder}
+        itemTemplate={itemTemplate}
+        valueTemplate={valueTemplate}
+        panelClassName={isSmall ? "dropdown-small-panel" : undefined}
+        onChange={handleChange}
+        {...rest}
+      />
+      {error && (
+        <small className="text-red-500 text-xs block mt-1 ml-1">{error}</small>
+      )}
+    </div>
   );
 }

@@ -6,3 +6,7 @@ export type { TableColumn, CustomTableProps } from "./table";
 export * from "./table/filter-templates";
 export { default as TableActions } from "./table-actions";
 export type { TableAction } from "./table-actions";
+export { default as Stepper } from "./stepper";
+export type { StepperStep } from "./stepper";
+export { default as StepperForm } from "./stepper-form";
+export { default as FilePicker } from "./file-picker";
