@@ -29,6 +29,8 @@ const Step1 = () => {
             <FilePicker
               multiple={false}
               className="w-full"
+              dropText="Drop your picture here or"
+              browseText="browse"
               accept={{
                 "image/jpeg": [".jpg", ".jpeg"],
                 "image/png": [".png"],
@@ -101,49 +103,6 @@ const Step1 = () => {
           />
         </div>
       </div>
-      {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-4 px-6">
-        <div className="min-w-60">
-          <Dropdown
-            small
-            filter
-            label="Project"
-            options={projects}
-            className="w-full"
-            placeholder="Select Project"
-            selectedItem={selectedProject}
-            setSelectedItem={setSelectedProject}
-          />
-        </div>
-        <div className="min-w-60">
-          <Input
-            className="w-full"
-            label="Phone"
-            placeholder="Enter phone number"
-          />
-        </div>
-        <div className="min-w-60">
-          <Input
-            type="date"
-            className="w-full"
-            label="Date of Birth"
-            placeholder="Select date of birth"
-          />
-        </div>
-        <div className="min-w-60 w-72">
-          <FilePicker
-            multiple={false}
-            className="w-full"
-            label="Upload Picture"
-            accept={{
-              "image/jpeg": [".jpg", ".jpeg"],
-              "image/png": [".png"],
-            }}
-            onFileSelect={(files) => {
-              console.log(files);
-            }}
-          />
-        </div>
-      </div> */}
     </div>
   );
 };

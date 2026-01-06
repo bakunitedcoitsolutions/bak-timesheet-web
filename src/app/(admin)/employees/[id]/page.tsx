@@ -38,6 +38,7 @@ const EmployeePage = () => {
   const handleSubmit = async (data: Record<string, any>) => {
     console.log("Form submitted:", data);
     // Handle form submission here
+    router.replace(`/employees`);
   };
 
   const renderStepContent = (stepIndex: number) => {

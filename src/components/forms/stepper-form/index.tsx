@@ -1,8 +1,10 @@
 "use client";
 
+import { classNames } from "primereact/utils";
 import React, { useState, ReactNode } from "react";
-import Stepper, { StepperStep } from "../stepper";
+
 import Button from "../button";
+import Stepper, { StepperStep } from "../stepper";
 
 interface StepperFormProps {
   steps: StepperStep[];
@@ -86,10 +88,10 @@ const StepperForm: React.FC<StepperFormProps> = ({
   const isFirstStep = activeStep === 0;
 
   return (
-    <div className={className}>
-      <div className="grid grid-cols-1 h-full lg:grid-cols-4 gap-5">
+    <div className={classNames(className, "flex flex-1")}>
+      <div className="flex flex-1 flex-col lg:flex-row gap-5">
         {/* Stepper Sidebar */}
-        <div className="lg:col-span-1">
+        <div className="w-full lg:w-72">
           <Stepper
             steps={steps}
             completedSteps={completedSteps}
@@ -98,7 +100,7 @@ const StepperForm: React.FC<StepperFormProps> = ({
         </div>
 
         {/* Form Content */}
-        <div className="lg:col-span-3">
+        <div className="w-full lg:w-full">
           <div className="bg-white h-full flex flex-col justify-between rounded-xl border border-gray-100">
             {/* Step Content */}
             <div className="mb-6 flex flex-1">{children(activeStep)}</div>

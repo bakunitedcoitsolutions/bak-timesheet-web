@@ -111,7 +111,7 @@ export default function FilePicker({
       <div
         {...getRootProps()}
         className={classNames(
-          "border border-dashed w-full rounded-xl h-[44px] px-5 cursor-pointer transition-all duration-200 flex flex-col items-center justify-center gap-3",
+          "border border-dashed w-full rounded-xl h-[44px] px-1 md:px-5 cursor-pointer transition-all duration-200 flex flex-col items-center justify-center gap-3",
           {
             "border-primary bg-primary-light": isDragActive,
             "border-primary bg-primary-light/40": !isDragActive,
@@ -179,7 +179,7 @@ export default function FilePicker({
   if (label) {
     return (
       <div className="space-y-1 w-full">
-        <label className="block text-[15px] ml-1 mb-1">{label}</label>
+        <label className="block text-sm ml-1 mb-1">{label}</label>
         {files.length === 0 && renderPicker()}
         {files.length > 0 && renderFiles()}
         {error && (

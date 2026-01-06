@@ -46,7 +46,7 @@ export default function NumberInput({
   if (label) {
     return (
       <div className="space-y-1">
-        <label htmlFor={rest.id} className={`block text-[15px] ml-1 mb-1`}>
+        <label htmlFor={rest.id} className={`block text-sm ml-1 mb-1`}>
           {label}
         </label>
         {inputWithIcon}
