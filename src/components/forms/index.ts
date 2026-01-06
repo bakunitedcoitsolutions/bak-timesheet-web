@@ -10,3 +10,4 @@ export { default as Stepper } from "./stepper";
 export type { StepperStep } from "./stepper";
 export { default as StepperForm } from "./stepper-form";
 export { default as FilePicker } from "./file-picker";
+export { default as NumberInput } from "./number-input";

@@ -80,7 +80,7 @@ export default function ModifiedDropdown({
         {...rest}
       />
       {error && (
-        <small className="text-red-500 text-xs block mt-1 ml-1">{error}</small>
+        <small className="text-error text-xs block mt-1.5 ml-1">{error}</small>
       )}
     </div>
   );

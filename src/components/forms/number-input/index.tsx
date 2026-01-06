@@ -1,10 +1,9 @@
 "use client";
-import { InputText, InputTextProps } from "primereact/inputtext";
+import { InputNumber, InputNumberProps } from "primereact/inputnumber";
 import { IconField } from "primereact/iconfield";
 import { InputIcon } from "primereact/inputicon";
-import { ReactNode } from "react";
 
-interface ModifiedInputProps extends Omit<InputTextProps, "className"> {
+interface NumberInputProps extends Omit<InputNumberProps, "className"> {
   label?: string;
   icon?: string;
   iconPosition?: "left" | "right";
@@ -13,7 +12,7 @@ interface ModifiedInputProps extends Omit<InputTextProps, "className"> {
   error?: string;
 }
 
-export default function ModifiedInput({
+export default function NumberInput({
   label,
   icon,
   iconPosition = "left",
@@ -21,13 +20,13 @@ export default function ModifiedInput({
   className = "",
   error,
   ...rest
-}: ModifiedInputProps) {
+}: NumberInputProps) {
   const isSmall = small;
   const smallClass = isSmall ? "input-small" : "";
   const finalClassName =
     `${smallClass} ${className} ${error ? "p-invalid" : ""}`.trim();
 
-  const inputElement = <InputText className={finalClassName} {...rest} />;
+  const inputElement = <InputNumber className={finalClassName} {...rest} />;
 
   const inputWithIcon =
     iconPosition === "left" && icon ? (

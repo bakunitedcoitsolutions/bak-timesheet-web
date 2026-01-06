@@ -51,6 +51,8 @@
   --color-theme-light-red: #ffe5ed;
 
   --color-theme-border: #e0e6eb;
+
+  --color-error: #e24c4c;
 }
 
 @media (prefers-color-scheme: dark) {

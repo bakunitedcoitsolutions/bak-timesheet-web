@@ -13,6 +13,8 @@ interface FilePickerProps {
   onFileSelect?: (files: File[]) => void;
   value?: File[];
   disabled?: boolean;
+  dropText?: string;
+  browseText?: string;
 }
 
 export default function FilePicker({
@@ -25,6 +27,8 @@ export default function FilePicker({
   onFileSelect,
   value,
   disabled = false,
+  dropText = "Drop your files here or",
+  browseText = "browse files",
 }: FilePickerProps) {
   const [files, setFiles] = useState<File[]>(value || []);
 
@@ -58,78 +62,128 @@ export default function FilePicker({
     onFileSelect?.(newFiles);
   };
 
-  const renderFilePicker = () => {
+  const openFileInNewTab = (file: File) => {
+    const fileUrl = URL.createObjectURL(file);
+    window.open(fileUrl, "_blank");
+    // Clean up the URL after a delay to allow the browser to load it
+    setTimeout(() => {
+      URL.revokeObjectURL(fileUrl);
+    }, 100);
+  };
+
+  const getFileIcon = (file: File) => {
+    const fileType = file.type.toLowerCase();
+    const fileName = file.name.toLowerCase();
+
+    // Check for PDF
+    if (fileType === "application/pdf" || fileName.endsWith(".pdf")) {
+      return "pi-file-pdf text-xl!";
+    }
+
+    // Check for images
+    if (
+      fileType.startsWith("image/") ||
+      /\.(jpg|jpeg|png|gif|bmp|svg|webp|ico)$/i.test(fileName)
+    ) {
+      return "pi-image";
+    }
+
+    // Check for Word documents
+    if (fileType.includes("word") || /\.(doc|docx)$/i.test(fileName)) {
+      return "pi-file-word text-xl!";
+    }
+
+    // Check for Excel files
+    if (
+      fileType.includes("excel") ||
+      fileType.includes("spreadsheet") ||
+      /\.(xls|xlsx|csv)$/i.test(fileName)
+    ) {
+      return "pi-file-excel text-xl!";
+    }
+
+    // Default file icon
+    return "pi-file text-xl!";
+  };
+
+  const renderPicker = () => {
     return (
-      <div className="flex flex-col gap-3">
-        <div
-          {...getRootProps()}
-          className={classNames(
-            "border border-dashed rounded-xl p-8 cursor-pointer transition-all duration-200 flex flex-col items-center justify-center gap-3",
-            {
-              "border-primary bg-primary-light": isDragActive,
-              "border-primary bg-primary-light/40": !isDragActive,
-              "opacity-50 cursor-not-allowed": disabled,
-            },
-            className
-          )}
-        >
-          <input {...getInputProps()} />
-          <div className="flex flex-row items-center gap-3">
-            <i className="pi pi-cloud-upload text-2xl! text-primary"></i>
-            <div className="text-center">
-              <span className="text-[15px] text-gray-700">
-                Drop your files here or{" "}
-              </span>
-              <span className="text-[15px] text-primary font-semibold cursor-pointer hover:underline">
-                browse files
-              </span>
-            </div>
+      <div
+        {...getRootProps()}
+        className={classNames(
+          "border border-dashed w-full rounded-xl h-[44px] px-5 cursor-pointer transition-all duration-200 flex flex-col items-center justify-center gap-3",
+          {
+            "border-primary bg-primary-light": isDragActive,
+            "border-primary bg-primary-light/40": !isDragActive,
+            "opacity-50 cursor-not-allowed": disabled,
+          },
+          className
+        )}
+      >
+        <input {...getInputProps()} />
+        <div className="flex cursor-pointer flex-row items-center gap-1.5">
+          <img alt="upload" src="/assets/icons/upload-icon.svg" />
+          <div className="text-center">
+            <span className="text-xs">{dropText} </span>
+            <span className="text-xs text-primary font-semibold">
+              {browseText}
+            </span>
           </div>
         </div>
+      </div>
+    );
+  };
 
-        {files.length > 0 && (
-          <div className="flex flex-col gap-2 mt-2">
-            {files.map((file, index) => (
+  const renderFiles = () => {
+    return (
+      <div className="flex w-full flex-col gap-2">
+        {files.map((file, index) => (
+          <div
+            key={`${file.name}-${index}`}
+            className="flex w-full items-center justify-between rounded-xl h-[44px] pl-2 pr-3 border border-primary/30  gap-x-2"
+          >
+            <div className="flex items-center justify-center w-7 h-7 rounded-lg">
+              <i className={`pi ${getFileIcon(file)} text-primary`} />
+            </div>
+            <div className="flex w-full py-1 flex-col justify-center mr-1">
+              <span className="text-xs font-semibold truncate">
+                {file.name}
+              </span>
+            </div>
+            <div className="flex justify-center items-center gap-x-2">
               <div
-                key={`${file.name}-${index}`}
-                className="flex items-center justify-between p-3 bg-gray-50 rounded-lg border border-gray-200"
+                className="cursor-pointer flex justify-center items-center"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  openFileInNewTab(file);
+                }}
               >
-                <div className="flex items-center gap-2 flex-1 min-w-0">
-                  <i className="fa-light fa-file text-lg text-gray-600 shrink-0"></i>
-                  <span className="text-sm font-medium text-gray-700 truncate">
-                    {file.name}
-                  </span>
-                  <span className="text-xs text-gray-500 shrink-0">
-                    ({(file.size / 1024).toFixed(2)} KB)
-                  </span>
-                </div>
-                {!disabled && (
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      removeFile(index);
-                    }}
-                    className="ml-2 p-1 hover:bg-red-100 rounded transition-colors"
-                    type="button"
-                  >
-                    <i className="pi pi-times text-red-500"></i>
-                  </button>
-                )}
+                <i className="pi pi-external-link text-sm! text-[#14B8A6]" />
               </div>
-            ))}
+              <div
+                className="cursor-pointer flex justify-center items-center"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  removeFile(index);
+                }}
+              >
+                <i className="pi pi-trash text-sm! text-error" />
+              </div>
+            </div>
           </div>
-        )}
+        ))}
       </div>
     );
   };
 
   if (label) {
     return (
-      <div className="space-y-1">
+      <div className="space-y-1 w-full">
         <label className="block text-[15px] ml-1 mb-1">{label}</label>
-        {renderFilePicker()}
+        {files.length === 0 && renderPicker()}
+        {files.length > 0 && renderFiles()}
         {error && (
-          <small className="text-red-500 text-xs block mt-1 ml-1">
+          <small className="text-error text-xs block mt-1.5 ml-1">
             {error}
           </small>
         )}
@@ -139,12 +193,18 @@ export default function FilePicker({
 
   if (error) {
     return (
-      <div>
-        {renderFilePicker()}
-        <small className="text-red-500 text-xs block mt-1 ml-1">{error}</small>
+      <div className="w-full">
+        {files.length === 0 && renderPicker()}
+        {files.length > 0 && renderFiles()}
+        <small className="text-error text-xs block mt-1.5 ml-1">{error}</small>
       </div>
     );
   }
 
-  return renderFilePicker();
+  return (
+    <div className="w-full">
+      {files.length === 0 && renderPicker()}
+      {files.length > 0 && renderFiles()}
+    </div>
+  );
 }
