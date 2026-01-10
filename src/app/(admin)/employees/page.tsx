@@ -294,7 +294,10 @@ const EmployeesPage = () => {
         </div>
         <div className="flex items-center gap-3 w-full md:w-auto">
           <div>
-            <ExportOptions exportCSV={exportCSV} exportExcel={exportExcel} />
+            <ExportOptions
+              exportCSV={exportCSV || (() => {})}
+              exportExcel={exportExcel || (() => {})}
+            />
           </div>
           <div className="w-full md:w-auto">
             <Input
