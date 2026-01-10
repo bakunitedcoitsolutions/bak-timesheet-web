@@ -312,7 +312,7 @@ const EmployeesPage = () => {
     );
   };
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-6 px-6 py-6">
       <div className="flex flex-col md:flex-row justify-between items-center gap-3">
         <div className="w-full md:w-auto flex flex-1 flex-col gap-1">
           <h1 className="text-2xl font-semibold text-gray-900">

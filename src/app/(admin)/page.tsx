@@ -96,7 +96,7 @@ const HomePage = () => {
   ];
 
   return (
-    <div className="flex flex-col gap-6 overflow-hidden!">
+    <div className="flex flex-col gap-6 px-6 py-6 overflow-hidden!">
       {/* Stats Grid */}
       <div className="grid grid-cols-1 bg-white w-full rounded-xl md:grid-cols-2 xl:grid-cols-4 gap-6 p-6">
         {stats.map((stat, index) => (

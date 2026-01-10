@@ -42,7 +42,7 @@ export default function AdminLayout({
         )}
       >
         <Header collapsed={collapsed} setCollapsed={setCollapsed} />
-        <main className="px-6 py-6 flex-1 overflow-x-hidden bg-secondary-white rounded-tl-xl">
+        <main className="flex-1 overflow-x-hidden bg-secondary-white md:rounded-tl-xl">
           {children}
         </main>
       </div>
