@@ -770,6 +770,183 @@ const designationOptions = [
   { label: "Other", value: "4" },
 ];
 
+interface TimesheetEntry {
+  id: number;
+  rowNumber: number;
+  code: string;
+  employeeName: string;
+  designation: string;
+  hasFlag: boolean;
+  isLocked: boolean;
+  project1: string | null;
+  project1Hours: number;
+  project1OT: number;
+  project2: string | null;
+  project2Hours: number;
+  project2OT: number;
+  totalHours: number;
+  remarks: string;
+  allowBreakProject1?: boolean;
+  allowBreakProject1Value?: boolean;
+  allowBreakProject2?: boolean;
+  allowBreakProject2Value?: boolean;
+}
+
+// Sample data matching the image description
+const initialTimesheetData: TimesheetEntry[] = [
+  {
+    id: 1,
+    rowNumber: 1,
+    code: "10000",
+    employeeName: "REJA, HALIL/HALIL, SALUM SALUM SALUM SALUM",
+    designation: "Driver",
+    hasFlag: false,
+    isLocked: false,
+    project1: null,
+    project1Hours: 0,
+    project1OT: 0,
+    project2: null,
+    project2Hours: 0,
+    project2OT: 0,
+    totalHours: 0,
+    remarks: "",
+    allowBreakProject1: false,
+    allowBreakProject1Value: false,
+    allowBreakProject2: false,
+    allowBreakProject2Value: false,
+  },
+  {
+    id: 2,
+    rowNumber: 2,
+    code: "20000",
+    employeeName: "EMPLOYEE NAME 2",
+    designation: "Designation",
+    hasFlag: false,
+    isLocked: false,
+    project1: null,
+    project1Hours: 0,
+    project1OT: 0,
+    project2: null,
+    project2Hours: 0,
+    project2OT: 0,
+    totalHours: 0,
+    remarks: "",
+    allowBreakProject1: true,
+    allowBreakProject1Value: false,
+    allowBreakProject2: true,
+    allowBreakProject2Value: false,
+  },
+  {
+    id: 3,
+    rowNumber: 3,
+    code: "30001",
+    employeeName: "HUSSEIN ALI SHILAH ISSA",
+    designation: "Truck Driver (Low Loader)",
+    hasFlag: true,
+    isLocked: false,
+    project1: null,
+    project1Hours: 0,
+    project1OT: 0,
+    project2: null,
+    project2Hours: 0,
+    project2OT: 0,
+    totalHours: 0,
+    remarks: "",
+    allowBreakProject1: false,
+    allowBreakProject1Value: false,
+    allowBreakProject2: false,
+    allowBreakProject2Value: false,
+  },
+  {
+    id: 4,
+    rowNumber: 4,
+    code: "30002",
+    employeeName: "IBRAHIM ALI SHILAH ISSA",
+    designation: "Foreman Engineer",
+    hasFlag: false,
+    isLocked: true,
+    project1: null,
+    project1Hours: 0,
+    project1OT: 0,
+    project2: null,
+    project2Hours: 0,
+    project2OT: 0,
+    totalHours: 0,
+    remarks: "",
+    allowBreakProject1: true,
+    allowBreakProject1Value: false,
+    allowBreakProject2: true,
+    allowBreakProject2Value: false,
+  },
+  {
+    id: 5,
+    rowNumber: 5,
+    code: "30003",
+    employeeName: "EMPLOYEE NAME 5",
+    designation: "Electrician",
+    hasFlag: false,
+    isLocked: false,
+    project1: null,
+    project1Hours: 0,
+    project1OT: 0,
+    project2: null,
+    project2Hours: 0,
+    project2OT: 0,
+    totalHours: 0,
+    remarks: "",
+    allowBreakProject1: true,
+    allowBreakProject1Value: false,
+    allowBreakProject2: true,
+    allowBreakProject2Value: false,
+  },
+  {
+    id: 6,
+    rowNumber: 6,
+    code: "30004",
+    employeeName: "ABDI FARAX ABDI SALAH (GEN)",
+    designation: "Watchman",
+    hasFlag: false,
+    isLocked: false,
+    project1: null,
+    project1Hours: 0,
+    project1OT: 0,
+    project2: null,
+    project2Hours: 0,
+    project2OT: 0,
+    totalHours: 0,
+    remarks: "",
+    allowBreakProject1: true,
+    allowBreakProject1Value: false,
+    allowBreakProject2: true,
+    allowBreakProject2Value: false,
+  },
+];
+
+// Generate more rows to reach 24
+for (let i = 7; i <= 24; i++) {
+  initialTimesheetData.push({
+    id: i,
+    rowNumber: i,
+    code: String(10000 + i * 1000),
+    employeeName: `EMPLOYEE NAME ${i}`,
+    designation: i % 3 === 0 ? "Mechanic" : i % 3 === 1 ? "Plumber" : "Laborer",
+    hasFlag: i >= 7 && i <= 12,
+    isLocked: false,
+    project1: null,
+    project1Hours: 0,
+    project1OT: 0,
+    project2: null,
+    project2Hours: 0,
+    project2OT: 0,
+    totalHours: 0,
+    remarks: "",
+    allowBreakProject1: true,
+    allowBreakProject1Value: false,
+    allowBreakProject2: true,
+    allowBreakProject2Value: false,
+  });
+}
+
 export {
   stats,
   projects,
@@ -778,5 +955,6 @@ export {
   months,
   employees,
   designationOptions,
+  initialTimesheetData,
 };
-export type { ProjectExpense, Employee };
+export type { ProjectExpense, Employee, TimesheetEntry };

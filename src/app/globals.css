@@ -54,6 +54,7 @@
   --color-theme-border: #e0e6eb;
 
   --color-error: #e24c4c;
+  --color-theme-text-gray: #6a7282;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -187,4 +188,27 @@ body .p-datatable.custom-header .p-datatable-tbody > tr > td {
 
 body .p-datatable.custom-header .p-datatable-tbody > tr:last-child > td {
   border-bottom: none !important;
+}
+
+/* Custom small number input styling for timesheet */
+
+body .timesheet-number-input.p-inputnumber .p-inputnumber-input {
+  width: 100% !important;
+  min-width: 100% !important;
+  max-width: 100% !important;
+  height: 2.5rem !important;
+  padding: 4px 6px !important;
+  border-radius: 12px !important;
+  text-align: center !important;
+}
+
+body .timesheet-number-input.p-inputnumber .p-inputnumber-input:focus {
+  width: 100% !important;
+  min-width: 100% !important;
+  max-width: 100% !important;
+}
+
+/* Locked row styling */
+body .p-datatable .p-datatable-tbody > tr.locked-row {
+  background-color: #fdf5f6 !important;
 }

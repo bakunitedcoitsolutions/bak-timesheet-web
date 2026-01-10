@@ -1,14 +1,14 @@
 "use client";
 
-import { ReactNode } from "react";
-import { classNames } from "primereact/utils";
 import { Input } from "@/components";
+import { classNames } from "primereact/utils";
+import { ReactNode, useState, useEffect } from "react";
 
 const TitleHeader = ({
-  title,
   icon,
-  children,
+  title,
   value,
+  children,
   onChange,
 }: {
   title: string;
@@ -17,6 +17,37 @@ const TitleHeader = ({
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }) => {
+  const [isFullscreen, setIsFullscreen] = useState(false);
+
+  useEffect(() => {
+    if (children) {
+      return;
+    }
+    const handleFullscreenChange = () => {
+      setIsFullscreen(!!document.fullscreenElement);
+    };
+
+    document?.addEventListener?.("fullscreenchange", handleFullscreenChange);
+    return () => {
+      document?.removeEventListener?.(
+        "fullscreenchange",
+        handleFullscreenChange
+      );
+    };
+  }, []);
+
+  const toggleFullscreen = async () => {
+    try {
+      if (!document?.fullscreenElement) {
+        await document?.documentElement?.requestFullscreen?.();
+      } else {
+        await document?.exitFullscreen?.();
+      }
+    } catch (error) {
+      console.error("Error toggling fullscreen:", error);
+    }
+  };
+
   return (
     <div
       className={classNames(
@@ -43,8 +74,16 @@ const TitleHeader = ({
               placeholder="Search"
             />
           </div>
-          <div className="w-10 h-10 flex items-center justify-center rounded-md cursor-pointer text-white">
-            <i className="fa-regular fa-expand text-xl!" />
+          <div
+            className="w-10 h-10 flex items-center justify-center rounded-md cursor-pointer text-white hover:bg-white/20 transition-colors"
+            onClick={toggleFullscreen}
+            title={isFullscreen ? "Exit Fullscreen" : "Enter Fullscreen"}
+          >
+            <i
+              className={`${
+                isFullscreen ? "fa-regular fa-compress" : "fa-regular fa-expand"
+              } text-xl!`}
+            />
           </div>
         </div>
       )}
