@@ -15,7 +15,7 @@ const steps: StepperStep[] = [
   { id: "other-details", label: "Other Details", number: 5 },
 ];
 
-const EmployeePage = () => {
+const UpsertEmployeePage = () => {
   const router = useRouter();
   const { id: employeeIdParam } = useParams();
   const {
@@ -75,4 +75,4 @@ const EmployeePage = () => {
   );
 };
 
-export default EmployeePage;
+export default UpsertEmployeePage;

@@ -28,12 +28,6 @@ const StepperForm: React.FC<StepperFormProps> = ({
   const [activeStep, setActiveStep] = useState(initialStep);
   const [completedSteps, setCompletedSteps] = useState<number[]>([]);
 
-  console.log({
-    steps,
-    activeStep,
-    completedSteps,
-  });
-
   const handleNext = () => {
     if (activeStep < steps.length - 1) {
       // Mark current step as completed

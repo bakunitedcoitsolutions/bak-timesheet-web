@@ -127,6 +127,11 @@ const menuItems: MenuItem[] = [
         href: "/setup/cities",
       },
       {
+        label: "Branches",
+        icon: "fa-light fa-sitemap text-lg!",
+        href: "/setup/branches",
+      },
+      {
         label: "Designation",
         icon: "fa-light fa-briefcase text-lg!",
         href: "/setup/designation",

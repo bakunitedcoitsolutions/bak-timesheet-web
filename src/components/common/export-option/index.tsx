@@ -1,8 +1,10 @@
-import { Button } from "@/components/forms";
-import { Menu } from "primereact/menu";
-import { MenuItem, MenuItemOptions } from "primereact/menuitem";
-import { classNames } from "primereact/utils";
+"use client";
 import { useRef } from "react";
+import { Menu } from "primereact/menu";
+import { classNames } from "primereact/utils";
+import { MenuItem, MenuItemOptions } from "primereact/menuitem";
+
+import { Button } from "@/components";
 
 const ExportOptions = ({
   exportCSV,
