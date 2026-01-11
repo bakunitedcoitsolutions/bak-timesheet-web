@@ -1712,6 +1712,122 @@ const citiesData: City[] = [
   },
 ];
 
+export interface Branch {
+  id: number;
+  nameEn: string;
+  nameAr: string;
+  isActive: boolean;
+}
+
+const branchesData: Branch[] = [
+  {
+    id: 1,
+    nameEn: "Jeddah",
+    nameAr: "جدة",
+    isActive: true,
+  },
+  {
+    id: 2,
+    nameEn: "Riyadh",
+    nameAr: "الرياض",
+    isActive: true,
+  },
+];
+
+export interface Designation {
+  id: number;
+  nameEn: string;
+  nameAr: string;
+  hoursPerDay: number;
+  displayOrder: number;
+  color: string; // hex color
+  breakfastAllowance: boolean;
+  isActive: boolean;
+}
+
+const designationsData: Designation[] = [
+  {
+    id: 1,
+    nameEn: "Engineer",
+    nameAr: "مهندس",
+    hoursPerDay: 8,
+    displayOrder: 1,
+    color: "#3B82F6",
+    breakfastAllowance: true,
+    isActive: true,
+  },
+  {
+    id: 2,
+    nameEn: "Manager",
+    nameAr: "مدير",
+    hoursPerDay: 8,
+    displayOrder: 2,
+    color: "#10B981",
+    breakfastAllowance: true,
+    isActive: true,
+  },
+  {
+    id: 3,
+    nameEn: "Assistant",
+    nameAr: "مساعد",
+    hoursPerDay: 8,
+    displayOrder: 3,
+    color: "#F59E0B",
+    breakfastAllowance: false,
+    isActive: true,
+  },
+  {
+    id: 4,
+    nameEn: "Truck House Driver",
+    nameAr: "سائق شاحنة",
+    hoursPerDay: 10,
+    displayOrder: 4,
+    color: "#EF4444",
+    breakfastAllowance: true,
+    isActive: true,
+  },
+  {
+    id: 5,
+    nameEn: "Carpenter",
+    nameAr: "نجار",
+    hoursPerDay: 8,
+    displayOrder: 5,
+    color: "#8B5CF6",
+    breakfastAllowance: false,
+    isActive: true,
+  },
+  {
+    id: 6,
+    nameEn: "Data Operator",
+    nameAr: "عامل بيانات",
+    hoursPerDay: 8,
+    displayOrder: 6,
+    color: "#06B6D4",
+    breakfastAllowance: false,
+    isActive: true,
+  },
+  {
+    id: 7,
+    nameEn: "Mechanic",
+    nameAr: "ميكانيكي",
+    hoursPerDay: 8,
+    displayOrder: 7,
+    color: "#F97316",
+    breakfastAllowance: false,
+    isActive: true,
+  },
+  {
+    id: 8,
+    nameEn: "OS, Driver",
+    nameAr: "سائق",
+    hoursPerDay: 10,
+    displayOrder: 8,
+    color: "#EC4899",
+    breakfastAllowance: true,
+    isActive: true,
+  },
+];
+
 export {
   stats,
   projectsData,
@@ -1726,6 +1842,8 @@ export {
   initialChallansData,
   countriesData,
   citiesData,
+  branchesData,
+  designationsData,
 };
 export type {
   ProjectExpense,
@@ -1735,4 +1853,6 @@ export type {
   ChallanEntry,
   Country,
   City,
+  Branch,
+  Designation,
 };

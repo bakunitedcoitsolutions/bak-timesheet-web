@@ -61,7 +61,7 @@ const columns = (
   },
   {
     field: "isActive",
-    header: "Active?",
+    header: "Is Active",
     sortable: true,
     filterable: false,
     style: { minWidth: 100 },
@@ -128,7 +128,7 @@ const ProjectsPage = () => {
             placeholder="Search"
           />
         </div>
-        <div className="flex items-center gap-3 w-full md:w-auto">
+        <div className="flex items-center gap-3 w-full md:w-auto justify-end">
           <div>
             <ExportOptions
               exportCSV={exportCSV || (() => {})}
