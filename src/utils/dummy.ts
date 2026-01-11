@@ -1446,6 +1446,65 @@ const userRolesData: UserRole[] = [
   },
 ];
 
+interface User {
+  id: number;
+  nameEn: string;
+  nameAr: string;
+  email: string;
+  userRoleId: number;
+  branchAccess: boolean;
+  branchId: number | null;
+  projectIds: number[];
+  isActive: boolean;
+}
+
+const usersData: User[] = [
+  {
+    id: 1,
+    nameEn: "John Admin",
+    nameAr: "جون أدمن",
+    email: "john.admin@example.com",
+    userRoleId: 1,
+    branchAccess: false,
+    branchId: null,
+    projectIds: [],
+    isActive: true,
+  },
+  {
+    id: 2,
+    nameEn: "Sarah Manager",
+    nameAr: "سارة مدير",
+    email: "sarah.manager@example.com",
+    userRoleId: 2,
+    branchAccess: false,
+    branchId: null,
+    projectIds: [],
+    isActive: true,
+  },
+  {
+    id: 3,
+    nameEn: "Ahmed Branch Operator",
+    nameAr: "أحمد مشغل فرع",
+    email: "ahmed.operator@example.com",
+    userRoleId: 3,
+    branchAccess: true,
+    branchId: 1,
+    projectIds: [1, 2, 3],
+    isActive: true,
+  },
+  {
+    id: 4,
+    nameEn: "Fatima Data Entry",
+    nameAr: "فاطمة إدخال بيانات",
+    email: "fatima.data@example.com",
+    userRoleId: 4,
+    branchAccess: true,
+    branchId: 2,
+    projectIds: [4, 5],
+    isActive: true,
+  },
+];
+
 interface EmployeeStatus {
   id: number;
   nameEn: string;
@@ -2102,6 +2161,7 @@ export {
   payrollSectionsData,
   employeeStatusesData,
   userRolesData,
+  usersData,
 };
 export type {
   ProjectExpense,
@@ -2116,4 +2176,6 @@ export type {
   Designation,
   EmployeeStatus,
   UserRole,
+  User,
+  Project,
 };
