@@ -57,7 +57,7 @@ const Step1 = () => {
         <div
           className={classNames(
             FORM_FIELD_WIDTHS["2"],
-            "px-6 mt-4 xl:pl-0 xl:mt-0 max-w-full"
+            "px-6 mt-4 xl:pl-0 xl:mt-0"
           )}
         >
           <label className={`block text-[15px] ml-1 xl:mt-[12px] mb-[8px]`}>
@@ -71,36 +71,21 @@ const Step1 = () => {
         </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 md:gap-y-8 md:py-5 px-6">
-        <div
-          className={classNames(
-            FORM_FIELD_WIDTHS["2"],
-            "xl:min-w-83.5! max-w-full"
-          )}
-        >
+        <div className={classNames(FORM_FIELD_WIDTHS["2"], "xl:min-w-83.5!")}>
           <Input
             label="Full Name (En)"
             className="w-full"
             placeholder="Enter full name in English"
           />
         </div>
-        <div
-          className={classNames(
-            FORM_FIELD_WIDTHS["2"],
-            "xl:min-w-83.5! max-w-full"
-          )}
-        >
+        <div className={classNames(FORM_FIELD_WIDTHS["2"], "xl:min-w-83.5!")}>
           <Input
             label="Full Name (Ar)"
             className="w-full text-right"
             placeholder="أدخل الاسم الكامل بالعربية"
           />
         </div>
-        <div
-          className={classNames(
-            FORM_FIELD_WIDTHS["2"],
-            "xl:min-w-83.5! max-w-full"
-          )}
-        >
+        <div className={classNames(FORM_FIELD_WIDTHS["2"], "xl:min-w-83.5!")}>
           <Input
             label="Birth Date"
             type="date"
@@ -108,12 +93,7 @@ const Step1 = () => {
             placeholder="Select birth date"
           />
         </div>
-        <div
-          className={classNames(
-            FORM_FIELD_WIDTHS["2"],
-            "xl:min-w-83.5! max-w-full"
-          )}
-        >
+        <div className={classNames(FORM_FIELD_WIDTHS["2"], "xl:min-w-83.5!")}>
           <MaskInput
             className="w-full"
             mask="999 999 9999"

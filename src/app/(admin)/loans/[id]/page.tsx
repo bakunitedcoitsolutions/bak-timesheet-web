@@ -54,7 +54,7 @@ const UpsertLoanPage = () => {
       <div className="flex h-full justify-between flex-1 md:flex-none flex-col gap-4 py-6 bg-white rounded-lg">
         <StepperFormHeading title={isAddMode ? "Add Loan" : "Edit Loan"} />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 md:gap-y-8 md:py-5 px-6 mt-5 md:mt-0 max-w-5xl content-start flex-1">
-          <div className={classNames(FORM_FIELD_WIDTHS["2"], "max-w-full")}>
+          <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
             <Input
               type="date"
               label="Date"
@@ -62,7 +62,7 @@ const UpsertLoanPage = () => {
               placeholder="Select date"
             />
           </div>
-          <div className={classNames(FORM_FIELD_WIDTHS["2"], "max-w-full")}>
+          <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
             <Dropdown
               small
               filter
@@ -74,7 +74,7 @@ const UpsertLoanPage = () => {
               setSelectedItem={setSelectedEmployee}
             />
           </div>
-          <div className={classNames(FORM_FIELD_WIDTHS["2"], "max-w-full")}>
+          <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
             <Dropdown
               label="Type"
               className="w-full"
@@ -84,7 +84,7 @@ const UpsertLoanPage = () => {
               setSelectedItem={setSelectedLoanType}
             />
           </div>
-          <div className={classNames(FORM_FIELD_WIDTHS["2"], "max-w-full")}>
+          <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
             <NumberInput
               label="Amount"
               className="w-full"
