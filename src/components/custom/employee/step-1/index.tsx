@@ -5,6 +5,7 @@ import { classNames } from "primereact/utils";
 import { FORM_FIELD_WIDTHS } from "@/utils/constants";
 import { StepperFormHeading } from "@/components/common";
 import { FilePicker, Input, NumberInput } from "@/components/forms";
+import MaskInput from "@/components/forms/mask-input";
 
 const Step1 = () => {
   const [profilePicture, setProfilePicture] = useState<File | null>(null);
@@ -93,13 +94,11 @@ const Step1 = () => {
           />
         </div>
         <div className={classNames(FORM_FIELD_WIDTHS["2"], "xl:min-w-83.5!")}>
-          <NumberInput
-            prefix="0"
-            maxLength={9}
+          <MaskInput
             className="w-full"
-            useGrouping={false}
+            mask="999 999 9999"
             label="Mobile Number"
-            placeholder="Enter mobile number (without 0/966/+966)"
+            placeholder="Enter mobile number (without 966/+966)"
           />
         </div>
       </div>

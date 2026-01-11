@@ -71,9 +71,8 @@ const Step3 = () => {
             />
           </div>
           <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
-            <NumberInput
-              className="w-full"
-              useGrouping={false}
+            <Input
+              className="w-full uppercase placeholder:normal-case"
               label="Passport No."
               placeholder="Enter passport number"
             />

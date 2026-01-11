@@ -39,7 +39,7 @@ const projects = [
     value: "0",
   },
   {
-    label: "ABC Company",
+    label: "ABC Company ABC Company ABC Company ABC Company",
     value: "100",
   },
   {
@@ -864,7 +864,7 @@ const initialTimesheetData: TimesheetEntry[] = [
     employeeName: "IBRAHIM ALI SHILAH ISSA",
     designation: "Foreman Engineer",
     hasFlag: false,
-    isLocked: true,
+    isLocked: false,
     project1: null,
     project1Hours: 0,
     project1OT: 0,

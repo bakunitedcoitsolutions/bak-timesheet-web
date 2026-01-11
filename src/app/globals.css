@@ -212,3 +212,8 @@ body .timesheet-number-input.p-inputnumber .p-inputnumber-input:focus {
 body .p-datatable .p-datatable-tbody > tr.locked-row {
   background-color: #fdf5f6 !important;
 }
+
+/* Timesheet table styling */
+body .p-datatable.timesheet-table .p-datatable-tbody > tr > td {
+  padding: 0.75rem !important;
+}

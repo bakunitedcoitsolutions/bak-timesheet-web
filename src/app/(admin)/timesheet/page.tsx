@@ -20,6 +20,7 @@ import {
   TimesheetEntry,
 } from "@/utils/dummy";
 import { Checkbox } from "primereact/checkbox";
+import { classNames } from "primereact/utils";
 
 const TimesheetPage = () => {
   const [selectedDesignation, setSelectedDesignation] = useState<any>("0");
@@ -66,10 +67,14 @@ const TimesheetPage = () => {
       header: "#",
       sortable: false,
       filterable: false,
-      style: { width: "30px" },
       align: "center",
       body: (rowData: TimesheetEntry) => (
-        <div className="flex items-center justify-center w-[30px] gap-1.5">
+        <div
+          className={classNames("flex items-center justify-center gap-1.5", {
+            "w-[40px]": rowData.isLocked,
+            "w-[35px]": !rowData.isLocked,
+          })}
+        >
           <span className="text-sm font-medium">{rowData.rowNumber}</span>
           {rowData.isLocked && (
             <i className="pi pi-lock text-sm! text-primary"></i>
@@ -82,6 +87,7 @@ const TimesheetPage = () => {
       header: "Code",
       sortable: false,
       filterable: false,
+      align: "left",
       style: { width: "50px" },
       body: (rowData: TimesheetEntry) => (
         <div className="w-[50px]">
@@ -91,7 +97,7 @@ const TimesheetPage = () => {
     },
     {
       field: "employeeName",
-      header: "Employee",
+      header: "Emp. Name",
       sortable: false,
       filterable: false,
       style: { minWidth: "280px" },
@@ -123,195 +129,215 @@ const TimesheetPage = () => {
     },
     {
       field: "project1",
-      header: (
-        <div className="flex flex-col gap-1 w-64!">
-          <span className="font-semibold pl-2!">Project 1</span>
-          <div className="flex gap-2 text-xs font-medium text-theme-text-gray mt-1">
-            <span className="flex-1 pl-2!">Hours</span>
-            <span className="flex-1 pl-2!">O/T</span>
-          </div>
-        </div>
-      ) as any,
+      header: "Prj. 1",
       sortable: false,
       filterable: false,
-      style: { minWidth: "220px" },
+      style: { maxWidth: "200px", width: "200px" },
       body: (rowData: TimesheetEntry) => (
-        <div className="flex flex-col gap-3.5 py-1">
-          <div className="h-9 w-64! flex items-center gap-3.5">
-            <div className="w-full h-full!">
-              <Dropdown
-                small
-                filter
-                options={projectOptions}
-                disabled={rowData.isLocked}
-                className="w-full h-10!"
-                placeholder="Select Project"
-                selectedItem={rowData.project1}
-                setSelectedItem={(value) =>
-                  updateTimesheetEntry(rowData.id, "project1", value)
-                }
-              />
-            </div>
-            {rowData.allowBreakProject1 && (
-              <div className="flex flex-col align-items-center">
-                <Checkbox
-                  disabled={rowData.isLocked}
-                  inputId="allowBreakProject1"
-                  name="pizza"
-                  value="allowBreakProject1Value"
-                  onChange={() =>
-                    updateTimesheetEntry(
-                      rowData.id,
-                      "allowBreakProject1Value",
-                      !rowData.allowBreakProject1Value || false
-                    )
-                  }
-                  checked={rowData.allowBreakProject1Value || false}
-                />
-              </div>
-            )}
+        <div className="flex items-center">
+          <div className="w-[calc(200px-2rem)] h-10!">
+            <Dropdown
+              small
+              filter
+              options={projectOptions}
+              disabled={rowData.isLocked}
+              className="w-full h-10!"
+              placeholder="Select Project"
+              selectedItem={rowData.project1}
+              setSelectedItem={(value) =>
+                updateTimesheetEntry(rowData.id, "project1", value)
+              }
+            />
           </div>
-          <div className="flex flex-1 gap-1.5 w-64!">
-            <div className="flex flex-1 w-6!">
-              <NumberInput
-                useGrouping={false}
-                disabled={rowData.isLocked}
-                value={rowData.project1Hours}
-                onValueChange={(e) =>
-                  updateTimesheetEntry(
-                    rowData.id,
-                    "project1Hours",
-                    e.value || 0
-                  )
-                }
-                className="timesheet-number-input"
-                min={0}
-                showButtons={false}
-              />
-            </div>
-            <div className="flex flex-1 w-6!">
-              <NumberInput
-                useGrouping={false}
-                disabled={rowData.isLocked}
-                value={rowData.project1OT}
-                onValueChange={(e) =>
-                  updateTimesheetEntry(rowData.id, "project1OT", e.value || 0)
-                }
-                className="timesheet-number-input"
-                min={0}
-                showButtons={false}
-              />
-            </div>
-          </div>
+        </div>
+      ),
+    },
+    {
+      field: "allowBreakProject1",
+      header: "Brf",
+      sortable: false,
+      filterable: false,
+      style: { minWidth: "50px", width: "50px" },
+      body: (rowData: TimesheetEntry) => (
+        <div className="flex justify-center items-center">
+          {rowData.allowBreakProject1 ? (
+            <Checkbox
+              disabled={rowData.isLocked}
+              inputId={`allowBreakProject1-${rowData.id}`}
+              name="allowBreakProject1"
+              value="allowBreakProject1Value"
+              onChange={() =>
+                updateTimesheetEntry(
+                  rowData.id,
+                  "allowBreakProject1Value",
+                  !rowData.allowBreakProject1Value || false
+                )
+              }
+              checked={rowData.allowBreakProject1Value || false}
+            />
+          ) : null}
+        </div>
+      ),
+    },
+    {
+      field: "project1Hours",
+      header: "Hrs.",
+      sortable: false,
+      filterable: false,
+      style: { minWidth: "80px" },
+      body: (rowData: TimesheetEntry) => (
+        <div className="flex justify-center py-1">
+          <NumberInput
+            useGrouping={false}
+            disabled={rowData.isLocked}
+            value={rowData.project1Hours}
+            onValueChange={(e) =>
+              updateTimesheetEntry(rowData.id, "project1Hours", e.value || 0)
+            }
+            className="timesheet-number-input"
+            min={0}
+            showButtons={false}
+          />
+        </div>
+      ),
+    },
+    {
+      field: "project1OT",
+      header: "O/T",
+      sortable: false,
+      filterable: false,
+      style: { minWidth: "80px" },
+      body: (rowData: TimesheetEntry) => (
+        <div className="flex justify-center">
+          <NumberInput
+            useGrouping={false}
+            disabled={rowData.isLocked}
+            value={rowData.project1OT}
+            onValueChange={(e) =>
+              updateTimesheetEntry(rowData.id, "project1OT", e.value || 0)
+            }
+            className="timesheet-number-input"
+            min={0}
+            showButtons={false}
+          />
         </div>
       ),
     },
     {
       field: "project2",
-      header: (
-        <div className="flex flex-col gap-1 w-64!">
-          <span className="font-semibold pl-2!">Project 2</span>
-          <div className="flex gap-2 text-xs font-normal text-gray-600 mt-1">
-            <span className="flex-1 pl-2!">Hours</span>
-            <span className="flex-1 pl-2!">O/T</span>
-          </div>
-        </div>
-      ) as any,
+      header: "Prj. 2",
       sortable: false,
       filterable: false,
-      style: { minWidth: "220px" },
+      style: { maxWidth: "200px", width: "200px" },
       body: (rowData: TimesheetEntry) => (
-        <div className="flex flex-col gap-3.5 py-1">
-          <div className="h-9 w-64! flex items-center gap-3.5">
-            <div className="w-full h-full!">
-              <Dropdown
-                small
-                filter
-                options={projectOptions}
-                disabled={rowData.isLocked}
-                className="w-full h-10!"
-                placeholder="Select Project"
-                selectedItem={rowData.project2}
-                setSelectedItem={(value) =>
-                  updateTimesheetEntry(rowData.id, "project2", value)
-                }
-              />
-            </div>
-            {rowData.allowBreakProject2 && (
-              <div className="flex flex-col align-items-center">
-                <Checkbox
-                  disabled={rowData.isLocked}
-                  inputId="allowBreakProject2"
-                  name="pizza"
-                  value="allowBreakProject2Value"
-                  onChange={() =>
-                    updateTimesheetEntry(
-                      rowData.id,
-                      "allowBreakProject2Value",
-                      !rowData.allowBreakProject2Value || false
-                    )
-                  }
-                  checked={rowData.allowBreakProject2Value || false}
-                />
-              </div>
-            )}
-          </div>
-          <div className="flex flex-1 gap-1.5 w-64!">
-            <div className="flex flex-1 w-full">
-              <NumberInput
-                useGrouping={false}
-                disabled={rowData.isLocked}
-                value={rowData.project2Hours}
-                onValueChange={(e) =>
-                  updateTimesheetEntry(
-                    rowData.id,
-                    "project2Hours",
-                    e.value || 0
-                  )
-                }
-                className="timesheet-number-input"
-                min={0}
-                showButtons={false}
-              />
-            </div>
-            <div className="flex flex-1 w-full">
-              <NumberInput
-                useGrouping={false}
-                disabled={rowData.isLocked}
-                value={rowData.project2OT}
-                onValueChange={(e) =>
-                  updateTimesheetEntry(rowData.id, "project2OT", e.value || 0)
-                }
-                className="timesheet-number-input"
-                min={0}
-                showButtons={false}
-              />
-            </div>
+        <div className="flex items-center">
+          <div className="w-[calc(200px-2rem)] h-10!">
+            <Dropdown
+              small
+              filter
+              options={projectOptions}
+              disabled={rowData.isLocked}
+              className="w-full h-10!"
+              placeholder="Select Project"
+              selectedItem={rowData.project2}
+              setSelectedItem={(value) =>
+                updateTimesheetEntry(rowData.id, "project2", value)
+              }
+            />
           </div>
         </div>
       ),
     },
     {
-      field: "totalHours",
-      header: "Total Hours",
+      field: "allowBreakProject2",
+      header: "Brf",
       sortable: false,
       filterable: false,
-      style: { width: "150px" },
+      style: { minWidth: "50px", width: "50px" },
       body: (rowData: TimesheetEntry) => (
-        <div className="py-1 w-[150px]">
-          <div className="w-full">
-            <NumberInput
-              useGrouping={false}
+        <div className="flex justify-center items-center">
+          {rowData.allowBreakProject2 ? (
+            <Checkbox
               disabled={rowData.isLocked}
-              value={rowData.totalHours}
-              onValueChange={(e) =>
-                updateTimesheetEntry(rowData.id, "totalHours", e.value || 0)
+              inputId={`allowBreakProject2-${rowData.id}`}
+              name="allowBreakProject2"
+              value="allowBreakProject2Value"
+              onChange={() =>
+                updateTimesheetEntry(
+                  rowData.id,
+                  "allowBreakProject2Value",
+                  !rowData.allowBreakProject2Value || false
+                )
               }
-              className="timesheet-number-input"
-              min={0}
-              showButtons={false}
+              checked={rowData.allowBreakProject2Value || false}
             />
-          </div>
+          ) : null}
+        </div>
+      ),
+    },
+    {
+      field: "project2Hours",
+      header: "Hrs.",
+      sortable: false,
+      filterable: false,
+      style: { minWidth: "80px" },
+      body: (rowData: TimesheetEntry) => (
+        <div className="flex justify-center">
+          <NumberInput
+            useGrouping={false}
+            disabled={rowData.isLocked}
+            value={rowData.project2Hours}
+            onValueChange={(e) =>
+              updateTimesheetEntry(rowData.id, "project2Hours", e.value || 0)
+            }
+            className="timesheet-number-input"
+            min={0}
+            showButtons={false}
+          />
+        </div>
+      ),
+    },
+    {
+      field: "project2OT",
+      header: "O/T",
+      sortable: false,
+      filterable: false,
+      style: { minWidth: "80px" },
+      body: (rowData: TimesheetEntry) => (
+        <div className="flex justify-center">
+          <NumberInput
+            useGrouping={false}
+            disabled={rowData.isLocked}
+            value={rowData.project2OT}
+            onValueChange={(e) =>
+              updateTimesheetEntry(rowData.id, "project2OT", e.value || 0)
+            }
+            className="timesheet-number-input"
+            min={0}
+            showButtons={false}
+          />
+        </div>
+      ),
+    },
+    {
+      field: "totalHours",
+      header: "Total Hrs.",
+      sortable: false,
+      filterable: false,
+      style: { minWidth: "100px" },
+      body: (rowData: TimesheetEntry) => (
+        <div className="flex justify-center">
+          <NumberInput
+            useGrouping={false}
+            disabled={rowData.isLocked}
+            value={rowData.totalHours}
+            onValueChange={(e) =>
+              updateTimesheetEntry(rowData.id, "totalHours", e.value || 0)
+            }
+            className="timesheet-number-input"
+            min={0}
+            showButtons={false}
+          />
         </div>
       ),
     },
@@ -424,6 +450,7 @@ const TimesheetPage = () => {
             columns={columns()}
             pagination={false}
             globalSearch={false}
+            emptyMessage="No timesheet data found."
             rowClassName={(rowData: TimesheetEntry) =>
               rowData.isLocked ? "locked-row" : ""
             }

@@ -39,7 +39,7 @@ export default function ModifiedDropdown({
     if (option) {
       return (
         <div className={`flex align-items-center ${textSizeClass}`}>
-          <span>{option.label}</span>
+          <span className="truncate">{option.label}</span>
         </div>
       );
     }
@@ -50,7 +50,7 @@ export default function ModifiedDropdown({
   const itemTemplate = (option: DropdownOption) => {
     return (
       <div className={`flex align-items-center ${textSizeClass}`}>
-        <span>{option.label}</span>
+        <span className="truncate">{option.label}</span>
       </div>
     );
   };
