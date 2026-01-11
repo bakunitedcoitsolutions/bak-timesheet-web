@@ -947,11 +947,30 @@ for (let i = 7; i <= 24; i++) {
   });
 }
 
+export interface Project {
+  id: number;
+  nameEn: string;
+  nameAr: string;
+  isActive: boolean;
+}
+
+const projectsData: Project[] = [];
+
+for (let i = 1; i <= 10; i++) {
+  projectsData.push({
+    id: i,
+    nameEn: `Project ${i}`,
+    nameAr: `المشروع ${i}`,
+    isActive: i % 2 === 0,
+  });
+}
+
 export {
   stats,
-  projects,
+  projectsData,
   expensesByProject,
   branches,
+  projects,
   months,
   employees,
   designationOptions,
