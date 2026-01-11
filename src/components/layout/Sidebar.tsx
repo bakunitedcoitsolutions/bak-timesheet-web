@@ -173,6 +173,13 @@ export default function Sidebar({ collapsed, setCollapsed }: SidebarProps) {
 
   const isExpanded = (label: string) => expandedMenus.includes(label);
 
+  const onClickMenuItem = () => {
+    const mobileView = window && window?.innerWidth < 768;
+    if (mobileView) {
+      setCollapsed(!collapsed);
+    }
+  };
+
   const renderMenuItem = (item: MenuItem) => {
     if (item.divider) {
       return (
@@ -230,6 +237,7 @@ export default function Sidebar({ collapsed, setCollapsed }: SidebarProps) {
               className={classNames(
                 "flex text-center items-center w-full gap-x-3"
               )}
+              onClick={() => onClickMenuItem()}
             >
               <i
                 className={classNames(item.icon, {
@@ -313,6 +321,7 @@ export default function Sidebar({ collapsed, setCollapsed }: SidebarProps) {
                         "text-black": !isSubActive,
                       }
                     )}
+                    onClick={() => onClickMenuItem()}
                   >
                     <i
                       className={classNames(subItem.icon, {

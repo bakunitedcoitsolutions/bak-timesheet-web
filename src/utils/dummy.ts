@@ -1712,7 +1712,7 @@ const citiesData: City[] = [
   },
 ];
 
-export interface Branch {
+interface Branch {
   id: number;
   nameEn: string;
   nameAr: string;
@@ -1734,7 +1734,7 @@ const branchesData: Branch[] = [
   },
 ];
 
-export interface Designation {
+interface Designation {
   id: number;
   nameEn: string;
   nameAr: string;
@@ -1828,6 +1828,146 @@ const designationsData: Designation[] = [
   },
 ];
 
+interface PayrollSection {
+  id: number;
+  nameEn: string;
+  nameAr: string;
+  displayOrder: number;
+  isActive: boolean;
+  designations: number[];
+}
+
+const payrollSectionsData: PayrollSection[] = [
+  {
+    id: 1,
+    nameEn: "Office Staff",
+    nameAr: "موظفو المكتب",
+    displayOrder: 1,
+    isActive: true,
+    designations: [1, 2, 3], // Engineer, Manager, Assistant
+  },
+  {
+    id: 2,
+    nameEn: "Formans (Construction)",
+    nameAr: "فورمان (بناء)",
+    displayOrder: 3,
+    isActive: true,
+    designations: [2, 5, 6], // Manager, Carpenter, Data Operator
+  },
+  {
+    id: 3,
+    nameEn: "Drivers (Construction)",
+    nameAr: "سائقون (بناء)",
+    displayOrder: 4,
+    isActive: true,
+    designations: [4, 8], // Truck House Driver, OS Driver
+  },
+  {
+    id: 4,
+    nameEn: "Carpenters (Construction)",
+    nameAr: "نجارون (بناء)",
+    displayOrder: 7,
+    isActive: true,
+    designations: [5], // Carpenter
+  },
+  {
+    id: 5,
+    nameEn: "Masons (Construction)",
+    nameAr: "بناؤون (بناء)",
+    displayOrder: 8,
+    isActive: true,
+    designations: [3, 6], // Assistant, Data Operator
+  },
+  {
+    id: 6,
+    nameEn: "Electrician (Construction)",
+    nameAr: "كهربائي (بناء)",
+    displayOrder: 9,
+    isActive: true,
+    designations: [1, 7], // Engineer, Mechanic
+  },
+  {
+    id: 7,
+    nameEn: "BD, Labour (Construction)",
+    nameAr: "عمال BD (بناء)",
+    displayOrder: 10,
+    isActive: true,
+    designations: [3, 6], // Assistant, Data Operator
+  },
+  {
+    id: 8,
+    nameEn: "OS, Labour (Construction)",
+    nameAr: "عمال OS (بناء)",
+    displayOrder: 12,
+    isActive: true,
+    designations: [8], // OS Driver
+  },
+  {
+    id: 9,
+    nameEn: "MEP",
+    nameAr: "MEP",
+    displayOrder: 13,
+    isActive: true,
+    designations: [1, 7], // Engineer, Mechanic
+  },
+  {
+    id: 10,
+    nameEn: "Final Out Labour",
+    nameAr: "عمال النهائي",
+    displayOrder: 16,
+    isActive: true,
+    designations: [3, 6], // Assistant, Data Operator
+  },
+  {
+    id: 11,
+    nameEn: "Steel Fixers (Construction)",
+    nameAr: "مثبتون فولاذ (بناء)",
+    displayOrder: 2,
+    isActive: true,
+    designations: [5, 7], // Carpenter, Mechanic
+  },
+  {
+    id: 12,
+    nameEn: "Plumbers (Construction)",
+    nameAr: "سباكون (بناء)",
+    displayOrder: 5,
+    isActive: true,
+    designations: [7], // Mechanic
+  },
+  {
+    id: 13,
+    nameEn: "Painters (Construction)",
+    nameAr: "رسامون (بناء)",
+    displayOrder: 6,
+    isActive: true,
+    designations: [3, 6], // Assistant, Data Operator
+  },
+  {
+    id: 14,
+    nameEn: "Welders (Construction)",
+    nameAr: "لحامون (بناء)",
+    displayOrder: 11,
+    isActive: true,
+    designations: [7], // Mechanic
+  },
+  {
+    id: 15,
+    nameEn: "Heavy Equipment Operators",
+    nameAr: "مشغلو المعدات الثقيلة",
+    displayOrder: 14,
+    isActive: true,
+    designations: [4, 8], // Truck House Driver, OS Driver
+  },
+  {
+    id: 16,
+    nameEn: "Supervisors (Construction)",
+    nameAr: "مشرفون (بناء)",
+    displayOrder: 15,
+    isActive: true,
+    designations: [2], // Manager
+  },
+];
+
 export {
   stats,
   projectsData,
@@ -1844,6 +1984,7 @@ export {
   citiesData,
   branchesData,
   designationsData,
+  payrollSectionsData,
 };
 export type {
   ProjectExpense,
@@ -1854,5 +1995,6 @@ export type {
   Country,
   City,
   Branch,
+  PayrollSection,
   Designation,
 };

@@ -134,6 +134,37 @@ body .p-dropdown-panel.dropdown-small-panel .p-dropdown-empty-message {
   padding: 0.5rem 0.75rem;
 }
 
+/* Small multi-select styles */
+.multi-select-small .p-multiselect-label,
+.multi-select-small .p-multiselect-trigger,
+.multi-select-small .p-multiselect .p-multiselect-label {
+  font-size: 0.875rem;
+  padding: 0.6rem 0.75rem !important;
+}
+
+/* Target the filter input in multi-select panel (element has both p-multiselect-filter and p-inputtext classes) */
+body
+  .p-multiselect-panel.multi-select-small-panel
+  .p-multiselect-filter.p-inputtext {
+  padding: 0.375rem 0.5rem !important;
+}
+
+/* Target the multi-select panel items when multi-select-small is used */
+body .p-multiselect-panel.multi-select-small-panel .p-multiselect-item,
+body .p-multiselect-panel.multi-select-small-panel .p-multiselect-item {
+  font-size: 0.875rem;
+  padding: 0.5rem 0.75rem;
+}
+
+/* Target the multi-select empty message when multi-select-small is used */
+body
+  .p-multiselect-panel.multi-select-small-panel
+  .p-multiselect-empty-message {
+  font-size: 0.875rem;
+  text-align: center;
+  padding: 0.5rem 0.75rem;
+}
+
 /* Small input styles */
 body .input-small.p-inputtext,
 body .input-small.p-inputtext.p-component {
@@ -216,4 +247,27 @@ body .p-datatable .p-datatable-tbody > tr.locked-row {
 /* Timesheet table styling */
 body .p-datatable.timesheet-table .p-datatable-tbody > tr > td {
   padding: 0.75rem !important;
+}
+
+/* Hide spacing for "All" group in designation dropdown */
+body
+  .p-dropdown-panel.designation-dropdown-panel
+  .p-dropdown-items-wrapper
+  > ul
+  > li:first-child {
+  margin: 0 !important;
+  padding: 0 !important;
+  height: auto !important;
+}
+
+body
+  .p-dropdown-panel.designation-dropdown-panel
+  .p-dropdown-items-wrapper
+  > ul
+  > li:first-child
+  > .p-dropdown-item-group {
+  display: none !important;
+  height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
 }

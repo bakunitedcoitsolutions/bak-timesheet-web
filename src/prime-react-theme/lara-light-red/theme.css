@@ -1812,7 +1812,7 @@
   }
   .p-multiselect {
     background: #ffffff;
-    border: 1px solid #d1d5db;
+    border: 1px solid var(--color-theme-border);
     transition:
       background-color 0.2s,
       color 0.2s,
@@ -1883,7 +1883,7 @@
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
   }
   .p-multiselect-panel .p-multiselect-header {
-    padding: 0.75rem 1.25rem;
+    padding: 0.75rem;
     border-bottom: 1px solid #e5e7eb;
     color: #374151;
     background: #f9fafb;
