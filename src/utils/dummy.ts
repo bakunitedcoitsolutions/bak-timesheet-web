@@ -965,6 +965,184 @@ for (let i = 1; i <= 10; i++) {
   });
 }
 
+interface LoanEntry {
+  id: number;
+  date: string; // DD-Mon-YYYY format
+  code: string; // 5-digit code
+  employeeName: string;
+  designation: string;
+  amount: number;
+  remarks: string;
+  type: "loan" | "return";
+}
+
+const initialLoansData: LoanEntry[] = [
+  {
+    id: 1,
+    date: "01-Dec-2025",
+    code: "60045",
+    employeeName: "TAIMOOR HASSAN MUHAMMAD WALAYAT",
+    designation: "Truck House Driver",
+    amount: 200,
+    remarks: "Exit re-entry visa fess",
+    type: "loan",
+  },
+  {
+    id: 2,
+    date: "04-Dec-2025",
+    code: "90525",
+    employeeName: "NADEEM ABBAS",
+    designation: "OS, Carpenter",
+    amount: 500,
+    remarks: "Issue Iqama Process fee (Abu Mashal)",
+    type: "return",
+  },
+  {
+    id: 3,
+    date: "08-Dec-2025",
+    code: "10014",
+    employeeName: "WAKIL AHMED CHOUDHURY",
+    designation: "Data Operator",
+    amount: 1000,
+    remarks: "PV-6541",
+    type: "loan",
+  },
+  {
+    id: 4,
+    date: "09-Dec-2025",
+    code: "90668",
+    employeeName: "WAQAR AHMED",
+    designation: "Shavel Operator",
+    amount: 200,
+    remarks: "Advance taken by sajid aurangzeb",
+    type: "return",
+  },
+  {
+    id: 5,
+    date: "10-Dec-2025",
+    code: "90642",
+    employeeName: "ZAKRIYA MUHAMMED",
+    designation: "Carpenter",
+    amount: 500,
+    remarks: "Advance PV-6086",
+    type: "loan",
+  },
+  {
+    id: 6,
+    date: "11-Dec-2025",
+    code: "60062",
+    employeeName: "SHAHADAT KHAN MUHAMMAD TUFAIL",
+    designation: "Truck House Driver",
+    amount: 2000,
+    remarks: "Naqal Kafala fees",
+    type: "return",
+  },
+  {
+    id: 7,
+    date: "12-Dec-2025",
+    code: "40104",
+    employeeName: "SHAD MUHAMMAD UMAR DAD",
+    designation: "Carpenter",
+    amount: 3000,
+    remarks: "PV-6564 khafala Charges paid outside",
+    type: "loan",
+  },
+  {
+    id: 8,
+    date: "13-Dec-2025",
+    code: "40103",
+    employeeName: "MUHAMMAD SAJID AURANGZEB",
+    designation: "Data Operator",
+    amount: 2500,
+    remarks: "3 months iqama JAN, FEB, MAR 2026",
+    type: "return",
+  },
+  {
+    id: 9,
+    date: "14-Dec-2025",
+    code: "60065",
+    employeeName: "ISHTIAQ AHMED MUHAMMAD SIDDIQUE",
+    designation: "Truck House Driver",
+    amount: 7500,
+    remarks: "Jun 2025 to Feb 2026",
+    type: "loan",
+  },
+  {
+    id: 10,
+    date: "15-Dec-2025",
+    code: "60066",
+    employeeName: "AHMED ALI KHAN",
+    designation: "Shavel Operator",
+    amount: 400,
+    remarks: "Advance",
+    type: "return",
+  },
+];
+
+// Generate more entries to reach 152 total (as shown in pagination)
+for (let i = 11; i <= 152; i++) {
+  const designations = [
+    "Truck House Driver",
+    "OS, Carpenter",
+    "Data Operator",
+    "Shavel Operator",
+    "Carpenter",
+    "Site Supervisor",
+    "Mechanical Engineer",
+    "Electrician",
+  ];
+  const employeeNames = [
+    "TAIMOOR HASSAN MUHAMMAD WALAYAT",
+    "NADEEM ABBAS",
+    "WAKIL AHMED CHOUDHURY",
+    "WAQAR AHMED",
+    "ZAKRIYA MUHAMMED",
+    "SHAHADAT KHAN MUHAMMAD TUFAIL",
+    "SHAD MUHAMMAD UMAR DAD",
+    "MUHAMMAD SAJID AURANGZEB",
+    "ISHTIAQ AHMED MUHAMMAD SIDDIQUE",
+    "AHMED ALI KHAN",
+    "MUHAMMAD HASSAN",
+    "ALI AHMED",
+    "HASSAN MUHAMMAD",
+    "ABDUL RAHMAN",
+    "OMAR ALI",
+  ];
+  const remarks = [
+    "Exit re-entry visa fess",
+    "Issue Iqama Process fee",
+    "PV-6541",
+    "Advance taken",
+    "Advance PV-6086",
+    "Naqal Kafala fees",
+    "khafala Charges paid outside",
+    "3 months iqama",
+    "Advance",
+    "Medical expenses",
+    "Travel expenses",
+    "Emergency loan",
+  ];
+
+  const day = String(Math.floor(Math.random() * 28) + 1).padStart(2, "0");
+  const month = "Dec";
+  const year = 2025;
+  const code = String(Math.floor(Math.random() * 90000) + 10000);
+
+  initialLoansData.push({
+    id: i,
+    date: `${day}-${month}-${year}`,
+    code: code,
+    employeeName:
+      employeeNames[Math.floor(Math.random() * employeeNames.length)],
+    designation: designations[Math.floor(Math.random() * designations.length)],
+    amount: [200, 400, 500, 1000, 1500, 2000, 2500, 3000, 5000, 7500][
+      Math.floor(Math.random() * 10)
+    ],
+    remarks: remarks[Math.floor(Math.random() * remarks.length)],
+    type: i % 2 === 0 ? "loan" : "return",
+  });
+}
+
 export {
   stats,
   projectsData,
@@ -975,5 +1153,6 @@ export {
   employees,
   designationOptions,
   initialTimesheetData,
+  initialLoansData,
 };
-export type { ProjectExpense, Employee, TimesheetEntry };
+export type { ProjectExpense, Employee, TimesheetEntry, LoanEntry };

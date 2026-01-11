@@ -49,22 +49,22 @@ const UpsertProjectPage = () => {
         <StepperFormHeading
           title={isAddMode ? "Add Project" : "Edit Project"}
         />
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 md:gap-y-8 md:py-5 px-6 mt-5 md:mt-0 max-w-5xl content-start flex-1">
-          <div className={classNames(FORM_FIELD_WIDTHS["2"], "xl:min-w-83.5!")}>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 md:gap-y-8 md:py-5 px-6 mt-5 md:mt-0 w-full md:max-w-5xl content-start flex-1">
+          <div className={classNames(FORM_FIELD_WIDTHS["2"], "max-w-full")}>
             <Input
               label="Full Name (En)"
               className="w-full"
               placeholder="Enter full name in English"
             />
           </div>
-          <div className={classNames(FORM_FIELD_WIDTHS["2"], "xl:min-w-83.5!")}>
+          <div className={classNames(FORM_FIELD_WIDTHS["2"], "max-w-full")}>
             <Input
               label="Full Name (Ar)"
               className="w-full text-right"
               placeholder="أدخل الاسم الكامل بالعربية"
             />
           </div>
-          <div className={classNames(FORM_FIELD_WIDTHS["2"], "xl:min-w-83.5!")}>
+          <div className={classNames(FORM_FIELD_WIDTHS["2"], "max-w-full")}>
             <Dropdown
               label="Project Status"
               className="w-full"
