@@ -146,6 +146,11 @@ const menuItems: MenuItem[] = [
         icon: "fa-light fa-user-check text-lg!",
         href: "/setup/employee-statuses",
       },
+      {
+        label: "User Roles",
+        icon: "fa-light fa-user-shield text-lg!",
+        href: "/setup/user-roles",
+      },
     ],
   },
 ];

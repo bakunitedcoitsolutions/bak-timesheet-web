@@ -1383,6 +1383,121 @@ const countriesData: Country[] = [
   },
 ];
 
+interface UserRole {
+  id: number;
+  nameEn: string;
+  nameAr: string;
+  access: string;
+  isActive: boolean;
+}
+
+/**
+ * User Role Access Level Definitions:
+ *
+ * 1. Admin - Can do anything of all branches
+ * 2. Manager - Can do anything of all branches except user management
+ * 3. Branch Operator - Can do anything under its branch except user management
+ * 4. Data Entry Operator - Restricted: No user management, can only add data (no modify, no delete)
+ * 5. Cashier - Can view some reports, ledger, and some data
+ * 6. Time Keeper - Can only view attendance report of employees
+ */
+const userRolesData: UserRole[] = [
+  {
+    id: 1,
+    nameEn: "Admin",
+    nameAr: "مدير",
+    access: "Admin",
+    isActive: true,
+  },
+  {
+    id: 2,
+    nameEn: "Manager",
+    nameAr: "مدير",
+    access: "Manager",
+    isActive: true,
+  },
+  {
+    id: 3,
+    nameEn: "Branch Operator",
+    nameAr: "مشغل فرع",
+    access: "Branch Operator",
+    isActive: true,
+  },
+  {
+    id: 4,
+    nameEn: "Data Entry Operator",
+    nameAr: "مشغل إدخال البيانات",
+    access: "Data Entry Operator",
+    isActive: true,
+  },
+  {
+    id: 5,
+    nameEn: "Cashier",
+    nameAr: "أمين صندوق",
+    access: "Cashier",
+    isActive: true,
+  },
+  {
+    id: 6,
+    nameEn: "Time Keeper",
+    nameAr: "حارس الوقت",
+    access: "Time Keeper",
+    isActive: true,
+  },
+];
+
+interface EmployeeStatus {
+  id: number;
+  nameEn: string;
+  nameAr: string;
+  isActive: boolean;
+}
+
+const employeeStatusesData: EmployeeStatus[] = [
+  {
+    id: 1,
+    nameEn: "Active",
+    nameAr: "نشط",
+    isActive: true,
+  },
+  {
+    id: 2,
+    nameEn: "Final Exit",
+    nameAr: "خروج نهائي",
+    isActive: false,
+  },
+  {
+    id: 3,
+    nameEn: "Haroob",
+    nameAr: "هرووب",
+    isActive: false,
+  },
+  {
+    id: 4,
+    nameEn: "Inactive",
+    nameAr: "غير نشط",
+    isActive: false,
+  },
+  {
+    id: 5,
+    nameEn: "Resigned",
+    nameAr: "استقال",
+    isActive: false,
+  },
+  {
+    id: 6,
+    nameEn: "Terminated",
+    nameAr: "مُنهي",
+    isActive: false,
+  },
+  {
+    id: 7,
+    nameEn: "Vacation",
+    nameAr: "إجازة",
+    isActive: true,
+  },
+];
+
 interface City {
   id: number;
   nameEn: string;
@@ -1985,6 +2100,8 @@ export {
   branchesData,
   designationsData,
   payrollSectionsData,
+  employeeStatusesData,
+  userRolesData,
 };
 export type {
   ProjectExpense,
@@ -1997,4 +2114,6 @@ export type {
   Branch,
   PayrollSection,
   Designation,
+  EmployeeStatus,
+  UserRole,
 };

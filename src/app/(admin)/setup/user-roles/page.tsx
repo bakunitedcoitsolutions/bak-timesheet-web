@@ -11,7 +11,21 @@ import {
   ExportOptions,
   CustomHeaderProps,
 } from "@/components";
-import { Designation, designationsData } from "@/utils/dummy";
+import { UserRole, userRolesData } from "@/utils/dummy";
+
+const getAccessDefinition = (access: string): string => {
+  const definitions: Record<string, string> = {
+    Admin: "Can do anything of all branches",
+    Manager: "Can do anything of all branches except user management",
+    "Branch Operator":
+      "Can do anything under its branch except user management",
+    "Data Entry Operator":
+      "Restricted: No user management, can only add data (no modify, no delete)",
+    Cashier: "Can view some reports, ledger, and some data",
+    "Time Keeper": "Can only view attendance report of employees",
+  };
+  return definitions[access] || "";
+};
 
 const commonColumnProps = {
   sortable: true,
@@ -23,9 +37,9 @@ const commonColumnProps = {
 };
 
 const columns = (
-  handleEdit: (designation: Designation) => void,
-  handleDelete: (designation: Designation) => void
-): TableColumn<Designation>[] => [
+  handleEdit: (role: UserRole) => void,
+  handleDelete: (role: UserRole) => void
+): TableColumn<UserRole>[] => [
   {
     field: "id",
     header: "#",
@@ -33,7 +47,7 @@ const columns = (
     filterable: false,
     align: "center",
     style: { width: "40px" },
-    body: (rowData: Designation) => (
+    body: (rowData: UserRole) => (
       <div className={"flex items-center justify-center gap-1.5 w-[40px]"}>
         <span className="text-sm font-medium">{rowData.id}</span>
       </div>
@@ -44,7 +58,7 @@ const columns = (
     header: "Name",
     ...commonColumnProps,
     style: { minWidth: "200px" },
-    body: (rowData: Designation) => (
+    body: (rowData: UserRole) => (
       <span className="text-sm">{rowData.nameEn}</span>
     ),
   },
@@ -53,66 +67,22 @@ const columns = (
     header: "Arabic Name",
     ...commonColumnProps,
     style: { minWidth: "200px" },
-    body: (rowData: Designation) => (
+    body: (rowData: UserRole) => (
       <div className="w-full flex flex-1 justify-end">
         <span className="text-sm text-right">{rowData.nameAr || ""}</span>
       </div>
     ),
   },
   {
-    field: "hoursPerDay",
-    header: "Hours/Day",
-    ...commonColumnProps,
-    style: { minWidth: "120px" },
-    align: "center",
-    body: (rowData: Designation) => (
-      <div className="w-full flex flex-1 justify-center">
-        <span className="text-sm">{rowData.hoursPerDay}</span>
-      </div>
-    ),
-  },
-  {
-    field: "displayOrder",
-    header: "Display Order",
-    ...commonColumnProps,
-    style: { minWidth: "150px" },
-    align: "center",
-    body: (rowData: Designation) => (
-      <div className="w-full flex flex-1 justify-center">
-        <span className="text-sm">{rowData.displayOrder}</span>
-      </div>
-    ),
-  },
-  {
-    field: "color",
-    header: "Color",
+    field: "description",
+    header: "Description",
     sortable: false,
     filterable: false,
-    style: { minWidth: "100px" },
-    align: "center",
-    body: (rowData: Designation) => (
-      <div className="w-full flex flex-1 justify-center">
-        <div
-          className="w-8 h-8 rounded-md border border-gray-300"
-          style={{ backgroundColor: rowData.color }}
-          title={rowData.color}
-        />
-      </div>
-    ),
-  },
-  {
-    field: "breakfastAllowance",
-    header: "Breakfast Allowance",
-    sortable: true,
-    filterable: false,
-    style: { minWidth: "150px" },
-    align: "center",
-    body: (rowData: Designation) => (
-      <div className="w-full flex flex-1 justify-center">
-        <span className="text-sm text-center">
-          {rowData.breakfastAllowance ? "Yes" : "No"}
-        </span>
-      </div>
+    style: { minWidth: "300px" },
+    body: (rowData: UserRole) => (
+      <span className="text-sm text-gray-600">
+        {getAccessDefinition(rowData.access)}
+      </span>
     ),
   },
   {
@@ -122,7 +92,7 @@ const columns = (
     filterable: false,
     style: { minWidth: 100 },
     align: "center",
-    body: (rowData: Designation) => (
+    body: (rowData: UserRole) => (
       <div className="w-full flex flex-1 justify-center">
         <span
           className={classNames("text-sm text-center", {
@@ -142,7 +112,7 @@ const columns = (
     filterable: false,
     align: "center",
     style: { minWidth: 150 },
-    body: (rowData: Designation) => (
+    body: (rowData: UserRole) => (
       <TableActions
         rowData={rowData}
         onEdit={handleEdit}
@@ -152,21 +122,17 @@ const columns = (
   },
 ];
 
-const DesignationPage = () => {
+const UserRolesPage = () => {
   const router = useRouter();
 
-  const handleEdit = (designation: Designation) => {
-    console.log("Edit designation:", designation);
-    // TODO: Navigate to edit page or open edit modal
-    router.push(`/setup/designation/${designation.id}`);
+  const handleEdit = (role: UserRole) => {
+    router.push(`/setup/user-roles/${role.id}`);
   };
 
-  const handleDelete = (designation: Designation) => {
-    console.log("Delete designation:", designation);
-    // TODO: Implement delete functionality with confirmation
-    if (confirm(`Are you sure you want to delete ${designation.nameEn}?`)) {
+  const handleDelete = (role: UserRole) => {
+    if (confirm(`Are you sure you want to delete ${role.nameEn}?`)) {
       // Delete logic here
-      // Example: deleteDesignation(designation.id);
+      console.log("Delete role:", role);
     }
   };
 
@@ -205,10 +171,10 @@ const DesignationPage = () => {
       <div className="flex flex-col md:flex-row justify-between items-center gap-3">
         <div className="w-full md:w-auto flex flex-1 flex-col gap-1">
           <h1 className="text-2xl font-semibold text-gray-900">
-            Designation Management
+            User Role Management
           </h1>
           <p className="text-sm text-gray-600 mt-1">
-            View, Manage designation records, and designation details.
+            View, manage user role records, and role details.
           </p>
         </div>
         <div className="w-full md:w-auto">
@@ -216,15 +182,15 @@ const DesignationPage = () => {
             size="small"
             variant="solid"
             icon="pi pi-plus"
-            label="Add Designation"
-            onClick={() => router.push("/setup/designation/new")}
+            label="Add User Role"
+            onClick={() => router.push("/setup/user-roles/new")}
           />
         </div>
       </div>
       <div className="bg-white rounded-xl overflow-hidden">
         <Table
           dataKey="id"
-          data={designationsData}
+          data={userRolesData}
           customHeader={renderHeader}
           columns={columns(handleEdit, handleDelete)}
         />
@@ -233,4 +199,4 @@ const DesignationPage = () => {
   );
 };
 
-export default DesignationPage;
+export default UserRolesPage;

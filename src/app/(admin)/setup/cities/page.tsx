@@ -1,6 +1,7 @@
 "use client";
-import { useRouter } from "next/navigation";
 import { useMemo } from "react";
+import { useRouter } from "next/navigation";
+import { classNames } from "primereact/utils";
 
 import {
   Input,
@@ -84,14 +85,19 @@ const CitiesPage = () => {
     },
     {
       field: "isActive",
-      header: "Is Active",
+      header: "Status",
       sortable: true,
       filterable: false,
       style: { minWidth: 100 },
       align: "center",
       body: (rowData: City) => (
         <div className="w-full flex flex-1 justify-center">
-          <span className="text-sm text-center">
+          <span
+            className={classNames("text-sm text-center", {
+              "text-theme-green bg-theme-light-green": rowData.isActive,
+              "text-theme-red bg-theme-light-red": !rowData.isActive,
+            })}
+          >
             {rowData.isActive ? "Active" : "Inactive"}
           </span>
         </div>
