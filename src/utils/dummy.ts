@@ -1143,7 +1143,7 @@ for (let i = 11; i <= 152; i++) {
   });
 }
 
-export interface ChallanEntry {
+interface ChallanEntry {
   id: number;
   date: string; // DD-Mon-YYYY format
   code: string; // Employee code
@@ -1193,7 +1193,8 @@ const initialChallansData: ChallanEntry[] = [
     designation: "Mechanic",
     challanAmount: 375,
     deductionAmount: 0,
-    remarks: "Violation 3126334315 Date: 2025-12-23 استخدام السائق بيده أي جهاز محمول اثناء سير المركبة",
+    remarks:
+      "Violation 3126334315 Date: 2025-12-23 استخدام السائق بيده أي جهاز محمول اثناء سير المركبة",
   },
   {
     id: 5,
@@ -1312,6 +1313,405 @@ for (let i = 11; i <= 21; i++) {
   });
 }
 
+interface Country {
+  id: number;
+  nameEn: string;
+  nameAr: string;
+  isActive: boolean;
+}
+
+const countriesData: Country[] = [
+  {
+    id: 1,
+    nameEn: "Afghanistan",
+    nameAr: "أفغانستان",
+    isActive: true,
+  },
+  {
+    id: 2,
+    nameEn: "Bangladish",
+    nameAr: "بنغلاديش",
+    isActive: true,
+  },
+  {
+    id: 3,
+    nameEn: "C-Lanka",
+    nameAr: "س-لانكا",
+    isActive: true,
+  },
+  {
+    id: 4,
+    nameEn: "Egypt",
+    nameAr: "مصر",
+    isActive: true,
+  },
+  {
+    id: 5,
+    nameEn: "Hind",
+    nameAr: "الهند",
+    isActive: true,
+  },
+  {
+    id: 6,
+    nameEn: "Pakistan",
+    nameAr: "باكستان",
+    isActive: true,
+  },
+  {
+    id: 7,
+    nameEn: "Palastine",
+    nameAr: "فلسطين",
+    isActive: true,
+  },
+  {
+    id: 8,
+    nameEn: "Saudi",
+    nameAr: "السعودية",
+    isActive: true,
+  },
+  {
+    id: 9,
+    nameEn: "Siria",
+    nameAr: "سوريا",
+    isActive: true,
+  },
+  {
+    id: 10,
+    nameEn: "Sudani",
+    nameAr: "السودان",
+    isActive: true,
+  },
+];
+
+interface City {
+  id: number;
+  nameEn: string;
+  nameAr: string;
+  countryId: number;
+  isActive: boolean;
+}
+
+const citiesData: City[] = [
+  // Afghanistan (id: 1)
+  {
+    id: 1,
+    nameEn: "Kabul",
+    nameAr: "كابل",
+    countryId: 1,
+    isActive: true,
+  },
+  {
+    id: 2,
+    nameEn: "Herat",
+    nameAr: "هرات",
+    countryId: 1,
+    isActive: true,
+  },
+  {
+    id: 3,
+    nameEn: "Kandahar",
+    nameAr: "قندهار",
+    countryId: 1,
+    isActive: true,
+  },
+  {
+    id: 4,
+    nameEn: "Mazar-i-Sharif",
+    nameAr: "مزار شريف",
+    countryId: 1,
+    isActive: true,
+  },
+  // Bangladish (id: 2)
+  {
+    id: 5,
+    nameEn: "Dhaka",
+    nameAr: "داكا",
+    countryId: 2,
+    isActive: true,
+  },
+  {
+    id: 6,
+    nameEn: "Chittagong",
+    nameAr: "شيتاغونغ",
+    countryId: 2,
+    isActive: true,
+  },
+  {
+    id: 7,
+    nameEn: "Sylhet",
+    nameAr: "سيلهيت",
+    countryId: 2,
+    isActive: true,
+  },
+  {
+    id: 8,
+    nameEn: "Rajshahi",
+    nameAr: "راجشاهي",
+    countryId: 2,
+    isActive: true,
+  },
+  // C-Lanka (id: 3)
+  {
+    id: 9,
+    nameEn: "Colombo",
+    nameAr: "كولومبو",
+    countryId: 3,
+    isActive: true,
+  },
+  {
+    id: 10,
+    nameEn: "Kandy",
+    nameAr: "كاندي",
+    countryId: 3,
+    isActive: true,
+  },
+  {
+    id: 11,
+    nameEn: "Galle",
+    nameAr: "غالي",
+    countryId: 3,
+    isActive: true,
+  },
+  {
+    id: 12,
+    nameEn: "Jaffna",
+    nameAr: "جافنا",
+    countryId: 3,
+    isActive: true,
+  },
+  // Egypt (id: 4)
+  {
+    id: 13,
+    nameEn: "Cairo",
+    nameAr: "القاهرة",
+    countryId: 4,
+    isActive: true,
+  },
+  {
+    id: 14,
+    nameEn: "Alexandria",
+    nameAr: "الإسكندرية",
+    countryId: 4,
+    isActive: true,
+  },
+  {
+    id: 15,
+    nameEn: "Giza",
+    nameAr: "الجيزة",
+    countryId: 4,
+    isActive: true,
+  },
+  {
+    id: 16,
+    nameEn: "Luxor",
+    nameAr: "الأقصر",
+    countryId: 4,
+    isActive: true,
+  },
+  // Hind (id: 5)
+  {
+    id: 17,
+    nameEn: "Delhi",
+    nameAr: "دلهي",
+    countryId: 5,
+    isActive: true,
+  },
+  {
+    id: 18,
+    nameEn: "Mumbai",
+    nameAr: "مومباي",
+    countryId: 5,
+    isActive: true,
+  },
+  {
+    id: 19,
+    nameEn: "Bangalore",
+    nameAr: "بنغالور",
+    countryId: 5,
+    isActive: true,
+  },
+  {
+    id: 20,
+    nameEn: "Kolkata",
+    nameAr: "كلكتا",
+    countryId: 5,
+    isActive: true,
+  },
+  // Pakistan (id: 6)
+  {
+    id: 21,
+    nameEn: "Karachi",
+    nameAr: "كراتشي",
+    countryId: 6,
+    isActive: true,
+  },
+  {
+    id: 22,
+    nameEn: "Lahore",
+    nameAr: "لاهور",
+    countryId: 6,
+    isActive: true,
+  },
+  {
+    id: 23,
+    nameEn: "Islamabad",
+    nameAr: "إسلام أباد",
+    countryId: 6,
+    isActive: true,
+  },
+  {
+    id: 24,
+    nameEn: "Faisalabad",
+    nameAr: "فيصل أباد",
+    countryId: 6,
+    isActive: true,
+  },
+  // Palastine (id: 7)
+  {
+    id: 25,
+    nameEn: "Ramallah",
+    nameAr: "رام الله",
+    countryId: 7,
+    isActive: true,
+  },
+  {
+    id: 26,
+    nameEn: "Gaza",
+    nameAr: "غزة",
+    countryId: 7,
+    isActive: true,
+  },
+  {
+    id: 27,
+    nameEn: "Nablus",
+    nameAr: "نابلس",
+    countryId: 7,
+    isActive: true,
+  },
+  {
+    id: 28,
+    nameEn: "Hebron",
+    nameAr: "الخليل",
+    countryId: 7,
+    isActive: true,
+  },
+  // Saudi (id: 8)
+  {
+    id: 29,
+    nameEn: "Jeddah",
+    nameAr: "جدة",
+    countryId: 8,
+    isActive: true,
+  },
+  {
+    id: 30,
+    nameEn: "Riyadh",
+    nameAr: "الرياض",
+    countryId: 8,
+    isActive: true,
+  },
+  {
+    id: 31,
+    nameEn: "Dammam",
+    nameAr: "الدمام",
+    countryId: 8,
+    isActive: true,
+  },
+  {
+    id: 32,
+    nameEn: "Khobar",
+    nameAr: "الخبر",
+    countryId: 8,
+    isActive: true,
+  },
+  {
+    id: 33,
+    nameEn: "Abha",
+    nameAr: "أبها",
+    countryId: 8,
+    isActive: true,
+  },
+  {
+    id: 34,
+    nameEn: "Jazan",
+    nameAr: "جازان",
+    countryId: 8,
+    isActive: true,
+  },
+  {
+    id: 35,
+    nameEn: "Mecca",
+    nameAr: "مكة المكرمة",
+    countryId: 8,
+    isActive: true,
+  },
+  {
+    id: 36,
+    nameEn: "Medina",
+    nameAr: "المدينة المنورة",
+    countryId: 8,
+    isActive: true,
+  },
+  // Siria (id: 9)
+  {
+    id: 37,
+    nameEn: "Damascus",
+    nameAr: "دمشق",
+    countryId: 9,
+    isActive: true,
+  },
+  {
+    id: 38,
+    nameEn: "Aleppo",
+    nameAr: "حلب",
+    countryId: 9,
+    isActive: true,
+  },
+  {
+    id: 39,
+    nameEn: "Homs",
+    nameAr: "حمص",
+    countryId: 9,
+    isActive: true,
+  },
+  {
+    id: 40,
+    nameEn: "Latakia",
+    nameAr: "اللاذقية",
+    countryId: 9,
+    isActive: true,
+  },
+  // Sudani (id: 10)
+  {
+    id: 41,
+    nameEn: "Khartoum",
+    nameAr: "الخرطوم",
+    countryId: 10,
+    isActive: true,
+  },
+  {
+    id: 42,
+    nameEn: "Port Sudan",
+    nameAr: "بورت سودان",
+    countryId: 10,
+    isActive: true,
+  },
+  {
+    id: 43,
+    nameEn: "Omdurman",
+    nameAr: "أم درمان",
+    countryId: 10,
+    isActive: true,
+  },
+  {
+    id: 44,
+    nameEn: "Kassala",
+    nameAr: "كسلا",
+    countryId: 10,
+    isActive: true,
+  },
+];
+
 export {
   stats,
   projectsData,
@@ -1324,5 +1724,15 @@ export {
   initialTimesheetData,
   initialLoansData,
   initialChallansData,
+  countriesData,
+  citiesData,
 };
-export type { ProjectExpense, Employee, TimesheetEntry, LoanEntry, ChallanEntry };
+export type {
+  ProjectExpense,
+  Employee,
+  TimesheetEntry,
+  LoanEntry,
+  ChallanEntry,
+  Country,
+  City,
+};

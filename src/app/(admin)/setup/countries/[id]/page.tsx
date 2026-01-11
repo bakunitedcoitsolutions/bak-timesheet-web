@@ -9,25 +9,25 @@ import { getEntityModeFromParam } from "@/helpers";
 import { FORM_FIELD_WIDTHS } from "@/utils/constants";
 import { Button, Dropdown, Input } from "@/components/forms";
 
-const projectStatusOptions = [
+const countryStatusOptions = [
   { label: "Active", value: "1" },
   { label: "Inactive", value: "2" },
 ];
 
-const UpsertProjectPage = () => {
-  const [selectedProjectStatus, setSelectedProjectStatus] = useState<
+const UpsertCountryPage = () => {
+  const [selectedCountryStatus, setSelectedCountryStatus] = useState<
     string | null
   >(null);
   const router = useRouter();
-  const { id: projectIdParam } = useParams();
+  const { id: countryIdParam } = useParams();
   const {
     isInvalid,
     isAddMode,
     isEditMode,
-    entityId: projectId,
+    entityId: countryId,
   } = getEntityModeFromParam({
     addKeyword: "new",
-    param: projectIdParam,
+    param: countryIdParam,
   });
 
   // Redirect to 404 page if the entity is invalid
@@ -40,14 +40,14 @@ const UpsertProjectPage = () => {
   const handleSubmit = async (data: Record<string, any>) => {
     console.log("Form submitted:", data);
     // Handle form submission here
-    router.replace(`/projects`);
+    router.replace(`/countries`);
   };
 
   return (
     <div className="flex flex-col h-full gap-6 px-6 py-6">
       <div className="flex h-full justify-between flex-1 md:flex-none flex-col gap-4 py-6 bg-white rounded-lg">
         <StepperFormHeading
-          title={isAddMode ? "Add Project" : "Edit Project"}
+          title={isAddMode ? "Add Country" : "Edit Country"}
         />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 md:gap-y-8 md:py-5 px-6 mt-5 md:mt-0 w-full md:max-w-5xl content-start flex-1">
           <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
@@ -62,12 +62,12 @@ const UpsertProjectPage = () => {
           </div>
           <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
             <Dropdown
-              label="Project Status"
+              label="Country Status"
               className="w-full"
-              options={projectStatusOptions}
+              options={countryStatusOptions}
               placeholder="Choose"
-              selectedItem={selectedProjectStatus}
-              setSelectedItem={setSelectedProjectStatus}
+              selectedItem={selectedCountryStatus}
+              setSelectedItem={setSelectedCountryStatus}
             />
           </div>
         </div>
@@ -76,7 +76,7 @@ const UpsertProjectPage = () => {
           <Button
             size="small"
             variant="text"
-            onClick={() => router.replace("/projects")}
+            onClick={() => router.replace("/countries")}
           >
             Cancel
           </Button>
@@ -94,4 +94,4 @@ const UpsertProjectPage = () => {
   );
 };
 
-export default UpsertProjectPage;
+export default UpsertCountryPage;

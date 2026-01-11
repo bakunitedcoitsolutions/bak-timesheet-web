@@ -1,34 +1,44 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { useParams, useRouter } from "next/navigation";
 
 import { classNames } from "primereact/utils";
+import { countriesData } from "@/utils/dummy";
 import { StepperFormHeading } from "@/components";
 import { getEntityModeFromParam } from "@/helpers";
 import { FORM_FIELD_WIDTHS } from "@/utils/constants";
 import { Button, Dropdown, Input } from "@/components/forms";
 
-const projectStatusOptions = [
+const cityStatusOptions = [
   { label: "Active", value: "1" },
   { label: "Inactive", value: "2" },
 ];
 
-const UpsertProjectPage = () => {
-  const [selectedProjectStatus, setSelectedProjectStatus] = useState<
-    string | null
-  >(null);
+const UpsertCityPage = () => {
+  const [selectedCountry, setSelectedCountry] = useState<string | null>(null);
+  const [selectedCityStatus, setSelectedCityStatus] = useState<string | null>(
+    null
+  );
   const router = useRouter();
-  const { id: projectIdParam } = useParams();
+  const { id: cityIdParam } = useParams();
   const {
     isInvalid,
     isAddMode,
     isEditMode,
-    entityId: projectId,
+    entityId: cityId,
   } = getEntityModeFromParam({
     addKeyword: "new",
-    param: projectIdParam,
+    param: cityIdParam,
   });
+
+  // Convert countriesData to dropdown options
+  const countryOptions = useMemo(() => {
+    return countriesData.map((country) => ({
+      label: country.nameEn,
+      value: String(country.id),
+    }));
+  }, []);
 
   // Redirect to 404 page if the entity is invalid
   useEffect(() => {
@@ -40,15 +50,13 @@ const UpsertProjectPage = () => {
   const handleSubmit = async (data: Record<string, any>) => {
     console.log("Form submitted:", data);
     // Handle form submission here
-    router.replace(`/projects`);
+    router.replace(`/setup/cities`);
   };
 
   return (
     <div className="flex flex-col h-full gap-6 px-6 py-6">
       <div className="flex h-full justify-between flex-1 md:flex-none flex-col gap-4 py-6 bg-white rounded-lg">
-        <StepperFormHeading
-          title={isAddMode ? "Add Project" : "Edit Project"}
-        />
+        <StepperFormHeading title={isAddMode ? "Add City" : "Edit City"} />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 md:gap-y-8 md:py-5 px-6 mt-5 md:mt-0 w-full md:max-w-5xl content-start flex-1">
           <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
             <Input label="Name" className="w-full" placeholder="Enter name" />
@@ -62,12 +70,23 @@ const UpsertProjectPage = () => {
           </div>
           <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
             <Dropdown
-              label="Project Status"
+              label="Country"
               className="w-full"
-              options={projectStatusOptions}
+              options={countryOptions}
+              placeholder="Choose Country"
+              selectedItem={selectedCountry}
+              setSelectedItem={setSelectedCountry}
+              filter
+            />
+          </div>
+          <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
+            <Dropdown
+              label="City Status"
+              className="w-full"
+              options={cityStatusOptions}
               placeholder="Choose"
-              selectedItem={selectedProjectStatus}
-              setSelectedItem={setSelectedProjectStatus}
+              selectedItem={selectedCityStatus}
+              setSelectedItem={setSelectedCityStatus}
             />
           </div>
         </div>
@@ -76,7 +95,7 @@ const UpsertProjectPage = () => {
           <Button
             size="small"
             variant="text"
-            onClick={() => router.replace("/projects")}
+            onClick={() => router.replace("/setup/cities")}
           >
             Cancel
           </Button>
@@ -94,4 +113,4 @@ const UpsertProjectPage = () => {
   );
 };
 
-export default UpsertProjectPage;
+export default UpsertCityPage;
