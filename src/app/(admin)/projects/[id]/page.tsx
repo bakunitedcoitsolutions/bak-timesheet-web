@@ -49,7 +49,7 @@ const UpsertProjectPage = () => {
         <StepperFormHeading
           title={isAddMode ? "Add Project" : "Edit Project"}
         />
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 md:gap-y-8 md:py-5 px-6 max-w-5xl items-center mt-5 md:mt-0">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 md:gap-y-8 md:py-5 px-6 mt-5 md:mt-0 max-w-5xl content-start flex-1">
           <div className={classNames(FORM_FIELD_WIDTHS["2"], "xl:min-w-83.5!")}>
             <Input
               label="Full Name (En)"
