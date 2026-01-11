@@ -1,5 +1,5 @@
 {
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
-  "cSpell.words": ["Challans", "Gridlines", "Timesheet"]
+  "cSpell.words": ["Challan", "Challans", "Gridlines", "Timesheet"]
 }

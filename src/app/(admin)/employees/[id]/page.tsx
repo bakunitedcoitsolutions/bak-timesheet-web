@@ -65,7 +65,7 @@ const UpsertEmployeePage = () => {
       </h1>
       <StepperForm
         steps={steps}
-        initialStep={4}
+        initialStep={0}
         onSubmit={handleSubmit}
         className="w-full h-full"
       >

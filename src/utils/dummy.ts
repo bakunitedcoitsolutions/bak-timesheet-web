@@ -1143,6 +1143,175 @@ for (let i = 11; i <= 152; i++) {
   });
 }
 
+export interface ChallanEntry {
+  id: number;
+  date: string; // DD-Mon-YYYY format
+  code: string; // Employee code
+  employeeName: string;
+  designation: string;
+  challanAmount: number;
+  deductionAmount: number;
+  remarks: string;
+}
+
+const initialChallansData: ChallanEntry[] = [
+  {
+    id: 1,
+    date: "18-Dec-2025",
+    code: "60065",
+    employeeName: "ISHTIAQ AHMED MUHAMMAD SIDDIQUE",
+    designation: "Truck House Driver",
+    challanAmount: 113,
+    deductionAmount: 0,
+    remarks: "Traffic Violation",
+  },
+  {
+    id: 2,
+    date: "24-Dec-2025",
+    code: "60039",
+    employeeName: "MUDASSAR IQBAL MAZHAR IQBAL",
+    designation: "Truck House Driver",
+    challanAmount: 0,
+    deductionAmount: 113,
+    remarks: "Traffic Violations Refunded",
+  },
+  {
+    id: 3,
+    date: "30-Dec-2025",
+    code: "60008",
+    employeeName: "WASEEM AKHTAR MUHAMMAD ISMAIL",
+    designation: "Mechanic",
+    challanAmount: 2925,
+    deductionAmount: 0,
+    remarks: "Traffic Violation",
+  },
+  {
+    id: 4,
+    date: "31-Dec-2025",
+    code: "60008",
+    employeeName: "WASEEM AKHTAR MUHAMMAD ISMAIL",
+    designation: "Mechanic",
+    challanAmount: 375,
+    deductionAmount: 0,
+    remarks: "Violation 3126334315 Date: 2025-12-23 استخدام السائق بيده أي جهاز محمول اثناء سير المركبة",
+  },
+  {
+    id: 5,
+    date: "31-Dec-2025",
+    code: "60058",
+    employeeName: "REHMAT ULLAH SHARIF",
+    designation: "Truck House Driver",
+    challanAmount: 763,
+    deductionAmount: 0,
+    remarks: "Traffic Violation",
+  },
+  {
+    id: 6,
+    date: "31-Dec-2025",
+    code: "65029",
+    employeeName: "SHAKIR ULLAH",
+    designation: "OS, Driver",
+    challanAmount: 113,
+    deductionAmount: 0,
+    remarks: "Traffic Violation",
+  },
+  {
+    id: 7,
+    date: "31-Dec-2025",
+    code: "90020",
+    employeeName: "ARSHAD MANDI",
+    designation: "OS, Steel Fixer",
+    challanAmount: 75,
+    deductionAmount: 0,
+    remarks: "Traffic Violation 2009",
+  },
+  {
+    id: 8,
+    date: "31-Dec-2025",
+    code: "90020",
+    employeeName: "ARSHAD MANDI",
+    designation: "OS, Steel Fixer",
+    challanAmount: 113,
+    deductionAmount: 0,
+    remarks: "Traffic Violation 3457",
+  },
+  {
+    id: 9,
+    date: "31-Dec-2025",
+    code: "20007",
+    employeeName: "BASHARAT SAIN",
+    designation: "Forman",
+    challanAmount: 226,
+    deductionAmount: 0,
+    remarks: "Traffic Violation 6193",
+  },
+  {
+    id: 10,
+    date: "31-Dec-2025",
+    code: "30072",
+    employeeName: "IFTIKHAR AHMED MUHAMMAD SHARIF",
+    designation: "SF, Labour",
+    challanAmount: 188,
+    deductionAmount: 0,
+    remarks: "Traffic Violation 3457",
+  },
+];
+
+// Generate more entries to reach 21 total (as shown in pagination)
+for (let i = 11; i <= 21; i++) {
+  const designations = [
+    "Truck House Driver",
+    "Mechanic",
+    "OS, Driver",
+    "OS, Steel Fixer",
+    "Forman",
+    "SF, Labour",
+    "Carpenter",
+    "Data Operator",
+  ];
+  const employeeNames = [
+    "ISHTIAQ AHMED MUHAMMAD SIDDIQUE",
+    "MUDASSAR IQBAL MAZHAR IQBAL",
+    "WASEEM AKHTAR MUHAMMAD ISMAIL",
+    "REHMAT ULLAH SHARIF",
+    "SHAKIR ULLAH",
+    "ARSHAD MANDI",
+    "BASHARAT SAIN",
+    "IFTIKHAR AHMED MUHAMMAD SHARIF",
+    "TAIMOOR HASSAN MUHAMMAD WALAYAT",
+    "NADEEM ABBAS",
+  ];
+  const remarks = [
+    "Traffic Violation",
+    "Traffic Violations Refunded",
+    "Traffic Violation 2009",
+    "Traffic Violation 3457",
+    "Traffic Violation 6193",
+    "Violation 3126334315",
+    "Speeding violation",
+    "Parking violation",
+  ];
+
+  const day = String(Math.floor(Math.random() * 28) + 1).padStart(2, "0");
+  const month = "Dec";
+  const year = 2025;
+  const code = String(Math.floor(Math.random() * 90000) + 10000);
+
+  initialChallansData.push({
+    id: i,
+    date: `${day}-${month}-${year}`,
+    code: code,
+    employeeName:
+      employeeNames[Math.floor(Math.random() * employeeNames.length)],
+    designation: designations[Math.floor(Math.random() * designations.length)],
+    challanAmount: [0, 75, 113, 188, 226, 375, 763, 2925][
+      Math.floor(Math.random() * 8)
+    ],
+    deductionAmount: [0, 113, 226][Math.floor(Math.random() * 3)],
+    remarks: remarks[Math.floor(Math.random() * remarks.length)],
+  });
+}
+
 export {
   stats,
   projectsData,
@@ -1154,5 +1323,6 @@ export {
   designationOptions,
   initialTimesheetData,
   initialLoansData,
+  initialChallansData,
 };
-export type { ProjectExpense, Employee, TimesheetEntry, LoanEntry };
+export type { ProjectExpense, Employee, TimesheetEntry, LoanEntry, ChallanEntry };
