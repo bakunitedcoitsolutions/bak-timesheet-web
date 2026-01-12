@@ -976,6 +976,164 @@ interface LoanEntry {
   type: "loan" | "return";
 }
 
+interface PayrollEntry {
+  id: number;
+  period: string; // "JANUARY 2025" format
+  gosiSalary: number;
+  salary: number;
+  previousAdvance: number;
+  currentAdvance: number;
+  deduction: number;
+  netLoan: number; // can be negative
+  netSalaryPayable: number;
+  cardSalary: number;
+  cashSalary: number;
+  status: "Posted" | "Pending";
+}
+
+const initialPayrollData: PayrollEntry[] = [
+  {
+    id: 10,
+    period: "DEC 2025",
+    gosiSalary: 175900,
+    salary: 225720,
+    previousAdvance: 46657,
+    currentAdvance: 1000,
+    deduction: 4350,
+    netLoan: -352,
+    netSalaryPayable: 7132,
+    cardSalary: 105170,
+    cashSalary: 116014,
+    status: "Pending",
+  },
+  {
+    id: 1,
+    period: "JAN 2025",
+    gosiSalary: 690853,
+    salary: 1121577,
+    previousAdvance: 154583,
+    currentAdvance: 50267,
+    deduction: 62172,
+    netLoan: 7759,
+    netSalaryPayable: 97969,
+    cardSalary: 371172,
+    cashSalary: 688252,
+    status: "Posted",
+  },
+  {
+    id: 2,
+    period: "FEB 2025",
+    gosiSalary: 699805,
+    salary: 1076188,
+    previousAdvance: 147611,
+    currentAdvance: 63119,
+    deduction: 42497,
+    netLoan: 24634,
+    netSalaryPayable: 81713,
+    cardSalary: 388685,
+    cashSalary: 645112,
+    status: "Posted",
+  },
+  {
+    id: 3,
+    period: "MAR 2025",
+    gosiSalary: 717403,
+    salary: 821263,
+    previousAdvance: 173933,
+    currentAdvance: 58329,
+    deduction: 52005,
+    netLoan: 46123,
+    netSalaryPayable: 215474,
+    cardSalary: 306175,
+    cashSalary: 463319,
+    status: "Posted",
+  },
+  {
+    id: 4,
+    period: "APR 2025",
+    gosiSalary: 699303,
+    salary: 956258,
+    previousAdvance: 181579,
+    currentAdvance: 66068,
+    deduction: 35239,
+    netLoan: 10829,
+    netSalaryPayable: 77722,
+    cardSalary: 381824,
+    cashSalary: 539893,
+    status: "Posted",
+  },
+  {
+    id: 5,
+    period: "MAY 202525",
+    gosiSalary: 699303,
+    salary: 1190127,
+    previousAdvance: 212408,
+    currentAdvance: 53012,
+    deduction: 84872,
+    netLoan: 83950,
+    netSalaryPayable: 72686,
+    cardSalary: 446990,
+    cashSalary: 658274,
+    status: "Posted",
+  },
+  {
+    id: 6,
+    period: "JUN 2025",
+    gosiSalary: 613103,
+    salary: 931819,
+    previousAdvance: 139401,
+    currentAdvance: 29424,
+    deduction: 42671,
+    netLoan: 72436,
+    netSalaryPayable: 542446,
+    cardSalary: 390397,
+    cashSalary: 498680,
+    status: "Posted",
+  },
+  {
+    id: 7,
+    period: "JUL 2025",
+    gosiSalary: 648053,
+    salary: 891314,
+    previousAdvance: 132625,
+    currentAdvance: 29932,
+    deduction: 39439,
+    netLoan: 5740,
+    netSalaryPayable: 159266,
+    cardSalary: 366240,
+    cashSalary: 485646,
+    status: "Posted",
+  },
+  {
+    id: 8,
+    period: "OCT 2025",
+    gosiSalary: 784959,
+    salary: 1350379,
+    previousAdvance: 270024,
+    currentAdvance: 113976,
+    deduction: 74221,
+    netLoan: 8710,
+    netSalaryPayable: 75665,
+    cardSalary: 417486,
+    cashSalary: 845904,
+    status: "Posted",
+  },
+  {
+    id: 9,
+    period: "NOV 2025",
+    gosiSalary: 878507,
+    salary: 1381864,
+    previousAdvance: 297385,
+    currentAdvance: 111891,
+    deduction: 116801,
+    netLoan: 25287,
+    netSalaryPayable: 305013,
+    cardSalary: 391906,
+    cashSalary: 853674,
+    status: "Posted",
+  },
+];
+
 const initialLoansData: LoanEntry[] = [
   {
     id: 1,
@@ -2154,6 +2312,7 @@ export {
   initialTimesheetData,
   initialLoansData,
   initialChallansData,
+  initialPayrollData,
   countriesData,
   citiesData,
   branchesData,
@@ -2169,6 +2328,7 @@ export type {
   TimesheetEntry,
   LoanEntry,
   ChallanEntry,
+  PayrollEntry,
   Country,
   City,
   Branch,
