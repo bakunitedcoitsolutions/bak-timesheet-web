@@ -947,7 +947,7 @@ for (let i = 7; i <= 24; i++) {
   });
 }
 
-export interface Project {
+interface Project {
   id: number;
   nameEn: string;
   nameAr: string;
