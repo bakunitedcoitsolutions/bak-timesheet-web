@@ -93,8 +93,8 @@ export default function Header({ collapsed, setCollapsed }: HeaderProps) {
           className={classNames(
             "w-10 h-10 flex items-center justify-center cursor-pointer rounded-full  focus:outline-none transition-all duration-300",
             {
-              "bg-primary shadow-sm text-white": !collapsed,
-              "bg-transparent text-primary hover:bg-primary/10": collapsed,
+              "bg-primary-light text-primary": !collapsed,
+              "bg-transparent text-primary hover:bg-primary-light": collapsed,
             }
           )}
         >
