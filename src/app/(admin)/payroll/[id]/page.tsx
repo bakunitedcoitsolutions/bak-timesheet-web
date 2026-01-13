@@ -103,7 +103,7 @@ const PayrollDetailPage = () => {
             <Badge text="C" />
             <Badge text="F" />
           </div>
-            </div>
+        </div>
       ),
     },
     {
@@ -317,7 +317,7 @@ const PayrollDetailPage = () => {
         <div className="flex justify-center">
           <NumberInput
             useGrouping={false}
-              disabled={rowData.isLocked}
+            disabled={rowData.isLocked}
             value={rowData.totalSalary}
             onValueChange={(e) =>
               updatePayrollEntry(rowData.id, "totalSalary", e.value || 0)
@@ -325,8 +325,8 @@ const PayrollDetailPage = () => {
             className="timesheet-number-input"
             min={0}
             showButtons={false}
-            />
-          </div>
+          />
+        </div>
       ),
     },
     {
@@ -357,7 +357,7 @@ const PayrollDetailPage = () => {
         <div className="flex justify-center">
           <NumberInput
             useGrouping={false}
-              disabled={rowData.isLocked}
+            disabled={rowData.isLocked}
             value={rowData.currentAdvance}
             onValueChange={(e) =>
               updatePayrollEntry(rowData.id, "currentAdvance", e.value || 0)
@@ -436,7 +436,7 @@ const PayrollDetailPage = () => {
         <div className="flex justify-center">
           <NumberInput
             useGrouping={false}
-              disabled={rowData.isLocked}
+            disabled={rowData.isLocked}
             value={rowData.currentTraffic}
             onValueChange={(e) =>
               updatePayrollEntry(rowData.id, "currentTraffic", e.value || 0)
@@ -444,8 +444,8 @@ const PayrollDetailPage = () => {
             className="timesheet-number-input"
             min={0}
             showButtons={false}
-            />
-          </div>
+          />
+        </div>
       ),
     },
     {
@@ -476,7 +476,7 @@ const PayrollDetailPage = () => {
         <div className="flex justify-center">
           <NumberInput
             useGrouping={false}
-              disabled={rowData.isLocked}
+            disabled={rowData.isLocked}
             value={rowData.netTraffic}
             onValueChange={(e) =>
               updatePayrollEntry(rowData.id, "netTraffic", e.value || 0)
@@ -567,7 +567,7 @@ const PayrollDetailPage = () => {
     },
     {
       field: "project",
-      header: "Project",
+      header: "Salary Method",
       ...tableCommonProps,
       style: { minWidth: 200, width: 200 },
       body: (rowData: PayrollDetailEntry) => (
@@ -577,7 +577,7 @@ const PayrollDetailPage = () => {
           options={projectOptions}
           disabled={rowData.isLocked}
           className="w-[200px]! h-10!"
-          placeholder="Select Project"
+          placeholder="Choose Method"
           selectedItem={rowData.project}
           setSelectedItem={(value) =>
             updatePayrollEntry(rowData.id, "project", value)
