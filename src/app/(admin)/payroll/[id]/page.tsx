@@ -81,6 +81,7 @@ const PayrollDetailPage = () => {
       field: "empCode",
       header: "Emp. Code",
       ...tableCommonProps,
+      style: { minWidth: 120, zIndex: 10 },
       frozen: true,
       body: (rowData: PayrollDetailEntry) => (
         <span className="text-sm font-semibold!">{rowData.empCode}</span>
@@ -90,7 +91,7 @@ const PayrollDetailPage = () => {
       field: "name",
       header: "Name",
       ...tableCommonProps,
-      style: { minWidth: 300 },
+      style: { minWidth: 300, zIndex: 10 },
       frozen: true,
       body: (rowData: PayrollDetailEntry) => (
         <div className="flex items-start gap-2">
