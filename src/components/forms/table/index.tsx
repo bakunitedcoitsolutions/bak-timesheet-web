@@ -94,6 +94,7 @@ export interface CustomTableProps<
     exportPdf?: () => void;
   }) => ReactNode;
   exportable?: boolean;
+  extraSmall?: boolean;
   exportColumns?: Array<{ title: string; dataKey: string }>;
 }
 
@@ -120,6 +121,7 @@ const CustomTable = forwardRef<TableRef, CustomTableProps<any>>(
       customHeader,
       exportable = false,
       exportColumns,
+      extraSmall = false,
       ...rest
     }: CustomTableProps<T>,
     ref: React.ForwardedRef<TableRef>
@@ -429,6 +431,7 @@ const CustomTable = forwardRef<TableRef, CustomTableProps<any>>(
                     smallTextFilterTemplate(
                       options,
                       filterPlaceholder || "Search",
+                      extraSmall ?? false,
                       filterIcon
                     )
                 : undefined);

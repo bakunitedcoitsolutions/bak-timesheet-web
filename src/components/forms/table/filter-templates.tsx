@@ -10,6 +10,7 @@ import { InputText } from "primereact/inputtext";
 import { ColumnFilterElementTemplateOptions } from "primereact/column";
 import { Tag } from "primereact/tag";
 import Input from "../input";
+import { classNames } from "primereact/utils";
 
 interface FilterOption {
   label: string;
@@ -108,19 +109,27 @@ export const textFilterTemplate = (
 export const smallTextFilterTemplate = (
   options: ColumnFilterElementTemplateOptions,
   placeholder: string = "Search",
+  extraSmall?: boolean,
   icon?: string
 ) => {
   return (
     <Input
-      small
-      icon={icon ?? "pi pi-search text-text-gray!"}
+      small={!extraSmall}
+      icon={classNames(icon ?? "pi pi-search text-text-gray!", {
+        "text-xs!": extraSmall,
+      })}
       iconPosition="left"
       value={options.value || ""}
       onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
         options.filterApplyCallback(e.target.value)
       }
       placeholder={placeholder}
-      className="p-column-filter placeholder:text-text-gray!"
+      className={classNames(
+        {
+          "input-extra-small": extraSmall,
+        },
+        "p-column-filter placeholder:text-text-gray!"
+      )}
       style={{ width: "100%", maxWidth: "100%" }}
     />
   );

@@ -12,6 +12,7 @@ import {
   Table,
   TableColumn,
   TableRef,
+  Badge,
 } from "@/components";
 import {
   designationOptions,
@@ -111,11 +112,7 @@ const TimesheetPage = () => {
               {rowData.designation}
             </span>
           </div>
-          {rowData.hasFlag && (
-            <div className="w-5 h-5 bg-primary rounded-md flex items-center justify-center shrink-0">
-              <span className="text-white text-base font-bold">F</span>
-            </div>
-          )}
+          {rowData.hasFlag && <Badge text="F" />}
         </div>
       ),
     },
@@ -454,8 +451,6 @@ const TimesheetPage = () => {
             rowClassName={(rowData: TimesheetEntry) =>
               rowData.isLocked ? "locked-row" : ""
             }
-            // tableClassName="timesheet-table"
-            // showGridlines
           />
         </div>
       </div>

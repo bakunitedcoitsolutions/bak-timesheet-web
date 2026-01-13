@@ -165,14 +165,6 @@ body
   padding: 0.5rem 0.75rem;
 }
 
-/* Small input styles */
-body .input-small.p-inputtext,
-body .input-small.p-inputtext.p-component {
-  font-size: 0.875rem !important;
-  padding: 0.5rem !important;
-  height: auto !important;
-}
-
 /* Ensure filter inputs don't exceed column width */
 body .p-datatable .p-column-filter {
   width: 100% !important;
@@ -189,6 +181,13 @@ body .p-datatable .p-datatable-thead > tr:nth-child(2) td {
 }
 
 /* Small input with icon - add padding to prevent overlap */
+body .input-small.p-inputtext,
+body .input-small.p-inputtext.p-component {
+  font-size: 0.875rem !important;
+  padding: 0.5rem !important;
+  height: auto !important;
+}
+
 body .p-icon-field-left .input-small.p-inputtext,
 body .p-icon-field-left .input-small.p-inputtext.p-component {
   padding-left: 2.5rem !important;
@@ -202,6 +201,30 @@ body .p-icon-field-right .input-small.p-inputtext.p-component {
 body .input-small .p-icon-field-left .p-input-icon,
 body .input-small .p-icon-field-right .p-input-icon {
   font-size: 0.875rem;
+}
+
+/* Extra small input with icon - add padding to prevent overlap */
+body .input-extra-small.p-inputtext,
+body .input-extra-small.p-inputtext.p-component {
+  font-size: 0.8rem !important;
+  padding: 0.4rem !important;
+  height: auto !important;
+  border-radius: 0.62rem !important;
+}
+
+body .p-icon-field-left .input-extra-small.p-inputtext,
+body .p-icon-field-left .input-extra-small.p-inputtext.p-component {
+  padding-left: 1.85rem !important;
+}
+
+body .p-icon-field-right .input-extra-small.p-inputtext,
+body .p-icon-field-right .input-extra-small.p-inputtext.p-component {
+  padding-right: 1.5rem !important;
+}
+
+body .input-extra-small .p-icon-field-left .p-input-icon,
+body .input-extra-small .p-icon-field-right .p-input-icon {
+  font-size: 0.75rem;
 }
 
 /* Custom table header styles - only for tables with custom-header class */
@@ -222,7 +245,6 @@ body .p-datatable.custom-header .p-datatable-tbody > tr:last-child > td {
 }
 
 /* Custom small number input styling for timesheet */
-
 body .timesheet-number-input.p-inputnumber .p-inputnumber-input {
   width: 100% !important;
   min-width: 100% !important;
