@@ -151,6 +151,11 @@ const menuItems: MenuItem[] = [
         icon: "fa-light fa-user-shield text-lg!",
         href: "/setup/user-roles",
       },
+      {
+        label: "GOSI Cities",
+        icon: "fa-light fa-building-memo text-lg!",
+        href: "/setup/gosi-cities",
+      },
     ],
   },
 ];

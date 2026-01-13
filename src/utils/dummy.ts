@@ -1989,6 +1989,13 @@ interface Country {
   isActive: boolean;
 }
 
+interface GosiCity {
+  id: number;
+  nameEn: string;
+  nameAr: string;
+  isActive: boolean;
+}
+
 const countriesData: Country[] = [
   {
     id: 1,
@@ -2048,6 +2055,27 @@ const countriesData: Country[] = [
     id: 10,
     nameEn: "Sudani",
     nameAr: "السودان",
+    isActive: true,
+  },
+];
+
+const gosiCitiesData: GosiCity[] = [
+  {
+    id: 1,
+    nameEn: "Riyadh",
+    nameAr: "الرياض",
+    isActive: true,
+  },
+  {
+    id: 2,
+    nameEn: "Jeddah",
+    nameAr: "جدة",
+    isActive: true,
+  },
+  {
+    id: 3,
+    nameEn: "Al Barq",
+    nameAr: "البرق",
     isActive: true,
   },
 ];
@@ -2827,6 +2855,7 @@ export {
   initialPayrollDetailData,
   countriesData,
   citiesData,
+  gosiCitiesData,
   branchesData,
   designationsData,
   payrollSectionsData,
@@ -2844,6 +2873,7 @@ export type {
   PayrollDetailEntry,
   Country,
   City,
+  GosiCity,
   Branch,
   PayrollSection,
   Designation,
