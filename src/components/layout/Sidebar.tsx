@@ -115,48 +115,7 @@ const menuItems: MenuItem[] = [
   {
     label: "Setup",
     icon: "fa-light fa-gear text-xl!",
-    items: [
-      {
-        label: "Countries",
-        icon: "fa-light fa-globe text-lg!",
-        href: "/setup/countries",
-      },
-      {
-        label: "Cities",
-        icon: "fa-light fa-city text-lg!",
-        href: "/setup/cities",
-      },
-      {
-        label: "Branches",
-        icon: "fa-light fa-sitemap text-lg!",
-        href: "/setup/branches",
-      },
-      {
-        label: "Designation",
-        icon: "fa-light fa-briefcase text-lg!",
-        href: "/setup/designation",
-      },
-      {
-        label: "Payroll Sections",
-        icon: "fa-light fa-wallet text-lg!",
-        href: "/setup/payroll-sections",
-      },
-      {
-        label: "Employee Statuses",
-        icon: "fa-light fa-user-check text-lg!",
-        href: "/setup/employee-statuses",
-      },
-      {
-        label: "User Roles",
-        icon: "fa-light fa-user-shield text-lg!",
-        href: "/setup/user-roles",
-      },
-      {
-        label: "GOSI Cities",
-        icon: "fa-light fa-building-memo text-lg!",
-        href: "/setup/gosi-cities",
-      },
-    ],
+    href: "/setup",
   },
 ];
 
