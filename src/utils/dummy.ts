@@ -2032,6 +2032,130 @@ const initialExitReentryData: ExitReentryEntry[] = [
   },
 ];
 
+interface LedgerEntry {
+  id: number;
+  date: string; // DD-Mon-YYYY format or empty
+  description: string;
+  salary: number | null;
+  loan: number | null;
+  challan: number | null;
+  deduction: number | null;
+  balance: number;
+}
+
+const initialLedgerData: LedgerEntry[] = [
+  {
+    id: 1,
+    date: "",
+    description: "Opening Balance",
+    salary: null,
+    loan: null,
+    challan: null,
+    deduction: null,
+    balance: 0,
+  },
+  {
+    id: 2,
+    date: "31-Jul-2022",
+    description: "Salary (Jul 22)",
+    salary: 3000,
+    loan: null,
+    challan: null,
+    deduction: null,
+    balance: 3000,
+  },
+  {
+    id: 3,
+    date: "15-Aug-2022",
+    description: "Loan (Aug 22)",
+    salary: null,
+    loan: 500,
+    challan: null,
+    deduction: null,
+    balance: 2500,
+  },
+  {
+    id: 4,
+    date: "20-Aug-2022",
+    description: "Challan (Aug 22)",
+    salary: null,
+    loan: null,
+    challan: 150,
+    deduction: null,
+    balance: 2350,
+  },
+  {
+    id: 5,
+    date: "31-Aug-2022",
+    description: "Salary (Aug 22)",
+    salary: 6000,
+    loan: null,
+    challan: null,
+    deduction: null,
+    balance: 8350,
+  },
+  {
+    id: 6,
+    date: "10-Sep-2022",
+    description: "Loan (Sep 22)",
+    salary: null,
+    loan: 800,
+    challan: null,
+    deduction: null,
+    balance: 7550,
+  },
+  {
+    id: 7,
+    date: "25-Sep-2022",
+    description: "Challan (Sep 22)",
+    salary: null,
+    loan: null,
+    challan: 200,
+    deduction: null,
+    balance: 7350,
+  },
+  {
+    id: 8,
+    date: "30-Sep-2022",
+    description: "Salary (Sep 22)",
+    salary: 6000,
+    loan: null,
+    challan: null,
+    deduction: null,
+    balance: 13350,
+  },
+  {
+    id: 9,
+    date: "12-Oct-2022",
+    description: "Loan (Oct 22)",
+    salary: null,
+    loan: 1000,
+    challan: null,
+    deduction: null,
+    balance: 12350,
+  },
+  {
+    id: 10,
+    date: "18-Oct-2022",
+    description: "Challan (Oct 22)",
+    salary: null,
+    loan: null,
+    challan: 300,
+    deduction: null,
+    balance: 12050,
+  },
+  {
+    id: 11,
+    date: "31-Oct-2022",
+    description: "Salary (Oct 22)",
+    salary: 6000,
+    loan: null,
+    challan: null,
+    deduction: null,
+    balance: 18050,
+  },
+];
+
 interface Country {
   id: number;
   nameEn: string;
@@ -2902,6 +3026,7 @@ export {
   initialLoansData,
   initialChallansData,
   initialExitReentryData,
+  initialLedgerData,
   initialPayrollData,
   initialPayrollDetailData,
   countriesData,
@@ -2921,6 +3046,7 @@ export type {
   LoanEntry,
   ChallanEntry,
   ExitReentryEntry,
+  LedgerEntry,
   PayrollEntry,
   PayrollDetailEntry,
   Country,

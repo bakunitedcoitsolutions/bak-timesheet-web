@@ -284,6 +284,13 @@ body .p-datatable.timesheet-table .p-datatable-tbody > tr > td {
   padding: 0.75rem !important;
 }
 
+/* Ledger table footer styling */
+body .p-datatable .p-datatable-tfoot > tr > td {
+  background-color: #f3f4f6 !important;
+  font-weight: 600 !important;
+  padding: 0.75rem !important;
+}
+
 /* Hide spacing for "All" group in designation dropdown */
 body
   .p-dropdown-panel.designation-dropdown-panel
