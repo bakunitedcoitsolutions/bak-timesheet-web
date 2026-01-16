@@ -6,11 +6,11 @@ import {
   Input,
   Table,
   Button,
+  TypeBadge,
   TableColumn,
   TableActions,
   ExportOptions,
   CustomHeaderProps,
-  TypeBadge,
 } from "@/components";
 import { City, citiesData, countriesData } from "@/utils/dummy";
 

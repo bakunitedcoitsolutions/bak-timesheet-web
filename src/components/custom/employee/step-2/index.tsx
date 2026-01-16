@@ -5,6 +5,7 @@ import { classNames } from "primereact/utils";
 import { FORM_FIELD_WIDTHS } from "@/utils/constants";
 import { StepperFormHeading } from "@/components/common";
 import { Dropdown, FilePicker, Input, NumberInput } from "@/components/forms";
+import { branchesData } from "@/utils/dummy";
 
 const genderOptions = [
   { label: "Male", value: "male" },
@@ -60,6 +61,7 @@ const isFixedOptions = [
 const Step2 = () => {
   // Row 1
   const [selectedCity, setSelectedCity] = useState<string | null>(null);
+  const [selectedBranch, setSelectedBranch] = useState<string | null>(null);
   const [selectedGender, setSelectedGender] = useState<string | null>(null);
   const [selectedCountry, setSelectedCountry] = useState<string | null>(null);
   // Row 2
@@ -130,7 +132,20 @@ const Step2 = () => {
             setSelectedItem={setSelectedEmployeeStatus}
           />
         </div>
-        <div className={classNames(FORM_FIELD_WIDTHS["4"], "xl:col-span-2")}>
+        <div className={classNames(FORM_FIELD_WIDTHS["4"])}>
+          <Dropdown
+            label="Branch"
+            className="w-full"
+            placeholder="Choose"
+            options={branchesData.map((branch) => ({
+              label: branch.nameEn,
+              value: branch.id,
+            }))}
+            selectedItem={selectedBranch}
+            setSelectedItem={setSelectedBranch}
+          />
+        </div>
+        <div className={classNames(FORM_FIELD_WIDTHS["4"])}>
           <Dropdown
             label="Designation"
             className="w-full"

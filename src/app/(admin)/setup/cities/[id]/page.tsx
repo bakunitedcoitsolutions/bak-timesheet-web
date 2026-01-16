@@ -1,9 +1,10 @@
 "use client";
 
 import { useEffect, useState, useMemo } from "react";
+import { classNames } from "primereact/utils";
+import { Checkbox } from "primereact/checkbox";
 import { useParams, useRouter } from "next/navigation";
 
-import { classNames } from "primereact/utils";
 import { countriesData } from "@/utils/dummy";
 import { StepperFormHeading } from "@/components";
 import { getEntityModeFromParam } from "@/helpers";
@@ -16,6 +17,7 @@ const cityStatusOptions = [
 ];
 
 const UpsertCityPage = () => {
+  const [showInPayroll, setShowInPayroll] = useState<boolean>(false);
   const [selectedCountry, setSelectedCountry] = useState<string | null>(null);
   const [selectedCityStatus, setSelectedCityStatus] = useState<string | null>(
     null
@@ -88,6 +90,19 @@ const UpsertCityPage = () => {
               selectedItem={selectedCityStatus}
               setSelectedItem={setSelectedCityStatus}
             />
+          </div>
+          <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
+            <div className="flex align-items-center cursor-pointer">
+              <Checkbox
+                name="showInPayroll"
+                inputId="showInPayroll"
+                onChange={(e) => setShowInPayroll(e?.checked ?? false)}
+                checked={showInPayroll}
+              />
+              <label htmlFor="showInPayroll" className="ml-2">
+                Show in Payroll Details
+              </label>
+            </div>
           </div>
         </div>
 
