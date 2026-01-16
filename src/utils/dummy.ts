@@ -1823,6 +1823,16 @@ interface ChallanEntry {
   type: string;
 }
 
+interface ExitReentryEntry {
+  id: number;
+  code: string; // Employee code
+  employeeName: string;
+  designation: string;
+  type: "Exit" | "Entry";
+  date: string; // DD-Mon-YYYY format
+  remarks: string;
+}
+
 const initialChallansData: ChallanEntry[] = [
   {
     id: 1,
@@ -1982,6 +1992,45 @@ for (let i = 11; i <= 21; i++) {
     remarks: remarks[Math.floor(Math.random() * remarks.length)],
   });
 }
+
+const initialExitReentryData: ExitReentryEntry[] = [
+  {
+    id: 1,
+    code: "21005",
+    employeeName: "AZHAR IQBAL MUHAMMAD INAYAT",
+    designation: "Driver",
+    type: "Exit",
+    date: "15-Jul-2024",
+    remarks: "Exit re-entry visa fees",
+  },
+  {
+    id: 2,
+    code: "55012",
+    employeeName: "BELAL AHMED",
+    designation: "BD, Labour",
+    type: "Entry",
+    date: "11-May-2024",
+    remarks: "Return from exit",
+  },
+  {
+    id: 3,
+    code: "55025",
+    employeeName: "FARUK AHMED CHY",
+    designation: "BD, Labour",
+    type: "Exit",
+    date: "11-May-2024",
+    remarks: "Exit re-entry visa fees",
+  },
+  {
+    id: 4,
+    code: "55026",
+    employeeName: "MOHAMMED FARUK - MIAH",
+    designation: "BD, Labour",
+    type: "Entry",
+    date: "12-May-2024",
+    remarks: "Return from exit",
+  },
+];
 
 interface Country {
   id: number;
@@ -2852,6 +2901,7 @@ export {
   initialTimesheetData,
   initialLoansData,
   initialChallansData,
+  initialExitReentryData,
   initialPayrollData,
   initialPayrollDetailData,
   countriesData,
@@ -2870,6 +2920,7 @@ export type {
   TimesheetEntry,
   LoanEntry,
   ChallanEntry,
+  ExitReentryEntry,
   PayrollEntry,
   PayrollDetailEntry,
   Country,

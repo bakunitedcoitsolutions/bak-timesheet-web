@@ -1,6 +1,5 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { classNames } from "primereact/utils";
 
 import {
   Input,
@@ -10,6 +9,7 @@ import {
   TableActions,
   ExportOptions,
   CustomHeaderProps,
+  TypeBadge,
 } from "@/components";
 import { Designation, designationsData } from "@/utils/dummy";
 
@@ -125,16 +125,10 @@ const columns = (
     style: { minWidth: 100 },
     align: "center",
     body: (rowData: Designation) => (
-      <div className="w-full flex flex-1 justify-center">
-        <span
-          className={classNames("text-sm text-center", {
-            "text-theme-green bg-theme-light-green": rowData.isActive,
-            "text-theme-red bg-theme-light-red": !rowData.isActive,
-          })}
-        >
-          {rowData.isActive ? "Active" : "In-Active"}
-        </span>
-      </div>
+      <TypeBadge
+        text={rowData.isActive ? "Active" : "In-Active"}
+        variant={rowData.isActive ? "success" : "danger"}
+      />
     ),
   },
   {

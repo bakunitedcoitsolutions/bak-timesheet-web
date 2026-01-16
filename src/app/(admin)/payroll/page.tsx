@@ -14,6 +14,7 @@ import {
   ExportOptions,
   CustomHeaderProps,
   Dropdown,
+  TypeBadge,
 } from "@/components";
 import { initialPayrollData, PayrollEntry } from "@/utils/dummy";
 
@@ -239,17 +240,10 @@ const columns = (
     align: "center",
     style: { minWidth: "120px" },
     body: (rowData: PayrollEntry) => (
-      <span
-        className={classNames(
-          "inline-flex items-center justify-center px-3 py-1 rounded-full text-xs font-semibold",
-          {
-            "bg-yellow-100 text-yellow-700": rowData.status === "Pending",
-            "bg-green-100 text-green-700": rowData.status === "Posted",
-          }
-        )}
-      >
-        {rowData.status}
-      </span>
+      <TypeBadge
+        text={rowData.status}
+        variant={rowData.status === "Pending" ? "warning" : "success"}
+      />
     ),
   },
   {

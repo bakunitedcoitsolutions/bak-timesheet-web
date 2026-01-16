@@ -19,6 +19,7 @@ import {
   PieChart,
   Dropdown,
   TableColumn,
+  TypeBadge,
 } from "@/components";
 
 const HomePage = () => {
@@ -73,15 +74,10 @@ const HomePage = () => {
       sortable: false,
       filterable: false,
       body: (rowData) => (
-        <span
-          className={classNames("text-sm font-semibold px-2 py-1 rounded-md", {
-            "text-theme-green bg-theme-light-green":
-              rowData.status === "active",
-            "text-theme-red bg-theme-light-red": rowData.status === "inactive",
-          })}
-        >
-          {rowData.status === "active" ? "Active" : "Inactive"}
-        </span>
+        <TypeBadge
+          text={rowData.status === "active" ? "Active" : "Inactive"}
+          variant={rowData.status === "active" ? "success" : "danger"}
+        />
       ),
     },
     {

@@ -4,3 +4,4 @@ export { default as ExportOptions } from "./export-option";
 export { default as TitleHeader } from "./title-header";
 export { default as BulkUploadOptions } from "./bulk-upload-option";
 export { default as Badge } from "./badge";
+export { default as TypeBadge } from "./type-badge";
