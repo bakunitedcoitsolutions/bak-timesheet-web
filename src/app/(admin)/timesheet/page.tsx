@@ -1,24 +1,24 @@
 "use client";
 import { useRef, useState } from "react";
 import {
+  Input,
+  Badge,
+  Table,
   Button,
+  TableRef,
   Dropdown,
+  TableColumn,
+  NumberInput,
   TitleHeader,
   ExportOptions,
   BulkUploadOptions,
   CustomHeaderProps,
-  Input,
-  NumberInput,
-  Table,
-  TableColumn,
-  TableRef,
-  Badge,
 } from "@/components";
 import {
-  designationOptions,
   projects,
-  initialTimesheetData,
   TimesheetEntry,
+  designationOptions,
+  initialTimesheetData,
 } from "@/utils/dummy";
 import { Checkbox } from "primereact/checkbox";
 import { classNames } from "primereact/utils";
@@ -126,7 +126,7 @@ const TimesheetPage = () => {
     },
     {
       field: "project1",
-      header: "Prj. 1",
+      header: "Project 1",
       sortable: false,
       filterable: false,
       style: { maxWidth: "200px", width: "200px" },
@@ -151,10 +151,10 @@ const TimesheetPage = () => {
     },
     {
       field: "allowBreakProject1",
-      header: "Brf",
+      header: "B. Alw",
       sortable: false,
       filterable: false,
-      style: { minWidth: "50px", width: "50px" },
+      style: { minWidth: "70px", width: "70px" },
       body: (rowData: TimesheetEntry) => (
         <div className="flex justify-center items-center">
           {rowData.allowBreakProject1 ? (
@@ -222,7 +222,7 @@ const TimesheetPage = () => {
     },
     {
       field: "project2",
-      header: "Prj. 2",
+      header: "Project 2",
       sortable: false,
       filterable: false,
       style: { maxWidth: "200px", width: "200px" },
@@ -247,10 +247,10 @@ const TimesheetPage = () => {
     },
     {
       field: "allowBreakProject2",
-      header: "Brf",
+      header: "B. Alw",
       sortable: false,
       filterable: false,
-      style: { minWidth: "50px", width: "50px" },
+      style: { minWidth: "70px", width: "70px" },
       body: (rowData: TimesheetEntry) => (
         <div className="flex justify-center items-center">
           {rowData.allowBreakProject2 ? (
@@ -424,7 +424,7 @@ const TimesheetPage = () => {
   };
 
   return (
-    <div className="flex flex-col">
+    <div className="flex h-full flex-col">
       <TitleHeader
         title="ATTENDANCE SHEET"
         icon={<i className="fa-light fa-calendar text-xl!" />}
@@ -434,12 +434,12 @@ const TimesheetPage = () => {
           setSearchValue(value);
         }}
       />
-      <div className="flex flex-col gap-4 px-6 py-6 bg-theme-primary-light">
+      <div className="flex flex-1 flex-col gap-4 px-6 py-6 bg-theme-primary-light min-h-0">
         {renderHeader({
           exportCSV,
           exportExcel,
         })}
-        <div className="bg-white rounded-xl overflow-hidden">
+        <div className="bg-white h-full rounded-xl overflow-hidden min-h-0">
           <Table
             ref={tableRef}
             dataKey="id"
@@ -451,6 +451,8 @@ const TimesheetPage = () => {
             rowClassName={(rowData: TimesheetEntry) =>
               rowData.isLocked ? "locked-row" : ""
             }
+            scrollable
+            scrollHeight="72vh"
           />
         </div>
       </div>

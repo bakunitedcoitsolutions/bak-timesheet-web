@@ -71,6 +71,19 @@ body {
   font-weight: 600;
 }
 
+.font-arabic,
+.font-arabic div,
+.font-arabic span,
+.font-arabic input,
+.font-arabic .p-inputtext,
+.font-arabic .p-inputnumber-input,
+.font-arabic textarea {
+  --thm-font: var(--font-arabic);
+  font-family: var(--font-arabic), Arial, sans-serif;
+  font-size: 24px !important; /* Larger base font size for Arabic */
+  line-height: 1.8;
+}
+
 #password > div {
   width: 100% !important;
 }

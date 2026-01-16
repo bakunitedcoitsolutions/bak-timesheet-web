@@ -38,7 +38,7 @@ const Step5 = () => {
         </div>
       </div>
       <div className="flex flex-col gap-4">
-        <StepperFormHeading title="BAK Card Details" />
+        <StepperFormHeading title="Bank Card Details" />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 lg:gap-y-8 px-6">
           <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
             <Dropdown

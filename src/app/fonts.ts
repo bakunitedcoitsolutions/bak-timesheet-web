@@ -75,3 +75,9 @@ export const centuryGothic = localFont({
   ],
   variable: "--font-century-gothic",
 });
+
+export const tanseekArabic = localFont({
+  src: "../../public/assets/fonts/Tanseek-Modern-Pro-Arabic.ttf",
+  variable: "--font-arabic",
+  display: "swap",
+});

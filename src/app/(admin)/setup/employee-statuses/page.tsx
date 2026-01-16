@@ -55,7 +55,9 @@ const columns = (
     style: { minWidth: "200px" },
     body: (rowData: EmployeeStatus) => (
       <div className="w-full flex flex-1 justify-end">
-        <span className="text-sm text-right">{rowData.nameAr || ""}</span>
+        <span className="text-xl! text-right font-arabic">
+          {rowData.nameAr || ""}
+        </span>
       </div>
     ),
   },
@@ -141,8 +143,8 @@ const EmployeeStatusesPage = () => {
     );
   };
   return (
-    <div className="flex flex-col gap-6 px-6 py-6">
-      <div className="flex flex-col md:flex-row justify-between items-center gap-3">
+    <div className="flex h-full flex-col gap-6 px-6 py-6">
+      <div className="flex flex-col md:flex-row justify-between items-center gap-3 shrink-0">
         <div className="w-full md:w-auto flex flex-1 flex-col gap-1">
           <h1 className="text-2xl font-semibold text-gray-900">
             Employee Status Management
@@ -161,12 +163,17 @@ const EmployeeStatusesPage = () => {
           />
         </div>
       </div>
-      <div className="bg-white rounded-xl overflow-hidden">
+      <div className="bg-white flex-1 rounded-xl overflow-hidden min-h-0">
         <Table
           dataKey="id"
           data={employeeStatusesData}
           customHeader={renderHeader}
           columns={columns(handleEdit, handleDelete)}
+          pagination={true}
+          rowsPerPageOptions={[10, 25, 50]}
+          rows={10}
+          scrollable
+          scrollHeight="65vh"
         />
       </div>
     </div>

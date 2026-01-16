@@ -1818,9 +1818,9 @@ interface ChallanEntry {
   code: string; // Employee code
   employeeName: string;
   designation: string;
-  challanAmount: number;
-  deductionAmount: number;
+  amount: number;
   remarks: string;
+  type: string;
 }
 
 const initialChallansData: ChallanEntry[] = [
@@ -1830,8 +1830,8 @@ const initialChallansData: ChallanEntry[] = [
     code: "60065",
     employeeName: "ISHTIAQ AHMED MUHAMMAD SIDDIQUE",
     designation: "Truck House Driver",
-    challanAmount: 113,
-    deductionAmount: 0,
+    amount: 113,
+    type: "challan",
     remarks: "Traffic Violation",
   },
   {
@@ -1840,8 +1840,8 @@ const initialChallansData: ChallanEntry[] = [
     code: "60039",
     employeeName: "MUDASSAR IQBAL MAZHAR IQBAL",
     designation: "Truck House Driver",
-    challanAmount: 0,
-    deductionAmount: 113,
+    amount: 0,
+    type: "return",
     remarks: "Traffic Violations Refunded",
   },
   {
@@ -1850,8 +1850,8 @@ const initialChallansData: ChallanEntry[] = [
     code: "60008",
     employeeName: "WASEEM AKHTAR MUHAMMAD ISMAIL",
     designation: "Mechanic",
-    challanAmount: 2925,
-    deductionAmount: 0,
+    amount: 2925,
+    type: "challan",
     remarks: "Traffic Violation",
   },
   {
@@ -1860,8 +1860,8 @@ const initialChallansData: ChallanEntry[] = [
     code: "60008",
     employeeName: "WASEEM AKHTAR MUHAMMAD ISMAIL",
     designation: "Mechanic",
-    challanAmount: 375,
-    deductionAmount: 0,
+    amount: 375,
+    type: "challan",
     remarks:
       "Violation 3126334315 Date: 2025-12-23 استخدام السائق بيده أي جهاز محمول اثناء سير المركبة",
   },
@@ -1871,8 +1871,8 @@ const initialChallansData: ChallanEntry[] = [
     code: "60058",
     employeeName: "REHMAT ULLAH SHARIF",
     designation: "Truck House Driver",
-    challanAmount: 763,
-    deductionAmount: 0,
+    amount: 763,
+    type: "challan",
     remarks: "Traffic Violation",
   },
   {
@@ -1881,8 +1881,8 @@ const initialChallansData: ChallanEntry[] = [
     code: "65029",
     employeeName: "SHAKIR ULLAH",
     designation: "OS, Driver",
-    challanAmount: 113,
-    deductionAmount: 0,
+    amount: 113,
+    type: "challan",
     remarks: "Traffic Violation",
   },
   {
@@ -1891,8 +1891,8 @@ const initialChallansData: ChallanEntry[] = [
     code: "90020",
     employeeName: "ARSHAD MANDI",
     designation: "OS, Steel Fixer",
-    challanAmount: 75,
-    deductionAmount: 0,
+    amount: 75,
+    type: "challan",
     remarks: "Traffic Violation 2009",
   },
   {
@@ -1901,8 +1901,8 @@ const initialChallansData: ChallanEntry[] = [
     code: "90020",
     employeeName: "ARSHAD MANDI",
     designation: "OS, Steel Fixer",
-    challanAmount: 113,
-    deductionAmount: 0,
+    amount: 113,
+    type: "challan",
     remarks: "Traffic Violation 3457",
   },
   {
@@ -1911,8 +1911,8 @@ const initialChallansData: ChallanEntry[] = [
     code: "20007",
     employeeName: "BASHARAT SAIN",
     designation: "Forman",
-    challanAmount: 226,
-    deductionAmount: 0,
+    amount: 226,
+    type: "challan",
     remarks: "Traffic Violation 6193",
   },
   {
@@ -1921,8 +1921,8 @@ const initialChallansData: ChallanEntry[] = [
     code: "30072",
     employeeName: "IFTIKHAR AHMED MUHAMMAD SHARIF",
     designation: "SF, Labour",
-    challanAmount: 188,
-    deductionAmount: 0,
+    amount: 188,
+    type: "challan",
     remarks: "Traffic Violation 3457",
   },
 ];
@@ -1967,6 +1967,9 @@ for (let i = 11; i <= 21; i++) {
   const year = 2025;
   const code = String(Math.floor(Math.random() * 90000) + 10000);
 
+  const challanAmounts = [0, 75, 113, 188, 226, 375, 763, 2925];
+  const types = ["challan", "return"];
+
   initialChallansData.push({
     id: i,
     date: `${day}-${month}-${year}`,
@@ -1974,10 +1977,8 @@ for (let i = 11; i <= 21; i++) {
     employeeName:
       employeeNames[Math.floor(Math.random() * employeeNames.length)],
     designation: designations[Math.floor(Math.random() * designations.length)],
-    challanAmount: [0, 75, 113, 188, 226, 375, 763, 2925][
-      Math.floor(Math.random() * 8)
-    ],
-    deductionAmount: [0, 113, 226][Math.floor(Math.random() * 3)],
+    amount: challanAmounts[Math.floor(Math.random() * challanAmounts.length)],
+    type: types[Math.floor(Math.random() * types.length)],
     remarks: remarks[Math.floor(Math.random() * remarks.length)],
   });
 }

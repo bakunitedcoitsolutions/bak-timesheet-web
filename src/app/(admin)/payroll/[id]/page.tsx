@@ -81,7 +81,7 @@ const PayrollDetailPage = () => {
       field: "empCode",
       header: "Emp. Code",
       ...tableCommonProps,
-      style: { minWidth: 120, zIndex: 10 },
+      style: { minWidth: 120 },
       frozen: true,
       body: (rowData: PayrollDetailEntry) => (
         <span className="text-sm font-semibold!">{rowData.empCode}</span>
@@ -91,16 +91,16 @@ const PayrollDetailPage = () => {
       field: "name",
       header: "Name",
       ...tableCommonProps,
-      style: { minWidth: 300, zIndex: 10 },
+      style: { minWidth: 300 },
       frozen: true,
       body: (rowData: PayrollDetailEntry) => (
-        <div className="flex items-start gap-2">
-          <div className="flex flex-1 flex-col gap-1">
-            <span className="text-sm font-medium leading-tight">
+        <div className="flex items-start gap-2 min-w-0">
+          <div className="flex flex-1 flex-col gap-1 min-w-0">
+            <span className="text-sm font-medium leading-tight break-words">
               {rowData.name}
             </span>
           </div>
-          <div className="flex items-center justify-center gap-x-1">
+          <div className="flex items-center justify-center gap-x-1 shrink-0">
             <Badge text="C" />
             <Badge text="F" />
           </div>
@@ -697,7 +697,7 @@ const PayrollDetailPage = () => {
   };
 
   return (
-    <div className="flex flex-col">
+    <div className="flex h-full flex-col">
       <TitleHeader
         title={`PAYROLL DETAILS OF ${formatPeriod(periodParam)}`}
         icon={<i className="fa-light fa-calendar text-xl!" />}
@@ -707,12 +707,12 @@ const PayrollDetailPage = () => {
           setSearchValue(value);
         }}
       />
-      <div className="flex flex-col gap-4 px-6 py-6 bg-theme-primary-light">
+      <div className="flex flex-1 flex-col gap-4 px-6 py-6 bg-theme-primary-light">
         {renderHeader({
           exportCSV,
           exportExcel,
         })}
-        <div className="bg-white rounded-xl overflow-hidden">
+        <div className="bg-white h-full rounded-xl overflow-hidden">
           <Table
             ref={tableRef}
             dataKey="id"
@@ -725,7 +725,7 @@ const PayrollDetailPage = () => {
             globalSearch={false}
             emptyMessage="No payroll data found."
             scrollable
-            scrollHeight="flex"
+            scrollHeight="65vh"
             stripedRows
           />
         </div>

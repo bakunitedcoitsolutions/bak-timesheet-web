@@ -31,9 +31,9 @@ const columns = (
     field: "date",
     header: "Date",
     ...commonColumnProps,
-    style: { width: "150px" },
+    style: { width: "100px" },
     body: (rowData: ChallanEntry) => (
-      <div className="w-[150px]">
+      <div className="w-[100px]">
         <span className="text-sm">{rowData.date}</span>
       </div>
     ),
@@ -68,24 +68,23 @@ const columns = (
     ),
   },
   {
-    field: "challanAmount",
-    header: "Challan Amount",
+    field: "type",
+    header: "Type",
     ...commonColumnProps,
+    filterable: false,
     style: { minWidth: "150px" },
     body: (rowData: ChallanEntry) => (
-      <span className="text-sm font-semibold">
-        {rowData.challanAmount.toLocaleString()}
-      </span>
+      <span className="text-sm capitalize">{rowData.type}</span>
     ),
   },
   {
-    field: "deductionAmount",
-    header: "Deduction Amount",
+    field: "amount",
+    header: "Amount",
     ...commonColumnProps,
     style: { minWidth: "150px" },
     body: (rowData: ChallanEntry) => (
       <span className="text-sm font-semibold">
-        {rowData.deductionAmount.toLocaleString()}
+        {rowData.amount.toLocaleString()}
       </span>
     ),
   },
@@ -93,7 +92,7 @@ const columns = (
     field: "remarks",
     header: "Remarks",
     ...commonColumnProps,
-    style: { minWidth: "300px" },
+    style: { minWidth: "250px" },
     body: (rowData: ChallanEntry) => (
       <span className="text-sm">{rowData.remarks}</span>
     ),
@@ -198,8 +197,8 @@ const ChallansPage = () => {
     );
   };
   return (
-    <div className="flex flex-col gap-6 px-6 py-6">
-      <div className="flex flex-col md:flex-row justify-between items-center gap-3">
+    <div className="flex h-full flex-col gap-6 px-6 py-6">
+      <div className="flex flex-col md:flex-row justify-between items-center gap-3 shrink-0">
         <div className="w-full md:w-auto flex flex-1 flex-col gap-1">
           <h1 className="text-2xl font-semibold text-gray-900">
             Challan Management
@@ -218,7 +217,7 @@ const ChallansPage = () => {
           />
         </div>
       </div>
-      <div className="bg-white rounded-xl overflow-hidden">
+      <div className="bg-white flex-1 rounded-xl overflow-hidden min-h-0">
         <Table
           ref={tableRef}
           dataKey="id"
@@ -228,6 +227,8 @@ const ChallansPage = () => {
           pagination={true}
           rowsPerPageOptions={[10, 25, 50]}
           rows={10}
+          scrollable
+          scrollHeight="65vh"
         />
       </div>
     </div>

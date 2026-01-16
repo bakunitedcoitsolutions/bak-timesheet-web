@@ -13,6 +13,7 @@ import {
   TableColumn,
   ExportOptions,
   CustomHeaderProps,
+  Dropdown,
 } from "@/components";
 import { initialPayrollData, PayrollEntry } from "@/utils/dummy";
 
@@ -115,7 +116,7 @@ const PayrollActions = ({
       {payroll.status === "Pending" && (
         <>
           <div
-            className="absolute w-7 h-7 cursor-pointer -right-[5px] top-[60%] -translate-y-[50%] z-10 justify-center items-center"
+            className="absolute w-7 h-7 cursor-pointer -right-[5px] top-[60%] -translate-y-[50%] z-1 justify-center items-center"
             onClick={(e) => menuRef.current?.toggle(e)}
           >
             <i className="pi pi-ellipsis-v text-primary"></i>
@@ -146,15 +147,6 @@ const columns = (
     style: { minWidth: "150px" },
     body: (rowData: PayrollEntry) => (
       <span className="text-sm font-semibold">{rowData.period}</span>
-    ),
-  },
-  {
-    field: "gosiSalary",
-    header: "Gosi Salary",
-    ...commonColumnProps,
-    style: { minWidth: "150px" },
-    body: (rowData: PayrollEntry) => (
-      <span className="text-sm">{rowData.gosiSalary.toLocaleString()}</span>
     ),
   },
   {
@@ -281,6 +273,13 @@ const columns = (
 
 const PayrollPage = () => {
   const router = useRouter();
+  const yearOptions = Array.from({ length: 20 }, (_, index) => ({
+    label: `${new Date().getFullYear() - index}`,
+    value: `${new Date().getFullYear() - index}`,
+  }));
+  const [selectedYear, setSelectedYear] = useState<string>(
+    yearOptions[0].value
+  );
   const [searchValue, setSearchValue] = useState<string>("");
   const [payrollData] = useState<PayrollEntry[]>(initialPayrollData);
   const tableRef = useRef<TableRef>(null);
@@ -323,13 +322,14 @@ const PayrollPage = () => {
     return (
       <div className="flex flex-col md:flex-row justify-between items-center gap-3 flex-1 w-full">
         <div className="w-full md:w-auto">
-          <Input
+          <Dropdown
             small
-            type="month"
-            value={value}
-            onChange={onChange}
+            filter
+            options={yearOptions}
+            placeholder="Select Year"
             className="w-full md:w-44"
-            placeholder="Select Month & Year"
+            selectedItem={selectedYear}
+            setSelectedItem={setSelectedYear}
           />
         </div>
         <div className="flex items-center gap-3 w-full md:w-auto">
@@ -355,8 +355,8 @@ const PayrollPage = () => {
     );
   };
   return (
-    <div className="flex flex-col gap-6 px-6 py-6">
-      <div className="flex flex-col md:flex-row justify-between items-center gap-3">
+    <div className="flex h-full flex-col gap-6 px-6 py-6">
+      <div className="flex flex-col md:flex-row justify-between items-center gap-3 shrink-0">
         <div className="w-full md:w-auto flex flex-1 flex-col gap-1">
           <h1 className="text-2xl font-semibold text-gray-900">
             Payroll Management
@@ -374,7 +374,7 @@ const PayrollPage = () => {
           />
         </div>
       </div>
-      <div className="bg-white rounded-xl overflow-hidden">
+      <div className="bg-white flex-1 rounded-xl overflow-hidden min-h-0">
         <Table
           ref={tableRef}
           dataKey="id"
@@ -389,7 +389,8 @@ const PayrollPage = () => {
           pagination={true}
           rowsPerPageOptions={[10, 25, 50]}
           rows={10}
-          showGridlines
+          scrollable
+          scrollHeight="65vh"
         />
       </div>
     </div>

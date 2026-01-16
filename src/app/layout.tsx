@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Providers from "@/providers";
-import { centuryGothic } from "./fonts";
+import { centuryGothic, tanseekArabic } from "./fonts";
 import CustomConfirmDialog from "@/components/common/confirm-dialog";
 
 export const metadata: Metadata = {
@@ -17,7 +17,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${centuryGothic.variable} antialiased`}>
+      <body
+        className={`${centuryGothic.variable} ${tanseekArabic.variable} antialiased`}
+      >
         <Providers>
           <CustomConfirmDialog />
           {children}
