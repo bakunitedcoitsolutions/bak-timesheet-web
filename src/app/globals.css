@@ -298,6 +298,14 @@ body .p-datatable.report-table .p-datatable-thead > tr > th {
   background-color: var(--color-table-header-footer) !important;
 }
 
+body
+  .p-datatable.report-table
+  .p-datatable-tbody
+  > tr.p-rowgroup-header
+  > td:first-child {
+  padding: 1rem 0 0 !important;
+}
+
 /* Hide spacing for "All" group in designation dropdown */
 body
   .p-dropdown-panel.designation-dropdown-panel

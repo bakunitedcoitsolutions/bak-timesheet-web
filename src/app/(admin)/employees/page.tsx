@@ -9,11 +9,11 @@ import {
   Button,
   TableColumn,
   TableActions,
+  GroupDropdown,
   ExportOptions,
   CustomHeaderProps,
 } from "@/components";
 import { employees } from "@/utils/dummy";
-import GroupDropdown from "@/components/common/group-dropdown";
 
 const commonColumnProps = {
   sortable: true,

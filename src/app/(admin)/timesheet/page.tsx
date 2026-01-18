@@ -2,7 +2,6 @@
 import { useRef, useState } from "react";
 import { classNames } from "primereact/utils";
 import { Checkbox } from "primereact/checkbox";
-import GroupDropdown from "@/components/common/group-dropdown";
 
 import {
   Input,
@@ -15,6 +14,7 @@ import {
   NumberInput,
   TitleHeader,
   ExportOptions,
+  GroupDropdown,
   BulkUploadOptions,
   CustomHeaderProps,
 } from "@/components";
@@ -435,8 +435,8 @@ const TimesheetPage = () => {
         })}
         <div className="bg-white h-full rounded-xl overflow-hidden min-h-0">
           <Table
-            ref={tableRef}
             dataKey="id"
+            ref={tableRef}
             data={timesheetData}
             columns={columns()}
             pagination={false}
