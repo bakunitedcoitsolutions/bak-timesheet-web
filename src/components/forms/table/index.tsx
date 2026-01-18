@@ -17,6 +17,7 @@ import { InputIcon } from "primereact/inputicon";
 import { FilterMatchMode } from "primereact/api";
 import { Column, ColumnProps } from "primereact/column";
 import { smallTextFilterTemplate } from "./filter-templates";
+import { printTable } from "@/utils/helpers/print-utils";
 
 export interface CustomHeaderProps {
   value?: string;
@@ -41,6 +42,7 @@ export interface TableColumn<T = any> extends Omit<
   filterIcon?: string;
   smallFilter?: boolean;
   body?: (rowData: T) => ReactNode;
+  footer?: () => ReactNode;
   style?: React.CSSProperties;
   className?: string;
 }
@@ -49,6 +51,7 @@ export interface TableRef {
   exportCSV: (selectionOnly?: boolean) => void;
   exportExcel: () => void;
   exportPdf: () => void;
+  print: () => void;
   getData: () => any[];
   getFilters: () => DataTableFilterMeta;
   getGlobalFilterValue: () => string;
@@ -92,10 +95,13 @@ export interface CustomTableProps<
     exportCSV: (selectionOnly?: boolean) => void;
     exportExcel: () => void;
     exportPdf?: () => void;
+    print?: () => void;
   }) => ReactNode;
   exportable?: boolean;
   extraSmall?: boolean;
   exportColumns?: Array<{ title: string; dataKey: string }>;
+  printTitle?: string;
+  printHeaderContent?: ReactNode;
 }
 
 const CustomTable = forwardRef<TableRef, CustomTableProps<any>>(
@@ -122,6 +128,8 @@ const CustomTable = forwardRef<TableRef, CustomTableProps<any>>(
       exportable = false,
       exportColumns,
       extraSmall = false,
+      printTitle,
+      printHeaderContent,
       ...rest
     }: CustomTableProps<T>,
     ref: React.ForwardedRef<TableRef>
@@ -275,6 +283,23 @@ const CustomTable = forwardRef<TableRef, CustomTableProps<any>>(
       });
     };
 
+    // Print function
+    const print = () => {
+      printTable({
+        data,
+        columns: columns.map((col) => ({
+          field: col.field,
+          header: col.header,
+          align: (col.align || "left") as "left" | "center" | "right",
+          style: col.style,
+          body: col.body,
+          footer: col.footer,
+        })),
+        printTitle,
+        printHeaderContent,
+      });
+    };
+
     const renderHeader = () => {
       if (customHeader) {
         return customHeader({
@@ -283,6 +308,7 @@ const CustomTable = forwardRef<TableRef, CustomTableProps<any>>(
           exportCSV,
           exportExcel,
           exportPdf,
+          print,
         });
       }
 
@@ -330,6 +356,7 @@ const CustomTable = forwardRef<TableRef, CustomTableProps<any>>(
       exportCSV,
       exportExcel,
       exportPdf,
+      print,
       getData: () => data,
       getFilters: () => filters,
       getGlobalFilterValue: () => globalFilterValue,

@@ -1,5 +1,7 @@
 "use client";
 import { useRef, useState } from "react";
+import { classNames } from "primereact/utils";
+
 import {
   Table,
   Button,
@@ -21,6 +23,11 @@ const LedgerPage = () => {
     useState<string>("Engineer");
   const [idCardNumber, setIdCardNumber] = useState<string>("2526262361");
   const tableRef = useRef<TableRef>(null);
+
+  // Print handler
+  const handlePrint = () => {
+    tableRef.current?.print();
+  };
 
   // Calculate totals
   const totals = ledgerData.reduce(
@@ -158,7 +165,7 @@ const LedgerPage = () => {
   const renderHeader = ({ exportCSV, exportExcel }: CustomHeaderProps) => {
     return (
       <div className="flex flex-col lg:flex-row justify-between bg-[#F5E6E8] items-center gap-3 flex-1 w-full">
-        <div className="flex flex-1 items-center gap-3 w-full">
+        <div className="flex flex-1 flex-col lg:flex-row items-center gap-3 w-full">
           <div className="w-full lg:w-auto">
             <NumberInput
               useGrouping={false}
@@ -168,7 +175,7 @@ const LedgerPage = () => {
               className="w-full lg:w-60 h-10.5!"
             />
           </div>
-          <div className="w-full lg:w-28 hidden lg:block">
+          <div className="w-full lg:w-28">
             <Button
               size="small"
               className="w-full xl:w-28 2xl:w-32 h-10!"
@@ -176,23 +183,41 @@ const LedgerPage = () => {
             />
           </div>
         </div>
-        <div className="flex items-center gap-3 w-full lg:w-auto">
-          <div className="block lg:hidden w-full lg:w-auto">
-            <Button
-              size="small"
-              className="w-full lg:w-28 h-10!"
-              label="Search"
-            />
+      </div>
+    );
+  };
+
+  const renderEmployeeInfo = (isPrinting: boolean) => {
+    return (
+      <div className={classNames("flex flex-1 gap-3 justify-between", {
+        "flex-row items-center": isPrinting,
+        "flex-col sm:flex-row items-start sm:items-center": !isPrinting,
+      })}>
+        <div className={classNames("flex flex-1 gap-x-2 gap-y-1", {
+          "flex-row items-center": isPrinting,
+          "flex-col lg:flex-row items-start lg:items-center": !isPrinting,
+        })}>
+          <div className="flex gap-x-2">
+            <span className="font-semibold">{employeeCode}</span>
+            <span className="text-gray-400 font-semibold">-</span>
+            <span className="font-semibold">{employeeName}</span>
           </div>
-          <div className="w-full lg:w-auto">
-            <Button
-              size="small"
-              label="Print"
-              icon="pi pi-print"
-              variant="outlined"
-              className="w-full lg:w-28 h-10! bg-white!"
-            />
+          <span className={classNames("text-gray-400", {
+            "hidden lg:block": !isPrinting,
+            "block": isPrinting,
+          })}>|</span>
+          <div className="flex gap-x-2">
+            <span className="text-xs text-gray-600">ID Card:</span>
+            <span className="text-xs font-medium ">{idCardNumber}</span>
           </div>
+        </div>
+        <div className={classNames("flex justify-end", {
+          "w-auto": isPrinting,
+          "w-full sm:w-auto": !isPrinting,
+        })}>
+          <span className="font-bold text-right">
+            {employeeDesignation}
+          </span>
         </div>
       </div>
     );
@@ -203,7 +228,18 @@ const LedgerPage = () => {
       <TitleHeader
         title="EMPLOYEE LEDGER"
         icon={<i className="fa-light fa-book-open-lines text-xl!" />}
-        hideInput={true}
+        renderInput={() => (
+          <div className="w-full lg:w-auto">
+            <Button
+              size="small"
+              label="Print"
+              icon="pi pi-print"
+              variant="outlined"
+              className="w-full lg:w-28 h-10! bg-white!"
+              onClick={handlePrint}
+            />
+          </div>
+        )}
       />
       <div className="bg-[#F5E6E8] px-6 py-4">
         {renderHeader({
@@ -214,19 +250,7 @@ const LedgerPage = () => {
       <div className="flex flex-1 flex-col gap-4 px-6 pt-4 pb-6 bg-theme-primary-light min-h-0">
         {/* Employee Info Section */}
         <div className="bg-white rounded-xl py-4 px-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <span className="font-semibold ">{employeeCode}</span>
-              <span className="text-gray-400">-</span>
-              <span className="font-semibold ">{employeeName}</span>
-              <span className="text-gray-400">|</span>
-              <span className="text-xs text-gray-600">ID Card:</span>
-              <span className="text-xs font-medium ">{idCardNumber}</span>
-            </div>
-            <div>
-              <span className="font-semibold ">{employeeDesignation}</span>
-            </div>
-          </div>
+         {renderEmployeeInfo(false)}
         </div>
 
         {/* Table Section */}
@@ -242,6 +266,9 @@ const LedgerPage = () => {
             scrollable
             scrollHeight="80vh"
             showGridlines
+            printTitle="EMPLOYEE LEDGER"
+            tableClassName="report-table"
+            printHeaderContent={renderEmployeeInfo(true)}
           />
         </div>
       </div>

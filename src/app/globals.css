@@ -291,6 +291,11 @@ body .p-datatable .p-datatable-tfoot > tr > td {
   padding: 0.75rem !important;
 }
 
+/* Ledger table header styling */
+body .p-datatable.report-table .p-datatable-thead > tr > th {
+  background-color: #f3f4f6 !important;
+}
+
 /* Hide spacing for "All" group in designation dropdown */
 body
   .p-dropdown-panel.designation-dropdown-panel

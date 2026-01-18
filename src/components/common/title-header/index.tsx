@@ -10,14 +10,16 @@ const TitleHeader = ({
   value,
   children,
   onChange,
+  renderInput,
   hideInput = false,
 }: {
   title: string;
   icon: ReactNode;
   children?: ReactNode;
   value?: string;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   hideInput?: boolean;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  renderInput?: () => ReactNode;
 }) => {
   const [isFullscreen, setIsFullscreen] = useState(false);
 
@@ -66,18 +68,21 @@ const TitleHeader = ({
       </div>
       {children ?? (
         <div className="flex w-full md:w-auto items-center gap-4">
-          {!hideInput && (
-            <div className="w-full md:w-80">
-              <Input
-                value={value}
-                className="w-full"
-                icon="pi pi-search"
-                iconPosition="left"
-                onChange={onChange}
-                placeholder="Search"
-              />
-            </div>
-          )}
+          {!hideInput &&
+            (renderInput ? (
+              renderInput()
+            ) : (
+              <div className="w-full md:w-80">
+                <Input
+                  value={value}
+                  className="w-full"
+                  icon="pi pi-search"
+                  iconPosition="left"
+                  onChange={onChange}
+                  placeholder="Search"
+                />
+              </div>
+            ))}
           <div
             className="w-10 h-10 flex items-center justify-center rounded-md cursor-pointer text-white hover:bg-white/20 transition-colors"
             onClick={toggleFullscreen}
