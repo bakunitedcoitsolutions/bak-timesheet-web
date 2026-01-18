@@ -9,7 +9,6 @@ import {
   TableColumn,
   NumberInput,
   TitleHeader,
-  CustomHeaderProps,
 } from "@/components";
 import { LedgerEntry, initialLedgerData } from "@/utils/dummy";
 
@@ -162,7 +161,7 @@ const LedgerPage = () => {
     },
   ];
 
-  const renderHeader = ({ exportCSV, exportExcel }: CustomHeaderProps) => {
+  const renderHeader = () => {
     return (
       <div className="flex flex-col lg:flex-row justify-between bg-[#F5E6E8] items-center gap-3 flex-1 w-full">
         <div className="flex flex-1 flex-col lg:flex-row items-center gap-3 w-full">
@@ -234,6 +233,7 @@ const LedgerPage = () => {
   return (
     <div className="flex h-full flex-col">
       <TitleHeader
+        showBack={false}
         title="EMPLOYEE LEDGER"
         icon={<i className="fa-light fa-book-open-lines text-xl!" />}
         renderInput={() => (
@@ -249,12 +249,7 @@ const LedgerPage = () => {
           </div>
         )}
       />
-      <div className="bg-[#F5E6E8] px-6 py-4">
-        {renderHeader({
-          exportCSV: () => tableRef.current?.exportCSV(),
-          exportExcel: () => tableRef.current?.exportExcel(),
-        })}
-      </div>
+      <div className="bg-[#F5E6E8] px-6 py-4">{renderHeader()}</div>
       <div className="flex flex-1 flex-col gap-4 px-6 pt-4 pb-6 bg-theme-primary-light min-h-0">
         {/* Employee Info Section */}
         <div className="bg-white rounded-xl py-4 px-4">

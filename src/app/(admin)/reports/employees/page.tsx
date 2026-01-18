@@ -1,19 +1,29 @@
 "use client";
 import { useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import { classNames } from "primereact/utils";
+import { Checkbox } from "primereact/checkbox";
 
 import {
   Table,
+  Input,
   Button,
+  Dropdown,
   TableRef,
-  TableColumn,
-  NumberInput,
   TitleHeader,
-  CustomHeaderProps,
+  TableColumn,
+  MultiSelect,
 } from "@/components";
-import { LedgerEntry, initialLedgerData } from "@/utils/dummy";
+import {
+  LedgerEntry,
+  designationsData,
+  initialLedgerData,
+  payrollSectionsData,
+} from "@/utils/dummy";
+import GroupDropdown from "@/components/common/group-dropdown";
 
 const EmployeesReportPage = () => {
+  const router = useRouter();
   const [ledgerData] = useState<LedgerEntry[]>(initialLedgerData);
   const [employeeCode, setEmployeeCode] = useState<string>("20002");
   const [employeeName, setEmployeeName] = useState<string>(
@@ -23,6 +33,41 @@ const EmployeesReportPage = () => {
     useState<string>("Engineer");
   const [idCardNumber, setIdCardNumber] = useState<string>("2526262361");
   const tableRef = useRef<TableRef>(null);
+
+  // Filter states
+  const [employeeCodes, setEmployeeCodes] = useState<string>("");
+  const [selectedDesignation, setSelectedDesignation] = useState<any>("all");
+  const [selectedColumn, setSelectedColumn] = useState<any>([]);
+  const [zeroRate, setZeroRate] = useState<boolean>(false);
+
+  // Transform designations data to dropdown options
+  const designationOptions = [
+    { label: "All Designations", value: null },
+    ...designationsData
+      .filter((d) => d.isActive)
+      .map((d) => ({
+        label: d.nameEn,
+        value: d.id,
+      })),
+  ];
+
+  // Transform payroll sections data to dropdown options
+  const payrollSectionOptions = [
+    { label: "All Payroll Sections", value: null },
+    ...payrollSectionsData
+      .filter((p) => p.isActive)
+      .map((p) => ({
+        label: p.nameEn,
+        value: p.id,
+      })),
+  ];
+
+  const columnOptions = [
+    { label: "Select Column", value: null },
+    { label: "Name", value: "name" },
+    { label: "Designation", value: "designation" },
+    { label: "Salary", value: "salary" },
+  ];
 
   // Print handler
   const handlePrint = () => {
@@ -162,26 +207,52 @@ const EmployeesReportPage = () => {
     },
   ];
 
-  const renderHeader = ({ exportCSV, exportExcel }: CustomHeaderProps) => {
+  const renderHeader = () => {
     return (
-      <div className="flex flex-col lg:flex-row justify-between bg-[#F5E6E8] items-center gap-3 flex-1 w-full">
-        <div className="flex flex-1 flex-col lg:flex-row items-center gap-3 w-full">
-          <div className="w-full lg:w-auto">
-            <NumberInput
-              useGrouping={false}
-              placeholder="Employee Code"
-              value={parseInt(employeeCode) || undefined}
-              onValueChange={(e) => setEmployeeCode(e.value?.toString() || "")}
-              className="w-full lg:w-60 h-10.5!"
+      <div className="bg-[#F5E6E8] w-full flex flex-col xl:flex-row justify-between gap-x-10 gap-y-4">
+        <div className="grid flex-1 grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-3 items-center">
+          <div className="w-full">
+            <Input
+              small
+              placeholder="Employee Codes"
+              value={employeeCodes}
+              onChange={(e) => setEmployeeCodes(e.target.value)}
+              className="w-full h-10!"
             />
           </div>
-          <div className="w-full lg:w-28">
-            <Button
-              size="small"
-              className="w-full xl:w-28 2xl:w-32 h-10!"
-              label="Search"
+          <div className="w-full lg:col-span-2">
+            <GroupDropdown
+              placeholder="Select Section"
+              className="w-full h-10.5!"
+              selectedItem={selectedDesignation}
+              setSelectedItem={setSelectedDesignation}
             />
           </div>
+          <div className="w-full lg:col-span-2">
+            <MultiSelect
+              small
+              options={columnOptions}
+              className="w-full h-10!"
+              placeholder="Select Columns"
+              selectedItem={selectedColumn}
+              setSelectedItem={setSelectedColumn}
+            />
+          </div>
+        </div>
+        <div className="flex items-center gap-5 justify-between xl:justify-end">
+          <div className="w-[100px]">
+            <div className="flex items-center gap-2">
+              <Checkbox
+                inputId="zeroRate"
+                checked={zeroRate}
+                onChange={(e) => setZeroRate(e.checked ?? false)}
+              />
+              <label htmlFor="zeroRate" className="text-sm cursor-pointer">
+                Zero Rate
+              </label>
+            </div>
+          </div>
+          <Button size="small" className="w-32 h-10!" label="Search" />
         </div>
       </div>
     );
@@ -234,8 +305,9 @@ const EmployeesReportPage = () => {
   return (
     <div className="flex h-full flex-col">
       <TitleHeader
-        title="EMPLOYEE LEDGER"
-        icon={<i className="fa-light fa-book-open-lines text-xl!" />}
+        title="EMPLOYEES REPORT"
+        onBack={() => router.replace("/reports")}
+        icon={<i className="fa-light fa-user-group text-xl!" />}
         renderInput={() => (
           <div className="w-full lg:w-auto">
             <Button
@@ -249,35 +321,30 @@ const EmployeesReportPage = () => {
           </div>
         )}
       />
-      <div className="bg-[#F5E6E8] px-6 py-4">
-        {renderHeader({
-          exportCSV: () => tableRef.current?.exportCSV(),
-          exportExcel: () => tableRef.current?.exportExcel(),
-        })}
-      </div>
-      <div className="flex flex-1 flex-col gap-4 px-6 pt-4 pb-6 bg-theme-primary-light min-h-0">
-        {/* Employee Info Section */}
-        <div className="bg-white rounded-xl py-4 px-4">
-          {renderEmployeeInfo(false)}
-        </div>
+      <div className="bg-[#F5E6E8] px-6 py-4">{renderHeader()}</div>
+      <div className="flex flex-1 flex-col gap-4 px-6 pt-4 pb-6 bg-white min-h-0">
+        <div className="flex flex-col gap-2">
+          {/* Employee Info Section */}
+          <div className="bg-table-header-footer py-4 px-4">
+            {renderEmployeeInfo(false)}
+          </div>
 
-        {/* Table Section */}
-        <div className="bg-white h-full rounded-xl overflow-hidden min-h-0">
-          <Table
-            ref={tableRef}
-            dataKey="id"
-            data={ledgerData}
-            columns={columns()}
-            pagination={false}
-            globalSearch={false}
-            emptyMessage="No ledger data found."
-            scrollable
-            scrollHeight="80vh"
-            showGridlines
-            printTitle="EMPLOYEE LEDGER"
-            tableClassName="report-table"
-            printHeaderContent={renderEmployeeInfo(true)}
-          />
+          {/* Table Section */}
+          <div className="bg-white h-full overflow-hidden min-h-0">
+            <Table
+              ref={tableRef}
+              dataKey="id"
+              data={ledgerData}
+              columns={columns()}
+              pagination={false}
+              globalSearch={false}
+              emptyMessage="No ledger data found."
+              showGridlines
+              printTitle="EMPLOYEE LEDGER"
+              tableClassName="report-table"
+              printHeaderContent={renderEmployeeInfo(true)}
+            />
+          </div>
         </div>
       </div>
     </div>

@@ -706,6 +706,7 @@ const PayrollDetailPage = () => {
           const value = e.target.value;
           setSearchValue(value);
         }}
+        onBack={() => router.replace("/payroll")}
       />
       <div className="flex flex-1 flex-col gap-4 px-6 py-6 bg-theme-primary-light">
         {renderHeader({

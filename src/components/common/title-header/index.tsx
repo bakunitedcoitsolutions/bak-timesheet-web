@@ -1,6 +1,7 @@
 "use client";
 
-import { Input } from "@/components";
+import { Button, Input } from "@/components";
+import { useRouter } from "next/navigation";
 import { classNames } from "primereact/utils";
 import { ReactNode, useState, useEffect } from "react";
 
@@ -8,19 +9,24 @@ const TitleHeader = ({
   icon,
   title,
   value,
+  onBack,
   children,
   onChange,
   renderInput,
+  showBack = true,
   hideInput = false,
 }: {
   title: string;
-  icon: ReactNode;
-  children?: ReactNode;
   value?: string;
+  icon: ReactNode;
+  showBack?: boolean;
   hideInput?: boolean;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  children?: ReactNode;
   renderInput?: () => ReactNode;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onBack?: () => void;
 }) => {
+  const router = useRouter();
   const [isFullscreen, setIsFullscreen] = useState(false);
 
   useEffect(() => {
@@ -59,6 +65,17 @@ const TitleHeader = ({
       )}
     >
       <div className="flex items-center gap-4">
+        {showBack && (
+          <div className="w-10 h-10 flex items-center justify-center text-white">
+            <Button
+              size="small"
+              variant="text"
+              className="w-9 h-9 shadow-none! border-none! flex items-center justify-center text-white!"
+              icon="fa-regular fa-arrow-left-long text-xl!"
+              onClick={onBack ?? (() => router.back())}
+            />
+          </div>
+        )}
         <div className="w-10 h-10 flex items-center justify-center rounded-md bg-white/20 text-white">
           {icon}
         </div>

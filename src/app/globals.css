@@ -55,6 +55,8 @@
 
   --color-error: #e24c4c;
   --color-theme-text-gray: #6a7282;
+
+  --color-table-header-footer: #f3f4f6;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -286,14 +288,14 @@ body .p-datatable.timesheet-table .p-datatable-tbody > tr > td {
 
 /* Ledger table footer styling */
 body .p-datatable .p-datatable-tfoot > tr > td {
-  background-color: #f3f4f6 !important;
+  background-color: var(--color-table-header-footer) !important;
   font-weight: 600 !important;
   padding: 0.75rem !important;
 }
 
 /* Ledger table header styling */
 body .p-datatable.report-table .p-datatable-thead > tr > th {
-  background-color: #f3f4f6 !important;
+  background-color: var(--color-table-header-footer) !important;
 }
 
 /* Hide spacing for "All" group in designation dropdown */

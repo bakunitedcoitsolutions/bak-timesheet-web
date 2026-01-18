@@ -1,5 +1,9 @@
 "use client";
 import { useRef, useState } from "react";
+import { classNames } from "primereact/utils";
+import { Checkbox } from "primereact/checkbox";
+import GroupDropdown from "@/components/common/group-dropdown";
+
 import {
   Input,
   Badge,
@@ -14,17 +18,10 @@ import {
   BulkUploadOptions,
   CustomHeaderProps,
 } from "@/components";
-import {
-  projects,
-  TimesheetEntry,
-  designationOptions,
-  initialTimesheetData,
-} from "@/utils/dummy";
-import { Checkbox } from "primereact/checkbox";
-import { classNames } from "primereact/utils";
+import { projects, TimesheetEntry, initialTimesheetData } from "@/utils/dummy";
 
 const TimesheetPage = () => {
-  const [selectedDesignation, setSelectedDesignation] = useState<any>("0");
+  const [selectedDesignation, setSelectedDesignation] = useState<any>("all");
   const [timesheetData, setTimesheetData] =
     useState<TimesheetEntry[]>(initialTimesheetData);
   const [searchValue, setSearchValue] = useState<string>("");
@@ -370,12 +367,8 @@ const TimesheetPage = () => {
             />
           </div>
           <div className="w-full lg:w-auto">
-            <Dropdown
-              small
-              filter
-              options={designationOptions}
+            <GroupDropdown
               className="w-full lg:w-48 h-10.5!"
-              placeholder="Select Designation"
               selectedItem={selectedDesignation}
               setSelectedItem={setSelectedDesignation}
             />
@@ -426,6 +419,7 @@ const TimesheetPage = () => {
   return (
     <div className="flex h-full flex-col">
       <TitleHeader
+        showBack={false}
         title="ATTENDANCE SHEET"
         icon={<i className="fa-light fa-calendar text-xl!" />}
         value={searchValue}
