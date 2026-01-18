@@ -189,35 +189,43 @@ const LedgerPage = () => {
 
   const renderEmployeeInfo = (isPrinting: boolean) => {
     return (
-      <div className={classNames("flex flex-1 gap-3 justify-between", {
-        "flex-row items-center": isPrinting,
-        "flex-col sm:flex-row items-start sm:items-center": !isPrinting,
-      })}>
-        <div className={classNames("flex flex-1 gap-x-2 gap-y-1", {
+      <div
+        className={classNames("flex flex-1 gap-3 justify-between", {
           "flex-row items-center": isPrinting,
-          "flex-col lg:flex-row items-start lg:items-center": !isPrinting,
-        })}>
+          "flex-col sm:flex-row items-start sm:items-center": !isPrinting,
+        })}
+      >
+        <div
+          className={classNames("flex flex-1 gap-x-2 gap-y-1", {
+            "flex-row items-center": isPrinting,
+            "flex-col lg:flex-row items-start lg:items-center": !isPrinting,
+          })}
+        >
           <div className="flex gap-x-2">
             <span className="font-semibold">{employeeCode}</span>
             <span className="text-gray-400 font-semibold">-</span>
             <span className="font-semibold">{employeeName}</span>
           </div>
-          <span className={classNames("text-gray-400", {
-            "hidden lg:block": !isPrinting,
-            "block": isPrinting,
-          })}>|</span>
+          <span
+            className={classNames("text-gray-400", {
+              "hidden lg:block": !isPrinting,
+              block: isPrinting,
+            })}
+          >
+            |
+          </span>
           <div className="flex gap-x-2">
             <span className="text-xs text-gray-600">ID Card:</span>
             <span className="text-xs font-medium ">{idCardNumber}</span>
           </div>
         </div>
-        <div className={classNames("flex justify-end", {
-          "w-auto": isPrinting,
-          "w-full sm:w-auto": !isPrinting,
-        })}>
-          <span className="font-bold text-right">
-            {employeeDesignation}
-          </span>
+        <div
+          className={classNames("flex justify-end", {
+            "w-auto": isPrinting,
+            "w-full sm:w-auto": !isPrinting,
+          })}
+        >
+          <span className="font-bold text-right">{employeeDesignation}</span>
         </div>
       </div>
     );
@@ -250,7 +258,7 @@ const LedgerPage = () => {
       <div className="flex flex-1 flex-col gap-4 px-6 pt-4 pb-6 bg-theme-primary-light min-h-0">
         {/* Employee Info Section */}
         <div className="bg-white rounded-xl py-4 px-4">
-         {renderEmployeeInfo(false)}
+          {renderEmployeeInfo(false)}
         </div>
 
         {/* Table Section */}
