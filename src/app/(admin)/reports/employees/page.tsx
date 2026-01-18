@@ -13,67 +13,27 @@ import {
   MultiSelect,
   GroupDropdown,
 } from "@/components";
-import {
-  designationsData,
-  payrollSectionsData,
-  initialEmployeeReportData,
-  EmployeeReportEntry,
-} from "@/utils/dummy";
+import { printGroupedTable } from "@/utils/helpers/print-utils";
+import { sortByOriginalOrder } from "@/utils/helpers/array-utils";
+import { EmployeeReportEntry, initialEmployeeReportData } from "@/utils/dummy";
 
 const EmployeesReportPage = () => {
   const router = useRouter();
+  const tableRef = useRef<TableRef>(null);
+
   const [employeeReportData] = useState<EmployeeReportEntry[]>(
     initialEmployeeReportData
   );
   const [employeeName, setEmployeeName] = useState<string>("EMPLOYEES REPORT");
-  const tableRef = useRef<TableRef>(null);
 
-  // Sort data by section to ensure proper grouping
-  const sortedData = [...employeeReportData].sort((a, b) => {
-    if (a.section < b.section) return -1;
-    if (a.section > b.section) return 1;
-    return 0;
-  });
+  // Sort data by section order as they appear in the original data
+  const sortedData = sortByOriginalOrder(employeeReportData, "section");
 
   // Filter states
   const [employeeCodes, setEmployeeCodes] = useState<string>("");
   const [selectedDesignation, setSelectedDesignation] = useState<any>("all");
-  const [selectedColumn, setSelectedColumn] = useState<any>([]);
+  const [selectedColumn, setSelectedColumn] = useState<string[]>([]);
   const [zeroRate, setZeroRate] = useState<boolean>(false);
-
-  // Transform designations data to dropdown options
-  const designationOptions = [
-    { label: "All Designations", value: null },
-    ...designationsData
-      .filter((d) => d.isActive)
-      .map((d) => ({
-        label: d.nameEn,
-        value: d.id,
-      })),
-  ];
-
-  // Transform payroll sections data to dropdown options
-  const payrollSectionOptions = [
-    { label: "All Payroll Sections", value: null },
-    ...payrollSectionsData
-      .filter((p) => p.isActive)
-      .map((p) => ({
-        label: p.nameEn,
-        value: p.id,
-      })),
-  ];
-
-  const columnOptions = [
-    { label: "Select Column", value: null },
-    { label: "Name", value: "name" },
-    { label: "Designation", value: "designation" },
-    { label: "Salary", value: "salary" },
-  ];
-
-  // Print handler
-  const handlePrint = () => {
-    tableRef.current?.print();
-  };
 
   const tableCommonProps = {
     sortable: false,
@@ -88,7 +48,8 @@ const EmployeesReportPage = () => {
     return indexInSection;
   };
 
-  const columns = (): TableColumn<EmployeeReportEntry>[] => [
+  // Define all available columns
+  const allColumns = (): TableColumn<EmployeeReportEntry>[] => [
     {
       field: "id",
       header: "#",
@@ -269,6 +230,47 @@ const EmployeesReportPage = () => {
     },
   ];
 
+  // Generate column options for MultiSelect (excluding the # column as it's always shown)
+  const columnOptions = allColumns()
+    .filter((col) => col.field !== "id")
+    .map((col) => ({
+      label: col.header || String(col.field),
+      value: col.field as string,
+    }));
+
+  // Get columns for display (always show all columns in the table)
+  const columns = (): TableColumn<EmployeeReportEntry>[] => allColumns();
+
+  // Print handler - prints multiple tables grouped by section
+  const handlePrint = () => {
+    // Filter columns based on selected columns
+    // Always include the # column, and include selected columns
+    // If no columns are selected, include all columns
+    const columnsToPrint = allColumns().filter((col) => {
+      // Always include the # column
+      if (col.field === "id") return true;
+      // If no columns selected, include all
+      if (selectedColumn.length === 0) return true;
+      // Otherwise, only include selected columns
+      return selectedColumn.includes(col.field as string);
+    });
+
+    printGroupedTable({
+      data: sortedData,
+      columns: columnsToPrint.map((col) => ({
+        field: col.field,
+        header: col.header || "",
+        align: (col.align || "left") as "left" | "center" | "right",
+        style: col.style,
+        body: col.body,
+        footer: col.footer,
+      })),
+      groupBy: "section",
+      printTitle: "EMPLOYEES REPORT",
+      printHeaderContent: employeeName,
+    });
+  };
+
   const renderHeader = () => {
     return (
       <div className="bg-[#F5E6E8] w-full flex flex-col xl:flex-row justify-between gap-x-10 gap-y-4 px-6 py-6">
@@ -339,8 +341,8 @@ const EmployeesReportPage = () => {
           </div>
         )}
       />
-      <div className="bg-theme-primary-light min-h-0">{renderHeader()}</div>
-      <div className="bg-white mt-4 h-full overflow-hidden min-h-0">
+      <div className="bg-theme-primary-light">{renderHeader()}</div>
+      <div className="bg-white mt-4 overflow-hidden">
         <Table
           dataKey="id"
           showGridlines
@@ -361,11 +363,6 @@ const EmployeesReportPage = () => {
           printTitle="EMPLOYEES REPORT"
           tableClassName="report-table"
           emptyMessage="No employees data found."
-          printHeaderContent={
-            <div className="w-full">
-              <span className="font-semibold">{employeeName}</span>
-            </div>
-          }
           scrollable
           scrollHeight="72vh"
         />

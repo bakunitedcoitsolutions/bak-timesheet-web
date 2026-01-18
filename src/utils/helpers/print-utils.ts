@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 /**
  * Extract text content from React nodes
  */
-const extractText = (node: ReactNode): string => {
+export const extractText = (node: ReactNode): string => {
   if (typeof node === "string") return node;
   if (typeof node === "number") return String(node);
   if (Array.isArray(node)) return node.map(extractText).join("");
@@ -114,6 +114,14 @@ export interface PrintTableOptions<T = any> {
   printHeaderContent?: ReactNode;
 }
 
+export interface PrintGroupedTableOptions<T = any> {
+  data: T[];
+  columns: PrintTableColumn<T>[];
+  groupBy: keyof T | string;
+  printTitle?: string;
+  printHeaderContent?: string | ReactNode;
+}
+
 /**
  * Prints a table with the given data and columns
  */
@@ -169,16 +177,23 @@ export const printTable = <T extends Record<string, any>>({
   // Get column alignments
   const alignments = columns.map((col) => col.align || "left");
 
+  // Calculate column widths to fit on page
+  const totalColumns = headers.length;
+  const columnWidthPercent = Math.floor(100 / totalColumns);
+
   // Generate HTML
   const tableHTML = `
-    <table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+    <table style="width: 100%; border-collapse: collapse; margin-top: 10px; table-layout: auto;">
       <thead>
         <tr>
           ${headers
-            .map(
-              (header, idx) =>
-                `<th style="border: 1px solid #ddd; padding: 8px; background-color: #f3f4f6; font-weight: bold; text-align: ${alignments[idx]}; min-width: ${columns[idx].style?.minWidth || "auto"}">${header}</th>`
-            )
+            .map((header, idx) => {
+              const minWidth = columns[idx].style?.minWidth;
+              const widthStyle = minWidth
+                ? `min-width: ${minWidth};`
+                : `width: ${columnWidthPercent}%;`;
+              return `<th style="border: 1px solid #ddd; padding: 8px; background-color: #f3f4f6; font-weight: bold; text-align: ${alignments[idx]}; ${widthStyle} white-space: nowrap;">${header}</th>`;
+            })
             .join("")}
         </tr>
       </thead>
@@ -187,15 +202,30 @@ export const printTable = <T extends Record<string, any>>({
           .map(
             (row) =>
               `<tr>${row
-                .map(
-                  (cell, idx) =>
-                    `<td style="border: 1px solid #ddd; padding: 8px; text-align: ${alignments[idx]}">${cell}</td>`
-                )
+                .map((cell, idx) => {
+                  const minWidth = columns[idx].style?.minWidth;
+                  const widthStyle = minWidth
+                    ? `min-width: ${minWidth};`
+                    : `width: ${columnWidthPercent}%;`;
+                  return `<td style="border: 1px solid #ddd; padding: 8px; text-align: ${alignments[idx]}; ${widthStyle} word-wrap: break-word; overflow-wrap: break-word;">${cell}</td>`;
+                })
                 .join("")}</tr>`
           )
           .join("")}
       </tbody>
-      ${footerRow ? `<tfoot><tr>${footerRow.map((cell, idx) => `<td style="border: 1px solid #ddd; padding: 8px; background-color: #f3f4f6; font-weight: bold; text-align: ${alignments[idx]}">${cell}</td>`).join("")}</tr></tfoot>` : ""}
+      ${
+        footerRow
+          ? `<tfoot><tr>${footerRow
+              .map((cell, idx) => {
+                const minWidth = columns[idx].style?.minWidth;
+                const widthStyle = minWidth
+                  ? `min-width: ${minWidth};`
+                  : `width: ${columnWidthPercent}%;`;
+                return `<td style="border: 1px solid #ddd; padding: 8px; background-color: #f3f4f6; font-weight: bold; text-align: ${alignments[idx]}; ${widthStyle}">${cell}</td>`;
+              })
+              .join("")}</tr></tfoot>`
+          : ""
+      }
     </table>
   `;
 
@@ -274,6 +304,20 @@ export const printTable = <T extends Record<string, any>>({
             body {
               padding: 10px;
             }
+            table {
+              width: 100% !important;
+              max-width: 100% !important;
+              font-size: 10px;
+            }
+            th, td {
+              padding: 4px 6px !important;
+              font-size: 10px;
+              word-wrap: break-word;
+              overflow-wrap: break-word;
+            }
+            .print-header-content {
+              page-break-after: avoid;
+            }
           }
         </style>
       </head>
@@ -281,6 +325,216 @@ export const printTable = <T extends Record<string, any>>({
         ${printTitle ? `<div class="print-header"><h1>${printTitle}</h1></div>` : ""}
         ${headerHTML}
         ${tableHTML}
+      </body>
+    </html>
+  `;
+
+  printWindow.document.write(printContent);
+  printWindow.document.close();
+  printWindow.focus();
+  setTimeout(() => {
+    printWindow.print();
+    printWindow.close();
+  }, 250);
+};
+
+/**
+ * Prints multiple tables grouped by a specific field
+ * Each group is printed as a separate table with its own header
+ */
+export const printGroupedTable = <T extends Record<string, any>>({
+  data,
+  columns,
+  groupBy,
+  printTitle,
+  printHeaderContent,
+}: PrintGroupedTableOptions<T>) => {
+  if (typeof window === "undefined") return;
+  const printWindow = window.open("", "_blank");
+  if (!printWindow) return;
+
+  // Group data by the specified field
+  const groupedData = data.reduce(
+    (acc, entry) => {
+      const groupValue = (entry as any)[groupBy];
+      const groupKey = String(groupValue);
+      if (!acc[groupKey]) {
+        acc[groupKey] = [];
+      }
+      acc[groupKey].push(entry);
+      return acc;
+    },
+    {} as Record<string, T[]>
+  );
+
+  const groups = Object.keys(groupedData);
+
+  // Generate HTML for each group table
+  const groupTables = groups.map((group) => {
+    const groupData = groupedData[group];
+
+    // Generate table rows
+    const tableRows = groupData.map((row) => {
+      return columns.map((col) => {
+        const field = col.field as string;
+        let cellValue = "";
+
+        if (col.body) {
+          const bodyResult = col.body(row);
+          cellValue = extractText(bodyResult);
+        } else {
+          const value = (row as any)[field];
+          if (value !== null && value !== undefined) {
+            if (typeof value === "object") {
+              cellValue = JSON.stringify(value);
+            } else {
+              cellValue = String(value);
+            }
+          }
+        }
+
+        return cellValue;
+      });
+    });
+
+    // Get column headers
+    const headers = columns.map((col) => col.header);
+    const alignments = columns.map((col) => col.align || "left");
+
+    // Calculate column widths to fit on page
+    const totalColumns = headers.length;
+    const columnWidthPercent = Math.floor(100 / totalColumns);
+
+    // Generate table HTML
+    const tableHTML = `
+      <div style="margin-bottom: 30px; page-break-after: auto; width: 100%; overflow: visible;">
+        <div style="background-color: #f3f4f6; padding: 12px; font-weight: 600; font-size: 14px; text-transform: uppercase; border: 1px solid #ddd; border-bottom: none;">
+          ${group}
+        </div>
+        <table style="width: 100%; border-collapse: collapse; border: 1px solid #ddd; table-layout: auto;">
+          <thead>
+            <tr>
+              ${headers
+                .map((header, idx) => {
+                  const minWidth = columns[idx].style?.minWidth;
+                  const widthStyle = minWidth
+                    ? `min-width: ${minWidth};`
+                    : `width: ${columnWidthPercent}%;`;
+                  return `<th style="border: 1px solid #ddd; padding: 8px; background-color: #f3f4f6; font-weight: bold; text-align: ${alignments[idx]}; ${widthStyle} white-space: nowrap;">${header}</th>`;
+                })
+                .join("")}
+            </tr>
+          </thead>
+          <tbody>
+            ${tableRows
+              .map(
+                (row) =>
+                  `<tr>${row
+                    .map((cell, idx) => {
+                      const minWidth = columns[idx].style?.minWidth;
+                      const widthStyle = minWidth
+                        ? `min-width: ${minWidth};`
+                        : `width: ${columnWidthPercent}%;`;
+                      return `<td style="border: 1px solid #ddd; padding: 8px; text-align: ${alignments[idx]}; ${widthStyle} word-wrap: break-word; overflow-wrap: break-word;">${cell}</td>`;
+                    })
+                    .join("")}</tr>`
+              )
+              .join("")}
+          </tbody>
+        </table>
+      </div>
+    `;
+
+    return tableHTML;
+  });
+
+  // Generate header content HTML
+  let headerHTML = "";
+  if (printHeaderContent) {
+    if (typeof printHeaderContent === "string") {
+      headerHTML = `<div style="display: flex; width: 100%; justify-content: space-between; margin-bottom: 15px; padding: 10px; background-color: #f5f5f5;">
+        <span style="font-weight: 600;">${printHeaderContent}</span>
+      </div>`;
+    } else {
+      const headerContentHTML = nodeToHTML(printHeaderContent);
+      headerHTML = `<div style="display: flex; width: 100%; justify-content: space-between; margin-bottom: 15px; padding: 10px; background-color: #f5f5f5;">
+        ${headerContentHTML}
+      </div>`;
+    }
+  }
+
+  const printContent = `
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <title>${printTitle || "Print"}</title>
+        <style>
+          * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+          }
+          body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            font-size: 12px;
+          }
+          .print-header {
+            width: 100%;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #000;
+          }
+          .print-header h1 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            text-align: center;
+          }
+          table {
+            width: 100%;
+            border-collapse: collapse;
+          }
+          th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+          }
+          th {
+            background-color: #f3f4f6;
+            font-weight: bold;
+          }
+          @media print {
+            @page {
+              size: A4;
+              margin: 0.5cm;
+            }
+            body {
+              padding: 10px;
+            }
+            table {
+              width: 100% !important;
+              max-width: 100% !important;
+              font-size: 10px;
+            }
+            th, td {
+              padding: 4px 6px !important;
+              font-size: 10px;
+              word-wrap: break-word;
+              overflow-wrap: break-word;
+            }
+            div {
+              page-break-inside: avoid;
+            }
+            .print-header {
+              page-break-after: avoid;
+            }
+          }
+        </style>
+      </head>
+      <body>
+        ${printTitle ? `<div class="print-header"><h1>${printTitle}</h1></div>` : ""}
+        ${headerHTML}
+        ${groupTables.join("")}
       </body>
     </html>
   `;
