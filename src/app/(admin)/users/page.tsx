@@ -7,11 +7,11 @@ import {
   Table,
   Button,
   TableRef,
+  TypeBadge,
   TableColumn,
   TableActions,
   ExportOptions,
   CustomHeaderProps,
-  TypeBadge,
 } from "@/components";
 import {
   User,

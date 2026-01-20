@@ -7,17 +7,8 @@ import { classNames } from "primereact/utils";
 import { StepperFormHeading } from "@/components";
 import { getEntityModeFromParam } from "@/helpers";
 import { FORM_FIELD_WIDTHS } from "@/utils/constants";
-import {
-  Button,
-  Dropdown,
-  Input,
-  MultiSelect,
-} from "@/components/forms";
-import {
-  branchesData,
-  projectsData,
-  userRolesData,
-} from "@/utils/dummy";
+import { Input, Button, Dropdown, MultiSelect } from "@/components/forms";
+import { branchesData, projectsData, userRolesData } from "@/utils/dummy";
 
 const statusOptions = [
   { label: "Active", value: "1" },
@@ -85,9 +76,7 @@ const UpsertUserPage = () => {
   return (
     <div className="flex flex-col h-full gap-6 px-6 py-6">
       <div className="flex h-full justify-between flex-1 md:flex-none flex-col gap-4 py-6 bg-white rounded-lg">
-        <StepperFormHeading
-          title={isAddMode ? "Add User" : "Edit User"}
-        />
+        <StepperFormHeading title={isAddMode ? "Add User" : "Edit User"} />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 md:gap-y-8 md:py-5 px-6 mt-5 md:mt-0 w-full md:max-w-5xl content-start flex-1">
           <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
             <Input label="Name" className="w-full" placeholder="Enter name" />
@@ -139,7 +128,9 @@ const UpsertUserPage = () => {
                   setSelectedItem={setSelectedBranch}
                 />
               </div>
-              <div className={classNames(FORM_FIELD_WIDTHS["2"], "md:col-span-2")}>
+              <div
+                className={classNames(FORM_FIELD_WIDTHS["2"], "md:col-span-2")}
+              >
                 <MultiSelect
                   small
                   filter
