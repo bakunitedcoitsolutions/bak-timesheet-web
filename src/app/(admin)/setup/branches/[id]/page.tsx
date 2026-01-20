@@ -9,25 +9,25 @@ import { getEntityModeFromParam } from "@/helpers";
 import { FORM_FIELD_WIDTHS } from "@/utils/constants";
 import { Button, Dropdown, Input } from "@/components/forms";
 
-const countryStatusOptions = [
+const branchStatusOptions = [
   { label: "Active", value: "1" },
   { label: "Inactive", value: "2" },
 ];
 
-const UpsertCountryPage = () => {
-  const [selectedCountryStatus, setSelectedCountryStatus] = useState<
+const UpsertBranchPage = () => {
+  const [selectedBranchStatus, setSelectedBranchStatus] = useState<
     string | null
   >(null);
   const router = useRouter();
-  const { id: countryIdParam } = useParams();
+  const { id: branchIdParam } = useParams();
   const {
     isInvalid,
     isAddMode,
     isEditMode,
-    entityId: countryId,
+    entityId: branchId,
   } = getEntityModeFromParam({
     addKeyword: "new",
-    param: countryIdParam,
+    param: branchIdParam,
   });
 
   // Redirect to 404 page if the entity is invalid
@@ -40,15 +40,13 @@ const UpsertCountryPage = () => {
   const handleSubmit = async (data: Record<string, any>) => {
     console.log("Form submitted:", data);
     // Handle form submission here
-    router.replace(`/countries`);
+    router.replace(`/setup/branches`);
   };
 
   return (
     <div className="flex flex-col h-full gap-6 px-6 py-6">
       <div className="flex h-full justify-between flex-1 md:flex-none flex-col gap-4 py-6 bg-white rounded-lg">
-        <StepperFormHeading
-          title={isAddMode ? "Add Country" : "Edit Country"}
-        />
+        <StepperFormHeading title={isAddMode ? "Add Branch" : "Edit Branch"} />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 md:gap-y-8 md:py-5 px-6 mt-5 md:mt-0 w-full md:max-w-5xl content-start flex-1">
           <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
             <Input label="Name" className="w-full" placeholder="Enter name" />
@@ -62,12 +60,12 @@ const UpsertCountryPage = () => {
           </div>
           <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
             <Dropdown
-              label="Country Status"
+              label="Branch Status"
               className="w-full"
-              options={countryStatusOptions}
+              options={branchStatusOptions}
               placeholder="Choose"
-              selectedItem={selectedCountryStatus}
-              setSelectedItem={setSelectedCountryStatus}
+              selectedItem={selectedBranchStatus}
+              setSelectedItem={setSelectedBranchStatus}
             />
           </div>
         </div>
@@ -76,7 +74,7 @@ const UpsertCountryPage = () => {
           <Button
             size="small"
             variant="text"
-            onClick={() => router.replace("/countries")}
+            onClick={() => router.replace("/setup/branches")}
           >
             Cancel
           </Button>
@@ -94,4 +92,4 @@ const UpsertCountryPage = () => {
   );
 };
 
-export default UpsertCountryPage;
+export default UpsertBranchPage;

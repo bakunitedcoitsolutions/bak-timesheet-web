@@ -28,16 +28,19 @@ export type AggregatePayrollSection = {
 
 export type PayrollSectionAvgAggregateOutputType = {
   id: number | null
+  displayOrderKey: number | null
 }
 
 export type PayrollSectionSumAggregateOutputType = {
   id: number | null
+  displayOrderKey: number | null
 }
 
 export type PayrollSectionMinAggregateOutputType = {
   id: number | null
   nameEn: string | null
   nameAr: string | null
+  displayOrderKey: number | null
   isActive: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -47,6 +50,7 @@ export type PayrollSectionMaxAggregateOutputType = {
   id: number | null
   nameEn: string | null
   nameAr: string | null
+  displayOrderKey: number | null
   isActive: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -56,6 +60,7 @@ export type PayrollSectionCountAggregateOutputType = {
   id: number
   nameEn: number
   nameAr: number
+  displayOrderKey: number
   isActive: number
   createdAt: number
   updatedAt: number
@@ -65,16 +70,19 @@ export type PayrollSectionCountAggregateOutputType = {
 
 export type PayrollSectionAvgAggregateInputType = {
   id?: true
+  displayOrderKey?: true
 }
 
 export type PayrollSectionSumAggregateInputType = {
   id?: true
+  displayOrderKey?: true
 }
 
 export type PayrollSectionMinAggregateInputType = {
   id?: true
   nameEn?: true
   nameAr?: true
+  displayOrderKey?: true
   isActive?: true
   createdAt?: true
   updatedAt?: true
@@ -84,6 +92,7 @@ export type PayrollSectionMaxAggregateInputType = {
   id?: true
   nameEn?: true
   nameAr?: true
+  displayOrderKey?: true
   isActive?: true
   createdAt?: true
   updatedAt?: true
@@ -93,6 +102,7 @@ export type PayrollSectionCountAggregateInputType = {
   id?: true
   nameEn?: true
   nameAr?: true
+  displayOrderKey?: true
   isActive?: true
   createdAt?: true
   updatedAt?: true
@@ -189,6 +199,7 @@ export type PayrollSectionGroupByOutputType = {
   id: number
   nameEn: string
   nameAr: string | null
+  displayOrderKey: number | null
   isActive: boolean
   createdAt: Date
   updatedAt: Date
@@ -221,6 +232,7 @@ export type PayrollSectionWhereInput = {
   id?: Prisma.IntFilter<"PayrollSection"> | number
   nameEn?: Prisma.StringFilter<"PayrollSection"> | string
   nameAr?: Prisma.StringNullableFilter<"PayrollSection"> | string | null
+  displayOrderKey?: Prisma.IntNullableFilter<"PayrollSection"> | number | null
   isActive?: Prisma.BoolFilter<"PayrollSection"> | boolean
   createdAt?: Prisma.DateTimeFilter<"PayrollSection"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"PayrollSection"> | Date | string
@@ -231,6 +243,7 @@ export type PayrollSectionOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   nameEn?: Prisma.SortOrder
   nameAr?: Prisma.SortOrderInput | Prisma.SortOrder
+  displayOrderKey?: Prisma.SortOrderInput | Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -244,6 +257,7 @@ export type PayrollSectionWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.PayrollSectionWhereInput | Prisma.PayrollSectionWhereInput[]
   nameEn?: Prisma.StringFilter<"PayrollSection"> | string
   nameAr?: Prisma.StringNullableFilter<"PayrollSection"> | string | null
+  displayOrderKey?: Prisma.IntNullableFilter<"PayrollSection"> | number | null
   isActive?: Prisma.BoolFilter<"PayrollSection"> | boolean
   createdAt?: Prisma.DateTimeFilter<"PayrollSection"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"PayrollSection"> | Date | string
@@ -254,6 +268,7 @@ export type PayrollSectionOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   nameEn?: Prisma.SortOrder
   nameAr?: Prisma.SortOrderInput | Prisma.SortOrder
+  displayOrderKey?: Prisma.SortOrderInput | Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -271,6 +286,7 @@ export type PayrollSectionScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"PayrollSection"> | number
   nameEn?: Prisma.StringWithAggregatesFilter<"PayrollSection"> | string
   nameAr?: Prisma.StringNullableWithAggregatesFilter<"PayrollSection"> | string | null
+  displayOrderKey?: Prisma.IntNullableWithAggregatesFilter<"PayrollSection"> | number | null
   isActive?: Prisma.BoolWithAggregatesFilter<"PayrollSection"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"PayrollSection"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"PayrollSection"> | Date | string
@@ -279,6 +295,7 @@ export type PayrollSectionScalarWhereWithAggregatesInput = {
 export type PayrollSectionCreateInput = {
   nameEn: string
   nameAr?: string | null
+  displayOrderKey?: number | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -289,6 +306,7 @@ export type PayrollSectionUncheckedCreateInput = {
   id?: number
   nameEn: string
   nameAr?: string | null
+  displayOrderKey?: number | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -298,6 +316,7 @@ export type PayrollSectionUncheckedCreateInput = {
 export type PayrollSectionUpdateInput = {
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayOrderKey?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -308,6 +327,7 @@ export type PayrollSectionUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayOrderKey?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -318,6 +338,7 @@ export type PayrollSectionCreateManyInput = {
   id?: number
   nameEn: string
   nameAr?: string | null
+  displayOrderKey?: number | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -326,6 +347,7 @@ export type PayrollSectionCreateManyInput = {
 export type PayrollSectionUpdateManyMutationInput = {
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayOrderKey?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -335,6 +357,7 @@ export type PayrollSectionUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayOrderKey?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -349,6 +372,7 @@ export type PayrollSectionCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   nameEn?: Prisma.SortOrder
   nameAr?: Prisma.SortOrder
+  displayOrderKey?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -356,12 +380,14 @@ export type PayrollSectionCountOrderByAggregateInput = {
 
 export type PayrollSectionAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  displayOrderKey?: Prisma.SortOrder
 }
 
 export type PayrollSectionMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   nameEn?: Prisma.SortOrder
   nameAr?: Prisma.SortOrder
+  displayOrderKey?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -371,6 +397,7 @@ export type PayrollSectionMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   nameEn?: Prisma.SortOrder
   nameAr?: Prisma.SortOrder
+  displayOrderKey?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -378,6 +405,7 @@ export type PayrollSectionMinOrderByAggregateInput = {
 
 export type PayrollSectionSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  displayOrderKey?: Prisma.SortOrder
 }
 
 export type PayrollSectionCreateNestedOneWithoutPayrollsInput = {
@@ -399,6 +427,7 @@ export type PayrollSectionUpdateOneWithoutPayrollsNestedInput = {
 export type PayrollSectionCreateWithoutPayrollsInput = {
   nameEn: string
   nameAr?: string | null
+  displayOrderKey?: number | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -408,6 +437,7 @@ export type PayrollSectionUncheckedCreateWithoutPayrollsInput = {
   id?: number
   nameEn: string
   nameAr?: string | null
+  displayOrderKey?: number | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -432,6 +462,7 @@ export type PayrollSectionUpdateToOneWithWhereWithoutPayrollsInput = {
 export type PayrollSectionUpdateWithoutPayrollsInput = {
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayOrderKey?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -441,6 +472,7 @@ export type PayrollSectionUncheckedUpdateWithoutPayrollsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayOrderKey?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -481,6 +513,7 @@ export type PayrollSectionSelect<ExtArgs extends runtime.Types.Extensions.Intern
   id?: boolean
   nameEn?: boolean
   nameAr?: boolean
+  displayOrderKey?: boolean
   isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -492,6 +525,7 @@ export type PayrollSectionSelectCreateManyAndReturn<ExtArgs extends runtime.Type
   id?: boolean
   nameEn?: boolean
   nameAr?: boolean
+  displayOrderKey?: boolean
   isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -501,6 +535,7 @@ export type PayrollSectionSelectUpdateManyAndReturn<ExtArgs extends runtime.Type
   id?: boolean
   nameEn?: boolean
   nameAr?: boolean
+  displayOrderKey?: boolean
   isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -510,12 +545,13 @@ export type PayrollSectionSelectScalar = {
   id?: boolean
   nameEn?: boolean
   nameAr?: boolean
+  displayOrderKey?: boolean
   isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type PayrollSectionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nameEn" | "nameAr" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["payrollSection"]>
+export type PayrollSectionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nameEn" | "nameAr" | "displayOrderKey" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["payrollSection"]>
 export type PayrollSectionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   payrolls?: boolean | Prisma.PayrollSection$payrollsArgs<ExtArgs>
   _count?: boolean | Prisma.PayrollSectionCountOutputTypeDefaultArgs<ExtArgs>
@@ -532,6 +568,7 @@ export type $PayrollSectionPayload<ExtArgs extends runtime.Types.Extensions.Inte
     id: number
     nameEn: string
     nameAr: string | null
+    displayOrderKey: number | null
     isActive: boolean
     createdAt: Date
     updatedAt: Date
@@ -962,6 +999,7 @@ export interface PayrollSectionFieldRefs {
   readonly id: Prisma.FieldRef<"PayrollSection", 'Int'>
   readonly nameEn: Prisma.FieldRef<"PayrollSection", 'String'>
   readonly nameAr: Prisma.FieldRef<"PayrollSection", 'String'>
+  readonly displayOrderKey: Prisma.FieldRef<"PayrollSection", 'Int'>
   readonly isActive: Prisma.FieldRef<"PayrollSection", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"PayrollSection", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"PayrollSection", 'DateTime'>

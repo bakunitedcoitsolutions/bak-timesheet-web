@@ -28,7 +28,6 @@ const userSelectWithoutPassword = {
   nameEn: true,
   nameAr: true,
   email: true,
-  image: true,
   userRoleId: true,
   branchId: true,
   isActive: true,

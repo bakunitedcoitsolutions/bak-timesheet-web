@@ -7,14 +7,7 @@ import { classNames } from "primereact/utils";
 import { StepperFormHeading } from "@/components";
 import { getEntityModeFromParam } from "@/helpers";
 import { FORM_FIELD_WIDTHS } from "@/utils/constants";
-import {
-  Button,
-  Dropdown,
-  Input,
-  NumberInput,
-  MultiSelect,
-} from "@/components/forms";
-import { designationsData } from "@/utils/dummy";
+import { Input, Button, Dropdown, NumberInput } from "@/components/forms";
 
 const payrollSectionStatusOptions = [
   { label: "Active", value: "1" },
@@ -24,9 +17,6 @@ const payrollSectionStatusOptions = [
 const UpsertPayrollSectionPage = () => {
   const [selectedPayrollSectionStatus, setSelectedPayrollSectionStatus] =
     useState<string | null>(null);
-  const [selectedDesignations, setSelectedDesignations] = useState<string[]>(
-    []
-  );
   const router = useRouter();
   const { id: payrollSectionIdParam } = useParams();
   const {
@@ -51,11 +41,6 @@ const UpsertPayrollSectionPage = () => {
     // Handle form submission here
     router.replace(`/setup/payroll-sections`);
   };
-
-  const designationOptions = designationsData.map((designation) => ({
-    label: designation.nameEn,
-    value: designation.id,
-  }));
 
   return (
     <div className="flex flex-col h-full gap-6 px-6 py-6">
@@ -90,18 +75,6 @@ const UpsertPayrollSectionPage = () => {
               placeholder="Choose"
               selectedItem={selectedPayrollSectionStatus}
               setSelectedItem={setSelectedPayrollSectionStatus}
-            />
-          </div>
-          <div className={classNames(FORM_FIELD_WIDTHS["2"], "md:col-span-2")}>
-            <MultiSelect
-              small
-              filter
-              label="Designations"
-              className="w-full"
-              options={designationOptions}
-              placeholder="Choose"
-              selectedItem={selectedDesignations}
-              setSelectedItem={setSelectedDesignations}
             />
           </div>
         </div>

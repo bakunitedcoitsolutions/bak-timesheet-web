@@ -42,6 +42,7 @@ export type CityMinAggregateOutputType = {
   nameAr: string | null
   countryId: number | null
   isActive: boolean | null
+  showInPayroll: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -52,6 +53,7 @@ export type CityMaxAggregateOutputType = {
   nameAr: string | null
   countryId: number | null
   isActive: boolean | null
+  showInPayroll: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -62,6 +64,7 @@ export type CityCountAggregateOutputType = {
   nameAr: number
   countryId: number
   isActive: number
+  showInPayroll: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -84,6 +87,7 @@ export type CityMinAggregateInputType = {
   nameAr?: true
   countryId?: true
   isActive?: true
+  showInPayroll?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -94,6 +98,7 @@ export type CityMaxAggregateInputType = {
   nameAr?: true
   countryId?: true
   isActive?: true
+  showInPayroll?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -104,6 +109,7 @@ export type CityCountAggregateInputType = {
   nameAr?: true
   countryId?: true
   isActive?: true
+  showInPayroll?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -201,6 +207,7 @@ export type CityGroupByOutputType = {
   nameAr: string | null
   countryId: number | null
   isActive: boolean
+  showInPayroll: boolean
   createdAt: Date
   updatedAt: Date
   _count: CityCountAggregateOutputType | null
@@ -234,10 +241,10 @@ export type CityWhereInput = {
   nameAr?: Prisma.StringNullableFilter<"City"> | string | null
   countryId?: Prisma.IntNullableFilter<"City"> | number | null
   isActive?: Prisma.BoolFilter<"City"> | boolean
+  showInPayroll?: Prisma.BoolFilter<"City"> | boolean
   createdAt?: Prisma.DateTimeFilter<"City"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"City"> | Date | string
   country?: Prisma.XOR<Prisma.CountryNullableScalarRelationFilter, Prisma.CountryWhereInput> | null
-  branches?: Prisma.BranchListRelationFilter
   employees?: Prisma.EmployeeListRelationFilter
 }
 
@@ -247,10 +254,10 @@ export type CityOrderByWithRelationInput = {
   nameAr?: Prisma.SortOrderInput | Prisma.SortOrder
   countryId?: Prisma.SortOrderInput | Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  showInPayroll?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   country?: Prisma.CountryOrderByWithRelationInput
-  branches?: Prisma.BranchOrderByRelationAggregateInput
   employees?: Prisma.EmployeeOrderByRelationAggregateInput
 }
 
@@ -263,10 +270,10 @@ export type CityWhereUniqueInput = Prisma.AtLeast<{
   nameAr?: Prisma.StringNullableFilter<"City"> | string | null
   countryId?: Prisma.IntNullableFilter<"City"> | number | null
   isActive?: Prisma.BoolFilter<"City"> | boolean
+  showInPayroll?: Prisma.BoolFilter<"City"> | boolean
   createdAt?: Prisma.DateTimeFilter<"City"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"City"> | Date | string
   country?: Prisma.XOR<Prisma.CountryNullableScalarRelationFilter, Prisma.CountryWhereInput> | null
-  branches?: Prisma.BranchListRelationFilter
   employees?: Prisma.EmployeeListRelationFilter
 }, "id">
 
@@ -276,6 +283,7 @@ export type CityOrderByWithAggregationInput = {
   nameAr?: Prisma.SortOrderInput | Prisma.SortOrder
   countryId?: Prisma.SortOrderInput | Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  showInPayroll?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.CityCountOrderByAggregateInput
@@ -294,6 +302,7 @@ export type CityScalarWhereWithAggregatesInput = {
   nameAr?: Prisma.StringNullableWithAggregatesFilter<"City"> | string | null
   countryId?: Prisma.IntNullableWithAggregatesFilter<"City"> | number | null
   isActive?: Prisma.BoolWithAggregatesFilter<"City"> | boolean
+  showInPayroll?: Prisma.BoolWithAggregatesFilter<"City"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"City"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"City"> | Date | string
 }
@@ -302,10 +311,10 @@ export type CityCreateInput = {
   nameEn: string
   nameAr?: string | null
   isActive?: boolean
+  showInPayroll?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   country?: Prisma.CountryCreateNestedOneWithoutCitiesInput
-  branches?: Prisma.BranchCreateNestedManyWithoutCityInput
   employees?: Prisma.EmployeeCreateNestedManyWithoutCityInput
 }
 
@@ -315,9 +324,9 @@ export type CityUncheckedCreateInput = {
   nameAr?: string | null
   countryId?: number | null
   isActive?: boolean
+  showInPayroll?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  branches?: Prisma.BranchUncheckedCreateNestedManyWithoutCityInput
   employees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutCityInput
 }
 
@@ -325,10 +334,10 @@ export type CityUpdateInput = {
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  showInPayroll?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   country?: Prisma.CountryUpdateOneWithoutCitiesNestedInput
-  branches?: Prisma.BranchUpdateManyWithoutCityNestedInput
   employees?: Prisma.EmployeeUpdateManyWithoutCityNestedInput
 }
 
@@ -338,9 +347,9 @@ export type CityUncheckedUpdateInput = {
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   countryId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  showInPayroll?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  branches?: Prisma.BranchUncheckedUpdateManyWithoutCityNestedInput
   employees?: Prisma.EmployeeUncheckedUpdateManyWithoutCityNestedInput
 }
 
@@ -350,6 +359,7 @@ export type CityCreateManyInput = {
   nameAr?: string | null
   countryId?: number | null
   isActive?: boolean
+  showInPayroll?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -358,6 +368,7 @@ export type CityUpdateManyMutationInput = {
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  showInPayroll?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -368,13 +379,9 @@ export type CityUncheckedUpdateManyInput = {
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   countryId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  showInPayroll?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type CityNullableScalarRelationFilter = {
-  is?: Prisma.CityWhereInput | null
-  isNot?: Prisma.CityWhereInput | null
 }
 
 export type CityCountOrderByAggregateInput = {
@@ -383,6 +390,7 @@ export type CityCountOrderByAggregateInput = {
   nameAr?: Prisma.SortOrder
   countryId?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  showInPayroll?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -398,6 +406,7 @@ export type CityMaxOrderByAggregateInput = {
   nameAr?: Prisma.SortOrder
   countryId?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  showInPayroll?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -408,6 +417,7 @@ export type CityMinOrderByAggregateInput = {
   nameAr?: Prisma.SortOrder
   countryId?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  showInPayroll?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -427,20 +437,9 @@ export type CityOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
-export type CityCreateNestedOneWithoutBranchesInput = {
-  create?: Prisma.XOR<Prisma.CityCreateWithoutBranchesInput, Prisma.CityUncheckedCreateWithoutBranchesInput>
-  connectOrCreate?: Prisma.CityCreateOrConnectWithoutBranchesInput
-  connect?: Prisma.CityWhereUniqueInput
-}
-
-export type CityUpdateOneWithoutBranchesNestedInput = {
-  create?: Prisma.XOR<Prisma.CityCreateWithoutBranchesInput, Prisma.CityUncheckedCreateWithoutBranchesInput>
-  connectOrCreate?: Prisma.CityCreateOrConnectWithoutBranchesInput
-  upsert?: Prisma.CityUpsertWithoutBranchesInput
-  disconnect?: Prisma.CityWhereInput | boolean
-  delete?: Prisma.CityWhereInput | boolean
-  connect?: Prisma.CityWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.CityUpdateToOneWithWhereWithoutBranchesInput, Prisma.CityUpdateWithoutBranchesInput>, Prisma.CityUncheckedUpdateWithoutBranchesInput>
+export type CityNullableScalarRelationFilter = {
+  is?: Prisma.CityWhereInput | null
+  isNot?: Prisma.CityWhereInput | null
 }
 
 export type CityCreateNestedManyWithoutCountryInput = {
@@ -501,71 +500,13 @@ export type CityUpdateOneWithoutEmployeesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.CityUpdateToOneWithWhereWithoutEmployeesInput, Prisma.CityUpdateWithoutEmployeesInput>, Prisma.CityUncheckedUpdateWithoutEmployeesInput>
 }
 
-export type CityCreateWithoutBranchesInput = {
-  nameEn: string
-  nameAr?: string | null
-  isActive?: boolean
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  country?: Prisma.CountryCreateNestedOneWithoutCitiesInput
-  employees?: Prisma.EmployeeCreateNestedManyWithoutCityInput
-}
-
-export type CityUncheckedCreateWithoutBranchesInput = {
-  id?: number
-  nameEn: string
-  nameAr?: string | null
-  countryId?: number | null
-  isActive?: boolean
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  employees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutCityInput
-}
-
-export type CityCreateOrConnectWithoutBranchesInput = {
-  where: Prisma.CityWhereUniqueInput
-  create: Prisma.XOR<Prisma.CityCreateWithoutBranchesInput, Prisma.CityUncheckedCreateWithoutBranchesInput>
-}
-
-export type CityUpsertWithoutBranchesInput = {
-  update: Prisma.XOR<Prisma.CityUpdateWithoutBranchesInput, Prisma.CityUncheckedUpdateWithoutBranchesInput>
-  create: Prisma.XOR<Prisma.CityCreateWithoutBranchesInput, Prisma.CityUncheckedCreateWithoutBranchesInput>
-  where?: Prisma.CityWhereInput
-}
-
-export type CityUpdateToOneWithWhereWithoutBranchesInput = {
-  where?: Prisma.CityWhereInput
-  data: Prisma.XOR<Prisma.CityUpdateWithoutBranchesInput, Prisma.CityUncheckedUpdateWithoutBranchesInput>
-}
-
-export type CityUpdateWithoutBranchesInput = {
-  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
-  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  country?: Prisma.CountryUpdateOneWithoutCitiesNestedInput
-  employees?: Prisma.EmployeeUpdateManyWithoutCityNestedInput
-}
-
-export type CityUncheckedUpdateWithoutBranchesInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
-  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  countryId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  employees?: Prisma.EmployeeUncheckedUpdateManyWithoutCityNestedInput
-}
-
 export type CityCreateWithoutCountryInput = {
   nameEn: string
   nameAr?: string | null
   isActive?: boolean
+  showInPayroll?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  branches?: Prisma.BranchCreateNestedManyWithoutCityInput
   employees?: Prisma.EmployeeCreateNestedManyWithoutCityInput
 }
 
@@ -574,9 +515,9 @@ export type CityUncheckedCreateWithoutCountryInput = {
   nameEn: string
   nameAr?: string | null
   isActive?: boolean
+  showInPayroll?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  branches?: Prisma.BranchUncheckedCreateNestedManyWithoutCityInput
   employees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutCityInput
 }
 
@@ -615,6 +556,7 @@ export type CityScalarWhereInput = {
   nameAr?: Prisma.StringNullableFilter<"City"> | string | null
   countryId?: Prisma.IntNullableFilter<"City"> | number | null
   isActive?: Prisma.BoolFilter<"City"> | boolean
+  showInPayroll?: Prisma.BoolFilter<"City"> | boolean
   createdAt?: Prisma.DateTimeFilter<"City"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"City"> | Date | string
 }
@@ -623,10 +565,10 @@ export type CityCreateWithoutEmployeesInput = {
   nameEn: string
   nameAr?: string | null
   isActive?: boolean
+  showInPayroll?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   country?: Prisma.CountryCreateNestedOneWithoutCitiesInput
-  branches?: Prisma.BranchCreateNestedManyWithoutCityInput
 }
 
 export type CityUncheckedCreateWithoutEmployeesInput = {
@@ -635,9 +577,9 @@ export type CityUncheckedCreateWithoutEmployeesInput = {
   nameAr?: string | null
   countryId?: number | null
   isActive?: boolean
+  showInPayroll?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  branches?: Prisma.BranchUncheckedCreateNestedManyWithoutCityInput
 }
 
 export type CityCreateOrConnectWithoutEmployeesInput = {
@@ -660,10 +602,10 @@ export type CityUpdateWithoutEmployeesInput = {
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  showInPayroll?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   country?: Prisma.CountryUpdateOneWithoutCitiesNestedInput
-  branches?: Prisma.BranchUpdateManyWithoutCityNestedInput
 }
 
 export type CityUncheckedUpdateWithoutEmployeesInput = {
@@ -672,9 +614,9 @@ export type CityUncheckedUpdateWithoutEmployeesInput = {
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   countryId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  showInPayroll?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  branches?: Prisma.BranchUncheckedUpdateManyWithoutCityNestedInput
 }
 
 export type CityCreateManyCountryInput = {
@@ -682,6 +624,7 @@ export type CityCreateManyCountryInput = {
   nameEn: string
   nameAr?: string | null
   isActive?: boolean
+  showInPayroll?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -690,9 +633,9 @@ export type CityUpdateWithoutCountryInput = {
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  showInPayroll?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  branches?: Prisma.BranchUpdateManyWithoutCityNestedInput
   employees?: Prisma.EmployeeUpdateManyWithoutCityNestedInput
 }
 
@@ -701,9 +644,9 @@ export type CityUncheckedUpdateWithoutCountryInput = {
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  showInPayroll?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  branches?: Prisma.BranchUncheckedUpdateManyWithoutCityNestedInput
   employees?: Prisma.EmployeeUncheckedUpdateManyWithoutCityNestedInput
 }
 
@@ -712,6 +655,7 @@ export type CityUncheckedUpdateManyWithoutCountryInput = {
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  showInPayroll?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -722,12 +666,10 @@ export type CityUncheckedUpdateManyWithoutCountryInput = {
  */
 
 export type CityCountOutputType = {
-  branches: number
   employees: number
 }
 
 export type CityCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  branches?: boolean | CityCountOutputTypeCountBranchesArgs
   employees?: boolean | CityCountOutputTypeCountEmployeesArgs
 }
 
@@ -744,13 +686,6 @@ export type CityCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensi
 /**
  * CityCountOutputType without action
  */
-export type CityCountOutputTypeCountBranchesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.BranchWhereInput
-}
-
-/**
- * CityCountOutputType without action
- */
 export type CityCountOutputTypeCountEmployeesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.EmployeeWhereInput
 }
@@ -762,10 +697,10 @@ export type CitySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   nameAr?: boolean
   countryId?: boolean
   isActive?: boolean
+  showInPayroll?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   country?: boolean | Prisma.City$countryArgs<ExtArgs>
-  branches?: boolean | Prisma.City$branchesArgs<ExtArgs>
   employees?: boolean | Prisma.City$employeesArgs<ExtArgs>
   _count?: boolean | Prisma.CityCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["city"]>
@@ -776,6 +711,7 @@ export type CitySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   nameAr?: boolean
   countryId?: boolean
   isActive?: boolean
+  showInPayroll?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   country?: boolean | Prisma.City$countryArgs<ExtArgs>
@@ -787,6 +723,7 @@ export type CitySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   nameAr?: boolean
   countryId?: boolean
   isActive?: boolean
+  showInPayroll?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   country?: boolean | Prisma.City$countryArgs<ExtArgs>
@@ -798,14 +735,14 @@ export type CitySelectScalar = {
   nameAr?: boolean
   countryId?: boolean
   isActive?: boolean
+  showInPayroll?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type CityOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nameEn" | "nameAr" | "countryId" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["city"]>
+export type CityOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nameEn" | "nameAr" | "countryId" | "isActive" | "showInPayroll" | "createdAt" | "updatedAt", ExtArgs["result"]["city"]>
 export type CityInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   country?: boolean | Prisma.City$countryArgs<ExtArgs>
-  branches?: boolean | Prisma.City$branchesArgs<ExtArgs>
   employees?: boolean | Prisma.City$employeesArgs<ExtArgs>
   _count?: boolean | Prisma.CityCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -820,7 +757,6 @@ export type $CityPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   name: "City"
   objects: {
     country: Prisma.$CountryPayload<ExtArgs> | null
-    branches: Prisma.$BranchPayload<ExtArgs>[]
     employees: Prisma.$EmployeePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -829,6 +765,7 @@ export type $CityPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     nameAr: string | null
     countryId: number | null
     isActive: boolean
+    showInPayroll: boolean
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["city"]>
@@ -1226,7 +1163,6 @@ readonly fields: CityFieldRefs;
 export interface Prisma__CityClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   country<T extends Prisma.City$countryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.City$countryArgs<ExtArgs>>): Prisma.Prisma__CountryClient<runtime.Types.Result.GetResult<Prisma.$CountryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  branches<T extends Prisma.City$branchesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.City$branchesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BranchPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   employees<T extends Prisma.City$employeesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.City$employeesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1262,6 +1198,7 @@ export interface CityFieldRefs {
   readonly nameAr: Prisma.FieldRef<"City", 'String'>
   readonly countryId: Prisma.FieldRef<"City", 'Int'>
   readonly isActive: Prisma.FieldRef<"City", 'Boolean'>
+  readonly showInPayroll: Prisma.FieldRef<"City", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"City", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"City", 'DateTime'>
 }
@@ -1676,30 +1613,6 @@ export type City$countryArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
    */
   include?: Prisma.CountryInclude<ExtArgs> | null
   where?: Prisma.CountryWhereInput
-}
-
-/**
- * City.branches
- */
-export type City$branchesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Branch
-   */
-  select?: Prisma.BranchSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Branch
-   */
-  omit?: Prisma.BranchOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.BranchInclude<ExtArgs> | null
-  where?: Prisma.BranchWhereInput
-  orderBy?: Prisma.BranchOrderByWithRelationInput | Prisma.BranchOrderByWithRelationInput[]
-  cursor?: Prisma.BranchWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.BranchScalarFieldEnum | Prisma.BranchScalarFieldEnum[]
 }
 
 /**

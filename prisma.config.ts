@@ -1,12 +1,12 @@
 /**
  * Prisma Configuration for Supabase
  * Prisma 7 requires connection URLs to be defined here instead of schema.prisma
- * 
+ *
  * Supabase Connection String Format:
  * - Direct connection: postgresql://postgres:[PASSWORD]@db.[PROJECT-REF].supabase.co:5432/postgres
  * - Connection pooler (recommended for production/serverless):
  *   postgresql://postgres.[PROJECT-REF]:[PASSWORD]@aws-0-[REGION].pooler.supabase.com:6543/postgres
- * 
+ *
  * Get your connection string from: Supabase Dashboard → Settings → Database → Connection string
  */
 

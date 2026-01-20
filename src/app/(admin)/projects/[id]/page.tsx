@@ -8,6 +8,7 @@ import { StepperFormHeading } from "@/components";
 import { getEntityModeFromParam } from "@/helpers";
 import { FORM_FIELD_WIDTHS } from "@/utils/constants";
 import { Button, Dropdown, Input } from "@/components/forms";
+import { branchesData } from "@/utils/dummy";
 
 const projectStatusOptions = [
   { label: "Active", value: "1" },
@@ -15,6 +16,7 @@ const projectStatusOptions = [
 ];
 
 const UpsertProjectPage = () => {
+  const [selectedBranch, setSelectedBranch] = useState<string | null>(null);
   const [selectedProjectStatus, setSelectedProjectStatus] = useState<
     string | null
   >(null);
@@ -68,6 +70,19 @@ const UpsertProjectPage = () => {
               placeholder="Choose"
               selectedItem={selectedProjectStatus}
               setSelectedItem={setSelectedProjectStatus}
+            />
+          </div>
+          <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
+            <Dropdown
+              label="Branch"
+              className="w-full"
+              placeholder="Choose"
+              options={branchesData.map((branch) => ({
+                label: branch.nameEn,
+                value: branch.id,
+              }))}
+              selectedItem={selectedBranch}
+              setSelectedItem={setSelectedBranch}
             />
           </div>
         </div>

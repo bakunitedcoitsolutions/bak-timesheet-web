@@ -172,22 +172,22 @@ const Step2 = () => {
         {/* Third Row */}
         <div className={classNames(FORM_FIELD_WIDTHS["4"])}>
           <Dropdown
-            label="Deductable?"
-            className="w-full"
-            options={isFixedOptions}
-            placeholder="Choose"
-            selectedItem={selectedIsDeductable}
-            setSelectedItem={setSelectedIsDeductable}
-          />
-        </div>
-        <div className={classNames(FORM_FIELD_WIDTHS["4"])}>
-          <Dropdown
-            label="Fixed?"
+            label="Is Fixed?"
             className="w-full"
             options={isFixedOptions}
             placeholder="Choose"
             selectedItem={selectedIsFixed}
             setSelectedItem={setSelectedIsFixed}
+          />
+        </div>
+        <div className={classNames(FORM_FIELD_WIDTHS["4"])}>
+          <Dropdown
+            className="w-full"
+            placeholder="Choose"
+            label="Is Deductable?"
+            options={isFixedOptions}
+            selectedItem={selectedIsDeductable}
+            setSelectedItem={setSelectedIsDeductable}
           />
         </div>
         <div className={classNames(FORM_FIELD_WIDTHS["4"])}>
@@ -278,14 +278,22 @@ const Step2 = () => {
             placeholder="Enter contract end date"
           />
         </div>
-        <div className={classNames(FORM_FIELD_WIDTHS["4"], "xl:col-span-2")}>
+        <div className={classNames(FORM_FIELD_WIDTHS["4"])}>
           <NumberInput
             disabled
             maxLength={5}
             placeholder="N/A"
             className="w-full"
             useGrouping={false}
-            label="Contract Remaining Days"
+            label="Contract Rem. Days"
+          />
+        </div>
+        <div className={classNames(FORM_FIELD_WIDTHS["4"])}>
+          <Input
+            type="date"
+            className="w-full"
+            label="Joining Date"
+            placeholder="Enter joining date"
           />
         </div>
         <div className={classNames(FORM_FIELD_WIDTHS["4"], "xl:col-span-2")}>

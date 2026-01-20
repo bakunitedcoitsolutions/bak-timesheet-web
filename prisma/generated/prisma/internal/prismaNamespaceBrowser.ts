@@ -93,10 +93,11 @@ export const UserScalarFieldEnum = {
   nameAr: 'nameAr',
   email: 'email',
   password: 'password',
-  image: 'image',
   userRoleId: 'userRoleId',
   branchId: 'branchId',
   isActive: 'isActive',
+  createdBy: 'createdBy',
+  updatedBy: 'updatedBy',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -132,8 +133,6 @@ export const BranchScalarFieldEnum = {
   id: 'id',
   nameEn: 'nameEn',
   nameAr: 'nameAr',
-  code: 'code',
-  cityId: 'cityId',
   isActive: 'isActive',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -148,6 +147,7 @@ export const CityScalarFieldEnum = {
   nameAr: 'nameAr',
   countryId: 'countryId',
   isActive: 'isActive',
+  showInPayroll: 'showInPayroll',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -159,7 +159,6 @@ export const CountryScalarFieldEnum = {
   id: 'id',
   nameEn: 'nameEn',
   nameAr: 'nameAr',
-  code: 'code',
   isActive: 'isActive',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -205,6 +204,10 @@ export const DesignationScalarFieldEnum = {
   id: 'id',
   nameEn: 'nameEn',
   nameAr: 'nameAr',
+  hoursPerDay: 'hoursPerDay',
+  displayOrderKey: 'displayOrderKey',
+  color: 'color',
+  breakfastAllowance: 'breakfastAllowance',
   isActive: 'isActive',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -273,6 +276,7 @@ export const PayrollSectionScalarFieldEnum = {
   id: 'id',
   nameEn: 'nameEn',
   nameAr: 'nameAr',
+  displayOrderKey: 'displayOrderKey',
   isActive: 'isActive',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'

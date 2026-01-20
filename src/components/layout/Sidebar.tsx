@@ -34,33 +34,6 @@ const menuItems: MenuItem[] = [
     icon: "fa-light fa-building text-xl!",
     href: "/projects",
   },
-  { label: "Loans", icon: "fa-light fa-newspaper text-xl!", href: "/loans" },
-  {
-    divider: true,
-    label: "",
-    icon: "",
-  },
-  {
-    label: "Traffic Challans",
-    icon: "fa-light fa-ticket text-xl!",
-    href: "/challans",
-  },
-  {
-    label: "Exit Re-entry",
-    icon: "fa-light fa-diamond-turn-right text-xl!",
-    href: "/exit-reentry",
-  },
-  {
-    label: "Payroll",
-    icon: "fa-sharp fa-light fa-book-open-reader text-xl!",
-    href: "/payroll",
-  },
-  {
-    label: "Ledger",
-    icon: "fa-light fa-book-open-lines text-xl!",
-    href: "/ledger",
-  },
-  { label: "Users Mgmt.", icon: "pi pi-users text-2xl!", href: "/users" },
   {
     label: "Reports",
     icon: "fa-sharp fa-light fa-file-chart-column text-xl!",
@@ -113,6 +86,33 @@ const menuItems: MenuItem[] = [
     //   },
     // ],
   },
+  {
+    divider: true,
+    label: "",
+    icon: "",
+  },
+  { label: "Loans", icon: "fa-light fa-newspaper text-xl!", href: "/loans" },
+  {
+    label: "Traffic Challans",
+    icon: "fa-light fa-ticket text-xl!",
+    href: "/challans",
+  },
+  {
+    label: "Payroll",
+    icon: "fa-sharp fa-light fa-book-open-reader text-xl!",
+    href: "/payroll",
+  },
+  {
+    label: "Ledger",
+    icon: "fa-light fa-book-open-lines text-xl!",
+    href: "/ledger",
+  },
+  {
+    label: "Exit Re-entry",
+    icon: "fa-light fa-diamond-turn-right text-xl!",
+    href: "/exit-reentry",
+  },
+  { label: "Users Mgmt.", icon: "pi pi-users text-2xl!", href: "/users" },
   {
     label: "Setup",
     icon: "fa-light fa-gear text-xl!",

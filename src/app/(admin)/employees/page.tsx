@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import {
   Input,
   Table,
+  Badge,
   Button,
   TableColumn,
   TableActions,
@@ -30,9 +31,11 @@ type Employee = {
   empNameEn: string;
   empNameAr: string;
   empGender: string;
+  empSalary: string;
   empPicture?: string;
   empContactNo: string;
   empIsFixed?: boolean;
+  empIsDeductable?: boolean;
   empProfession: string;
   empHourlyRate: string;
   empDesignation: string;
@@ -149,7 +152,41 @@ const columns = (
     header: "Hourly Rate",
     ...commonColumnProps,
     body: (rowData: Employee) => (
-      <span className="text-sm">{rowData.empHourlyRate}</span>
+      <div className="flex items-start gap-2">
+        <span className="text-sm font-semibold">
+          {rowData.empHourlyRate === "0.0" ? (
+            <span className="text-text-gray font-normal">N/A</span>
+          ) : (
+            rowData.empHourlyRate
+          )}
+        </span>
+      </div>
+    ),
+  },
+  {
+    field: "empSalary",
+    header: "Salary",
+    ...commonColumnProps,
+    body: (rowData: Employee) => (
+      <div className="flex justify-between gap-2">
+        <span className="text-sm font-semibold">
+          {rowData.empSalary === "0.0" ? (
+            <span className="text-text-gray font-normal">N/A</span>
+          ) : (
+            rowData.empSalary
+          )}
+        </span>
+        <div className="flex items-start gap-2">
+          {rowData.empIsFixed && <Badge text="F" />}
+          {rowData.empIsDeductable && (
+            <Badge
+              // containerClassName="bg-primary-light"
+              // textClassName="text-primary!"
+              text="D"
+            />
+          )}
+        </div>
+      </div>
     ),
   },
   {
@@ -174,20 +211,6 @@ const columns = (
     ...commonColumnProps,
     body: (rowData: Employee) => (
       <span className="text-sm">{rowData.empContactNo}</span>
-    ),
-  },
-  {
-    field: "empIsFixedEmp",
-    header: "Fixed?",
-    sortable: false,
-    filterable: false,
-    style: { minWidth: 100 },
-    body: (rowData: Employee) => (
-      <div className="w-full flex flex-1 justify-center">
-        <span className="text-sm text-center">
-          {rowData.empIsFixed ? "Yes" : "No"}
-        </span>
-      </div>
     ),
   },
   {
@@ -341,6 +364,7 @@ const EmployeesPage = () => {
           rowsPerPageOptions={[10, 25, 50]}
           rows={10}
           scrollable
+          removableSort
           scrollHeight="65vh"
         />
       </div>
