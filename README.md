@@ -1,36 +1,93 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Timesheet Management System
 
-## Getting Started
+A modern timesheet management application built with Next.js 16, Prisma, Supabase, and NextAuth.
 
-First, run the development server:
+## Tech Stack
+
+- **Next.js 16** - React framework with App Router
+- **Prisma 7** - Type-safe ORM
+- **Supabase** - PostgreSQL database
+- **Upstash Redis** - Caching and session management
+- **NextAuth.js v5** - Authentication
+- **TypeScript** - Type safety
+
+## Quick Start
+
+### 1. Install Dependencies
+
+```bash
+npm install
+```
+
+### 2. Environment Variables
+
+Copy `.env.example` to `.env` and fill in:
+
+```env
+# Database
+DATABASE_URL="postgresql://postgres:[PASSWORD]@db.[PROJECT-REF].supabase.co:5432/postgres"
+
+# NextAuth
+NEXTAUTH_URL="http://localhost:3000"
+NEXT_AUTH_SECRET="generate-with: openssl rand -base64 32"
+
+# Redis
+UPSTASH_REDIS_REST_URL="https://your-redis.upstash.io"
+UPSTASH_REDIS_REST_TOKEN="your-token"
+```
+
+### 3. Setup Database
+
+```bash
+# Generate Prisma Client
+npm run db:generate
+
+# Push schema to database
+npm run db:push
+```
+
+### 4. Run Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Project Structure
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+src/
+├── app/              # Next.js App Router pages and API routes
+├── lib/
+│   ├── auth/        # NextAuth configuration and helpers
+│   ├── db/          # Prisma client and services
+│   └── redis/       # Upstash Redis client
+├── components/      # React components
+└── utils/           # Utility functions and helpers
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Key Features
 
-## Learn More
+- **Role-Based Access Control** - Admin, Manager, Branch Manager, User with Privileges
+- **User Management** - Create, update, and manage users with granular permissions
+- **Session Management** - JWT-based authentication with Redis caching
+- **Audit Trail** - Track who created/updated records (`createdBy`, `updatedBy`)
 
-To learn more about Next.js, take a look at the following resources:
+## Database Commands
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm run db:generate  # Generate Prisma Client
+npm run db:push      # Push schema changes
+npm run db:migrate   # Run migrations
+npm run db:studio    # Open Prisma Studio
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Authentication
 
-## Deploy on Vercel
+- Credentials-based login (email/password)
+- JWT session strategy
+- Active user status validation on every request
+- Session invalidation support
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Environment Variables
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+See `.env.example` for all required variables.

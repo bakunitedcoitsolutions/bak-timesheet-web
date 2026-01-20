@@ -23,6 +23,7 @@ export async function proxy(request: NextRequest) {
     "/favicon.ico",
     "/assets",
   ];
+  return NextResponse.next();
 
   // Check if route is public
   const isPublicRoute = publicRoutes.some((route) =>
@@ -36,7 +37,7 @@ export async function proxy(request: NextRequest) {
   // Get token from NextAuth v5
   const token = await getToken({
     req: request,
-    secret: process.env.NEXTAUTH_SECRET,
+    secret: process.env.NEXT_AUTH_SECRET,
     salt: "authjs.session-token", // Required for NextAuth v5
   });
 
@@ -50,10 +51,10 @@ export async function proxy(request: NextRequest) {
   // Check if user is active using Redis cache (fast check)
   // This ensures inactive users are immediately blocked even if they have a valid token
   // Uses Upstash Redis for fast lookups without hitting the database on every request
-  const userId = token.id as string;
+  const userId = token?.id as string;
   if (userId) {
     const isActive = await getUserActiveStatus(userId);
-    
+
     if (!isActive) {
       // User has been deactivated - force logout
       const loginUrl = new URL("/login", request.url);

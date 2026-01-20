@@ -3,13 +3,24 @@
  * Business logic for user operations
  */
 
-import { prisma } from "@/lib/db/prisma";
 import { hash } from "bcryptjs";
+
+import { prisma } from "@/lib/db/prisma";
 import type { UserPrivileges } from "@/utils/dummy";
 import {
   invalidateUserSessions,
   updateUserActiveStatusCache,
 } from "@/lib/auth/security";
+import {
+  determineBranchIdForUpdate,
+  validateBranchManagerBranchId,
+} from "@/utils/helpers/user-branch";
+
+// Type helper for Prisma transaction client
+// Extracts the transaction client type from Prisma's $transaction method
+type PrismaTransactionClient = Parameters<
+  Parameters<typeof prisma.$transaction>[0]
+>[0];
 
 // Reusable select object that excludes password
 const userSelectWithoutPassword = {
@@ -21,15 +32,33 @@ const userSelectWithoutPassword = {
   userRoleId: true,
   branchId: true,
   isActive: true,
+  createdBy: true,
+  updatedBy: true,
   createdAt: true,
   updatedAt: true,
 };
 
 // Select with relations (excluding password)
+// Only include name fields for branch, creator, and updater relations
 const userSelectWithRelations = {
   ...userSelectWithoutPassword,
   userRole: true,
-  branch: true,
+  branch: {
+    select: {
+      id: true,
+      nameEn: true,
+    },
+  },
+  creator: {
+    select: {
+      nameEn: true,
+    },
+  },
+  updater: {
+    select: {
+      nameEn: true,
+    },
+  },
   privileges: true,
 };
 
@@ -41,6 +70,8 @@ export interface CreateUserData {
   userRoleId: number;
   branchId?: number; // Required if userRoleId === 3 (Branch Manager)
   privileges?: UserPrivileges;
+  isActive?: boolean;
+  createdBy?: string; // ID of user who is creating this record
 }
 
 export interface UpdateUserData {
@@ -52,6 +83,7 @@ export interface UpdateUserData {
   branchId?: number; // Required if userRoleId === 3 (Branch Manager)
   privileges?: UserPrivileges;
   isActive?: boolean;
+  updatedBy?: string; // ID of user who is updating this record
 }
 
 export const userService = {
@@ -62,38 +94,61 @@ export const userService = {
     const hashedPassword = await hash(data.password, 12);
 
     // Create user with transaction to handle related data
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const user = await prisma.$transaction(async (tx: any) => {
-      // Validate: Branch Manager (roleId: 3) must have branchId
-      if (data.userRoleId === 3 && !data.branchId) {
-        throw new Error("Branch Manager must be assigned to a branch");
-      }
+    const user = await prisma.$transaction(
+      async (tx: PrismaTransactionClient) => {
+        // Validate: Branch Manager (roleId: 3) must have branchId
+        if (data.userRoleId === 3 && !data.branchId) {
+          throw new Error("Branch Manager must be assigned to a branch");
+        }
 
-      // Create user (exclude password from response)
-      const newUser = await tx.user.create({
-        data: {
+        // Validate: Email must be unique
+        const existingUser = await tx.user.findUnique({
+          where: { email: data.email },
+          select: { id: true },
+        });
+
+        if (existingUser) {
+          throw new Error("Email already exists");
+        }
+
+        // Create user (exclude password from response)
+        // Only include branchId when userRoleId is 3 (Branch Manager)
+        const userData: any = {
           nameEn: data.nameEn,
           nameAr: data.nameAr,
           email: data.email,
           password: hashedPassword,
           userRoleId: data.userRoleId,
-          branchId: data.branchId,
-        },
-        select: userSelectWithoutPassword,
-      });
+        };
 
-      // Create privileges if user has "User with Privileges" role (roleId: 4)
-      if (data.userRoleId === 4 && data.privileges) {
-        await tx.userPrivilege.create({
-          data: {
-            userId: newUser.id,
-            privileges: data.privileges as any,
-          },
+        // branchId is only available/set when userRoleId is 3 (Branch Manager)
+        if (data.userRoleId === 3) {
+          userData.branchId = data.branchId;
+        }
+
+        // Set createdBy if provided
+        if (data.createdBy) {
+          userData.createdBy = data.createdBy;
+        }
+
+        const newUser = await tx.user.create({
+          data: userData,
+          select: userSelectWithoutPassword,
         });
-      }
 
-      return newUser;
-    });
+        // Create privileges if user has "User with Privileges" role (roleId: 4)
+        if (data.userRoleId === 4 && data.privileges) {
+          await tx.userPrivilege.create({
+            data: {
+              userId: newUser.id,
+              privileges: data.privileges as any,
+            },
+          });
+        }
+
+        return newUser;
+      }
+    );
 
     return user;
   },
@@ -140,16 +195,20 @@ export const userService = {
    */
   async update(id: string, data: UpdateUserData) {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return prisma.$transaction(async (tx: any) => {
+    return prisma.$transaction(async (tx: PrismaTransactionClient) => {
       const updateData: any = {};
+      // email cannot be changed
 
       if (data.nameEn !== undefined) updateData.nameEn = data.nameEn;
       if (data.nameAr !== undefined) updateData.nameAr = data.nameAr;
-      if (data.email !== undefined) updateData.email = data.email;
       if (data.userRoleId !== undefined)
         updateData.userRoleId = data.userRoleId;
-      if (data.branchId !== undefined) updateData.branchId = data.branchId;
       if (data.isActive !== undefined) updateData.isActive = data.isActive;
+
+      // Set updatedBy if provided
+      if (data.updatedBy) {
+        updateData.updatedBy = data.updatedBy;
+      }
 
       // Hash password if provided
       if (data.password) {
@@ -162,16 +221,31 @@ export const userService = {
         select: { userRoleId: true, branchId: true, isActive: true },
       });
 
-      // Validate: Branch Manager (roleId: 3) must have branchId
+      if (!currentUser) {
+        throw new Error("User not found");
+      }
+
+      // Determine final role
       const finalRoleId =
         data.userRoleId !== undefined
           ? data.userRoleId
-          : currentUser?.userRoleId;
-      const finalBranchId =
-        data.branchId !== undefined ? data.branchId : currentUser?.branchId;
-      if (finalRoleId === 3 && !finalBranchId) {
-        throw new Error("Branch Manager must be assigned to a branch");
+          : currentUser.userRoleId;
+
+      // Handle branchId based on role changes using helper function
+      const { branchIdToSet, finalBranchId } = determineBranchIdForUpdate(
+        currentUser.userRoleId,
+        data.userRoleId,
+        currentUser.branchId,
+        data.branchId
+      );
+
+      // Set branchId in updateData if determined by helper
+      if (branchIdToSet !== undefined) {
+        updateData.branchId = branchIdToSet;
       }
+
+      // Validate: Branch Manager (roleId: 3) must have branchId
+      validateBranchManagerBranchId(finalRoleId, finalBranchId);
 
       // Update user (exclude password from response)
       const updatedUser = await tx.user.update({
@@ -194,8 +268,13 @@ export const userService = {
         await updateUserActiveStatusCache(id, updatedUser.isActive);
       }
 
-      // Update privileges if user has "User with Privileges" role
-      if (data.userRoleId === 4 && data.privileges !== undefined) {
+      // Update privileges if user has "User with Privileges" role (roleId: 4)
+      const finalRoleIdForPrivileges =
+        data.userRoleId !== undefined
+          ? data.userRoleId
+          : currentUser.userRoleId;
+
+      if (finalRoleIdForPrivileges === 4 && data.privileges !== undefined) {
         await tx.userPrivilege.upsert({
           where: { userId: id },
           create: {
@@ -206,8 +285,8 @@ export const userService = {
             privileges: data.privileges as any,
           },
         });
-      } else if (data.privileges !== undefined) {
-        // Remove privileges if role changed
+      } else if (data.userRoleId !== undefined && data.userRoleId !== 4) {
+        // Remove privileges if role changed to something other than "User with Privileges"
         await tx.userPrivilege.deleteMany({
           where: { userId: id },
         });
@@ -227,7 +306,7 @@ export const userService = {
   },
 
   /**
-   * List users with pagination
+   * List users with pagination and sorting
    */
   async list(params: {
     page?: number;
@@ -236,6 +315,8 @@ export const userService = {
     roleId?: number;
     branchId?: number;
     isActive?: boolean;
+    sortOrder?: "asc" | "desc"; // Sort direction
+    sortBy?: string; // Column name to sort by (e.g., "nameEn", "email", "createdAt", "userRole.nameEn", "branch.nameEn")
   }) {
     const page = params.page || 1;
     const limit = params.limit || 10;
@@ -255,6 +336,23 @@ export const userService = {
     if (params.branchId) where.branchId = params.branchId;
     if (params.isActive !== undefined) where.isActive = params.isActive;
 
+    // Determine sort order (default: desc)
+    const sortOrder = params.sortOrder || "desc";
+
+    // Build orderBy clause based on sortBy parameter
+    // Only allow sorting by: nameEn, nameAr, isActive
+    let orderBy: any = { createdAt: "desc" }; // Default sort
+
+    if (params.sortBy) {
+      const sortBy = params.sortBy.trim();
+      const validFields = ["nameEn", "nameAr", "isActive"];
+
+      // Only allow sorting by the specified valid fields
+      if (validFields.includes(sortBy)) {
+        orderBy = { [sortBy]: sortOrder };
+      }
+    }
+
     const [users, total] = await Promise.all([
       prisma.user.findMany({
         where,
@@ -263,9 +361,9 @@ export const userService = {
         select: {
           ...userSelectWithoutPassword,
           userRole: true,
-          branch: true,
+          branch: { select: { nameEn: true } },
         },
-        orderBy: { createdAt: "desc" },
+        orderBy,
       }),
       prisma.user.count({ where }),
     ]);

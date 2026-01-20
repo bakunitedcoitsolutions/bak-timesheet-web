@@ -8,7 +8,6 @@ import {
   invalidateUserSessions,
   clearSessionInvalidation,
   updateUserActiveStatusCache,
-  invalidateUserActiveStatusCache,
 } from "./security";
 
 /**
@@ -35,16 +34,11 @@ export async function deactivateUser(userId: string): Promise<void> {
       where: { id: userId },
       data: { isActive: false },
     });
-
-    // Delete all active sessions to force logout
-    await tx.session.deleteMany({
-      where: { userId },
-    });
   });
 
   // Invalidate all JWT tokens for this user
   await invalidateUserSessions(userId);
-  
+
   // Update Redis cache immediately (so proxy checks fail fast)
   await updateUserActiveStatusCache(userId, false);
 }
@@ -61,7 +55,7 @@ export async function activateUser(userId: string): Promise<void> {
 
   // Clear session invalidation so user can log in again
   await clearSessionInvalidation(userId);
-  
+
   // Update Redis cache immediately
   await updateUserActiveStatusCache(userId, true);
 }
@@ -78,7 +72,8 @@ export async function validateUserStatus(userId: string): Promise<{
   if (!isActive) {
     return {
       isValid: false,
-      error: "Your account has been deactivated. Please contact an administrator.",
+      error:
+        "Your account has been deactivated. Please contact an administrator.",
     };
   }
 

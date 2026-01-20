@@ -2,15 +2,14 @@
  * Authentication Helper Functions
  */
 
-import { getServerSession } from "next-auth";
-import { authOptions } from "./config";
+import { auth } from "./auth";
 import { cache } from "@/lib/redis/upstash";
 
 /**
  * Get current session on server side
  */
 export async function getSession() {
-  return getServerSession(authOptions);
+  return await auth();
 }
 
 /**

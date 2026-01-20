@@ -3,20 +3,14 @@
  * Handles authentication with Supabase and session management
  */
 
-import { NextAuthOptions } from "next-auth";
-import CredentialsProvider from "next-auth/providers/credentials";
-import { prisma } from "@/lib/db/prisma";
 import { compare } from "bcryptjs";
-import {
-  recordFailedLoginAttempt,
-  clearFailedLoginAttempts,
-  isAccountLocked,
-  isSessionInvalidated,
-  getUserActiveStatus,
-  updateUserActiveStatusCache,
-} from "./security";
+import { NextAuthConfig } from "next-auth";
+import CredentialsProvider from "next-auth/providers/credentials";
 
-export const authOptions: NextAuthOptions = {
+import { prisma } from "@/lib/db/prisma";
+import { getUserActiveStatus } from "./security";
+
+export const authOptions: NextAuthConfig = {
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -29,17 +23,9 @@ export const authOptions: NextAuthOptions = {
           throw new Error("Email and password are required");
         }
 
-        // Check if account is locked due to failed attempts
-        const locked = await isAccountLocked(credentials.email);
-        if (locked) {
-          throw new Error(
-            "Account temporarily locked due to multiple failed login attempts. Please try again later."
-          );
-        }
-
         // Find user by email
         const user = await prisma.user.findUnique({
-          where: { email: credentials.email },
+          where: { email: credentials.email as string },
           include: {
             userRole: true,
             branch: true,
@@ -48,8 +34,6 @@ export const authOptions: NextAuthOptions = {
         });
 
         if (!user || !user.password) {
-          // Record failed attempt
-          await recordFailedLoginAttempt(credentials.email);
           throw new Error("Invalid email or password");
         }
 
@@ -60,30 +44,17 @@ export const authOptions: NextAuthOptions = {
 
         // Verify password
         const isPasswordValid = await compare(
-          credentials.password,
+          credentials.password as string,
           user.password
         );
 
         if (!isPasswordValid) {
-          // Record failed attempt
-          await recordFailedLoginAttempt(credentials.email);
           throw new Error("Invalid email or password");
         }
 
-        // Clear failed login attempts on successful login
-        await clearFailedLoginAttempts(credentials.email);
-
-        // Return user object (will be available in session)
-        return {
-          id: user.id,
-          email: user.email,
-          name: user.nameEn,
-          image: user.image,
-          role: user.userRole.access,
-          roleId: user.userRoleId,
-          branchId: user.branchId,
-          privileges: user.privileges?.privileges || null,
-        };
+        // Return entire user object except password
+        const { password, ...userWithoutPassword } = user;
+        return userWithoutPassword as any;
       },
     }),
   ],
@@ -109,28 +80,29 @@ export const authOptions: NextAuthOptions = {
     error: "/login",
   },
   callbacks: {
-    async jwt({ token, user, trigger }) {
+    async jwt({
+      token,
+      user,
+      trigger,
+    }: {
+      token: any;
+      user?: any;
+      trigger?: "signIn" | "signUp" | "update";
+    }) {
       // Initial sign in
       if (user) {
         token.id = user.id;
-        token.role = user.role;
-        token.roleId = user.roleId;
-        token.branchId = user.branchId;
-        token.privileges = user.privileges;
+        token.role = (user as any).userRole?.access;
+        token.roleId = (user as any).userRoleId;
+        token.branchId = (user as any).branchId;
+        token.privileges = (user as any).privileges?.privileges || [];
         token.iat = Math.floor(Date.now() / 1000); // Issued at time
       }
 
-      // Check if session is invalidated (e.g., user deactivated)
+      // Check if user is still active on every request
       if (token.id) {
         const userId = token.id as string;
-        
-        // Check session invalidation
-        const invalidated = await isSessionInvalidated(userId);
-        if (invalidated) {
-          // Force logout by throwing error
-          throw new Error("Session invalidated");
-        }
-        
+
         // Check if user is still active (using Redis cache for performance)
         const isActive = await getUserActiveStatus(userId);
         if (!isActive) {
@@ -160,7 +132,7 @@ export const authOptions: NextAuthOptions = {
 
       return token;
     },
-    async session({ session, token }) {
+    async session({ session, token }: { session: any; token: any }) {
       if (session.user) {
         session.user.id = token.id as string;
         session.user.role = token.role as string;
@@ -171,6 +143,6 @@ export const authOptions: NextAuthOptions = {
       return session;
     },
   },
-  secret: process.env.NEXTAUTH_SECRET,
+  secret: process.env.NEXT_AUTH_SECRET,
   debug: process.env.NODE_ENV === "development",
 };

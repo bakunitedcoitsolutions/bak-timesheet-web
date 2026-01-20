@@ -2,9 +2,14 @@
  * NextAuth API Route Handler
  */
 
-import NextAuth from "next-auth";
-import { authOptions } from "@/lib/auth/config";
+import { NextRequest } from "next/server";
 
-const handler = NextAuth(authOptions);
+import * as authHandlers from "@/lib/auth/auth";
 
-export { handler as GET, handler as POST };
+export const GET = (req: NextRequest) => {
+  return authHandlers.GET(req);
+};
+
+export const POST = (req: NextRequest) => {
+  return authHandlers.POST(req);
+};

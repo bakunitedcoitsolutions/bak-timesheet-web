@@ -29,6 +29,8 @@ model User {
   userRoleId    Int
   branchId      Int?      // Required for Branch Manager (roleId: 3), optional for others
   isActive      Boolean   @default(true)
+  createdBy     String?   // ID of user who created this record
+  updatedBy     String?   // ID of user who last updated this record
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 
@@ -36,10 +38,16 @@ model User {
   userRole      UserRole  @relation(fields: [userRoleId], references: [id])
   branch        Branch?   @relation(fields: [branchId], references: [id])
   privileges    UserPrivilege?
+  creator       User?     @relation("UserCreatedBy", fields: [createdBy], references: [id])
+  updater       User?     @relation("UserUpdatedBy", fields: [updatedBy], references: [id])
+  createdUsers  User[]    @relation("UserCreatedBy")
+  updatedUsers  User[]    @relation("UserUpdatedBy")
 
   @@index([email])
   @@index([userRoleId])
   @@index([branchId])
+  @@index([createdBy])
+  @@index([updatedBy])
 }
 
 // ============================================
