@@ -17,3 +17,5 @@ export { default as StepperForm } from "./stepper-form";
 export { default as FilePicker } from "./file-picker";
 export { default as NumberInput } from "./number-input";
 export { default as MultiSelect } from "./multi-select";
+export { default as Checkbox } from "./checkbox";
+export type { CheckboxProps } from "./checkbox";

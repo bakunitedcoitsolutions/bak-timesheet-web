@@ -11,6 +11,7 @@ interface ModifiedInputProps extends Omit<InputTextProps, "className"> {
   small?: boolean;
   className?: string;
   error?: string;
+  onIconClick?: () => void;
 }
 
 export default function ModifiedInput({
@@ -20,6 +21,7 @@ export default function ModifiedInput({
   small = false,
   className = "",
   error,
+  onIconClick,
   ...rest
 }: ModifiedInputProps) {
   const isSmall = small;
@@ -29,16 +31,26 @@ export default function ModifiedInput({
 
   const inputElement = <InputText className={finalClassName} {...rest} />;
 
+  const iconElement = onIconClick ? (
+    <InputIcon 
+      className={icon} 
+      onClick={onIconClick}
+      style={{ cursor: "pointer" }}
+    />
+  ) : (
+    <InputIcon className={icon} />
+  );
+
   const inputWithIcon =
     iconPosition === "left" && icon ? (
       <IconField iconPosition={iconPosition}>
-        <InputIcon className={icon} />
+        {iconElement}
         {inputElement}
       </IconField>
     ) : iconPosition === "right" && icon ? (
       <IconField iconPosition={iconPosition}>
         {inputElement}
-        <InputIcon className={icon} />
+        {iconElement}
       </IconField>
     ) : (
       inputElement

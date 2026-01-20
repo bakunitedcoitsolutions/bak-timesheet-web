@@ -1,27 +1,40 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { classNames } from "primereact/utils";
 import { useParams, useRouter } from "next/navigation";
 
-import { classNames } from "primereact/utils";
-import { StepperFormHeading } from "@/components";
+import {
+  branchesData,
+  userRolesData,
+  UserPrivileges,
+  FeaturePermissions,
+  ReportsPrivileges,
+} from "@/utils/dummy";
+import {
+  handleReportToggle as toggleReport,
+  handleFeatureToggle as toggleFeature,
+  isFeatureEnabled as checkFeatureEnabled,
+  handlePrivilegeChange as changePrivilege,
+  handleReportFilterToggle as toggleReportFilter,
+} from "@/utils/helpers/user-privileges";
+import { generatePassword } from "@/utils/helpers";
 import { getEntityModeFromParam } from "@/helpers";
 import { FORM_FIELD_WIDTHS } from "@/utils/constants";
-import { Input, Button, Dropdown, MultiSelect } from "@/components/forms";
-import { branchesData, projectsData, userRolesData } from "@/utils/dummy";
+import { Input, Button, Dropdown } from "@/components/forms";
+import { Privileges, ReportsSection, StepperFormHeading } from "@/components";
 
 const statusOptions = [
   { label: "Active", value: "1" },
   { label: "Inactive", value: "2" },
 ];
 
-const BRANCH_OPERATOR_ROLE_ID = 3; // Branch Operator role ID
-
 const UpsertUserPage = () => {
   const [selectedUserRole, setSelectedUserRole] = useState<any>(null);
   const [selectedStatus, setSelectedStatus] = useState<string | null>(null);
   const [selectedBranch, setSelectedBranch] = useState<any>(null);
-  const [selectedProjects, setSelectedProjects] = useState<number[]>([]);
+  const [privileges, setPrivileges] = useState<UserPrivileges>({});
+  const [password, setPassword] = useState<string>("");
   const router = useRouter();
   const { id: userIdParam } = useParams();
   const {
@@ -34,9 +47,6 @@ const UpsertUserPage = () => {
     param: userIdParam,
   });
 
-  // Check if selected role is Branch Operator
-  const isBranchOperator = selectedUserRole === BRANCH_OPERATOR_ROLE_ID;
-
   // Redirect to 404 page if the entity is invalid
   useEffect(() => {
     if (isInvalid) {
@@ -44,28 +54,59 @@ const UpsertUserPage = () => {
     }
   }, [isInvalid, router]);
 
-  // Reset branch and projects when role changes away from Branch Operator
+  // Reset privileges when role changes
   useEffect(() => {
-    if (!isBranchOperator) {
-      setSelectedBranch(null);
-      setSelectedProjects([]);
-    }
-  }, [isBranchOperator]);
+    setPrivileges({});
+  }, [selectedUserRole]);
+
+  // Wrapper functions that use the helpers with local state
+  const isFeatureEnabled = (featureKey: keyof UserPrivileges): boolean => {
+    return checkFeatureEnabled(featureKey, privileges);
+  };
+
+  const handleFeatureToggle = (
+    featureKey: keyof UserPrivileges,
+    enabled: boolean
+  ) => {
+    toggleFeature(featureKey, enabled, setPrivileges);
+  };
+
+  const handlePrivilegeChange = (
+    featureKey: keyof UserPrivileges,
+    permissionKey: keyof FeaturePermissions,
+    checked: boolean
+  ) => {
+    changePrivilege(featureKey, permissionKey, checked, setPrivileges);
+  };
+
+  // Wrapper functions for report handlers
+  const handleReportToggle = (reportId: string, enabled: boolean) => {
+    toggleReport(reportId, enabled, setPrivileges);
+  };
+
+  const handleReportFilterToggle = (
+    reportId: string,
+    filterKey: string,
+    enabled: boolean
+  ) => {
+    toggleReportFilter(reportId, filterKey, enabled, setPrivileges);
+  };
+
+  // Generate random password
+  const handleGeneratePassword = () => {
+    const generatedPassword = generatePassword();
+    setPassword(generatedPassword);
+  };
 
   const handleSubmit = async (data: Record<string, any>) => {
-    console.log("Form submitted:", data);
+    console.log("Form submitted:", data, privileges);
     // Handle form submission here
-    router.replace(`/users`);
+    // router.replace(`/users`);
   };
 
   const branchOptions = branchesData.map((branch) => ({
     label: branch.nameEn,
     value: branch.id,
-  }));
-
-  const projectOptions = projectsData.map((project) => ({
-    label: project.nameEn,
-    value: project.id,
   }));
 
   const userRoleOptions = userRolesData.map((role) => ({
@@ -116,33 +157,47 @@ const UpsertUserPage = () => {
               setSelectedItem={setSelectedStatus}
             />
           </div>
-          {isBranchOperator && (
+          <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
+            <Input
+              className="w-full"
+              label="Set Password"
+              placeholder="Set/Generate password"
+              icon="pi pi-refresh"
+              iconPosition="right"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              onIconClick={handleGeneratePassword}
+            />
+          </div>
+          {selectedUserRole === 3 && (
+            <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
+              <Dropdown
+                label="Branch"
+                className="w-full"
+                options={branchOptions}
+                placeholder="Choose Branch"
+                selectedItem={selectedBranch}
+                setSelectedItem={setSelectedBranch}
+              />
+            </div>
+          )}
+          {selectedUserRole === 4 && (
             <>
-              <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
-                <Dropdown
-                  label="Branch"
-                  className="w-full"
-                  options={branchOptions}
-                  placeholder="Choose branch"
-                  selectedItem={selectedBranch}
-                  setSelectedItem={setSelectedBranch}
-                />
-              </div>
-              <div
-                className={classNames(FORM_FIELD_WIDTHS["2"], "md:col-span-2")}
-              >
-                <MultiSelect
-                  small
-                  filter
-                  label="Projects"
-                  className="w-full"
-                  options={projectOptions}
-                  placeholder="Choose projects"
-                  selectedItem={selectedProjects}
-                  setSelectedItem={setSelectedProjects}
-                />
-              </div>
+              <Privileges
+                privileges={privileges}
+                isFeatureEnabled={isFeatureEnabled}
+                handleFeatureToggle={handleFeatureToggle}
+                handlePrivilegeChange={handlePrivilegeChange}
+              />
             </>
+          )}
+          {/* Separate Reports Section - shown when Reports feature is enabled */}
+          {selectedUserRole === 4 && isFeatureEnabled("reports") && (
+            <ReportsSection
+              privileges={privileges.reports as ReportsPrivileges}
+              handleReportToggle={handleReportToggle}
+              handleReportFilterToggle={handleReportFilterToggle}
+            />
           )}
         </div>
 

@@ -15,14 +15,9 @@ import { UserRole, userRolesData } from "@/utils/dummy";
 
 const getAccessDefinition = (access: string): string => {
   const definitions: Record<string, string> = {
-    Admin: "Can do anything of all branches",
+    Admin: "Can do anything of all branches (all functionalities)",
     Manager: "Can do anything of all branches except user management",
-    "Branch Operator":
-      "Can do anything under its branch except user management",
-    "Data Entry Operator":
-      "Restricted: No user management, can only add data (no modify, no delete)",
-    Cashier: "Can view some reports, ledger, and some data",
-    "Time Keeper": "Can only view attendance report of employees",
+    "User with Privileges": "Customizable permissions with checkboxes for each feature",
   };
   return definitions[access] || "";
 };

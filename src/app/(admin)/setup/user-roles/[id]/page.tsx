@@ -12,20 +12,14 @@ import { Button, Dropdown, Input } from "@/components/forms";
 /**
  * Access Level Options with Definitions:
  * 
- * 1. Admin - Can do anything of all branches
+ * 1. Admin - Can do anything of all branches (all functionalities)
  * 2. Manager - Can do anything of all branches except user management
- * 3. Branch Operator - Can do anything under its branch except user management
- * 4. Data Entry Operator - Restricted: No user management, can only add data (no modify, no delete)
- * 5. Cashier - Can view some reports, ledger, and some data
- * 6. Time Keeper - Can only view attendance report of employees
+ * 3. User with Privileges - Customizable permissions with checkboxes for each feature
  */
 const accessOptions = [
   { label: "Admin", value: "Admin" },
   { label: "Manager", value: "Manager" },
-  { label: "Branch Operator", value: "Branch Operator" },
-  { label: "Data Entry Operator", value: "Data Entry Operator" },
-  { label: "Cashier", value: "Cashier" },
-  { label: "Time Keeper", value: "Time Keeper" },
+  { label: "User with Privileges", value: "User with Privileges" },
 ];
 
 const statusOptions = [

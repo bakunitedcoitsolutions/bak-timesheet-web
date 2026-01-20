@@ -2547,6 +2547,47 @@ const gosiCitiesData: GosiCity[] = [
   },
 ];
 
+// Permission types for features
+export type PermissionType = "full" | "add" | "edit" | "view";
+
+export interface FeaturePermissions {
+  full: boolean;
+  add: boolean;
+  edit: boolean;
+  view: boolean;
+}
+
+export interface ReportFilterOption {
+  key: string;
+  label?: string; // Optional - labels come from REPORT_OPTIONS config, not saved in state
+  enabled: boolean;
+}
+
+export interface ReportPermissions {
+  reportId: string;
+  enabled: boolean;
+  filters?: ReportFilterOption[];
+}
+
+export interface ReportsPrivileges extends FeaturePermissions {
+  reports?: ReportPermissions[];
+}
+
+export interface UserPrivileges {
+  employees?: FeaturePermissions;
+  timesheet?: FeaturePermissions;
+  projects?: FeaturePermissions;
+  loans?: FeaturePermissions;
+  trafficChallans?: FeaturePermissions;
+  exitReentry?: FeaturePermissions;
+  payroll?: FeaturePermissions;
+  ledger?: FeaturePermissions;
+  usersManagement?: FeaturePermissions;
+  reports?: ReportsPrivileges;
+  setup?: FeaturePermissions;
+  dashboard?: FeaturePermissions;
+}
+
 interface UserRole {
   id: number;
   nameEn: string;
@@ -2558,12 +2599,9 @@ interface UserRole {
 /**
  * User Role Access Level Definitions:
  *
- * 1. Admin - Can do anything of all branches
+ * 1. Admin - Can do anything of all branches (all functionalities)
  * 2. Manager - Can do anything of all branches except user management
- * 3. Branch Operator - Can do anything under its branch except user management
- * 4. Data Entry Operator - Restricted: No user management, can only add data (no modify, no delete)
- * 5. Cashier - Can view some reports, ledger, and some data
- * 6. Time Keeper - Can only view attendance report of employees
+ * 3. User with Privileges - Customizable permissions with checkboxes for each feature
  */
 const userRolesData: UserRole[] = [
   {
@@ -2582,30 +2620,16 @@ const userRolesData: UserRole[] = [
   },
   {
     id: 3,
-    nameEn: "Branch Operator",
-    nameAr: "مشغل فرع",
-    access: "Branch Operator",
+    nameEn: "Branch Manager",
+    nameAr: "مدير فرع",
+    access: "Branch Manager",
     isActive: true,
   },
   {
     id: 4,
-    nameEn: "Data Entry Operator",
-    nameAr: "مشغل إدخال البيانات",
-    access: "Data Entry Operator",
-    isActive: true,
-  },
-  {
-    id: 5,
-    nameEn: "Cashier",
-    nameAr: "أمين صندوق",
-    access: "Cashier",
-    isActive: true,
-  },
-  {
-    id: 6,
-    nameEn: "Time Keeper",
-    nameAr: "حارس الوقت",
-    access: "Time Keeper",
+    nameEn: "User with Privileges",
+    nameAr: "مستخدم بصلاحيات",
+    access: "User with Privileges",
     isActive: true,
   },
 ];
@@ -2620,6 +2644,7 @@ interface User {
   branchId: number | null;
   projectIds: number[];
   isActive: boolean;
+  privileges?: UserPrivileges; // Only for User with Privileges role
 }
 
 const usersData: User[] = [
@@ -2647,25 +2672,34 @@ const usersData: User[] = [
   },
   {
     id: 3,
-    nameEn: "Ahmed Branch Operator",
-    nameAr: "أحمد مشغل فرع",
-    email: "ahmed.operator@example.com",
+    nameEn: "Ahmed User",
+    nameAr: "أحمد مستخدم",
+    email: "ahmed.user@example.com",
     userRoleId: 3,
-    branchAccess: true,
-    branchId: 1,
-    projectIds: [1, 2, 3],
+    branchAccess: false,
+    branchId: null,
+    projectIds: [],
     isActive: true,
-  },
-  {
-    id: 4,
-    nameEn: "Fatima Data Entry",
-    nameAr: "فاطمة إدخال بيانات",
-    email: "fatima.data@example.com",
-    userRoleId: 4,
-    branchAccess: true,
-    branchId: 2,
-    projectIds: [4, 5],
-    isActive: true,
+    privileges: {
+      employees: {
+        full: false,
+        add: true,
+        edit: true,
+        view: true,
+      },
+      timesheet: {
+        full: false,
+        add: true,
+        edit: false,
+        view: true,
+      },
+      reports: {
+        full: false,
+        add: false,
+        edit: false,
+        view: true,
+      },
+    },
   },
 ];
 
