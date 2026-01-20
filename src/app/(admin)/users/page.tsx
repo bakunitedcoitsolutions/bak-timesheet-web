@@ -92,23 +92,14 @@ const columns = (
     filterable: false,
     style: { minWidth: "200px" },
     body: (rowData: User) => {
-      if (!rowData.branchAccess || !rowData.branchId) return "-";
+      // Branch Manager (roleId: 3) has branch access, others don't show branch
+      const hasBranchAccess = rowData.userRoleId === 3;
+      if (!hasBranchAccess || !rowData.branchId) return "-";
       const branch = branchesData.find((b) => b.id === rowData.branchId);
-      const projectNames =
-        rowData.projectIds
-          ?.map((id) => {
-            const project = projectsData.find((p) => p.id === id);
-            return project?.nameEn;
-          })
-          .filter(Boolean)
-          .join(", ") || "";
 
       return (
         <div className="flex flex-col">
           <span className="text-sm font-bold">{branch?.nameEn || "-"}</span>
-          {projectNames && (
-            <span className="text-xs text-gray-400 mt-0.5">{projectNames}</span>
-          )}
         </div>
       );
     },

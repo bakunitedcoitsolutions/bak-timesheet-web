@@ -99,8 +99,13 @@ const UpsertUserPage = () => {
   };
 
   const handleSubmit = async (data: Record<string, any>) => {
-    console.log("Form submitted:", data, privileges);
+    const submitData = {
+      ...data,
+      privileges: selectedUserRole === 4 ? privileges : undefined, // Include privileges if User with Privileges role
+    };
+    console.log("Form submitted:", submitData, privileges);
     // Handle form submission here
+    // TODO: Call userService.create() or userService.update() with submitData
     // router.replace(`/users`);
   };
 

@@ -2640,9 +2640,7 @@ interface User {
   nameAr: string;
   email: string;
   userRoleId: number;
-  branchAccess: boolean;
-  branchId: number | null;
-  projectIds: number[];
+  branchId: number | null; // Required for Branch Manager (roleId: 3)
   isActive: boolean;
   privileges?: UserPrivileges; // Only for User with Privileges role
 }
@@ -2654,9 +2652,7 @@ const usersData: User[] = [
     nameAr: "جون أدمن",
     email: "john.admin@example.com",
     userRoleId: 1,
-    branchAccess: false,
     branchId: null,
-    projectIds: [],
     isActive: true,
   },
   {
@@ -2665,9 +2661,7 @@ const usersData: User[] = [
     nameAr: "سارة مدير",
     email: "sarah.manager@example.com",
     userRoleId: 2,
-    branchAccess: false,
     branchId: null,
-    projectIds: [],
     isActive: true,
   },
   {
@@ -2676,9 +2670,7 @@ const usersData: User[] = [
     nameAr: "أحمد مستخدم",
     email: "ahmed.user@example.com",
     userRoleId: 3,
-    branchAccess: false,
-    branchId: null,
-    projectIds: [],
+    branchId: 1, // Branch Manager must have a branch
     isActive: true,
     privileges: {
       employees: {
