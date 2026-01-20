@@ -40,7 +40,6 @@ export type ProjectMinAggregateOutputType = {
   id: number | null
   nameEn: string | null
   nameAr: string | null
-  code: string | null
   branchId: number | null
   description: string | null
   isActive: boolean | null
@@ -52,7 +51,6 @@ export type ProjectMaxAggregateOutputType = {
   id: number | null
   nameEn: string | null
   nameAr: string | null
-  code: string | null
   branchId: number | null
   description: string | null
   isActive: boolean | null
@@ -64,7 +62,6 @@ export type ProjectCountAggregateOutputType = {
   id: number
   nameEn: number
   nameAr: number
-  code: number
   branchId: number
   description: number
   isActive: number
@@ -88,7 +85,6 @@ export type ProjectMinAggregateInputType = {
   id?: true
   nameEn?: true
   nameAr?: true
-  code?: true
   branchId?: true
   description?: true
   isActive?: true
@@ -100,7 +96,6 @@ export type ProjectMaxAggregateInputType = {
   id?: true
   nameEn?: true
   nameAr?: true
-  code?: true
   branchId?: true
   description?: true
   isActive?: true
@@ -112,7 +107,6 @@ export type ProjectCountAggregateInputType = {
   id?: true
   nameEn?: true
   nameAr?: true
-  code?: true
   branchId?: true
   description?: true
   isActive?: true
@@ -211,7 +205,6 @@ export type ProjectGroupByOutputType = {
   id: number
   nameEn: string
   nameAr: string | null
-  code: string | null
   branchId: number | null
   description: string | null
   isActive: boolean
@@ -246,33 +239,32 @@ export type ProjectWhereInput = {
   id?: Prisma.IntFilter<"Project"> | number
   nameEn?: Prisma.StringFilter<"Project"> | string
   nameAr?: Prisma.StringNullableFilter<"Project"> | string | null
-  code?: Prisma.StringNullableFilter<"Project"> | string | null
   branchId?: Prisma.IntNullableFilter<"Project"> | number | null
   description?: Prisma.StringNullableFilter<"Project"> | string | null
   isActive?: Prisma.BoolFilter<"Project"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Project"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Project"> | Date | string
   branch?: Prisma.XOR<Prisma.BranchNullableScalarRelationFilter, Prisma.BranchWhereInput> | null
-  timesheets?: Prisma.TimesheetListRelationFilter
+  timesheetsAsProject1?: Prisma.TimesheetListRelationFilter
+  timesheetsAsProject2?: Prisma.TimesheetListRelationFilter
 }
 
 export type ProjectOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   nameEn?: Prisma.SortOrder
   nameAr?: Prisma.SortOrderInput | Prisma.SortOrder
-  code?: Prisma.SortOrderInput | Prisma.SortOrder
   branchId?: Prisma.SortOrderInput | Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   branch?: Prisma.BranchOrderByWithRelationInput
-  timesheets?: Prisma.TimesheetOrderByRelationAggregateInput
+  timesheetsAsProject1?: Prisma.TimesheetOrderByRelationAggregateInput
+  timesheetsAsProject2?: Prisma.TimesheetOrderByRelationAggregateInput
 }
 
 export type ProjectWhereUniqueInput = Prisma.AtLeast<{
   id?: number
-  code?: string
   AND?: Prisma.ProjectWhereInput | Prisma.ProjectWhereInput[]
   OR?: Prisma.ProjectWhereInput[]
   NOT?: Prisma.ProjectWhereInput | Prisma.ProjectWhereInput[]
@@ -284,14 +276,14 @@ export type ProjectWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"Project"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Project"> | Date | string
   branch?: Prisma.XOR<Prisma.BranchNullableScalarRelationFilter, Prisma.BranchWhereInput> | null
-  timesheets?: Prisma.TimesheetListRelationFilter
-}, "id" | "code">
+  timesheetsAsProject1?: Prisma.TimesheetListRelationFilter
+  timesheetsAsProject2?: Prisma.TimesheetListRelationFilter
+}, "id">
 
 export type ProjectOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   nameEn?: Prisma.SortOrder
   nameAr?: Prisma.SortOrderInput | Prisma.SortOrder
-  code?: Prisma.SortOrderInput | Prisma.SortOrder
   branchId?: Prisma.SortOrderInput | Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   isActive?: Prisma.SortOrder
@@ -311,7 +303,6 @@ export type ProjectScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"Project"> | number
   nameEn?: Prisma.StringWithAggregatesFilter<"Project"> | string
   nameAr?: Prisma.StringNullableWithAggregatesFilter<"Project"> | string | null
-  code?: Prisma.StringNullableWithAggregatesFilter<"Project"> | string | null
   branchId?: Prisma.IntNullableWithAggregatesFilter<"Project"> | number | null
   description?: Prisma.StringNullableWithAggregatesFilter<"Project"> | string | null
   isActive?: Prisma.BoolWithAggregatesFilter<"Project"> | boolean
@@ -322,58 +313,57 @@ export type ProjectScalarWhereWithAggregatesInput = {
 export type ProjectCreateInput = {
   nameEn: string
   nameAr?: string | null
-  code?: string | null
   description?: string | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   branch?: Prisma.BranchCreateNestedOneWithoutProjectsInput
-  timesheets?: Prisma.TimesheetCreateNestedManyWithoutProjectInput
+  timesheetsAsProject1?: Prisma.TimesheetCreateNestedManyWithoutProject1Input
+  timesheetsAsProject2?: Prisma.TimesheetCreateNestedManyWithoutProject2Input
 }
 
 export type ProjectUncheckedCreateInput = {
   id?: number
   nameEn: string
   nameAr?: string | null
-  code?: string | null
   branchId?: number | null
   description?: string | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  timesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutProjectInput
+  timesheetsAsProject1?: Prisma.TimesheetUncheckedCreateNestedManyWithoutProject1Input
+  timesheetsAsProject2?: Prisma.TimesheetUncheckedCreateNestedManyWithoutProject2Input
 }
 
 export type ProjectUpdateInput = {
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   branch?: Prisma.BranchUpdateOneWithoutProjectsNestedInput
-  timesheets?: Prisma.TimesheetUpdateManyWithoutProjectNestedInput
+  timesheetsAsProject1?: Prisma.TimesheetUpdateManyWithoutProject1NestedInput
+  timesheetsAsProject2?: Prisma.TimesheetUpdateManyWithoutProject2NestedInput
 }
 
 export type ProjectUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  timesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutProjectNestedInput
+  timesheetsAsProject1?: Prisma.TimesheetUncheckedUpdateManyWithoutProject1NestedInput
+  timesheetsAsProject2?: Prisma.TimesheetUncheckedUpdateManyWithoutProject2NestedInput
 }
 
 export type ProjectCreateManyInput = {
   id?: number
   nameEn: string
   nameAr?: string | null
-  code?: string | null
   branchId?: number | null
   description?: string | null
   isActive?: boolean
@@ -384,7 +374,6 @@ export type ProjectCreateManyInput = {
 export type ProjectUpdateManyMutationInput = {
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -395,7 +384,6 @@ export type ProjectUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -417,7 +405,6 @@ export type ProjectCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   nameEn?: Prisma.SortOrder
   nameAr?: Prisma.SortOrder
-  code?: Prisma.SortOrder
   branchId?: Prisma.SortOrder
   description?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
@@ -434,7 +421,6 @@ export type ProjectMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   nameEn?: Prisma.SortOrder
   nameAr?: Prisma.SortOrder
-  code?: Prisma.SortOrder
   branchId?: Prisma.SortOrder
   description?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
@@ -446,7 +432,6 @@ export type ProjectMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   nameEn?: Prisma.SortOrder
   nameAr?: Prisma.SortOrder
-  code?: Prisma.SortOrder
   branchId?: Prisma.SortOrder
   description?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
@@ -459,9 +444,9 @@ export type ProjectSumOrderByAggregateInput = {
   branchId?: Prisma.SortOrder
 }
 
-export type ProjectScalarRelationFilter = {
-  is?: Prisma.ProjectWhereInput
-  isNot?: Prisma.ProjectWhereInput
+export type ProjectNullableScalarRelationFilter = {
+  is?: Prisma.ProjectWhereInput | null
+  isNot?: Prisma.ProjectWhereInput | null
 }
 
 export type ProjectCreateNestedManyWithoutBranchInput = {
@@ -506,41 +491,59 @@ export type ProjectUncheckedUpdateManyWithoutBranchNestedInput = {
   deleteMany?: Prisma.ProjectScalarWhereInput | Prisma.ProjectScalarWhereInput[]
 }
 
-export type ProjectCreateNestedOneWithoutTimesheetsInput = {
-  create?: Prisma.XOR<Prisma.ProjectCreateWithoutTimesheetsInput, Prisma.ProjectUncheckedCreateWithoutTimesheetsInput>
-  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutTimesheetsInput
+export type ProjectCreateNestedOneWithoutTimesheetsAsProject1Input = {
+  create?: Prisma.XOR<Prisma.ProjectCreateWithoutTimesheetsAsProject1Input, Prisma.ProjectUncheckedCreateWithoutTimesheetsAsProject1Input>
+  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutTimesheetsAsProject1Input
   connect?: Prisma.ProjectWhereUniqueInput
 }
 
-export type ProjectUpdateOneRequiredWithoutTimesheetsNestedInput = {
-  create?: Prisma.XOR<Prisma.ProjectCreateWithoutTimesheetsInput, Prisma.ProjectUncheckedCreateWithoutTimesheetsInput>
-  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutTimesheetsInput
-  upsert?: Prisma.ProjectUpsertWithoutTimesheetsInput
+export type ProjectCreateNestedOneWithoutTimesheetsAsProject2Input = {
+  create?: Prisma.XOR<Prisma.ProjectCreateWithoutTimesheetsAsProject2Input, Prisma.ProjectUncheckedCreateWithoutTimesheetsAsProject2Input>
+  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutTimesheetsAsProject2Input
   connect?: Prisma.ProjectWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.ProjectUpdateToOneWithWhereWithoutTimesheetsInput, Prisma.ProjectUpdateWithoutTimesheetsInput>, Prisma.ProjectUncheckedUpdateWithoutTimesheetsInput>
+}
+
+export type ProjectUpdateOneWithoutTimesheetsAsProject1NestedInput = {
+  create?: Prisma.XOR<Prisma.ProjectCreateWithoutTimesheetsAsProject1Input, Prisma.ProjectUncheckedCreateWithoutTimesheetsAsProject1Input>
+  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutTimesheetsAsProject1Input
+  upsert?: Prisma.ProjectUpsertWithoutTimesheetsAsProject1Input
+  disconnect?: Prisma.ProjectWhereInput | boolean
+  delete?: Prisma.ProjectWhereInput | boolean
+  connect?: Prisma.ProjectWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProjectUpdateToOneWithWhereWithoutTimesheetsAsProject1Input, Prisma.ProjectUpdateWithoutTimesheetsAsProject1Input>, Prisma.ProjectUncheckedUpdateWithoutTimesheetsAsProject1Input>
+}
+
+export type ProjectUpdateOneWithoutTimesheetsAsProject2NestedInput = {
+  create?: Prisma.XOR<Prisma.ProjectCreateWithoutTimesheetsAsProject2Input, Prisma.ProjectUncheckedCreateWithoutTimesheetsAsProject2Input>
+  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutTimesheetsAsProject2Input
+  upsert?: Prisma.ProjectUpsertWithoutTimesheetsAsProject2Input
+  disconnect?: Prisma.ProjectWhereInput | boolean
+  delete?: Prisma.ProjectWhereInput | boolean
+  connect?: Prisma.ProjectWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProjectUpdateToOneWithWhereWithoutTimesheetsAsProject2Input, Prisma.ProjectUpdateWithoutTimesheetsAsProject2Input>, Prisma.ProjectUncheckedUpdateWithoutTimesheetsAsProject2Input>
 }
 
 export type ProjectCreateWithoutBranchInput = {
   nameEn: string
   nameAr?: string | null
-  code?: string | null
   description?: string | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  timesheets?: Prisma.TimesheetCreateNestedManyWithoutProjectInput
+  timesheetsAsProject1?: Prisma.TimesheetCreateNestedManyWithoutProject1Input
+  timesheetsAsProject2?: Prisma.TimesheetCreateNestedManyWithoutProject2Input
 }
 
 export type ProjectUncheckedCreateWithoutBranchInput = {
   id?: number
   nameEn: string
   nameAr?: string | null
-  code?: string | null
   description?: string | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  timesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutProjectInput
+  timesheetsAsProject1?: Prisma.TimesheetUncheckedCreateNestedManyWithoutProject1Input
+  timesheetsAsProject2?: Prisma.TimesheetUncheckedCreateNestedManyWithoutProject2Input
 }
 
 export type ProjectCreateOrConnectWithoutBranchInput = {
@@ -576,7 +579,6 @@ export type ProjectScalarWhereInput = {
   id?: Prisma.IntFilter<"Project"> | number
   nameEn?: Prisma.StringFilter<"Project"> | string
   nameAr?: Prisma.StringNullableFilter<"Project"> | string | null
-  code?: Prisma.StringNullableFilter<"Project"> | string | null
   branchId?: Prisma.IntNullableFilter<"Project"> | number | null
   description?: Prisma.StringNullableFilter<"Project"> | string | null
   isActive?: Prisma.BoolFilter<"Project"> | boolean
@@ -584,73 +586,134 @@ export type ProjectScalarWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Project"> | Date | string
 }
 
-export type ProjectCreateWithoutTimesheetsInput = {
+export type ProjectCreateWithoutTimesheetsAsProject1Input = {
   nameEn: string
   nameAr?: string | null
-  code?: string | null
   description?: string | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   branch?: Prisma.BranchCreateNestedOneWithoutProjectsInput
+  timesheetsAsProject2?: Prisma.TimesheetCreateNestedManyWithoutProject2Input
 }
 
-export type ProjectUncheckedCreateWithoutTimesheetsInput = {
+export type ProjectUncheckedCreateWithoutTimesheetsAsProject1Input = {
   id?: number
   nameEn: string
   nameAr?: string | null
-  code?: string | null
   branchId?: number | null
   description?: string | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  timesheetsAsProject2?: Prisma.TimesheetUncheckedCreateNestedManyWithoutProject2Input
 }
 
-export type ProjectCreateOrConnectWithoutTimesheetsInput = {
+export type ProjectCreateOrConnectWithoutTimesheetsAsProject1Input = {
   where: Prisma.ProjectWhereUniqueInput
-  create: Prisma.XOR<Prisma.ProjectCreateWithoutTimesheetsInput, Prisma.ProjectUncheckedCreateWithoutTimesheetsInput>
+  create: Prisma.XOR<Prisma.ProjectCreateWithoutTimesheetsAsProject1Input, Prisma.ProjectUncheckedCreateWithoutTimesheetsAsProject1Input>
 }
 
-export type ProjectUpsertWithoutTimesheetsInput = {
-  update: Prisma.XOR<Prisma.ProjectUpdateWithoutTimesheetsInput, Prisma.ProjectUncheckedUpdateWithoutTimesheetsInput>
-  create: Prisma.XOR<Prisma.ProjectCreateWithoutTimesheetsInput, Prisma.ProjectUncheckedCreateWithoutTimesheetsInput>
+export type ProjectCreateWithoutTimesheetsAsProject2Input = {
+  nameEn: string
+  nameAr?: string | null
+  description?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  branch?: Prisma.BranchCreateNestedOneWithoutProjectsInput
+  timesheetsAsProject1?: Prisma.TimesheetCreateNestedManyWithoutProject1Input
+}
+
+export type ProjectUncheckedCreateWithoutTimesheetsAsProject2Input = {
+  id?: number
+  nameEn: string
+  nameAr?: string | null
+  branchId?: number | null
+  description?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  timesheetsAsProject1?: Prisma.TimesheetUncheckedCreateNestedManyWithoutProject1Input
+}
+
+export type ProjectCreateOrConnectWithoutTimesheetsAsProject2Input = {
+  where: Prisma.ProjectWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProjectCreateWithoutTimesheetsAsProject2Input, Prisma.ProjectUncheckedCreateWithoutTimesheetsAsProject2Input>
+}
+
+export type ProjectUpsertWithoutTimesheetsAsProject1Input = {
+  update: Prisma.XOR<Prisma.ProjectUpdateWithoutTimesheetsAsProject1Input, Prisma.ProjectUncheckedUpdateWithoutTimesheetsAsProject1Input>
+  create: Prisma.XOR<Prisma.ProjectCreateWithoutTimesheetsAsProject1Input, Prisma.ProjectUncheckedCreateWithoutTimesheetsAsProject1Input>
   where?: Prisma.ProjectWhereInput
 }
 
-export type ProjectUpdateToOneWithWhereWithoutTimesheetsInput = {
+export type ProjectUpdateToOneWithWhereWithoutTimesheetsAsProject1Input = {
   where?: Prisma.ProjectWhereInput
-  data: Prisma.XOR<Prisma.ProjectUpdateWithoutTimesheetsInput, Prisma.ProjectUncheckedUpdateWithoutTimesheetsInput>
+  data: Prisma.XOR<Prisma.ProjectUpdateWithoutTimesheetsAsProject1Input, Prisma.ProjectUncheckedUpdateWithoutTimesheetsAsProject1Input>
 }
 
-export type ProjectUpdateWithoutTimesheetsInput = {
+export type ProjectUpdateWithoutTimesheetsAsProject1Input = {
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   branch?: Prisma.BranchUpdateOneWithoutProjectsNestedInput
+  timesheetsAsProject2?: Prisma.TimesheetUpdateManyWithoutProject2NestedInput
 }
 
-export type ProjectUncheckedUpdateWithoutTimesheetsInput = {
+export type ProjectUncheckedUpdateWithoutTimesheetsAsProject1Input = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  timesheetsAsProject2?: Prisma.TimesheetUncheckedUpdateManyWithoutProject2NestedInput
+}
+
+export type ProjectUpsertWithoutTimesheetsAsProject2Input = {
+  update: Prisma.XOR<Prisma.ProjectUpdateWithoutTimesheetsAsProject2Input, Prisma.ProjectUncheckedUpdateWithoutTimesheetsAsProject2Input>
+  create: Prisma.XOR<Prisma.ProjectCreateWithoutTimesheetsAsProject2Input, Prisma.ProjectUncheckedCreateWithoutTimesheetsAsProject2Input>
+  where?: Prisma.ProjectWhereInput
+}
+
+export type ProjectUpdateToOneWithWhereWithoutTimesheetsAsProject2Input = {
+  where?: Prisma.ProjectWhereInput
+  data: Prisma.XOR<Prisma.ProjectUpdateWithoutTimesheetsAsProject2Input, Prisma.ProjectUncheckedUpdateWithoutTimesheetsAsProject2Input>
+}
+
+export type ProjectUpdateWithoutTimesheetsAsProject2Input = {
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  branch?: Prisma.BranchUpdateOneWithoutProjectsNestedInput
+  timesheetsAsProject1?: Prisma.TimesheetUpdateManyWithoutProject1NestedInput
+}
+
+export type ProjectUncheckedUpdateWithoutTimesheetsAsProject2Input = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  timesheetsAsProject1?: Prisma.TimesheetUncheckedUpdateManyWithoutProject1NestedInput
 }
 
 export type ProjectCreateManyBranchInput = {
   id?: number
   nameEn: string
   nameAr?: string | null
-  code?: string | null
   description?: string | null
   isActive?: boolean
   createdAt?: Date | string
@@ -660,31 +723,30 @@ export type ProjectCreateManyBranchInput = {
 export type ProjectUpdateWithoutBranchInput = {
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  timesheets?: Prisma.TimesheetUpdateManyWithoutProjectNestedInput
+  timesheetsAsProject1?: Prisma.TimesheetUpdateManyWithoutProject1NestedInput
+  timesheetsAsProject2?: Prisma.TimesheetUpdateManyWithoutProject2NestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutBranchInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  timesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutProjectNestedInput
+  timesheetsAsProject1?: Prisma.TimesheetUncheckedUpdateManyWithoutProject1NestedInput
+  timesheetsAsProject2?: Prisma.TimesheetUncheckedUpdateManyWithoutProject2NestedInput
 }
 
 export type ProjectUncheckedUpdateManyWithoutBranchInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -697,11 +759,13 @@ export type ProjectUncheckedUpdateManyWithoutBranchInput = {
  */
 
 export type ProjectCountOutputType = {
-  timesheets: number
+  timesheetsAsProject1: number
+  timesheetsAsProject2: number
 }
 
 export type ProjectCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  timesheets?: boolean | ProjectCountOutputTypeCountTimesheetsArgs
+  timesheetsAsProject1?: boolean | ProjectCountOutputTypeCountTimesheetsAsProject1Args
+  timesheetsAsProject2?: boolean | ProjectCountOutputTypeCountTimesheetsAsProject2Args
 }
 
 /**
@@ -717,7 +781,14 @@ export type ProjectCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Exte
 /**
  * ProjectCountOutputType without action
  */
-export type ProjectCountOutputTypeCountTimesheetsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type ProjectCountOutputTypeCountTimesheetsAsProject1Args<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TimesheetWhereInput
+}
+
+/**
+ * ProjectCountOutputType without action
+ */
+export type ProjectCountOutputTypeCountTimesheetsAsProject2Args<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.TimesheetWhereInput
 }
 
@@ -726,14 +797,14 @@ export type ProjectSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   id?: boolean
   nameEn?: boolean
   nameAr?: boolean
-  code?: boolean
   branchId?: boolean
   description?: boolean
   isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   branch?: boolean | Prisma.Project$branchArgs<ExtArgs>
-  timesheets?: boolean | Prisma.Project$timesheetsArgs<ExtArgs>
+  timesheetsAsProject1?: boolean | Prisma.Project$timesheetsAsProject1Args<ExtArgs>
+  timesheetsAsProject2?: boolean | Prisma.Project$timesheetsAsProject2Args<ExtArgs>
   _count?: boolean | Prisma.ProjectCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["project"]>
 
@@ -741,7 +812,6 @@ export type ProjectSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   id?: boolean
   nameEn?: boolean
   nameAr?: boolean
-  code?: boolean
   branchId?: boolean
   description?: boolean
   isActive?: boolean
@@ -754,7 +824,6 @@ export type ProjectSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   id?: boolean
   nameEn?: boolean
   nameAr?: boolean
-  code?: boolean
   branchId?: boolean
   description?: boolean
   isActive?: boolean
@@ -767,7 +836,6 @@ export type ProjectSelectScalar = {
   id?: boolean
   nameEn?: boolean
   nameAr?: boolean
-  code?: boolean
   branchId?: boolean
   description?: boolean
   isActive?: boolean
@@ -775,10 +843,11 @@ export type ProjectSelectScalar = {
   updatedAt?: boolean
 }
 
-export type ProjectOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nameEn" | "nameAr" | "code" | "branchId" | "description" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["project"]>
+export type ProjectOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nameEn" | "nameAr" | "branchId" | "description" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["project"]>
 export type ProjectInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   branch?: boolean | Prisma.Project$branchArgs<ExtArgs>
-  timesheets?: boolean | Prisma.Project$timesheetsArgs<ExtArgs>
+  timesheetsAsProject1?: boolean | Prisma.Project$timesheetsAsProject1Args<ExtArgs>
+  timesheetsAsProject2?: boolean | Prisma.Project$timesheetsAsProject2Args<ExtArgs>
   _count?: boolean | Prisma.ProjectCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ProjectIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -792,13 +861,13 @@ export type $ProjectPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   name: "Project"
   objects: {
     branch: Prisma.$BranchPayload<ExtArgs> | null
-    timesheets: Prisma.$TimesheetPayload<ExtArgs>[]
+    timesheetsAsProject1: Prisma.$TimesheetPayload<ExtArgs>[]
+    timesheetsAsProject2: Prisma.$TimesheetPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     nameEn: string
     nameAr: string | null
-    code: string | null
     branchId: number | null
     description: string | null
     isActive: boolean
@@ -1199,7 +1268,8 @@ readonly fields: ProjectFieldRefs;
 export interface Prisma__ProjectClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   branch<T extends Prisma.Project$branchArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$branchArgs<ExtArgs>>): Prisma.Prisma__BranchClient<runtime.Types.Result.GetResult<Prisma.$BranchPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  timesheets<T extends Prisma.Project$timesheetsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$timesheetsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TimesheetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  timesheetsAsProject1<T extends Prisma.Project$timesheetsAsProject1Args<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$timesheetsAsProject1Args<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TimesheetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  timesheetsAsProject2<T extends Prisma.Project$timesheetsAsProject2Args<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$timesheetsAsProject2Args<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TimesheetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1232,7 +1302,6 @@ export interface ProjectFieldRefs {
   readonly id: Prisma.FieldRef<"Project", 'Int'>
   readonly nameEn: Prisma.FieldRef<"Project", 'String'>
   readonly nameAr: Prisma.FieldRef<"Project", 'String'>
-  readonly code: Prisma.FieldRef<"Project", 'String'>
   readonly branchId: Prisma.FieldRef<"Project", 'Int'>
   readonly description: Prisma.FieldRef<"Project", 'String'>
   readonly isActive: Prisma.FieldRef<"Project", 'Boolean'>
@@ -1653,9 +1722,33 @@ export type Project$branchArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 /**
- * Project.timesheets
+ * Project.timesheetsAsProject1
  */
-export type Project$timesheetsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Project$timesheetsAsProject1Args<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Timesheet
+   */
+  select?: Prisma.TimesheetSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Timesheet
+   */
+  omit?: Prisma.TimesheetOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TimesheetInclude<ExtArgs> | null
+  where?: Prisma.TimesheetWhereInput
+  orderBy?: Prisma.TimesheetOrderByWithRelationInput | Prisma.TimesheetOrderByWithRelationInput[]
+  cursor?: Prisma.TimesheetWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TimesheetScalarFieldEnum | Prisma.TimesheetScalarFieldEnum[]
+}
+
+/**
+ * Project.timesheetsAsProject2
+ */
+export type Project$timesheetsAsProject2Args<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the Timesheet
    */

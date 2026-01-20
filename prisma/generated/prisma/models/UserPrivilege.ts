@@ -20,20 +20,32 @@ export type UserPrivilegeModel = runtime.Types.Result.DefaultSelection<Prisma.$U
 
 export type AggregateUserPrivilege = {
   _count: UserPrivilegeCountAggregateOutputType | null
+  _avg: UserPrivilegeAvgAggregateOutputType | null
+  _sum: UserPrivilegeSumAggregateOutputType | null
   _min: UserPrivilegeMinAggregateOutputType | null
   _max: UserPrivilegeMaxAggregateOutputType | null
 }
 
+export type UserPrivilegeAvgAggregateOutputType = {
+  id: number | null
+  userId: number | null
+}
+
+export type UserPrivilegeSumAggregateOutputType = {
+  id: number | null
+  userId: number | null
+}
+
 export type UserPrivilegeMinAggregateOutputType = {
-  id: string | null
-  userId: string | null
+  id: number | null
+  userId: number | null
   createdAt: Date | null
   updatedAt: Date | null
 }
 
 export type UserPrivilegeMaxAggregateOutputType = {
-  id: string | null
-  userId: string | null
+  id: number | null
+  userId: number | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -47,6 +59,16 @@ export type UserPrivilegeCountAggregateOutputType = {
   _all: number
 }
 
+
+export type UserPrivilegeAvgAggregateInputType = {
+  id?: true
+  userId?: true
+}
+
+export type UserPrivilegeSumAggregateInputType = {
+  id?: true
+  userId?: true
+}
 
 export type UserPrivilegeMinAggregateInputType = {
   id?: true
@@ -109,6 +131,18 @@ export type UserPrivilegeAggregateArgs<ExtArgs extends runtime.Types.Extensions.
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: UserPrivilegeAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: UserPrivilegeSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: UserPrivilegeMinAggregateInputType
@@ -139,17 +173,21 @@ export type UserPrivilegeGroupByArgs<ExtArgs extends runtime.Types.Extensions.In
   take?: number
   skip?: number
   _count?: UserPrivilegeCountAggregateInputType | true
+  _avg?: UserPrivilegeAvgAggregateInputType
+  _sum?: UserPrivilegeSumAggregateInputType
   _min?: UserPrivilegeMinAggregateInputType
   _max?: UserPrivilegeMaxAggregateInputType
 }
 
 export type UserPrivilegeGroupByOutputType = {
-  id: string
-  userId: string
+  id: number
+  userId: number
   privileges: runtime.JsonValue
   createdAt: Date
   updatedAt: Date
   _count: UserPrivilegeCountAggregateOutputType | null
+  _avg: UserPrivilegeAvgAggregateOutputType | null
+  _sum: UserPrivilegeSumAggregateOutputType | null
   _min: UserPrivilegeMinAggregateOutputType | null
   _max: UserPrivilegeMaxAggregateOutputType | null
 }
@@ -173,8 +211,8 @@ export type UserPrivilegeWhereInput = {
   AND?: Prisma.UserPrivilegeWhereInput | Prisma.UserPrivilegeWhereInput[]
   OR?: Prisma.UserPrivilegeWhereInput[]
   NOT?: Prisma.UserPrivilegeWhereInput | Prisma.UserPrivilegeWhereInput[]
-  id?: Prisma.StringFilter<"UserPrivilege"> | string
-  userId?: Prisma.StringFilter<"UserPrivilege"> | string
+  id?: Prisma.IntFilter<"UserPrivilege"> | number
+  userId?: Prisma.IntFilter<"UserPrivilege"> | number
   privileges?: Prisma.JsonFilter<"UserPrivilege">
   createdAt?: Prisma.DateTimeFilter<"UserPrivilege"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"UserPrivilege"> | Date | string
@@ -191,8 +229,8 @@ export type UserPrivilegeOrderByWithRelationInput = {
 }
 
 export type UserPrivilegeWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
-  userId?: string
+  id?: number
+  userId?: number
   AND?: Prisma.UserPrivilegeWhereInput | Prisma.UserPrivilegeWhereInput[]
   OR?: Prisma.UserPrivilegeWhereInput[]
   NOT?: Prisma.UserPrivilegeWhereInput | Prisma.UserPrivilegeWhereInput[]
@@ -209,23 +247,24 @@ export type UserPrivilegeOrderByWithAggregationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.UserPrivilegeCountOrderByAggregateInput
+  _avg?: Prisma.UserPrivilegeAvgOrderByAggregateInput
   _max?: Prisma.UserPrivilegeMaxOrderByAggregateInput
   _min?: Prisma.UserPrivilegeMinOrderByAggregateInput
+  _sum?: Prisma.UserPrivilegeSumOrderByAggregateInput
 }
 
 export type UserPrivilegeScalarWhereWithAggregatesInput = {
   AND?: Prisma.UserPrivilegeScalarWhereWithAggregatesInput | Prisma.UserPrivilegeScalarWhereWithAggregatesInput[]
   OR?: Prisma.UserPrivilegeScalarWhereWithAggregatesInput[]
   NOT?: Prisma.UserPrivilegeScalarWhereWithAggregatesInput | Prisma.UserPrivilegeScalarWhereWithAggregatesInput[]
-  id?: Prisma.StringWithAggregatesFilter<"UserPrivilege"> | string
-  userId?: Prisma.StringWithAggregatesFilter<"UserPrivilege"> | string
+  id?: Prisma.IntWithAggregatesFilter<"UserPrivilege"> | number
+  userId?: Prisma.IntWithAggregatesFilter<"UserPrivilege"> | number
   privileges?: Prisma.JsonWithAggregatesFilter<"UserPrivilege">
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"UserPrivilege"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"UserPrivilege"> | Date | string
 }
 
 export type UserPrivilegeCreateInput = {
-  id?: string
   privileges: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -233,15 +272,14 @@ export type UserPrivilegeCreateInput = {
 }
 
 export type UserPrivilegeUncheckedCreateInput = {
-  id?: string
-  userId: string
+  id?: number
+  userId: number
   privileges: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
 }
 
 export type UserPrivilegeUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   privileges?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -249,31 +287,30 @@ export type UserPrivilegeUpdateInput = {
 }
 
 export type UserPrivilegeUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
   privileges?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type UserPrivilegeCreateManyInput = {
-  id?: string
-  userId: string
+  id?: number
+  userId: number
   privileges: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
 }
 
 export type UserPrivilegeUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   privileges?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type UserPrivilegeUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
   privileges?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -292,6 +329,11 @@ export type UserPrivilegeCountOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
 }
 
+export type UserPrivilegeAvgOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
+}
+
 export type UserPrivilegeMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
@@ -304,6 +346,11 @@ export type UserPrivilegeMinOrderByAggregateInput = {
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+}
+
+export type UserPrivilegeSumOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
 }
 
 export type UserPrivilegeCreateNestedOneWithoutUserInput = {
@@ -339,14 +386,13 @@ export type UserPrivilegeUncheckedUpdateOneWithoutUserNestedInput = {
 }
 
 export type UserPrivilegeCreateWithoutUserInput = {
-  id?: string
   privileges: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
 }
 
 export type UserPrivilegeUncheckedCreateWithoutUserInput = {
-  id?: string
+  id?: number
   privileges: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -369,14 +415,13 @@ export type UserPrivilegeUpdateToOneWithWhereWithoutUserInput = {
 }
 
 export type UserPrivilegeUpdateWithoutUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   privileges?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type UserPrivilegeUncheckedUpdateWithoutUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   privileges?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -436,8 +481,8 @@ export type $UserPrivilegePayload<ExtArgs extends runtime.Types.Extensions.Inter
     user: Prisma.$UserPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    id: string
-    userId: string
+    id: number
+    userId: number
     privileges: runtime.JsonValue
     createdAt: Date
     updatedAt: Date
@@ -865,8 +910,8 @@ export interface Prisma__UserPrivilegeClient<T, Null = never, ExtArgs extends ru
  * Fields of the UserPrivilege model
  */
 export interface UserPrivilegeFieldRefs {
-  readonly id: Prisma.FieldRef<"UserPrivilege", 'String'>
-  readonly userId: Prisma.FieldRef<"UserPrivilege", 'String'>
+  readonly id: Prisma.FieldRef<"UserPrivilege", 'Int'>
+  readonly userId: Prisma.FieldRef<"UserPrivilege", 'Int'>
   readonly privileges: Prisma.FieldRef<"UserPrivilege", 'Json'>
   readonly createdAt: Prisma.FieldRef<"UserPrivilege", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"UserPrivilege", 'DateTime'>

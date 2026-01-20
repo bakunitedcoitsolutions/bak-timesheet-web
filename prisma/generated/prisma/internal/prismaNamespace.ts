@@ -1886,18 +1886,49 @@ export type GosiCityScalarFieldEnum = (typeof GosiCityScalarFieldEnum)[keyof typ
 
 export const EmployeeScalarFieldEnum = {
   id: 'id',
-  employeeNumber: 'employeeNumber',
+  profilePicture: 'profilePicture',
+  employeeCode: 'employeeCode',
   nameEn: 'nameEn',
   nameAr: 'nameAr',
-  email: 'email',
+  dob: 'dob',
   phone: 'phone',
-  designationId: 'designationId',
-  branchId: 'branchId',
+  gender: 'gender',
+  countryId: 'countryId',
   cityId: 'cityId',
   statusId: 'statusId',
-  gosiCityId: 'gosiCityId',
+  branchId: 'branchId',
+  designationId: 'designationId',
+  payrollSectionId: 'payrollSectionId',
+  isDeductable: 'isDeductable',
+  isFixed: 'isFixed',
+  workingDays: 'workingDays',
+  workingHours: 'workingHours',
+  hourlyRate: 'hourlyRate',
+  salary: 'salary',
+  foodAllowance: 'foodAllowance',
+  mobileAllowance: 'mobileAllowance',
+  otherAllowance: 'otherAllowance',
+  contractStartDate: 'contractStartDate',
+  contractEndDate: 'contractEndDate',
+  contractDocument: 'contractDocument',
+  contractEndReason: 'contractEndReason',
   joiningDate: 'joiningDate',
-  isActive: 'isActive',
+  idCardNo: 'idCardNo',
+  idCardExpiryDate: 'idCardExpiryDate',
+  idCardDocument: 'idCardDocument',
+  profession: 'profession',
+  nationality: 'nationality',
+  passportNo: 'passportNo',
+  passportExpiryDate: 'passportExpiryDate',
+  passportDocument: 'passportDocument',
+  bankName: 'bankName',
+  bankCode: 'bankCode',
+  iban: 'iban',
+  gosiSalary: 'gosiSalary',
+  gosiCityId: 'gosiCityId',
+  openingBalance: 'openingBalance',
+  isCardDelivered: 'isCardDelivered',
+  cardDocument: 'cardDocument',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -1937,7 +1968,6 @@ export const ProjectScalarFieldEnum = {
   id: 'id',
   nameEn: 'nameEn',
   nameAr: 'nameAr',
-  code: 'code',
   branchId: 'branchId',
   description: 'description',
   isActive: 'isActive',
@@ -1951,9 +1981,16 @@ export type ProjectScalarFieldEnum = (typeof ProjectScalarFieldEnum)[keyof typeo
 export const TimesheetScalarFieldEnum = {
   id: 'id',
   employeeId: 'employeeId',
-  projectId: 'projectId',
   date: 'date',
-  hours: 'hours',
+  project1Id: 'project1Id',
+  project1BfAllowance: 'project1BfAllowance',
+  project1Hours: 'project1Hours',
+  project1Overtime: 'project1Overtime',
+  project2Id: 'project2Id',
+  project2BfAllowance: 'project2BfAllowance',
+  project2Hours: 'project2Hours',
+  project2Overtime: 'project2Overtime',
+  totalHours: 'totalHours',
   description: 'description',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -1993,11 +2030,10 @@ export type PayrollSectionScalarFieldEnum = (typeof PayrollSectionScalarFieldEnu
 export const LoanScalarFieldEnum = {
   id: 'id',
   employeeId: 'employeeId',
+  date: 'date',
+  type: 'type',
   amount: 'amount',
-  startDate: 'startDate',
-  endDate: 'endDate',
-  status: 'status',
-  notes: 'notes',
+  remarks: 'remarks',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -2008,8 +2044,9 @@ export type LoanScalarFieldEnum = (typeof LoanScalarFieldEnum)[keyof typeof Loan
 export const TrafficChallanScalarFieldEnum = {
   id: 'id',
   employeeId: 'employeeId',
-  amount: 'amount',
   date: 'date',
+  type: 'type',
+  amount: 'amount',
   description: 'description',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -2021,10 +2058,10 @@ export type TrafficChallanScalarFieldEnum = (typeof TrafficChallanScalarFieldEnu
 export const ExitReentryScalarFieldEnum = {
   id: 'id',
   employeeId: 'employeeId',
-  exitDate: 'exitDate',
-  reentryDate: 'reentryDate',
-  reason: 'reason',
-  status: 'status',
+  designationId: 'designationId',
+  date: 'date',
+  type: 'type',
+  remarks: 'remarks',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -2034,11 +2071,13 @@ export type ExitReentryScalarFieldEnum = (typeof ExitReentryScalarFieldEnum)[key
 
 export const LedgerScalarFieldEnum = {
   id: 'id',
+  employeeId: 'employeeId',
   date: 'date',
-  description: 'description',
-  debit: 'debit',
-  credit: 'credit',
+  type: 'type',
+  amountType: 'amountType',
+  amount: 'amount',
   balance: 'balance',
+  description: 'description',
   reference: 'reference',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -2094,20 +2133,6 @@ export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof Json
 
 
 /**
- * Reference to a field of type 'String'
- */
-export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String'>
-    
-
-
-/**
- * Reference to a field of type 'String[]'
- */
-export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String[]'>
-    
-
-
-/**
  * Reference to a field of type 'Int'
  */
 export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
@@ -2118,6 +2143,20 @@ export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'In
  * Reference to a field of type 'Int[]'
  */
 export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+/**
+ * Reference to a field of type 'String'
+ */
+export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String'>
+    
+
+
+/**
+ * Reference to a field of type 'String[]'
+ */
+export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String[]'>
     
 
 
@@ -2167,6 +2206,76 @@ export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel,
  * Reference to a field of type 'Decimal[]'
  */
 export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal[]'>
+    
+
+
+/**
+ * Reference to a field of type 'LoanType'
+ */
+export type EnumLoanTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LoanType'>
+    
+
+
+/**
+ * Reference to a field of type 'LoanType[]'
+ */
+export type ListEnumLoanTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LoanType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'TrafficChallanType'
+ */
+export type EnumTrafficChallanTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TrafficChallanType'>
+    
+
+
+/**
+ * Reference to a field of type 'TrafficChallanType[]'
+ */
+export type ListEnumTrafficChallanTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TrafficChallanType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'ExitReentryType'
+ */
+export type EnumExitReentryTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ExitReentryType'>
+    
+
+
+/**
+ * Reference to a field of type 'ExitReentryType[]'
+ */
+export type ListEnumExitReentryTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ExitReentryType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'LedgerType'
+ */
+export type EnumLedgerTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LedgerType'>
+    
+
+
+/**
+ * Reference to a field of type 'LedgerType[]'
+ */
+export type ListEnumLedgerTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LedgerType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'AmountType'
+ */
+export type EnumAmountTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AmountType'>
+    
+
+
+/**
+ * Reference to a field of type 'AmountType[]'
+ */
+export type ListEnumAmountTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AmountType[]'>
     
 
 

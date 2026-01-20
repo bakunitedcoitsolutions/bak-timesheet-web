@@ -269,6 +269,7 @@ export type DesignationWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Designation"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Designation"> | Date | string
   employees?: Prisma.EmployeeListRelationFilter
+  exitReentries?: Prisma.ExitReentryListRelationFilter
 }
 
 export type DesignationOrderByWithRelationInput = {
@@ -283,6 +284,7 @@ export type DesignationOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   employees?: Prisma.EmployeeOrderByRelationAggregateInput
+  exitReentries?: Prisma.ExitReentryOrderByRelationAggregateInput
 }
 
 export type DesignationWhereUniqueInput = Prisma.AtLeast<{
@@ -300,6 +302,7 @@ export type DesignationWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"Designation"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Designation"> | Date | string
   employees?: Prisma.EmployeeListRelationFilter
+  exitReentries?: Prisma.ExitReentryListRelationFilter
 }, "id">
 
 export type DesignationOrderByWithAggregationInput = {
@@ -347,6 +350,7 @@ export type DesignationCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   employees?: Prisma.EmployeeCreateNestedManyWithoutDesignationInput
+  exitReentries?: Prisma.ExitReentryCreateNestedManyWithoutDesignationInput
 }
 
 export type DesignationUncheckedCreateInput = {
@@ -361,6 +365,7 @@ export type DesignationUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   employees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutDesignationInput
+  exitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutDesignationInput
 }
 
 export type DesignationUpdateInput = {
@@ -374,6 +379,7 @@ export type DesignationUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   employees?: Prisma.EmployeeUpdateManyWithoutDesignationNestedInput
+  exitReentries?: Prisma.ExitReentryUpdateManyWithoutDesignationNestedInput
 }
 
 export type DesignationUncheckedUpdateInput = {
@@ -388,6 +394,7 @@ export type DesignationUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   employees?: Prisma.EmployeeUncheckedUpdateManyWithoutDesignationNestedInput
+  exitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutDesignationNestedInput
 }
 
 export type DesignationCreateManyInput = {
@@ -502,12 +509,20 @@ export type DesignationUpdateOneWithoutEmployeesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.DesignationUpdateToOneWithWhereWithoutEmployeesInput, Prisma.DesignationUpdateWithoutEmployeesInput>, Prisma.DesignationUncheckedUpdateWithoutEmployeesInput>
 }
 
-export type NullableDecimalFieldUpdateOperationsInput = {
-  set?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  increment?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  decrement?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  multiply?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
+export type DesignationCreateNestedOneWithoutExitReentriesInput = {
+  create?: Prisma.XOR<Prisma.DesignationCreateWithoutExitReentriesInput, Prisma.DesignationUncheckedCreateWithoutExitReentriesInput>
+  connectOrCreate?: Prisma.DesignationCreateOrConnectWithoutExitReentriesInput
+  connect?: Prisma.DesignationWhereUniqueInput
+}
+
+export type DesignationUpdateOneWithoutExitReentriesNestedInput = {
+  create?: Prisma.XOR<Prisma.DesignationCreateWithoutExitReentriesInput, Prisma.DesignationUncheckedCreateWithoutExitReentriesInput>
+  connectOrCreate?: Prisma.DesignationCreateOrConnectWithoutExitReentriesInput
+  upsert?: Prisma.DesignationUpsertWithoutExitReentriesInput
+  disconnect?: Prisma.DesignationWhereInput | boolean
+  delete?: Prisma.DesignationWhereInput | boolean
+  connect?: Prisma.DesignationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.DesignationUpdateToOneWithWhereWithoutExitReentriesInput, Prisma.DesignationUpdateWithoutExitReentriesInput>, Prisma.DesignationUncheckedUpdateWithoutExitReentriesInput>
 }
 
 export type DesignationCreateWithoutEmployeesInput = {
@@ -520,6 +535,7 @@ export type DesignationCreateWithoutEmployeesInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  exitReentries?: Prisma.ExitReentryCreateNestedManyWithoutDesignationInput
 }
 
 export type DesignationUncheckedCreateWithoutEmployeesInput = {
@@ -533,6 +549,7 @@ export type DesignationUncheckedCreateWithoutEmployeesInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  exitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutDesignationInput
 }
 
 export type DesignationCreateOrConnectWithoutEmployeesInput = {
@@ -561,6 +578,7 @@ export type DesignationUpdateWithoutEmployeesInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  exitReentries?: Prisma.ExitReentryUpdateManyWithoutDesignationNestedInput
 }
 
 export type DesignationUncheckedUpdateWithoutEmployeesInput = {
@@ -574,6 +592,77 @@ export type DesignationUncheckedUpdateWithoutEmployeesInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  exitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutDesignationNestedInput
+}
+
+export type DesignationCreateWithoutExitReentriesInput = {
+  nameEn: string
+  nameAr?: string | null
+  hoursPerDay?: number | null
+  displayOrderKey?: number | null
+  color?: string | null
+  breakfastAllowance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  employees?: Prisma.EmployeeCreateNestedManyWithoutDesignationInput
+}
+
+export type DesignationUncheckedCreateWithoutExitReentriesInput = {
+  id?: number
+  nameEn: string
+  nameAr?: string | null
+  hoursPerDay?: number | null
+  displayOrderKey?: number | null
+  color?: string | null
+  breakfastAllowance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  employees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutDesignationInput
+}
+
+export type DesignationCreateOrConnectWithoutExitReentriesInput = {
+  where: Prisma.DesignationWhereUniqueInput
+  create: Prisma.XOR<Prisma.DesignationCreateWithoutExitReentriesInput, Prisma.DesignationUncheckedCreateWithoutExitReentriesInput>
+}
+
+export type DesignationUpsertWithoutExitReentriesInput = {
+  update: Prisma.XOR<Prisma.DesignationUpdateWithoutExitReentriesInput, Prisma.DesignationUncheckedUpdateWithoutExitReentriesInput>
+  create: Prisma.XOR<Prisma.DesignationCreateWithoutExitReentriesInput, Prisma.DesignationUncheckedCreateWithoutExitReentriesInput>
+  where?: Prisma.DesignationWhereInput
+}
+
+export type DesignationUpdateToOneWithWhereWithoutExitReentriesInput = {
+  where?: Prisma.DesignationWhereInput
+  data: Prisma.XOR<Prisma.DesignationUpdateWithoutExitReentriesInput, Prisma.DesignationUncheckedUpdateWithoutExitReentriesInput>
+}
+
+export type DesignationUpdateWithoutExitReentriesInput = {
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursPerDay?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  displayOrderKey?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  breakfastAllowance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  employees?: Prisma.EmployeeUpdateManyWithoutDesignationNestedInput
+}
+
+export type DesignationUncheckedUpdateWithoutExitReentriesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursPerDay?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  displayOrderKey?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  breakfastAllowance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  employees?: Prisma.EmployeeUncheckedUpdateManyWithoutDesignationNestedInput
 }
 
 
@@ -583,10 +672,12 @@ export type DesignationUncheckedUpdateWithoutEmployeesInput = {
 
 export type DesignationCountOutputType = {
   employees: number
+  exitReentries: number
 }
 
 export type DesignationCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   employees?: boolean | DesignationCountOutputTypeCountEmployeesArgs
+  exitReentries?: boolean | DesignationCountOutputTypeCountExitReentriesArgs
 }
 
 /**
@@ -606,6 +697,13 @@ export type DesignationCountOutputTypeCountEmployeesArgs<ExtArgs extends runtime
   where?: Prisma.EmployeeWhereInput
 }
 
+/**
+ * DesignationCountOutputType without action
+ */
+export type DesignationCountOutputTypeCountExitReentriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ExitReentryWhereInput
+}
+
 
 export type DesignationSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -619,6 +717,7 @@ export type DesignationSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   createdAt?: boolean
   updatedAt?: boolean
   employees?: boolean | Prisma.Designation$employeesArgs<ExtArgs>
+  exitReentries?: boolean | Prisma.Designation$exitReentriesArgs<ExtArgs>
   _count?: boolean | Prisma.DesignationCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["designation"]>
 
@@ -664,6 +763,7 @@ export type DesignationSelectScalar = {
 export type DesignationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nameEn" | "nameAr" | "hoursPerDay" | "displayOrderKey" | "color" | "breakfastAllowance" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["designation"]>
 export type DesignationInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   employees?: boolean | Prisma.Designation$employeesArgs<ExtArgs>
+  exitReentries?: boolean | Prisma.Designation$exitReentriesArgs<ExtArgs>
   _count?: boolean | Prisma.DesignationCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type DesignationIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -673,6 +773,7 @@ export type $DesignationPayload<ExtArgs extends runtime.Types.Extensions.Interna
   name: "Designation"
   objects: {
     employees: Prisma.$EmployeePayload<ExtArgs>[]
+    exitReentries: Prisma.$ExitReentryPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1080,6 +1181,7 @@ readonly fields: DesignationFieldRefs;
 export interface Prisma__DesignationClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   employees<T extends Prisma.Designation$employeesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Designation$employeesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  exitReentries<T extends Prisma.Designation$exitReentriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Designation$exitReentriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ExitReentryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1528,6 +1630,30 @@ export type Designation$employeesArgs<ExtArgs extends runtime.Types.Extensions.I
   take?: number
   skip?: number
   distinct?: Prisma.EmployeeScalarFieldEnum | Prisma.EmployeeScalarFieldEnum[]
+}
+
+/**
+ * Designation.exitReentries
+ */
+export type Designation$exitReentriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ExitReentry
+   */
+  select?: Prisma.ExitReentrySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ExitReentry
+   */
+  omit?: Prisma.ExitReentryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ExitReentryInclude<ExtArgs> | null
+  where?: Prisma.ExitReentryWhereInput
+  orderBy?: Prisma.ExitReentryOrderByWithRelationInput | Prisma.ExitReentryOrderByWithRelationInput[]
+  cursor?: Prisma.ExitReentryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ExitReentryScalarFieldEnum | Prisma.ExitReentryScalarFieldEnum[]
 }
 
 /**
