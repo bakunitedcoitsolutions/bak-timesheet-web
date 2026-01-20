@@ -72,7 +72,7 @@ export async function hasPermission(
 /**
  * Cache user session data
  */
-export async function cacheUserSession(userId: string, data: any) {
+export async function cacheUserSession(userId: number, data: any) {
   const key = `user:session:${userId}`;
   await cache.set(key, data, 30 * 60); // 30 minutes
 }
@@ -80,7 +80,7 @@ export async function cacheUserSession(userId: string, data: any) {
 /**
  * Get cached user session data
  */
-export async function getCachedUserSession<T>(userId: string): Promise<T | null> {
+export async function getCachedUserSession<T>(userId: number): Promise<T | null> {
   const key = `user:session:${userId}`;
   return cache.get<T>(key);
 }

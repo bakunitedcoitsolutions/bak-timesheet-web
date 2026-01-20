@@ -101,7 +101,7 @@ export const authOptions: NextAuthConfig = {
 
       // Check if user is still active on every request
       if (token.id) {
-        const userId = token.id as string;
+        const userId = token.id as number;
 
         // Check if user is still active (using Redis cache for performance)
         const isActive = await getUserActiveStatus(userId);
@@ -114,7 +114,7 @@ export const authOptions: NextAuthConfig = {
       // Refresh user data on session update (optional)
       if (trigger === "update" && token.id) {
         const user = await prisma.user.findUnique({
-          where: { id: token.id as string },
+          where: { id: token.id as number },
           include: {
             userRole: true,
             branch: true,
@@ -134,7 +134,7 @@ export const authOptions: NextAuthConfig = {
     },
     async session({ session, token }: { session: any; token: any }) {
       if (session.user) {
-        session.user.id = token.id as string;
+        session.user.id = token.id as number;
         session.user.role = token.role as string;
         session.user.roleId = token.roleId as number;
         session.user.branchId = token.branchId as number | null;

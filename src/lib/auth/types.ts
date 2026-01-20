@@ -9,7 +9,7 @@ import { UserPrivileges } from "@/utils/dummy";
 declare module "next-auth" {
   interface Session {
     user: {
-      id: string;
+      id: number;
       role: string;
       roleId: number;
       branchId: number | null;
@@ -18,7 +18,7 @@ declare module "next-auth" {
   }
 
   interface User {
-    id: string;
+    id: number;
     role: string;
     roleId: number;
     branchId: number | null;
@@ -28,7 +28,7 @@ declare module "next-auth" {
 
 declare module "next-auth/jwt" {
   interface JWT {
-    id: string;
+    id: number;
     role: string;
     roleId: number;
     branchId: number | null;

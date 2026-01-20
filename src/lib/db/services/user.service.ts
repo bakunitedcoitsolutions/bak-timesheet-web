@@ -70,7 +70,7 @@ export interface CreateUserData {
   branchId?: number; // Required if userRoleId === 3 (Branch Manager)
   privileges?: UserPrivileges;
   isActive?: boolean;
-  createdBy?: string; // ID of user who is creating this record
+  createdBy?: number; // ID of user who is creating this record
 }
 
 export interface UpdateUserData {
@@ -82,7 +82,7 @@ export interface UpdateUserData {
   branchId?: number; // Required if userRoleId === 3 (Branch Manager)
   privileges?: UserPrivileges;
   isActive?: boolean;
-  updatedBy?: string; // ID of user who is updating this record
+  updatedBy?: number; // ID of user who is updating this record
 }
 
 export const userService = {
@@ -155,7 +155,7 @@ export const userService = {
   /**
    * Get user by ID with relations (password excluded)
    */
-  async findById(id: string) {
+  async findById(id: number) {
     return prisma.user.findUnique({
       where: { id },
       select: userSelectWithRelations,
@@ -192,7 +192,7 @@ export const userService = {
   /**
    * Update user
    */
-  async update(id: string, data: UpdateUserData) {
+  async update(id: number, data: UpdateUserData) {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return prisma.$transaction(async (tx: PrismaTransactionClient) => {
       const updateData: any = {};
@@ -298,7 +298,7 @@ export const userService = {
   /**
    * Delete user
    */
-  async delete(id: string): Promise<void> {
+  async delete(id: number): Promise<void> {
     await prisma.user.delete({
       where: { id },
     });

@@ -29,7 +29,7 @@ export const TOKEN_SECURITY = {
  * Invalidate all sessions for a user
  * This forces them to re-authenticate on next request
  */
-export async function invalidateUserSessions(userId: string): Promise<void> {
+export async function invalidateUserSessions(userId: number): Promise<void> {
   const key = `${TOKEN_SECURITY.SESSION_INVALID_PREFIX}${userId}`;
   // Set expiration to match token max age
   await cache.set(key, true, TOKEN_SECURITY.MAX_AGE);
@@ -38,7 +38,7 @@ export async function invalidateUserSessions(userId: string): Promise<void> {
 /**
  * Clear session invalidation (when user is reactivated)
  */
-export async function clearSessionInvalidation(userId: string): Promise<void> {
+export async function clearSessionInvalidation(userId: number): Promise<void> {
   const key = `${TOKEN_SECURITY.SESSION_INVALID_PREFIX}${userId}`;
   await cache.delete(key);
 }
@@ -50,7 +50,7 @@ export async function clearSessionInvalidation(userId: string): Promise<void> {
  * Status changes are handled immediately via updateUserActiveStatusCache,
  * so we don't need to extend TTL on every cache hit (reduces Redis calls)
  */
-export async function getUserActiveStatus(userId: string): Promise<boolean> {
+export async function getUserActiveStatus(userId: number): Promise<boolean> {
   const cacheKey = `${TOKEN_SECURITY.USER_ACTIVE_PREFIX}${userId}`;
 
   // Try cache first (only 1 Redis call on cache hit)
@@ -80,7 +80,7 @@ export async function getUserActiveStatus(userId: string): Promise<boolean> {
  * This ensures status changes take effect immediately without waiting for cache expiration
  */
 export async function updateUserActiveStatusCache(
-  userId: string,
+  userId: number,
   isActive: boolean
 ): Promise<void> {
   const cacheKey = `${TOKEN_SECURITY.USER_ACTIVE_PREFIX}${userId}`;
