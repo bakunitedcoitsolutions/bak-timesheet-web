@@ -192,6 +192,7 @@ const Step2 = () => {
         </div>
         <div className={classNames(FORM_FIELD_WIDTHS["4"])}>
           <NumberInput
+            min={0}
             maxLength={2}
             className="w-full"
             label="Working Days"
@@ -201,6 +202,7 @@ const Step2 = () => {
         </div>
         <div className={classNames(FORM_FIELD_WIDTHS["4"])}>
           <NumberInput
+            min={0}
             maxLength={3}
             className="w-full"
             label="Working Hours"
@@ -215,6 +217,19 @@ const Step2 = () => {
         {/* Fourth Row */}
         <div className={classNames(FORM_FIELD_WIDTHS["4"])}>
           <NumberInput
+            min={0}
+            maxLength={5}
+            className="w-full"
+            useGrouping={false}
+            label={selectedIsFixed === "1" ? "Salary" : "Hourly Rate"}
+            placeholder={
+              selectedIsFixed === "1" ? "Enter salary" : "Enter hourly rate"
+            }
+          />
+        </div>
+        <div className={classNames(FORM_FIELD_WIDTHS["4"])}>
+          <NumberInput
+            min={0}
             maxLength={5}
             className="w-full"
             useGrouping={false}
@@ -224,6 +239,7 @@ const Step2 = () => {
         </div>
         <div className={classNames(FORM_FIELD_WIDTHS["4"])}>
           <NumberInput
+            min={0}
             maxLength={5}
             className="w-full"
             useGrouping={false}
@@ -231,8 +247,9 @@ const Step2 = () => {
             placeholder="Enter mobile allowance"
           />
         </div>
-        <div className={classNames(FORM_FIELD_WIDTHS["4"], "xl:col-span-2")}>
+        <div className={classNames(FORM_FIELD_WIDTHS["4"])}>
           <NumberInput
+            min={0}
             maxLength={5}
             className="w-full"
             useGrouping={false}
