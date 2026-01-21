@@ -15,14 +15,16 @@ export {
   CreateUserSchema,
   UpdateUserSchema,
   ListUsersParamsSchema,
-} from "./user.dto";
+} from "./user.schemas";
+export type {
+  CreateUserInput,
+  UpdateUserInput,
+  ListUsersParamsInput,
+} from "./user.schemas";
 export type {
   CreateUserData,
-  CreateUserInput,
   UpdateUserData,
-  UpdateUserInput,
   ListUsersParams,
-  ListUsersParamsInput,
   ListUsersSortableField,
   UserRoleInterface,
   UserPrivilegeInterface,

@@ -115,7 +115,7 @@ export const createUser = async (data: CreateUserData) => {
         select: userSelectWithoutPassword,
       });
 
-      // Create privileges if user has "User with Privileges" role (roleId: 4)
+      // Create privileges if user has "Access-Enabled User" role (roleId: 4)
       if (data.userRoleId === 4 && data.privileges) {
         await tx.userPrivilege.create({
           data: {
@@ -244,7 +244,7 @@ export const updateUser = async (id: number, data: UpdateUserData) => {
       await updateUserActiveStatusCache(id, updatedUser.isActive);
     }
 
-    // Update privileges if user has "User with Privileges" role (roleId: 4)
+    // Update privileges if user has "Access-Enabled User" role (roleId: 4)
     const finalRoleIdForPrivileges =
       data.userRoleId !== undefined ? data.userRoleId : currentUser.userRoleId;
 
@@ -260,7 +260,7 @@ export const updateUser = async (id: number, data: UpdateUserData) => {
         },
       });
     } else if (data.userRoleId !== undefined && data.userRoleId !== 4) {
-      // Remove privileges if role changed to something other than "User with Privileges"
+      // Remove privileges if role changed to something other than "Access-Enabled User"
       await tx.userPrivilege.deleteMany({
         where: { userId: id },
       });

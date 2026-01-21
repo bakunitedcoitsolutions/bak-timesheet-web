@@ -3,8 +3,6 @@
  * Type definitions for user service operations
  */
 
-import { z } from "zod";
-
 import type { BranchInterface } from "../branch";
 import type { UserPrivileges } from "@/utils/dummy";
 
@@ -105,45 +103,10 @@ export interface ListUsersResponse {
 // ---------------------------------------------------------------------------
 // Part 2: Schemas (frontend/backend validation) not required by services
 // ---------------------------------------------------------------------------
-
-export const CreateUserSchema = z.object({
-  nameEn: z.string().min(2, "Name is required"),
-  nameAr: z.string().min(2, "Arabic name is required").optional(),
-  email: z.string().email("Invalid email address").min(1, "Email is required"),
-  password: z.string().min(6, "Password must be at least 6 characters long"),
-  userRoleId: z.number().min(1, "User role is required"),
-  branchId: z.number().optional(),
-  privileges: z.any().optional(),
-  isActive: z.boolean().default(true).optional(),
-  createdBy: z.number().optional(),
-});
-
-export const UpdateUserSchema = z.object({
-  nameEn: z.string().min(2, "Name is required").optional(),
-  nameAr: z.string().min(2, "Arabic name is required").optional(),
-  email: z.string().email("Invalid email address").optional(),
-  password: z
-    .string()
-    .min(6, "Password must be at least 6 characters long")
-    .optional(),
-  userRoleId: z.number().min(1, "User role is required").optional(),
-  branchId: z.number().optional(),
-  privileges: z.any().optional(),
-  isActive: z.boolean().optional(),
-  updatedBy: z.number().optional(),
-});
-
-export const ListUsersParamsSchema = z.object({
-  page: z.number().int().positive().optional(),
-  limit: z.number().int().positive().optional(),
-  search: z.string().optional(),
-  roleId: z.number().int().positive().optional(),
-  branchId: z.number().int().positive().optional(),
-  isActive: z.boolean().optional(),
-  sortOrder: z.enum(["asc", "desc"]).optional(),
-  sortBy: z.enum(["nameEn", "nameAr", "isActive"]).optional(),
-});
-
-export type CreateUserInput = z.infer<typeof CreateUserSchema>;
-export type UpdateUserInput = z.infer<typeof UpdateUserSchema>;
-export type ListUsersParamsInput = z.infer<typeof ListUsersParamsSchema>;
+// Schemas have been moved to user.schemas.ts for client-side safety
+// Re-export types for convenience (they reference schemas from user.schemas.ts)
+export type {
+  CreateUserInput,
+  UpdateUserInput,
+  ListUsersParamsInput,
+} from "./user.schemas";

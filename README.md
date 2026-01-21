@@ -67,7 +67,7 @@ src/
 
 ## Key Features
 
-- **Role-Based Access Control** - Admin, Manager, Branch Manager, User with Privileges
+- **Role-Based Access Control** - Admin, Manager, Branch Manager, Access-Enabled User
 - **User Management** - Create, update, and manage users with granular permissions
 - **Session Management** - JWT-based authentication with Redis caching
 - **Audit Trail** - Track who created/updated records (`createdBy`, `updatedBy`)

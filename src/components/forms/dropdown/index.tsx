@@ -1,9 +1,5 @@
 "use client";
-import {
-  Dropdown,
-  DropdownProps,
-  DropdownChangeEvent,
-} from "primereact/dropdown";
+import { Dropdown, DropdownProps } from "primereact/dropdown";
 
 interface DropdownOption {
   label: string;
@@ -17,8 +13,6 @@ interface ModifiedDropdownProps extends Omit<DropdownProps, "onChange"> {
   options: DropdownOption[];
   small?: boolean;
   placeholder: string;
-  selectedItem: any;
-  setSelectedItem: (item: any) => void;
 }
 
 export default function ModifiedDropdown({
@@ -27,8 +21,6 @@ export default function ModifiedDropdown({
   options,
   small = false,
   placeholder,
-  selectedItem,
-  setSelectedItem,
   className = "",
   ...rest
 }: ModifiedDropdownProps) {
@@ -55,10 +47,6 @@ export default function ModifiedDropdown({
     );
   };
 
-  const handleChange = (e: DropdownChangeEvent) => {
-    setSelectedItem(e.value);
-  };
-
   return (
     <div className="space-y-1">
       {label && (
@@ -69,14 +57,12 @@ export default function ModifiedDropdown({
       <Dropdown
         options={options}
         filterDelay={400}
-        value={selectedItem}
         optionLabel="label"
         className={className}
         placeholder={placeholder}
         itemTemplate={itemTemplate}
         valueTemplate={valueTemplate}
         panelClassName={isSmall ? "dropdown-small-panel" : undefined}
-        onChange={handleChange}
         {...rest}
       />
       {error && (

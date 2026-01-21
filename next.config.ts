@@ -11,6 +11,15 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  // Exclude server-only packages from client bundle
+  // serverExternalPackages: ["pg", "@prisma/client", "@prisma/adapter-pg"],
+  // experimental: {
+  //   serverComponentsExternalPackages: [
+  //     "pg",
+  //     "@prisma/client",
+  //     "@prisma/adapter-pg",
+  //   ],
+  // },
 };
 
 export default nextConfig;

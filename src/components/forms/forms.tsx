@@ -157,7 +157,7 @@ export function FormItem<T extends FieldValues>({
                   [valueName]: normalizedValue,
                   id: name,
                   className: `${children.props.className ?? ""} ${
-                    error?.message ? "p-error" : ""
+                    error?.message ? "p-invalid" : ""
                   }`.trim(),
                 })}
                 {!hideError && (

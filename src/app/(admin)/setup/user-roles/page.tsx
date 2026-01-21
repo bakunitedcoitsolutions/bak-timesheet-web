@@ -17,7 +17,8 @@ const getAccessDefinition = (access: string): string => {
   const definitions: Record<string, string> = {
     Admin: "Can do anything of all branches (all functionalities)",
     Manager: "Can do anything of all branches except user management",
-    "User with Privileges": "Customizable permissions with checkboxes for each feature",
+    "Access-Enabled User":
+      "Customizable permissions with checkboxes for each feature",
   };
   return definitions[access] || "";
 };

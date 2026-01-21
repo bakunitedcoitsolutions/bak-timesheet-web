@@ -59,7 +59,7 @@ model UserRole {
   id        Int      @id @default(autoincrement())
   nameEn    String
   nameAr    String?
-  access    String   // Admin, Manager, Branch Manager, User with Privileges
+  access    String   // Admin, Manager, Branch Manager, Access-Enabled User
   isActive  Boolean  @default(true)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

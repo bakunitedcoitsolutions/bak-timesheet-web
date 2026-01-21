@@ -2638,7 +2638,7 @@ interface UserRole {
  *
  * 1. Admin - Can do anything of all branches (all functionalities)
  * 2. Manager - Can do anything of all branches except user management
- * 3. User with Privileges - Customizable permissions with checkboxes for each feature
+ * 3. Access-Enabled User - Customizable permissions with checkboxes for each feature
  */
 const userRolesData: UserRole[] = [
   {
@@ -2664,9 +2664,9 @@ const userRolesData: UserRole[] = [
   },
   {
     id: 4,
-    nameEn: "User with Privileges",
+    nameEn: "Access-Enabled User",
     nameAr: "مستخدم بصلاحيات",
-    access: "User with Privileges",
+    access: "Access-Enabled User",
     isActive: true,
   },
 ];
@@ -2679,7 +2679,7 @@ interface User {
   userRoleId: number;
   branchId: number | null; // Required for Branch Manager (roleId: 3)
   isActive: boolean;
-  privileges?: UserPrivileges; // Only for User with Privileges role
+  privileges?: UserPrivileges; // Only for Access-Enabled User role
 }
 
 const usersData: User[] = [

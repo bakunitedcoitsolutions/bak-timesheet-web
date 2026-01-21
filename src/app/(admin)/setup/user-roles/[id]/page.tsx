@@ -11,15 +11,15 @@ import { Button, Dropdown, Input } from "@/components/forms";
 
 /**
  * Access Level Options with Definitions:
- * 
+ *
  * 1. Admin - Can do anything of all branches (all functionalities)
  * 2. Manager - Can do anything of all branches except user management
- * 3. User with Privileges - Customizable permissions with checkboxes for each feature
+ * 3. Access-Enabled User - Customizable permissions with checkboxes for each feature
  */
 const accessOptions = [
   { label: "Admin", value: "Admin" },
   { label: "Manager", value: "Manager" },
-  { label: "User with Privileges", value: "User with Privileges" },
+  { label: "Access-Enabled User", value: "Access-Enabled User" },
 ];
 
 const statusOptions = [

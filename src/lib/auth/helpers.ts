@@ -54,9 +54,10 @@ export async function hasPermission(
     return true;
   }
 
-  // User with Privileges - check custom privileges
-  if (user.role === "User with Privileges" && user.privileges) {
-    const featurePrivileges = user.privileges[feature as keyof typeof user.privileges];
+  // Access-Enabled User - check custom privileges
+  if (user.role === "Access-Enabled User" && user.privileges) {
+    const featurePrivileges =
+      user.privileges[feature as keyof typeof user.privileges];
     if (!featurePrivileges) return false;
 
     if (permission === "full") {
@@ -80,7 +81,9 @@ export async function cacheUserSession(userId: number, data: any) {
 /**
  * Get cached user session data
  */
-export async function getCachedUserSession<T>(userId: number): Promise<T | null> {
+export async function getCachedUserSession<T>(
+  userId: number
+): Promise<T | null> {
   const key = `user:session:${userId}`;
   return cache.get<T>(key);
 }
