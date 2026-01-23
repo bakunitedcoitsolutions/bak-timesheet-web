@@ -34,15 +34,18 @@ export interface UpdateUserData {
   updatedBy?: number; // ID of user who is updating this record
 }
 
-export type ListUsersSortableField = "nameEn" | "nameAr" | "isActive";
+export type ListUsersSortableField =
+  | "nameEn"
+  | "nameAr"
+  | "isActive"
+  | "email"
+  | "userRoleId"
+  | "branchId";
 
 export interface ListUsersParams {
   page?: number;
   limit?: number;
   search?: string;
-  roleId?: number;
-  branchId?: number;
-  isActive?: boolean;
   sortOrder?: "asc" | "desc";
   sortBy?: ListUsersSortableField;
 }
@@ -99,14 +102,3 @@ export interface ListUsersResponse {
     totalPages: number;
   };
 }
-
-// ---------------------------------------------------------------------------
-// Part 2: Schemas (frontend/backend validation) not required by services
-// ---------------------------------------------------------------------------
-// Schemas have been moved to user.schemas.ts for client-side safety
-// Re-export types for convenience (they reference schemas from user.schemas.ts)
-export type {
-  CreateUserInput,
-  UpdateUserInput,
-  ListUsersParamsInput,
-} from "./user.schemas";

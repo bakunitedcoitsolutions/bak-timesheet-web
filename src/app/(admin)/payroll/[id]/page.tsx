@@ -579,10 +579,8 @@ const PayrollDetailPage = () => {
           disabled={rowData.isLocked}
           className="w-[200px]! h-10!"
           placeholder="Choose Method"
-          selectedItem={rowData.project}
-          setSelectedItem={(value) =>
-            updatePayrollEntry(rowData.id, "project", value)
-          }
+          value={rowData.project}
+          onChange={(e) => updatePayrollEntry(rowData.id, "project", e.value)}
         />
       ),
     },
@@ -598,10 +596,8 @@ const PayrollDetailPage = () => {
           disabled={rowData.isLocked}
           className="w-[150px]! h-10!"
           placeholder="Pending"
-          selectedItem={rowData.status}
-          setSelectedItem={(value) =>
-            updatePayrollEntry(rowData.id, "status", value)
-          }
+          value={rowData.status}
+          onChange={(e) => updatePayrollEntry(rowData.id, "status", e.value)}
         />
       ),
     },
@@ -627,8 +623,8 @@ const PayrollDetailPage = () => {
               options={designationOptions}
               className="w-full lg:w-48 h-10.5!"
               placeholder="Select Designation"
-              selectedItem={selectedDesignation}
-              setSelectedItem={setSelectedDesignation}
+              value={selectedDesignation}
+              onChange={(e) => setSelectedDesignation(e.value)}
             />
           </div>
           <div className="w-full lg:w-auto hidden lg:block">

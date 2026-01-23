@@ -10,8 +10,8 @@ import {
   branchesData,
   userRolesData,
   UserPrivileges,
-  FeaturePermissions,
   ReportsPrivileges,
+  FeaturePermissions,
 } from "@/utils/dummy";
 import {
   handleReportToggle as toggleReport,
@@ -20,12 +20,14 @@ import {
   handlePrivilegeChange as changePrivilege,
   handleReportFilterToggle as toggleReportFilter,
 } from "@/utils/helpers/user-privileges";
-import { generatePassword } from "@/utils/helpers";
+import { toastService } from "@/lib/toast";
 import { getEntityModeFromParam } from "@/helpers";
+import { generatePassword, getErrorMessage } from "@/utils/helpers";
 import { FORM_FIELD_WIDTHS, STATUS_OPTIONS } from "@/utils/constants";
 import { CreateUserSchema } from "@/lib/db/services/user/user.schemas";
 import { Input, Button, Dropdown, Form, FormItem } from "@/components/forms";
 import { Privileges, ReportsSection, StepperFormHeading } from "@/components";
+import { useCreateUser, useUpdateUser } from "@/lib/db/services/user/requests";
 
 const UpsertUserPage = () => {
   const [privileges, setPrivileges] = useState<UserPrivileges>({});
@@ -40,6 +42,9 @@ const UpsertUserPage = () => {
     addKeyword: "new",
     param: userIdParam,
   });
+
+  const { mutateAsync: createUser } = useCreateUser();
+  const { mutateAsync: updateUser } = useUpdateUser();
 
   const defaultValues = {
     nameEn: "",
@@ -124,13 +129,47 @@ const UpsertUserPage = () => {
   const onFormSubmit = handleSubmit(async (data) => {
     const submitData = {
       ...data,
+      email: data?.email?.toLowerCase?.()?.trim?.(),
       privileges: selectedUserRoleId === 4 ? privileges : undefined, // Include privileges if Access-Enabled User role
     };
-    console.log("Form submitted:", submitData, privileges);
-    // Handle form submission here
-    // TODO: Call userService.create() or userService.update() with submitData
-    // router.replace(`/users`);
+    if (isAddMode) {
+      handleAddUser(submitData);
+    } else {
+      handleUpdateUser(submitData);
+    }
   });
+
+  const handleAddUser = async (data: Record<string, any>) => {
+    try {
+      console.log("Form submitted: Add User", data);
+      await createUser(data, {
+        onSuccess: () => {
+          toastService.showSuccess("Success", "User created successfully");
+          reset(defaultValues);
+          router.replace("/users");
+        },
+        onError: (error: any) => {
+          const errorMessage = getErrorMessage(error, "Failed to create user");
+          toastService.showError("Error", errorMessage);
+        },
+      });
+    } catch (error) {}
+  };
+
+  const handleUpdateUser = async (data: Record<string, any>) => {
+    console.log("Form submitted: Update User", data);
+    try {
+      await updateUser(data, {
+        onSuccess: () => {
+          toastService.showSuccess("Success", "User updated successfully");
+        },
+        onError: (error: any) => {
+          const errorMessage = getErrorMessage(error, "Failed to update user");
+          toastService.showError("Error", errorMessage);
+        },
+      });
+    } catch (error) {}
+  };
 
   const branchOptions = branchesData.map((branch) => ({
     label: branch.nameEn,
@@ -142,7 +181,6 @@ const UpsertUserPage = () => {
     value: role.id,
   }));
 
-  // errorCss={`${!!errors.areaName?.message ? "mb-2" : ""}`}
   return (
     <div className="flex flex-col h-full gap-6 px-6 py-6">
       <div className="flex h-full justify-between flex-1 md:flex-none flex-col gap-4 py-6 bg-white rounded-lg">
@@ -246,6 +284,7 @@ const UpsertUserPage = () => {
           <Button
             size="small"
             variant="text"
+            disabled={isSubmitting}
             onClick={() => router.replace("/users")}
           >
             Cancel
@@ -254,7 +293,9 @@ const UpsertUserPage = () => {
             size="small"
             variant="solid"
             onClick={onFormSubmit}
-            className="w-28 justify-center!"
+            loading={isSubmitting}
+            disabled={isSubmitting}
+            className="w-28 justify-center! gap-1"
           >
             Save
           </Button>

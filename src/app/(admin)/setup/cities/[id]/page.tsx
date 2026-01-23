@@ -76,8 +76,8 @@ const UpsertCityPage = () => {
               className="w-full"
               options={countryOptions}
               placeholder="Choose Country"
-              selectedItem={selectedCountry}
-              setSelectedItem={setSelectedCountry}
+              value={selectedCountry}
+              onChange={(e) => setSelectedCountry(e.value)}
               filter
             />
           </div>
@@ -87,8 +87,8 @@ const UpsertCityPage = () => {
               className="w-full"
               options={cityStatusOptions}
               placeholder="Choose"
-              selectedItem={selectedCityStatus}
-              setSelectedItem={setSelectedCityStatus}
+              value={selectedCityStatus}
+              onChange={(e) => setSelectedCityStatus(e.value)}
             />
           </div>
           <div className={classNames(FORM_FIELD_WIDTHS["2"])}>

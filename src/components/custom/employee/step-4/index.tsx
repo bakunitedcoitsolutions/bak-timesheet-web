@@ -41,8 +41,8 @@ const Step4 = () => {
               className="w-full"
               options={bankOptions}
               placeholder="Choose Bank"
-              selectedItem={selectedBank}
-              setSelectedItem={setSelectedBank}
+              value={selectedBank}
+              onChange={(e) => setSelectedBank(e.value)}
             />
           </div>
           <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
@@ -73,8 +73,8 @@ const Step4 = () => {
               className="w-full"
               options={cityOptions}
               placeholder="GOSI City"
-              selectedItem={selectedGosiCity}
-              setSelectedItem={setSelectedGosiCity}
+              value={selectedGosiCity}
+              onChange={(e) => setSelectedGosiCity(e.value)}
             />
           </div>
         </div>

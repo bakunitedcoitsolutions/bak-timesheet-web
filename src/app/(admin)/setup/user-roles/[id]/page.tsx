@@ -78,8 +78,8 @@ const UpsertUserRolePage = () => {
               className="w-full"
               options={accessOptions}
               placeholder="Choose"
-              selectedItem={selectedAccess}
-              setSelectedItem={setSelectedAccess}
+              value={selectedAccess}
+              onChange={(e) => setSelectedAccess(e.value)}
             />
           </div>
           <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
@@ -88,8 +88,8 @@ const UpsertUserRolePage = () => {
               className="w-full"
               options={statusOptions}
               placeholder="Choose"
-              selectedItem={selectedStatus}
-              setSelectedItem={setSelectedStatus}
+              value={selectedStatus}
+              onChange={(e) => setSelectedStatus(e.value)}
             />
           </div>
         </div>

@@ -137,9 +137,9 @@ const TimesheetPage = () => {
               disabled={rowData.isLocked}
               className="w-full h-10!"
               placeholder="Select Project"
-              selectedItem={rowData.project1}
-              setSelectedItem={(value) =>
-                updateTimesheetEntry(rowData.id, "project1", value)
+              value={rowData.project1}
+              onChange={(e) =>
+                updateTimesheetEntry(rowData.id, "project1", e.value)
               }
             />
           </div>
@@ -233,9 +233,9 @@ const TimesheetPage = () => {
               disabled={rowData.isLocked}
               className="w-full h-10!"
               placeholder="Select Project"
-              selectedItem={rowData.project2}
-              setSelectedItem={(value) =>
-                updateTimesheetEntry(rowData.id, "project2", value)
+              value={rowData.project2}
+              onChange={(e) =>
+                updateTimesheetEntry(rowData.id, "project2", e.value)
               }
             />
           </div>
@@ -369,8 +369,8 @@ const TimesheetPage = () => {
           <div className="w-full lg:w-auto">
             <GroupDropdown
               className="w-full lg:w-48 h-10.5!"
-              selectedItem={selectedDesignation}
-              setSelectedItem={setSelectedDesignation}
+              value={selectedDesignation}
+              onChange={setSelectedDesignation}
             />
           </div>
           <div className="w-full lg:w-auto hidden lg:block">

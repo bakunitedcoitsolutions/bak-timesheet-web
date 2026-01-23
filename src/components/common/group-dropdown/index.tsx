@@ -2,15 +2,15 @@ import { Dropdown } from "@/components/forms";
 import { designationOptions, payrollSectionsData } from "@/utils/dummy";
 
 const GroupDropdown = ({
-  selectedItem,
+  value,
+  onChange,
   className = "w-full",
-  setSelectedItem,
   placeholder = "Choose",
 }: {
-  selectedItem: any;
+  value: any;
   className?: string;
   placeholder?: string;
-  setSelectedItem: (value: any) => void;
+  onChange: (value: any) => void;
 }) => {
   const getGroupedDesignations = () => {
     const groupedDesignations = [
@@ -59,14 +59,14 @@ const GroupDropdown = ({
     <Dropdown
       small
       filter
+      value={value}
       optionLabel="label"
       className={className}
       optionGroupLabel="label"
       optionGroupChildren="items"
       placeholder={placeholder}
       options={getGroupedDesignations()}
-      selectedItem={selectedItem}
-      setSelectedItem={setSelectedItem}
+      onChange={(e) => onChange(e.value)}
       optionGroupTemplate={optionGroupTemplate}
       panelClassName="designation-dropdown-panel"
     />

@@ -74,8 +74,8 @@ const UpsertChallanPage = () => {
               className="w-full"
               options={employeeOptions}
               placeholder="Choose"
-              selectedItem={selectedEmployee}
-              setSelectedItem={setSelectedEmployee}
+              value={selectedEmployee}
+              onChange={(e) => setSelectedEmployee(e.value)}
             />
           </div>
           <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
@@ -84,8 +84,8 @@ const UpsertChallanPage = () => {
               className="w-full"
               options={challanTypeOptions}
               placeholder="Choose"
-              selectedItem={selectedChallanType}
-              setSelectedItem={setSelectedChallanType}
+              value={selectedChallanType}
+              onChange={(e) => setSelectedChallanType(e.value)}
             />
           </div>
           <div className={classNames(FORM_FIELD_WIDTHS["2"])}>

@@ -322,8 +322,8 @@ const PayrollPage = () => {
             options={yearOptions}
             placeholder="Select Year"
             className="w-full md:w-44"
-            selectedItem={selectedYear}
-            setSelectedItem={setSelectedYear}
+            value={selectedYear}
+            onChange={(e) => setSelectedYear(e.value)}
           />
         </div>
         <div className="flex items-center gap-3 w-full md:w-auto">

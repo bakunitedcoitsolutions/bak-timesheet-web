@@ -94,8 +94,8 @@ const Step2 = () => {
             className="w-full"
             options={genderOptions}
             placeholder="Choose"
-            selectedItem={selectedGender}
-            setSelectedItem={setSelectedGender}
+            value={selectedGender}
+            onChange={(e) => setSelectedGender(e.value)}
           />
         </div>
         <div className={classNames(FORM_FIELD_WIDTHS["4"], "xl:col-span-2")}>
@@ -104,8 +104,8 @@ const Step2 = () => {
             className="w-full"
             options={countryOptions}
             placeholder="Choose"
-            selectedItem={selectedCountry}
-            setSelectedItem={setSelectedCountry}
+            value={selectedCountry}
+            onChange={(e) => setSelectedCountry(e.value)}
           />
         </div>
         <div className={classNames(FORM_FIELD_WIDTHS["4"])}>
@@ -114,8 +114,8 @@ const Step2 = () => {
             className="w-full"
             options={cityOptions}
             placeholder="Choose"
-            selectedItem={selectedCity}
-            setSelectedItem={setSelectedCity}
+            value={selectedCity}
+            onChange={(e) => setSelectedCity(e.value)}
           />
         </div>
         {/* Mobile Separator */}
@@ -128,8 +128,8 @@ const Step2 = () => {
             className="w-full"
             options={employeeStatusOptions}
             placeholder="Choose"
-            selectedItem={selectedEmployeeStatus}
-            setSelectedItem={setSelectedEmployeeStatus}
+            value={selectedEmployeeStatus}
+            onChange={(e) => setSelectedEmployeeStatus(e.value)}
           />
         </div>
         <div className={classNames(FORM_FIELD_WIDTHS["4"])}>
@@ -141,8 +141,8 @@ const Step2 = () => {
               label: branch.nameEn,
               value: branch.id,
             }))}
-            selectedItem={selectedBranch}
-            setSelectedItem={setSelectedBranch}
+            value={selectedBranch}
+            onChange={(e) => setSelectedBranch(e.value)}
           />
         </div>
         <div className={classNames(FORM_FIELD_WIDTHS["4"])}>
@@ -151,8 +151,8 @@ const Step2 = () => {
             className="w-full"
             options={designationOptions}
             placeholder="Choose"
-            selectedItem={selectedDesignation}
-            setSelectedItem={setSelectedDesignation}
+            value={selectedDesignation}
+            onChange={(e) => setSelectedDesignation(e.value)}
           />
         </div>
         <div className={classNames(FORM_FIELD_WIDTHS["4"])}>
@@ -161,8 +161,8 @@ const Step2 = () => {
             className="w-full"
             options={payrollSectionOptions}
             placeholder="Choose"
-            selectedItem={selectedPayrollSection}
-            setSelectedItem={setSelectedPayrollSection}
+            value={selectedPayrollSection}
+            onChange={(e) => setSelectedPayrollSection(e.value)}
           />
         </div>
 
@@ -176,8 +176,8 @@ const Step2 = () => {
             className="w-full"
             options={isFixedOptions}
             placeholder="Choose"
-            selectedItem={selectedIsFixed}
-            setSelectedItem={setSelectedIsFixed}
+            value={selectedIsFixed}
+            onChange={(e) => setSelectedIsFixed(e.value)}
           />
         </div>
         <div className={classNames(FORM_FIELD_WIDTHS["4"])}>
@@ -186,8 +186,8 @@ const Step2 = () => {
             placeholder="Choose"
             label="Is Deductable?"
             options={isFixedOptions}
-            selectedItem={selectedIsDeductable}
-            setSelectedItem={setSelectedIsDeductable}
+            value={selectedIsDeductable}
+            onChange={(e) => setSelectedIsDeductable(e.value)}
           />
         </div>
         <div className={classNames(FORM_FIELD_WIDTHS["4"])}>

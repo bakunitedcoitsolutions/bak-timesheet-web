@@ -25,7 +25,7 @@ const ReportsSection = ({
         <h3 className="text-lg font-semibold text-primary mb-4">Reports</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {REPORT_OPTIONS.map((report) => {
-            const reportPermission = privileges?.reports?.find(
+            const reportPermission = privileges?.items?.find(
               (r) => r.reportId === report.id
             );
             const isReportEnabled = reportPermission?.enabled || false;

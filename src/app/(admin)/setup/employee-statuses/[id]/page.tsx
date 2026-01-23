@@ -64,8 +64,8 @@ const UpsertEmployeeStatusPage = () => {
               className="w-full"
               options={statusOptions}
               placeholder="Choose"
-              selectedItem={selectedStatus}
-              setSelectedItem={setSelectedStatus}
+              value={selectedStatus}
+              onChange={(e) => setSelectedStatus(e.value)}
             />
           </div>
         </div>

@@ -73,8 +73,8 @@ const UpsertPayrollSectionPage = () => {
               className="w-full"
               options={payrollSectionStatusOptions}
               placeholder="Choose"
-              selectedItem={selectedPayrollSectionStatus}
-              setSelectedItem={setSelectedPayrollSectionStatus}
+              value={selectedPayrollSectionStatus}
+              onChange={(e) => setSelectedPayrollSectionStatus(e.value)}
             />
           </div>
         </div>

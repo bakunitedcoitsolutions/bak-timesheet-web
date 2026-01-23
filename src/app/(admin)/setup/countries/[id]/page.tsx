@@ -66,8 +66,8 @@ const UpsertCountryPage = () => {
               className="w-full"
               options={countryStatusOptions}
               placeholder="Choose"
-              selectedItem={selectedCountryStatus}
-              setSelectedItem={setSelectedCountryStatus}
+              value={selectedCountryStatus}
+              onChange={(e) => setSelectedCountryStatus(e.value)}
             />
           </div>
         </div>

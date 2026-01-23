@@ -328,3 +328,12 @@ body
   padding: 0 !important;
   margin: 0 !important;
 }
+
+/*  */
+body .p-datatable .p-datatable-loading-overlay {
+  @apply bg-primary/10! z-10!;
+}
+
+body .p-datatable .p-datatable-tbody > tr.p-datatable-emptymessage > td {
+  @apply text-primary!;
+}

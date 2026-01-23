@@ -41,7 +41,7 @@ export interface TableColumn<T = any> extends Omit<
   filterPlaceholder?: string;
   filterIcon?: string;
   smallFilter?: boolean;
-  body?: (rowData: T) => ReactNode;
+  body?: (rowData: T, options?: { rowIndex?: number }) => ReactNode;
   footer?: () => ReactNode;
   style?: React.CSSProperties;
   className?: string;
@@ -471,7 +471,12 @@ const CustomTable = forwardRef<TableRef, CustomTableProps<any>>(
                 sortable={isSortable}
                 filter={isFilterable}
                 filterElement={finalFilterElement}
-                body={body}
+                body={
+                  body
+                    ? (rowData: any, options: any) =>
+                        body(rowData, { rowIndex: options?.rowIndex })
+                    : undefined
+                }
                 style={style}
                 className={className}
                 {...columnProps}

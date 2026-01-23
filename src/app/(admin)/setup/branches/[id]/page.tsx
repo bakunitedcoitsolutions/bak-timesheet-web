@@ -64,8 +64,8 @@ const UpsertBranchPage = () => {
               className="w-full"
               options={branchStatusOptions}
               placeholder="Choose"
-              selectedItem={selectedBranchStatus}
-              setSelectedItem={setSelectedBranchStatus}
+              value={selectedBranchStatus}
+              onChange={(e) => setSelectedBranchStatus(e.value)}
             />
           </div>
         </div>

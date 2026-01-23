@@ -100,8 +100,8 @@ const UpsertDesignationPage = () => {
               className="w-full"
               options={breakfastAllowanceOptions}
               placeholder="Choose"
-              selectedItem={selectedBreakfastAllowance}
-              setSelectedItem={setSelectedBreakfastAllowance}
+              value={selectedBreakfastAllowance}
+              onChange={(e) => setSelectedBreakfastAllowance(e.value)}
             />
           </div>
           <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
@@ -110,8 +110,8 @@ const UpsertDesignationPage = () => {
               className="w-full"
               options={designationStatusOptions}
               placeholder="Choose"
-              selectedItem={selectedDesignationStatus}
-              setSelectedItem={setSelectedDesignationStatus}
+              value={selectedDesignationStatus}
+              onChange={(e) => setSelectedDesignationStatus(e.value)}
             />
           </div>
         </div>

@@ -70,8 +70,8 @@ const UpsertLoanPage = () => {
               className="w-full"
               options={employeeOptions}
               placeholder="Choose"
-              selectedItem={selectedEmployee}
-              setSelectedItem={setSelectedEmployee}
+              value={selectedEmployee}
+              onChange={(e) => setSelectedEmployee(e.value)}
             />
           </div>
           <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
@@ -80,8 +80,8 @@ const UpsertLoanPage = () => {
               className="w-full"
               options={loanTypeOptions}
               placeholder="Choose"
-              selectedItem={selectedLoanType}
-              setSelectedItem={setSelectedLoanType}
+              value={selectedLoanType}
+              onChange={(e) => setSelectedLoanType(e.value)}
             />
           </div>
           <div className={classNames(FORM_FIELD_WIDTHS["2"])}>

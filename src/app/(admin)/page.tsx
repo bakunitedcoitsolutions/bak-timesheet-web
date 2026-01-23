@@ -139,9 +139,9 @@ const HomePage = () => {
               small
               filter
               options={projects}
+              value={selectedProject}
               placeholder="Select Project"
-              selectedItem={selectedProject}
-              setSelectedItem={setSelectedProject}
+              onChange={(e) => setSelectedProject(e.value)}
             />
           </div>
           <div className="h-[500px] w-full min-w-0 mt-6 relative">
@@ -236,8 +236,8 @@ const HomePage = () => {
                   className="w-full"
                   options={branches}
                   placeholder="All Branches"
-                  selectedItem={selectedBranch}
-                  setSelectedItem={setSelectedBranch}
+                  value={selectedBranch}
+                  onChange={(e) => setSelectedBranch(e.value)}
                 />
               </div>
               <div className="flex flex-1 lg:flex-none">
@@ -246,8 +246,8 @@ const HomePage = () => {
                   options={months}
                   className="w-full"
                   placeholder="Dec 2025"
-                  selectedItem={selectedMonth}
-                  setSelectedItem={setSelectedMonth}
+                  value={selectedMonth}
+                  onChange={(e) => setSelectedMonth(e.value)}
                 />
               </div>
             </div>

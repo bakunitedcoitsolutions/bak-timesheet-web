@@ -2607,7 +2607,7 @@ export interface ReportPermissions {
 }
 
 export interface ReportsPrivileges extends FeaturePermissions {
-  reports?: ReportPermissions[];
+  items?: ReportPermissions[];
 }
 
 export interface UserPrivileges {

@@ -46,8 +46,8 @@ const Step5 = () => {
               label="Is Card Delivered?"
               options={isCardDeliveredOptions}
               placeholder="Choose"
-              selectedItem={selectedIsCardDelivered}
-              setSelectedItem={setSelectedIsCardDelivered}
+              value={selectedIsCardDelivered}
+              onChange={(e) => setSelectedIsCardDelivered(e.value)}
             />
           </div>
           <div className={classNames(FORM_FIELD_WIDTHS["2"])}>

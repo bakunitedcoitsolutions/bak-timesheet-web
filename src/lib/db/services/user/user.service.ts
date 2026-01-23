@@ -298,11 +298,6 @@ export const listUsers = async (
       { email: { contains: params.search, mode: "insensitive" } },
     ];
   }
-
-  if (params.roleId) where.userRoleId = params.roleId;
-  if (params.branchId) where.branchId = params.branchId;
-  if (params.isActive !== undefined) where.isActive = params.isActive;
-
   // Determine sort order (default: desc)
   const sortOrder = params.sortOrder || "desc";
 
@@ -312,7 +307,14 @@ export const listUsers = async (
 
   if (params.sortBy) {
     const sortBy = params.sortBy;
-    const validFields = ["nameEn", "nameAr", "isActive"] as const;
+    const validFields = [
+      "nameEn",
+      "nameAr",
+      "isActive",
+      "email",
+      "userRoleId",
+      "branchId",
+    ] as const;
 
     // Only allow sorting by the specified valid fields
     if (validFields.includes(sortBy)) {

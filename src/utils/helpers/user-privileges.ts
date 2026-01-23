@@ -1,5 +1,9 @@
 import React from "react";
-import { UserPrivileges, FeaturePermissions, ReportsPrivileges } from "@/utils/dummy";
+import {
+  UserPrivileges,
+  FeaturePermissions,
+  ReportsPrivileges,
+} from "@/utils/dummy";
 import { FEATURES_CONFIG } from "@/utils/constants/permissions";
 import { REPORT_OPTIONS } from "@/utils/constants/reports";
 
@@ -59,13 +63,14 @@ export const handleFeatureToggle = (
           add: false,
           edit: false,
           view: false,
-          reports: REPORT_OPTIONS.map((report) => ({
+          items: REPORT_OPTIONS.map((report) => ({
             reportId: report.id,
             enabled: true,
-            filters: report.filterOptions?.map((filter) => ({
-              key: filter.key,
-              enabled: true,
-            })) || [],
+            filters:
+              report.filterOptions?.map((filter) => ({
+                key: filter.key,
+                enabled: true,
+              })) || [],
           })),
         };
         updated[featureKey] = reportsPrivileges;
@@ -187,16 +192,16 @@ export const handleReportToggle = (
         add: false,
         edit: false,
         view: false,
-        reports: [],
+        items: [],
       };
     }
 
     const reportsPrivileges = updated.reports as ReportsPrivileges;
-    if (!reportsPrivileges.reports) {
-      reportsPrivileges.reports = [];
+    if (!reportsPrivileges.items) {
+      reportsPrivileges.items = [];
     }
 
-    const existingReportIndex = reportsPrivileges.reports.findIndex(
+    const existingReportIndex = reportsPrivileges.items.findIndex(
       (r) => r.reportId === reportId
     );
 
@@ -205,7 +210,7 @@ export const handleReportToggle = (
     if (enabled) {
       if (existingReportIndex === -1) {
         // Add new report with all filters enabled
-        reportsPrivileges.reports.push({
+        reportsPrivileges.items.push({
           reportId,
           enabled: true,
           filters:
@@ -216,7 +221,7 @@ export const handleReportToggle = (
         });
       } else {
         // Enable existing report and ensure filters are initialized
-        const existingReport = reportsPrivileges.reports[existingReportIndex];
+        const existingReport = reportsPrivileges.items[existingReportIndex];
         existingReport.enabled = true;
 
         // Initialize filters if they don't exist or are missing
@@ -247,10 +252,10 @@ export const handleReportToggle = (
       }
     } else {
       if (existingReportIndex !== -1) {
-        reportsPrivileges.reports[existingReportIndex].enabled = false;
+        reportsPrivileges.items[existingReportIndex].enabled = false;
         // Disable all filters when report is disabled
-        if (reportsPrivileges.reports[existingReportIndex].filters) {
-          reportsPrivileges.reports[existingReportIndex].filters.forEach(
+        if (reportsPrivileges.items[existingReportIndex].filters) {
+          reportsPrivileges.items[existingReportIndex].filters.forEach(
             (filter) => {
               filter.enabled = false;
             }
@@ -281,32 +286,30 @@ export const handleReportFilterToggle = (
         add: false,
         edit: false,
         view: false,
-        reports: [],
+        items: [],
       };
     }
 
     const reportsPrivileges = updated.reports as ReportsPrivileges;
-    if (!reportsPrivileges.reports) {
-      reportsPrivileges.reports = [];
+    if (!reportsPrivileges.items) {
+      reportsPrivileges.items = [];
     }
 
-    const reportIndex = reportsPrivileges.reports.findIndex(
+    const reportIndex = reportsPrivileges.items.findIndex(
       (r) => r.reportId === reportId
     );
     const reportConfig = REPORT_OPTIONS.find((r) => r.id === reportId);
 
     if (reportIndex !== -1) {
       // Report exists
-      const report = reportsPrivileges.reports[reportIndex];
+      const report = reportsPrivileges.items[reportIndex];
 
       // Ensure filters array exists
       if (!report.filters) {
         report.filters = [];
       }
 
-      const filterIndex = report.filters.findIndex(
-        (f) => f.key === filterKey
-      );
+      const filterIndex = report.filters.findIndex((f) => f.key === filterKey);
 
       if (filterIndex !== -1) {
         // Update existing filter
@@ -329,7 +332,7 @@ export const handleReportFilterToggle = (
         (f) => f.key === filterKey
       );
       if (reportConfig && filterOption) {
-        reportsPrivileges.reports.push({
+        reportsPrivileges.items.push({
           reportId,
           enabled: true,
           filters: [

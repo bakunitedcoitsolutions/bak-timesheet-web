@@ -68,8 +68,8 @@ const UpsertProjectPage = () => {
               className="w-full"
               options={projectStatusOptions}
               placeholder="Choose"
-              selectedItem={selectedProjectStatus}
-              setSelectedItem={setSelectedProjectStatus}
+              value={selectedProjectStatus}
+              onChange={(e) => setSelectedProjectStatus(e.value)}
             />
           </div>
           <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
@@ -81,8 +81,8 @@ const UpsertProjectPage = () => {
                 label: branch.nameEn,
                 value: branch.id,
               }))}
-              selectedItem={selectedBranch}
-              setSelectedItem={setSelectedBranch}
+              value={selectedBranch}
+              onChange={(e) => setSelectedBranch(e.value)}
             />
           </div>
         </div>

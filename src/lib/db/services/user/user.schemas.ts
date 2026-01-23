@@ -37,11 +37,10 @@ export const ListUsersParamsSchema = z.object({
   page: z.number().int().positive().optional(),
   limit: z.number().int().positive().optional(),
   search: z.string().optional(),
-  roleId: z.number().int().positive().optional(),
-  branchId: z.number().int().positive().optional(),
-  isActive: z.boolean().optional(),
   sortOrder: z.enum(["asc", "desc"]).optional(),
-  sortBy: z.enum(["nameEn", "nameAr", "isActive"]).optional(),
+  sortBy: z
+    .enum(["nameEn", "nameAr", "isActive", "email", "userRoleId", "branchId"])
+    .optional(),
 });
 
 export type CreateUserInput = z.infer<typeof CreateUserSchema>;

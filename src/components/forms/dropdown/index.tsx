@@ -7,7 +7,7 @@ interface DropdownOption {
   [key: string]: any;
 }
 
-interface ModifiedDropdownProps extends Omit<DropdownProps, "onChange"> {
+interface ModifiedDropdownProps extends DropdownProps {
   label?: string;
   error?: string;
   options: DropdownOption[];

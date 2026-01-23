@@ -104,8 +104,8 @@ const UpsertExitReentryPage = () => {
               className="w-full"
               options={employeeOptions}
               placeholder="Choose"
-              selectedItem={selectedEmployee}
-              setSelectedItem={setSelectedEmployee}
+              value={selectedEmployee}
+              onChange={(e) => setSelectedEmployee(e.value)}
             />
           </div>
           <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
@@ -114,8 +114,8 @@ const UpsertExitReentryPage = () => {
               className="w-full"
               options={exitReentryTypeOptions}
               placeholder="Choose"
-              selectedItem={selectedType}
-              setSelectedItem={setSelectedType}
+              value={selectedType}
+              onChange={(e) => setSelectedType(e.value)}
             />
           </div>
           <div className={classNames(FORM_FIELD_WIDTHS["2"])}>

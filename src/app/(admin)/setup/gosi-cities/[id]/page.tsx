@@ -66,8 +66,8 @@ const UpsertGosiCityPage = () => {
               className="w-full"
               options={gosiCityStatusOptions}
               placeholder="Choose"
-              selectedItem={selectedGosiCityStatus}
-              setSelectedItem={setSelectedGosiCityStatus}
+              value={selectedGosiCityStatus}
+              onChange={(e) => setSelectedGosiCityStatus(e.value)}
             />
           </div>
         </div>
