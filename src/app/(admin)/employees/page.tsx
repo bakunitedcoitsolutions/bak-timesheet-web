@@ -306,8 +306,8 @@ const EmployeesPage = () => {
       <div className="flex flex-col md:flex-row justify-between items-center gap-3 flex-1 w-full">
         <div className="w-full md:w-auto md:min-w-60">
           <GroupDropdown
-            selectedItem={selectedDesignation}
-            setSelectedItem={setSelectedDesignation}
+            value={selectedDesignation}
+            onChange={setSelectedDesignation}
           />
         </div>
         <div className="flex items-center gap-3 w-full md:w-auto">

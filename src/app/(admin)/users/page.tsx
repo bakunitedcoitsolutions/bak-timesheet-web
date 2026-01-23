@@ -52,8 +52,8 @@ const columns = (
     sortable: false,
     filterable: false,
     align: "center",
-    style: { minWidth: "100px" },
-    headerStyle: { minWidth: "100px" },
+    style: { minWidth: "70px" },
+    headerStyle: { minWidth: "70px" },
     body: (rowData: ListedUser, options?: { rowIndex?: number }) => {
       const rowIndex = options?.rowIndex ?? 0;
       const index = (currentPage - 1) * rowsPerPage + rowIndex + 1;

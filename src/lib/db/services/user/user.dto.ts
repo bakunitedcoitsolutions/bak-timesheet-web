@@ -87,10 +87,15 @@ export interface UserWithoutPassword {
 
 export interface ListedUser extends Omit<
   UserWithoutPassword,
-  "branch" | "userRole"
+  "branch" | "userRole" | "privileges"
 > {
-  userRole: Omit<UserRoleInterface, "nameAr"> & { nameAr: string | null };
-  branch: { nameEn: string } | null;
+  userRole: {
+    id: number;
+    nameEn: string;
+    access: string;
+  };
+  branch: { id: number; nameEn: string } | null;
+  privileges: { id: number; privileges: UserPrivileges | null } | null;
 }
 
 export interface ListUsersResponse {

@@ -14,6 +14,7 @@ import {
   determineBranchIdForUpdate,
   validateBranchManagerBranchId,
 } from "@/utils/helpers/user-branch";
+import type { UserPrivileges } from "@/utils/dummy";
 import type {
   CreateUserData,
   UpdateUserData,
@@ -46,7 +47,13 @@ const userSelectWithoutPassword = {
 // Only include name fields for branch, creator, and updater relations
 const userSelectWithRelations = {
   ...userSelectWithoutPassword,
-  userRole: true,
+  userRole: {
+    select: {
+      id: true,
+      nameEn: true,
+      access: true,
+    },
+  },
   branch: {
     select: {
       id: true,
@@ -329,16 +336,39 @@ export const listUsers = async (
       take: limit,
       select: {
         ...userSelectWithoutPassword,
-        userRole: true,
-        branch: { select: { nameEn: true } },
+        userRole: {
+          select: {
+            id: true,
+            nameEn: true,
+            access: true,
+          },
+        },
+        branch: { select: { id: true, nameEn: true } },
+        privileges: {
+          select: {
+            id: true,
+            privileges: true,
+          },
+        },
       },
       orderBy,
     }),
     prisma.user.count({ where }),
   ]);
 
+  // Transform users to match ListedUser type (cast JsonValue to UserPrivileges)
+  const transformedUsers = users.map((user) => ({
+    ...user,
+    privileges: user.privileges
+      ? {
+          id: user.privileges.id,
+          privileges: user.privileges.privileges as UserPrivileges,
+        }
+      : null,
+  }));
+
   return {
-    users,
+    users: transformedUsers,
     pagination: {
       page,
       limit,

@@ -288,8 +288,8 @@ const EmployeesReportPage = () => {
             <GroupDropdown
               placeholder="Select Section"
               className="w-full h-10.5!"
-              selectedItem={selectedDesignation}
-              setSelectedItem={setSelectedDesignation}
+              value={selectedDesignation}
+              onChange={setSelectedDesignation}
             />
           </div>
           <div className="w-full lg:col-span-2">
