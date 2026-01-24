@@ -90,7 +90,7 @@ const columns = (
     field: "email",
     header: "Email",
     ...commonColumnProps,
-    style: { minWidth: "200px" },
+    style: { minWidth: 250 },
     body: (rowData: ListedUser) => (
       <span className="text-sm">{rowData.email}</span>
     ),
@@ -100,7 +100,7 @@ const columns = (
     header: "Role",
     sortable: true,
     filterable: false,
-    style: { minWidth: "150px" },
+    style: { minWidth: 200 },
     body: (rowData: ListedUser) => {
       return <span className="text-sm">{rowData?.userRole?.nameEn || ""}</span>;
     },
@@ -129,7 +129,7 @@ const columns = (
     header: "Status",
     sortable: true,
     filterable: false,
-    style: { minWidth: 100 },
+    style: { minWidth: 130 },
     align: "center",
     body: (rowData: ListedUser) => (
       <TypeBadge

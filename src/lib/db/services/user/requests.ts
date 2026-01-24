@@ -1,8 +1,13 @@
 import { queryClient } from "@/lib/react-query";
 import { useMutation, useQuery } from "@/lib/zsa/zsa-query";
 
-import { ListUsersParamsInput } from "./user.schemas";
-import { listUsersAction, createUserAction, updateUserAction } from "./actions";
+import { GetUserByIdInput, ListUsersParamsInput } from "./user.schemas";
+import {
+  listUsersAction,
+  createUserAction,
+  updateUserAction,
+  getUserByIdAction,
+} from "./actions";
 
 export const useGetUsers = (input: ListUsersParamsInput) =>
   useQuery(listUsersAction, {
@@ -37,5 +42,20 @@ export const useUpdateUser = () =>
           },
         ],
       });
+      queryClient.invalidateQueries({
+        queryKey: [
+          "user",
+          {
+            id: id,
+          },
+        ],
+      });
     },
+  });
+
+export const useGetUserById = (input: GetUserByIdInput) =>
+  useQuery(getUserByIdAction, {
+    queryKey: ["user", input.id],
+    input,
+    enabled: !!input.id,
   });

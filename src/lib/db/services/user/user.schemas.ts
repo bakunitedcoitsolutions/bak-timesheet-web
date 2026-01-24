@@ -19,12 +19,15 @@ export const CreateUserSchema = z.object({
 });
 
 export const UpdateUserSchema = z.object({
+  id: z.number().int().positive(),
   nameEn: z.string().min(2, "Name is required").optional(),
   nameAr: z.string().min(2, "Arabic name is required").optional(),
   email: z.string().email("Invalid email address").optional(),
   password: z
     .string()
-    .min(6, "Password must be at least 6 characters long")
+    .refine((val) => !val || val.length >= 6, {
+      message: "Password must be at least 6 characters long",
+    })
     .optional(),
   userRoleId: z.number().min(1, "User role is required").optional(),
   branchId: z.number().optional(),
@@ -43,6 +46,11 @@ export const ListUsersParamsSchema = z.object({
     .optional(),
 });
 
+export const GetUserByIdSchema = z.object({
+  id: z.number().int().positive(),
+});
+
 export type CreateUserInput = z.infer<typeof CreateUserSchema>;
 export type UpdateUserInput = z.infer<typeof UpdateUserSchema>;
 export type ListUsersParamsInput = z.infer<typeof ListUsersParamsSchema>;
+export type GetUserByIdInput = z.infer<typeof GetUserByIdSchema>;

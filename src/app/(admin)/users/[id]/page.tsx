@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { classNames } from "primereact/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useParams, useRouter } from "next/navigation";
+import { ProgressSpinner } from "primereact/progressspinner";
 
 import {
   branchesData,
@@ -13,6 +14,15 @@ import {
   ReportsPrivileges,
   FeaturePermissions,
 } from "@/utils/dummy";
+import {
+  useUpdateUser,
+  useCreateUser,
+  useGetUserById,
+} from "@/lib/db/services/user/requests";
+import {
+  CreateUserSchema,
+  UpdateUserSchema,
+} from "@/lib/db/services/user/user.schemas";
 import {
   handleReportToggle as toggleReport,
   handleFeatureToggle as toggleFeature,
@@ -24,13 +34,12 @@ import { toastService } from "@/lib/toast";
 import { getEntityModeFromParam } from "@/helpers";
 import { generatePassword, getErrorMessage } from "@/utils/helpers";
 import { FORM_FIELD_WIDTHS, STATUS_OPTIONS } from "@/utils/constants";
-import { CreateUserSchema } from "@/lib/db/services/user/user.schemas";
 import { Input, Button, Dropdown, Form, FormItem } from "@/components/forms";
 import { Privileges, ReportsSection, StepperFormHeading } from "@/components";
-import { useCreateUser, useUpdateUser } from "@/lib/db/services/user/requests";
 
 const UpsertUserPage = () => {
   const [privileges, setPrivileges] = useState<UserPrivileges>({});
+
   const router = useRouter();
   const { id: userIdParam } = useParams();
   const {
@@ -45,8 +54,12 @@ const UpsertUserPage = () => {
 
   const { mutateAsync: createUser } = useCreateUser();
   const { mutateAsync: updateUser } = useUpdateUser();
+  const { data: foundUser, isLoading } = useGetUserById({
+    id: userId ? Number(userId) : 0,
+  });
 
   const defaultValues = {
+    ...(isEditMode ? { id: 0 } : {}),
     nameEn: "",
     nameAr: "",
     email: "",
@@ -58,8 +71,10 @@ const UpsertUserPage = () => {
     createdBy: 0,
   };
 
+  const zodSchema = isEditMode ? UpdateUserSchema : CreateUserSchema;
+
   const form = useForm({
-    resolver: zodResolver(CreateUserSchema),
+    resolver: zodResolver(zodSchema),
     defaultValues,
   });
 
@@ -85,6 +100,28 @@ const UpsertUserPage = () => {
   useEffect(() => {
     setPrivileges({});
   }, [selectedUserRoleId]);
+
+  useEffect(() => {
+    if (foundUser) {
+      const setUser = {
+        ...(isEditMode ? { id: foundUser?.id ?? 0 } : {}),
+        nameEn: foundUser?.nameEn,
+        nameAr: foundUser?.nameAr,
+        email: foundUser?.email,
+        userRoleId: foundUser?.userRoleId ?? 0,
+        isActive: foundUser?.isActive,
+        branchId: foundUser?.branchId ?? 0,
+        privileges: foundUser?.privileges?.privileges ?? null,
+        password: "",
+      };
+      reset(setUser);
+      if (foundUser?.userRole?.id === 4) {
+        setTimeout(() => {
+          setPrivileges(foundUser?.privileges?.privileges ?? {});
+        }, 300);
+      }
+    }
+  }, [foundUser]);
 
   // Wrapper functions that use the helpers with local state
   const isFeatureEnabled = (featureKey: keyof UserPrivileges): boolean => {
@@ -185,121 +222,133 @@ const UpsertUserPage = () => {
     <div className="flex flex-col h-full gap-6 px-6 py-6">
       <div className="flex h-full justify-between flex-1 md:flex-none flex-col gap-4 py-6 bg-white rounded-lg">
         <StepperFormHeading title={isAddMode ? "Add User" : "Edit User"} />
-        <Form form={form} className="w-full h-full content-start md:max-w-5xl">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 md:gap-y-4 md:py-5 px-6 mt-5 md:mt-0 flex-1">
-            <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
-              <FormItem name="nameEn">
-                <Input
-                  label="Name"
-                  className="w-full"
-                  placeholder="Enter name"
-                />
-              </FormItem>
-            </div>
-            <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
-              <FormItem name="nameAr">
-                <Input
-                  label="Arabic Name"
-                  className="w-full text-right"
-                  placeholder="أدخل الاسم بالعربية"
-                />
-              </FormItem>
-            </div>
-            <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
-              <FormItem name="email">
-                <Input
-                  type="email"
-                  label="Email"
-                  className="w-full"
-                  placeholder="Enter email"
-                />
-              </FormItem>
-            </div>
-            <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
-              <FormItem name="userRoleId">
-                <Dropdown
-                  label="User Role"
-                  className="w-full"
-                  placeholder="Choose"
-                  options={userRoleOptions}
-                />
-              </FormItem>
-            </div>
-            <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
-              <FormItem name="isActive">
-                <Dropdown
-                  label="Status"
-                  className="w-full"
-                  placeholder="Choose"
-                  options={STATUS_OPTIONS}
-                />
-              </FormItem>
-            </div>
-            <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
-              <FormItem name="password">
-                <Input
-                  className="w-full"
-                  label="Set Password"
-                  placeholder="Set/Generate password"
-                  icon="pi pi-refresh"
-                  iconPosition="right"
-                  onIconClick={handleGeneratePassword}
-                />
-              </FormItem>
-            </div>
-            {selectedUserRoleId === 3 && (
-              <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
-                <FormItem name="branchId">
-                  <Dropdown
-                    label="Branch"
-                    className="w-full"
-                    options={branchOptions}
-                    placeholder="Choose Branch"
-                  />
-                </FormItem>
-              </div>
-            )}
-            {selectedUserRoleId === 4 && (
-              <>
-                <Privileges
-                  privileges={privileges}
-                  isFeatureEnabled={isFeatureEnabled}
-                  handleFeatureToggle={handleFeatureToggle}
-                  handlePrivilegeChange={handlePrivilegeChange}
-                />
-                {/* Separate Reports Section - shown when Reports feature is enabled */}
-                {isFeatureEnabled("reports") && (
-                  <ReportsSection
-                    privileges={privileges.reports as ReportsPrivileges}
-                    handleReportToggle={handleReportToggle}
-                    handleReportFilterToggle={handleReportFilterToggle}
-                  />
-                )}
-              </>
-            )}
+        {isLoading ? (
+          <div className="flex justify-center items-center h-full">
+            <ProgressSpinner style={{ width: "50px", height: "50px" }} />
           </div>
-        </Form>
+        ) : (
+          <>
+            <Form
+              form={form}
+              className="w-full h-full content-start md:max-w-5xl"
+            >
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 md:gap-y-4 md:py-5 px-6 mt-5 md:mt-0 flex-1">
+                <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
+                  <FormItem name="nameEn">
+                    <Input
+                      label="Name"
+                      className="w-full"
+                      placeholder="Enter name"
+                    />
+                  </FormItem>
+                </div>
+                <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
+                  <FormItem name="nameAr">
+                    <Input
+                      label="Arabic Name"
+                      className="w-full text-right"
+                      placeholder="أدخل الاسم بالعربية"
+                    />
+                  </FormItem>
+                </div>
+                <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
+                  <FormItem name="email">
+                    <Input
+                      type="email"
+                      label="Email"
+                      className="w-full"
+                      disabled={isEditMode}
+                      placeholder="Enter email"
+                    />
+                  </FormItem>
+                </div>
+                <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
+                  <FormItem name="userRoleId">
+                    <Dropdown
+                      label="User Role"
+                      className="w-full"
+                      placeholder="Choose"
+                      options={userRoleOptions}
+                    />
+                  </FormItem>
+                </div>
+                <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
+                  <FormItem name="isActive">
+                    <Dropdown
+                      label="Status"
+                      className="w-full"
+                      placeholder="Choose"
+                      options={STATUS_OPTIONS}
+                    />
+                  </FormItem>
+                </div>
+                <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
+                  <FormItem name="password">
+                    <Input
+                      className="w-full"
+                      label="Set Password"
+                      placeholder="Set/Generate password"
+                      icon="pi pi-refresh"
+                      iconPosition="right"
+                      onIconClick={handleGeneratePassword}
+                    />
+                  </FormItem>
+                </div>
+                {selectedUserRoleId === 3 && (
+                  <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
+                    <FormItem name="branchId">
+                      <Dropdown
+                        label="Branch"
+                        className="w-full"
+                        options={branchOptions}
+                        placeholder="Choose Branch"
+                      />
+                    </FormItem>
+                  </div>
+                )}
+                {selectedUserRoleId === 4 && (
+                  <>
+                    <Privileges
+                      privileges={privileges}
+                      isFeatureEnabled={isFeatureEnabled}
+                      handleFeatureToggle={handleFeatureToggle}
+                      handlePrivilegeChange={handlePrivilegeChange}
+                    />
+                    {/* Separate Reports Section - shown when Reports feature is enabled */}
+                    {isFeatureEnabled("reports") && (
+                      <ReportsSection
+                        privileges={privileges.reports as ReportsPrivileges}
+                        handleReportToggle={handleReportToggle}
+                        handleReportFilterToggle={handleReportFilterToggle}
+                      />
+                    )}
+                  </>
+                )}
+              </div>
+            </Form>
 
-        <div className="flex items-center gap-3 justify-end px-6">
-          <Button
-            size="small"
-            variant="text"
-            disabled={isSubmitting}
-            onClick={() => router.replace("/users")}
-          >
-            Cancel
-          </Button>
-          <Button
-            size="small"
-            variant="solid"
-            onClick={onFormSubmit}
-            loading={isSubmitting}
-            disabled={isSubmitting}
-            className="w-28 justify-center! gap-1"
-          >
-            Save
-          </Button>
-        </div>
+            <div className="flex items-center gap-3 justify-end px-6">
+              <Button
+                size="small"
+                variant="text"
+                disabled={isSubmitting}
+                onClick={() => router.replace("/users")}
+              >
+                Cancel
+              </Button>
+              <Button
+                size="small"
+                variant="solid"
+                onClick={onFormSubmit}
+                loading={isSubmitting}
+                disabled={isSubmitting}
+                className="w-28 justify-center! gap-1"
+              >
+                Save
+              </Button>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

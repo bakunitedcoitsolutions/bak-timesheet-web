@@ -210,6 +210,14 @@ export const updateUser = async (id: number, data: UpdateUserData) => {
       throw new Error("User not found");
     }
 
+    // Normalize branchId: convert 0 to null/undefined (form default value)
+    const normalizedBranchId =
+      data.branchId !== undefined
+        ? data.branchId === 0
+          ? null
+          : data.branchId
+        : undefined;
+
     // Determine final role
     const finalRoleId =
       data.userRoleId !== undefined ? data.userRoleId : currentUser.userRoleId;
@@ -219,8 +227,20 @@ export const updateUser = async (id: number, data: UpdateUserData) => {
       currentUser.userRoleId,
       data.userRoleId,
       currentUser.branchId,
-      data.branchId
+      normalizedBranchId
     );
+
+    // Validate branchId exists if provided
+    if (branchIdToSet !== undefined && branchIdToSet !== null) {
+      const branchExists = await tx.branch.findUnique({
+        where: { id: branchIdToSet },
+        select: { id: true },
+      });
+
+      if (!branchExists) {
+        throw new Error(`Branch with ID ${branchIdToSet} does not exist`);
+      }
+    }
 
     // Set branchId in updateData if determined by helper
     if (branchIdToSet !== undefined) {

@@ -1,8 +1,15 @@
 "use server";
 import { serverAction } from "@/lib/zsa/zsa-action";
-import { createUser, listUsers, updateUser } from "./user.service";
+import {
+  createUser,
+  findUserById,
+  listUsers,
+  updateUser,
+} from "./user.service";
 import {
   CreateUserSchema,
+  GetUserByIdInput,
+  GetUserByIdSchema,
   ListUsersParamsSchema,
   UpdateUserSchema,
 } from "./user.schemas";
@@ -26,5 +33,12 @@ export const updateUserAction = serverAction
   .handler(async ({ input }) => {
     const { id, ...rest } = input;
     const response = await updateUser(id, rest);
+    return response;
+  });
+
+export const getUserByIdAction = serverAction
+  .input(GetUserByIdSchema)
+  .handler(async ({ input }: { input: GetUserByIdInput }) => {
+    const response = await findUserById(input.id);
     return response;
   });
