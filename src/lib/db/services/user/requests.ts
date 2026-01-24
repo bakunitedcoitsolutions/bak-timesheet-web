@@ -7,6 +7,7 @@ import {
   createUserAction,
   updateUserAction,
   getUserByIdAction,
+  deleteUserAction,
 } from "./actions";
 
 export const useGetUsers = (input: ListUsersParamsInput) =>
@@ -58,4 +59,15 @@ export const useGetUserById = (input: GetUserByIdInput) =>
     queryKey: ["user", input.id],
     input,
     enabled: !!input.id,
+  });
+
+export const useDeleteUser = () =>
+  useMutation(deleteUserAction, {
+    mutationKey: ["delete-user"],
+    onSuccess: () => {
+      // Invalidate all queries starting with "users" (including ["users", input])
+      queryClient.invalidateQueries({
+        queryKey: ["users"],
+      });
+    },
   });

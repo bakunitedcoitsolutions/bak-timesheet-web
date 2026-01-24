@@ -50,7 +50,12 @@ export const GetUserByIdSchema = z.object({
   id: z.number().int().positive(),
 });
 
+export const DeleteUserSchema = z.object({
+  id: z.number().int().positive(),
+});
+
 export type CreateUserInput = z.infer<typeof CreateUserSchema>;
 export type UpdateUserInput = z.infer<typeof UpdateUserSchema>;
 export type ListUsersParamsInput = z.infer<typeof ListUsersParamsSchema>;
 export type GetUserByIdInput = z.infer<typeof GetUserByIdSchema>;
+export type DeleteUserInput = z.infer<typeof DeleteUserSchema>;

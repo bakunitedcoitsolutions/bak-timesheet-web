@@ -301,8 +301,16 @@ export const updateUser = async (id: number, data: UpdateUserData) => {
  * Delete user
  */
 export const deleteUser = async (id: number): Promise<void> => {
-  await prisma.user.delete({
-    where: { id },
+  return prisma.$transaction(async (tx: PrismaTransactionClient) => {
+    // Delete user privileges first (though cascade should handle this)
+    await tx.userPrivilege.deleteMany({
+      where: { userId: id },
+    });
+
+    // Delete user (cascade will also delete privileges, but we're being explicit)
+    await tx.user.delete({
+      where: { id },
+    });
   });
 };
 

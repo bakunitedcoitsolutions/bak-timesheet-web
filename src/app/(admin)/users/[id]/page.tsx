@@ -170,9 +170,9 @@ const UpsertUserPage = () => {
       privileges: selectedUserRoleId === 4 ? privileges : undefined, // Include privileges if Access-Enabled User role
     };
     if (isAddMode) {
-      handleAddUser(submitData);
+      await handleAddUser(submitData);
     } else {
-      handleUpdateUser(submitData);
+      await handleUpdateUser(submitData);
     }
   });
 

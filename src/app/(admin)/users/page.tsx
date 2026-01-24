@@ -1,5 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
+import { ProgressSpinner } from "primereact/progressspinner";
 import { useRef, useState, useEffect, useMemo, useCallback } from "react";
 
 import {
@@ -12,12 +13,17 @@ import {
   TableActions,
   ExportOptions,
 } from "@/components";
+import {
+  getErrorMessage,
+  createSortHandler,
+  toPrimeReactSortOrder,
+} from "@/utils/helpers";
 import { ListedUser } from "@/lib";
 import { useDebounce } from "@/hooks";
+import { toastService } from "@/lib/toast";
 import { branchesData } from "@/utils/dummy";
-import { useGetUsers } from "@/lib/db/services/user/requests";
-import { ProgressSpinner } from "primereact/progressspinner";
-import { createSortHandler, toPrimeReactSortOrder } from "@/utils/helpers";
+import { showConfirmDialog } from "@/components/common/confirm-dialog";
+import { useDeleteUser, useGetUsers } from "@/lib/db/services/user/requests";
 
 // Constants
 const SORTABLE_FIELDS = {
@@ -165,6 +171,7 @@ const UsersPage = () => {
     undefined
   );
   const tableRef = useRef<TableRef>(null);
+  const { mutateAsync: deleteUser } = useDeleteUser();
 
   // Debounce search input
   const debouncedSearch = useDebounce(searchValue, 500);
@@ -196,8 +203,6 @@ const UsersPage = () => {
     totalPages: 0,
   };
 
-  console.log("Users:", users);
-
   // Memoized handlers
   const handleEdit = useCallback(
     (user: ListedUser) => {
@@ -207,10 +212,28 @@ const UsersPage = () => {
   );
 
   const handleDelete = useCallback((user: ListedUser) => {
-    if (confirm(`Are you sure you want to delete ${user.nameEn}?`)) {
-      // Delete logic here
-      console.log("Delete user:", user);
-    }
+    showConfirmDialog({
+      icon: "pi pi-trash",
+      title: "Delete User",
+      message: `Are you sure you want to delete "${user.nameEn}"?`,
+      onAccept: async () => {
+        await deleteUser(
+          { id: user.id },
+          {
+            onSuccess: () => {
+              toastService.showInfo("Done", "User deleted successfully");
+            },
+            onError: (error: any) => {
+              const errorMessage = getErrorMessage(
+                error,
+                "Failed to delete user"
+              );
+              toastService.showError("Error", errorMessage);
+            },
+          }
+        );
+      },
+    });
   }, []);
 
   const exportCSV = useCallback(() => {

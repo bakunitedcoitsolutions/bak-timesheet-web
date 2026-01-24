@@ -2,12 +2,15 @@
 import { serverAction } from "@/lib/zsa/zsa-action";
 import {
   createUser,
+  deleteUser,
   findUserById,
   listUsers,
   updateUser,
 } from "./user.service";
 import {
   CreateUserSchema,
+  DeleteUserInput,
+  DeleteUserSchema,
   GetUserByIdInput,
   GetUserByIdSchema,
   ListUsersParamsSchema,
@@ -40,5 +43,12 @@ export const getUserByIdAction = serverAction
   .input(GetUserByIdSchema)
   .handler(async ({ input }: { input: GetUserByIdInput }) => {
     const response = await findUserById(input.id);
+    return response;
+  });
+
+export const deleteUserAction = serverAction
+  .input(DeleteUserSchema)
+  .handler(async ({ input }: { input: DeleteUserInput }) => {
+    const response = await deleteUser(input.id);
     return response;
   });
