@@ -82,9 +82,31 @@ export const createUser = async (data: CreateUserData) => {
   // Create user with transaction to handle related data
   const user = await prisma.$transaction(
     async (tx: PrismaTransactionClient) => {
+      // Normalize branchId: convert 0 to null (form default value)
+      const normalizedBranchId =
+        data.branchId !== undefined
+          ? data.branchId === 0
+            ? null
+            : data.branchId
+          : null;
+
       // Validate: Branch Manager (roleId: 3) must have branchId
-      if (data.userRoleId === 3 && !data.branchId) {
+      if (data.userRoleId === 3 && !normalizedBranchId) {
         throw new Error("Branch Manager must be assigned to a branch");
+      }
+
+      // Validate branchId exists if provided
+      if (normalizedBranchId !== null && normalizedBranchId !== undefined) {
+        const branchExists = await tx.branch.findUnique({
+          where: { id: normalizedBranchId },
+          select: { id: true },
+        });
+
+        if (!branchExists) {
+          throw new Error(
+            `Branch with ID ${normalizedBranchId} does not exist`
+          );
+        }
       }
 
       // Validate: Email must be unique
@@ -98,7 +120,6 @@ export const createUser = async (data: CreateUserData) => {
       }
 
       // Create user (exclude password from response)
-      // Only include branchId when userRoleId is 3 (Branch Manager)
       const userData: any = {
         nameEn: data.nameEn,
         nameAr: data.nameAr,
@@ -107,9 +128,9 @@ export const createUser = async (data: CreateUserData) => {
         userRoleId: data.userRoleId,
       };
 
-      // branchId is only available/set when userRoleId is 3 (Branch Manager)
-      if (data.userRoleId === 3) {
-        userData.branchId = data.branchId;
+      // Set branchId if provided (normalized value)
+      if (normalizedBranchId !== null && normalizedBranchId !== undefined) {
+        userData.branchId = normalizedBranchId;
       }
 
       // Set createdBy if provided

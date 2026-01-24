@@ -8,8 +8,6 @@ import { useParams, useRouter } from "next/navigation";
 import { ProgressSpinner } from "primereact/progressspinner";
 
 import {
-  branchesData,
-  userRolesData,
   UserPrivileges,
   ReportsPrivileges,
   FeaturePermissions,
@@ -19,6 +17,10 @@ import {
   useCreateUser,
   useGetUserById,
 } from "@/lib/db/services/user/requests";
+import { useGetBranches } from "@/lib/db/services/branch/requests";
+import { useGetUserRoles } from "@/lib/db/services/user-role/requests";
+import type { ListedBranch } from "@/lib/db/services/branch/branch.dto";
+import type { UserRoleInterface } from "@/lib/db/services/user-role/user-role.service";
 import {
   CreateUserSchema,
   UpdateUserSchema,
@@ -57,6 +59,14 @@ const UpsertUserPage = () => {
   const { data: foundUser, isLoading } = useGetUserById({
     id: userId ? Number(userId) : 0,
   });
+
+  // Fetch branches and user roles
+  const { data: branchesData, isLoading: isLoadingBranches } = useGetBranches({
+    page: 1,
+    limit: 1000, // Get all branches
+  });
+  const { data: userRolesData, isLoading: isLoadingUserRoles } =
+    useGetUserRoles();
 
   const defaultValues = {
     ...(isEditMode ? { id: 0 } : {}),
@@ -208,21 +218,23 @@ const UpsertUserPage = () => {
     } catch (error) {}
   };
 
-  const branchOptions = branchesData.map((branch) => ({
-    label: branch.nameEn,
-    value: branch.id,
-  }));
+  const branchOptions =
+    branchesData?.branches?.map((branch: ListedBranch) => ({
+      label: branch.nameEn,
+      value: branch.id,
+    })) || [];
 
-  const userRoleOptions = userRolesData.map((role) => ({
-    label: role.nameEn,
-    value: role.id,
-  }));
+  const userRoleOptions =
+    userRolesData?.map((role: UserRoleInterface) => ({
+      label: role.nameEn,
+      value: role.id,
+    })) || [];
 
   return (
     <div className="flex flex-col h-full gap-6 px-6 py-6">
       <div className="flex h-full justify-between flex-1 md:flex-none flex-col gap-4 py-6 bg-white rounded-lg">
         <StepperFormHeading title={isAddMode ? "Add User" : "Edit User"} />
-        {isLoading ? (
+        {isLoading || isLoadingBranches || isLoadingUserRoles ? (
           <div className="flex justify-center items-center h-full">
             <ProgressSpinner style={{ width: "50px", height: "50px" }} />
           </div>

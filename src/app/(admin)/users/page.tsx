@@ -21,7 +21,6 @@ import {
 import { ListedUser } from "@/lib";
 import { useDebounce } from "@/hooks";
 import { toastService } from "@/lib/toast";
-import { branchesData } from "@/utils/dummy";
 import { showConfirmDialog } from "@/components/common/confirm-dialog";
 import { useDeleteUser, useGetUsers } from "@/lib/db/services/user/requests";
 
@@ -118,14 +117,11 @@ const columns = (
     filterable: false,
     style: { minWidth: "200px" },
     body: (rowData: ListedUser) => {
-      // Branch Manager (roleId: 3) has branch access, others don't show branch
-      const hasBranchAccess = rowData.userRoleId === 3;
-      if (!hasBranchAccess || !rowData.branchId) return "-";
-      const branch = branchesData.find((b) => b.id === rowData.branchId);
+      const branch = rowData?.branch?.nameEn || "-";
 
       return (
         <div className="flex flex-col">
-          <span className="text-sm font-bold">{branch?.nameEn || "-"}</span>
+          <span className="text-sm font-bold">{branch}</span>
         </div>
       );
     },
