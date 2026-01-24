@@ -1,5 +1,9 @@
 /**
- * User Service Exports
+ * Branch Service Exports
  */
 
-export type { BranchInterface } from "./branch.dto";
+export * from "./branch.service";
+export * from "./branch.schemas";
+export * from "./branch.dto";
+export * from "./actions";
+export * from "./requests";
