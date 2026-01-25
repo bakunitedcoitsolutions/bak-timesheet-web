@@ -40,7 +40,7 @@ const Privileges = ({
                   <Checkbox
                     label={feature.label}
                     checked={isEnabled}
-                    onChange={(checked) => {
+                    onChange={(checked: boolean) => {
                       handleFeatureToggle(feature.key, checked);
                     }}
                     name={`${feature.key}-section`}
@@ -74,11 +74,11 @@ const Privileges = ({
                                   >
                                 )[permission.key]
                               )}
-                              onChange={(checked) =>
+                              onChange={(checked: boolean) =>
                                 handlePrivilegeChange(
                                   feature.key,
                                   permission.key,
-                                  checked
+                                  checked as boolean
                                 )
                               }
                               name={`${feature.key}-${permission.key}`}
@@ -86,7 +86,6 @@ const Privileges = ({
                           ))}
                       </div>
                     )}
-                    
                   </>
                 )}
               </div>

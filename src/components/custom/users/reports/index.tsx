@@ -40,7 +40,7 @@ const ReportsSection = ({
                   <Checkbox
                     label={report.title}
                     checked={isReportEnabled}
-                    onChange={(checked) =>
+                    onChange={(checked: boolean) =>
                       handleReportToggle(report.id, checked)
                     }
                     name={`report-${report.id}-section`}
@@ -70,11 +70,11 @@ const ReportsSection = ({
                             key={filterOption.key}
                             label={filterOption.label}
                             checked={isFilterEnabled}
-                            onChange={(checked) =>
+                            onChange={(checked: boolean) =>
                               handleReportFilterToggle(
                                 report.id,
                                 filterOption.key,
-                                checked
+                                checked as boolean
                               )
                             }
                             name={`report-${report.id}-${filterOption.key}`}

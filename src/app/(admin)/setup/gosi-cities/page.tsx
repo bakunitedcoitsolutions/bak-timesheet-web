@@ -1,17 +1,38 @@
 "use client";
 import { useRouter } from "next/navigation";
+import { ProgressSpinner } from "primereact/progressspinner";
+import { useRef, useState, useEffect, useMemo, useCallback } from "react";
 
 import {
   Input,
   Table,
   Button,
+  TableRef,
+  TypeBadge,
   TableColumn,
   TableActions,
   ExportOptions,
-  CustomHeaderProps,
-  TypeBadge,
 } from "@/components";
-import { GosiCity, gosiCitiesData } from "@/utils/dummy";
+import {
+  getErrorMessage,
+  createSortHandler,
+  toPrimeReactSortOrder,
+} from "@/utils/helpers";
+import { ListedGosiCity } from "@/lib/db/services/gosi-city/gosi-city.dto";
+import { useDebounce } from "@/hooks";
+import { toastService } from "@/lib/toast";
+import { showConfirmDialog } from "@/components/common/confirm-dialog";
+import {
+  useDeleteGosiCity,
+  useGetGosiCities,
+} from "@/lib/db/services/gosi-city/requests";
+
+// Constants
+const SORTABLE_FIELDS = {
+  nameEn: "nameEn",
+  nameAr: "nameAr",
+  isActive: "isActive",
+} as const;
 
 const commonColumnProps = {
   sortable: true,
@@ -22,29 +43,38 @@ const commonColumnProps = {
   style: { minWidth: 200 },
 };
 
+type SortableField = keyof typeof SORTABLE_FIELDS;
+
 const columns = (
-  handleEdit: (city: GosiCity) => void,
-  handleDelete: (city: GosiCity) => void
-): TableColumn<GosiCity>[] => [
+  handleEdit: (gosiCity: ListedGosiCity) => void,
+  handleDelete: (gosiCity: ListedGosiCity) => void,
+  currentPage: number = 1,
+  rowsPerPage: number = 10
+): TableColumn<ListedGosiCity>[] => [
   {
     field: "id",
     header: "#",
     sortable: false,
     filterable: false,
     align: "center",
-    style: { width: "40px" },
-    body: (rowData: GosiCity) => (
-      <div className={"flex items-center justify-center gap-1.5 w-[40px]"}>
-        <span className="text-sm font-medium">{rowData.id}</span>
-      </div>
-    ),
+    style: { minWidth: "70px" },
+    headerStyle: { minWidth: "70px" },
+    body: (rowData: ListedGosiCity, options?: { rowIndex?: number }) => {
+      const rowIndex = options?.rowIndex ?? 0;
+      const index = (currentPage - 1) * rowsPerPage + rowIndex + 1;
+      return (
+        <div className={"flex items-center justify-center gap-1.5 w-[40px]"}>
+          <span className="text-sm font-medium">{index}</span>
+        </div>
+      );
+    },
   },
   {
     field: "nameEn",
     header: "Name",
     ...commonColumnProps,
     style: { minWidth: "200px" },
-    body: (rowData: GosiCity) => (
+    body: (rowData: ListedGosiCity) => (
       <span className="text-sm">{rowData.nameEn}</span>
     ),
   },
@@ -53,7 +83,7 @@ const columns = (
     header: "Arabic Name",
     ...commonColumnProps,
     style: { minWidth: "200px" },
-    body: (rowData: GosiCity) => (
+    body: (rowData: ListedGosiCity) => (
       <div className="w-full flex flex-1 justify-end">
         <span className="text-xl! text-right font-arabic">
           {rowData.nameAr || ""}
@@ -66,9 +96,9 @@ const columns = (
     header: "Status",
     sortable: true,
     filterable: false,
-    style: { minWidth: 100 },
+    style: { minWidth: 130 },
     align: "center",
-    body: (rowData: GosiCity) => (
+    body: (rowData: ListedGosiCity) => (
       <TypeBadge
         text={rowData.isActive ? "Active" : "In-Active"}
         variant={rowData.isActive ? "success" : "danger"}
@@ -82,7 +112,7 @@ const columns = (
     filterable: false,
     align: "center",
     style: { minWidth: 150 },
-    body: (rowData: GosiCity) => (
+    body: (rowData: ListedGosiCity) => (
       <TableActions
         rowData={rowData}
         onEdit={handleEdit}
@@ -94,49 +124,148 @@ const columns = (
 
 const GosiCitiesPage = () => {
   const router = useRouter();
+  const [searchValue, setSearchValue] = useState<string>("");
+  const [page, setPage] = useState<number>(1);
+  const [limit, setLimit] = useState<number>(10);
+  const [sortBy, setSortBy] = useState<SortableField | undefined>(undefined);
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc" | undefined>(
+    undefined
+  );
+  const tableRef = useRef<TableRef>(null);
+  const { mutateAsync: deleteGosiCity } = useDeleteGosiCity();
 
-  const handleEdit = (city: GosiCity) => {
-    console.log("Edit GOSI city:", city);
-    router.push(`/setup/gosi-cities/${city.id}`);
-  };
+  // Debounce search input
+  const debouncedSearch = useDebounce(searchValue, 500);
 
-  const handleDelete = (city: GosiCity) => {
-    console.log("Delete GOSI city:", city);
-    if (confirm(`Are you sure you want to delete ${city.nameEn}?`)) {
-      // Delete logic here
+  // Reset to first page when search value changes
+  useEffect(() => {
+    if (searchValue !== debouncedSearch && page !== 1) {
+      setPage(1);
     }
+  }, [searchValue, debouncedSearch, page]);
+
+  const { data: gosiCitiesResponse, isLoading } = useGetGosiCities({
+    page,
+    limit,
+    sortBy,
+    sortOrder,
+    search: debouncedSearch || undefined,
+  });
+
+  const gosiCities = gosiCitiesResponse?.gosiCities ?? [];
+  const {
+    total,
+    page: currentPage,
+    limit: currentLimit,
+  } = gosiCitiesResponse?.pagination ?? {
+    page: 1,
+    limit: 10,
+    total: 0,
+    totalPages: 0,
   };
 
-  const renderHeader = ({
-    value,
-    onChange,
-    exportCSV,
-    exportExcel,
-  }: CustomHeaderProps) => {
+  // Memoized handlers
+  const handleEdit = useCallback(
+    (gosiCity: ListedGosiCity) => {
+      router.push(`/setup/gosi-cities/${gosiCity.id}`);
+    },
+    [router]
+  );
+
+  const handleDelete = useCallback(
+    (gosiCity: ListedGosiCity) => {
+      showConfirmDialog({
+        icon: "pi pi-trash",
+        title: "Delete GOSI City",
+        message: `Are you sure you want to delete "${gosiCity.nameEn}"?`,
+        onAccept: async () => {
+          await deleteGosiCity(
+            { id: gosiCity.id },
+            {
+              onSuccess: () => {
+                toastService.showInfo("Done", "GOSI City deleted successfully");
+              },
+              onError: (error: any) => {
+                const errorMessage = getErrorMessage(
+                  error,
+                  "Failed to delete GOSI city"
+                );
+                toastService.showError("Error", errorMessage);
+              },
+            }
+          );
+        },
+      });
+    },
+    [deleteGosiCity]
+  );
+
+  const exportCSV = useCallback(() => {
+    tableRef.current?.exportCSV();
+  }, []);
+
+  const exportExcel = useCallback(() => {
+    tableRef.current?.exportExcel();
+  }, []);
+
+  const handlePageChange = useCallback(
+    (e: { page?: number; rows?: number }) => {
+      // PrimeReact uses 0-based page index, our API uses 1-based
+      setPage((e.page ?? 0) + 1);
+      setLimit(e.rows ?? currentLimit);
+    },
+    [currentLimit]
+  );
+
+  const handlePageReset = useCallback(() => {
+    setPage(1);
+  }, []);
+
+  // Memoized sort handler
+  const sortHandler = useMemo(
+    () =>
+      createSortHandler({
+        fieldMap: SORTABLE_FIELDS,
+        currentPage: page,
+        onSortByChange: setSortBy,
+        onSortOrderChange: setSortOrder,
+        onPageReset: handlePageReset,
+      }),
+    [page, handlePageReset]
+  );
+
+  // Memoized columns
+  const tableColumns = useMemo(
+    () => columns(handleEdit, handleDelete, currentPage, currentLimit),
+    [handleEdit, handleDelete, currentPage, currentLimit]
+  );
+
+  // Memoized header renderer
+  const renderHeader = useCallback(() => {
     return (
       <div className="flex flex-col md:flex-row justify-between items-center gap-3 flex-1 w-full">
         <div className="w-full md:w-auto">
           <Input
             small
             className="w-full"
-            value={value}
+            value={searchValue}
             icon="pi pi-search"
             iconPosition="left"
-            onChange={onChange}
+            onChange={(e) => {
+              setSearchValue(e.target.value);
+            }}
             placeholder="Search"
           />
         </div>
         <div className="flex items-center gap-3 w-full md:w-auto justify-end">
           <div>
-            <ExportOptions
-              exportCSV={exportCSV || (() => {})}
-              exportExcel={exportExcel || (() => {})}
-            />
+            <ExportOptions exportCSV={exportCSV} exportExcel={exportExcel} />
           </div>
         </div>
       </div>
     );
-  };
+  }, [searchValue, exportCSV, exportExcel]);
+
   return (
     <div className="flex h-full flex-col gap-6 px-6 py-6">
       <div className="flex flex-col md:flex-row justify-between items-center gap-3 shrink-0">
@@ -161,12 +290,26 @@ const GosiCitiesPage = () => {
       <div className="bg-white flex-1 rounded-xl overflow-hidden min-h-0">
         <Table
           dataKey="id"
-          data={gosiCitiesData}
+          removableSort
+          data={gosiCities}
+          ref={tableRef}
+          loading={isLoading}
+          loadingIcon={
+            <ProgressSpinner style={{ width: "50px", height: "50px" }} />
+          }
           customHeader={renderHeader}
-          columns={columns(handleEdit, handleDelete)}
+          columns={tableColumns}
+          sortMode="single"
+          onPage={handlePageChange}
+          onSort={sortHandler}
+          sortField={sortBy}
+          sortOrder={toPrimeReactSortOrder(sortOrder) as any}
           pagination={true}
           rowsPerPageOptions={[10, 25, 50]}
-          rows={10}
+          rows={currentLimit}
+          first={(currentPage - 1) * currentLimit}
+          totalRecords={total}
+          globalSearch={true}
           scrollable
           scrollHeight="65vh"
         />
