@@ -6,23 +6,99 @@ import { FORM_FIELD_WIDTHS } from "@/utils/constants";
 import MaskInput from "@/components/forms/mask-input";
 import { StepperFormHeading } from "@/components/common";
 import { FilePicker, Input, NumberInput } from "@/components/forms";
+import {
+  uploadFile,
+  validateFileType,
+  validateFileSize,
+  FILE_TYPES,
+  FILE_SIZE_LIMITS,
+} from "@/utils/helpers";
+import { toastService } from "@/lib/toast";
 
 const Step1 = () => {
   const [profilePicture, setProfilePicture] = useState<File | null>(null);
+  const [uploadedImageUrl, setUploadedImageUrl] = useState<string | null>(null);
+  const [isUploading, setIsUploading] = useState(false);
+
+  const handleFileSelect = async (files: File[]) => {
+    if (!files || files.length === 0) return;
+
+    const file = files[0];
+
+    // Validate file type
+    if (!validateFileType(file, [...FILE_TYPES.IMAGES])) {
+      toastService.showError(
+        "Invalid File Type",
+        "Please select a valid image file (JPEG, PNG, GIF, WebP, SVG, HEIC, HEIF)"
+      );
+      return;
+    }
+
+    // Validate file size (5MB limit for images)
+    if (!validateFileSize(file, FILE_SIZE_LIMITS.IMAGE)) {
+      toastService.showError(
+        "File Too Large",
+        `File size must be less than ${FILE_SIZE_LIMITS.IMAGE}MB`
+      );
+      return;
+    }
+
+    // Set file for preview
+    setProfilePicture(file);
+    setIsUploading(true);
+
+    try {
+      // Upload file to Supabase Storage
+      // Note: Make sure the "employee-profiles" bucket exists in Supabase Storage
+      // If not, create it in Supabase Dashboard > Storage
+      const result = await uploadFile(file, {
+        bucket: "employees", // Create this bucket in Supabase Storage if it doesn't exist
+        folder: "avatars",
+        isPublic: true,
+      });
+
+      // Save the uploaded URL
+      setUploadedImageUrl(result.url);
+      console.log("File uploaded successfully:", result);
+      toastService.showSuccess(
+        "Success",
+        "Profile picture uploaded successfully"
+      );
+
+      // TODO: Save result.url to database when submitting the form
+    } catch (error: any) {
+      console.error("Upload error:", error);
+      toastService.showError(
+        "Upload Failed",
+        error?.message || "Failed to upload profile picture"
+      );
+      setProfilePicture(null);
+      setUploadedImageUrl(null);
+    } finally {
+      setIsUploading(false);
+    }
+  };
 
   const renderProfilePicture = () => {
     return (
       <div className="space-y-2 gap-4 px-6">
         <label className="block text-[15px] ml-1">Profile Picture</label>
         <div className="flex flex-col md:flex-row items-start md:items-center gap-4">
-          <div className="w-16 h-16 flex items-center justify-center rounded-full">
+          <div className="w-16 h-16 flex items-center justify-center rounded-full relative">
+            {isUploading && (
+              <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 rounded-full">
+                <span className="text-white text-xs">Uploading...</span>
+              </div>
+            )}
             <img
               alt="user"
-              className="w-16 h-16 rounded-full"
+              className="w-16 h-16 rounded-full object-cover"
               src={
-                profilePicture
-                  ? URL.createObjectURL(profilePicture)
-                  : "/assets/icons/user-icon.jpg"
+                uploadedImageUrl
+                  ? uploadedImageUrl
+                  : profilePicture
+                    ? URL.createObjectURL(profilePicture)
+                    : "/assets/icons/user-icon.jpg"
               }
             />
           </div>
@@ -30,18 +106,18 @@ const Step1 = () => {
             <FilePicker
               multiple={false}
               className="w-full"
+              disabled={isUploading}
               dropText="Drop your picture here or"
               browseText="browse"
               accept={{
                 "image/jpeg": [".jpg", ".jpeg"],
                 "image/png": [".png"],
+                "image/gif": [".gif"],
+                "image/webp": [".webp"],
+                "image/heic": [".heic"],
+                "image/heif": [".heif"],
               }}
-              onFileSelect={(files: File[]) => {
-                if (files) {
-                  const file = files[0];
-                  setProfilePicture(file);
-                }
-              }}
+              onFileSelect={handleFileSelect}
             />
           </div>
         </div>
