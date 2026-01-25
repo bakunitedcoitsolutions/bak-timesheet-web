@@ -5,12 +5,12 @@ import { classNames } from "primereact/utils";
 import { FORM_FIELD_WIDTHS } from "@/utils/constants";
 import MaskInput from "@/components/forms/mask-input";
 import { StepperFormHeading } from "@/components/common";
-import { FilePicker, Input, NumberInput } from "@/components/forms";
+import { Checkbox, FilePicker, Input, NumberInput } from "@/components/forms";
 import {
+  FILE_TYPES,
   uploadFile,
   validateFileType,
   validateFileSize,
-  FILE_TYPES,
   FILE_SIZE_LIMITS,
 } from "@/utils/helpers";
 import { toastService } from "@/lib/toast";
@@ -141,9 +141,10 @@ const Step1 = () => {
           </label>
           <NumberInput
             useGrouping={false}
-            className="w-full md:w-60 xl:w-72"
+            className="w-full md:w-60 xl:w-72 mb-3"
             placeholder="Enter employee code"
           />
+          <Checkbox label="Override" labelClassName="mt-0.5!" />
         </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 md:gap-y-8 md:py-5 px-6">
