@@ -31,27 +31,75 @@ const payrollSectionSelect = {
  * Create a new payroll section
  */
 export const createPayrollSection = async (data: CreatePayrollSectionData) => {
-  // Validate: nameEn must be unique
-  const existingPayrollSection = await prisma.payrollSection.findFirst({
-    where: { nameEn: data.nameEn },
-    select: { id: true },
+  return prisma.$transaction(async (tx: PrismaTransactionClient) => {
+    // Validate: nameEn must be unique
+    const existingPayrollSection = await tx.payrollSection.findFirst({
+      where: { nameEn: data.nameEn },
+      select: { id: true },
+    });
+
+    if (existingPayrollSection) {
+      throw new Error("Payroll Section name already exists");
+    }
+
+    let finalDisplayOrderKey = data.displayOrderKey ?? null;
+
+    // If displayOrderKey is null or undefined, auto-assign the next number from the last
+    if (finalDisplayOrderKey === null || finalDisplayOrderKey === undefined) {
+      const lastRecord = await tx.payrollSection.findFirst({
+        where: {
+          displayOrderKey: {
+            not: null,
+          },
+        },
+        orderBy: {
+          displayOrderKey: "desc",
+        },
+        select: {
+          displayOrderKey: true,
+        },
+      });
+
+      // If no records exist or all have null, start from 1
+      finalDisplayOrderKey = lastRecord?.displayOrderKey
+        ? lastRecord.displayOrderKey + 1
+        : 1;
+    } else {
+      // Auto-adjust displayOrderKey: if the key exists, shift all records with >= key by 1
+      const recordsToShift = await tx.payrollSection.findMany({
+        where: {
+          displayOrderKey: {
+            gte: finalDisplayOrderKey,
+          },
+        },
+        select: { id: true, displayOrderKey: true },
+      });
+
+      // Update each record to shift by 1
+      for (const record of recordsToShift) {
+        if (record.displayOrderKey !== null) {
+          await tx.payrollSection.update({
+            where: { id: record.id },
+            data: {
+              displayOrderKey: record.displayOrderKey + 1,
+            },
+          });
+        }
+      }
+    }
+
+    const payrollSection = await tx.payrollSection.create({
+      data: {
+        nameEn: data.nameEn,
+        nameAr: data.nameAr,
+        displayOrderKey: finalDisplayOrderKey,
+        isActive: data.isActive ?? true,
+      },
+      select: payrollSectionSelect,
+    });
+
+    return payrollSection;
   });
-
-  if (existingPayrollSection) {
-    throw new Error("Payroll Section name already exists");
-  }
-
-  const payrollSection = await prisma.payrollSection.create({
-    data: {
-      nameEn: data.nameEn,
-      nameAr: data.nameAr,
-      displayOrderKey: data.displayOrderKey || null,
-      isActive: data.isActive ?? true,
-    },
-    select: payrollSectionSelect,
-  });
-
-  return payrollSection;
 };
 
 /**
@@ -75,7 +123,7 @@ export const updatePayrollSection = async (
     // Check if payroll section exists
     const existingPayrollSection = await tx.payrollSection.findUnique({
       where: { id },
-      select: { id: true },
+      select: { id: true, displayOrderKey: true },
     });
 
     if (!existingPayrollSection) {
@@ -97,12 +145,115 @@ export const updatePayrollSection = async (
       }
     }
 
+    // Auto-adjust displayOrderKey if it's being updated
+    if (data.displayOrderKey !== undefined) {
+      const oldOrderKey = existingPayrollSection.displayOrderKey;
+      const newOrderKey = data.displayOrderKey ?? null;
+
+      if (newOrderKey !== null && oldOrderKey !== newOrderKey) {
+        if (oldOrderKey === null) {
+          // Moving from null to a specific key: shift records with >= newOrderKey by 1
+          const recordsToShift = await tx.payrollSection.findMany({
+            where: {
+              displayOrderKey: {
+                gte: newOrderKey,
+              },
+              NOT: { id },
+            },
+            select: { id: true, displayOrderKey: true },
+          });
+
+          for (const record of recordsToShift) {
+            if (record.displayOrderKey !== null) {
+              await tx.payrollSection.update({
+                where: { id: record.id },
+                data: {
+                  displayOrderKey: record.displayOrderKey + 1,
+                },
+              });
+            }
+          }
+        } else if (newOrderKey === null) {
+          // Moving from a specific key to null: shift records with > oldOrderKey down by 1
+          const recordsToShift = await tx.payrollSection.findMany({
+            where: {
+              displayOrderKey: {
+                gt: oldOrderKey,
+              },
+              NOT: { id },
+            },
+            select: { id: true, displayOrderKey: true },
+          });
+
+          for (const record of recordsToShift) {
+            if (record.displayOrderKey !== null) {
+              await tx.payrollSection.update({
+                where: { id: record.id },
+                data: {
+                  displayOrderKey: record.displayOrderKey - 1,
+                },
+              });
+            }
+          }
+        } else {
+          // Moving from one key to another
+          if (newOrderKey > oldOrderKey) {
+            // Moving down: shift records between old and new down by 1
+            const recordsToShift = await tx.payrollSection.findMany({
+              where: {
+                displayOrderKey: {
+                  gt: oldOrderKey,
+                  lte: newOrderKey,
+                },
+                NOT: { id },
+              },
+              select: { id: true, displayOrderKey: true },
+            });
+
+            for (const record of recordsToShift) {
+              if (record.displayOrderKey !== null) {
+                await tx.payrollSection.update({
+                  where: { id: record.id },
+                  data: {
+                    displayOrderKey: record.displayOrderKey - 1,
+                  },
+                });
+              }
+            }
+          } else {
+            // Moving up: shift records between new and old up by 1
+            const recordsToShift = await tx.payrollSection.findMany({
+              where: {
+                displayOrderKey: {
+                  gte: newOrderKey,
+                  lt: oldOrderKey,
+                },
+                NOT: { id },
+              },
+              select: { id: true, displayOrderKey: true },
+            });
+
+            for (const record of recordsToShift) {
+              if (record.displayOrderKey !== null) {
+                await tx.payrollSection.update({
+                  where: { id: record.id },
+                  data: {
+                    displayOrderKey: record.displayOrderKey + 1,
+                  },
+                });
+              }
+            }
+          }
+        }
+      }
+    }
+
     const updateData: any = {};
 
     if (data.nameEn !== undefined) updateData.nameEn = data.nameEn;
     if (data.nameAr !== undefined) updateData.nameAr = data.nameAr;
     if (data.displayOrderKey !== undefined)
-      updateData.displayOrderKey = data.displayOrderKey || null;
+      updateData.displayOrderKey = data.displayOrderKey ?? null;
     if (data.isActive !== undefined) updateData.isActive = data.isActive;
 
     const updatedPayrollSection = await tx.payrollSection.update({
@@ -120,10 +271,10 @@ export const updatePayrollSection = async (
  */
 export const deletePayrollSection = async (id: number): Promise<void> => {
   return prisma.$transaction(async (tx: PrismaTransactionClient) => {
-    // Check if payroll section exists
+    // Check if payroll section exists and get its displayOrderKey
     const existingPayrollSection = await tx.payrollSection.findUnique({
       where: { id },
-      select: { id: true },
+      select: { id: true, displayOrderKey: true },
     });
 
     if (!existingPayrollSection) {
@@ -152,6 +303,43 @@ export const deletePayrollSection = async (id: number): Promise<void> => {
       );
     }
 
+    // If the record has a displayOrderKey, shift down all records with higher keys
+    if (existingPayrollSection.displayOrderKey !== null) {
+      // Check if there are records with higher keys (if not, this is the last item - no need to shift)
+      const hasRecordsAfter = await tx.payrollSection.findFirst({
+        where: {
+          displayOrderKey: {
+            gt: existingPayrollSection.displayOrderKey,
+          },
+        },
+        select: { id: true },
+      });
+
+      // Only shift if there are records with higher keys (not the last item)
+      if (hasRecordsAfter) {
+        const recordsToShift = await tx.payrollSection.findMany({
+          where: {
+            displayOrderKey: {
+              gt: existingPayrollSection.displayOrderKey,
+            },
+          },
+          select: { id: true, displayOrderKey: true },
+        });
+
+        // Shift each record down by 1
+        for (const record of recordsToShift) {
+          if (record.displayOrderKey !== null) {
+            await tx.payrollSection.update({
+              where: { id: record.id },
+              data: {
+                displayOrderKey: record.displayOrderKey - 1,
+              },
+            });
+          }
+        }
+      }
+    }
+
     // Delete payroll section
     await tx.payrollSection.delete({
       where: { id },
@@ -178,11 +366,13 @@ export const listPayrollSections = async (
     ];
   }
 
-  // Determine sort order (default: desc)
-  const sortOrder = params.sortOrder || "desc";
+  // Determine sort order (default: asc for displayOrderKey, desc for others)
+  const sortOrder =
+    params.sortOrder || (params.sortBy === "displayOrderKey" ? "asc" : "desc");
 
   // Build orderBy clause based on sortBy parameter
-  let orderBy: any = { createdAt: "desc" }; // Default sort
+  // Default: sort by displayOrderKey ascending (nulls go last in ascending order), then by createdAt descending
+  let orderBy: any = [{ displayOrderKey: "asc" }, { createdAt: "desc" }];
 
   if (params.sortBy) {
     const sortBy = params.sortBy;
@@ -195,7 +385,13 @@ export const listPayrollSections = async (
 
     // Only allow sorting by the specified valid fields
     if (validFields.includes(sortBy)) {
-      orderBy = { [sortBy]: sortOrder };
+      if (sortBy === "displayOrderKey") {
+        // For displayOrderKey, use array to maintain secondary sort by createdAt
+        orderBy = [{ displayOrderKey: sortOrder }, { createdAt: "desc" }];
+      } else {
+        // For other fields, simple sort
+        orderBy = { [sortBy]: sortOrder };
+      }
     }
   }
 

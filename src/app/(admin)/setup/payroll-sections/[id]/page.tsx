@@ -1,22 +1,36 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useParams, useRouter } from "next/navigation";
-
+import { useEffect } from "react";
+import { useForm } from "react-hook-form";
 import { classNames } from "primereact/utils";
-import { StepperFormHeading } from "@/components";
-import { getEntityModeFromParam } from "@/helpers";
-import { FORM_FIELD_WIDTHS } from "@/utils/constants";
-import { Input, Button, Dropdown, NumberInput } from "@/components/forms";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useParams, useRouter } from "next/navigation";
+import { ProgressSpinner } from "primereact/progressspinner";
 
-const payrollSectionStatusOptions = [
-  { label: "Active", value: "1" },
-  { label: "Inactive", value: "2" },
-];
+import {
+  useUpdatePayrollSection,
+  useCreatePayrollSection,
+  useGetPayrollSectionById,
+} from "@/lib/db/services/payroll-section/requests";
+import {
+  CreatePayrollSectionSchema,
+  UpdatePayrollSectionSchema,
+} from "@/lib/db/services/payroll-section/payroll-section.schemas";
+import { toastService } from "@/lib/toast";
+import { getEntityModeFromParam } from "@/helpers";
+import { getErrorMessage } from "@/utils/helpers";
+import { FORM_FIELD_WIDTHS, STATUS_OPTIONS } from "@/utils/constants";
+import {
+  Input,
+  Button,
+  Dropdown,
+  Form,
+  FormItem,
+  NumberInput,
+} from "@/components/forms";
+import { StepperFormHeading } from "@/components";
 
 const UpsertPayrollSectionPage = () => {
-  const [selectedPayrollSectionStatus, setSelectedPayrollSectionStatus] =
-    useState<string | null>(null);
   const router = useRouter();
   const { id: payrollSectionIdParam } = useParams();
   const {
@@ -29,6 +43,35 @@ const UpsertPayrollSectionPage = () => {
     param: payrollSectionIdParam,
   });
 
+  const { mutateAsync: createPayrollSection } = useCreatePayrollSection();
+  const { mutateAsync: updatePayrollSection } = useUpdatePayrollSection();
+  const { data: foundPayrollSection, isLoading } = useGetPayrollSectionById({
+    id: payrollSectionId ? Number(payrollSectionId) : 0,
+  });
+
+  const defaultValues = {
+    ...(isEditMode ? { id: 0 } : {}),
+    nameEn: "",
+    nameAr: "",
+    displayOrderKey: undefined,
+    isActive: true,
+  };
+
+  const zodSchema = isEditMode
+    ? UpdatePayrollSectionSchema
+    : CreatePayrollSectionSchema;
+
+  const form = useForm({
+    resolver: zodResolver(zodSchema),
+    defaultValues,
+  });
+
+  const {
+    reset,
+    handleSubmit,
+    formState: { isSubmitting, errors },
+  } = form;
+
   // Redirect to 404 page if the entity is invalid
   useEffect(() => {
     if (isInvalid) {
@@ -36,10 +79,69 @@ const UpsertPayrollSectionPage = () => {
     }
   }, [isInvalid, router]);
 
-  const handleSubmit = async (data: Record<string, any>) => {
-    console.log("Form submitted:", data);
-    // Handle form submission here
-    router.replace(`/setup/payroll-sections`);
+  useEffect(() => {
+    if (foundPayrollSection) {
+      const setPayrollSection = {
+        ...(isEditMode ? { id: foundPayrollSection?.id ?? 0 } : {}),
+        nameEn: foundPayrollSection?.nameEn,
+        nameAr: foundPayrollSection?.nameAr,
+        displayOrderKey: foundPayrollSection?.displayOrderKey ?? undefined,
+        isActive: foundPayrollSection?.isActive,
+      };
+      reset(setPayrollSection);
+    }
+  }, [foundPayrollSection, isEditMode, reset]);
+
+  const onFormSubmit = handleSubmit(async (data) => {
+    if (isAddMode) {
+      await handleAddPayrollSection(data);
+    } else {
+      await handleUpdatePayrollSection(data);
+    }
+  });
+
+  const handleAddPayrollSection = async (data: Record<string, any>) => {
+    try {
+      console.log("Form submitted: Add Payroll Section", data);
+      await createPayrollSection(data, {
+        onSuccess: () => {
+          toastService.showSuccess(
+            "Success",
+            "Payroll Section created successfully"
+          );
+          reset(defaultValues);
+          router.replace("/setup/payroll-sections");
+        },
+        onError: (error: any) => {
+          const errorMessage = getErrorMessage(
+            error,
+            "Failed to create payroll section"
+          );
+          toastService.showError("Error", errorMessage);
+        },
+      });
+    } catch (error) {}
+  };
+
+  const handleUpdatePayrollSection = async (data: Record<string, any>) => {
+    console.log("Form submitted: Update Payroll Section", data);
+    try {
+      await updatePayrollSection(data, {
+        onSuccess: () => {
+          toastService.showSuccess(
+            "Success",
+            "Payroll Section updated successfully"
+          );
+        },
+        onError: (error: any) => {
+          const errorMessage = getErrorMessage(
+            error,
+            "Failed to update payroll section"
+          );
+          toastService.showError("Error", errorMessage);
+        },
+      });
+    } catch (error) {}
   };
 
   return (
@@ -48,54 +150,80 @@ const UpsertPayrollSectionPage = () => {
         <StepperFormHeading
           title={isAddMode ? "Add Payroll Section" : "Edit Payroll Section"}
         />
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 md:gap-y-8 md:py-5 px-6 mt-5 md:mt-0 w-full md:max-w-5xl content-start flex-1">
-          <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
-            <Input label="Name" className="w-full" placeholder="Enter name" />
+        {isLoading ? (
+          <div className="flex justify-center items-center h-full">
+            <ProgressSpinner style={{ width: "50px", height: "50px" }} />
           </div>
-          <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
-            <Input
-              label="Arabic Name"
-              className="w-full text-right"
-              placeholder="أدخل الاسم بالعربية"
-            />
-          </div>
-          <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
-            <NumberInput
-              useGrouping={false}
-              className="w-full"
-              label="Display Order"
-              placeholder="Enter display order"
-            />
-          </div>
-          <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
-            <Dropdown
-              label="Status"
-              className="w-full"
-              options={payrollSectionStatusOptions}
-              placeholder="Choose"
-              value={selectedPayrollSectionStatus}
-              onChange={(e) => setSelectedPayrollSectionStatus(e.value)}
-            />
-          </div>
-        </div>
+        ) : (
+          <>
+            <Form
+              form={form}
+              className="w-full h-full content-start md:max-w-5xl"
+            >
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 md:gap-y-4 md:py-5 px-6 mt-5 md:mt-0 flex-1">
+                <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
+                  <FormItem name="nameEn">
+                    <Input
+                      label="Name"
+                      className="w-full"
+                      placeholder="Enter name"
+                    />
+                  </FormItem>
+                </div>
+                <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
+                  <FormItem name="nameAr">
+                    <Input
+                      label="Arabic Name"
+                      className="w-full text-right"
+                      placeholder="أدخل الاسم بالعربية"
+                    />
+                  </FormItem>
+                </div>
+                <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
+                  <FormItem name="displayOrderKey">
+                    <NumberInput
+                      useGrouping={false}
+                      className="w-full"
+                      label="Display Order"
+                      placeholder="Enter display order"
+                    />
+                  </FormItem>
+                </div>
+                <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
+                  <FormItem name="isActive">
+                    <Dropdown
+                      label="Status"
+                      className="w-full"
+                      placeholder="Choose"
+                      options={STATUS_OPTIONS}
+                    />
+                  </FormItem>
+                </div>
+              </div>
+            </Form>
 
-        <div className="flex items-center gap-3 justify-end px-6">
-          <Button
-            size="small"
-            variant="text"
-            onClick={() => router.replace("/setup/payroll-sections")}
-          >
-            Cancel
-          </Button>
-          <Button
-            size="small"
-            variant="solid"
-            onClick={handleSubmit}
-            className="w-28 justify-center!"
-          >
-            Save
-          </Button>
-        </div>
+            <div className="flex items-center gap-3 justify-end px-6">
+              <Button
+                size="small"
+                variant="text"
+                disabled={isSubmitting}
+                onClick={() => router.replace("/setup/payroll-sections")}
+              >
+                Cancel
+              </Button>
+              <Button
+                size="small"
+                variant="solid"
+                onClick={onFormSubmit}
+                loading={isSubmitting}
+                disabled={isSubmitting}
+                className="w-28 justify-center! gap-1"
+              >
+                Save
+              </Button>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

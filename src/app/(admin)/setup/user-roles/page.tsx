@@ -169,15 +169,6 @@ const UserRolesPage = () => {
             View, manage user role records, and role details.
           </p>
         </div>
-        <div className="w-full md:w-auto">
-          <Button
-            size="small"
-            variant="solid"
-            icon="pi pi-plus"
-            label="Add User Role"
-            onClick={() => router.push("/setup/user-roles/new")}
-          />
-        </div>
       </div>
       <div className="bg-white flex-1 rounded-xl overflow-hidden min-h-0">
         <Table
