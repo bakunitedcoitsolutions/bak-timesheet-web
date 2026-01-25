@@ -5,31 +5,64 @@ import React, { useState, ReactNode } from "react";
 
 import Button from "../button";
 import Stepper, { StepperStep } from "../stepper";
+import { StepperFormProvider, useStepperForm } from "@/context";
 
 interface StepperFormProps {
   steps: StepperStep[];
   initialStep?: number;
   onSubmit?: (data: Record<string, any>) => void | Promise<void>;
   onStepChange?: (step: number) => void;
+  onStepSave?: (step: number) => Promise<boolean> | boolean;
   children: (step: number) => ReactNode;
   showNavigation?: boolean;
   className?: string;
 }
 
-const StepperForm: React.FC<StepperFormProps> = ({
+const StepperFormContent: React.FC<StepperFormProps> = ({
   steps,
   initialStep = 0,
   onSubmit,
   onStepChange,
+  onStepSave,
   children,
   showNavigation = true,
   className,
 }) => {
   const [activeStep, setActiveStep] = useState(initialStep);
   const [completedSteps, setCompletedSteps] = useState<number[]>([]);
+  const { isSubmitting } = useStepperForm();
 
-  const handleNext = () => {
+  const markStepAsCompleted = (stepNumber: number) => {
+    if (!completedSteps.includes(stepNumber)) {
+      setCompletedSteps([...completedSteps, stepNumber]);
+    }
+  };
+
+  // Sync activeStep when initialStep changes (e.g., after redirect)
+  React.useEffect(() => {
+    setActiveStep(initialStep);
+    // Mark step 1 as completed when moving to step 2
+    if (initialStep === 1) {
+      setCompletedSteps((prev) => {
+        if (!prev.includes(1)) {
+          return [...prev, 1];
+        }
+        return prev;
+      });
+    }
+  }, [initialStep]);
+
+  const handleNext = async () => {
     if (activeStep < steps.length - 1) {
+      // Call step-specific save handler if provided
+      if (onStepSave) {
+        const result = await onStepSave(activeStep);
+        if (result === false) {
+          // Save failed, don't proceed
+          return;
+        }
+      }
+
       // Mark current step as completed
       const currentStepNumber = steps[activeStep].number;
       markStepAsCompleted(currentStepNumber);
@@ -70,12 +103,6 @@ const StepperForm: React.FC<StepperFormProps> = ({
 
   const unmarkStepAsCompleted = (stepNumber: number) => {
     setCompletedSteps(completedSteps.filter((num) => num !== stepNumber));
-  };
-
-  const markStepAsCompleted = (stepNumber: number) => {
-    if (!completedSteps.includes(stepNumber)) {
-      setCompletedSteps([...completedSteps, stepNumber]);
-    }
   };
 
   const isLastStep = activeStep === steps.length - 1;
@@ -125,7 +152,9 @@ const StepperForm: React.FC<StepperFormProps> = ({
                     <Button
                       size="small"
                       variant="solid"
-                      onClick={() => {
+                      loading={isSubmitting}
+                      disabled={isSubmitting}
+                      onClick={async () => {
                         // Mark last step as completed before submitting
                         const currentStepNumber = steps[activeStep].number;
                         markStepAsCompleted(currentStepNumber);
@@ -133,11 +162,19 @@ const StepperForm: React.FC<StepperFormProps> = ({
                       }}
                       iconPosition="right"
                       icon="pi pi-check"
+                      className="w-28 justify-center!"
                     >
                       Submit
                     </Button>
                   ) : (
-                    <Button size="small" variant="solid" onClick={handleNext}>
+                    <Button
+                      size="small"
+                      variant="solid"
+                      onClick={handleNext}
+                      loading={isSubmitting}
+                      disabled={isSubmitting}
+                      className="justify-center! gap-1"
+                    >
                       Save & Proceed
                     </Button>
                   )}
@@ -148,6 +185,14 @@ const StepperForm: React.FC<StepperFormProps> = ({
         </div>
       </div>
     </div>
+  );
+};
+
+const StepperForm: React.FC<StepperFormProps> = (props) => {
+  return (
+    <StepperFormProvider>
+      <StepperFormContent {...props} />
+    </StepperFormProvider>
   );
 };
 

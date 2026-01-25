@@ -6,7 +6,11 @@ import { FORM_FIELD_WIDTHS } from "@/utils/constants";
 import { StepperFormHeading } from "@/components/common";
 import { FilePicker, Input, NumberInput } from "@/components/forms";
 
-const Step3 = () => {
+interface Step3Props {
+  employeeId?: number | null;
+}
+
+const Step3 = ({ employeeId }: Step3Props) => {
   const [idCardDocument, setIdCardDocument] = useState<File | null>(null);
   const [passportDocument, setPassportDocument] = useState<File | null>(null);
 

@@ -2,9 +2,11 @@
 import { InputNumber, InputNumberProps } from "primereact/inputnumber";
 import { IconField } from "primereact/iconfield";
 import { InputIcon } from "primereact/inputicon";
+import { classNames } from "primereact/utils";
 
 interface NumberInputProps extends Omit<InputNumberProps, "className"> {
   label?: string;
+  labelClassName?: string;
   icon?: string;
   iconPosition?: "left" | "right";
   small?: boolean;
@@ -14,6 +16,7 @@ interface NumberInputProps extends Omit<InputNumberProps, "className"> {
 
 export default function NumberInput({
   label,
+  labelClassName = "",
   icon,
   iconPosition = "left",
   small = false,
@@ -46,7 +49,10 @@ export default function NumberInput({
   if (label) {
     return (
       <div className="space-y-1">
-        <label htmlFor={rest.id} className={`block text-sm ml-1 mb-1`}>
+        <label
+          htmlFor={rest.id}
+          className={classNames(`block text-sm ml-1 mb-1`, labelClassName)}
+        >
           {label}
         </label>
         {inputWithIcon}

@@ -28,6 +28,7 @@ export type AggregateEmployee = {
 
 export type EmployeeAvgAggregateOutputType = {
   id: number | null
+  employeeCode: number | null
   countryId: number | null
   cityId: number | null
   statusId: number | null
@@ -48,6 +49,7 @@ export type EmployeeAvgAggregateOutputType = {
 
 export type EmployeeSumAggregateOutputType = {
   id: number | null
+  employeeCode: number | null
   countryId: number | null
   cityId: number | null
   statusId: number | null
@@ -69,7 +71,7 @@ export type EmployeeSumAggregateOutputType = {
 export type EmployeeMinAggregateOutputType = {
   id: number | null
   profilePicture: string | null
-  employeeCode: string | null
+  employeeCode: number | null
   nameEn: string | null
   nameAr: string | null
   dob: Date | null
@@ -118,7 +120,7 @@ export type EmployeeMinAggregateOutputType = {
 export type EmployeeMaxAggregateOutputType = {
   id: number | null
   profilePicture: string | null
-  employeeCode: string | null
+  employeeCode: number | null
   nameEn: string | null
   nameAr: string | null
   dob: Date | null
@@ -217,6 +219,7 @@ export type EmployeeCountAggregateOutputType = {
 
 export type EmployeeAvgAggregateInputType = {
   id?: true
+  employeeCode?: true
   countryId?: true
   cityId?: true
   statusId?: true
@@ -237,6 +240,7 @@ export type EmployeeAvgAggregateInputType = {
 
 export type EmployeeSumAggregateInputType = {
   id?: true
+  employeeCode?: true
   countryId?: true
   cityId?: true
   statusId?: true
@@ -492,7 +496,7 @@ export type EmployeeGroupByArgs<ExtArgs extends runtime.Types.Extensions.Interna
 export type EmployeeGroupByOutputType = {
   id: number
   profilePicture: string | null
-  employeeCode: string | null
+  employeeCode: number
   nameEn: string
   nameAr: string | null
   dob: Date | null
@@ -564,7 +568,7 @@ export type EmployeeWhereInput = {
   NOT?: Prisma.EmployeeWhereInput | Prisma.EmployeeWhereInput[]
   id?: Prisma.IntFilter<"Employee"> | number
   profilePicture?: Prisma.StringNullableFilter<"Employee"> | string | null
-  employeeCode?: Prisma.StringNullableFilter<"Employee"> | string | null
+  employeeCode?: Prisma.IntFilter<"Employee"> | number
   nameEn?: Prisma.StringFilter<"Employee"> | string
   nameAr?: Prisma.StringNullableFilter<"Employee"> | string | null
   dob?: Prisma.DateTimeNullableFilter<"Employee"> | Date | string | null
@@ -626,7 +630,7 @@ export type EmployeeWhereInput = {
 export type EmployeeOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   profilePicture?: Prisma.SortOrderInput | Prisma.SortOrder
-  employeeCode?: Prisma.SortOrderInput | Prisma.SortOrder
+  employeeCode?: Prisma.SortOrder
   nameEn?: Prisma.SortOrder
   nameAr?: Prisma.SortOrderInput | Prisma.SortOrder
   dob?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -687,7 +691,7 @@ export type EmployeeOrderByWithRelationInput = {
 
 export type EmployeeWhereUniqueInput = Prisma.AtLeast<{
   id?: number
-  employeeCode?: string
+  employeeCode?: number
   AND?: Prisma.EmployeeWhereInput | Prisma.EmployeeWhereInput[]
   OR?: Prisma.EmployeeWhereInput[]
   NOT?: Prisma.EmployeeWhereInput | Prisma.EmployeeWhereInput[]
@@ -753,7 +757,7 @@ export type EmployeeWhereUniqueInput = Prisma.AtLeast<{
 export type EmployeeOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   profilePicture?: Prisma.SortOrderInput | Prisma.SortOrder
-  employeeCode?: Prisma.SortOrderInput | Prisma.SortOrder
+  employeeCode?: Prisma.SortOrder
   nameEn?: Prisma.SortOrder
   nameAr?: Prisma.SortOrderInput | Prisma.SortOrder
   dob?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -810,7 +814,7 @@ export type EmployeeScalarWhereWithAggregatesInput = {
   NOT?: Prisma.EmployeeScalarWhereWithAggregatesInput | Prisma.EmployeeScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"Employee"> | number
   profilePicture?: Prisma.StringNullableWithAggregatesFilter<"Employee"> | string | null
-  employeeCode?: Prisma.StringNullableWithAggregatesFilter<"Employee"> | string | null
+  employeeCode?: Prisma.IntWithAggregatesFilter<"Employee"> | number
   nameEn?: Prisma.StringWithAggregatesFilter<"Employee"> | string
   nameAr?: Prisma.StringNullableWithAggregatesFilter<"Employee"> | string | null
   dob?: Prisma.DateTimeNullableWithAggregatesFilter<"Employee"> | Date | string | null
@@ -858,7 +862,7 @@ export type EmployeeScalarWhereWithAggregatesInput = {
 
 export type EmployeeCreateInput = {
   profilePicture?: string | null
-  employeeCode?: string | null
+  employeeCode: number
   nameEn: string
   nameAr?: string | null
   dob?: Date | string | null
@@ -913,7 +917,7 @@ export type EmployeeCreateInput = {
 export type EmployeeUncheckedCreateInput = {
   id?: number
   profilePicture?: string | null
-  employeeCode?: string | null
+  employeeCode: number
   nameEn: string
   nameAr?: string | null
   dob?: Date | string | null
@@ -967,7 +971,7 @@ export type EmployeeUncheckedCreateInput = {
 
 export type EmployeeUpdateInput = {
   profilePicture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  employeeCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeCode?: Prisma.IntFieldUpdateOperationsInput | number
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1022,7 +1026,7 @@ export type EmployeeUpdateInput = {
 export type EmployeeUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   profilePicture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  employeeCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeCode?: Prisma.IntFieldUpdateOperationsInput | number
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1077,7 +1081,7 @@ export type EmployeeUncheckedUpdateInput = {
 export type EmployeeCreateManyInput = {
   id?: number
   profilePicture?: string | null
-  employeeCode?: string | null
+  employeeCode: number
   nameEn: string
   nameAr?: string | null
   dob?: Date | string | null
@@ -1125,7 +1129,7 @@ export type EmployeeCreateManyInput = {
 
 export type EmployeeUpdateManyMutationInput = {
   profilePicture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  employeeCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeCode?: Prisma.IntFieldUpdateOperationsInput | number
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1167,7 +1171,7 @@ export type EmployeeUpdateManyMutationInput = {
 export type EmployeeUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   profilePicture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  employeeCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeCode?: Prisma.IntFieldUpdateOperationsInput | number
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1274,6 +1278,7 @@ export type EmployeeCountOrderByAggregateInput = {
 
 export type EmployeeAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  employeeCode?: Prisma.SortOrder
   countryId?: Prisma.SortOrder
   cityId?: Prisma.SortOrder
   statusId?: Prisma.SortOrder
@@ -1392,6 +1397,7 @@ export type EmployeeMinOrderByAggregateInput = {
 
 export type EmployeeSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  employeeCode?: Prisma.SortOrder
   countryId?: Prisma.SortOrder
   cityId?: Prisma.SortOrder
   statusId?: Prisma.SortOrder
@@ -1814,7 +1820,7 @@ export type EmployeeUpdateOneWithoutLedgersNestedInput = {
 
 export type EmployeeCreateWithoutBranchInput = {
   profilePicture?: string | null
-  employeeCode?: string | null
+  employeeCode: number
   nameEn: string
   nameAr?: string | null
   dob?: Date | string | null
@@ -1868,7 +1874,7 @@ export type EmployeeCreateWithoutBranchInput = {
 export type EmployeeUncheckedCreateWithoutBranchInput = {
   id?: number
   profilePicture?: string | null
-  employeeCode?: string | null
+  employeeCode: number
   nameEn: string
   nameAr?: string | null
   dob?: Date | string | null
@@ -1951,7 +1957,7 @@ export type EmployeeScalarWhereInput = {
   NOT?: Prisma.EmployeeScalarWhereInput | Prisma.EmployeeScalarWhereInput[]
   id?: Prisma.IntFilter<"Employee"> | number
   profilePicture?: Prisma.StringNullableFilter<"Employee"> | string | null
-  employeeCode?: Prisma.StringNullableFilter<"Employee"> | string | null
+  employeeCode?: Prisma.IntFilter<"Employee"> | number
   nameEn?: Prisma.StringFilter<"Employee"> | string
   nameAr?: Prisma.StringNullableFilter<"Employee"> | string | null
   dob?: Prisma.DateTimeNullableFilter<"Employee"> | Date | string | null
@@ -1999,7 +2005,7 @@ export type EmployeeScalarWhereInput = {
 
 export type EmployeeCreateWithoutCityInput = {
   profilePicture?: string | null
-  employeeCode?: string | null
+  employeeCode: number
   nameEn: string
   nameAr?: string | null
   dob?: Date | string | null
@@ -2053,7 +2059,7 @@ export type EmployeeCreateWithoutCityInput = {
 export type EmployeeUncheckedCreateWithoutCityInput = {
   id?: number
   profilePicture?: string | null
-  employeeCode?: string | null
+  employeeCode: number
   nameEn: string
   nameAr?: string | null
   dob?: Date | string | null
@@ -2132,7 +2138,7 @@ export type EmployeeUpdateManyWithWhereWithoutCityInput = {
 
 export type EmployeeCreateWithoutCountryInput = {
   profilePicture?: string | null
-  employeeCode?: string | null
+  employeeCode: number
   nameEn: string
   nameAr?: string | null
   dob?: Date | string | null
@@ -2186,7 +2192,7 @@ export type EmployeeCreateWithoutCountryInput = {
 export type EmployeeUncheckedCreateWithoutCountryInput = {
   id?: number
   profilePicture?: string | null
-  employeeCode?: string | null
+  employeeCode: number
   nameEn: string
   nameAr?: string | null
   dob?: Date | string | null
@@ -2265,7 +2271,7 @@ export type EmployeeUpdateManyWithWhereWithoutCountryInput = {
 
 export type EmployeeCreateWithoutGosiCityInput = {
   profilePicture?: string | null
-  employeeCode?: string | null
+  employeeCode: number
   nameEn: string
   nameAr?: string | null
   dob?: Date | string | null
@@ -2319,7 +2325,7 @@ export type EmployeeCreateWithoutGosiCityInput = {
 export type EmployeeUncheckedCreateWithoutGosiCityInput = {
   id?: number
   profilePicture?: string | null
-  employeeCode?: string | null
+  employeeCode: number
   nameEn: string
   nameAr?: string | null
   dob?: Date | string | null
@@ -2398,7 +2404,7 @@ export type EmployeeUpdateManyWithWhereWithoutGosiCityInput = {
 
 export type EmployeeCreateWithoutDesignationInput = {
   profilePicture?: string | null
-  employeeCode?: string | null
+  employeeCode: number
   nameEn: string
   nameAr?: string | null
   dob?: Date | string | null
@@ -2452,7 +2458,7 @@ export type EmployeeCreateWithoutDesignationInput = {
 export type EmployeeUncheckedCreateWithoutDesignationInput = {
   id?: number
   profilePicture?: string | null
-  employeeCode?: string | null
+  employeeCode: number
   nameEn: string
   nameAr?: string | null
   dob?: Date | string | null
@@ -2531,7 +2537,7 @@ export type EmployeeUpdateManyWithWhereWithoutDesignationInput = {
 
 export type EmployeeCreateWithoutStatusInput = {
   profilePicture?: string | null
-  employeeCode?: string | null
+  employeeCode: number
   nameEn: string
   nameAr?: string | null
   dob?: Date | string | null
@@ -2585,7 +2591,7 @@ export type EmployeeCreateWithoutStatusInput = {
 export type EmployeeUncheckedCreateWithoutStatusInput = {
   id?: number
   profilePicture?: string | null
-  employeeCode?: string | null
+  employeeCode: number
   nameEn: string
   nameAr?: string | null
   dob?: Date | string | null
@@ -2664,7 +2670,7 @@ export type EmployeeUpdateManyWithWhereWithoutStatusInput = {
 
 export type EmployeeCreateWithoutTimesheetsInput = {
   profilePicture?: string | null
-  employeeCode?: string | null
+  employeeCode: number
   nameEn: string
   nameAr?: string | null
   dob?: Date | string | null
@@ -2718,7 +2724,7 @@ export type EmployeeCreateWithoutTimesheetsInput = {
 export type EmployeeUncheckedCreateWithoutTimesheetsInput = {
   id?: number
   profilePicture?: string | null
-  employeeCode?: string | null
+  employeeCode: number
   nameEn: string
   nameAr?: string | null
   dob?: Date | string | null
@@ -2787,7 +2793,7 @@ export type EmployeeUpdateToOneWithWhereWithoutTimesheetsInput = {
 
 export type EmployeeUpdateWithoutTimesheetsInput = {
   profilePicture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  employeeCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeCode?: Prisma.IntFieldUpdateOperationsInput | number
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2841,7 +2847,7 @@ export type EmployeeUpdateWithoutTimesheetsInput = {
 export type EmployeeUncheckedUpdateWithoutTimesheetsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   profilePicture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  employeeCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeCode?: Prisma.IntFieldUpdateOperationsInput | number
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2894,7 +2900,7 @@ export type EmployeeUncheckedUpdateWithoutTimesheetsInput = {
 
 export type EmployeeCreateWithoutPayrollsInput = {
   profilePicture?: string | null
-  employeeCode?: string | null
+  employeeCode: number
   nameEn: string
   nameAr?: string | null
   dob?: Date | string | null
@@ -2948,7 +2954,7 @@ export type EmployeeCreateWithoutPayrollsInput = {
 export type EmployeeUncheckedCreateWithoutPayrollsInput = {
   id?: number
   profilePicture?: string | null
-  employeeCode?: string | null
+  employeeCode: number
   nameEn: string
   nameAr?: string | null
   dob?: Date | string | null
@@ -3017,7 +3023,7 @@ export type EmployeeUpdateToOneWithWhereWithoutPayrollsInput = {
 
 export type EmployeeUpdateWithoutPayrollsInput = {
   profilePicture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  employeeCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeCode?: Prisma.IntFieldUpdateOperationsInput | number
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -3071,7 +3077,7 @@ export type EmployeeUpdateWithoutPayrollsInput = {
 export type EmployeeUncheckedUpdateWithoutPayrollsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   profilePicture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  employeeCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeCode?: Prisma.IntFieldUpdateOperationsInput | number
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -3124,7 +3130,7 @@ export type EmployeeUncheckedUpdateWithoutPayrollsInput = {
 
 export type EmployeeCreateWithoutPayrollSectionInput = {
   profilePicture?: string | null
-  employeeCode?: string | null
+  employeeCode: number
   nameEn: string
   nameAr?: string | null
   dob?: Date | string | null
@@ -3178,7 +3184,7 @@ export type EmployeeCreateWithoutPayrollSectionInput = {
 export type EmployeeUncheckedCreateWithoutPayrollSectionInput = {
   id?: number
   profilePicture?: string | null
-  employeeCode?: string | null
+  employeeCode: number
   nameEn: string
   nameAr?: string | null
   dob?: Date | string | null
@@ -3257,7 +3263,7 @@ export type EmployeeUpdateManyWithWhereWithoutPayrollSectionInput = {
 
 export type EmployeeCreateWithoutLoansInput = {
   profilePicture?: string | null
-  employeeCode?: string | null
+  employeeCode: number
   nameEn: string
   nameAr?: string | null
   dob?: Date | string | null
@@ -3311,7 +3317,7 @@ export type EmployeeCreateWithoutLoansInput = {
 export type EmployeeUncheckedCreateWithoutLoansInput = {
   id?: number
   profilePicture?: string | null
-  employeeCode?: string | null
+  employeeCode: number
   nameEn: string
   nameAr?: string | null
   dob?: Date | string | null
@@ -3380,7 +3386,7 @@ export type EmployeeUpdateToOneWithWhereWithoutLoansInput = {
 
 export type EmployeeUpdateWithoutLoansInput = {
   profilePicture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  employeeCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeCode?: Prisma.IntFieldUpdateOperationsInput | number
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -3434,7 +3440,7 @@ export type EmployeeUpdateWithoutLoansInput = {
 export type EmployeeUncheckedUpdateWithoutLoansInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   profilePicture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  employeeCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeCode?: Prisma.IntFieldUpdateOperationsInput | number
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -3487,7 +3493,7 @@ export type EmployeeUncheckedUpdateWithoutLoansInput = {
 
 export type EmployeeCreateWithoutTrafficChallansInput = {
   profilePicture?: string | null
-  employeeCode?: string | null
+  employeeCode: number
   nameEn: string
   nameAr?: string | null
   dob?: Date | string | null
@@ -3541,7 +3547,7 @@ export type EmployeeCreateWithoutTrafficChallansInput = {
 export type EmployeeUncheckedCreateWithoutTrafficChallansInput = {
   id?: number
   profilePicture?: string | null
-  employeeCode?: string | null
+  employeeCode: number
   nameEn: string
   nameAr?: string | null
   dob?: Date | string | null
@@ -3610,7 +3616,7 @@ export type EmployeeUpdateToOneWithWhereWithoutTrafficChallansInput = {
 
 export type EmployeeUpdateWithoutTrafficChallansInput = {
   profilePicture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  employeeCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeCode?: Prisma.IntFieldUpdateOperationsInput | number
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -3664,7 +3670,7 @@ export type EmployeeUpdateWithoutTrafficChallansInput = {
 export type EmployeeUncheckedUpdateWithoutTrafficChallansInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   profilePicture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  employeeCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeCode?: Prisma.IntFieldUpdateOperationsInput | number
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -3717,7 +3723,7 @@ export type EmployeeUncheckedUpdateWithoutTrafficChallansInput = {
 
 export type EmployeeCreateWithoutExitReentriesInput = {
   profilePicture?: string | null
-  employeeCode?: string | null
+  employeeCode: number
   nameEn: string
   nameAr?: string | null
   dob?: Date | string | null
@@ -3771,7 +3777,7 @@ export type EmployeeCreateWithoutExitReentriesInput = {
 export type EmployeeUncheckedCreateWithoutExitReentriesInput = {
   id?: number
   profilePicture?: string | null
-  employeeCode?: string | null
+  employeeCode: number
   nameEn: string
   nameAr?: string | null
   dob?: Date | string | null
@@ -3840,7 +3846,7 @@ export type EmployeeUpdateToOneWithWhereWithoutExitReentriesInput = {
 
 export type EmployeeUpdateWithoutExitReentriesInput = {
   profilePicture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  employeeCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeCode?: Prisma.IntFieldUpdateOperationsInput | number
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -3894,7 +3900,7 @@ export type EmployeeUpdateWithoutExitReentriesInput = {
 export type EmployeeUncheckedUpdateWithoutExitReentriesInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   profilePicture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  employeeCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeCode?: Prisma.IntFieldUpdateOperationsInput | number
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -3947,7 +3953,7 @@ export type EmployeeUncheckedUpdateWithoutExitReentriesInput = {
 
 export type EmployeeCreateWithoutLedgersInput = {
   profilePicture?: string | null
-  employeeCode?: string | null
+  employeeCode: number
   nameEn: string
   nameAr?: string | null
   dob?: Date | string | null
@@ -4001,7 +4007,7 @@ export type EmployeeCreateWithoutLedgersInput = {
 export type EmployeeUncheckedCreateWithoutLedgersInput = {
   id?: number
   profilePicture?: string | null
-  employeeCode?: string | null
+  employeeCode: number
   nameEn: string
   nameAr?: string | null
   dob?: Date | string | null
@@ -4070,7 +4076,7 @@ export type EmployeeUpdateToOneWithWhereWithoutLedgersInput = {
 
 export type EmployeeUpdateWithoutLedgersInput = {
   profilePicture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  employeeCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeCode?: Prisma.IntFieldUpdateOperationsInput | number
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -4124,7 +4130,7 @@ export type EmployeeUpdateWithoutLedgersInput = {
 export type EmployeeUncheckedUpdateWithoutLedgersInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   profilePicture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  employeeCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeCode?: Prisma.IntFieldUpdateOperationsInput | number
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -4178,7 +4184,7 @@ export type EmployeeUncheckedUpdateWithoutLedgersInput = {
 export type EmployeeCreateManyBranchInput = {
   id?: number
   profilePicture?: string | null
-  employeeCode?: string | null
+  employeeCode: number
   nameEn: string
   nameAr?: string | null
   dob?: Date | string | null
@@ -4225,7 +4231,7 @@ export type EmployeeCreateManyBranchInput = {
 
 export type EmployeeUpdateWithoutBranchInput = {
   profilePicture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  employeeCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeCode?: Prisma.IntFieldUpdateOperationsInput | number
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -4279,7 +4285,7 @@ export type EmployeeUpdateWithoutBranchInput = {
 export type EmployeeUncheckedUpdateWithoutBranchInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   profilePicture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  employeeCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeCode?: Prisma.IntFieldUpdateOperationsInput | number
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -4333,7 +4339,7 @@ export type EmployeeUncheckedUpdateWithoutBranchInput = {
 export type EmployeeUncheckedUpdateManyWithoutBranchInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   profilePicture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  employeeCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeCode?: Prisma.IntFieldUpdateOperationsInput | number
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -4381,7 +4387,7 @@ export type EmployeeUncheckedUpdateManyWithoutBranchInput = {
 export type EmployeeCreateManyCityInput = {
   id?: number
   profilePicture?: string | null
-  employeeCode?: string | null
+  employeeCode: number
   nameEn: string
   nameAr?: string | null
   dob?: Date | string | null
@@ -4428,7 +4434,7 @@ export type EmployeeCreateManyCityInput = {
 
 export type EmployeeUpdateWithoutCityInput = {
   profilePicture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  employeeCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeCode?: Prisma.IntFieldUpdateOperationsInput | number
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -4482,7 +4488,7 @@ export type EmployeeUpdateWithoutCityInput = {
 export type EmployeeUncheckedUpdateWithoutCityInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   profilePicture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  employeeCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeCode?: Prisma.IntFieldUpdateOperationsInput | number
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -4536,7 +4542,7 @@ export type EmployeeUncheckedUpdateWithoutCityInput = {
 export type EmployeeUncheckedUpdateManyWithoutCityInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   profilePicture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  employeeCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeCode?: Prisma.IntFieldUpdateOperationsInput | number
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -4584,7 +4590,7 @@ export type EmployeeUncheckedUpdateManyWithoutCityInput = {
 export type EmployeeCreateManyCountryInput = {
   id?: number
   profilePicture?: string | null
-  employeeCode?: string | null
+  employeeCode: number
   nameEn: string
   nameAr?: string | null
   dob?: Date | string | null
@@ -4631,7 +4637,7 @@ export type EmployeeCreateManyCountryInput = {
 
 export type EmployeeUpdateWithoutCountryInput = {
   profilePicture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  employeeCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeCode?: Prisma.IntFieldUpdateOperationsInput | number
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -4685,7 +4691,7 @@ export type EmployeeUpdateWithoutCountryInput = {
 export type EmployeeUncheckedUpdateWithoutCountryInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   profilePicture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  employeeCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeCode?: Prisma.IntFieldUpdateOperationsInput | number
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -4739,7 +4745,7 @@ export type EmployeeUncheckedUpdateWithoutCountryInput = {
 export type EmployeeUncheckedUpdateManyWithoutCountryInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   profilePicture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  employeeCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeCode?: Prisma.IntFieldUpdateOperationsInput | number
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -4787,7 +4793,7 @@ export type EmployeeUncheckedUpdateManyWithoutCountryInput = {
 export type EmployeeCreateManyGosiCityInput = {
   id?: number
   profilePicture?: string | null
-  employeeCode?: string | null
+  employeeCode: number
   nameEn: string
   nameAr?: string | null
   dob?: Date | string | null
@@ -4834,7 +4840,7 @@ export type EmployeeCreateManyGosiCityInput = {
 
 export type EmployeeUpdateWithoutGosiCityInput = {
   profilePicture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  employeeCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeCode?: Prisma.IntFieldUpdateOperationsInput | number
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -4888,7 +4894,7 @@ export type EmployeeUpdateWithoutGosiCityInput = {
 export type EmployeeUncheckedUpdateWithoutGosiCityInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   profilePicture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  employeeCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeCode?: Prisma.IntFieldUpdateOperationsInput | number
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -4942,7 +4948,7 @@ export type EmployeeUncheckedUpdateWithoutGosiCityInput = {
 export type EmployeeUncheckedUpdateManyWithoutGosiCityInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   profilePicture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  employeeCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeCode?: Prisma.IntFieldUpdateOperationsInput | number
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -4990,7 +4996,7 @@ export type EmployeeUncheckedUpdateManyWithoutGosiCityInput = {
 export type EmployeeCreateManyDesignationInput = {
   id?: number
   profilePicture?: string | null
-  employeeCode?: string | null
+  employeeCode: number
   nameEn: string
   nameAr?: string | null
   dob?: Date | string | null
@@ -5037,7 +5043,7 @@ export type EmployeeCreateManyDesignationInput = {
 
 export type EmployeeUpdateWithoutDesignationInput = {
   profilePicture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  employeeCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeCode?: Prisma.IntFieldUpdateOperationsInput | number
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -5091,7 +5097,7 @@ export type EmployeeUpdateWithoutDesignationInput = {
 export type EmployeeUncheckedUpdateWithoutDesignationInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   profilePicture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  employeeCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeCode?: Prisma.IntFieldUpdateOperationsInput | number
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -5145,7 +5151,7 @@ export type EmployeeUncheckedUpdateWithoutDesignationInput = {
 export type EmployeeUncheckedUpdateManyWithoutDesignationInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   profilePicture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  employeeCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeCode?: Prisma.IntFieldUpdateOperationsInput | number
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -5193,7 +5199,7 @@ export type EmployeeUncheckedUpdateManyWithoutDesignationInput = {
 export type EmployeeCreateManyStatusInput = {
   id?: number
   profilePicture?: string | null
-  employeeCode?: string | null
+  employeeCode: number
   nameEn: string
   nameAr?: string | null
   dob?: Date | string | null
@@ -5240,7 +5246,7 @@ export type EmployeeCreateManyStatusInput = {
 
 export type EmployeeUpdateWithoutStatusInput = {
   profilePicture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  employeeCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeCode?: Prisma.IntFieldUpdateOperationsInput | number
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -5294,7 +5300,7 @@ export type EmployeeUpdateWithoutStatusInput = {
 export type EmployeeUncheckedUpdateWithoutStatusInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   profilePicture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  employeeCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeCode?: Prisma.IntFieldUpdateOperationsInput | number
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -5348,7 +5354,7 @@ export type EmployeeUncheckedUpdateWithoutStatusInput = {
 export type EmployeeUncheckedUpdateManyWithoutStatusInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   profilePicture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  employeeCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeCode?: Prisma.IntFieldUpdateOperationsInput | number
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -5396,7 +5402,7 @@ export type EmployeeUncheckedUpdateManyWithoutStatusInput = {
 export type EmployeeCreateManyPayrollSectionInput = {
   id?: number
   profilePicture?: string | null
-  employeeCode?: string | null
+  employeeCode: number
   nameEn: string
   nameAr?: string | null
   dob?: Date | string | null
@@ -5443,7 +5449,7 @@ export type EmployeeCreateManyPayrollSectionInput = {
 
 export type EmployeeUpdateWithoutPayrollSectionInput = {
   profilePicture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  employeeCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeCode?: Prisma.IntFieldUpdateOperationsInput | number
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -5497,7 +5503,7 @@ export type EmployeeUpdateWithoutPayrollSectionInput = {
 export type EmployeeUncheckedUpdateWithoutPayrollSectionInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   profilePicture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  employeeCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeCode?: Prisma.IntFieldUpdateOperationsInput | number
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -5551,7 +5557,7 @@ export type EmployeeUncheckedUpdateWithoutPayrollSectionInput = {
 export type EmployeeUncheckedUpdateManyWithoutPayrollSectionInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   profilePicture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  employeeCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeCode?: Prisma.IntFieldUpdateOperationsInput | number
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -5952,7 +5958,7 @@ export type $EmployeePayload<ExtArgs extends runtime.Types.Extensions.InternalAr
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     profilePicture: string | null
-    employeeCode: string | null
+    employeeCode: number
     nameEn: string
     nameAr: string | null
     dob: Date | null
@@ -6434,7 +6440,7 @@ export interface Prisma__EmployeeClient<T, Null = never, ExtArgs extends runtime
 export interface EmployeeFieldRefs {
   readonly id: Prisma.FieldRef<"Employee", 'Int'>
   readonly profilePicture: Prisma.FieldRef<"Employee", 'String'>
-  readonly employeeCode: Prisma.FieldRef<"Employee", 'String'>
+  readonly employeeCode: Prisma.FieldRef<"Employee", 'Int'>
   readonly nameEn: Prisma.FieldRef<"Employee", 'String'>
   readonly nameAr: Prisma.FieldRef<"Employee", 'String'>
   readonly dob: Prisma.FieldRef<"Employee", 'DateTime'>

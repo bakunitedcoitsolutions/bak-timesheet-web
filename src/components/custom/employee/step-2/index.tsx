@@ -58,7 +58,11 @@ const isFixedOptions = [
   },
 ];
 
-const Step2 = () => {
+interface Step2Props {
+  employeeId?: number | null;
+}
+
+const Step2 = ({ employeeId }: Step2Props) => {
   // Row 1
   const [selectedCity, setSelectedCity] = useState<string | null>(null);
   const [selectedBranch, setSelectedBranch] = useState<string | null>(null);

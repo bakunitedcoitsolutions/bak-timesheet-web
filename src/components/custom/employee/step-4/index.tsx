@@ -26,7 +26,11 @@ const cityOptions = [
   { label: "Al-Baha", value: "al-baha" },
 ];
 
-const Step4 = () => {
+interface Step4Props {
+  employeeId?: number | null;
+}
+
+const Step4 = ({ employeeId }: Step4Props) => {
   const [selectedBank, setSelectedBank] = useState<string | null>(null);
   const [selectedGosiCity, setSelectedGosiCity] = useState<string | null>(null);
 

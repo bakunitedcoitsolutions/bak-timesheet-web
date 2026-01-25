@@ -17,7 +17,11 @@ const isCardDeliveredOptions = [
   },
 ];
 
-const Step5 = () => {
+interface Step5Props {
+  employeeId?: number | null;
+}
+
+const Step5 = ({ employeeId }: Step5Props) => {
   const [cardDocument, setCardDocument] = useState<File | null>(null);
   const [selectedIsCardDelivered, setSelectedIsCardDelivered] = useState<
     string | null

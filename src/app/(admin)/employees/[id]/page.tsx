@@ -1,11 +1,18 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useParams, useRouter } from "next/navigation";
 
 import { getEntityModeFromParam } from "@/helpers";
 import { StepperForm, StepperStep } from "@/components/forms";
-import { Step1, Step2, Step3, Step4, Step5 } from "@/components";
+import {
+  Step1,
+  Step2,
+  Step3,
+  Step4,
+  Step5,
+  type Step1Handle,
+} from "@/components";
 
 const steps: StepperStep[] = [
   { id: "basic-info", label: "Basic Info", number: 1 },
@@ -28,6 +35,23 @@ const UpsertEmployeePage = () => {
     param: employeeIdParam,
   });
 
+  const [currentEmployeeId, setCurrentEmployeeId] = useState<number | null>(
+    isEditMode && employeeId ? Number(employeeId) : null
+  );
+  const step1Ref = useRef<Step1Handle | null>(null);
+
+  const [initialStep] = useState(() => {
+    if (typeof window !== "undefined" && isEditMode && employeeId) {
+      const justCreatedId = sessionStorage.getItem("justCreatedEmployeeId");
+      if (justCreatedId === String(employeeId)) {
+        // Clear the flag and start at step 2
+        sessionStorage.removeItem("justCreatedEmployeeId");
+        return 1;
+      }
+    }
+    return 0;
+  });
+
   // Redirect to 404 page if the entity is invalid
   useEffect(() => {
     if (isInvalid) {
@@ -35,24 +59,51 @@ const UpsertEmployeePage = () => {
     }
   }, [isInvalid, router]);
 
+  const handleStepComplete = (newEmployeeId: number) => {
+    setCurrentEmployeeId(newEmployeeId);
+
+    // If we're in add mode and just created an employee, redirect to edit URL
+    if (isAddMode && newEmployeeId) {
+      // Store in sessionStorage so we know to start at step 2 after redirect
+      if (typeof window !== "undefined") {
+        sessionStorage.setItem("justCreatedEmployeeId", String(newEmployeeId));
+      }
+      router.replace(`/employees/${newEmployeeId}`);
+    }
+  };
+
+  const handleStepSave = async (step: number): Promise<boolean> => {
+    if (step === 0 && step1Ref.current) {
+      return await step1Ref.current.submit();
+    }
+    return true;
+  };
+
   const handleSubmit = async (data: Record<string, any>) => {
     console.log("Form submitted:", data);
-    // Handle form submission here
     router.replace(`/employees`);
   };
 
   const renderStepContent = (stepIndex: number) => {
     switch (stepIndex) {
       case 0:
-        return <Step1 />;
+        return (
+          <Step1
+            ref={step1Ref}
+            employeeId={currentEmployeeId}
+            isAddMode={isAddMode}
+            isEditMode={isEditMode}
+            onStepComplete={handleStepComplete}
+          />
+        );
       case 1:
-        return <Step2 />;
+        return <Step2 employeeId={currentEmployeeId} />;
       case 2:
-        return <Step3 />;
+        return <Step3 employeeId={currentEmployeeId} />;
       case 3:
-        return <Step4 />;
+        return <Step4 employeeId={currentEmployeeId} />;
       case 4:
-        return <Step5 />;
+        return <Step5 employeeId={currentEmployeeId} />;
       default:
         return <div>Step not found</div>;
     }
@@ -65,8 +116,9 @@ const UpsertEmployeePage = () => {
       </h1>
       <StepperForm
         steps={steps}
-        initialStep={0}
+        initialStep={initialStep}
         onSubmit={handleSubmit}
+        onStepSave={handleStepSave}
         className="w-full h-full"
       >
         {renderStepContent}

@@ -12,7 +12,7 @@ import { z } from "zod";
 
 export const CreateEmployeeStep1Schema = z.object({
   profilePicture: z.string().optional(),
-  employeeCode: z.string().optional(),
+  employeeCode: z.number().int().positive("Employee code is required"),
   nameEn: z.string().min(2, "Name is required"),
   nameAr: z.string().optional(),
   dob: z.union([z.date(), z.string()]).optional(),
@@ -23,7 +23,7 @@ export const CreateEmployeeStep1Schema = z.object({
 export const UpdateEmployeeStep1Schema = z.object({
   id: z.number().int().positive(),
   profilePicture: z.string().optional(),
-  employeeCode: z.string().optional(),
+  employeeCode: z.number().int().positive("Employee code is required"),
   nameEn: z.string().min(2, "Name is required").optional(),
   nameAr: z.string().optional(),
   dob: z.union([z.date(), z.string()]).optional(),

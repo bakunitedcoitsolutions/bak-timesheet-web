@@ -16,3 +16,4 @@ export const STATUS_OPTIONS = [
 
 export * from "./permissions";
 export * from "./reports";
+export * from "./storage";

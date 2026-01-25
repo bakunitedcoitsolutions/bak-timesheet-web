@@ -11,7 +11,7 @@ import type { Prisma } from "../../../../../prisma/generated/prisma/client";
 
 export interface CreateEmployeeStep1Data {
   profilePicture?: string; // URL from Supabase Storage
-  employeeCode?: string;
+  employeeCode: number;
   nameEn: string;
   nameAr?: string;
   dob?: Date | string;
@@ -21,7 +21,7 @@ export interface CreateEmployeeStep1Data {
 
 export interface UpdateEmployeeStep1Data {
   profilePicture?: string; // URL from Supabase Storage
-  employeeCode?: string;
+  employeeCode: number;
   nameEn?: string;
   nameAr?: string;
   dob?: Date | string;
@@ -123,7 +123,7 @@ export interface EmployeeInterface {
   id: number;
   // Step 1
   profilePicture: string | null;
-  employeeCode: string | null;
+  employeeCode: number;
   nameEn: string;
   nameAr: string | null;
   dob: Date | null;

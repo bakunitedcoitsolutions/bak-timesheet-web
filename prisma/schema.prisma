@@ -145,7 +145,7 @@ model Employee {
   // Step 1
   id                Int       @id @default(autoincrement())
   profilePicture    String?
-  employeeCode      String?   @unique
+  employeeCode      Int       @unique
   nameEn            String
   nameAr            String?
   dob         DateTime?
