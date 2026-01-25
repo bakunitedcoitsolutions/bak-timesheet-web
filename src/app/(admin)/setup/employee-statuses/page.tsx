@@ -1,17 +1,38 @@
 "use client";
 import { useRouter } from "next/navigation";
+import { ProgressSpinner } from "primereact/progressspinner";
+import { useRef, useState, useEffect, useMemo, useCallback } from "react";
 
 import {
   Input,
   Table,
   Button,
+  TableRef,
+  TypeBadge,
   TableColumn,
   TableActions,
   ExportOptions,
-  CustomHeaderProps,
-  TypeBadge,
 } from "@/components";
-import { EmployeeStatus, employeeStatusesData } from "@/utils/dummy";
+import {
+  getErrorMessage,
+  createSortHandler,
+  toPrimeReactSortOrder,
+} from "@/utils/helpers";
+import { ListedEmployeeStatus } from "@/lib/db/services/employee-status/employee-status.dto";
+import { useDebounce } from "@/hooks";
+import { toastService } from "@/lib/toast";
+import { showConfirmDialog } from "@/components/common/confirm-dialog";
+import {
+  useDeleteEmployeeStatus,
+  useGetEmployeeStatuses,
+} from "@/lib/db/services/employee-status/requests";
+
+// Constants
+const SORTABLE_FIELDS = {
+  nameEn: "nameEn",
+  nameAr: "nameAr",
+  isActive: "isActive",
+} as const;
 
 const commonColumnProps = {
   sortable: true,
@@ -22,29 +43,38 @@ const commonColumnProps = {
   style: { minWidth: 200 },
 };
 
+type SortableField = keyof typeof SORTABLE_FIELDS;
+
 const columns = (
-  handleEdit: (status: EmployeeStatus) => void,
-  handleDelete: (status: EmployeeStatus) => void
-): TableColumn<EmployeeStatus>[] => [
+  handleEdit: (status: ListedEmployeeStatus) => void,
+  handleDelete: (status: ListedEmployeeStatus) => void,
+  currentPage: number = 1,
+  rowsPerPage: number = 10
+): TableColumn<ListedEmployeeStatus>[] => [
   {
     field: "id",
     header: "#",
     sortable: false,
     filterable: false,
     align: "center",
-    style: { width: "40px" },
-    body: (rowData: EmployeeStatus) => (
-      <div className={"flex items-center justify-center gap-1.5 w-[40px]"}>
-        <span className="text-sm font-medium">{rowData.id}</span>
-      </div>
-    ),
+    style: { minWidth: "70px" },
+    headerStyle: { minWidth: "70px" },
+    body: (rowData: ListedEmployeeStatus, options?: { rowIndex?: number }) => {
+      const rowIndex = options?.rowIndex ?? 0;
+      const index = (currentPage - 1) * rowsPerPage + rowIndex + 1;
+      return (
+        <div className={"flex items-center justify-center gap-1.5 w-[40px]"}>
+          <span className="text-sm font-medium">{index}</span>
+        </div>
+      );
+    },
   },
   {
     field: "nameEn",
     header: "Name",
     ...commonColumnProps,
     style: { minWidth: "200px" },
-    body: (rowData: EmployeeStatus) => (
+    body: (rowData: ListedEmployeeStatus) => (
       <span className="text-sm">{rowData.nameEn}</span>
     ),
   },
@@ -53,7 +83,7 @@ const columns = (
     header: "Arabic Name",
     ...commonColumnProps,
     style: { minWidth: "200px" },
-    body: (rowData: EmployeeStatus) => (
+    body: (rowData: ListedEmployeeStatus) => (
       <div className="w-full flex flex-1 justify-end">
         <span className="text-xl! text-right font-arabic">
           {rowData.nameAr || ""}
@@ -66,9 +96,9 @@ const columns = (
     header: "Status",
     sortable: true,
     filterable: false,
-    style: { minWidth: 100 },
+    style: { minWidth: 130 },
     align: "center",
-    body: (rowData: EmployeeStatus) => (
+    body: (rowData: ListedEmployeeStatus) => (
       <TypeBadge
         text={rowData.isActive ? "Active" : "In-Active"}
         variant={rowData.isActive ? "success" : "danger"}
@@ -82,7 +112,7 @@ const columns = (
     filterable: false,
     align: "center",
     style: { minWidth: 150 },
-    body: (rowData: EmployeeStatus) => (
+    body: (rowData: ListedEmployeeStatus) => (
       <TableActions
         rowData={rowData}
         onEdit={handleEdit}
@@ -94,48 +124,151 @@ const columns = (
 
 const EmployeeStatusesPage = () => {
   const router = useRouter();
+  const [searchValue, setSearchValue] = useState<string>("");
+  const [page, setPage] = useState<number>(1);
+  const [limit, setLimit] = useState<number>(10);
+  const [sortBy, setSortBy] = useState<SortableField | undefined>(undefined);
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc" | undefined>(
+    undefined
+  );
+  const tableRef = useRef<TableRef>(null);
+  const { mutateAsync: deleteEmployeeStatus } = useDeleteEmployeeStatus();
 
-  const handleEdit = (status: EmployeeStatus) => {
-    router.push(`/setup/employee-statuses/${status.id}`);
-  };
+  // Debounce search input
+  const debouncedSearch = useDebounce(searchValue, 500);
 
-  const handleDelete = (status: EmployeeStatus) => {
-    if (confirm(`Are you sure you want to delete ${status.nameEn}?`)) {
-      // Delete logic here
-      console.log("Delete status:", status);
+  // Reset to first page when search value changes
+  useEffect(() => {
+    if (searchValue !== debouncedSearch && page !== 1) {
+      setPage(1);
     }
+  }, [searchValue, debouncedSearch, page]);
+
+  const { data: employeeStatusesResponse, isLoading } = useGetEmployeeStatuses({
+    page,
+    limit,
+    sortBy,
+    sortOrder,
+    search: debouncedSearch || undefined,
+  });
+
+  const employeeStatuses = employeeStatusesResponse?.employeeStatuses ?? [];
+  const {
+    total,
+    page: currentPage,
+    limit: currentLimit,
+  } = employeeStatusesResponse?.pagination ?? {
+    page: 1,
+    limit: 10,
+    total: 0,
+    totalPages: 0,
   };
 
-  const renderHeader = ({
-    value,
-    onChange,
-    exportCSV,
-    exportExcel,
-  }: CustomHeaderProps) => {
+  // Memoized handlers
+  const handleEdit = useCallback(
+    (status: ListedEmployeeStatus) => {
+      router.push(`/setup/employee-statuses/${status.id}`);
+    },
+    [router]
+  );
+
+  const handleDelete = useCallback(
+    (status: ListedEmployeeStatus) => {
+      showConfirmDialog({
+        icon: "pi pi-trash",
+        title: "Delete Employee Status",
+        message: `Are you sure you want to delete "${status.nameEn}"?`,
+        onAccept: async () => {
+          await deleteEmployeeStatus(
+            { id: status.id },
+            {
+              onSuccess: () => {
+                toastService.showInfo(
+                  "Done",
+                  "Employee Status deleted successfully"
+                );
+              },
+              onError: (error: any) => {
+                const errorMessage = getErrorMessage(
+                  error,
+                  "Failed to delete employee status"
+                );
+                toastService.showError("Error", errorMessage);
+              },
+            }
+          );
+        },
+      });
+    },
+    [deleteEmployeeStatus]
+  );
+
+  const exportCSV = useCallback(() => {
+    tableRef.current?.exportCSV();
+  }, []);
+
+  const exportExcel = useCallback(() => {
+    tableRef.current?.exportExcel();
+  }, []);
+
+  const handlePageChange = useCallback(
+    (e: { page?: number; rows?: number }) => {
+      // PrimeReact uses 0-based page index, our API uses 1-based
+      setPage((e.page ?? 0) + 1);
+      setLimit(e.rows ?? currentLimit);
+    },
+    [currentLimit]
+  );
+
+  const handlePageReset = useCallback(() => {
+    setPage(1);
+  }, []);
+
+  // Memoized sort handler
+  const sortHandler = useMemo(
+    () =>
+      createSortHandler({
+        fieldMap: SORTABLE_FIELDS,
+        currentPage: page,
+        onSortByChange: setSortBy,
+        onSortOrderChange: setSortOrder,
+        onPageReset: handlePageReset,
+      }),
+    [page, handlePageReset]
+  );
+
+  // Memoized columns
+  const tableColumns = useMemo(
+    () => columns(handleEdit, handleDelete, currentPage, currentLimit),
+    [handleEdit, handleDelete, currentPage, currentLimit]
+  );
+
+  // Memoized header renderer
+  const renderHeader = useCallback(() => {
     return (
       <div className="flex flex-col md:flex-row justify-between items-center gap-3 flex-1 w-full">
         <div className="w-full md:w-auto">
           <Input
             small
             className="w-full"
-            value={value}
+            value={searchValue}
             icon="pi pi-search"
             iconPosition="left"
-            onChange={onChange}
+            onChange={(e) => {
+              setSearchValue(e.target.value);
+            }}
             placeholder="Search"
           />
         </div>
         <div className="flex items-center gap-3 w-full md:w-auto justify-end">
           <div>
-            <ExportOptions
-              exportCSV={exportCSV || (() => {})}
-              exportExcel={exportExcel || (() => {})}
-            />
+            <ExportOptions exportCSV={exportCSV} exportExcel={exportExcel} />
           </div>
         </div>
       </div>
     );
-  };
+  }, [searchValue, exportCSV, exportExcel]);
+
   return (
     <div className="flex h-full flex-col gap-6 px-6 py-6">
       <div className="flex flex-col md:flex-row justify-between items-center gap-3 shrink-0">
@@ -160,12 +293,26 @@ const EmployeeStatusesPage = () => {
       <div className="bg-white flex-1 rounded-xl overflow-hidden min-h-0">
         <Table
           dataKey="id"
-          data={employeeStatusesData}
+          removableSort
+          data={employeeStatuses}
+          ref={tableRef}
+          loading={isLoading}
+          loadingIcon={
+            <ProgressSpinner style={{ width: "50px", height: "50px" }} />
+          }
           customHeader={renderHeader}
-          columns={columns(handleEdit, handleDelete)}
+          columns={tableColumns}
+          sortMode="single"
+          onPage={handlePageChange}
+          onSort={sortHandler}
+          sortField={sortBy}
+          sortOrder={toPrimeReactSortOrder(sortOrder) as any}
           pagination={true}
           rowsPerPageOptions={[10, 25, 50]}
-          rows={10}
+          rows={currentLimit}
+          first={(currentPage - 1) * currentLimit}
+          totalRecords={total}
+          globalSearch={true}
           scrollable
           scrollHeight="65vh"
         />
