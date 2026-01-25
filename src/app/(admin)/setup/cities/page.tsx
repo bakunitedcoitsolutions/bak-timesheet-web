@@ -1,18 +1,39 @@
 "use client";
-import { useMemo } from "react";
 import { useRouter } from "next/navigation";
+import { ProgressSpinner } from "primereact/progressspinner";
+import { useRef, useState, useEffect, useMemo, useCallback } from "react";
 
 import {
   Input,
   Table,
   Button,
+  TableRef,
   TypeBadge,
   TableColumn,
   TableActions,
   ExportOptions,
-  CustomHeaderProps,
 } from "@/components";
-import { City, citiesData, countriesData } from "@/utils/dummy";
+import {
+  getErrorMessage,
+  createSortHandler,
+  toPrimeReactSortOrder,
+} from "@/utils/helpers";
+import { ListedCity } from "@/lib/db/services/city/city.dto";
+import { useDebounce } from "@/hooks";
+import { toastService } from "@/lib/toast";
+import { showConfirmDialog } from "@/components/common/confirm-dialog";
+import {
+  useDeleteCity,
+  useGetCities,
+} from "@/lib/db/services/city/requests";
+
+// Constants
+const SORTABLE_FIELDS = {
+  nameEn: "nameEn",
+  nameAr: "nameAr",
+  isActive: "isActive",
+  showInPayroll: "showInPayroll",
+} as const;
 
 const commonColumnProps = {
   sortable: true,
@@ -23,144 +44,241 @@ const commonColumnProps = {
   style: { minWidth: 200 },
 };
 
+type SortableField = keyof typeof SORTABLE_FIELDS;
+
+const columns = (
+  handleEdit: (city: ListedCity) => void,
+  handleDelete: (city: ListedCity) => void,
+  currentPage: number = 1,
+  rowsPerPage: number = 10
+): TableColumn<ListedCity>[] => [
+  {
+    field: "id",
+    header: "#",
+    sortable: false,
+    filterable: false,
+    align: "center",
+    style: { minWidth: "70px" },
+    headerStyle: { minWidth: "70px" },
+    body: (rowData: ListedCity, options?: { rowIndex?: number }) => {
+      const rowIndex = options?.rowIndex ?? 0;
+      const index = (currentPage - 1) * rowsPerPage + rowIndex + 1;
+      return (
+        <div className={"flex items-center justify-center gap-1.5 w-[40px]"}>
+          <span className="text-sm font-medium">{index}</span>
+        </div>
+      );
+    },
+  },
+  {
+    field: "nameEn",
+    header: "Name",
+    ...commonColumnProps,
+    style: { minWidth: "200px" },
+    body: (rowData: ListedCity) => (
+      <span className="text-sm">{rowData.nameEn}</span>
+    ),
+  },
+  {
+    field: "nameAr",
+    header: "Arabic Name",
+    ...commonColumnProps,
+    style: { minWidth: "200px" },
+    body: (rowData: ListedCity) => (
+      <div className="w-full flex flex-1 justify-end">
+        <span className="text-xl! text-right font-arabic">
+          {rowData.nameAr || ""}
+        </span>
+      </div>
+    ),
+  },
+  {
+    field: "countryId",
+    header: "Country",
+    sortable: false,
+    filterable: false,
+    style: { minWidth: "200px" },
+    body: (rowData: ListedCity) => (
+      <span className="text-sm">
+        {rowData.country?.nameEn || "-"}
+      </span>
+    ),
+  },
+  {
+    field: "isActive",
+    header: "Status",
+    sortable: true,
+    filterable: false,
+    style: { minWidth: 130 },
+    align: "center",
+    body: (rowData: ListedCity) => (
+      <TypeBadge
+        text={rowData.isActive ? "Active" : "In-Active"}
+        variant={rowData.isActive ? "success" : "danger"}
+      />
+    ),
+  },
+  {
+    field: "actions",
+    header: "Actions",
+    sortable: false,
+    filterable: false,
+    align: "center",
+    style: { minWidth: 150 },
+    body: (rowData: ListedCity) => (
+      <TableActions
+        rowData={rowData}
+        onEdit={handleEdit}
+        onDelete={handleDelete}
+      />
+    ),
+  },
+];
+
 const CitiesPage = () => {
   const router = useRouter();
+  const [searchValue, setSearchValue] = useState<string>("");
+  const [page, setPage] = useState<number>(1);
+  const [limit, setLimit] = useState<number>(10);
+  const [sortBy, setSortBy] = useState<SortableField | undefined>(undefined);
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc" | undefined>(
+    undefined
+  );
+  const tableRef = useRef<TableRef>(null);
+  const { mutateAsync: deleteCity } = useDeleteCity();
 
-  // Create a map of countryId to country name for efficient lookup
-  const countryMap = useMemo(() => {
-    const map = new Map<number, string>();
-    countriesData.forEach((country) => {
-      map.set(country.id, country.nameEn);
-    });
-    return map;
+  // Debounce search input
+  const debouncedSearch = useDebounce(searchValue, 500);
+
+  // Reset to first page when search value changes
+  useEffect(() => {
+    if (searchValue !== debouncedSearch && page !== 1) {
+      setPage(1);
+    }
+  }, [searchValue, debouncedSearch, page]);
+
+  const { data: citiesResponse, isLoading } = useGetCities({
+    page,
+    limit,
+    sortBy,
+    sortOrder,
+    search: debouncedSearch || undefined,
+  });
+
+  const cities = citiesResponse?.cities ?? [];
+  const {
+    total,
+    page: currentPage,
+    limit: currentLimit,
+  } = citiesResponse?.pagination ?? {
+    page: 1,
+    limit: 10,
+    total: 0,
+    totalPages: 0,
+  };
+
+  // Memoized handlers
+  const handleEdit = useCallback(
+    (city: ListedCity) => {
+      router.push(`/setup/cities/${city.id}`);
+    },
+    [router]
+  );
+
+  const handleDelete = useCallback(
+    (city: ListedCity) => {
+      showConfirmDialog({
+        icon: "pi pi-trash",
+        title: "Delete City",
+        message: `Are you sure you want to delete "${city.nameEn}"?`,
+        onAccept: async () => {
+          await deleteCity(
+            { id: city.id },
+            {
+              onSuccess: () => {
+                toastService.showInfo("Done", "City deleted successfully");
+              },
+              onError: (error: any) => {
+                const errorMessage = getErrorMessage(
+                  error,
+                  "Failed to delete city"
+                );
+                toastService.showError("Error", errorMessage);
+              },
+            }
+          );
+        },
+      });
+    },
+    [deleteCity]
+  );
+
+  const exportCSV = useCallback(() => {
+    tableRef.current?.exportCSV();
   }, []);
 
-  const columns = (
-    handleEdit: (city: City) => void,
-    handleDelete: (city: City) => void
-  ): TableColumn<City>[] => [
-    {
-      field: "id",
-      header: "#",
-      sortable: false,
-      filterable: false,
-      align: "center",
-      style: { width: "40px" },
-      body: (rowData: City) => (
-        <div className={"flex items-center justify-center gap-1.5 w-[40px]"}>
-          <span className="text-sm font-medium">{rowData.id}</span>
-        </div>
-      ),
-    },
-    {
-      field: "nameEn",
-      header: "Name",
-      ...commonColumnProps,
-      style: { minWidth: "200px" },
-      body: (rowData: City) => (
-        <span className="text-sm">{rowData.nameEn}</span>
-      ),
-    },
-    {
-      field: "nameAr",
-      header: "Arabic Name",
-      ...commonColumnProps,
-      style: { minWidth: "200px" },
-      body: (rowData: City) => (
-        <div className="w-full flex flex-1 justify-end">
-          <span className="text-xl! text-right font-arabic">
-            {rowData.nameAr || ""}
-          </span>
-        </div>
-      ),
-    },
-    {
-      field: "countryId",
-      header: "Country",
-      ...commonColumnProps,
-      style: { minWidth: "200px" },
-      body: (rowData: City) => (
-        <span className="text-sm">
-          {countryMap.get(rowData.countryId) || "Unknown"}
-        </span>
-      ),
-    },
-    {
-      field: "isActive",
-      header: "Status",
-      sortable: true,
-      filterable: false,
-      style: { minWidth: 100 },
-      align: "center",
-      body: (rowData: City) => (
-        <TypeBadge
-          text={rowData.isActive ? "Active" : "Inactive"}
-          variant={rowData.isActive ? "success" : "danger"}
-        />
-      ),
-    },
-    {
-      field: "actions",
-      header: "Actions",
-      sortable: false,
-      filterable: false,
-      align: "center",
-      style: { minWidth: 150 },
-      body: (rowData: City) => (
-        <TableActions
-          rowData={rowData}
-          onEdit={handleEdit}
-          onDelete={handleDelete}
-        />
-      ),
-    },
-  ];
+  const exportExcel = useCallback(() => {
+    tableRef.current?.exportExcel();
+  }, []);
 
-  const handleEdit = (city: City) => {
-    console.log("Edit city:", city);
-    // TODO: Navigate to edit page or open edit modal
-    // Example: router.push(`/cities/${city.id}/edit`);
-  };
+  const handlePageChange = useCallback(
+    (e: { page?: number; rows?: number }) => {
+      // PrimeReact uses 0-based page index, our API uses 1-based
+      setPage((e.page ?? 0) + 1);
+      setLimit(e.rows ?? currentLimit);
+    },
+    [currentLimit]
+  );
 
-  const handleDelete = (city: City) => {
-    console.log("Delete city:", city);
-    // TODO: Implement delete functionality with confirmation
-    if (confirm(`Are you sure you want to delete ${city.nameEn}?`)) {
-      // Delete logic here
-      // Example: deleteCity(city.id);
-    }
-  };
+  const handlePageReset = useCallback(() => {
+    setPage(1);
+  }, []);
 
-  const renderHeader = ({
-    value,
-    onChange,
-    exportCSV,
-    exportExcel,
-  }: CustomHeaderProps) => {
+  // Memoized sort handler
+  const sortHandler = useMemo(
+    () =>
+      createSortHandler({
+        fieldMap: SORTABLE_FIELDS,
+        currentPage: page,
+        onSortByChange: setSortBy,
+        onSortOrderChange: setSortOrder,
+        onPageReset: handlePageReset,
+      }),
+    [page, handlePageReset]
+  );
+
+  // Memoized columns
+  const tableColumns = useMemo(
+    () => columns(handleEdit, handleDelete, currentPage, currentLimit),
+    [handleEdit, handleDelete, currentPage, currentLimit]
+  );
+
+  // Memoized header renderer
+  const renderHeader = useCallback(() => {
     return (
       <div className="flex flex-col md:flex-row justify-between items-center gap-3 flex-1 w-full">
         <div className="w-full md:w-auto">
           <Input
             small
             className="w-full"
-            value={value}
+            value={searchValue}
             icon="pi pi-search"
             iconPosition="left"
-            onChange={onChange}
+            onChange={(e) => {
+              setSearchValue(e.target.value);
+            }}
             placeholder="Search"
           />
         </div>
         <div className="flex items-center gap-3 w-full md:w-auto justify-end">
           <div>
-            <ExportOptions
-              exportCSV={exportCSV || (() => {})}
-              exportExcel={exportExcel || (() => {})}
-            />
+            <ExportOptions exportCSV={exportCSV} exportExcel={exportExcel} />
           </div>
         </div>
       </div>
     );
-  };
+  }, [searchValue, exportCSV, exportExcel]);
+
   return (
     <div className="flex h-full flex-col gap-6 px-6 py-6">
       <div className="flex flex-col md:flex-row justify-between items-center gap-3 shrink-0">
@@ -169,7 +287,7 @@ const CitiesPage = () => {
             City Management
           </h1>
           <p className="text-sm text-gray-600 mt-1">
-            View, Manage city records, and city details.
+            View, manage city records, and city details.
           </p>
         </div>
         <div className="w-full md:w-auto">
@@ -185,12 +303,26 @@ const CitiesPage = () => {
       <div className="bg-white flex-1 rounded-xl overflow-hidden min-h-0">
         <Table
           dataKey="id"
-          data={citiesData}
+          removableSort
+          data={cities}
+          ref={tableRef}
+          loading={isLoading}
+          loadingIcon={
+            <ProgressSpinner style={{ width: "50px", height: "50px" }} />
+          }
           customHeader={renderHeader}
-          columns={columns(handleEdit, handleDelete)}
+          columns={tableColumns}
+          sortMode="single"
+          onPage={handlePageChange}
+          onSort={sortHandler}
+          sortField={sortBy}
+          sortOrder={toPrimeReactSortOrder(sortOrder) as any}
           pagination={true}
           rowsPerPageOptions={[10, 25, 50]}
-          rows={10}
+          rows={currentLimit}
+          first={(currentPage - 1) * currentLimit}
+          totalRecords={total}
+          globalSearch={true}
           scrollable
           scrollHeight="65vh"
         />

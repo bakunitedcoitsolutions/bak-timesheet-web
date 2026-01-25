@@ -5,6 +5,7 @@
 
 import type { BranchInterface } from "../branch";
 import type { UserPrivileges } from "@/utils/dummy";
+import type { UserRoleInterface } from "../user-role";
 
 // ---------------------------------------------------------------------------
 // Part 1: Types used by services (service layer contracts)
@@ -48,16 +49,6 @@ export interface ListUsersParams {
   search?: string;
   sortOrder?: "asc" | "desc";
   sortBy?: ListUsersSortableField;
-}
-
-export interface UserRoleInterface {
-  id: number;
-  nameEn: string;
-  nameAr: string;
-  access: string;
-  isActive: boolean;
-  createdAt: Date | any;
-  updatedAt: Date | any;
 }
 
 export interface UserPrivilegeInterface {
