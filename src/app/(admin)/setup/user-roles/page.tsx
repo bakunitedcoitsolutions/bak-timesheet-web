@@ -1,22 +1,23 @@
 "use client";
-import { useRouter } from "next/navigation";
+import { ProgressSpinner } from "primereact/progressspinner";
+import { useRef, useState, useMemo, useCallback } from "react";
 
 import {
   Input,
   Table,
-  Button,
-  TableColumn,
-  TableActions,
-  ExportOptions,
-  CustomHeaderProps,
+  TableRef,
   TypeBadge,
+  TableColumn,
+  ExportOptions,
 } from "@/components";
-import { UserRole, userRolesData } from "@/utils/dummy";
+import { useGetUserRoles } from "@/lib/db/services/user-role/requests";
+import { UserRoleInterface } from "@/lib/db/services/user-role/user-role.service";
 
 const getAccessDefinition = (access: string): string => {
   const definitions: Record<string, string> = {
     Admin: "Can do anything of all branches (all functionalities)",
     Manager: "Can do anything of all branches except user management",
+    Branch: "Can do anything within assigned branch only",
     "Access-Enabled User":
       "Customizable permissions with checkboxes for each feature",
   };
@@ -32,29 +33,30 @@ const commonColumnProps = {
   style: { minWidth: 200 },
 };
 
-const columns = (
-  handleEdit: (role: UserRole) => void,
-  handleDelete: (role: UserRole) => void
-): TableColumn<UserRole>[] => [
+const columns = (): TableColumn<UserRoleInterface>[] => [
   {
     field: "id",
     header: "#",
     sortable: false,
     filterable: false,
     align: "center",
-    style: { width: "40px" },
-    body: (rowData: UserRole) => (
-      <div className={"flex items-center justify-center gap-1.5 w-[40px]"}>
-        <span className="text-sm font-medium">{rowData.id}</span>
-      </div>
-    ),
+    style: { minWidth: "70px" },
+    headerStyle: { minWidth: "70px" },
+    body: (rowData: UserRoleInterface, options?: { rowIndex?: number }) => {
+      const rowIndex = options?.rowIndex ?? 0;
+      return (
+        <div className={"flex items-center justify-center gap-1.5 w-[40px]"}>
+          <span className="text-sm font-medium">{rowIndex + 1}</span>
+        </div>
+      );
+    },
   },
   {
     field: "nameEn",
     header: "Name",
     ...commonColumnProps,
     style: { minWidth: "200px" },
-    body: (rowData: UserRole) => (
+    body: (rowData: UserRoleInterface) => (
       <span className="text-sm">{rowData.nameEn}</span>
     ),
   },
@@ -63,7 +65,7 @@ const columns = (
     header: "Arabic Name",
     ...commonColumnProps,
     style: { minWidth: "200px" },
-    body: (rowData: UserRole) => (
+    body: (rowData: UserRoleInterface) => (
       <div className="w-full flex flex-1 justify-end">
         <span className="text-xl! text-right font-arabic">
           {rowData.nameAr || ""}
@@ -77,7 +79,7 @@ const columns = (
     sortable: false,
     filterable: false,
     style: { minWidth: "300px" },
-    body: (rowData: UserRole) => (
+    body: (rowData: UserRoleInterface) => (
       <span className="text-sm text-gray-600">
         {getAccessDefinition(rowData.access)}
       </span>
@@ -88,76 +90,71 @@ const columns = (
     header: "Status",
     sortable: true,
     filterable: false,
-    style: { minWidth: 100 },
+    style: { minWidth: 130 },
     align: "center",
-    body: (rowData: UserRole) => (
+    body: (rowData: UserRoleInterface) => (
       <TypeBadge
         text={rowData.isActive ? "Active" : "In-Active"}
         variant={rowData.isActive ? "success" : "danger"}
       />
     ),
   },
-  {
-    field: "actions",
-    header: "Actions",
-    sortable: false,
-    filterable: false,
-    align: "center",
-    style: { minWidth: 150 },
-    body: (rowData: UserRole) => (
-      <TableActions
-        rowData={rowData}
-        onEdit={handleEdit}
-        onDelete={handleDelete}
-      />
-    ),
-  },
 ];
 
 const UserRolesPage = () => {
-  const router = useRouter();
+  const [searchValue, setSearchValue] = useState<string>("");
+  const tableRef = useRef<TableRef>(null);
+  const { data: userRoles, isLoading } = useGetUserRoles();
 
-  const handleEdit = (role: UserRole) => {
-    router.push(`/setup/user-roles/${role.id}`);
-  };
+  // Client-side filtering (since service doesn't support search)
+  const filteredUserRoles = useMemo(() => {
+    if (!userRoles || !searchValue) return userRoles || [];
+    const searchLower = searchValue.toLowerCase();
+    return userRoles.filter(
+      (role: UserRoleInterface) =>
+        role.nameEn.toLowerCase().includes(searchLower) ||
+        role.nameAr?.toLowerCase().includes(searchLower) ||
+        role.access.toLowerCase().includes(searchLower)
+    );
+  }, [userRoles, searchValue]);
 
-  const handleDelete = (role: UserRole) => {
-    if (confirm(`Are you sure you want to delete ${role.nameEn}?`)) {
-      // Delete logic here
-      console.log("Delete role:", role);
-    }
-  };
+  const exportCSV = useCallback(() => {
+    tableRef.current?.exportCSV();
+  }, []);
 
-  const renderHeader = ({
-    value,
-    onChange,
-    exportCSV,
-    exportExcel,
-  }: CustomHeaderProps) => {
+  const exportExcel = useCallback(() => {
+    tableRef.current?.exportExcel();
+  }, []);
+
+  // Memoized columns
+  const tableColumns = useMemo(() => columns(), []);
+
+  // Memoized header renderer
+  const renderHeader = useCallback(() => {
     return (
       <div className="flex flex-col md:flex-row justify-between items-center gap-3 flex-1 w-full">
         <div className="w-full md:w-auto">
           <Input
             small
             className="w-full"
-            value={value}
+            value={searchValue}
             icon="pi pi-search"
             iconPosition="left"
-            onChange={onChange}
+            onChange={(e) => {
+              setSearchValue(e.target.value);
+            }}
             placeholder="Search"
           />
         </div>
         <div className="flex items-center gap-3 w-full md:w-auto justify-end">
           <div>
-            <ExportOptions
-              exportCSV={exportCSV || (() => {})}
-              exportExcel={exportExcel || (() => {})}
-            />
+            <ExportOptions exportCSV={exportCSV} exportExcel={exportExcel} />
           </div>
         </div>
       </div>
     );
-  };
+  }, [searchValue, exportCSV, exportExcel]);
+
   return (
     <div className="flex h-full flex-col gap-6 px-6 py-6">
       <div className="flex flex-col md:flex-row justify-between items-center gap-3 shrink-0">
@@ -166,19 +163,25 @@ const UserRolesPage = () => {
             User Role Management
           </h1>
           <p className="text-sm text-gray-600 mt-1">
-            View, manage user role records, and role details.
+            View user role records and role details. (View Only)
           </p>
         </div>
       </div>
       <div className="bg-white flex-1 rounded-xl overflow-hidden min-h-0">
         <Table
           dataKey="id"
-          data={userRolesData}
+          data={filteredUserRoles}
+          ref={tableRef}
+          loading={isLoading}
+          loadingIcon={
+            <ProgressSpinner style={{ width: "50px", height: "50px" }} />
+          }
           customHeader={renderHeader}
-          columns={columns(handleEdit, handleDelete)}
+          columns={tableColumns}
           pagination={true}
           rowsPerPageOptions={[10, 25, 50]}
           rows={10}
+          globalSearch={true}
           scrollable
           scrollHeight="65vh"
         />
