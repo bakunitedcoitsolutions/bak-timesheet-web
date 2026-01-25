@@ -33,7 +33,14 @@ export const ListDesignationsParamsSchema = z.object({
   search: z.string().optional(),
   sortOrder: z.enum(["asc", "desc"]).optional(),
   sortBy: z
-    .enum(["nameEn", "nameAr", "isActive", "displayOrderKey"])
+    .enum([
+      "nameEn",
+      "nameAr",
+      "isActive",
+      "displayOrderKey",
+      "hoursPerDay",
+      "breakfastAllowance",
+    ])
     .optional(),
 });
 

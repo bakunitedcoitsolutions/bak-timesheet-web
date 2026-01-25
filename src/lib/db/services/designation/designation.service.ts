@@ -34,40 +34,106 @@ const designationSelect = {
  * Create a new designation
  */
 export const createDesignation = async (data: CreateDesignationData) => {
-  // Validate: nameEn must be unique
-  const existingDesignation = await prisma.designation.findFirst({
-    where: { nameEn: data.nameEn },
-    select: { id: true },
+  return prisma.$transaction(async (tx: PrismaTransactionClient) => {
+    // Validate: nameEn must be unique
+    const existingDesignation = await tx.designation.findFirst({
+      where: { nameEn: data.nameEn },
+      select: { id: true },
+    });
+
+    if (existingDesignation) {
+      throw new Error("Designation name already exists");
+    }
+
+    let finalDisplayOrderKey = data.displayOrderKey ?? null;
+
+    // If displayOrderKey is null or undefined, auto-assign the next number from the last
+    if (finalDisplayOrderKey === null || finalDisplayOrderKey === undefined) {
+      const lastRecord = await tx.designation.findFirst({
+        where: {
+          displayOrderKey: {
+            not: null,
+          },
+        },
+        orderBy: {
+          displayOrderKey: "desc",
+        },
+        select: {
+          displayOrderKey: true,
+        },
+      });
+
+      // If no records exist or all have null, start from 1
+      finalDisplayOrderKey = lastRecord?.displayOrderKey
+        ? lastRecord.displayOrderKey + 1
+        : 1;
+    } else {
+      // Auto-adjust displayOrderKey: if the key exists, shift all records with >= key by 1
+      const recordsToShift = await tx.designation.findMany({
+        where: {
+          displayOrderKey: {
+            gte: finalDisplayOrderKey,
+          },
+        },
+        select: { id: true, displayOrderKey: true },
+      });
+
+      // Update each record to shift by 1
+      for (const record of recordsToShift) {
+        if (record.displayOrderKey !== null) {
+          await tx.designation.update({
+            where: { id: record.id },
+            data: {
+              displayOrderKey: record.displayOrderKey + 1,
+            },
+          });
+        }
+      }
+    }
+
+    const designation = await tx.designation.create({
+      data: {
+        nameEn: data.nameEn,
+        nameAr: data.nameAr,
+        hoursPerDay: data.hoursPerDay ?? null,
+        displayOrderKey: finalDisplayOrderKey,
+        color: data.color ?? "#FFFFFF", // Default to white
+        breakfastAllowance: data.breakfastAllowance ?? null,
+        isActive: data.isActive ?? true,
+      },
+      select: designationSelect,
+    });
+
+    // Convert Decimal to number for client serialization
+    return {
+      ...designation,
+      breakfastAllowance: designation.breakfastAllowance
+        ? Number(designation.breakfastAllowance)
+        : null,
+    };
   });
-
-  if (existingDesignation) {
-    throw new Error("Designation name already exists");
-  }
-
-  const designation = await prisma.designation.create({
-    data: {
-      nameEn: data.nameEn,
-      nameAr: data.nameAr,
-      hoursPerDay: data.hoursPerDay ?? null,
-      displayOrderKey: data.displayOrderKey ?? null,
-      color: data.color ?? null,
-      breakfastAllowance: data.breakfastAllowance ?? null,
-      isActive: data.isActive ?? true,
-    },
-    select: designationSelect,
-  });
-
-  return designation;
 };
 
 /**
  * Get designation by ID
  */
 export const findDesignationById = async (id: number) => {
-  return prisma.designation.findUnique({
+  const designation = await prisma.designation.findUnique({
     where: { id },
     select: designationSelect,
   });
+
+  if (!designation) {
+    return null;
+  }
+
+  // Convert Decimal to number for client serialization
+  return {
+    ...designation,
+    breakfastAllowance: designation.breakfastAllowance
+      ? Number(designation.breakfastAllowance)
+      : null,
+  };
 };
 
 /**
@@ -78,10 +144,10 @@ export const updateDesignation = async (
   data: UpdateDesignationData
 ) => {
   return prisma.$transaction(async (tx: PrismaTransactionClient) => {
-    // Check if designation exists
+    // Check if designation exists and get its displayOrderKey
     const existingDesignation = await tx.designation.findUnique({
       where: { id },
-      select: { id: true },
+      select: { id: true, displayOrderKey: true },
     });
 
     if (!existingDesignation) {
@@ -100,6 +166,109 @@ export const updateDesignation = async (
 
       if (duplicateDesignation) {
         throw new Error("Designation name already exists");
+      }
+    }
+
+    // Auto-adjust displayOrderKey if it's being updated
+    if (data.displayOrderKey !== undefined) {
+      const oldOrderKey = existingDesignation.displayOrderKey;
+      const newOrderKey = data.displayOrderKey ?? null;
+
+      if (newOrderKey !== null && oldOrderKey !== newOrderKey) {
+        if (oldOrderKey === null) {
+          // Moving from null to a specific key: shift records with >= newOrderKey by 1
+          const recordsToShift = await tx.designation.findMany({
+            where: {
+              displayOrderKey: {
+                gte: newOrderKey,
+              },
+              NOT: { id },
+            },
+            select: { id: true, displayOrderKey: true },
+          });
+
+          for (const record of recordsToShift) {
+            if (record.displayOrderKey !== null) {
+              await tx.designation.update({
+                where: { id: record.id },
+                data: {
+                  displayOrderKey: record.displayOrderKey + 1,
+                },
+              });
+            }
+          }
+        } else if (newOrderKey === null) {
+          // Moving from a specific key to null: shift records with > oldOrderKey down by 1
+          const recordsToShift = await tx.designation.findMany({
+            where: {
+              displayOrderKey: {
+                gt: oldOrderKey,
+              },
+              NOT: { id },
+            },
+            select: { id: true, displayOrderKey: true },
+          });
+
+          for (const record of recordsToShift) {
+            if (record.displayOrderKey !== null) {
+              await tx.designation.update({
+                where: { id: record.id },
+                data: {
+                  displayOrderKey: record.displayOrderKey - 1,
+                },
+              });
+            }
+          }
+        } else {
+          // Moving from one key to another
+          if (newOrderKey > oldOrderKey) {
+            // Moving down: shift records between old and new down by 1
+            const recordsToShift = await tx.designation.findMany({
+              where: {
+                displayOrderKey: {
+                  gt: oldOrderKey,
+                  lte: newOrderKey,
+                },
+                NOT: { id },
+              },
+              select: { id: true, displayOrderKey: true },
+            });
+
+            for (const record of recordsToShift) {
+              if (record.displayOrderKey !== null) {
+                await tx.designation.update({
+                  where: { id: record.id },
+                  data: {
+                    displayOrderKey: record.displayOrderKey - 1,
+                  },
+                });
+              }
+            }
+          } else {
+            // Moving up: shift records between new and old up by 1
+            const recordsToShift = await tx.designation.findMany({
+              where: {
+                displayOrderKey: {
+                  gte: newOrderKey,
+                  lt: oldOrderKey,
+                },
+                NOT: { id },
+              },
+              select: { id: true, displayOrderKey: true },
+            });
+
+            for (const record of recordsToShift) {
+              if (record.displayOrderKey !== null) {
+                await tx.designation.update({
+                  where: { id: record.id },
+                  data: {
+                    displayOrderKey: record.displayOrderKey + 1,
+                  },
+                });
+              }
+            }
+          }
+        }
       }
     }
 
@@ -122,7 +291,13 @@ export const updateDesignation = async (
       select: designationSelect,
     });
 
-    return updatedDesignation;
+    // Convert Decimal to number for client serialization
+    return {
+      ...updatedDesignation,
+      breakfastAllowance: updatedDesignation.breakfastAllowance
+        ? Number(updatedDesignation.breakfastAllowance)
+        : null,
+    };
   });
 };
 
@@ -131,10 +306,10 @@ export const updateDesignation = async (
  */
 export const deleteDesignation = async (id: number): Promise<void> => {
   return prisma.$transaction(async (tx: PrismaTransactionClient) => {
-    // Check if designation exists
+    // Check if designation exists and get its displayOrderKey
     const existingDesignation = await tx.designation.findUnique({
       where: { id },
-      select: { id: true },
+      select: { id: true, displayOrderKey: true },
     });
 
     if (!existingDesignation) {
@@ -163,6 +338,43 @@ export const deleteDesignation = async (id: number): Promise<void> => {
       );
     }
 
+    // If the record has a displayOrderKey, shift down all records with higher keys
+    if (existingDesignation.displayOrderKey !== null) {
+      // Check if there are records with higher keys (if not, this is the last item - no need to shift)
+      const hasRecordsAfter = await tx.designation.findFirst({
+        where: {
+          displayOrderKey: {
+            gt: existingDesignation.displayOrderKey,
+          },
+        },
+        select: { id: true },
+      });
+
+      // Only shift if there are records with higher keys (not the last item)
+      if (hasRecordsAfter) {
+        const recordsToShift = await tx.designation.findMany({
+          where: {
+            displayOrderKey: {
+              gt: existingDesignation.displayOrderKey,
+            },
+          },
+          select: { id: true, displayOrderKey: true },
+        });
+
+        // Shift each record down by 1
+        for (const record of recordsToShift) {
+          if (record.displayOrderKey !== null) {
+            await tx.designation.update({
+              where: { id: record.id },
+              data: {
+                displayOrderKey: record.displayOrderKey - 1,
+              },
+            });
+          }
+        }
+      }
+    }
+
     // Delete designation
     await tx.designation.delete({
       where: { id },
@@ -189,11 +401,13 @@ export const listDesignations = async (
     ];
   }
 
-  // Determine sort order (default: desc)
-  const sortOrder = params.sortOrder || "desc";
+  // Determine sort order (default: asc for displayOrderKey, desc for others)
+  const sortOrder =
+    params.sortOrder || (params.sortBy === "displayOrderKey" ? "asc" : "desc");
 
   // Build orderBy clause based on sortBy parameter
-  let orderBy: any = { createdAt: "desc" }; // Default sort
+  // Default: sort by displayOrderKey ascending (nulls go last in ascending order), then by createdAt descending
+  let orderBy: any = [{ displayOrderKey: "asc" }, { createdAt: "desc" }];
 
   if (params.sortBy) {
     const sortBy = params.sortBy;
@@ -202,11 +416,19 @@ export const listDesignations = async (
       "nameAr",
       "isActive",
       "displayOrderKey",
+      "hoursPerDay",
+      "breakfastAllowance",
     ] as const;
 
     // Only allow sorting by the specified valid fields
     if (validFields.includes(sortBy)) {
-      orderBy = { [sortBy]: sortOrder };
+      if (sortBy === "displayOrderKey") {
+        // For displayOrderKey, use array to maintain secondary sort by createdAt
+        orderBy = [{ displayOrderKey: sortOrder }, { createdAt: "desc" }];
+      } else {
+        // For other fields, simple sort
+        orderBy = { [sortBy]: sortOrder };
+      }
     }
   }
 
@@ -221,8 +443,16 @@ export const listDesignations = async (
     prisma.designation.count({ where }),
   ]);
 
+  // Convert Decimal to number for client serialization
+  const transformedDesignations = designations.map((designation) => ({
+    ...designation,
+    breakfastAllowance: designation.breakfastAllowance
+      ? Number(designation.breakfastAllowance)
+      : null,
+  }));
+
   return {
-    designations,
+    designations: transformedDesignations,
     pagination: {
       page,
       limit,

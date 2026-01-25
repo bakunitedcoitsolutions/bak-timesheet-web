@@ -29,7 +29,9 @@ export type ListDesignationsSortableField =
   | "nameEn"
   | "nameAr"
   | "isActive"
-  | "displayOrderKey";
+  | "displayOrderKey"
+  | "hoursPerDay"
+  | "breakfastAllowance";
 
 export interface ListDesignationsParams {
   page?: number;
@@ -46,7 +48,7 @@ export interface DesignationInterface {
   hoursPerDay: number | null;
   displayOrderKey: number | null;
   color: string | null;
-  breakfastAllowance: Prisma.Decimal | null;
+  breakfastAllowance: number | null; // Converted from Decimal for client serialization
   isActive: boolean;
   createdAt: Date | any;
   updatedAt: Date | any;
