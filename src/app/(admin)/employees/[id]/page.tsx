@@ -3,8 +3,6 @@
 import { useEffect, useState, useRef } from "react";
 import { useParams, useRouter } from "next/navigation";
 
-import { getEntityModeFromParam } from "@/helpers";
-import { StepperForm, StepperStep } from "@/components/forms";
 import {
   Step1,
   Step2,
@@ -12,7 +10,10 @@ import {
   Step4,
   Step5,
   type Step1Handle,
+  type Step2Handle,
 } from "@/components";
+import { getEntityModeFromParam } from "@/helpers";
+import { StepperForm, StepperStep } from "@/components/forms";
 
 const steps: StepperStep[] = [
   { id: "basic-info", label: "Basic Info", number: 1 },
@@ -39,6 +40,7 @@ const UpsertEmployeePage = () => {
     isEditMode && employeeId ? Number(employeeId) : null
   );
   const step1Ref = useRef<Step1Handle | null>(null);
+  const step2Ref = useRef<Step2Handle | null>(null);
 
   const [initialStep] = useState(() => {
     if (typeof window !== "undefined" && isEditMode && employeeId) {
@@ -76,6 +78,9 @@ const UpsertEmployeePage = () => {
     if (step === 0 && step1Ref.current) {
       return await step1Ref.current.submit();
     }
+    if (step === 1 && step2Ref.current) {
+      return await step2Ref.current.submit();
+    }
     return true;
   };
 
@@ -97,7 +102,7 @@ const UpsertEmployeePage = () => {
           />
         );
       case 1:
-        return <Step2 employeeId={currentEmployeeId} />;
+        return <Step2 ref={step2Ref} employeeId={currentEmployeeId} />;
       case 2:
         return <Step3 employeeId={currentEmployeeId} />;
       case 3:
@@ -116,7 +121,8 @@ const UpsertEmployeePage = () => {
       </h1>
       <StepperForm
         steps={steps}
-        initialStep={initialStep}
+        initialStep={1}
+        // initialStep={initialStep}
         onSubmit={handleSubmit}
         onStepSave={handleStepSave}
         className="w-full h-full"
