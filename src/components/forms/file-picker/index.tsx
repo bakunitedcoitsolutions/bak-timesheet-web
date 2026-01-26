@@ -43,8 +43,11 @@ export default function FilePicker({
   const onDrop = useCallback(
     (acceptedFiles: File[]) => {
       const newFiles = multiple ? [...files, ...acceptedFiles] : acceptedFiles;
-      setFiles(newFiles);
+      // Call onFileSelect first to allow validation
+      // If validation fails, onFileSelect should handle clearing the file
       onFileSelect?.(newFiles);
+      // Only update internal state if validation passes (value prop will update)
+      // The useEffect will sync files with value prop
     },
     [files, multiple, onFileSelect]
   );
