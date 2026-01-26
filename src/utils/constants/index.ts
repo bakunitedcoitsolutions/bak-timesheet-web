@@ -17,3 +17,10 @@ export const STATUS_OPTIONS = [
 export * from "./permissions";
 export * from "./reports";
 export * from "./storage";
+
+export const COMMON_QUERY_INPUT = {
+  page: 1,
+  limit: 1000,
+  sortBy: "displayOrderKey" as const,
+  sortOrder: "asc" as const,
+};

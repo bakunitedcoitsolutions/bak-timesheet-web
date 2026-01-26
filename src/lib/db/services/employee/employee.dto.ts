@@ -106,7 +106,11 @@ export type ListEmployeesSortableField =
   | "dob"
   | "joiningDate"
   | "contractStartDate"
-  | "contractEndDate";
+  | "contractEndDate"
+  | "gender"
+  | "idCardNo"
+  | "profession"
+  | "nationality";
 
 export interface ListEmployeesParams {
   page?: number;
@@ -117,6 +121,7 @@ export interface ListEmployeesParams {
   branchId?: number;
   statusId?: number;
   designationId?: number;
+  payrollSectionId?: number;
 }
 
 export interface EmployeeInterface {

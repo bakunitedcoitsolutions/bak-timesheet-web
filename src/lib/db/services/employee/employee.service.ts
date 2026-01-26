@@ -609,6 +609,11 @@ export const listEmployees = async (
     where.designationId = params.designationId;
   }
 
+  // Filter by payrollSectionId
+  if (params.payrollSectionId !== undefined) {
+    where.payrollSectionId = params.payrollSectionId;
+  }
+
   // Build orderBy clause
   const orderBy: any = {};
   if (params.sortBy) {

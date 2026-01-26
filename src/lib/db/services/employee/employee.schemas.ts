@@ -119,11 +119,16 @@ export const ListEmployeesParamsSchema = z.object({
       "joiningDate",
       "contractStartDate",
       "contractEndDate",
+      "gender",
+      "idCardNo",
+      "profession",
+      "nationality",
     ])
     .optional(),
   branchId: z.number().int().positive().optional(),
   statusId: z.number().int().positive().optional(),
   designationId: z.number().int().positive().optional(),
+  payrollSectionId: z.number().int().positive().optional(),
 });
 
 export const GetEmployeeByIdSchema = z.object({

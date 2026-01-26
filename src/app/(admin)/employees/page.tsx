@@ -1,20 +1,55 @@
 "use client";
 import Image from "next/image";
-import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { ProgressSpinner } from "primereact/progressspinner";
+import { useRef, useState, useEffect, useMemo, useCallback } from "react";
 
 import {
   Input,
   Table,
   Badge,
   Button,
+  TableRef,
+  TypeBadge,
   TableColumn,
   TableActions,
-  GroupDropdown,
   ExportOptions,
-  CustomHeaderProps,
+  GroupDropdown,
 } from "@/components";
-import { employees } from "@/utils/dummy";
+import {
+  getErrorMessage,
+  createSortHandler,
+  toPrimeReactSortOrder,
+  getSignedUrl,
+  parseGroupDropdownFilter,
+} from "@/utils/helpers";
+import { ListedEmployee } from "@/lib/db/services/employee/employee.dto";
+import { ListEmployeesSortableField } from "@/lib/db/services/employee/employee.dto";
+import { useDebounce } from "@/hooks";
+import { toastService } from "@/lib/toast";
+import { showConfirmDialog } from "@/components/common/confirm-dialog";
+import { useDeleteEmployee, useGetEmployees } from "@/lib/db/services/employee";
+import { COMMON_QUERY_INPUT, STORAGE_CONFIG } from "@/utils/constants";
+import { useGetDesignations } from "@/lib/db/services/designation/requests";
+import { useGetPayrollSections } from "@/lib/db/services/payroll-section/requests";
+import type { ListedDesignation } from "@/lib/db/services/designation/designation.dto";
+import type { ListedPayrollSection } from "@/lib/db/services/payroll-section/payroll-section.dto";
+
+// Constants
+const SORTABLE_FIELDS = {
+  nameEn: "nameEn",
+  nameAr: "nameAr",
+  employeeCode: "employeeCode",
+  phone: "phone",
+  dob: "dob",
+  joiningDate: "joiningDate",
+  contractStartDate: "contractStartDate",
+  contractEndDate: "contractEndDate",
+  gender: "gender",
+  idCardNo: "idCardNo",
+  profession: "profession",
+  nationality: "nationality",
+} as const;
 
 const commonColumnProps = {
   sortable: true,
@@ -25,218 +60,299 @@ const commonColumnProps = {
   style: { minWidth: 200 },
 };
 
-type Employee = {
-  empCode: string;
-  empIdNo: string;
-  empNameEn: string;
-  empNameAr: string;
-  empGender: string;
-  empSalary: string;
-  empPicture?: string;
-  empContactNo: string;
-  empIsFixed?: boolean;
-  empIsDeductable?: boolean;
-  empProfession: string;
-  empHourlyRate: string;
-  empDesignation: string;
-  empNationality: string;
-  empCardDocLink?: string;
-  empPayrollSection: string;
-  empOpeningBalance: string;
-  empIsCardDelivered?: boolean;
+type SortableField = keyof typeof SORTABLE_FIELDS;
+
+// Helper component for profile picture with signed URL
+const EmployeeProfilePicture = ({
+  profilePicture,
+  employeeName,
+}: {
+  profilePicture: string | null;
+  employeeName: string;
+}) => {
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    if (!profilePicture) {
+      setIsLoading(false);
+      return;
+    }
+
+    // Check if it's already a URL
+    if (profilePicture.startsWith("http")) {
+      setImageUrl(profilePicture);
+      setIsLoading(false);
+      return;
+    }
+
+    // Generate signed URL for private file
+    getSignedUrl(STORAGE_CONFIG.EMPLOYEES_BUCKET, profilePicture, 3600)
+      .then((signedUrl) => {
+        setImageUrl(signedUrl);
+      })
+      .catch((error) => {
+        console.error("Failed to get signed URL:", error);
+        setImageUrl(null);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }, [profilePicture]);
+
+  if (isLoading) {
+    return (
+      <div className="w-12 h-12 bg-gray-200 rounded-xl flex items-center justify-center shrink-0">
+        <i className="pi pi-spin pi-spinner text-gray-400 text-sm"></i>
+      </div>
+    );
+  }
+
+  if (imageUrl) {
+    return (
+      <div className="relative w-12 h-12 rounded-xl overflow-hidden shrink-0">
+        <Image
+          width={48}
+          height={48}
+          src={imageUrl}
+          alt={employeeName || "Employee"}
+          className="object-cover w-full h-full"
+        />
+      </div>
+    );
+  }
+
+  return (
+    <div className="w-12 h-12 bg-gray-200 rounded-xl flex items-center justify-center shrink-0">
+      <i className="pi pi-user text-gray-400 text-xl"></i>
+    </div>
+  );
 };
 
 const columns = (
-  handlePrint: (employee: Employee) => void,
-  handleEdit: (employee: Employee) => void,
-  handleDelete: (employee: Employee) => void
-): TableColumn<Employee>[] => [
+  handlePrint: (employee: ListedEmployee) => void,
+  handleEdit: (employee: ListedEmployee) => void,
+  handleDelete: (employee: ListedEmployee) => void,
+  handleViewCard: (employee: ListedEmployee) => void,
+  currentPage: number = 1,
+  rowsPerPage: number = 10
+): TableColumn<ListedEmployee>[] => [
   {
-    field: "empCode",
+    field: "id",
+    header: "#",
+    sortable: false,
+    filterable: false,
+    align: "center",
+    style: { minWidth: "70px" },
+    headerStyle: { minWidth: "70px" },
+    body: (rowData: ListedEmployee, options?: { rowIndex?: number }) => {
+      const rowIndex = options?.rowIndex ?? 0;
+      const index = (currentPage - 1) * rowsPerPage + rowIndex + 1;
+      return (
+        <div className={"flex items-center justify-center gap-1.5 w-[40px]"}>
+          <span className="text-sm font-medium">{index}</span>
+        </div>
+      );
+    },
+  },
+  {
+    field: "employeeCode",
     header: "Emp. Code",
     ...commonColumnProps,
-    body: (rowData: Employee) => (
+    body: (rowData: ListedEmployee) => (
       <div className="flex items-center gap-5">
-        <div className="relative w-12 h-12 rounded-xl overflow-hidden shrink-0">
-          {rowData?.empPicture ? (
-            <Image
-              width={48}
-              height={48}
-              src={rowData.empPicture}
-              alt={rowData.empNameEn || "Employee"}
-              className="object-cover w-full h-full"
-            />
-          ) : (
-            <div className="w-full h-full bg-gray-200 flex items-center justify-center">
-              <i className="pi pi-user text-gray-400 text-xl"></i>
-            </div>
-          )}
-        </div>
-        <span className="text-sm font-semibold text-primary underline cursor-pointer">
-          {rowData.empCode}
+        <EmployeeProfilePicture
+          profilePicture={rowData.profilePicture}
+          employeeName={rowData.nameEn}
+        />
+        <span
+          className="text-sm font-semibold text-primary underline cursor-pointer"
+          onClick={() => handleEdit(rowData)}
+        >
+          {rowData.employeeCode}
         </span>
       </div>
     ),
   },
   {
-    field: "empNameEn",
+    field: "nameEn",
     header: "Name (En)",
     ...commonColumnProps,
-    style: { minWidth: "25rem" },
-    body: (rowData) => (
+    style: { minWidth: "250px" },
+    body: (rowData: ListedEmployee) => (
       <span className="text-sm uppercase font-medium whitespace-nowrap">
-        {rowData.empNameEn}
+        {rowData.nameEn}
       </span>
     ),
   },
   {
-    field: "empNameAr",
+    field: "nameAr",
     header: "Name (Ar)",
     ...commonColumnProps,
-    body: (rowData: Employee) => (
+    body: (rowData: ListedEmployee) => (
       <div className="w-full flex flex-1 justify-end">
         <span className="text-right font-medium font-arabic">
-          {rowData.empNameAr}
+          {rowData.nameAr || ""}
         </span>
       </div>
     ),
   },
   {
-    field: "empGender",
+    field: "gender",
     header: "Gender",
     style: { minWidth: 100 },
     filterable: false,
     sortable: true,
-    body: (rowData: Employee) => (
+    body: (rowData: ListedEmployee) => (
       <div className="w-full flex flex-1 justify-center">
         <span className="text-sm">
-          {rowData.empGender === "Male" ? "M" : "F"}
+          {rowData.gender === "male"
+            ? "M"
+            : rowData.gender === "female"
+              ? "F"
+              : "-"}
         </span>
       </div>
     ),
   },
   {
-    field: "empIdNo",
+    field: "idCardNo",
     header: "ID No.",
     ...commonColumnProps,
-    body: (rowData: Employee) => (
-      <span className="text-sm">{rowData.empIdNo}</span>
+    body: (rowData: ListedEmployee) => (
+      <span className="text-sm">{rowData.idCardNo || "-"}</span>
     ),
   },
   {
-    field: "empDesignation",
+    field: "designationId",
     header: "Designation",
-    ...commonColumnProps,
-    body: (rowData: Employee) => (
-      <span className="text-sm">{rowData.empDesignation}</span>
+    sortable: false,
+    filterable: false,
+    style: { minWidth: 150 },
+    body: (rowData: any) => (
+      <span className="text-sm">
+        {rowData?.designationName ? rowData.designationName : "-"}
+      </span>
     ),
   },
   {
-    field: "empPayrollSection",
+    field: "payrollSectionId",
     header: "Payroll Sect.",
-    ...commonColumnProps,
-    body: (rowData: Employee) => (
-      <span className="text-sm">{rowData.empPayrollSection}</span>
+    sortable: false,
+    filterable: false,
+    style: { minWidth: 150 },
+    body: (rowData: any) => (
+      <span className="text-sm">
+        {rowData?.payrollSectionName ? rowData.payrollSectionName : "-"}
+      </span>
     ),
   },
   {
-    field: "empProfession",
+    field: "profession",
     header: "Profession",
     ...commonColumnProps,
-    body: (rowData: Employee) => (
-      <span className="text-sm">{rowData.empProfession}</span>
+    body: (rowData: ListedEmployee) => (
+      <span className="text-sm">{rowData.profession || "-"}</span>
     ),
   },
   {
-    field: "empHourlyRate",
+    field: "hourlyRate",
     header: "Hourly Rate",
-    ...commonColumnProps,
-    body: (rowData: Employee) => (
-      <div className="flex items-start gap-2">
+    sortable: false,
+    filterable: false,
+    style: { minWidth: 120 },
+    body: (rowData: ListedEmployee) => (
+      <div className="flex items-start justify-center gap-2">
         <span className="text-sm font-semibold">
-          {rowData.empHourlyRate === "0.0" ? (
-            <span className="text-text-gray font-normal">N/A</span>
+          {rowData.hourlyRate && rowData.hourlyRate > 0 ? (
+            rowData.hourlyRate.toString()
           ) : (
-            rowData.empHourlyRate
+            <span className="text-text-gray font-normal">N/A</span>
           )}
         </span>
       </div>
     ),
   },
   {
-    field: "empSalary",
+    field: "salary",
     header: "Salary",
-    ...commonColumnProps,
-    body: (rowData: Employee) => (
+    sortable: false,
+    filterable: false,
+    style: { minWidth: 150 },
+    body: (rowData: ListedEmployee) => (
       <div className="flex justify-between gap-2">
         <span className="text-sm font-semibold">
-          {rowData.empSalary === "0.0" ? (
-            <span className="text-text-gray font-normal">N/A</span>
+          {rowData.salary && rowData.salary > 0 ? (
+            rowData.salary.toString()
           ) : (
-            rowData.empSalary
+            <span className="text-text-gray font-normal">N/A</span>
           )}
         </span>
         <div className="flex items-start gap-2">
-          {rowData.empIsFixed && <Badge text="F" />}
-          {rowData.empIsDeductable && (
-            <Badge
-              // containerClassName="bg-primary-light"
-              // textClassName="text-primary!"
-              text="D"
-            />
-          )}
+          {rowData.isFixed && <Badge text="F" />}
+          {rowData.isDeductable && <Badge text="D" />}
         </div>
       </div>
     ),
   },
   {
-    field: "empOpeningBalance",
+    field: "openingBalance",
     header: "Opening Balance",
-    ...commonColumnProps,
-    body: (rowData: Employee) => (
-      <span className="text-sm">{rowData.empOpeningBalance}</span>
+    sortable: false,
+    filterable: false,
+    style: { minWidth: 150 },
+    body: (rowData: ListedEmployee) => (
+      <span className="text-sm">
+        {rowData.openingBalance?.toString() || "-"}
+      </span>
     ),
   },
   {
-    field: "empNationality",
+    field: "nationality",
     header: "Nationality",
     ...commonColumnProps,
-    body: (rowData: Employee) => (
-      <span className="text-sm">{rowData.empNationality}</span>
+    body: (rowData: ListedEmployee) => (
+      <span className="text-sm">{rowData.nationality || "-"}</span>
     ),
   },
   {
-    field: "empContactNo",
+    field: "phone",
     header: "Contact No.",
     ...commonColumnProps,
-    body: (rowData: Employee) => (
-      <span className="text-sm">{rowData.empContactNo}</span>
+    body: (rowData: ListedEmployee) => (
+      <span className="text-sm">{rowData.phone || "-"}</span>
     ),
   },
   {
-    field: "empIsCardDelivered",
+    field: "isCardDelivered",
     header: "Card Delivered?",
     sortable: false,
     filterable: false,
     style: { minWidth: 150 },
-    body: (rowData: Employee) => (
+    align: "center",
+    body: (rowData: ListedEmployee) => (
       <div className="w-full flex flex-1 justify-center">
-        <span className="text-sm text-center">
-          {rowData.empIsCardDelivered ? "Yes" : "No"}
-        </span>
+        <TypeBadge
+          text={rowData.isCardDelivered ? "Yes" : "No"}
+          variant={rowData.isCardDelivered ? "success" : "danger"}
+        />
       </div>
     ),
   },
   {
-    field: "empCardDocLink",
+    field: "cardDocument",
     header: "ID Card",
     sortable: false,
     filterable: false,
     style: { minWidth: 100 },
-    body: (rowData: Employee) => (
+    align: "center",
+    body: (rowData: ListedEmployee) => (
       <div className="w-full flex flex-1 justify-center">
-        {rowData.empCardDocLink ? (
-          <span className="text-sm text-center text-primary underline cursor-pointer">
+        {rowData.cardDocument ? (
+          <span
+            className="text-sm text-center text-primary underline cursor-pointer"
+            onClick={() => handleViewCard(rowData)}
+          >
             View
           </span>
         ) : (
@@ -252,7 +368,7 @@ const columns = (
     filterable: false,
     align: "center",
     style: { minWidth: 150 },
-    body: (rowData: Employee) => (
+    body: (rowData: ListedEmployee) => (
       <TableActions
         rowData={rowData}
         onEdit={handleEdit}
@@ -273,65 +389,238 @@ const columns = (
 
 const EmployeesPage = () => {
   const router = useRouter();
-  const [selectedDesignation, setSelectedDesignation] = useState<any>("all");
+  const [searchValue, setSearchValue] = useState<string>("");
+  const [page, setPage] = useState<number>(1);
+  const [limit, setLimit] = useState<number>(10);
+  const [sortBy, setSortBy] = useState<
+    SortableField | ListEmployeesSortableField
+  >("nameEn");
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
+  const [selectedFilter, setSelectedFilter] = useState<string | number | null>(
+    null
+  );
+  const tableRef = useRef<TableRef>(null);
+  const { mutateAsync: deleteEmployee } = useDeleteEmployee();
 
-  const handlePrint = (employee: Employee) => {
+  // Debounce search input
+  const debouncedSearch = useDebounce(searchValue, 500);
+
+  // Reset to first page when search value or filter changes
+  useEffect(() => {
+    if (searchValue !== debouncedSearch && page !== 1) {
+      setPage(1);
+    }
+  }, [searchValue, debouncedSearch, page]);
+
+  useEffect(() => {
+    if (page !== 1) {
+      setPage(1);
+    }
+  }, [selectedFilter]);
+
+  // Parse filter parameters from GroupDropdown selection
+  const filterParams = parseGroupDropdownFilter(selectedFilter);
+
+  const { data: employeesResponse, isLoading } = useGetEmployees({
+    page,
+    limit,
+    sortBy: sortBy as ListEmployeesSortableField,
+    sortOrder,
+    search: debouncedSearch || undefined,
+    designationId: filterParams.designationId,
+    payrollSectionId: filterParams.payrollSectionId,
+  });
+
+  const employees = employeesResponse?.employees ?? [];
+
+  const {
+    total,
+    page: currentPage,
+    limit: currentLimit,
+  } = employeesResponse?.pagination ?? {
+    page: 1,
+    limit: 10,
+    total: 0,
+    totalPages: 0,
+  };
+  const { data: designationsResponse } = useGetDesignations(COMMON_QUERY_INPUT);
+  const designations = designationsResponse?.designations ?? [];
+  const { data: payrollSectionsResponse } =
+    useGetPayrollSections(COMMON_QUERY_INPUT);
+  const payrollSections = payrollSectionsResponse?.payrollSections ?? [];
+
+  const modifyEmployeesData = useMemo(() => {
+    return employees.map((employee: ListedEmployee) => {
+      const designation = designations.find(
+        (designation: ListedDesignation) =>
+          designation.id === employee.designationId
+      );
+      const payrollSection = payrollSections.find(
+        (payrollSection: ListedPayrollSection) =>
+          payrollSection.id === employee.payrollSectionId
+      );
+      return {
+        ...employee,
+        designationName: designation?.nameEn,
+        payrollSectionName: payrollSection?.nameEn,
+      };
+    });
+  }, [employees]);
+
+  // Memoized handlers
+  const handleEdit = useCallback(
+    (employee: ListedEmployee) => {
+      router.push(`/employees/${employee.id}`);
+    },
+    [router]
+  );
+
+  const handleDelete = useCallback(
+    (employee: ListedEmployee) => {
+      showConfirmDialog({
+        icon: "pi pi-trash",
+        title: "Delete Employee",
+        message: `Are you sure you want to delete "${employee.nameEn}"?`,
+        onAccept: async () => {
+          await deleteEmployee(
+            { id: employee.id },
+            {
+              onSuccess: () => {
+                toastService.showInfo("Done", "Employee deleted successfully");
+              },
+              onError: (error: any) => {
+                const errorMessage = getErrorMessage(
+                  error,
+                  "Failed to delete employee"
+                );
+                toastService.showError("Error", errorMessage);
+              },
+            }
+          );
+        },
+      });
+    },
+    [deleteEmployee]
+  );
+
+  const handlePrint = useCallback((employee: ListedEmployee) => {
     console.log("Print employee:", employee);
     // TODO: Implement print functionality
-    // You can open a print dialog or generate a PDF
-  };
+  }, []);
 
-  const handleEdit = (employee: Employee) => {
-    console.log("Edit employee:", employee);
-    // TODO: Navigate to edit page or open edit modal
-    // Example: router.push(`/employees/${employee.empCode}/edit`);
-  };
-
-  const handleDelete = (employee: Employee) => {
-    console.log("Delete employee:", employee);
-    // TODO: Implement delete functionality with confirmation
-    if (confirm(`Are you sure you want to delete ${employee.empNameEn}?`)) {
-      // Delete logic here
-      // Example: deleteEmployee(employee.id);
+  const handleViewCard = useCallback((employee: ListedEmployee) => {
+    if (employee.cardDocument) {
+      // Generate signed URL and open in new tab
+      getSignedUrl(STORAGE_CONFIG.EMPLOYEES_BUCKET, employee.cardDocument, 3600)
+        .then((signedUrl) => {
+          window.open(signedUrl, "_blank");
+        })
+        .catch((error) => {
+          console.error("Failed to get signed URL:", error);
+          toastService.showError("Error", "Failed to load card document");
+        });
     }
-  };
+  }, []);
 
-  const renderHeader = ({
-    value,
-    onChange,
-    exportCSV,
-    exportExcel,
-  }: CustomHeaderProps) => {
+  const exportCSV = useCallback(() => {
+    tableRef.current?.exportCSV();
+  }, []);
+
+  const exportExcel = useCallback(() => {
+    tableRef.current?.exportExcel();
+  }, []);
+
+  const handlePageChange = useCallback(
+    (e: { page?: number; rows?: number }) => {
+      // PrimeReact uses 0-based page index, our API uses 1-based
+      setPage((e.page ?? 0) + 1);
+      setLimit(e.rows ?? currentLimit);
+    },
+    [currentLimit]
+  );
+
+  const handlePageReset = useCallback(() => {
+    setPage(1);
+  }, []);
+
+  // Wrapper for setSortBy to handle undefined (reset to default)
+  const handleSortByChange = useCallback((field: SortableField | undefined) => {
+    setSortBy(field ?? "nameEn");
+  }, []);
+
+  // Wrapper for setSortOrder to handle undefined (reset to default)
+  const handleSortOrderChange = useCallback(
+    (order: "asc" | "desc" | undefined) => {
+      setSortOrder(order ?? "asc");
+    },
+    []
+  );
+
+  // Memoized sort handler
+  const sortHandler = useMemo(
+    () =>
+      createSortHandler({
+        fieldMap: SORTABLE_FIELDS,
+        currentPage: page,
+        onSortByChange: handleSortByChange,
+        onSortOrderChange: handleSortOrderChange,
+        onPageReset: handlePageReset,
+      }),
+    [page, handlePageReset, handleSortByChange, handleSortOrderChange]
+  );
+
+  // Memoized columns
+  const tableColumns = useMemo(
+    () =>
+      columns(
+        handlePrint,
+        handleEdit,
+        handleDelete,
+        handleViewCard,
+        currentPage,
+        currentLimit
+      ),
+    [
+      handlePrint,
+      handleEdit,
+      handleDelete,
+      handleViewCard,
+      currentPage,
+      currentLimit,
+    ]
+  );
+
+  // Memoized header renderer
+  const renderHeader = useCallback(() => {
     return (
       <div className="flex flex-col md:flex-row justify-between items-center gap-3 flex-1 w-full">
         <div className="w-full md:w-auto md:min-w-60">
-          <GroupDropdown
-            value={selectedDesignation}
-            onChange={setSelectedDesignation}
-          />
+          <GroupDropdown value={selectedFilter} onChange={setSelectedFilter} />
         </div>
-        <div className="flex items-center gap-3 w-full md:w-auto">
-          <div>
-            <ExportOptions
-              exportCSV={exportCSV || (() => {})}
-              exportExcel={exportExcel || (() => {})}
-            />
+        <div className="flex items-center gap-3 w-full md:w-auto justify-end">
+          <div className="flex items-center gap-3 w-full md:w-auto justify-end">
+            <div>
+              <ExportOptions exportCSV={exportCSV} exportExcel={exportExcel} />
+            </div>
           </div>
           <div className="w-full md:w-auto">
             <Input
               small
               className="w-full"
-              value={value}
+              value={searchValue}
               icon="pi pi-search"
               iconPosition="left"
-              onChange={onChange}
+              onChange={(e) => {
+                setSearchValue(e.target.value);
+              }}
               placeholder="Search"
             />
           </div>
         </div>
       </div>
     );
-  };
+  }, [searchValue, exportCSV, exportExcel, selectedFilter]);
+
   return (
     <div className="flex h-full flex-col gap-6 px-6 py-6">
       <div className="flex flex-col md:flex-row justify-between items-center gap-3 shrink-0">
@@ -340,7 +629,7 @@ const EmployeesPage = () => {
             Employee Management
           </h1>
           <p className="text-sm text-gray-600 mt-1">
-            View, Manage employee records, personal information, and employment
+            View, manage employee records, personal information, and employment
             details.
           </p>
         </div>
@@ -357,14 +646,27 @@ const EmployeesPage = () => {
       <div className="bg-white flex-1 rounded-xl overflow-hidden min-h-0">
         <Table
           dataKey="id"
-          data={employees}
-          columns={columns(handlePrint, handleEdit, handleDelete)}
+          removableSort
+          data={modifyEmployeesData}
+          ref={tableRef}
+          loading={isLoading}
+          loadingIcon={
+            <ProgressSpinner style={{ width: "50px", height: "50px" }} />
+          }
           customHeader={renderHeader}
+          columns={tableColumns}
+          sortMode="single"
+          onPage={handlePageChange}
+          onSort={sortHandler}
+          sortField={sortBy}
+          sortOrder={toPrimeReactSortOrder(sortOrder) as any}
           pagination={true}
           rowsPerPageOptions={[10, 25, 50]}
-          rows={10}
+          rows={currentLimit}
+          first={(currentPage - 1) * currentLimit}
+          totalRecords={total}
+          globalSearch={true}
           scrollable
-          removableSort
           scrollHeight="65vh"
         />
       </div>
