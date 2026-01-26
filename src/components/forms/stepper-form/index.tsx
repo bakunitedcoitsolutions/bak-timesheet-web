@@ -6,6 +6,7 @@ import React, { useState, ReactNode } from "react";
 import Button from "../button";
 import Stepper, { StepperStep } from "../stepper";
 import { StepperFormProvider, useStepperForm } from "@/context";
+import { useRouter } from "next/navigation";
 
 interface StepperFormProps {
   steps: StepperStep[];
@@ -28,6 +29,7 @@ const StepperFormContent: React.FC<StepperFormProps> = ({
   showNavigation = true,
   className,
 }) => {
+  const router = useRouter();
   const [activeStep, setActiveStep] = useState(initialStep);
   const [completedSteps, setCompletedSteps] = useState<number[]>([]);
   const { isSubmitting } = useStepperForm();
@@ -145,7 +147,11 @@ const StepperFormContent: React.FC<StepperFormProps> = ({
                 )}
 
                 <div className="flex items-center gap-3">
-                  <Button size="small" variant="text" onClick={handlePrevious}>
+                  <Button
+                    size="small"
+                    variant="text"
+                    onClick={() => router.replace("/employees")}
+                  >
                     Cancel
                   </Button>
                   {isLastStep ? (
