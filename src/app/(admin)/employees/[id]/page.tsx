@@ -139,6 +139,7 @@ const UpsertEmployeePage = () => {
         onSubmit={handleSubmit}
         initialStep={initialStep}
         onStepSave={handleStepSave}
+        isEditMode={isEditMode}
         className="w-full h-full"
       >
         {renderStepContent}

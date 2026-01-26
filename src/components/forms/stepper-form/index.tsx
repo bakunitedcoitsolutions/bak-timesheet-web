@@ -1,12 +1,12 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { classNames } from "primereact/utils";
 import React, { useState, ReactNode } from "react";
 
 import Button from "../button";
 import Stepper, { StepperStep } from "../stepper";
 import { StepperFormProvider, useStepperForm } from "@/context";
-import { useRouter } from "next/navigation";
 
 interface StepperFormProps {
   steps: StepperStep[];
@@ -17,6 +17,7 @@ interface StepperFormProps {
   children: (step: number) => ReactNode;
   showNavigation?: boolean;
   className?: string;
+  isEditMode?: boolean;
 }
 
 const StepperFormContent: React.FC<StepperFormProps> = ({
@@ -28,6 +29,7 @@ const StepperFormContent: React.FC<StepperFormProps> = ({
   children,
   showNavigation = true,
   className,
+  isEditMode = false,
 }) => {
   const router = useRouter();
   const [activeStep, setActiveStep] = useState(initialStep);
@@ -93,14 +95,12 @@ const StepperFormContent: React.FC<StepperFormProps> = ({
   };
 
   const handleStepClick = (stepIndex: number) => {
-    // Allow navigation to completed steps or next step
-    if (
-      completedSteps.includes(steps[stepIndex].number) ||
-      stepIndex === activeStep + 1
-    ) {
+    // Only allow step clicking in edit mode
+    if (isEditMode) {
       setActiveStep(stepIndex);
       onStepChange?.(stepIndex);
     }
+    // In add mode, step clicking is disabled
   };
 
   const unmarkStepAsCompleted = (stepNumber: number) => {
@@ -119,6 +119,7 @@ const StepperFormContent: React.FC<StepperFormProps> = ({
             steps={steps}
             completedSteps={completedSteps}
             activeStep={steps[activeStep]?.number || 1}
+            onStepClick={isEditMode ? handleStepClick : undefined}
           />
         </div>
 

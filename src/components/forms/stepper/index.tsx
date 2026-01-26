@@ -14,12 +14,14 @@ interface StepperProps {
   className?: string;
   steps: StepperStep[];
   completedSteps?: number[];
+  onStepClick?: (stepIndex: number) => void;
 }
 
 const Stepper: React.FC<StepperProps> = ({
   steps,
   className,
   activeStep,
+  onStepClick,
   completedSteps = [],
 }) => {
   const isStepCompleted = (stepNumber: number) =>
@@ -41,9 +43,14 @@ const Stepper: React.FC<StepperProps> = ({
           return (
             <div
               key={step.id}
-              className="flex flex-col lg:flex-row justify-center lg:justify-start items-center gap-2.5 relative"
+              className={classNames(
+                "flex flex-col lg:flex-row justify-center lg:justify-start items-center gap-2.5 relative",
+                {
+                  "cursor-pointer": onStepClick,
+                }
+              )}
+              onClick={() => onStepClick?.(index)}
             >
-              {/* Step Circle */}
               <div className="shrink-0 relative z-10 w-8 h-8">
                 {completed ? (
                   <div className="w-full h-full rounded-full bg-primary flex items-center justify-center">
