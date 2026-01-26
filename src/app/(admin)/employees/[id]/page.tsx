@@ -13,6 +13,7 @@ import {
   type Step2Handle,
   type Step3Handle,
   type Step4Handle,
+  type Step5Handle,
 } from "@/components";
 import { getEntityModeFromParam } from "@/helpers";
 import { StepperForm, StepperStep } from "@/components/forms";
@@ -45,6 +46,7 @@ const UpsertEmployeePage = () => {
   const step2Ref = useRef<Step2Handle | null>(null);
   const step3Ref = useRef<Step3Handle | null>(null);
   const step4Ref = useRef<Step4Handle | null>(null);
+  const step5Ref = useRef<Step5Handle | null>(null);
 
   const [initialStep] = useState(() => {
     if (typeof window !== "undefined" && isEditMode && employeeId) {
@@ -91,6 +93,9 @@ const UpsertEmployeePage = () => {
     if (step === 3 && step4Ref.current) {
       return await step4Ref.current.submit();
     }
+    if (step === 4 && step5Ref.current) {
+      return await step5Ref.current.submit();
+    }
     return true;
   };
 
@@ -118,7 +123,7 @@ const UpsertEmployeePage = () => {
       case 3:
         return <Step4 ref={step4Ref} employeeId={currentEmployeeId} />;
       case 4:
-        return <Step5 employeeId={currentEmployeeId} />;
+        return <Step5 ref={step5Ref} employeeId={currentEmployeeId} />;
       default:
         return <div>Step not found</div>;
     }
@@ -131,9 +136,8 @@ const UpsertEmployeePage = () => {
       </h1>
       <StepperForm
         steps={steps}
-        initialStep={3}
-        // initialStep={initialStep}
         onSubmit={handleSubmit}
+        initialStep={initialStep}
         onStepSave={handleStepSave}
         className="w-full h-full"
       >

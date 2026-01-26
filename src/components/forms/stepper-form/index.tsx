@@ -155,14 +155,27 @@ const StepperFormContent: React.FC<StepperFormProps> = ({
                       loading={isSubmitting}
                       disabled={isSubmitting}
                       onClick={async () => {
-                        // Mark last step as completed before submitting
-                        const currentStepNumber = steps[activeStep].number;
-                        markStepAsCompleted(currentStepNumber);
-                        onSubmit?.({});
+                        try {
+                          // Save current step before submitting
+                          if (onStepSave) {
+                            const result = await onStepSave(activeStep);
+                            if (result === false) {
+                              // Save failed, don't submit
+                              return;
+                            }
+                          }
+
+                          // Mark last step as completed before submitting
+                          const currentStepNumber = steps[activeStep].number;
+                          markStepAsCompleted(currentStepNumber);
+                          await onSubmit?.({});
+                        } catch (error) {
+                          console.error("Error during submit:", error);
+                        }
                       }}
                       iconPosition="right"
                       icon="pi pi-check"
-                      className="w-28 justify-center!"
+                      className="w-28 justify-center! gap-1!"
                     >
                       Submit
                     </Button>
