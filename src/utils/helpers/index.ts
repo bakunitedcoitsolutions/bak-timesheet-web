@@ -6,3 +6,4 @@ export * from "./user-branch";
 export * from "./error-utils";
 export * from "./table-sort-utils";
 export * from "./file-upload-utils";
+export * from "./file-name-utils";

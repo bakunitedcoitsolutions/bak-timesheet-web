@@ -2,6 +2,7 @@
 import { useCallback, useState, useEffect } from "react";
 import { useDropzone } from "react-dropzone";
 import { classNames } from "primereact/utils";
+import { formatFileName } from "@/utils/helpers";
 
 interface FilePickerProps {
   label?: string;
@@ -63,6 +64,15 @@ export default function FilePicker({
   };
 
   const openFileInNewTab = (file: File) => {
+    // Check if this is an existing file with a custom URL
+    const existingFile = file as any;
+    if (existingFile.isExisting && existingFile.externalUrl) {
+      // Use the provided external URL (e.g., signed URL)
+      window.open(existingFile.externalUrl, "_blank");
+      return;
+    }
+
+    // For new files, create object URL
     const fileUrl = URL.createObjectURL(file);
     window.open(fileUrl, "_blank");
     // Clean up the URL after a delay to allow the browser to load it
@@ -146,8 +156,8 @@ export default function FilePicker({
               <i className={`pi ${getFileIcon(file)} text-primary`} />
             </div>
             <div className="flex w-full py-1 flex-col justify-center mr-1">
-              <span className="text-xs font-semibold truncate">
-                {file.name}
+              <span className="text-xs font-semibold truncate text-left">
+                {formatFileName(file.name)}
               </span>
             </div>
             <div className="flex justify-center items-center gap-x-2">
