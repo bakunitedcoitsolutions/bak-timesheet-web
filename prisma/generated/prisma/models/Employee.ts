@@ -105,6 +105,8 @@ export type EmployeeMinAggregateOutputType = {
   passportNo: string | null
   passportExpiryDate: Date | null
   passportDocument: string | null
+  lastExitDate: Date | null
+  lastEntryDate: Date | null
   bankName: string | null
   bankCode: string | null
   iban: string | null
@@ -154,6 +156,8 @@ export type EmployeeMaxAggregateOutputType = {
   passportNo: string | null
   passportExpiryDate: Date | null
   passportDocument: string | null
+  lastExitDate: Date | null
+  lastEntryDate: Date | null
   bankName: string | null
   bankCode: string | null
   iban: string | null
@@ -203,6 +207,8 @@ export type EmployeeCountAggregateOutputType = {
   passportNo: number
   passportExpiryDate: number
   passportDocument: number
+  lastExitDate: number
+  lastEntryDate: number
   bankName: number
   bankCode: number
   iban: number
@@ -296,6 +302,8 @@ export type EmployeeMinAggregateInputType = {
   passportNo?: true
   passportExpiryDate?: true
   passportDocument?: true
+  lastExitDate?: true
+  lastEntryDate?: true
   bankName?: true
   bankCode?: true
   iban?: true
@@ -345,6 +353,8 @@ export type EmployeeMaxAggregateInputType = {
   passportNo?: true
   passportExpiryDate?: true
   passportDocument?: true
+  lastExitDate?: true
+  lastEntryDate?: true
   bankName?: true
   bankCode?: true
   iban?: true
@@ -394,6 +404,8 @@ export type EmployeeCountAggregateInputType = {
   passportNo?: true
   passportExpiryDate?: true
   passportDocument?: true
+  lastExitDate?: true
+  lastEntryDate?: true
   bankName?: true
   bankCode?: true
   iban?: true
@@ -530,6 +542,8 @@ export type EmployeeGroupByOutputType = {
   passportNo: string | null
   passportExpiryDate: Date | null
   passportDocument: string | null
+  lastExitDate: Date | null
+  lastEntryDate: Date | null
   bankName: string | null
   bankCode: string | null
   iban: string | null
@@ -602,6 +616,8 @@ export type EmployeeWhereInput = {
   passportNo?: Prisma.StringNullableFilter<"Employee"> | string | null
   passportExpiryDate?: Prisma.DateTimeNullableFilter<"Employee"> | Date | string | null
   passportDocument?: Prisma.StringNullableFilter<"Employee"> | string | null
+  lastExitDate?: Prisma.DateTimeNullableFilter<"Employee"> | Date | string | null
+  lastEntryDate?: Prisma.DateTimeNullableFilter<"Employee"> | Date | string | null
   bankName?: Prisma.StringNullableFilter<"Employee"> | string | null
   bankCode?: Prisma.StringNullableFilter<"Employee"> | string | null
   iban?: Prisma.StringNullableFilter<"Employee"> | string | null
@@ -664,6 +680,8 @@ export type EmployeeOrderByWithRelationInput = {
   passportNo?: Prisma.SortOrderInput | Prisma.SortOrder
   passportExpiryDate?: Prisma.SortOrderInput | Prisma.SortOrder
   passportDocument?: Prisma.SortOrderInput | Prisma.SortOrder
+  lastExitDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  lastEntryDate?: Prisma.SortOrderInput | Prisma.SortOrder
   bankName?: Prisma.SortOrderInput | Prisma.SortOrder
   bankCode?: Prisma.SortOrderInput | Prisma.SortOrder
   iban?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -729,6 +747,8 @@ export type EmployeeWhereUniqueInput = Prisma.AtLeast<{
   passportNo?: Prisma.StringNullableFilter<"Employee"> | string | null
   passportExpiryDate?: Prisma.DateTimeNullableFilter<"Employee"> | Date | string | null
   passportDocument?: Prisma.StringNullableFilter<"Employee"> | string | null
+  lastExitDate?: Prisma.DateTimeNullableFilter<"Employee"> | Date | string | null
+  lastEntryDate?: Prisma.DateTimeNullableFilter<"Employee"> | Date | string | null
   bankName?: Prisma.StringNullableFilter<"Employee"> | string | null
   bankCode?: Prisma.StringNullableFilter<"Employee"> | string | null
   iban?: Prisma.StringNullableFilter<"Employee"> | string | null
@@ -791,6 +811,8 @@ export type EmployeeOrderByWithAggregationInput = {
   passportNo?: Prisma.SortOrderInput | Prisma.SortOrder
   passportExpiryDate?: Prisma.SortOrderInput | Prisma.SortOrder
   passportDocument?: Prisma.SortOrderInput | Prisma.SortOrder
+  lastExitDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  lastEntryDate?: Prisma.SortOrderInput | Prisma.SortOrder
   bankName?: Prisma.SortOrderInput | Prisma.SortOrder
   bankCode?: Prisma.SortOrderInput | Prisma.SortOrder
   iban?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -848,6 +870,8 @@ export type EmployeeScalarWhereWithAggregatesInput = {
   passportNo?: Prisma.StringNullableWithAggregatesFilter<"Employee"> | string | null
   passportExpiryDate?: Prisma.DateTimeNullableWithAggregatesFilter<"Employee"> | Date | string | null
   passportDocument?: Prisma.StringNullableWithAggregatesFilter<"Employee"> | string | null
+  lastExitDate?: Prisma.DateTimeNullableWithAggregatesFilter<"Employee"> | Date | string | null
+  lastEntryDate?: Prisma.DateTimeNullableWithAggregatesFilter<"Employee"> | Date | string | null
   bankName?: Prisma.StringNullableWithAggregatesFilter<"Employee"> | string | null
   bankCode?: Prisma.StringNullableWithAggregatesFilter<"Employee"> | string | null
   iban?: Prisma.StringNullableWithAggregatesFilter<"Employee"> | string | null
@@ -890,6 +914,8 @@ export type EmployeeCreateInput = {
   passportNo?: string | null
   passportExpiryDate?: Date | string | null
   passportDocument?: string | null
+  lastExitDate?: Date | string | null
+  lastEntryDate?: Date | string | null
   bankName?: string | null
   bankCode?: string | null
   iban?: string | null
@@ -951,6 +977,8 @@ export type EmployeeUncheckedCreateInput = {
   passportNo?: string | null
   passportExpiryDate?: Date | string | null
   passportDocument?: string | null
+  lastExitDate?: Date | string | null
+  lastEntryDate?: Date | string | null
   bankName?: string | null
   bankCode?: string | null
   iban?: string | null
@@ -999,6 +1027,8 @@ export type EmployeeUpdateInput = {
   passportNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportExpiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   passportDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExitDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastEntryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1060,6 +1090,8 @@ export type EmployeeUncheckedUpdateInput = {
   passportNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportExpiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   passportDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExitDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastEntryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1115,6 +1147,8 @@ export type EmployeeCreateManyInput = {
   passportNo?: string | null
   passportExpiryDate?: Date | string | null
   passportDocument?: string | null
+  lastExitDate?: Date | string | null
+  lastEntryDate?: Date | string | null
   bankName?: string | null
   bankCode?: string | null
   iban?: string | null
@@ -1157,6 +1191,8 @@ export type EmployeeUpdateManyMutationInput = {
   passportNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportExpiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   passportDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExitDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastEntryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1205,6 +1241,8 @@ export type EmployeeUncheckedUpdateManyInput = {
   passportNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportExpiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   passportDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExitDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastEntryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1264,6 +1302,8 @@ export type EmployeeCountOrderByAggregateInput = {
   passportNo?: Prisma.SortOrder
   passportExpiryDate?: Prisma.SortOrder
   passportDocument?: Prisma.SortOrder
+  lastExitDate?: Prisma.SortOrder
+  lastEntryDate?: Prisma.SortOrder
   bankName?: Prisma.SortOrder
   bankCode?: Prisma.SortOrder
   iban?: Prisma.SortOrder
@@ -1334,6 +1374,8 @@ export type EmployeeMaxOrderByAggregateInput = {
   passportNo?: Prisma.SortOrder
   passportExpiryDate?: Prisma.SortOrder
   passportDocument?: Prisma.SortOrder
+  lastExitDate?: Prisma.SortOrder
+  lastEntryDate?: Prisma.SortOrder
   bankName?: Prisma.SortOrder
   bankCode?: Prisma.SortOrder
   iban?: Prisma.SortOrder
@@ -1383,6 +1425,8 @@ export type EmployeeMinOrderByAggregateInput = {
   passportNo?: Prisma.SortOrder
   passportExpiryDate?: Prisma.SortOrder
   passportDocument?: Prisma.SortOrder
+  lastExitDate?: Prisma.SortOrder
+  lastEntryDate?: Prisma.SortOrder
   bankName?: Prisma.SortOrder
   bankCode?: Prisma.SortOrder
   iban?: Prisma.SortOrder
@@ -1848,6 +1892,8 @@ export type EmployeeCreateWithoutBranchInput = {
   passportNo?: string | null
   passportExpiryDate?: Date | string | null
   passportDocument?: string | null
+  lastExitDate?: Date | string | null
+  lastEntryDate?: Date | string | null
   bankName?: string | null
   bankCode?: string | null
   iban?: string | null
@@ -1907,6 +1953,8 @@ export type EmployeeUncheckedCreateWithoutBranchInput = {
   passportNo?: string | null
   passportExpiryDate?: Date | string | null
   passportDocument?: string | null
+  lastExitDate?: Date | string | null
+  lastEntryDate?: Date | string | null
   bankName?: string | null
   bankCode?: string | null
   iban?: string | null
@@ -1991,6 +2039,8 @@ export type EmployeeScalarWhereInput = {
   passportNo?: Prisma.StringNullableFilter<"Employee"> | string | null
   passportExpiryDate?: Prisma.DateTimeNullableFilter<"Employee"> | Date | string | null
   passportDocument?: Prisma.StringNullableFilter<"Employee"> | string | null
+  lastExitDate?: Prisma.DateTimeNullableFilter<"Employee"> | Date | string | null
+  lastEntryDate?: Prisma.DateTimeNullableFilter<"Employee"> | Date | string | null
   bankName?: Prisma.StringNullableFilter<"Employee"> | string | null
   bankCode?: Prisma.StringNullableFilter<"Employee"> | string | null
   iban?: Prisma.StringNullableFilter<"Employee"> | string | null
@@ -2033,6 +2083,8 @@ export type EmployeeCreateWithoutCityInput = {
   passportNo?: string | null
   passportExpiryDate?: Date | string | null
   passportDocument?: string | null
+  lastExitDate?: Date | string | null
+  lastEntryDate?: Date | string | null
   bankName?: string | null
   bankCode?: string | null
   iban?: string | null
@@ -2092,6 +2144,8 @@ export type EmployeeUncheckedCreateWithoutCityInput = {
   passportNo?: string | null
   passportExpiryDate?: Date | string | null
   passportDocument?: string | null
+  lastExitDate?: Date | string | null
+  lastEntryDate?: Date | string | null
   bankName?: string | null
   bankCode?: string | null
   iban?: string | null
@@ -2166,6 +2220,8 @@ export type EmployeeCreateWithoutCountryInput = {
   passportNo?: string | null
   passportExpiryDate?: Date | string | null
   passportDocument?: string | null
+  lastExitDate?: Date | string | null
+  lastEntryDate?: Date | string | null
   bankName?: string | null
   bankCode?: string | null
   iban?: string | null
@@ -2225,6 +2281,8 @@ export type EmployeeUncheckedCreateWithoutCountryInput = {
   passportNo?: string | null
   passportExpiryDate?: Date | string | null
   passportDocument?: string | null
+  lastExitDate?: Date | string | null
+  lastEntryDate?: Date | string | null
   bankName?: string | null
   bankCode?: string | null
   iban?: string | null
@@ -2299,6 +2357,8 @@ export type EmployeeCreateWithoutGosiCityInput = {
   passportNo?: string | null
   passportExpiryDate?: Date | string | null
   passportDocument?: string | null
+  lastExitDate?: Date | string | null
+  lastEntryDate?: Date | string | null
   bankName?: string | null
   bankCode?: string | null
   iban?: string | null
@@ -2359,6 +2419,8 @@ export type EmployeeUncheckedCreateWithoutGosiCityInput = {
   passportNo?: string | null
   passportExpiryDate?: Date | string | null
   passportDocument?: string | null
+  lastExitDate?: Date | string | null
+  lastEntryDate?: Date | string | null
   bankName?: string | null
   bankCode?: string | null
   iban?: string | null
@@ -2432,6 +2494,8 @@ export type EmployeeCreateWithoutDesignationInput = {
   passportNo?: string | null
   passportExpiryDate?: Date | string | null
   passportDocument?: string | null
+  lastExitDate?: Date | string | null
+  lastEntryDate?: Date | string | null
   bankName?: string | null
   bankCode?: string | null
   iban?: string | null
@@ -2491,6 +2555,8 @@ export type EmployeeUncheckedCreateWithoutDesignationInput = {
   passportNo?: string | null
   passportExpiryDate?: Date | string | null
   passportDocument?: string | null
+  lastExitDate?: Date | string | null
+  lastEntryDate?: Date | string | null
   bankName?: string | null
   bankCode?: string | null
   iban?: string | null
@@ -2565,6 +2631,8 @@ export type EmployeeCreateWithoutStatusInput = {
   passportNo?: string | null
   passportExpiryDate?: Date | string | null
   passportDocument?: string | null
+  lastExitDate?: Date | string | null
+  lastEntryDate?: Date | string | null
   bankName?: string | null
   bankCode?: string | null
   iban?: string | null
@@ -2624,6 +2692,8 @@ export type EmployeeUncheckedCreateWithoutStatusInput = {
   passportNo?: string | null
   passportExpiryDate?: Date | string | null
   passportDocument?: string | null
+  lastExitDate?: Date | string | null
+  lastEntryDate?: Date | string | null
   bankName?: string | null
   bankCode?: string | null
   iban?: string | null
@@ -2698,6 +2768,8 @@ export type EmployeeCreateWithoutTimesheetsInput = {
   passportNo?: string | null
   passportExpiryDate?: Date | string | null
   passportDocument?: string | null
+  lastExitDate?: Date | string | null
+  lastEntryDate?: Date | string | null
   bankName?: string | null
   bankCode?: string | null
   iban?: string | null
@@ -2758,6 +2830,8 @@ export type EmployeeUncheckedCreateWithoutTimesheetsInput = {
   passportNo?: string | null
   passportExpiryDate?: Date | string | null
   passportDocument?: string | null
+  lastExitDate?: Date | string | null
+  lastEntryDate?: Date | string | null
   bankName?: string | null
   bankCode?: string | null
   iban?: string | null
@@ -2821,6 +2895,8 @@ export type EmployeeUpdateWithoutTimesheetsInput = {
   passportNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportExpiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   passportDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExitDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastEntryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2881,6 +2957,8 @@ export type EmployeeUncheckedUpdateWithoutTimesheetsInput = {
   passportNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportExpiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   passportDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExitDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastEntryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2928,6 +3006,8 @@ export type EmployeeCreateWithoutPayrollsInput = {
   passportNo?: string | null
   passportExpiryDate?: Date | string | null
   passportDocument?: string | null
+  lastExitDate?: Date | string | null
+  lastEntryDate?: Date | string | null
   bankName?: string | null
   bankCode?: string | null
   iban?: string | null
@@ -2988,6 +3068,8 @@ export type EmployeeUncheckedCreateWithoutPayrollsInput = {
   passportNo?: string | null
   passportExpiryDate?: Date | string | null
   passportDocument?: string | null
+  lastExitDate?: Date | string | null
+  lastEntryDate?: Date | string | null
   bankName?: string | null
   bankCode?: string | null
   iban?: string | null
@@ -3051,6 +3133,8 @@ export type EmployeeUpdateWithoutPayrollsInput = {
   passportNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportExpiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   passportDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExitDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastEntryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3111,6 +3195,8 @@ export type EmployeeUncheckedUpdateWithoutPayrollsInput = {
   passportNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportExpiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   passportDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExitDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastEntryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3158,6 +3244,8 @@ export type EmployeeCreateWithoutPayrollSectionInput = {
   passportNo?: string | null
   passportExpiryDate?: Date | string | null
   passportDocument?: string | null
+  lastExitDate?: Date | string | null
+  lastEntryDate?: Date | string | null
   bankName?: string | null
   bankCode?: string | null
   iban?: string | null
@@ -3217,6 +3305,8 @@ export type EmployeeUncheckedCreateWithoutPayrollSectionInput = {
   passportNo?: string | null
   passportExpiryDate?: Date | string | null
   passportDocument?: string | null
+  lastExitDate?: Date | string | null
+  lastEntryDate?: Date | string | null
   bankName?: string | null
   bankCode?: string | null
   iban?: string | null
@@ -3291,6 +3381,8 @@ export type EmployeeCreateWithoutLoansInput = {
   passportNo?: string | null
   passportExpiryDate?: Date | string | null
   passportDocument?: string | null
+  lastExitDate?: Date | string | null
+  lastEntryDate?: Date | string | null
   bankName?: string | null
   bankCode?: string | null
   iban?: string | null
@@ -3351,6 +3443,8 @@ export type EmployeeUncheckedCreateWithoutLoansInput = {
   passportNo?: string | null
   passportExpiryDate?: Date | string | null
   passportDocument?: string | null
+  lastExitDate?: Date | string | null
+  lastEntryDate?: Date | string | null
   bankName?: string | null
   bankCode?: string | null
   iban?: string | null
@@ -3414,6 +3508,8 @@ export type EmployeeUpdateWithoutLoansInput = {
   passportNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportExpiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   passportDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExitDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastEntryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3474,6 +3570,8 @@ export type EmployeeUncheckedUpdateWithoutLoansInput = {
   passportNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportExpiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   passportDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExitDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastEntryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3521,6 +3619,8 @@ export type EmployeeCreateWithoutTrafficChallansInput = {
   passportNo?: string | null
   passportExpiryDate?: Date | string | null
   passportDocument?: string | null
+  lastExitDate?: Date | string | null
+  lastEntryDate?: Date | string | null
   bankName?: string | null
   bankCode?: string | null
   iban?: string | null
@@ -3581,6 +3681,8 @@ export type EmployeeUncheckedCreateWithoutTrafficChallansInput = {
   passportNo?: string | null
   passportExpiryDate?: Date | string | null
   passportDocument?: string | null
+  lastExitDate?: Date | string | null
+  lastEntryDate?: Date | string | null
   bankName?: string | null
   bankCode?: string | null
   iban?: string | null
@@ -3644,6 +3746,8 @@ export type EmployeeUpdateWithoutTrafficChallansInput = {
   passportNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportExpiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   passportDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExitDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastEntryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3704,6 +3808,8 @@ export type EmployeeUncheckedUpdateWithoutTrafficChallansInput = {
   passportNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportExpiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   passportDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExitDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastEntryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3751,6 +3857,8 @@ export type EmployeeCreateWithoutExitReentriesInput = {
   passportNo?: string | null
   passportExpiryDate?: Date | string | null
   passportDocument?: string | null
+  lastExitDate?: Date | string | null
+  lastEntryDate?: Date | string | null
   bankName?: string | null
   bankCode?: string | null
   iban?: string | null
@@ -3811,6 +3919,8 @@ export type EmployeeUncheckedCreateWithoutExitReentriesInput = {
   passportNo?: string | null
   passportExpiryDate?: Date | string | null
   passportDocument?: string | null
+  lastExitDate?: Date | string | null
+  lastEntryDate?: Date | string | null
   bankName?: string | null
   bankCode?: string | null
   iban?: string | null
@@ -3874,6 +3984,8 @@ export type EmployeeUpdateWithoutExitReentriesInput = {
   passportNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportExpiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   passportDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExitDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastEntryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3934,6 +4046,8 @@ export type EmployeeUncheckedUpdateWithoutExitReentriesInput = {
   passportNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportExpiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   passportDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExitDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastEntryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3981,6 +4095,8 @@ export type EmployeeCreateWithoutLedgersInput = {
   passportNo?: string | null
   passportExpiryDate?: Date | string | null
   passportDocument?: string | null
+  lastExitDate?: Date | string | null
+  lastEntryDate?: Date | string | null
   bankName?: string | null
   bankCode?: string | null
   iban?: string | null
@@ -4041,6 +4157,8 @@ export type EmployeeUncheckedCreateWithoutLedgersInput = {
   passportNo?: string | null
   passportExpiryDate?: Date | string | null
   passportDocument?: string | null
+  lastExitDate?: Date | string | null
+  lastEntryDate?: Date | string | null
   bankName?: string | null
   bankCode?: string | null
   iban?: string | null
@@ -4104,6 +4222,8 @@ export type EmployeeUpdateWithoutLedgersInput = {
   passportNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportExpiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   passportDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExitDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastEntryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4164,6 +4284,8 @@ export type EmployeeUncheckedUpdateWithoutLedgersInput = {
   passportNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportExpiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   passportDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExitDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastEntryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4217,6 +4339,8 @@ export type EmployeeCreateManyBranchInput = {
   passportNo?: string | null
   passportExpiryDate?: Date | string | null
   passportDocument?: string | null
+  lastExitDate?: Date | string | null
+  lastEntryDate?: Date | string | null
   bankName?: string | null
   bankCode?: string | null
   iban?: string | null
@@ -4259,6 +4383,8 @@ export type EmployeeUpdateWithoutBranchInput = {
   passportNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportExpiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   passportDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExitDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastEntryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4318,6 +4444,8 @@ export type EmployeeUncheckedUpdateWithoutBranchInput = {
   passportNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportExpiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   passportDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExitDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastEntryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4372,6 +4500,8 @@ export type EmployeeUncheckedUpdateManyWithoutBranchInput = {
   passportNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportExpiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   passportDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExitDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastEntryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4420,6 +4550,8 @@ export type EmployeeCreateManyCityInput = {
   passportNo?: string | null
   passportExpiryDate?: Date | string | null
   passportDocument?: string | null
+  lastExitDate?: Date | string | null
+  lastEntryDate?: Date | string | null
   bankName?: string | null
   bankCode?: string | null
   iban?: string | null
@@ -4462,6 +4594,8 @@ export type EmployeeUpdateWithoutCityInput = {
   passportNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportExpiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   passportDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExitDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastEntryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4521,6 +4655,8 @@ export type EmployeeUncheckedUpdateWithoutCityInput = {
   passportNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportExpiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   passportDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExitDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastEntryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4575,6 +4711,8 @@ export type EmployeeUncheckedUpdateManyWithoutCityInput = {
   passportNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportExpiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   passportDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExitDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastEntryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4623,6 +4761,8 @@ export type EmployeeCreateManyCountryInput = {
   passportNo?: string | null
   passportExpiryDate?: Date | string | null
   passportDocument?: string | null
+  lastExitDate?: Date | string | null
+  lastEntryDate?: Date | string | null
   bankName?: string | null
   bankCode?: string | null
   iban?: string | null
@@ -4665,6 +4805,8 @@ export type EmployeeUpdateWithoutCountryInput = {
   passportNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportExpiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   passportDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExitDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastEntryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4724,6 +4866,8 @@ export type EmployeeUncheckedUpdateWithoutCountryInput = {
   passportNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportExpiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   passportDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExitDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastEntryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4778,6 +4922,8 @@ export type EmployeeUncheckedUpdateManyWithoutCountryInput = {
   passportNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportExpiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   passportDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExitDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastEntryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4827,6 +4973,8 @@ export type EmployeeCreateManyGosiCityInput = {
   passportNo?: string | null
   passportExpiryDate?: Date | string | null
   passportDocument?: string | null
+  lastExitDate?: Date | string | null
+  lastEntryDate?: Date | string | null
   bankName?: string | null
   bankCode?: string | null
   iban?: string | null
@@ -4868,6 +5016,8 @@ export type EmployeeUpdateWithoutGosiCityInput = {
   passportNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportExpiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   passportDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExitDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastEntryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4928,6 +5078,8 @@ export type EmployeeUncheckedUpdateWithoutGosiCityInput = {
   passportNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportExpiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   passportDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExitDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastEntryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4982,6 +5134,8 @@ export type EmployeeUncheckedUpdateManyWithoutGosiCityInput = {
   passportNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportExpiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   passportDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExitDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastEntryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5029,6 +5183,8 @@ export type EmployeeCreateManyDesignationInput = {
   passportNo?: string | null
   passportExpiryDate?: Date | string | null
   passportDocument?: string | null
+  lastExitDate?: Date | string | null
+  lastEntryDate?: Date | string | null
   bankName?: string | null
   bankCode?: string | null
   iban?: string | null
@@ -5071,6 +5227,8 @@ export type EmployeeUpdateWithoutDesignationInput = {
   passportNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportExpiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   passportDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExitDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastEntryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5130,6 +5288,8 @@ export type EmployeeUncheckedUpdateWithoutDesignationInput = {
   passportNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportExpiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   passportDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExitDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastEntryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5184,6 +5344,8 @@ export type EmployeeUncheckedUpdateManyWithoutDesignationInput = {
   passportNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportExpiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   passportDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExitDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastEntryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5232,6 +5394,8 @@ export type EmployeeCreateManyStatusInput = {
   passportNo?: string | null
   passportExpiryDate?: Date | string | null
   passportDocument?: string | null
+  lastExitDate?: Date | string | null
+  lastEntryDate?: Date | string | null
   bankName?: string | null
   bankCode?: string | null
   iban?: string | null
@@ -5274,6 +5438,8 @@ export type EmployeeUpdateWithoutStatusInput = {
   passportNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportExpiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   passportDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExitDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastEntryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5333,6 +5499,8 @@ export type EmployeeUncheckedUpdateWithoutStatusInput = {
   passportNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportExpiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   passportDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExitDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastEntryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5387,6 +5555,8 @@ export type EmployeeUncheckedUpdateManyWithoutStatusInput = {
   passportNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportExpiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   passportDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExitDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastEntryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5435,6 +5605,8 @@ export type EmployeeCreateManyPayrollSectionInput = {
   passportNo?: string | null
   passportExpiryDate?: Date | string | null
   passportDocument?: string | null
+  lastExitDate?: Date | string | null
+  lastEntryDate?: Date | string | null
   bankName?: string | null
   bankCode?: string | null
   iban?: string | null
@@ -5477,6 +5649,8 @@ export type EmployeeUpdateWithoutPayrollSectionInput = {
   passportNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportExpiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   passportDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExitDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastEntryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5536,6 +5710,8 @@ export type EmployeeUncheckedUpdateWithoutPayrollSectionInput = {
   passportNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportExpiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   passportDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExitDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastEntryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5590,6 +5766,8 @@ export type EmployeeUncheckedUpdateManyWithoutPayrollSectionInput = {
   passportNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportExpiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   passportDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExitDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastEntryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5715,6 +5893,8 @@ export type EmployeeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   passportNo?: boolean
   passportExpiryDate?: boolean
   passportDocument?: boolean
+  lastExitDate?: boolean
+  lastEntryDate?: boolean
   bankName?: boolean
   bankCode?: boolean
   iban?: boolean
@@ -5778,6 +5958,8 @@ export type EmployeeSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   passportNo?: boolean
   passportExpiryDate?: boolean
   passportDocument?: boolean
+  lastExitDate?: boolean
+  lastEntryDate?: boolean
   bankName?: boolean
   bankCode?: boolean
   iban?: boolean
@@ -5834,6 +6016,8 @@ export type EmployeeSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   passportNo?: boolean
   passportExpiryDate?: boolean
   passportDocument?: boolean
+  lastExitDate?: boolean
+  lastEntryDate?: boolean
   bankName?: boolean
   bankCode?: boolean
   iban?: boolean
@@ -5890,6 +6074,8 @@ export type EmployeeSelectScalar = {
   passportNo?: boolean
   passportExpiryDate?: boolean
   passportDocument?: boolean
+  lastExitDate?: boolean
+  lastEntryDate?: boolean
   bankName?: boolean
   bankCode?: boolean
   iban?: boolean
@@ -5902,7 +6088,7 @@ export type EmployeeSelectScalar = {
   updatedAt?: boolean
 }
 
-export type EmployeeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "profilePicture" | "employeeCode" | "nameEn" | "nameAr" | "dob" | "phone" | "gender" | "countryId" | "cityId" | "statusId" | "branchId" | "designationId" | "payrollSectionId" | "isDeductable" | "isFixed" | "workingDays" | "workingHours" | "hourlyRate" | "salary" | "foodAllowance" | "mobileAllowance" | "otherAllowance" | "contractStartDate" | "contractEndDate" | "contractDocument" | "contractEndReason" | "joiningDate" | "idCardNo" | "idCardExpiryDate" | "idCardDocument" | "profession" | "nationality" | "passportNo" | "passportExpiryDate" | "passportDocument" | "bankName" | "bankCode" | "iban" | "gosiSalary" | "gosiCityId" | "openingBalance" | "isCardDelivered" | "cardDocument" | "createdAt" | "updatedAt", ExtArgs["result"]["employee"]>
+export type EmployeeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "profilePicture" | "employeeCode" | "nameEn" | "nameAr" | "dob" | "phone" | "gender" | "countryId" | "cityId" | "statusId" | "branchId" | "designationId" | "payrollSectionId" | "isDeductable" | "isFixed" | "workingDays" | "workingHours" | "hourlyRate" | "salary" | "foodAllowance" | "mobileAllowance" | "otherAllowance" | "contractStartDate" | "contractEndDate" | "contractDocument" | "contractEndReason" | "joiningDate" | "idCardNo" | "idCardExpiryDate" | "idCardDocument" | "profession" | "nationality" | "passportNo" | "passportExpiryDate" | "passportDocument" | "lastExitDate" | "lastEntryDate" | "bankName" | "bankCode" | "iban" | "gosiSalary" | "gosiCityId" | "openingBalance" | "isCardDelivered" | "cardDocument" | "createdAt" | "updatedAt", ExtArgs["result"]["employee"]>
 export type EmployeeInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   country?: boolean | Prisma.Employee$countryArgs<ExtArgs>
   city?: boolean | Prisma.Employee$cityArgs<ExtArgs>
@@ -5992,6 +6178,8 @@ export type $EmployeePayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     passportNo: string | null
     passportExpiryDate: Date | null
     passportDocument: string | null
+    lastExitDate: Date | null
+    lastEntryDate: Date | null
     bankName: string | null
     bankCode: string | null
     iban: string | null
@@ -6474,6 +6662,8 @@ export interface EmployeeFieldRefs {
   readonly passportNo: Prisma.FieldRef<"Employee", 'String'>
   readonly passportExpiryDate: Prisma.FieldRef<"Employee", 'DateTime'>
   readonly passportDocument: Prisma.FieldRef<"Employee", 'String'>
+  readonly lastExitDate: Prisma.FieldRef<"Employee", 'DateTime'>
+  readonly lastEntryDate: Prisma.FieldRef<"Employee", 'DateTime'>
   readonly bankName: Prisma.FieldRef<"Employee", 'String'>
   readonly bankCode: Prisma.FieldRef<"Employee", 'String'>
   readonly iban: Prisma.FieldRef<"Employee", 'String'>

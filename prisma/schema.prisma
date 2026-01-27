@@ -20,29 +20,29 @@ datasource db {
 // you'll need to add back the Account model.
 
 model User {
-  id            Int       @id @default(autoincrement())
-  nameEn        String
-  nameAr        String?
-  email         String    @unique
-  password      String?   // Hashed password
-  userRoleId    Int
-  branchId      Int?      // Required for Branch Manager (roleId: 3), optional for others
-  isActive      Boolean   @default(true)
-  createdBy     Int?      // ID of user who created this record
-  updatedBy     Int?      // ID of user who last updated this record
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  id         Int      @id @default(autoincrement())
+  nameEn     String
+  nameAr     String?
+  email      String   @unique
+  password   String? // Hashed password
+  userRoleId Int
+  branchId   Int? // Required for Branch Manager (roleId: 3), optional for others
+  isActive   Boolean  @default(true)
+  createdBy  Int? // ID of user who created this record
+  updatedBy  Int? // ID of user who last updated this record
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 
   // Relations: User → Other Tables (User has foreign keys)
-  userRole      UserRole  @relation(fields: [userRoleId], references: [id])
-  branch        Branch?   @relation(fields: [branchId], references: [id])
-  privileges    UserPrivilege?
-  creator       User?     @relation("UserCreatedBy", fields: [createdBy], references: [id])
-  updater       User?     @relation("UserUpdatedBy", fields: [updatedBy], references: [id])
-  
+  userRole   UserRole       @relation(fields: [userRoleId], references: [id])
+  branch     Branch?        @relation(fields: [branchId], references: [id])
+  privileges UserPrivilege?
+  creator    User?          @relation("UserCreatedBy", fields: [createdBy], references: [id])
+  updater    User?          @relation("UserUpdatedBy", fields: [updatedBy], references: [id])
+
   // Relations: Other Tables → User (Other tables have foreign keys pointing to User)
-  createdUsers  User[]    @relation("UserCreatedBy")
-  updatedUsers  User[]    @relation("UserUpdatedBy")
+  createdUsers User[] @relation("UserCreatedBy")
+  updatedUsers User[] @relation("UserUpdatedBy")
 
   @@index([email])
   @@index([userRoleId])
@@ -59,23 +59,23 @@ model UserRole {
   id        Int      @id @default(autoincrement())
   nameEn    String
   nameAr    String?
-  access    String   // Admin, Manager, Branch Manager, Access-Enabled User
+  access    String // Admin, Manager, Branch Manager, Access-Enabled User
   isActive  Boolean  @default(true)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  users     User[]
+  users User[]
 }
 
 model UserPrivilege {
   id         Int      @id @default(autoincrement())
   userId     Int      @unique
-  privileges Json     // Stores UserPrivileges structure
+  privileges Json // Stores UserPrivileges structure
   createdAt  DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt  DateTime @updatedAt
 
   // Relations: UserPrivilege → Other Tables (UserPrivilege has foreign keys)
-  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 // ============================================
@@ -107,8 +107,8 @@ model City {
   updatedAt     DateTime @updatedAt
 
   // Relations: City → Other Tables (City has foreign keys)
-  country   Country? @relation(fields: [countryId], references: [id])
-  
+  country Country? @relation(fields: [countryId], references: [id])
+
   // Relations: Other Tables → City (Other tables have foreign keys pointing to City)
   employees Employee[]
 }
@@ -127,12 +127,12 @@ model Country {
 }
 
 model GosiCity {
-  id        Int       @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   nameEn    String
   nameAr    String?
-  isActive  Boolean   @default(true)
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   employees Employee[]
 }
@@ -143,16 +143,16 @@ model GosiCity {
 
 model Employee {
   // Step 1
-  id                Int       @id @default(autoincrement())
-  profilePicture    String?
-  employeeCode      Int       @unique
-  nameEn            String
-  nameAr            String?
-  dob         DateTime?
-  phone             String?
+  id             Int       @id @default(autoincrement())
+  profilePicture String?
+  employeeCode   Int       @unique
+  nameEn         String
+  nameAr         String?
+  dob            DateTime?
+  phone          String?
 
   // Step 2
-  gender            String?   // Male, Female
+  gender            String? // Male, Female
   countryId         Int?
   cityId            Int?
   statusId          Int?
@@ -175,46 +175,49 @@ model Employee {
   joiningDate       DateTime?
 
   // Step 3
-  idCardNo          String?
-  idCardExpiryDate DateTime?
-  idCardDocument   String?
-  profession       String?
-  nationality      String?
-  passportNo       String?
+  idCardNo           String?
+  idCardExpiryDate   DateTime?
+  idCardDocument     String?
+  profession         String?
+  nationality        String?
+  passportNo         String?
   passportExpiryDate DateTime?
-  passportDocument String?
+  passportDocument   String?
+
+  lastExitDate DateTime?
+  lastEntryDate DateTime?
 
   // Step 4
-  bankName          String?
-  bankCode          String?
-  iban              String?
-  gosiSalary        Decimal?  @db.Decimal(10, 1)
-  gosiCityId        Int?
+  bankName   String?
+  bankCode   String?
+  iban       String?
+  gosiSalary Decimal? @db.Decimal(10, 1)
+  gosiCityId Int?
 
   // Step 5 - Loan & Bank Card Details
-  openingBalance    Decimal?  @db.Decimal(10, 1)
-  isCardDelivered   Boolean   @default(false)
-  cardDocument      String?
+  openingBalance  Decimal? @db.Decimal(10, 1)
+  isCardDelivered Boolean  @default(false)
+  cardDocument    String?
 
-  createdAt         DateTime  @default(now())
-  updatedAt         DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   // Relations: Employee → Other Tables (Employee has foreign keys)
-  country           Country?  @relation(fields: [countryId], references: [id])
-  city              City?     @relation(fields: [cityId], references: [id])
-  status            EmployeeStatus? @relation(fields: [statusId], references: [id])
-  branch            Branch?   @relation(fields: [branchId], references: [id])
-  designation       Designation? @relation(fields: [designationId], references: [id])
-  payrollSection    PayrollSection? @relation(fields: [payrollSectionId], references: [id])
-  gosiCity          GosiCity? @relation(fields: [gosiCityId], references: [id])
-  
+  country        Country?        @relation(fields: [countryId], references: [id])
+  city           City?           @relation(fields: [cityId], references: [id])
+  status         EmployeeStatus? @relation(fields: [statusId], references: [id])
+  branch         Branch?         @relation(fields: [branchId], references: [id])
+  designation    Designation?    @relation(fields: [designationId], references: [id])
+  payrollSection PayrollSection? @relation(fields: [payrollSectionId], references: [id])
+  gosiCity       GosiCity?       @relation(fields: [gosiCityId], references: [id])
+
   // Relations: Other Tables → Employee (Other tables have foreign keys pointing to Employee)
-  timesheets        Timesheet[]
-  loans             Loan[]
-  trafficChallans   TrafficChallan[]
-  exitReentries     ExitReentry[]
-  payrolls          Payroll[]
-  ledgers           Ledger[]
+  timesheets      Timesheet[]
+  loans           Loan[]
+  trafficChallans TrafficChallan[]
+  exitReentries   ExitReentry[]
+  payrolls        Payroll[]
+  ledgers         Ledger[]
 
   @@index([employeeCode])
   @@index([countryId])
@@ -223,29 +226,29 @@ model Employee {
 }
 
 model Designation {
-  id                Int       @id @default(autoincrement())
-  nameEn            String
-  nameAr            String?
-  hoursPerDay       Int?
-  displayOrderKey   Int?
-  color             String?   // Hex color code (e.g., #3B82F6)
+  id                 Int      @id @default(autoincrement())
+  nameEn             String
+  nameAr             String?
+  hoursPerDay        Int?
+  displayOrderKey    Int?
+  color              String? // Hex color code (e.g., #3B82F6)
   breakfastAllowance Decimal? @db.Decimal(10, 1)
-  isActive          Boolean   @default(true)
-  createdAt         DateTime  @default(now())
-  updatedAt         DateTime  @updatedAt
+  isActive           Boolean  @default(true)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
 
   // Relations: Other Tables → Designation (Other tables have foreign keys pointing to Designation)
-  employees Employee[]
+  employees     Employee[]
   exitReentries ExitReentry[]
 }
 
 model EmployeeStatus {
-  id        Int       @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   nameEn    String
   nameAr    String?
-  isActive  Boolean   @default(true)
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   // Relations: Other Tables → EmployeeStatus (Other tables have foreign keys pointing to EmployeeStatus)
   employees Employee[]
@@ -266,11 +269,11 @@ model Project {
   updatedAt   DateTime @updatedAt
 
   // Relations: Project → Other Tables (Project has foreign keys)
-  branch      Branch?  @relation(fields: [branchId], references: [id])
-  
+  branch Branch? @relation(fields: [branchId], references: [id])
+
   // Relations: Other Tables → Project (Other tables have foreign keys pointing to Project)
-  timesheetsAsProject1  Timesheet[] @relation("TimesheetProject1")
-  timesheetsAsProject2  Timesheet[] @relation("TimesheetProject2")
+  timesheetsAsProject1 Timesheet[] @relation("TimesheetProject1")
+  timesheetsAsProject2 Timesheet[] @relation("TimesheetProject2")
 }
 
 // ============================================
@@ -278,26 +281,26 @@ model Project {
 // ============================================
 
 model Timesheet {
-  id                Int       @id @default(autoincrement())
-  employeeId        Int
-  date              DateTime  // Compulsory date field
-  project1Id         Int?
-  project1BfAllowance Boolean @default(false)
-  project1Hours     Int?
-  project1Overtime  Int?
-  project2Id         Int?
-  project2BfAllowance Boolean @default(false)
-  project2Hours     Int?
-  project2Overtime  Int?
-  totalHours        Int?
-  description       String?   @db.Text
-  createdAt         DateTime  @default(now())
-  updatedAt         DateTime  @updatedAt
+  id                  Int      @id @default(autoincrement())
+  employeeId          Int
+  date                DateTime // Compulsory date field
+  project1Id          Int?
+  project1BfAllowance Boolean  @default(false)
+  project1Hours       Int?
+  project1Overtime    Int?
+  project2Id          Int?
+  project2BfAllowance Boolean  @default(false)
+  project2Hours       Int?
+  project2Overtime    Int?
+  totalHours          Int?
+  description         String?  @db.Text
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
 
   // Relations: Timesheet → Other Tables (Timesheet has foreign keys)
-  employee          Employee  @relation(fields: [employeeId], references: [id], onDelete: Cascade)
-  project1          Project?  @relation("TimesheetProject1", fields: [project1Id], references: [id], onDelete: Cascade)
-  project2          Project?  @relation("TimesheetProject2", fields: [project2Id], references: [id], onDelete: Cascade)
+  employee Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  project1 Project? @relation("TimesheetProject1", fields: [project1Id], references: [id], onDelete: Cascade)
+  project2 Project? @relation("TimesheetProject2", fields: [project2Id], references: [id], onDelete: Cascade)
 
   @@index([employeeId])
   @@index([date])
@@ -310,32 +313,35 @@ model Timesheet {
 // ============================================
 
 model Payroll {
-  id          Int       @id @default(autoincrement())
-  employeeId  Int
-  sectionId   Int?
-  month       Int       // 1-12
-  year        Int
-  amount      Decimal   @db.Decimal(10, 2)
-  notes       String?   @db.Text
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  id         Int      @id @default(autoincrement())
+  employeeId Int
+  sectionId  Int?
+  month      Int // 1-12
+  year       Int
+  amount     Decimal  @db.Decimal(10, 2)
+  notes      String?  @db.Text
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 
   // Relations: Payroll → Other Tables (Payroll has foreign keys)
-  employee    Employee  @relation(fields: [employeeId], references: [id], onDelete: Cascade)
-  section     PayrollSection? @relation(fields: [sectionId], references: [id])
+  employee Employee        @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  section  PayrollSection? @relation(fields: [sectionId], references: [id])
+
+  // Relations: Other Tables → Payroll (Other tables have foreign keys pointing to Payroll)
+  ledgers Ledger[]
 
   @@index([employeeId])
   @@index([year, month])
 }
 
 model PayrollSection {
-  id             Int      @id @default(autoincrement())
-  nameEn         String
-  nameAr         String?
+  id              Int      @id @default(autoincrement())
+  nameEn          String
+  nameAr          String?
   displayOrderKey Int?
-  isActive       Boolean  @default(true)
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+  isActive        Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 
   // Relations: Other Tables → PayrollSection (Other tables have foreign keys pointing to PayrollSection)
   employees Employee[]
@@ -352,17 +358,20 @@ enum LoanType {
 }
 
 model Loan {
-  id          Int       @id @default(autoincrement())
-  employeeId  Int
-  date        DateTime
-  type        LoanType
-  amount      Decimal   @db.Decimal(10, 2)
-  remarks     String?   @db.Text
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  id         Int      @id @default(autoincrement())
+  employeeId Int
+  date       DateTime
+  type       LoanType
+  amount     Decimal  @db.Decimal(10, 2)
+  remarks    String?  @db.Text
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 
   // Relations: Loan → Other Tables (Loan has foreign keys)
-  employee    Employee  @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  employee Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+
+  // Relations: Other Tables → Loan (Other tables have foreign keys pointing to Loan)
+  ledgers Ledger[]
 
   @@index([employeeId])
   @@index([date])
@@ -379,17 +388,20 @@ enum TrafficChallanType {
 }
 
 model TrafficChallan {
-  id          Int       @id @default(autoincrement())
+  id          Int                @id @default(autoincrement())
   employeeId  Int
   date        DateTime
   type        TrafficChallanType
-  amount      Decimal   @db.Decimal(10, 2)
-  description String?   @db.Text
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  amount      Decimal            @db.Decimal(10, 2)
+  description String?            @db.Text
+  createdAt   DateTime           @default(now())
+  updatedAt   DateTime           @updatedAt
 
   // Relations: TrafficChallan → Other Tables (TrafficChallan has foreign keys)
-  employee    Employee  @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  employee Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+
+  // Relations: Other Tables → TrafficChallan (Other tables have foreign keys pointing to TrafficChallan)
+  ledgers Ledger[]
 
   @@index([employeeId])
   @@index([date])
@@ -406,18 +418,18 @@ enum ExitReentryType {
 }
 
 model ExitReentry {
-  id            Int       @id @default(autoincrement())
+  id            Int             @id @default(autoincrement())
   employeeId    Int
   designationId Int?
   date          DateTime
   type          ExitReentryType
-  remarks       String?   @db.Text
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  remarks       String?         @db.Text
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
 
   // Relations: ExitReentry → Other Tables (ExitReentry has foreign keys)
-  employee      Employee  @relation(fields: [employeeId], references: [id], onDelete: Cascade)
-  designation   Designation? @relation(fields: [designationId], references: [id])
+  employee    Employee     @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  designation Designation? @relation(fields: [designationId], references: [id])
 
   @@index([employeeId])
   @@index([designationId])
@@ -441,20 +453,26 @@ enum AmountType {
 }
 
 model Ledger {
-  id          Int       @id @default(autoincrement())
-  employeeId  Int?
-  date        DateTime
-  type        LedgerType
-  amountType  AmountType
-  amount      Decimal   @db.Decimal(10, 2)
-  balance     Decimal   @db.Decimal(10, 2)
-  description String    @db.Text
-  reference   String?
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  id               Int        @id @default(autoincrement())
+  employeeId       Int?
+  date             DateTime
+  type             LedgerType
+  amountType       AmountType
+  amount           Decimal    @db.Decimal(10, 2)
+  balance          Decimal    @db.Decimal(10, 2)
+  description      String     @db.Text
+  reference        String?
+  createdAt        DateTime   @default(now())
+  updatedAt        DateTime   @updatedAt
+  payrollId        Int?
+  loanId           Int?
+  trafficChallanId Int?
 
   // Relations: Ledger → Other Tables (Ledger has foreign keys)
-  employee    Employee? @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  employee       Employee?       @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  payroll        Payroll?        @relation(fields: [payrollId], references: [id], onDelete: Cascade)
+  loan           Loan?           @relation(fields: [loanId], references: [id], onDelete: Cascade)
+  trafficChallan TrafficChallan? @relation(fields: [trafficChallanId], references: [id], onDelete: Cascade)
 
   @@index([date])
   @@index([employeeId])

@@ -424,7 +424,11 @@ const CustomTable = forwardRef<TableRef, CustomTableProps<any>>(
           selectionMode={selectionMode as any}
           onSelectionChange={handleSelectionChange as any}
           className={tableClassName}
-          {...(rest as any)}
+          {...(Object.fromEntries(
+            Object.entries(rest as any).filter(
+              ([key]) => key !== "onGlobalFilterChange" && key !== "globalFilter"
+            )
+          ) as any)}
         >
           {columns.map((column, index) => {
             const {

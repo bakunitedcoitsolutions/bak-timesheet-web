@@ -1921,6 +1921,8 @@ export const EmployeeScalarFieldEnum = {
   passportNo: 'passportNo',
   passportExpiryDate: 'passportExpiryDate',
   passportDocument: 'passportDocument',
+  lastExitDate: 'lastExitDate',
+  lastEntryDate: 'lastEntryDate',
   bankName: 'bankName',
   bankCode: 'bankCode',
   iban: 'iban',
@@ -2080,7 +2082,10 @@ export const LedgerScalarFieldEnum = {
   description: 'description',
   reference: 'reference',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  payrollId: 'payrollId',
+  loanId: 'loanId',
+  trafficChallanId: 'trafficChallanId'
 } as const
 
 export type LedgerScalarFieldEnum = (typeof LedgerScalarFieldEnum)[keyof typeof LedgerScalarFieldEnum]

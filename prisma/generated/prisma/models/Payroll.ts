@@ -270,6 +270,7 @@ export type PayrollWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Payroll"> | Date | string
   employee?: Prisma.XOR<Prisma.EmployeeScalarRelationFilter, Prisma.EmployeeWhereInput>
   section?: Prisma.XOR<Prisma.PayrollSectionNullableScalarRelationFilter, Prisma.PayrollSectionWhereInput> | null
+  ledgers?: Prisma.LedgerListRelationFilter
 }
 
 export type PayrollOrderByWithRelationInput = {
@@ -284,6 +285,7 @@ export type PayrollOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   employee?: Prisma.EmployeeOrderByWithRelationInput
   section?: Prisma.PayrollSectionOrderByWithRelationInput
+  ledgers?: Prisma.LedgerOrderByRelationAggregateInput
 }
 
 export type PayrollWhereUniqueInput = Prisma.AtLeast<{
@@ -301,6 +303,7 @@ export type PayrollWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"Payroll"> | Date | string
   employee?: Prisma.XOR<Prisma.EmployeeScalarRelationFilter, Prisma.EmployeeWhereInput>
   section?: Prisma.XOR<Prisma.PayrollSectionNullableScalarRelationFilter, Prisma.PayrollSectionWhereInput> | null
+  ledgers?: Prisma.LedgerListRelationFilter
 }, "id">
 
 export type PayrollOrderByWithAggregationInput = {
@@ -344,6 +347,7 @@ export type PayrollCreateInput = {
   updatedAt?: Date | string
   employee: Prisma.EmployeeCreateNestedOneWithoutPayrollsInput
   section?: Prisma.PayrollSectionCreateNestedOneWithoutPayrollsInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutPayrollInput
 }
 
 export type PayrollUncheckedCreateInput = {
@@ -356,6 +360,7 @@ export type PayrollUncheckedCreateInput = {
   notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutPayrollInput
 }
 
 export type PayrollUpdateInput = {
@@ -367,6 +372,7 @@ export type PayrollUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   employee?: Prisma.EmployeeUpdateOneRequiredWithoutPayrollsNestedInput
   section?: Prisma.PayrollSectionUpdateOneWithoutPayrollsNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutPayrollNestedInput
 }
 
 export type PayrollUncheckedUpdateInput = {
@@ -379,6 +385,7 @@ export type PayrollUncheckedUpdateInput = {
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutPayrollNestedInput
 }
 
 export type PayrollCreateManyInput = {
@@ -478,6 +485,11 @@ export type PayrollSumOrderByAggregateInput = {
   amount?: Prisma.SortOrder
 }
 
+export type PayrollNullableScalarRelationFilter = {
+  is?: Prisma.PayrollWhereInput | null
+  isNot?: Prisma.PayrollWhereInput | null
+}
+
 export type PayrollCreateNestedManyWithoutEmployeeInput = {
   create?: Prisma.XOR<Prisma.PayrollCreateWithoutEmployeeInput, Prisma.PayrollUncheckedCreateWithoutEmployeeInput> | Prisma.PayrollCreateWithoutEmployeeInput[] | Prisma.PayrollUncheckedCreateWithoutEmployeeInput[]
   connectOrCreate?: Prisma.PayrollCreateOrConnectWithoutEmployeeInput | Prisma.PayrollCreateOrConnectWithoutEmployeeInput[]
@@ -570,6 +582,22 @@ export type PayrollUncheckedUpdateManyWithoutSectionNestedInput = {
   deleteMany?: Prisma.PayrollScalarWhereInput | Prisma.PayrollScalarWhereInput[]
 }
 
+export type PayrollCreateNestedOneWithoutLedgersInput = {
+  create?: Prisma.XOR<Prisma.PayrollCreateWithoutLedgersInput, Prisma.PayrollUncheckedCreateWithoutLedgersInput>
+  connectOrCreate?: Prisma.PayrollCreateOrConnectWithoutLedgersInput
+  connect?: Prisma.PayrollWhereUniqueInput
+}
+
+export type PayrollUpdateOneWithoutLedgersNestedInput = {
+  create?: Prisma.XOR<Prisma.PayrollCreateWithoutLedgersInput, Prisma.PayrollUncheckedCreateWithoutLedgersInput>
+  connectOrCreate?: Prisma.PayrollCreateOrConnectWithoutLedgersInput
+  upsert?: Prisma.PayrollUpsertWithoutLedgersInput
+  disconnect?: Prisma.PayrollWhereInput | boolean
+  delete?: Prisma.PayrollWhereInput | boolean
+  connect?: Prisma.PayrollWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.PayrollUpdateToOneWithWhereWithoutLedgersInput, Prisma.PayrollUpdateWithoutLedgersInput>, Prisma.PayrollUncheckedUpdateWithoutLedgersInput>
+}
+
 export type PayrollCreateWithoutEmployeeInput = {
   month: number
   year: number
@@ -578,6 +606,7 @@ export type PayrollCreateWithoutEmployeeInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   section?: Prisma.PayrollSectionCreateNestedOneWithoutPayrollsInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutPayrollInput
 }
 
 export type PayrollUncheckedCreateWithoutEmployeeInput = {
@@ -589,6 +618,7 @@ export type PayrollUncheckedCreateWithoutEmployeeInput = {
   notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutPayrollInput
 }
 
 export type PayrollCreateOrConnectWithoutEmployeeInput = {
@@ -640,6 +670,7 @@ export type PayrollCreateWithoutSectionInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   employee: Prisma.EmployeeCreateNestedOneWithoutPayrollsInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutPayrollInput
 }
 
 export type PayrollUncheckedCreateWithoutSectionInput = {
@@ -651,6 +682,7 @@ export type PayrollUncheckedCreateWithoutSectionInput = {
   notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutPayrollInput
 }
 
 export type PayrollCreateOrConnectWithoutSectionInput = {
@@ -679,6 +711,68 @@ export type PayrollUpdateManyWithWhereWithoutSectionInput = {
   data: Prisma.XOR<Prisma.PayrollUpdateManyMutationInput, Prisma.PayrollUncheckedUpdateManyWithoutSectionInput>
 }
 
+export type PayrollCreateWithoutLedgersInput = {
+  month: number
+  year: number
+  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  notes?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  employee: Prisma.EmployeeCreateNestedOneWithoutPayrollsInput
+  section?: Prisma.PayrollSectionCreateNestedOneWithoutPayrollsInput
+}
+
+export type PayrollUncheckedCreateWithoutLedgersInput = {
+  id?: number
+  employeeId: number
+  sectionId?: number | null
+  month: number
+  year: number
+  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  notes?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type PayrollCreateOrConnectWithoutLedgersInput = {
+  where: Prisma.PayrollWhereUniqueInput
+  create: Prisma.XOR<Prisma.PayrollCreateWithoutLedgersInput, Prisma.PayrollUncheckedCreateWithoutLedgersInput>
+}
+
+export type PayrollUpsertWithoutLedgersInput = {
+  update: Prisma.XOR<Prisma.PayrollUpdateWithoutLedgersInput, Prisma.PayrollUncheckedUpdateWithoutLedgersInput>
+  create: Prisma.XOR<Prisma.PayrollCreateWithoutLedgersInput, Prisma.PayrollUncheckedCreateWithoutLedgersInput>
+  where?: Prisma.PayrollWhereInput
+}
+
+export type PayrollUpdateToOneWithWhereWithoutLedgersInput = {
+  where?: Prisma.PayrollWhereInput
+  data: Prisma.XOR<Prisma.PayrollUpdateWithoutLedgersInput, Prisma.PayrollUncheckedUpdateWithoutLedgersInput>
+}
+
+export type PayrollUpdateWithoutLedgersInput = {
+  month?: Prisma.IntFieldUpdateOperationsInput | number
+  year?: Prisma.IntFieldUpdateOperationsInput | number
+  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  employee?: Prisma.EmployeeUpdateOneRequiredWithoutPayrollsNestedInput
+  section?: Prisma.PayrollSectionUpdateOneWithoutPayrollsNestedInput
+}
+
+export type PayrollUncheckedUpdateWithoutLedgersInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  employeeId?: Prisma.IntFieldUpdateOperationsInput | number
+  sectionId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  month?: Prisma.IntFieldUpdateOperationsInput | number
+  year?: Prisma.IntFieldUpdateOperationsInput | number
+  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
 export type PayrollCreateManyEmployeeInput = {
   id?: number
   sectionId?: number | null
@@ -698,6 +792,7 @@ export type PayrollUpdateWithoutEmployeeInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   section?: Prisma.PayrollSectionUpdateOneWithoutPayrollsNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutPayrollNestedInput
 }
 
 export type PayrollUncheckedUpdateWithoutEmployeeInput = {
@@ -709,6 +804,7 @@ export type PayrollUncheckedUpdateWithoutEmployeeInput = {
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutPayrollNestedInput
 }
 
 export type PayrollUncheckedUpdateManyWithoutEmployeeInput = {
@@ -741,6 +837,7 @@ export type PayrollUpdateWithoutSectionInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   employee?: Prisma.EmployeeUpdateOneRequiredWithoutPayrollsNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutPayrollNestedInput
 }
 
 export type PayrollUncheckedUpdateWithoutSectionInput = {
@@ -752,6 +849,7 @@ export type PayrollUncheckedUpdateWithoutSectionInput = {
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutPayrollNestedInput
 }
 
 export type PayrollUncheckedUpdateManyWithoutSectionInput = {
@@ -766,6 +864,35 @@ export type PayrollUncheckedUpdateManyWithoutSectionInput = {
 }
 
 
+/**
+ * Count Type PayrollCountOutputType
+ */
+
+export type PayrollCountOutputType = {
+  ledgers: number
+}
+
+export type PayrollCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  ledgers?: boolean | PayrollCountOutputTypeCountLedgersArgs
+}
+
+/**
+ * PayrollCountOutputType without action
+ */
+export type PayrollCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PayrollCountOutputType
+   */
+  select?: Prisma.PayrollCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * PayrollCountOutputType without action
+ */
+export type PayrollCountOutputTypeCountLedgersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LedgerWhereInput
+}
+
 
 export type PayrollSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -779,6 +906,8 @@ export type PayrollSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   updatedAt?: boolean
   employee?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
   section?: boolean | Prisma.Payroll$sectionArgs<ExtArgs>
+  ledgers?: boolean | Prisma.Payroll$ledgersArgs<ExtArgs>
+  _count?: boolean | Prisma.PayrollCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["payroll"]>
 
 export type PayrollSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -825,6 +954,8 @@ export type PayrollOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
 export type PayrollInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   employee?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
   section?: boolean | Prisma.Payroll$sectionArgs<ExtArgs>
+  ledgers?: boolean | Prisma.Payroll$ledgersArgs<ExtArgs>
+  _count?: boolean | Prisma.PayrollCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type PayrollIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   employee?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
@@ -840,6 +971,7 @@ export type $PayrollPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   objects: {
     employee: Prisma.$EmployeePayload<ExtArgs>
     section: Prisma.$PayrollSectionPayload<ExtArgs> | null
+    ledgers: Prisma.$LedgerPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1247,6 +1379,7 @@ export interface Prisma__PayrollClient<T, Null = never, ExtArgs extends runtime.
   readonly [Symbol.toStringTag]: "PrismaPromise"
   employee<T extends Prisma.EmployeeDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.EmployeeDefaultArgs<ExtArgs>>): Prisma.Prisma__EmployeeClient<runtime.Types.Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   section<T extends Prisma.Payroll$sectionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Payroll$sectionArgs<ExtArgs>>): Prisma.Prisma__PayrollSectionClient<runtime.Types.Result.GetResult<Prisma.$PayrollSectionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  ledgers<T extends Prisma.Payroll$ledgersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Payroll$ledgersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LedgerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1697,6 +1830,30 @@ export type Payroll$sectionArgs<ExtArgs extends runtime.Types.Extensions.Interna
    */
   include?: Prisma.PayrollSectionInclude<ExtArgs> | null
   where?: Prisma.PayrollSectionWhereInput
+}
+
+/**
+ * Payroll.ledgers
+ */
+export type Payroll$ledgersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Ledger
+   */
+  select?: Prisma.LedgerSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Ledger
+   */
+  omit?: Prisma.LedgerOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LedgerInclude<ExtArgs> | null
+  where?: Prisma.LedgerWhereInput
+  orderBy?: Prisma.LedgerOrderByWithRelationInput | Prisma.LedgerOrderByWithRelationInput[]
+  cursor?: Prisma.LedgerWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.LedgerScalarFieldEnum | Prisma.LedgerScalarFieldEnum[]
 }
 
 /**

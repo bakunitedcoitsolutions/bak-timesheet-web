@@ -31,6 +31,9 @@ export type LedgerAvgAggregateOutputType = {
   employeeId: number | null
   amount: runtime.Decimal | null
   balance: runtime.Decimal | null
+  payrollId: number | null
+  loanId: number | null
+  trafficChallanId: number | null
 }
 
 export type LedgerSumAggregateOutputType = {
@@ -38,6 +41,9 @@ export type LedgerSumAggregateOutputType = {
   employeeId: number | null
   amount: runtime.Decimal | null
   balance: runtime.Decimal | null
+  payrollId: number | null
+  loanId: number | null
+  trafficChallanId: number | null
 }
 
 export type LedgerMinAggregateOutputType = {
@@ -52,6 +58,9 @@ export type LedgerMinAggregateOutputType = {
   reference: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  payrollId: number | null
+  loanId: number | null
+  trafficChallanId: number | null
 }
 
 export type LedgerMaxAggregateOutputType = {
@@ -66,6 +75,9 @@ export type LedgerMaxAggregateOutputType = {
   reference: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  payrollId: number | null
+  loanId: number | null
+  trafficChallanId: number | null
 }
 
 export type LedgerCountAggregateOutputType = {
@@ -80,6 +92,9 @@ export type LedgerCountAggregateOutputType = {
   reference: number
   createdAt: number
   updatedAt: number
+  payrollId: number
+  loanId: number
+  trafficChallanId: number
   _all: number
 }
 
@@ -89,6 +104,9 @@ export type LedgerAvgAggregateInputType = {
   employeeId?: true
   amount?: true
   balance?: true
+  payrollId?: true
+  loanId?: true
+  trafficChallanId?: true
 }
 
 export type LedgerSumAggregateInputType = {
@@ -96,6 +114,9 @@ export type LedgerSumAggregateInputType = {
   employeeId?: true
   amount?: true
   balance?: true
+  payrollId?: true
+  loanId?: true
+  trafficChallanId?: true
 }
 
 export type LedgerMinAggregateInputType = {
@@ -110,6 +131,9 @@ export type LedgerMinAggregateInputType = {
   reference?: true
   createdAt?: true
   updatedAt?: true
+  payrollId?: true
+  loanId?: true
+  trafficChallanId?: true
 }
 
 export type LedgerMaxAggregateInputType = {
@@ -124,6 +148,9 @@ export type LedgerMaxAggregateInputType = {
   reference?: true
   createdAt?: true
   updatedAt?: true
+  payrollId?: true
+  loanId?: true
+  trafficChallanId?: true
 }
 
 export type LedgerCountAggregateInputType = {
@@ -138,6 +165,9 @@ export type LedgerCountAggregateInputType = {
   reference?: true
   createdAt?: true
   updatedAt?: true
+  payrollId?: true
+  loanId?: true
+  trafficChallanId?: true
   _all?: true
 }
 
@@ -239,6 +269,9 @@ export type LedgerGroupByOutputType = {
   reference: string | null
   createdAt: Date
   updatedAt: Date
+  payrollId: number | null
+  loanId: number | null
+  trafficChallanId: number | null
   _count: LedgerCountAggregateOutputType | null
   _avg: LedgerAvgAggregateOutputType | null
   _sum: LedgerSumAggregateOutputType | null
@@ -276,7 +309,13 @@ export type LedgerWhereInput = {
   reference?: Prisma.StringNullableFilter<"Ledger"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Ledger"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Ledger"> | Date | string
+  payrollId?: Prisma.IntNullableFilter<"Ledger"> | number | null
+  loanId?: Prisma.IntNullableFilter<"Ledger"> | number | null
+  trafficChallanId?: Prisma.IntNullableFilter<"Ledger"> | number | null
   employee?: Prisma.XOR<Prisma.EmployeeNullableScalarRelationFilter, Prisma.EmployeeWhereInput> | null
+  payroll?: Prisma.XOR<Prisma.PayrollNullableScalarRelationFilter, Prisma.PayrollWhereInput> | null
+  loan?: Prisma.XOR<Prisma.LoanNullableScalarRelationFilter, Prisma.LoanWhereInput> | null
+  trafficChallan?: Prisma.XOR<Prisma.TrafficChallanNullableScalarRelationFilter, Prisma.TrafficChallanWhereInput> | null
 }
 
 export type LedgerOrderByWithRelationInput = {
@@ -291,7 +330,13 @@ export type LedgerOrderByWithRelationInput = {
   reference?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  payrollId?: Prisma.SortOrderInput | Prisma.SortOrder
+  loanId?: Prisma.SortOrderInput | Prisma.SortOrder
+  trafficChallanId?: Prisma.SortOrderInput | Prisma.SortOrder
   employee?: Prisma.EmployeeOrderByWithRelationInput
+  payroll?: Prisma.PayrollOrderByWithRelationInput
+  loan?: Prisma.LoanOrderByWithRelationInput
+  trafficChallan?: Prisma.TrafficChallanOrderByWithRelationInput
 }
 
 export type LedgerWhereUniqueInput = Prisma.AtLeast<{
@@ -309,7 +354,13 @@ export type LedgerWhereUniqueInput = Prisma.AtLeast<{
   reference?: Prisma.StringNullableFilter<"Ledger"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Ledger"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Ledger"> | Date | string
+  payrollId?: Prisma.IntNullableFilter<"Ledger"> | number | null
+  loanId?: Prisma.IntNullableFilter<"Ledger"> | number | null
+  trafficChallanId?: Prisma.IntNullableFilter<"Ledger"> | number | null
   employee?: Prisma.XOR<Prisma.EmployeeNullableScalarRelationFilter, Prisma.EmployeeWhereInput> | null
+  payroll?: Prisma.XOR<Prisma.PayrollNullableScalarRelationFilter, Prisma.PayrollWhereInput> | null
+  loan?: Prisma.XOR<Prisma.LoanNullableScalarRelationFilter, Prisma.LoanWhereInput> | null
+  trafficChallan?: Prisma.XOR<Prisma.TrafficChallanNullableScalarRelationFilter, Prisma.TrafficChallanWhereInput> | null
 }, "id">
 
 export type LedgerOrderByWithAggregationInput = {
@@ -324,6 +375,9 @@ export type LedgerOrderByWithAggregationInput = {
   reference?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  payrollId?: Prisma.SortOrderInput | Prisma.SortOrder
+  loanId?: Prisma.SortOrderInput | Prisma.SortOrder
+  trafficChallanId?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.LedgerCountOrderByAggregateInput
   _avg?: Prisma.LedgerAvgOrderByAggregateInput
   _max?: Prisma.LedgerMaxOrderByAggregateInput
@@ -346,6 +400,9 @@ export type LedgerScalarWhereWithAggregatesInput = {
   reference?: Prisma.StringNullableWithAggregatesFilter<"Ledger"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Ledger"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Ledger"> | Date | string
+  payrollId?: Prisma.IntNullableWithAggregatesFilter<"Ledger"> | number | null
+  loanId?: Prisma.IntNullableWithAggregatesFilter<"Ledger"> | number | null
+  trafficChallanId?: Prisma.IntNullableWithAggregatesFilter<"Ledger"> | number | null
 }
 
 export type LedgerCreateInput = {
@@ -359,6 +416,9 @@ export type LedgerCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   employee?: Prisma.EmployeeCreateNestedOneWithoutLedgersInput
+  payroll?: Prisma.PayrollCreateNestedOneWithoutLedgersInput
+  loan?: Prisma.LoanCreateNestedOneWithoutLedgersInput
+  trafficChallan?: Prisma.TrafficChallanCreateNestedOneWithoutLedgersInput
 }
 
 export type LedgerUncheckedCreateInput = {
@@ -373,6 +433,9 @@ export type LedgerUncheckedCreateInput = {
   reference?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  payrollId?: number | null
+  loanId?: number | null
+  trafficChallanId?: number | null
 }
 
 export type LedgerUpdateInput = {
@@ -386,6 +449,9 @@ export type LedgerUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   employee?: Prisma.EmployeeUpdateOneWithoutLedgersNestedInput
+  payroll?: Prisma.PayrollUpdateOneWithoutLedgersNestedInput
+  loan?: Prisma.LoanUpdateOneWithoutLedgersNestedInput
+  trafficChallan?: Prisma.TrafficChallanUpdateOneWithoutLedgersNestedInput
 }
 
 export type LedgerUncheckedUpdateInput = {
@@ -400,6 +466,9 @@ export type LedgerUncheckedUpdateInput = {
   reference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  payrollId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  loanId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  trafficChallanId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type LedgerCreateManyInput = {
@@ -414,6 +483,9 @@ export type LedgerCreateManyInput = {
   reference?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  payrollId?: number | null
+  loanId?: number | null
+  trafficChallanId?: number | null
 }
 
 export type LedgerUpdateManyMutationInput = {
@@ -440,6 +512,9 @@ export type LedgerUncheckedUpdateManyInput = {
   reference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  payrollId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  loanId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  trafficChallanId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type LedgerListRelationFilter = {
@@ -464,6 +539,9 @@ export type LedgerCountOrderByAggregateInput = {
   reference?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  payrollId?: Prisma.SortOrder
+  loanId?: Prisma.SortOrder
+  trafficChallanId?: Prisma.SortOrder
 }
 
 export type LedgerAvgOrderByAggregateInput = {
@@ -471,6 +549,9 @@ export type LedgerAvgOrderByAggregateInput = {
   employeeId?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   balance?: Prisma.SortOrder
+  payrollId?: Prisma.SortOrder
+  loanId?: Prisma.SortOrder
+  trafficChallanId?: Prisma.SortOrder
 }
 
 export type LedgerMaxOrderByAggregateInput = {
@@ -485,6 +566,9 @@ export type LedgerMaxOrderByAggregateInput = {
   reference?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  payrollId?: Prisma.SortOrder
+  loanId?: Prisma.SortOrder
+  trafficChallanId?: Prisma.SortOrder
 }
 
 export type LedgerMinOrderByAggregateInput = {
@@ -499,6 +583,9 @@ export type LedgerMinOrderByAggregateInput = {
   reference?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  payrollId?: Prisma.SortOrder
+  loanId?: Prisma.SortOrder
+  trafficChallanId?: Prisma.SortOrder
 }
 
 export type LedgerSumOrderByAggregateInput = {
@@ -506,6 +593,9 @@ export type LedgerSumOrderByAggregateInput = {
   employeeId?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   balance?: Prisma.SortOrder
+  payrollId?: Prisma.SortOrder
+  loanId?: Prisma.SortOrder
+  trafficChallanId?: Prisma.SortOrder
 }
 
 export type LedgerCreateNestedManyWithoutEmployeeInput = {
@@ -550,6 +640,132 @@ export type LedgerUncheckedUpdateManyWithoutEmployeeNestedInput = {
   deleteMany?: Prisma.LedgerScalarWhereInput | Prisma.LedgerScalarWhereInput[]
 }
 
+export type LedgerCreateNestedManyWithoutPayrollInput = {
+  create?: Prisma.XOR<Prisma.LedgerCreateWithoutPayrollInput, Prisma.LedgerUncheckedCreateWithoutPayrollInput> | Prisma.LedgerCreateWithoutPayrollInput[] | Prisma.LedgerUncheckedCreateWithoutPayrollInput[]
+  connectOrCreate?: Prisma.LedgerCreateOrConnectWithoutPayrollInput | Prisma.LedgerCreateOrConnectWithoutPayrollInput[]
+  createMany?: Prisma.LedgerCreateManyPayrollInputEnvelope
+  connect?: Prisma.LedgerWhereUniqueInput | Prisma.LedgerWhereUniqueInput[]
+}
+
+export type LedgerUncheckedCreateNestedManyWithoutPayrollInput = {
+  create?: Prisma.XOR<Prisma.LedgerCreateWithoutPayrollInput, Prisma.LedgerUncheckedCreateWithoutPayrollInput> | Prisma.LedgerCreateWithoutPayrollInput[] | Prisma.LedgerUncheckedCreateWithoutPayrollInput[]
+  connectOrCreate?: Prisma.LedgerCreateOrConnectWithoutPayrollInput | Prisma.LedgerCreateOrConnectWithoutPayrollInput[]
+  createMany?: Prisma.LedgerCreateManyPayrollInputEnvelope
+  connect?: Prisma.LedgerWhereUniqueInput | Prisma.LedgerWhereUniqueInput[]
+}
+
+export type LedgerUpdateManyWithoutPayrollNestedInput = {
+  create?: Prisma.XOR<Prisma.LedgerCreateWithoutPayrollInput, Prisma.LedgerUncheckedCreateWithoutPayrollInput> | Prisma.LedgerCreateWithoutPayrollInput[] | Prisma.LedgerUncheckedCreateWithoutPayrollInput[]
+  connectOrCreate?: Prisma.LedgerCreateOrConnectWithoutPayrollInput | Prisma.LedgerCreateOrConnectWithoutPayrollInput[]
+  upsert?: Prisma.LedgerUpsertWithWhereUniqueWithoutPayrollInput | Prisma.LedgerUpsertWithWhereUniqueWithoutPayrollInput[]
+  createMany?: Prisma.LedgerCreateManyPayrollInputEnvelope
+  set?: Prisma.LedgerWhereUniqueInput | Prisma.LedgerWhereUniqueInput[]
+  disconnect?: Prisma.LedgerWhereUniqueInput | Prisma.LedgerWhereUniqueInput[]
+  delete?: Prisma.LedgerWhereUniqueInput | Prisma.LedgerWhereUniqueInput[]
+  connect?: Prisma.LedgerWhereUniqueInput | Prisma.LedgerWhereUniqueInput[]
+  update?: Prisma.LedgerUpdateWithWhereUniqueWithoutPayrollInput | Prisma.LedgerUpdateWithWhereUniqueWithoutPayrollInput[]
+  updateMany?: Prisma.LedgerUpdateManyWithWhereWithoutPayrollInput | Prisma.LedgerUpdateManyWithWhereWithoutPayrollInput[]
+  deleteMany?: Prisma.LedgerScalarWhereInput | Prisma.LedgerScalarWhereInput[]
+}
+
+export type LedgerUncheckedUpdateManyWithoutPayrollNestedInput = {
+  create?: Prisma.XOR<Prisma.LedgerCreateWithoutPayrollInput, Prisma.LedgerUncheckedCreateWithoutPayrollInput> | Prisma.LedgerCreateWithoutPayrollInput[] | Prisma.LedgerUncheckedCreateWithoutPayrollInput[]
+  connectOrCreate?: Prisma.LedgerCreateOrConnectWithoutPayrollInput | Prisma.LedgerCreateOrConnectWithoutPayrollInput[]
+  upsert?: Prisma.LedgerUpsertWithWhereUniqueWithoutPayrollInput | Prisma.LedgerUpsertWithWhereUniqueWithoutPayrollInput[]
+  createMany?: Prisma.LedgerCreateManyPayrollInputEnvelope
+  set?: Prisma.LedgerWhereUniqueInput | Prisma.LedgerWhereUniqueInput[]
+  disconnect?: Prisma.LedgerWhereUniqueInput | Prisma.LedgerWhereUniqueInput[]
+  delete?: Prisma.LedgerWhereUniqueInput | Prisma.LedgerWhereUniqueInput[]
+  connect?: Prisma.LedgerWhereUniqueInput | Prisma.LedgerWhereUniqueInput[]
+  update?: Prisma.LedgerUpdateWithWhereUniqueWithoutPayrollInput | Prisma.LedgerUpdateWithWhereUniqueWithoutPayrollInput[]
+  updateMany?: Prisma.LedgerUpdateManyWithWhereWithoutPayrollInput | Prisma.LedgerUpdateManyWithWhereWithoutPayrollInput[]
+  deleteMany?: Prisma.LedgerScalarWhereInput | Prisma.LedgerScalarWhereInput[]
+}
+
+export type LedgerCreateNestedManyWithoutLoanInput = {
+  create?: Prisma.XOR<Prisma.LedgerCreateWithoutLoanInput, Prisma.LedgerUncheckedCreateWithoutLoanInput> | Prisma.LedgerCreateWithoutLoanInput[] | Prisma.LedgerUncheckedCreateWithoutLoanInput[]
+  connectOrCreate?: Prisma.LedgerCreateOrConnectWithoutLoanInput | Prisma.LedgerCreateOrConnectWithoutLoanInput[]
+  createMany?: Prisma.LedgerCreateManyLoanInputEnvelope
+  connect?: Prisma.LedgerWhereUniqueInput | Prisma.LedgerWhereUniqueInput[]
+}
+
+export type LedgerUncheckedCreateNestedManyWithoutLoanInput = {
+  create?: Prisma.XOR<Prisma.LedgerCreateWithoutLoanInput, Prisma.LedgerUncheckedCreateWithoutLoanInput> | Prisma.LedgerCreateWithoutLoanInput[] | Prisma.LedgerUncheckedCreateWithoutLoanInput[]
+  connectOrCreate?: Prisma.LedgerCreateOrConnectWithoutLoanInput | Prisma.LedgerCreateOrConnectWithoutLoanInput[]
+  createMany?: Prisma.LedgerCreateManyLoanInputEnvelope
+  connect?: Prisma.LedgerWhereUniqueInput | Prisma.LedgerWhereUniqueInput[]
+}
+
+export type LedgerUpdateManyWithoutLoanNestedInput = {
+  create?: Prisma.XOR<Prisma.LedgerCreateWithoutLoanInput, Prisma.LedgerUncheckedCreateWithoutLoanInput> | Prisma.LedgerCreateWithoutLoanInput[] | Prisma.LedgerUncheckedCreateWithoutLoanInput[]
+  connectOrCreate?: Prisma.LedgerCreateOrConnectWithoutLoanInput | Prisma.LedgerCreateOrConnectWithoutLoanInput[]
+  upsert?: Prisma.LedgerUpsertWithWhereUniqueWithoutLoanInput | Prisma.LedgerUpsertWithWhereUniqueWithoutLoanInput[]
+  createMany?: Prisma.LedgerCreateManyLoanInputEnvelope
+  set?: Prisma.LedgerWhereUniqueInput | Prisma.LedgerWhereUniqueInput[]
+  disconnect?: Prisma.LedgerWhereUniqueInput | Prisma.LedgerWhereUniqueInput[]
+  delete?: Prisma.LedgerWhereUniqueInput | Prisma.LedgerWhereUniqueInput[]
+  connect?: Prisma.LedgerWhereUniqueInput | Prisma.LedgerWhereUniqueInput[]
+  update?: Prisma.LedgerUpdateWithWhereUniqueWithoutLoanInput | Prisma.LedgerUpdateWithWhereUniqueWithoutLoanInput[]
+  updateMany?: Prisma.LedgerUpdateManyWithWhereWithoutLoanInput | Prisma.LedgerUpdateManyWithWhereWithoutLoanInput[]
+  deleteMany?: Prisma.LedgerScalarWhereInput | Prisma.LedgerScalarWhereInput[]
+}
+
+export type LedgerUncheckedUpdateManyWithoutLoanNestedInput = {
+  create?: Prisma.XOR<Prisma.LedgerCreateWithoutLoanInput, Prisma.LedgerUncheckedCreateWithoutLoanInput> | Prisma.LedgerCreateWithoutLoanInput[] | Prisma.LedgerUncheckedCreateWithoutLoanInput[]
+  connectOrCreate?: Prisma.LedgerCreateOrConnectWithoutLoanInput | Prisma.LedgerCreateOrConnectWithoutLoanInput[]
+  upsert?: Prisma.LedgerUpsertWithWhereUniqueWithoutLoanInput | Prisma.LedgerUpsertWithWhereUniqueWithoutLoanInput[]
+  createMany?: Prisma.LedgerCreateManyLoanInputEnvelope
+  set?: Prisma.LedgerWhereUniqueInput | Prisma.LedgerWhereUniqueInput[]
+  disconnect?: Prisma.LedgerWhereUniqueInput | Prisma.LedgerWhereUniqueInput[]
+  delete?: Prisma.LedgerWhereUniqueInput | Prisma.LedgerWhereUniqueInput[]
+  connect?: Prisma.LedgerWhereUniqueInput | Prisma.LedgerWhereUniqueInput[]
+  update?: Prisma.LedgerUpdateWithWhereUniqueWithoutLoanInput | Prisma.LedgerUpdateWithWhereUniqueWithoutLoanInput[]
+  updateMany?: Prisma.LedgerUpdateManyWithWhereWithoutLoanInput | Prisma.LedgerUpdateManyWithWhereWithoutLoanInput[]
+  deleteMany?: Prisma.LedgerScalarWhereInput | Prisma.LedgerScalarWhereInput[]
+}
+
+export type LedgerCreateNestedManyWithoutTrafficChallanInput = {
+  create?: Prisma.XOR<Prisma.LedgerCreateWithoutTrafficChallanInput, Prisma.LedgerUncheckedCreateWithoutTrafficChallanInput> | Prisma.LedgerCreateWithoutTrafficChallanInput[] | Prisma.LedgerUncheckedCreateWithoutTrafficChallanInput[]
+  connectOrCreate?: Prisma.LedgerCreateOrConnectWithoutTrafficChallanInput | Prisma.LedgerCreateOrConnectWithoutTrafficChallanInput[]
+  createMany?: Prisma.LedgerCreateManyTrafficChallanInputEnvelope
+  connect?: Prisma.LedgerWhereUniqueInput | Prisma.LedgerWhereUniqueInput[]
+}
+
+export type LedgerUncheckedCreateNestedManyWithoutTrafficChallanInput = {
+  create?: Prisma.XOR<Prisma.LedgerCreateWithoutTrafficChallanInput, Prisma.LedgerUncheckedCreateWithoutTrafficChallanInput> | Prisma.LedgerCreateWithoutTrafficChallanInput[] | Prisma.LedgerUncheckedCreateWithoutTrafficChallanInput[]
+  connectOrCreate?: Prisma.LedgerCreateOrConnectWithoutTrafficChallanInput | Prisma.LedgerCreateOrConnectWithoutTrafficChallanInput[]
+  createMany?: Prisma.LedgerCreateManyTrafficChallanInputEnvelope
+  connect?: Prisma.LedgerWhereUniqueInput | Prisma.LedgerWhereUniqueInput[]
+}
+
+export type LedgerUpdateManyWithoutTrafficChallanNestedInput = {
+  create?: Prisma.XOR<Prisma.LedgerCreateWithoutTrafficChallanInput, Prisma.LedgerUncheckedCreateWithoutTrafficChallanInput> | Prisma.LedgerCreateWithoutTrafficChallanInput[] | Prisma.LedgerUncheckedCreateWithoutTrafficChallanInput[]
+  connectOrCreate?: Prisma.LedgerCreateOrConnectWithoutTrafficChallanInput | Prisma.LedgerCreateOrConnectWithoutTrafficChallanInput[]
+  upsert?: Prisma.LedgerUpsertWithWhereUniqueWithoutTrafficChallanInput | Prisma.LedgerUpsertWithWhereUniqueWithoutTrafficChallanInput[]
+  createMany?: Prisma.LedgerCreateManyTrafficChallanInputEnvelope
+  set?: Prisma.LedgerWhereUniqueInput | Prisma.LedgerWhereUniqueInput[]
+  disconnect?: Prisma.LedgerWhereUniqueInput | Prisma.LedgerWhereUniqueInput[]
+  delete?: Prisma.LedgerWhereUniqueInput | Prisma.LedgerWhereUniqueInput[]
+  connect?: Prisma.LedgerWhereUniqueInput | Prisma.LedgerWhereUniqueInput[]
+  update?: Prisma.LedgerUpdateWithWhereUniqueWithoutTrafficChallanInput | Prisma.LedgerUpdateWithWhereUniqueWithoutTrafficChallanInput[]
+  updateMany?: Prisma.LedgerUpdateManyWithWhereWithoutTrafficChallanInput | Prisma.LedgerUpdateManyWithWhereWithoutTrafficChallanInput[]
+  deleteMany?: Prisma.LedgerScalarWhereInput | Prisma.LedgerScalarWhereInput[]
+}
+
+export type LedgerUncheckedUpdateManyWithoutTrafficChallanNestedInput = {
+  create?: Prisma.XOR<Prisma.LedgerCreateWithoutTrafficChallanInput, Prisma.LedgerUncheckedCreateWithoutTrafficChallanInput> | Prisma.LedgerCreateWithoutTrafficChallanInput[] | Prisma.LedgerUncheckedCreateWithoutTrafficChallanInput[]
+  connectOrCreate?: Prisma.LedgerCreateOrConnectWithoutTrafficChallanInput | Prisma.LedgerCreateOrConnectWithoutTrafficChallanInput[]
+  upsert?: Prisma.LedgerUpsertWithWhereUniqueWithoutTrafficChallanInput | Prisma.LedgerUpsertWithWhereUniqueWithoutTrafficChallanInput[]
+  createMany?: Prisma.LedgerCreateManyTrafficChallanInputEnvelope
+  set?: Prisma.LedgerWhereUniqueInput | Prisma.LedgerWhereUniqueInput[]
+  disconnect?: Prisma.LedgerWhereUniqueInput | Prisma.LedgerWhereUniqueInput[]
+  delete?: Prisma.LedgerWhereUniqueInput | Prisma.LedgerWhereUniqueInput[]
+  connect?: Prisma.LedgerWhereUniqueInput | Prisma.LedgerWhereUniqueInput[]
+  update?: Prisma.LedgerUpdateWithWhereUniqueWithoutTrafficChallanInput | Prisma.LedgerUpdateWithWhereUniqueWithoutTrafficChallanInput[]
+  updateMany?: Prisma.LedgerUpdateManyWithWhereWithoutTrafficChallanInput | Prisma.LedgerUpdateManyWithWhereWithoutTrafficChallanInput[]
+  deleteMany?: Prisma.LedgerScalarWhereInput | Prisma.LedgerScalarWhereInput[]
+}
+
 export type EnumLedgerTypeFieldUpdateOperationsInput = {
   set?: $Enums.LedgerType
 }
@@ -568,6 +784,9 @@ export type LedgerCreateWithoutEmployeeInput = {
   reference?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  payroll?: Prisma.PayrollCreateNestedOneWithoutLedgersInput
+  loan?: Prisma.LoanCreateNestedOneWithoutLedgersInput
+  trafficChallan?: Prisma.TrafficChallanCreateNestedOneWithoutLedgersInput
 }
 
 export type LedgerUncheckedCreateWithoutEmployeeInput = {
@@ -581,6 +800,9 @@ export type LedgerUncheckedCreateWithoutEmployeeInput = {
   reference?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  payrollId?: number | null
+  loanId?: number | null
+  trafficChallanId?: number | null
 }
 
 export type LedgerCreateOrConnectWithoutEmployeeInput = {
@@ -624,6 +846,180 @@ export type LedgerScalarWhereInput = {
   reference?: Prisma.StringNullableFilter<"Ledger"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Ledger"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Ledger"> | Date | string
+  payrollId?: Prisma.IntNullableFilter<"Ledger"> | number | null
+  loanId?: Prisma.IntNullableFilter<"Ledger"> | number | null
+  trafficChallanId?: Prisma.IntNullableFilter<"Ledger"> | number | null
+}
+
+export type LedgerCreateWithoutPayrollInput = {
+  date: Date | string
+  type: $Enums.LedgerType
+  amountType: $Enums.AmountType
+  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  balance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  description: string
+  reference?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  employee?: Prisma.EmployeeCreateNestedOneWithoutLedgersInput
+  loan?: Prisma.LoanCreateNestedOneWithoutLedgersInput
+  trafficChallan?: Prisma.TrafficChallanCreateNestedOneWithoutLedgersInput
+}
+
+export type LedgerUncheckedCreateWithoutPayrollInput = {
+  id?: number
+  employeeId?: number | null
+  date: Date | string
+  type: $Enums.LedgerType
+  amountType: $Enums.AmountType
+  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  balance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  description: string
+  reference?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  loanId?: number | null
+  trafficChallanId?: number | null
+}
+
+export type LedgerCreateOrConnectWithoutPayrollInput = {
+  where: Prisma.LedgerWhereUniqueInput
+  create: Prisma.XOR<Prisma.LedgerCreateWithoutPayrollInput, Prisma.LedgerUncheckedCreateWithoutPayrollInput>
+}
+
+export type LedgerCreateManyPayrollInputEnvelope = {
+  data: Prisma.LedgerCreateManyPayrollInput | Prisma.LedgerCreateManyPayrollInput[]
+  skipDuplicates?: boolean
+}
+
+export type LedgerUpsertWithWhereUniqueWithoutPayrollInput = {
+  where: Prisma.LedgerWhereUniqueInput
+  update: Prisma.XOR<Prisma.LedgerUpdateWithoutPayrollInput, Prisma.LedgerUncheckedUpdateWithoutPayrollInput>
+  create: Prisma.XOR<Prisma.LedgerCreateWithoutPayrollInput, Prisma.LedgerUncheckedCreateWithoutPayrollInput>
+}
+
+export type LedgerUpdateWithWhereUniqueWithoutPayrollInput = {
+  where: Prisma.LedgerWhereUniqueInput
+  data: Prisma.XOR<Prisma.LedgerUpdateWithoutPayrollInput, Prisma.LedgerUncheckedUpdateWithoutPayrollInput>
+}
+
+export type LedgerUpdateManyWithWhereWithoutPayrollInput = {
+  where: Prisma.LedgerScalarWhereInput
+  data: Prisma.XOR<Prisma.LedgerUpdateManyMutationInput, Prisma.LedgerUncheckedUpdateManyWithoutPayrollInput>
+}
+
+export type LedgerCreateWithoutLoanInput = {
+  date: Date | string
+  type: $Enums.LedgerType
+  amountType: $Enums.AmountType
+  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  balance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  description: string
+  reference?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  employee?: Prisma.EmployeeCreateNestedOneWithoutLedgersInput
+  payroll?: Prisma.PayrollCreateNestedOneWithoutLedgersInput
+  trafficChallan?: Prisma.TrafficChallanCreateNestedOneWithoutLedgersInput
+}
+
+export type LedgerUncheckedCreateWithoutLoanInput = {
+  id?: number
+  employeeId?: number | null
+  date: Date | string
+  type: $Enums.LedgerType
+  amountType: $Enums.AmountType
+  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  balance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  description: string
+  reference?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  payrollId?: number | null
+  trafficChallanId?: number | null
+}
+
+export type LedgerCreateOrConnectWithoutLoanInput = {
+  where: Prisma.LedgerWhereUniqueInput
+  create: Prisma.XOR<Prisma.LedgerCreateWithoutLoanInput, Prisma.LedgerUncheckedCreateWithoutLoanInput>
+}
+
+export type LedgerCreateManyLoanInputEnvelope = {
+  data: Prisma.LedgerCreateManyLoanInput | Prisma.LedgerCreateManyLoanInput[]
+  skipDuplicates?: boolean
+}
+
+export type LedgerUpsertWithWhereUniqueWithoutLoanInput = {
+  where: Prisma.LedgerWhereUniqueInput
+  update: Prisma.XOR<Prisma.LedgerUpdateWithoutLoanInput, Prisma.LedgerUncheckedUpdateWithoutLoanInput>
+  create: Prisma.XOR<Prisma.LedgerCreateWithoutLoanInput, Prisma.LedgerUncheckedCreateWithoutLoanInput>
+}
+
+export type LedgerUpdateWithWhereUniqueWithoutLoanInput = {
+  where: Prisma.LedgerWhereUniqueInput
+  data: Prisma.XOR<Prisma.LedgerUpdateWithoutLoanInput, Prisma.LedgerUncheckedUpdateWithoutLoanInput>
+}
+
+export type LedgerUpdateManyWithWhereWithoutLoanInput = {
+  where: Prisma.LedgerScalarWhereInput
+  data: Prisma.XOR<Prisma.LedgerUpdateManyMutationInput, Prisma.LedgerUncheckedUpdateManyWithoutLoanInput>
+}
+
+export type LedgerCreateWithoutTrafficChallanInput = {
+  date: Date | string
+  type: $Enums.LedgerType
+  amountType: $Enums.AmountType
+  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  balance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  description: string
+  reference?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  employee?: Prisma.EmployeeCreateNestedOneWithoutLedgersInput
+  payroll?: Prisma.PayrollCreateNestedOneWithoutLedgersInput
+  loan?: Prisma.LoanCreateNestedOneWithoutLedgersInput
+}
+
+export type LedgerUncheckedCreateWithoutTrafficChallanInput = {
+  id?: number
+  employeeId?: number | null
+  date: Date | string
+  type: $Enums.LedgerType
+  amountType: $Enums.AmountType
+  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  balance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  description: string
+  reference?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  payrollId?: number | null
+  loanId?: number | null
+}
+
+export type LedgerCreateOrConnectWithoutTrafficChallanInput = {
+  where: Prisma.LedgerWhereUniqueInput
+  create: Prisma.XOR<Prisma.LedgerCreateWithoutTrafficChallanInput, Prisma.LedgerUncheckedCreateWithoutTrafficChallanInput>
+}
+
+export type LedgerCreateManyTrafficChallanInputEnvelope = {
+  data: Prisma.LedgerCreateManyTrafficChallanInput | Prisma.LedgerCreateManyTrafficChallanInput[]
+  skipDuplicates?: boolean
+}
+
+export type LedgerUpsertWithWhereUniqueWithoutTrafficChallanInput = {
+  where: Prisma.LedgerWhereUniqueInput
+  update: Prisma.XOR<Prisma.LedgerUpdateWithoutTrafficChallanInput, Prisma.LedgerUncheckedUpdateWithoutTrafficChallanInput>
+  create: Prisma.XOR<Prisma.LedgerCreateWithoutTrafficChallanInput, Prisma.LedgerUncheckedCreateWithoutTrafficChallanInput>
+}
+
+export type LedgerUpdateWithWhereUniqueWithoutTrafficChallanInput = {
+  where: Prisma.LedgerWhereUniqueInput
+  data: Prisma.XOR<Prisma.LedgerUpdateWithoutTrafficChallanInput, Prisma.LedgerUncheckedUpdateWithoutTrafficChallanInput>
+}
+
+export type LedgerUpdateManyWithWhereWithoutTrafficChallanInput = {
+  where: Prisma.LedgerScalarWhereInput
+  data: Prisma.XOR<Prisma.LedgerUpdateManyMutationInput, Prisma.LedgerUncheckedUpdateManyWithoutTrafficChallanInput>
 }
 
 export type LedgerCreateManyEmployeeInput = {
@@ -637,6 +1033,9 @@ export type LedgerCreateManyEmployeeInput = {
   reference?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  payrollId?: number | null
+  loanId?: number | null
+  trafficChallanId?: number | null
 }
 
 export type LedgerUpdateWithoutEmployeeInput = {
@@ -649,6 +1048,9 @@ export type LedgerUpdateWithoutEmployeeInput = {
   reference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  payroll?: Prisma.PayrollUpdateOneWithoutLedgersNestedInput
+  loan?: Prisma.LoanUpdateOneWithoutLedgersNestedInput
+  trafficChallan?: Prisma.TrafficChallanUpdateOneWithoutLedgersNestedInput
 }
 
 export type LedgerUncheckedUpdateWithoutEmployeeInput = {
@@ -662,6 +1064,9 @@ export type LedgerUncheckedUpdateWithoutEmployeeInput = {
   reference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  payrollId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  loanId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  trafficChallanId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type LedgerUncheckedUpdateManyWithoutEmployeeInput = {
@@ -675,6 +1080,198 @@ export type LedgerUncheckedUpdateManyWithoutEmployeeInput = {
   reference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  payrollId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  loanId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  trafficChallanId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+}
+
+export type LedgerCreateManyPayrollInput = {
+  id?: number
+  employeeId?: number | null
+  date: Date | string
+  type: $Enums.LedgerType
+  amountType: $Enums.AmountType
+  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  balance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  description: string
+  reference?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  loanId?: number | null
+  trafficChallanId?: number | null
+}
+
+export type LedgerUpdateWithoutPayrollInput = {
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
+  amountType?: Prisma.EnumAmountTypeFieldUpdateOperationsInput | $Enums.AmountType
+  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  reference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  employee?: Prisma.EmployeeUpdateOneWithoutLedgersNestedInput
+  loan?: Prisma.LoanUpdateOneWithoutLedgersNestedInput
+  trafficChallan?: Prisma.TrafficChallanUpdateOneWithoutLedgersNestedInput
+}
+
+export type LedgerUncheckedUpdateWithoutPayrollInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  employeeId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
+  amountType?: Prisma.EnumAmountTypeFieldUpdateOperationsInput | $Enums.AmountType
+  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  reference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  loanId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  trafficChallanId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+}
+
+export type LedgerUncheckedUpdateManyWithoutPayrollInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  employeeId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
+  amountType?: Prisma.EnumAmountTypeFieldUpdateOperationsInput | $Enums.AmountType
+  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  reference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  loanId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  trafficChallanId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+}
+
+export type LedgerCreateManyLoanInput = {
+  id?: number
+  employeeId?: number | null
+  date: Date | string
+  type: $Enums.LedgerType
+  amountType: $Enums.AmountType
+  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  balance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  description: string
+  reference?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  payrollId?: number | null
+  trafficChallanId?: number | null
+}
+
+export type LedgerUpdateWithoutLoanInput = {
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
+  amountType?: Prisma.EnumAmountTypeFieldUpdateOperationsInput | $Enums.AmountType
+  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  reference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  employee?: Prisma.EmployeeUpdateOneWithoutLedgersNestedInput
+  payroll?: Prisma.PayrollUpdateOneWithoutLedgersNestedInput
+  trafficChallan?: Prisma.TrafficChallanUpdateOneWithoutLedgersNestedInput
+}
+
+export type LedgerUncheckedUpdateWithoutLoanInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  employeeId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
+  amountType?: Prisma.EnumAmountTypeFieldUpdateOperationsInput | $Enums.AmountType
+  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  reference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  payrollId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  trafficChallanId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+}
+
+export type LedgerUncheckedUpdateManyWithoutLoanInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  employeeId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
+  amountType?: Prisma.EnumAmountTypeFieldUpdateOperationsInput | $Enums.AmountType
+  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  reference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  payrollId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  trafficChallanId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+}
+
+export type LedgerCreateManyTrafficChallanInput = {
+  id?: number
+  employeeId?: number | null
+  date: Date | string
+  type: $Enums.LedgerType
+  amountType: $Enums.AmountType
+  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  balance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  description: string
+  reference?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  payrollId?: number | null
+  loanId?: number | null
+}
+
+export type LedgerUpdateWithoutTrafficChallanInput = {
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
+  amountType?: Prisma.EnumAmountTypeFieldUpdateOperationsInput | $Enums.AmountType
+  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  reference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  employee?: Prisma.EmployeeUpdateOneWithoutLedgersNestedInput
+  payroll?: Prisma.PayrollUpdateOneWithoutLedgersNestedInput
+  loan?: Prisma.LoanUpdateOneWithoutLedgersNestedInput
+}
+
+export type LedgerUncheckedUpdateWithoutTrafficChallanInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  employeeId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
+  amountType?: Prisma.EnumAmountTypeFieldUpdateOperationsInput | $Enums.AmountType
+  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  reference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  payrollId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  loanId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+}
+
+export type LedgerUncheckedUpdateManyWithoutTrafficChallanInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  employeeId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
+  amountType?: Prisma.EnumAmountTypeFieldUpdateOperationsInput | $Enums.AmountType
+  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  reference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  payrollId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  loanId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 
@@ -691,7 +1288,13 @@ export type LedgerSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   reference?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  payrollId?: boolean
+  loanId?: boolean
+  trafficChallanId?: boolean
   employee?: boolean | Prisma.Ledger$employeeArgs<ExtArgs>
+  payroll?: boolean | Prisma.Ledger$payrollArgs<ExtArgs>
+  loan?: boolean | Prisma.Ledger$loanArgs<ExtArgs>
+  trafficChallan?: boolean | Prisma.Ledger$trafficChallanArgs<ExtArgs>
 }, ExtArgs["result"]["ledger"]>
 
 export type LedgerSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -706,7 +1309,13 @@ export type LedgerSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   reference?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  payrollId?: boolean
+  loanId?: boolean
+  trafficChallanId?: boolean
   employee?: boolean | Prisma.Ledger$employeeArgs<ExtArgs>
+  payroll?: boolean | Prisma.Ledger$payrollArgs<ExtArgs>
+  loan?: boolean | Prisma.Ledger$loanArgs<ExtArgs>
+  trafficChallan?: boolean | Prisma.Ledger$trafficChallanArgs<ExtArgs>
 }, ExtArgs["result"]["ledger"]>
 
 export type LedgerSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -721,7 +1330,13 @@ export type LedgerSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   reference?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  payrollId?: boolean
+  loanId?: boolean
+  trafficChallanId?: boolean
   employee?: boolean | Prisma.Ledger$employeeArgs<ExtArgs>
+  payroll?: boolean | Prisma.Ledger$payrollArgs<ExtArgs>
+  loan?: boolean | Prisma.Ledger$loanArgs<ExtArgs>
+  trafficChallan?: boolean | Prisma.Ledger$trafficChallanArgs<ExtArgs>
 }, ExtArgs["result"]["ledger"]>
 
 export type LedgerSelectScalar = {
@@ -736,23 +1351,38 @@ export type LedgerSelectScalar = {
   reference?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  payrollId?: boolean
+  loanId?: boolean
+  trafficChallanId?: boolean
 }
 
-export type LedgerOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "employeeId" | "date" | "type" | "amountType" | "amount" | "balance" | "description" | "reference" | "createdAt" | "updatedAt", ExtArgs["result"]["ledger"]>
+export type LedgerOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "employeeId" | "date" | "type" | "amountType" | "amount" | "balance" | "description" | "reference" | "createdAt" | "updatedAt" | "payrollId" | "loanId" | "trafficChallanId", ExtArgs["result"]["ledger"]>
 export type LedgerInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   employee?: boolean | Prisma.Ledger$employeeArgs<ExtArgs>
+  payroll?: boolean | Prisma.Ledger$payrollArgs<ExtArgs>
+  loan?: boolean | Prisma.Ledger$loanArgs<ExtArgs>
+  trafficChallan?: boolean | Prisma.Ledger$trafficChallanArgs<ExtArgs>
 }
 export type LedgerIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   employee?: boolean | Prisma.Ledger$employeeArgs<ExtArgs>
+  payroll?: boolean | Prisma.Ledger$payrollArgs<ExtArgs>
+  loan?: boolean | Prisma.Ledger$loanArgs<ExtArgs>
+  trafficChallan?: boolean | Prisma.Ledger$trafficChallanArgs<ExtArgs>
 }
 export type LedgerIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   employee?: boolean | Prisma.Ledger$employeeArgs<ExtArgs>
+  payroll?: boolean | Prisma.Ledger$payrollArgs<ExtArgs>
+  loan?: boolean | Prisma.Ledger$loanArgs<ExtArgs>
+  trafficChallan?: boolean | Prisma.Ledger$trafficChallanArgs<ExtArgs>
 }
 
 export type $LedgerPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Ledger"
   objects: {
     employee: Prisma.$EmployeePayload<ExtArgs> | null
+    payroll: Prisma.$PayrollPayload<ExtArgs> | null
+    loan: Prisma.$LoanPayload<ExtArgs> | null
+    trafficChallan: Prisma.$TrafficChallanPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -766,6 +1396,9 @@ export type $LedgerPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     reference: string | null
     createdAt: Date
     updatedAt: Date
+    payrollId: number | null
+    loanId: number | null
+    trafficChallanId: number | null
   }, ExtArgs["result"]["ledger"]>
   composites: {}
 }
@@ -1161,6 +1794,9 @@ readonly fields: LedgerFieldRefs;
 export interface Prisma__LedgerClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   employee<T extends Prisma.Ledger$employeeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Ledger$employeeArgs<ExtArgs>>): Prisma.Prisma__EmployeeClient<runtime.Types.Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  payroll<T extends Prisma.Ledger$payrollArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Ledger$payrollArgs<ExtArgs>>): Prisma.Prisma__PayrollClient<runtime.Types.Result.GetResult<Prisma.$PayrollPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  loan<T extends Prisma.Ledger$loanArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Ledger$loanArgs<ExtArgs>>): Prisma.Prisma__LoanClient<runtime.Types.Result.GetResult<Prisma.$LoanPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  trafficChallan<T extends Prisma.Ledger$trafficChallanArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Ledger$trafficChallanArgs<ExtArgs>>): Prisma.Prisma__TrafficChallanClient<runtime.Types.Result.GetResult<Prisma.$TrafficChallanPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1201,6 +1837,9 @@ export interface LedgerFieldRefs {
   readonly reference: Prisma.FieldRef<"Ledger", 'String'>
   readonly createdAt: Prisma.FieldRef<"Ledger", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Ledger", 'DateTime'>
+  readonly payrollId: Prisma.FieldRef<"Ledger", 'Int'>
+  readonly loanId: Prisma.FieldRef<"Ledger", 'Int'>
+  readonly trafficChallanId: Prisma.FieldRef<"Ledger", 'Int'>
 }
     
 
@@ -1613,6 +2252,63 @@ export type Ledger$employeeArgs<ExtArgs extends runtime.Types.Extensions.Interna
    */
   include?: Prisma.EmployeeInclude<ExtArgs> | null
   where?: Prisma.EmployeeWhereInput
+}
+
+/**
+ * Ledger.payroll
+ */
+export type Ledger$payrollArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Payroll
+   */
+  select?: Prisma.PayrollSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Payroll
+   */
+  omit?: Prisma.PayrollOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PayrollInclude<ExtArgs> | null
+  where?: Prisma.PayrollWhereInput
+}
+
+/**
+ * Ledger.loan
+ */
+export type Ledger$loanArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Loan
+   */
+  select?: Prisma.LoanSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Loan
+   */
+  omit?: Prisma.LoanOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LoanInclude<ExtArgs> | null
+  where?: Prisma.LoanWhereInput
+}
+
+/**
+ * Ledger.trafficChallan
+ */
+export type Ledger$trafficChallanArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TrafficChallan
+   */
+  select?: Prisma.TrafficChallanSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the TrafficChallan
+   */
+  omit?: Prisma.TrafficChallanOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TrafficChallanInclude<ExtArgs> | null
+  where?: Prisma.TrafficChallanWhereInput
 }
 
 /**
