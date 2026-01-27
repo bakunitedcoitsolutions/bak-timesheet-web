@@ -1,25 +1,38 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useParams, useRouter } from "next/navigation";
-
+import { useEffect } from "react";
+import { useForm } from "react-hook-form";
 import { classNames } from "primereact/utils";
-import { StepperFormHeading } from "@/components";
-import { getEntityModeFromParam } from "@/helpers";
-import { FORM_FIELD_WIDTHS } from "@/utils/constants";
-import { Button, Dropdown, Input } from "@/components/forms";
-import { branchesData } from "@/utils/dummy";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useParams, useRouter } from "next/navigation";
+import { ProgressSpinner } from "primereact/progressspinner";
 
-const projectStatusOptions = [
-  { label: "Active", value: "1" },
-  { label: "Inactive", value: "2" },
-];
+import {
+  useUpdateProject,
+  useCreateProject,
+  useGetProjectById,
+} from "@/lib/db/services/project/requests";
+import {
+  CreateProjectSchema,
+  UpdateProjectSchema,
+} from "@/lib/db/services/project/project.schemas";
+import { useGetBranches } from "@/lib/db/services/branch/requests";
+import { toastService } from "@/lib/toast";
+import { getEntityModeFromParam } from "@/helpers";
+import { getErrorMessage } from "@/utils/helpers";
+import { FORM_FIELD_WIDTHS, STATUS_OPTIONS } from "@/utils/constants";
+import {
+  Input,
+  Button,
+  Dropdown,
+  Form,
+  FormItem,
+  Textarea,
+} from "@/components/forms";
+import { StepperFormHeading } from "@/components";
+import { ListedBranch } from "@/lib/db/services/branch/branch.dto";
 
 const UpsertProjectPage = () => {
-  const [selectedBranch, setSelectedBranch] = useState<string | null>(null);
-  const [selectedProjectStatus, setSelectedProjectStatus] = useState<
-    string | null
-  >(null);
   const router = useRouter();
   const { id: projectIdParam } = useParams();
   const {
@@ -32,6 +45,46 @@ const UpsertProjectPage = () => {
     param: projectIdParam,
   });
 
+  const { mutateAsync: createProject } = useCreateProject();
+  const { mutateAsync: updateProject } = useUpdateProject();
+  const { data: foundProject, isLoading } = useGetProjectById({
+    id: projectId ? Number(projectId) : 0,
+  });
+
+  // Fetch branches
+  const { data: branchesResponse } = useGetBranches({
+    page: 1,
+    limit: 1000,
+  });
+  const branches = branchesResponse?.branches ?? [];
+
+  const branchOptions = branches.map((branch: ListedBranch) => ({
+    label: branch.nameEn,
+    value: branch.id,
+  }));
+
+  const defaultValues = {
+    ...(isEditMode ? { id: 0 } : {}),
+    nameEn: "",
+    nameAr: "",
+    branchId: undefined,
+    description: "",
+    isActive: true,
+  };
+
+  const zodSchema = isEditMode ? UpdateProjectSchema : CreateProjectSchema;
+
+  const form = useForm({
+    resolver: zodResolver(zodSchema),
+    defaultValues,
+  });
+
+  const {
+    reset,
+    handleSubmit,
+    formState: { isSubmitting, errors },
+  } = form;
+
   // Redirect to 404 page if the entity is invalid
   useEffect(() => {
     if (isInvalid) {
@@ -39,10 +92,48 @@ const UpsertProjectPage = () => {
     }
   }, [isInvalid, router]);
 
-  const handleSubmit = async (data: Record<string, any>) => {
-    console.log("Form submitted:", data);
-    // Handle form submission here
-    router.replace(`/projects`);
+  useEffect(() => {
+    if (foundProject) {
+      const setProject = {
+        ...(isEditMode ? { id: foundProject?.id ?? 0 } : {}),
+        nameEn: foundProject?.nameEn,
+        nameAr: foundProject?.nameAr ?? "",
+        branchId: foundProject?.branchId ?? undefined,
+        description: foundProject?.description ?? "",
+        isActive: foundProject?.isActive,
+      };
+      reset(setProject);
+    }
+  }, [foundProject, isEditMode, reset]);
+
+  const onFormSubmit = handleSubmit(async (data) => {
+    if (isAddMode) {
+      await handleCreateProject(data);
+    } else {
+      await handleUpdateProject(data);
+    }
+  });
+
+  const handleCreateProject = async (data: any) => {
+    try {
+      await createProject(data);
+      toastService.showSuccess("Done", "Project created successfully");
+      router.replace("/projects");
+    } catch (error) {
+      const errorMessage = getErrorMessage(error, "Failed to create project");
+      toastService.showError("Error", errorMessage);
+    }
+  };
+
+  const handleUpdateProject = async (data: any) => {
+    try {
+      await updateProject(data);
+      toastService.showSuccess("Done", "Project updated successfully");
+      router.replace("/projects");
+    } catch (error) {
+      const errorMessage = getErrorMessage(error, "Failed to update project");
+      toastService.showError("Error", errorMessage);
+    }
   };
 
   return (
@@ -51,59 +142,91 @@ const UpsertProjectPage = () => {
         <StepperFormHeading
           title={isAddMode ? "Add Project" : "Edit Project"}
         />
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 md:gap-y-8 md:py-5 px-6 mt-5 md:mt-0 w-full md:max-w-5xl content-start flex-1">
-          <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
-            <Input label="Name" className="w-full" placeholder="Enter name" />
+        {isLoading ? (
+          <div className="flex justify-center items-center h-full">
+            <ProgressSpinner style={{ width: "50px", height: "50px" }} />
           </div>
-          <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
-            <Input
-              label="Arabic Name"
-              className="w-full text-right"
-              placeholder="أدخل الاسم بالعربية"
-            />
-          </div>
-          <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
-            <Dropdown
-              label="Project Status"
-              className="w-full"
-              options={projectStatusOptions}
-              placeholder="Choose"
-              value={selectedProjectStatus}
-              onChange={(e) => setSelectedProjectStatus(e.value)}
-            />
-          </div>
-          <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
-            <Dropdown
-              label="Branch"
-              className="w-full"
-              placeholder="Choose"
-              options={branchesData.map((branch) => ({
-                label: branch.nameEn,
-                value: branch.id,
-              }))}
-              value={selectedBranch}
-              onChange={(e) => setSelectedBranch(e.value)}
-            />
-          </div>
-        </div>
+        ) : (
+          <>
+            <Form
+              form={form}
+              className="w-full h-full content-start md:max-w-5xl"
+            >
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 md:gap-y-4 md:py-5 px-6 mt-5 md:mt-0 flex-1">
+                <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
+                  <FormItem name="nameEn">
+                    <Input
+                      label="Project Name"
+                      className="w-full"
+                      placeholder="Enter project name"
+                    />
+                  </FormItem>
+                </div>
+                <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
+                  <FormItem name="nameAr">
+                    <Input
+                      label="Arabic Name"
+                      className="w-full text-right"
+                      placeholder="أدخل اسم المشروع بالعربية"
+                    />
+                  </FormItem>
+                </div>
+                <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
+                  <FormItem name="branchId">
+                    <Dropdown
+                      label="Branch"
+                      className="w-full"
+                      placeholder="Choose branch"
+                      options={branchOptions}
+                      showClear
+                    />
+                  </FormItem>
+                </div>
+                <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
+                  <FormItem name="isActive">
+                    <Dropdown
+                      label="Status"
+                      className="w-full"
+                      placeholder="Choose"
+                      options={STATUS_OPTIONS}
+                    />
+                  </FormItem>
+                </div>
+                <div className={classNames("md:col-span-2")}>
+                  <FormItem name="description">
+                    <Textarea
+                      label="Description"
+                      className="w-full"
+                      placeholder="Enter project description"
+                      rows={4}
+                    />
+                  </FormItem>
+                </div>
+              </div>
+            </Form>
 
-        <div className="flex items-center gap-3 justify-end px-6">
-          <Button
-            size="small"
-            variant="text"
-            onClick={() => router.replace("/projects")}
-          >
-            Cancel
-          </Button>
-          <Button
-            size="small"
-            variant="solid"
-            onClick={handleSubmit}
-            className="w-28 justify-center!"
-          >
-            Save
-          </Button>
-        </div>
+            <div className="flex items-center gap-3 justify-end px-6">
+              <Button
+                size="small"
+                variant="text"
+                disabled={isSubmitting}
+                onClick={() => router.replace("/projects")}
+              >
+                Cancel
+              </Button>
+              <Button
+                size="small"
+                variant="solid"
+                onClick={onFormSubmit}
+                loading={isSubmitting}
+                disabled={isSubmitting}
+                className="w-28 justify-center! gap-1"
+              >
+                Save
+              </Button>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
