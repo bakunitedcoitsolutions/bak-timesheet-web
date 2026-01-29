@@ -11,7 +11,9 @@ import {
   updateTrafficChallanAction,
   getTrafficChallanByIdAction,
   deleteTrafficChallanAction,
+  bulkUploadTrafficChallansAction,
 } from "./actions";
+import { BulkUploadTrafficChallanInput } from "./traffic-challan.schemas";
 
 export const useGetTrafficChallans = (input: ListTrafficChallansParamsInput) =>
   useQuery(listTrafficChallansAction, {
@@ -54,6 +56,16 @@ export const useGetTrafficChallanById = (
 export const useDeleteTrafficChallan = () =>
   useMutation(deleteTrafficChallanAction, {
     mutationKey: ["delete-traffic-challan"],
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["traffic-challans"],
+      });
+    },
+  });
+
+export const useBulkUploadTrafficChallans = () =>
+  useMutation(bulkUploadTrafficChallansAction, {
+    mutationKey: ["bulk-upload-traffic-challans"],
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ["traffic-challans"],

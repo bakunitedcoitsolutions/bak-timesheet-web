@@ -6,6 +6,7 @@ import {
   findLoanById,
   listLoans,
   deleteLoan,
+  bulkUploadLoans,
 } from "./loan.service";
 import {
   CreateLoanSchema,
@@ -13,10 +14,12 @@ import {
   ListLoansParamsSchema,
   GetLoanByIdSchema,
   DeleteLoanSchema,
+  BulkUploadLoanSchema,
   CreateLoanInput,
   UpdateLoanInput,
   GetLoanByIdInput,
   DeleteLoanInput,
+  BulkUploadLoanInput,
 } from "./loan.schemas";
 
 // Create Loan
@@ -57,5 +60,13 @@ export const deleteLoanAction = serverAction
   .input(DeleteLoanSchema)
   .handler(async ({ input }: { input: DeleteLoanInput }) => {
     const response = await deleteLoan(input.id);
+    return response;
+  });
+
+// Bulk Upload Loans
+export const bulkUploadLoansAction = serverAction
+  .input(BulkUploadLoanSchema)
+  .handler(async ({ input }: { input: BulkUploadLoanInput }) => {
+    const response = await bulkUploadLoans(input);
     return response;
   });

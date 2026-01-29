@@ -9,6 +9,8 @@ import type {
   UpdateLoanData,
   ListLoansParams,
   ListLoansResponse,
+  BulkUploadLoanData,
+  BulkUploadLoanResult,
 } from "./loan.dto";
 import { convertDecimalToNumber } from "@/lib/db/utils";
 
@@ -30,6 +32,79 @@ const loanSelect = {
 };
 
 /**
+ * Internal reusable function to create a loan with ledger entry
+ * This function handles the creation of both loan and ledger entry with balance calculation
+ */
+async function createLoanWithLedger(
+  tx: PrismaTransactionClient,
+  data: {
+    employeeId: number;
+    date: Date | string;
+    type: "LOAN" | "RETURN";
+    amount: number | any;
+    remarks?: string;
+  }
+) {
+  const remarks = data.remarks ?? "";
+
+  // Create loan
+  const loan = await tx.loan.create({
+    data: {
+      employeeId: data.employeeId,
+      date: new Date(data.date),
+      type: data.type,
+      amount: data.amount,
+      remarks: remarks,
+    },
+    select: loanSelect,
+  });
+
+  // Determine amount type: LOAN = DEBIT, RETURN = CREDIT
+  const amountType = data.type === "LOAN" ? "DEBIT" : "CREDIT";
+
+  // Get the previous balance (balance of the entry just before this one, based on createdAt)
+  const previousEntry = await tx.ledger.findFirst({
+    where: {
+      employeeId: data.employeeId,
+    },
+    orderBy: [{ createdAt: "desc" }],
+    select: { balance: true },
+  });
+
+  // Calculate previous balance (0 if no previous entry)
+  let previousBalance = 0;
+  if (previousEntry) {
+    previousBalance = Number(previousEntry.balance);
+  }
+
+  // Calculate new balance for current entry
+  // CREDIT increases balance, DEBIT decreases balance
+  const amountNum = Number(data.amount);
+  let newBalance = previousBalance;
+  if (amountType === "CREDIT") {
+    newBalance = previousBalance + amountNum;
+  } else if (amountType === "DEBIT") {
+    newBalance = previousBalance - amountNum;
+  }
+
+  // Create ledger entry with calculated balance
+  await tx.ledger.create({
+    data: {
+      employeeId: data.employeeId,
+      date: new Date(data.date),
+      type: "LOAN",
+      amountType: amountType as "CREDIT" | "DEBIT",
+      amount: data.amount,
+      balance: newBalance,
+      description: `Loan ${!!remarks ? `(${remarks})` : ""}`,
+      loanId: loan.id,
+    },
+  });
+
+  return loan;
+}
+
+/**
  * Create a new loan
  */
 export const createLoan = async (data: CreateLoanData) => {
@@ -44,61 +119,12 @@ export const createLoan = async (data: CreateLoanData) => {
       throw new Error(`Employee with ID ${data.employeeId} does not exist`);
     }
 
-    const remarks = data.remarks ?? "";
-
-    const loan = await tx.loan.create({
-      data: {
-        employeeId: data.employeeId,
-        date: new Date(data.date),
-        type: data.type,
-        amount: data.amount,
-        remarks: remarks,
-      },
-      select: loanSelect,
-    });
-
-    // Determine amount type: LOAN = DEBIT, RETURN = CREDIT
-    const amountType = data.type === "LOAN" ? "DEBIT" : "CREDIT";
-
-    // Get the previous balance (balance of the entry just before this one, based on createdAt)
-    const previousEntry = await tx.ledger.findFirst({
-      where: {
-        employeeId: data.employeeId,
-      },
-      orderBy: [
-        { createdAt: "desc" },
-      ],
-      select: { balance: true },
-    });
-
-    // Calculate previous balance (0 if no previous entry)
-    let previousBalance = 0;
-    if (previousEntry) {
-      previousBalance = Number(previousEntry.balance);
-    }
-
-    // Calculate new balance for current entry
-    // CREDIT increases balance, DEBIT decreases balance
-    const amountNum = Number(data.amount);
-    let newBalance = previousBalance;
-    if (amountType === "CREDIT") {
-      newBalance = previousBalance + amountNum;
-    } else if (amountType === "DEBIT") {
-      newBalance = previousBalance - amountNum;
-    }
-
-    // Create ledger entry with calculated balance
-    await tx.ledger.create({
-      data: {
-        employeeId: data.employeeId,
-        date: new Date(data.date),
-        type: "LOAN",
-        amountType: amountType as "CREDIT" | "DEBIT",
-        amount: data.amount,
-        balance: newBalance,
-        description: `Loan ${!!remarks ? `(${remarks})` : ""}`,
-        loanId: loan.id,
-      },
+    const loan = await createLoanWithLedger(tx, {
+      employeeId: data.employeeId,
+      date: data.date,
+      type: data.type,
+      amount: data.amount,
+      remarks: data.remarks,
     });
 
     // Convert Decimal to number for client serialization
@@ -219,9 +245,7 @@ export const updateLoan = async (id: number, data: UpdateLoanData) => {
             id: { not: ledgerEntry.id }, // Exclude current entry
             createdAt: { lt: ledgerEntry.createdAt },
           },
-          orderBy: [
-            { createdAt: "desc" },
-          ],
+          orderBy: [{ createdAt: "desc" }],
           select: { balance: true },
         });
 
@@ -261,9 +285,7 @@ export const updateLoan = async (id: number, data: UpdateLoanData) => {
             id: { not: ledgerEntry.id }, // Exclude current entry
             createdAt: { gt: ledgerEntry.createdAt },
           },
-          orderBy: [
-            { createdAt: "asc" },
-          ],
+          orderBy: [{ createdAt: "asc" }],
           select: { id: true, amount: true, amountType: true, balance: true },
         });
 
@@ -415,4 +437,66 @@ export const listLoans = async (
       totalPages: Math.ceil(total / limit),
     },
   };
+};
+
+/**
+ * Bulk upload loans
+ */
+export const bulkUploadLoans = async (
+  data: BulkUploadLoanData
+): Promise<BulkUploadLoanResult> => {
+  const result: BulkUploadLoanResult = {
+    success: 0,
+    failed: 0,
+    errors: [],
+  };
+
+  // Process each loan in a transaction
+  for (let i = 0; i < data.loans.length; i++) {
+    const row = data.loans[i];
+    const rowNumber = i + 1; // 1-indexed for user-friendly error messages
+
+    try {
+      await prisma.$transaction(async (tx: PrismaTransactionClient) => {
+        // Resolve employeeId from employeeCode
+        const employee = await tx.employee.findUnique({
+          where: { employeeCode: row.employeeCode },
+          select: { id: true },
+        });
+
+        if (!employee) {
+          throw new Error(`Employee with code ${row.employeeCode} not found`);
+        }
+
+        // Create loan with ledger entry using reusable function
+        await createLoanWithLedger(tx, {
+          employeeId: employee.id,
+          date: row.date,
+          type: row.type,
+          amount: row.amount,
+          remarks: row.remarks,
+        });
+      });
+
+      result.success++;
+    } catch (error: any) {
+      console.error(error);
+      console.error(error.message);
+      console.error(error.stack);
+      console.error(error.cause);
+      console.error(error.code);
+      console.error(error.name);
+      console.error(error.syscall);
+      console.error(error.address);
+      console.error(error.port);
+      result.failed++;
+      result.errors.push({
+        row: rowNumber,
+        data: row,
+        error: error.message || "Unknown error",
+      });
+    }
+  }
+
+  return result;
 };

@@ -63,3 +63,29 @@ export interface ListTrafficChallansResponse {
     totalPages: number;
   };
 }
+
+// ---------------------------------------------------------------------------
+// Bulk Upload
+// ---------------------------------------------------------------------------
+
+export interface BulkUploadTrafficChallanRow {
+  employeeCode: number; // Employee code (required)
+  date: Date | string;
+  type: TrafficChallanType;
+  amount: number | Prisma.Decimal;
+  description?: string;
+}
+
+export interface BulkUploadTrafficChallanData {
+  trafficChallans: BulkUploadTrafficChallanRow[];
+}
+
+export interface BulkUploadTrafficChallanResult {
+  success: number;
+  failed: number;
+  errors: Array<{
+    row: number;
+    data: BulkUploadTrafficChallanRow;
+    error: string;
+  }>;
+}

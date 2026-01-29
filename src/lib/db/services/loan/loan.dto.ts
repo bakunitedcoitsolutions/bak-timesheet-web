@@ -63,3 +63,29 @@ export interface ListLoansResponse {
     totalPages: number;
   };
 }
+
+// ---------------------------------------------------------------------------
+// Bulk Upload
+// ---------------------------------------------------------------------------
+
+export interface BulkUploadLoanRow {
+  employeeCode: number; // Employee code (required)
+  date: Date | string;
+  type: LoanType;
+  amount: number | Prisma.Decimal;
+  remarks?: string;
+}
+
+export interface BulkUploadLoanData {
+  loans: BulkUploadLoanRow[];
+}
+
+export interface BulkUploadLoanResult {
+  success: number;
+  failed: number;
+  errors: Array<{
+    row: number;
+    data: BulkUploadLoanRow;
+    error: string;
+  }>;
+}

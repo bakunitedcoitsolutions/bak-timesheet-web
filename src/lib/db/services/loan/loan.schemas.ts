@@ -50,9 +50,22 @@ export const DeleteLoanSchema = z.object({
   id: z.number().int().positive(),
 });
 
+export const BulkUploadLoanRowSchema = z.object({
+  employeeCode: z.number().int().positive("Employee code is required"),
+  date: z.coerce.date(),
+  type: z.enum(["LOAN", "RETURN"]),
+  amount: z.number().positive("Amount must be greater than 0"),
+  remarks: z.string().optional(),
+});
+
+export const BulkUploadLoanSchema = z.object({
+  loans: z.array(BulkUploadLoanRowSchema).min(1, "At least one loan is required"),
+});
+
 // Type exports for use in actions
 export type CreateLoanInput = z.infer<typeof CreateLoanSchema>;
 export type UpdateLoanInput = z.infer<typeof UpdateLoanSchema>;
 export type ListLoansParamsInput = z.infer<typeof ListLoansParamsSchema>;
 export type GetLoanByIdInput = z.infer<typeof GetLoanByIdSchema>;
 export type DeleteLoanInput = z.infer<typeof DeleteLoanSchema>;
+export type BulkUploadLoanInput = z.infer<typeof BulkUploadLoanSchema>;

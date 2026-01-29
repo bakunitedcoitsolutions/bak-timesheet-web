@@ -8,6 +8,7 @@ import {
   updateLoanAction,
   getLoanByIdAction,
   deleteLoanAction,
+  bulkUploadLoansAction,
 } from "./actions";
 
 export const useGetLoans = (input: ListLoansParamsInput) =>
@@ -49,6 +50,16 @@ export const useGetLoanById = (input: GetLoanByIdInput) =>
 export const useDeleteLoan = () =>
   useMutation(deleteLoanAction, {
     mutationKey: ["delete-loan"],
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["loans"],
+      });
+    },
+  });
+
+export const useBulkUploadLoans = () =>
+  useMutation(bulkUploadLoansAction, {
+    mutationKey: ["bulk-upload-loans"],
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ["loans"],

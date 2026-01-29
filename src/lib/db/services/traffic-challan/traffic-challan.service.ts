@@ -9,6 +9,9 @@ import type {
   UpdateTrafficChallanData,
   ListTrafficChallansParams,
   ListTrafficChallansResponse,
+  BulkUploadTrafficChallanData,
+  BulkUploadTrafficChallanResult,
+  BulkUploadTrafficChallanRow,
 } from "./traffic-challan.dto";
 import { convertDecimalToNumber } from "@/lib/db/utils";
 
@@ -30,6 +33,81 @@ const trafficChallanSelect = {
 };
 
 /**
+ * Internal reusable function to create a traffic challan with ledger entry
+ * This function handles the creation of both traffic challan and ledger entry with balance calculation
+ */
+async function createTrafficChallanWithLedger(
+  tx: PrismaTransactionClient,
+  data: {
+    employeeId: number;
+    date: Date | string;
+    type: "CHALLAN" | "RETURN";
+    amount: number | any;
+    description?: string;
+  }
+) {
+  const description = data.description ?? "";
+
+  // Create traffic challan
+  const trafficChallan = await tx.trafficChallan.create({
+    data: {
+      employeeId: data.employeeId,
+      date: new Date(data.date),
+      type: data.type,
+      amount: data.amount,
+      description: description,
+    },
+    select: trafficChallanSelect,
+  });
+
+  // Determine amount type: CHALLAN = DEBIT, RETURN = CREDIT
+  const amountType = data.type === "CHALLAN" ? "DEBIT" : "CREDIT";
+
+  // Get the previous balance (balance of the entry just before this one, based on createdAt)
+  const previousEntry = await tx.ledger.findFirst({
+    where: {
+      employeeId: data.employeeId,
+    },
+    orderBy: [
+      { createdAt: "desc" },
+    ],
+    select: { balance: true },
+  });
+
+  // Calculate previous balance (0 if no previous entry)
+  let previousBalance = 0;
+  if (previousEntry) {
+    previousBalance = Number(previousEntry.balance);
+  }
+
+  // Calculate new balance for current entry
+  // CREDIT increases balance, DEBIT decreases balance
+  const amountNum = Number(data.amount);
+  let newBalance = previousBalance;
+  if (amountType === "CREDIT") {
+    newBalance = previousBalance + amountNum;
+  } else if (amountType === "DEBIT") {
+    newBalance = previousBalance - amountNum;
+  }
+
+  // Create ledger entry with calculated balance
+  await tx.ledger.create({
+    data: {
+      employeeId: data.employeeId,
+      date: new Date(data.date),
+      type: "CHALLAN",
+      amountType: amountType as "CREDIT" | "DEBIT",
+      amount: data.amount,
+      balance: newBalance,
+      description: `Challan ${!!description ? `(${description})` : ""}`,
+      trafficChallanId: trafficChallan.id,
+    },
+  });
+
+  return trafficChallan;
+}
+
+/**
  * Create a new traffic challan
  */
 export const createTrafficChallan = async (data: CreateTrafficChallanData) => {
@@ -44,61 +122,12 @@ export const createTrafficChallan = async (data: CreateTrafficChallanData) => {
       throw new Error(`Employee with ID ${data.employeeId} does not exist`);
     }
 
-    const description = data.description ?? "";
-
-    const trafficChallan = await tx.trafficChallan.create({
-      data: {
-        employeeId: data.employeeId,
-        date: new Date(data.date),
-        type: data.type,
-        amount: data.amount,
-        description: description,
-      },
-      select: trafficChallanSelect,
-    });
-
-    // Determine amount type: CHALLAN = DEBIT, RETURN = CREDIT
-    const amountType = data.type === "CHALLAN" ? "DEBIT" : "CREDIT";
-
-    // Get the previous balance (balance of the entry just before this one, based on createdAt)
-    const previousEntry = await tx.ledger.findFirst({
-      where: {
-        employeeId: data.employeeId,
-      },
-      orderBy: [
-        { createdAt: "desc" },
-      ],
-      select: { balance: true },
-    });
-
-    // Calculate previous balance (0 if no previous entry)
-    let previousBalance = 0;
-    if (previousEntry) {
-      previousBalance = Number(previousEntry.balance);
-    }
-
-    // Calculate new balance for current entry
-    // CREDIT increases balance, DEBIT decreases balance
-    const amountNum = Number(data.amount);
-    let newBalance = previousBalance;
-    if (amountType === "CREDIT") {
-      newBalance = previousBalance + amountNum;
-    } else if (amountType === "DEBIT") {
-      newBalance = previousBalance - amountNum;
-    }
-
-    // Create ledger entry with calculated balance
-    await tx.ledger.create({
-      data: {
-        employeeId: data.employeeId,
-        date: new Date(data.date),
-        type: "CHALLAN",
-        amountType: amountType as "CREDIT" | "DEBIT",
-        amount: data.amount,
-        balance: newBalance,
-        description: `Challan ${!!description ? `(${description})` : ""}`,
-        trafficChallanId: trafficChallan.id,
-      },
+    const trafficChallan = await createTrafficChallanWithLedger(tx, {
+      employeeId: data.employeeId,
+      date: data.date,
+      type: data.type,
+      amount: data.amount,
+      description: data.description,
     });
 
     // Convert Decimal to number for client serialization
@@ -414,4 +443,59 @@ export const listTrafficChallans = async (
       totalPages: Math.ceil(total / limit),
     },
   };
+};
+
+/**
+ * Bulk upload traffic challans
+ */
+export const bulkUploadTrafficChallans = async (
+  data: BulkUploadTrafficChallanData
+): Promise<BulkUploadTrafficChallanResult> => {
+  const result: BulkUploadTrafficChallanResult = {
+    success: 0,
+    failed: 0,
+    errors: [],
+  };
+
+  // Process each traffic challan in a transaction
+  for (let i = 0; i < data.trafficChallans.length; i++) {
+    const row = data.trafficChallans[i];
+    const rowNumber = i + 1; // 1-indexed for user-friendly error messages
+
+    try {
+      await prisma.$transaction(async (tx: PrismaTransactionClient) => {
+        // Resolve employeeId from employeeCode
+        const employee = await tx.employee.findUnique({
+          where: { employeeCode: row.employeeCode },
+          select: { id: true },
+        });
+
+        if (!employee) {
+          throw new Error(
+            `Employee with code ${row.employeeCode} not found`
+          );
+        }
+
+        // Create traffic challan with ledger entry using reusable function
+        await createTrafficChallanWithLedger(tx, {
+          employeeId: employee.id,
+          date: row.date,
+          type: row.type,
+          amount: row.amount,
+          description: row.description,
+        });
+      });
+
+      result.success++;
+    } catch (error: any) {
+      result.failed++;
+      result.errors.push({
+        row: rowNumber,
+        data: row,
+        error: error.message || "Unknown error",
+      });
+    }
+  }
+
+  return result;
 };

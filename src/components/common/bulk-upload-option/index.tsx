@@ -9,10 +9,12 @@ import { Button } from "@/components";
 const BulkUploadOptions = ({
   uploadCSV,
   uploadExcel,
+  downloadTemplate,
   buttonClassName,
 }: {
-  uploadCSV: () => void;
-  uploadExcel: () => void;
+  uploadCSV?: () => void;
+  uploadExcel?: () => void;
+  downloadTemplate?: () => void;
   buttonClassName?: string;
 }) => {
   const menuRight = useRef<Menu | null>(null);
@@ -22,7 +24,7 @@ const BulkUploadOptions = ({
       label: "CSV",
       icon: "fa-regular fa-file-csv text-xl!",
       command: () => {
-        uploadCSV();
+        uploadCSV?.();
       },
       template: (item: MenuItem, options: MenuItemOptions) => {
         return (
@@ -45,7 +47,30 @@ const BulkUploadOptions = ({
       label: "Excel",
       icon: "fa-regular fa-file-xls text-xl!",
       command: () => {
-        uploadExcel();
+        uploadExcel?.();
+      },
+      template: (item: MenuItem, options: MenuItemOptions) => {
+        return (
+          <div
+            onClick={(e) => options.onClick(e)}
+            className={classNames(
+              options.className,
+              "w-full flex h-12 p-2 pl-4 cursor-pointer rounded-t-xl border-b border-gray-200"
+            )}
+          >
+            <span
+              className={classNames(item.icon, "mr-2 text-theme-green")}
+            ></span>
+            <p className="font-medium text-sm">{item.label}</p>
+          </div>
+        );
+      },
+    },
+    {
+      label: "Download Sample",
+      icon: "fa-regular fa-file-download text-xl!",
+      command: () => {
+        downloadTemplate?.();
       },
       template: (item: MenuItem, options: MenuItemOptions) => {
         return (

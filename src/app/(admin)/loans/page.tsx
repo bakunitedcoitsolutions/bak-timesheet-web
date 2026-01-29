@@ -13,18 +13,31 @@ import {
   TableActions,
   ExportOptions,
   BulkUploadOptions,
+  BulkUploadDialog,
 } from "@/components";
 import {
   getErrorMessage,
   createSortHandler,
   toPrimeReactSortOrder,
 } from "@/utils/helpers";
-import { ListedLoan } from "@/lib/db/services/loan/loan.dto";
-import { ListLoansSortableField } from "@/lib/db/services/loan/loan.dto";
 import { useDebounce } from "@/hooks";
 import { toastService } from "@/lib/toast";
+import {
+  ListedLoan,
+  BulkUploadLoanResult,
+} from "@/lib/db/services/loan/loan.dto";
 import { showConfirmDialog } from "@/components/common/confirm-dialog";
-import { useDeleteLoan, useGetLoans } from "@/lib/db/services/loan/requests";
+import { ListLoansSortableField } from "@/lib/db/services/loan/loan.dto";
+import {
+  useDeleteLoan,
+  useGetLoans,
+  useBulkUploadLoans,
+} from "@/lib/db/services/loan/requests";
+import {
+  parseExcelFile,
+  parseCSVFile,
+  downloadSampleTemplate,
+} from "@/lib/db/services/loan/bulk-upload-utils";
 
 // Constants
 const SORTABLE_FIELDS = {
@@ -149,8 +162,10 @@ const LoansPage = () => {
     "createdAt"
   );
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
+  const [showFilePicker, setShowFilePicker] = useState<boolean>(false);
   const tableRef = useRef<TableRef>(null);
   const { mutateAsync: deleteLoan } = useDeleteLoan();
+  const { mutateAsync: bulkUploadLoans } = useBulkUploadLoans();
 
   // Debounce search input
   const debouncedSearch = useDebounce(searchValue, 500);
@@ -297,6 +312,81 @@ const LoansPage = () => {
     [handleEdit, handleDelete, currentPage, currentLimit]
   );
 
+  // Bulk upload handlers
+  const handleUploadCSV = useCallback(() => {
+    setShowFilePicker(true);
+  }, []);
+
+  const handleUploadExcel = useCallback(() => {
+    setShowFilePicker(true);
+  }, []);
+
+  const handleUpload = useCallback(
+    async (file: File) => {
+      try {
+        // Detect file type from file extension or MIME type
+        const fileName = file.name.toLowerCase();
+        const isCSV = fileName.endsWith(".csv") || file.type === "text/csv";
+
+        let parseResult;
+        if (isCSV) {
+          parseResult = await parseCSVFile(file);
+        } else {
+          parseResult = await parseExcelFile(file);
+        }
+
+        if (parseResult.errors.length > 0) {
+          toastService.showWarn(
+            "Parse Warnings",
+            `${parseResult.errors.length} row(s) had errors. Check console for details.`
+          );
+          console.error("Parse errors:", parseResult.errors);
+        }
+
+        if (parseResult.data.length === 0) {
+          toastService.showError("Error", "No valid data found in file");
+          throw new Error("No valid data found in file");
+        }
+
+        // Upload the data
+        await bulkUploadLoans(
+          { loans: parseResult.data },
+          {
+            onSuccess: (result: BulkUploadLoanResult) => {
+              const message =
+                result.success > 0
+                  ? `Successfully uploaded ${result.success} loan(s)`
+                  : "Upload completed";
+
+              if (result.failed > 0) {
+                toastService.showWarn(
+                  "Upload Complete",
+                  `${message}. ${result.failed} failed. Check console for details.`
+                );
+                console.error("Upload errors:", result.errors);
+              } else {
+                toastService.showSuccess("Success", message);
+              }
+            },
+            onError: (error: any) => {
+              const errorMessage = getErrorMessage(
+                error,
+                "Failed to upload loans"
+              );
+              toastService.showError("Error", errorMessage);
+              throw error; // Re-throw to prevent dialog from closing
+            },
+          }
+        );
+      } catch (error: any) {
+        const errorMessage = getErrorMessage(error, "Failed to parse file");
+        toastService.showError("Error", errorMessage);
+        throw error; // Re-throw to prevent dialog from closing
+      }
+    },
+    [bulkUploadLoans]
+  );
+
   // Memoized header renderer
   const renderHeader = useCallback(() => {
     return (
@@ -334,65 +424,91 @@ const LoansPage = () => {
           </div>
           <div className="w-full lg:w-auto">
             <BulkUploadOptions
-              uploadCSV={() => {}}
-              uploadExcel={() => {}}
+              uploadCSV={handleUploadCSV}
+              uploadExcel={handleUploadExcel}
+              downloadTemplate={downloadSampleTemplate}
               buttonClassName="w-full md:w-auto h-9!"
             />
           </div>
         </div>
       </div>
     );
-  }, [searchValue, selectedDate, exportCSV, exportExcel]);
+  }, [
+    searchValue,
+    selectedDate,
+    exportCSV,
+    exportExcel,
+    handleUploadCSV,
+    handleUploadExcel,
+  ]);
 
   return (
-    <div className="flex h-full flex-col gap-6 px-6 py-6">
-      <div className="flex flex-col md:flex-row justify-between items-center gap-3 shrink-0">
-        <div className="w-full md:w-auto flex flex-1 flex-col gap-1">
-          <h1 className="text-2xl font-semibold text-gray-900">
-            Loan Management
-          </h1>
-          <p className="text-sm text-gray-600 mt-1">
-            View, manage loan records, and loan details.
-          </p>
+    <>
+      <div className="flex h-full flex-col gap-6 px-6 py-6">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-3 shrink-0">
+          <div className="w-full md:w-auto flex flex-1 flex-col gap-1">
+            <h1 className="text-2xl font-semibold text-gray-900">
+              Loan Management
+            </h1>
+            <p className="text-sm text-gray-600 mt-1">
+              View, manage loan records, and loan details.
+            </p>
+          </div>
+          <div className="w-full md:w-auto">
+            <Button
+              size="small"
+              variant="solid"
+              icon="pi pi-plus"
+              label="Add Loan"
+              onClick={() => router.push("/loans/new")}
+            />
+          </div>
         </div>
-        <div className="w-full md:w-auto">
-          <Button
-            size="small"
-            variant="solid"
-            icon="pi pi-plus"
-            label="Add Loan"
-            onClick={() => router.push("/loans/new")}
+        <div className="bg-white flex-1 rounded-xl overflow-hidden min-h-0">
+          <Table
+            dataKey="id"
+            removableSort
+            data={loans}
+            ref={tableRef}
+            loading={isLoading}
+            loadingIcon={
+              <ProgressSpinner style={{ width: "50px", height: "50px" }} />
+            }
+            customHeader={renderHeader}
+            columns={tableColumns}
+            sortMode="single"
+            onPage={handlePageChange}
+            onSort={sortHandler}
+            sortField={sortBy}
+            sortOrder={toPrimeReactSortOrder(sortOrder) as any}
+            pagination={true}
+            rowsPerPageOptions={[10, 25, 50]}
+            rows={currentLimit}
+            first={(currentPage - 1) * currentLimit}
+            totalRecords={total}
+            globalSearch={true}
+            scrollable
+            scrollHeight="65vh"
           />
         </div>
       </div>
-      <div className="bg-white flex-1 rounded-xl overflow-hidden min-h-0">
-        <Table
-          dataKey="id"
-          removableSort
-          data={loans}
-          ref={tableRef}
-          loading={isLoading}
-          loadingIcon={
-            <ProgressSpinner style={{ width: "50px", height: "50px" }} />
-          }
-          customHeader={renderHeader}
-          columns={tableColumns}
-          sortMode="single"
-          onPage={handlePageChange}
-          onSort={sortHandler}
-          sortField={sortBy}
-          sortOrder={toPrimeReactSortOrder(sortOrder) as any}
-          pagination={true}
-          rowsPerPageOptions={[10, 25, 50]}
-          rows={currentLimit}
-          first={(currentPage - 1) * currentLimit}
-          totalRecords={total}
-          globalSearch={true}
-          scrollable
-          scrollHeight="65vh"
-        />
-      </div>
-    </div>
+
+      <BulkUploadDialog
+        visible={showFilePicker}
+        title="Upload Loans"
+        onHide={() => {
+          setShowFilePicker(false);
+        }}
+        onUpload={handleUpload}
+        accept={{
+          "text/csv": [".csv"],
+          "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": [
+            ".xlsx",
+          ],
+          "application/vnd.ms-excel": [".xls"],
+        }}
+      />
+    </>
   );
 };
 

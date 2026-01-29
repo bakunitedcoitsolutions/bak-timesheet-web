@@ -7,6 +7,7 @@ import { formatFileName } from "@/utils/helpers";
 interface FilePickerProps {
   label?: string;
   className?: string;
+  fileClassName?: string;
   error?: string;
   accept?: Record<string, string[]>;
   multiple?: boolean;
@@ -20,6 +21,7 @@ interface FilePickerProps {
 
 export default function FilePicker({
   label,
+  fileClassName = "",
   error,
   className = "",
   accept,
@@ -153,7 +155,10 @@ export default function FilePicker({
         {files.map((file, index) => (
           <div
             key={`${file.name}-${index}`}
-            className="flex w-full items-center justify-between rounded-xl h-[44px] pl-2 pr-3 border border-primary/30  gap-x-2"
+            className={classNames(
+              "flex w-full items-center justify-between rounded-xl h-[44px] pl-2 pr-3 border border-primary/30  gap-x-2",
+              fileClassName
+            )}
           >
             <div className="flex items-center justify-center w-7 h-7 rounded-lg">
               <i className={`pi ${getFileIcon(file)} text-primary`} />

@@ -50,6 +50,18 @@ export const DeleteTrafficChallanSchema = z.object({
   id: z.number().int().positive(),
 });
 
+export const BulkUploadTrafficChallanRowSchema = z.object({
+  employeeCode: z.number().int().positive("Employee code is required"),
+  date: z.coerce.date(),
+  type: z.enum(["CHALLAN", "RETURN"]),
+  amount: z.number().positive("Amount must be greater than 0"),
+  description: z.string().optional(),
+});
+
+export const BulkUploadTrafficChallanSchema = z.object({
+  trafficChallans: z.array(BulkUploadTrafficChallanRowSchema).min(1, "At least one traffic challan is required"),
+});
+
 // Type exports for use in actions
 export type CreateTrafficChallanInput = z.infer<
   typeof CreateTrafficChallanSchema
@@ -66,3 +78,4 @@ export type GetTrafficChallanByIdInput = z.infer<
 export type DeleteTrafficChallanInput = z.infer<
   typeof DeleteTrafficChallanSchema
 >;
+export type BulkUploadTrafficChallanInput = z.infer<typeof BulkUploadTrafficChallanSchema>;
