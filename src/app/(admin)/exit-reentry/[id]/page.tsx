@@ -1,18 +1,42 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useParams, useRouter } from "next/navigation";
-
+import { useEffect, useMemo } from "react";
+import { useForm } from "react-hook-form";
 import { classNames } from "primereact/utils";
-import { StepperFormHeading } from "@/components";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useParams, useRouter } from "next/navigation";
+import { ProgressSpinner } from "primereact/progressspinner";
+
+import {
+  useUpdateExitReentry,
+  useCreateExitReentry,
+  useGetExitReentryById,
+} from "@/lib/db/services/exit-reentry/requests";
+import {
+  CreateExitReentrySchema,
+  UpdateExitReentrySchema,
+} from "@/lib/db/services/exit-reentry/exit-reentry.schemas";
+import { useGetEmployees } from "@/lib/db/services/employee/requests";
+import { useGetDesignations } from "@/lib/db/services/designation/requests";
+import { toastService } from "@/lib/toast";
 import { getEntityModeFromParam } from "@/helpers";
-import { FORM_FIELD_WIDTHS } from "@/utils/constants";
-import { Button, Dropdown, Input } from "@/components/forms";
-import { initialTimesheetData, designationsData } from "@/utils/dummy";
+import { getErrorMessage } from "@/utils/helpers";
+import { FORM_FIELD_WIDTHS, COMMON_QUERY_INPUT } from "@/utils/constants";
+import {
+  Input,
+  Button,
+  Dropdown,
+  Form,
+  FormItem,
+  Textarea,
+} from "@/components/forms";
+import { StepperFormHeading } from "@/components";
+import { ListedEmployee } from "@/lib/db/services/employee/employee.dto";
+import { ListedDesignation } from "@/lib/db/services/designation/designation.dto";
 
 const exitReentryTypeOptions = [
-  { label: "Exit", value: "1" },
-  { label: "Entry", value: "2" },
+  { label: "Exit", value: "EXIT" },
+  { label: "Entry", value: "ENTRY" },
 ];
 
 const UpsertExitReentryPage = () => {
@@ -28,10 +52,67 @@ const UpsertExitReentryPage = () => {
     param: exitReentryIdParam,
   });
 
-  const [selectedType, setSelectedType] = useState<string | null>(null);
-  const [selectedEmployee, setSelectedEmployee] = useState<string | null>(null);
-  const [designation, setDesignation] = useState<string>("");
-  const [designationId, setDesignationId] = useState<number | null>(null);
+  const { mutateAsync: createExitReentry } = useCreateExitReentry();
+  const { mutateAsync: updateExitReentry } = useUpdateExitReentry();
+  const { data: foundExitReentry, isLoading } = useGetExitReentryById({
+    id: exitReentryId ? Number(exitReentryId) : 0,
+  });
+
+  // Fetch employees
+  const { data: employeesResponse } = useGetEmployees({
+    page: 1,
+    limit: 1000,
+  });
+  const employees = employeesResponse?.employees ?? [];
+
+  // Fetch designations
+  const { data: designationsResponse } = useGetDesignations(COMMON_QUERY_INPUT);
+  const designations = designationsResponse?.designations ?? [];
+
+  // Create a map for quick designation lookup
+  const designationsMap = useMemo(() => {
+    const map = new Map<number, ListedDesignation>();
+    designations.forEach((des: ListedDesignation) => {
+      map.set(des.id, des);
+    });
+    return map;
+  }, [designations]);
+
+  const employeeOptions = employees.map((employee: ListedEmployee) => ({
+    label: `${employee.employeeCode} - ${employee.nameEn}`,
+    value: employee.id,
+  }));
+
+  const zodSchema = isEditMode
+    ? UpdateExitReentrySchema
+    : CreateExitReentrySchema;
+
+  const defaultValues = {
+    ...(isEditMode ? { id: 0 } : {}),
+    employeeId: undefined as number | undefined,
+    date: "",
+    type: undefined as "EXIT" | "ENTRY" | undefined,
+    remarks: "",
+  };
+
+  const form = useForm({
+    resolver: zodResolver(zodSchema) as any,
+    defaultValues,
+  });
+
+  const {
+    reset,
+    handleSubmit,
+    watch,
+    formState: { isSubmitting },
+  } = form;
+
+  const selectedEmployeeId = watch("employeeId");
+
+  // Get employee designation when employee is selected
+  const selectedEmployee = employees.find(
+    (emp: ListedEmployee) => emp.id === selectedEmployeeId
+  );
 
   // Redirect to 404 page if the entity is invalid
   useEffect(() => {
@@ -40,46 +121,74 @@ const UpsertExitReentryPage = () => {
     }
   }, [isInvalid, router]);
 
-  // Update designation name and ID when employee is selected
   useEffect(() => {
-    if (selectedEmployee) {
-      const employeeId = parseInt(selectedEmployee, 10);
-      const employee = initialTimesheetData.find(
-        (emp) => emp.id === employeeId
-      );
-      if (employee) {
-        // Find designation ID by matching the designation name
-        const designationObj = designationsData.find(
-          (des) => des.nameEn === employee.designation
-        );
-        setDesignation(employee.designation);
-        setDesignationId(designationObj?.id || null);
-      } else {
-        setDesignation("");
-        setDesignationId(null);
-      }
-    } else {
-      setDesignation("");
-      setDesignationId(null);
+    if (foundExitReentry) {
+      const setExitReentry = {
+        ...(isEditMode ? { id: foundExitReentry?.id ?? 0 } : {}),
+        employeeId: foundExitReentry?.employeeId,
+        date: foundExitReentry?.date
+          ? new Date(foundExitReentry.date).toISOString().split("T")[0]
+          : "",
+        type: foundExitReentry?.type,
+        remarks: foundExitReentry?.remarks || "",
+      };
+      reset(setExitReentry);
     }
-  }, [selectedEmployee]);
+  }, [foundExitReentry, isEditMode, reset]);
 
-  const handleSubmit = async (data: Record<string, any>) => {
-    console.log("Form submitted:", {
-      ...data,
-      employeeId: selectedEmployee ? parseInt(selectedEmployee, 10) : null,
-      designationId: designationId,
-      type:
-        selectedType === "1" ? "EXIT" : selectedType === "2" ? "ENTRY" : null,
-    });
-    // Handle form submission here - use designationId for saving to DB
-    router.replace(`/exit-reentry`);
+  const onFormSubmit = handleSubmit(async (data) => {
+    if (isAddMode) {
+      await handleCreateExitReentry(data);
+    } else {
+      await handleUpdateExitReentry(data);
+    }
+  });
+
+  const handleCreateExitReentry = async (data: any) => {
+    try {
+      await createExitReentry(data, {
+        onSuccess: () => {
+          toastService.showSuccess(
+            "Done",
+            "Exit/Re-entry created successfully"
+          );
+          router.replace("/exit-reentry");
+        },
+        onError: (error: any) => {
+          const errorMessage = getErrorMessage(
+            error,
+            "Failed to create exit/re-entry"
+          );
+          toastService.showError("Error", errorMessage);
+        },
+      });
+    } catch (error) {
+      // Error handled in onError callback
+    }
   };
 
-  const employeeOptions = initialTimesheetData.map((timesheet) => ({
-    label: `${timesheet.code} - ${timesheet.employeeName}`,
-    value: timesheet.id.toString(),
-  }));
+  const handleUpdateExitReentry = async (data: any) => {
+    try {
+      await updateExitReentry(data, {
+        onSuccess: () => {
+          toastService.showSuccess(
+            "Done",
+            "Exit/Re-entry updated successfully"
+          );
+          router.replace("/exit-reentry");
+        },
+        onError: (error: any) => {
+          const errorMessage = getErrorMessage(
+            error,
+            "Failed to update exit/re-entry"
+          );
+          toastService.showError("Error", errorMessage);
+        },
+      });
+    } catch (error) {
+      // Error handled in onError callback
+    }
+  };
 
   return (
     <div className="flex flex-col h-full gap-6 px-6 py-6">
@@ -87,77 +196,103 @@ const UpsertExitReentryPage = () => {
         <StepperFormHeading
           title={isAddMode ? "Add Exit/Re-entry" : "Edit Exit/Re-entry"}
         />
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 md:gap-y-8 md:py-5 px-6 mt-5 md:mt-0 max-w-5xl content-start flex-1">
-          <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
-            <Input
-              type="date"
-              label="Date"
-              className="w-full"
-              placeholder="Select date"
-            />
+        {isLoading ? (
+          <div className="flex justify-center items-center h-full">
+            <ProgressSpinner style={{ width: "50px", height: "50px" }} />
           </div>
-          <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
-            <Dropdown
-              small
-              filter
-              label="Employee"
-              className="w-full"
-              options={employeeOptions}
-              placeholder="Choose"
-              value={selectedEmployee}
-              onChange={(e) => setSelectedEmployee(e.value)}
-            />
-          </div>
-          <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
-            <Dropdown
-              label="Type"
-              className="w-full"
-              options={exitReentryTypeOptions}
-              placeholder="Choose"
-              value={selectedType}
-              onChange={(e) => setSelectedType(e.value)}
-            />
-          </div>
-          <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
-            <Input
-              disabled
-              label="Designation"
-              className="w-full"
-              placeholder="Enter designation..."
-              value={designation}
-            />
-          </div>
-          <div
-            className={classNames(
-              FORM_FIELD_WIDTHS["2"],
-              "md:col-span-2 max-w-full"
-            )}
-          >
-            <Input
-              label="Remarks"
-              className="w-full"
-              placeholder="Enter remarks..."
-            />
-          </div>
-        </div>
+        ) : (
+          <>
+            <Form
+              form={form}
+              className="w-full h-full content-start md:max-w-5xl"
+            >
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 md:gap-y-4 md:py-5 px-6 mt-5 md:mt-0 flex-1">
+                <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
+                  <FormItem name="date">
+                    <Input
+                      type="date"
+                      label="Date"
+                      className="w-full"
+                      placeholder="Select date"
+                    />
+                  </FormItem>
+                </div>
+                <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
+                  <FormItem name="employeeId">
+                    <Dropdown
+                      filter
+                      label="Employee"
+                      className="w-full"
+                      options={employeeOptions}
+                      placeholder="Choose"
+                      showClear
+                    />
+                  </FormItem>
+                </div>
+                <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
+                  <FormItem name="type">
+                    <Dropdown
+                      label="Type"
+                      className="w-full"
+                      options={exitReentryTypeOptions}
+                      placeholder="Choose"
+                    />
+                  </FormItem>
+                </div>
+                <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
+                  <Input
+                    disabled
+                    label="Designation"
+                    className="w-full"
+                    placeholder="Designation will appear here..."
+                    value={
+                      selectedEmployee?.designationId
+                        ? designationsMap.get(selectedEmployee.designationId)
+                            ?.nameEn || "-"
+                        : "-"
+                    }
+                  />
+                </div>
+                <div
+                  className={classNames(
+                    FORM_FIELD_WIDTHS["2"],
+                    "md:col-span-2 max-w-full"
+                  )}
+                >
+                  <FormItem name="remarks">
+                    <Textarea
+                      label="Remarks"
+                      className="w-full"
+                      placeholder="Enter remarks..."
+                      rows={4}
+                    />
+                  </FormItem>
+                </div>
+              </div>
+            </Form>
 
-        <div className="flex items-center gap-3 justify-end px-6">
-          <Button
-            size="small"
-            variant="text"
-            onClick={() => router.replace("/exit-reentry")}
-          >
-            Cancel
-          </Button>
-          <Button
-            size="small"
-            variant="solid"
-            onClick={handleSubmit}
-            className="w-28 justify-center!"
-          >
-            Save
-          </Button>
-        </div>
+            <div className="flex items-center gap-3 justify-end px-6">
+              <Button
+                size="small"
+                variant="text"
+                disabled={isSubmitting}
+                onClick={() => router.replace("/exit-reentry")}
+              >
+                Cancel
+              </Button>
+              <Button
+                size="small"
+                variant="solid"
+                onClick={onFormSubmit}
+                loading={isSubmitting}
+                disabled={isSubmitting}
+                className="w-28 justify-center! gap-1"
+              >
+                Save
+              </Button>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
