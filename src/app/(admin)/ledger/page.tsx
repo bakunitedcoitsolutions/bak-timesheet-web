@@ -2,6 +2,7 @@
 import { useRef, useState, useMemo, useCallback } from "react";
 import { classNames } from "primereact/utils";
 import { ProgressSpinner } from "primereact/progressspinner";
+import { InputNumberChangeEvent } from "primereact/inputnumber";
 
 import {
   Table,
@@ -11,13 +12,12 @@ import {
   NumberInput,
   TitleHeader,
 } from "@/components";
-import { useGetLedgerByEmployeeCode } from "@/lib/db/services/ledger/requests";
+import { toastService } from "@/lib/toast";
+import { COMMON_QUERY_INPUT } from "@/utils/constants";
 import { LedgerEntryInterface } from "@/lib/db/services/ledger/ledger.dto";
 import { useGetDesignations } from "@/lib/db/services/designation/requests";
-import { COMMON_QUERY_INPUT } from "@/utils/constants";
+import { useGetLedgerByEmployeeCode } from "@/lib/db/services/ledger/requests";
 import { ListedDesignation } from "@/lib/db/services/designation/designation.dto";
-import { toastService } from "@/lib/toast";
-import { getErrorMessage } from "@/utils/helpers";
 
 // Transformed ledger entry for table display
 interface LedgerEntry {
@@ -291,11 +291,19 @@ const LedgerPage = () => {
           <div className="w-full lg:w-auto">
             <NumberInput
               useGrouping={false}
-              placeholder="Employee Code"
-              value={parseInt(employeeCode) || undefined}
-              onValueChange={(e) => setEmployeeCode(e.value?.toString() || "")}
-              className="w-full lg:w-60 h-10.5!"
               disabled={isLoading}
+              placeholder="Employee Code"
+              className="w-full lg:w-60 h-10.5!"
+              onChange={(e: InputNumberChangeEvent) =>
+                setEmployeeCode(e.value?.toString() || "")
+              }
+              value={employeeCode ? parseInt(employeeCode) : undefined}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" && !isLoading) {
+                  e?.preventDefault?.();
+                  handleSearch();
+                }
+              }}
             />
           </div>
           <div className="w-full lg:w-28">
@@ -344,11 +352,11 @@ const LedgerPage = () => {
               <span className="font-semibold">{employeeName}</span>
             </div>
             {idCardNumber && (
-              <>
+              <div className="flex gap-x-2 items-center">
                 <span
                   className={classNames("text-gray-400", {
                     "hidden lg:block": !isPrinting,
-                    block: isPrinting,
+                    inline: isPrinting,
                   })}
                 >
                   |
@@ -357,7 +365,7 @@ const LedgerPage = () => {
                   <span className="text-xs text-gray-600">ID Card:</span>
                   <span className="text-xs font-medium ">{idCardNumber}</span>
                 </div>
-              </>
+              </div>
             )}
           </div>
           {employeeDesignation && (
