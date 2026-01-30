@@ -1,7 +1,8 @@
 "use client";
-import { useRef, useState } from "react";
+import { useRef, useState, useMemo, useEffect } from "react";
 import { classNames } from "primereact/utils";
 import { Checkbox } from "primereact/checkbox";
+import { ProgressSpinner } from "primereact/progressspinner";
 
 import {
   Input,
@@ -10,47 +11,120 @@ import {
   Button,
   TableRef,
   Dropdown,
-  TableColumn,
   NumberInput,
   TitleHeader,
+  TableColumn,
   ExportOptions,
   GroupDropdown,
   BulkUploadOptions,
   CustomHeaderProps,
 } from "@/components";
-import { projects, TimesheetEntry, initialTimesheetData } from "@/utils/dummy";
+import { COMMON_QUERY_INPUT } from "@/utils/constants";
+import { parseGroupDropdownFilter } from "@/utils/helpers";
+import { useGetProjects } from "@/lib/db/services/project/requests";
+import type { ListedProject } from "@/lib/db/services/project/project.dto";
+import {
+  useGetTimesheetPageData,
+  useSaveTimesheetEntries,
+} from "@/lib/db/services/timesheet/requests";
+import { useGetPayrollSections } from "@/lib/db/services/payroll-section/requests";
+import type {
+  TimesheetPageRow,
+  SaveTimesheetEntryItem,
+} from "@/lib/db/services/timesheet/timesheet.dto";
+import { toastService } from "@/lib/toast";
+import type { ListedPayrollSection } from "@/lib/db/services/payroll-section/payroll-section.dto";
+
+/** Stable empty array so useMemo/useEffect deps don't change every render when no data */
+const EMPTY_ROWS: TimesheetPageRow[] = [];
+
+/** Today's date in YYYY-MM-DD */
+const getTodayDateString = () => new Date().toISOString().slice(0, 10);
 
 const TimesheetPage = () => {
-  const [selectedDesignation, setSelectedDesignation] = useState<any>("all");
-  const [timesheetData, setTimesheetData] =
-    useState<TimesheetEntry[]>(initialTimesheetData);
+  const [selectedDate, setSelectedDate] =
+    useState<string>(getTodayDateString());
+  const [isLoading, setIsLoading] = useState(false);
   const [searchValue, setSearchValue] = useState<string>("");
+  const [selectedFilter, setSelectedFilter] = useState<string | number | null>(
+    null
+  );
+  const [timesheetData, setTimesheetData] = useState<TimesheetPageRow[]>([]);
   const tableRef = useRef<TableRef>(null);
+  // Payroll sections: default to first section id when loaded
+  const { data: payrollSectionsResponse } =
+    useGetPayrollSections(COMMON_QUERY_INPUT);
+  const payrollSections: ListedPayrollSection[] =
+    payrollSectionsResponse?.payrollSections ?? [];
 
-  // Project options (excluding "All Projects")
-  const projectOptions = projects.filter((p) => p.value !== "0");
+  useEffect(() => {
+    if (payrollSections.length > 0) {
+      setSelectedFilter(`payroll-${payrollSections[0].id}`);
+    }
+  }, [payrollSections]);
+
+  const filterParams = parseGroupDropdownFilter(selectedFilter);
+
+  // Timesheet page data: employees in selected payroll section merged with timesheet records for selected date
+  const {
+    refetch: refetchTimesheet,
+    isLoading: isLoadingTimesheet,
+    data: timesheetPageResponse,
+  } = useGetTimesheetPageData({
+    date: new Date(selectedDate),
+    designationId: filterParams.designationId,
+    payrollSectionId: filterParams.payrollSectionId,
+  });
+
+  const { mutateAsync: saveTimesheetEntries } = useSaveTimesheetEntries();
+
+  // Projects for Project 1 / Project 2 dropdowns
+  const { data: projectsResponse } = useGetProjects({
+    page: 1,
+    limit: 1000,
+    sortBy: "nameEn",
+    sortOrder: "asc",
+  });
+  const projectsList: ListedProject[] = projectsResponse?.projects ?? [];
+  const projectOptions = useMemo(
+    () =>
+      projectsList.map((p) => ({
+        label: p.nameEn,
+        value: String(p.id),
+      })),
+    [projectsList]
+  );
+
+  // Use backend response directly (rows already in table shape)
+  const rows = timesheetPageResponse?.rows ?? EMPTY_ROWS;
+  const mergedTableData = useMemo(() => rows, [rows]);
+
+  // Keep table data in sync with merged data; allow local edits via updateTimesheetEntry
+  useEffect(() => {
+    setTimesheetData(mergedTableData);
+  }, [mergedTableData]);
 
   const updateTimesheetEntry = (
     id: number,
-    field: keyof TimesheetEntry,
+    field: keyof TimesheetPageRow,
     value: any
   ) => {
     setTimesheetData((prev) =>
       prev.map((entry) => {
         if (entry.id === id) {
           const updated = { ...entry, [field]: value };
-          // Auto-calculate total hours
+          // Auto-calculate total hours when any hour field changes
           if (
             field === "project1Hours" ||
-            field === "project1OT" ||
+            field === "project1Overtime" ||
             field === "project2Hours" ||
-            field === "project2OT"
+            field === "project2Overtime"
           ) {
-            updated.totalHours =
-              updated.project1Hours +
-              updated.project1OT +
-              updated.project2Hours +
-              updated.project2OT;
+            const p1H = updated.project1Hours ?? 0;
+            const p1OT = updated.project1Overtime ?? 0;
+            const p2H = updated.project2Hours ?? 0;
+            const p2OT = updated.project2Overtime ?? 0;
+            updated.totalHours = p1H + p1OT + p2H + p2OT;
           }
           return updated;
         }
@@ -59,14 +133,14 @@ const TimesheetPage = () => {
     );
   };
 
-  const columns = (): TableColumn<TimesheetEntry>[] => [
+  const columns = (): TableColumn<TimesheetPageRow>[] => [
     {
       field: "rowNumber",
       header: "#",
       sortable: false,
       filterable: false,
       align: "center",
-      body: (rowData: TimesheetEntry) => (
+      body: (rowData: TimesheetPageRow) => (
         <div
           className={classNames("flex items-center justify-center gap-1.5", {
             "w-[40px]": rowData.isLocked,
@@ -81,40 +155,40 @@ const TimesheetPage = () => {
       ),
     },
     {
-      field: "code",
+      field: "employeeCode",
       header: "Code",
       sortable: false,
       filterable: false,
       align: "left",
       style: { width: "50px" },
-      body: (rowData: TimesheetEntry) => (
+      body: (rowData: TimesheetPageRow) => (
         <div className="w-[50px]">
-          <span className="text-sm font-medium">{rowData.code}</span>
+          <span className="text-sm font-medium">{rowData.employeeCode}</span>
         </div>
       ),
     },
     {
-      field: "employeeName",
+      field: "nameEn",
       header: "Emp. Name",
       sortable: false,
       filterable: false,
       style: { minWidth: "280px" },
-      body: (rowData: TimesheetEntry) => (
+      body: (rowData: TimesheetPageRow) => (
         <div className="flex items-start gap-2">
           <div className="flex flex-1 flex-col gap-1">
             <span className="text-sm font-medium leading-tight">
-              {rowData.employeeName}
+              {rowData.nameEn}
             </span>
             <span className="text-xs text-theme-text-gray capitalize">
-              {rowData.designation}
+              {rowData.designationNameEn}
             </span>
           </div>
-          {rowData.hasFlag && <Badge text="F" />}
+          {rowData.isFixed && <Badge text="F" />}
         </div>
       ),
     },
     {
-      field: "designation",
+      field: "designationNameEn",
       header: "Designation",
       sortable: false,
       filterable: false,
@@ -122,12 +196,12 @@ const TimesheetPage = () => {
       body: () => null,
     },
     {
-      field: "project1",
+      field: "project1Id",
       header: "Project 1",
       sortable: false,
       filterable: false,
       style: { maxWidth: "200px", width: "200px" },
-      body: (rowData: TimesheetEntry) => (
+      body: (rowData: TimesheetPageRow) => (
         <div className="flex items-center">
           <div className="w-[calc(200px-2rem)] h-10!">
             <Dropdown
@@ -137,9 +211,15 @@ const TimesheetPage = () => {
               disabled={rowData.isLocked}
               className="w-full h-10!"
               placeholder="Select Project"
-              value={rowData.project1}
+              value={
+                rowData.project1Id != null ? String(rowData.project1Id) : null
+              }
               onChange={(e) =>
-                updateTimesheetEntry(rowData.id, "project1", e.value)
+                updateTimesheetEntry(
+                  rowData.id,
+                  "project1Id",
+                  e.value != null ? Number(e.value) : null
+                )
               }
             />
           </div>
@@ -147,29 +227,27 @@ const TimesheetPage = () => {
       ),
     },
     {
-      field: "allowBreakProject1",
+      field: "project1BfAllowance",
       header: "B. Alw",
       sortable: false,
       filterable: false,
       style: { minWidth: "70px", width: "70px" },
-      body: (rowData: TimesheetEntry) => (
+      body: (rowData: TimesheetPageRow) => (
         <div className="flex justify-center items-center">
-          {rowData.allowBreakProject1 ? (
-            <Checkbox
-              disabled={rowData.isLocked}
-              inputId={`allowBreakProject1-${rowData.id}`}
-              name="allowBreakProject1"
-              value="allowBreakProject1Value"
-              onChange={() =>
-                updateTimesheetEntry(
-                  rowData.id,
-                  "allowBreakProject1Value",
-                  !rowData.allowBreakProject1Value || false
-                )
-              }
-              checked={rowData.allowBreakProject1Value || false}
-            />
-          ) : null}
+          <Checkbox
+            disabled={rowData.isLocked}
+            inputId={`allowBreakProject1-${rowData.id}`}
+            name="project1BfAllowance"
+            value="project1BfAllowance"
+            onChange={() =>
+              updateTimesheetEntry(
+                rowData.id,
+                "project1BfAllowance",
+                !rowData.project1BfAllowance
+              )
+            }
+            checked={rowData.project1BfAllowance}
+          />
         </div>
       ),
     },
@@ -179,14 +257,14 @@ const TimesheetPage = () => {
       sortable: false,
       filterable: false,
       style: { minWidth: "80px" },
-      body: (rowData: TimesheetEntry) => (
+      body: (rowData: TimesheetPageRow) => (
         <div className="flex justify-center py-1">
           <NumberInput
             useGrouping={false}
             disabled={rowData.isLocked}
-            value={rowData.project1Hours}
+            value={rowData.project1Hours ?? 0}
             onValueChange={(e) =>
-              updateTimesheetEntry(rowData.id, "project1Hours", e.value || 0)
+              updateTimesheetEntry(rowData.id, "project1Hours", e.value ?? null)
             }
             className="timesheet-number-input"
             min={0}
@@ -196,19 +274,23 @@ const TimesheetPage = () => {
       ),
     },
     {
-      field: "project1OT",
+      field: "project1Overtime",
       header: "O/T",
       sortable: false,
       filterable: false,
       style: { minWidth: "80px" },
-      body: (rowData: TimesheetEntry) => (
+      body: (rowData: TimesheetPageRow) => (
         <div className="flex justify-center">
           <NumberInput
             useGrouping={false}
             disabled={rowData.isLocked}
-            value={rowData.project1OT}
+            value={rowData.project1Overtime ?? 0}
             onValueChange={(e) =>
-              updateTimesheetEntry(rowData.id, "project1OT", e.value || 0)
+              updateTimesheetEntry(
+                rowData.id,
+                "project1Overtime",
+                e.value ?? null
+              )
             }
             className="timesheet-number-input"
             min={0}
@@ -218,12 +300,12 @@ const TimesheetPage = () => {
       ),
     },
     {
-      field: "project2",
+      field: "project2Id",
       header: "Project 2",
       sortable: false,
       filterable: false,
       style: { maxWidth: "200px", width: "200px" },
-      body: (rowData: TimesheetEntry) => (
+      body: (rowData: TimesheetPageRow) => (
         <div className="flex items-center">
           <div className="w-[calc(200px-2rem)] h-10!">
             <Dropdown
@@ -233,9 +315,15 @@ const TimesheetPage = () => {
               disabled={rowData.isLocked}
               className="w-full h-10!"
               placeholder="Select Project"
-              value={rowData.project2}
+              value={
+                rowData.project2Id != null ? String(rowData.project2Id) : null
+              }
               onChange={(e) =>
-                updateTimesheetEntry(rowData.id, "project2", e.value)
+                updateTimesheetEntry(
+                  rowData.id,
+                  "project2Id",
+                  e.value != null ? Number(e.value) : null
+                )
               }
             />
           </div>
@@ -243,29 +331,27 @@ const TimesheetPage = () => {
       ),
     },
     {
-      field: "allowBreakProject2",
+      field: "project2BfAllowance",
       header: "B. Alw",
       sortable: false,
       filterable: false,
       style: { minWidth: "70px", width: "70px" },
-      body: (rowData: TimesheetEntry) => (
+      body: (rowData: TimesheetPageRow) => (
         <div className="flex justify-center items-center">
-          {rowData.allowBreakProject2 ? (
-            <Checkbox
-              disabled={rowData.isLocked}
-              inputId={`allowBreakProject2-${rowData.id}`}
-              name="allowBreakProject2"
-              value="allowBreakProject2Value"
-              onChange={() =>
-                updateTimesheetEntry(
-                  rowData.id,
-                  "allowBreakProject2Value",
-                  !rowData.allowBreakProject2Value || false
-                )
-              }
-              checked={rowData.allowBreakProject2Value || false}
-            />
-          ) : null}
+          <Checkbox
+            disabled={rowData.isLocked}
+            inputId={`allowBreakProject2-${rowData.id}`}
+            name="project2BfAllowance"
+            value="project2BfAllowance"
+            onChange={() =>
+              updateTimesheetEntry(
+                rowData.id,
+                "project2BfAllowance",
+                !rowData.project2BfAllowance
+              )
+            }
+            checked={rowData.project2BfAllowance}
+          />
         </div>
       ),
     },
@@ -275,14 +361,14 @@ const TimesheetPage = () => {
       sortable: false,
       filterable: false,
       style: { minWidth: "80px" },
-      body: (rowData: TimesheetEntry) => (
+      body: (rowData: TimesheetPageRow) => (
         <div className="flex justify-center">
           <NumberInput
             useGrouping={false}
             disabled={rowData.isLocked}
-            value={rowData.project2Hours}
+            value={rowData.project2Hours ?? 0}
             onValueChange={(e) =>
-              updateTimesheetEntry(rowData.id, "project2Hours", e.value || 0)
+              updateTimesheetEntry(rowData.id, "project2Hours", e.value ?? null)
             }
             className="timesheet-number-input"
             min={0}
@@ -292,19 +378,23 @@ const TimesheetPage = () => {
       ),
     },
     {
-      field: "project2OT",
+      field: "project2Overtime",
       header: "O/T",
       sortable: false,
       filterable: false,
       style: { minWidth: "80px" },
-      body: (rowData: TimesheetEntry) => (
+      body: (rowData: TimesheetPageRow) => (
         <div className="flex justify-center">
           <NumberInput
             useGrouping={false}
             disabled={rowData.isLocked}
-            value={rowData.project2OT}
+            value={rowData.project2Overtime ?? 0}
             onValueChange={(e) =>
-              updateTimesheetEntry(rowData.id, "project2OT", e.value || 0)
+              updateTimesheetEntry(
+                rowData.id,
+                "project2Overtime",
+                e.value ?? null
+              )
             }
             className="timesheet-number-input"
             min={0}
@@ -319,41 +409,64 @@ const TimesheetPage = () => {
       sortable: false,
       filterable: false,
       style: { minWidth: "100px" },
-      body: (rowData: TimesheetEntry) => (
-        <div className="flex justify-center">
-          <NumberInput
-            useGrouping={false}
-            disabled={rowData.isLocked}
-            value={rowData.totalHours}
-            onValueChange={(e) =>
-              updateTimesheetEntry(rowData.id, "totalHours", e.value || 0)
-            }
-            className="timesheet-number-input"
-            min={0}
-            showButtons={false}
-          />
+      body: (rowData: TimesheetPageRow) => (
+        <div className="flex items-center justify-center border border-primary-light rounded-xl h-10">
+          <span className="text-sm">{rowData.totalHours ?? 0}</span>
         </div>
       ),
     },
     {
-      field: "remarks",
+      field: "description",
       header: "Remarks",
       sortable: false,
       filterable: false,
       style: { minWidth: "300px" },
-      body: (rowData: TimesheetEntry) => (
+      body: (rowData: TimesheetPageRow) => (
         <Input
           disabled={rowData.isLocked}
           placeholder="Add remarks..."
-          value={rowData.remarks}
+          value={rowData.description ?? ""}
           onChange={(e) =>
-            updateTimesheetEntry(rowData.id, "remarks", e.target.value)
+            updateTimesheetEntry(rowData.id, "description", e.target.value)
           }
           className="w-full h-10!"
         />
       ),
     },
   ];
+
+  const updateTimesheetEntries = async () => {
+    setIsLoading(true);
+    const entries: SaveTimesheetEntryItem[] = timesheetData.map((row) => ({
+      employeeId: row.employeeId,
+      timesheetId: row.timesheetId,
+      project1Id: row.project1Id,
+      project1BfAllowance: row.project1BfAllowance,
+      project1Hours: row.project1Hours,
+      project1Overtime: row.project1Overtime,
+      project2Id: row.project2Id,
+      project2BfAllowance: row.project2BfAllowance,
+      project2Hours: row.project2Hours,
+      project2Overtime: row.project2Overtime,
+      totalHours: row.totalHours,
+      description: row.description,
+    }));
+    try {
+      const result = await saveTimesheetEntries({
+        date: new Date(selectedDate),
+        entries,
+      });
+      toastService.showSuccess(
+        "Done",
+        `${result.saved} timesheet entr${result.saved === 1 ? "y" : "ies"} saved successfully`
+      );
+    } catch (err) {
+      const message = err instanceof Error ? err.message : "Failed to save";
+      toastService.showError("Error", message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const renderHeader = ({ exportCSV, exportExcel }: CustomHeaderProps) => {
     return (
@@ -364,31 +477,27 @@ const TimesheetPage = () => {
               type="date"
               placeholder="Select Date"
               className="w-full lg:w-40 h-10.5!"
+              value={selectedDate}
+              onChange={(e) => setSelectedDate(e.target.value)}
             />
           </div>
           <div className="w-full lg:w-auto">
             <GroupDropdown
-              className="w-full lg:w-48 h-10.5!"
-              value={selectedDesignation}
-              onChange={setSelectedDesignation}
+              value={selectedFilter}
+              onChange={setSelectedFilter}
+              className="w-full lg:w-48"
             />
           </div>
-          <div className="w-full lg:w-auto hidden lg:block">
+          <div className="w-full lg:w-auto hidden xl:block">
             <Button
               size="small"
+              label="Refresh"
               className="w-full xl:w-28 2xl:w-32 h-10!"
-              label="Search"
+              onClick={() => refetchTimesheet()}
             />
           </div>
         </div>
         <div className="flex items-center gap-3 w-full lg:w-auto">
-          <div className="block lg:hidden w-full lg:w-auto">
-            <Button
-              size="small"
-              className="w-full lg:w-auto h-10!"
-              label="Search"
-            />
-          </div>
           <div className="w-full lg:w-auto">
             <ExportOptions
               exportCSV={exportCSV || (() => {})}
@@ -401,6 +510,16 @@ const TimesheetPage = () => {
               uploadCSV={() => {}}
               uploadExcel={() => {}}
               buttonClassName="w-full lg:w-auto h-9!"
+            />
+          </div>
+          <div className=" w-full lg:w-auto">
+            <Button
+              size="small"
+              label="Update"
+              loading={isLoading}
+              disabled={isLoadingTimesheet}
+              onClick={updateTimesheetEntries}
+              className="w-full xl:w-28 2xl:w-32 h-10!"
             />
           </div>
         </div>
@@ -433,21 +552,27 @@ const TimesheetPage = () => {
           exportCSV,
           exportExcel,
         })}
-        <div className="bg-white h-full rounded-xl overflow-hidden min-h-0">
-          <Table
-            dataKey="id"
-            ref={tableRef}
-            data={timesheetData}
-            columns={columns()}
-            pagination={false}
-            globalSearch={false}
-            emptyMessage="No timesheet data found."
-            rowClassName={(rowData: TimesheetEntry) =>
-              rowData.isLocked ? "locked-row" : ""
-            }
-            scrollable
-            scrollHeight="72vh"
-          />
+        <div className="bg-white h-full rounded-xl overflow-hidden min-h-0 relative">
+          {isLoadingTimesheet ? (
+            <div className="flex items-center justify-center h-[72vh]">
+              <ProgressSpinner style={{ width: "40px", height: "40px" }} />
+            </div>
+          ) : (
+            <Table
+              dataKey="id"
+              ref={tableRef}
+              data={timesheetData}
+              columns={columns()}
+              pagination={false}
+              globalSearch={false}
+              emptyMessage="No timesheet data found. Select a date and payroll section."
+              rowClassName={(rowData: TimesheetPageRow) =>
+                rowData.isLocked ? "locked-row" : ""
+              }
+              scrollable
+              scrollHeight="72vh"
+            />
+          )}
         </div>
       </div>
     </div>

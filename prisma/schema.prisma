@@ -296,6 +296,7 @@ model Timesheet {
   description         String?  @db.Text
   createdAt           DateTime @default(now())
   updatedAt           DateTime @updatedAt
+  isLocked            Boolean  @default(false)
 
   // Relations: Timesheet → Other Tables (Timesheet has foreign keys)
   employee Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
