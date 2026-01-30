@@ -10,6 +10,8 @@ import type {
   TimesheetPageRow,
   SaveTimesheetEntriesParams,
   SaveTimesheetEntriesResponse,
+  BulkUploadTimesheetData,
+  BulkUploadTimesheetResult,
 } from "./timesheet.dto";
 
 /**
@@ -200,4 +202,107 @@ export const saveTimesheetEntries = async (
   }
 
   return { saved };
+};
+
+/**
+ * Bulk upload timesheet entries from file (CSV/Excel).
+ * Resolves employeeCode to employeeId, then upserts timesheet per (employeeId, date).
+ */
+export const bulkUploadTimesheets = async (
+  data: BulkUploadTimesheetData
+): Promise<BulkUploadTimesheetResult> => {
+  const result: BulkUploadTimesheetResult = {
+    success: 0,
+    failed: 0,
+    errors: [],
+  };
+
+  // Pre-fetch all employees by unique codes in one query
+  const uniqueCodes = [...new Set(data.entries.map((e) => e.employeeCode))];
+  const employees = await prisma.employee.findMany({
+    where: { employeeCode: { in: uniqueCodes } },
+    select: { id: true, employeeCode: true },
+  });
+  const employeeByCode = new Map(employees.map((e) => [e.employeeCode, e]));
+
+  for (let i = 0; i < data.entries.length; i++) {
+    const row = data.entries[i];
+    const rowNumber = i + 1;
+
+    try {
+      const dateNormalized = startOfDayUTC(
+        typeof row.date === "string" ? new Date(row.date) : row.date
+      );
+
+      const employee = employeeByCode.get(row.employeeCode);
+
+      if (!employee) {
+        result.failed++;
+        result.errors.push({
+          row: rowNumber,
+          data: row,
+          error: `Employee with code ${row.employeeCode} not found`,
+        });
+        continue;
+      }
+
+      const existing = await prisma.timesheet.findFirst({
+        where: {
+          employeeId: employee.id,
+          date: {
+            gte: dateNormalized,
+            lt: new Date(dateNormalized.getTime() + 24 * 60 * 60 * 1000),
+          },
+        },
+        select: { id: true },
+      });
+
+      if (existing) {
+        continue;
+      }
+
+      const p1H = row.project1Hours ?? 0;
+      const p1OT = row.project1Overtime ?? 0;
+      const p2H = row.project2Hours ?? 0;
+      const p2OT = row.project2Overtime ?? 0;
+      const totalHours =
+        (typeof p1H === "number" ? p1H : 0) +
+        (typeof p1OT === "number" ? p1OT : 0) +
+        (typeof p2H === "number" ? p2H : 0) +
+        (typeof p2OT === "number" ? p2OT : 0);
+
+      const payload = {
+        isLocked: true,
+        project1Id: row.project1Id ?? null,
+        project1BfAllowance: row.project1BfAllowance ?? false,
+        project1Hours: p1H,
+        project1Overtime: p1OT,
+        project2Id: row.project2Id ?? null,
+        project2BfAllowance: row.project2BfAllowance ?? false,
+        project2Hours: p2H,
+        project2Overtime: p2OT,
+        totalHours: totalHours > 0 ? totalHours : null,
+        description: row.description ?? null,
+      };
+
+      await prisma.timesheet.create({
+        data: {
+          employeeId: employee.id,
+          date: dateNormalized,
+          ...payload,
+        },
+      });
+
+      result.success++;
+    } catch (error: any) {
+      result.failed++;
+      result.errors.push({
+        row: rowNumber,
+        data: row,
+        error: error?.message ?? "Unknown error",
+      });
+    }
+  }
+
+  return result;
 };

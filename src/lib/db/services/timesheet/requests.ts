@@ -1,9 +1,13 @@
 import { queryClient } from "@/lib/react-query";
 import { useMutation, useQuery } from "@/lib/zsa/zsa-query";
-import { GetTimesheetPageDataInput, SaveTimesheetEntriesInput } from "./timesheet.schemas";
+import {
+  GetTimesheetPageDataInput,
+  SaveTimesheetEntriesInput,
+} from "./timesheet.schemas";
 import {
   getTimesheetPageDataAction,
   saveTimesheetEntriesAction,
+  bulkUploadTimesheetsAction,
 } from "./actions";
 
 const dateToKey = (d: Date) =>
@@ -24,6 +28,14 @@ export const useGetTimesheetPageData = (input: GetTimesheetPageDataInput) =>
 export const useSaveTimesheetEntries = () =>
   useMutation(saveTimesheetEntriesAction, {
     mutationKey: ["save-timesheet-entries"],
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["timesheet-page"] });
+    },
+  });
+
+export const useBulkUploadTimesheets = () =>
+  useMutation(bulkUploadTimesheetsAction, {
+    mutationKey: ["bulk-upload-timesheets"],
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["timesheet-page"] });
     },

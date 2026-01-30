@@ -62,3 +62,35 @@ export interface SaveTimesheetEntriesParams {
 export interface SaveTimesheetEntriesResponse {
   saved: number;
 }
+
+// ---------------------------------------------------------------------------
+// Bulk Upload (from CSV/Excel file)
+// ---------------------------------------------------------------------------
+
+export interface BulkUploadTimesheetRow {
+  date: Date | string;
+  employeeCode: number;
+  project1Id?: number | null;
+  project1BfAllowance?: boolean;
+  project1Hours?: number | null;
+  project1Overtime?: number | null;
+  project2Id?: number | null;
+  project2BfAllowance?: boolean;
+  project2Hours?: number | null;
+  project2Overtime?: number | null;
+  description?: string | null;
+}
+
+export interface BulkUploadTimesheetData {
+  entries: BulkUploadTimesheetRow[];
+}
+
+export interface BulkUploadTimesheetResult {
+  success: number;
+  failed: number;
+  errors: Array<{
+    row: number;
+    data: BulkUploadTimesheetRow;
+    error: string;
+  }>;
+}

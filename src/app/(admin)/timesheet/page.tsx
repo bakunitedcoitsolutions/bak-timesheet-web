@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useState, useMemo, useEffect } from "react";
+import { useRef, useState, useMemo, useEffect, useCallback } from "react";
 import { classNames } from "primereact/utils";
 import { Checkbox } from "primereact/checkbox";
 import { ProgressSpinner } from "primereact/progressspinner";
@@ -17,21 +17,29 @@ import {
   ExportOptions,
   GroupDropdown,
   BulkUploadOptions,
+  BulkUploadDialog,
   CustomHeaderProps,
 } from "@/components";
 import { COMMON_QUERY_INPUT } from "@/utils/constants";
-import { parseGroupDropdownFilter } from "@/utils/helpers";
+import { parseGroupDropdownFilter, getErrorMessage } from "@/utils/helpers";
 import { useGetProjects } from "@/lib/db/services/project/requests";
 import type { ListedProject } from "@/lib/db/services/project/project.dto";
 import {
   useGetTimesheetPageData,
   useSaveTimesheetEntries,
+  useBulkUploadTimesheets,
 } from "@/lib/db/services/timesheet/requests";
 import { useGetPayrollSections } from "@/lib/db/services/payroll-section/requests";
 import type {
   TimesheetPageRow,
   SaveTimesheetEntryItem,
 } from "@/lib/db/services/timesheet/timesheet.dto";
+import type { BulkUploadTimesheetResult } from "@/lib/db/services/timesheet/timesheet.dto";
+import {
+  parseExcelFile,
+  parseCSVFile,
+  downloadSampleTemplate,
+} from "@/lib/db/services/timesheet/bulk-upload-utils";
 import { toastService } from "@/lib/toast";
 import type { ListedPayrollSection } from "@/lib/db/services/payroll-section/payroll-section.dto";
 
@@ -45,6 +53,7 @@ const TimesheetPage = () => {
   const [selectedDate, setSelectedDate] =
     useState<string>(getTodayDateString());
   const [isLoading, setIsLoading] = useState(false);
+  const [showFilePicker, setShowFilePicker] = useState(false);
   const [searchValue, setSearchValue] = useState<string>("");
   const [selectedFilter, setSelectedFilter] = useState<string | number | null>(
     null
@@ -77,6 +86,7 @@ const TimesheetPage = () => {
   });
 
   const { mutateAsync: saveTimesheetEntries } = useSaveTimesheetEntries();
+  const { mutateAsync: bulkUploadTimesheets } = useBulkUploadTimesheets();
 
   // Projects for Project 1 / Project 2 dropdowns
   const { data: projectsResponse } = useGetProjects({
@@ -468,6 +478,78 @@ const TimesheetPage = () => {
     }
   };
 
+  const handleUploadCSV = useCallback(() => {
+    setShowFilePicker(true);
+  }, []);
+
+  const handleUploadExcel = useCallback(() => {
+    setShowFilePicker(true);
+  }, []);
+
+  const handleUpload = useCallback(
+    async (file: File) => {
+      try {
+        const fileName = file.name.toLowerCase();
+        const isCSV = fileName.endsWith(".csv") || file.type === "text/csv";
+
+        let parseResult;
+        if (isCSV) {
+          parseResult = await parseCSVFile(file);
+        } else {
+          parseResult = await parseExcelFile(file);
+        }
+
+        if (parseResult.errors.length > 0) {
+          toastService.showWarn(
+            "Parse Warnings",
+            `${parseResult.errors.length} row(s) had errors. Check console for details.`
+          );
+          console.error("Parse errors:", parseResult.errors);
+        }
+
+        if (parseResult.data.length === 0) {
+          toastService.showError("Error", "No valid data found in file");
+          throw new Error("No valid data found in file");
+        }
+
+        await bulkUploadTimesheets(
+          { entries: parseResult.data },
+          {
+            onSuccess: (result: BulkUploadTimesheetResult) => {
+              const message =
+                result.success > 0
+                  ? `Successfully uploaded ${result.success} timesheet entr${result.success === 1 ? "y" : "ies"}`
+                  : "Upload completed";
+
+              if (result.failed > 0) {
+                toastService.showWarn(
+                  "Upload Complete",
+                  `${message}. ${result.failed} failed. Check console for details.`
+                );
+                console.error("Upload errors:", result.errors);
+              } else {
+                toastService.showSuccess("Success", message);
+              }
+            },
+            onError: (error: any) => {
+              const errorMessage = getErrorMessage(
+                error,
+                "Failed to upload timesheets"
+              );
+              toastService.showError("Error", errorMessage);
+              throw error;
+            },
+          }
+        );
+      } catch (error: any) {
+        const errorMessage = getErrorMessage(error, "Failed to parse file");
+        toastService.showError("Error", errorMessage);
+        throw error;
+      }
+    },
+    [bulkUploadTimesheets]
+  );
+
   const renderHeader = ({ exportCSV, exportExcel }: CustomHeaderProps) => {
     return (
       <div className="flex flex-col lg:flex-row justify-between bg-theme-primary-light items-center gap-3 flex-1 w-full">
@@ -507,8 +589,9 @@ const TimesheetPage = () => {
           </div>
           <div className="w-full lg:w-auto">
             <BulkUploadOptions
-              uploadCSV={() => {}}
-              uploadExcel={() => {}}
+              uploadCSV={handleUploadCSV}
+              uploadExcel={handleUploadExcel}
+              downloadTemplate={downloadSampleTemplate}
               buttonClassName="w-full lg:w-auto h-9!"
             />
           </div>
@@ -536,46 +619,62 @@ const TimesheetPage = () => {
   };
 
   return (
-    <div className="flex h-full flex-col">
-      <TitleHeader
-        showBack={false}
-        title="ATTENDANCE SHEET"
-        icon={<i className="fa-light fa-calendar text-xl!" />}
-        value={searchValue}
-        onChange={(e) => {
-          const value = e.target.value;
-          setSearchValue(value);
-        }}
-      />
-      <div className="flex flex-1 flex-col gap-4 px-6 py-6 bg-theme-primary-light min-h-0">
-        {renderHeader({
-          exportCSV,
-          exportExcel,
-        })}
-        <div className="bg-white h-full rounded-xl overflow-hidden min-h-0 relative">
-          {isLoadingTimesheet ? (
-            <div className="flex items-center justify-center h-[72vh]">
-              <ProgressSpinner style={{ width: "40px", height: "40px" }} />
-            </div>
-          ) : (
-            <Table
-              dataKey="id"
-              ref={tableRef}
-              data={timesheetData}
-              columns={columns()}
-              pagination={false}
-              globalSearch={false}
-              emptyMessage="No timesheet data found. Select a date and payroll section."
-              rowClassName={(rowData: TimesheetPageRow) =>
-                rowData.isLocked ? "locked-row" : ""
-              }
-              scrollable
-              scrollHeight="72vh"
-            />
-          )}
+    <>
+      <div className="flex h-full flex-col">
+        <TitleHeader
+          showBack={false}
+          title="ATTENDANCE SHEET"
+          icon={<i className="fa-light fa-calendar text-xl!" />}
+          value={searchValue}
+          onChange={(e) => {
+            const value = e.target.value;
+            setSearchValue(value);
+          }}
+        />
+        <div className="flex flex-1 flex-col gap-4 px-6 py-6 bg-theme-primary-light min-h-0">
+          {renderHeader({
+            exportCSV,
+            exportExcel,
+          })}
+          <div className="bg-white h-full rounded-xl overflow-hidden min-h-0 relative">
+            {isLoadingTimesheet ? (
+              <div className="flex items-center justify-center h-[72vh]">
+                <ProgressSpinner style={{ width: "40px", height: "40px" }} />
+              </div>
+            ) : (
+              <Table
+                dataKey="id"
+                ref={tableRef}
+                data={timesheetData}
+                columns={columns()}
+                pagination={false}
+                globalSearch={false}
+                emptyMessage="No timesheet data found. Select a date and payroll section."
+                rowClassName={(rowData: TimesheetPageRow) =>
+                  rowData.isLocked ? "locked-row" : ""
+                }
+                scrollable
+                scrollHeight="72vh"
+              />
+            )}
+          </div>
         </div>
       </div>
-    </div>
+
+      <BulkUploadDialog
+        visible={showFilePicker}
+        title="Upload Timesheets"
+        onHide={() => setShowFilePicker(false)}
+        onUpload={handleUpload}
+        accept={{
+          "text/csv": [".csv"],
+          "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": [
+            ".xlsx",
+          ],
+          "application/vnd.ms-excel": [".xls"],
+        }}
+      />
+    </>
   );
 };
 
