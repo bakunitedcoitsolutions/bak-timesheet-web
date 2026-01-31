@@ -69,7 +69,7 @@ export const getLedgerByEmployeeCode = async (
       reference: true,
       createdAt: true,
       updatedAt: true,
-      payrollId: true,
+      payrollDetailId: true,
       loanId: true,
       trafficChallanId: true,
     },

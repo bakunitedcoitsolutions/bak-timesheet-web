@@ -44,6 +44,12 @@ model User {
   createdUsers User[] @relation("UserCreatedBy")
   updatedUsers User[] @relation("UserUpdatedBy")
 
+  // Relations: PayrollSummary
+  createdPayrollSummaries  PayrollSummary[] @relation("PayrollSummaryCreatedBy")
+  modifiedPayrollSummaries PayrollSummary[] @relation("PayrollSummaryModifiedBy")
+  createdPayrollDetails    PayrollDetails[] @relation("PayrollDetailsCreatedBy")
+  modifiedPayrollDetails   PayrollDetails[] @relation("PayrollDetailsModifiedBy")
+
   @@index([email])
   @@index([userRoleId])
   @@index([branchId])
@@ -91,9 +97,11 @@ model Branch {
   updatedAt DateTime @updatedAt
 
   // Relations: Other Tables → Branch (Other tables have foreign keys pointing to Branch)
-  users     User[]
-  employees Employee[]
-  projects  Project[]
+  users            User[]
+  employees        Employee[]
+  projects         Project[]
+  payrollSummaries PayrollSummary[]
+  payrollDetails   PayrollDetails[]
 }
 
 model City {
@@ -184,7 +192,7 @@ model Employee {
   passportExpiryDate DateTime?
   passportDocument   String?
 
-  lastExitDate DateTime?
+  lastExitDate  DateTime?
   lastEntryDate DateTime?
 
   // Step 4
@@ -216,7 +224,7 @@ model Employee {
   loans           Loan[]
   trafficChallans TrafficChallan[]
   exitReentries   ExitReentry[]
-  payrolls        Payroll[]
+  payrollDetails  PayrollDetails[]
   ledgers         Ledger[]
 
   @@index([employeeCode])
@@ -310,30 +318,8 @@ model Timesheet {
 }
 
 // ============================================
-// PAYROLL
+// PAYROLL DETAILS & SUMMARY
 // ============================================
-
-model Payroll {
-  id         Int      @id @default(autoincrement())
-  employeeId Int
-  sectionId  Int?
-  month      Int // 1-12
-  year       Int
-  amount     Decimal  @db.Decimal(10, 2)
-  notes      String?  @db.Text
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-
-  // Relations: Payroll → Other Tables (Payroll has foreign keys)
-  employee Employee        @relation(fields: [employeeId], references: [id], onDelete: Cascade)
-  section  PayrollSection? @relation(fields: [sectionId], references: [id])
-
-  // Relations: Other Tables → Payroll (Other tables have foreign keys pointing to Payroll)
-  ledgers Ledger[]
-
-  @@index([employeeId])
-  @@index([year, month])
-}
 
 model PayrollSection {
   id              Int      @id @default(autoincrement())
@@ -345,8 +331,125 @@ model PayrollSection {
   updatedAt       DateTime @updatedAt
 
   // Relations: Other Tables → PayrollSection (Other tables have foreign keys pointing to PayrollSection)
-  employees Employee[]
-  payrolls  Payroll[]
+  employees      Employee[]
+  payrollDetails PayrollDetails[]
+}
+
+model PayrollStatus {
+  id        Int      @id @default(autoincrement())
+  nameEn    String
+  nameAr    String?
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations: Other Tables → PayrollStatus (Other tables have foreign keys pointing to PayrollStatus)
+  summaries      PayrollSummary[]
+  payrollDetails PayrollDetails[]
+}
+
+model PayrollSummary {
+  id                    Int      @id @default(autoincrement())
+  payrollMonth          Int
+  payrollYear           Int
+  totalSalary           Decimal  @db.Decimal(10, 2)
+  totalPreviousAdvance  Decimal  @db.Decimal(10, 2)
+  totalCurrentAdvance   Decimal  @db.Decimal(10, 2)
+  totalDeduction        Decimal  @db.Decimal(10, 2)
+  totalNetLoan          Decimal  @db.Decimal(10, 2)
+  totalNetSalaryPayable Decimal  @db.Decimal(10, 2)
+  totalCardSalary       Decimal  @db.Decimal(10, 2)
+  totalCashSalary       Decimal  @db.Decimal(10, 2)
+  remarks               String?  @db.Text
+  payrollStatusId       Int?
+  branchId              Int?
+  createdDate           DateTime @default(now())
+  createdBy             Int?
+  modifiedDate          DateTime @updatedAt
+  modifiedBy            Int?
+
+  // Relations: PayrollSummary → Other Tables (PayrollSummary has foreign keys)
+  branch        Branch?        @relation(fields: [branchId], references: [id])
+  payrollStatus PayrollStatus? @relation(fields: [payrollStatusId], references: [id])
+  creator       User?          @relation("PayrollSummaryCreatedBy", fields: [createdBy], references: [id])
+  modifier      User?          @relation("PayrollSummaryModifiedBy", fields: [modifiedBy], references: [id])
+
+  // Relations: Other Tables → PayrollSummary
+  details PayrollDetails[]
+
+  @@index([payrollMonth, payrollYear])
+  @@index([branchId])
+  @@index([payrollStatusId])
+  @@index([createdBy])
+  @@index([modifiedBy])
+}
+
+model PaymentMethod {
+  id        Int      @id @default(autoincrement())
+  nameEn    String
+  nameAr    String?
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations: Other Tables → PaymentMethod
+  payrollDetails PayrollDetails[]
+}
+
+model PayrollDetails {
+  id                      Int      @id @default(autoincrement())
+  payrollId               Int
+  payrollMonth            Int
+  payrollYear             Int
+  employeeId              Int
+  workDays                Int
+  totalHours              Decimal  @db.Decimal(10, 2)
+  hourlyRate              Decimal  @db.Decimal(10, 2)
+  allowance               Decimal  @db.Decimal(10, 2)
+  salary                  Decimal  @db.Decimal(10, 2)
+  previousLoan            Decimal  @db.Decimal(10, 2)
+  currentLoan             Decimal  @db.Decimal(10, 2)
+  deductionLoan           Decimal  @db.Decimal(10, 2)
+  netLoan                 Decimal  @db.Decimal(10, 2)
+  previousTrafficChallan  Decimal  @db.Decimal(10, 2)
+  currentTrafficChallan   Decimal  @db.Decimal(10, 2)
+  deductionTrafficChallan Decimal  @db.Decimal(10, 2)
+  netTrafficChallan       Decimal  @db.Decimal(10, 2)
+  netSalaryPayable        Decimal  @db.Decimal(10, 2)
+  cardSalary              Decimal  @db.Decimal(10, 2)
+  cashSalary              Decimal  @db.Decimal(10, 2)
+  overTime                Decimal  @db.Decimal(10, 2)
+  remarks                 String?  @db.Text
+  paymentMethodId         Int?
+  payrollStatusId         Int?
+  branchId                Int?
+  createdDate             DateTime @default(now())
+  createdBy               Int?
+  modifiedDate            DateTime @updatedAt
+  modifiedBy              Int?
+  payrollSectionId        Int?
+
+  // Relations: PayrollDetails → Other Tables
+  payrollSummary PayrollSummary  @relation(fields: [payrollId], references: [id], onDelete: Cascade)
+  employee       Employee        @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  paymentMethod  PaymentMethod?  @relation(fields: [paymentMethodId], references: [id])
+  payrollStatus  PayrollStatus?  @relation(fields: [payrollStatusId], references: [id])
+  branch         Branch?         @relation(fields: [branchId], references: [id])
+  creator        User?           @relation("PayrollDetailsCreatedBy", fields: [createdBy], references: [id])
+  modifier       User?           @relation("PayrollDetailsModifiedBy", fields: [modifiedBy], references: [id])
+  payrollSection PayrollSection? @relation(fields: [payrollSectionId], references: [id])
+
+  // Relations: Other Tables → PayrollDetails
+  ledgers Ledger[]
+
+  @@index([payrollId])
+  @@index([employeeId])
+  @@index([payrollMonth, payrollYear])
+  @@index([branchId])
+  @@index([payrollStatusId])
+  @@index([paymentMethodId])
+  @@index([createdBy])
+  @@index([modifiedBy])
 }
 
 // ============================================
@@ -465,13 +568,13 @@ model Ledger {
   reference        String?
   createdAt        DateTime   @default(now())
   updatedAt        DateTime   @updatedAt
-  payrollId        Int?
+  payrollDetailId  Int?
   loanId           Int?
   trafficChallanId Int?
 
   // Relations: Ledger → Other Tables (Ledger has foreign keys)
   employee       Employee?       @relation(fields: [employeeId], references: [id], onDelete: Cascade)
-  payroll        Payroll?        @relation(fields: [payrollId], references: [id], onDelete: Cascade)
+  payrollDetail  PayrollDetails? @relation(fields: [payrollDetailId], references: [id], onDelete: Cascade)
   loan           Loan?           @relation(fields: [loanId], references: [id], onDelete: Cascade)
   trafficChallan TrafficChallan? @relation(fields: [trafficChallanId], references: [id], onDelete: Cascade)
 

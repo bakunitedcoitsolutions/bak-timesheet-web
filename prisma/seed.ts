@@ -85,6 +85,64 @@ async function main() {
   }
   console.log(`✅ Seeded ${userRoles.length} user roles`);
 
+  // Seed Payment Methods
+  console.log("📝 Seeding Payment Methods...");
+  const paymentMethods = [
+    {
+      id: 1,
+      nameEn: "Card",
+      nameAr: "بطاقة",
+      isActive: true,
+    },
+  ];
+
+  for (const method of paymentMethods) {
+    await prisma.paymentMethod.upsert({
+      where: { id: method.id },
+      update: method,
+      create: method,
+    });
+  }
+  console.log(`✅ Seeded ${paymentMethods.length} payment methods`);
+
+  // Seed Payroll Statuses
+  console.log("📝 Seeding Payroll Statuses...");
+  const payrollStatuses = [
+    {
+      id: 1,
+      nameEn: "Pending",
+      nameAr: "قيد الانتظار",
+      isActive: true,
+    },
+    {
+      id: 2,
+      nameEn: "Done",
+      nameAr: "تم",
+      isActive: true,
+    },
+    {
+      id: 3,
+      nameEn: "Posted",
+      nameAr: "مرحل",
+      isActive: true,
+    },
+    {
+      id: 4,
+      nameEn: "Revision",
+      nameAr: "مراجعة",
+      isActive: true,
+    },
+  ];
+
+  for (const status of payrollStatuses) {
+    await prisma.payrollStatus.upsert({
+      where: { id: status.id },
+      update: status,
+      create: status,
+    });
+  }
+  console.log(`✅ Seeded ${payrollStatuses.length} payroll statuses`);
+
   //   // Seed Employee Statuses
   //   console.log("📝 Seeding Employee Statuses...");
   //   const employeeStatuses = [

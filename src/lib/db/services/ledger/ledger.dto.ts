@@ -22,7 +22,7 @@ export interface LedgerEntryInterface {
   reference: string | null;
   createdAt: Date | any;
   updatedAt: Date | any;
-  payrollId: number | null;
+  payrollDetailId: number | null;
   loanId: number | null;
   trafficChallanId: number | null;
 }

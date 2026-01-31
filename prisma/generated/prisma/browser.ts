@@ -78,15 +78,30 @@ export type Project = Prisma.ProjectModel
  */
 export type Timesheet = Prisma.TimesheetModel
 /**
- * Model Payroll
- * 
- */
-export type Payroll = Prisma.PayrollModel
-/**
  * Model PayrollSection
  * 
  */
 export type PayrollSection = Prisma.PayrollSectionModel
+/**
+ * Model PayrollStatus
+ * 
+ */
+export type PayrollStatus = Prisma.PayrollStatusModel
+/**
+ * Model PayrollSummary
+ * 
+ */
+export type PayrollSummary = Prisma.PayrollSummaryModel
+/**
+ * Model PaymentMethod
+ * 
+ */
+export type PaymentMethod = Prisma.PaymentMethodModel
+/**
+ * Model PayrollDetails
+ * 
+ */
+export type PayrollDetails = Prisma.PayrollDetailsModel
 /**
  * Model Loan
  * 

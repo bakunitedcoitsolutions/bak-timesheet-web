@@ -639,7 +639,7 @@ export type EmployeeWhereInput = {
   loans?: Prisma.LoanListRelationFilter
   trafficChallans?: Prisma.TrafficChallanListRelationFilter
   exitReentries?: Prisma.ExitReentryListRelationFilter
-  payrolls?: Prisma.PayrollListRelationFilter
+  payrollDetails?: Prisma.PayrollDetailsListRelationFilter
   ledgers?: Prisma.LedgerListRelationFilter
 }
 
@@ -703,7 +703,7 @@ export type EmployeeOrderByWithRelationInput = {
   loans?: Prisma.LoanOrderByRelationAggregateInput
   trafficChallans?: Prisma.TrafficChallanOrderByRelationAggregateInput
   exitReentries?: Prisma.ExitReentryOrderByRelationAggregateInput
-  payrolls?: Prisma.PayrollOrderByRelationAggregateInput
+  payrollDetails?: Prisma.PayrollDetailsOrderByRelationAggregateInput
   ledgers?: Prisma.LedgerOrderByRelationAggregateInput
 }
 
@@ -770,7 +770,7 @@ export type EmployeeWhereUniqueInput = Prisma.AtLeast<{
   loans?: Prisma.LoanListRelationFilter
   trafficChallans?: Prisma.TrafficChallanListRelationFilter
   exitReentries?: Prisma.ExitReentryListRelationFilter
-  payrolls?: Prisma.PayrollListRelationFilter
+  payrollDetails?: Prisma.PayrollDetailsListRelationFilter
   ledgers?: Prisma.LedgerListRelationFilter
 }, "id" | "employeeCode">
 
@@ -936,7 +936,7 @@ export type EmployeeCreateInput = {
   loans?: Prisma.LoanCreateNestedManyWithoutEmployeeInput
   trafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutEmployeeInput
   exitReentries?: Prisma.ExitReentryCreateNestedManyWithoutEmployeeInput
-  payrolls?: Prisma.PayrollCreateNestedManyWithoutEmployeeInput
+  payrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutEmployeeInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutEmployeeInput
 }
 
@@ -993,7 +993,7 @@ export type EmployeeUncheckedCreateInput = {
   loans?: Prisma.LoanUncheckedCreateNestedManyWithoutEmployeeInput
   trafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutEmployeeInput
   exitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutEmployeeInput
-  payrolls?: Prisma.PayrollUncheckedCreateNestedManyWithoutEmployeeInput
+  payrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutEmployeeInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutEmployeeInput
 }
 
@@ -1049,7 +1049,7 @@ export type EmployeeUpdateInput = {
   loans?: Prisma.LoanUpdateManyWithoutEmployeeNestedInput
   trafficChallans?: Prisma.TrafficChallanUpdateManyWithoutEmployeeNestedInput
   exitReentries?: Prisma.ExitReentryUpdateManyWithoutEmployeeNestedInput
-  payrolls?: Prisma.PayrollUpdateManyWithoutEmployeeNestedInput
+  payrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutEmployeeNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutEmployeeNestedInput
 }
 
@@ -1106,7 +1106,7 @@ export type EmployeeUncheckedUpdateInput = {
   loans?: Prisma.LoanUncheckedUpdateManyWithoutEmployeeNestedInput
   trafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutEmployeeNestedInput
   exitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutEmployeeNestedInput
-  payrolls?: Prisma.PayrollUncheckedUpdateManyWithoutEmployeeNestedInput
+  payrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutEmployeeNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutEmployeeNestedInput
 }
 
@@ -1748,20 +1748,6 @@ export type EmployeeUpdateOneRequiredWithoutTimesheetsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.EmployeeUpdateToOneWithWhereWithoutTimesheetsInput, Prisma.EmployeeUpdateWithoutTimesheetsInput>, Prisma.EmployeeUncheckedUpdateWithoutTimesheetsInput>
 }
 
-export type EmployeeCreateNestedOneWithoutPayrollsInput = {
-  create?: Prisma.XOR<Prisma.EmployeeCreateWithoutPayrollsInput, Prisma.EmployeeUncheckedCreateWithoutPayrollsInput>
-  connectOrCreate?: Prisma.EmployeeCreateOrConnectWithoutPayrollsInput
-  connect?: Prisma.EmployeeWhereUniqueInput
-}
-
-export type EmployeeUpdateOneRequiredWithoutPayrollsNestedInput = {
-  create?: Prisma.XOR<Prisma.EmployeeCreateWithoutPayrollsInput, Prisma.EmployeeUncheckedCreateWithoutPayrollsInput>
-  connectOrCreate?: Prisma.EmployeeCreateOrConnectWithoutPayrollsInput
-  upsert?: Prisma.EmployeeUpsertWithoutPayrollsInput
-  connect?: Prisma.EmployeeWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.EmployeeUpdateToOneWithWhereWithoutPayrollsInput, Prisma.EmployeeUpdateWithoutPayrollsInput>, Prisma.EmployeeUncheckedUpdateWithoutPayrollsInput>
-}
-
 export type EmployeeCreateNestedManyWithoutPayrollSectionInput = {
   create?: Prisma.XOR<Prisma.EmployeeCreateWithoutPayrollSectionInput, Prisma.EmployeeUncheckedCreateWithoutPayrollSectionInput> | Prisma.EmployeeCreateWithoutPayrollSectionInput[] | Prisma.EmployeeUncheckedCreateWithoutPayrollSectionInput[]
   connectOrCreate?: Prisma.EmployeeCreateOrConnectWithoutPayrollSectionInput | Prisma.EmployeeCreateOrConnectWithoutPayrollSectionInput[]
@@ -1802,6 +1788,20 @@ export type EmployeeUncheckedUpdateManyWithoutPayrollSectionNestedInput = {
   update?: Prisma.EmployeeUpdateWithWhereUniqueWithoutPayrollSectionInput | Prisma.EmployeeUpdateWithWhereUniqueWithoutPayrollSectionInput[]
   updateMany?: Prisma.EmployeeUpdateManyWithWhereWithoutPayrollSectionInput | Prisma.EmployeeUpdateManyWithWhereWithoutPayrollSectionInput[]
   deleteMany?: Prisma.EmployeeScalarWhereInput | Prisma.EmployeeScalarWhereInput[]
+}
+
+export type EmployeeCreateNestedOneWithoutPayrollDetailsInput = {
+  create?: Prisma.XOR<Prisma.EmployeeCreateWithoutPayrollDetailsInput, Prisma.EmployeeUncheckedCreateWithoutPayrollDetailsInput>
+  connectOrCreate?: Prisma.EmployeeCreateOrConnectWithoutPayrollDetailsInput
+  connect?: Prisma.EmployeeWhereUniqueInput
+}
+
+export type EmployeeUpdateOneRequiredWithoutPayrollDetailsNestedInput = {
+  create?: Prisma.XOR<Prisma.EmployeeCreateWithoutPayrollDetailsInput, Prisma.EmployeeUncheckedCreateWithoutPayrollDetailsInput>
+  connectOrCreate?: Prisma.EmployeeCreateOrConnectWithoutPayrollDetailsInput
+  upsert?: Prisma.EmployeeUpsertWithoutPayrollDetailsInput
+  connect?: Prisma.EmployeeWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.EmployeeUpdateToOneWithWhereWithoutPayrollDetailsInput, Prisma.EmployeeUpdateWithoutPayrollDetailsInput>, Prisma.EmployeeUncheckedUpdateWithoutPayrollDetailsInput>
 }
 
 export type EmployeeCreateNestedOneWithoutLoansInput = {
@@ -1913,7 +1913,7 @@ export type EmployeeCreateWithoutBranchInput = {
   loans?: Prisma.LoanCreateNestedManyWithoutEmployeeInput
   trafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutEmployeeInput
   exitReentries?: Prisma.ExitReentryCreateNestedManyWithoutEmployeeInput
-  payrolls?: Prisma.PayrollCreateNestedManyWithoutEmployeeInput
+  payrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutEmployeeInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutEmployeeInput
 }
 
@@ -1969,7 +1969,7 @@ export type EmployeeUncheckedCreateWithoutBranchInput = {
   loans?: Prisma.LoanUncheckedCreateNestedManyWithoutEmployeeInput
   trafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutEmployeeInput
   exitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutEmployeeInput
-  payrolls?: Prisma.PayrollUncheckedCreateNestedManyWithoutEmployeeInput
+  payrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutEmployeeInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutEmployeeInput
 }
 
@@ -2104,7 +2104,7 @@ export type EmployeeCreateWithoutCityInput = {
   loans?: Prisma.LoanCreateNestedManyWithoutEmployeeInput
   trafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutEmployeeInput
   exitReentries?: Prisma.ExitReentryCreateNestedManyWithoutEmployeeInput
-  payrolls?: Prisma.PayrollCreateNestedManyWithoutEmployeeInput
+  payrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutEmployeeInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutEmployeeInput
 }
 
@@ -2160,7 +2160,7 @@ export type EmployeeUncheckedCreateWithoutCityInput = {
   loans?: Prisma.LoanUncheckedCreateNestedManyWithoutEmployeeInput
   trafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutEmployeeInput
   exitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutEmployeeInput
-  payrolls?: Prisma.PayrollUncheckedCreateNestedManyWithoutEmployeeInput
+  payrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutEmployeeInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutEmployeeInput
 }
 
@@ -2241,7 +2241,7 @@ export type EmployeeCreateWithoutCountryInput = {
   loans?: Prisma.LoanCreateNestedManyWithoutEmployeeInput
   trafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutEmployeeInput
   exitReentries?: Prisma.ExitReentryCreateNestedManyWithoutEmployeeInput
-  payrolls?: Prisma.PayrollCreateNestedManyWithoutEmployeeInput
+  payrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutEmployeeInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutEmployeeInput
 }
 
@@ -2297,7 +2297,7 @@ export type EmployeeUncheckedCreateWithoutCountryInput = {
   loans?: Prisma.LoanUncheckedCreateNestedManyWithoutEmployeeInput
   trafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutEmployeeInput
   exitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutEmployeeInput
-  payrolls?: Prisma.PayrollUncheckedCreateNestedManyWithoutEmployeeInput
+  payrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutEmployeeInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutEmployeeInput
 }
 
@@ -2378,7 +2378,7 @@ export type EmployeeCreateWithoutGosiCityInput = {
   loans?: Prisma.LoanCreateNestedManyWithoutEmployeeInput
   trafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutEmployeeInput
   exitReentries?: Prisma.ExitReentryCreateNestedManyWithoutEmployeeInput
-  payrolls?: Prisma.PayrollCreateNestedManyWithoutEmployeeInput
+  payrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutEmployeeInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutEmployeeInput
 }
 
@@ -2434,7 +2434,7 @@ export type EmployeeUncheckedCreateWithoutGosiCityInput = {
   loans?: Prisma.LoanUncheckedCreateNestedManyWithoutEmployeeInput
   trafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutEmployeeInput
   exitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutEmployeeInput
-  payrolls?: Prisma.PayrollUncheckedCreateNestedManyWithoutEmployeeInput
+  payrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutEmployeeInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutEmployeeInput
 }
 
@@ -2515,7 +2515,7 @@ export type EmployeeCreateWithoutDesignationInput = {
   loans?: Prisma.LoanCreateNestedManyWithoutEmployeeInput
   trafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutEmployeeInput
   exitReentries?: Prisma.ExitReentryCreateNestedManyWithoutEmployeeInput
-  payrolls?: Prisma.PayrollCreateNestedManyWithoutEmployeeInput
+  payrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutEmployeeInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutEmployeeInput
 }
 
@@ -2571,7 +2571,7 @@ export type EmployeeUncheckedCreateWithoutDesignationInput = {
   loans?: Prisma.LoanUncheckedCreateNestedManyWithoutEmployeeInput
   trafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutEmployeeInput
   exitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutEmployeeInput
-  payrolls?: Prisma.PayrollUncheckedCreateNestedManyWithoutEmployeeInput
+  payrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutEmployeeInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutEmployeeInput
 }
 
@@ -2652,7 +2652,7 @@ export type EmployeeCreateWithoutStatusInput = {
   loans?: Prisma.LoanCreateNestedManyWithoutEmployeeInput
   trafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutEmployeeInput
   exitReentries?: Prisma.ExitReentryCreateNestedManyWithoutEmployeeInput
-  payrolls?: Prisma.PayrollCreateNestedManyWithoutEmployeeInput
+  payrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutEmployeeInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutEmployeeInput
 }
 
@@ -2708,7 +2708,7 @@ export type EmployeeUncheckedCreateWithoutStatusInput = {
   loans?: Prisma.LoanUncheckedCreateNestedManyWithoutEmployeeInput
   trafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutEmployeeInput
   exitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutEmployeeInput
-  payrolls?: Prisma.PayrollUncheckedCreateNestedManyWithoutEmployeeInput
+  payrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutEmployeeInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutEmployeeInput
 }
 
@@ -2789,7 +2789,7 @@ export type EmployeeCreateWithoutTimesheetsInput = {
   loans?: Prisma.LoanCreateNestedManyWithoutEmployeeInput
   trafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutEmployeeInput
   exitReentries?: Prisma.ExitReentryCreateNestedManyWithoutEmployeeInput
-  payrolls?: Prisma.PayrollCreateNestedManyWithoutEmployeeInput
+  payrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutEmployeeInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutEmployeeInput
 }
 
@@ -2845,7 +2845,7 @@ export type EmployeeUncheckedCreateWithoutTimesheetsInput = {
   loans?: Prisma.LoanUncheckedCreateNestedManyWithoutEmployeeInput
   trafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutEmployeeInput
   exitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutEmployeeInput
-  payrolls?: Prisma.PayrollUncheckedCreateNestedManyWithoutEmployeeInput
+  payrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutEmployeeInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutEmployeeInput
 }
 
@@ -2916,7 +2916,7 @@ export type EmployeeUpdateWithoutTimesheetsInput = {
   loans?: Prisma.LoanUpdateManyWithoutEmployeeNestedInput
   trafficChallans?: Prisma.TrafficChallanUpdateManyWithoutEmployeeNestedInput
   exitReentries?: Prisma.ExitReentryUpdateManyWithoutEmployeeNestedInput
-  payrolls?: Prisma.PayrollUpdateManyWithoutEmployeeNestedInput
+  payrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutEmployeeNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutEmployeeNestedInput
 }
 
@@ -2972,245 +2972,7 @@ export type EmployeeUncheckedUpdateWithoutTimesheetsInput = {
   loans?: Prisma.LoanUncheckedUpdateManyWithoutEmployeeNestedInput
   trafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutEmployeeNestedInput
   exitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutEmployeeNestedInput
-  payrolls?: Prisma.PayrollUncheckedUpdateManyWithoutEmployeeNestedInput
-  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutEmployeeNestedInput
-}
-
-export type EmployeeCreateWithoutPayrollsInput = {
-  profilePicture?: string | null
-  employeeCode: number
-  nameEn: string
-  nameAr?: string | null
-  dob?: Date | string | null
-  phone?: string | null
-  gender?: string | null
-  isDeductable?: boolean
-  isFixed?: boolean
-  workingDays?: number | null
-  workingHours?: number | null
-  hourlyRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  salary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  foodAllowance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  mobileAllowance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  otherAllowance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  contractStartDate?: Date | string | null
-  contractEndDate?: Date | string | null
-  contractDocument?: string | null
-  contractEndReason?: string | null
-  joiningDate?: Date | string | null
-  idCardNo?: string | null
-  idCardExpiryDate?: Date | string | null
-  idCardDocument?: string | null
-  profession?: string | null
-  nationality?: string | null
-  passportNo?: string | null
-  passportExpiryDate?: Date | string | null
-  passportDocument?: string | null
-  lastExitDate?: Date | string | null
-  lastEntryDate?: Date | string | null
-  bankName?: string | null
-  bankCode?: string | null
-  iban?: string | null
-  gosiSalary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  openingBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  isCardDelivered?: boolean
-  cardDocument?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  country?: Prisma.CountryCreateNestedOneWithoutEmployeesInput
-  city?: Prisma.CityCreateNestedOneWithoutEmployeesInput
-  status?: Prisma.EmployeeStatusCreateNestedOneWithoutEmployeesInput
-  branch?: Prisma.BranchCreateNestedOneWithoutEmployeesInput
-  designation?: Prisma.DesignationCreateNestedOneWithoutEmployeesInput
-  payrollSection?: Prisma.PayrollSectionCreateNestedOneWithoutEmployeesInput
-  gosiCity?: Prisma.GosiCityCreateNestedOneWithoutEmployeesInput
-  timesheets?: Prisma.TimesheetCreateNestedManyWithoutEmployeeInput
-  loans?: Prisma.LoanCreateNestedManyWithoutEmployeeInput
-  trafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutEmployeeInput
-  exitReentries?: Prisma.ExitReentryCreateNestedManyWithoutEmployeeInput
-  ledgers?: Prisma.LedgerCreateNestedManyWithoutEmployeeInput
-}
-
-export type EmployeeUncheckedCreateWithoutPayrollsInput = {
-  id?: number
-  profilePicture?: string | null
-  employeeCode: number
-  nameEn: string
-  nameAr?: string | null
-  dob?: Date | string | null
-  phone?: string | null
-  gender?: string | null
-  countryId?: number | null
-  cityId?: number | null
-  statusId?: number | null
-  branchId?: number | null
-  designationId?: number | null
-  payrollSectionId?: number | null
-  isDeductable?: boolean
-  isFixed?: boolean
-  workingDays?: number | null
-  workingHours?: number | null
-  hourlyRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  salary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  foodAllowance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  mobileAllowance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  otherAllowance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  contractStartDate?: Date | string | null
-  contractEndDate?: Date | string | null
-  contractDocument?: string | null
-  contractEndReason?: string | null
-  joiningDate?: Date | string | null
-  idCardNo?: string | null
-  idCardExpiryDate?: Date | string | null
-  idCardDocument?: string | null
-  profession?: string | null
-  nationality?: string | null
-  passportNo?: string | null
-  passportExpiryDate?: Date | string | null
-  passportDocument?: string | null
-  lastExitDate?: Date | string | null
-  lastEntryDate?: Date | string | null
-  bankName?: string | null
-  bankCode?: string | null
-  iban?: string | null
-  gosiSalary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  gosiCityId?: number | null
-  openingBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  isCardDelivered?: boolean
-  cardDocument?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  timesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutEmployeeInput
-  loans?: Prisma.LoanUncheckedCreateNestedManyWithoutEmployeeInput
-  trafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutEmployeeInput
-  exitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutEmployeeInput
-  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutEmployeeInput
-}
-
-export type EmployeeCreateOrConnectWithoutPayrollsInput = {
-  where: Prisma.EmployeeWhereUniqueInput
-  create: Prisma.XOR<Prisma.EmployeeCreateWithoutPayrollsInput, Prisma.EmployeeUncheckedCreateWithoutPayrollsInput>
-}
-
-export type EmployeeUpsertWithoutPayrollsInput = {
-  update: Prisma.XOR<Prisma.EmployeeUpdateWithoutPayrollsInput, Prisma.EmployeeUncheckedUpdateWithoutPayrollsInput>
-  create: Prisma.XOR<Prisma.EmployeeCreateWithoutPayrollsInput, Prisma.EmployeeUncheckedCreateWithoutPayrollsInput>
-  where?: Prisma.EmployeeWhereInput
-}
-
-export type EmployeeUpdateToOneWithWhereWithoutPayrollsInput = {
-  where?: Prisma.EmployeeWhereInput
-  data: Prisma.XOR<Prisma.EmployeeUpdateWithoutPayrollsInput, Prisma.EmployeeUncheckedUpdateWithoutPayrollsInput>
-}
-
-export type EmployeeUpdateWithoutPayrollsInput = {
-  profilePicture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  employeeCode?: Prisma.IntFieldUpdateOperationsInput | number
-  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
-  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isDeductable?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isFixed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  workingDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  workingHours?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  hourlyRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  salary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  foodAllowance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  mobileAllowance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  otherAllowance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  contractStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  contractEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  contractDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  contractEndReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  joiningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  idCardNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  idCardExpiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  idCardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  profession?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passportNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passportExpiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  passportDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastExitDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lastEntryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bankCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  gosiSalary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  openingBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  country?: Prisma.CountryUpdateOneWithoutEmployeesNestedInput
-  city?: Prisma.CityUpdateOneWithoutEmployeesNestedInput
-  status?: Prisma.EmployeeStatusUpdateOneWithoutEmployeesNestedInput
-  branch?: Prisma.BranchUpdateOneWithoutEmployeesNestedInput
-  designation?: Prisma.DesignationUpdateOneWithoutEmployeesNestedInput
-  payrollSection?: Prisma.PayrollSectionUpdateOneWithoutEmployeesNestedInput
-  gosiCity?: Prisma.GosiCityUpdateOneWithoutEmployeesNestedInput
-  timesheets?: Prisma.TimesheetUpdateManyWithoutEmployeeNestedInput
-  loans?: Prisma.LoanUpdateManyWithoutEmployeeNestedInput
-  trafficChallans?: Prisma.TrafficChallanUpdateManyWithoutEmployeeNestedInput
-  exitReentries?: Prisma.ExitReentryUpdateManyWithoutEmployeeNestedInput
-  ledgers?: Prisma.LedgerUpdateManyWithoutEmployeeNestedInput
-}
-
-export type EmployeeUncheckedUpdateWithoutPayrollsInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  profilePicture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  employeeCode?: Prisma.IntFieldUpdateOperationsInput | number
-  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
-  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  countryId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  cityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  statusId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  designationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  payrollSectionId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  isDeductable?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isFixed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  workingDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  workingHours?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  hourlyRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  salary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  foodAllowance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  mobileAllowance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  otherAllowance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  contractStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  contractEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  contractDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  contractEndReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  joiningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  idCardNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  idCardExpiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  idCardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  profession?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passportNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passportExpiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  passportDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastExitDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lastEntryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bankCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  gosiSalary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  gosiCityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  openingBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  timesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutEmployeeNestedInput
-  loans?: Prisma.LoanUncheckedUpdateManyWithoutEmployeeNestedInput
-  trafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutEmployeeNestedInput
-  exitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutEmployeeNestedInput
+  payrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutEmployeeNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutEmployeeNestedInput
 }
 
@@ -3265,7 +3027,7 @@ export type EmployeeCreateWithoutPayrollSectionInput = {
   loans?: Prisma.LoanCreateNestedManyWithoutEmployeeInput
   trafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutEmployeeInput
   exitReentries?: Prisma.ExitReentryCreateNestedManyWithoutEmployeeInput
-  payrolls?: Prisma.PayrollCreateNestedManyWithoutEmployeeInput
+  payrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutEmployeeInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutEmployeeInput
 }
 
@@ -3321,7 +3083,7 @@ export type EmployeeUncheckedCreateWithoutPayrollSectionInput = {
   loans?: Prisma.LoanUncheckedCreateNestedManyWithoutEmployeeInput
   trafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutEmployeeInput
   exitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutEmployeeInput
-  payrolls?: Prisma.PayrollUncheckedCreateNestedManyWithoutEmployeeInput
+  payrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutEmployeeInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutEmployeeInput
 }
 
@@ -3349,6 +3111,244 @@ export type EmployeeUpdateWithWhereUniqueWithoutPayrollSectionInput = {
 export type EmployeeUpdateManyWithWhereWithoutPayrollSectionInput = {
   where: Prisma.EmployeeScalarWhereInput
   data: Prisma.XOR<Prisma.EmployeeUpdateManyMutationInput, Prisma.EmployeeUncheckedUpdateManyWithoutPayrollSectionInput>
+}
+
+export type EmployeeCreateWithoutPayrollDetailsInput = {
+  profilePicture?: string | null
+  employeeCode: number
+  nameEn: string
+  nameAr?: string | null
+  dob?: Date | string | null
+  phone?: string | null
+  gender?: string | null
+  isDeductable?: boolean
+  isFixed?: boolean
+  workingDays?: number | null
+  workingHours?: number | null
+  hourlyRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  salary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  foodAllowance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mobileAllowance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  otherAllowance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  contractStartDate?: Date | string | null
+  contractEndDate?: Date | string | null
+  contractDocument?: string | null
+  contractEndReason?: string | null
+  joiningDate?: Date | string | null
+  idCardNo?: string | null
+  idCardExpiryDate?: Date | string | null
+  idCardDocument?: string | null
+  profession?: string | null
+  nationality?: string | null
+  passportNo?: string | null
+  passportExpiryDate?: Date | string | null
+  passportDocument?: string | null
+  lastExitDate?: Date | string | null
+  lastEntryDate?: Date | string | null
+  bankName?: string | null
+  bankCode?: string | null
+  iban?: string | null
+  gosiSalary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  isCardDelivered?: boolean
+  cardDocument?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  country?: Prisma.CountryCreateNestedOneWithoutEmployeesInput
+  city?: Prisma.CityCreateNestedOneWithoutEmployeesInput
+  status?: Prisma.EmployeeStatusCreateNestedOneWithoutEmployeesInput
+  branch?: Prisma.BranchCreateNestedOneWithoutEmployeesInput
+  designation?: Prisma.DesignationCreateNestedOneWithoutEmployeesInput
+  payrollSection?: Prisma.PayrollSectionCreateNestedOneWithoutEmployeesInput
+  gosiCity?: Prisma.GosiCityCreateNestedOneWithoutEmployeesInput
+  timesheets?: Prisma.TimesheetCreateNestedManyWithoutEmployeeInput
+  loans?: Prisma.LoanCreateNestedManyWithoutEmployeeInput
+  trafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutEmployeeInput
+  exitReentries?: Prisma.ExitReentryCreateNestedManyWithoutEmployeeInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutEmployeeInput
+}
+
+export type EmployeeUncheckedCreateWithoutPayrollDetailsInput = {
+  id?: number
+  profilePicture?: string | null
+  employeeCode: number
+  nameEn: string
+  nameAr?: string | null
+  dob?: Date | string | null
+  phone?: string | null
+  gender?: string | null
+  countryId?: number | null
+  cityId?: number | null
+  statusId?: number | null
+  branchId?: number | null
+  designationId?: number | null
+  payrollSectionId?: number | null
+  isDeductable?: boolean
+  isFixed?: boolean
+  workingDays?: number | null
+  workingHours?: number | null
+  hourlyRate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  salary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  foodAllowance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mobileAllowance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  otherAllowance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  contractStartDate?: Date | string | null
+  contractEndDate?: Date | string | null
+  contractDocument?: string | null
+  contractEndReason?: string | null
+  joiningDate?: Date | string | null
+  idCardNo?: string | null
+  idCardExpiryDate?: Date | string | null
+  idCardDocument?: string | null
+  profession?: string | null
+  nationality?: string | null
+  passportNo?: string | null
+  passportExpiryDate?: Date | string | null
+  passportDocument?: string | null
+  lastExitDate?: Date | string | null
+  lastEntryDate?: Date | string | null
+  bankName?: string | null
+  bankCode?: string | null
+  iban?: string | null
+  gosiSalary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  gosiCityId?: number | null
+  openingBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  isCardDelivered?: boolean
+  cardDocument?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  timesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutEmployeeInput
+  loans?: Prisma.LoanUncheckedCreateNestedManyWithoutEmployeeInput
+  trafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutEmployeeInput
+  exitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutEmployeeInput
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutEmployeeInput
+}
+
+export type EmployeeCreateOrConnectWithoutPayrollDetailsInput = {
+  where: Prisma.EmployeeWhereUniqueInput
+  create: Prisma.XOR<Prisma.EmployeeCreateWithoutPayrollDetailsInput, Prisma.EmployeeUncheckedCreateWithoutPayrollDetailsInput>
+}
+
+export type EmployeeUpsertWithoutPayrollDetailsInput = {
+  update: Prisma.XOR<Prisma.EmployeeUpdateWithoutPayrollDetailsInput, Prisma.EmployeeUncheckedUpdateWithoutPayrollDetailsInput>
+  create: Prisma.XOR<Prisma.EmployeeCreateWithoutPayrollDetailsInput, Prisma.EmployeeUncheckedCreateWithoutPayrollDetailsInput>
+  where?: Prisma.EmployeeWhereInput
+}
+
+export type EmployeeUpdateToOneWithWhereWithoutPayrollDetailsInput = {
+  where?: Prisma.EmployeeWhereInput
+  data: Prisma.XOR<Prisma.EmployeeUpdateWithoutPayrollDetailsInput, Prisma.EmployeeUncheckedUpdateWithoutPayrollDetailsInput>
+}
+
+export type EmployeeUpdateWithoutPayrollDetailsInput = {
+  profilePicture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeCode?: Prisma.IntFieldUpdateOperationsInput | number
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDeductable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isFixed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  workingDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  workingHours?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  hourlyRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  salary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  foodAllowance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mobileAllowance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  otherAllowance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  contractStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  contractEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  contractDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contractEndReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  joiningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  idCardNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardExpiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  idCardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profession?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passportNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passportExpiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExitDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastEntryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gosiSalary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  country?: Prisma.CountryUpdateOneWithoutEmployeesNestedInput
+  city?: Prisma.CityUpdateOneWithoutEmployeesNestedInput
+  status?: Prisma.EmployeeStatusUpdateOneWithoutEmployeesNestedInput
+  branch?: Prisma.BranchUpdateOneWithoutEmployeesNestedInput
+  designation?: Prisma.DesignationUpdateOneWithoutEmployeesNestedInput
+  payrollSection?: Prisma.PayrollSectionUpdateOneWithoutEmployeesNestedInput
+  gosiCity?: Prisma.GosiCityUpdateOneWithoutEmployeesNestedInput
+  timesheets?: Prisma.TimesheetUpdateManyWithoutEmployeeNestedInput
+  loans?: Prisma.LoanUpdateManyWithoutEmployeeNestedInput
+  trafficChallans?: Prisma.TrafficChallanUpdateManyWithoutEmployeeNestedInput
+  exitReentries?: Prisma.ExitReentryUpdateManyWithoutEmployeeNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutEmployeeNestedInput
+}
+
+export type EmployeeUncheckedUpdateWithoutPayrollDetailsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  profilePicture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeCode?: Prisma.IntFieldUpdateOperationsInput | number
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  countryId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  cityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  statusId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  designationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  payrollSectionId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isDeductable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isFixed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  workingDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  workingHours?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  hourlyRate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  salary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  foodAllowance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mobileAllowance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  otherAllowance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  contractStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  contractEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  contractDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contractEndReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  joiningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  idCardNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardExpiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  idCardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profession?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passportNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passportExpiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExitDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastEntryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gosiSalary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  gosiCityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  openingBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  timesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutEmployeeNestedInput
+  loans?: Prisma.LoanUncheckedUpdateManyWithoutEmployeeNestedInput
+  trafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutEmployeeNestedInput
+  exitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutEmployeeNestedInput
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutEmployeeNestedInput
 }
 
 export type EmployeeCreateWithoutLoansInput = {
@@ -3402,7 +3402,7 @@ export type EmployeeCreateWithoutLoansInput = {
   timesheets?: Prisma.TimesheetCreateNestedManyWithoutEmployeeInput
   trafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutEmployeeInput
   exitReentries?: Prisma.ExitReentryCreateNestedManyWithoutEmployeeInput
-  payrolls?: Prisma.PayrollCreateNestedManyWithoutEmployeeInput
+  payrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutEmployeeInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutEmployeeInput
 }
 
@@ -3458,7 +3458,7 @@ export type EmployeeUncheckedCreateWithoutLoansInput = {
   timesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutEmployeeInput
   trafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutEmployeeInput
   exitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutEmployeeInput
-  payrolls?: Prisma.PayrollUncheckedCreateNestedManyWithoutEmployeeInput
+  payrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutEmployeeInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutEmployeeInput
 }
 
@@ -3529,7 +3529,7 @@ export type EmployeeUpdateWithoutLoansInput = {
   timesheets?: Prisma.TimesheetUpdateManyWithoutEmployeeNestedInput
   trafficChallans?: Prisma.TrafficChallanUpdateManyWithoutEmployeeNestedInput
   exitReentries?: Prisma.ExitReentryUpdateManyWithoutEmployeeNestedInput
-  payrolls?: Prisma.PayrollUpdateManyWithoutEmployeeNestedInput
+  payrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutEmployeeNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutEmployeeNestedInput
 }
 
@@ -3585,7 +3585,7 @@ export type EmployeeUncheckedUpdateWithoutLoansInput = {
   timesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutEmployeeNestedInput
   trafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutEmployeeNestedInput
   exitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutEmployeeNestedInput
-  payrolls?: Prisma.PayrollUncheckedUpdateManyWithoutEmployeeNestedInput
+  payrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutEmployeeNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutEmployeeNestedInput
 }
 
@@ -3640,7 +3640,7 @@ export type EmployeeCreateWithoutTrafficChallansInput = {
   timesheets?: Prisma.TimesheetCreateNestedManyWithoutEmployeeInput
   loans?: Prisma.LoanCreateNestedManyWithoutEmployeeInput
   exitReentries?: Prisma.ExitReentryCreateNestedManyWithoutEmployeeInput
-  payrolls?: Prisma.PayrollCreateNestedManyWithoutEmployeeInput
+  payrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutEmployeeInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutEmployeeInput
 }
 
@@ -3696,7 +3696,7 @@ export type EmployeeUncheckedCreateWithoutTrafficChallansInput = {
   timesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutEmployeeInput
   loans?: Prisma.LoanUncheckedCreateNestedManyWithoutEmployeeInput
   exitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutEmployeeInput
-  payrolls?: Prisma.PayrollUncheckedCreateNestedManyWithoutEmployeeInput
+  payrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutEmployeeInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutEmployeeInput
 }
 
@@ -3767,7 +3767,7 @@ export type EmployeeUpdateWithoutTrafficChallansInput = {
   timesheets?: Prisma.TimesheetUpdateManyWithoutEmployeeNestedInput
   loans?: Prisma.LoanUpdateManyWithoutEmployeeNestedInput
   exitReentries?: Prisma.ExitReentryUpdateManyWithoutEmployeeNestedInput
-  payrolls?: Prisma.PayrollUpdateManyWithoutEmployeeNestedInput
+  payrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutEmployeeNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutEmployeeNestedInput
 }
 
@@ -3823,7 +3823,7 @@ export type EmployeeUncheckedUpdateWithoutTrafficChallansInput = {
   timesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutEmployeeNestedInput
   loans?: Prisma.LoanUncheckedUpdateManyWithoutEmployeeNestedInput
   exitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutEmployeeNestedInput
-  payrolls?: Prisma.PayrollUncheckedUpdateManyWithoutEmployeeNestedInput
+  payrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutEmployeeNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutEmployeeNestedInput
 }
 
@@ -3878,7 +3878,7 @@ export type EmployeeCreateWithoutExitReentriesInput = {
   timesheets?: Prisma.TimesheetCreateNestedManyWithoutEmployeeInput
   loans?: Prisma.LoanCreateNestedManyWithoutEmployeeInput
   trafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutEmployeeInput
-  payrolls?: Prisma.PayrollCreateNestedManyWithoutEmployeeInput
+  payrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutEmployeeInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutEmployeeInput
 }
 
@@ -3934,7 +3934,7 @@ export type EmployeeUncheckedCreateWithoutExitReentriesInput = {
   timesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutEmployeeInput
   loans?: Prisma.LoanUncheckedCreateNestedManyWithoutEmployeeInput
   trafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutEmployeeInput
-  payrolls?: Prisma.PayrollUncheckedCreateNestedManyWithoutEmployeeInput
+  payrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutEmployeeInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutEmployeeInput
 }
 
@@ -4005,7 +4005,7 @@ export type EmployeeUpdateWithoutExitReentriesInput = {
   timesheets?: Prisma.TimesheetUpdateManyWithoutEmployeeNestedInput
   loans?: Prisma.LoanUpdateManyWithoutEmployeeNestedInput
   trafficChallans?: Prisma.TrafficChallanUpdateManyWithoutEmployeeNestedInput
-  payrolls?: Prisma.PayrollUpdateManyWithoutEmployeeNestedInput
+  payrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutEmployeeNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutEmployeeNestedInput
 }
 
@@ -4061,7 +4061,7 @@ export type EmployeeUncheckedUpdateWithoutExitReentriesInput = {
   timesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutEmployeeNestedInput
   loans?: Prisma.LoanUncheckedUpdateManyWithoutEmployeeNestedInput
   trafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutEmployeeNestedInput
-  payrolls?: Prisma.PayrollUncheckedUpdateManyWithoutEmployeeNestedInput
+  payrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutEmployeeNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutEmployeeNestedInput
 }
 
@@ -4117,7 +4117,7 @@ export type EmployeeCreateWithoutLedgersInput = {
   loans?: Prisma.LoanCreateNestedManyWithoutEmployeeInput
   trafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutEmployeeInput
   exitReentries?: Prisma.ExitReentryCreateNestedManyWithoutEmployeeInput
-  payrolls?: Prisma.PayrollCreateNestedManyWithoutEmployeeInput
+  payrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutEmployeeInput
 }
 
 export type EmployeeUncheckedCreateWithoutLedgersInput = {
@@ -4173,7 +4173,7 @@ export type EmployeeUncheckedCreateWithoutLedgersInput = {
   loans?: Prisma.LoanUncheckedCreateNestedManyWithoutEmployeeInput
   trafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutEmployeeInput
   exitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutEmployeeInput
-  payrolls?: Prisma.PayrollUncheckedCreateNestedManyWithoutEmployeeInput
+  payrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutEmployeeInput
 }
 
 export type EmployeeCreateOrConnectWithoutLedgersInput = {
@@ -4244,7 +4244,7 @@ export type EmployeeUpdateWithoutLedgersInput = {
   loans?: Prisma.LoanUpdateManyWithoutEmployeeNestedInput
   trafficChallans?: Prisma.TrafficChallanUpdateManyWithoutEmployeeNestedInput
   exitReentries?: Prisma.ExitReentryUpdateManyWithoutEmployeeNestedInput
-  payrolls?: Prisma.PayrollUpdateManyWithoutEmployeeNestedInput
+  payrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutEmployeeNestedInput
 }
 
 export type EmployeeUncheckedUpdateWithoutLedgersInput = {
@@ -4300,7 +4300,7 @@ export type EmployeeUncheckedUpdateWithoutLedgersInput = {
   loans?: Prisma.LoanUncheckedUpdateManyWithoutEmployeeNestedInput
   trafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutEmployeeNestedInput
   exitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutEmployeeNestedInput
-  payrolls?: Prisma.PayrollUncheckedUpdateManyWithoutEmployeeNestedInput
+  payrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutEmployeeNestedInput
 }
 
 export type EmployeeCreateManyBranchInput = {
@@ -4404,7 +4404,7 @@ export type EmployeeUpdateWithoutBranchInput = {
   loans?: Prisma.LoanUpdateManyWithoutEmployeeNestedInput
   trafficChallans?: Prisma.TrafficChallanUpdateManyWithoutEmployeeNestedInput
   exitReentries?: Prisma.ExitReentryUpdateManyWithoutEmployeeNestedInput
-  payrolls?: Prisma.PayrollUpdateManyWithoutEmployeeNestedInput
+  payrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutEmployeeNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutEmployeeNestedInput
 }
 
@@ -4460,7 +4460,7 @@ export type EmployeeUncheckedUpdateWithoutBranchInput = {
   loans?: Prisma.LoanUncheckedUpdateManyWithoutEmployeeNestedInput
   trafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutEmployeeNestedInput
   exitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutEmployeeNestedInput
-  payrolls?: Prisma.PayrollUncheckedUpdateManyWithoutEmployeeNestedInput
+  payrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutEmployeeNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutEmployeeNestedInput
 }
 
@@ -4615,7 +4615,7 @@ export type EmployeeUpdateWithoutCityInput = {
   loans?: Prisma.LoanUpdateManyWithoutEmployeeNestedInput
   trafficChallans?: Prisma.TrafficChallanUpdateManyWithoutEmployeeNestedInput
   exitReentries?: Prisma.ExitReentryUpdateManyWithoutEmployeeNestedInput
-  payrolls?: Prisma.PayrollUpdateManyWithoutEmployeeNestedInput
+  payrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutEmployeeNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutEmployeeNestedInput
 }
 
@@ -4671,7 +4671,7 @@ export type EmployeeUncheckedUpdateWithoutCityInput = {
   loans?: Prisma.LoanUncheckedUpdateManyWithoutEmployeeNestedInput
   trafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutEmployeeNestedInput
   exitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutEmployeeNestedInput
-  payrolls?: Prisma.PayrollUncheckedUpdateManyWithoutEmployeeNestedInput
+  payrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutEmployeeNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutEmployeeNestedInput
 }
 
@@ -4826,7 +4826,7 @@ export type EmployeeUpdateWithoutCountryInput = {
   loans?: Prisma.LoanUpdateManyWithoutEmployeeNestedInput
   trafficChallans?: Prisma.TrafficChallanUpdateManyWithoutEmployeeNestedInput
   exitReentries?: Prisma.ExitReentryUpdateManyWithoutEmployeeNestedInput
-  payrolls?: Prisma.PayrollUpdateManyWithoutEmployeeNestedInput
+  payrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutEmployeeNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutEmployeeNestedInput
 }
 
@@ -4882,7 +4882,7 @@ export type EmployeeUncheckedUpdateWithoutCountryInput = {
   loans?: Prisma.LoanUncheckedUpdateManyWithoutEmployeeNestedInput
   trafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutEmployeeNestedInput
   exitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutEmployeeNestedInput
-  payrolls?: Prisma.PayrollUncheckedUpdateManyWithoutEmployeeNestedInput
+  payrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutEmployeeNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutEmployeeNestedInput
 }
 
@@ -5037,7 +5037,7 @@ export type EmployeeUpdateWithoutGosiCityInput = {
   loans?: Prisma.LoanUpdateManyWithoutEmployeeNestedInput
   trafficChallans?: Prisma.TrafficChallanUpdateManyWithoutEmployeeNestedInput
   exitReentries?: Prisma.ExitReentryUpdateManyWithoutEmployeeNestedInput
-  payrolls?: Prisma.PayrollUpdateManyWithoutEmployeeNestedInput
+  payrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutEmployeeNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutEmployeeNestedInput
 }
 
@@ -5093,7 +5093,7 @@ export type EmployeeUncheckedUpdateWithoutGosiCityInput = {
   loans?: Prisma.LoanUncheckedUpdateManyWithoutEmployeeNestedInput
   trafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutEmployeeNestedInput
   exitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutEmployeeNestedInput
-  payrolls?: Prisma.PayrollUncheckedUpdateManyWithoutEmployeeNestedInput
+  payrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutEmployeeNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutEmployeeNestedInput
 }
 
@@ -5248,7 +5248,7 @@ export type EmployeeUpdateWithoutDesignationInput = {
   loans?: Prisma.LoanUpdateManyWithoutEmployeeNestedInput
   trafficChallans?: Prisma.TrafficChallanUpdateManyWithoutEmployeeNestedInput
   exitReentries?: Prisma.ExitReentryUpdateManyWithoutEmployeeNestedInput
-  payrolls?: Prisma.PayrollUpdateManyWithoutEmployeeNestedInput
+  payrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutEmployeeNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutEmployeeNestedInput
 }
 
@@ -5304,7 +5304,7 @@ export type EmployeeUncheckedUpdateWithoutDesignationInput = {
   loans?: Prisma.LoanUncheckedUpdateManyWithoutEmployeeNestedInput
   trafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutEmployeeNestedInput
   exitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutEmployeeNestedInput
-  payrolls?: Prisma.PayrollUncheckedUpdateManyWithoutEmployeeNestedInput
+  payrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutEmployeeNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutEmployeeNestedInput
 }
 
@@ -5459,7 +5459,7 @@ export type EmployeeUpdateWithoutStatusInput = {
   loans?: Prisma.LoanUpdateManyWithoutEmployeeNestedInput
   trafficChallans?: Prisma.TrafficChallanUpdateManyWithoutEmployeeNestedInput
   exitReentries?: Prisma.ExitReentryUpdateManyWithoutEmployeeNestedInput
-  payrolls?: Prisma.PayrollUpdateManyWithoutEmployeeNestedInput
+  payrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutEmployeeNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutEmployeeNestedInput
 }
 
@@ -5515,7 +5515,7 @@ export type EmployeeUncheckedUpdateWithoutStatusInput = {
   loans?: Prisma.LoanUncheckedUpdateManyWithoutEmployeeNestedInput
   trafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutEmployeeNestedInput
   exitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutEmployeeNestedInput
-  payrolls?: Prisma.PayrollUncheckedUpdateManyWithoutEmployeeNestedInput
+  payrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutEmployeeNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutEmployeeNestedInput
 }
 
@@ -5670,7 +5670,7 @@ export type EmployeeUpdateWithoutPayrollSectionInput = {
   loans?: Prisma.LoanUpdateManyWithoutEmployeeNestedInput
   trafficChallans?: Prisma.TrafficChallanUpdateManyWithoutEmployeeNestedInput
   exitReentries?: Prisma.ExitReentryUpdateManyWithoutEmployeeNestedInput
-  payrolls?: Prisma.PayrollUpdateManyWithoutEmployeeNestedInput
+  payrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutEmployeeNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutEmployeeNestedInput
 }
 
@@ -5726,7 +5726,7 @@ export type EmployeeUncheckedUpdateWithoutPayrollSectionInput = {
   loans?: Prisma.LoanUncheckedUpdateManyWithoutEmployeeNestedInput
   trafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutEmployeeNestedInput
   exitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutEmployeeNestedInput
-  payrolls?: Prisma.PayrollUncheckedUpdateManyWithoutEmployeeNestedInput
+  payrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutEmployeeNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutEmployeeNestedInput
 }
 
@@ -5790,7 +5790,7 @@ export type EmployeeCountOutputType = {
   loans: number
   trafficChallans: number
   exitReentries: number
-  payrolls: number
+  payrollDetails: number
   ledgers: number
 }
 
@@ -5799,7 +5799,7 @@ export type EmployeeCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensio
   loans?: boolean | EmployeeCountOutputTypeCountLoansArgs
   trafficChallans?: boolean | EmployeeCountOutputTypeCountTrafficChallansArgs
   exitReentries?: boolean | EmployeeCountOutputTypeCountExitReentriesArgs
-  payrolls?: boolean | EmployeeCountOutputTypeCountPayrollsArgs
+  payrollDetails?: boolean | EmployeeCountOutputTypeCountPayrollDetailsArgs
   ledgers?: boolean | EmployeeCountOutputTypeCountLedgersArgs
 }
 
@@ -5844,8 +5844,8 @@ export type EmployeeCountOutputTypeCountExitReentriesArgs<ExtArgs extends runtim
 /**
  * EmployeeCountOutputType without action
  */
-export type EmployeeCountOutputTypeCountPayrollsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.PayrollWhereInput
+export type EmployeeCountOutputTypeCountPayrollDetailsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PayrollDetailsWhereInput
 }
 
 /**
@@ -5916,7 +5916,7 @@ export type EmployeeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   loans?: boolean | Prisma.Employee$loansArgs<ExtArgs>
   trafficChallans?: boolean | Prisma.Employee$trafficChallansArgs<ExtArgs>
   exitReentries?: boolean | Prisma.Employee$exitReentriesArgs<ExtArgs>
-  payrolls?: boolean | Prisma.Employee$payrollsArgs<ExtArgs>
+  payrollDetails?: boolean | Prisma.Employee$payrollDetailsArgs<ExtArgs>
   ledgers?: boolean | Prisma.Employee$ledgersArgs<ExtArgs>
   _count?: boolean | Prisma.EmployeeCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["employee"]>
@@ -6101,7 +6101,7 @@ export type EmployeeInclude<ExtArgs extends runtime.Types.Extensions.InternalArg
   loans?: boolean | Prisma.Employee$loansArgs<ExtArgs>
   trafficChallans?: boolean | Prisma.Employee$trafficChallansArgs<ExtArgs>
   exitReentries?: boolean | Prisma.Employee$exitReentriesArgs<ExtArgs>
-  payrolls?: boolean | Prisma.Employee$payrollsArgs<ExtArgs>
+  payrollDetails?: boolean | Prisma.Employee$payrollDetailsArgs<ExtArgs>
   ledgers?: boolean | Prisma.Employee$ledgersArgs<ExtArgs>
   _count?: boolean | Prisma.EmployeeCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -6138,7 +6138,7 @@ export type $EmployeePayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     loans: Prisma.$LoanPayload<ExtArgs>[]
     trafficChallans: Prisma.$TrafficChallanPayload<ExtArgs>[]
     exitReentries: Prisma.$ExitReentryPayload<ExtArgs>[]
-    payrolls: Prisma.$PayrollPayload<ExtArgs>[]
+    payrollDetails: Prisma.$PayrollDetailsPayload<ExtArgs>[]
     ledgers: Prisma.$LedgerPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -6595,7 +6595,7 @@ export interface Prisma__EmployeeClient<T, Null = never, ExtArgs extends runtime
   loans<T extends Prisma.Employee$loansArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Employee$loansArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LoanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   trafficChallans<T extends Prisma.Employee$trafficChallansArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Employee$trafficChallansArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TrafficChallanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   exitReentries<T extends Prisma.Employee$exitReentriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Employee$exitReentriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ExitReentryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  payrolls<T extends Prisma.Employee$payrollsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Employee$payrollsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PayrollPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  payrollDetails<T extends Prisma.Employee$payrollDetailsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Employee$payrollDetailsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PayrollDetailsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   ledgers<T extends Prisma.Employee$ledgersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Employee$ledgersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LedgerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -7299,27 +7299,27 @@ export type Employee$exitReentriesArgs<ExtArgs extends runtime.Types.Extensions.
 }
 
 /**
- * Employee.payrolls
+ * Employee.payrollDetails
  */
-export type Employee$payrollsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Employee$payrollDetailsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Payroll
+   * Select specific fields to fetch from the PayrollDetails
    */
-  select?: Prisma.PayrollSelect<ExtArgs> | null
+  select?: Prisma.PayrollDetailsSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Payroll
+   * Omit specific fields from the PayrollDetails
    */
-  omit?: Prisma.PayrollOmit<ExtArgs> | null
+  omit?: Prisma.PayrollDetailsOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.PayrollInclude<ExtArgs> | null
-  where?: Prisma.PayrollWhereInput
-  orderBy?: Prisma.PayrollOrderByWithRelationInput | Prisma.PayrollOrderByWithRelationInput[]
-  cursor?: Prisma.PayrollWhereUniqueInput
+  include?: Prisma.PayrollDetailsInclude<ExtArgs> | null
+  where?: Prisma.PayrollDetailsWhereInput
+  orderBy?: Prisma.PayrollDetailsOrderByWithRelationInput | Prisma.PayrollDetailsOrderByWithRelationInput[]
+  cursor?: Prisma.PayrollDetailsWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.PayrollScalarFieldEnum | Prisma.PayrollScalarFieldEnum[]
+  distinct?: Prisma.PayrollDetailsScalarFieldEnum | Prisma.PayrollDetailsScalarFieldEnum[]
 }
 
 /**

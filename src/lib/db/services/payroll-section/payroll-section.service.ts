@@ -293,8 +293,8 @@ export const deletePayrollSection = async (id: number): Promise<void> => {
     }
 
     // Check if payroll section is being used by payrolls
-    const payrollsCount = await tx.payroll.count({
-      where: { sectionId: id },
+    const payrollsCount = await tx.payrollDetails.count({
+      where: { payrollSectionId: id },
     });
 
     if (payrollsCount > 0) {

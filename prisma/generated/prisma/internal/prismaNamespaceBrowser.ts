@@ -63,8 +63,11 @@ export const ModelName = {
   EmployeeStatus: 'EmployeeStatus',
   Project: 'Project',
   Timesheet: 'Timesheet',
-  Payroll: 'Payroll',
   PayrollSection: 'PayrollSection',
+  PayrollStatus: 'PayrollStatus',
+  PayrollSummary: 'PayrollSummary',
+  PaymentMethod: 'PaymentMethod',
+  PayrollDetails: 'PayrollDetails',
   Loan: 'Loan',
   TrafficChallan: 'TrafficChallan',
   ExitReentry: 'ExitReentry',
@@ -297,21 +300,6 @@ export const TimesheetScalarFieldEnum = {
 export type TimesheetScalarFieldEnum = (typeof TimesheetScalarFieldEnum)[keyof typeof TimesheetScalarFieldEnum]
 
 
-export const PayrollScalarFieldEnum = {
-  id: 'id',
-  employeeId: 'employeeId',
-  sectionId: 'sectionId',
-  month: 'month',
-  year: 'year',
-  amount: 'amount',
-  notes: 'notes',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type PayrollScalarFieldEnum = (typeof PayrollScalarFieldEnum)[keyof typeof PayrollScalarFieldEnum]
-
-
 export const PayrollSectionScalarFieldEnum = {
   id: 'id',
   nameEn: 'nameEn',
@@ -323,6 +311,91 @@ export const PayrollSectionScalarFieldEnum = {
 } as const
 
 export type PayrollSectionScalarFieldEnum = (typeof PayrollSectionScalarFieldEnum)[keyof typeof PayrollSectionScalarFieldEnum]
+
+
+export const PayrollStatusScalarFieldEnum = {
+  id: 'id',
+  nameEn: 'nameEn',
+  nameAr: 'nameAr',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PayrollStatusScalarFieldEnum = (typeof PayrollStatusScalarFieldEnum)[keyof typeof PayrollStatusScalarFieldEnum]
+
+
+export const PayrollSummaryScalarFieldEnum = {
+  id: 'id',
+  payrollMonth: 'payrollMonth',
+  payrollYear: 'payrollYear',
+  totalSalary: 'totalSalary',
+  totalPreviousAdvance: 'totalPreviousAdvance',
+  totalCurrentAdvance: 'totalCurrentAdvance',
+  totalDeduction: 'totalDeduction',
+  totalNetLoan: 'totalNetLoan',
+  totalNetSalaryPayable: 'totalNetSalaryPayable',
+  totalCardSalary: 'totalCardSalary',
+  totalCashSalary: 'totalCashSalary',
+  remarks: 'remarks',
+  payrollStatusId: 'payrollStatusId',
+  branchId: 'branchId',
+  createdDate: 'createdDate',
+  createdBy: 'createdBy',
+  modifiedDate: 'modifiedDate',
+  modifiedBy: 'modifiedBy'
+} as const
+
+export type PayrollSummaryScalarFieldEnum = (typeof PayrollSummaryScalarFieldEnum)[keyof typeof PayrollSummaryScalarFieldEnum]
+
+
+export const PaymentMethodScalarFieldEnum = {
+  id: 'id',
+  nameEn: 'nameEn',
+  nameAr: 'nameAr',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PaymentMethodScalarFieldEnum = (typeof PaymentMethodScalarFieldEnum)[keyof typeof PaymentMethodScalarFieldEnum]
+
+
+export const PayrollDetailsScalarFieldEnum = {
+  id: 'id',
+  payrollId: 'payrollId',
+  payrollMonth: 'payrollMonth',
+  payrollYear: 'payrollYear',
+  employeeId: 'employeeId',
+  workDays: 'workDays',
+  totalHours: 'totalHours',
+  hourlyRate: 'hourlyRate',
+  allowance: 'allowance',
+  salary: 'salary',
+  previousLoan: 'previousLoan',
+  currentLoan: 'currentLoan',
+  deductionLoan: 'deductionLoan',
+  netLoan: 'netLoan',
+  previousTrafficChallan: 'previousTrafficChallan',
+  currentTrafficChallan: 'currentTrafficChallan',
+  deductionTrafficChallan: 'deductionTrafficChallan',
+  netTrafficChallan: 'netTrafficChallan',
+  netSalaryPayable: 'netSalaryPayable',
+  cardSalary: 'cardSalary',
+  cashSalary: 'cashSalary',
+  overTime: 'overTime',
+  remarks: 'remarks',
+  paymentMethodId: 'paymentMethodId',
+  payrollStatusId: 'payrollStatusId',
+  branchId: 'branchId',
+  createdDate: 'createdDate',
+  createdBy: 'createdBy',
+  modifiedDate: 'modifiedDate',
+  modifiedBy: 'modifiedBy',
+  payrollSectionId: 'payrollSectionId'
+} as const
+
+export type PayrollDetailsScalarFieldEnum = (typeof PayrollDetailsScalarFieldEnum)[keyof typeof PayrollDetailsScalarFieldEnum]
 
 
 export const LoanScalarFieldEnum = {
@@ -379,7 +452,7 @@ export const LedgerScalarFieldEnum = {
   reference: 'reference',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  payrollId: 'payrollId',
+  payrollDetailId: 'payrollDetailId',
   loanId: 'loanId',
   trafficChallanId: 'trafficChallanId'
 } as const
