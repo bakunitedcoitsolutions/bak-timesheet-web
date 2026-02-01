@@ -9,9 +9,9 @@ import type {
   PayrollSummaryWithRelations,
 } from "./payroll-summary.dto";
 import {
-  UpdateMonthlyPayrollValuesInput,
   RunPayrollInput,
   RepostPayrollInput,
+  UpdateMonthlyPayrollValuesInput,
 } from "./payroll-summary.schemas";
 import { convertDecimalToNumber } from "@/lib/db/utils";
 
@@ -462,7 +462,20 @@ export const runPayroll = async ({
   payrollYear,
   payrollMonth,
 }: RunPayrollInput) => {
-  // 1. Check if payroll already exists
+  // 1. Check if there is any active payroll (Pending)
+  const activePayroll = await prisma.payrollSummary.findFirst({
+    where: {
+      payrollStatusId: 1, // Pending
+    },
+  });
+
+  if (activePayroll) {
+    throw new Error(
+      "There is active payroll, you cannot run the payroll when there is an active payroll"
+    );
+  }
+
+  // 2. Check if payroll already exists
   const existingPayroll = await prisma.payrollSummary.findFirst({
     where: {
       payrollYear,
@@ -502,23 +515,32 @@ export const runPayroll = async ({
   );
 };
 
-export const repostPayroll = async ({
-  payrollYear,
-  payrollMonth,
-}: RunPayrollInput) => {
-  // Verify it exists
-  const existingPayroll = await prisma.payrollSummary.findFirst({
+export const repostPayroll = async ({ id }: RepostPayrollInput) => {
+  // Check if there is any active payroll (Pending) that is NOT this one
+  const activePayroll = await prisma.payrollSummary.findFirst({
     where: {
-      payrollYear,
-      payrollMonth,
+      payrollStatusId: 1, // Pending
+    },
+  });
+
+  if (activePayroll) {
+    throw new Error(
+      "There is active payroll, you cannot run the payroll when there is an active payroll"
+    );
+  }
+
+  // Verify it exists
+  const existingPayroll = await prisma.payrollSummary.findUnique({
+    where: {
+      id,
     },
   });
 
   if (!existingPayroll) {
-    throw new Error(
-      `Payroll for the month of ${payrollMonth}/${payrollYear} not found!`
-    );
+    throw new Error(`Payroll with ID ${id} not found!`);
   }
+
+  const { payrollYear, payrollMonth } = existingPayroll;
 
   // 1. Delete Existing Details
   await prisma.payrollDetails.deleteMany({
