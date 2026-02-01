@@ -2077,7 +2077,6 @@ export const CityScalarFieldEnum = {
   nameAr: 'nameAr',
   countryId: 'countryId',
   isActive: 'isActive',
-  showInPayroll: 'showInPayroll',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const

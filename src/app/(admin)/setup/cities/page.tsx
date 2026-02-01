@@ -22,17 +22,13 @@ import { ListedCity } from "@/lib/db/services/city/city.dto";
 import { useDebounce } from "@/hooks";
 import { toastService } from "@/lib/toast";
 import { showConfirmDialog } from "@/components/common/confirm-dialog";
-import {
-  useDeleteCity,
-  useGetCities,
-} from "@/lib/db/services/city/requests";
+import { useDeleteCity, useGetCities } from "@/lib/db/services/city/requests";
 
 // Constants
 const SORTABLE_FIELDS = {
   nameEn: "nameEn",
   nameAr: "nameAr",
   isActive: "isActive",
-  showInPayroll: "showInPayroll",
 } as const;
 
 const commonColumnProps = {
@@ -99,9 +95,7 @@ const columns = (
     filterable: false,
     style: { minWidth: "200px" },
     body: (rowData: ListedCity) => (
-      <span className="text-sm">
-        {rowData.country?.nameEn || "-"}
-      </span>
+      <span className="text-sm">{rowData.country?.nameEn || "-"}</span>
     ),
   },
   {

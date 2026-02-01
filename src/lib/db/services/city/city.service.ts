@@ -23,7 +23,7 @@ const citySelect = {
   nameAr: true,
   countryId: true,
   isActive: true,
-  showInPayroll: true,
+
   createdAt: true,
   updatedAt: true,
 };
@@ -60,7 +60,6 @@ export const createCity = async (data: CreateCityData) => {
       nameAr: data.nameAr,
       countryId: data.countryId || null,
       isActive: data.isActive ?? true,
-      showInPayroll: data.showInPayroll ?? false,
     },
     select: citySelect,
   });
@@ -135,8 +134,6 @@ export const updateCity = async (id: number, data: UpdateCityData) => {
     if (data.countryId !== undefined)
       updateData.countryId = data.countryId || null;
     if (data.isActive !== undefined) updateData.isActive = data.isActive;
-    if (data.showInPayroll !== undefined)
-      updateData.showInPayroll = data.showInPayroll;
 
     const updatedCity = await tx.city.update({
       where: { id },
@@ -213,12 +210,7 @@ export const listCities = async (
 
   if (params.sortBy) {
     const sortBy = params.sortBy;
-    const validFields = [
-      "nameEn",
-      "nameAr",
-      "isActive",
-      "showInPayroll",
-    ] as const;
+    const validFields = ["nameEn", "nameAr", "isActive", "isActive"] as const;
 
     // Only allow sorting by the specified valid fields
     if (validFields.includes(sortBy)) {

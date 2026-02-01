@@ -8,7 +8,6 @@ export interface CreateCityData {
   nameAr?: string;
   countryId?: number;
   isActive?: boolean;
-  showInPayroll?: boolean;
 }
 
 export interface UpdateCityData {
@@ -16,14 +15,9 @@ export interface UpdateCityData {
   nameAr?: string;
   countryId?: number;
   isActive?: boolean;
-  showInPayroll?: boolean;
 }
 
-export type ListCitiesSortableField =
-  | "nameEn"
-  | "nameAr"
-  | "isActive"
-  | "showInPayroll";
+export type ListCitiesSortableField = "nameEn" | "nameAr" | "isActive";
 
 export interface ListCitiesParams {
   page?: number;
@@ -40,7 +34,7 @@ export interface CityInterface {
   nameAr: string | null;
   countryId: number | null;
   isActive: boolean;
-  showInPayroll: boolean;
+
   createdAt: Date | any;
   updatedAt: Date | any;
 }

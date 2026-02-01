@@ -110,7 +110,7 @@ model City {
   nameAr        String?
   countryId     Int?
   isActive      Boolean  @default(true)
-  showInPayroll Boolean  @default(false)
+
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 

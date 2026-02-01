@@ -11,7 +11,6 @@ export const CreateCitySchema = z.object({
   nameAr: z.string().min(2, "Arabic name is required").optional(),
   countryId: z.number().int().positive().optional(),
   isActive: z.boolean().default(true).optional(),
-  showInPayroll: z.boolean().default(false).optional(),
 });
 
 export const UpdateCitySchema = z.object({
@@ -20,7 +19,6 @@ export const UpdateCitySchema = z.object({
   nameAr: z.string().min(2, "Arabic name is required").optional(),
   countryId: z.number().int().positive().optional(),
   isActive: z.boolean().optional(),
-  showInPayroll: z.boolean().optional(),
 });
 
 export const ListCitiesParamsSchema = z.object({
@@ -29,7 +27,7 @@ export const ListCitiesParamsSchema = z.object({
   search: z.string().optional(),
   countryId: z.number().int().positive().optional(),
   sortOrder: z.enum(["asc", "desc"]).optional(),
-  sortBy: z.enum(["nameEn", "nameAr", "isActive", "showInPayroll"]).optional(),
+  sortBy: z.enum(["nameEn", "nameAr", "isActive"]).optional(),
 });
 
 export const GetCityByIdSchema = z.object({

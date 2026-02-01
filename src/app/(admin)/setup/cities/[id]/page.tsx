@@ -64,7 +64,6 @@ const UpsertCityPage = () => {
     nameAr: "",
     countryId: undefined,
     isActive: true,
-    showInPayroll: false,
   };
 
   const zodSchema = isEditMode ? UpdateCitySchema : CreateCitySchema;
@@ -95,7 +94,6 @@ const UpsertCityPage = () => {
         nameAr: foundCity?.nameAr,
         countryId: foundCity?.countryId ?? undefined,
         isActive: foundCity?.isActive,
-        showInPayroll: foundCity?.showInPayroll ?? false,
       };
       reset(setCity);
     }
@@ -202,14 +200,6 @@ const UpsertCityPage = () => {
                       className="w-full"
                       placeholder="Choose"
                       options={STATUS_OPTIONS}
-                    />
-                  </FormItem>
-                </div>
-                <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
-                  <FormItem name="showInPayroll" valueName="checked">
-                    <Checkbox
-                      name="showInPayroll"
-                      label="Show in Payroll Details"
                     />
                   </FormItem>
                 </div>

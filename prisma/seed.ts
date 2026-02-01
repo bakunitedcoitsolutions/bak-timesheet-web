@@ -90,8 +90,32 @@ async function main() {
   const paymentMethods = [
     {
       id: 1,
-      nameEn: "Card",
-      nameAr: "بطاقة",
+      nameEn: "Card 1",
+      nameAr: "بطاقة 1",
+      isActive: true,
+    },
+    {
+      id: 2,
+      nameEn: "Card 2",
+      nameAr: "بطاقة 2",
+      isActive: true,
+    },
+    {
+      id: 3,
+      nameEn: "Transfer",
+      nameAr: "تحويل",
+      isActive: true,
+    },
+    {
+      id: 4,
+      nameEn: "Jeddah - Cash",
+      nameAr: "جدة - نقد",
+      isActive: true,
+    },
+    {
+      id: 5,
+      nameEn: "Riyadh - Cash",
+      nameAr: "الرياض - نقد",
       isActive: true,
     },
   ];
@@ -199,317 +223,226 @@ async function main() {
   //   }
   //   console.log(`✅ Seeded ${employeeStatuses.length} employee statuses`);
 
-  //   // Seed Countries
-  //   console.log("📝 Seeding Countries...");
-  //   const countries = [
-  //     {
-  //       id: 1,
-  //       nameEn: "Afghanistan",
-  //       nameAr: "أفغانستان",
-  //       isActive: true,
-  //     },
-  //     {
-  //       id: 2,
-  //       nameEn: "Bangladish",
-  //       nameAr: "بنغلاديش",
-  //       isActive: true,
-  //     },
-  //     {
-  //       id: 3,
-  //       nameEn: "C-Lanka",
-  //       nameAr: "س-لانكا",
-  //       isActive: true,
-  //     },
-  //     {
-  //       id: 4,
-  //       nameEn: "Egypt",
-  //       nameAr: "مصر",
-  //       isActive: true,
-  //     },
-  //     {
-  //       id: 5,
-  //       nameEn: "Hind",
-  //       nameAr: "الهند",
-  //       isActive: true,
-  //     },
-  //     {
-  //       id: 6,
-  //       nameEn: "Pakistan",
-  //       nameAr: "باكستان",
-  //       isActive: true,
-  //     },
-  //     {
-  //       id: 7,
-  //       nameEn: "Palastine",
-  //       nameAr: "فلسطين",
-  //       isActive: true,
-  //     },
-  //     {
-  //       id: 8,
-  //       nameEn: "Saudi",
-  //       nameAr: "السعودية",
-  //       isActive: true,
-  //     },
-  //     {
-  //       id: 9,
-  //       nameEn: "Siria",
-  //       nameAr: "سوريا",
-  //       isActive: true,
-  //     },
-  //     {
-  //       id: 10,
-  //       nameEn: "Sudani",
-  //       nameAr: "السودان",
-  //       isActive: true,
-  //     },
-  //   ];
+  // Seed Countries
+  console.log("📝 Seeding Countries...");
+  const countries = [
+    {
+      id: 1,
+      nameEn: "Saudi",
+      nameAr: "السعودية",
+      isActive: true,
+    },
+    {
+      id: 3,
+      nameEn: "Pakistan",
+      nameAr: "باكستان",
+      isActive: true,
+    },
+    {
+      id: 4,
+      nameEn: "UAE",
+      nameAr: "الإمارات",
+      isActive: true,
+    },
+    {
+      id: 5,
+      nameEn: "Afghanistan",
+      nameAr: "أفغانستان",
+      isActive: true,
+    },
+    {
+      id: 6,
+      nameEn: "Bangladish",
+      nameAr: "بنغلاديش",
+      isActive: true,
+    },
+    {
+      id: 7,
+      nameEn: "Egypt",
+      nameAr: "مصر",
+      isActive: true,
+    },
+    {
+      id: 8,
+      nameEn: "Hind",
+      nameAr: "الهند",
+      isActive: true,
+    },
+    {
+      id: 9,
+      nameEn: "Syria",
+      nameAr: "الشام",
+      isActive: true,
+    },
+    {
+      id: 10,
+      nameEn: "Yaman",
+      nameAr: "اليمن",
+      isActive: true,
+    },
+    {
+      id: 11,
+      nameEn: "C-Lanka",
+      nameAr: "س-لانكا",
+      isActive: true,
+    },
+    {
+      id: 12,
+      nameEn: "Sudan",
+      nameAr: "السودان",
+      isActive: true,
+    },
+    {
+      id: 13,
+      nameEn: "Palastine",
+      nameAr: "فلسطين",
+      isActive: true,
+    },
+  ];
 
-  //   for (const country of countries) {
-  //     await prisma.country.upsert({
-  //       where: { id: country.id },
-  //       update: country,
-  //       create: country,
-  //     });
-  //   }
-  //   console.log(`✅ Seeded ${countries.length} countries`);
+  for (const country of countries) {
+    await prisma.country.upsert({
+      where: { id: country.id },
+      update: country,
+      create: country,
+    });
+  }
+  console.log(`✅ Seeded ${countries.length} countries`);
 
-  //   // Seed Cities
-  //   console.log("📝 Seeding Cities...");
-  //   const cities = [
-  //     // Afghanistan (id: 1)
-  //     { id: 1, nameEn: "Kabul", nameAr: "كابل", countryId: 1, isActive: true },
-  //     { id: 2, nameEn: "Herat", nameAr: "هرات", countryId: 1, isActive: true },
-  //     {
-  //       id: 3,
-  //       nameEn: "Kandahar",
-  //       nameAr: "قندهار",
-  //       countryId: 1,
-  //       isActive: true,
-  //     },
-  //     {
-  //       id: 4,
-  //       nameEn: "Mazar-i-Sharif",
-  //       nameAr: "مزار شريف",
-  //       countryId: 1,
-  //       isActive: true,
-  //     },
-  //     // Bangladish (id: 2)
-  //     { id: 5, nameEn: "Dhaka", nameAr: "داكا", countryId: 2, isActive: true },
-  //     {
-  //       id: 6,
-  //       nameEn: "Chittagong",
-  //       nameAr: "شيتاغونغ",
-  //       countryId: 2,
-  //       isActive: true,
-  //     },
-  //     { id: 7, nameEn: "Sylhet", nameAr: "سيلهيت", countryId: 2, isActive: true },
-  //     // C-Lanka (id: 3)
-  //     {
-  //       id: 8,
-  //       nameEn: "Colombo",
-  //       nameAr: "كولومبو",
-  //       countryId: 3,
-  //       isActive: true,
-  //     },
-  //     { id: 9, nameEn: "Kandy", nameAr: "كاندي", countryId: 3, isActive: true },
-  //     // Egypt (id: 4)
-  //     {
-  //       id: 10,
-  //       nameEn: "Cairo",
-  //       nameAr: "القاهرة",
-  //       countryId: 4,
-  //       isActive: true,
-  //     },
-  //     {
-  //       id: 11,
-  //       nameEn: "Alexandria",
-  //       nameAr: "الإسكندرية",
-  //       countryId: 4,
-  //       isActive: true,
-  //     },
-  //     { id: 12, nameEn: "Giza", nameAr: "الجيزة", countryId: 4, isActive: true },
-  //     // Hind (id: 5)
-  //     {
-  //       id: 13,
-  //       nameEn: "Mumbai",
-  //       nameAr: "مومباي",
-  //       countryId: 5,
-  //       isActive: true,
-  //     },
-  //     { id: 14, nameEn: "Delhi", nameAr: "دلهي", countryId: 5, isActive: true },
-  //     {
-  //       id: 15,
-  //       nameEn: "Bangalore",
-  //       nameAr: "بنغالور",
-  //       countryId: 5,
-  //       isActive: true,
-  //     },
-  //     // Nepal (id: 6)
-  //     {
-  //       id: 16,
-  //       nameEn: "Kathmandu",
-  //       nameAr: "كاتماندو",
-  //       countryId: 6,
-  //       isActive: true,
-  //     },
-  //     {
-  //       id: 17,
-  //       nameEn: "Pokhara",
-  //       nameAr: "بوكهارا",
-  //       countryId: 6,
-  //       isActive: true,
-  //     },
-  //     // Pakistan (id: 7)
-  //     {
-  //       id: 18,
-  //       nameEn: "Karachi",
-  //       nameAr: "كراتشي",
-  //       countryId: 7,
-  //       isActive: true,
-  //     },
-  //     { id: 19, nameEn: "Lahore", nameAr: "لاهور", countryId: 7, isActive: true },
-  //     {
-  //       id: 20,
-  //       nameEn: "Islamabad",
-  //       nameAr: "إسلام أباد",
-  //       countryId: 7,
-  //       isActive: true,
-  //     },
-  //     // Philippines (id: 8)
-  //     {
-  //       id: 21,
-  //       nameEn: "Manila",
-  //       nameAr: "مانيلا",
-  //       countryId: 8,
-  //       isActive: true,
-  //     },
-  //     { id: 22, nameEn: "Cebu", nameAr: "سيبو", countryId: 8, isActive: true },
-  //     // Saudi (id: 8)
-  //     {
-  //       id: 23,
-  //       nameEn: "Riyadh",
-  //       nameAr: "الرياض",
-  //       countryId: 8,
-  //       isActive: true,
-  //       showInPayroll: true,
-  //     },
-  //     {
-  //       id: 24,
-  //       nameEn: "Jeddah",
-  //       nameAr: "جدة",
-  //       countryId: 8,
-  //       isActive: true,
-  //       showInPayroll: true,
-  //     },
-  //     {
-  //       id: 25,
-  //       nameEn: "Dammam",
-  //       nameAr: "الدمام",
-  //       countryId: 8,
-  //       isActive: true,
-  //       showInPayroll: true,
-  //     },
-  //     {
-  //       id: 26,
-  //       nameEn: "Mecca",
-  //       nameAr: "مكة",
-  //       countryId: 8,
-  //       isActive: true,
-  //       showInPayroll: true,
-  //     },
-  //     {
-  //       id: 27,
-  //       nameEn: "Medina",
-  //       nameAr: "المدينة",
-  //       countryId: 8,
-  //       isActive: true,
-  //       showInPayroll: true,
-  //     },
-  //     // Siria (id: 9)
-  //     {
-  //       id: 28,
-  //       nameEn: "Damascus",
-  //       nameAr: "دمشق",
-  //       countryId: 9,
-  //       isActive: true,
-  //     },
-  //     { id: 29, nameEn: "Aleppo", nameAr: "حلب", countryId: 9, isActive: true },
-  //     // Sudani (id: 10)
-  //     {
-  //       id: 30,
-  //       nameEn: "Khartoum",
-  //       nameAr: "الخرطوم",
-  //       countryId: 10,
-  //       isActive: true,
-  //     },
-  //   ];
+  // Seed Cities
+  console.log("📝 Seeding Cities...");
+  const cities = [
+    {
+      id: 2,
+      nameEn: "Jeddah",
+      nameAr: "جدة",
+      countryId: 1,
+      isActive: true,
+    },
+    {
+      id: 3,
+      nameEn: "Makkah",
+      nameAr: "مكة",
+      countryId: 1,
+      isActive: true,
+    },
+    {
+      id: 4,
+      nameEn: "Madinah",
+      nameAr: "المدينة",
+      countryId: 1,
+      isActive: true,
+    },
+    {
+      id: 5,
+      nameEn: "Riyadh",
+      nameAr: "الرياض",
+      countryId: 1,
+      isActive: true,
+    },
+    {
+      id: 6,
+      nameEn: "Taif",
+      nameAr: "الطائف",
+      countryId: 1,
+      isActive: true,
+    },
+    {
+      id: 7,
+      nameEn: "Dammam",
+      nameAr: "الدمام",
+      countryId: 1,
+      isActive: true,
+    },
+    {
+      id: 8,
+      nameEn: "Neom",
+      nameAr: "نيوم",
+      countryId: 1,
+      isActive: true,
+    },
+    {
+      id: 9,
+      nameEn: "Sudan",
+      nameAr: "السودان",
+      countryId: 12,
+      isActive: true,
+    },
+    {
+      id: 10,
+      nameEn: "Palastine",
+      nameAr: "فلسطين",
+      countryId: 13, // Corrected from 1 based on user feedback
+      isActive: true,
+    },
+  ];
 
-  //   for (const city of cities) {
-  //     await prisma.city.upsert({
-  //       where: { id: city.id },
-  //       update: city,
-  //       create: city,
-  //     });
-  //   }
-  //   console.log(`✅ Seeded ${cities.length} cities`);
+  for (const city of cities) {
+    await prisma.city.upsert({
+      where: { id: city.id },
+      update: city,
+      create: city,
+    });
+  }
+  console.log(`✅ Seeded ${cities.length} cities`);
 
-  //   // Seed GOSI Cities
-  //   console.log("📝 Seeding GOSI Cities...");
-  //   const gosiCities = [
-  //     {
-  //       id: 1,
-  //       nameEn: "Riyadh",
-  //       nameAr: "الرياض",
-  //       isActive: true,
-  //     },
-  //     {
-  //       id: 2,
-  //       nameEn: "Jeddah",
-  //       nameAr: "جدة",
-  //       isActive: true,
-  //     },
-  //     {
-  //       id: 3,
-  //       nameEn: "Al Barq",
-  //       nameAr: "البرق",
-  //       isActive: true,
-  //     },
-  //   ];
+  // Seed GOSI Cities
+  console.log("📝 Seeding GOSI Cities...");
+  const gosiCities = [
+    {
+      id: 1,
+      nameEn: "Jeddah",
+      nameAr: "جدة",
+      isActive: true,
+    },
+    {
+      id: 2,
+      nameEn: "Riyadh",
+      nameAr: "الرياض",
+      isActive: true,
+    },
+    {
+      id: 3,
+      nameEn: "Al Barq",
+      nameAr: "البرق",
+      isActive: true,
+    },
+  ];
 
-  //   for (const gosiCity of gosiCities) {
-  //     await prisma.gosiCity.upsert({
-  //       where: { id: gosiCity.id },
-  //       update: gosiCity,
-  //       create: gosiCity,
-  //     });
-  //   }
-  //   console.log(`✅ Seeded ${gosiCities.length} GOSI cities`);
+  for (const gosiCity of gosiCities) {
+    await prisma.gosiCity.upsert({
+      where: { id: gosiCity.id },
+      update: gosiCity,
+      create: gosiCity,
+    });
+  }
+  console.log(`✅ Seeded ${gosiCities.length} GOSI cities`);
 
-  //   // Seed Branches
-  //   console.log("📝 Seeding Branches...");
-  //   const branches = [
-  //     {
-  //       id: 1,
-  //       nameEn: "Jeddah",
-  //       nameAr: "جدة",
-  //       isActive: true,
-  //     },
-  //     {
-  //       id: 2,
-  //       nameEn: "Riyadh",
-  //       nameAr: "الرياض",
-  //       isActive: true,
-  //     },
-  //   ];
+  // Seed Branches
+  console.log("📝 Seeding Branches...");
+  const branches = [
+    {
+      id: 1,
+      nameEn: "BAK Construction",
+      nameAr: "جدة",
+      isActive: true,
+    },
+    {
+      id: 2,
+      nameEn: "Al Barq Transport",
+      nameAr: "الرياض",
+      isActive: true,
+    },
+  ];
 
-  //   for (const branch of branches) {
-  //     await prisma.branch.upsert({
-  //       where: { id: branch.id },
-  //       update: branch,
-  //       create: branch,
-  //     });
-  //   }
-  //   console.log(`✅ Seeded ${branches.length} branches`);
+  for (const branch of branches) {
+    await prisma.branch.upsert({
+      where: { id: branch.id },
+      update: branch,
+      create: branch,
+    });
+  }
+  console.log(`✅ Seeded ${branches.length} branches`);
 
   //   // Seed Designations
   //   console.log("📝 Seeding Designations...");
