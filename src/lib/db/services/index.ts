@@ -13,3 +13,4 @@ export * from "./employee-status";
 export * from "./user-role";
 export * from "./employee";
 export * from "./timesheet";
+export * from "./payroll-summary";

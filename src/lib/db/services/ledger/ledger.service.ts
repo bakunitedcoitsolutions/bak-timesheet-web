@@ -12,15 +12,7 @@ import type {
 /**
  * Helper function to convert Decimal to number for client serialization
  */
-const convertDecimalToNumber = (value: any): number => {
-  if (value === null || value === undefined) return 0;
-  if (typeof value === "number") return value;
-  // Handle Prisma.Decimal
-  if (typeof value === "object" && "toNumber" in value) {
-    return value.toNumber();
-  }
-  return Number(value);
-};
+import { convertDecimalToNumber } from "@/lib/db/utils";
 
 /**
  * Get ledger entries by employee code
@@ -78,8 +70,8 @@ export const getLedgerByEmployeeCode = async (
   // Convert Decimal fields to numbers for client serialization
   const transformedLedgerEntries = ledgerEntries.map((entry) => ({
     ...entry,
-    amount: convertDecimalToNumber(entry.amount),
-    balance: convertDecimalToNumber(entry.balance),
+    amount: convertDecimalToNumber(entry.amount) || 0,
+    balance: convertDecimalToNumber(entry.balance) || 0,
   }));
 
   return {

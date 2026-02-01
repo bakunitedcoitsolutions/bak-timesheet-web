@@ -1,7 +1,8 @@
 "use client";
-import { useState, useRef } from "react";
+import { useState, useRef, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { classNames } from "primereact/utils";
+import { ProgressSpinner } from "primereact/progressspinner";
 import { Menu } from "primereact/menu";
 import { MenuItem, MenuItemOptions } from "primereact/menuitem";
 
@@ -16,7 +17,14 @@ import {
   Dropdown,
   TypeBadge,
 } from "@/components";
-import { initialPayrollData, PayrollEntry } from "@/utils/dummy";
+import { PayrollEntry } from "@/utils/dummy";
+import {
+  useGetPayrollSummaries,
+  PayrollSummaryWithRelations,
+  useUpdateMonthlyPayrollValues,
+} from "@/lib/db/services/payroll-summary";
+import { toastService } from "@/lib/toast";
+import { showConfirmDialog } from "@/components/common/confirm-dialog";
 
 const commonColumnProps = {
   sortable: true,
@@ -274,34 +282,128 @@ const PayrollPage = () => {
   const [selectedYear, setSelectedYear] = useState<string>(
     yearOptions[0].value
   );
-  const [searchValue, setSearchValue] = useState<string>("");
-  const [payrollData] = useState<PayrollEntry[]>(initialPayrollData);
   const tableRef = useRef<TableRef>(null);
+
+  const { data: payrollSummaries, isLoading } = useGetPayrollSummaries({
+    year: parseInt(selectedYear),
+  });
+
+  const payrollData: PayrollEntry[] = useMemo(() => {
+    if (!payrollSummaries) return [];
+    return payrollSummaries.map((summary: PayrollSummaryWithRelations) => {
+      const monthNames = [
+        "JAN",
+        "FEB",
+        "MAR",
+        "APR",
+        "MAY",
+        "JUN",
+        "JUL",
+        "AUG",
+        "SEP",
+        "OCT",
+        "NOV",
+        "DEC",
+      ];
+      const period = `${monthNames[summary.payrollMonth - 1]} ${summary.payrollYear}`;
+
+      return {
+        id: summary.id,
+        period,
+        gosiSalary: 0, // Not available in summary yet
+        salary: summary.totalSalary,
+        previousAdvance: summary.totalPreviousAdvance,
+        currentAdvance: summary.totalCurrentAdvance,
+        deduction: summary.totalDeduction,
+        netLoan: summary.totalNetLoan,
+        netSalaryPayable: summary.totalNetSalaryPayable,
+        cardSalary: summary.totalCardSalary,
+        cashSalary: summary.totalCashSalary,
+        status: (summary.payrollStatus?.nameEn || "Pending") as any, // Cast to match likely enum or string
+      };
+    });
+  }, [payrollSummaries]);
 
   const handleView = (payroll: PayrollEntry) => {
     console.log("View payroll:", payroll);
     // TODO: Navigate to view page or open view modal
   };
 
-  const handleRecalculate = (payroll: PayrollEntry) => {
-    console.log("Recalculate payroll:", payroll);
-    // TODO: Implement recalculate functionality
+  /* New Hook */
+  const { mutateAsync: updatePayrollValues } = useUpdateMonthlyPayrollValues();
+
+  const parsePeriod = (period: string) => {
+    const [monthStr, yearStr] = period.split(" ");
+    const monthIndex = [
+      "JAN",
+      "FEB",
+      "MAR",
+      "APR",
+      "MAY",
+      "JUN",
+      "JUL",
+      "AUG",
+      "SEP",
+      "OCT",
+      "NOV",
+      "DEC",
+    ].indexOf(monthStr.toUpperCase());
+    return {
+      payrollMonth: monthIndex + 1,
+      payrollYear: parseInt(yearStr),
+    };
   };
 
-  const handlePost = (payroll: PayrollEntry) => {
-    console.log("Post payroll:", payroll);
-    // TODO: Implement post functionality
-    if (confirm(`Are you sure you want to post ${payroll.period}?`)) {
-      // Post logic here
+  const handleRecalculate = async (payroll: PayrollEntry) => {
+    try {
+      const { payrollMonth, payrollYear } = parsePeriod(payroll.period);
+      await updatePayrollValues({
+        payrollMonth,
+        payrollYear,
+        isPosted: false,
+      });
+      toastService.showSuccess("Success", "Payroll recalculated successfully");
+    } catch (error) {
+      console.error(error);
+      toastService.showError("Error", "Failed to recalculate payroll");
     }
   };
 
+  const handlePost = async (payroll: PayrollEntry) => {
+    showConfirmDialog({
+      icon: "pi pi-check-circle text-theme-green",
+      title: "Post Payroll",
+      message: `Are you sure you want to post ${payroll.period}?`,
+      onAccept: async () => {
+        try {
+          const { payrollMonth, payrollYear } = parsePeriod(payroll.period);
+          await updatePayrollValues({
+            payrollMonth,
+            payrollYear,
+            isPosted: true,
+          });
+          toastService.showSuccess("Success", "Payroll posted successfully");
+        } catch (error) {
+          console.error(error);
+          toastService.showError("Error", "Failed to post payroll");
+        }
+      },
+    });
+  };
+
+  /* Removed Repost Logic for now as it wasn't requested in C# or explicit plan, but kept function shell if needed? 
+     The prompt asked to "Recalculate" and "Post".
+     "Repost" logic was just in the dummy UI. I'll leave it as TODO or empty. */
   const handleRepost = (payroll: PayrollEntry) => {
-    console.log("Repost payroll:", payroll);
-    // TODO: Implement repost functionality
-    if (confirm(`Are you sure you want to repost ${payroll.period}?`)) {
-      // Repost logic here
-    }
+    showConfirmDialog({
+      icon: "pi pi-replay text-[#FFA617]",
+      title: "Repost Payroll",
+      message: `Are you sure you want to repost ${payroll.period}?`,
+      onAccept: async () => {
+        // Repost logic here
+        console.log("Repost confirmed for", payroll.period);
+      },
+    });
   };
 
   const exportCSV = () => {
@@ -333,14 +435,11 @@ const PayrollPage = () => {
           <div className="w-full md:w-auto">
             <Input
               small
-              value={searchValue}
+              value={value}
               className="w-full"
               icon="pi pi-search"
               iconPosition="left"
-              onChange={(e) => {
-                setSearchValue(e.target.value);
-                onChange?.(e);
-              }}
+              onChange={onChange}
               placeholder="Search"
             />
           </div>
@@ -385,6 +484,10 @@ const PayrollPage = () => {
           rows={10}
           scrollable
           scrollHeight="65vh"
+          loading={isLoading}
+          loadingIcon={
+            <ProgressSpinner style={{ width: "50px", height: "50px" }} />
+          }
         />
       </div>
     </div>

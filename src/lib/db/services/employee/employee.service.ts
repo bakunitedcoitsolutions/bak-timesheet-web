@@ -79,15 +79,7 @@ const employeeSelect = {
 /**
  * Helper function to convert Decimal to number for client serialization
  */
-const convertDecimalToNumber = (value: any): number | null => {
-  if (value === null || value === undefined) return null;
-  if (typeof value === "number") return value;
-  // Handle Prisma.Decimal
-  if (typeof value === "object" && "toNumber" in value) {
-    return value.toNumber();
-  }
-  return Number(value);
-};
+import { convertDecimalToNumber } from "@/lib/db/utils";
 
 /**
  * Helper function to normalize date strings to Date objects
@@ -107,16 +99,16 @@ const generateRandomEmployeeCode = (): number => {
   // Use seconds since epoch (fits in INTEGER range) + random component
   const timestampSeconds = Math.floor(Date.now() / 1000);
   const randomComponent = Math.floor(Math.random() * 1000000); // 0-999999
-  
+
   // Combine: timestamp (ensures uniqueness) + random (adds variation)
   // Ensure it doesn't exceed INTEGER max (2,147,483,647)
   const code = timestampSeconds + randomComponent;
-  
+
   // If somehow it exceeds max, use a fallback random number
   if (code > 2147483647) {
     return Math.floor(1000000 + Math.random() * 9000000); // 7-8 digit number
   }
-  
+
   return code;
 };
 
@@ -126,48 +118,48 @@ const generateRandomEmployeeCode = (): number => {
 export const createEmployeeStep1 = async (data: CreateEmployeeStep1Data) => {
   return prisma.$transaction(
     async (tx: PrismaTransactionClient) => {
-    // Handle employee code assignment
-    const existingEmployee = await tx.employee.findUnique({
-      where: { employeeCode: data.employeeCode },
-      select: { id: true },
-    });
+      // Handle employee code assignment
+      const existingEmployee = await tx.employee.findUnique({
+        where: { employeeCode: data.employeeCode },
+        select: { id: true },
+      });
 
-    if (existingEmployee) {
-      // If reassignEmployeeCode is true, assign random code to previous employee
-      if (data.reassignEmployeeCode) {
-        const randomCode = generateRandomEmployeeCode();
-        await tx.employee.update({
-          where: { id: existingEmployee.id },
-          data: { employeeCode: randomCode },
-        });
-      } else {
-        throw new Error("Employee code already exists");
+      if (existingEmployee) {
+        // If reassignEmployeeCode is true, assign random code to previous employee
+        if (data.reassignEmployeeCode) {
+          const randomCode = generateRandomEmployeeCode();
+          await tx.employee.update({
+            where: { id: existingEmployee.id },
+            data: { employeeCode: randomCode },
+          });
+        } else {
+          throw new Error("Employee code already exists");
+        }
       }
-    }
 
-    const employee = await tx.employee.create({
-      data: {
-        profilePicture: data.profilePicture ?? null,
-        employeeCode: data.employeeCode,
-        nameEn: data.nameEn,
-        nameAr: data.nameAr ?? null,
-        dob: normalizeDate(data.dob),
-        phone: data.phone ?? null,
-      },
-      select: employeeSelect,
-    });
+      const employee = await tx.employee.create({
+        data: {
+          profilePicture: data.profilePicture ?? null,
+          employeeCode: data.employeeCode,
+          nameEn: data.nameEn,
+          nameAr: data.nameAr ?? null,
+          dob: normalizeDate(data.dob),
+          phone: data.phone ?? null,
+        },
+        select: employeeSelect,
+      });
 
-    // Convert Decimal fields to numbers for client serialization
-    return {
-      ...employee,
-      hourlyRate: convertDecimalToNumber(employee.hourlyRate),
-      salary: convertDecimalToNumber(employee.salary),
-      foodAllowance: convertDecimalToNumber(employee.foodAllowance),
-      mobileAllowance: convertDecimalToNumber(employee.mobileAllowance),
-      otherAllowance: convertDecimalToNumber(employee.otherAllowance),
-      gosiSalary: convertDecimalToNumber(employee.gosiSalary),
-      openingBalance: convertDecimalToNumber(employee.openingBalance),
-    };
+      // Convert Decimal fields to numbers for client serialization
+      return {
+        ...employee,
+        hourlyRate: convertDecimalToNumber(employee.hourlyRate),
+        salary: convertDecimalToNumber(employee.salary),
+        foodAllowance: convertDecimalToNumber(employee.foodAllowance),
+        mobileAllowance: convertDecimalToNumber(employee.mobileAllowance),
+        otherAllowance: convertDecimalToNumber(employee.otherAllowance),
+        gosiSalary: convertDecimalToNumber(employee.gosiSalary),
+        openingBalance: convertDecimalToNumber(employee.openingBalance),
+      };
     },
     {
       maxWait: 10000, // Wait up to 10 seconds to acquire a transaction
@@ -185,62 +177,62 @@ export const updateEmployeeStep1 = async (
 ) => {
   return prisma.$transaction(
     async (tx: PrismaTransactionClient) => {
-    // Validate employee exists
-    const existingEmployee = await tx.employee.findUnique({
-      where: { id },
-      select: { id: true },
-    });
+      // Validate employee exists
+      const existingEmployee = await tx.employee.findUnique({
+        where: { id },
+        select: { id: true },
+      });
 
-    if (!existingEmployee) {
-      throw new Error("Employee not found");
-    }
-
-    // Handle employee code assignment
-    const employeeWithCode = await tx.employee.findUnique({
-      where: { employeeCode: data.employeeCode },
-      select: { id: true },
-    });
-
-    if (employeeWithCode && employeeWithCode.id !== id) {
-      // If reassignEmployeeCode is true, assign random code to previous employee
-      if (data.reassignEmployeeCode) {
-        const randomCode = generateRandomEmployeeCode();
-        await tx.employee.update({
-          where: { id: employeeWithCode.id },
-          data: { employeeCode: randomCode },
-        });
-      } else {
-        throw new Error("Employee code already exists");
+      if (!existingEmployee) {
+        throw new Error("Employee not found");
       }
-    }
 
-    const updateData: any = {};
+      // Handle employee code assignment
+      const employeeWithCode = await tx.employee.findUnique({
+        where: { employeeCode: data.employeeCode },
+        select: { id: true },
+      });
 
-    if (data.profilePicture !== undefined)
-      updateData.profilePicture = data.profilePicture ?? null;
-    updateData.employeeCode = data.employeeCode;
-    if (data.nameEn !== undefined) updateData.nameEn = data.nameEn;
-    if (data.nameAr !== undefined) updateData.nameAr = data.nameAr ?? null;
-    if (data.dob !== undefined) updateData.dob = normalizeDate(data.dob);
-    if (data.phone !== undefined) updateData.phone = data.phone ?? null;
+      if (employeeWithCode && employeeWithCode.id !== id) {
+        // If reassignEmployeeCode is true, assign random code to previous employee
+        if (data.reassignEmployeeCode) {
+          const randomCode = generateRandomEmployeeCode();
+          await tx.employee.update({
+            where: { id: employeeWithCode.id },
+            data: { employeeCode: randomCode },
+          });
+        } else {
+          throw new Error("Employee code already exists");
+        }
+      }
 
-    const employee = await tx.employee.update({
-      where: { id },
-      data: updateData,
-      select: employeeSelect,
-    });
+      const updateData: any = {};
 
-    // Convert Decimal fields to numbers for client serialization
-    return {
-      ...employee,
-      hourlyRate: convertDecimalToNumber(employee.hourlyRate),
-      salary: convertDecimalToNumber(employee.salary),
-      foodAllowance: convertDecimalToNumber(employee.foodAllowance),
-      mobileAllowance: convertDecimalToNumber(employee.mobileAllowance),
-      otherAllowance: convertDecimalToNumber(employee.otherAllowance),
-      gosiSalary: convertDecimalToNumber(employee.gosiSalary),
-      openingBalance: convertDecimalToNumber(employee.openingBalance),
-    };
+      if (data.profilePicture !== undefined)
+        updateData.profilePicture = data.profilePicture ?? null;
+      updateData.employeeCode = data.employeeCode;
+      if (data.nameEn !== undefined) updateData.nameEn = data.nameEn;
+      if (data.nameAr !== undefined) updateData.nameAr = data.nameAr ?? null;
+      if (data.dob !== undefined) updateData.dob = normalizeDate(data.dob);
+      if (data.phone !== undefined) updateData.phone = data.phone ?? null;
+
+      const employee = await tx.employee.update({
+        where: { id },
+        data: updateData,
+        select: employeeSelect,
+      });
+
+      // Convert Decimal fields to numbers for client serialization
+      return {
+        ...employee,
+        hourlyRate: convertDecimalToNumber(employee.hourlyRate),
+        salary: convertDecimalToNumber(employee.salary),
+        foodAllowance: convertDecimalToNumber(employee.foodAllowance),
+        mobileAllowance: convertDecimalToNumber(employee.mobileAllowance),
+        otherAllowance: convertDecimalToNumber(employee.otherAllowance),
+        gosiSalary: convertDecimalToNumber(employee.gosiSalary),
+        openingBalance: convertDecimalToNumber(employee.openingBalance),
+      };
     },
     {
       maxWait: 10000, // Wait up to 10 seconds to acquire a transaction
