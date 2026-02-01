@@ -22,6 +22,8 @@ import {
   useGetPayrollSummaries,
   PayrollSummaryWithRelations,
   useUpdateMonthlyPayrollValues,
+  useRunPayroll,
+  useRepostPayroll,
 } from "@/lib/db/services/payroll-summary";
 import { toastService } from "@/lib/toast";
 import { showConfirmDialog } from "@/components/common/confirm-dialog";
@@ -331,6 +333,8 @@ const PayrollPage = () => {
 
   /* New Hook */
   const { mutateAsync: updatePayrollValues } = useUpdateMonthlyPayrollValues();
+  const { mutateAsync: runPayroll } = useRunPayroll();
+  const { mutateAsync: repostPayroll } = useRepostPayroll();
 
   const parsePeriod = (period: string) => {
     const [monthStr, yearStr] = period.split(" ");
@@ -400,8 +404,13 @@ const PayrollPage = () => {
       title: "Repost Payroll",
       message: `Are you sure you want to repost ${payroll.period}?`,
       onAccept: async () => {
-        // Repost logic here
-        console.log("Repost confirmed for", payroll.period);
+        try {
+          await repostPayroll({ id: Number(payroll.id) });
+          toastService.showSuccess("Success", "Payroll reposted successfully");
+        } catch (error) {
+          console.error(error);
+          toastService.showError("Error", "Failed to repost payroll");
+        }
       },
     });
   };
@@ -463,7 +472,29 @@ const PayrollPage = () => {
             size="small"
             variant="solid"
             label="Run Payroll"
-            onClick={() => router.push("/payroll/12-2025")}
+            onClick={() => {
+              // Temporary: Use prompt or simple selection.
+              // Since I need to select Month/Year, simplest is a prompt for now or reusing selectedYear
+              // and asking for month.
+              const currentYear = new Date().getFullYear();
+              const input = prompt(
+                "Enter Month (1-12) to run for " + currentYear,
+                (new Date().getMonth() + 1).toString()
+              );
+              if (input) {
+                const month = parseInt(input);
+                if (month >= 1 && month <= 12) {
+                  runPayroll({ payrollYear: currentYear, payrollMonth: month })
+                    .then(() =>
+                      toastService.showSuccess(
+                        "Success",
+                        "Payroll run successfully"
+                      )
+                    )
+                    .catch((e) => toastService.showError("Error", e.message));
+                }
+              }
+            }}
           />
         </div>
       </div>

@@ -5,6 +5,8 @@ import { GetPayrollSummaryByYearParamsInput } from "./payroll-summary.schemas";
 import {
   updateMonthlyPayrollValuesAction,
   getPayrollSummariesByYearAction,
+  runPayrollAction,
+  repostPayrollAction,
 } from "./actions";
 
 export const useUpdateMonthlyPayrollValues = () =>
@@ -15,6 +17,26 @@ export const useUpdateMonthlyPayrollValues = () =>
         queryKey: ["payroll-summaries"],
       });
       // Invalidate specific query if needed, avoiding complexity for now
+    },
+  });
+
+export const useRunPayroll = () =>
+  useMutation(runPayrollAction, {
+    mutationKey: ["run-payroll"],
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["payroll-summaries"],
+      });
+    },
+  });
+
+export const useRepostPayroll = () =>
+  useMutation(repostPayrollAction, {
+    mutationKey: ["repost-payroll"],
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["payroll-summaries"],
+      });
     },
   });
 

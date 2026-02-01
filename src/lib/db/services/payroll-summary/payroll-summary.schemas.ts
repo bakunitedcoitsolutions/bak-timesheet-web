@@ -12,9 +12,21 @@ export type GetPayrollSummaryByYearParamsInput = z.infer<
 export const UpdateMonthlyPayrollValuesSchema = z.object({
   payrollYear: z.number(),
   payrollMonth: z.number(),
-  isPosted: z.boolean().optional().nullable(),
+  isPosted: z.boolean(),
+});
+
+export const RunPayrollSchema = z.object({
+  payrollYear: z.number(),
+  payrollMonth: z.number(),
+});
+
+export const RepostPayrollSchema = z.object({
+  id: z.number(),
 });
 
 export type UpdateMonthlyPayrollValuesInput = z.infer<
   typeof UpdateMonthlyPayrollValuesSchema
 >;
+
+export type RunPayrollInput = z.infer<typeof RunPayrollSchema>;
+export type RepostPayrollInput = z.infer<typeof RepostPayrollSchema>;

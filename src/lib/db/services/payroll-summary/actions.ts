@@ -4,16 +4,32 @@ import { serverAction } from "@/lib/zsa/zsa-action";
 import {
   UpdateMonthlyPayrollValuesSchema,
   GetPayrollSummaryByYearParamsSchema,
+  RunPayrollSchema,
+  RepostPayrollSchema,
 } from "./payroll-summary.schemas";
 import {
   updateMonthlyPayrollValues,
   getPayrollSummariesByYear,
+  runPayroll,
+  repostPayroll,
 } from "./payroll-summary.service";
 
 export const updateMonthlyPayrollValuesAction = serverAction
   .input(UpdateMonthlyPayrollValuesSchema)
   .handler(async ({ input }) => {
     await updateMonthlyPayrollValues(input);
+  });
+
+export const runPayrollAction = serverAction
+  .input(RunPayrollSchema)
+  .handler(async ({ input }) => {
+    await runPayroll(input);
+  });
+
+export const repostPayrollAction = serverAction
+  .input(RepostPayrollSchema)
+  .handler(async ({ input }) => {
+    await repostPayroll(input);
   });
 
 export const getPayrollSummariesByYearAction = serverAction
