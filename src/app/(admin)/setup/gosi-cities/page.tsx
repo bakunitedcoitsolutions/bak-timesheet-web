@@ -297,6 +297,7 @@ const GosiCitiesPage = () => {
           onPage={handlePageChange}
           onSort={sortHandler}
           sortField={sortBy}
+          lazy={true}
           sortOrder={toPrimeReactSortOrder(sortOrder) as any}
           pagination={true}
           rowsPerPageOptions={[10, 25, 50]}

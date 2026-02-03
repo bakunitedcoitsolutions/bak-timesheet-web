@@ -176,6 +176,7 @@ const UserRolesPage = () => {
           customHeader={renderHeader}
           columns={tableColumns}
           pagination={true}
+          lazy={true}
           rowsPerPageOptions={[10, 25, 50]}
           rows={10}
           globalSearch={true}

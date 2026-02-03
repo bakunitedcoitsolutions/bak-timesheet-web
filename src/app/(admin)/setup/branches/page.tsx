@@ -296,6 +296,7 @@ const BranchesPage = () => {
           sortMode="single"
           onPage={handlePageChange}
           onSort={sortHandler}
+          lazy={true}
           sortField={sortBy}
           sortOrder={toPrimeReactSortOrder(sortOrder) as any}
           pagination={true}

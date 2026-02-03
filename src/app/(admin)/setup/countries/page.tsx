@@ -299,6 +299,7 @@ const CountriesPage = () => {
           sortField={sortBy}
           sortOrder={toPrimeReactSortOrder(sortOrder) as any}
           pagination={true}
+          lazy={true}
           rowsPerPageOptions={[10, 25, 50]}
           rows={currentLimit}
           first={(currentPage - 1) * currentLimit}
