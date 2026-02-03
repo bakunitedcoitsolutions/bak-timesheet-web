@@ -426,7 +426,8 @@ const CustomTable = forwardRef<TableRef, CustomTableProps<any>>(
           className={tableClassName}
           {...(Object.fromEntries(
             Object.entries(rest as any).filter(
-              ([key]) => key !== "onGlobalFilterChange" && key !== "globalFilter"
+              ([key]) =>
+                key !== "onGlobalFilterChange" && key !== "globalFilter"
             )
           ) as any)}
         >

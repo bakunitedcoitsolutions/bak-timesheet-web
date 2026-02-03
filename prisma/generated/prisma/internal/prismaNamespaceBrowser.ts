@@ -71,7 +71,8 @@ export const ModelName = {
   Loan: 'Loan',
   TrafficChallan: 'TrafficChallan',
   ExitReentry: 'ExitReentry',
-  Ledger: 'Ledger'
+  Ledger: 'Ledger',
+  AllowanceNotAvailable: 'AllowanceNotAvailable'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -199,9 +200,9 @@ export const EmployeeScalarFieldEnum = {
   isDeductable: 'isDeductable',
   isFixed: 'isFixed',
   workingDays: 'workingDays',
-  workingHours: 'workingHours',
   hourlyRate: 'hourlyRate',
   salary: 'salary',
+  breakfastAllowance: 'breakfastAllowance',
   foodAllowance: 'foodAllowance',
   mobileAllowance: 'mobileAllowance',
   otherAllowance: 'otherAllowance',
@@ -214,7 +215,7 @@ export const EmployeeScalarFieldEnum = {
   idCardExpiryDate: 'idCardExpiryDate',
   idCardDocument: 'idCardDocument',
   profession: 'profession',
-  nationality: 'nationality',
+  nationalityId: 'nationalityId',
   passportNo: 'passportNo',
   passportExpiryDate: 'passportExpiryDate',
   passportDocument: 'passportDocument',
@@ -242,7 +243,6 @@ export const DesignationScalarFieldEnum = {
   hoursPerDay: 'hoursPerDay',
   displayOrderKey: 'displayOrderKey',
   color: 'color',
-  breakfastAllowance: 'breakfastAllowance',
   isActive: 'isActive',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -282,11 +282,9 @@ export const TimesheetScalarFieldEnum = {
   employeeId: 'employeeId',
   date: 'date',
   project1Id: 'project1Id',
-  project1BfAllowance: 'project1BfAllowance',
   project1Hours: 'project1Hours',
   project1Overtime: 'project1Overtime',
   project2Id: 'project2Id',
-  project2BfAllowance: 'project2BfAllowance',
   project2Hours: 'project2Hours',
   project2Overtime: 'project2Overtime',
   totalHours: 'totalHours',
@@ -457,6 +455,22 @@ export const LedgerScalarFieldEnum = {
 } as const
 
 export type LedgerScalarFieldEnum = (typeof LedgerScalarFieldEnum)[keyof typeof LedgerScalarFieldEnum]
+
+
+export const AllowanceNotAvailableScalarFieldEnum = {
+  id: 'id',
+  nameEn: 'nameEn',
+  nameAr: 'nameAr',
+  description: 'description',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  type: 'type',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AllowanceNotAvailableScalarFieldEnum = (typeof AllowanceNotAvailableScalarFieldEnum)[keyof typeof AllowanceNotAvailableScalarFieldEnum]
 
 
 export const SortOrder = {

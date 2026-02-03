@@ -3,15 +3,12 @@
  * Type definitions for designation service operations
  */
 
-import type { Prisma } from "../../../../../prisma/generated/prisma/client";
-
 export interface CreateDesignationData {
   nameEn: string;
   nameAr?: string;
   hoursPerDay?: number;
   displayOrderKey?: number;
   color?: string;
-  breakfastAllowance?: number | Prisma.Decimal;
   isActive?: boolean;
 }
 
@@ -21,7 +18,6 @@ export interface UpdateDesignationData {
   hoursPerDay?: number;
   displayOrderKey?: number;
   color?: string;
-  breakfastAllowance?: number | Prisma.Decimal;
   isActive?: boolean;
 }
 
@@ -30,8 +26,7 @@ export type ListDesignationsSortableField =
   | "nameAr"
   | "isActive"
   | "displayOrderKey"
-  | "hoursPerDay"
-  | "breakfastAllowance";
+  | "hoursPerDay";
 
 export interface ListDesignationsParams {
   page?: number;
@@ -48,7 +43,6 @@ export interface DesignationInterface {
   hoursPerDay: number | null;
   displayOrderKey: number | null;
   color: string | null;
-  breakfastAllowance: number | null; // Converted from Decimal for client serialization
   isActive: boolean;
   createdAt: Date | any;
   updatedAt: Date | any;

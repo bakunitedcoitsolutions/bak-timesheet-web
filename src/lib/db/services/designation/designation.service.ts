@@ -24,7 +24,6 @@ const designationSelect = {
   hoursPerDay: true,
   displayOrderKey: true,
   color: true,
-  breakfastAllowance: true,
   isActive: true,
   createdAt: true,
   updatedAt: true,
@@ -98,19 +97,12 @@ export const createDesignation = async (data: CreateDesignationData) => {
         hoursPerDay: data.hoursPerDay ?? null,
         displayOrderKey: finalDisplayOrderKey,
         color: data.color ?? "#FFFFFF", // Default to white
-        breakfastAllowance: data.breakfastAllowance ?? null,
         isActive: data.isActive ?? true,
       },
       select: designationSelect,
     });
 
-    // Convert Decimal to number for client serialization
-    return {
-      ...designation,
-      breakfastAllowance: designation.breakfastAllowance
-        ? Number(designation.breakfastAllowance)
-        : null,
-    };
+    return designation;
   });
 };
 
@@ -128,12 +120,7 @@ export const findDesignationById = async (id: number) => {
   }
 
   // Convert Decimal to number for client serialization
-  return {
-    ...designation,
-    breakfastAllowance: designation.breakfastAllowance
-      ? Number(designation.breakfastAllowance)
-      : null,
-  };
+  return designation;
 };
 
 /**
@@ -281,8 +268,6 @@ export const updateDesignation = async (
     if (data.displayOrderKey !== undefined)
       updateData.displayOrderKey = data.displayOrderKey ?? null;
     if (data.color !== undefined) updateData.color = data.color ?? null;
-    if (data.breakfastAllowance !== undefined)
-      updateData.breakfastAllowance = data.breakfastAllowance ?? null;
     if (data.isActive !== undefined) updateData.isActive = data.isActive;
 
     const updatedDesignation = await tx.designation.update({
@@ -291,13 +276,7 @@ export const updateDesignation = async (
       select: designationSelect,
     });
 
-    // Convert Decimal to number for client serialization
-    return {
-      ...updatedDesignation,
-      breakfastAllowance: updatedDesignation.breakfastAllowance
-        ? Number(updatedDesignation.breakfastAllowance)
-        : null,
-    };
+    return updatedDesignation;
   });
 };
 
@@ -417,7 +396,6 @@ export const listDesignations = async (
       "isActive",
       "displayOrderKey",
       "hoursPerDay",
-      "breakfastAllowance",
     ] as const;
 
     // Only allow sorting by the specified valid fields
@@ -443,16 +421,8 @@ export const listDesignations = async (
     prisma.designation.count({ where }),
   ]);
 
-  // Convert Decimal to number for client serialization
-  const transformedDesignations = designations.map((designation) => ({
-    ...designation,
-    breakfastAllowance: designation.breakfastAllowance
-      ? Number(designation.breakfastAllowance)
-      : null,
-  }));
-
   return {
-    designations: transformedDesignations,
+    designations,
     pagination: {
       page,
       limit,

@@ -42,14 +42,11 @@ const columns = (): TableColumn<UserRoleInterface>[] => [
     align: "center",
     style: { minWidth: "70px" },
     headerStyle: { minWidth: "70px" },
-    body: (rowData: UserRoleInterface, options?: { rowIndex?: number }) => {
-      const rowIndex = options?.rowIndex ?? 0;
-      return (
-        <div className={"flex items-center justify-center gap-1.5 w-[40px]"}>
-          <span className="text-sm font-medium">{rowIndex + 1}</span>
-        </div>
-      );
-    },
+    body: (rowData: UserRoleInterface) => (
+      <div className={"flex items-center justify-center gap-1.5 w-[40px]"}>
+        <span className="text-sm font-medium">{rowData?.id}</span>
+      </div>
+    ),
   },
   {
     field: "nameEn",

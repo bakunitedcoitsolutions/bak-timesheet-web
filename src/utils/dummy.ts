@@ -3142,7 +3142,6 @@ interface Designation {
   hoursPerDay: number;
   displayOrder: number;
   color: string; // hex color
-  breakfastAllowance: boolean;
   isActive: boolean;
 }
 
@@ -3154,7 +3153,6 @@ const designationsData: Designation[] = [
     hoursPerDay: 8,
     displayOrder: 1,
     color: "#3B82F6",
-    breakfastAllowance: true,
     isActive: true,
   },
   {
@@ -3164,7 +3162,6 @@ const designationsData: Designation[] = [
     hoursPerDay: 8,
     displayOrder: 2,
     color: "#10B981",
-    breakfastAllowance: true,
     isActive: true,
   },
   {
@@ -3174,7 +3171,6 @@ const designationsData: Designation[] = [
     hoursPerDay: 8,
     displayOrder: 3,
     color: "#F59E0B",
-    breakfastAllowance: false,
     isActive: true,
   },
   {
@@ -3184,7 +3180,6 @@ const designationsData: Designation[] = [
     hoursPerDay: 10,
     displayOrder: 4,
     color: "#EF4444",
-    breakfastAllowance: true,
     isActive: true,
   },
   {
@@ -3194,7 +3189,6 @@ const designationsData: Designation[] = [
     hoursPerDay: 8,
     displayOrder: 5,
     color: "#8B5CF6",
-    breakfastAllowance: false,
     isActive: true,
   },
   {
@@ -3204,7 +3198,6 @@ const designationsData: Designation[] = [
     hoursPerDay: 8,
     displayOrder: 6,
     color: "#06B6D4",
-    breakfastAllowance: false,
     isActive: true,
   },
   {
@@ -3214,7 +3207,6 @@ const designationsData: Designation[] = [
     hoursPerDay: 8,
     displayOrder: 7,
     color: "#F97316",
-    breakfastAllowance: false,
     isActive: true,
   },
   {
@@ -3224,7 +3216,6 @@ const designationsData: Designation[] = [
     hoursPerDay: 10,
     displayOrder: 8,
     color: "#EC4899",
-    breakfastAllowance: true,
     isActive: true,
   },
 ];
@@ -3418,3 +3409,6 @@ export type {
   User,
   Project,
 };
+
+// These are designation ids which has breakfast allowance
+// 1, 2, 3, 4, 5, 8, 9, 20, 21, 22, 23, 37, 40, 44

@@ -55,11 +55,9 @@ export type TimesheetMinAggregateOutputType = {
   employeeId: number | null
   date: Date | null
   project1Id: number | null
-  project1BfAllowance: boolean | null
   project1Hours: number | null
   project1Overtime: number | null
   project2Id: number | null
-  project2BfAllowance: boolean | null
   project2Hours: number | null
   project2Overtime: number | null
   totalHours: number | null
@@ -74,11 +72,9 @@ export type TimesheetMaxAggregateOutputType = {
   employeeId: number | null
   date: Date | null
   project1Id: number | null
-  project1BfAllowance: boolean | null
   project1Hours: number | null
   project1Overtime: number | null
   project2Id: number | null
-  project2BfAllowance: boolean | null
   project2Hours: number | null
   project2Overtime: number | null
   totalHours: number | null
@@ -93,11 +89,9 @@ export type TimesheetCountAggregateOutputType = {
   employeeId: number
   date: number
   project1Id: number
-  project1BfAllowance: number
   project1Hours: number
   project1Overtime: number
   project2Id: number
-  project2BfAllowance: number
   project2Hours: number
   project2Overtime: number
   totalHours: number
@@ -138,11 +132,9 @@ export type TimesheetMinAggregateInputType = {
   employeeId?: true
   date?: true
   project1Id?: true
-  project1BfAllowance?: true
   project1Hours?: true
   project1Overtime?: true
   project2Id?: true
-  project2BfAllowance?: true
   project2Hours?: true
   project2Overtime?: true
   totalHours?: true
@@ -157,11 +149,9 @@ export type TimesheetMaxAggregateInputType = {
   employeeId?: true
   date?: true
   project1Id?: true
-  project1BfAllowance?: true
   project1Hours?: true
   project1Overtime?: true
   project2Id?: true
-  project2BfAllowance?: true
   project2Hours?: true
   project2Overtime?: true
   totalHours?: true
@@ -176,11 +166,9 @@ export type TimesheetCountAggregateInputType = {
   employeeId?: true
   date?: true
   project1Id?: true
-  project1BfAllowance?: true
   project1Hours?: true
   project1Overtime?: true
   project2Id?: true
-  project2BfAllowance?: true
   project2Hours?: true
   project2Overtime?: true
   totalHours?: true
@@ -282,11 +270,9 @@ export type TimesheetGroupByOutputType = {
   employeeId: number
   date: Date
   project1Id: number | null
-  project1BfAllowance: boolean
   project1Hours: number | null
   project1Overtime: number | null
   project2Id: number | null
-  project2BfAllowance: boolean
   project2Hours: number | null
   project2Overtime: number | null
   totalHours: number | null
@@ -324,11 +310,9 @@ export type TimesheetWhereInput = {
   employeeId?: Prisma.IntFilter<"Timesheet"> | number
   date?: Prisma.DateTimeFilter<"Timesheet"> | Date | string
   project1Id?: Prisma.IntNullableFilter<"Timesheet"> | number | null
-  project1BfAllowance?: Prisma.BoolFilter<"Timesheet"> | boolean
   project1Hours?: Prisma.IntNullableFilter<"Timesheet"> | number | null
   project1Overtime?: Prisma.IntNullableFilter<"Timesheet"> | number | null
   project2Id?: Prisma.IntNullableFilter<"Timesheet"> | number | null
-  project2BfAllowance?: Prisma.BoolFilter<"Timesheet"> | boolean
   project2Hours?: Prisma.IntNullableFilter<"Timesheet"> | number | null
   project2Overtime?: Prisma.IntNullableFilter<"Timesheet"> | number | null
   totalHours?: Prisma.IntNullableFilter<"Timesheet"> | number | null
@@ -346,11 +330,9 @@ export type TimesheetOrderByWithRelationInput = {
   employeeId?: Prisma.SortOrder
   date?: Prisma.SortOrder
   project1Id?: Prisma.SortOrderInput | Prisma.SortOrder
-  project1BfAllowance?: Prisma.SortOrder
   project1Hours?: Prisma.SortOrderInput | Prisma.SortOrder
   project1Overtime?: Prisma.SortOrderInput | Prisma.SortOrder
   project2Id?: Prisma.SortOrderInput | Prisma.SortOrder
-  project2BfAllowance?: Prisma.SortOrder
   project2Hours?: Prisma.SortOrderInput | Prisma.SortOrder
   project2Overtime?: Prisma.SortOrderInput | Prisma.SortOrder
   totalHours?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -371,11 +353,9 @@ export type TimesheetWhereUniqueInput = Prisma.AtLeast<{
   employeeId?: Prisma.IntFilter<"Timesheet"> | number
   date?: Prisma.DateTimeFilter<"Timesheet"> | Date | string
   project1Id?: Prisma.IntNullableFilter<"Timesheet"> | number | null
-  project1BfAllowance?: Prisma.BoolFilter<"Timesheet"> | boolean
   project1Hours?: Prisma.IntNullableFilter<"Timesheet"> | number | null
   project1Overtime?: Prisma.IntNullableFilter<"Timesheet"> | number | null
   project2Id?: Prisma.IntNullableFilter<"Timesheet"> | number | null
-  project2BfAllowance?: Prisma.BoolFilter<"Timesheet"> | boolean
   project2Hours?: Prisma.IntNullableFilter<"Timesheet"> | number | null
   project2Overtime?: Prisma.IntNullableFilter<"Timesheet"> | number | null
   totalHours?: Prisma.IntNullableFilter<"Timesheet"> | number | null
@@ -393,11 +373,9 @@ export type TimesheetOrderByWithAggregationInput = {
   employeeId?: Prisma.SortOrder
   date?: Prisma.SortOrder
   project1Id?: Prisma.SortOrderInput | Prisma.SortOrder
-  project1BfAllowance?: Prisma.SortOrder
   project1Hours?: Prisma.SortOrderInput | Prisma.SortOrder
   project1Overtime?: Prisma.SortOrderInput | Prisma.SortOrder
   project2Id?: Prisma.SortOrderInput | Prisma.SortOrder
-  project2BfAllowance?: Prisma.SortOrder
   project2Hours?: Prisma.SortOrderInput | Prisma.SortOrder
   project2Overtime?: Prisma.SortOrderInput | Prisma.SortOrder
   totalHours?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -420,11 +398,9 @@ export type TimesheetScalarWhereWithAggregatesInput = {
   employeeId?: Prisma.IntWithAggregatesFilter<"Timesheet"> | number
   date?: Prisma.DateTimeWithAggregatesFilter<"Timesheet"> | Date | string
   project1Id?: Prisma.IntNullableWithAggregatesFilter<"Timesheet"> | number | null
-  project1BfAllowance?: Prisma.BoolWithAggregatesFilter<"Timesheet"> | boolean
   project1Hours?: Prisma.IntNullableWithAggregatesFilter<"Timesheet"> | number | null
   project1Overtime?: Prisma.IntNullableWithAggregatesFilter<"Timesheet"> | number | null
   project2Id?: Prisma.IntNullableWithAggregatesFilter<"Timesheet"> | number | null
-  project2BfAllowance?: Prisma.BoolWithAggregatesFilter<"Timesheet"> | boolean
   project2Hours?: Prisma.IntNullableWithAggregatesFilter<"Timesheet"> | number | null
   project2Overtime?: Prisma.IntNullableWithAggregatesFilter<"Timesheet"> | number | null
   totalHours?: Prisma.IntNullableWithAggregatesFilter<"Timesheet"> | number | null
@@ -436,10 +412,8 @@ export type TimesheetScalarWhereWithAggregatesInput = {
 
 export type TimesheetCreateInput = {
   date: Date | string
-  project1BfAllowance?: boolean
   project1Hours?: number | null
   project1Overtime?: number | null
-  project2BfAllowance?: boolean
   project2Hours?: number | null
   project2Overtime?: number | null
   totalHours?: number | null
@@ -457,11 +431,9 @@ export type TimesheetUncheckedCreateInput = {
   employeeId: number
   date: Date | string
   project1Id?: number | null
-  project1BfAllowance?: boolean
   project1Hours?: number | null
   project1Overtime?: number | null
   project2Id?: number | null
-  project2BfAllowance?: boolean
   project2Hours?: number | null
   project2Overtime?: number | null
   totalHours?: number | null
@@ -473,10 +445,8 @@ export type TimesheetUncheckedCreateInput = {
 
 export type TimesheetUpdateInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  project1BfAllowance?: Prisma.BoolFieldUpdateOperationsInput | boolean
   project1Hours?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   project1Overtime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  project2BfAllowance?: Prisma.BoolFieldUpdateOperationsInput | boolean
   project2Hours?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   project2Overtime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   totalHours?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -494,11 +464,9 @@ export type TimesheetUncheckedUpdateInput = {
   employeeId?: Prisma.IntFieldUpdateOperationsInput | number
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   project1Id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  project1BfAllowance?: Prisma.BoolFieldUpdateOperationsInput | boolean
   project1Hours?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   project1Overtime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   project2Id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  project2BfAllowance?: Prisma.BoolFieldUpdateOperationsInput | boolean
   project2Hours?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   project2Overtime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   totalHours?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -513,11 +481,9 @@ export type TimesheetCreateManyInput = {
   employeeId: number
   date: Date | string
   project1Id?: number | null
-  project1BfAllowance?: boolean
   project1Hours?: number | null
   project1Overtime?: number | null
   project2Id?: number | null
-  project2BfAllowance?: boolean
   project2Hours?: number | null
   project2Overtime?: number | null
   totalHours?: number | null
@@ -529,10 +495,8 @@ export type TimesheetCreateManyInput = {
 
 export type TimesheetUpdateManyMutationInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  project1BfAllowance?: Prisma.BoolFieldUpdateOperationsInput | boolean
   project1Hours?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   project1Overtime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  project2BfAllowance?: Prisma.BoolFieldUpdateOperationsInput | boolean
   project2Hours?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   project2Overtime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   totalHours?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -547,11 +511,9 @@ export type TimesheetUncheckedUpdateManyInput = {
   employeeId?: Prisma.IntFieldUpdateOperationsInput | number
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   project1Id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  project1BfAllowance?: Prisma.BoolFieldUpdateOperationsInput | boolean
   project1Hours?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   project1Overtime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   project2Id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  project2BfAllowance?: Prisma.BoolFieldUpdateOperationsInput | boolean
   project2Hours?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   project2Overtime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   totalHours?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -576,11 +538,9 @@ export type TimesheetCountOrderByAggregateInput = {
   employeeId?: Prisma.SortOrder
   date?: Prisma.SortOrder
   project1Id?: Prisma.SortOrder
-  project1BfAllowance?: Prisma.SortOrder
   project1Hours?: Prisma.SortOrder
   project1Overtime?: Prisma.SortOrder
   project2Id?: Prisma.SortOrder
-  project2BfAllowance?: Prisma.SortOrder
   project2Hours?: Prisma.SortOrder
   project2Overtime?: Prisma.SortOrder
   totalHours?: Prisma.SortOrder
@@ -607,11 +567,9 @@ export type TimesheetMaxOrderByAggregateInput = {
   employeeId?: Prisma.SortOrder
   date?: Prisma.SortOrder
   project1Id?: Prisma.SortOrder
-  project1BfAllowance?: Prisma.SortOrder
   project1Hours?: Prisma.SortOrder
   project1Overtime?: Prisma.SortOrder
   project2Id?: Prisma.SortOrder
-  project2BfAllowance?: Prisma.SortOrder
   project2Hours?: Prisma.SortOrder
   project2Overtime?: Prisma.SortOrder
   totalHours?: Prisma.SortOrder
@@ -626,11 +584,9 @@ export type TimesheetMinOrderByAggregateInput = {
   employeeId?: Prisma.SortOrder
   date?: Prisma.SortOrder
   project1Id?: Prisma.SortOrder
-  project1BfAllowance?: Prisma.SortOrder
   project1Hours?: Prisma.SortOrder
   project1Overtime?: Prisma.SortOrder
   project2Id?: Prisma.SortOrder
-  project2BfAllowance?: Prisma.SortOrder
   project2Hours?: Prisma.SortOrder
   project2Overtime?: Prisma.SortOrder
   totalHours?: Prisma.SortOrder
@@ -780,10 +736,8 @@ export type TimesheetUncheckedUpdateManyWithoutProject2NestedInput = {
 
 export type TimesheetCreateWithoutEmployeeInput = {
   date: Date | string
-  project1BfAllowance?: boolean
   project1Hours?: number | null
   project1Overtime?: number | null
-  project2BfAllowance?: boolean
   project2Hours?: number | null
   project2Overtime?: number | null
   totalHours?: number | null
@@ -799,11 +753,9 @@ export type TimesheetUncheckedCreateWithoutEmployeeInput = {
   id?: number
   date: Date | string
   project1Id?: number | null
-  project1BfAllowance?: boolean
   project1Hours?: number | null
   project1Overtime?: number | null
   project2Id?: number | null
-  project2BfAllowance?: boolean
   project2Hours?: number | null
   project2Overtime?: number | null
   totalHours?: number | null
@@ -847,11 +799,9 @@ export type TimesheetScalarWhereInput = {
   employeeId?: Prisma.IntFilter<"Timesheet"> | number
   date?: Prisma.DateTimeFilter<"Timesheet"> | Date | string
   project1Id?: Prisma.IntNullableFilter<"Timesheet"> | number | null
-  project1BfAllowance?: Prisma.BoolFilter<"Timesheet"> | boolean
   project1Hours?: Prisma.IntNullableFilter<"Timesheet"> | number | null
   project1Overtime?: Prisma.IntNullableFilter<"Timesheet"> | number | null
   project2Id?: Prisma.IntNullableFilter<"Timesheet"> | number | null
-  project2BfAllowance?: Prisma.BoolFilter<"Timesheet"> | boolean
   project2Hours?: Prisma.IntNullableFilter<"Timesheet"> | number | null
   project2Overtime?: Prisma.IntNullableFilter<"Timesheet"> | number | null
   totalHours?: Prisma.IntNullableFilter<"Timesheet"> | number | null
@@ -863,10 +813,8 @@ export type TimesheetScalarWhereInput = {
 
 export type TimesheetCreateWithoutProject1Input = {
   date: Date | string
-  project1BfAllowance?: boolean
   project1Hours?: number | null
   project1Overtime?: number | null
-  project2BfAllowance?: boolean
   project2Hours?: number | null
   project2Overtime?: number | null
   totalHours?: number | null
@@ -882,11 +830,9 @@ export type TimesheetUncheckedCreateWithoutProject1Input = {
   id?: number
   employeeId: number
   date: Date | string
-  project1BfAllowance?: boolean
   project1Hours?: number | null
   project1Overtime?: number | null
   project2Id?: number | null
-  project2BfAllowance?: boolean
   project2Hours?: number | null
   project2Overtime?: number | null
   totalHours?: number | null
@@ -908,10 +854,8 @@ export type TimesheetCreateManyProject1InputEnvelope = {
 
 export type TimesheetCreateWithoutProject2Input = {
   date: Date | string
-  project1BfAllowance?: boolean
   project1Hours?: number | null
   project1Overtime?: number | null
-  project2BfAllowance?: boolean
   project2Hours?: number | null
   project2Overtime?: number | null
   totalHours?: number | null
@@ -928,10 +872,8 @@ export type TimesheetUncheckedCreateWithoutProject2Input = {
   employeeId: number
   date: Date | string
   project1Id?: number | null
-  project1BfAllowance?: boolean
   project1Hours?: number | null
   project1Overtime?: number | null
-  project2BfAllowance?: boolean
   project2Hours?: number | null
   project2Overtime?: number | null
   totalHours?: number | null
@@ -987,11 +929,9 @@ export type TimesheetCreateManyEmployeeInput = {
   id?: number
   date: Date | string
   project1Id?: number | null
-  project1BfAllowance?: boolean
   project1Hours?: number | null
   project1Overtime?: number | null
   project2Id?: number | null
-  project2BfAllowance?: boolean
   project2Hours?: number | null
   project2Overtime?: number | null
   totalHours?: number | null
@@ -1003,10 +943,8 @@ export type TimesheetCreateManyEmployeeInput = {
 
 export type TimesheetUpdateWithoutEmployeeInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  project1BfAllowance?: Prisma.BoolFieldUpdateOperationsInput | boolean
   project1Hours?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   project1Overtime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  project2BfAllowance?: Prisma.BoolFieldUpdateOperationsInput | boolean
   project2Hours?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   project2Overtime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   totalHours?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1022,11 +960,9 @@ export type TimesheetUncheckedUpdateWithoutEmployeeInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   project1Id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  project1BfAllowance?: Prisma.BoolFieldUpdateOperationsInput | boolean
   project1Hours?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   project1Overtime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   project2Id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  project2BfAllowance?: Prisma.BoolFieldUpdateOperationsInput | boolean
   project2Hours?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   project2Overtime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   totalHours?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1040,11 +976,9 @@ export type TimesheetUncheckedUpdateManyWithoutEmployeeInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   project1Id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  project1BfAllowance?: Prisma.BoolFieldUpdateOperationsInput | boolean
   project1Hours?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   project1Overtime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   project2Id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  project2BfAllowance?: Prisma.BoolFieldUpdateOperationsInput | boolean
   project2Hours?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   project2Overtime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   totalHours?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1058,11 +992,9 @@ export type TimesheetCreateManyProject1Input = {
   id?: number
   employeeId: number
   date: Date | string
-  project1BfAllowance?: boolean
   project1Hours?: number | null
   project1Overtime?: number | null
   project2Id?: number | null
-  project2BfAllowance?: boolean
   project2Hours?: number | null
   project2Overtime?: number | null
   totalHours?: number | null
@@ -1077,10 +1009,8 @@ export type TimesheetCreateManyProject2Input = {
   employeeId: number
   date: Date | string
   project1Id?: number | null
-  project1BfAllowance?: boolean
   project1Hours?: number | null
   project1Overtime?: number | null
-  project2BfAllowance?: boolean
   project2Hours?: number | null
   project2Overtime?: number | null
   totalHours?: number | null
@@ -1092,10 +1022,8 @@ export type TimesheetCreateManyProject2Input = {
 
 export type TimesheetUpdateWithoutProject1Input = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  project1BfAllowance?: Prisma.BoolFieldUpdateOperationsInput | boolean
   project1Hours?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   project1Overtime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  project2BfAllowance?: Prisma.BoolFieldUpdateOperationsInput | boolean
   project2Hours?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   project2Overtime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   totalHours?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1111,11 +1039,9 @@ export type TimesheetUncheckedUpdateWithoutProject1Input = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   employeeId?: Prisma.IntFieldUpdateOperationsInput | number
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  project1BfAllowance?: Prisma.BoolFieldUpdateOperationsInput | boolean
   project1Hours?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   project1Overtime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   project2Id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  project2BfAllowance?: Prisma.BoolFieldUpdateOperationsInput | boolean
   project2Hours?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   project2Overtime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   totalHours?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1129,11 +1055,9 @@ export type TimesheetUncheckedUpdateManyWithoutProject1Input = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   employeeId?: Prisma.IntFieldUpdateOperationsInput | number
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  project1BfAllowance?: Prisma.BoolFieldUpdateOperationsInput | boolean
   project1Hours?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   project1Overtime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   project2Id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  project2BfAllowance?: Prisma.BoolFieldUpdateOperationsInput | boolean
   project2Hours?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   project2Overtime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   totalHours?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1145,10 +1069,8 @@ export type TimesheetUncheckedUpdateManyWithoutProject1Input = {
 
 export type TimesheetUpdateWithoutProject2Input = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  project1BfAllowance?: Prisma.BoolFieldUpdateOperationsInput | boolean
   project1Hours?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   project1Overtime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  project2BfAllowance?: Prisma.BoolFieldUpdateOperationsInput | boolean
   project2Hours?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   project2Overtime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   totalHours?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1165,10 +1087,8 @@ export type TimesheetUncheckedUpdateWithoutProject2Input = {
   employeeId?: Prisma.IntFieldUpdateOperationsInput | number
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   project1Id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  project1BfAllowance?: Prisma.BoolFieldUpdateOperationsInput | boolean
   project1Hours?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   project1Overtime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  project2BfAllowance?: Prisma.BoolFieldUpdateOperationsInput | boolean
   project2Hours?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   project2Overtime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   totalHours?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1183,10 +1103,8 @@ export type TimesheetUncheckedUpdateManyWithoutProject2Input = {
   employeeId?: Prisma.IntFieldUpdateOperationsInput | number
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   project1Id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  project1BfAllowance?: Prisma.BoolFieldUpdateOperationsInput | boolean
   project1Hours?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   project1Overtime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  project2BfAllowance?: Prisma.BoolFieldUpdateOperationsInput | boolean
   project2Hours?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   project2Overtime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   totalHours?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1203,11 +1121,9 @@ export type TimesheetSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   employeeId?: boolean
   date?: boolean
   project1Id?: boolean
-  project1BfAllowance?: boolean
   project1Hours?: boolean
   project1Overtime?: boolean
   project2Id?: boolean
-  project2BfAllowance?: boolean
   project2Hours?: boolean
   project2Overtime?: boolean
   totalHours?: boolean
@@ -1225,11 +1141,9 @@ export type TimesheetSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   employeeId?: boolean
   date?: boolean
   project1Id?: boolean
-  project1BfAllowance?: boolean
   project1Hours?: boolean
   project1Overtime?: boolean
   project2Id?: boolean
-  project2BfAllowance?: boolean
   project2Hours?: boolean
   project2Overtime?: boolean
   totalHours?: boolean
@@ -1247,11 +1161,9 @@ export type TimesheetSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
   employeeId?: boolean
   date?: boolean
   project1Id?: boolean
-  project1BfAllowance?: boolean
   project1Hours?: boolean
   project1Overtime?: boolean
   project2Id?: boolean
-  project2BfAllowance?: boolean
   project2Hours?: boolean
   project2Overtime?: boolean
   totalHours?: boolean
@@ -1269,11 +1181,9 @@ export type TimesheetSelectScalar = {
   employeeId?: boolean
   date?: boolean
   project1Id?: boolean
-  project1BfAllowance?: boolean
   project1Hours?: boolean
   project1Overtime?: boolean
   project2Id?: boolean
-  project2BfAllowance?: boolean
   project2Hours?: boolean
   project2Overtime?: boolean
   totalHours?: boolean
@@ -1283,7 +1193,7 @@ export type TimesheetSelectScalar = {
   isLocked?: boolean
 }
 
-export type TimesheetOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "employeeId" | "date" | "project1Id" | "project1BfAllowance" | "project1Hours" | "project1Overtime" | "project2Id" | "project2BfAllowance" | "project2Hours" | "project2Overtime" | "totalHours" | "description" | "createdAt" | "updatedAt" | "isLocked", ExtArgs["result"]["timesheet"]>
+export type TimesheetOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "employeeId" | "date" | "project1Id" | "project1Hours" | "project1Overtime" | "project2Id" | "project2Hours" | "project2Overtime" | "totalHours" | "description" | "createdAt" | "updatedAt" | "isLocked", ExtArgs["result"]["timesheet"]>
 export type TimesheetInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   employee?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
   project1?: boolean | Prisma.Timesheet$project1Args<ExtArgs>
@@ -1312,11 +1222,9 @@ export type $TimesheetPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     employeeId: number
     date: Date
     project1Id: number | null
-    project1BfAllowance: boolean
     project1Hours: number | null
     project1Overtime: number | null
     project2Id: number | null
-    project2BfAllowance: boolean
     project2Hours: number | null
     project2Overtime: number | null
     totalHours: number | null
@@ -1754,11 +1662,9 @@ export interface TimesheetFieldRefs {
   readonly employeeId: Prisma.FieldRef<"Timesheet", 'Int'>
   readonly date: Prisma.FieldRef<"Timesheet", 'DateTime'>
   readonly project1Id: Prisma.FieldRef<"Timesheet", 'Int'>
-  readonly project1BfAllowance: Prisma.FieldRef<"Timesheet", 'Boolean'>
   readonly project1Hours: Prisma.FieldRef<"Timesheet", 'Int'>
   readonly project1Overtime: Prisma.FieldRef<"Timesheet", 'Int'>
   readonly project2Id: Prisma.FieldRef<"Timesheet", 'Int'>
-  readonly project2BfAllowance: Prisma.FieldRef<"Timesheet", 'Boolean'>
   readonly project2Hours: Prisma.FieldRef<"Timesheet", 'Int'>
   readonly project2Overtime: Prisma.FieldRef<"Timesheet", 'Int'>
   readonly totalHours: Prisma.FieldRef<"Timesheet", 'Int'>

@@ -225,7 +225,8 @@ export type CountryWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Country"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Country"> | Date | string
   cities?: Prisma.CityListRelationFilter
-  employees?: Prisma.EmployeeListRelationFilter
+  employeesByCountry?: Prisma.EmployeeListRelationFilter
+  employeesByNationality?: Prisma.EmployeeListRelationFilter
 }
 
 export type CountryOrderByWithRelationInput = {
@@ -236,7 +237,8 @@ export type CountryOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   cities?: Prisma.CityOrderByRelationAggregateInput
-  employees?: Prisma.EmployeeOrderByRelationAggregateInput
+  employeesByCountry?: Prisma.EmployeeOrderByRelationAggregateInput
+  employeesByNationality?: Prisma.EmployeeOrderByRelationAggregateInput
 }
 
 export type CountryWhereUniqueInput = Prisma.AtLeast<{
@@ -250,7 +252,8 @@ export type CountryWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"Country"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Country"> | Date | string
   cities?: Prisma.CityListRelationFilter
-  employees?: Prisma.EmployeeListRelationFilter
+  employeesByCountry?: Prisma.EmployeeListRelationFilter
+  employeesByNationality?: Prisma.EmployeeListRelationFilter
 }, "id">
 
 export type CountryOrderByWithAggregationInput = {
@@ -286,7 +289,8 @@ export type CountryCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   cities?: Prisma.CityCreateNestedManyWithoutCountryInput
-  employees?: Prisma.EmployeeCreateNestedManyWithoutCountryInput
+  employeesByCountry?: Prisma.EmployeeCreateNestedManyWithoutCountryInput
+  employeesByNationality?: Prisma.EmployeeCreateNestedManyWithoutNationalityInput
 }
 
 export type CountryUncheckedCreateInput = {
@@ -297,7 +301,8 @@ export type CountryUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   cities?: Prisma.CityUncheckedCreateNestedManyWithoutCountryInput
-  employees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutCountryInput
+  employeesByCountry?: Prisma.EmployeeUncheckedCreateNestedManyWithoutCountryInput
+  employeesByNationality?: Prisma.EmployeeUncheckedCreateNestedManyWithoutNationalityInput
 }
 
 export type CountryUpdateInput = {
@@ -307,7 +312,8 @@ export type CountryUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   cities?: Prisma.CityUpdateManyWithoutCountryNestedInput
-  employees?: Prisma.EmployeeUpdateManyWithoutCountryNestedInput
+  employeesByCountry?: Prisma.EmployeeUpdateManyWithoutCountryNestedInput
+  employeesByNationality?: Prisma.EmployeeUpdateManyWithoutNationalityNestedInput
 }
 
 export type CountryUncheckedUpdateInput = {
@@ -318,7 +324,8 @@ export type CountryUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   cities?: Prisma.CityUncheckedUpdateManyWithoutCountryNestedInput
-  employees?: Prisma.EmployeeUncheckedUpdateManyWithoutCountryNestedInput
+  employeesByCountry?: Prisma.EmployeeUncheckedUpdateManyWithoutCountryNestedInput
+  employeesByNationality?: Prisma.EmployeeUncheckedUpdateManyWithoutNationalityNestedInput
 }
 
 export type CountryCreateManyInput = {
@@ -403,20 +410,36 @@ export type CountryUpdateOneWithoutCitiesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.CountryUpdateToOneWithWhereWithoutCitiesInput, Prisma.CountryUpdateWithoutCitiesInput>, Prisma.CountryUncheckedUpdateWithoutCitiesInput>
 }
 
-export type CountryCreateNestedOneWithoutEmployeesInput = {
-  create?: Prisma.XOR<Prisma.CountryCreateWithoutEmployeesInput, Prisma.CountryUncheckedCreateWithoutEmployeesInput>
-  connectOrCreate?: Prisma.CountryCreateOrConnectWithoutEmployeesInput
+export type CountryCreateNestedOneWithoutEmployeesByCountryInput = {
+  create?: Prisma.XOR<Prisma.CountryCreateWithoutEmployeesByCountryInput, Prisma.CountryUncheckedCreateWithoutEmployeesByCountryInput>
+  connectOrCreate?: Prisma.CountryCreateOrConnectWithoutEmployeesByCountryInput
   connect?: Prisma.CountryWhereUniqueInput
 }
 
-export type CountryUpdateOneWithoutEmployeesNestedInput = {
-  create?: Prisma.XOR<Prisma.CountryCreateWithoutEmployeesInput, Prisma.CountryUncheckedCreateWithoutEmployeesInput>
-  connectOrCreate?: Prisma.CountryCreateOrConnectWithoutEmployeesInput
-  upsert?: Prisma.CountryUpsertWithoutEmployeesInput
+export type CountryCreateNestedOneWithoutEmployeesByNationalityInput = {
+  create?: Prisma.XOR<Prisma.CountryCreateWithoutEmployeesByNationalityInput, Prisma.CountryUncheckedCreateWithoutEmployeesByNationalityInput>
+  connectOrCreate?: Prisma.CountryCreateOrConnectWithoutEmployeesByNationalityInput
+  connect?: Prisma.CountryWhereUniqueInput
+}
+
+export type CountryUpdateOneWithoutEmployeesByCountryNestedInput = {
+  create?: Prisma.XOR<Prisma.CountryCreateWithoutEmployeesByCountryInput, Prisma.CountryUncheckedCreateWithoutEmployeesByCountryInput>
+  connectOrCreate?: Prisma.CountryCreateOrConnectWithoutEmployeesByCountryInput
+  upsert?: Prisma.CountryUpsertWithoutEmployeesByCountryInput
   disconnect?: Prisma.CountryWhereInput | boolean
   delete?: Prisma.CountryWhereInput | boolean
   connect?: Prisma.CountryWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.CountryUpdateToOneWithWhereWithoutEmployeesInput, Prisma.CountryUpdateWithoutEmployeesInput>, Prisma.CountryUncheckedUpdateWithoutEmployeesInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CountryUpdateToOneWithWhereWithoutEmployeesByCountryInput, Prisma.CountryUpdateWithoutEmployeesByCountryInput>, Prisma.CountryUncheckedUpdateWithoutEmployeesByCountryInput>
+}
+
+export type CountryUpdateOneWithoutEmployeesByNationalityNestedInput = {
+  create?: Prisma.XOR<Prisma.CountryCreateWithoutEmployeesByNationalityInput, Prisma.CountryUncheckedCreateWithoutEmployeesByNationalityInput>
+  connectOrCreate?: Prisma.CountryCreateOrConnectWithoutEmployeesByNationalityInput
+  upsert?: Prisma.CountryUpsertWithoutEmployeesByNationalityInput
+  disconnect?: Prisma.CountryWhereInput | boolean
+  delete?: Prisma.CountryWhereInput | boolean
+  connect?: Prisma.CountryWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CountryUpdateToOneWithWhereWithoutEmployeesByNationalityInput, Prisma.CountryUpdateWithoutEmployeesByNationalityInput>, Prisma.CountryUncheckedUpdateWithoutEmployeesByNationalityInput>
 }
 
 export type CountryCreateWithoutCitiesInput = {
@@ -425,7 +448,8 @@ export type CountryCreateWithoutCitiesInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  employees?: Prisma.EmployeeCreateNestedManyWithoutCountryInput
+  employeesByCountry?: Prisma.EmployeeCreateNestedManyWithoutCountryInput
+  employeesByNationality?: Prisma.EmployeeCreateNestedManyWithoutNationalityInput
 }
 
 export type CountryUncheckedCreateWithoutCitiesInput = {
@@ -435,7 +459,8 @@ export type CountryUncheckedCreateWithoutCitiesInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  employees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutCountryInput
+  employeesByCountry?: Prisma.EmployeeUncheckedCreateNestedManyWithoutCountryInput
+  employeesByNationality?: Prisma.EmployeeUncheckedCreateNestedManyWithoutNationalityInput
 }
 
 export type CountryCreateOrConnectWithoutCitiesInput = {
@@ -460,7 +485,8 @@ export type CountryUpdateWithoutCitiesInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  employees?: Prisma.EmployeeUpdateManyWithoutCountryNestedInput
+  employeesByCountry?: Prisma.EmployeeUpdateManyWithoutCountryNestedInput
+  employeesByNationality?: Prisma.EmployeeUpdateManyWithoutNationalityNestedInput
 }
 
 export type CountryUncheckedUpdateWithoutCitiesInput = {
@@ -470,19 +496,21 @@ export type CountryUncheckedUpdateWithoutCitiesInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  employees?: Prisma.EmployeeUncheckedUpdateManyWithoutCountryNestedInput
+  employeesByCountry?: Prisma.EmployeeUncheckedUpdateManyWithoutCountryNestedInput
+  employeesByNationality?: Prisma.EmployeeUncheckedUpdateManyWithoutNationalityNestedInput
 }
 
-export type CountryCreateWithoutEmployeesInput = {
+export type CountryCreateWithoutEmployeesByCountryInput = {
   nameEn: string
   nameAr?: string | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   cities?: Prisma.CityCreateNestedManyWithoutCountryInput
+  employeesByNationality?: Prisma.EmployeeCreateNestedManyWithoutNationalityInput
 }
 
-export type CountryUncheckedCreateWithoutEmployeesInput = {
+export type CountryUncheckedCreateWithoutEmployeesByCountryInput = {
   id?: number
   nameEn: string
   nameAr?: string | null
@@ -490,34 +518,62 @@ export type CountryUncheckedCreateWithoutEmployeesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   cities?: Prisma.CityUncheckedCreateNestedManyWithoutCountryInput
+  employeesByNationality?: Prisma.EmployeeUncheckedCreateNestedManyWithoutNationalityInput
 }
 
-export type CountryCreateOrConnectWithoutEmployeesInput = {
+export type CountryCreateOrConnectWithoutEmployeesByCountryInput = {
   where: Prisma.CountryWhereUniqueInput
-  create: Prisma.XOR<Prisma.CountryCreateWithoutEmployeesInput, Prisma.CountryUncheckedCreateWithoutEmployeesInput>
+  create: Prisma.XOR<Prisma.CountryCreateWithoutEmployeesByCountryInput, Prisma.CountryUncheckedCreateWithoutEmployeesByCountryInput>
 }
 
-export type CountryUpsertWithoutEmployeesInput = {
-  update: Prisma.XOR<Prisma.CountryUpdateWithoutEmployeesInput, Prisma.CountryUncheckedUpdateWithoutEmployeesInput>
-  create: Prisma.XOR<Prisma.CountryCreateWithoutEmployeesInput, Prisma.CountryUncheckedCreateWithoutEmployeesInput>
+export type CountryCreateWithoutEmployeesByNationalityInput = {
+  nameEn: string
+  nameAr?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  cities?: Prisma.CityCreateNestedManyWithoutCountryInput
+  employeesByCountry?: Prisma.EmployeeCreateNestedManyWithoutCountryInput
+}
+
+export type CountryUncheckedCreateWithoutEmployeesByNationalityInput = {
+  id?: number
+  nameEn: string
+  nameAr?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  cities?: Prisma.CityUncheckedCreateNestedManyWithoutCountryInput
+  employeesByCountry?: Prisma.EmployeeUncheckedCreateNestedManyWithoutCountryInput
+}
+
+export type CountryCreateOrConnectWithoutEmployeesByNationalityInput = {
+  where: Prisma.CountryWhereUniqueInput
+  create: Prisma.XOR<Prisma.CountryCreateWithoutEmployeesByNationalityInput, Prisma.CountryUncheckedCreateWithoutEmployeesByNationalityInput>
+}
+
+export type CountryUpsertWithoutEmployeesByCountryInput = {
+  update: Prisma.XOR<Prisma.CountryUpdateWithoutEmployeesByCountryInput, Prisma.CountryUncheckedUpdateWithoutEmployeesByCountryInput>
+  create: Prisma.XOR<Prisma.CountryCreateWithoutEmployeesByCountryInput, Prisma.CountryUncheckedCreateWithoutEmployeesByCountryInput>
   where?: Prisma.CountryWhereInput
 }
 
-export type CountryUpdateToOneWithWhereWithoutEmployeesInput = {
+export type CountryUpdateToOneWithWhereWithoutEmployeesByCountryInput = {
   where?: Prisma.CountryWhereInput
-  data: Prisma.XOR<Prisma.CountryUpdateWithoutEmployeesInput, Prisma.CountryUncheckedUpdateWithoutEmployeesInput>
+  data: Prisma.XOR<Prisma.CountryUpdateWithoutEmployeesByCountryInput, Prisma.CountryUncheckedUpdateWithoutEmployeesByCountryInput>
 }
 
-export type CountryUpdateWithoutEmployeesInput = {
+export type CountryUpdateWithoutEmployeesByCountryInput = {
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   cities?: Prisma.CityUpdateManyWithoutCountryNestedInput
+  employeesByNationality?: Prisma.EmployeeUpdateManyWithoutNationalityNestedInput
 }
 
-export type CountryUncheckedUpdateWithoutEmployeesInput = {
+export type CountryUncheckedUpdateWithoutEmployeesByCountryInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -525,6 +581,39 @@ export type CountryUncheckedUpdateWithoutEmployeesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   cities?: Prisma.CityUncheckedUpdateManyWithoutCountryNestedInput
+  employeesByNationality?: Prisma.EmployeeUncheckedUpdateManyWithoutNationalityNestedInput
+}
+
+export type CountryUpsertWithoutEmployeesByNationalityInput = {
+  update: Prisma.XOR<Prisma.CountryUpdateWithoutEmployeesByNationalityInput, Prisma.CountryUncheckedUpdateWithoutEmployeesByNationalityInput>
+  create: Prisma.XOR<Prisma.CountryCreateWithoutEmployeesByNationalityInput, Prisma.CountryUncheckedCreateWithoutEmployeesByNationalityInput>
+  where?: Prisma.CountryWhereInput
+}
+
+export type CountryUpdateToOneWithWhereWithoutEmployeesByNationalityInput = {
+  where?: Prisma.CountryWhereInput
+  data: Prisma.XOR<Prisma.CountryUpdateWithoutEmployeesByNationalityInput, Prisma.CountryUncheckedUpdateWithoutEmployeesByNationalityInput>
+}
+
+export type CountryUpdateWithoutEmployeesByNationalityInput = {
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  cities?: Prisma.CityUpdateManyWithoutCountryNestedInput
+  employeesByCountry?: Prisma.EmployeeUpdateManyWithoutCountryNestedInput
+}
+
+export type CountryUncheckedUpdateWithoutEmployeesByNationalityInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  cities?: Prisma.CityUncheckedUpdateManyWithoutCountryNestedInput
+  employeesByCountry?: Prisma.EmployeeUncheckedUpdateManyWithoutCountryNestedInput
 }
 
 
@@ -534,12 +623,14 @@ export type CountryUncheckedUpdateWithoutEmployeesInput = {
 
 export type CountryCountOutputType = {
   cities: number
-  employees: number
+  employeesByCountry: number
+  employeesByNationality: number
 }
 
 export type CountryCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   cities?: boolean | CountryCountOutputTypeCountCitiesArgs
-  employees?: boolean | CountryCountOutputTypeCountEmployeesArgs
+  employeesByCountry?: boolean | CountryCountOutputTypeCountEmployeesByCountryArgs
+  employeesByNationality?: boolean | CountryCountOutputTypeCountEmployeesByNationalityArgs
 }
 
 /**
@@ -562,7 +653,14 @@ export type CountryCountOutputTypeCountCitiesArgs<ExtArgs extends runtime.Types.
 /**
  * CountryCountOutputType without action
  */
-export type CountryCountOutputTypeCountEmployeesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type CountryCountOutputTypeCountEmployeesByCountryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.EmployeeWhereInput
+}
+
+/**
+ * CountryCountOutputType without action
+ */
+export type CountryCountOutputTypeCountEmployeesByNationalityArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.EmployeeWhereInput
 }
 
@@ -575,7 +673,8 @@ export type CountrySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   createdAt?: boolean
   updatedAt?: boolean
   cities?: boolean | Prisma.Country$citiesArgs<ExtArgs>
-  employees?: boolean | Prisma.Country$employeesArgs<ExtArgs>
+  employeesByCountry?: boolean | Prisma.Country$employeesByCountryArgs<ExtArgs>
+  employeesByNationality?: boolean | Prisma.Country$employeesByNationalityArgs<ExtArgs>
   _count?: boolean | Prisma.CountryCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["country"]>
 
@@ -609,7 +708,8 @@ export type CountrySelectScalar = {
 export type CountryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nameEn" | "nameAr" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["country"]>
 export type CountryInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   cities?: boolean | Prisma.Country$citiesArgs<ExtArgs>
-  employees?: boolean | Prisma.Country$employeesArgs<ExtArgs>
+  employeesByCountry?: boolean | Prisma.Country$employeesByCountryArgs<ExtArgs>
+  employeesByNationality?: boolean | Prisma.Country$employeesByNationalityArgs<ExtArgs>
   _count?: boolean | Prisma.CountryCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type CountryIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -619,7 +719,8 @@ export type $CountryPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   name: "Country"
   objects: {
     cities: Prisma.$CityPayload<ExtArgs>[]
-    employees: Prisma.$EmployeePayload<ExtArgs>[]
+    employeesByCountry: Prisma.$EmployeePayload<ExtArgs>[]
+    employeesByNationality: Prisma.$EmployeePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1023,7 +1124,8 @@ readonly fields: CountryFieldRefs;
 export interface Prisma__CountryClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   cities<T extends Prisma.Country$citiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Country$citiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  employees<T extends Prisma.Country$employeesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Country$employeesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  employeesByCountry<T extends Prisma.Country$employeesByCountryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Country$employeesByCountryArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  employeesByNationality<T extends Prisma.Country$employeesByNationalityArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Country$employeesByNationalityArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1471,9 +1573,33 @@ export type Country$citiesArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 /**
- * Country.employees
+ * Country.employeesByCountry
  */
-export type Country$employeesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Country$employeesByCountryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Employee
+   */
+  select?: Prisma.EmployeeSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Employee
+   */
+  omit?: Prisma.EmployeeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EmployeeInclude<ExtArgs> | null
+  where?: Prisma.EmployeeWhereInput
+  orderBy?: Prisma.EmployeeOrderByWithRelationInput | Prisma.EmployeeOrderByWithRelationInput[]
+  cursor?: Prisma.EmployeeWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.EmployeeScalarFieldEnum | Prisma.EmployeeScalarFieldEnum[]
+}
+
+/**
+ * Country.employeesByNationality
+ */
+export type Country$employeesByNationalityArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the Employee
    */

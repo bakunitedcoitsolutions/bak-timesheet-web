@@ -21,12 +21,6 @@ const COLUMN_MAPPINGS = {
     "emp_code",
   ],
   project1Id: ["Project 1 ID", "Project1Id", "Project 1", "project1Id"],
-  project1BfAllowance: [
-    "Project 1 Bf Allowance",
-    "Project1BfAllowance",
-    "B. Alw 1",
-    "project1BfAllowance",
-  ],
   project1Hours: ["Project 1 Hours", "Project1Hours", "Hrs 1", "project1Hours"],
   project1Overtime: [
     "Project 1 Overtime",
@@ -35,12 +29,6 @@ const COLUMN_MAPPINGS = {
     "project1Overtime",
   ],
   project2Id: ["Project 2 ID", "Project2Id", "Project 2", "project2Id"],
-  project2BfAllowance: [
-    "Project 2 Bf Allowance",
-    "Project2BfAllowance",
-    "B. Alw 2",
-    "project2BfAllowance",
-  ],
   project2Hours: ["Project 2 Hours", "Project2Hours", "Hrs 2", "project2Hours"],
   project2Overtime: [
     "Project 2 Overtime",
@@ -122,14 +110,6 @@ function parseCellValue(value: any, field: keyof BulkUploadTimesheetRow): any {
       return Math.floor(n);
     }
 
-    case "project1BfAllowance":
-    case "project2BfAllowance":
-      return (
-        stringValue.toLowerCase() === "true" ||
-        stringValue === "1" ||
-        stringValue.toLowerCase() === "yes"
-      );
-
     case "description":
       return stringValue || undefined;
 
@@ -146,11 +126,9 @@ function parseDataRows(
   const dateIndex = findColumnIndex(headers, "date");
   const employeeCodeIndex = findColumnIndex(headers, "employeeCode");
   const project1IdIndex = findColumnIndex(headers, "project1Id");
-  const project1BfIndex = findColumnIndex(headers, "project1BfAllowance");
   const project1HoursIndex = findColumnIndex(headers, "project1Hours");
   const project1OTIndex = findColumnIndex(headers, "project1Overtime");
   const project2IdIndex = findColumnIndex(headers, "project2Id");
-  const project2BfIndex = findColumnIndex(headers, "project2BfAllowance");
   const project2HoursIndex = findColumnIndex(headers, "project2Hours");
   const project2OTIndex = findColumnIndex(headers, "project2Overtime");
   const descriptionIndex = findColumnIndex(headers, "description");
@@ -184,11 +162,6 @@ function parseDataRows(
 
       if (project1IdIndex !== -1 && row[project1IdIndex] != null)
         entry.project1Id = parseCellValue(row[project1IdIndex], "project1Id");
-      if (project1BfIndex !== -1 && row[project1BfIndex] != null)
-        entry.project1BfAllowance = parseCellValue(
-          row[project1BfIndex],
-          "project1BfAllowance"
-        ) as boolean;
       if (project1HoursIndex !== -1 && row[project1HoursIndex] != null)
         entry.project1Hours = parseCellValue(
           row[project1HoursIndex],
@@ -201,11 +174,6 @@ function parseDataRows(
         );
       if (project2IdIndex !== -1 && row[project2IdIndex] != null)
         entry.project2Id = parseCellValue(row[project2IdIndex], "project2Id");
-      if (project2BfIndex !== -1 && row[project2BfIndex] != null)
-        entry.project2BfAllowance = parseCellValue(
-          row[project2BfIndex],
-          "project2BfAllowance"
-        ) as boolean;
       if (project2HoursIndex !== -1 && row[project2HoursIndex] != null)
         entry.project2Hours = parseCellValue(
           row[project2HoursIndex],

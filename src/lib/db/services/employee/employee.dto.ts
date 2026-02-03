@@ -44,9 +44,9 @@ export interface UpdateEmployeeStep2Data {
   isDeductable?: boolean;
   isFixed?: boolean;
   workingDays?: number;
-  workingHours?: number;
   hourlyRate?: number | Prisma.Decimal;
   salary?: number | Prisma.Decimal;
+  breakfastAllowance?: boolean;
   foodAllowance?: number | Prisma.Decimal;
   mobileAllowance?: number | Prisma.Decimal;
   otherAllowance?: number | Prisma.Decimal;
@@ -66,7 +66,7 @@ export interface UpdateEmployeeStep3Data {
   idCardExpiryDate?: Date | string;
   idCardDocument?: string; // URL from Supabase Storage
   profession?: string;
-  nationality?: string;
+  nationalityId?: number;
   passportNo?: string;
   passportExpiryDate?: Date | string;
   passportDocument?: string; // URL from Supabase Storage
@@ -110,7 +110,7 @@ export type ListEmployeesSortableField =
   | "gender"
   | "idCardNo"
   | "profession"
-  | "nationality";
+  | "nationalityId";
 
 export interface ListEmployeesParams {
   page?: number;
@@ -144,9 +144,9 @@ export interface EmployeeInterface {
   isDeductable: boolean;
   isFixed: boolean;
   workingDays: number | null;
-  workingHours: number | null;
   hourlyRate: number | null; // Converted from Decimal
   salary: number | null; // Converted from Decimal
+  breakfastAllowance: boolean;
   foodAllowance: number | null; // Converted from Decimal
   mobileAllowance: number | null; // Converted from Decimal
   otherAllowance: number | null; // Converted from Decimal
@@ -160,7 +160,7 @@ export interface EmployeeInterface {
   idCardExpiryDate: Date | null;
   idCardDocument: string | null;
   profession: string | null;
-  nationality: string | null;
+  nationalityId: number | null;
   passportNo: string | null;
   passportExpiryDate: Date | null;
   passportDocument: string | null;
@@ -179,7 +179,11 @@ export interface EmployeeInterface {
   updatedAt: Date | any;
 }
 
-export interface ListedEmployee extends EmployeeInterface {}
+export interface ListedEmployee extends EmployeeInterface {
+  nationality: {
+    nameEn: string;
+  } | null;
+}
 
 export interface ListEmployeesResponse {
   employees: ListedEmployee[];

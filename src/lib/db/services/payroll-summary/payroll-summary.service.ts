@@ -307,10 +307,10 @@ const calculateAndSavePayroll = async (
 
     // Breakfast Allowance (Flags)
     let calculatedFoodAllowance = 0;
-    empTimesheets.forEach((t) => {
-      if (t.project1BfAllowance) calculatedFoodAllowance += 10;
-      if (t.project2BfAllowance) calculatedFoodAllowance += 10;
-    });
+    // empTimesheets.forEach((t) => {
+    //   if (t.project1BfAllowance) calculatedFoodAllowance += 10;
+    //   if (t.project2BfAllowance) calculatedFoodAllowance += 10;
+    // });
 
     // Salary Logic (Fixed vs Hourly)
     let hourlyRate = Number(emp.hourlyRate || 0);

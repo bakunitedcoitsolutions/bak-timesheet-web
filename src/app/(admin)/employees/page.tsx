@@ -133,9 +133,7 @@ const columns = (
   handlePrint: (employee: ListedEmployee) => void,
   handleEdit: (employee: ListedEmployee) => void,
   handleDelete: (employee: ListedEmployee) => void,
-  handleViewCard: (employee: ListedEmployee) => void,
-  currentPage: number = 1,
-  rowsPerPage: number = 10
+  handleViewCard: (employee: ListedEmployee) => void
 ): TableColumn<ListedEmployee>[] => [
   {
     field: "id",
@@ -145,15 +143,11 @@ const columns = (
     align: "center",
     style: { minWidth: "70px" },
     headerStyle: { minWidth: "70px" },
-    body: (rowData: ListedEmployee, options?: { rowIndex?: number }) => {
-      const rowIndex = options?.rowIndex ?? 0;
-      const index = (currentPage - 1) * rowsPerPage + rowIndex + 1;
-      return (
-        <div className={"flex items-center justify-center gap-1.5 w-[40px]"}>
-          <span className="text-sm font-medium">{index}</span>
-        </div>
-      );
-    },
+    body: (rowData: ListedEmployee) => (
+      <div className={"flex items-center justify-center gap-1.5 w-[40px]"}>
+        <span className="text-sm font-medium">{rowData?.id}</span>
+      </div>
+    ),
   },
   {
     field: "employeeCode",
@@ -312,7 +306,7 @@ const columns = (
     header: "Nationality",
     ...commonColumnProps,
     body: (rowData: ListedEmployee) => (
-      <span className="text-sm">{rowData.nationality || "-"}</span>
+      <span className="text-sm">{rowData?.nationality?.nameEn || "-"}</span>
     ),
   },
   {
@@ -394,7 +388,7 @@ const EmployeesPage = () => {
   const [limit, setLimit] = useState<number>(10);
   const [sortBy, setSortBy] = useState<
     SortableField | ListEmployeesSortableField
-  >("nameEn");
+  >("employeeCode");
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
   const [selectedFilter, setSelectedFilter] = useState<string | number | null>(
     null
@@ -431,10 +425,15 @@ const EmployeesPage = () => {
     payrollSectionId: filterParams.payrollSectionId,
   });
 
+  console.log("Current page state:", page, "limit:", limit);
+  console.log("employeesResponse:", employeesResponse);
+  console.log("employees count:", employeesResponse?.employees?.length);
+
   const employees = employeesResponse?.employees ?? [];
 
   const {
     total,
+    totalPages,
     page: currentPage,
     limit: currentLimit,
   } = employeesResponse?.pagination ?? {
@@ -443,6 +442,7 @@ const EmployeesPage = () => {
     total: 0,
     totalPages: 0,
   };
+
   const { data: designationsResponse } = useGetDesignations(COMMON_QUERY_INPUT);
   const designations = designationsResponse?.designations ?? [];
   const { data: payrollSectionsResponse } =
@@ -465,7 +465,7 @@ const EmployeesPage = () => {
         payrollSectionName: payrollSection?.nameEn,
       };
     });
-  }, [employees]);
+  }, [employees, designations, payrollSections]);
 
   // Memoized handlers
   const handleEdit = useCallback(
@@ -532,9 +532,10 @@ const EmployeesPage = () => {
 
   const handlePageChange = useCallback(
     (e: { page?: number; rows?: number }) => {
-      // PrimeReact uses 0-based page index, our API uses 1-based
-      setPage((e.page ?? 0) + 1);
-      setLimit(e.rows ?? currentLimit);
+      const newPage = (e.page ?? 0) + 1;
+      const newLimit = e.rows ?? currentLimit;
+      setPage(newPage);
+      setLimit(newLimit);
     },
     [currentLimit]
   );
@@ -545,7 +546,7 @@ const EmployeesPage = () => {
 
   // Wrapper for setSortBy to handle undefined (reset to default)
   const handleSortByChange = useCallback((field: SortableField | undefined) => {
-    setSortBy(field ?? "nameEn");
+    setSortBy(field ?? "employeeCode");
   }, []);
 
   // Wrapper for setSortOrder to handle undefined (reset to default)
@@ -571,23 +572,8 @@ const EmployeesPage = () => {
 
   // Memoized columns
   const tableColumns = useMemo(
-    () =>
-      columns(
-        handlePrint,
-        handleEdit,
-        handleDelete,
-        handleViewCard,
-        currentPage,
-        currentLimit
-      ),
-    [
-      handlePrint,
-      handleEdit,
-      handleDelete,
-      handleViewCard,
-      currentPage,
-      currentLimit,
-    ]
+    () => columns(handlePrint, handleEdit, handleDelete, handleViewCard),
+    [handlePrint, handleEdit, handleDelete, handleViewCard]
   );
 
   // Memoized header renderer
@@ -661,6 +647,7 @@ const EmployeesPage = () => {
           sortField={sortBy}
           sortOrder={toPrimeReactSortOrder(sortOrder) as any}
           pagination={true}
+          lazy={true}
           rowsPerPageOptions={[10, 25, 50]}
           rows={currentLimit}
           first={(currentPage - 1) * currentLimit}

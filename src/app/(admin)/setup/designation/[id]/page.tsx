@@ -56,7 +56,6 @@ const UpsertDesignationPage = () => {
     hoursPerDay: undefined,
     displayOrderKey: undefined,
     color: "#FFFFFF", // Default to white
-    breakfastAllowance: undefined,
     isActive: true,
   };
 
@@ -91,9 +90,6 @@ const UpsertDesignationPage = () => {
         hoursPerDay: foundDesignation?.hoursPerDay ?? undefined,
         displayOrderKey: foundDesignation?.displayOrderKey ?? undefined,
         color: foundDesignation?.color || "#FFFFFF",
-        breakfastAllowance: foundDesignation?.breakfastAllowance
-          ? Number(foundDesignation.breakfastAllowance)
-          : undefined,
         isActive: foundDesignation?.isActive,
       };
       reset(setDesignation);
@@ -218,16 +214,6 @@ const UpsertDesignationPage = () => {
                       />
                     </FormItem>
                   </div>
-                </div>
-                <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
-                  <FormItem name="breakfastAllowance">
-                    <NumberInput
-                      useGrouping={false}
-                      className="w-full"
-                      label="Breakfast Allowance"
-                      placeholder="Enter breakfast allowance"
-                    />
-                  </FormItem>
                 </div>
                 <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
                   <FormItem name="isActive">

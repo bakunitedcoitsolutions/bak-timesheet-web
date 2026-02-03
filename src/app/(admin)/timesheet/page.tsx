@@ -237,31 +237,6 @@ const TimesheetPage = () => {
       ),
     },
     {
-      field: "project1BfAllowance",
-      header: "B. Alw",
-      sortable: false,
-      filterable: false,
-      style: { minWidth: "70px", width: "70px" },
-      body: (rowData: TimesheetPageRow) => (
-        <div className="flex justify-center items-center">
-          <Checkbox
-            disabled={rowData.isLocked}
-            inputId={`allowBreakProject1-${rowData.id}`}
-            name="project1BfAllowance"
-            value="project1BfAllowance"
-            onChange={() =>
-              updateTimesheetEntry(
-                rowData.id,
-                "project1BfAllowance",
-                !rowData.project1BfAllowance
-              )
-            }
-            checked={rowData.project1BfAllowance}
-          />
-        </div>
-      ),
-    },
-    {
       field: "project1Hours",
       header: "Hrs.",
       sortable: false,
@@ -337,31 +312,6 @@ const TimesheetPage = () => {
               }
             />
           </div>
-        </div>
-      ),
-    },
-    {
-      field: "project2BfAllowance",
-      header: "B. Alw",
-      sortable: false,
-      filterable: false,
-      style: { minWidth: "70px", width: "70px" },
-      body: (rowData: TimesheetPageRow) => (
-        <div className="flex justify-center items-center">
-          <Checkbox
-            disabled={rowData.isLocked}
-            inputId={`allowBreakProject2-${rowData.id}`}
-            name="project2BfAllowance"
-            value="project2BfAllowance"
-            onChange={() =>
-              updateTimesheetEntry(
-                rowData.id,
-                "project2BfAllowance",
-                !rowData.project2BfAllowance
-              )
-            }
-            checked={rowData.project2BfAllowance}
-          />
         </div>
       ),
     },
@@ -451,11 +401,9 @@ const TimesheetPage = () => {
       employeeId: row.employeeId,
       timesheetId: row.timesheetId,
       project1Id: row.project1Id,
-      project1BfAllowance: row.project1BfAllowance,
       project1Hours: row.project1Hours,
       project1Overtime: row.project1Overtime,
       project2Id: row.project2Id,
-      project2BfAllowance: row.project2BfAllowance,
       project2Hours: row.project2Hours,
       project2Overtime: row.project2Overtime,
       totalHours: row.totalHours,

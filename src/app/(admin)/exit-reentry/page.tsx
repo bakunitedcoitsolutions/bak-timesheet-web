@@ -53,9 +53,7 @@ type SortableField = keyof typeof SORTABLE_FIELDS;
 const columns = (
   handleEdit: (entry: ListedExitReentry) => void,
   handleDelete: (entry: ListedExitReentry) => void,
-  employeesMap: Map<number, ListedEmployee>,
-  currentPage: number = 1,
-  rowsPerPage: number = 10
+  employeesMap: Map<number, ListedEmployee>
 ): TableColumn<ListedExitReentry>[] => [
   {
     field: "id",
@@ -65,15 +63,11 @@ const columns = (
     align: "center",
     style: { minWidth: "70px" },
     headerStyle: { minWidth: "70px" },
-    body: (rowData: ListedExitReentry, options?: { rowIndex?: number }) => {
-      const rowIndex = options?.rowIndex ?? 0;
-      const index = (currentPage - 1) * rowsPerPage + rowIndex + 1;
-      return (
-        <div className={"flex items-center justify-center gap-1.5 w-[40px]"}>
-          <span className="text-sm font-medium">{index}</span>
-        </div>
-      );
-    },
+    body: (rowData: ListedExitReentry) => (
+      <div className={"flex items-center justify-center gap-1.5 w-[40px]"}>
+        <span className="text-sm font-medium">{rowData?.id}</span>
+      </div>
+    ),
   },
   {
     field: "employeeId",
@@ -326,15 +320,8 @@ const ExitReentryPage = () => {
 
   // Memoized columns
   const tableColumns = useMemo(
-    () =>
-      columns(
-        handleEdit,
-        handleDelete,
-        employeesMap,
-        currentPage,
-        currentLimit
-      ),
-    [handleEdit, handleDelete, employeesMap, currentPage, currentLimit]
+    () => columns(handleEdit, handleDelete, employeesMap),
+    [handleEdit, handleDelete, employeesMap]
   );
 
   // Memoized header renderer

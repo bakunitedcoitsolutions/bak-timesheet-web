@@ -35,7 +35,6 @@ const SORTABLE_FIELDS = {
   isActive: "isActive",
   displayOrderKey: "displayOrderKey",
   hoursPerDay: "hoursPerDay",
-  breakfastAllowance: "breakfastAllowance",
 } as const;
 
 const commonColumnProps = {
@@ -51,9 +50,7 @@ type SortableField = keyof typeof SORTABLE_FIELDS;
 
 const columns = (
   handleEdit: (designation: ListedDesignation) => void,
-  handleDelete: (designation: ListedDesignation) => void,
-  currentPage: number = 1,
-  rowsPerPage: number = 10
+  handleDelete: (designation: ListedDesignation) => void
 ): TableColumn<ListedDesignation>[] => [
   {
     field: "id",
@@ -63,15 +60,11 @@ const columns = (
     align: "center",
     style: { minWidth: "70px" },
     headerStyle: { minWidth: "70px" },
-    body: (rowData: ListedDesignation, options?: { rowIndex?: number }) => {
-      const rowIndex = options?.rowIndex ?? 0;
-      const index = (currentPage - 1) * rowsPerPage + rowIndex + 1;
-      return (
-        <div className={"flex items-center justify-center gap-1.5 w-[40px]"}>
-          <span className="text-sm font-medium">{index}</span>
-        </div>
-      );
-    },
+    body: (rowData: ListedDesignation) => (
+      <div className={"flex items-center justify-center gap-1.5 w-[40px]"}>
+        <span className="text-sm font-medium">{rowData?.id}</span>
+      </div>
+    ),
   },
   {
     field: "nameEn",
@@ -137,23 +130,6 @@ const columns = (
           style={{ backgroundColor: rowData.color || "#FFFFFF" }}
           title={rowData.color || "#FFFFFF"}
         />
-      </div>
-    ),
-  },
-  {
-    field: "breakfastAllowance",
-    header: "Brf Allowance",
-    sortable: true,
-    filterable: false,
-    style: { minWidth: "150px" },
-    align: "center",
-    body: (rowData: ListedDesignation) => (
-      <div className="w-full flex flex-1 justify-center">
-        <span className="text-sm text-center">
-          {rowData.breakfastAllowance
-            ? rowData.breakfastAllowance.toString()
-            : "-"}
-        </span>
       </div>
     ),
   },
@@ -319,8 +295,8 @@ const DesignationPage = () => {
 
   // Memoized columns
   const tableColumns = useMemo(
-    () => columns(handleEdit, handleDelete, currentPage, currentLimit),
-    [handleEdit, handleDelete, currentPage, currentLimit]
+    () => columns(handleEdit, handleDelete),
+    [handleEdit, handleDelete]
   );
 
   // Memoized header renderer

@@ -49,9 +49,7 @@ type SortableField = keyof typeof SORTABLE_FIELDS;
 
 const columns = (
   handleEdit: (project: ListedProject) => void,
-  handleDelete: (project: ListedProject) => void,
-  currentPage: number = 1,
-  rowsPerPage: number = 10
+  handleDelete: (project: ListedProject) => void
 ): TableColumn<ListedProject>[] => [
   {
     field: "id",
@@ -61,15 +59,11 @@ const columns = (
     align: "center",
     style: { minWidth: "70px" },
     headerStyle: { minWidth: "70px" },
-    body: (rowData: ListedProject, options?: { rowIndex?: number }) => {
-      const rowIndex = options?.rowIndex ?? 0;
-      const index = (currentPage - 1) * rowsPerPage + rowIndex + 1;
-      return (
-        <div className={"flex items-center justify-center gap-1.5 w-[40px]"}>
-          <span className="text-sm font-medium">{index}</span>
-        </div>
-      );
-    },
+    body: (rowData: ListedProject) => (
+      <div className={"flex items-center justify-center gap-1.5 w-[40px]"}>
+        <span className="text-sm font-medium">{rowData?.id}</span>
+      </div>
+    ),
   },
   {
     field: "nameEn",
@@ -105,9 +99,7 @@ const columns = (
     showClearButton: false,
     style: { minWidth: 250 },
     body: (rowData: ListedProject) => (
-      <span className="text-sm line-clamp-2">
-        {rowData.description || "-"}
-      </span>
+      <span className="text-sm line-clamp-2">{rowData.description || "-"}</span>
     ),
   },
   {
@@ -268,8 +260,8 @@ const ProjectsPage = () => {
 
   // Memoized columns
   const tableColumns = useMemo(
-    () => columns(handleEdit, handleDelete, currentPage, currentLimit),
-    [handleEdit, handleDelete, currentPage, currentLimit]
+    () => columns(handleEdit, handleDelete),
+    [handleEdit, handleDelete]
   );
 
   // Memoized header renderer

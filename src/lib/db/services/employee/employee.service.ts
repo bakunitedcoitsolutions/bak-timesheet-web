@@ -5,14 +5,14 @@
 
 import { prisma } from "@/lib/db/prisma";
 import type {
+  ListEmployeesParams,
+  ListEmployeesResponse,
   CreateEmployeeStep1Data,
   UpdateEmployeeStep1Data,
   UpdateEmployeeStep2Data,
   UpdateEmployeeStep3Data,
   UpdateEmployeeStep4Data,
   UpdateEmployeeStep5Data,
-  ListEmployeesParams,
-  ListEmployeesResponse,
 } from "./employee.dto";
 
 // Type helper for Prisma transaction client
@@ -41,9 +41,9 @@ const employeeSelect = {
   isDeductable: true,
   isFixed: true,
   workingDays: true,
-  workingHours: true,
   hourlyRate: true,
   salary: true,
+  breakfastAllowance: true,
   foodAllowance: true,
   mobileAllowance: true,
   otherAllowance: true,
@@ -57,7 +57,7 @@ const employeeSelect = {
   idCardExpiryDate: true,
   idCardDocument: true,
   profession: true,
-  nationality: true,
+  nationalityId: true,
   passportNo: true,
   passportExpiryDate: true,
   passportDocument: true,
@@ -337,11 +337,11 @@ export const updateEmployeeStep2 = async (
   if (data.isFixed !== undefined) updateData.isFixed = data.isFixed;
   if (data.workingDays !== undefined)
     updateData.workingDays = data.workingDays ?? null;
-  if (data.workingHours !== undefined)
-    updateData.workingHours = data.workingHours ?? null;
   if (data.hourlyRate !== undefined)
     updateData.hourlyRate = data.hourlyRate ?? null;
   if (data.salary !== undefined) updateData.salary = data.salary ?? null;
+  if (data.breakfastAllowance !== undefined)
+    updateData.breakfastAllowance = data.breakfastAllowance ?? false;
   if (data.foodAllowance !== undefined)
     updateData.foodAllowance = data.foodAllowance ?? null;
   if (data.mobileAllowance !== undefined)
@@ -404,8 +404,8 @@ export const updateEmployeeStep3 = async (
     updateData.idCardDocument = data.idCardDocument ?? null;
   if (data.profession !== undefined)
     updateData.profession = data.profession ?? null;
-  if (data.nationality !== undefined)
-    updateData.nationality = data.nationality ?? null;
+  if (data.nationalityId !== undefined)
+    updateData.nationalityId = data.nationalityId ?? null;
   if (data.passportNo !== undefined)
     updateData.passportNo = data.passportNo ?? null;
   if (data.passportExpiryDate !== undefined)
@@ -623,7 +623,14 @@ export const listEmployees = async (
     orderBy,
     skip,
     take: limit,
-    select: employeeSelect,
+    select: {
+      ...employeeSelect,
+      nationality: {
+        select: {
+          nameEn: true,
+        },
+      },
+    },
   });
 
   // Convert Decimal fields to numbers for client serialization

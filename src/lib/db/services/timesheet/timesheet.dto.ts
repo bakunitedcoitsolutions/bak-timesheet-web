@@ -23,11 +23,9 @@ export interface TimesheetPageRow {
   isFixed: boolean;
   isLocked: boolean;
   project1Id: number | null;
-  project1BfAllowance: boolean;
   project1Hours: number | null;
   project1Overtime: number | null;
   project2Id: number | null;
-  project2BfAllowance: boolean;
   project2Hours: number | null;
   project2Overtime: number | null;
   totalHours: number | null;
@@ -43,11 +41,9 @@ export interface SaveTimesheetEntryItem {
   employeeId: number;
   timesheetId: number | null;
   project1Id: number | null;
-  project1BfAllowance: boolean;
   project1Hours: number | null;
   project1Overtime: number | null;
   project2Id: number | null;
-  project2BfAllowance: boolean;
   project2Hours: number | null;
   project2Overtime: number | null;
   totalHours: number | null;
@@ -71,11 +67,9 @@ export interface BulkUploadTimesheetRow {
   date: Date | string;
   employeeCode: number;
   project1Id?: number | null;
-  project1BfAllowance?: boolean;
   project1Hours?: number | null;
   project1Overtime?: number | null;
   project2Id?: number | null;
-  project2BfAllowance?: boolean;
   project2Hours?: number | null;
   project2Overtime?: number | null;
   description?: string | null;

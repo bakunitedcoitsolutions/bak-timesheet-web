@@ -30,14 +30,12 @@ export type DesignationAvgAggregateOutputType = {
   id: number | null
   hoursPerDay: number | null
   displayOrderKey: number | null
-  breakfastAllowance: runtime.Decimal | null
 }
 
 export type DesignationSumAggregateOutputType = {
   id: number | null
   hoursPerDay: number | null
   displayOrderKey: number | null
-  breakfastAllowance: runtime.Decimal | null
 }
 
 export type DesignationMinAggregateOutputType = {
@@ -47,7 +45,6 @@ export type DesignationMinAggregateOutputType = {
   hoursPerDay: number | null
   displayOrderKey: number | null
   color: string | null
-  breakfastAllowance: runtime.Decimal | null
   isActive: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -60,7 +57,6 @@ export type DesignationMaxAggregateOutputType = {
   hoursPerDay: number | null
   displayOrderKey: number | null
   color: string | null
-  breakfastAllowance: runtime.Decimal | null
   isActive: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -73,7 +69,6 @@ export type DesignationCountAggregateOutputType = {
   hoursPerDay: number
   displayOrderKey: number
   color: number
-  breakfastAllowance: number
   isActive: number
   createdAt: number
   updatedAt: number
@@ -85,14 +80,12 @@ export type DesignationAvgAggregateInputType = {
   id?: true
   hoursPerDay?: true
   displayOrderKey?: true
-  breakfastAllowance?: true
 }
 
 export type DesignationSumAggregateInputType = {
   id?: true
   hoursPerDay?: true
   displayOrderKey?: true
-  breakfastAllowance?: true
 }
 
 export type DesignationMinAggregateInputType = {
@@ -102,7 +95,6 @@ export type DesignationMinAggregateInputType = {
   hoursPerDay?: true
   displayOrderKey?: true
   color?: true
-  breakfastAllowance?: true
   isActive?: true
   createdAt?: true
   updatedAt?: true
@@ -115,7 +107,6 @@ export type DesignationMaxAggregateInputType = {
   hoursPerDay?: true
   displayOrderKey?: true
   color?: true
-  breakfastAllowance?: true
   isActive?: true
   createdAt?: true
   updatedAt?: true
@@ -128,7 +119,6 @@ export type DesignationCountAggregateInputType = {
   hoursPerDay?: true
   displayOrderKey?: true
   color?: true
-  breakfastAllowance?: true
   isActive?: true
   createdAt?: true
   updatedAt?: true
@@ -228,7 +218,6 @@ export type DesignationGroupByOutputType = {
   hoursPerDay: number | null
   displayOrderKey: number | null
   color: string | null
-  breakfastAllowance: runtime.Decimal | null
   isActive: boolean
   createdAt: Date
   updatedAt: Date
@@ -264,7 +253,6 @@ export type DesignationWhereInput = {
   hoursPerDay?: Prisma.IntNullableFilter<"Designation"> | number | null
   displayOrderKey?: Prisma.IntNullableFilter<"Designation"> | number | null
   color?: Prisma.StringNullableFilter<"Designation"> | string | null
-  breakfastAllowance?: Prisma.DecimalNullableFilter<"Designation"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isActive?: Prisma.BoolFilter<"Designation"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Designation"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Designation"> | Date | string
@@ -279,7 +267,6 @@ export type DesignationOrderByWithRelationInput = {
   hoursPerDay?: Prisma.SortOrderInput | Prisma.SortOrder
   displayOrderKey?: Prisma.SortOrderInput | Prisma.SortOrder
   color?: Prisma.SortOrderInput | Prisma.SortOrder
-  breakfastAllowance?: Prisma.SortOrderInput | Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -297,7 +284,6 @@ export type DesignationWhereUniqueInput = Prisma.AtLeast<{
   hoursPerDay?: Prisma.IntNullableFilter<"Designation"> | number | null
   displayOrderKey?: Prisma.IntNullableFilter<"Designation"> | number | null
   color?: Prisma.StringNullableFilter<"Designation"> | string | null
-  breakfastAllowance?: Prisma.DecimalNullableFilter<"Designation"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isActive?: Prisma.BoolFilter<"Designation"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Designation"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Designation"> | Date | string
@@ -312,7 +298,6 @@ export type DesignationOrderByWithAggregationInput = {
   hoursPerDay?: Prisma.SortOrderInput | Prisma.SortOrder
   displayOrderKey?: Prisma.SortOrderInput | Prisma.SortOrder
   color?: Prisma.SortOrderInput | Prisma.SortOrder
-  breakfastAllowance?: Prisma.SortOrderInput | Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -333,7 +318,6 @@ export type DesignationScalarWhereWithAggregatesInput = {
   hoursPerDay?: Prisma.IntNullableWithAggregatesFilter<"Designation"> | number | null
   displayOrderKey?: Prisma.IntNullableWithAggregatesFilter<"Designation"> | number | null
   color?: Prisma.StringNullableWithAggregatesFilter<"Designation"> | string | null
-  breakfastAllowance?: Prisma.DecimalNullableWithAggregatesFilter<"Designation"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isActive?: Prisma.BoolWithAggregatesFilter<"Designation"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Designation"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Designation"> | Date | string
@@ -345,7 +329,6 @@ export type DesignationCreateInput = {
   hoursPerDay?: number | null
   displayOrderKey?: number | null
   color?: string | null
-  breakfastAllowance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -360,7 +343,6 @@ export type DesignationUncheckedCreateInput = {
   hoursPerDay?: number | null
   displayOrderKey?: number | null
   color?: string | null
-  breakfastAllowance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -374,7 +356,6 @@ export type DesignationUpdateInput = {
   hoursPerDay?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   displayOrderKey?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  breakfastAllowance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -389,7 +370,6 @@ export type DesignationUncheckedUpdateInput = {
   hoursPerDay?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   displayOrderKey?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  breakfastAllowance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -404,7 +384,6 @@ export type DesignationCreateManyInput = {
   hoursPerDay?: number | null
   displayOrderKey?: number | null
   color?: string | null
-  breakfastAllowance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -416,7 +395,6 @@ export type DesignationUpdateManyMutationInput = {
   hoursPerDay?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   displayOrderKey?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  breakfastAllowance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -429,7 +407,6 @@ export type DesignationUncheckedUpdateManyInput = {
   hoursPerDay?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   displayOrderKey?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  breakfastAllowance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -447,7 +424,6 @@ export type DesignationCountOrderByAggregateInput = {
   hoursPerDay?: Prisma.SortOrder
   displayOrderKey?: Prisma.SortOrder
   color?: Prisma.SortOrder
-  breakfastAllowance?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -457,7 +433,6 @@ export type DesignationAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   hoursPerDay?: Prisma.SortOrder
   displayOrderKey?: Prisma.SortOrder
-  breakfastAllowance?: Prisma.SortOrder
 }
 
 export type DesignationMaxOrderByAggregateInput = {
@@ -467,7 +442,6 @@ export type DesignationMaxOrderByAggregateInput = {
   hoursPerDay?: Prisma.SortOrder
   displayOrderKey?: Prisma.SortOrder
   color?: Prisma.SortOrder
-  breakfastAllowance?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -480,7 +454,6 @@ export type DesignationMinOrderByAggregateInput = {
   hoursPerDay?: Prisma.SortOrder
   displayOrderKey?: Prisma.SortOrder
   color?: Prisma.SortOrder
-  breakfastAllowance?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -490,7 +463,6 @@ export type DesignationSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   hoursPerDay?: Prisma.SortOrder
   displayOrderKey?: Prisma.SortOrder
-  breakfastAllowance?: Prisma.SortOrder
 }
 
 export type DesignationCreateNestedOneWithoutEmployeesInput = {
@@ -531,7 +503,6 @@ export type DesignationCreateWithoutEmployeesInput = {
   hoursPerDay?: number | null
   displayOrderKey?: number | null
   color?: string | null
-  breakfastAllowance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -545,7 +516,6 @@ export type DesignationUncheckedCreateWithoutEmployeesInput = {
   hoursPerDay?: number | null
   displayOrderKey?: number | null
   color?: string | null
-  breakfastAllowance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -574,7 +544,6 @@ export type DesignationUpdateWithoutEmployeesInput = {
   hoursPerDay?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   displayOrderKey?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  breakfastAllowance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -588,7 +557,6 @@ export type DesignationUncheckedUpdateWithoutEmployeesInput = {
   hoursPerDay?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   displayOrderKey?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  breakfastAllowance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -601,7 +569,6 @@ export type DesignationCreateWithoutExitReentriesInput = {
   hoursPerDay?: number | null
   displayOrderKey?: number | null
   color?: string | null
-  breakfastAllowance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -615,7 +582,6 @@ export type DesignationUncheckedCreateWithoutExitReentriesInput = {
   hoursPerDay?: number | null
   displayOrderKey?: number | null
   color?: string | null
-  breakfastAllowance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -644,7 +610,6 @@ export type DesignationUpdateWithoutExitReentriesInput = {
   hoursPerDay?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   displayOrderKey?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  breakfastAllowance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -658,7 +623,6 @@ export type DesignationUncheckedUpdateWithoutExitReentriesInput = {
   hoursPerDay?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   displayOrderKey?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  breakfastAllowance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -712,7 +676,6 @@ export type DesignationSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   hoursPerDay?: boolean
   displayOrderKey?: boolean
   color?: boolean
-  breakfastAllowance?: boolean
   isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -728,7 +691,6 @@ export type DesignationSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   hoursPerDay?: boolean
   displayOrderKey?: boolean
   color?: boolean
-  breakfastAllowance?: boolean
   isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -741,7 +703,6 @@ export type DesignationSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   hoursPerDay?: boolean
   displayOrderKey?: boolean
   color?: boolean
-  breakfastAllowance?: boolean
   isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -754,13 +715,12 @@ export type DesignationSelectScalar = {
   hoursPerDay?: boolean
   displayOrderKey?: boolean
   color?: boolean
-  breakfastAllowance?: boolean
   isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type DesignationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nameEn" | "nameAr" | "hoursPerDay" | "displayOrderKey" | "color" | "breakfastAllowance" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["designation"]>
+export type DesignationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nameEn" | "nameAr" | "hoursPerDay" | "displayOrderKey" | "color" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["designation"]>
 export type DesignationInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   employees?: boolean | Prisma.Designation$employeesArgs<ExtArgs>
   exitReentries?: boolean | Prisma.Designation$exitReentriesArgs<ExtArgs>
@@ -782,7 +742,6 @@ export type $DesignationPayload<ExtArgs extends runtime.Types.Extensions.Interna
     hoursPerDay: number | null
     displayOrderKey: number | null
     color: string | null
-    breakfastAllowance: runtime.Decimal | null
     isActive: boolean
     createdAt: Date
     updatedAt: Date
@@ -1217,7 +1176,6 @@ export interface DesignationFieldRefs {
   readonly hoursPerDay: Prisma.FieldRef<"Designation", 'Int'>
   readonly displayOrderKey: Prisma.FieldRef<"Designation", 'Int'>
   readonly color: Prisma.FieldRef<"Designation", 'String'>
-  readonly breakfastAllowance: Prisma.FieldRef<"Designation", 'Decimal'>
   readonly isActive: Prisma.FieldRef<"Designation", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"Designation", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Designation", 'DateTime'>

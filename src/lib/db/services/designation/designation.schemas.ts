@@ -12,7 +12,6 @@ export const CreateDesignationSchema = z.object({
   hoursPerDay: z.number().int().positive().optional(),
   displayOrderKey: z.number().int().optional(),
   color: z.string().optional(),
-  breakfastAllowance: z.number().optional(),
   isActive: z.boolean().default(true).optional(),
 });
 
@@ -23,7 +22,6 @@ export const UpdateDesignationSchema = z.object({
   hoursPerDay: z.number().int().positive().optional(),
   displayOrderKey: z.number().int().optional(),
   color: z.string().optional(),
-  breakfastAllowance: z.number().optional(),
   isActive: z.boolean().optional(),
 });
 
@@ -33,14 +31,7 @@ export const ListDesignationsParamsSchema = z.object({
   search: z.string().optional(),
   sortOrder: z.enum(["asc", "desc"]).optional(),
   sortBy: z
-    .enum([
-      "nameEn",
-      "nameAr",
-      "isActive",
-      "displayOrderKey",
-      "hoursPerDay",
-      "breakfastAllowance",
-    ])
+    .enum(["nameEn", "nameAr", "isActive", "displayOrderKey", "hoursPerDay"])
     .optional(),
 });
 

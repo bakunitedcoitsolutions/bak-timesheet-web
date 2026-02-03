@@ -404,7 +404,8 @@ export const ModelName = {
   Loan: 'Loan',
   TrafficChallan: 'TrafficChallan',
   ExitReentry: 'ExitReentry',
-  Ledger: 'Ledger'
+  Ledger: 'Ledger',
+  AllowanceNotAvailable: 'AllowanceNotAvailable'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -420,7 +421,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "userRole" | "userPrivilege" | "branch" | "city" | "country" | "gosiCity" | "employee" | "designation" | "employeeStatus" | "project" | "timesheet" | "payrollSection" | "payrollStatus" | "payrollSummary" | "paymentMethod" | "payrollDetails" | "loan" | "trafficChallan" | "exitReentry" | "ledger"
+    modelProps: "user" | "userRole" | "userPrivilege" | "branch" | "city" | "country" | "gosiCity" | "employee" | "designation" | "employeeStatus" | "project" | "timesheet" | "payrollSection" | "payrollStatus" | "payrollSummary" | "paymentMethod" | "payrollDetails" | "loan" | "trafficChallan" | "exitReentry" | "ledger" | "allowanceNotAvailable"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1978,6 +1979,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    AllowanceNotAvailable: {
+      payload: Prisma.$AllowanceNotAvailablePayload<ExtArgs>
+      fields: Prisma.AllowanceNotAvailableFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AllowanceNotAvailableFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AllowanceNotAvailablePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AllowanceNotAvailableFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AllowanceNotAvailablePayload>
+        }
+        findFirst: {
+          args: Prisma.AllowanceNotAvailableFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AllowanceNotAvailablePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AllowanceNotAvailableFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AllowanceNotAvailablePayload>
+        }
+        findMany: {
+          args: Prisma.AllowanceNotAvailableFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AllowanceNotAvailablePayload>[]
+        }
+        create: {
+          args: Prisma.AllowanceNotAvailableCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AllowanceNotAvailablePayload>
+        }
+        createMany: {
+          args: Prisma.AllowanceNotAvailableCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.AllowanceNotAvailableCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AllowanceNotAvailablePayload>[]
+        }
+        delete: {
+          args: Prisma.AllowanceNotAvailableDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AllowanceNotAvailablePayload>
+        }
+        update: {
+          args: Prisma.AllowanceNotAvailableUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AllowanceNotAvailablePayload>
+        }
+        deleteMany: {
+          args: Prisma.AllowanceNotAvailableDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AllowanceNotAvailableUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.AllowanceNotAvailableUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AllowanceNotAvailablePayload>[]
+        }
+        upsert: {
+          args: Prisma.AllowanceNotAvailableUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AllowanceNotAvailablePayload>
+        }
+        aggregate: {
+          args: Prisma.AllowanceNotAvailableAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAllowanceNotAvailable>
+        }
+        groupBy: {
+          args: Prisma.AllowanceNotAvailableGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AllowanceNotAvailableGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.AllowanceNotAvailableCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AllowanceNotAvailableCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -2126,9 +2201,9 @@ export const EmployeeScalarFieldEnum = {
   isDeductable: 'isDeductable',
   isFixed: 'isFixed',
   workingDays: 'workingDays',
-  workingHours: 'workingHours',
   hourlyRate: 'hourlyRate',
   salary: 'salary',
+  breakfastAllowance: 'breakfastAllowance',
   foodAllowance: 'foodAllowance',
   mobileAllowance: 'mobileAllowance',
   otherAllowance: 'otherAllowance',
@@ -2141,7 +2216,7 @@ export const EmployeeScalarFieldEnum = {
   idCardExpiryDate: 'idCardExpiryDate',
   idCardDocument: 'idCardDocument',
   profession: 'profession',
-  nationality: 'nationality',
+  nationalityId: 'nationalityId',
   passportNo: 'passportNo',
   passportExpiryDate: 'passportExpiryDate',
   passportDocument: 'passportDocument',
@@ -2169,7 +2244,6 @@ export const DesignationScalarFieldEnum = {
   hoursPerDay: 'hoursPerDay',
   displayOrderKey: 'displayOrderKey',
   color: 'color',
-  breakfastAllowance: 'breakfastAllowance',
   isActive: 'isActive',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -2209,11 +2283,9 @@ export const TimesheetScalarFieldEnum = {
   employeeId: 'employeeId',
   date: 'date',
   project1Id: 'project1Id',
-  project1BfAllowance: 'project1BfAllowance',
   project1Hours: 'project1Hours',
   project1Overtime: 'project1Overtime',
   project2Id: 'project2Id',
-  project2BfAllowance: 'project2BfAllowance',
   project2Hours: 'project2Hours',
   project2Overtime: 'project2Overtime',
   totalHours: 'totalHours',
@@ -2384,6 +2456,22 @@ export const LedgerScalarFieldEnum = {
 } as const
 
 export type LedgerScalarFieldEnum = (typeof LedgerScalarFieldEnum)[keyof typeof LedgerScalarFieldEnum]
+
+
+export const AllowanceNotAvailableScalarFieldEnum = {
+  id: 'id',
+  nameEn: 'nameEn',
+  nameAr: 'nameAr',
+  description: 'description',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  type: 'type',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AllowanceNotAvailableScalarFieldEnum = (typeof AllowanceNotAvailableScalarFieldEnum)[keyof typeof AllowanceNotAvailableScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -2580,6 +2668,20 @@ export type ListEnumAmountTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$P
 
 
 /**
+ * Reference to a field of type 'AllowanceType'
+ */
+export type EnumAllowanceTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AllowanceType'>
+    
+
+
+/**
+ * Reference to a field of type 'AllowanceType[]'
+ */
+export type ListEnumAllowanceTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AllowanceType[]'>
+    
+
+
+/**
  * Reference to a field of type 'Float'
  */
 export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -2708,6 +2810,7 @@ export type GlobalOmitConfig = {
   trafficChallan?: Prisma.TrafficChallanOmit
   exitReentry?: Prisma.ExitReentryOmit
   ledger?: Prisma.LedgerOmit
+  allowanceNotAvailable?: Prisma.AllowanceNotAvailableOmit
 }
 
 /* Types for Logging */

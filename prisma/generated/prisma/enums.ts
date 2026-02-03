@@ -48,3 +48,13 @@ export const AmountType = {
 } as const
 
 export type AmountType = (typeof AmountType)[keyof typeof AmountType]
+
+
+export const AllowanceType = {
+  BREAKFAST: 'BREAKFAST',
+  FOOD: 'FOOD',
+  MOBILE: 'MOBILE',
+  OTHER: 'OTHER'
+} as const
+
+export type AllowanceType = (typeof AllowanceType)[keyof typeof AllowanceType]

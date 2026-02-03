@@ -86,9 +86,9 @@ const Step2 = forwardRef<Step2Handle, Step2Props>(({ employeeId }, ref) => {
     isDeductable: false,
     isFixed: false,
     workingDays: undefined,
-    workingHours: undefined,
     hourlyRate: undefined,
     salary: undefined,
+    breakfastAllowance: false,
     foodAllowance: undefined,
     mobileAllowance: undefined,
     otherAllowance: undefined,
@@ -145,11 +145,11 @@ const Step2 = forwardRef<Step2Handle, Step2Props>(({ employeeId }, ref) => {
         isDeductable: foundEmployee.isDeductable ?? false,
         isFixed: foundEmployee.isFixed ?? false,
         workingDays: foundEmployee.workingDays || undefined,
-        workingHours: foundEmployee.workingHours || undefined,
         hourlyRate: foundEmployee.hourlyRate
           ? Number(foundEmployee.hourlyRate)
           : undefined,
         salary: foundEmployee.salary ? Number(foundEmployee.salary) : undefined,
+        breakfastAllowance: foundEmployee.breakfastAllowance ?? false,
         foodAllowance: foundEmployee.foodAllowance
           ? Number(foundEmployee.foodAllowance)
           : undefined,
@@ -256,9 +256,9 @@ const Step2 = forwardRef<Step2Handle, Step2Props>(({ employeeId }, ref) => {
               isDeductable: data.isDeductable,
               isFixed: data.isFixed,
               workingDays: data.workingDays,
-              workingHours: data.workingHours,
               hourlyRate: data.hourlyRate,
               salary: data.salary,
+              breakfastAllowance: data.breakfastAllowance,
               foodAllowance: data.foodAllowance,
               mobileAllowance: data.mobileAllowance,
               otherAllowance: data.otherAllowance,
@@ -438,7 +438,7 @@ const Step2 = forwardRef<Step2Handle, Step2Props>(({ employeeId }, ref) => {
           </FormItem>
           <FormItem
             name="countryId"
-            className={classNames(FORM_FIELD_WIDTHS["4"], "xl:col-span-2")}
+            className={classNames(FORM_FIELD_WIDTHS["4"])}
           >
             <Dropdown
               label="Country"
@@ -458,11 +458,6 @@ const Step2 = forwardRef<Step2Handle, Step2Props>(({ employeeId }, ref) => {
               placeholder="Choose"
             />
           </FormItem>
-
-          {/* Mobile Separator */}
-          <div className="w-full h-px mt-2 mb-2 bg-primary-light block md:hidden" />
-
-          {/* Second Row */}
           <FormItem
             name="statusId"
             className={classNames(FORM_FIELD_WIDTHS["4"])}
@@ -474,6 +469,11 @@ const Step2 = forwardRef<Step2Handle, Step2Props>(({ employeeId }, ref) => {
               placeholder="Choose"
             />
           </FormItem>
+
+          {/* Mobile Separator */}
+          <div className="w-full h-px mt-2 mb-2 bg-primary-light block md:hidden" />
+
+          {/* Second Row */}
           <FormItem
             name="branchId"
             className={classNames(FORM_FIELD_WIDTHS["4"])}
@@ -507,11 +507,6 @@ const Step2 = forwardRef<Step2Handle, Step2Props>(({ employeeId }, ref) => {
               placeholder="Choose"
             />
           </FormItem>
-
-          {/* Mobile Separator */}
-          <div className="w-full h-px mt-2 mb-2 bg-primary-light block md:hidden" />
-
-          {/* Third Row */}
           <FormItem
             name="isFixed"
             className={classNames(FORM_FIELD_WIDTHS["4"])}
@@ -523,6 +518,10 @@ const Step2 = forwardRef<Step2Handle, Step2Props>(({ employeeId }, ref) => {
               placeholder="Choose"
             />
           </FormItem>
+          {/* Mobile Separator */}
+          <div className="w-full h-px mt-2 mb-2 bg-primary-light block md:hidden" />
+
+          {/* Third Row */}
           <FormItem
             name="isDeductable"
             className={classNames(FORM_FIELD_WIDTHS["4"])}
@@ -545,19 +544,6 @@ const Step2 = forwardRef<Step2Handle, Step2Props>(({ employeeId }, ref) => {
               className="w-full"
               useGrouping={false}
               placeholder="Enter working days"
-            />
-          </FormItem>
-          <FormItem
-            name="workingHours"
-            className={classNames(FORM_FIELD_WIDTHS["4"])}
-          >
-            <NumberInput
-              min={0}
-              maxLength={3}
-              label="Working Hours"
-              className="w-full"
-              useGrouping={false}
-              placeholder="Enter working hours"
             />
           </FormItem>
 
@@ -595,6 +581,17 @@ const Step2 = forwardRef<Step2Handle, Step2Props>(({ employeeId }, ref) => {
               />
             </FormItem>
           )}
+          <FormItem
+            name="breakfastAllowance"
+            className={classNames(FORM_FIELD_WIDTHS["4"])}
+          >
+            <Dropdown
+              label="Breakfast Allowance"
+              className="w-full"
+              options={isFixedOptions}
+              placeholder="Choose"
+            />
+          </FormItem>
           <FormItem
             name="foodAllowance"
             className={classNames(FORM_FIELD_WIDTHS["4"])}
@@ -634,7 +631,6 @@ const Step2 = forwardRef<Step2Handle, Step2Props>(({ employeeId }, ref) => {
               placeholder="Enter other allowance"
             />
           </FormItem>
-
           {/* Mobile Separator */}
           <div className="w-full h-px mt-2 mb-2 bg-primary-light block md:hidden" />
 

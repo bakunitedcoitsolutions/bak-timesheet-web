@@ -8,6 +8,7 @@ import { ProgressSpinner } from "primereact/progressspinner";
 import { FORM_FIELD_WIDTHS, STORAGE_CONFIG } from "@/utils/constants";
 import { StepperFormHeading } from "@/components/common";
 import {
+  Dropdown,
   FilePicker,
   Form,
   FormItem,
@@ -20,6 +21,8 @@ import {
   useUpdateEmployeeStep3,
   useGetEmployeeById,
 } from "@/lib/db/services/employee";
+import { useGetCountries } from "@/lib/db/services/country";
+import type { ListedCountry } from "@/lib/db/services/country/country.dto";
 import { UpdateEmployeeStep3Schema } from "@/lib/db/services/employee/employee.schemas";
 import { useStepperForm } from "@/context";
 import { useFileUpload } from "@/hooks";
@@ -44,13 +47,16 @@ const Step3 = forwardRef<Step3Handle, Step3Props>(({ employeeId }, ref) => {
     id: employeeId ?? 0,
   });
 
+  // Fetch countries for nationality dropdown
+  const { data: countriesData } = useGetCountries({ page: 1, limit: 1000 });
+
   const defaultValues = {
     id: employeeId ?? 0,
     idCardNo: "",
     idCardExpiryDate: "",
     idCardDocument: "",
     profession: "",
-    nationality: "",
+    nationalityId: undefined,
     passportNo: "",
     passportExpiryDate: "",
     passportDocument: "",
@@ -104,7 +110,7 @@ const Step3 = forwardRef<Step3Handle, Step3Props>(({ employeeId }, ref) => {
           : "",
         idCardDocument: foundEmployee.idCardDocument || "",
         profession: foundEmployee.profession || "",
-        nationality: foundEmployee.nationality || "",
+        nationalityId: foundEmployee.nationalityId || undefined,
         passportNo: foundEmployee.passportNo || "",
         passportExpiryDate: foundEmployee.passportExpiryDate
           ? new Date(foundEmployee.passportExpiryDate)
@@ -161,7 +167,7 @@ const Step3 = forwardRef<Step3Handle, Step3Props>(({ employeeId }, ref) => {
               idCardNo: data.idCardNo,
               idCardExpiryDate: data.idCardExpiryDate,
               profession: data.profession,
-              nationality: data.nationality,
+              nationalityId: data.nationalityId,
               passportNo: data.passportNo,
               passportExpiryDate: data.passportExpiryDate,
               passportDocument: submitData.passportDocument,
@@ -190,7 +196,7 @@ const Step3 = forwardRef<Step3Handle, Step3Props>(({ employeeId }, ref) => {
               idCardExpiryDate: data.idCardExpiryDate,
               idCardDocument: submitData.idCardDocument,
               profession: data.profession,
-              nationality: data.nationality,
+              nationalityId: data.nationalityId,
               passportNo: data.passportNo,
               passportExpiryDate: data.passportExpiryDate,
             },
@@ -239,6 +245,13 @@ const Step3 = forwardRef<Step3Handle, Step3Props>(({ employeeId }, ref) => {
       });
     },
   }));
+
+  // Prepare nationality dropdown options
+  const nationalityOptions =
+    countriesData?.countries.map((country: ListedCountry) => ({
+      label: country.nameEn,
+      value: country.id,
+    })) || [];
 
   if (isLoadingEmployee) {
     return (
@@ -322,13 +335,14 @@ const Step3 = forwardRef<Step3Handle, Step3Props>(({ employeeId }, ref) => {
           <StepperFormHeading title="Passport" />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 lg:gap-y-8 px-6">
             <FormItem
-              name="nationality"
+              name="nationalityId"
               className={classNames(FORM_FIELD_WIDTHS["2"])}
             >
-              <Input
-                className="w-full"
+              <Dropdown
                 label="Nationality"
-                placeholder="Enter nationality"
+                className="w-full"
+                options={nationalityOptions}
+                placeholder="Choose"
               />
             </FormItem>
             <FormItem

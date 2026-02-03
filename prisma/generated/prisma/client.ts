@@ -144,3 +144,8 @@ export type ExitReentry = Prisma.ExitReentryModel
  * 
  */
 export type Ledger = Prisma.LedgerModel
+/**
+ * Model AllowanceNotAvailable
+ * 
+ */
+export type AllowanceNotAvailable = Prisma.AllowanceNotAvailableModel

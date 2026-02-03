@@ -105,17 +105,17 @@ model Branch {
 }
 
 model City {
-  id            Int      @id @default(autoincrement())
-  nameEn        String
-  nameAr        String?
-  countryId     Int?
-  isActive      Boolean  @default(true)
+  id        Int     @id @default(autoincrement())
+  nameEn    String
+  nameAr    String?
+  countryId Int?
+  isActive  Boolean @default(true)
 
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   // Relations: City → Other Tables (City has foreign keys)
-  country Country? @relation(fields: [countryId], references: [id])
+  country Country? @relation("CityCountry", fields: [countryId], references: [id])
 
   // Relations: Other Tables → City (Other tables have foreign keys pointing to City)
   employees Employee[]
@@ -130,8 +130,9 @@ model Country {
   updatedAt DateTime @updatedAt
 
   // Relations: Other Tables → Country (Other tables have foreign keys pointing to Country)
-  cities    City[]
-  employees Employee[]
+  cities                 City[]     @relation("CityCountry")
+  employeesByCountry     Employee[] @relation("EmployeeCountry")
+  employeesByNationality Employee[] @relation("EmployeeNationality")
 }
 
 model GosiCity {
@@ -160,34 +161,34 @@ model Employee {
   phone          String?
 
   // Step 2
-  gender            String? // Male, Female
-  countryId         Int?
-  cityId            Int?
-  statusId          Int?
-  branchId          Int?
-  designationId     Int?
-  payrollSectionId  Int?
-  isDeductable      Boolean   @default(false)
-  isFixed           Boolean   @default(false)
-  workingDays       Int?
-  workingHours      Int?
-  hourlyRate        Decimal?  @db.Decimal(10, 1)
-  salary            Decimal?  @db.Decimal(10, 1)
-  foodAllowance     Decimal?  @db.Decimal(10, 1)
-  mobileAllowance   Decimal?  @db.Decimal(10, 1)
-  otherAllowance    Decimal?  @db.Decimal(10, 1)
-  contractStartDate DateTime?
-  contractEndDate   DateTime?
-  contractDocument  String?
-  contractEndReason String?   @db.Text
-  joiningDate       DateTime?
+  gender             String? // Male, Female
+  countryId          Int?
+  cityId             Int?
+  statusId           Int?
+  branchId           Int?
+  designationId      Int?
+  payrollSectionId   Int?
+  isDeductable       Boolean   @default(false)
+  isFixed            Boolean   @default(false)
+  workingDays        Int?
+  hourlyRate         Decimal?  @db.Decimal(10, 1)
+  salary             Decimal?  @db.Decimal(10, 1)
+  breakfastAllowance Boolean   @default(false)
+  foodAllowance      Decimal?  @db.Decimal(10, 1)
+  mobileAllowance    Decimal?  @db.Decimal(10, 1)
+  otherAllowance     Decimal?  @db.Decimal(10, 1)
+  contractStartDate  DateTime?
+  contractEndDate    DateTime?
+  contractDocument   String?
+  contractEndReason  String?   @db.Text
+  joiningDate        DateTime?
 
   // Step 3
   idCardNo           String?
   idCardExpiryDate   DateTime?
   idCardDocument     String?
   profession         String?
-  nationality        String?
+  nationalityId      Int?
   passportNo         String?
   passportExpiryDate DateTime?
   passportDocument   String?
@@ -211,7 +212,8 @@ model Employee {
   updatedAt DateTime @updatedAt
 
   // Relations: Employee → Other Tables (Employee has foreign keys)
-  country        Country?        @relation(fields: [countryId], references: [id])
+  country        Country?        @relation("EmployeeCountry", fields: [countryId], references: [id])
+  nationality    Country?        @relation("EmployeeNationality", fields: [nationalityId], references: [id])
   city           City?           @relation(fields: [cityId], references: [id])
   status         EmployeeStatus? @relation(fields: [statusId], references: [id])
   branch         Branch?         @relation(fields: [branchId], references: [id])
@@ -234,16 +236,15 @@ model Employee {
 }
 
 model Designation {
-  id                 Int      @id @default(autoincrement())
-  nameEn             String
-  nameAr             String?
-  hoursPerDay        Int?
-  displayOrderKey    Int?
-  color              String? // Hex color code (e.g., #3B82F6)
-  breakfastAllowance Decimal? @db.Decimal(10, 1)
-  isActive           Boolean  @default(true)
-  createdAt          DateTime @default(now())
-  updatedAt          DateTime @updatedAt
+  id              Int      @id @default(autoincrement())
+  nameEn          String
+  nameAr          String?
+  hoursPerDay     Int?
+  displayOrderKey Int?
+  color           String? // Hex color code (e.g., #3B82F6)
+  isActive        Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 
   // Relations: Other Tables → Designation (Other tables have foreign keys pointing to Designation)
   employees     Employee[]
@@ -289,22 +290,20 @@ model Project {
 // ============================================
 
 model Timesheet {
-  id                  Int      @id @default(autoincrement())
-  employeeId          Int
-  date                DateTime // Compulsory date field
-  project1Id          Int?
-  project1BfAllowance Boolean  @default(false)
-  project1Hours       Int?
-  project1Overtime    Int?
-  project2Id          Int?
-  project2BfAllowance Boolean  @default(false)
-  project2Hours       Int?
-  project2Overtime    Int?
-  totalHours          Int?
-  description         String?  @db.Text
-  createdAt           DateTime @default(now())
-  updatedAt           DateTime @updatedAt
-  isLocked            Boolean  @default(false)
+  id               Int      @id @default(autoincrement())
+  employeeId       Int
+  date             DateTime // Compulsory date field
+  project1Id       Int?
+  project1Hours    Int?
+  project1Overtime Int?
+  project2Id       Int?
+  project2Hours    Int?
+  project2Overtime Int?
+  totalHours       Int?
+  description      String?  @db.Text
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  isLocked         Boolean  @default(false)
 
   // Relations: Timesheet → Other Tables (Timesheet has foreign keys)
   employee Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
@@ -582,4 +581,29 @@ model Ledger {
   @@index([employeeId])
   @@index([type])
   @@index([amountType])
+}
+
+enum AllowanceType {
+  BREAKFAST
+  FOOD
+  MOBILE
+  OTHER
+}
+
+model AllowanceNotAvailable {
+  id          Int           @id @default(autoincrement())
+  nameEn      String // e.g., "Ramadan 2026"
+  nameAr      String? // e.g., "رمضان 2026"
+  description String?       @db.Text // Optional description/reason
+  startDate   DateTime // Start date of the exclusion period
+  endDate     DateTime // End date of the exclusion period
+  type        AllowanceType // Type of allowance to exclude (BREAKFAST)
+  isActive    Boolean       @default(true) // Allow soft disable without deletion
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  @@index([startDate])
+  @@index([endDate])
+  @@index([type])
+  @@index([isActive])
 }

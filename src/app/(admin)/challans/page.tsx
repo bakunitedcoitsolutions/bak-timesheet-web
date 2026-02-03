@@ -57,9 +57,7 @@ type SortableField = keyof typeof SORTABLE_FIELDS;
 
 const columns = (
   handleEdit: (challan: ListedTrafficChallan) => void,
-  handleDelete: (challan: ListedTrafficChallan) => void,
-  currentPage: number = 1,
-  rowsPerPage: number = 10
+  handleDelete: (challan: ListedTrafficChallan) => void
 ): TableColumn<ListedTrafficChallan>[] => [
   {
     field: "id",
@@ -69,15 +67,11 @@ const columns = (
     align: "center",
     style: { minWidth: "70px" },
     headerStyle: { minWidth: "70px" },
-    body: (rowData: ListedTrafficChallan, options?: { rowIndex?: number }) => {
-      const rowIndex = options?.rowIndex ?? 0;
-      const index = (currentPage - 1) * rowsPerPage + rowIndex + 1;
-      return (
-        <div className={"flex items-center justify-center gap-1.5 w-[40px]"}>
-          <span className="text-sm font-medium">{index}</span>
-        </div>
-      );
-    },
+    body: (rowData: ListedTrafficChallan) => (
+      <div className={"flex items-center justify-center gap-1.5 w-[40px]"}>
+        <span className="text-sm font-medium">{rowData?.id}</span>
+      </div>
+    ),
   },
   {
     field: "date",
@@ -309,8 +303,8 @@ const ChallansPage = () => {
 
   // Memoized columns
   const tableColumns = useMemo(
-    () => columns(handleEdit, handleDelete, currentPage, currentLimit),
-    [handleEdit, handleDelete, currentPage, currentLimit]
+    () => columns(handleEdit, handleDelete),
+    [handleEdit, handleDelete]
   );
 
   // Bulk upload handlers
