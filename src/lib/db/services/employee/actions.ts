@@ -87,9 +87,7 @@ export const updateEmployeeStep5Action = serverAction
 export const listEmployeesAction = serverAction
   .input(ListEmployeesParamsSchema)
   .handler(async ({ input }) => {
-    console.log("listEmployeesAction input:", input);
     const response = await listEmployees(input);
-    console.log("listEmployeesAction response:", response);
     return response;
   });
 

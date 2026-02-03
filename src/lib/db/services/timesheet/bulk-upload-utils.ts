@@ -316,11 +316,9 @@ export function downloadSampleTemplate(): void {
     {
       Date: "2024-01-15",
       "Employee Code": 1001,
-      "Project 1 Bf Allowance": "true",
       "Project 1 ID": 1,
       "Project 1 Hours": 8,
       "Project 1 Overtime": 0,
-      "Project 2 Bf Allowance": "false",
       "Project 2 ID": "",
       "Project 2 Hours": 0,
       "Project 2 Overtime": 0,
@@ -329,11 +327,9 @@ export function downloadSampleTemplate(): void {
     {
       Date: "2024-01-15",
       "Employee Code": 1002,
-      "Project 1 Bf Allowance": "false",
       "Project 1 ID": 2,
       "Project 1 Hours": 6,
       "Project 1 Overtime": 2,
-      "Project 2 Bf Allowance": "true",
       "Project 2 ID": "",
       "Project 2 Hours": 0,
       "Project 2 Overtime": 0,
