@@ -12,8 +12,8 @@ import {
   TableColumn,
   TableActions,
   ExportOptions,
-  BulkUploadOptions,
   BulkUploadDialog,
+  BulkUploadOptions,
 } from "@/components";
 import {
   getErrorMessage,
@@ -29,13 +29,13 @@ import {
 import { showConfirmDialog } from "@/components/common/confirm-dialog";
 import { ListLoansSortableField } from "@/lib/db/services/loan/loan.dto";
 import {
-  useDeleteLoan,
   useGetLoans,
+  useDeleteLoan,
   useBulkUploadLoans,
 } from "@/lib/db/services/loan/requests";
 import {
-  parseExcelFile,
   parseCSVFile,
+  parseExcelFile,
   downloadSampleTemplate,
 } from "@/lib/db/services/loan/bulk-upload-utils";
 
@@ -80,7 +80,7 @@ const columns = (
     field: "date",
     header: "Date",
     ...commonColumnProps,
-    style: { minWidth: "150px" },
+    style: { minWidth: "100px" },
     body: (rowData: ListedLoan) => {
       const date = new Date(rowData.date);
       return (
@@ -93,6 +93,23 @@ const columns = (
         </span>
       );
     },
+  },
+  {
+    field: "employeeId",
+    header: "Employee",
+    ...commonColumnProps,
+    style: { minWidth: "250px" },
+    body: (rowData: ListedLoan) => (
+      <span className="text-sm line-clamp-2">
+        {!!rowData.employee?.employeeCode && (
+          <span className="font-semibold text-primary">
+            {rowData.employee?.employeeCode}
+            {!!rowData.employee?.nameEn ? " - " : ""}
+          </span>
+        )}
+        {!!rowData.employee?.nameEn && <span>{rowData.employee?.nameEn}</span>}
+      </span>
+    ),
   },
   {
     field: "type",
@@ -124,7 +141,7 @@ const columns = (
     field: "remarks",
     header: "Remarks",
     ...commonColumnProps,
-    style: { minWidth: "250px" },
+    style: { minWidth: "300px" },
     body: (rowData: ListedLoan) => (
       <span className="text-sm line-clamp-2">{rowData.remarks || "-"}</span>
     ),
@@ -472,6 +489,7 @@ const LoansPage = () => {
             columns={tableColumns}
             sortMode="single"
             onPage={handlePageChange}
+            lazy
             onSort={sortHandler}
             sortField={sortBy}
             sortOrder={toPrimeReactSortOrder(sortOrder) as any}

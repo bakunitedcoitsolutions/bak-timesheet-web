@@ -12,7 +12,7 @@ const csv = require("csv-parser");
  * - Convert decimal hours to integers (rounding)
  */
 
-const CSV_FILE = path.join(__dirname, "../data/Timesheets.csv");
+const CSV_FILE = path.join(__dirname, "../data/Timesheets31122025.csv");
 const OUTPUT_DIR = path.join(__dirname, "timesheet-data");
 
 // Helper function to parse date

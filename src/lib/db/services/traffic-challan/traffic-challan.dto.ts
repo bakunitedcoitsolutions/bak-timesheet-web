@@ -52,7 +52,12 @@ export interface TrafficChallanInterface {
   updatedAt: Date | any;
 }
 
-export interface ListedTrafficChallan extends TrafficChallanInterface {}
+export interface ListedTrafficChallan extends TrafficChallanInterface {
+  employee?: {
+    nameEn: string;
+    employeeCode: number;
+  };
+}
 
 export interface ListTrafficChallansResponse {
   trafficChallans: ListedTrafficChallan[];

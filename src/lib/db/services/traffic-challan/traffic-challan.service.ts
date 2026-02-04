@@ -30,6 +30,12 @@ const trafficChallanSelect = {
   description: true,
   createdAt: true,
   updatedAt: true,
+  employee: {
+    select: {
+      nameEn: true,
+      employeeCode: true,
+    },
+  },
 };
 
 /**
@@ -68,9 +74,7 @@ async function createTrafficChallanWithLedger(
     where: {
       employeeId: data.employeeId,
     },
-    orderBy: [
-      { createdAt: "desc" },
-    ],
+    orderBy: [{ createdAt: "desc" }],
     select: { balance: true },
   });
 
@@ -213,7 +217,14 @@ export const updateTrafficChallan = async (
     // Find and update the corresponding ledger entry
     const ledgerEntry = await tx.ledger.findFirst({
       where: { trafficChallanId: id },
-      select: { id: true, createdAt: true, amount: true, amountType: true, balance: true, date: true },
+      select: {
+        id: true,
+        createdAt: true,
+        amount: true,
+        amountType: true,
+        balance: true,
+        date: true,
+      },
     });
 
     if (ledgerEntry) {
@@ -247,9 +258,7 @@ export const updateTrafficChallan = async (
             id: { not: ledgerEntry.id }, // Exclude current entry
             createdAt: { lt: ledgerEntry.createdAt },
           },
-          orderBy: [
-            { createdAt: "desc" },
-          ],
+          orderBy: [{ createdAt: "desc" }],
           select: { balance: true },
         });
 
@@ -289,9 +298,7 @@ export const updateTrafficChallan = async (
             id: { not: ledgerEntry.id }, // Exclude current entry
             createdAt: { gt: ledgerEntry.createdAt },
           },
-          orderBy: [
-            { createdAt: "asc" },
-          ],
+          orderBy: [{ createdAt: "asc" }],
           select: { id: true, amount: true, amountType: true, balance: true },
         });
 
@@ -471,9 +478,7 @@ export const bulkUploadTrafficChallans = async (
         });
 
         if (!employee) {
-          throw new Error(
-            `Employee with code ${row.employeeCode} not found`
-          );
+          throw new Error(`Employee with code ${row.employeeCode} not found`);
         }
 
         // Create traffic challan with ledger entry using reusable function

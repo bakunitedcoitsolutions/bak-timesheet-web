@@ -77,7 +77,7 @@ const columns = (
     field: "date",
     header: "Date",
     ...commonColumnProps,
-    style: { minWidth: "150px" },
+    style: { minWidth: "100px" },
     body: (rowData: ListedTrafficChallan) => {
       const date = new Date(rowData.date);
       return (
@@ -90,6 +90,23 @@ const columns = (
         </span>
       );
     },
+  },
+  {
+    field: "employee",
+    header: "Employee",
+    ...commonColumnProps,
+    style: { minWidth: "250px" },
+    body: (rowData: ListedTrafficChallan) => (
+      <span className="text-sm line-clamp-2">
+        {!!rowData.employee?.employeeCode && (
+          <span className="font-semibold text-primary">
+            {rowData.employee?.employeeCode}
+            {!!rowData.employee?.nameEn ? " - " : ""}
+          </span>
+        )}
+        {!!rowData.employee?.nameEn && <span>{rowData.employee?.nameEn}</span>}
+      </span>
+    ),
   },
   {
     field: "type",
@@ -121,7 +138,7 @@ const columns = (
     field: "description",
     header: "Description",
     ...commonColumnProps,
-    style: { minWidth: "250px" },
+    style: { minWidth: "300px" },
     body: (rowData: ListedTrafficChallan) => (
       <span className="text-sm line-clamp-2">{rowData.description || "-"}</span>
     ),
@@ -475,6 +492,7 @@ const ChallansPage = () => {
             onPage={handlePageChange}
             onSort={sortHandler}
             sortField={sortBy}
+            lazy
             sortOrder={toPrimeReactSortOrder(sortOrder) as any}
             pagination={true}
             rowsPerPageOptions={[10, 25, 50]}

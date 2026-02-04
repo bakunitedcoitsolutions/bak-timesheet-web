@@ -29,6 +29,12 @@ const loanSelect = {
   remarks: true,
   createdAt: true,
   updatedAt: true,
+  employee: {
+    select: {
+      nameEn: true,
+      employeeCode: true,
+    },
+  },
 };
 
 /**

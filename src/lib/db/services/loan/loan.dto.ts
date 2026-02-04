@@ -23,11 +23,7 @@ export interface UpdateLoanData {
   remarks?: string;
 }
 
-export type ListLoansSortableField =
-  | "date"
-  | "type"
-  | "amount"
-  | "createdAt";
+export type ListLoansSortableField = "date" | "type" | "amount" | "createdAt";
 
 export interface ListLoansParams {
   page?: number;
@@ -52,7 +48,12 @@ export interface LoanInterface {
   updatedAt: Date | any;
 }
 
-export interface ListedLoan extends LoanInterface {}
+export interface ListedLoan extends LoanInterface {
+  employee?: {
+    nameEn: string;
+    employeeCode: number;
+  };
+}
 
 export interface ListLoansResponse {
   loans: ListedLoan[];
