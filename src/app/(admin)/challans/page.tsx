@@ -95,6 +95,7 @@ const columns = (
     field: "employee",
     header: "Employee",
     ...commonColumnProps,
+    sortable: false,
     style: { minWidth: "250px" },
     body: (rowData: ListedTrafficChallan) => (
       <span className="text-sm line-clamp-2">
@@ -138,6 +139,7 @@ const columns = (
     field: "description",
     header: "Description",
     ...commonColumnProps,
+    sortable: false,
     style: { minWidth: "300px" },
     body: (rowData: ListedTrafficChallan) => (
       <span className="text-sm line-clamp-2">{rowData.description || "-"}</span>
