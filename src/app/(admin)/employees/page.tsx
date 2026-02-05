@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { ProgressSpinner } from "primereact/progressspinner";
+import { DataTableFilterMeta } from "primereact/datatable";
 import { useRef, useState, useEffect, useMemo, useCallback } from "react";
 
 import {
@@ -393,11 +394,15 @@ const EmployeesPage = () => {
   const [selectedFilter, setSelectedFilter] = useState<string | number | null>(
     "all"
   );
+  const [columnFilters, setColumnFilters] = useState<Record<string, string>>(
+    {}
+  );
   const tableRef = useRef<TableRef>(null);
   const { mutateAsync: deleteEmployee } = useDeleteEmployee();
 
-  // Debounce search input
+  // Debounce search input and column filters
   const debouncedSearch = useDebounce(searchValue, 500);
+  const debouncedColumnFilters = useDebounce(columnFilters, 500);
 
   // Reset to first page when search value or filter changes
   useEffect(() => {
@@ -412,6 +417,30 @@ const EmployeesPage = () => {
     }
   }, [selectedFilter]);
 
+  // Reset to first page when column filters change
+  useEffect(() => {
+    if (page !== 1) {
+      setPage(1);
+    }
+  }, [debouncedColumnFilters]);
+
+  const handleFilterChange = useCallback((filters: DataTableFilterMeta) => {
+    const newFilters: Record<string, string> = {};
+
+    Object.entries(filters).forEach(([field, filterMeta]) => {
+      // Skip global filter
+      if (field === "global") return;
+
+      // Handle different filter meta structures
+      const meta = filterMeta as any;
+      if (meta && meta.value) {
+        newFilters[field] = meta.value;
+      }
+    });
+
+    setColumnFilters(newFilters);
+  }, []);
+
   // Parse filter parameters from GroupDropdown selection
   const filterParams = parseGroupDropdownFilter(selectedFilter);
 
@@ -423,20 +452,26 @@ const EmployeesPage = () => {
     search: debouncedSearch || undefined,
     designationId: filterParams.designationId,
     payrollSectionId: filterParams.payrollSectionId,
+    // Column filters
+    employeeCode: debouncedColumnFilters.employeeCode,
+    nameEn: debouncedColumnFilters.nameEn,
+    nameAr: debouncedColumnFilters.nameAr,
+    phone: debouncedColumnFilters.phone,
+    idCardNo: debouncedColumnFilters.idCardNo,
+    profession: debouncedColumnFilters.profession,
+    nationality: debouncedColumnFilters.nationality,
   });
 
   const employees = employeesResponse?.employees ?? [];
 
   const {
     total,
-    totalPages,
     page: currentPage,
     limit: currentLimit,
   } = employeesResponse?.pagination ?? {
     page: 1,
     limit: 10,
     total: 0,
-    totalPages: 0,
   };
 
   const { data: designationsResponse } = useGetDesignations(COMMON_QUERY_INPUT);
@@ -644,6 +679,7 @@ const EmployeesPage = () => {
           sortOrder={toPrimeReactSortOrder(sortOrder) as any}
           pagination={true}
           lazy={true}
+          onFilter={handleFilterChange}
           rowsPerPageOptions={[10, 25, 50]}
           rows={currentLimit}
           first={(currentPage - 1) * currentLimit}

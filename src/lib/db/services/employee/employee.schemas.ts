@@ -129,6 +129,14 @@ export const ListEmployeesParamsSchema = z.object({
   statusId: z.number().int().positive().optional(),
   designationId: z.number().int().positive().optional(),
   payrollSectionId: z.number().int().positive().optional(),
+  // Column filters
+  employeeCode: z.string().optional(),
+  nameEn: z.string().optional(),
+  nameAr: z.string().optional(),
+  phone: z.string().optional(),
+  idCardNo: z.string().optional(),
+  profession: z.string().optional(),
+  nationality: z.string().optional(),
 });
 
 export const GetEmployeeByIdSchema = z.object({

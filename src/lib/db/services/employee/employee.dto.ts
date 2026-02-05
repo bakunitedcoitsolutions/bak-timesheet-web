@@ -122,6 +122,14 @@ export interface ListEmployeesParams {
   statusId?: number;
   designationId?: number;
   payrollSectionId?: number;
+  // Column filters
+  employeeCode?: string;
+  nameEn?: string;
+  nameAr?: string;
+  phone?: string;
+  idCardNo?: string;
+  profession?: string;
+  nationality?: string;
 }
 
 export interface EmployeeInterface {

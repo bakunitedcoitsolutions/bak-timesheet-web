@@ -570,41 +570,92 @@ export const listEmployees = async (
   const limit = params.limit ?? 10;
   const skip = (page - 1) * limit;
 
-  // Build where clause
-  const where: any = {};
+  // Build where clause with AND conditions
+  const whereConditions: any[] = [];
 
   // Search filter
   if (params.search) {
     const searchNumber = parseInt(params.search, 10);
     const isNumberSearch = !isNaN(searchNumber);
 
-    where.OR = [
-      { nameEn: { contains: params.search, mode: "insensitive" } },
-      { nameAr: { contains: params.search, mode: "insensitive" } },
-      ...(isNumberSearch ? [{ employeeCode: searchNumber }] : []),
-      { phone: { contains: params.search, mode: "insensitive" } },
-    ];
+    whereConditions.push({
+      OR: [
+        { nameEn: { contains: params.search, mode: "insensitive" } },
+        { nameAr: { contains: params.search, mode: "insensitive" } },
+        ...(isNumberSearch ? [{ employeeCode: searchNumber }] : []),
+        { phone: { contains: params.search, mode: "insensitive" } },
+      ],
+    });
+  }
+
+  // Column filters
+  if (params.employeeCode) {
+    const codeNumber = parseInt(params.employeeCode, 10);
+    if (!isNaN(codeNumber)) {
+      whereConditions.push({ employeeCode: codeNumber });
+    }
+  }
+
+  if (params.nameEn) {
+    whereConditions.push({
+      nameEn: { contains: params.nameEn, mode: "insensitive" },
+    });
+  }
+
+  if (params.nameAr) {
+    whereConditions.push({
+      nameAr: { contains: params.nameAr, mode: "insensitive" },
+    });
+  }
+
+  if (params.phone) {
+    whereConditions.push({
+      phone: { contains: params.phone, mode: "insensitive" },
+    });
+  }
+
+  if (params.idCardNo) {
+    whereConditions.push({
+      idCardNo: { contains: params.idCardNo, mode: "insensitive" },
+    });
+  }
+
+  if (params.profession) {
+    whereConditions.push({
+      profession: { contains: params.profession, mode: "insensitive" },
+    });
+  }
+
+  if (params.nationality) {
+    whereConditions.push({
+      nationality: {
+        nameEn: { contains: params.nationality, mode: "insensitive" },
+      },
+    });
   }
 
   // Filter by branchId
   if (params.branchId !== undefined) {
-    where.branchId = params.branchId;
+    whereConditions.push({ branchId: params.branchId });
   }
 
   // Filter by statusId
   if (params.statusId !== undefined) {
-    where.statusId = params.statusId;
+    whereConditions.push({ statusId: params.statusId });
   }
 
   // Filter by designationId
   if (params.designationId !== undefined) {
-    where.designationId = params.designationId;
+    whereConditions.push({ designationId: params.designationId });
   }
 
   // Filter by payrollSectionId
   if (params.payrollSectionId !== undefined) {
-    where.payrollSectionId = params.payrollSectionId;
+    whereConditions.push({ payrollSectionId: params.payrollSectionId });
   }
+
+  // Combine all conditions with AND
+  const where: any = whereConditions.length > 0 ? { AND: whereConditions } : {};
 
   // Build orderBy clause
   const orderBy: any = {};

@@ -97,6 +97,7 @@ export interface CustomTableProps<
     exportPdf?: () => void;
     print?: () => void;
   }) => ReactNode;
+  onFilter?: (filters: DataTableFilterMeta) => void;
   exportable?: boolean;
   extraSmall?: boolean;
   exportColumns?: Array<{ title: string; dataKey: string }>;
@@ -125,6 +126,7 @@ const CustomTable = forwardRef<TableRef, CustomTableProps<any>>(
       selection,
       tableClassName,
       customHeader,
+      onFilter,
       exportable = false,
       exportColumns,
       extraSmall = false,
@@ -409,6 +411,12 @@ const CustomTable = forwardRef<TableRef, CustomTableProps<any>>(
           rowsPerPageOptions={rowsPerPageOptions}
           dataKey={dataKey}
           filters={hasFilterableColumns ? filters : undefined}
+          onFilter={(e) => {
+            setFilters(e.filters);
+            if (onFilter) {
+              onFilter(e.filters);
+            }
+          }}
           filterDisplay={
             hasFilterableColumns
               ? (filterDisplay as "row" | "menu" | undefined)
