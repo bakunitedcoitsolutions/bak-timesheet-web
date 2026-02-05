@@ -214,6 +214,17 @@ export const listProjects = async (
     where.isActive = params.isActive;
   }
 
+  // Column filters
+  if (params.nameEn) {
+    where.nameEn = { contains: params.nameEn, mode: "insensitive" };
+  }
+  if (params.nameAr) {
+    where.nameAr = { contains: params.nameAr, mode: "insensitive" };
+  }
+  if (params.description) {
+    where.description = { contains: params.description, mode: "insensitive" };
+  }
+
   // Build orderBy clause
   const orderBy: any = {};
   if (params.sortBy) {

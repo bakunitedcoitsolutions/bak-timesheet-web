@@ -28,16 +28,13 @@ export const ListProjectsParamsSchema = z.object({
   limit: z.number().int().positive().optional(),
   search: z.string().optional(),
   sortOrder: z.enum(["asc", "desc"]).optional(),
-  sortBy: z
-    .enum([
-      "nameEn",
-      "nameAr",
-      "isActive",
-      "createdAt",
-    ])
-    .optional(),
+  sortBy: z.enum(["nameEn", "nameAr", "isActive", "createdAt"]).optional(),
   branchId: z.number().int().positive().optional(),
   isActive: z.boolean().optional(),
+  // Column filters
+  nameEn: z.string().optional(),
+  nameAr: z.string().optional(),
+  description: z.string().optional(),
 });
 
 export const GetProjectByIdSchema = z.object({
@@ -51,8 +48,6 @@ export const DeleteProjectSchema = z.object({
 // Type exports for use in actions
 export type CreateProjectInput = z.infer<typeof CreateProjectSchema>;
 export type UpdateProjectInput = z.infer<typeof UpdateProjectSchema>;
-export type ListProjectsParamsInput = z.infer<
-  typeof ListProjectsParamsSchema
->;
+export type ListProjectsParamsInput = z.infer<typeof ListProjectsParamsSchema>;
 export type GetProjectByIdInput = z.infer<typeof GetProjectByIdSchema>;
 export type DeleteProjectInput = z.infer<typeof DeleteProjectSchema>;

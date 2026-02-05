@@ -33,6 +33,10 @@ export interface ListProjectsParams {
   sortBy?: ListProjectsSortableField;
   branchId?: number;
   isActive?: boolean;
+  // Column filters
+  nameEn?: string;
+  nameAr?: string;
+  description?: string;
 }
 
 export interface ProjectInterface {

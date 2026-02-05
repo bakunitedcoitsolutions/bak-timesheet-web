@@ -1,6 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { ProgressSpinner } from "primereact/progressspinner";
+import { DataTableFilterMeta } from "primereact/datatable";
 import { useRef, useState, useEffect, useMemo, useCallback } from "react";
 
 import {
@@ -142,18 +143,46 @@ const ProjectsPage = () => {
     SortableField | ListProjectsSortableField
   >("createdAt");
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
+  const [columnFilters, setColumnFilters] = useState<Record<string, string>>(
+    {}
+  );
   const tableRef = useRef<TableRef>(null);
   const { mutateAsync: deleteProject } = useDeleteProject();
 
-  // Debounce search input
+  // Debounce search input and column filters
   const debouncedSearch = useDebounce(searchValue, 500);
+  const debouncedColumnFilters = useDebounce(columnFilters, 500);
 
-  // Reset to first page when search value changes
+  // Reset to first page when search value or filter changes
   useEffect(() => {
     if (searchValue !== debouncedSearch && page !== 1) {
       setPage(1);
     }
   }, [searchValue, debouncedSearch, page]);
+
+  // Reset to first page when column filters change
+  useEffect(() => {
+    if (page !== 1) {
+      setPage(1);
+    }
+  }, [debouncedColumnFilters]);
+
+  const handleFilterChange = useCallback((filters: DataTableFilterMeta) => {
+    const newFilters: Record<string, string> = {};
+
+    Object.entries(filters).forEach(([field, filterMeta]) => {
+      // Skip global filter
+      if (field === "global") return;
+
+      // Handle different filter meta structures
+      const meta = filterMeta as any;
+      if (meta && meta.value) {
+        newFilters[field] = meta.value;
+      }
+    });
+
+    setColumnFilters(newFilters);
+  }, []);
 
   const { data: projectsResponse, isLoading } = useGetProjects({
     page,
@@ -161,6 +190,10 @@ const ProjectsPage = () => {
     sortBy: sortBy as ListProjectsSortableField,
     sortOrder,
     search: debouncedSearch || undefined,
+    // Column filters
+    nameEn: debouncedColumnFilters.nameEn,
+    nameAr: debouncedColumnFilters.nameAr,
+    description: debouncedColumnFilters.description,
   });
 
   const projects = projectsResponse?.projects ?? [];
@@ -326,6 +359,7 @@ const ProjectsPage = () => {
           sortMode="single"
           onPage={handlePageChange}
           onSort={sortHandler}
+          onFilter={handleFilterChange}
           sortField={sortBy}
           lazy={true}
           sortOrder={toPrimeReactSortOrder(sortOrder) as any}
