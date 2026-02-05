@@ -84,6 +84,10 @@ export async function seedTimesheets(prisma: PrismaClient) {
 
     // Batch insert timesheets for this employee using createMany
     try {
+      console.log(
+        `     → Employee ${data.employeeId}: Inserting ${timesheets.length} timesheets...`
+      );
+
       const timesheetData = timesheets.map((timesheet) => ({
         id: timesheet.id,
         employeeId: timesheet.employeeId,
@@ -105,6 +109,11 @@ export async function seedTimesheets(prisma: PrismaClient) {
       });
 
       insertedCount += result.count;
+      console.log(
+        `     ✓ Employee ${data.employeeId}: Inserted ${result.count} timesheets (${
+          timesheets.length - result.count
+        } duplicates skipped)`
+      );
     } catch (error) {
       console.warn(
         `  ⚠️  Error inserting timesheets for employee ${data.employeeId}:`,

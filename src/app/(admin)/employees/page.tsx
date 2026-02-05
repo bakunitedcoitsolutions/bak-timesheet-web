@@ -391,7 +391,7 @@ const EmployeesPage = () => {
   >("employeeCode");
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
   const [selectedFilter, setSelectedFilter] = useState<string | number | null>(
-    null
+    "all"
   );
   const tableRef = useRef<TableRef>(null);
   const { mutateAsync: deleteEmployee } = useDeleteEmployee();
@@ -424,10 +424,6 @@ const EmployeesPage = () => {
     designationId: filterParams.designationId,
     payrollSectionId: filterParams.payrollSectionId,
   });
-
-  console.log("Current page state:", page, "limit:", limit);
-  console.log("employeesResponse:", employeesResponse);
-  console.log("employees count:", employeesResponse?.employees?.length);
 
   const employees = employeesResponse?.employees ?? [];
 

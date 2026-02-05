@@ -11,12 +11,14 @@ import type { ListedPayrollSection } from "@/lib/db/services/payroll-section/pay
 const GroupDropdown = ({
   value,
   onChange,
+  hideAllOption = false,
   className = "w-full",
   placeholder = "Choose",
 }: {
   value: any;
   className?: string;
   placeholder?: string;
+  hideAllOption?: boolean;
   onChange: (value: any) => void;
 }) => {
   // Fetch designations with stable query key
@@ -31,16 +33,19 @@ const GroupDropdown = ({
 
   const getGroupedDesignations = useMemo(() => {
     const groupedDesignations = [
-      {
-        label: "All",
-        value: "all",
-        items: [
-          {
-            label: "All",
-            value: "all",
-          },
-        ],
-      },
+      ...((!hideAllOption && [
+        {
+          label: "All",
+          value: "all",
+          items: [
+            {
+              label: "All",
+              value: "all",
+            },
+          ],
+        },
+      ]) ||
+        []),
       {
         label: "Payroll Sections",
         value: "payroll-sections",
@@ -67,8 +72,12 @@ const GroupDropdown = ({
         return <div style={{ display: "none" }} />;
       }
       return (
-        <div className="font-semibold text-sm text-gray-600 px-3 py-2">
-          {option.label}
+        <div className="w-full flex items-center justify-center gap-3 px-4 py-3 bg-white">
+          <div className="flex-1 h-px bg-lineat-to-r from-transparent via-gray-300 to-gray-300" />
+          <span className="inline-flex items-center px-3 py-1 bg-primary/10 rounded-full font-semibold text-xs text-primary tracking-wide uppercase">
+            {option.label}
+          </span>
+          <div className="flex-1 h-px bg-lineat-to-l from-transparent via-gray-300 to-gray-300" />
         </div>
       );
     },

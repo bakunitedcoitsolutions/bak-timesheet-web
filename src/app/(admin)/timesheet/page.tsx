@@ -513,6 +513,7 @@ const TimesheetPage = () => {
           </div>
           <div className="w-full lg:w-auto">
             <GroupDropdown
+              hideAllOption
               value={selectedFilter}
               onChange={setSelectedFilter}
               className="w-full lg:w-48"
