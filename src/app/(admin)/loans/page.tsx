@@ -49,7 +49,7 @@ const SORTABLE_FIELDS = {
 
 const commonColumnProps = {
   sortable: true,
-  filterable: true,
+  filterable: false,
   smallFilter: true,
   showFilterMenu: false,
   showClearButton: false,
