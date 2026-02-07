@@ -325,7 +325,7 @@ export default function Sidebar({ collapsed, setCollapsed }: SidebarProps) {
       )}
       <div
         className={classNames(
-          "fixed left-0 top-0 h-screen bg-white transition-all duration-300 ease-in-out z-21 flex flex-col",
+          "fixed left-0 top-0 h-screen bg-white transition-all duration-300 ease-in-out z-21 flex flex-col print:hidden",
           {
             "w-64 translate-x-0": !collapsed,
             "-translate-x-full md:translate-x-0 w-0 md:w-20": collapsed,

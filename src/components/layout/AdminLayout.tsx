@@ -38,6 +38,7 @@ export default function AdminLayout({
           {
             "md:ml-64": !collapsed,
             "md:ml-20": collapsed,
+            "print:ml-0!": true,
           }
         )}
       >
