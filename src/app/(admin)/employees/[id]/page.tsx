@@ -57,7 +57,7 @@ const UpsertEmployeePage = () => {
         return 1;
       }
     }
-    return 2;
+    return 0;
   });
 
   // Redirect to 404 page if the entity is invalid

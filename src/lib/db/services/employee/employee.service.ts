@@ -666,7 +666,7 @@ export const listEmployees = async (
   }
 
   // Get total count
-  const total = await prisma.employee.count();
+  const total = await prisma.employee.count({ where });
 
   // Get employees
   const employees = await prisma.employee.findMany({
