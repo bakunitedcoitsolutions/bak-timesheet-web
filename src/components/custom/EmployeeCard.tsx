@@ -9,7 +9,7 @@ export const EmployeeCard = ({
   designationName?: string;
 }) => {
   return (
-    <div className="bg-white rounded-xl overflow-hidden flex flex-col items-center  w-[2.1in] h-[3.1in] relative border border-gray-100">
+    <div className="bg-white rounded-xl overflow-hidden flex flex-col items-center  w-[2.4in] h-[3.1in] relative border border-gray-100">
       {/* Content Container */}
       <div className="relative z-10 w-full flex flex-col items-center flex-1">
         {/* Logo Box */}
