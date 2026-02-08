@@ -1,13 +1,13 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { memo, useState, useRef } from "react";
-import { Calendar } from "primereact/calendar";
 import { useReactToPrint } from "react-to-print";
 import { centuryGothic, tanseekArabic } from "@/app/fonts";
 import { ProgressSpinner } from "primereact/progressspinner";
 import { InputNumberChangeEvent } from "primereact/inputnumber";
 
 import {
+  Input,
   Button,
   SalarySlip,
   TitleHeader,
@@ -88,13 +88,18 @@ const FilterSection = memo(
       <div className="bg-[#F5E6E8] w-full flex flex-col xl:flex-row justify-between gap-x-10 gap-y-4 px-6 py-6 print:hidden">
         <div className="grid flex-1 grid-cols-1 md:grid-cols-4 lg:grid-cols-5 gap-3 items-center">
           <div className="w-full">
-            <Calendar
-              value={selectedDate}
-              onChange={(e) => e.value && onDateChange(e.value)}
-              view="month"
-              dateFormat="MM yy"
+            <Input
+              type="month"
+              value={`${selectedDate.getFullYear()}-${String(
+                selectedDate.getMonth() + 1
+              ).padStart(2, "0")}`}
+              onChange={(e) => {
+                if (e.target.value) {
+                  const [y, m] = e.target.value.split("-").map(Number);
+                  onDateChange(new Date(y, m - 1));
+                }
+              }}
               className="w-full h-10!"
-              inputClassName="h-10!"
               placeholder="Select Month"
             />
           </div>
