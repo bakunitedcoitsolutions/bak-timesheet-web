@@ -4,7 +4,7 @@ async function main() {
   const summaries = await prisma.payrollSummary.findMany({
     include: {
       _count: {
-        select: { payrollDetails: true },
+        // select: { payrollDetails: true },
       },
     },
     orderBy: {
@@ -15,7 +15,7 @@ async function main() {
   console.log("Payroll Summaries:");
   summaries.forEach((s) => {
     console.log(
-      `ID: ${s.id}, Year: ${s.payrollYear}, Month: ${s.payrollMonth}, Status: ${s.payrollStatusId}, Details Count: ${s._count.payrollDetails}`
+      `ID: ${s.id}, Year: ${s.payrollYear}, Month: ${s.payrollMonth}, Status: ${s.payrollStatusId}`
     );
   });
 

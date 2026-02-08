@@ -49,11 +49,8 @@ export const useGetPayrollSummaries = (
   });
 
 // Manually defining input type since schema is defined inside actions.ts for now
-import { z } from "zod";
 import { getPayrollDetailsAction } from "./actions";
-import { GetPayrollDetailsSchema } from "./payroll-summary.schemas";
-
-export type GetPayrollDetailsInput = z.infer<typeof GetPayrollDetailsSchema>;
+import { GetPayrollDetailsInput } from "./payroll-summary.schemas";
 
 export const useGetPayrollDetails = (input: GetPayrollDetailsInput) =>
   useQuery(getPayrollDetailsAction, {
