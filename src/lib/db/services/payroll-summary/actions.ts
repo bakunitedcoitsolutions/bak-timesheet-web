@@ -6,12 +6,14 @@ import {
   GetPayrollSummaryByYearParamsSchema,
   RunPayrollSchema,
   RepostPayrollSchema,
+  GetPayrollDetailsSchema,
 } from "./payroll-summary.schemas";
 import {
   updateMonthlyPayrollValues,
   getPayrollSummariesByYear,
   runPayroll,
   repostPayroll,
+  getPayrollDetails,
 } from "./payroll-summary.service";
 
 export const updateMonthlyPayrollValuesAction = serverAction
@@ -37,4 +39,10 @@ export const getPayrollSummariesByYearAction = serverAction
   .handler(async ({ input }) => {
     const response = await getPayrollSummariesByYear(input);
     return response;
+  });
+
+export const getPayrollDetailsAction = serverAction
+  .input(GetPayrollDetailsSchema)
+  .handler(async ({ input }) => {
+    return await getPayrollDetails(input);
   });

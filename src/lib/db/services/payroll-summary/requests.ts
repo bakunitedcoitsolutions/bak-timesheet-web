@@ -47,3 +47,16 @@ export const useGetPayrollSummaries = (
     queryKey: ["payroll-summaries", input],
     input,
   });
+
+// Manually defining input type since schema is defined inside actions.ts for now
+import { z } from "zod";
+import { getPayrollDetailsAction } from "./actions";
+import { GetPayrollDetailsSchema } from "./payroll-summary.schemas";
+
+export type GetPayrollDetailsInput = z.infer<typeof GetPayrollDetailsSchema>;
+
+export const useGetPayrollDetails = (input: GetPayrollDetailsInput) =>
+  useQuery(getPayrollDetailsAction, {
+    queryKey: ["payroll-details", input],
+    input,
+  });
