@@ -17,9 +17,9 @@ import {
 import { COMMON_QUERY_INPUT } from "@/utils/constants";
 import { parseGroupDropdownFilter } from "@/utils/helpers";
 import { useGetEmployees } from "@/lib/db/services/employee";
-import { printGroupedTable } from "@/utils/helpers/print-utils";
 import { ListedDesignation } from "@/lib/db/services/designation";
 import { ListedEmployeeStatus } from "@/lib/db/services/employee-status";
+import { printGroupedTable, printTable } from "@/utils/helpers/print-utils";
 import { ListedEmployee } from "@/lib/db/services/employee/employee.dto";
 import { useGetDesignations } from "@/lib/db/services/designation/requests";
 import { useGetEmployeeStatuses } from "@/lib/db/services/employee-status/requests";
@@ -434,7 +434,7 @@ const EmployeesReportPage = () => {
       ? "EMPLOYEES REPORT (ZERO RATE)"
       : "EMPLOYEES REPORT";
 
-    printGroupedTable({
+    const commonPrintProps = {
       data: employees,
       columns: columnsToPrint.map((col) => ({
         field: col.field,
@@ -443,10 +443,18 @@ const EmployeesReportPage = () => {
         style: col.style,
         body: col.body,
       })),
-      groupBy: "sectionName",
       printTitle: printTitle,
       printHeaderContent: printTitle,
-    });
+    };
+
+    if (hasActiveFilter) {
+      printTable(commonPrintProps);
+    } else {
+      printGroupedTable({
+        ...commonPrintProps,
+        groupBy: "sectionName",
+      });
+    }
   };
 
   return (
