@@ -12,6 +12,10 @@ import type {
   SaveTimesheetEntriesResponse,
   BulkUploadTimesheetData,
   BulkUploadTimesheetResult,
+  GetMonthlyTimesheetReportParams,
+  GetMonthlyTimesheetReportResponse,
+  DailyTimesheetRecord,
+  EmployeeMonthlyReport,
 } from "./timesheet.dto";
 
 /**
@@ -297,4 +301,177 @@ export const bulkUploadTimesheets = async (
   }
 
   return result;
+};
+
+/**
+ * Get monthly timesheet report data for one or all employees.
+ * Aggregates daily records for the specified month and year.
+ */
+export const getMonthlyTimesheetReportData = async (
+  params: GetMonthlyTimesheetReportParams
+): Promise<GetMonthlyTimesheetReportResponse> => {
+  const {
+    month,
+    year,
+    employeeId,
+    employeeCode,
+    projectId,
+    designationId,
+    payrollSectionId,
+    showAbsents,
+    showFixedSalary,
+  } = params;
+
+  // Calculate month boundaries (UTC)
+  const startDate = new Date(Date.UTC(year, month - 1, 1, 0, 0, 0));
+  const endDate = new Date(Date.UTC(year, month, 0, 23, 59, 59, 999));
+  const daysInMonth = endDate.getUTCDate();
+
+  // 1. Fetch Employees
+  const employees = await prisma.employee.findMany({
+    where: {
+      ...(employeeId ? { id: employeeId } : {}),
+      ...(employeeCode
+        ? {
+            OR: [
+              {
+                employeeCode: isNaN(Number(employeeCode))
+                  ? undefined
+                  : Number(employeeCode),
+              },
+              {
+                nameEn: {
+                  contains: employeeCode,
+                  mode: "insensitive" as const,
+                },
+              },
+              {
+                nameAr: {
+                  contains: employeeCode,
+                  mode: "insensitive" as const,
+                },
+              },
+            ].filter((condition) => Object.values(condition)[0] !== undefined),
+          }
+        : {}),
+      ...(designationId ? { designationId } : {}),
+      ...(payrollSectionId ? { payrollSectionId } : {}),
+      ...(showFixedSalary ? { isFixed: true } : {}),
+    },
+    select: {
+      id: true,
+      employeeCode: true,
+      nameEn: true,
+      nameAr: true,
+      idCardNo: true,
+      isFixed: true,
+      designation: {
+        select: { nameEn: true },
+      },
+    },
+    orderBy: { employeeCode: "asc" },
+  });
+
+  // 2. Fetch Timesheets for the month
+  const timesheets = await prisma.timesheet.findMany({
+    where: {
+      date: {
+        gte: startDate,
+        lte: endDate,
+      },
+      ...(employeeId ? { employeeId } : {}),
+      ...(projectId
+        ? {
+            OR: [{ project1Id: projectId }, { project2Id: projectId }],
+          }
+        : {}),
+    },
+    include: {
+      project1: { select: { nameEn: true } },
+      project2: { select: { nameEn: true } },
+    },
+  });
+
+  // 3. Map timesheets by employee and date
+  const timesheetMap = new Map<string, (typeof timesheets)[0]>();
+  timesheets.forEach((ts) => {
+    const key = `${ts.employeeId}-${ts.date.getUTCDate()}`;
+    timesheetMap.set(key, ts);
+  });
+
+  // 4. Generate report per employee
+  const reports: EmployeeMonthlyReport[] = employees.map((emp: any) => {
+    const dailyRecords: DailyTimesheetRecord[] = [];
+    let totalHours = 0;
+    let totalOT = 0;
+
+    for (let day = 1; day <= daysInMonth; day++) {
+      const ts = timesheetMap.get(`${emp.id}-${day}`);
+      const dateString = new Date(Date.UTC(year, month - 1, day));
+      const isFriday = dateString.getUTCDay() === 5;
+
+      const record: DailyTimesheetRecord = {
+        date: `${day.toString().padStart(2, "0")}-${dateString.toLocaleString("en-US", { month: "short" })}`,
+        day,
+        project1Id: ts?.project1Id ?? null,
+        project1Name: ts?.project1?.nameEn ?? null,
+        project1Hours: ts?.project1Hours ?? 0,
+        project1Overtime: ts?.project1Overtime ?? 0,
+        project2Id: ts?.project2Id ?? null,
+        project2Name: ts?.project2?.nameEn ?? null,
+        project2Hours: ts?.project2Hours ?? 0,
+        project2Overtime: ts?.project2Overtime ?? 0,
+        totalHours: ts?.totalHours ?? 0,
+        description: ts?.description ?? null,
+        isFriday,
+        remarks: isFriday
+          ? "Friday"
+          : emp.isFixed && day === daysInMonth
+            ? "Fixed Salary"
+            : null,
+      };
+
+      // If projectId is set, only count hours for that project
+      if (projectId) {
+        let p1H = record.project1Id === projectId ? record.project1Hours : 0;
+        let p1OT =
+          record.project1Id === projectId ? record.project1Overtime : 0;
+        let p2H = record.project2Id === projectId ? record.project2Hours : 0;
+        let p2OT =
+          record.project2Id === projectId ? record.project2Overtime : 0;
+
+        totalHours += p1H + p2H;
+        totalOT += p1OT + p2OT;
+      } else {
+        totalHours += record.project1Hours + record.project2Hours;
+        totalOT += record.project1Overtime + record.project2Overtime;
+      }
+
+      dailyRecords.push(record);
+    }
+
+    // Optional: Filter out employees with no hours if showAbsents is false
+    const grandTotal = totalHours + totalOT;
+
+    return {
+      employeeId: emp.id,
+      employeeCode: emp.employeeCode,
+      nameEn: emp.nameEn,
+      nameAr: emp.nameAr,
+      designationName: emp.designation?.nameEn ?? null,
+      idCardNo: emp.idCardNo,
+      isFixed: emp.isFixed,
+      dailyRecords,
+      totalHours,
+      totalOT,
+      grandTotal,
+    };
+  });
+
+  // Filter out reports with zero hours if showAbsents is false
+  const filteredReports = showAbsents
+    ? reports
+    : reports.filter((r) => r.grandTotal > 0);
+
+  return { reports: filteredReports };
 };

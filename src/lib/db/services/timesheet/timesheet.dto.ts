@@ -88,3 +88,49 @@ export interface BulkUploadTimesheetResult {
     error: string;
   }>;
 }
+export interface GetMonthlyTimesheetReportParams {
+  month: number;
+  year: number;
+  employeeId?: number | null;
+  employeeCode?: string | null;
+  projectId?: number | null;
+  designationId?: number | null;
+  payrollSectionId?: number | null;
+  showAbsents?: boolean;
+  showFixedSalary?: boolean;
+}
+
+export interface DailyTimesheetRecord {
+  date: string;
+  day: number;
+  project1Id: number | null;
+  project1Name: string | null;
+  project1Hours: number;
+  project1Overtime: number;
+  project2Id: number | null;
+  project2Name: string | null;
+  project2Hours: number;
+  project2Overtime: number;
+  totalHours: number;
+  description: string | null;
+  isFriday: boolean;
+  remarks: string | null;
+}
+
+export interface EmployeeMonthlyReport {
+  employeeId: number;
+  employeeCode: number;
+  nameEn: string;
+  nameAr: string | null;
+  designationName: string | null;
+  idCardNo: string | null;
+  isFixed: boolean;
+  dailyRecords: DailyTimesheetRecord[];
+  totalHours: number;
+  totalOT: number;
+  grandTotal: number;
+}
+
+export interface GetMonthlyTimesheetReportResponse {
+  reports: EmployeeMonthlyReport[];
+}

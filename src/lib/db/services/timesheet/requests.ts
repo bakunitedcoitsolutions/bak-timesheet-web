@@ -3,11 +3,13 @@ import { useMutation, useQuery } from "@/lib/zsa/zsa-query";
 import {
   GetTimesheetPageDataInput,
   SaveTimesheetEntriesInput,
+  GetMonthlyTimesheetReportInput,
 } from "./timesheet.schemas";
 import {
   getTimesheetPageDataAction,
   saveTimesheetEntriesAction,
   bulkUploadTimesheetsAction,
+  getMonthlyTimesheetReportAction,
 } from "./actions";
 
 const dateToKey = (d: Date) =>
@@ -39,4 +41,21 @@ export const useBulkUploadTimesheets = () =>
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["timesheet-page"] });
     },
+  });
+
+export const useGetMonthlyTimesheetReport = (
+  input: GetMonthlyTimesheetReportInput
+) =>
+  useQuery(getMonthlyTimesheetReportAction, {
+    queryKey: [
+      "monthly-timesheet-report",
+      input.month,
+      input.year,
+      input.employeeId,
+      input.projectId,
+      input.showAbsents,
+      input.showFixedSalary,
+    ],
+    input,
+    enabled: !!input.month && !!input.year,
   });
