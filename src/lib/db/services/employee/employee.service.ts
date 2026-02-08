@@ -639,6 +639,22 @@ export const listEmployees = async (
     whereConditions.push({ branchId: params.branchId });
   }
 
+  // Filter by Zero Rate
+  if (params.zeroRate) {
+    whereConditions.push({
+      OR: [
+        {
+          isFixed: true,
+          salary: 0,
+        },
+        {
+          isFixed: false,
+          hourlyRate: 0,
+        },
+      ],
+    });
+  }
+
   // Filter by statusId
   if (params.statusId !== undefined) {
     whereConditions.push({ statusId: params.statusId });
@@ -658,9 +674,16 @@ export const listEmployees = async (
   const where: any = whereConditions.length > 0 ? { AND: whereConditions } : {};
 
   // Build orderBy clause
-  const orderBy: any = {};
+  let orderBy: any = {};
   if (params.sortBy) {
-    orderBy[params.sortBy] = params.sortOrder ?? "asc";
+    if (params.sortBy === "payrollSectionId") {
+      orderBy = [
+        { payrollSection: { displayOrderKey: params.sortOrder ?? "asc" } },
+        { nameEn: "asc" }, // Secondary sort by name
+      ];
+    } else {
+      orderBy[params.sortBy] = params.sortOrder ?? "asc";
+    }
   } else {
     orderBy.createdAt = "desc"; // Default sort
   }
@@ -679,6 +702,12 @@ export const listEmployees = async (
       nationality: {
         select: {
           nameEn: true,
+        },
+      },
+      payrollSection: {
+        select: {
+          nameEn: true,
+          nameAr: true,
         },
       },
     },

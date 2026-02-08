@@ -37,11 +37,16 @@ export const nodeToHTML = (node: ReactNode): string => {
 
     if (!props) return "";
 
+    // Handle Fragments (symbol type)
+    if (typeof type === "symbol" || !type) {
+      return props.children ? nodeToHTML(props.children) : "";
+    }
+
     // Get tag name
     let tagName = "div";
     if (typeof type === "string") {
       tagName = type;
-    } else if (type && typeof type === "function") {
+    } else if (typeof type === "function") {
       // For custom components, default to div
       tagName = "div";
     }
@@ -103,7 +108,7 @@ export interface PrintTableColumn<T = any> {
   header: string;
   align?: "left" | "center" | "right";
   style?: { minWidth?: number | string; width?: number | string };
-  body?: (rowData: T) => ReactNode;
+  body?: (rowData: T, options?: { rowIndex?: number }) => ReactNode;
   footer?: () => ReactNode;
 }
 
@@ -142,8 +147,8 @@ export const printTable = <T extends Record<string, any>>({
       let cellValue = "";
 
       if (col.body) {
-        const bodyResult = col.body(row);
-        cellValue = extractText(bodyResult);
+        const bodyResult = col.body(row, { rowIndex: data.indexOf(row) });
+        cellValue = nodeToHTML(bodyResult);
       } else {
         const value = (row as any)[field];
         if (value !== null && value !== undefined) {
@@ -165,7 +170,7 @@ export const printTable = <T extends Record<string, any>>({
     ? columns.map((col) => {
         if (col.footer) {
           const footerResult = col.footer();
-          return extractText(footerResult);
+          return nodeToHTML(footerResult);
         }
         return "";
       })
@@ -380,8 +385,10 @@ export const printGroupedTable = <T extends Record<string, any>>({
         let cellValue = "";
 
         if (col.body) {
-          const bodyResult = col.body(row);
-          cellValue = extractText(bodyResult);
+          const bodyResult = col.body(row, {
+            rowIndex: groupData.indexOf(row),
+          });
+          cellValue = nodeToHTML(bodyResult);
         } else {
           const value = (row as any)[field];
           if (value !== null && value !== undefined) {

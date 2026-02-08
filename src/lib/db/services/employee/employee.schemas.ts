@@ -123,6 +123,7 @@ export const ListEmployeesParamsSchema = z.object({
       "idCardNo",
       "profession",
       "nationalityId",
+      "payrollSectionId",
     ])
     .optional(),
   branchId: z.number().int().positive().optional(),
@@ -137,6 +138,7 @@ export const ListEmployeesParamsSchema = z.object({
   idCardNo: z.string().optional(),
   profession: z.string().optional(),
   nationality: z.string().optional(),
+  zeroRate: z.boolean().optional(),
 });
 
 export const GetEmployeeByIdSchema = z.object({

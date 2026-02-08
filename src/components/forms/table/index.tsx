@@ -138,7 +138,14 @@ const CustomTable = forwardRef<TableRef, CustomTableProps<any>>(
   ) {
     const [filters, setFilters] = useState<DataTableFilterMeta>({});
     const [globalFilterValue, setGlobalFilterValue] = useState<string>("");
+    const [first, setFirst] = useState(0);
+    const [rows, setRows] = useState(rowsPerPage);
     const dt = useRef<DataTable<any>>(null);
+
+    // Reset pagination when data changes
+    React.useEffect(() => {
+      setFirst(0);
+    }, [data]);
 
     // Initialize filters based on columns
     React.useEffect(() => {
@@ -407,7 +414,8 @@ const CustomTable = forwardRef<TableRef, CustomTableProps<any>>(
           ref={dt}
           value={data as any}
           paginator={pagination}
-          rows={rowsPerPage}
+          first={first}
+          rows={rows}
           rowsPerPageOptions={rowsPerPageOptions}
           dataKey={dataKey}
           filters={hasFilterableColumns ? filters : undefined}
@@ -431,6 +439,18 @@ const CustomTable = forwardRef<TableRef, CustomTableProps<any>>(
           selection={selection as any}
           selectionMode={selectionMode as any}
           onSelectionChange={handleSelectionChange as any}
+          onPage={(e) => {
+            setFirst(e.first);
+            setRows(e.rows);
+            const tableElement = dt.current?.getElement();
+            const wrapper = tableElement?.querySelector(".p-datatable-wrapper");
+            if (wrapper) {
+              wrapper.scrollTo({ top: 0, behavior: "smooth" });
+            }
+            if ((rest as any).onPage) {
+              (rest as any).onPage(e);
+            }
+          }}
           className={tableClassName}
           {...(Object.fromEntries(
             Object.entries(rest as any).filter(

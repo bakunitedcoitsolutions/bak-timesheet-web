@@ -110,7 +110,8 @@ export type ListEmployeesSortableField =
   | "gender"
   | "idCardNo"
   | "profession"
-  | "nationalityId";
+  | "nationalityId"
+  | "payrollSectionId";
 
 export interface ListEmployeesParams {
   page?: number;
@@ -130,6 +131,7 @@ export interface ListEmployeesParams {
   idCardNo?: string;
   profession?: string;
   nationality?: string;
+  zeroRate?: boolean;
 }
 
 export interface EmployeeInterface {
@@ -190,6 +192,10 @@ export interface EmployeeInterface {
 export interface ListedEmployee extends EmployeeInterface {
   nationality: {
     nameEn: string;
+  } | null;
+  payrollSection: {
+    nameEn: string;
+    nameAr: string | null;
   } | null;
 }
 
