@@ -3,6 +3,7 @@ import { memo, useState, useRef, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { Checkbox } from "primereact/checkbox";
 import { useReactToPrint } from "react-to-print";
+import { Paginator } from "primereact/paginator";
 import { InputNumberChangeEvent } from "primereact/inputnumber";
 
 import {
@@ -222,6 +223,10 @@ const MonthlyTimesheetReportPage = () => {
     showFixedSalary: false,
   });
 
+  // Pagination states
+  const [first, setFirst] = useState(0);
+  const [rows, setRows] = useState(10);
+
   // Use the monthly report hook
   const { data: reportResponse, isLoading } = useGetMonthlyTimesheetReport({
     month: selectedDate.getMonth() + 1,
@@ -239,9 +244,16 @@ const MonthlyTimesheetReportPage = () => {
     months.find((m) => m.value === selectedDate.getMonth() + 1)?.label || "";
   const year = selectedDate.getFullYear();
 
-  // Flatten all employee reports into rows for the Table component
+  // Smart Pagination: Slice reports (employees) FIRST, then flatten
+  // This ensures we show X employees per page, not X rows
+  const visibleReports = useMemo(
+    () => reports.slice(first, first + rows),
+    [reports, first, rows]
+  );
+
+  // Flatten ONLY the visible reports for the current page
   const flattenedData: FlattenedTimesheetRow[] = useMemo(() => {
-    return reports.flatMap((report) =>
+    return visibleReports.flatMap((report) =>
       report.dailyRecords.map((record) => ({
         _rowKey: `${report.employeeId}-${record.day}`,
         employeeKey: `${report.employeeCode}-${report.employeeId}`,
@@ -273,7 +285,7 @@ const MonthlyTimesheetReportPage = () => {
           record.project2Overtime,
       }))
     );
-  }, [reports]);
+  }, [visibleReports]);
 
   const handleSearch = (params: any) => {
     const filterParams = parseGroupDropdownFilter(params.selectedFilter);
@@ -438,14 +450,41 @@ const MonthlyTimesheetReportPage = () => {
         ref={contentRef}
         className={`bg-white mt-4 overflow-hidden ${centuryGothic.variable} ${tanseekArabic.variable}`}
       >
+        <div className="mb-4 px-6 print:hidden flex flex-col md:flex-row justify-between items-center gap-4">
+          <span className="text-sm text-gray-600 font-medium order-2 md:order-1">
+            Showing <span className="text-primary font-bold">{first + 1}</span>{" "}
+            to{" "}
+            <span className="text-primary font-bold">
+              {Math.min(first + rows, reports.length)}
+            </span>{" "}
+            of <span className="text-primary font-bold">{reports.length}</span>{" "}
+            employees
+          </span>
+          <Paginator
+            rows={rows}
+            first={first}
+            totalRecords={reports.length}
+            rowsPerPageOptions={[10, 20, 50]}
+            onPageChange={(e) => {
+              setFirst(e.first);
+              setRows(e.rows);
+              const tableWrapper = contentRef.current?.querySelector(
+                ".p-datatable-wrapper"
+              );
+              tableWrapper?.scrollTo({ top: 0, behavior: "smooth" });
+            }}
+            template="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
+            className="paginator-sm border-none! p-0! order-1 md:order-2 bg-transparent!"
+          />
+        </div>
+
         <Table
           dataKey="_rowKey"
           showGridlines
           data={flattenedData}
           columns={columns}
           loading={isLoading}
-          pagination={true}
-          rowsPerPage={100}
+          pagination={false}
           globalSearch={false}
           rowGroupMode="subheader"
           groupRowsBy="employeeKey"
