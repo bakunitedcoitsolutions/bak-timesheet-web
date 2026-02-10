@@ -1,30 +1,26 @@
 "use client";
-import { memo, useState, useRef, useMemo, useEffect } from "react";
+import { memo, useState, useRef, useMemo } from "react";
 import { useRouter } from "next/navigation";
-import { useReactToPrint } from "react-to-print";
 import { Checkbox } from "primereact/checkbox";
+import { useReactToPrint } from "react-to-print";
 import { InputNumberChangeEvent } from "primereact/inputnumber";
-import { Paginator } from "primereact/paginator";
-import { centuryGothic, tanseekArabic } from "@/app/fonts";
 
 import {
+  Input,
   Table,
   Button,
+  Dropdown,
   TitleHeader,
   TableColumn,
   NumberInput,
-  Dropdown,
-  Input,
   GroupDropdown,
 } from "@/components";
 import { COMMON_QUERY_INPUT } from "@/utils/constants";
 import { parseGroupDropdownFilter } from "@/utils/helpers";
+import { centuryGothic, tanseekArabic } from "@/app/fonts";
 import { useGetProjects } from "@/lib/db/services/project/requests";
+import { EmployeeMonthlyReport } from "@/lib/db/services/timesheet/timesheet.dto";
 import { useGetMonthlyTimesheetReport } from "@/lib/db/services/timesheet/requests";
-import {
-  EmployeeMonthlyReport,
-  DailyTimesheetRecord,
-} from "@/lib/db/services/timesheet/timesheet.dto";
 
 // Date Helpers
 const months = [
@@ -42,8 +38,6 @@ const months = [
   { label: "December", value: 12 },
 ];
 
-const currentYear = new Date().getFullYear();
-
 const FilterSection = memo(
   ({
     onSearch,
@@ -59,7 +53,7 @@ const FilterSection = memo(
       string | number | null
     >("all");
     const [projectId, setProjectId] = useState<number | null>(null);
-    const [showAbsents, setShowAbsents] = useState<boolean>(true);
+    const [showAbsents, setShowAbsents] = useState<boolean>(false);
     const [showFixedSalary, setShowFixedSalary] = useState<boolean>(false);
 
     // Fetch Projects for dropdown
@@ -184,157 +178,33 @@ const FilterSection = memo(
   }
 );
 
-const EmployeeReportTable = ({
-  report,
-  monthName,
-  year,
-}: {
-  report: EmployeeMonthlyReport;
-  monthName: string;
-  year: number;
-}) => {
-  return (
-    <div className="mb-10 page-break-inside-avoid">
-      <div className="bg-gray-100 p-3 border-x border-t border-gray-300 flex justify-between items-center">
-        <h3 className="text-sm font-bold uppercase">
-          {report.employeeCode} - {report.nameEn} (
-          {report.designationName || "No Designation"})
-          <span className="ml-2 text-gray-600">
-            ID# {report.idCardNo || "N/A"}
-          </span>
-        </h3>
-        <span className="text-xs font-semibold text-primary">
-          ({monthName.toUpperCase()}-{year})
-        </span>
-      </div>
-      <div className="overflow-x-auto border-x border-b border-gray-300">
-        <table className="w-full text-xs border-collapse">
-          <thead>
-            <tr className="bg-gray-50 border-b border-gray-200">
-              <th className="p-2 border-r border-gray-200 text-center w-[50px]">
-                #
-              </th>
-              <th className="p-2 border-r border-gray-200 text-center w-[80px]">
-                Date
-              </th>
-              <th className="p-2 border-r border-gray-200 text-left min-w-[150px]">
-                Project 1
-              </th>
-              <th className="p-2 border-r border-gray-200 text-center w-[60px]">
-                Hrs
-              </th>
-              <th className="p-2 border-r border-gray-200 text-center w-[60px]">
-                OT
-              </th>
-              <th className="p-2 border-r border-gray-200 text-left min-w-[150px]">
-                Project 2
-              </th>
-              <th className="p-2 border-r border-gray-200 text-center w-[60px]">
-                Hrs
-              </th>
-              <th className="p-2 border-r border-gray-200 text-center w-[60px]">
-                OT
-              </th>
-              <th className="p-2 border-r border-gray-200 text-center w-[80px]">
-                Total
-              </th>
-              <th className="p-2 text-left min-w-[120px]">Remarks</th>
-            </tr>
-          </thead>
-          <tbody>
-            {report.dailyRecords.map((record) => (
-              <tr
-                key={record.day}
-                className="border-b border-gray-100 hover:bg-gray-50"
-              >
-                <td className="p-2 border-r border-gray-100 text-center font-medium">
-                  {record.day}
-                </td>
-                <td className="p-2 border-r border-gray-100 text-center">
-                  {record.date}
-                </td>
-                <td className="p-2 border-r border-gray-100">
-                  {record.project1Name || "-"}
-                </td>
-                <td className="p-2 border-r border-gray-100 text-center">
-                  {record.project1Hours || 0}
-                </td>
-                <td className="p-2 border-r border-gray-100 text-center">
-                  {record.project1Overtime || 0}
-                </td>
-                <td className="p-2 border-r border-gray-100">
-                  {record.project2Name || "-"}
-                </td>
-                <td className="p-2 border-r border-gray-100 text-center">
-                  {record.project2Hours || 0}
-                </td>
-                <td className="p-2 border-r border-gray-100 text-center">
-                  {record.project2Overtime || 0}
-                </td>
-                <td className="p-2 border-r border-gray-100 text-center font-bold">
-                  {record.project1Hours +
-                    record.project1Overtime +
-                    record.project2Hours +
-                    record.project2Overtime}
-                </td>
-                <td
-                  className={`p-2 ${record.isFriday ? "text-red-500 font-medium" : ""}`}
-                >
-                  {record.remarks || ""}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-          <tfoot>
-            <tr className="bg-gray-50 font-bold border-t-2 border-gray-200">
-              <td colSpan={3} className="p-2 text-right">
-                TOTALS:
-              </td>
-              <td className="p-2 text-center text-primary">
-                {report.dailyRecords.reduce(
-                  (sum, r) => sum + (r.project1Hours || 0),
-                  0
-                )}
-              </td>
-              <td className="p-2 text-center text-primary">
-                {report.dailyRecords.reduce(
-                  (sum, r) => sum + (r.project1Overtime || 0),
-                  0
-                )}
-              </td>
-              <td className="p-2"></td>
-              <td className="p-2 text-center text-primary">
-                {report.dailyRecords.reduce(
-                  (sum, r) => sum + (r.project2Hours || 0),
-                  0
-                )}
-              </td>
-              <td className="p-2 text-center text-primary">
-                {report.dailyRecords.reduce(
-                  (sum, r) => sum + (r.project2Overtime || 0),
-                  0
-                )}
-              </td>
-              <td className="p-2 text-center bg-yellow-100">
-                {report.grandTotal}
-              </td>
-              <td className="p-2 flex gap-4">
-                <div className="flex gap-1">
-                  <span className="text-[10px] text-gray-500">Hrs:</span>
-                  <span>{report.totalHours}</span>
-                </div>
-                <div className="flex gap-1">
-                  <span className="text-[10px] text-gray-500">OT:</span>
-                  <span>{report.totalOT}</span>
-                </div>
-              </td>
-            </tr>
-          </tfoot>
-        </table>
-      </div>
-    </div>
-  );
-};
+// Flattened row type for table rendering
+interface FlattenedTimesheetRow {
+  _rowKey: string;
+  employeeKey: string;
+  employeeId: number;
+  employeeCode: number;
+  nameEn: string;
+  nameAr: string | null;
+  designationName: string | null;
+  idCardNo: string | null;
+  sectionName: string | null;
+  isFixed: boolean;
+  totalHours: number;
+  totalOT: number;
+  grandTotal: number;
+  day: number;
+  date: string;
+  project1Name: string | null;
+  project1Hours: number;
+  project1Overtime: number;
+  project2Name: string | null;
+  project2Hours: number;
+  project2Overtime: number;
+  isFriday: boolean;
+  remarks: string | null;
+  dayTotal: number;
+}
 
 const MonthlyTimesheetReportPage = () => {
   const router = useRouter();
@@ -342,24 +212,15 @@ const MonthlyTimesheetReportPage = () => {
   const reactToPrintFn = useReactToPrint({ contentRef });
 
   // Filter states
-  const [selectedDate, setSelectedDate] = useState<Date>(new Date());
+  const [selectedDate, setSelectedDate] = useState<Date>(new Date(2025, 11, 1));
   const [filter, setFilter] = useState({
     employeeCode: null as string | null,
     projectId: null as number | null,
     designationId: undefined as number | undefined,
     payrollSectionId: undefined as number | undefined,
-    showAbsents: true,
+    showAbsents: false,
     showFixedSalary: false,
   });
-
-  // Pagination states
-  const [first, setFirst] = useState(0);
-  const [rows, setRows] = useState(20);
-
-  // Reset pagination when filter or date changes
-  useEffect(() => {
-    setFirst(0);
-  }, [filter, selectedDate]);
 
   // Use the monthly report hook
   const { data: reportResponse, isLoading } = useGetMonthlyTimesheetReport({
@@ -373,9 +234,46 @@ const MonthlyTimesheetReportPage = () => {
     showFixedSalary: filter.showFixedSalary,
   });
 
-  const reports = reportResponse?.reports || [];
+  const reports: EmployeeMonthlyReport[] = reportResponse?.reports || [];
   const monthName =
     months.find((m) => m.value === selectedDate.getMonth() + 1)?.label || "";
+  const year = selectedDate.getFullYear();
+
+  // Flatten all employee reports into rows for the Table component
+  const flattenedData: FlattenedTimesheetRow[] = useMemo(() => {
+    return reports.flatMap((report) =>
+      report.dailyRecords.map((record) => ({
+        _rowKey: `${report.employeeId}-${record.day}`,
+        employeeKey: `${report.employeeCode}-${report.employeeId}`,
+        employeeId: report.employeeId,
+        employeeCode: report.employeeCode,
+        nameEn: report.nameEn,
+        nameAr: report.nameAr,
+        designationName: report.designationName,
+        idCardNo: report.idCardNo,
+        sectionName: report.sectionName,
+        isFixed: report.isFixed,
+        totalHours: report.totalHours,
+        totalOT: report.totalOT,
+        grandTotal: report.grandTotal,
+        day: record.day,
+        date: record.date,
+        project1Name: record.project1Name,
+        project1Hours: record.project1Hours,
+        project1Overtime: record.project1Overtime,
+        project2Name: record.project2Name,
+        project2Hours: record.project2Hours,
+        project2Overtime: record.project2Overtime,
+        isFriday: record.isFriday,
+        remarks: record.remarks,
+        dayTotal:
+          record.project1Hours +
+          record.project1Overtime +
+          record.project2Hours +
+          record.project2Overtime,
+      }))
+    );
+  }, [reports]);
 
   const handleSearch = (params: any) => {
     const filterParams = parseGroupDropdownFilter(params.selectedFilter);
@@ -390,6 +288,122 @@ const MonthlyTimesheetReportPage = () => {
     if (reports.length === 0) return;
     reactToPrintFn();
   };
+
+  // Table column definitions
+  const tableCommonProps = { sortable: false, filterable: false };
+
+  const columns: TableColumn<FlattenedTimesheetRow>[] = useMemo(
+    () => [
+      {
+        field: "day",
+        header: "#",
+        ...tableCommonProps,
+        align: "center" as const,
+        style: { width: 50, minWidth: 50 },
+        body: (row: FlattenedTimesheetRow) => (
+          <span className="text-sm font-medium text-gray-500">{row.day}</span>
+        ),
+      },
+      {
+        field: "date",
+        header: "Date",
+        ...tableCommonProps,
+        align: "center" as const,
+        style: { width: 120, minWidth: 120 },
+        body: (row: FlattenedTimesheetRow) => (
+          <span className="text-sm font-medium">{row.date}</span>
+        ),
+      },
+      {
+        field: "project1Name",
+        header: "Project 1",
+        ...tableCommonProps,
+        style: { minWidth: 140 },
+        body: (row: FlattenedTimesheetRow) => (
+          <span className="text-sm font-medium">{row.project1Name || "-"}</span>
+        ),
+      },
+      {
+        field: "project1Hours",
+        header: "Hrs",
+        ...tableCommonProps,
+        align: "center" as const,
+        style: { width: 60, minWidth: 60 },
+        body: (row: FlattenedTimesheetRow) => (
+          <span className="text-sm font-medium">{row.project1Hours || 0}</span>
+        ),
+      },
+      {
+        field: "project1Overtime",
+        header: "OT",
+        ...tableCommonProps,
+        align: "center" as const,
+        style: { width: 60, minWidth: 60 },
+        body: (row: FlattenedTimesheetRow) => (
+          <span className="text-sm font-medium text-blue-600">
+            {row.project1Overtime || 0}
+          </span>
+        ),
+      },
+      {
+        field: "project2Name",
+        header: "Project 2",
+        ...tableCommonProps,
+        style: { minWidth: 140 },
+        body: (row: FlattenedTimesheetRow) => (
+          <span className="text-sm">{row.project2Name || "-"}</span>
+        ),
+      },
+      {
+        field: "project2Hours",
+        header: "Hrs",
+        ...tableCommonProps,
+        align: "center" as const,
+        style: { width: 60, minWidth: 60 },
+        body: (row: FlattenedTimesheetRow) => (
+          <span className="text-sm font-medium">{row.project2Hours || 0}</span>
+        ),
+      },
+      {
+        field: "project2Overtime",
+        header: "OT",
+        ...tableCommonProps,
+        align: "center" as const,
+        style: { width: 60, minWidth: 60 },
+        body: (row: FlattenedTimesheetRow) => (
+          <span className="text-sm font-medium text-blue-600">
+            {row.project2Overtime || 0}
+          </span>
+        ),
+      },
+      {
+        field: "dayTotal",
+        header: "Total",
+        ...tableCommonProps,
+        align: "center" as const,
+        style: { width: 70, minWidth: 70 },
+        body: (row: FlattenedTimesheetRow) => (
+          <span className="text-sm font-semibold text-primary">
+            {row.dayTotal}
+          </span>
+        ),
+      },
+      {
+        field: "remarks",
+        header: "Remarks",
+        ...tableCommonProps,
+        style: { minWidth: 100 },
+        body: (row: FlattenedTimesheetRow) => (
+          <span
+            className={`text-sm ${row.isFriday ? `text-primary` : "text-gray-600"}`}
+          >
+            {row.remarks || ""}
+          </span>
+        ),
+      },
+    ],
+    []
+  );
 
   return (
     <div className="h-full bg-white flex flex-col">
@@ -422,133 +436,77 @@ const MonthlyTimesheetReportPage = () => {
 
       <div
         ref={contentRef}
-        className={`flex-1 overflow-y-auto p-6 bg-gray-50 print:p-0 print:bg-white print:overflow-visible ${centuryGothic.variable} ${tanseekArabic.variable}`}
+        className={`bg-white mt-4 overflow-hidden ${centuryGothic.variable} ${tanseekArabic.variable}`}
       >
-        {isLoading ? (
-          <div className="flex flex-col items-center justify-center h-64 gap-3">
-            <i className="pi pi-spin pi-spinner text-3xl text-primary" />
-            <span className="text-gray-500">Generating Report...</span>
-          </div>
-        ) : reports.length > 0 ? (
-          <div className="report-container max-w-5xl mx-auto">
-            <div className="mb-4 print:hidden flex justify-between items-center bg-white p-3 rounded border border-gray-200">
-              <span className="text-sm text-gray-600">
-                Showing <strong>{first + 1}</strong> to{" "}
-                <strong>{Math.min(first + rows, reports.length)}</strong> of{" "}
-                <strong>{reports.length}</strong> employees
+        <Table
+          dataKey="_rowKey"
+          showGridlines
+          data={flattenedData}
+          columns={columns}
+          loading={isLoading}
+          pagination={true}
+          rowsPerPage={100}
+          globalSearch={false}
+          rowGroupMode="subheader"
+          groupRowsBy="employeeKey"
+          rowGroupHeaderTemplate={(rowData: FlattenedTimesheetRow) => (
+            <div className="border border-primary/50 py-3 px-4 bg-gray-50 flex justify-between items-center">
+              <span className="font-semibold text-primary text-sm uppercase">
+                {rowData.employeeCode} - {rowData.nameEn} (
+                {rowData.designationName || "-"})
               </span>
-              <Paginator
-                first={first}
-                rows={rows}
-                totalRecords={reports.length}
-                rowsPerPageOptions={[10, 20, 50, 100]}
-                onPageChange={(e) => {
-                  setFirst(e.first);
-                  setRows(e.rows);
-                }}
-                template="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
-                className="paginator-sm"
-              />
+              <div className="flex items-center gap-4">
+                <span className="text-sm text-gray-700 font-semibold whitespace-nowrap">
+                  ID# {rowData.idCardNo || "N/A"}
+                </span>
+                <span className="text-[11px] font-bold text-white bg-primary px-3 py-1 rounded-sm uppercase">
+                  {monthName.toUpperCase()} {year}
+                </span>
+              </div>
             </div>
-
-            {reports
-              .slice(first, first + rows)
-              .map((report: EmployeeMonthlyReport) => (
-                <EmployeeReportTable
-                  key={report.employeeId}
-                  report={report}
-                  monthName={monthName}
-                  year={selectedDate.getFullYear()}
-                />
-              ))}
-
-            <div className="mt-4 print:hidden">
-              <Paginator
-                first={first}
-                rows={rows}
-                totalRecords={reports.length}
-                rowsPerPageOptions={[10, 20, 50, 100]}
-                onPageChange={(e) => {
-                  setFirst(e.first);
-                  setRows(e.rows);
-                }}
-                className="paginator-sm"
-              />
-            </div>
-          </div>
-        ) : (
-          <div className="flex flex-col items-center justify-center h-64 bg-gray-50 rounded border border-dashed border-gray-300">
-            <i className="pi pi-info-circle text-3xl text-gray-400 mb-2" />
-            <span className="text-gray-500">
-              No records found for the selected criteria.
-            </span>
-          </div>
-        )}
+          )}
+          rowGroupFooterTemplate={(rowData: FlattenedTimesheetRow) => {
+            const empRows = flattenedData.filter(
+              (r) => r.employeeKey === rowData.employeeKey
+            );
+            const p1Hrs = empRows.reduce((s, r) => s + r.project1Hours, 0);
+            const p1OT = empRows.reduce((s, r) => s + r.project1Overtime, 0);
+            const p2Hrs = empRows.reduce((s, r) => s + r.project2Hours, 0);
+            const p2OT = empRows.reduce((s, r) => s + r.project2Overtime, 0);
+            const total = p1Hrs + p1OT + p2Hrs + p2OT;
+            return (
+              <>
+                <td className="text-center bg-table-header-footer font-bold text-base" />
+                <td className="text-center! bg-table-header-footer font-bold text-base">
+                  Total
+                </td>
+                <td className="text-center! bg-table-header-footer" />
+                <td className="text-center! bg-table-header-footer font-bold text-base">
+                  {p1Hrs}
+                </td>
+                <td className="text-center! bg-table-header-footer font-bold text-base text-blue-600">
+                  {p1OT}
+                </td>
+                <td className="text-center! bg-table-header-footer" />
+                <td className="text-center! bg-table-header-footer font-bold text-base">
+                  {p2Hrs}
+                </td>
+                <td className="text-center! bg-table-header-footer font-bold text-base text-blue-600">
+                  {p2OT}
+                </td>
+                <td className="text-center! bg-table-header-footer font-bold text-base text-primary">
+                  {total}
+                </td>
+                <td className="text-center bg-table-header-footer" />
+              </>
+            );
+          }}
+          tableClassName="report-table"
+          emptyMessage="No records found for the selected criteria."
+          scrollable
+          scrollHeight="72vh"
+        />
       </div>
-
-      <style jsx global>{`
-        @media print {
-          @page {
-            size: A4;
-            margin: 5mm;
-          }
-          body {
-            background: white !important;
-            print-color-adjust: exact;
-            -webkit-print-color-adjust: exact;
-          }
-          .report-container {
-            max-width: 100% !important;
-            padding: 0 !important;
-            margin: 0 !important;
-          }
-          .page-break-inside-avoid {
-            page-break-inside: avoid;
-            break-inside: avoid;
-          }
-          /* Ensure backgrounds print */
-          * {
-            -webkit-print-color-adjust: exact !important;
-            print-color-adjust: exact !important;
-          }
-        }
-        .monthly-report-table .p-datatable-header {
-          display: none;
-        }
-        .monthly-report-table .text-xs {
-          font-size: 0.75rem;
-        }
-        .paginator-sm .p-paginator {
-          padding: 0;
-          background: transparent;
-          border: none;
-        }
-        .paginator-sm .p-paginator-element {
-          min-width: 2rem;
-          height: 2rem;
-        }
-
-        /* Responsive table styles for EmployeeReportTable */
-        table {
-          width: 100%;
-          border-spacing: 0;
-        }
-        th,
-        td {
-          border: 1px solid #e5e7eb;
-          padding: 8px;
-        }
-        th {
-          background-color: #f9fafb;
-          font-weight: 600;
-        }
-        @media print {
-          th,
-          td {
-            border-color: #d1d5db !important;
-          }
-        }
-      `}</style>
     </div>
   );
 };

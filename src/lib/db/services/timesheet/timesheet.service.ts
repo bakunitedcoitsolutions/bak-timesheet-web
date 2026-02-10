@@ -368,6 +368,9 @@ export const getMonthlyTimesheetReportData = async (
       designation: {
         select: { nameEn: true },
       },
+      payrollSection: {
+        select: { nameEn: true },
+      },
     },
     orderBy: { employeeCode: "asc" },
   });
@@ -431,21 +434,9 @@ export const getMonthlyTimesheetReportData = async (
             : null,
       };
 
-      // If projectId is set, only count hours for that project
-      if (projectId) {
-        let p1H = record.project1Id === projectId ? record.project1Hours : 0;
-        let p1OT =
-          record.project1Id === projectId ? record.project1Overtime : 0;
-        let p2H = record.project2Id === projectId ? record.project2Hours : 0;
-        let p2OT =
-          record.project2Id === projectId ? record.project2Overtime : 0;
-
-        totalHours += p1H + p2H;
-        totalOT += p1OT + p2OT;
-      } else {
-        totalHours += record.project1Hours + record.project2Hours;
-        totalOT += record.project1Overtime + record.project2Overtime;
-      }
+      // Always count all hours for totals, regardless of project filtering
+      totalHours += record.project1Hours + record.project2Hours;
+      totalOT += record.project1Overtime + record.project2Overtime;
 
       dailyRecords.push(record);
     }
@@ -461,6 +452,7 @@ export const getMonthlyTimesheetReportData = async (
       designationName: emp.designation?.nameEn ?? null,
       idCardNo: emp.idCardNo,
       isFixed: emp.isFixed,
+      sectionName: emp.payrollSection?.nameEn ?? "Unassigned",
       dailyRecords,
       totalHours,
       totalOT,

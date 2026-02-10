@@ -125,6 +125,7 @@ export interface EmployeeMonthlyReport {
   designationName: string | null;
   idCardNo: string | null;
   isFixed: boolean;
+  sectionName: string | null;
   dailyRecords: DailyTimesheetRecord[];
   totalHours: number;
   totalOT: number;

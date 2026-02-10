@@ -306,6 +306,12 @@ body
   padding: 1rem 0 0 !important;
 }
 
+body .p-datatable.report-table .p-datatable-tbody > tr.p-rowgroup-footer > td {
+  background-color: var(--color-table-header-footer) !important;
+  font-weight: 600 !important;
+  padding: 0.75rem !important;
+}
+
 /* Hide spacing for "All" group in designation dropdown */
 body
   .p-dropdown-panel.designation-dropdown-panel

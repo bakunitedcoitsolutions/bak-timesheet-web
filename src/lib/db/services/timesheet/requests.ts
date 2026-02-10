@@ -2,7 +2,6 @@ import { queryClient } from "@/lib/react-query";
 import { useMutation, useQuery } from "@/lib/zsa/zsa-query";
 import {
   GetTimesheetPageDataInput,
-  SaveTimesheetEntriesInput,
   GetMonthlyTimesheetReportInput,
 } from "./timesheet.schemas";
 import {
@@ -52,7 +51,10 @@ export const useGetMonthlyTimesheetReport = (
       input.month,
       input.year,
       input.employeeId,
+      input.employeeCode,
       input.projectId,
+      input.designationId,
+      input.payrollSectionId,
       input.showAbsents,
       input.showFixedSalary,
     ],
