@@ -2,7 +2,6 @@
 import { memo, useState, useRef, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { Checkbox } from "primereact/checkbox";
-import { useReactToPrint } from "react-to-print";
 import { Paginator } from "primereact/paginator";
 import { InputNumberChangeEvent } from "primereact/inputnumber";
 
@@ -22,6 +21,7 @@ import { centuryGothic, tanseekArabic } from "@/app/fonts";
 import { useGetProjects } from "@/lib/db/services/project/requests";
 import { EmployeeMonthlyReport } from "@/lib/db/services/timesheet/timesheet.dto";
 import { useGetMonthlyTimesheetReport } from "@/lib/db/services/timesheet/requests";
+import { printTimesheetReport } from "@/utils/helpers/print-timesheet";
 
 // Date Helpers
 const months = [
@@ -210,7 +210,6 @@ interface FlattenedTimesheetRow {
 const MonthlyTimesheetReportPage = () => {
   const router = useRouter();
   const contentRef = useRef<HTMLDivElement>(null);
-  const reactToPrintFn = useReactToPrint({ contentRef });
 
   // Filter states
   const [selectedDate, setSelectedDate] = useState<Date>(new Date(2025, 11, 1));
@@ -298,7 +297,7 @@ const MonthlyTimesheetReportPage = () => {
 
   const handlePrint = () => {
     if (reports.length === 0) return;
-    reactToPrintFn();
+    printTimesheetReport(reports, monthName, year);
   };
 
   // Table column definitions
