@@ -51,7 +51,7 @@ export const useGetMonthlyTimesheetReport = (
       input.month,
       input.year,
       input.employeeId,
-      input.employeeCode,
+      input.employeeCodes,
       input.projectId,
       input.designationId,
       input.payrollSectionId,

@@ -63,7 +63,7 @@ export const GetMonthlyTimesheetReportSchema = z.object({
   month: z.number().int().min(1).max(12),
   year: z.number().int().min(2000).max(2100),
   employeeId: z.number().int().positive().optional().nullable(),
-  employeeCode: z.string().optional().nullable(),
+  employeeCodes: z.array(z.string()).optional().nullable(),
   projectId: z.number().int().positive().optional().nullable(),
   designationId: z.number().int().positive().optional().nullable(),
   payrollSectionId: z.number().int().positive().optional().nullable(),

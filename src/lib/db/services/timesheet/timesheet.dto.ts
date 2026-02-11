@@ -92,7 +92,7 @@ export interface GetMonthlyTimesheetReportParams {
   month: number;
   year: number;
   employeeId?: number | null;
-  employeeCode?: string | null;
+  employeeCodes?: string[] | null;
   projectId?: number | null;
   designationId?: number | null;
   payrollSectionId?: number | null;

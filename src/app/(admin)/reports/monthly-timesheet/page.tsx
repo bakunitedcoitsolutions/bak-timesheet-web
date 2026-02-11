@@ -3,7 +3,6 @@ import { memo, useState, useRef, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { Checkbox } from "primereact/checkbox";
 import { Paginator } from "primereact/paginator";
-import { InputNumberChangeEvent } from "primereact/inputnumber";
 
 import {
   Input,
@@ -12,8 +11,8 @@ import {
   Dropdown,
   TitleHeader,
   TableColumn,
-  NumberInput,
   GroupDropdown,
+  AutoScrollChips,
 } from "@/components";
 import { COMMON_QUERY_INPUT } from "@/utils/constants";
 import { parseGroupDropdownFilter } from "@/utils/helpers";
@@ -49,7 +48,7 @@ const FilterSection = memo(
     selectedDate: Date;
     onDateChange: (date: Date) => void;
   }) => {
-    const [searchValue, setSearchValue] = useState<string>("");
+    const [employeeCodes, setEmployeeCodes] = useState<string[]>([]);
     const [selectedFilter, setSelectedFilter] = useState<
       string | number | null
     >("all");
@@ -74,7 +73,7 @@ const FilterSection = memo(
 
     const handleRefresh = () => {
       onSearch({
-        employeeCode: searchValue || null,
+        employeeCodes: employeeCodes.length > 0 ? employeeCodes : null,
         selectedFilter,
         projectId,
         showAbsents,
@@ -102,20 +101,13 @@ const FilterSection = memo(
             />
           </div>
           <div className="w-full">
-            <NumberInput
-              small
-              useGrouping={false}
-              placeholder="Employee Codes / Name"
-              value={!!searchValue ? parseInt(searchValue) : undefined}
-              onChange={(e: InputNumberChangeEvent) =>
-                setSearchValue(e.value?.toString() || "")
-              }
+            <AutoScrollChips
+              keyfilter="int"
+              value={employeeCodes}
+              allowDuplicate={false}
+              placeholder="Employee Codes"
               className="w-full h-10!"
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  handleRefresh();
-                }
-              }}
+              onChange={(e) => setEmployeeCodes(e.value ?? [])}
             />
           </div>
           <div className="w-full">
@@ -160,7 +152,7 @@ const FilterSection = memo(
                   htmlFor="fixedSalary"
                   className="text-sm cursor-pointer select-none whitespace-nowrap"
                 >
-                  Fixed Sal.
+                  Fixed Salary
                 </label>
               </div>
             </div>
@@ -214,7 +206,7 @@ const MonthlyTimesheetReportPage = () => {
   // Filter states
   const [selectedDate, setSelectedDate] = useState<Date>(new Date(2025, 11, 1));
   const [filter, setFilter] = useState({
-    employeeCode: null as string | null,
+    employeeCodes: null as string[] | null,
     projectId: null as number | null,
     designationId: undefined as number | undefined,
     payrollSectionId: undefined as number | undefined,
@@ -230,7 +222,7 @@ const MonthlyTimesheetReportPage = () => {
   const { data: reportResponse, isLoading } = useGetMonthlyTimesheetReport({
     month: selectedDate.getMonth() + 1,
     year: selectedDate.getFullYear(),
-    employeeCode: filter.employeeCode,
+    employeeCodes: filter.employeeCodes,
     projectId: filter.projectId,
     designationId: filter.designationId,
     payrollSectionId: filter.payrollSectionId,

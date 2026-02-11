@@ -314,7 +314,7 @@ export const getMonthlyTimesheetReportData = async (
     month,
     year,
     employeeId,
-    employeeCode,
+    employeeCodes,
     projectId,
     designationId,
     payrollSectionId,
@@ -331,27 +331,13 @@ export const getMonthlyTimesheetReportData = async (
   const employees = await prisma.employee.findMany({
     where: {
       ...(employeeId ? { id: employeeId } : {}),
-      ...(employeeCode
+      ...(employeeCodes && employeeCodes.length > 0
         ? {
-            OR: [
-              {
-                employeeCode: isNaN(Number(employeeCode))
-                  ? undefined
-                  : Number(employeeCode),
-              },
-              {
-                nameEn: {
-                  contains: employeeCode,
-                  mode: "insensitive" as const,
-                },
-              },
-              {
-                nameAr: {
-                  contains: employeeCode,
-                  mode: "insensitive" as const,
-                },
-              },
-            ].filter((condition) => Object.values(condition)[0] !== undefined),
+            employeeCode: {
+              in: employeeCodes
+                .map((code) => Number(code))
+                .filter((n) => !isNaN(n)),
+            },
           }
         : {}),
       ...(designationId ? { designationId } : {}),
