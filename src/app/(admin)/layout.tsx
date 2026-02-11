@@ -1,5 +1,10 @@
 import AdminLayout from "@/components/layout/AdminLayout";
+import { GlobalDataProvider } from "@/context/GlobalDataContext";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  return <AdminLayout>{children}</AdminLayout>;
+  return (
+    <GlobalDataProvider>
+      <AdminLayout>{children}</AdminLayout>
+    </GlobalDataProvider>
+  );
 }
