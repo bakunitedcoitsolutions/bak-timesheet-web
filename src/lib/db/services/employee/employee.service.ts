@@ -589,7 +589,14 @@ export const listEmployees = async (
   }
 
   // Column filters
-  if (params.employeeCode) {
+  if (params.employeeCodes && params.employeeCodes.length > 0) {
+    const codes = params.employeeCodes
+      .map((code) => Number(code))
+      .filter((n) => !isNaN(n));
+    if (codes.length > 0) {
+      whereConditions.push({ employeeCode: { in: codes } });
+    }
+  } else if (params.employeeCode) {
     const codeNumber = parseInt(params.employeeCode, 10);
     if (!isNaN(codeNumber)) {
       whereConditions.push({ employeeCode: codeNumber });

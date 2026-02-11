@@ -124,6 +124,7 @@ export interface ListEmployeesParams {
   designationId?: number;
   payrollSectionId?: number;
   // Column filters
+  employeeCodes?: string[];
   employeeCode?: string;
   nameEn?: string;
   nameAr?: string;

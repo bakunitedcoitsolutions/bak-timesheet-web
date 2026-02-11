@@ -131,6 +131,7 @@ export const ListEmployeesParamsSchema = z.object({
   designationId: z.number().int().positive().optional(),
   payrollSectionId: z.number().int().positive().optional(),
   // Column filters
+  employeeCodes: z.array(z.string()).optional(),
   employeeCode: z.string().optional(),
   nameEn: z.string().optional(),
   nameAr: z.string().optional(),

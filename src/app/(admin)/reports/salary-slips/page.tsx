@@ -4,15 +4,14 @@ import { memo, useState, useRef } from "react";
 import { useReactToPrint } from "react-to-print";
 import { centuryGothic, tanseekArabic } from "@/app/fonts";
 import { ProgressSpinner } from "primereact/progressspinner";
-import { InputNumberChangeEvent } from "primereact/inputnumber";
 
 import {
   Input,
   Button,
   SalarySlip,
   TitleHeader,
-  NumberInput,
   GroupDropdown,
+  AutoScrollChips,
 } from "@/components";
 import { COMMON_QUERY_INPUT } from "@/utils/constants";
 import { parseGroupDropdownFilter } from "@/utils/helpers";
@@ -71,17 +70,20 @@ const FilterSection = memo(
     selectedDate,
     onDateChange,
   }: {
-    onSearch: (search: string, filter: string | number | null) => void;
+    onSearch: (
+      employeeCodes: string[] | null,
+      filter: string | number | null
+    ) => void;
     selectedDate: Date;
     onDateChange: (date: Date) => void;
   }) => {
-    const [searchValue, setSearchValue] = useState<string>("");
+    const [employeeCodes, setEmployeeCodes] = useState<string[]>([]);
     const [selectedFilter, setSelectedFilter] = useState<
       string | number | null
     >("all");
 
     const handleSearch = () => {
-      onSearch(searchValue, selectedFilter);
+      onSearch(employeeCodes.length > 0 ? employeeCodes : null, selectedFilter);
     };
 
     return (
@@ -104,20 +106,13 @@ const FilterSection = memo(
             />
           </div>
           <div className="w-full">
-            <NumberInput
-              small
-              useGrouping={false}
-              placeholder="Employee Codes / Name"
-              value={!!searchValue ? parseInt(searchValue) : undefined}
-              onChange={(e: InputNumberChangeEvent) =>
-                setSearchValue(e.value?.toString() || "")
-              }
+            <AutoScrollChips
+              value={employeeCodes}
+              onChange={(e) => setEmployeeCodes(e.value ?? [])}
+              keyfilter="int"
+              allowDuplicate={false}
+              placeholder="Employee Codes"
               className="w-full h-10!"
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  handleSearch();
-                }
-              }}
             />
           </div>
           <div className="w-full">
@@ -148,7 +143,9 @@ const SalarySlipsPage = () => {
   const reactToPrintFn = useReactToPrint({ contentRef });
 
   // Query states
-  const [querySearch, setQuerySearch] = useState<string>("");
+  const [queryEmployeeCodes, setQueryEmployeeCodes] = useState<string[] | null>(
+    null
+  );
   const [queryFilter, setQueryFilter] = useState<string | number | null>("all");
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
 
@@ -158,7 +155,7 @@ const SalarySlipsPage = () => {
   const { data: employeesResponse, isLoading } = useGetEmployees({
     page: 1,
     limit: 1000,
-    search: querySearch || undefined,
+    employeeCodes: queryEmployeeCodes || undefined,
     designationId: filterParams.designationId,
     payrollSectionId: filterParams.payrollSectionId,
     sortBy: "employeeCode",
@@ -181,8 +178,11 @@ const SalarySlipsPage = () => {
     reactToPrintFn();
   };
 
-  const handleSearch = (search: string, filter: string | number | null) => {
-    setQuerySearch(search);
+  const handleSearch = (
+    employeeCodes: string[] | null,
+    filter: string | number | null
+  ) => {
+    setQueryEmployeeCodes(employeeCodes);
     setQueryFilter(filter);
   };
 

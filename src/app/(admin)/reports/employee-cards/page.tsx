@@ -4,14 +4,13 @@ import { memo, useState, useRef } from "react";
 import { useReactToPrint } from "react-to-print";
 import { centuryGothic, tanseekArabic } from "@/app/fonts";
 import { ProgressSpinner } from "primereact/progressspinner";
-import { InputNumberChangeEvent } from "primereact/inputnumber";
 
 import {
   Button,
   TitleHeader,
-  NumberInput,
   EmployeeCard,
   GroupDropdown,
+  AutoScrollChips,
 } from "@/components";
 import { COMMON_QUERY_INPUT } from "@/utils/constants";
 import { parseGroupDropdownFilter } from "@/utils/helpers";
@@ -64,35 +63,31 @@ const FilterSection = memo(
   ({
     onSearch,
   }: {
-    onSearch: (search: string, filter: string | number | null) => void;
+    onSearch: (
+      employeeCodes: string[] | null,
+      filter: string | number | null
+    ) => void;
   }) => {
-    const [searchValue, setSearchValue] = useState<string>("");
+    const [employeeCodes, setEmployeeCodes] = useState<string[]>([]);
     const [selectedFilter, setSelectedFilter] = useState<
       string | number | null
     >("all");
 
     const handleSearch = () => {
-      onSearch(searchValue, selectedFilter);
+      onSearch(employeeCodes.length > 0 ? employeeCodes : null, selectedFilter);
     };
 
     return (
       <div className="bg-[#F5E6E8] w-full flex flex-col xl:flex-row justify-between gap-x-10 gap-y-4 px-6 py-6 print:hidden">
         <div className="grid flex-1 grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-3 items-center">
           <div className="w-full">
-            <NumberInput
-              small
-              useGrouping={false}
-              placeholder="Employee Codes / Name"
-              value={!!searchValue ? parseInt(searchValue) : undefined}
-              onChange={(e: InputNumberChangeEvent) =>
-                setSearchValue(e.value?.toString() || "")
-              }
+            <AutoScrollChips
+              value={employeeCodes}
+              onChange={(e) => setEmployeeCodes(e.value ?? [])}
+              keyfilter="int"
+              allowDuplicate={false}
+              placeholder="Employee Codes"
               className="w-full h-10!"
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  handleSearch();
-                }
-              }}
             />
           </div>
           <div className="w-full">
@@ -123,7 +118,9 @@ const EmployeesCardReportPage = () => {
   const reactToPrintFn = useReactToPrint({ contentRef });
 
   // Query states (what is actually used for fetching)
-  const [querySearch, setQuerySearch] = useState<string>("");
+  const [queryEmployeeCodes, setQueryEmployeeCodes] = useState<string[] | null>(
+    null
+  );
   const [queryFilter, setQueryFilter] = useState<string | number | null>("all");
 
   const filterParams = parseGroupDropdownFilter(queryFilter);
@@ -132,7 +129,7 @@ const EmployeesCardReportPage = () => {
   const { data: employeesResponse, isLoading } = useGetEmployees({
     page: 1,
     limit: 1000, // Fetch all for report (or a large number)
-    search: querySearch || undefined,
+    employeeCodes: queryEmployeeCodes || undefined,
     designationId: filterParams.designationId,
     payrollSectionId: filterParams.payrollSectionId,
     sortBy: "employeeCode",
@@ -155,8 +152,11 @@ const EmployeesCardReportPage = () => {
     reactToPrintFn();
   };
 
-  const handleSearch = (search: string, filter: string | number | null) => {
-    setQuerySearch(search);
+  const handleSearch = (
+    employeeCodes: string[] | null,
+    filter: string | number | null
+  ) => {
+    setQueryEmployeeCodes(employeeCodes);
     setQueryFilter(filter);
   };
 
