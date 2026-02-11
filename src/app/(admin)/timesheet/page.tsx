@@ -1,7 +1,6 @@
 "use client";
 import { useRef, useState, useMemo, useEffect, useCallback } from "react";
 import { classNames } from "primereact/utils";
-import { Checkbox } from "primereact/checkbox";
 import { ProgressSpinner } from "primereact/progressspinner";
 
 import {
@@ -20,9 +19,10 @@ import {
   BulkUploadDialog,
   CustomHeaderProps,
 } from "@/components";
+import { toastService } from "@/lib/toast";
 import { COMMON_QUERY_INPUT } from "@/utils/constants";
-import { parseGroupDropdownFilter, getErrorMessage } from "@/utils/helpers";
 import { useGetProjects } from "@/lib/db/services/project/requests";
+import { parseGroupDropdownFilter, getErrorMessage } from "@/utils/helpers";
 import type { ListedProject } from "@/lib/db/services/project/project.dto";
 import {
   useGetTimesheetPageData,
@@ -36,11 +36,10 @@ import type {
 } from "@/lib/db/services/timesheet/timesheet.dto";
 import type { BulkUploadTimesheetResult } from "@/lib/db/services/timesheet/timesheet.dto";
 import {
-  parseExcelFile,
   parseCSVFile,
+  parseExcelFile,
   downloadSampleTemplate,
 } from "@/lib/db/services/timesheet/bulk-upload-utils";
-import { toastService } from "@/lib/toast";
 import type { ListedPayrollSection } from "@/lib/db/services/payroll-section/payroll-section.dto";
 
 /** Stable empty array so useMemo/useEffect deps don't change every render when no data */
