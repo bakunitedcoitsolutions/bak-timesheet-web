@@ -34,8 +34,12 @@ export const saveTimesheetEntriesAction = serverAction
 export const bulkUploadTimesheetsAction = serverAction
   .input(BulkUploadTimesheetsSchema)
   .handler(async ({ input }: { input: BulkUploadTimesheetsInput }) => {
-    const response = await bulkUploadTimesheets(input);
-    return response;
+    try {
+      const response = await bulkUploadTimesheets(input);
+      return response;
+    } catch (error) {
+      throw error;
+    }
   });
 
 export const getMonthlyTimesheetReportAction = serverAction

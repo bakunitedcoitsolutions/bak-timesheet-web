@@ -3,6 +3,11 @@
  * Fetches timesheet records for a date, optionally filters employees by payroll section or designation, and merges into page rows.
  */
 
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+
+dayjs.extend(utc);
+
 import { prisma } from "@/lib/db/prisma";
 import type {
   GetTimesheetPageDataParams,
@@ -136,18 +141,11 @@ export const getTimesheetPageData = async (
 /**
  * Normalize date to start of day UTC for DB consistency
  */
+// Force the date to be UTC Midnight of the same calendar day.
+// This prevents timezone shifts (e.g. +5 hours becoming previous day in UTC).
+// We take the "2026-02-01" part and say "This is 2026-02-01 00:00:00 UTC".
 function startOfDayUTC(date: Date): Date {
-  return new Date(
-    Date.UTC(
-      date.getUTCFullYear(),
-      date.getUTCMonth(),
-      date.getUTCDate(),
-      0,
-      0,
-      0,
-      0
-    )
-  );
+  return dayjs.utc(dayjs(date).format("YYYY-MM-DD")).toDate();
 }
 
 /** Max entries per transaction to avoid long-running transactions and timeouts */

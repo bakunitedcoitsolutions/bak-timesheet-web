@@ -3,6 +3,7 @@
  * Functions to parse CSV and Excel files for timesheet bulk upload
  */
 
+import dayjs from "dayjs";
 import * as XLSX from "xlsx";
 import type { BulkUploadTimesheetRow } from "./timesheet.dto";
 
@@ -87,11 +88,25 @@ function parseCellValue(value: any, field: keyof BulkUploadTimesheetRow): any {
     }
 
     case "date": {
-      const date = new Date(stringValue);
-      if (isNaN(date.getTime())) {
+      if (value instanceof Date) {
+        return value;
+      }
+
+      const parsedDate = dayjs(stringValue, "YYYY-MM-DD");
+      if (!parsedDate.isValid()) {
         throw new Error(`Invalid date: ${stringValue}`);
       }
-      return date;
+
+      // Sanity check: if year is > 2100, assume it might be invalid parsing
+      if (parsedDate.year() > 2100) {
+        throw new Error(
+          `Invalid date (year ${parsedDate.year()}): ${stringValue}. Ensure standard date format (YYYY-MM-DD).`
+        );
+      }
+
+      const toDate = parsedDate.toDate();
+
+      return toDate;
     }
 
     case "project1Id":
@@ -203,21 +218,28 @@ export function parseExcelFile(file: File): Promise<ParseFileResult> {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
 
-    reader.onload = (e) => {
+    reader.onload = () => {
       try {
-        const data = e.target?.result;
+        const data = reader.result;
         if (!data) {
           reject(new Error("Failed to read file"));
           return;
         }
 
-        const workbook = XLSX.read(data, { type: "binary" });
+        // ✅ Better than readAsBinaryString (avoids encoding issues)
+        const workbook = XLSX.read(data, {
+          type: "array",
+          cellDates: false, // ✅ keep dates OUT of JS Date objects
+        });
+
         const firstSheetName = workbook.SheetNames[0];
         const worksheet = workbook.Sheets[firstSheetName];
 
         const jsonData = XLSX.utils.sheet_to_json(worksheet, {
           header: 1,
           defval: "",
+          raw: false, // ✅ IMPORTANT: applies Excel formatting => dates become strings
+          dateNF: "yyyy-mm-dd", // or "dd/mm/yyyy" if you prefer
         }) as any[][];
 
         if (jsonData.length < 2) {
@@ -229,7 +251,7 @@ export function parseExcelFile(file: File): Promise<ParseFileResult> {
           return;
         }
 
-        const headers = jsonData[0].map((h) => String(h));
+        const headers = jsonData[0].map((h) => String(h).trim());
         const result = parseDataRows(
           jsonData,
           headers,
@@ -242,7 +264,7 @@ export function parseExcelFile(file: File): Promise<ParseFileResult> {
     };
 
     reader.onerror = () => reject(new Error("Failed to read file"));
-    reader.readAsBinaryString(file);
+    reader.readAsArrayBuffer(file); // ✅ changed
   });
 }
 
