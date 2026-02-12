@@ -38,53 +38,6 @@ const menuItems: MenuItem[] = [
     label: "Reports",
     icon: "fa-sharp fa-light fa-file-chart-column text-xl!",
     href: "/reports",
-    // items: [
-    //   {
-    //     label: "Employees",
-    //     icon: "fa-light fa-user-group text-base!",
-    //     href: "/reports/employees",
-    //   },
-    //   {
-    //     label: "Salary Slips",
-    //     icon: "fa-light fa-receipt text-lg!",
-    //     href: "/reports/salary-slips",
-    //   },
-    //   {
-    //     label: "Payroll Report",
-    //     icon: "fa-light fa-file-contract text-lg!",
-    //     href: "/reports/payroll",
-    //   },
-    //   {
-    //     label: "Site Wise Report",
-    //     icon: "fa-light fa-file-invoice text-lg!",
-    //     href: "/reports/site-wise",
-    //   },
-    //   {
-    //     label: "Master Payroll Report",
-    //     icon: "fa-light fa-file-chart-column text-lg!",
-    //     href: "/reports/master-payroll",
-    //   },
-    //   {
-    //     label: "Emp Leave Statement",
-    //     icon: "fa-light fa-file-chart-pie text-lg!",
-    //     href: "/reports/employee-leave-statement",
-    //   },
-    //   {
-    //     label: "Monthly Timesheet",
-    //     icon: "fa-light fa-calendar-check text-lg!",
-    //     href: "/reports/monthly-timesheet",
-    //   },
-    //   {
-    //     label: "Daily Timesheet",
-    //     icon: "fa-light fa-calendar-circle-plus text-lg!",
-    //     href: "/reports/daily-timesheet",
-    //   },
-    //   {
-    //     label: "Employee Cards",
-    //     icon: "fa-light fa-address-card text-lg!",
-    //     href: "/reports/employee-cards",
-    //   },
-    // ],
   },
   {
     divider: true,
@@ -93,9 +46,9 @@ const menuItems: MenuItem[] = [
   },
   { label: "Loans", icon: "fa-light fa-newspaper text-xl!", href: "/loans" },
   {
-    label: "Traffic Challans",
+    label: "Traffic Voilations",
     icon: "fa-light fa-ticket text-xl!",
-    href: "/challans",
+    href: "/voilations",
   },
   {
     label: "Payroll",

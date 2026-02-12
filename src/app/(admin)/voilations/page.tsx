@@ -2,6 +2,7 @@
 import { useRouter } from "next/navigation";
 import { ProgressSpinner } from "primereact/progressspinner";
 import { useRef, useState, useEffect, useMemo, useCallback } from "react";
+import dayjs from "dayjs";
 
 import {
   Input,
@@ -79,14 +80,9 @@ const columns = (
     ...commonColumnProps,
     style: { minWidth: "100px" },
     body: (rowData: ListedTrafficChallan) => {
-      const date = new Date(rowData.date);
       return (
         <span className="text-sm">
-          {date.toLocaleDateString("en-GB", {
-            day: "2-digit",
-            month: "2-digit",
-            year: "numeric",
-          })}
+          {dayjs(rowData.date).format("DD/MM/YYYY")}
         </span>
       );
     },
@@ -165,7 +161,9 @@ const columns = (
 const ChallansPage = () => {
   const router = useRouter();
   const [searchValue, setSearchValue] = useState<string>("");
-  const [selectedDate, setSelectedDate] = useState<string>("");
+  const [selectedDate, setSelectedDate] = useState<string>(
+    dayjs().format("YYYY-MM")
+  );
   const [page, setPage] = useState<number>(1);
   const [limit, setLimit] = useState<number>(10);
   const [sortBy, setSortBy] = useState<
@@ -181,31 +179,24 @@ const ChallansPage = () => {
   // Debounce search input
   const debouncedSearch = useDebounce(searchValue, 500);
 
-  // Reset to first page when search value or date changes
+  // Reset to first page when search value changes
   useEffect(() => {
-    if (searchValue !== debouncedSearch && page !== 1) {
-      setPage(1);
-    }
-  }, [searchValue, debouncedSearch, page]);
+    setPage(1);
+  }, [debouncedSearch]);
 
+  // Reset to first page when date changes
   useEffect(() => {
-    if (selectedDate && page !== 1) {
-      setPage(1);
-    }
-  }, [selectedDate, page]);
+    setPage(1);
+  }, [selectedDate]);
 
   // Convert selected date to Date object for API
   // Set startDate to beginning of day and endDate to end of day
   const dateFilter = selectedDate
     ? (() => {
-        const selected = new Date(selectedDate);
-        const startOfDay = new Date(selected);
-        startOfDay.setHours(0, 0, 0, 0);
-        const endOfDay = new Date(selected);
-        endOfDay.setHours(23, 59, 59, 999);
+        const date = dayjs(selectedDate);
         return {
-          startDate: startOfDay,
-          endDate: endOfDay,
+          startDate: date.startOf("month").toDate(),
+          endDate: date.endOf("month").toDate(),
         };
       })()
     : undefined;
@@ -409,7 +400,7 @@ const ChallansPage = () => {
           <div className="w-full md:w-auto">
             <Input
               small
-              type="date"
+              type="month"
               value={selectedDate}
               onChange={(e) => setSelectedDate(e.target.value)}
               className="w-full md:w-44"
@@ -462,10 +453,10 @@ const ChallansPage = () => {
         <div className="flex flex-col md:flex-row justify-between items-center gap-3 shrink-0">
           <div className="w-full md:w-auto flex flex-1 flex-col gap-1">
             <h1 className="text-2xl font-semibold text-gray-900">
-              Challan Management
+              Traffic Voilation Management
             </h1>
             <p className="text-sm text-gray-600 mt-1">
-              View, manage challan records, and challan details.
+              View, manage traffic voilation records, and voilation details.
             </p>
           </div>
           <div className="w-full md:w-auto">
@@ -473,8 +464,8 @@ const ChallansPage = () => {
               size="small"
               variant="solid"
               icon="pi pi-plus"
-              label="Add Challan"
-              onClick={() => router.push("/challans/new")}
+              label="Add Voilation"
+              onClick={() => router.push("/voilations/new")}
             />
           </div>
         </div>

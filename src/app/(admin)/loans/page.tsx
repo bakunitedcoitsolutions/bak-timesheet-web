@@ -2,6 +2,7 @@
 import { useRouter } from "next/navigation";
 import { ProgressSpinner } from "primereact/progressspinner";
 import { useRef, useState, useEffect, useMemo, useCallback } from "react";
+import dayjs from "dayjs";
 
 import {
   Input,
@@ -82,14 +83,9 @@ const columns = (
     ...commonColumnProps,
     style: { minWidth: "100px" },
     body: (rowData: ListedLoan) => {
-      const date = new Date(rowData.date);
       return (
         <span className="text-sm">
-          {date.toLocaleDateString("en-GB", {
-            day: "2-digit",
-            month: "2-digit",
-            year: "numeric",
-          })}
+          {dayjs(rowData.date).format("DD/MM/YYYY")}
         </span>
       );
     },
@@ -168,7 +164,9 @@ const columns = (
 const LoansPage = () => {
   const router = useRouter();
   const [searchValue, setSearchValue] = useState<string>("");
-  const [selectedDate, setSelectedDate] = useState<string>("");
+  const [selectedDate, setSelectedDate] = useState<string>(
+    dayjs().format("YYYY-MM")
+  );
   const [page, setPage] = useState<number>(1);
   const [limit, setLimit] = useState<number>(10);
   const [sortBy, setSortBy] = useState<SortableField | ListLoansSortableField>(
@@ -183,31 +181,24 @@ const LoansPage = () => {
   // Debounce search input
   const debouncedSearch = useDebounce(searchValue, 500);
 
-  // Reset to first page when search value or date changes
+  // Reset to first page when search value changes
   useEffect(() => {
-    if (searchValue !== debouncedSearch && page !== 1) {
-      setPage(1);
-    }
-  }, [searchValue, debouncedSearch, page]);
+    setPage(1);
+  }, [debouncedSearch]);
 
+  // Reset to first page when date changes
   useEffect(() => {
-    if (selectedDate && page !== 1) {
-      setPage(1);
-    }
-  }, [selectedDate, page]);
+    setPage(1);
+  }, [selectedDate]);
 
   // Convert selected date to Date object for API
   // Set startDate to beginning of day and endDate to end of day
   const dateFilter = selectedDate
     ? (() => {
-        const selected = new Date(selectedDate);
-        const startOfDay = new Date(selected);
-        startOfDay.setHours(0, 0, 0, 0);
-        const endOfDay = new Date(selected);
-        endOfDay.setHours(23, 59, 59, 999);
+        const date = dayjs(selectedDate);
         return {
-          startDate: startOfDay,
-          endDate: endOfDay,
+          startDate: date.startOf("month").toDate(),
+          endDate: date.endOf("month").toDate(),
         };
       })()
     : undefined;
@@ -408,7 +399,7 @@ const LoansPage = () => {
           <div className="w-full md:w-auto">
             <Input
               small
-              type="date"
+              type="month"
               value={selectedDate}
               onChange={(e) => setSelectedDate(e.target.value)}
               className="w-full md:w-44"

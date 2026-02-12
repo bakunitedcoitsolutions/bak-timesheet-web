@@ -123,12 +123,15 @@ const UpsertChallanPage = () => {
   const handleCreateChallan = async (data: any) => {
     try {
       await createTrafficChallan(data);
-      toastService.showSuccess("Done", "Traffic challan created successfully");
-      router.replace("/challans");
+      toastService.showSuccess(
+        "Done",
+        "Traffic voilation created successfully"
+      );
+      router.replace("/voilations");
     } catch (error) {
       const errorMessage = getErrorMessage(
         error,
-        "Failed to create traffic challan"
+        "Failed to create traffic voilation"
       );
       toastService.showError("Error", errorMessage);
     }
@@ -140,12 +143,15 @@ const UpsertChallanPage = () => {
         id: challanId ? Number(challanId) : 0,
         ...data,
       });
-      toastService.showSuccess("Done", "Traffic challan updated successfully");
+      toastService.showSuccess(
+        "Done",
+        "Traffic voilation updated successfully"
+      );
       router.replace("/challans");
     } catch (error) {
       const errorMessage = getErrorMessage(
         error,
-        "Failed to update traffic challan"
+        "Failed to update traffic voilation"
       );
       toastService.showError("Error", errorMessage);
     }
@@ -155,7 +161,7 @@ const UpsertChallanPage = () => {
     <div className="flex flex-col h-full gap-6 px-6 py-6">
       <div className="flex h-full justify-between flex-1 md:flex-none flex-col gap-4 py-6 bg-white rounded-lg">
         <StepperFormHeading
-          title={isAddMode ? "Add Challan" : "Edit Challan"}
+          title={isAddMode ? "Add Voilation" : "Edit Voilation"}
         />
         {isLoading ? (
           <div className="flex justify-center items-center h-full">
