@@ -75,15 +75,14 @@ const menuItems: MenuItem[] = [
 
 export default function Sidebar({ collapsed, setCollapsed }: SidebarProps) {
   const pathname = usePathname();
-  const [expandedMenus, setExpandedMenus] = useState<string[]>([]);
-
-  // Auto-expand submenu if active on mount
-  useState(() => {
+  const [expandedMenus, setExpandedMenus] = useState<string[]>(() => {
+    const initialExpanded: string[] = [];
     menuItems.forEach((item) => {
       if (item.items && item.items.some((sub) => sub.href === pathname)) {
-        setExpandedMenus((prev) => [...prev, item.label]);
+        initialExpanded.push(item.label);
       }
     });
+    return initialExpanded;
   });
 
   const toggleSubmenu = (label: string) => {

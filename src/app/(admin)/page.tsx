@@ -47,49 +47,52 @@ const HomePage = () => {
   };
 
   // Define table columns
-  const columns: TableColumn<ProjectExpense>[] = [
-    {
-      field: "name",
-      header: "Projects",
-      sortable: false,
-      filterable: false,
-      body: (rowData) => (
-        <div className="flex min-w-64 items-center gap-3">
-          <div className="relative w-12 h-12 rounded-xl overflow-hidden shrink-0">
-            <Image
-              src={rowData.image}
-              alt={rowData.name}
-              width={48}
-              height={48}
-              className="object-cover w-full h-full"
-            />
+  const columns: TableColumn<ProjectExpense>[] = useMemo(
+    () => [
+      {
+        field: "name",
+        header: "Projects",
+        sortable: false,
+        filterable: false,
+        body: (rowData) => (
+          <div className="flex min-w-64 items-center gap-3">
+            <div className="relative w-12 h-12 rounded-xl overflow-hidden shrink-0">
+              <Image
+                src={rowData.image}
+                alt={rowData.name}
+                width={48}
+                height={48}
+                className="object-cover w-full h-full"
+              />
+            </div>
+            <span className="text-sm font-semibold">{rowData.name}</span>
           </div>
-          <span className="text-sm font-semibold">{rowData.name}</span>
-        </div>
-      ),
-    },
-    {
-      field: "status",
-      header: "Status",
-      sortable: false,
-      filterable: false,
-      body: (rowData) => (
-        <TypeBadge
-          text={rowData.status === "active" ? "Active" : "Inactive"}
-          variant={rowData.status === "active" ? "success" : "danger"}
-        />
-      ),
-    },
-    {
-      field: "expenses",
-      header: "Expenses",
-      sortable: false,
-      filterable: false,
-      body: (rowData) => (
-        <span className="">{formatExpenses(rowData.expenses)}</span>
-      ),
-    },
-  ];
+        ),
+      },
+      {
+        field: "status",
+        header: "Status",
+        sortable: false,
+        filterable: false,
+        body: (rowData) => (
+          <TypeBadge
+            text={rowData.status === "active" ? "Active" : "Inactive"}
+            variant={rowData.status === "active" ? "success" : "danger"}
+          />
+        ),
+      },
+      {
+        field: "expenses",
+        header: "Expenses",
+        sortable: false,
+        filterable: false,
+        body: (rowData) => (
+          <span className="">{formatExpenses(rowData.expenses)}</span>
+        ),
+      },
+    ],
+    []
+  );
 
   return (
     <div className="flex flex-col gap-6 px-6 py-6 overflow-hidden!">

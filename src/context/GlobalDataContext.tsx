@@ -84,10 +84,10 @@ export const GlobalDataProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const [data, setData] = useState<GlobalData>(initialData);
-  const [isLoading, setIsLoading] = useState(true);
+  const [data, setData] = React.useState<GlobalData>(initialData);
+  const [isLoading, setIsLoading] = React.useState(true);
 
-  const fetchData = async () => {
+  const fetchData = React.useCallback(async () => {
     try {
       setIsLoading(true);
       const [data, err] = await getGlobalDataAction({});
@@ -103,14 +103,19 @@ export const GlobalDataProvider = ({
     } finally {
       setIsLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [fetchData]);
+
+  const value = React.useMemo(
+    () => ({ data, isLoading, refresh: fetchData }),
+    [data, isLoading, fetchData]
+  );
 
   return (
-    <GlobalDataContext.Provider value={{ data, isLoading, refresh: fetchData }}>
+    <GlobalDataContext.Provider value={value}>
       {children}
     </GlobalDataContext.Provider>
   );
