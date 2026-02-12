@@ -14,11 +14,10 @@ import {
   GroupDropdown,
   AutoScrollChips,
 } from "@/components";
-import { COMMON_QUERY_INPUT } from "@/utils/constants";
 import { parseGroupDropdownFilter } from "@/utils/helpers";
 import { centuryGothic, tanseekArabic } from "@/app/fonts";
-import { useGetProjects } from "@/lib/db/services/project/requests";
 import { printTimesheetReport } from "@/utils/helpers/print-timesheet";
+import { useGlobalData, GlobalDataGeneral } from "@/context/GlobalDataContext";
 import { EmployeeMonthlyReport } from "@/lib/db/services/timesheet/timesheet.dto";
 import { useGetMonthlyTimesheetReport } from "@/lib/db/services/timesheet/requests";
 
@@ -56,20 +55,17 @@ const FilterSection = memo(
     const [showAbsents, setShowAbsents] = useState<boolean>(false);
     const [showFixedSalary, setShowFixedSalary] = useState<boolean>(false);
 
-    // Fetch Projects for dropdown
-    const { data: projectsResponse } = useGetProjects({
-      ...COMMON_QUERY_INPUT,
-      limit: 1000,
-      sortBy: "nameEn",
-      sortOrder: "asc",
-    });
+    // Fetch global data
+    const { data: globalData } = useGlobalData();
+    const projects = globalData.projects || [];
+
     const projectOptions = useMemo(() => {
-      const options = (projectsResponse?.projects || []).map((p: any) => ({
+      const options = projects.map((p: GlobalDataGeneral) => ({
         label: p.nameEn,
         value: p.id,
       }));
       return [{ label: "All Projects", value: null }, ...options];
-    }, [projectsResponse]);
+    }, [projects]);
 
     const handleRefresh = () => {
       onSearch({
@@ -120,6 +116,7 @@ const FilterSection = memo(
           </div>
           <div className="w-full">
             <Dropdown
+              filter
               options={projectOptions}
               value={projectId}
               onChange={(e) => setProjectId(e.value)}

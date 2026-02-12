@@ -13,7 +13,6 @@ import {
   Form,
   FormItem,
   Input,
-  NumberInput,
 } from "@/components/forms";
 import { getErrorMessage, FILE_TYPES } from "@/utils/helpers";
 import { toastService } from "@/lib/toast";
@@ -21,11 +20,10 @@ import {
   useUpdateEmployeeStep3,
   useGetEmployeeById,
 } from "@/lib/db/services/employee";
-import { useGetCountries } from "@/lib/db/services/country";
-import type { ListedCountry } from "@/lib/db/services/country/country.dto";
 import { UpdateEmployeeStep3Schema } from "@/lib/db/services/employee/employee.schemas";
 import { useStepperForm } from "@/context";
 import { useFileUpload } from "@/hooks";
+import { GlobalDataGeneral, useGlobalData } from "@/context/GlobalDataContext";
 
 interface Step3Props {
   employeeId?: number | null;
@@ -48,7 +46,8 @@ const Step3 = forwardRef<Step3Handle, Step3Props>(({ employeeId }, ref) => {
   });
 
   // Fetch countries for nationality dropdown
-  const { data: countriesData } = useGetCountries({ page: 1, limit: 1000 });
+  const { data: globalData } = useGlobalData();
+  const countriesData = { countries: globalData.countries };
 
   const defaultValues = {
     id: employeeId ?? 0,
@@ -248,7 +247,7 @@ const Step3 = forwardRef<Step3Handle, Step3Props>(({ employeeId }, ref) => {
 
   // Prepare nationality dropdown options
   const nationalityOptions =
-    countriesData?.countries.map((country: ListedCountry) => ({
+    countriesData?.countries.map((country: GlobalDataGeneral) => ({
       label: country.nameEn,
       value: country.id,
     })) || [];

@@ -16,7 +16,7 @@ import {
   CreateTrafficChallanSchema,
   UpdateTrafficChallanSchema,
 } from "@/lib/db/services/traffic-challan/traffic-challan.schemas";
-import { useGetEmployees } from "@/lib/db/services/employee/requests";
+import { useGlobalData, GlobalDataEmployee } from "@/context/GlobalDataContext";
 import { toastService } from "@/lib/toast";
 import { getEntityModeFromParam } from "@/helpers";
 import { getErrorMessage } from "@/utils/helpers";
@@ -31,7 +31,6 @@ import {
   Textarea,
 } from "@/components/forms";
 import { StepperFormHeading } from "@/components";
-import { ListedEmployee } from "@/lib/db/services/employee/employee.dto";
 
 const challanTypeOptions = [
   { label: "Challan", value: "CHALLAN" },
@@ -58,13 +57,10 @@ const UpsertChallanPage = () => {
   });
 
   // Fetch employees
-  const { data: employeesResponse } = useGetEmployees({
-    page: 1,
-    limit: 1000,
-  });
-  const employees = employeesResponse?.employees ?? [];
+  const { data: globalData } = useGlobalData();
+  const employees = globalData.employees || [];
 
-  const employeeOptions = employees.map((employee: ListedEmployee) => ({
+  const employeeOptions = employees.map((employee: GlobalDataEmployee) => ({
     label: `${employee.employeeCode} - ${employee.nameEn}`,
     value: employee.id,
   }));

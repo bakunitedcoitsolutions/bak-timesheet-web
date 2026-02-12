@@ -21,9 +21,8 @@ import {
 } from "@/components";
 import { toastService } from "@/lib/toast";
 import { COMMON_QUERY_INPUT } from "@/utils/constants";
-import { useGetProjects } from "@/lib/db/services/project/requests";
+import { useGlobalData, GlobalDataGeneral } from "@/context/GlobalDataContext";
 import { parseGroupDropdownFilter, getErrorMessage } from "@/utils/helpers";
-import type { ListedProject } from "@/lib/db/services/project/project.dto";
 import {
   useGetTimesheetPageData,
   useSaveTimesheetEntries,
@@ -88,16 +87,11 @@ const TimesheetPage = () => {
   const { mutateAsync: bulkUploadTimesheets } = useBulkUploadTimesheets();
 
   // Projects for Project 1 / Project 2 dropdowns
-  const { data: projectsResponse } = useGetProjects({
-    page: 1,
-    limit: 1000,
-    sortBy: "nameEn",
-    sortOrder: "asc",
-  });
-  const projectsList: ListedProject[] = projectsResponse?.projects ?? [];
+  const { data: globalData } = useGlobalData();
+  const projectsList = globalData.projects || [];
   const projectOptions = useMemo(
     () =>
-      projectsList.map((p) => ({
+      projectsList.map((p: GlobalDataGeneral) => ({
         label: p.nameEn,
         value: String(p.id),
       })),

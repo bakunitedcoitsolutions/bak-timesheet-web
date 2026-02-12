@@ -29,9 +29,7 @@ import {
   useDeleteExitReentry,
   useGetExitReentries,
 } from "@/lib/db/services/exit-reentry/requests";
-import { useGetEmployees } from "@/lib/db/services/employee/requests";
-import { ListedEmployee } from "@/lib/db/services/employee/employee.dto";
-
+import { useGlobalData, GlobalDataEmployee } from "@/context/GlobalDataContext";
 // Constants
 const SORTABLE_FIELDS = {
   date: "date",
@@ -53,7 +51,7 @@ type SortableField = keyof typeof SORTABLE_FIELDS;
 const columns = (
   handleEdit: (entry: ListedExitReentry) => void,
   handleDelete: (entry: ListedExitReentry) => void,
-  employeesMap: Map<number, ListedEmployee>
+  employeesMap: Map<number, GlobalDataEmployee>
 ): TableColumn<ListedExitReentry>[] => [
   {
     field: "id",
@@ -200,16 +198,13 @@ const ExitReentryPage = () => {
   });
 
   // Fetch all employees for display
-  const { data: employeesResponse } = useGetEmployees({
-    page: 1,
-    limit: 10000,
-  });
-  const employees = employeesResponse?.employees ?? [];
+  const { data: globalData } = useGlobalData();
+  const employees = globalData.employees || [];
 
   // Create a map for quick employee lookup
   const employeesMap = useMemo(() => {
-    const map = new Map<number, ListedEmployee>();
-    employees.forEach((emp: ListedEmployee) => {
+    const map = new Map<number, GlobalDataEmployee>();
+    employees.forEach((emp: GlobalDataEmployee) => {
       map.set(emp.id, emp);
     });
     return map;

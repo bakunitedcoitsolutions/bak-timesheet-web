@@ -22,12 +22,17 @@ export const getGlobalDataAction = serverAction
       paymentMethods,
     ] = await Promise.all([
       prisma.designation.findMany({
-        select: { id: true, nameEn: true },
+        select: { id: true, nameEn: true, hoursPerDay: true },
         where: { isActive: true },
         orderBy: { nameEn: "asc" },
       }),
       prisma.employee.findMany({
-        select: { id: true, employeeCode: true, nameEn: true },
+        select: {
+          id: true,
+          employeeCode: true,
+          nameEn: true,
+          designationId: true,
+        },
         where: { statusId: 1 }, // Assuming 1 is Active
         orderBy: { employeeCode: "asc" },
       }),
@@ -62,7 +67,7 @@ export const getGlobalDataAction = serverAction
         orderBy: { nameEn: "asc" },
       }),
       prisma.city.findMany({
-        select: { id: true, nameEn: true },
+        select: { id: true, nameEn: true, countryId: true },
         where: { isActive: true },
         orderBy: { nameEn: "asc" },
       }),

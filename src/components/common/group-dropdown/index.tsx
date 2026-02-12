@@ -2,11 +2,11 @@
 
 import { useMemo, memo } from "react";
 import { Dropdown } from "@/components/forms";
-import { COMMON_QUERY_INPUT } from "@/utils/constants";
-import { useGetDesignations } from "@/lib/db/services/designation/requests";
-import { useGetPayrollSections } from "@/lib/db/services/payroll-section/requests";
-import type { ListedDesignation } from "@/lib/db/services/designation/designation.dto";
-import type { ListedPayrollSection } from "@/lib/db/services/payroll-section/payroll-section.dto";
+import {
+  useGlobalData,
+  GlobalDataDesignation,
+  GlobalDataGeneral,
+} from "@/context/GlobalDataContext";
 
 const GroupDropdown = ({
   value,
@@ -21,15 +21,10 @@ const GroupDropdown = ({
   hideAllOption?: boolean;
   onChange: (value: any) => void;
 }) => {
-  // Fetch designations with stable query key
-  const { data: designationsResponse } = useGetDesignations(COMMON_QUERY_INPUT);
-
-  // Fetch payroll sections with stable query key
-  const { data: payrollSectionsResponse } =
-    useGetPayrollSections(COMMON_QUERY_INPUT);
-
-  const designations = designationsResponse?.designations ?? [];
-  const payrollSections = payrollSectionsResponse?.payrollSections ?? [];
+  // Fetch global data
+  const { data: globalData } = useGlobalData();
+  const designations = globalData.designations || [];
+  const payrollSections = globalData.payrollSections || [];
 
   const getGroupedDesignations = useMemo(() => {
     const groupedDesignations = [
@@ -49,7 +44,7 @@ const GroupDropdown = ({
       {
         label: "Payroll Sections",
         value: "payroll-sections",
-        items: payrollSections.map((payrollSection: ListedPayrollSection) => ({
+        items: payrollSections.map((payrollSection: GlobalDataGeneral) => ({
           label: payrollSection.nameEn,
           value: `payroll-${payrollSection.id}`,
         })),
@@ -57,7 +52,7 @@ const GroupDropdown = ({
       {
         label: "Designations",
         value: "designations",
-        items: designations.map((designation: ListedDesignation) => ({
+        items: designations.map((designation: GlobalDataDesignation) => ({
           label: designation.nameEn,
           value: `designation-${designation.id}`,
         })),

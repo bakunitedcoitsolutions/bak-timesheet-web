@@ -16,12 +16,15 @@ import {
   CreateExitReentrySchema,
   UpdateExitReentrySchema,
 } from "@/lib/db/services/exit-reentry/exit-reentry.schemas";
-import { useGetEmployees } from "@/lib/db/services/employee/requests";
-import { useGetDesignations } from "@/lib/db/services/designation/requests";
+import {
+  useGlobalData,
+  GlobalDataEmployee,
+  GlobalDataDesignation,
+} from "@/context/GlobalDataContext";
 import { toastService } from "@/lib/toast";
 import { getEntityModeFromParam } from "@/helpers";
 import { getErrorMessage } from "@/utils/helpers";
-import { FORM_FIELD_WIDTHS, COMMON_QUERY_INPUT } from "@/utils/constants";
+import { FORM_FIELD_WIDTHS } from "@/utils/constants";
 import {
   Input,
   Button,
@@ -31,8 +34,6 @@ import {
   Textarea,
 } from "@/components/forms";
 import { StepperFormHeading } from "@/components";
-import { ListedEmployee } from "@/lib/db/services/employee/employee.dto";
-import { ListedDesignation } from "@/lib/db/services/designation/designation.dto";
 
 const exitReentryTypeOptions = [
   { label: "Exit", value: "EXIT" },
@@ -58,27 +59,21 @@ const UpsertExitReentryPage = () => {
     id: exitReentryId ? Number(exitReentryId) : 0,
   });
 
-  // Fetch employees
-  const { data: employeesResponse } = useGetEmployees({
-    page: 1,
-    limit: 1000,
-  });
-  const employees = employeesResponse?.employees ?? [];
-
-  // Fetch designations
-  const { data: designationsResponse } = useGetDesignations(COMMON_QUERY_INPUT);
-  const designations = designationsResponse?.designations ?? [];
+  // Fetch global data
+  const { data: globalData } = useGlobalData();
+  const employees = globalData.employees || [];
+  const designations = globalData.designations || [];
 
   // Create a map for quick designation lookup
   const designationsMap = useMemo(() => {
-    const map = new Map<number, ListedDesignation>();
-    designations.forEach((des: ListedDesignation) => {
+    const map = new Map<number, GlobalDataDesignation>();
+    designations.forEach((des: GlobalDataDesignation) => {
       map.set(des.id, des);
     });
     return map;
   }, [designations]);
 
-  const employeeOptions = employees.map((employee: ListedEmployee) => ({
+  const employeeOptions = employees.map((employee: GlobalDataEmployee) => ({
     label: `${employee.employeeCode} - ${employee.nameEn}`,
     value: employee.id,
   }));
@@ -111,7 +106,7 @@ const UpsertExitReentryPage = () => {
 
   // Get employee designation when employee is selected
   const selectedEmployee = employees.find(
-    (emp: ListedEmployee) => emp.id === selectedEmployeeId
+    (emp: GlobalDataEmployee) => emp.id === selectedEmployeeId
   );
 
   // Redirect to 404 page if the entity is invalid

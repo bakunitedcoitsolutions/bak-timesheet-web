@@ -16,7 +16,7 @@ import {
   CreateProjectSchema,
   UpdateProjectSchema,
 } from "@/lib/db/services/project/project.schemas";
-import { useGetBranches } from "@/lib/db/services/branch/requests";
+import { useGlobalData, GlobalDataGeneral } from "@/context/GlobalDataContext";
 import { toastService } from "@/lib/toast";
 import { getEntityModeFromParam } from "@/helpers";
 import { getErrorMessage } from "@/utils/helpers";
@@ -30,7 +30,6 @@ import {
   Textarea,
 } from "@/components/forms";
 import { StepperFormHeading } from "@/components";
-import { ListedBranch } from "@/lib/db/services/branch/branch.dto";
 
 const UpsertProjectPage = () => {
   const router = useRouter();
@@ -52,13 +51,10 @@ const UpsertProjectPage = () => {
   });
 
   // Fetch branches
-  const { data: branchesResponse } = useGetBranches({
-    page: 1,
-    limit: 1000,
-  });
-  const branches = branchesResponse?.branches ?? [];
+  const { data: globalData } = useGlobalData();
+  const branches = globalData.branches || [];
 
-  const branchOptions = branches.map((branch: ListedBranch) => ({
+  const branchOptions = branches.map((branch: GlobalDataGeneral) => ({
     label: branch.nameEn,
     value: branch.id,
   }));

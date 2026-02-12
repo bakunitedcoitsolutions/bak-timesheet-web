@@ -107,6 +107,8 @@ function transformEmployee(row) {
   const designationId = parseInteger(row.DesignationId);
   const payrollSectionId = parseInteger(row.PayrollSectionId);
 
+  const workingDays = parseInteger(row.WorkDays);
+
   // Determine hours per day based on designation
   const hoursPerDay = designationIdsWhichHas8HoursAday.includes(designationId)
     ? 8
@@ -131,8 +133,10 @@ function transformEmployee(row) {
 
   if (isFixed) {
     if (hourlyRate > 0) {
-      finalSalary = hourlyRate * hoursPerDay * 30;
-      finalHourlyRate = 0;
+      // Calculate salary based on rate, hours, and working days (default 30)
+      const daysToUse = workingDays || 30;
+      finalSalary = hourlyRate * hoursPerDay * daysToUse;
+      finalHourlyRate = hourlyRate;
     } else {
       finalSalary = 0;
       finalHourlyRate = 0;
@@ -165,7 +169,7 @@ function transformEmployee(row) {
     payrollSectionId,
     isDeductable: parseBoolean(row.IsDeductable),
     isFixed: isFixed,
-    workingDays: parseInteger(row.WorkDays),
+    workingDays: workingDays,
     hourlyRate: finalHourlyRate,
     salary: finalSalary,
     breakfastAllowance,

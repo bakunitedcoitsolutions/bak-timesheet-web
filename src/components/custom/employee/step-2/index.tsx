@@ -23,19 +23,13 @@ import {
 } from "@/lib/db/services/employee";
 import { UpdateEmployeeStep2Schema } from "@/lib/db/services/employee/employee.schemas";
 import { useStepperForm } from "@/context";
+import {
+  useGlobalData,
+  GlobalDataCity,
+  GlobalDataGeneral,
+  GlobalDataDesignation,
+} from "@/context/GlobalDataContext";
 import { useFileUpload } from "@/hooks";
-import { useGetCountries } from "@/lib/db/services/country";
-import { useGetCities } from "@/lib/db/services/city";
-import { useGetBranches } from "@/lib/db/services/branch";
-import { useGetDesignations } from "@/lib/db/services/designation";
-import { useGetPayrollSections } from "@/lib/db/services/payroll-section";
-import { useGetEmployeeStatuses } from "@/lib/db/services/employee-status";
-import type { ListedCountry } from "@/lib/db/services/country/country.dto";
-import type { ListedCity } from "@/lib/db/services/city/city.dto";
-import type { ListedBranch } from "@/lib/db/services/branch/branch.dto";
-import type { ListedDesignation } from "@/lib/db/services/designation/designation.dto";
-import type { ListedPayrollSection } from "@/lib/db/services/payroll-section/payroll-section.dto";
-import type { ListedEmployeeStatus } from "@/lib/db/services/employee-status/employee-status.dto";
 
 interface Step2Props {
   employeeId?: number | null;
@@ -57,22 +51,17 @@ const Step2 = forwardRef<Step2Handle, Step2Props>(({ employeeId }, ref) => {
     id: employeeId ?? 0,
   });
 
-  // Fetch dropdown data
-  const { data: countriesData } = useGetCountries({ page: 1, limit: 1000 });
-  const { data: citiesData } = useGetCities({ page: 1, limit: 1000 });
-  const { data: branchesData } = useGetBranches({ page: 1, limit: 1000 });
-  const { data: designationsData } = useGetDesignations({
-    page: 1,
-    limit: 1000,
-  });
-  const { data: payrollSectionsData } = useGetPayrollSections({
-    page: 1,
-    limit: 1000,
-  });
-  const { data: employeeStatusesData } = useGetEmployeeStatuses({
-    page: 1,
-    limit: 1000,
-  });
+  // Fetch globel data
+  const { data: globalData } = useGlobalData();
+
+  const countriesData = { countries: globalData.countries };
+  const citiesData = { cities: globalData.cities };
+  const branchesData = { branches: globalData.branches };
+  const designationsData = { designations: globalData.designations };
+  const payrollSectionsData = { payrollSections: globalData.payrollSections };
+  const employeeStatusesData = {
+    employeeStatuses: globalData.employeeStatuses,
+  };
 
   const defaultValues = {
     id: employeeId ?? 0,
@@ -184,15 +173,16 @@ const Step2 = forwardRef<Step2Handle, Step2Props>(({ employeeId }, ref) => {
     } else if (isFixed === false) {
       setValue("salary", 0);
     }
-  }, [isFixed, setValue]);
+  }, [isFixed]);
 
   // Clear city selection when country changes
+  const currentCityId = watch("cityId");
+
   useEffect(() => {
-    const currentCityId = watch("cityId");
     if (selectedCountryId && currentCityId) {
       // Check if the selected city belongs to the selected country
-      const selectedCity = citiesData?.cities.find(
-        (city: ListedCity) => city.id === currentCityId
+      const selectedCity = globalData.cities?.find?.(
+        (city: GlobalDataCity) => city.id === currentCityId
       );
       if (selectedCity && selectedCity.countryId !== selectedCountryId) {
         // City doesn't belong to selected country, clear it
@@ -202,12 +192,31 @@ const Step2 = forwardRef<Step2Handle, Step2Props>(({ employeeId }, ref) => {
       // If country is cleared, also clear city
       setValue("cityId", undefined);
     }
-  }, [selectedCountryId, citiesData, setValue, watch]);
+  }, [selectedCountryId, globalData.cities, currentCityId]);
 
-  // Conditional rendering: show Salary if isFixed is true, show Hourly Rate if false
-  // If undefined, show Hourly Rate by default
-  const showSalary = isFixed === true;
-  const showHourlyRate = isFixed !== true; // Show if false or undefined
+  // Calculate Hourly Rate on Salary blur
+  const handleSalaryBlur = () => {
+    const currentSalary = form.getValues("salary");
+    const currentWorkingDays = form.getValues("workingDays");
+    const currentDesignationId = form.getValues("designationId");
+
+    if (currentSalary) {
+      const daysToUse =
+        currentWorkingDays && currentWorkingDays > 0 ? currentWorkingDays : 30;
+
+      // Find hours per day from selected designation
+      const selectedDesignation = globalData.designations.find(
+        (d: GlobalDataDesignation) => d.id === currentDesignationId
+      );
+      // Use designation hours or default to 8
+      const hoursToUse = selectedDesignation?.hoursPerDay || 8;
+
+      // Formula: Salary / Working Days / Hours Per Day
+      const calculatedHourlyRate = currentSalary / daysToUse / hoursToUse;
+      // Round to 2 decimal places
+      setValue("hourlyRate", Number(calculatedHourlyRate.toFixed(2)));
+    }
+  };
 
   const handleFormSubmit = async (data: any): Promise<boolean> => {
     if (!employeeId) {
@@ -314,14 +323,14 @@ const Step2 = forwardRef<Step2Handle, Step2Props>(({ employeeId }, ref) => {
   ];
 
   const countryOptions =
-    countriesData?.countries.map((country: ListedCountry) => ({
+    countriesData?.countries.map((country: GlobalDataGeneral) => ({
       label: country.nameEn,
       value: country.id,
     })) || [];
 
   const cityOptions =
     citiesData?.cities
-      .filter((city: ListedCity) => {
+      .filter((city: GlobalDataCity) => {
         // If no country is selected, show all cities
         if (!selectedCountryId) {
           return true;
@@ -329,38 +338,36 @@ const Step2 = forwardRef<Step2Handle, Step2Props>(({ employeeId }, ref) => {
         // Filter cities by selected country
         return city.countryId === selectedCountryId;
       })
-      .map((city: ListedCity) => ({
+      .map((city: GlobalDataCity) => ({
         label: city.nameEn,
         value: city.id,
       })) || [];
 
   const branchOptions =
-    branchesData?.branches.map((branch: ListedBranch) => ({
+    branchesData?.branches.map((branch: GlobalDataGeneral) => ({
       label: branch.nameEn,
       value: branch.id,
     })) || [];
 
   const designationOptions =
-    designationsData?.designations.map((designation: ListedDesignation) => ({
-      label: designation.nameEn,
-      value: designation.id,
-    })) || [];
+    designationsData?.designations.map(
+      (designation: GlobalDataDesignation) => ({
+        label: designation.nameEn,
+        value: designation.id,
+      })
+    ) || [];
 
   const payrollSectionOptions =
-    payrollSectionsData?.payrollSections.map(
-      (section: ListedPayrollSection) => ({
-        label: section.nameEn,
-        value: section.id,
-      })
-    ) || [];
+    payrollSectionsData?.payrollSections.map((section: GlobalDataGeneral) => ({
+      label: section.nameEn,
+      value: section.id,
+    })) || [];
 
   const employeeStatusOptions =
-    employeeStatusesData?.employeeStatuses.map(
-      (status: ListedEmployeeStatus) => ({
-        label: status.nameEn,
-        value: status.id,
-      })
-    ) || [];
+    employeeStatusesData?.employeeStatuses.map((status: GlobalDataGeneral) => ({
+      label: status.nameEn,
+      value: status.id,
+    })) || [];
 
   const isFixedOptions = [
     { label: "Yes", value: true },
@@ -551,36 +558,34 @@ const Step2 = forwardRef<Step2Handle, Step2Props>(({ employeeId }, ref) => {
           <div className="w-full h-px mt-2 mb-2 bg-primary-light block md:hidden" />
 
           {/* Fourth Row */}
-          {showSalary && (
-            <FormItem
-              name="salary"
-              className={classNames(FORM_FIELD_WIDTHS["4"])}
-            >
-              <NumberInput
-                min={0}
-                maxLength={10}
-                label="Salary"
-                className="w-full"
-                useGrouping={false}
-                placeholder="Enter salary"
-              />
-            </FormItem>
-          )}
-          {showHourlyRate && (
-            <FormItem
-              name="hourlyRate"
-              className={classNames(FORM_FIELD_WIDTHS["4"])}
-            >
-              <NumberInput
-                min={0}
-                maxLength={10}
-                label="Hourly Rate"
-                className="w-full"
-                useGrouping={false}
-                placeholder="Enter hourly rate"
-              />
-            </FormItem>
-          )}
+          <FormItem
+            name="salary"
+            className={classNames(FORM_FIELD_WIDTHS["4"])}
+          >
+            <NumberInput
+              min={0}
+              maxLength={10}
+              label="Salary"
+              className="w-full"
+              useGrouping={false}
+              placeholder="Enter salary"
+              disabled={isFixed !== true}
+              onBlur={handleSalaryBlur}
+            />
+          </FormItem>
+          <FormItem
+            name="hourlyRate"
+            className={classNames(FORM_FIELD_WIDTHS["4"])}
+          >
+            <NumberInput
+              min={0}
+              maxLength={10}
+              label="Hourly Rate"
+              className="w-full"
+              useGrouping={false}
+              placeholder="Enter hourly rate"
+            />
+          </FormItem>
           <FormItem
             name="breakfastAllowance"
             className={classNames(FORM_FIELD_WIDTHS["4"])}

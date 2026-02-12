@@ -13,12 +13,13 @@ import {
   GroupDropdown,
   AutoScrollChips,
 } from "@/components";
-import { COMMON_QUERY_INPUT } from "@/utils/constants";
 import { parseGroupDropdownFilter } from "@/utils/helpers";
 import { useGetEmployees } from "@/lib/db/services/employee";
-import { ListedDesignation } from "@/lib/db/services/designation";
 import { ListedEmployee } from "@/lib/db/services/employee/employee.dto";
-import { useGetDesignations } from "@/lib/db/services/designation/requests";
+import {
+  useGlobalData,
+  GlobalDataDesignation,
+} from "@/context/GlobalDataContext";
 
 const SalarySlipGrid = memo(
   ({
@@ -163,9 +164,8 @@ const SalarySlipsPage = () => {
   });
 
   const employees: ListedEmployee[] = employeesResponse?.employees ?? [];
-  const { data: designationsResponse } = useGetDesignations(COMMON_QUERY_INPUT);
-  const designations: ListedDesignation[] =
-    designationsResponse?.designations ?? [];
+  const { data: globalData } = useGlobalData();
+  const designations: GlobalDataDesignation[] = globalData.designations || [];
 
   // Helper to get designation name
   const getDesignationName = (id: number | null) => {

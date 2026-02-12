@@ -3,20 +3,50 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { getGlobalDataAction } from "@/lib/db/services/shared/actions";
 
+export interface GlobalDataCity {
+  id: number;
+  nameEn: string;
+  countryId: number;
+}
+
+export interface GlobalDataGeneral {
+  id: number;
+  nameEn: string;
+}
+
+export interface GlobalDataEmployee {
+  id: number;
+  employeeCode: number;
+  designationId: number;
+  nameEn: string;
+}
+
+export interface GlobalDataDesignation {
+  id: number;
+  nameEn: string;
+  hoursPerDay: number;
+}
+
+export interface GlobalDataUserPrivilege {
+  id: number;
+  userId: number;
+  privileges: any;
+}
+
 export interface GlobalData {
-  designations: { id: number; nameEn: string }[];
-  employees: { id: number; employeeCode: number; nameEn: string }[];
-  projects: { id: number; nameEn: string }[];
-  payrollSections: { id: number; nameEn: string }[];
-  payrollStatuses: { id: number; nameEn: string }[];
-  userRoles: { id: number; nameEn: string }[];
-  userPrivileges: { id: number; userId: number; privileges: any }[];
-  branches: { id: number; nameEn: string }[];
-  cities: { id: number; nameEn: string }[];
-  countries: { id: number; nameEn: string }[];
-  gosiCities: { id: number; nameEn: string }[];
-  employeeStatuses: { id: number; nameEn: string }[];
-  paymentMethods: { id: number; nameEn: string }[];
+  designations: GlobalDataDesignation[];
+  employees: GlobalDataEmployee[];
+  projects: GlobalDataGeneral[];
+  payrollSections: GlobalDataGeneral[];
+  payrollStatuses: GlobalDataGeneral[];
+  userRoles: GlobalDataGeneral[];
+  userPrivileges: GlobalDataUserPrivilege[];
+  branches: GlobalDataGeneral[];
+  cities: GlobalDataCity[];
+  countries: GlobalDataGeneral[];
+  gosiCities: GlobalDataGeneral[];
+  employeeStatuses: GlobalDataGeneral[];
+  paymentMethods: GlobalDataGeneral[];
 }
 
 interface GlobalDataContextType {

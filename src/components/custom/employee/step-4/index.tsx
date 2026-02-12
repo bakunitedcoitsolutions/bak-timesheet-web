@@ -22,8 +22,7 @@ import {
 } from "@/lib/db/services/employee";
 import { UpdateEmployeeStep4Schema } from "@/lib/db/services/employee/employee.schemas";
 import { useStepperForm } from "@/context";
-import { useGetGosiCities } from "@/lib/db/services/gosi-city";
-import type { ListedGosiCity } from "@/lib/db/services/gosi-city/gosi-city.dto";
+import { GlobalDataGeneral, useGlobalData } from "@/context/GlobalDataContext";
 
 interface Step4Props {
   employeeId?: number | null;
@@ -46,7 +45,9 @@ const Step4 = forwardRef<Step4Handle, Step4Props>(({ employeeId }, ref) => {
   });
 
   // Fetch dropdown data
-  const { data: gosiCitiesData } = useGetGosiCities({ page: 1, limit: 1000 });
+  // Fetch dropdown data
+  const { data: globalData } = useGlobalData();
+  const gosiCitiesData = { gosiCities: globalData.gosiCities };
 
   const defaultValues = {
     id: employeeId ?? 0,
@@ -143,7 +144,7 @@ const Step4 = forwardRef<Step4Handle, Step4Props>(({ employeeId }, ref) => {
   ];
 
   const gosiCityOptions =
-    gosiCitiesData?.gosiCities.map((city: ListedGosiCity) => ({
+    gosiCitiesData?.gosiCities.map((city: GlobalDataGeneral) => ({
       label: city.nameEn,
       value: city.id,
     })) || [];
@@ -162,7 +163,10 @@ const Step4 = forwardRef<Step4Handle, Step4Props>(({ employeeId }, ref) => {
         <div className="flex flex-col gap-4">
           <StepperFormHeading title="Bank Details" />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 lg:gap-y-8 px-6">
-            <FormItem name="bankName" className={classNames(FORM_FIELD_WIDTHS["2"])}>
+            <FormItem
+              name="bankName"
+              className={classNames(FORM_FIELD_WIDTHS["2"])}
+            >
               <Dropdown
                 label="Name"
                 className="w-full"
@@ -170,7 +174,10 @@ const Step4 = forwardRef<Step4Handle, Step4Props>(({ employeeId }, ref) => {
                 placeholder="Choose Bank"
               />
             </FormItem>
-            <FormItem name="bankCode" className={classNames(FORM_FIELD_WIDTHS["2"])}>
+            <FormItem
+              name="bankCode"
+              className={classNames(FORM_FIELD_WIDTHS["2"])}
+            >
               <Input
                 className="w-full"
                 label="Code"

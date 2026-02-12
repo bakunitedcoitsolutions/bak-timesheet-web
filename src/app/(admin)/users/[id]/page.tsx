@@ -17,10 +17,7 @@ import {
   useCreateUser,
   useGetUserById,
 } from "@/lib/db/services/user/requests";
-import { useGetBranches } from "@/lib/db/services/branch/requests";
-import { useGetUserRoles } from "@/lib/db/services/user-role/requests";
-import type { ListedBranch } from "@/lib/db/services/branch/branch.dto";
-import type { UserRoleInterface } from "@/lib/db/services/user-role/user-role.service";
+import { useGlobalData, GlobalDataGeneral } from "@/context/GlobalDataContext";
 import {
   CreateUserSchema,
   UpdateUserSchema,
@@ -60,13 +57,10 @@ const UpsertUserPage = () => {
     id: userId ? Number(userId) : 0,
   });
 
-  // Fetch branches and user roles
-  const { data: branchesData, isLoading: isLoadingBranches } = useGetBranches({
-    page: 1,
-    limit: 1000, // Get all branches
-  });
-  const { data: userRolesData, isLoading: isLoadingUserRoles } =
-    useGetUserRoles();
+  // Fetch global data
+  const { data: globalData } = useGlobalData();
+  const branches = globalData.branches || [];
+  const userRoles = globalData.userRoles || [];
 
   const defaultValues = {
     ...(isEditMode ? { id: 0 } : {}),
@@ -219,13 +213,13 @@ const UpsertUserPage = () => {
   };
 
   const branchOptions =
-    branchesData?.branches?.map((branch: ListedBranch) => ({
+    branches.map((branch: GlobalDataGeneral) => ({
       label: branch.nameEn,
       value: branch.id,
     })) || [];
 
   const userRoleOptions =
-    userRolesData?.map((role: UserRoleInterface) => ({
+    userRoles.map((role: GlobalDataGeneral) => ({
       label: role.nameEn,
       value: role.id,
     })) || [];
@@ -234,7 +228,7 @@ const UpsertUserPage = () => {
     <div className="flex flex-col h-full gap-6 px-6 py-6">
       <div className="flex h-full justify-between flex-1 md:flex-none flex-col gap-4 py-6 bg-white rounded-lg">
         <StepperFormHeading title={isAddMode ? "Add User" : "Edit User"} />
-        {isLoading || isLoadingBranches || isLoadingUserRoles ? (
+        {isLoading ? (
           <div className="flex justify-center items-center h-full">
             <ProgressSpinner style={{ width: "50px", height: "50px" }} />
           </div>

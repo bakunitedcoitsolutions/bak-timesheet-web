@@ -13,11 +13,12 @@ import {
   TitleHeader,
 } from "@/components";
 import { toastService } from "@/lib/toast";
-import { COMMON_QUERY_INPUT } from "@/utils/constants";
 import { LedgerEntryInterface } from "@/lib/db/services/ledger/ledger.dto";
-import { useGetDesignations } from "@/lib/db/services/designation/requests";
+import {
+  useGlobalData,
+  GlobalDataDesignation,
+} from "@/context/GlobalDataContext";
 import { useGetLedgerByEmployeeCode } from "@/lib/db/services/ledger/requests";
-import { ListedDesignation } from "@/lib/db/services/designation/designation.dto";
 
 // Transformed ledger entry for table display
 interface LedgerEntry {
@@ -44,13 +45,13 @@ const LedgerPage = () => {
   });
 
   // Fetch designations for display
-  const { data: designationsResponse } = useGetDesignations(COMMON_QUERY_INPUT);
-  const designations = designationsResponse?.designations ?? [];
+  const { data: globalData } = useGlobalData();
+  const designations = globalData.designations || [];
 
   // Create designation map
   const designationsMap = useMemo(() => {
-    const map = new Map<number, ListedDesignation>();
-    designations.forEach((des: ListedDesignation) => {
+    const map = new Map<number, GlobalDataDesignation>();
+    designations.forEach((des: GlobalDataDesignation) => {
       map.set(des.id, des);
     });
     return map;

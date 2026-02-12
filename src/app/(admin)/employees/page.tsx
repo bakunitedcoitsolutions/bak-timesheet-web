@@ -29,12 +29,13 @@ import { toastService } from "@/lib/toast";
 import { showConfirmDialog } from "@/components/common/confirm-dialog";
 import { COMMON_QUERY_INPUT, STORAGE_CONFIG } from "@/utils/constants";
 import { ListedEmployee } from "@/lib/db/services/employee/employee.dto";
-import { useGetDesignations } from "@/lib/db/services/designation/requests";
 import { useDeleteEmployee, useGetEmployees } from "@/lib/db/services/employee";
-import { useGetPayrollSections } from "@/lib/db/services/payroll-section/requests";
 import { ListEmployeesSortableField } from "@/lib/db/services/employee/employee.dto";
-import type { ListedDesignation } from "@/lib/db/services/designation/designation.dto";
-import type { ListedPayrollSection } from "@/lib/db/services/payroll-section/payroll-section.dto";
+import {
+  useGlobalData,
+  GlobalDataDesignation,
+  GlobalDataGeneral,
+} from "@/context/GlobalDataContext";
 
 // Constants
 const SORTABLE_FIELDS = {
@@ -474,20 +475,18 @@ const EmployeesPage = () => {
     total: 0,
   };
 
-  const { data: designationsResponse } = useGetDesignations(COMMON_QUERY_INPUT);
-  const designations = designationsResponse?.designations ?? [];
-  const { data: payrollSectionsResponse } =
-    useGetPayrollSections(COMMON_QUERY_INPUT);
-  const payrollSections = payrollSectionsResponse?.payrollSections ?? [];
+  const { data: globalData } = useGlobalData();
+  const designations = globalData.designations || [];
+  const payrollSections = globalData.payrollSections || [];
 
   const modifyEmployeesData = useMemo(() => {
     return employees.map((employee: ListedEmployee) => {
       const designation = designations.find(
-        (designation: ListedDesignation) =>
+        (designation: GlobalDataDesignation) =>
           designation.id === employee.designationId
       );
       const payrollSection = payrollSections.find(
-        (payrollSection: ListedPayrollSection) =>
+        (payrollSection: GlobalDataGeneral) =>
           payrollSection.id === employee.payrollSectionId
       );
       return {
