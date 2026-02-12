@@ -439,6 +439,8 @@ async function main() {
       nameAr: "سائق",
       displayOrderKey: 13,
       isActive: true,
+
+      hoursPerDay: 10,
     },
     {
       id: 2,
@@ -446,6 +448,8 @@ async function main() {
       nameAr: "حداد حديد",
       displayOrderKey: 14,
       isActive: true,
+
+      hoursPerDay: 10,
     },
     {
       id: 3,
@@ -453,6 +457,8 @@ async function main() {
       nameAr: "مشرف",
       displayOrderKey: 12,
       isActive: true,
+
+      hoursPerDay: 10,
     },
     {
       id: 4,
@@ -460,6 +466,8 @@ async function main() {
       nameAr: "نجار",
       displayOrderKey: 16,
       isActive: true,
+
+      hoursPerDay: 10,
     },
     {
       id: 5,
@@ -467,6 +475,8 @@ async function main() {
       nameAr: "عامل BD",
       displayOrderKey: 20,
       isActive: true,
+
+      hoursPerDay: 8,
     },
     {
       id: 6,
@@ -474,6 +484,8 @@ async function main() {
       nameAr: "حداد حديد OS",
       displayOrderKey: 33,
       isActive: true,
+
+      hoursPerDay: 10,
     },
     {
       id: 7,
@@ -481,6 +493,8 @@ async function main() {
       nameAr: "نجار OS",
       displayOrderKey: 34,
       isActive: true,
+
+      hoursPerDay: 10,
     },
     {
       id: 8,
@@ -488,6 +502,8 @@ async function main() {
       nameAr: "حداد حديد BD",
       displayOrderKey: 19,
       isActive: true,
+
+      hoursPerDay: 10,
     },
     {
       id: 9,
@@ -495,6 +511,8 @@ async function main() {
       nameAr: "بناء",
       displayOrderKey: 18,
       isActive: true,
+
+      hoursPerDay: 10,
     },
     {
       id: 10,
@@ -502,6 +520,8 @@ async function main() {
       nameAr: "الرئيس التنفيذي",
       displayOrderKey: 1,
       isActive: true,
+
+      hoursPerDay: 8,
     },
     {
       id: 11,
@@ -509,6 +529,8 @@ async function main() {
       nameAr: "مدير",
       displayOrderKey: 2,
       isActive: true,
+
+      hoursPerDay: 8,
     },
     {
       id: 12,
@@ -516,6 +538,8 @@ async function main() {
       nameAr: "المدير العام",
       displayOrderKey: 3,
       isActive: true,
+
+      hoursPerDay: 8,
     },
     {
       id: 13,
@@ -523,6 +547,8 @@ async function main() {
       nameAr: "مهندس",
       displayOrderKey: 4,
       isActive: true,
+
+      hoursPerDay: 10,
     },
     {
       id: 14,
@@ -530,6 +556,8 @@ async function main() {
       nameAr: "محاسب",
       displayOrderKey: 5,
       isActive: true,
+
+      hoursPerDay: 10,
     },
     {
       id: 15,
@@ -537,6 +565,8 @@ async function main() {
       nameAr: "أمين الصندوق",
       displayOrderKey: 6,
       isActive: true,
+
+      hoursPerDay: 10,
     },
     {
       id: 16,
@@ -544,6 +574,8 @@ async function main() {
       nameAr: "مشغل بيانات",
       displayOrderKey: 7,
       isActive: true,
+
+      hoursPerDay: 10,
     },
     {
       id: 17,
@@ -551,6 +583,8 @@ async function main() {
       nameAr: "عامل الشاي",
       displayOrderKey: 8,
       isActive: true,
+
+      hoursPerDay: 10,
     },
     {
       id: 18,
@@ -558,6 +592,8 @@ async function main() {
       nameAr: "عامل رفع",
       displayOrderKey: 9,
       isActive: true,
+
+      hoursPerDay: 10,
     },
     {
       id: 19,
@@ -565,6 +601,8 @@ async function main() {
       nameAr: "سعودي",
       displayOrderKey: 10,
       isActive: true,
+
+      hoursPerDay: 8,
     },
     {
       id: 20,
@@ -572,6 +610,8 @@ async function main() {
       nameAr: "مساح",
       displayOrderKey: 11,
       isActive: true,
+
+      hoursPerDay: 10,
     },
     {
       id: 21,
@@ -579,6 +619,8 @@ async function main() {
       nameAr: "عامل SF",
       displayOrderKey: 15,
       isActive: true,
+
+      hoursPerDay: 10,
     },
     {
       id: 22,
@@ -586,6 +628,8 @@ async function main() {
       nameAr: "عامل CP",
       displayOrderKey: 17,
       isActive: true,
+
+      hoursPerDay: 10,
     },
     {
       id: 23,
@@ -593,6 +637,8 @@ async function main() {
       nameAr: "كهربائي",
       displayOrderKey: 21,
       isActive: true,
+
+      hoursPerDay: 10,
     },
     {
       id: 24,
@@ -600,6 +646,8 @@ async function main() {
       nameAr: "ميكانيكي",
       displayOrderKey: 22,
       isActive: true,
+
+      hoursPerDay: 10,
     },
     {
       id: 25,
@@ -607,6 +655,8 @@ async function main() {
       nameAr: "كهربائي شاحنة",
       displayOrderKey: 23,
       isActive: true,
+
+      hoursPerDay: 10,
     },
     {
       id: 26,
@@ -614,6 +664,8 @@ async function main() {
       nameAr: "نشر",
       displayOrderKey: 24,
       isActive: true,
+
+      hoursPerDay: 10,
     },
     {
       id: 27,
@@ -621,6 +673,8 @@ async function main() {
       nameAr: "مشغل بوكلين",
       displayOrderKey: 25,
       isActive: true,
+
+      hoursPerDay: 10,
     },
     {
       id: 28,
@@ -628,6 +682,8 @@ async function main() {
       nameAr: "كهروميكانيكي",
       displayOrderKey: 26,
       isActive: true,
+
+      hoursPerDay: 10,
     },
     {
       id: 29,
@@ -635,6 +691,8 @@ async function main() {
       nameAr: "شخصي",
       displayOrderKey: 27,
       isActive: true,
+
+      hoursPerDay: 10,
     },
     {
       id: 30,
@@ -642,6 +700,8 @@ async function main() {
       nameAr: "مهندس OS",
       displayOrderKey: 28,
       isActive: true,
+
+      hoursPerDay: 10,
     },
     {
       id: 31,
@@ -649,6 +709,8 @@ async function main() {
       nameAr: "مساح OS",
       displayOrderKey: 29,
       isActive: true,
+
+      hoursPerDay: 10,
     },
     {
       id: 32,
@@ -656,6 +718,8 @@ async function main() {
       nameAr: "مشرف OS",
       displayOrderKey: 30,
       isActive: true,
+
+      hoursPerDay: 10,
     },
     {
       id: 33,
@@ -663,6 +727,8 @@ async function main() {
       nameAr: "سائق OS",
       displayOrderKey: 31,
       isActive: true,
+
+      hoursPerDay: 10,
     },
     {
       id: 34,
@@ -670,6 +736,8 @@ async function main() {
       nameAr: "كهربائي OS",
       displayOrderKey: 32,
       isActive: true,
+
+      hoursPerDay: 10,
     },
     {
       id: 35,
@@ -677,6 +745,8 @@ async function main() {
       nameAr: "مشرف شاحنة",
       displayOrderKey: 35,
       isActive: true,
+
+      hoursPerDay: 10,
     },
     {
       id: 36,
@@ -684,6 +754,8 @@ async function main() {
       nameAr: "بناء OS",
       displayOrderKey: 36,
       isActive: true,
+
+      hoursPerDay: 10,
     },
     {
       id: 37,
@@ -691,6 +763,8 @@ async function main() {
       nameAr: "عامل بناء",
       displayOrderKey: 38,
       isActive: true,
+
+      hoursPerDay: 10,
     },
     {
       id: 38,
@@ -698,6 +772,8 @@ async function main() {
       nameAr: "ميكانيكي OS",
       displayOrderKey: 37,
       isActive: true,
+
+      hoursPerDay: 10,
     },
     {
       id: 40,
@@ -705,6 +781,8 @@ async function main() {
       nameAr: "أمين مخزن",
       displayOrderKey: 39,
       isActive: true,
+
+      hoursPerDay: 10,
     },
     {
       id: 41,
@@ -712,6 +790,8 @@ async function main() {
       nameAr: "لحام OS",
       displayOrderKey: 42,
       isActive: true,
+
+      hoursPerDay: 10,
     },
     {
       id: 42,
@@ -719,6 +799,8 @@ async function main() {
       nameAr: "شاحنة OS",
       displayOrderKey: 41,
       isActive: true,
+
+      hoursPerDay: 10,
     },
     {
       id: 43,
@@ -726,6 +808,8 @@ async function main() {
       nameAr: "مشرف السلامة",
       displayOrderKey: 40,
       isActive: true,
+
+      hoursPerDay: 10,
     },
     {
       id: 44,
@@ -733,6 +817,8 @@ async function main() {
       nameAr: "عامل سقالات",
       displayOrderKey: 43,
       isActive: true,
+
+      hoursPerDay: 10,
     },
     {
       id: 45,
@@ -740,6 +826,8 @@ async function main() {
       nameAr: "مسجل الوقت",
       displayOrderKey: 51,
       isActive: true,
+
+      hoursPerDay: 10,
     },
     {
       id: 46,
@@ -747,6 +835,8 @@ async function main() {
       nameAr: "مدير الإدارة والمالية",
       displayOrderKey: 0,
       isActive: true,
+
+      hoursPerDay: 8,
     },
     {
       id: 47,
@@ -754,6 +844,8 @@ async function main() {
       nameAr: "مندوب مبيعات",
       displayOrderKey: 44,
       isActive: true,
+
+      hoursPerDay: 10,
     },
     {
       id: 48,
@@ -761,6 +853,8 @@ async function main() {
       nameAr: "كاتب شؤون الموظفين",
       displayOrderKey: 45,
       isActive: true,
+
+      hoursPerDay: 8,
     },
     {
       id: 49,
@@ -768,6 +862,8 @@ async function main() {
       nameAr: "سكرتير",
       displayOrderKey: 46,
       isActive: true,
+
+      hoursPerDay: 10,
     },
     {
       id: 50,
@@ -775,6 +871,8 @@ async function main() {
       nameAr: "مساعد مكتب الموقع",
       displayOrderKey: 47,
       isActive: true,
+
+      hoursPerDay: 8,
     },
     {
       id: 51,
@@ -782,6 +880,8 @@ async function main() {
       nameAr: "مشتري",
       displayOrderKey: 48,
       isActive: true,
+
+      hoursPerDay: 10,
     },
     {
       id: 52,
@@ -789,6 +889,8 @@ async function main() {
       nameAr: "استقبال في الموقع",
       displayOrderKey: 49,
       isActive: true,
+
+      hoursPerDay: 8,
     },
     {
       id: 53,
@@ -796,6 +898,8 @@ async function main() {
       nameAr: "مدير الموارد البشرية",
       displayOrderKey: 50,
       isActive: true,
+
+      hoursPerDay: 8,
     },
     {
       id: 54,
@@ -803,6 +907,8 @@ async function main() {
       nameAr: "عامل مكتب",
       displayOrderKey: 52,
       isActive: true,
+
+      hoursPerDay: 10,
     },
     {
       id: 55,
@@ -810,6 +916,8 @@ async function main() {
       nameAr: "حارس",
       displayOrderKey: 56,
       isActive: true,
+
+      hoursPerDay: 10,
     },
     {
       id: 56,
@@ -817,6 +925,8 @@ async function main() {
       nameAr: "مشرف جديد",
       displayOrderKey: 53,
       isActive: true,
+
+      hoursPerDay: 10,
     },
     {
       id: 57,
@@ -824,6 +934,8 @@ async function main() {
       nameAr: "نجار جديد",
       displayOrderKey: 54,
       isActive: true,
+
+      hoursPerDay: 10,
     },
     {
       id: 58,
@@ -831,6 +943,8 @@ async function main() {
       nameAr: "حداد حديد جديد",
       displayOrderKey: 55,
       isActive: true,
+
+      hoursPerDay: 10,
     },
     {
       id: 59,
@@ -838,6 +952,8 @@ async function main() {
       nameAr: "رسام",
       displayOrderKey: 57,
       isActive: true,
+
+      hoursPerDay: 8,
     },
     {
       id: 60,
@@ -845,6 +961,8 @@ async function main() {
       nameAr: "المدير الإداري",
       displayOrderKey: 0,
       isActive: true,
+
+      hoursPerDay: 8,
     },
     {
       id: 61,
@@ -852,6 +970,8 @@ async function main() {
       nameAr: "موظف منتهي الخدمة",
       displayOrderKey: 58,
       isActive: true,
+
+      hoursPerDay: 10,
     },
     {
       id: 62,
@@ -859,6 +979,8 @@ async function main() {
       nameAr: "لحام",
       displayOrderKey: 59,
       isActive: true,
+
+      hoursPerDay: 10,
     },
     {
       id: 63,
@@ -866,6 +988,8 @@ async function main() {
       nameAr: "حارس البوابة",
       displayOrderKey: 60,
       isActive: true,
+
+      hoursPerDay: 10,
     },
     {
       id: 64,
@@ -873,6 +997,8 @@ async function main() {
       nameAr: "مشرف عام",
       displayOrderKey: 61,
       isActive: true,
+
+      hoursPerDay: 10,
     },
     {
       id: 65,
@@ -880,6 +1006,8 @@ async function main() {
       nameAr: "سائق شاحنة",
       displayOrderKey: 62,
       isActive: true,
+
+      hoursPerDay: 10,
     },
     {
       id: 66,
@@ -887,6 +1015,8 @@ async function main() {
       nameAr: "مشغل جرافة",
       displayOrderKey: 63,
       isActive: true,
+
+      hoursPerDay: 10,
     },
     {
       id: 67,
@@ -894,6 +1024,8 @@ async function main() {
       nameAr: "سائق خاص",
       displayOrderKey: 64,
       isActive: true,
+
+      hoursPerDay: 10,
     },
     {
       id: 68,
@@ -901,6 +1033,8 @@ async function main() {
       nameAr: "عامل إطارات",
       displayOrderKey: 65,
       isActive: true,
+
+      hoursPerDay: 10,
     },
     {
       id: 69,
@@ -908,6 +1042,8 @@ async function main() {
       nameAr: "سائق ديانا",
       displayOrderKey: 66,
       isActive: true,
+
+      hoursPerDay: 10,
     },
   ];
 
@@ -1483,15 +1619,57 @@ async function main() {
   console.log("\n📝 Seeding Timesheets...");
   await seedTimesheets(prisma);
 
-  console.log("\n🎉 Database seed completed successfully!");
+  // Reset Sequences
+  await resetSequences();
+
+  console.log("� Database seed completed successfully!");
+}
+
+async function resetSequences() {
+  console.log("🔄 Resetting database sequences...");
+  const tables = [
+    "Loan",
+    "Ledger",
+    "Employee",
+    "User",
+    "UserRole",
+    "UserPrivilege",
+    "Branch",
+    "City",
+    "Country",
+    "GosiCity",
+    "Designation",
+    "EmployeeStatus",
+    "Project",
+    "Timesheet",
+    "PayrollSection",
+    "PayrollStatus",
+    "PayrollSummary",
+    "PaymentMethod",
+    "PayrollDetails",
+    "TrafficChallan",
+    "ExitReentry",
+    "AllowanceNotAvailable",
+  ];
+
+  for (const table of tables) {
+    try {
+      await prisma.$executeRawUnsafe(`
+        SELECT setval(pg_get_serial_sequence('"${table}"', 'id'), COALESCE((SELECT MAX(id) FROM "${table}"), 1), COALESCE((SELECT MAX(id) FROM "${table}"), 0) > 0);
+      `);
+    } catch (error) {
+      // Ignore errors for tables that might not exist or don't have sequences
+      // console.warn(`Warning: Could not reset sequence for ${table}`);
+    }
+  }
+  console.log("✅ Sequences reset successfully.");
 }
 
 main()
-  .then(async () => {
-    await prisma.$disconnect();
-  })
   .catch(async (e) => {
     console.error("❌ Error seeding database:", e);
-    await prisma.$disconnect();
     process.exit(1);
+  })
+  .finally(async () => {
+    await prisma.$disconnect();
   });

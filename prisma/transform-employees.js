@@ -93,7 +93,9 @@ function getBankName(bankCode) {
   return bankMapping[bankCodeUpper] || bankCode; // Return original code if not found
 }
 
-const designationIdsWhichHas8HoursAday = [5, 46, 48, 50, 52, 53, 59, 60];
+const designationIdsWhichHas8HoursAday = [
+  5, 10, 11, 12, 19, 46, 48, 50, 52, 53, 59, 60,
+];
 const designationIdsWhichHasBfAllowanceTrue = [
   1, 2, 3, 4, 5, 8, 9, 20, 21, 22, 23, 37, 40, 44,
 ];
@@ -135,7 +137,7 @@ function transformEmployee(row) {
     if (hourlyRate > 0) {
       // Calculate salary based on rate, hours, and working days (default 30)
       const daysToUse = workingDays || 30;
-      finalSalary = hourlyRate * hoursPerDay * daysToUse;
+      finalSalary = Math.round(hourlyRate * hoursPerDay * daysToUse);
       finalHourlyRate = hourlyRate;
     } else {
       finalSalary = 0;
