@@ -226,6 +226,11 @@ export function parseExcelFile(file: File): Promise<ParseFileResult> {
           return;
         }
 
+        console.log(
+          "parseExcelFile: File read successfully, bytes:",
+          (data as ArrayBuffer).byteLength
+        );
+
         // ✅ Better than readAsBinaryString (avoids encoding issues)
         const workbook = XLSX.read(data, {
           type: "array",
@@ -233,6 +238,7 @@ export function parseExcelFile(file: File): Promise<ParseFileResult> {
         });
 
         const firstSheetName = workbook.SheetNames[0];
+        console.log("parseExcelFile: Sheet names", workbook.SheetNames);
         const worksheet = workbook.Sheets[firstSheetName];
 
         const jsonData = XLSX.utils.sheet_to_json(worksheet, {
@@ -241,6 +247,8 @@ export function parseExcelFile(file: File): Promise<ParseFileResult> {
           raw: false, // ✅ IMPORTANT: applies Excel formatting => dates become strings
           dateNF: "yyyy-mm-dd", // or "dd/mm/yyyy" if you prefer
         }) as any[][];
+
+        console.log("parseExcelFile: JSON rows parsed:", jsonData.length);
 
         if (jsonData.length < 2) {
           reject(
@@ -252,6 +260,7 @@ export function parseExcelFile(file: File): Promise<ParseFileResult> {
         }
 
         const headers = jsonData[0].map((h) => String(h).trim());
+        console.log("parseExcelFile: Headers:", headers);
         const result = parseDataRows(
           jsonData,
           headers,
@@ -259,11 +268,15 @@ export function parseExcelFile(file: File): Promise<ParseFileResult> {
         );
         resolve(result);
       } catch (error: any) {
+        console.error("parseExcelFile error:", error);
         reject(new Error(`Failed to parse Excel file: ${error.message}`));
       }
     };
 
-    reader.onerror = () => reject(new Error("Failed to read file"));
+    reader.onerror = () => {
+      console.error("parseExcelFile: Reader error");
+      reject(new Error("Failed to read file"));
+    };
     reader.readAsArrayBuffer(file); // ✅ changed
   });
 }
@@ -300,10 +313,14 @@ export function parseCSVFile(file: File): Promise<ParseFileResult> {
           return;
         }
 
+        console.log("parseCSVFile: File read, length:", text.length);
+
         const lines = text
           .split("\n")
           .map((line) => line.trim())
           .filter((line) => line);
+
+        console.log("parseCSVFile: Lines found:", lines.length);
 
         if (lines.length < 2) {
           reject(
@@ -315,6 +332,8 @@ export function parseCSVFile(file: File): Promise<ParseFileResult> {
         }
 
         const headers = parseCSVLine(lines[0]);
+        console.log("parseCSVFile: Headers:", headers);
+
         const rows: any[][] = [];
         for (let i = 1; i < lines.length; i++) {
           rows.push(parseCSVLine(lines[i]));
@@ -324,11 +343,15 @@ export function parseCSVFile(file: File): Promise<ParseFileResult> {
         const result = parseDataRows(rows, headers, (i) => rows[i] ?? []);
         resolve(result);
       } catch (error: any) {
+        console.error("parseCSVFile error:", error);
         reject(new Error(`Failed to parse CSV file: ${error.message}`));
       }
     };
 
-    reader.onerror = () => reject(new Error("Failed to read file"));
+    reader.onerror = () => {
+      console.error("parseCSVFile: Reader error");
+      reject(new Error("Failed to read file"));
+    };
     reader.readAsText(file);
   });
 }

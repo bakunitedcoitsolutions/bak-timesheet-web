@@ -468,16 +468,27 @@ const TimesheetPage = () => {
 
   const handleUpload = useCallback(
     async (file: File) => {
+      console.log("handleUpload started", {
+        fileName: file.name,
+        type: file.type,
+        size: file.size,
+      });
       try {
         const fileName = file.name.toLowerCase();
         const isCSV = fileName.endsWith(".csv") || file.type === "text/csv";
 
+        console.log("Parsing file...", { isCSV });
         let parseResult;
         if (isCSV) {
           parseResult = await parseCSVFile(file);
         } else {
           parseResult = await parseExcelFile(file);
         }
+        console.log("File parsed", {
+          rows: parseResult.data.length,
+          errors: parseResult.errors.length,
+          firstRow: parseResult.data[0],
+        });
 
         if (parseResult.errors.length > 0) {
           toastService.showWarn(
@@ -488,14 +499,19 @@ const TimesheetPage = () => {
         }
 
         if (parseResult.data.length === 0) {
+          console.log("No valid data found in file");
           toastService.showError("Error", "No valid data found in file");
           throw new Error("No valid data found in file");
         }
 
+        console.log("Calling bulkUploadTimesheets mutation...", {
+          entriesCount: parseResult.data.length,
+        });
         await bulkUploadTimesheets(
           { entries: parseResult.data },
           {
             onSuccess: (result: BulkUploadTimesheetResult) => {
+              console.log("bulkUploadTimesheets success", result);
               const message =
                 result.success > 0
                   ? `Successfully uploaded ${result.success} timesheet entr${result.success === 1 ? "y" : "ies"}`
@@ -512,6 +528,7 @@ const TimesheetPage = () => {
               }
             },
             onError: (error: any) => {
+              console.log("bulkUploadTimesheets error", error);
               const errorMessage = getErrorMessage(
                 error,
                 "Failed to upload timesheets"
@@ -522,6 +539,7 @@ const TimesheetPage = () => {
           }
         );
       } catch (error: any) {
+        console.log("handleUpload exception", error);
         const errorMessage = getErrorMessage(error, "Failed to parse file");
         toastService.showError("Error", errorMessage);
         throw error;

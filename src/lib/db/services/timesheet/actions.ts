@@ -35,9 +35,14 @@ export const bulkUploadTimesheetsAction = serverAction
   .input(BulkUploadTimesheetsSchema)
   .handler(async ({ input }: { input: BulkUploadTimesheetsInput }) => {
     try {
+      console.log("bulkUploadTimesheetsAction called", {
+        entriesCount: input.entries.length,
+      });
       const response = await bulkUploadTimesheets(input);
+      console.log("bulkUploadTimesheetsAction response", response);
       return response;
     } catch (error) {
+      console.error("bulkUploadTimesheetsAction error", error);
       throw error;
     }
   });

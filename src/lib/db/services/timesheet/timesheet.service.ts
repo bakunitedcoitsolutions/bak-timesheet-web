@@ -264,6 +264,9 @@ export const saveTimesheetEntries = async (
 export const bulkUploadTimesheets = async (
   data: BulkUploadTimesheetData
 ): Promise<BulkUploadTimesheetResult> => {
+  console.log("Service: bulkUploadTimesheets started", {
+    entriesCount: data.entries.length,
+  });
   const result: BulkUploadTimesheetResult = {
     success: 0,
     failed: 0,
@@ -276,6 +279,10 @@ export const bulkUploadTimesheets = async (
     where: { employeeCode: { in: uniqueCodes } },
     select: { id: true, employeeCode: true },
   });
+  console.log("Service: Employees fetched", {
+    found: employees.length,
+    uniqueCodes: uniqueCodes.length,
+  });
   const employeeByCode = new Map(employees.map((e) => [e.employeeCode, e]));
 
   for (let i = 0; i < data.entries.length; i++) {
@@ -283,6 +290,8 @@ export const bulkUploadTimesheets = async (
     const rowNumber = i + 1;
 
     try {
+      if (i % 10 === 0) console.log(`Service: Processing row ${rowNumber}...`);
+
       const dateNormalized = startOfDayUTC(
         typeof row.date === "string" ? new Date(row.date) : row.date
       );
@@ -296,6 +305,9 @@ export const bulkUploadTimesheets = async (
           data: row,
           error: `Employee with code ${row.employeeCode} not found`,
         });
+        console.warn(
+          `Service: Employee not found for code ${row.employeeCode} at row ${rowNumber}`
+        );
         continue;
       }
 
@@ -311,6 +323,9 @@ export const bulkUploadTimesheets = async (
       });
 
       if (existing) {
+        console.log(
+          `Service: Skipping existing timesheet for employee ${row.employeeCode} on ${dateNormalized.toISOString()}`
+        );
         continue;
       }
 
@@ -352,9 +367,11 @@ export const bulkUploadTimesheets = async (
         data: row,
         error: error?.message ?? "Unknown error",
       });
+      console.error(`Service: Error processing row ${rowNumber}`, error);
     }
   }
 
+  console.log("Service: bulkUploadTimesheets finished", result);
   return result;
 };
 
