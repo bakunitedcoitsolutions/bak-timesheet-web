@@ -40,6 +40,7 @@ import {
   downloadSampleTemplate,
 } from "@/lib/db/services/timesheet/bulk-upload-utils";
 import type { ListedPayrollSection } from "@/lib/db/services/payroll-section/payroll-section.dto";
+import { validateProjectId } from "@/utils/helpers/main-utils";
 
 /** Stable empty array so useMemo/useEffect deps don't change every render when no data */
 const EMPTY_ROWS: TimesheetPageRow[] = [];
@@ -90,11 +91,16 @@ const TimesheetPage = () => {
   const { data: globalData } = useGlobalData();
   const projectsList = globalData.projects || [];
   const projectOptions = useMemo(
-    () =>
-      projectsList.map((p: GlobalDataGeneral) => ({
+    () => [
+      {
+        label: "Select Project",
+        value: null,
+      },
+      ...projectsList.map((p: GlobalDataGeneral) => ({
         label: p.nameEn,
         value: String(p.id),
       })),
+    ],
     [projectsList]
   );
 
@@ -393,10 +399,10 @@ const TimesheetPage = () => {
     const entries: SaveTimesheetEntryItem[] = timesheetData.map((row) => ({
       employeeId: row.employeeId,
       timesheetId: row.timesheetId,
-      project1Id: row.project1Id,
+      project1Id: validateProjectId(row.project1Id),
       project1Hours: row.project1Hours,
       project1Overtime: row.project1Overtime,
-      project2Id: row.project2Id,
+      project2Id: validateProjectId(row.project2Id),
       project2Hours: row.project2Hours,
       project2Overtime: row.project2Overtime,
       totalHours: row.totalHours,

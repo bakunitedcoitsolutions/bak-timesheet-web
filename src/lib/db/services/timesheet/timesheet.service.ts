@@ -150,7 +150,7 @@ function startOfDayUTC(date: Date): Date {
 }
 
 /** Max entries per transaction to avoid long-running transactions and timeouts */
-const SAVE_BATCH_SIZE = 100;
+const SAVE_BATCH_SIZE = 50;
 
 /**
  * Save multiple timesheet entries (create or update by timesheetId).
@@ -165,37 +165,42 @@ export const saveTimesheetEntries = async (
   let saved = 0;
   for (let i = 0; i < entries.length; i += SAVE_BATCH_SIZE) {
     const batch = entries.slice(i, i + SAVE_BATCH_SIZE);
-    await prisma.$transaction(async (tx) => {
-      for (const entry of batch) {
-        const data = {
-          isLocked: true,
-          project1Id: entry.project1Id,
-          project1Hours: entry.project1Hours,
-          project1Overtime: entry.project1Overtime,
-          project2Id: entry.project2Id,
-          project2Hours: entry.project2Hours,
-          project2Overtime: entry.project2Overtime,
-          totalHours: entry.totalHours,
-          description: entry.description,
-        };
+    await prisma.$transaction(
+      async (tx) => {
+        for (const entry of batch) {
+          const data = {
+            isLocked: true,
+            project1Id: entry.project1Id,
+            project1Hours: entry.project1Hours,
+            project1Overtime: entry.project1Overtime,
+            project2Id: entry.project2Id,
+            project2Hours: entry.project2Hours,
+            project2Overtime: entry.project2Overtime,
+            totalHours: entry.totalHours,
+            description: entry.description,
+          };
 
-        if (entry.timesheetId != null && entry.timesheetId > 0) {
-          await tx.timesheet.update({
-            where: { id: entry.timesheetId },
-            data,
-          });
-        } else {
-          await tx.timesheet.create({
-            data: {
-              employeeId: entry.employeeId,
-              date: dateNormalized,
-              ...data,
-            },
-          });
+          if (entry.timesheetId != null && entry.timesheetId > 0) {
+            await tx.timesheet.update({
+              where: { id: entry.timesheetId },
+              data,
+            });
+          } else {
+            await tx.timesheet.create({
+              data: {
+                employeeId: entry.employeeId,
+                date: dateNormalized,
+                ...data,
+              },
+            });
+          }
+          saved += 1;
         }
-        saved += 1;
+      },
+      {
+        timeout: 20000, // Increase timeout to 20s to handle slower batches
       }
-    });
+    );
   }
 
   return { saved };
