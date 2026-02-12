@@ -107,7 +107,7 @@ export const GlobalDataProvider = ({
 
   useEffect(() => {
     fetchData();
-  }, [fetchData]);
+  }, []);
 
   const value = React.useMemo(
     () => ({ data, isLoading, refresh: fetchData }),

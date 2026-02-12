@@ -170,6 +170,39 @@ const TimesheetPage = () => {
     );
   };
 
+  const saveSingleRow = async (rowData: TimesheetPageRow) => {
+    try {
+      const entry: SaveTimesheetEntryItem = {
+        employeeId: rowData.employeeId,
+        timesheetId: rowData.timesheetId,
+        project1Id: validateProjectId(rowData.project1Id),
+        project1Hours: rowData.project1Hours,
+        project1Overtime: rowData.project1Overtime,
+        project2Id: validateProjectId(rowData.project2Id),
+        project2Hours: rowData.project2Hours,
+        project2Overtime: rowData.project2Overtime,
+        totalHours: rowData.totalHours,
+        description: rowData.description,
+      };
+
+      await saveTimesheetEntries({
+        date: new Date(selectedDate),
+        entries: [entry],
+      });
+
+      toastService.showSuccess(
+        "Saved",
+        `Row saved successfully for ${rowData.nameEn} (${rowData.employeeCode})`
+      );
+    } catch (err) {
+      const message = err instanceof Error ? err.message : "Failed to save row";
+      toastService.showError(
+        "Error",
+        `Failed to save row for ${rowData.nameEn} (${rowData.employeeCode}): ${message}`
+      );
+    }
+  };
+
   const columns = (): TableColumn<TimesheetPageRow>[] => [
     {
       field: "rowNumber",
@@ -417,7 +450,33 @@ const TimesheetPage = () => {
             updateTimesheetEntry(rowData.id, "description", e.target.value)
           }
           className="w-full h-10!"
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              saveSingleRow(rowData);
+            }
+          }}
         />
+      ),
+    },
+    {
+      field: "id", // Using ID as field for Actions, though it's custom body
+      header: "Actions",
+      sortable: false,
+      filterable: false,
+      style: { minWidth: "80px", textAlign: "center" },
+      body: (rowData: TimesheetPageRow) => (
+        <div className="flex justify-center">
+          <Button
+            rounded
+            size="small"
+            variant="text"
+            aria-label="Save"
+            icon="pi pi-save text-lg!"
+            tooltipOptions={{ position: "top" }}
+            onClick={() => saveSingleRow(rowData)}
+            disabled={rowData.isLocked || isLoadingTimesheet}
+          />
+        </div>
       ),
     },
   ];

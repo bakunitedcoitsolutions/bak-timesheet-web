@@ -248,7 +248,11 @@ const columns = (
     header: "Profession",
     ...commonColumnProps,
     body: (rowData: ListedEmployee) => (
-      <span className="text-sm">{rowData.profession || "-"}</span>
+      <div className="w-full flex flex-1 justify-end">
+        <span className="text-right font-medium font-arabic">
+          {rowData.profession || ""}
+        </span>
+      </div>
     ),
   },
   {
