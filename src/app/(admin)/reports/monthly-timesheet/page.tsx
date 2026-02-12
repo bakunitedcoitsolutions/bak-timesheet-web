@@ -3,6 +3,7 @@ import { memo, useState, useRef, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { Checkbox } from "primereact/checkbox";
 import { Paginator } from "primereact/paginator";
+import dayjs from "dayjs";
 
 import {
   Input,
@@ -201,7 +202,9 @@ const MonthlyTimesheetReportPage = () => {
   const contentRef = useRef<HTMLDivElement>(null);
 
   // Filter states
-  const [selectedDate, setSelectedDate] = useState<Date>(new Date(2025, 11, 1));
+  const [selectedDate, setSelectedDate] = useState<Date>(
+    dayjs().startOf("month").toDate()
+  );
   const [filter, setFilter] = useState({
     employeeCodes: null as string[] | null,
     projectId: null as number | null,

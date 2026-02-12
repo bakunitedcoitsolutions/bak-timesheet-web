@@ -34,19 +34,27 @@ if (!process.env.DATABASE_URL) {
 // Create a PostgreSQL connection pool
 // Prisma 7 requires a Pool instance for the adapter (cannot use connection string directly)
 // This connection only exists on the server-side
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  max: 20, // Maximum number of clients in the pool
-  idleTimeoutMillis: 30000, // Close idle clients after 30 seconds
-  connectionTimeoutMillis: 10000, // Return an error after 10 seconds if connection could not be established
-});
-
-// Create the Prisma adapter
-const adapter = new PrismaPg(pool);
 
 const globalForPrisma = globalThis as unknown as {
   prisma: PrismaClient | undefined;
+  pool: Pool | undefined;
 };
+
+const pool =
+  globalForPrisma.pool ??
+  new Pool({
+    connectionString: process.env.DATABASE_URL,
+    max: 20, // Maximum number of clients in the pool
+    idleTimeoutMillis: 30000, // Close idle clients after 30 seconds
+    connectionTimeoutMillis: 10000, // Return an error after 10 seconds if connection could not be established
+  });
+
+if (process.env.NODE_ENV !== "production") {
+  globalForPrisma.pool = pool;
+}
+
+// Create the Prisma adapter
+const adapter = new PrismaPg(pool);
 
 export const prisma =
   globalForPrisma.prisma ??
