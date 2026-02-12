@@ -21,7 +21,6 @@ import {
 } from "@/components";
 import { useDebounce } from "@/hooks";
 import { toastService } from "@/lib/toast";
-import { COMMON_QUERY_INPUT } from "@/utils/constants";
 import { useGlobalData, GlobalDataGeneral } from "@/context/GlobalDataContext";
 import { parseGroupDropdownFilter, getErrorMessage } from "@/utils/helpers";
 import {
@@ -29,7 +28,6 @@ import {
   useSaveTimesheetEntries,
   useBulkUploadTimesheets,
 } from "@/lib/db/services/timesheet/requests";
-import { useGetPayrollSections } from "@/lib/db/services/payroll-section/requests";
 import type {
   TimesheetPageRow,
   SaveTimesheetEntryItem,
@@ -58,21 +56,10 @@ const TimesheetPage = () => {
   const [showFilePicker, setShowFilePicker] = useState(false);
   const [searchValue, setSearchValue] = useState<string>("");
   const [selectedFilter, setSelectedFilter] = useState<string | number | null>(
-    null
+    "all"
   );
   const [timesheetData, setTimesheetData] = useState<TimesheetPageRow[]>([]);
   const tableRef = useRef<TableRef>(null);
-  // Payroll sections: default to first section id when loaded
-  const { data: payrollSectionsResponse } =
-    useGetPayrollSections(COMMON_QUERY_INPUT);
-  const payrollSections: ListedPayrollSection[] =
-    payrollSectionsResponse?.payrollSections ?? [];
-
-  useEffect(() => {
-    if (payrollSections.length > 0 && !selectedFilter) {
-      setSelectedFilter(`payroll-${payrollSections[0].id}`);
-    }
-  }, [payrollSections, selectedFilter]);
 
   useEffect(() => {
     setPage(1);
@@ -558,7 +545,6 @@ const TimesheetPage = () => {
           </div>
           <div className="w-full lg:w-auto">
             <GroupDropdown
-              hideAllOption
               value={selectedFilter}
               onChange={setSelectedFilter}
               className="w-full lg:w-48"
