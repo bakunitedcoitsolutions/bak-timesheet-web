@@ -28,10 +28,22 @@ import type {
  * timesheet records for the selected date. One row per employee; timesheet fields
  * filled when a record exists for that employee and date.
  */
+/**
+ * Get timesheet page data: employees (optionally filtered by payrollSectionId or designationId) merged with
+ * timesheet records for the selected date. One row per employee; timesheet fields
+ * filled when a record exists for that employee and date.
+ */
 export const getTimesheetPageData = async (
   params: GetTimesheetPageDataParams
 ): Promise<GetTimesheetPageDataResponse> => {
-  const { date, payrollSectionId, designationId } = params;
+  const {
+    date,
+    payrollSectionId,
+    designationId,
+    page = 1,
+    limit = 50,
+    search,
+  } = params;
 
   // Start and end of day (UTC) from the given date
   const startOfDay = new Date(
@@ -57,12 +69,66 @@ export const getTimesheetPageData = async (
     )
   );
 
-  // 1. Fetch all timesheets for this date
+  // 1. Fetch all timesheets for this date (we need all to merge, or we could filter by employee IDs after fetching employees)
+  // Optimization: we can fetch timesheets only for the fetched employees later, but for now fetching all for the day is likely fine unless scale is huge.
+  // Better approach for pagination: Fetch paginated employees first, then fetch timesheets for those employees.
+
+  // 2. Build employee filter: optional payrollSectionId and/or designationId
+  const employeeWhere: any = {};
+
+  if (search) {
+    const searchNumber = Number(search);
+    employeeWhere.OR = [
+      { nameEn: { contains: search, mode: "insensitive" } },
+      { nameAr: { contains: search, mode: "insensitive" } },
+    ];
+    if (!isNaN(searchNumber)) {
+      employeeWhere.OR.push({ employeeCode: searchNumber });
+    }
+  } else {
+    // Only apply filters if no search is performed (global search behavior)
+    if (payrollSectionId != null && payrollSectionId > 0) {
+      employeeWhere.payrollSectionId = payrollSectionId;
+    }
+    if (designationId != null && designationId > 0) {
+      employeeWhere.designationId = designationId;
+    }
+  }
+
+  // Count total employees for pagination
+  const totalEmployees = await prisma.employee.count({
+    where: Object.keys(employeeWhere).length > 0 ? employeeWhere : undefined,
+  });
+
+  // 3. Fetch employees (filtered or all) with pagination
+  const employees = await prisma.employee.findMany({
+    where: Object.keys(employeeWhere).length > 0 ? employeeWhere : undefined,
+    orderBy: [{ employeeCode: "asc" }],
+    skip: (page - 1) * limit,
+    take: limit,
+    select: {
+      id: true,
+      employeeCode: true,
+      nameEn: true,
+      nameAr: true,
+      isFixed: true,
+      designationId: true,
+      designation: {
+        select: { nameEn: true },
+      },
+    },
+  });
+
+  // 4. Fetch timesheets only for these employees
+  const employeeIds = employees.map((e) => e.id);
   const timesheets = await prisma.timesheet.findMany({
     where: {
       date: {
         gte: startOfDay,
         lte: endOfDay,
+      },
+      employeeId: {
+        in: employeeIds,
       },
     },
     select: {
@@ -84,41 +150,18 @@ export const getTimesheetPageData = async (
     timesheets.map((t) => [t.employeeId, t])
   );
 
-  // 2. Build employee filter: optional payrollSectionId and/or designationId
-  const employeeWhere: { payrollSectionId?: number; designationId?: number } =
-    {};
-  if (payrollSectionId != null && payrollSectionId > 0) {
-    employeeWhere.payrollSectionId = payrollSectionId;
-  }
-  if (designationId != null && designationId > 0) {
-    employeeWhere.designationId = designationId;
-  }
-
-  // 3. Fetch employees (filtered or all)
-  const employees = await prisma.employee.findMany({
-    where: Object.keys(employeeWhere).length > 0 ? employeeWhere : undefined,
-    orderBy: [{ employeeCode: "asc" }],
-    select: {
-      id: true,
-      employeeCode: true,
-      nameEn: true,
-      nameAr: true,
-      isFixed: true,
-      designationId: true,
-      designation: {
-        select: { nameEn: true },
-      },
-    },
-  });
-
-  // 4. Build one row per employee (DB keys; merged with timesheet when present)
+  // 5. Build one row per employee (DB keys; merged with timesheet when present)
   const rows: TimesheetPageRow[] = employees.map((emp, index) => {
     const ts = timesheetByEmployeeId.get(emp.id);
+    // Row number should be relative to the whole dataset or page? Usually relative to start.
+    // Let's make it absolute row number (e.g. 51, 52...)
+    const distinctRowNumber = (page - 1) * limit + index + 1;
+
     return {
       id: emp.id,
       employeeId: emp.id,
       timesheetId: ts?.id ?? null,
-      rowNumber: index + 1,
+      rowNumber: distinctRowNumber,
       employeeCode: emp.employeeCode,
       nameEn: emp.nameEn,
       designationNameEn: emp.designation?.nameEn ?? "",
@@ -136,7 +179,15 @@ export const getTimesheetPageData = async (
     };
   });
 
-  return { rows };
+  return {
+    rows,
+    pagination: {
+      page,
+      limit,
+      total: totalEmployees,
+      totalPages: Math.ceil(totalEmployees / limit),
+    },
+  };
 };
 
 /**

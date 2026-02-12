@@ -9,6 +9,9 @@ export interface GetTimesheetPageDataParams {
   payrollSectionId?: number | null;
   /** Optional: filter employees by designation */
   designationId?: number | null;
+  page?: number;
+  limit?: number;
+  search?: string;
 }
 
 /** Single row for the timesheet table (keys aligned with DB: Employee + Timesheet) */
@@ -34,6 +37,12 @@ export interface TimesheetPageRow {
 
 export interface GetTimesheetPageDataResponse {
   rows: TimesheetPageRow[];
+  pagination: {
+    page: number;
+    limit: number;
+    total: number;
+    totalPages: number;
+  };
 }
 
 /** Single entry payload for bulk save (create or update) */

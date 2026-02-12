@@ -9,6 +9,9 @@ export const GetTimesheetPageDataSchema = z.object({
   date: z.coerce.date(),
   payrollSectionId: z.number().int().positive().optional().nullable(),
   designationId: z.number().int().positive().optional().nullable(),
+  page: z.number().int().min(1).optional(),
+  limit: z.number().int().min(1).optional(),
+  search: z.string().optional(),
 });
 
 export type GetTimesheetPageDataInput = z.infer<

@@ -19,6 +19,7 @@ import {
   BulkUploadDialog,
   CustomHeaderProps,
 } from "@/components";
+import { useDebounce } from "@/hooks";
 import { toastService } from "@/lib/toast";
 import { COMMON_QUERY_INPUT } from "@/utils/constants";
 import { useGlobalData, GlobalDataGeneral } from "@/context/GlobalDataContext";
@@ -51,6 +52,8 @@ const getTodayDateString = () => new Date().toISOString().slice(0, 10);
 const TimesheetPage = () => {
   const [selectedDate, setSelectedDate] =
     useState<string>(getTodayDateString());
+  const [page, setPage] = useState<number>(1);
+  const [limit, setLimit] = useState<number>(50);
   const [isLoading, setIsLoading] = useState(false);
   const [showFilePicker, setShowFilePicker] = useState(false);
   const [searchValue, setSearchValue] = useState<string>("");
@@ -66,23 +69,50 @@ const TimesheetPage = () => {
     payrollSectionsResponse?.payrollSections ?? [];
 
   useEffect(() => {
-    if (payrollSections.length > 0) {
+    if (payrollSections.length > 0 && !selectedFilter) {
       setSelectedFilter(`payroll-${payrollSections[0].id}`);
     }
-  }, [payrollSections]);
+  }, [payrollSections, selectedFilter]);
+
+  useEffect(() => {
+    setPage(1);
+  }, [selectedFilter, selectedDate]);
 
   const filterParams = parseGroupDropdownFilter(selectedFilter);
+
+  // Debounce search input
+  const debouncedSearch = useDebounce(searchValue, 500);
+
+  // Reset to first page when search value changes
+  useEffect(() => {
+    setPage(1);
+  }, [debouncedSearch]);
+
+  const timesheetQueryInput = useMemo(
+    () => ({
+      date: new Date(selectedDate),
+      designationId: filterParams.designationId,
+      payrollSectionId: filterParams.payrollSectionId,
+      page,
+      limit,
+      search: debouncedSearch,
+    }),
+    [
+      selectedDate,
+      filterParams.designationId,
+      filterParams.payrollSectionId,
+      page,
+      limit,
+      debouncedSearch,
+    ]
+  );
 
   // Timesheet page data: employees in selected payroll section merged with timesheet records for selected date
   const {
     refetch: refetchTimesheet,
     isLoading: isLoadingTimesheet,
     data: timesheetPageResponse,
-  } = useGetTimesheetPageData({
-    date: new Date(selectedDate),
-    designationId: filterParams.designationId,
-    payrollSectionId: filterParams.payrollSectionId,
-  });
+  } = useGetTimesheetPageData(timesheetQueryInput);
 
   const { mutateAsync: saveTimesheetEntries } = useSaveTimesheetEntries();
   const { mutateAsync: bulkUploadTimesheets } = useBulkUploadTimesheets();
@@ -106,6 +136,17 @@ const TimesheetPage = () => {
 
   // Use backend response directly (rows already in table shape)
   const rows = timesheetPageResponse?.rows ?? EMPTY_ROWS;
+  const {
+    total,
+    page: currentPage,
+    limit: currentLimit,
+  } = timesheetPageResponse?.pagination ?? {
+    page: 1,
+    limit: 50,
+    total: 0,
+    totalPages: 0,
+  };
+
   const mergedTableData = useMemo(() => rows, [rows]);
 
   // Keep table data in sync with merged data; allow local edits via updateTimesheetEntry
@@ -433,6 +474,11 @@ const TimesheetPage = () => {
     setShowFilePicker(true);
   }, []);
 
+  const handlePageChange = (event: any) => {
+    setPage(event.page + 1);
+    setLimit(event.rows);
+  };
+
   const handleUpload = useCallback(
     async (file: File) => {
       try {
@@ -595,14 +641,19 @@ const TimesheetPage = () => {
                 ref={tableRef}
                 data={timesheetData}
                 columns={columns()}
-                pagination={false}
+                pagination={true}
+                first={(currentPage - 1) * currentLimit}
+                rows={currentLimit}
+                totalRecords={total}
+                onPage={handlePageChange}
+                lazy
                 globalSearch={false}
                 emptyMessage="No timesheet data found. Select a date and payroll section."
                 rowClassName={(rowData: TimesheetPageRow) =>
                   rowData.isLocked ? "locked-row" : ""
                 }
                 scrollable
-                scrollHeight="72vh"
+                scrollHeight="65vh"
               />
             )}
           </div>
