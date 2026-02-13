@@ -3,6 +3,7 @@
  * Business logic for traffic challan operations
  */
 
+import dayjs from "dayjs";
 import { prisma } from "@/lib/db/prisma";
 import type {
   CreateTrafficChallanData,
@@ -11,7 +12,6 @@ import type {
   ListTrafficChallansResponse,
   BulkUploadTrafficChallanData,
   BulkUploadTrafficChallanResult,
-  BulkUploadTrafficChallanRow,
 } from "./traffic-challan.dto";
 import { convertDecimalToNumber } from "@/lib/db/utils";
 
@@ -58,7 +58,7 @@ async function createTrafficChallanWithLedger(
   const trafficChallan = await tx.trafficChallan.create({
     data: {
       employeeId: data.employeeId,
-      date: new Date(data.date),
+      date: dayjs(data.date).toDate(),
       type: data.type,
       amount: data.amount,
       description: description,
@@ -98,7 +98,7 @@ async function createTrafficChallanWithLedger(
   await tx.ledger.create({
     data: {
       employeeId: data.employeeId,
-      date: new Date(data.date),
+      date: dayjs(data.date).toDate(),
       type: "CHALLAN",
       amountType: amountType as "CREDIT" | "DEBIT",
       amount: data.amount,
@@ -202,7 +202,7 @@ export const updateTrafficChallan = async (
     const updateData: any = {};
 
     if (data.employeeId !== undefined) updateData.employeeId = data.employeeId;
-    if (data.date !== undefined) updateData.date = new Date(data.date);
+    if (data.date !== undefined) updateData.date = dayjs(data.date).toDate();
     if (data.type !== undefined) updateData.type = data.type;
     if (data.amount !== undefined) updateData.amount = data.amount;
     if (data.description !== undefined)
@@ -240,7 +240,7 @@ export const updateTrafficChallan = async (
 
       const newAmount = data.amount ?? existingTrafficChallan.amount;
       const newDate = data.date
-        ? new Date(data.date)
+        ? dayjs(data.date).toDate()
         : new Date(existingTrafficChallan.date);
 
       // Check if amount or amountType changed (date changes don't trigger balance recalculation)
@@ -408,10 +408,10 @@ export const listTrafficChallans = async (
   if (params.startDate || params.endDate) {
     where.date = {};
     if (params.startDate) {
-      where.date.gte = new Date(params.startDate);
+      where.date.gte = dayjs(params.startDate).toDate();
     }
     if (params.endDate) {
-      where.date.lte = new Date(params.endDate);
+      where.date.lte = dayjs(params.endDate).toDate();
     }
   }
 

@@ -3,6 +3,7 @@
  * Functions to parse CSV and Excel files for loan bulk upload
  */
 
+import dayjs from "dayjs";
 import * as XLSX from "xlsx";
 import type { BulkUploadLoanRow } from "./loan.dto";
 
@@ -98,13 +99,27 @@ function parseCellValue(value: any, field: keyof BulkUploadLoanRow): any {
       }
       return upperType;
 
-    case "date":
-      // Try parsing as date
-      const date = new Date(stringValue);
-      if (isNaN(date.getTime())) {
+    case "date": {
+      if (value instanceof Date) {
+        return value;
+      }
+
+      const parsedDate = dayjs(stringValue, "YYYY-MM-DD");
+      if (!parsedDate.isValid()) {
         throw new Error(`Invalid date: ${stringValue}`);
       }
-      return date;
+
+      // Sanity check: if year is > 2100, assume it might be invalid parsing
+      if (parsedDate.year() > 2100) {
+        throw new Error(
+          `Invalid date (year ${parsedDate.year()}): ${stringValue}. Ensure standard date format (YYYY-MM-DD).`
+        );
+      }
+
+      const toDate = parsedDate.toDate();
+
+      return toDate;
+    }
 
     case "remarks":
       return stringValue || undefined;
@@ -123,20 +138,32 @@ export function parseExcelFile(file: File): Promise<ParseFileResult> {
 
     reader.onload = (e) => {
       try {
-        const data = e.target?.result;
+        const data = reader.result;
         if (!data) {
           reject(new Error("Failed to read file"));
           return;
         }
 
-        const workbook = XLSX.read(data, { type: "binary" });
+        console.log(
+          "parseExcelFile: File read successfully, bytes:",
+          (data as ArrayBuffer).byteLength
+        );
+
+        // ✅ Better than readAsBinaryString (avoids encoding issues)
+        const workbook = XLSX.read(data, {
+          type: "array",
+          cellDates: false, // ✅ keep dates OUT of JS Date objects
+        });
+
         const firstSheetName = workbook.SheetNames[0];
+        console.log("parseExcelFile: Sheet names", workbook.SheetNames);
         const worksheet = workbook.Sheets[firstSheetName];
 
-        // Convert to JSON
         const jsonData = XLSX.utils.sheet_to_json(worksheet, {
           header: 1,
           defval: "",
+          raw: false, // ✅ IMPORTANT: applies Excel formatting => dates become strings
+          dateNF: "yyyy-mm-dd", // or "dd/mm/yyyy" if you prefer
         }) as any[][];
 
         if (jsonData.length < 2) {
@@ -224,7 +251,7 @@ export function parseExcelFile(file: File): Promise<ParseFileResult> {
       reject(new Error("Failed to read file"));
     };
 
-    reader.readAsBinaryString(file);
+    reader.readAsArrayBuffer(file); // ✅ changed
   });
 }
 

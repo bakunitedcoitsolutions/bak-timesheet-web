@@ -3,6 +3,7 @@
  * Business logic for loan operations
  */
 
+import dayjs from "dayjs";
 import { prisma } from "@/lib/db/prisma";
 import type {
   CreateLoanData,
@@ -57,7 +58,7 @@ async function createLoanWithLedger(
   const loan = await tx.loan.create({
     data: {
       employeeId: data.employeeId,
-      date: new Date(data.date),
+      date: dayjs(data.date).toDate(),
       type: data.type,
       amount: data.amount,
       remarks: remarks,
@@ -97,7 +98,7 @@ async function createLoanWithLedger(
   await tx.ledger.create({
     data: {
       employeeId: data.employeeId,
-      date: new Date(data.date),
+      date: dayjs(data.date).toDate(),
       type: "LOAN",
       amountType: amountType as "CREDIT" | "DEBIT",
       amount: data.amount,
@@ -198,7 +199,7 @@ export const updateLoan = async (id: number, data: UpdateLoanData) => {
     const updateData: any = {};
 
     if (data.employeeId !== undefined) updateData.employeeId = data.employeeId;
-    if (data.date !== undefined) updateData.date = new Date(data.date);
+    if (data.date !== undefined) updateData.date = dayjs(data.date).toDate();
     if (data.type !== undefined) updateData.type = data.type;
     if (data.amount !== undefined) updateData.amount = data.amount;
     if (data.remarks !== undefined) updateData.remarks = data.remarks ?? null;
@@ -233,7 +234,7 @@ export const updateLoan = async (id: number, data: UpdateLoanData) => {
 
       const newAmount = data.amount ?? existingLoan.amount;
       const newDate = data.date
-        ? new Date(data.date)
+        ? dayjs(data.date).toDate()
         : new Date(existingLoan.date);
 
       // Check if amount or amountType changed (date changes don't trigger balance recalculation)
@@ -401,10 +402,10 @@ export const listLoans = async (
   if (params.startDate || params.endDate) {
     where.date = {};
     if (params.startDate) {
-      where.date.gte = new Date(params.startDate);
+      where.date.gte = dayjs(params.startDate).toDate();
     }
     if (params.endDate) {
-      where.date.lte = new Date(params.endDate);
+      where.date.lte = dayjs(params.endDate).toDate();
     }
   }
 

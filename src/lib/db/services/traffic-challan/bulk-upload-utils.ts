@@ -3,6 +3,7 @@
  * Functions to parse CSV and Excel files for traffic challan bulk upload
  */
 
+import dayjs from "dayjs";
 import * as XLSX from "xlsx";
 import type { BulkUploadTrafficChallanRow } from "./traffic-challan.dto";
 
@@ -16,11 +17,24 @@ export interface ParseFileResult {
  * Supports multiple variations for flexibility
  */
 const COLUMN_MAPPINGS = {
-  employeeCode: ["Employee Code", "EmployeeCode", "Code", "Emp Code", "emp_code"],
+  employeeCode: [
+    "Employee Code",
+    "EmployeeCode",
+    "Code",
+    "Emp Code",
+    "emp_code",
+  ],
   date: ["Date", "Challan Date", "Transaction Date", "date"],
   type: ["Type", "Challan Type", "Transaction Type", "type"],
   amount: ["Amount", "Challan Amount", "Transaction Amount", "amount"],
-  description: ["Description", "Remarks", "Note", "Notes", "description", "remarks"],
+  description: [
+    "Description",
+    "Remarks",
+    "Note",
+    "Notes",
+    "description",
+    "remarks",
+  ],
 };
 
 /**
@@ -88,13 +102,27 @@ function parseCellValue(
       }
       return upperType;
 
-    case "date":
-      // Try parsing as date
-      const date = new Date(stringValue);
-      if (isNaN(date.getTime())) {
+    case "date": {
+      if (value instanceof Date) {
+        return value;
+      }
+
+      const parsedDate = dayjs(stringValue, "YYYY-MM-DD");
+      if (!parsedDate.isValid()) {
         throw new Error(`Invalid date: ${stringValue}`);
       }
-      return date;
+
+      // Sanity check: if year is > 2100, assume it might be invalid parsing
+      if (parsedDate.year() > 2100) {
+        throw new Error(
+          `Invalid date (year ${parsedDate.year()}): ${stringValue}. Ensure standard date format (YYYY-MM-DD).`
+        );
+      }
+
+      const toDate = parsedDate.toDate();
+
+      return toDate;
+    }
 
     case "description":
       return stringValue || undefined;
@@ -113,24 +141,34 @@ export function parseExcelFile(file: File): Promise<ParseFileResult> {
 
     reader.onload = (e) => {
       try {
-        const data = e.target?.result;
+        const data = reader.result;
         if (!data) {
           reject(new Error("Failed to read file"));
           return;
         }
 
-        const workbook = XLSX.read(data, { type: "binary" });
+        // ✅ Better than readAsBinaryString (avoids encoding issues)
+        const workbook = XLSX.read(data, {
+          type: "array",
+          cellDates: false, // ✅ keep dates OUT of JS Date objects
+        });
+
         const firstSheetName = workbook.SheetNames[0];
         const worksheet = workbook.Sheets[firstSheetName];
 
-        // Convert to JSON
         const jsonData = XLSX.utils.sheet_to_json(worksheet, {
           header: 1,
           defval: "",
+          raw: false, // ✅ IMPORTANT: applies Excel formatting => dates become strings
+          dateNF: "yyyy-mm-dd", // or "dd/mm/yyyy" if you prefer
         }) as any[][];
 
         if (jsonData.length < 2) {
-          reject(new Error("File must contain at least a header row and one data row"));
+          reject(
+            new Error(
+              "File must contain at least a header row and one data row"
+            )
+          );
           return;
         }
 
@@ -185,13 +223,18 @@ export function parseExcelFile(file: File): Promise<ParseFileResult> {
                 "employeeCode"
               ) as number,
               date: parseCellValue(row[dateIndex], "date"),
-              type: parseCellValue(row[typeIndex], "type") as "CHALLAN" | "RETURN",
+              type: parseCellValue(row[typeIndex], "type") as
+                | "CHALLAN"
+                | "RETURN",
               amount: parseCellValue(row[amountIndex], "amount"),
             };
 
             // Add optional description
             if (descriptionIndex !== -1 && row[descriptionIndex]) {
-              challanRow.description = parseCellValue(row[descriptionIndex], "description");
+              challanRow.description = parseCellValue(
+                row[descriptionIndex],
+                "description"
+              );
             }
 
             rows.push(challanRow);
@@ -210,7 +253,7 @@ export function parseExcelFile(file: File): Promise<ParseFileResult> {
       reject(new Error("Failed to read file"));
     };
 
-    reader.readAsBinaryString(file);
+    reader.readAsArrayBuffer(file); // ✅ changed
   });
 }
 
@@ -230,10 +273,17 @@ export function parseCSVFile(file: File): Promise<ParseFileResult> {
         }
 
         // Split into lines
-        const lines = text.split("\n").map((line) => line.trim()).filter((line) => line);
+        const lines = text
+          .split("\n")
+          .map((line) => line.trim())
+          .filter((line) => line);
 
         if (lines.length < 2) {
-          reject(new Error("File must contain at least a header row and one data row"));
+          reject(
+            new Error(
+              "File must contain at least a header row and one data row"
+            )
+          );
           return;
         }
 
@@ -318,13 +368,18 @@ export function parseCSVFile(file: File): Promise<ParseFileResult> {
                 "employeeCode"
               ) as number,
               date: parseCellValue(row[dateIndex], "date"),
-              type: parseCellValue(row[typeIndex], "type") as "CHALLAN" | "RETURN",
+              type: parseCellValue(row[typeIndex], "type") as
+                | "CHALLAN"
+                | "RETURN",
               amount: parseCellValue(row[amountIndex], "amount"),
             };
 
             // Add optional description
             if (descriptionIndex !== -1 && row[descriptionIndex]) {
-              challanRow.description = parseCellValue(row[descriptionIndex], "description");
+              challanRow.description = parseCellValue(
+                row[descriptionIndex],
+                "description"
+              );
             }
 
             rows.push(challanRow);
@@ -354,17 +409,17 @@ export function downloadSampleTemplate(): void {
   const sampleData = [
     {
       "Employee Code": 1001,
-      "Date": "2024-01-15",
-      "Type": "CHALLAN",
-      "Amount": 150,
-      "Description": "Sample challan entry",
+      Date: "2024-01-15",
+      Type: "CHALLAN",
+      Amount: 150,
+      Description: "Sample challan entry",
     },
     {
       "Employee Code": 1002,
-      "Date": "2024-01-20",
-      "Type": "RETURN",
-      "Amount": 100,
-      "Description": "Sample return entry",
+      Date: "2024-01-20",
+      Type: "RETURN",
+      Amount: 100,
+      Description: "Sample return entry",
     },
   ];
 
