@@ -38,7 +38,6 @@ import {
   parseExcelFile,
   downloadSampleTemplate,
 } from "@/lib/db/services/timesheet/bulk-upload-utils";
-import type { ListedPayrollSection } from "@/lib/db/services/payroll-section/payroll-section.dto";
 import { validateProjectId } from "@/utils/helpers/main-utils";
 
 /** Stable empty array so useMemo/useEffect deps don't change every render when no data */
@@ -105,7 +104,8 @@ const TimesheetPage = () => {
   const { mutateAsync: bulkUploadTimesheets } = useBulkUploadTimesheets();
 
   // Projects for Project 1 / Project 2 dropdowns
-  const { data: globalData } = useGlobalData();
+  const { data: globalData, isLoading: isLoadingGlobalData } = useGlobalData();
+
   const projectsList = globalData.projects || [];
   const projectOptions = useMemo(
     () => [
@@ -118,7 +118,7 @@ const TimesheetPage = () => {
         value: String(p.id),
       })),
     ],
-    [projectsList]
+    [globalData.projects]
   );
 
   // Use backend response directly (rows already in table shape)
@@ -141,345 +141,359 @@ const TimesheetPage = () => {
     setTimesheetData(mergedTableData);
   }, [mergedTableData]);
 
-  const updateTimesheetEntry = (
-    id: number,
-    field: keyof TimesheetPageRow,
-    value: any
-  ) => {
-    setTimesheetData((prev) =>
-      prev.map((entry) => {
-        if (entry.id === id) {
-          const updated = { ...entry, [field]: value };
-          // Auto-calculate total hours when any hour field changes
-          if (
-            field === "project1Hours" ||
-            field === "project1Overtime" ||
-            field === "project2Hours" ||
-            field === "project2Overtime"
-          ) {
-            const p1H = updated.project1Hours ?? 0;
-            const p1OT = updated.project1Overtime ?? 0;
-            const p2H = updated.project2Hours ?? 0;
-            const p2OT = updated.project2Overtime ?? 0;
-            updated.totalHours = p1H + p1OT + p2H + p2OT;
+  const updateTimesheetEntry = useCallback(
+    (id: number, field: keyof TimesheetPageRow, value: any) => {
+      setTimesheetData((prev) =>
+        prev.map((entry) => {
+          if (entry.id === id) {
+            const updated = { ...entry, [field]: value };
+            // Auto-calculate total hours when any hour field changes
+            if (
+              field === "project1Hours" ||
+              field === "project1Overtime" ||
+              field === "project2Hours" ||
+              field === "project2Overtime"
+            ) {
+              const p1H = updated.project1Hours ?? 0;
+              const p1OT = updated.project1Overtime ?? 0;
+              const p2H = updated.project2Hours ?? 0;
+              const p2OT = updated.project2Overtime ?? 0;
+              updated.totalHours = p1H + p1OT + p2H + p2OT;
+            }
+            return updated;
           }
-          return updated;
-        }
-        return entry;
-      })
-    );
-  };
-
-  const saveSingleRow = async (rowData: TimesheetPageRow) => {
-    try {
-      const entry: SaveTimesheetEntryItem = {
-        employeeId: rowData.employeeId,
-        timesheetId: rowData.timesheetId,
-        project1Id: validateProjectId(rowData.project1Id),
-        project1Hours: rowData.project1Hours,
-        project1Overtime: rowData.project1Overtime,
-        project2Id: validateProjectId(rowData.project2Id),
-        project2Hours: rowData.project2Hours,
-        project2Overtime: rowData.project2Overtime,
-        totalHours: rowData.totalHours,
-        description: rowData.description,
-      };
-
-      await saveTimesheetEntries({
-        date: new Date(selectedDate),
-        entries: [entry],
-      });
-
-      toastService.showSuccess(
-        "Saved",
-        `Row saved successfully for ${rowData.nameEn} (${rowData.employeeCode})`
+          return entry;
+        })
       );
-    } catch (err) {
-      const message = err instanceof Error ? err.message : "Failed to save row";
-      toastService.showError(
-        "Error",
-        `Failed to save row for ${rowData.nameEn} (${rowData.employeeCode}): ${message}`
-      );
-    }
-  };
+    },
+    []
+  );
 
-  const columns = (): TableColumn<TimesheetPageRow>[] => [
-    {
-      field: "rowNumber",
-      header: "#",
-      sortable: false,
-      filterable: false,
-      align: "center",
-      body: (rowData: TimesheetPageRow) => (
-        <div
-          className={classNames("flex items-center justify-center gap-1.5", {
-            "w-[40px]": rowData.isLocked,
-            "w-[35px]": !rowData.isLocked,
-          })}
-        >
-          <span className="text-sm font-medium">{rowData.rowNumber}</span>
-          {rowData.isLocked && (
-            <i className="pi pi-lock text-sm! text-primary"></i>
-          )}
-        </div>
-      ),
+  const saveSingleRow = useCallback(
+    async (rowData: TimesheetPageRow) => {
+      try {
+        const entry: SaveTimesheetEntryItem = {
+          employeeId: rowData.employeeId,
+          timesheetId: rowData.timesheetId,
+          project1Id: validateProjectId(rowData.project1Id),
+          project1Hours: rowData.project1Hours,
+          project1Overtime: rowData.project1Overtime,
+          project2Id: validateProjectId(rowData.project2Id),
+          project2Hours: rowData.project2Hours,
+          project2Overtime: rowData.project2Overtime,
+          totalHours: rowData.totalHours,
+          description: rowData.description,
+        };
+
+        await saveTimesheetEntries({
+          date: new Date(selectedDate),
+          entries: [entry],
+        });
+
+        toastService.showSuccess(
+          "Saved",
+          `Row saved successfully for ${rowData.nameEn} (${rowData.employeeCode})`
+        );
+      } catch (err) {
+        const message =
+          err instanceof Error ? err.message : "Failed to save row";
+        toastService.showError(
+          "Error",
+          `Failed to save row for ${rowData.nameEn} (${rowData.employeeCode}): ${message}`
+        );
+      }
     },
-    {
-      field: "employeeCode",
-      header: "Code",
-      sortable: false,
-      filterable: false,
-      align: "left",
-      style: { width: "50px" },
-      body: (rowData: TimesheetPageRow) => (
-        <div className="w-[50px]">
-          <span className="text-sm font-medium">{rowData.employeeCode}</span>
-        </div>
-      ),
-    },
-    {
-      field: "nameEn",
-      header: "Emp. Name",
-      sortable: false,
-      filterable: false,
-      style: { minWidth: "280px" },
-      body: (rowData: TimesheetPageRow) => (
-        <div className="flex items-start gap-2">
-          <div className="flex flex-1 flex-col gap-1">
-            <span className="text-sm font-medium leading-tight">
-              {rowData.nameEn}
-            </span>
-            <span className="text-xs text-theme-text-gray capitalize">
-              {rowData.designationNameEn}
-            </span>
+    [saveTimesheetEntries, selectedDate]
+  );
+
+  const columns = useMemo(
+    (): TableColumn<TimesheetPageRow>[] => [
+      {
+        field: "rowNumber",
+        header: "#",
+        sortable: false,
+        filterable: false,
+        align: "center",
+        body: (rowData: TimesheetPageRow) => (
+          <div
+            className={classNames("flex items-center justify-center gap-1.5", {
+              "w-[40px]": rowData.isLocked,
+              "w-[35px]": !rowData.isLocked,
+            })}
+          >
+            <span className="text-sm font-medium">{rowData.rowNumber}</span>
+            {rowData.isLocked && (
+              <i className="pi pi-lock text-sm! text-primary"></i>
+            )}
           </div>
-          {rowData.isFixed && <Badge text="F" />}
-        </div>
-      ),
-    },
-    {
-      field: "designationNameEn",
-      header: "Designation",
-      sortable: false,
-      filterable: false,
-      style: { display: "none" },
-      body: () => null,
-    },
-    {
-      field: "project1Id",
-      header: "Project 1",
-      sortable: false,
-      filterable: false,
-      style: { maxWidth: "200px", width: "200px" },
-      body: (rowData: TimesheetPageRow) => (
-        <div className="flex items-center">
-          <div className="w-[calc(200px-2rem)] h-10!">
-            <Dropdown
-              small
-              filter
-              options={projectOptions}
+        ),
+      },
+      {
+        field: "employeeCode",
+        header: "Code",
+        sortable: false,
+        filterable: false,
+        align: "left",
+        style: { width: "50px" },
+        body: (rowData: TimesheetPageRow) => (
+          <div className="w-[50px]">
+            <span className="text-sm font-medium">{rowData.employeeCode}</span>
+          </div>
+        ),
+      },
+      {
+        field: "nameEn",
+        header: "Emp. Name",
+        sortable: false,
+        filterable: false,
+        style: { minWidth: "280px" },
+        body: (rowData: TimesheetPageRow) => (
+          <div className="flex items-start gap-2">
+            <div className="flex flex-1 flex-col gap-1">
+              <span className="text-sm font-medium leading-tight">
+                {rowData.nameEn}
+              </span>
+              <span className="text-xs text-theme-text-gray capitalize">
+                {rowData.designationNameEn}
+              </span>
+            </div>
+            {rowData.isFixed && <Badge text="F" />}
+          </div>
+        ),
+      },
+      {
+        field: "designationNameEn",
+        header: "Designation",
+        sortable: false,
+        filterable: false,
+        style: { display: "none" },
+        body: () => null,
+      },
+      {
+        field: "project1Id",
+        header: "Project 1",
+        sortable: false,
+        filterable: false,
+        style: { maxWidth: "200px", width: "200px" },
+        body: (rowData: TimesheetPageRow) => (
+          <div className="flex items-center">
+            <div className="w-[calc(200px-2rem)] h-10!">
+              <Dropdown
+                small
+                filter
+                options={projectOptions}
+                disabled={rowData.isLocked}
+                className="w-full h-10!"
+                placeholder="Select Project"
+                value={
+                  rowData.project1Id != null ? String(rowData.project1Id) : null
+                }
+                onChange={(e) =>
+                  updateTimesheetEntry(
+                    rowData.id,
+                    "project1Id",
+                    e.value != null ? Number(e.value) : null
+                  )
+                }
+              />
+            </div>
+          </div>
+        ),
+      },
+      {
+        field: "project1Hours",
+        header: "Hrs.",
+        sortable: false,
+        filterable: false,
+        style: { minWidth: "80px" },
+        body: (rowData: TimesheetPageRow) => (
+          <div className="flex justify-center py-1">
+            <NumberInput
+              useGrouping={false}
               disabled={rowData.isLocked}
-              className="w-full h-10!"
-              placeholder="Select Project"
-              value={
-                rowData.project1Id != null ? String(rowData.project1Id) : null
-              }
-              onChange={(e) =>
+              value={rowData.project1Hours ?? 0}
+              onValueChange={(e) =>
                 updateTimesheetEntry(
                   rowData.id,
-                  "project1Id",
-                  e.value != null ? Number(e.value) : null
+                  "project1Hours",
+                  e.value ?? null
                 )
               }
+              className="timesheet-number-input"
+              min={0}
+              showButtons={false}
             />
           </div>
-        </div>
-      ),
-    },
-    {
-      field: "project1Hours",
-      header: "Hrs.",
-      sortable: false,
-      filterable: false,
-      style: { minWidth: "80px" },
-      body: (rowData: TimesheetPageRow) => (
-        <div className="flex justify-center py-1">
-          <NumberInput
-            useGrouping={false}
-            disabled={rowData.isLocked}
-            value={rowData.project1Hours ?? 0}
-            onValueChange={(e) =>
-              updateTimesheetEntry(rowData.id, "project1Hours", e.value ?? null)
-            }
-            className="timesheet-number-input"
-            min={0}
-            showButtons={false}
-          />
-        </div>
-      ),
-    },
-    {
-      field: "project1Overtime",
-      header: "O/T",
-      sortable: false,
-      filterable: false,
-      style: { minWidth: "80px" },
-      body: (rowData: TimesheetPageRow) => (
-        <div className="flex justify-center">
-          <NumberInput
-            useGrouping={false}
-            disabled={rowData.isLocked}
-            value={rowData.project1Overtime ?? 0}
-            onValueChange={(e) =>
-              updateTimesheetEntry(
-                rowData.id,
-                "project1Overtime",
-                e.value ?? null
-              )
-            }
-            className="timesheet-number-input"
-            min={0}
-            showButtons={false}
-          />
-        </div>
-      ),
-    },
-    {
-      field: "project2Id",
-      header: "Project 2",
-      sortable: false,
-      filterable: false,
-      style: { maxWidth: "200px", width: "200px" },
-      body: (rowData: TimesheetPageRow) => (
-        <div className="flex items-center">
-          <div className="w-[calc(200px-2rem)] h-10!">
-            <Dropdown
-              small
-              filter
-              options={projectOptions}
+        ),
+      },
+      {
+        field: "project1Overtime",
+        header: "O/T",
+        sortable: false,
+        filterable: false,
+        style: { minWidth: "80px" },
+        body: (rowData: TimesheetPageRow) => (
+          <div className="flex justify-center">
+            <NumberInput
+              useGrouping={false}
               disabled={rowData.isLocked}
-              className="w-full h-10!"
-              placeholder="Select Project"
-              value={
-                rowData.project2Id != null ? String(rowData.project2Id) : null
-              }
-              onChange={(e) =>
+              value={rowData.project1Overtime ?? 0}
+              onValueChange={(e) =>
                 updateTimesheetEntry(
                   rowData.id,
-                  "project2Id",
-                  e.value != null ? Number(e.value) : null
+                  "project1Overtime",
+                  e.value ?? null
                 )
               }
+              className="timesheet-number-input"
+              min={0}
+              showButtons={false}
             />
           </div>
-        </div>
-      ),
-    },
-    {
-      field: "project2Hours",
-      header: "Hrs.",
-      sortable: false,
-      filterable: false,
-      style: { minWidth: "80px" },
-      body: (rowData: TimesheetPageRow) => (
-        <div className="flex justify-center">
-          <NumberInput
-            useGrouping={false}
+        ),
+      },
+      {
+        field: "project2Id",
+        header: "Project 2",
+        sortable: false,
+        filterable: false,
+        style: { maxWidth: "200px", width: "200px" },
+        body: (rowData: TimesheetPageRow) => (
+          <div className="flex items-center">
+            <div className="w-[calc(200px-2rem)] h-10!">
+              <Dropdown
+                small
+                filter
+                options={projectOptions}
+                disabled={rowData.isLocked}
+                className="w-full h-10!"
+                placeholder="Select Project"
+                value={
+                  rowData.project2Id != null ? String(rowData.project2Id) : null
+                }
+                onChange={(e) =>
+                  updateTimesheetEntry(
+                    rowData.id,
+                    "project2Id",
+                    e.value != null ? Number(e.value) : null
+                  )
+                }
+              />
+            </div>
+          </div>
+        ),
+      },
+      {
+        field: "project2Hours",
+        header: "Hrs.",
+        sortable: false,
+        filterable: false,
+        style: { minWidth: "80px" },
+        body: (rowData: TimesheetPageRow) => (
+          <div className="flex justify-center">
+            <NumberInput
+              useGrouping={false}
+              disabled={rowData.isLocked}
+              value={rowData.project2Hours ?? 0}
+              onValueChange={(e) =>
+                updateTimesheetEntry(
+                  rowData.id,
+                  "project2Hours",
+                  e.value ?? null
+                )
+              }
+              className="timesheet-number-input"
+              min={0}
+              showButtons={false}
+            />
+          </div>
+        ),
+      },
+      {
+        field: "project2Overtime",
+        header: "O/T",
+        sortable: false,
+        filterable: false,
+        style: { minWidth: "80px" },
+        body: (rowData: TimesheetPageRow) => (
+          <div className="flex justify-center">
+            <NumberInput
+              useGrouping={false}
+              disabled={rowData.isLocked}
+              value={rowData.project2Overtime ?? 0}
+              onValueChange={(e) =>
+                updateTimesheetEntry(
+                  rowData.id,
+                  "project2Overtime",
+                  e.value ?? null
+                )
+              }
+              className="timesheet-number-input"
+              min={0}
+              showButtons={false}
+            />
+          </div>
+        ),
+      },
+      {
+        field: "totalHours",
+        header: "Total Hrs.",
+        sortable: false,
+        filterable: false,
+        style: { minWidth: "100px" },
+        body: (rowData: TimesheetPageRow) => (
+          <div className="flex items-center justify-center border border-primary-light rounded-xl h-10">
+            <span className="text-sm">{rowData.totalHours ?? 0}</span>
+          </div>
+        ),
+      },
+      {
+        field: "description",
+        header: "Remarks",
+        sortable: false,
+        filterable: false,
+        style: { minWidth: "300px" },
+        body: (rowData: TimesheetPageRow) => (
+          <Input
             disabled={rowData.isLocked}
-            value={rowData.project2Hours ?? 0}
-            onValueChange={(e) =>
-              updateTimesheetEntry(rowData.id, "project2Hours", e.value ?? null)
+            placeholder="Add remarks..."
+            value={rowData.description ?? ""}
+            onChange={(e) =>
+              updateTimesheetEntry(rowData.id, "description", e.target.value)
             }
-            className="timesheet-number-input"
-            min={0}
-            showButtons={false}
+            className="w-full h-10!"
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                saveSingleRow(rowData);
+              }
+            }}
           />
-        </div>
-      ),
-    },
-    {
-      field: "project2Overtime",
-      header: "O/T",
-      sortable: false,
-      filterable: false,
-      style: { minWidth: "80px" },
-      body: (rowData: TimesheetPageRow) => (
-        <div className="flex justify-center">
-          <NumberInput
-            useGrouping={false}
-            disabled={rowData.isLocked}
-            value={rowData.project2Overtime ?? 0}
-            onValueChange={(e) =>
-              updateTimesheetEntry(
-                rowData.id,
-                "project2Overtime",
-                e.value ?? null
-              )
-            }
-            className="timesheet-number-input"
-            min={0}
-            showButtons={false}
-          />
-        </div>
-      ),
-    },
-    {
-      field: "totalHours",
-      header: "Total Hrs.",
-      sortable: false,
-      filterable: false,
-      style: { minWidth: "100px" },
-      body: (rowData: TimesheetPageRow) => (
-        <div className="flex items-center justify-center border border-primary-light rounded-xl h-10">
-          <span className="text-sm">{rowData.totalHours ?? 0}</span>
-        </div>
-      ),
-    },
-    {
-      field: "description",
-      header: "Remarks",
-      sortable: false,
-      filterable: false,
-      style: { minWidth: "300px" },
-      body: (rowData: TimesheetPageRow) => (
-        <Input
-          disabled={rowData.isLocked}
-          placeholder="Add remarks..."
-          value={rowData.description ?? ""}
-          onChange={(e) =>
-            updateTimesheetEntry(rowData.id, "description", e.target.value)
-          }
-          className="w-full h-10!"
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              saveSingleRow(rowData);
-            }
-          }}
-        />
-      ),
-    },
-    {
-      field: "id", // Using ID as field for Actions, though it's custom body
-      header: "Actions",
-      sortable: false,
-      filterable: false,
-      style: { minWidth: "80px", textAlign: "center" },
-      body: (rowData: TimesheetPageRow) => (
-        <div className="flex justify-center">
-          <Button
-            rounded
-            size="small"
-            variant="text"
-            aria-label="Save"
-            icon="pi pi-save text-lg!"
-            tooltipOptions={{ position: "top" }}
-            onClick={() => saveSingleRow(rowData)}
-            disabled={rowData.isLocked || isLoadingTimesheet}
-          />
-        </div>
-      ),
-    },
-  ];
+        ),
+      },
+      {
+        field: "id", // Using ID as field for Actions, though it's custom body
+        header: "Actions",
+        sortable: false,
+        filterable: false,
+        style: { minWidth: "80px", textAlign: "center" },
+        body: (rowData: TimesheetPageRow) => (
+          <div className="flex justify-center">
+            <Button
+              rounded
+              size="small"
+              variant="text"
+              aria-label="Save"
+              icon="pi pi-save text-lg!"
+              tooltipOptions={{ position: "top" }}
+              onClick={() => saveSingleRow(rowData)}
+              disabled={rowData.isLocked || isLoadingTimesheet}
+            />
+          </div>
+        ),
+      },
+    ],
+    [projectOptions, isLoadingTimesheet]
+  );
 
   const updateTimesheetEntries = async () => {
     setIsLoading(true);
@@ -694,22 +708,22 @@ const TimesheetPage = () => {
             exportExcel,
           })}
           <div className="bg-white h-full rounded-xl overflow-hidden min-h-0 relative">
-            {isLoadingTimesheet ? (
+            {isLoadingTimesheet || isLoadingGlobalData ? (
               <div className="flex items-center justify-center h-[72vh]">
                 <ProgressSpinner style={{ width: "40px", height: "40px" }} />
               </div>
             ) : (
               <Table
+                lazy
                 dataKey="id"
                 ref={tableRef}
-                data={timesheetData}
-                columns={columns()}
+                columns={columns}
                 pagination={true}
-                first={(currentPage - 1) * currentLimit}
+                data={timesheetData}
                 rows={currentLimit}
                 totalRecords={total}
                 onPage={handlePageChange}
-                lazy
+                first={(currentPage - 1) * currentLimit}
                 globalSearch={false}
                 emptyMessage="No timesheet data found. Select a date and payroll section."
                 rowClassName={(rowData: TimesheetPageRow) =>
