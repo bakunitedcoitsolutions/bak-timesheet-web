@@ -32,8 +32,8 @@ const SalarySlipGrid = memo(
     monthYear: string;
   }) => {
     // Determine how many slips per page.
-    // Adjusted to 2 slips per page as requested
-    const slipsPerPage = 2;
+    // Adjusted to 3 slips per page as requested
+    const slipsPerPage = 3;
     const chunks = [];
     for (let i = 0; i < employees.length; i += slipsPerPage) {
       chunks.push(employees.slice(i, i + slipsPerPage));
@@ -44,7 +44,7 @@ const SalarySlipGrid = memo(
         {chunks.map((chunk, chunkIndex) => (
           <div
             key={chunkIndex}
-            className={`flex flex-col gap-6 ${
+            className={`flex flex-col gap-6 print:gap-4 ${
               chunkIndex < chunks.length - 1 ? "print:break-after-page" : ""
             }`}
           >
