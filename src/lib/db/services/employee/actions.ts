@@ -11,6 +11,12 @@ import {
   listEmployees,
   deleteEmployee,
 } from "./employee.service";
+import { cache } from "@/lib/redis";
+import {
+  getGlobalDataAction,
+  getSharedEmployeesAction,
+} from "../shared/actions";
+import { CACHE_KEYS } from "../shared/constants";
 import {
   CreateEmployeeStep1Schema,
   UpdateEmployeeStep1Schema,
@@ -35,6 +41,9 @@ export const createEmployeeStep1Action = serverAction
   .input(CreateEmployeeStep1Schema)
   .handler(async ({ input }) => {
     const response = await createEmployeeStep1(input);
+    // Invalidate and refresh cache
+    await cache.delete(CACHE_KEYS.EMPLOYEES);
+    await getSharedEmployeesAction();
     return response;
   });
 
@@ -44,6 +53,10 @@ export const updateEmployeeStep1Action = serverAction
   .handler(async ({ input }: { input: UpdateEmployeeStep1Input }) => {
     const { id, ...rest } = input;
     const response = await updateEmployeeStep1(id, rest);
+    // Invalidate and refresh cache as name might change
+    await cache.delete(CACHE_KEYS.EMPLOYEES);
+    getSharedEmployeesAction();
+    getGlobalDataAction();
     return response;
   });
 
@@ -53,6 +66,10 @@ export const updateEmployeeStep2Action = serverAction
   .handler(async ({ input }: { input: UpdateEmployeeStep2Input }) => {
     const { id, ...rest } = input;
     const response = await updateEmployeeStep2(id, rest);
+    // Invalidate and refresh cache as designation might change
+    await cache.delete(CACHE_KEYS.EMPLOYEES);
+    getSharedEmployeesAction();
+    getGlobalDataAction();
     return response;
   });
 
@@ -104,5 +121,9 @@ export const deleteEmployeeAction = serverAction
   .input(DeleteEmployeeSchema)
   .handler(async ({ input }: { input: DeleteEmployeeInput }) => {
     const response = await deleteEmployee(input.id);
+    // Invalidate and refresh cache
+    await cache.delete(CACHE_KEYS.EMPLOYEES);
+    getSharedEmployeesAction();
+    getGlobalDataAction();
     return response;
   });

@@ -7,14 +7,18 @@ import {
   listProjects,
   deleteProject,
 } from "./project.service";
+import { cache } from "@/lib/redis";
+import {
+  getGlobalDataAction,
+  getSharedProjectsAction,
+} from "../shared/actions";
+import { CACHE_KEYS } from "../shared/constants";
 import {
   CreateProjectSchema,
   UpdateProjectSchema,
   ListProjectsParamsSchema,
   GetProjectByIdSchema,
   DeleteProjectSchema,
-  CreateProjectInput,
-  UpdateProjectInput,
   GetProjectByIdInput,
   DeleteProjectInput,
 } from "./project.schemas";
@@ -22,17 +26,23 @@ import {
 // Create Project
 export const createProjectAction = serverAction
   .input(CreateProjectSchema)
-  .handler(async ({ input }: { input: CreateProjectInput }) => {
+  .handler(async ({ input }) => {
     const response = await createProject(input);
+    await cache.delete(CACHE_KEYS.PROJECTS);
+    getSharedProjectsAction();
+    getGlobalDataAction();
     return response;
   });
 
 // Update Project
 export const updateProjectAction = serverAction
   .input(UpdateProjectSchema)
-  .handler(async ({ input }: { input: UpdateProjectInput }) => {
+  .handler(async ({ input }) => {
     const { id, ...rest } = input;
     const response = await updateProject(id, rest);
+    await cache.delete(CACHE_KEYS.PROJECTS);
+    getSharedProjectsAction();
+    getGlobalDataAction();
     return response;
   });
 

@@ -4,24 +4,7 @@ import { serverAction } from "@/lib/zsa/zsa-action";
 import { z } from "zod";
 import { cache } from "@/lib/redis"; // Import cache helper
 
-// Define Cache Keys
-const CACHE_KEYS = {
-  EMPLOYEES: "shared:employees",
-  DESIGNATIONS: "shared:designations",
-  PROJECTS: "shared:projects",
-  PAYROLL_SECTIONS: "shared:payroll-sections",
-  PAYROLL_STATUSES: "shared:payroll-statuses",
-  USER_ROLES: "shared:user-roles",
-  USER_PRIVILEGES: "shared:user-privileges",
-  BRANCHES: "shared:branches",
-  CITIES: "shared:cities",
-  COUNTRIES: "shared:countries",
-  GOSI_CITIES: "shared:gosi-cities",
-  EMPLOYEE_STATUSES: "shared:employee-statuses",
-  PAYMENT_METHODS: "shared:payment-methods",
-};
-
-const GLOBAL_DATA_CACHE_TTL = 86400; // 1 day in seconds
+import { CACHE_KEYS, GLOBAL_DATA_CACHE_TTL } from "./constants";
 
 // Helper to fetch and cache
 const getOrFetch = async <T>(

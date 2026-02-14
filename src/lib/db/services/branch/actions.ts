@@ -7,9 +7,14 @@ import {
   listBranches,
   updateBranch,
 } from "./branch.service";
+import { cache } from "@/lib/redis";
+import {
+  getGlobalDataAction,
+  getSharedBranchesAction,
+} from "../shared/actions";
+import { CACHE_KEYS } from "../shared/constants";
 import {
   CreateBranchSchema,
-  DeleteBranchInput,
   DeleteBranchSchema,
   GetBranchByIdInput,
   GetBranchByIdSchema,
@@ -28,6 +33,9 @@ export const createBranchAction = serverAction
   .input(CreateBranchSchema)
   .handler(async ({ input }) => {
     const response = await createBranch(input);
+    await cache.delete(CACHE_KEYS.BRANCHES);
+    getSharedBranchesAction();
+    getGlobalDataAction();
     return response;
   });
 
@@ -36,6 +44,9 @@ export const updateBranchAction = serverAction
   .handler(async ({ input }) => {
     const { id, ...rest } = input;
     const response = await updateBranch(id, rest);
+    await cache.delete(CACHE_KEYS.BRANCHES);
+    getSharedBranchesAction();
+    getGlobalDataAction();
     return response;
   });
 
@@ -48,7 +59,7 @@ export const getBranchByIdAction = serverAction
 
 export const deleteBranchAction = serverAction
   .input(DeleteBranchSchema)
-  .handler(async ({ input }: { input: DeleteBranchInput }) => {
+  .handler(async ({ input }) => {
     const response = await deleteBranch(input.id);
     return response;
   });

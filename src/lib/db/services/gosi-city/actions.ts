@@ -7,6 +7,12 @@ import {
   listGosiCities,
   updateGosiCity,
 } from "./gosi-city.service";
+import { cache } from "@/lib/redis";
+import {
+  getGlobalDataAction,
+  getSharedGosiCitiesAction,
+} from "../shared/actions";
+import { CACHE_KEYS } from "../shared/constants";
 import {
   CreateGosiCitySchema,
   DeleteGosiCityInput,
@@ -28,6 +34,9 @@ export const createGosiCityAction = serverAction
   .input(CreateGosiCitySchema)
   .handler(async ({ input }) => {
     const response = await createGosiCity(input);
+    await cache.delete(CACHE_KEYS.GOSI_CITIES);
+    getSharedGosiCitiesAction();
+    getGlobalDataAction();
     return response;
   });
 
@@ -36,6 +45,9 @@ export const updateGosiCityAction = serverAction
   .handler(async ({ input }) => {
     const { id, ...rest } = input;
     const response = await updateGosiCity(id, rest);
+    await cache.delete(CACHE_KEYS.GOSI_CITIES);
+    getSharedGosiCitiesAction();
+    getGlobalDataAction();
     return response;
   });
 

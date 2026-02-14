@@ -7,6 +7,12 @@ import {
   listPayrollSections,
   updatePayrollSection,
 } from "./payroll-section.service";
+import { cache } from "@/lib/redis";
+import {
+  getGlobalDataAction,
+  getSharedPayrollSectionsAction,
+} from "../shared/actions";
+import { CACHE_KEYS } from "../shared/constants";
 import {
   CreatePayrollSectionSchema,
   DeletePayrollSectionInput,
@@ -28,6 +34,9 @@ export const createPayrollSectionAction = serverAction
   .input(CreatePayrollSectionSchema)
   .handler(async ({ input }) => {
     const response = await createPayrollSection(input);
+    await cache.delete(CACHE_KEYS.PAYROLL_SECTIONS);
+    getSharedPayrollSectionsAction();
+    getGlobalDataAction();
     return response;
   });
 
@@ -36,6 +45,9 @@ export const updatePayrollSectionAction = serverAction
   .handler(async ({ input }) => {
     const { id, ...rest } = input;
     const response = await updatePayrollSection(id, rest);
+    await cache.delete(CACHE_KEYS.PAYROLL_SECTIONS);
+    getSharedPayrollSectionsAction();
+    getGlobalDataAction();
     return response;
   });
 

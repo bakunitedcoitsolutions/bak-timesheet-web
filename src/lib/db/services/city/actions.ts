@@ -7,9 +7,11 @@ import {
   listCities,
   updateCity,
 } from "./city.service";
+import { cache } from "@/lib/redis";
+import { getGlobalDataAction, getSharedCitiesAction } from "../shared/actions";
+import { CACHE_KEYS } from "../shared/constants";
 import {
   CreateCitySchema,
-  DeleteCityInput,
   DeleteCitySchema,
   GetCityByIdInput,
   GetCityByIdSchema,
@@ -28,6 +30,9 @@ export const createCityAction = serverAction
   .input(CreateCitySchema)
   .handler(async ({ input }) => {
     const response = await createCity(input);
+    await cache.delete(CACHE_KEYS.CITIES);
+    getSharedCitiesAction();
+    getGlobalDataAction();
     return response;
   });
 
@@ -36,6 +41,9 @@ export const updateCityAction = serverAction
   .handler(async ({ input }) => {
     const { id, ...rest } = input;
     const response = await updateCity(id, rest);
+    await cache.delete(CACHE_KEYS.CITIES);
+    getSharedCitiesAction();
+    getGlobalDataAction();
     return response;
   });
 
@@ -48,7 +56,7 @@ export const getCityByIdAction = serverAction
 
 export const deleteCityAction = serverAction
   .input(DeleteCitySchema)
-  .handler(async ({ input }: { input: DeleteCityInput }) => {
+  .handler(async ({ input }) => {
     const response = await deleteCity(input.id);
     return response;
   });

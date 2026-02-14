@@ -7,6 +7,12 @@ import {
   listCountries,
   updateCountry,
 } from "./country.service";
+import { cache } from "@/lib/redis";
+import {
+  getGlobalDataAction,
+  getSharedCountriesAction,
+} from "../shared/actions";
+import { CACHE_KEYS } from "../shared/constants";
 import {
   CreateCountrySchema,
   DeleteCountryInput,
@@ -28,6 +34,9 @@ export const createCountryAction = serverAction
   .input(CreateCountrySchema)
   .handler(async ({ input }) => {
     const response = await createCountry(input);
+    await cache.delete(CACHE_KEYS.COUNTRIES);
+    getSharedCountriesAction();
+    getGlobalDataAction();
     return response;
   });
 
@@ -36,6 +45,9 @@ export const updateCountryAction = serverAction
   .handler(async ({ input }) => {
     const { id, ...rest } = input;
     const response = await updateCountry(id, rest);
+    await cache.delete(CACHE_KEYS.COUNTRIES);
+    getSharedCountriesAction();
+    getGlobalDataAction();
     return response;
   });
 

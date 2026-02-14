@@ -7,6 +7,12 @@ import {
   listDesignations,
   updateDesignation,
 } from "./designation.service";
+import { cache } from "@/lib/redis";
+import {
+  getGlobalDataAction,
+  getSharedDesignationsAction,
+} from "../shared/actions";
+import { CACHE_KEYS } from "../shared/constants";
 import {
   CreateDesignationSchema,
   DeleteDesignationInput,
@@ -28,6 +34,9 @@ export const createDesignationAction = serverAction
   .input(CreateDesignationSchema)
   .handler(async ({ input }) => {
     const response = await createDesignation(input);
+    await cache.delete(CACHE_KEYS.DESIGNATIONS);
+    getSharedDesignationsAction();
+    getGlobalDataAction();
     return response;
   });
 
@@ -36,6 +45,9 @@ export const updateDesignationAction = serverAction
   .handler(async ({ input }) => {
     const { id, ...rest } = input;
     const response = await updateDesignation(id, rest);
+    await cache.delete(CACHE_KEYS.DESIGNATIONS);
+    getSharedDesignationsAction();
+    getGlobalDataAction();
     return response;
   });
 
