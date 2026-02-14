@@ -9,7 +9,9 @@ import {
   saveTimesheetEntriesAction,
   bulkUploadTimesheetsAction,
   getMonthlyTimesheetReportAction,
+  getDailyTimesheetReportAction,
 } from "./actions";
+import { GetDailyTimesheetReportInput } from "./timesheet.schemas";
 
 const dateToKey = (d: Date) =>
   d instanceof Date && !isNaN(d.getTime()) ? d.toISOString().slice(0, 10) : "";
@@ -63,4 +65,22 @@ export const useGetMonthlyTimesheetReport = (
     ],
     input,
     enabled: !!input.month && !!input.year,
+  });
+
+export const useGetDailyTimesheetReport = (
+  input: GetDailyTimesheetReportInput
+) =>
+  useQuery(getDailyTimesheetReportAction, {
+    queryKey: [
+      "daily-timesheet-report",
+      dateToKey(input.date),
+      input.employeeCodes,
+      input.projectId,
+      input.designationId,
+      input.payrollSectionId,
+      input.showAbsents,
+      input.showFixedSalary,
+    ],
+    input,
+    enabled: !!input.date,
   });

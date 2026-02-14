@@ -77,3 +77,17 @@ export const GetMonthlyTimesheetReportSchema = z.object({
 export type GetMonthlyTimesheetReportInput = z.infer<
   typeof GetMonthlyTimesheetReportSchema
 >;
+
+export const GetDailyTimesheetReportSchema = z.object({
+  date: z.coerce.date(),
+  employeeCodes: z.array(z.string()).optional().nullable(),
+  projectId: z.number().int().positive().optional().nullable(),
+  designationId: z.number().int().positive().optional().nullable(),
+  payrollSectionId: z.number().int().positive().optional().nullable(),
+  showAbsents: z.boolean().optional(),
+  showFixedSalary: z.boolean().optional(),
+});
+
+export type GetDailyTimesheetReportInput = z.infer<
+  typeof GetDailyTimesheetReportSchema
+>;

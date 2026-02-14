@@ -5,6 +5,7 @@ import {
   saveTimesheetEntries,
   bulkUploadTimesheets,
   getMonthlyTimesheetReportData,
+  getDailyTimesheetReportData,
 } from "./timesheet.service";
 import {
   GetTimesheetPageDataSchema,
@@ -15,6 +16,8 @@ import {
   BulkUploadTimesheetsInput,
   GetMonthlyTimesheetReportSchema,
   GetMonthlyTimesheetReportInput,
+  GetDailyTimesheetReportSchema,
+  GetDailyTimesheetReportInput,
 } from "./timesheet.schemas";
 
 export const getTimesheetPageDataAction = serverAction
@@ -51,5 +54,11 @@ export const getMonthlyTimesheetReportAction = serverAction
   .input(GetMonthlyTimesheetReportSchema)
   .handler(async ({ input }: { input: GetMonthlyTimesheetReportInput }) => {
     const response = await getMonthlyTimesheetReportData(input);
+    return response;
+  });
+export const getDailyTimesheetReportAction = serverAction
+  .input(GetDailyTimesheetReportSchema)
+  .handler(async ({ input }: { input: GetDailyTimesheetReportInput }) => {
+    const response = await getDailyTimesheetReportData(input);
     return response;
   });

@@ -525,3 +525,189 @@ export const getMonthlyTimesheetReportData = async (
 
   return { reports: filteredReports };
 };
+
+/**
+ * Get daily timesheet report data for one or all employees.
+ * Fetches all relevant records for the specific date.
+ */
+export const getDailyTimesheetReportData = async (
+  params: import("./timesheet.schemas").GetDailyTimesheetReportInput
+): Promise<GetTimesheetPageDataResponse> => {
+  // Reuse logic from getTimesheetPageData but without pagination
+  const {
+    date,
+    payrollSectionId,
+    designationId,
+    employeeCodes,
+    projectId, // Note: getTimesheetPageData doesn't fully support filtering by project *on employees* in the same way, but let's adapting.
+    showAbsents,
+    showFixedSalary,
+  } = params;
+
+  // We can actually reuse getTimesheetPageData if we allow passing huge limit
+  // But getTimesheetPageData doesn't support 'employeeCodes' or 'showAbsents' in the same way.
+  // It's cleaner to implement a dedicated function that returns rows.
+
+  const startOfDay = new Date(
+    Date.UTC(
+      date.getUTCFullYear(),
+      date.getUTCMonth(),
+      date.getUTCDate(),
+      0,
+      0,
+      0,
+      0
+    )
+  );
+  const endOfDay = new Date(
+    Date.UTC(
+      date.getUTCFullYear(),
+      date.getUTCMonth(),
+      date.getUTCDate(),
+      23,
+      59,
+      59,
+      999
+    )
+  );
+
+  const employeeWhere: any = {};
+
+  if (employeeCodes && employeeCodes.length > 0) {
+    employeeWhere.employeeCode = {
+      in: employeeCodes.map((c) => Number(c)).filter((n) => !isNaN(n)),
+    };
+  }
+
+  if (payrollSectionId != null && payrollSectionId > 0) {
+    employeeWhere.payrollSectionId = payrollSectionId;
+  }
+  if (designationId != null && designationId > 0) {
+    employeeWhere.designationId = designationId;
+  }
+  if (showFixedSalary) {
+    employeeWhere.isFixed = true;
+  }
+
+  // Fetch ALL matching employees
+  const employees = await prisma.employee.findMany({
+    where: employeeWhere,
+    orderBy: [{ employeeCode: "asc" }],
+    select: {
+      id: true,
+      employeeCode: true,
+      nameEn: true,
+      nameAr: true,
+      isFixed: true,
+      designationId: true,
+      idCardNo: true,
+      designation: {
+        select: { nameEn: true },
+      },
+      payrollSection: {
+        select: { nameEn: true },
+      },
+    },
+  });
+
+  const employeeIds = employees.map((e) => e.id);
+
+  // Fetch timesheets
+  const timesheetWhere: any = {
+    date: {
+      gte: startOfDay,
+      lte: endOfDay,
+    },
+    employeeId: {
+      in: employeeIds,
+    },
+  };
+
+  if (projectId) {
+    timesheetWhere.OR = [{ project1Id: projectId }, { project2Id: projectId }];
+  }
+
+  const timesheets = await prisma.timesheet.findMany({
+    where: timesheetWhere,
+    include: {
+      project1: { select: { nameEn: true } },
+      project2: { select: { nameEn: true } },
+    },
+  });
+
+  const timesheetByEmployeeId = new Map(
+    timesheets.map((t) => [t.employeeId, t])
+  );
+
+  // Build rows
+  let rows: any[] = [];
+
+  employees.forEach((emp, index) => {
+    const ts = timesheetByEmployeeId.get(emp.id);
+
+    // If filtering by project, and this employee has no timesheet for that project,
+    // AND we are strictly filtering (which we are via timesheetWhere),
+    // then if ts is missing, it means they didn't work on that project.
+    // However, we fetched employees *separately*.
+    // If projectId is set, we strictly only want employees who worked on that project?
+    // Usually reports show everyone, but filtered by project means "show work done on project".
+
+    if (projectId && !ts) {
+      // If searching by project, exclude employees who didn't work on it
+      return;
+    }
+
+    if (!showAbsents && !ts) {
+      // If NOT showing absents, exclude employees with no timesheet
+      return;
+    }
+
+    // Calculate totals
+    const p1H = ts?.project1Hours ?? 0;
+    const p1OT = ts?.project1Overtime ?? 0;
+    const p2H = ts?.project2Hours ?? 0;
+    const p2OT = ts?.project2Overtime ?? 0;
+    const total = p1H + p1OT + p2H + p2OT;
+
+    if (!showAbsents && total === 0) {
+      return;
+    }
+
+    rows.push({
+      id: emp.id,
+      employeeId: emp.id,
+      timesheetId: ts?.id ?? null,
+      rowNumber: index + 1,
+      employeeCode: emp.employeeCode,
+      nameEn: emp.nameEn,
+      nameAr: emp.nameAr,
+      designationNameEn: emp.designation?.nameEn ?? "", // Keep consistent naming
+      designationName: emp.designation?.nameEn ?? "", // For report
+      sectionName: emp.payrollSection?.nameEn ?? "Unassigned",
+      idCardNo: emp.idCardNo,
+      isFixed: emp.isFixed,
+      isLocked: ts?.isLocked ?? false,
+      project1Id: ts?.project1Id ?? null,
+      project1Name: ts?.project1?.nameEn ?? null,
+      project1Hours: p1H,
+      project1Overtime: p1OT,
+      project2Id: ts?.project2Id ?? null,
+      project2Name: ts?.project2?.nameEn ?? null,
+      project2Hours: p2H,
+      project2Overtime: p2OT,
+      totalHours: total, // Use calculated total
+      description: ts?.description ?? null,
+      remarks: ts?.description ?? null,
+    });
+  });
+
+  return {
+    rows: rows as any, // Cast to any to fit or define a new type if needed
+    pagination: {
+      page: 1,
+      limit: rows.length,
+      total: rows.length,
+      totalPages: 1,
+    },
+  };
+};
