@@ -17,6 +17,7 @@ import {
   GroupDropdown,
   BulkUploadOptions,
   BulkUploadDialog,
+  BulkUploadReportDialog,
   CustomHeaderProps,
 } from "@/components";
 import { useDebounce } from "@/hooks";
@@ -58,6 +59,10 @@ const TimesheetPage = () => {
     "all"
   );
   const [timesheetData, setTimesheetData] = useState<TimesheetPageRow[]>([]);
+  const [uploadResult, setUploadResult] =
+    useState<BulkUploadTimesheetResult | null>(null);
+  const [showReportDialog, setShowReportDialog] = useState(false);
+  const [uploadedFileName, setUploadedFileName] = useState<string>("");
   const tableRef = useRef<TableRef>(null);
 
   useEffect(() => {
@@ -548,6 +553,7 @@ const TimesheetPage = () => {
       });
       try {
         const fileName = file.name.toLowerCase();
+        setUploadedFileName(file.name);
         const isCSV = fileName.endsWith(".csv") || file.type === "text/csv";
 
         console.log("Parsing file...", { isCSV });
@@ -585,19 +591,25 @@ const TimesheetPage = () => {
           {
             onSuccess: (result: BulkUploadTimesheetResult) => {
               console.log("bulkUploadTimesheets success", result);
-              const message =
-                result.success > 0
-                  ? `Successfully uploaded ${result.success} timesheet entr${result.success === 1 ? "y" : "ies"}`
-                  : "Upload completed";
+              setUploadResult(result);
+              setShowReportDialog(true);
+              setShowFilePicker(false); // Close picker on success
 
-              if (result.failed > 0) {
-                toastService.showWarn(
-                  "Upload Complete",
-                  `${message}. ${result.failed} failed. Check console for details.`
+              // Only show toast if EVERYTHING failed or general error, otherwise dialog handles details
+              if (
+                result.success === 0 &&
+                result.failed > 0 &&
+                result.skipped === 0
+              ) {
+                toastService.showError(
+                  "Upload Failed",
+                  "All rows failed. See report for details."
                 );
-                console.error("Upload errors:", result.errors);
               } else {
-                toastService.showSuccess("Success", message);
+                toastService.showSuccess(
+                  "Upload Processed",
+                  "Check report for details."
+                );
               }
             },
             onError: (error: any) => {
@@ -749,6 +761,17 @@ const TimesheetPage = () => {
           ],
           "application/vnd.ms-excel": [".xls"],
         }}
+      />
+
+      <BulkUploadReportDialog
+        visible={showReportDialog}
+        onHide={() => {
+          setShowReportDialog(false);
+          setUploadResult(null);
+          setUploadedFileName("");
+        }}
+        result={uploadResult}
+        fileName={uploadedFileName}
       />
     </>
   );

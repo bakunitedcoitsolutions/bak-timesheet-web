@@ -5,10 +5,17 @@ import dayjs from "dayjs";
  * Prints the Daily Timesheet Report.
  * Groups data by Payroll Section and generates a printable HTML view.
  */
+import { GlobalDataGeneral } from "@/context/GlobalDataContext";
+
+/**
+ * Prints the Daily Timesheet Report.
+ * Groups data by Payroll Section and generates a printable HTML view.
+ */
 export const printDailyTimesheetReport = (
   data: TimesheetPageRow[],
   date: Date,
-  selectedProjectName?: string | null
+  selectedProjectName?: string | null,
+  payrollSections: GlobalDataGeneral[] = []
 ) => {
   if (typeof window === "undefined") return;
   const printWindow = window.open("", "_blank");
@@ -26,7 +33,20 @@ export const printDailyTimesheetReport = (
     sections[section].push(row);
   });
 
-  const sortedSectionNames = Object.keys(sections).sort();
+  const sortedSectionNames = Object.keys(sections).sort((a, b) => {
+    if (a === "Unassigned") return 1;
+    if (b === "Unassigned") return -1;
+
+    const sectionA = payrollSections.find((s) => s.nameEn === a);
+    const sectionB = payrollSections.find((s) => s.nameEn === b);
+
+    const orderA = sectionA?.displayOrderKey ?? Number.MAX_SAFE_INTEGER;
+    const orderB = sectionB?.displayOrderKey ?? Number.MAX_SAFE_INTEGER;
+
+    if (orderA !== orderB) return orderA - orderB;
+
+    return a.localeCompare(b);
+  });
 
   const printContent = `
     <!DOCTYPE html>
@@ -144,9 +164,9 @@ export const printDailyTimesheetReport = (
                 <tbody>
                   ${rows
                     .map(
-                      (row) => `
+                      (row, index) => `
                     <tr>
-                      <td>${row.rowNumber}</td>
+                      <td>${index + 1}</td>
                       <td>${row.employeeCode}</td>
                       <td class="text-left">
                         <div>${row.nameEn}</div>
@@ -185,7 +205,8 @@ export const printDailyTimesheetReport = (
             <table>
               <tbody>
                 <tr>
-                   <td colspan="4" class="bg-footer text-center" style="font-size: 14px;">GRAND TOTAL</td>
+                   <td class="bg-footer text-center" style="font-size: 14px;">${data.length}</td>
+                   <td colspan="3" class="bg-footer text-center" style="font-size: 14px;">GRAND TOTAL</td>
                    <td class="bg-footer" colspan="2" style="font-size: 14px; width: 50px;">
                      ${data.reduce((sum, r) => sum + (r.project1Hours || 0), 0)}
                    </td>

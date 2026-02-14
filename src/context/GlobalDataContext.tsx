@@ -12,6 +12,7 @@ export interface GlobalDataCity {
 export interface GlobalDataGeneral {
   id: number;
   nameEn: string;
+  displayOrderKey?: number | null;
 }
 
 export interface GlobalDataEmployee {

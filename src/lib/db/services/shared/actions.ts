@@ -53,9 +53,14 @@ export const getSharedDesignationsAction = serverAction
   .handler(async () => {
     return getOrFetch(CACHE_KEYS.DESIGNATIONS, () =>
       prisma.designation.findMany({
-        select: { id: true, nameEn: true, hoursPerDay: true },
+        select: {
+          id: true,
+          nameEn: true,
+          hoursPerDay: true,
+          displayOrderKey: true,
+        },
         where: { isActive: true },
-        orderBy: { nameEn: "asc" },
+        orderBy: { displayOrderKey: "asc" },
       })
     );
   });
@@ -79,9 +84,9 @@ export const getSharedPayrollSectionsAction = serverAction
   .handler(async () => {
     return getOrFetch(CACHE_KEYS.PAYROLL_SECTIONS, () =>
       prisma.payrollSection.findMany({
-        select: { id: true, nameEn: true },
+        select: { id: true, nameEn: true, displayOrderKey: true },
         where: { isActive: true },
-        orderBy: { nameEn: "asc" },
+        orderBy: { displayOrderKey: "asc" },
       })
     );
   });

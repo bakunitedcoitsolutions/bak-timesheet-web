@@ -91,6 +91,15 @@ export interface BulkUploadTimesheetData {
 export interface BulkUploadTimesheetResult {
   success: number;
   failed: number;
+  skipped: number;
+  details: Array<{
+    row: number;
+    employeeCode: number;
+    date: string | Date;
+    status: "success" | "failed" | "skipped";
+    message?: string;
+  }>;
+  /** @deprecated use details array instead */
   errors: Array<{
     row: number;
     data: BulkUploadTimesheetRow;

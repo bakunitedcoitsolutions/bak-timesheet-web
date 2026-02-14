@@ -16,12 +16,12 @@ import {
   GroupDropdown,
   AutoScrollChips,
 } from "@/components";
-import { printDailyTimesheetReport } from "@/utils/helpers/print-daily-timesheet";
 import { parseGroupDropdownFilter } from "@/utils/helpers";
 import { centuryGothic, tanseekArabic } from "@/app/fonts";
 import { TimesheetPageRow } from "@/lib/db/services/timesheet/timesheet.dto";
 import { useGlobalData, GlobalDataGeneral } from "@/context/GlobalDataContext";
 import { useGetDailyTimesheetReport } from "@/lib/db/services/timesheet/requests";
+import { printDailyTimesheetReport } from "@/utils/helpers/print-daily-timesheet";
 
 const FilterSection = memo(
   ({
@@ -154,11 +154,11 @@ const FilterSection = memo(
 const DailyTimesheetReportPage = () => {
   const router = useRouter();
   const contentRef = useRef<HTMLDivElement>(null);
+  const { data: globalData } = useGlobalData();
 
   // Filter states
-  const [selectedDate, setSelectedDate] = useState<Date>(
-    new Date("2025-12-30")
-  );
+  const [selectedDate, setSelectedDate] = useState<Date>(new Date());
+  const [queryDate, setQueryDate] = useState<Date>(new Date()); // Date used for fetching data
   const [filter, setFilter] = useState({
     employeeCodes: null as string[] | null,
     projectId: null as number | null,
@@ -174,7 +174,7 @@ const DailyTimesheetReportPage = () => {
 
   // Use the new daily report hook
   const { data: reportResponse, isLoading } = useGetDailyTimesheetReport({
-    date: selectedDate,
+    date: queryDate,
     employeeCodes: filter.employeeCodes,
     projectId: filter.projectId,
     designationId: filter.designationId,
@@ -196,12 +196,28 @@ const DailyTimesheetReportPage = () => {
       groups[section].push(row);
     });
     return Object.keys(groups)
-      .sort()
+      .sort((a, b) => {
+        if (a === "Unassigned") return 1;
+        if (b === "Unassigned") return -1;
+
+        const sectionA = globalData.payrollSections.find((s) => s.nameEn === a);
+        const sectionB = globalData.payrollSections.find((s) => s.nameEn === b);
+
+        const orderA = sectionA?.displayOrderKey ?? Number.MAX_SAFE_INTEGER;
+        const orderB = sectionB?.displayOrderKey ?? Number.MAX_SAFE_INTEGER;
+
+        if (orderA !== orderB) return orderA - orderB;
+
+        return a.localeCompare(b);
+      })
       .map((name) => ({
         name,
-        rows: groups[name],
+        rows: groups[name].map((row, index) => ({
+          ...row,
+          displayIndex: index + 1,
+        })),
       }));
-  }, [reportData]);
+  }, [reportData, globalData.payrollSections]);
 
   // Pagination: Slice sections
   const visibleSections = useMemo(
@@ -222,6 +238,7 @@ const DailyTimesheetReportPage = () => {
       ...params,
       ...filterParams,
     });
+    setQueryDate(selectedDate); // Trigger search by updating queryDate
     setFirstSection(0); // Reset pagination on search
   };
 
@@ -230,7 +247,8 @@ const DailyTimesheetReportPage = () => {
     printDailyTimesheetReport(
       reportData,
       selectedDate,
-      selectedProject?.nameEn
+      selectedProject?.nameEn,
+      globalData.payrollSections
     );
   };
 
@@ -250,7 +268,7 @@ const DailyTimesheetReportPage = () => {
         style: { width: 50, minWidth: 50 },
         body: (row: TimesheetPageRow) => (
           <span className="text-sm font-medium text-gray-500">
-            {row.rowNumber}
+            {(row as any).displayIndex}
           </span>
         ),
       },
@@ -373,8 +391,6 @@ const DailyTimesheetReportPage = () => {
     []
   );
 
-  // Fetch global data for project name display
-  const { data: globalData } = useGlobalData();
   const selectedProject = useMemo(
     () =>
       filter.projectId

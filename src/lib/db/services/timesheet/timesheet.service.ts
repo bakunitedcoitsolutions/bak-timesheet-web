@@ -270,7 +270,9 @@ export const bulkUploadTimesheets = async (
   const result: BulkUploadTimesheetResult = {
     success: 0,
     failed: 0,
-    errors: [],
+    skipped: 0,
+    details: [],
+    errors: [], // Keep for backward compatibility if needed, but details covers it
   };
 
   // Pre-fetch all employees by unique codes in one query
@@ -290,7 +292,7 @@ export const bulkUploadTimesheets = async (
     const rowNumber = i + 1;
 
     try {
-      if (i % 10 === 0) console.log(`Service: Processing row ${rowNumber}...`);
+      if (i % 50 === 0) console.log(`Service: Processing row ${rowNumber}...`);
 
       const dateNormalized = startOfDayUTC(
         typeof row.date === "string" ? new Date(row.date) : row.date
@@ -300,14 +302,19 @@ export const bulkUploadTimesheets = async (
 
       if (!employee) {
         result.failed++;
+        result.details.push({
+          row: rowNumber,
+          employeeCode: row.employeeCode,
+          date: dateNormalized,
+          status: "failed",
+          message: `Employee with code ${row.employeeCode} not found`,
+        });
+        // Also push to errors for compat
         result.errors.push({
           row: rowNumber,
           data: row,
           error: `Employee with code ${row.employeeCode} not found`,
         });
-        console.warn(
-          `Service: Employee not found for code ${row.employeeCode} at row ${rowNumber}`
-        );
         continue;
       }
 
@@ -323,9 +330,14 @@ export const bulkUploadTimesheets = async (
       });
 
       if (existing) {
-        console.log(
-          `Service: Skipping existing timesheet for employee ${row.employeeCode} on ${dateNormalized.toISOString()}`
-        );
+        result.skipped++;
+        result.details.push({
+          row: rowNumber,
+          employeeCode: row.employeeCode,
+          date: dateNormalized,
+          status: "skipped",
+          message: "Timesheet already exists",
+        });
         continue;
       }
 
@@ -360,18 +372,37 @@ export const bulkUploadTimesheets = async (
       });
 
       result.success++;
+      result.details.push({
+        row: rowNumber,
+        employeeCode: row.employeeCode,
+        date: dateNormalized,
+        status: "success",
+        message: "Uploaded successfully",
+      });
     } catch (error: any) {
       result.failed++;
+      const msg = error?.message ?? "Unknown error";
+      result.details.push({
+        row: rowNumber,
+        employeeCode: row.employeeCode,
+        date: row.date,
+        status: "failed",
+        message: msg,
+      });
       result.errors.push({
         row: rowNumber,
         data: row,
-        error: error?.message ?? "Unknown error",
+        error: msg,
       });
       console.error(`Service: Error processing row ${rowNumber}`, error);
     }
   }
 
-  console.log("Service: bulkUploadTimesheets finished", result);
+  console.log("Service: bulkUploadTimesheets finished", {
+    success: result.success,
+    skipped: result.skipped,
+    failed: result.failed,
+  });
   return result;
 };
 
