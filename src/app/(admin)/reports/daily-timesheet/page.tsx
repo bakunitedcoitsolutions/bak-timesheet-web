@@ -50,14 +50,14 @@ const FilterSection = memo(
         label: p.nameEn,
         value: p.id,
       }));
-      return [{ label: "All Projects", value: null }, ...options];
+      return [{ label: "All Projects", value: 0 }, ...options];
     }, [projects]);
 
     const handleRefresh = () => {
       onSearch({
         employeeCodes: employeeCodes.length > 0 ? employeeCodes : null,
         selectedFilter,
-        projectId,
+        projectId: projectId === 0 ? null : projectId,
         showAbsents,
         showFixedSalary,
       });
