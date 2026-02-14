@@ -16,6 +16,7 @@ import {
   GroupDropdown,
   AutoScrollChips,
 } from "@/components";
+import { printDailyTimesheetReport } from "@/utils/helpers/print-daily-timesheet";
 import { parseGroupDropdownFilter } from "@/utils/helpers";
 import { centuryGothic, tanseekArabic } from "@/app/fonts";
 import { TimesheetPageRow } from "@/lib/db/services/timesheet/timesheet.dto";
@@ -225,8 +226,12 @@ const DailyTimesheetReportPage = () => {
   };
 
   const handlePrint = () => {
-    // For now, just window print, or implement specific print utility later
-    window.print();
+    if (reportData.length === 0) return;
+    printDailyTimesheetReport(
+      reportData,
+      selectedDate,
+      selectedProject?.nameEn
+    );
   };
 
   // Table column definitions
