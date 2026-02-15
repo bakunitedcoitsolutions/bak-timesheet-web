@@ -184,7 +184,7 @@ export const getSharedGosiCitiesAction = serverAction
 export const getSharedEmployeeStatusesAction = serverAction
   .input(z.object({}).optional())
   .handler(async () => {
-    return getOrFetch(CACHE_KEYS.EMPLOYEES, () =>
+    return getOrFetch(CACHE_KEYS.EMPLOYEE_STATUSES, () =>
       prisma.employeeStatus.findMany({
         select: { id: true, nameEn: true },
         where: { isActive: true },
