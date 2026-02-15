@@ -1,28 +1,28 @@
 "use client";
 import { useEffect, useImperativeHandle, forwardRef } from "react";
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { classNames } from "primereact/utils";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { ProgressSpinner } from "primereact/progressspinner";
 
 import { FORM_FIELD_WIDTHS, STORAGE_CONFIG } from "@/utils/constants";
-import { StepperFormHeading } from "@/components/common";
 import {
+  Form,
+  Input,
+  FormItem,
   Dropdown,
   FilePicker,
-  Form,
-  FormItem,
-  Input,
   NumberInput,
 } from "@/components/forms";
-import { getErrorMessage, FILE_TYPES } from "@/utils/helpers";
 import { toastService } from "@/lib/toast";
+import { useStepperForm } from "@/context";
+import { StepperFormHeading } from "@/components/common";
+import { getErrorMessage, FILE_TYPES } from "@/utils/helpers";
 import {
-  useUpdateEmployeeStep2,
   useGetEmployeeById,
+  useUpdateEmployeeStep2,
 } from "@/lib/db/services/employee";
 import { UpdateEmployeeStep2Schema } from "@/lib/db/services/employee/employee.schemas";
-import { useStepperForm } from "@/context";
 import {
   useGlobalData,
   GlobalDataCity,

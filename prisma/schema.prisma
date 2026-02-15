@@ -331,7 +331,6 @@ model PayrollSection {
 
   // Relations: Other Tables → PayrollSection (Other tables have foreign keys pointing to PayrollSection)
   employees      Employee[]
-  payrollDetails PayrollDetails[]
 }
 
 model PayrollStatus {
@@ -404,7 +403,9 @@ model PayrollDetails {
   workDays                Int
   totalHours              Decimal  @db.Decimal(10, 2)
   hourlyRate              Decimal  @db.Decimal(10, 2)
-  allowance               Decimal  @db.Decimal(10, 2)
+  breakfastAllowance      Decimal  @db.Decimal(10, 2)
+  otherAllowances         Decimal  @db.Decimal(10, 2)
+  totalAllowances         Decimal  @db.Decimal(10, 2)
   salary                  Decimal  @db.Decimal(10, 2)
   previousLoan            Decimal  @db.Decimal(10, 2)
   currentLoan             Decimal  @db.Decimal(10, 2)
@@ -426,7 +427,7 @@ model PayrollDetails {
   createdBy               Int?
   modifiedDate            DateTime @updatedAt
   modifiedBy              Int?
-  payrollSectionId        Int?
+  isLocked                Boolean  @default(false)
 
   // Relations: PayrollDetails → Other Tables
   payrollSummary PayrollSummary  @relation(fields: [payrollId], references: [id], onDelete: Cascade)
@@ -436,7 +437,6 @@ model PayrollDetails {
   branch         Branch?         @relation(fields: [branchId], references: [id])
   creator        User?           @relation("PayrollDetailsCreatedBy", fields: [createdBy], references: [id])
   modifier       User?           @relation("PayrollDetailsModifiedBy", fields: [modifiedBy], references: [id])
-  payrollSection PayrollSection? @relation(fields: [payrollSectionId], references: [id])
 
   // Relations: Other Tables → PayrollDetails
   ledgers Ledger[]

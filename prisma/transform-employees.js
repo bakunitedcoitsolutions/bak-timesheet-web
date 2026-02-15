@@ -109,7 +109,7 @@ function transformEmployee(row) {
   const designationId = parseInteger(row.DesignationId);
   const payrollSectionId = parseInteger(row.PayrollSectionId);
 
-  const workingDays = parseInteger(row.WorkDays);
+  const workingDays = parseInteger(row.WorkDays) || 30;
 
   // Determine hours per day based on designation
   const hoursPerDay = designationIdsWhichHas8HoursAday.includes(designationId)
@@ -136,8 +136,7 @@ function transformEmployee(row) {
   if (isFixed) {
     if (hourlyRate > 0) {
       // Calculate salary based on rate, hours, and working days (default 30)
-      const daysToUse = workingDays || 30;
-      finalSalary = Math.round(hourlyRate * hoursPerDay * daysToUse);
+      finalSalary = Math.round(hourlyRate * hoursPerDay * workingDays);
       finalHourlyRate = hourlyRate;
     } else {
       finalSalary = 0;
