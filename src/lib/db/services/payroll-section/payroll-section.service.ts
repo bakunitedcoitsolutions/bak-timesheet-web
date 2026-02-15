@@ -292,17 +292,6 @@ export const deletePayrollSection = async (id: number): Promise<void> => {
       );
     }
 
-    // Check if payroll section is being used by payrolls
-    const payrollsCount = await tx.payrollDetails.count({
-      where: { payrollSectionId: id },
-    });
-
-    if (payrollsCount > 0) {
-      throw new Error(
-        `Cannot delete payroll section: ${payrollsCount} payroll record(s) are using this payroll section`
-      );
-    }
-
     // If the record has a displayOrderKey, shift down all records with higher keys
     if (existingPayrollSection.displayOrderKey !== null) {
       // Check if there are records with higher keys (if not, this is the last item - no need to shift)

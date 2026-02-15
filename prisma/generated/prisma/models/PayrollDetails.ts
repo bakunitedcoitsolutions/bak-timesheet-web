@@ -35,16 +35,18 @@ export type PayrollDetailsAvgAggregateOutputType = {
   workDays: number | null
   totalHours: runtime.Decimal | null
   hourlyRate: runtime.Decimal | null
-  allowance: runtime.Decimal | null
+  breakfastAllowance: runtime.Decimal | null
+  otherAllowances: runtime.Decimal | null
+  totalAllowances: runtime.Decimal | null
   salary: runtime.Decimal | null
   previousLoan: runtime.Decimal | null
   currentLoan: runtime.Decimal | null
-  deductionLoan: runtime.Decimal | null
+  loanDeduction: runtime.Decimal | null
   netLoan: runtime.Decimal | null
-  previousTrafficChallan: runtime.Decimal | null
-  currentTrafficChallan: runtime.Decimal | null
-  deductionTrafficChallan: runtime.Decimal | null
-  netTrafficChallan: runtime.Decimal | null
+  previousChallan: runtime.Decimal | null
+  currentChallan: runtime.Decimal | null
+  challanDeduction: runtime.Decimal | null
+  netChallan: runtime.Decimal | null
   netSalaryPayable: runtime.Decimal | null
   cardSalary: runtime.Decimal | null
   cashSalary: runtime.Decimal | null
@@ -54,7 +56,6 @@ export type PayrollDetailsAvgAggregateOutputType = {
   branchId: number | null
   createdBy: number | null
   modifiedBy: number | null
-  payrollSectionId: number | null
 }
 
 export type PayrollDetailsSumAggregateOutputType = {
@@ -66,16 +67,18 @@ export type PayrollDetailsSumAggregateOutputType = {
   workDays: number | null
   totalHours: runtime.Decimal | null
   hourlyRate: runtime.Decimal | null
-  allowance: runtime.Decimal | null
+  breakfastAllowance: runtime.Decimal | null
+  otherAllowances: runtime.Decimal | null
+  totalAllowances: runtime.Decimal | null
   salary: runtime.Decimal | null
   previousLoan: runtime.Decimal | null
   currentLoan: runtime.Decimal | null
-  deductionLoan: runtime.Decimal | null
+  loanDeduction: runtime.Decimal | null
   netLoan: runtime.Decimal | null
-  previousTrafficChallan: runtime.Decimal | null
-  currentTrafficChallan: runtime.Decimal | null
-  deductionTrafficChallan: runtime.Decimal | null
-  netTrafficChallan: runtime.Decimal | null
+  previousChallan: runtime.Decimal | null
+  currentChallan: runtime.Decimal | null
+  challanDeduction: runtime.Decimal | null
+  netChallan: runtime.Decimal | null
   netSalaryPayable: runtime.Decimal | null
   cardSalary: runtime.Decimal | null
   cashSalary: runtime.Decimal | null
@@ -85,7 +88,6 @@ export type PayrollDetailsSumAggregateOutputType = {
   branchId: number | null
   createdBy: number | null
   modifiedBy: number | null
-  payrollSectionId: number | null
 }
 
 export type PayrollDetailsMinAggregateOutputType = {
@@ -97,16 +99,18 @@ export type PayrollDetailsMinAggregateOutputType = {
   workDays: number | null
   totalHours: runtime.Decimal | null
   hourlyRate: runtime.Decimal | null
-  allowance: runtime.Decimal | null
+  breakfastAllowance: runtime.Decimal | null
+  otherAllowances: runtime.Decimal | null
+  totalAllowances: runtime.Decimal | null
   salary: runtime.Decimal | null
   previousLoan: runtime.Decimal | null
   currentLoan: runtime.Decimal | null
-  deductionLoan: runtime.Decimal | null
+  loanDeduction: runtime.Decimal | null
   netLoan: runtime.Decimal | null
-  previousTrafficChallan: runtime.Decimal | null
-  currentTrafficChallan: runtime.Decimal | null
-  deductionTrafficChallan: runtime.Decimal | null
-  netTrafficChallan: runtime.Decimal | null
+  previousChallan: runtime.Decimal | null
+  currentChallan: runtime.Decimal | null
+  challanDeduction: runtime.Decimal | null
+  netChallan: runtime.Decimal | null
   netSalaryPayable: runtime.Decimal | null
   cardSalary: runtime.Decimal | null
   cashSalary: runtime.Decimal | null
@@ -119,7 +123,7 @@ export type PayrollDetailsMinAggregateOutputType = {
   createdBy: number | null
   modifiedDate: Date | null
   modifiedBy: number | null
-  payrollSectionId: number | null
+  isLocked: boolean | null
 }
 
 export type PayrollDetailsMaxAggregateOutputType = {
@@ -131,16 +135,18 @@ export type PayrollDetailsMaxAggregateOutputType = {
   workDays: number | null
   totalHours: runtime.Decimal | null
   hourlyRate: runtime.Decimal | null
-  allowance: runtime.Decimal | null
+  breakfastAllowance: runtime.Decimal | null
+  otherAllowances: runtime.Decimal | null
+  totalAllowances: runtime.Decimal | null
   salary: runtime.Decimal | null
   previousLoan: runtime.Decimal | null
   currentLoan: runtime.Decimal | null
-  deductionLoan: runtime.Decimal | null
+  loanDeduction: runtime.Decimal | null
   netLoan: runtime.Decimal | null
-  previousTrafficChallan: runtime.Decimal | null
-  currentTrafficChallan: runtime.Decimal | null
-  deductionTrafficChallan: runtime.Decimal | null
-  netTrafficChallan: runtime.Decimal | null
+  previousChallan: runtime.Decimal | null
+  currentChallan: runtime.Decimal | null
+  challanDeduction: runtime.Decimal | null
+  netChallan: runtime.Decimal | null
   netSalaryPayable: runtime.Decimal | null
   cardSalary: runtime.Decimal | null
   cashSalary: runtime.Decimal | null
@@ -153,7 +159,7 @@ export type PayrollDetailsMaxAggregateOutputType = {
   createdBy: number | null
   modifiedDate: Date | null
   modifiedBy: number | null
-  payrollSectionId: number | null
+  isLocked: boolean | null
 }
 
 export type PayrollDetailsCountAggregateOutputType = {
@@ -165,16 +171,18 @@ export type PayrollDetailsCountAggregateOutputType = {
   workDays: number
   totalHours: number
   hourlyRate: number
-  allowance: number
+  breakfastAllowance: number
+  otherAllowances: number
+  totalAllowances: number
   salary: number
   previousLoan: number
   currentLoan: number
-  deductionLoan: number
+  loanDeduction: number
   netLoan: number
-  previousTrafficChallan: number
-  currentTrafficChallan: number
-  deductionTrafficChallan: number
-  netTrafficChallan: number
+  previousChallan: number
+  currentChallan: number
+  challanDeduction: number
+  netChallan: number
   netSalaryPayable: number
   cardSalary: number
   cashSalary: number
@@ -187,7 +195,7 @@ export type PayrollDetailsCountAggregateOutputType = {
   createdBy: number
   modifiedDate: number
   modifiedBy: number
-  payrollSectionId: number
+  isLocked: number
   _all: number
 }
 
@@ -201,16 +209,18 @@ export type PayrollDetailsAvgAggregateInputType = {
   workDays?: true
   totalHours?: true
   hourlyRate?: true
-  allowance?: true
+  breakfastAllowance?: true
+  otherAllowances?: true
+  totalAllowances?: true
   salary?: true
   previousLoan?: true
   currentLoan?: true
-  deductionLoan?: true
+  loanDeduction?: true
   netLoan?: true
-  previousTrafficChallan?: true
-  currentTrafficChallan?: true
-  deductionTrafficChallan?: true
-  netTrafficChallan?: true
+  previousChallan?: true
+  currentChallan?: true
+  challanDeduction?: true
+  netChallan?: true
   netSalaryPayable?: true
   cardSalary?: true
   cashSalary?: true
@@ -220,7 +230,6 @@ export type PayrollDetailsAvgAggregateInputType = {
   branchId?: true
   createdBy?: true
   modifiedBy?: true
-  payrollSectionId?: true
 }
 
 export type PayrollDetailsSumAggregateInputType = {
@@ -232,16 +241,18 @@ export type PayrollDetailsSumAggregateInputType = {
   workDays?: true
   totalHours?: true
   hourlyRate?: true
-  allowance?: true
+  breakfastAllowance?: true
+  otherAllowances?: true
+  totalAllowances?: true
   salary?: true
   previousLoan?: true
   currentLoan?: true
-  deductionLoan?: true
+  loanDeduction?: true
   netLoan?: true
-  previousTrafficChallan?: true
-  currentTrafficChallan?: true
-  deductionTrafficChallan?: true
-  netTrafficChallan?: true
+  previousChallan?: true
+  currentChallan?: true
+  challanDeduction?: true
+  netChallan?: true
   netSalaryPayable?: true
   cardSalary?: true
   cashSalary?: true
@@ -251,7 +262,6 @@ export type PayrollDetailsSumAggregateInputType = {
   branchId?: true
   createdBy?: true
   modifiedBy?: true
-  payrollSectionId?: true
 }
 
 export type PayrollDetailsMinAggregateInputType = {
@@ -263,16 +273,18 @@ export type PayrollDetailsMinAggregateInputType = {
   workDays?: true
   totalHours?: true
   hourlyRate?: true
-  allowance?: true
+  breakfastAllowance?: true
+  otherAllowances?: true
+  totalAllowances?: true
   salary?: true
   previousLoan?: true
   currentLoan?: true
-  deductionLoan?: true
+  loanDeduction?: true
   netLoan?: true
-  previousTrafficChallan?: true
-  currentTrafficChallan?: true
-  deductionTrafficChallan?: true
-  netTrafficChallan?: true
+  previousChallan?: true
+  currentChallan?: true
+  challanDeduction?: true
+  netChallan?: true
   netSalaryPayable?: true
   cardSalary?: true
   cashSalary?: true
@@ -285,7 +297,7 @@ export type PayrollDetailsMinAggregateInputType = {
   createdBy?: true
   modifiedDate?: true
   modifiedBy?: true
-  payrollSectionId?: true
+  isLocked?: true
 }
 
 export type PayrollDetailsMaxAggregateInputType = {
@@ -297,16 +309,18 @@ export type PayrollDetailsMaxAggregateInputType = {
   workDays?: true
   totalHours?: true
   hourlyRate?: true
-  allowance?: true
+  breakfastAllowance?: true
+  otherAllowances?: true
+  totalAllowances?: true
   salary?: true
   previousLoan?: true
   currentLoan?: true
-  deductionLoan?: true
+  loanDeduction?: true
   netLoan?: true
-  previousTrafficChallan?: true
-  currentTrafficChallan?: true
-  deductionTrafficChallan?: true
-  netTrafficChallan?: true
+  previousChallan?: true
+  currentChallan?: true
+  challanDeduction?: true
+  netChallan?: true
   netSalaryPayable?: true
   cardSalary?: true
   cashSalary?: true
@@ -319,7 +333,7 @@ export type PayrollDetailsMaxAggregateInputType = {
   createdBy?: true
   modifiedDate?: true
   modifiedBy?: true
-  payrollSectionId?: true
+  isLocked?: true
 }
 
 export type PayrollDetailsCountAggregateInputType = {
@@ -331,16 +345,18 @@ export type PayrollDetailsCountAggregateInputType = {
   workDays?: true
   totalHours?: true
   hourlyRate?: true
-  allowance?: true
+  breakfastAllowance?: true
+  otherAllowances?: true
+  totalAllowances?: true
   salary?: true
   previousLoan?: true
   currentLoan?: true
-  deductionLoan?: true
+  loanDeduction?: true
   netLoan?: true
-  previousTrafficChallan?: true
-  currentTrafficChallan?: true
-  deductionTrafficChallan?: true
-  netTrafficChallan?: true
+  previousChallan?: true
+  currentChallan?: true
+  challanDeduction?: true
+  netChallan?: true
   netSalaryPayable?: true
   cardSalary?: true
   cashSalary?: true
@@ -353,7 +369,7 @@ export type PayrollDetailsCountAggregateInputType = {
   createdBy?: true
   modifiedDate?: true
   modifiedBy?: true
-  payrollSectionId?: true
+  isLocked?: true
   _all?: true
 }
 
@@ -452,16 +468,18 @@ export type PayrollDetailsGroupByOutputType = {
   workDays: number
   totalHours: runtime.Decimal
   hourlyRate: runtime.Decimal
-  allowance: runtime.Decimal
+  breakfastAllowance: runtime.Decimal
+  otherAllowances: runtime.Decimal
+  totalAllowances: runtime.Decimal
   salary: runtime.Decimal
   previousLoan: runtime.Decimal
   currentLoan: runtime.Decimal
-  deductionLoan: runtime.Decimal
+  loanDeduction: runtime.Decimal
   netLoan: runtime.Decimal
-  previousTrafficChallan: runtime.Decimal
-  currentTrafficChallan: runtime.Decimal
-  deductionTrafficChallan: runtime.Decimal
-  netTrafficChallan: runtime.Decimal
+  previousChallan: runtime.Decimal
+  currentChallan: runtime.Decimal
+  challanDeduction: runtime.Decimal
+  netChallan: runtime.Decimal
   netSalaryPayable: runtime.Decimal
   cardSalary: runtime.Decimal
   cashSalary: runtime.Decimal
@@ -474,7 +492,7 @@ export type PayrollDetailsGroupByOutputType = {
   createdBy: number | null
   modifiedDate: Date
   modifiedBy: number | null
-  payrollSectionId: number | null
+  isLocked: boolean
   _count: PayrollDetailsCountAggregateOutputType | null
   _avg: PayrollDetailsAvgAggregateOutputType | null
   _sum: PayrollDetailsSumAggregateOutputType | null
@@ -509,16 +527,18 @@ export type PayrollDetailsWhereInput = {
   workDays?: Prisma.IntFilter<"PayrollDetails"> | number
   totalHours?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   hourlyRate?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  allowance?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  breakfastAllowance?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  otherAllowances?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAllowances?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   salary?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   previousLoan?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentLoan?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionLoan?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  loanDeduction?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   netLoan?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  previousTrafficChallan?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  currentTrafficChallan?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionTrafficChallan?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  netTrafficChallan?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  previousChallan?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentChallan?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  challanDeduction?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  netChallan?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   netSalaryPayable?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   cardSalary?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   cashSalary?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -531,7 +551,7 @@ export type PayrollDetailsWhereInput = {
   createdBy?: Prisma.IntNullableFilter<"PayrollDetails"> | number | null
   modifiedDate?: Prisma.DateTimeFilter<"PayrollDetails"> | Date | string
   modifiedBy?: Prisma.IntNullableFilter<"PayrollDetails"> | number | null
-  payrollSectionId?: Prisma.IntNullableFilter<"PayrollDetails"> | number | null
+  isLocked?: Prisma.BoolFilter<"PayrollDetails"> | boolean
   payrollSummary?: Prisma.XOR<Prisma.PayrollSummaryScalarRelationFilter, Prisma.PayrollSummaryWhereInput>
   employee?: Prisma.XOR<Prisma.EmployeeScalarRelationFilter, Prisma.EmployeeWhereInput>
   paymentMethod?: Prisma.XOR<Prisma.PaymentMethodNullableScalarRelationFilter, Prisma.PaymentMethodWhereInput> | null
@@ -539,7 +559,6 @@ export type PayrollDetailsWhereInput = {
   branch?: Prisma.XOR<Prisma.BranchNullableScalarRelationFilter, Prisma.BranchWhereInput> | null
   creator?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   modifier?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
-  payrollSection?: Prisma.XOR<Prisma.PayrollSectionNullableScalarRelationFilter, Prisma.PayrollSectionWhereInput> | null
   ledgers?: Prisma.LedgerListRelationFilter
 }
 
@@ -552,16 +571,18 @@ export type PayrollDetailsOrderByWithRelationInput = {
   workDays?: Prisma.SortOrder
   totalHours?: Prisma.SortOrder
   hourlyRate?: Prisma.SortOrder
-  allowance?: Prisma.SortOrder
+  breakfastAllowance?: Prisma.SortOrder
+  otherAllowances?: Prisma.SortOrder
+  totalAllowances?: Prisma.SortOrder
   salary?: Prisma.SortOrder
   previousLoan?: Prisma.SortOrder
   currentLoan?: Prisma.SortOrder
-  deductionLoan?: Prisma.SortOrder
+  loanDeduction?: Prisma.SortOrder
   netLoan?: Prisma.SortOrder
-  previousTrafficChallan?: Prisma.SortOrder
-  currentTrafficChallan?: Prisma.SortOrder
-  deductionTrafficChallan?: Prisma.SortOrder
-  netTrafficChallan?: Prisma.SortOrder
+  previousChallan?: Prisma.SortOrder
+  currentChallan?: Prisma.SortOrder
+  challanDeduction?: Prisma.SortOrder
+  netChallan?: Prisma.SortOrder
   netSalaryPayable?: Prisma.SortOrder
   cardSalary?: Prisma.SortOrder
   cashSalary?: Prisma.SortOrder
@@ -574,7 +595,7 @@ export type PayrollDetailsOrderByWithRelationInput = {
   createdBy?: Prisma.SortOrderInput | Prisma.SortOrder
   modifiedDate?: Prisma.SortOrder
   modifiedBy?: Prisma.SortOrderInput | Prisma.SortOrder
-  payrollSectionId?: Prisma.SortOrderInput | Prisma.SortOrder
+  isLocked?: Prisma.SortOrder
   payrollSummary?: Prisma.PayrollSummaryOrderByWithRelationInput
   employee?: Prisma.EmployeeOrderByWithRelationInput
   paymentMethod?: Prisma.PaymentMethodOrderByWithRelationInput
@@ -582,7 +603,6 @@ export type PayrollDetailsOrderByWithRelationInput = {
   branch?: Prisma.BranchOrderByWithRelationInput
   creator?: Prisma.UserOrderByWithRelationInput
   modifier?: Prisma.UserOrderByWithRelationInput
-  payrollSection?: Prisma.PayrollSectionOrderByWithRelationInput
   ledgers?: Prisma.LedgerOrderByRelationAggregateInput
 }
 
@@ -598,16 +618,18 @@ export type PayrollDetailsWhereUniqueInput = Prisma.AtLeast<{
   workDays?: Prisma.IntFilter<"PayrollDetails"> | number
   totalHours?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   hourlyRate?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  allowance?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  breakfastAllowance?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  otherAllowances?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAllowances?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   salary?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   previousLoan?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentLoan?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionLoan?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  loanDeduction?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   netLoan?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  previousTrafficChallan?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  currentTrafficChallan?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionTrafficChallan?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  netTrafficChallan?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  previousChallan?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentChallan?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  challanDeduction?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  netChallan?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   netSalaryPayable?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   cardSalary?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   cashSalary?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -620,7 +642,7 @@ export type PayrollDetailsWhereUniqueInput = Prisma.AtLeast<{
   createdBy?: Prisma.IntNullableFilter<"PayrollDetails"> | number | null
   modifiedDate?: Prisma.DateTimeFilter<"PayrollDetails"> | Date | string
   modifiedBy?: Prisma.IntNullableFilter<"PayrollDetails"> | number | null
-  payrollSectionId?: Prisma.IntNullableFilter<"PayrollDetails"> | number | null
+  isLocked?: Prisma.BoolFilter<"PayrollDetails"> | boolean
   payrollSummary?: Prisma.XOR<Prisma.PayrollSummaryScalarRelationFilter, Prisma.PayrollSummaryWhereInput>
   employee?: Prisma.XOR<Prisma.EmployeeScalarRelationFilter, Prisma.EmployeeWhereInput>
   paymentMethod?: Prisma.XOR<Prisma.PaymentMethodNullableScalarRelationFilter, Prisma.PaymentMethodWhereInput> | null
@@ -628,7 +650,6 @@ export type PayrollDetailsWhereUniqueInput = Prisma.AtLeast<{
   branch?: Prisma.XOR<Prisma.BranchNullableScalarRelationFilter, Prisma.BranchWhereInput> | null
   creator?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   modifier?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
-  payrollSection?: Prisma.XOR<Prisma.PayrollSectionNullableScalarRelationFilter, Prisma.PayrollSectionWhereInput> | null
   ledgers?: Prisma.LedgerListRelationFilter
 }, "id">
 
@@ -641,16 +662,18 @@ export type PayrollDetailsOrderByWithAggregationInput = {
   workDays?: Prisma.SortOrder
   totalHours?: Prisma.SortOrder
   hourlyRate?: Prisma.SortOrder
-  allowance?: Prisma.SortOrder
+  breakfastAllowance?: Prisma.SortOrder
+  otherAllowances?: Prisma.SortOrder
+  totalAllowances?: Prisma.SortOrder
   salary?: Prisma.SortOrder
   previousLoan?: Prisma.SortOrder
   currentLoan?: Prisma.SortOrder
-  deductionLoan?: Prisma.SortOrder
+  loanDeduction?: Prisma.SortOrder
   netLoan?: Prisma.SortOrder
-  previousTrafficChallan?: Prisma.SortOrder
-  currentTrafficChallan?: Prisma.SortOrder
-  deductionTrafficChallan?: Prisma.SortOrder
-  netTrafficChallan?: Prisma.SortOrder
+  previousChallan?: Prisma.SortOrder
+  currentChallan?: Prisma.SortOrder
+  challanDeduction?: Prisma.SortOrder
+  netChallan?: Prisma.SortOrder
   netSalaryPayable?: Prisma.SortOrder
   cardSalary?: Prisma.SortOrder
   cashSalary?: Prisma.SortOrder
@@ -663,7 +686,7 @@ export type PayrollDetailsOrderByWithAggregationInput = {
   createdBy?: Prisma.SortOrderInput | Prisma.SortOrder
   modifiedDate?: Prisma.SortOrder
   modifiedBy?: Prisma.SortOrderInput | Prisma.SortOrder
-  payrollSectionId?: Prisma.SortOrderInput | Prisma.SortOrder
+  isLocked?: Prisma.SortOrder
   _count?: Prisma.PayrollDetailsCountOrderByAggregateInput
   _avg?: Prisma.PayrollDetailsAvgOrderByAggregateInput
   _max?: Prisma.PayrollDetailsMaxOrderByAggregateInput
@@ -683,16 +706,18 @@ export type PayrollDetailsScalarWhereWithAggregatesInput = {
   workDays?: Prisma.IntWithAggregatesFilter<"PayrollDetails"> | number
   totalHours?: Prisma.DecimalWithAggregatesFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   hourlyRate?: Prisma.DecimalWithAggregatesFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  allowance?: Prisma.DecimalWithAggregatesFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  breakfastAllowance?: Prisma.DecimalWithAggregatesFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  otherAllowances?: Prisma.DecimalWithAggregatesFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAllowances?: Prisma.DecimalWithAggregatesFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   salary?: Prisma.DecimalWithAggregatesFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   previousLoan?: Prisma.DecimalWithAggregatesFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentLoan?: Prisma.DecimalWithAggregatesFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionLoan?: Prisma.DecimalWithAggregatesFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  loanDeduction?: Prisma.DecimalWithAggregatesFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   netLoan?: Prisma.DecimalWithAggregatesFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  previousTrafficChallan?: Prisma.DecimalWithAggregatesFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  currentTrafficChallan?: Prisma.DecimalWithAggregatesFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionTrafficChallan?: Prisma.DecimalWithAggregatesFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  netTrafficChallan?: Prisma.DecimalWithAggregatesFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  previousChallan?: Prisma.DecimalWithAggregatesFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentChallan?: Prisma.DecimalWithAggregatesFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  challanDeduction?: Prisma.DecimalWithAggregatesFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  netChallan?: Prisma.DecimalWithAggregatesFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   netSalaryPayable?: Prisma.DecimalWithAggregatesFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   cardSalary?: Prisma.DecimalWithAggregatesFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   cashSalary?: Prisma.DecimalWithAggregatesFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -705,7 +730,7 @@ export type PayrollDetailsScalarWhereWithAggregatesInput = {
   createdBy?: Prisma.IntNullableWithAggregatesFilter<"PayrollDetails"> | number | null
   modifiedDate?: Prisma.DateTimeWithAggregatesFilter<"PayrollDetails"> | Date | string
   modifiedBy?: Prisma.IntNullableWithAggregatesFilter<"PayrollDetails"> | number | null
-  payrollSectionId?: Prisma.IntNullableWithAggregatesFilter<"PayrollDetails"> | number | null
+  isLocked?: Prisma.BoolWithAggregatesFilter<"PayrollDetails"> | boolean
 }
 
 export type PayrollDetailsCreateInput = {
@@ -714,16 +739,18 @@ export type PayrollDetailsCreateInput = {
   workDays: number
   totalHours: runtime.Decimal | runtime.DecimalJsLike | number | string
   hourlyRate: runtime.Decimal | runtime.DecimalJsLike | number | string
-  allowance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  breakfastAllowance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  otherAllowances: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAllowances: runtime.Decimal | runtime.DecimalJsLike | number | string
   salary: runtime.Decimal | runtime.DecimalJsLike | number | string
   previousLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
   currentLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  loanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
   netLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  previousTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  currentTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  netTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  previousChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  challanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
+  netChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
   netSalaryPayable: runtime.Decimal | runtime.DecimalJsLike | number | string
   cardSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
   cashSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -731,6 +758,7 @@ export type PayrollDetailsCreateInput = {
   remarks?: string | null
   createdDate?: Date | string
   modifiedDate?: Date | string
+  isLocked?: boolean
   payrollSummary: Prisma.PayrollSummaryCreateNestedOneWithoutDetailsInput
   employee: Prisma.EmployeeCreateNestedOneWithoutPayrollDetailsInput
   paymentMethod?: Prisma.PaymentMethodCreateNestedOneWithoutPayrollDetailsInput
@@ -738,7 +766,6 @@ export type PayrollDetailsCreateInput = {
   branch?: Prisma.BranchCreateNestedOneWithoutPayrollDetailsInput
   creator?: Prisma.UserCreateNestedOneWithoutCreatedPayrollDetailsInput
   modifier?: Prisma.UserCreateNestedOneWithoutModifiedPayrollDetailsInput
-  payrollSection?: Prisma.PayrollSectionCreateNestedOneWithoutPayrollDetailsInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutPayrollDetailInput
 }
 
@@ -751,16 +778,18 @@ export type PayrollDetailsUncheckedCreateInput = {
   workDays: number
   totalHours: runtime.Decimal | runtime.DecimalJsLike | number | string
   hourlyRate: runtime.Decimal | runtime.DecimalJsLike | number | string
-  allowance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  breakfastAllowance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  otherAllowances: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAllowances: runtime.Decimal | runtime.DecimalJsLike | number | string
   salary: runtime.Decimal | runtime.DecimalJsLike | number | string
   previousLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
   currentLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  loanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
   netLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  previousTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  currentTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  netTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  previousChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  challanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
+  netChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
   netSalaryPayable: runtime.Decimal | runtime.DecimalJsLike | number | string
   cardSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
   cashSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -773,7 +802,7 @@ export type PayrollDetailsUncheckedCreateInput = {
   createdBy?: number | null
   modifiedDate?: Date | string
   modifiedBy?: number | null
-  payrollSectionId?: number | null
+  isLocked?: boolean
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutPayrollDetailInput
 }
 
@@ -783,16 +812,18 @@ export type PayrollDetailsUpdateInput = {
   workDays?: Prisma.IntFieldUpdateOperationsInput | number
   totalHours?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   hourlyRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  allowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  breakfastAllowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  otherAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   salary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   previousLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  loanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   netLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  previousTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  currentTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  netTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  previousChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  challanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  netChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   netSalaryPayable?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   cardSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   cashSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -800,6 +831,7 @@ export type PayrollDetailsUpdateInput = {
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   modifiedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
   payrollSummary?: Prisma.PayrollSummaryUpdateOneRequiredWithoutDetailsNestedInput
   employee?: Prisma.EmployeeUpdateOneRequiredWithoutPayrollDetailsNestedInput
   paymentMethod?: Prisma.PaymentMethodUpdateOneWithoutPayrollDetailsNestedInput
@@ -807,7 +839,6 @@ export type PayrollDetailsUpdateInput = {
   branch?: Prisma.BranchUpdateOneWithoutPayrollDetailsNestedInput
   creator?: Prisma.UserUpdateOneWithoutCreatedPayrollDetailsNestedInput
   modifier?: Prisma.UserUpdateOneWithoutModifiedPayrollDetailsNestedInput
-  payrollSection?: Prisma.PayrollSectionUpdateOneWithoutPayrollDetailsNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutPayrollDetailNestedInput
 }
 
@@ -820,16 +851,18 @@ export type PayrollDetailsUncheckedUpdateInput = {
   workDays?: Prisma.IntFieldUpdateOperationsInput | number
   totalHours?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   hourlyRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  allowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  breakfastAllowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  otherAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   salary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   previousLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  loanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   netLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  previousTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  currentTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  netTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  previousChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  challanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  netChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   netSalaryPayable?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   cardSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   cashSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -842,7 +875,7 @@ export type PayrollDetailsUncheckedUpdateInput = {
   createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   modifiedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   modifiedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  payrollSectionId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutPayrollDetailNestedInput
 }
 
@@ -855,16 +888,18 @@ export type PayrollDetailsCreateManyInput = {
   workDays: number
   totalHours: runtime.Decimal | runtime.DecimalJsLike | number | string
   hourlyRate: runtime.Decimal | runtime.DecimalJsLike | number | string
-  allowance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  breakfastAllowance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  otherAllowances: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAllowances: runtime.Decimal | runtime.DecimalJsLike | number | string
   salary: runtime.Decimal | runtime.DecimalJsLike | number | string
   previousLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
   currentLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  loanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
   netLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  previousTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  currentTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  netTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  previousChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  challanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
+  netChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
   netSalaryPayable: runtime.Decimal | runtime.DecimalJsLike | number | string
   cardSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
   cashSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -877,7 +912,7 @@ export type PayrollDetailsCreateManyInput = {
   createdBy?: number | null
   modifiedDate?: Date | string
   modifiedBy?: number | null
-  payrollSectionId?: number | null
+  isLocked?: boolean
 }
 
 export type PayrollDetailsUpdateManyMutationInput = {
@@ -886,16 +921,18 @@ export type PayrollDetailsUpdateManyMutationInput = {
   workDays?: Prisma.IntFieldUpdateOperationsInput | number
   totalHours?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   hourlyRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  allowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  breakfastAllowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  otherAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   salary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   previousLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  loanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   netLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  previousTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  currentTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  netTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  previousChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  challanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  netChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   netSalaryPayable?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   cardSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   cashSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -903,6 +940,7 @@ export type PayrollDetailsUpdateManyMutationInput = {
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   modifiedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type PayrollDetailsUncheckedUpdateManyInput = {
@@ -914,16 +952,18 @@ export type PayrollDetailsUncheckedUpdateManyInput = {
   workDays?: Prisma.IntFieldUpdateOperationsInput | number
   totalHours?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   hourlyRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  allowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  breakfastAllowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  otherAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   salary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   previousLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  loanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   netLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  previousTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  currentTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  netTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  previousChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  challanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  netChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   netSalaryPayable?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   cardSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   cashSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -936,7 +976,7 @@ export type PayrollDetailsUncheckedUpdateManyInput = {
   createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   modifiedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   modifiedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  payrollSectionId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type PayrollDetailsListRelationFilter = {
@@ -958,16 +998,18 @@ export type PayrollDetailsCountOrderByAggregateInput = {
   workDays?: Prisma.SortOrder
   totalHours?: Prisma.SortOrder
   hourlyRate?: Prisma.SortOrder
-  allowance?: Prisma.SortOrder
+  breakfastAllowance?: Prisma.SortOrder
+  otherAllowances?: Prisma.SortOrder
+  totalAllowances?: Prisma.SortOrder
   salary?: Prisma.SortOrder
   previousLoan?: Prisma.SortOrder
   currentLoan?: Prisma.SortOrder
-  deductionLoan?: Prisma.SortOrder
+  loanDeduction?: Prisma.SortOrder
   netLoan?: Prisma.SortOrder
-  previousTrafficChallan?: Prisma.SortOrder
-  currentTrafficChallan?: Prisma.SortOrder
-  deductionTrafficChallan?: Prisma.SortOrder
-  netTrafficChallan?: Prisma.SortOrder
+  previousChallan?: Prisma.SortOrder
+  currentChallan?: Prisma.SortOrder
+  challanDeduction?: Prisma.SortOrder
+  netChallan?: Prisma.SortOrder
   netSalaryPayable?: Prisma.SortOrder
   cardSalary?: Prisma.SortOrder
   cashSalary?: Prisma.SortOrder
@@ -980,7 +1022,7 @@ export type PayrollDetailsCountOrderByAggregateInput = {
   createdBy?: Prisma.SortOrder
   modifiedDate?: Prisma.SortOrder
   modifiedBy?: Prisma.SortOrder
-  payrollSectionId?: Prisma.SortOrder
+  isLocked?: Prisma.SortOrder
 }
 
 export type PayrollDetailsAvgOrderByAggregateInput = {
@@ -992,16 +1034,18 @@ export type PayrollDetailsAvgOrderByAggregateInput = {
   workDays?: Prisma.SortOrder
   totalHours?: Prisma.SortOrder
   hourlyRate?: Prisma.SortOrder
-  allowance?: Prisma.SortOrder
+  breakfastAllowance?: Prisma.SortOrder
+  otherAllowances?: Prisma.SortOrder
+  totalAllowances?: Prisma.SortOrder
   salary?: Prisma.SortOrder
   previousLoan?: Prisma.SortOrder
   currentLoan?: Prisma.SortOrder
-  deductionLoan?: Prisma.SortOrder
+  loanDeduction?: Prisma.SortOrder
   netLoan?: Prisma.SortOrder
-  previousTrafficChallan?: Prisma.SortOrder
-  currentTrafficChallan?: Prisma.SortOrder
-  deductionTrafficChallan?: Prisma.SortOrder
-  netTrafficChallan?: Prisma.SortOrder
+  previousChallan?: Prisma.SortOrder
+  currentChallan?: Prisma.SortOrder
+  challanDeduction?: Prisma.SortOrder
+  netChallan?: Prisma.SortOrder
   netSalaryPayable?: Prisma.SortOrder
   cardSalary?: Prisma.SortOrder
   cashSalary?: Prisma.SortOrder
@@ -1011,7 +1055,6 @@ export type PayrollDetailsAvgOrderByAggregateInput = {
   branchId?: Prisma.SortOrder
   createdBy?: Prisma.SortOrder
   modifiedBy?: Prisma.SortOrder
-  payrollSectionId?: Prisma.SortOrder
 }
 
 export type PayrollDetailsMaxOrderByAggregateInput = {
@@ -1023,16 +1066,18 @@ export type PayrollDetailsMaxOrderByAggregateInput = {
   workDays?: Prisma.SortOrder
   totalHours?: Prisma.SortOrder
   hourlyRate?: Prisma.SortOrder
-  allowance?: Prisma.SortOrder
+  breakfastAllowance?: Prisma.SortOrder
+  otherAllowances?: Prisma.SortOrder
+  totalAllowances?: Prisma.SortOrder
   salary?: Prisma.SortOrder
   previousLoan?: Prisma.SortOrder
   currentLoan?: Prisma.SortOrder
-  deductionLoan?: Prisma.SortOrder
+  loanDeduction?: Prisma.SortOrder
   netLoan?: Prisma.SortOrder
-  previousTrafficChallan?: Prisma.SortOrder
-  currentTrafficChallan?: Prisma.SortOrder
-  deductionTrafficChallan?: Prisma.SortOrder
-  netTrafficChallan?: Prisma.SortOrder
+  previousChallan?: Prisma.SortOrder
+  currentChallan?: Prisma.SortOrder
+  challanDeduction?: Prisma.SortOrder
+  netChallan?: Prisma.SortOrder
   netSalaryPayable?: Prisma.SortOrder
   cardSalary?: Prisma.SortOrder
   cashSalary?: Prisma.SortOrder
@@ -1045,7 +1090,7 @@ export type PayrollDetailsMaxOrderByAggregateInput = {
   createdBy?: Prisma.SortOrder
   modifiedDate?: Prisma.SortOrder
   modifiedBy?: Prisma.SortOrder
-  payrollSectionId?: Prisma.SortOrder
+  isLocked?: Prisma.SortOrder
 }
 
 export type PayrollDetailsMinOrderByAggregateInput = {
@@ -1057,16 +1102,18 @@ export type PayrollDetailsMinOrderByAggregateInput = {
   workDays?: Prisma.SortOrder
   totalHours?: Prisma.SortOrder
   hourlyRate?: Prisma.SortOrder
-  allowance?: Prisma.SortOrder
+  breakfastAllowance?: Prisma.SortOrder
+  otherAllowances?: Prisma.SortOrder
+  totalAllowances?: Prisma.SortOrder
   salary?: Prisma.SortOrder
   previousLoan?: Prisma.SortOrder
   currentLoan?: Prisma.SortOrder
-  deductionLoan?: Prisma.SortOrder
+  loanDeduction?: Prisma.SortOrder
   netLoan?: Prisma.SortOrder
-  previousTrafficChallan?: Prisma.SortOrder
-  currentTrafficChallan?: Prisma.SortOrder
-  deductionTrafficChallan?: Prisma.SortOrder
-  netTrafficChallan?: Prisma.SortOrder
+  previousChallan?: Prisma.SortOrder
+  currentChallan?: Prisma.SortOrder
+  challanDeduction?: Prisma.SortOrder
+  netChallan?: Prisma.SortOrder
   netSalaryPayable?: Prisma.SortOrder
   cardSalary?: Prisma.SortOrder
   cashSalary?: Prisma.SortOrder
@@ -1079,7 +1126,7 @@ export type PayrollDetailsMinOrderByAggregateInput = {
   createdBy?: Prisma.SortOrder
   modifiedDate?: Prisma.SortOrder
   modifiedBy?: Prisma.SortOrder
-  payrollSectionId?: Prisma.SortOrder
+  isLocked?: Prisma.SortOrder
 }
 
 export type PayrollDetailsSumOrderByAggregateInput = {
@@ -1091,16 +1138,18 @@ export type PayrollDetailsSumOrderByAggregateInput = {
   workDays?: Prisma.SortOrder
   totalHours?: Prisma.SortOrder
   hourlyRate?: Prisma.SortOrder
-  allowance?: Prisma.SortOrder
+  breakfastAllowance?: Prisma.SortOrder
+  otherAllowances?: Prisma.SortOrder
+  totalAllowances?: Prisma.SortOrder
   salary?: Prisma.SortOrder
   previousLoan?: Prisma.SortOrder
   currentLoan?: Prisma.SortOrder
-  deductionLoan?: Prisma.SortOrder
+  loanDeduction?: Prisma.SortOrder
   netLoan?: Prisma.SortOrder
-  previousTrafficChallan?: Prisma.SortOrder
-  currentTrafficChallan?: Prisma.SortOrder
-  deductionTrafficChallan?: Prisma.SortOrder
-  netTrafficChallan?: Prisma.SortOrder
+  previousChallan?: Prisma.SortOrder
+  currentChallan?: Prisma.SortOrder
+  challanDeduction?: Prisma.SortOrder
+  netChallan?: Prisma.SortOrder
   netSalaryPayable?: Prisma.SortOrder
   cardSalary?: Prisma.SortOrder
   cashSalary?: Prisma.SortOrder
@@ -1110,7 +1159,6 @@ export type PayrollDetailsSumOrderByAggregateInput = {
   branchId?: Prisma.SortOrder
   createdBy?: Prisma.SortOrder
   modifiedBy?: Prisma.SortOrder
-  payrollSectionId?: Prisma.SortOrder
 }
 
 export type PayrollDetailsNullableScalarRelationFilter = {
@@ -1286,48 +1334,6 @@ export type PayrollDetailsUncheckedUpdateManyWithoutEmployeeNestedInput = {
   deleteMany?: Prisma.PayrollDetailsScalarWhereInput | Prisma.PayrollDetailsScalarWhereInput[]
 }
 
-export type PayrollDetailsCreateNestedManyWithoutPayrollSectionInput = {
-  create?: Prisma.XOR<Prisma.PayrollDetailsCreateWithoutPayrollSectionInput, Prisma.PayrollDetailsUncheckedCreateWithoutPayrollSectionInput> | Prisma.PayrollDetailsCreateWithoutPayrollSectionInput[] | Prisma.PayrollDetailsUncheckedCreateWithoutPayrollSectionInput[]
-  connectOrCreate?: Prisma.PayrollDetailsCreateOrConnectWithoutPayrollSectionInput | Prisma.PayrollDetailsCreateOrConnectWithoutPayrollSectionInput[]
-  createMany?: Prisma.PayrollDetailsCreateManyPayrollSectionInputEnvelope
-  connect?: Prisma.PayrollDetailsWhereUniqueInput | Prisma.PayrollDetailsWhereUniqueInput[]
-}
-
-export type PayrollDetailsUncheckedCreateNestedManyWithoutPayrollSectionInput = {
-  create?: Prisma.XOR<Prisma.PayrollDetailsCreateWithoutPayrollSectionInput, Prisma.PayrollDetailsUncheckedCreateWithoutPayrollSectionInput> | Prisma.PayrollDetailsCreateWithoutPayrollSectionInput[] | Prisma.PayrollDetailsUncheckedCreateWithoutPayrollSectionInput[]
-  connectOrCreate?: Prisma.PayrollDetailsCreateOrConnectWithoutPayrollSectionInput | Prisma.PayrollDetailsCreateOrConnectWithoutPayrollSectionInput[]
-  createMany?: Prisma.PayrollDetailsCreateManyPayrollSectionInputEnvelope
-  connect?: Prisma.PayrollDetailsWhereUniqueInput | Prisma.PayrollDetailsWhereUniqueInput[]
-}
-
-export type PayrollDetailsUpdateManyWithoutPayrollSectionNestedInput = {
-  create?: Prisma.XOR<Prisma.PayrollDetailsCreateWithoutPayrollSectionInput, Prisma.PayrollDetailsUncheckedCreateWithoutPayrollSectionInput> | Prisma.PayrollDetailsCreateWithoutPayrollSectionInput[] | Prisma.PayrollDetailsUncheckedCreateWithoutPayrollSectionInput[]
-  connectOrCreate?: Prisma.PayrollDetailsCreateOrConnectWithoutPayrollSectionInput | Prisma.PayrollDetailsCreateOrConnectWithoutPayrollSectionInput[]
-  upsert?: Prisma.PayrollDetailsUpsertWithWhereUniqueWithoutPayrollSectionInput | Prisma.PayrollDetailsUpsertWithWhereUniqueWithoutPayrollSectionInput[]
-  createMany?: Prisma.PayrollDetailsCreateManyPayrollSectionInputEnvelope
-  set?: Prisma.PayrollDetailsWhereUniqueInput | Prisma.PayrollDetailsWhereUniqueInput[]
-  disconnect?: Prisma.PayrollDetailsWhereUniqueInput | Prisma.PayrollDetailsWhereUniqueInput[]
-  delete?: Prisma.PayrollDetailsWhereUniqueInput | Prisma.PayrollDetailsWhereUniqueInput[]
-  connect?: Prisma.PayrollDetailsWhereUniqueInput | Prisma.PayrollDetailsWhereUniqueInput[]
-  update?: Prisma.PayrollDetailsUpdateWithWhereUniqueWithoutPayrollSectionInput | Prisma.PayrollDetailsUpdateWithWhereUniqueWithoutPayrollSectionInput[]
-  updateMany?: Prisma.PayrollDetailsUpdateManyWithWhereWithoutPayrollSectionInput | Prisma.PayrollDetailsUpdateManyWithWhereWithoutPayrollSectionInput[]
-  deleteMany?: Prisma.PayrollDetailsScalarWhereInput | Prisma.PayrollDetailsScalarWhereInput[]
-}
-
-export type PayrollDetailsUncheckedUpdateManyWithoutPayrollSectionNestedInput = {
-  create?: Prisma.XOR<Prisma.PayrollDetailsCreateWithoutPayrollSectionInput, Prisma.PayrollDetailsUncheckedCreateWithoutPayrollSectionInput> | Prisma.PayrollDetailsCreateWithoutPayrollSectionInput[] | Prisma.PayrollDetailsUncheckedCreateWithoutPayrollSectionInput[]
-  connectOrCreate?: Prisma.PayrollDetailsCreateOrConnectWithoutPayrollSectionInput | Prisma.PayrollDetailsCreateOrConnectWithoutPayrollSectionInput[]
-  upsert?: Prisma.PayrollDetailsUpsertWithWhereUniqueWithoutPayrollSectionInput | Prisma.PayrollDetailsUpsertWithWhereUniqueWithoutPayrollSectionInput[]
-  createMany?: Prisma.PayrollDetailsCreateManyPayrollSectionInputEnvelope
-  set?: Prisma.PayrollDetailsWhereUniqueInput | Prisma.PayrollDetailsWhereUniqueInput[]
-  disconnect?: Prisma.PayrollDetailsWhereUniqueInput | Prisma.PayrollDetailsWhereUniqueInput[]
-  delete?: Prisma.PayrollDetailsWhereUniqueInput | Prisma.PayrollDetailsWhereUniqueInput[]
-  connect?: Prisma.PayrollDetailsWhereUniqueInput | Prisma.PayrollDetailsWhereUniqueInput[]
-  update?: Prisma.PayrollDetailsUpdateWithWhereUniqueWithoutPayrollSectionInput | Prisma.PayrollDetailsUpdateWithWhereUniqueWithoutPayrollSectionInput[]
-  updateMany?: Prisma.PayrollDetailsUpdateManyWithWhereWithoutPayrollSectionInput | Prisma.PayrollDetailsUpdateManyWithWhereWithoutPayrollSectionInput[]
-  deleteMany?: Prisma.PayrollDetailsScalarWhereInput | Prisma.PayrollDetailsScalarWhereInput[]
-}
-
 export type PayrollDetailsCreateNestedManyWithoutPayrollStatusInput = {
   create?: Prisma.XOR<Prisma.PayrollDetailsCreateWithoutPayrollStatusInput, Prisma.PayrollDetailsUncheckedCreateWithoutPayrollStatusInput> | Prisma.PayrollDetailsCreateWithoutPayrollStatusInput[] | Prisma.PayrollDetailsUncheckedCreateWithoutPayrollStatusInput[]
   connectOrCreate?: Prisma.PayrollDetailsCreateOrConnectWithoutPayrollStatusInput | Prisma.PayrollDetailsCreateOrConnectWithoutPayrollStatusInput[]
@@ -1476,16 +1482,18 @@ export type PayrollDetailsCreateWithoutCreatorInput = {
   workDays: number
   totalHours: runtime.Decimal | runtime.DecimalJsLike | number | string
   hourlyRate: runtime.Decimal | runtime.DecimalJsLike | number | string
-  allowance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  breakfastAllowance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  otherAllowances: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAllowances: runtime.Decimal | runtime.DecimalJsLike | number | string
   salary: runtime.Decimal | runtime.DecimalJsLike | number | string
   previousLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
   currentLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  loanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
   netLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  previousTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  currentTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  netTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  previousChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  challanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
+  netChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
   netSalaryPayable: runtime.Decimal | runtime.DecimalJsLike | number | string
   cardSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
   cashSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1493,13 +1501,13 @@ export type PayrollDetailsCreateWithoutCreatorInput = {
   remarks?: string | null
   createdDate?: Date | string
   modifiedDate?: Date | string
+  isLocked?: boolean
   payrollSummary: Prisma.PayrollSummaryCreateNestedOneWithoutDetailsInput
   employee: Prisma.EmployeeCreateNestedOneWithoutPayrollDetailsInput
   paymentMethod?: Prisma.PaymentMethodCreateNestedOneWithoutPayrollDetailsInput
   payrollStatus?: Prisma.PayrollStatusCreateNestedOneWithoutPayrollDetailsInput
   branch?: Prisma.BranchCreateNestedOneWithoutPayrollDetailsInput
   modifier?: Prisma.UserCreateNestedOneWithoutModifiedPayrollDetailsInput
-  payrollSection?: Prisma.PayrollSectionCreateNestedOneWithoutPayrollDetailsInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutPayrollDetailInput
 }
 
@@ -1512,16 +1520,18 @@ export type PayrollDetailsUncheckedCreateWithoutCreatorInput = {
   workDays: number
   totalHours: runtime.Decimal | runtime.DecimalJsLike | number | string
   hourlyRate: runtime.Decimal | runtime.DecimalJsLike | number | string
-  allowance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  breakfastAllowance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  otherAllowances: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAllowances: runtime.Decimal | runtime.DecimalJsLike | number | string
   salary: runtime.Decimal | runtime.DecimalJsLike | number | string
   previousLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
   currentLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  loanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
   netLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  previousTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  currentTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  netTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  previousChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  challanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
+  netChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
   netSalaryPayable: runtime.Decimal | runtime.DecimalJsLike | number | string
   cardSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
   cashSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1533,7 +1543,7 @@ export type PayrollDetailsUncheckedCreateWithoutCreatorInput = {
   createdDate?: Date | string
   modifiedDate?: Date | string
   modifiedBy?: number | null
-  payrollSectionId?: number | null
+  isLocked?: boolean
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutPayrollDetailInput
 }
 
@@ -1553,16 +1563,18 @@ export type PayrollDetailsCreateWithoutModifierInput = {
   workDays: number
   totalHours: runtime.Decimal | runtime.DecimalJsLike | number | string
   hourlyRate: runtime.Decimal | runtime.DecimalJsLike | number | string
-  allowance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  breakfastAllowance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  otherAllowances: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAllowances: runtime.Decimal | runtime.DecimalJsLike | number | string
   salary: runtime.Decimal | runtime.DecimalJsLike | number | string
   previousLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
   currentLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  loanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
   netLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  previousTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  currentTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  netTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  previousChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  challanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
+  netChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
   netSalaryPayable: runtime.Decimal | runtime.DecimalJsLike | number | string
   cardSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
   cashSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1570,13 +1582,13 @@ export type PayrollDetailsCreateWithoutModifierInput = {
   remarks?: string | null
   createdDate?: Date | string
   modifiedDate?: Date | string
+  isLocked?: boolean
   payrollSummary: Prisma.PayrollSummaryCreateNestedOneWithoutDetailsInput
   employee: Prisma.EmployeeCreateNestedOneWithoutPayrollDetailsInput
   paymentMethod?: Prisma.PaymentMethodCreateNestedOneWithoutPayrollDetailsInput
   payrollStatus?: Prisma.PayrollStatusCreateNestedOneWithoutPayrollDetailsInput
   branch?: Prisma.BranchCreateNestedOneWithoutPayrollDetailsInput
   creator?: Prisma.UserCreateNestedOneWithoutCreatedPayrollDetailsInput
-  payrollSection?: Prisma.PayrollSectionCreateNestedOneWithoutPayrollDetailsInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutPayrollDetailInput
 }
 
@@ -1589,16 +1601,18 @@ export type PayrollDetailsUncheckedCreateWithoutModifierInput = {
   workDays: number
   totalHours: runtime.Decimal | runtime.DecimalJsLike | number | string
   hourlyRate: runtime.Decimal | runtime.DecimalJsLike | number | string
-  allowance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  breakfastAllowance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  otherAllowances: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAllowances: runtime.Decimal | runtime.DecimalJsLike | number | string
   salary: runtime.Decimal | runtime.DecimalJsLike | number | string
   previousLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
   currentLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  loanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
   netLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  previousTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  currentTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  netTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  previousChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  challanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
+  netChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
   netSalaryPayable: runtime.Decimal | runtime.DecimalJsLike | number | string
   cardSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
   cashSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1610,7 +1624,7 @@ export type PayrollDetailsUncheckedCreateWithoutModifierInput = {
   createdDate?: Date | string
   createdBy?: number | null
   modifiedDate?: Date | string
-  payrollSectionId?: number | null
+  isLocked?: boolean
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutPayrollDetailInput
 }
 
@@ -1652,16 +1666,18 @@ export type PayrollDetailsScalarWhereInput = {
   workDays?: Prisma.IntFilter<"PayrollDetails"> | number
   totalHours?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   hourlyRate?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  allowance?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  breakfastAllowance?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  otherAllowances?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAllowances?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   salary?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   previousLoan?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentLoan?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionLoan?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  loanDeduction?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   netLoan?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  previousTrafficChallan?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  currentTrafficChallan?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionTrafficChallan?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  netTrafficChallan?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  previousChallan?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentChallan?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  challanDeduction?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  netChallan?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   netSalaryPayable?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   cardSalary?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   cashSalary?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1674,7 +1690,7 @@ export type PayrollDetailsScalarWhereInput = {
   createdBy?: Prisma.IntNullableFilter<"PayrollDetails"> | number | null
   modifiedDate?: Prisma.DateTimeFilter<"PayrollDetails"> | Date | string
   modifiedBy?: Prisma.IntNullableFilter<"PayrollDetails"> | number | null
-  payrollSectionId?: Prisma.IntNullableFilter<"PayrollDetails"> | number | null
+  isLocked?: Prisma.BoolFilter<"PayrollDetails"> | boolean
 }
 
 export type PayrollDetailsUpsertWithWhereUniqueWithoutModifierInput = {
@@ -1699,16 +1715,18 @@ export type PayrollDetailsCreateWithoutBranchInput = {
   workDays: number
   totalHours: runtime.Decimal | runtime.DecimalJsLike | number | string
   hourlyRate: runtime.Decimal | runtime.DecimalJsLike | number | string
-  allowance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  breakfastAllowance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  otherAllowances: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAllowances: runtime.Decimal | runtime.DecimalJsLike | number | string
   salary: runtime.Decimal | runtime.DecimalJsLike | number | string
   previousLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
   currentLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  loanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
   netLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  previousTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  currentTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  netTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  previousChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  challanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
+  netChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
   netSalaryPayable: runtime.Decimal | runtime.DecimalJsLike | number | string
   cardSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
   cashSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1716,13 +1734,13 @@ export type PayrollDetailsCreateWithoutBranchInput = {
   remarks?: string | null
   createdDate?: Date | string
   modifiedDate?: Date | string
+  isLocked?: boolean
   payrollSummary: Prisma.PayrollSummaryCreateNestedOneWithoutDetailsInput
   employee: Prisma.EmployeeCreateNestedOneWithoutPayrollDetailsInput
   paymentMethod?: Prisma.PaymentMethodCreateNestedOneWithoutPayrollDetailsInput
   payrollStatus?: Prisma.PayrollStatusCreateNestedOneWithoutPayrollDetailsInput
   creator?: Prisma.UserCreateNestedOneWithoutCreatedPayrollDetailsInput
   modifier?: Prisma.UserCreateNestedOneWithoutModifiedPayrollDetailsInput
-  payrollSection?: Prisma.PayrollSectionCreateNestedOneWithoutPayrollDetailsInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutPayrollDetailInput
 }
 
@@ -1735,16 +1753,18 @@ export type PayrollDetailsUncheckedCreateWithoutBranchInput = {
   workDays: number
   totalHours: runtime.Decimal | runtime.DecimalJsLike | number | string
   hourlyRate: runtime.Decimal | runtime.DecimalJsLike | number | string
-  allowance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  breakfastAllowance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  otherAllowances: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAllowances: runtime.Decimal | runtime.DecimalJsLike | number | string
   salary: runtime.Decimal | runtime.DecimalJsLike | number | string
   previousLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
   currentLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  loanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
   netLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  previousTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  currentTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  netTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  previousChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  challanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
+  netChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
   netSalaryPayable: runtime.Decimal | runtime.DecimalJsLike | number | string
   cardSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
   cashSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1756,7 +1776,7 @@ export type PayrollDetailsUncheckedCreateWithoutBranchInput = {
   createdBy?: number | null
   modifiedDate?: Date | string
   modifiedBy?: number | null
-  payrollSectionId?: number | null
+  isLocked?: boolean
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutPayrollDetailInput
 }
 
@@ -1792,16 +1812,18 @@ export type PayrollDetailsCreateWithoutEmployeeInput = {
   workDays: number
   totalHours: runtime.Decimal | runtime.DecimalJsLike | number | string
   hourlyRate: runtime.Decimal | runtime.DecimalJsLike | number | string
-  allowance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  breakfastAllowance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  otherAllowances: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAllowances: runtime.Decimal | runtime.DecimalJsLike | number | string
   salary: runtime.Decimal | runtime.DecimalJsLike | number | string
   previousLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
   currentLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  loanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
   netLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  previousTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  currentTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  netTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  previousChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  challanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
+  netChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
   netSalaryPayable: runtime.Decimal | runtime.DecimalJsLike | number | string
   cardSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
   cashSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1809,13 +1831,13 @@ export type PayrollDetailsCreateWithoutEmployeeInput = {
   remarks?: string | null
   createdDate?: Date | string
   modifiedDate?: Date | string
+  isLocked?: boolean
   payrollSummary: Prisma.PayrollSummaryCreateNestedOneWithoutDetailsInput
   paymentMethod?: Prisma.PaymentMethodCreateNestedOneWithoutPayrollDetailsInput
   payrollStatus?: Prisma.PayrollStatusCreateNestedOneWithoutPayrollDetailsInput
   branch?: Prisma.BranchCreateNestedOneWithoutPayrollDetailsInput
   creator?: Prisma.UserCreateNestedOneWithoutCreatedPayrollDetailsInput
   modifier?: Prisma.UserCreateNestedOneWithoutModifiedPayrollDetailsInput
-  payrollSection?: Prisma.PayrollSectionCreateNestedOneWithoutPayrollDetailsInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutPayrollDetailInput
 }
 
@@ -1827,16 +1849,18 @@ export type PayrollDetailsUncheckedCreateWithoutEmployeeInput = {
   workDays: number
   totalHours: runtime.Decimal | runtime.DecimalJsLike | number | string
   hourlyRate: runtime.Decimal | runtime.DecimalJsLike | number | string
-  allowance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  breakfastAllowance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  otherAllowances: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAllowances: runtime.Decimal | runtime.DecimalJsLike | number | string
   salary: runtime.Decimal | runtime.DecimalJsLike | number | string
   previousLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
   currentLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  loanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
   netLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  previousTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  currentTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  netTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  previousChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  challanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
+  netChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
   netSalaryPayable: runtime.Decimal | runtime.DecimalJsLike | number | string
   cardSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
   cashSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1849,7 +1873,7 @@ export type PayrollDetailsUncheckedCreateWithoutEmployeeInput = {
   createdBy?: number | null
   modifiedDate?: Date | string
   modifiedBy?: number | null
-  payrollSectionId?: number | null
+  isLocked?: boolean
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutPayrollDetailInput
 }
 
@@ -1879,115 +1903,24 @@ export type PayrollDetailsUpdateManyWithWhereWithoutEmployeeInput = {
   data: Prisma.XOR<Prisma.PayrollDetailsUpdateManyMutationInput, Prisma.PayrollDetailsUncheckedUpdateManyWithoutEmployeeInput>
 }
 
-export type PayrollDetailsCreateWithoutPayrollSectionInput = {
-  payrollMonth: number
-  payrollYear: number
-  workDays: number
-  totalHours: runtime.Decimal | runtime.DecimalJsLike | number | string
-  hourlyRate: runtime.Decimal | runtime.DecimalJsLike | number | string
-  allowance: runtime.Decimal | runtime.DecimalJsLike | number | string
-  salary: runtime.Decimal | runtime.DecimalJsLike | number | string
-  previousLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  currentLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  netLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  previousTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  currentTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  netTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  netSalaryPayable: runtime.Decimal | runtime.DecimalJsLike | number | string
-  cardSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
-  cashSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
-  overTime: runtime.Decimal | runtime.DecimalJsLike | number | string
-  remarks?: string | null
-  createdDate?: Date | string
-  modifiedDate?: Date | string
-  payrollSummary: Prisma.PayrollSummaryCreateNestedOneWithoutDetailsInput
-  employee: Prisma.EmployeeCreateNestedOneWithoutPayrollDetailsInput
-  paymentMethod?: Prisma.PaymentMethodCreateNestedOneWithoutPayrollDetailsInput
-  payrollStatus?: Prisma.PayrollStatusCreateNestedOneWithoutPayrollDetailsInput
-  branch?: Prisma.BranchCreateNestedOneWithoutPayrollDetailsInput
-  creator?: Prisma.UserCreateNestedOneWithoutCreatedPayrollDetailsInput
-  modifier?: Prisma.UserCreateNestedOneWithoutModifiedPayrollDetailsInput
-  ledgers?: Prisma.LedgerCreateNestedManyWithoutPayrollDetailInput
-}
-
-export type PayrollDetailsUncheckedCreateWithoutPayrollSectionInput = {
-  id?: number
-  payrollId: number
-  payrollMonth: number
-  payrollYear: number
-  employeeId: number
-  workDays: number
-  totalHours: runtime.Decimal | runtime.DecimalJsLike | number | string
-  hourlyRate: runtime.Decimal | runtime.DecimalJsLike | number | string
-  allowance: runtime.Decimal | runtime.DecimalJsLike | number | string
-  salary: runtime.Decimal | runtime.DecimalJsLike | number | string
-  previousLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  currentLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  netLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  previousTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  currentTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  netTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  netSalaryPayable: runtime.Decimal | runtime.DecimalJsLike | number | string
-  cardSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
-  cashSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
-  overTime: runtime.Decimal | runtime.DecimalJsLike | number | string
-  remarks?: string | null
-  paymentMethodId?: number | null
-  payrollStatusId?: number | null
-  branchId?: number | null
-  createdDate?: Date | string
-  createdBy?: number | null
-  modifiedDate?: Date | string
-  modifiedBy?: number | null
-  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutPayrollDetailInput
-}
-
-export type PayrollDetailsCreateOrConnectWithoutPayrollSectionInput = {
-  where: Prisma.PayrollDetailsWhereUniqueInput
-  create: Prisma.XOR<Prisma.PayrollDetailsCreateWithoutPayrollSectionInput, Prisma.PayrollDetailsUncheckedCreateWithoutPayrollSectionInput>
-}
-
-export type PayrollDetailsCreateManyPayrollSectionInputEnvelope = {
-  data: Prisma.PayrollDetailsCreateManyPayrollSectionInput | Prisma.PayrollDetailsCreateManyPayrollSectionInput[]
-  skipDuplicates?: boolean
-}
-
-export type PayrollDetailsUpsertWithWhereUniqueWithoutPayrollSectionInput = {
-  where: Prisma.PayrollDetailsWhereUniqueInput
-  update: Prisma.XOR<Prisma.PayrollDetailsUpdateWithoutPayrollSectionInput, Prisma.PayrollDetailsUncheckedUpdateWithoutPayrollSectionInput>
-  create: Prisma.XOR<Prisma.PayrollDetailsCreateWithoutPayrollSectionInput, Prisma.PayrollDetailsUncheckedCreateWithoutPayrollSectionInput>
-}
-
-export type PayrollDetailsUpdateWithWhereUniqueWithoutPayrollSectionInput = {
-  where: Prisma.PayrollDetailsWhereUniqueInput
-  data: Prisma.XOR<Prisma.PayrollDetailsUpdateWithoutPayrollSectionInput, Prisma.PayrollDetailsUncheckedUpdateWithoutPayrollSectionInput>
-}
-
-export type PayrollDetailsUpdateManyWithWhereWithoutPayrollSectionInput = {
-  where: Prisma.PayrollDetailsScalarWhereInput
-  data: Prisma.XOR<Prisma.PayrollDetailsUpdateManyMutationInput, Prisma.PayrollDetailsUncheckedUpdateManyWithoutPayrollSectionInput>
-}
-
 export type PayrollDetailsCreateWithoutPayrollStatusInput = {
   payrollMonth: number
   payrollYear: number
   workDays: number
   totalHours: runtime.Decimal | runtime.DecimalJsLike | number | string
   hourlyRate: runtime.Decimal | runtime.DecimalJsLike | number | string
-  allowance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  breakfastAllowance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  otherAllowances: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAllowances: runtime.Decimal | runtime.DecimalJsLike | number | string
   salary: runtime.Decimal | runtime.DecimalJsLike | number | string
   previousLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
   currentLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  loanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
   netLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  previousTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  currentTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  netTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  previousChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  challanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
+  netChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
   netSalaryPayable: runtime.Decimal | runtime.DecimalJsLike | number | string
   cardSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
   cashSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1995,13 +1928,13 @@ export type PayrollDetailsCreateWithoutPayrollStatusInput = {
   remarks?: string | null
   createdDate?: Date | string
   modifiedDate?: Date | string
+  isLocked?: boolean
   payrollSummary: Prisma.PayrollSummaryCreateNestedOneWithoutDetailsInput
   employee: Prisma.EmployeeCreateNestedOneWithoutPayrollDetailsInput
   paymentMethod?: Prisma.PaymentMethodCreateNestedOneWithoutPayrollDetailsInput
   branch?: Prisma.BranchCreateNestedOneWithoutPayrollDetailsInput
   creator?: Prisma.UserCreateNestedOneWithoutCreatedPayrollDetailsInput
   modifier?: Prisma.UserCreateNestedOneWithoutModifiedPayrollDetailsInput
-  payrollSection?: Prisma.PayrollSectionCreateNestedOneWithoutPayrollDetailsInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutPayrollDetailInput
 }
 
@@ -2014,16 +1947,18 @@ export type PayrollDetailsUncheckedCreateWithoutPayrollStatusInput = {
   workDays: number
   totalHours: runtime.Decimal | runtime.DecimalJsLike | number | string
   hourlyRate: runtime.Decimal | runtime.DecimalJsLike | number | string
-  allowance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  breakfastAllowance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  otherAllowances: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAllowances: runtime.Decimal | runtime.DecimalJsLike | number | string
   salary: runtime.Decimal | runtime.DecimalJsLike | number | string
   previousLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
   currentLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  loanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
   netLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  previousTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  currentTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  netTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  previousChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  challanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
+  netChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
   netSalaryPayable: runtime.Decimal | runtime.DecimalJsLike | number | string
   cardSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
   cashSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2035,7 +1970,7 @@ export type PayrollDetailsUncheckedCreateWithoutPayrollStatusInput = {
   createdBy?: number | null
   modifiedDate?: Date | string
   modifiedBy?: number | null
-  payrollSectionId?: number | null
+  isLocked?: boolean
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutPayrollDetailInput
 }
 
@@ -2071,16 +2006,18 @@ export type PayrollDetailsCreateWithoutPayrollSummaryInput = {
   workDays: number
   totalHours: runtime.Decimal | runtime.DecimalJsLike | number | string
   hourlyRate: runtime.Decimal | runtime.DecimalJsLike | number | string
-  allowance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  breakfastAllowance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  otherAllowances: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAllowances: runtime.Decimal | runtime.DecimalJsLike | number | string
   salary: runtime.Decimal | runtime.DecimalJsLike | number | string
   previousLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
   currentLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  loanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
   netLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  previousTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  currentTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  netTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  previousChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  challanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
+  netChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
   netSalaryPayable: runtime.Decimal | runtime.DecimalJsLike | number | string
   cardSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
   cashSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2088,13 +2025,13 @@ export type PayrollDetailsCreateWithoutPayrollSummaryInput = {
   remarks?: string | null
   createdDate?: Date | string
   modifiedDate?: Date | string
+  isLocked?: boolean
   employee: Prisma.EmployeeCreateNestedOneWithoutPayrollDetailsInput
   paymentMethod?: Prisma.PaymentMethodCreateNestedOneWithoutPayrollDetailsInput
   payrollStatus?: Prisma.PayrollStatusCreateNestedOneWithoutPayrollDetailsInput
   branch?: Prisma.BranchCreateNestedOneWithoutPayrollDetailsInput
   creator?: Prisma.UserCreateNestedOneWithoutCreatedPayrollDetailsInput
   modifier?: Prisma.UserCreateNestedOneWithoutModifiedPayrollDetailsInput
-  payrollSection?: Prisma.PayrollSectionCreateNestedOneWithoutPayrollDetailsInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutPayrollDetailInput
 }
 
@@ -2106,16 +2043,18 @@ export type PayrollDetailsUncheckedCreateWithoutPayrollSummaryInput = {
   workDays: number
   totalHours: runtime.Decimal | runtime.DecimalJsLike | number | string
   hourlyRate: runtime.Decimal | runtime.DecimalJsLike | number | string
-  allowance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  breakfastAllowance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  otherAllowances: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAllowances: runtime.Decimal | runtime.DecimalJsLike | number | string
   salary: runtime.Decimal | runtime.DecimalJsLike | number | string
   previousLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
   currentLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  loanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
   netLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  previousTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  currentTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  netTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  previousChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  challanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
+  netChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
   netSalaryPayable: runtime.Decimal | runtime.DecimalJsLike | number | string
   cardSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
   cashSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2128,7 +2067,7 @@ export type PayrollDetailsUncheckedCreateWithoutPayrollSummaryInput = {
   createdBy?: number | null
   modifiedDate?: Date | string
   modifiedBy?: number | null
-  payrollSectionId?: number | null
+  isLocked?: boolean
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutPayrollDetailInput
 }
 
@@ -2164,16 +2103,18 @@ export type PayrollDetailsCreateWithoutPaymentMethodInput = {
   workDays: number
   totalHours: runtime.Decimal | runtime.DecimalJsLike | number | string
   hourlyRate: runtime.Decimal | runtime.DecimalJsLike | number | string
-  allowance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  breakfastAllowance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  otherAllowances: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAllowances: runtime.Decimal | runtime.DecimalJsLike | number | string
   salary: runtime.Decimal | runtime.DecimalJsLike | number | string
   previousLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
   currentLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  loanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
   netLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  previousTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  currentTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  netTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  previousChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  challanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
+  netChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
   netSalaryPayable: runtime.Decimal | runtime.DecimalJsLike | number | string
   cardSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
   cashSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2181,13 +2122,13 @@ export type PayrollDetailsCreateWithoutPaymentMethodInput = {
   remarks?: string | null
   createdDate?: Date | string
   modifiedDate?: Date | string
+  isLocked?: boolean
   payrollSummary: Prisma.PayrollSummaryCreateNestedOneWithoutDetailsInput
   employee: Prisma.EmployeeCreateNestedOneWithoutPayrollDetailsInput
   payrollStatus?: Prisma.PayrollStatusCreateNestedOneWithoutPayrollDetailsInput
   branch?: Prisma.BranchCreateNestedOneWithoutPayrollDetailsInput
   creator?: Prisma.UserCreateNestedOneWithoutCreatedPayrollDetailsInput
   modifier?: Prisma.UserCreateNestedOneWithoutModifiedPayrollDetailsInput
-  payrollSection?: Prisma.PayrollSectionCreateNestedOneWithoutPayrollDetailsInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutPayrollDetailInput
 }
 
@@ -2200,16 +2141,18 @@ export type PayrollDetailsUncheckedCreateWithoutPaymentMethodInput = {
   workDays: number
   totalHours: runtime.Decimal | runtime.DecimalJsLike | number | string
   hourlyRate: runtime.Decimal | runtime.DecimalJsLike | number | string
-  allowance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  breakfastAllowance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  otherAllowances: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAllowances: runtime.Decimal | runtime.DecimalJsLike | number | string
   salary: runtime.Decimal | runtime.DecimalJsLike | number | string
   previousLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
   currentLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  loanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
   netLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  previousTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  currentTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  netTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  previousChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  challanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
+  netChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
   netSalaryPayable: runtime.Decimal | runtime.DecimalJsLike | number | string
   cardSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
   cashSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2221,7 +2164,7 @@ export type PayrollDetailsUncheckedCreateWithoutPaymentMethodInput = {
   createdBy?: number | null
   modifiedDate?: Date | string
   modifiedBy?: number | null
-  payrollSectionId?: number | null
+  isLocked?: boolean
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutPayrollDetailInput
 }
 
@@ -2257,16 +2200,18 @@ export type PayrollDetailsCreateWithoutLedgersInput = {
   workDays: number
   totalHours: runtime.Decimal | runtime.DecimalJsLike | number | string
   hourlyRate: runtime.Decimal | runtime.DecimalJsLike | number | string
-  allowance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  breakfastAllowance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  otherAllowances: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAllowances: runtime.Decimal | runtime.DecimalJsLike | number | string
   salary: runtime.Decimal | runtime.DecimalJsLike | number | string
   previousLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
   currentLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  loanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
   netLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  previousTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  currentTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  netTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  previousChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  challanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
+  netChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
   netSalaryPayable: runtime.Decimal | runtime.DecimalJsLike | number | string
   cardSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
   cashSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2274,6 +2219,7 @@ export type PayrollDetailsCreateWithoutLedgersInput = {
   remarks?: string | null
   createdDate?: Date | string
   modifiedDate?: Date | string
+  isLocked?: boolean
   payrollSummary: Prisma.PayrollSummaryCreateNestedOneWithoutDetailsInput
   employee: Prisma.EmployeeCreateNestedOneWithoutPayrollDetailsInput
   paymentMethod?: Prisma.PaymentMethodCreateNestedOneWithoutPayrollDetailsInput
@@ -2281,7 +2227,6 @@ export type PayrollDetailsCreateWithoutLedgersInput = {
   branch?: Prisma.BranchCreateNestedOneWithoutPayrollDetailsInput
   creator?: Prisma.UserCreateNestedOneWithoutCreatedPayrollDetailsInput
   modifier?: Prisma.UserCreateNestedOneWithoutModifiedPayrollDetailsInput
-  payrollSection?: Prisma.PayrollSectionCreateNestedOneWithoutPayrollDetailsInput
 }
 
 export type PayrollDetailsUncheckedCreateWithoutLedgersInput = {
@@ -2293,16 +2238,18 @@ export type PayrollDetailsUncheckedCreateWithoutLedgersInput = {
   workDays: number
   totalHours: runtime.Decimal | runtime.DecimalJsLike | number | string
   hourlyRate: runtime.Decimal | runtime.DecimalJsLike | number | string
-  allowance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  breakfastAllowance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  otherAllowances: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAllowances: runtime.Decimal | runtime.DecimalJsLike | number | string
   salary: runtime.Decimal | runtime.DecimalJsLike | number | string
   previousLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
   currentLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  loanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
   netLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  previousTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  currentTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  netTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  previousChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  challanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
+  netChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
   netSalaryPayable: runtime.Decimal | runtime.DecimalJsLike | number | string
   cardSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
   cashSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2315,7 +2262,7 @@ export type PayrollDetailsUncheckedCreateWithoutLedgersInput = {
   createdBy?: number | null
   modifiedDate?: Date | string
   modifiedBy?: number | null
-  payrollSectionId?: number | null
+  isLocked?: boolean
 }
 
 export type PayrollDetailsCreateOrConnectWithoutLedgersInput = {
@@ -2340,16 +2287,18 @@ export type PayrollDetailsUpdateWithoutLedgersInput = {
   workDays?: Prisma.IntFieldUpdateOperationsInput | number
   totalHours?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   hourlyRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  allowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  breakfastAllowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  otherAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   salary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   previousLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  loanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   netLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  previousTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  currentTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  netTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  previousChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  challanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  netChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   netSalaryPayable?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   cardSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   cashSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2357,6 +2306,7 @@ export type PayrollDetailsUpdateWithoutLedgersInput = {
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   modifiedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
   payrollSummary?: Prisma.PayrollSummaryUpdateOneRequiredWithoutDetailsNestedInput
   employee?: Prisma.EmployeeUpdateOneRequiredWithoutPayrollDetailsNestedInput
   paymentMethod?: Prisma.PaymentMethodUpdateOneWithoutPayrollDetailsNestedInput
@@ -2364,7 +2314,6 @@ export type PayrollDetailsUpdateWithoutLedgersInput = {
   branch?: Prisma.BranchUpdateOneWithoutPayrollDetailsNestedInput
   creator?: Prisma.UserUpdateOneWithoutCreatedPayrollDetailsNestedInput
   modifier?: Prisma.UserUpdateOneWithoutModifiedPayrollDetailsNestedInput
-  payrollSection?: Prisma.PayrollSectionUpdateOneWithoutPayrollDetailsNestedInput
 }
 
 export type PayrollDetailsUncheckedUpdateWithoutLedgersInput = {
@@ -2376,16 +2325,18 @@ export type PayrollDetailsUncheckedUpdateWithoutLedgersInput = {
   workDays?: Prisma.IntFieldUpdateOperationsInput | number
   totalHours?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   hourlyRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  allowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  breakfastAllowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  otherAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   salary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   previousLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  loanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   netLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  previousTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  currentTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  netTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  previousChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  challanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  netChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   netSalaryPayable?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   cardSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   cashSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2398,7 +2349,7 @@ export type PayrollDetailsUncheckedUpdateWithoutLedgersInput = {
   createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   modifiedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   modifiedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  payrollSectionId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type PayrollDetailsCreateManyCreatorInput = {
@@ -2410,16 +2361,18 @@ export type PayrollDetailsCreateManyCreatorInput = {
   workDays: number
   totalHours: runtime.Decimal | runtime.DecimalJsLike | number | string
   hourlyRate: runtime.Decimal | runtime.DecimalJsLike | number | string
-  allowance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  breakfastAllowance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  otherAllowances: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAllowances: runtime.Decimal | runtime.DecimalJsLike | number | string
   salary: runtime.Decimal | runtime.DecimalJsLike | number | string
   previousLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
   currentLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  loanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
   netLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  previousTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  currentTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  netTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  previousChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  challanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
+  netChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
   netSalaryPayable: runtime.Decimal | runtime.DecimalJsLike | number | string
   cardSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
   cashSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2431,7 +2384,7 @@ export type PayrollDetailsCreateManyCreatorInput = {
   createdDate?: Date | string
   modifiedDate?: Date | string
   modifiedBy?: number | null
-  payrollSectionId?: number | null
+  isLocked?: boolean
 }
 
 export type PayrollDetailsCreateManyModifierInput = {
@@ -2443,16 +2396,18 @@ export type PayrollDetailsCreateManyModifierInput = {
   workDays: number
   totalHours: runtime.Decimal | runtime.DecimalJsLike | number | string
   hourlyRate: runtime.Decimal | runtime.DecimalJsLike | number | string
-  allowance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  breakfastAllowance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  otherAllowances: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAllowances: runtime.Decimal | runtime.DecimalJsLike | number | string
   salary: runtime.Decimal | runtime.DecimalJsLike | number | string
   previousLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
   currentLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  loanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
   netLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  previousTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  currentTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  netTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  previousChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  challanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
+  netChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
   netSalaryPayable: runtime.Decimal | runtime.DecimalJsLike | number | string
   cardSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
   cashSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2464,7 +2419,7 @@ export type PayrollDetailsCreateManyModifierInput = {
   createdDate?: Date | string
   createdBy?: number | null
   modifiedDate?: Date | string
-  payrollSectionId?: number | null
+  isLocked?: boolean
 }
 
 export type PayrollDetailsUpdateWithoutCreatorInput = {
@@ -2473,16 +2428,18 @@ export type PayrollDetailsUpdateWithoutCreatorInput = {
   workDays?: Prisma.IntFieldUpdateOperationsInput | number
   totalHours?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   hourlyRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  allowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  breakfastAllowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  otherAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   salary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   previousLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  loanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   netLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  previousTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  currentTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  netTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  previousChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  challanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  netChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   netSalaryPayable?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   cardSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   cashSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2490,13 +2447,13 @@ export type PayrollDetailsUpdateWithoutCreatorInput = {
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   modifiedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
   payrollSummary?: Prisma.PayrollSummaryUpdateOneRequiredWithoutDetailsNestedInput
   employee?: Prisma.EmployeeUpdateOneRequiredWithoutPayrollDetailsNestedInput
   paymentMethod?: Prisma.PaymentMethodUpdateOneWithoutPayrollDetailsNestedInput
   payrollStatus?: Prisma.PayrollStatusUpdateOneWithoutPayrollDetailsNestedInput
   branch?: Prisma.BranchUpdateOneWithoutPayrollDetailsNestedInput
   modifier?: Prisma.UserUpdateOneWithoutModifiedPayrollDetailsNestedInput
-  payrollSection?: Prisma.PayrollSectionUpdateOneWithoutPayrollDetailsNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutPayrollDetailNestedInput
 }
 
@@ -2509,16 +2466,18 @@ export type PayrollDetailsUncheckedUpdateWithoutCreatorInput = {
   workDays?: Prisma.IntFieldUpdateOperationsInput | number
   totalHours?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   hourlyRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  allowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  breakfastAllowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  otherAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   salary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   previousLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  loanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   netLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  previousTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  currentTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  netTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  previousChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  challanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  netChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   netSalaryPayable?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   cardSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   cashSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2530,7 +2489,7 @@ export type PayrollDetailsUncheckedUpdateWithoutCreatorInput = {
   createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   modifiedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   modifiedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  payrollSectionId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutPayrollDetailNestedInput
 }
 
@@ -2543,16 +2502,18 @@ export type PayrollDetailsUncheckedUpdateManyWithoutCreatorInput = {
   workDays?: Prisma.IntFieldUpdateOperationsInput | number
   totalHours?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   hourlyRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  allowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  breakfastAllowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  otherAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   salary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   previousLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  loanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   netLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  previousTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  currentTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  netTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  previousChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  challanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  netChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   netSalaryPayable?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   cardSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   cashSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2564,7 +2525,7 @@ export type PayrollDetailsUncheckedUpdateManyWithoutCreatorInput = {
   createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   modifiedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   modifiedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  payrollSectionId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type PayrollDetailsUpdateWithoutModifierInput = {
@@ -2573,16 +2534,18 @@ export type PayrollDetailsUpdateWithoutModifierInput = {
   workDays?: Prisma.IntFieldUpdateOperationsInput | number
   totalHours?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   hourlyRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  allowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  breakfastAllowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  otherAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   salary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   previousLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  loanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   netLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  previousTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  currentTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  netTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  previousChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  challanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  netChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   netSalaryPayable?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   cardSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   cashSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2590,13 +2553,13 @@ export type PayrollDetailsUpdateWithoutModifierInput = {
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   modifiedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
   payrollSummary?: Prisma.PayrollSummaryUpdateOneRequiredWithoutDetailsNestedInput
   employee?: Prisma.EmployeeUpdateOneRequiredWithoutPayrollDetailsNestedInput
   paymentMethod?: Prisma.PaymentMethodUpdateOneWithoutPayrollDetailsNestedInput
   payrollStatus?: Prisma.PayrollStatusUpdateOneWithoutPayrollDetailsNestedInput
   branch?: Prisma.BranchUpdateOneWithoutPayrollDetailsNestedInput
   creator?: Prisma.UserUpdateOneWithoutCreatedPayrollDetailsNestedInput
-  payrollSection?: Prisma.PayrollSectionUpdateOneWithoutPayrollDetailsNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutPayrollDetailNestedInput
 }
 
@@ -2609,16 +2572,18 @@ export type PayrollDetailsUncheckedUpdateWithoutModifierInput = {
   workDays?: Prisma.IntFieldUpdateOperationsInput | number
   totalHours?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   hourlyRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  allowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  breakfastAllowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  otherAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   salary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   previousLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  loanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   netLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  previousTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  currentTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  netTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  previousChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  challanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  netChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   netSalaryPayable?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   cardSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   cashSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2630,7 +2595,7 @@ export type PayrollDetailsUncheckedUpdateWithoutModifierInput = {
   createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   modifiedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  payrollSectionId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutPayrollDetailNestedInput
 }
 
@@ -2643,16 +2608,18 @@ export type PayrollDetailsUncheckedUpdateManyWithoutModifierInput = {
   workDays?: Prisma.IntFieldUpdateOperationsInput | number
   totalHours?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   hourlyRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  allowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  breakfastAllowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  otherAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   salary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   previousLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  loanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   netLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  previousTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  currentTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  netTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  previousChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  challanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  netChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   netSalaryPayable?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   cardSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   cashSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2664,7 +2631,7 @@ export type PayrollDetailsUncheckedUpdateManyWithoutModifierInput = {
   createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   modifiedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  payrollSectionId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type PayrollDetailsCreateManyBranchInput = {
@@ -2676,16 +2643,18 @@ export type PayrollDetailsCreateManyBranchInput = {
   workDays: number
   totalHours: runtime.Decimal | runtime.DecimalJsLike | number | string
   hourlyRate: runtime.Decimal | runtime.DecimalJsLike | number | string
-  allowance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  breakfastAllowance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  otherAllowances: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAllowances: runtime.Decimal | runtime.DecimalJsLike | number | string
   salary: runtime.Decimal | runtime.DecimalJsLike | number | string
   previousLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
   currentLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  loanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
   netLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  previousTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  currentTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  netTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  previousChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  challanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
+  netChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
   netSalaryPayable: runtime.Decimal | runtime.DecimalJsLike | number | string
   cardSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
   cashSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2697,7 +2666,7 @@ export type PayrollDetailsCreateManyBranchInput = {
   createdBy?: number | null
   modifiedDate?: Date | string
   modifiedBy?: number | null
-  payrollSectionId?: number | null
+  isLocked?: boolean
 }
 
 export type PayrollDetailsUpdateWithoutBranchInput = {
@@ -2706,16 +2675,18 @@ export type PayrollDetailsUpdateWithoutBranchInput = {
   workDays?: Prisma.IntFieldUpdateOperationsInput | number
   totalHours?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   hourlyRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  allowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  breakfastAllowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  otherAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   salary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   previousLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  loanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   netLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  previousTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  currentTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  netTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  previousChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  challanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  netChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   netSalaryPayable?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   cardSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   cashSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2723,13 +2694,13 @@ export type PayrollDetailsUpdateWithoutBranchInput = {
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   modifiedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
   payrollSummary?: Prisma.PayrollSummaryUpdateOneRequiredWithoutDetailsNestedInput
   employee?: Prisma.EmployeeUpdateOneRequiredWithoutPayrollDetailsNestedInput
   paymentMethod?: Prisma.PaymentMethodUpdateOneWithoutPayrollDetailsNestedInput
   payrollStatus?: Prisma.PayrollStatusUpdateOneWithoutPayrollDetailsNestedInput
   creator?: Prisma.UserUpdateOneWithoutCreatedPayrollDetailsNestedInput
   modifier?: Prisma.UserUpdateOneWithoutModifiedPayrollDetailsNestedInput
-  payrollSection?: Prisma.PayrollSectionUpdateOneWithoutPayrollDetailsNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutPayrollDetailNestedInput
 }
 
@@ -2742,16 +2713,18 @@ export type PayrollDetailsUncheckedUpdateWithoutBranchInput = {
   workDays?: Prisma.IntFieldUpdateOperationsInput | number
   totalHours?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   hourlyRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  allowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  breakfastAllowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  otherAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   salary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   previousLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  loanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   netLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  previousTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  currentTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  netTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  previousChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  challanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  netChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   netSalaryPayable?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   cardSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   cashSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2763,7 +2736,7 @@ export type PayrollDetailsUncheckedUpdateWithoutBranchInput = {
   createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   modifiedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   modifiedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  payrollSectionId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutPayrollDetailNestedInput
 }
 
@@ -2776,16 +2749,18 @@ export type PayrollDetailsUncheckedUpdateManyWithoutBranchInput = {
   workDays?: Prisma.IntFieldUpdateOperationsInput | number
   totalHours?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   hourlyRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  allowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  breakfastAllowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  otherAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   salary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   previousLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  loanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   netLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  previousTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  currentTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  netTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  previousChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  challanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  netChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   netSalaryPayable?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   cardSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   cashSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2797,7 +2772,7 @@ export type PayrollDetailsUncheckedUpdateManyWithoutBranchInput = {
   createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   modifiedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   modifiedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  payrollSectionId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type PayrollDetailsCreateManyEmployeeInput = {
@@ -2808,16 +2783,18 @@ export type PayrollDetailsCreateManyEmployeeInput = {
   workDays: number
   totalHours: runtime.Decimal | runtime.DecimalJsLike | number | string
   hourlyRate: runtime.Decimal | runtime.DecimalJsLike | number | string
-  allowance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  breakfastAllowance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  otherAllowances: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAllowances: runtime.Decimal | runtime.DecimalJsLike | number | string
   salary: runtime.Decimal | runtime.DecimalJsLike | number | string
   previousLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
   currentLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  loanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
   netLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  previousTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  currentTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  netTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  previousChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  challanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
+  netChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
   netSalaryPayable: runtime.Decimal | runtime.DecimalJsLike | number | string
   cardSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
   cashSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2830,7 +2807,7 @@ export type PayrollDetailsCreateManyEmployeeInput = {
   createdBy?: number | null
   modifiedDate?: Date | string
   modifiedBy?: number | null
-  payrollSectionId?: number | null
+  isLocked?: boolean
 }
 
 export type PayrollDetailsUpdateWithoutEmployeeInput = {
@@ -2839,16 +2816,18 @@ export type PayrollDetailsUpdateWithoutEmployeeInput = {
   workDays?: Prisma.IntFieldUpdateOperationsInput | number
   totalHours?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   hourlyRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  allowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  breakfastAllowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  otherAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   salary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   previousLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  loanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   netLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  previousTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  currentTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  netTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  previousChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  challanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  netChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   netSalaryPayable?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   cardSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   cashSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2856,13 +2835,13 @@ export type PayrollDetailsUpdateWithoutEmployeeInput = {
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   modifiedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
   payrollSummary?: Prisma.PayrollSummaryUpdateOneRequiredWithoutDetailsNestedInput
   paymentMethod?: Prisma.PaymentMethodUpdateOneWithoutPayrollDetailsNestedInput
   payrollStatus?: Prisma.PayrollStatusUpdateOneWithoutPayrollDetailsNestedInput
   branch?: Prisma.BranchUpdateOneWithoutPayrollDetailsNestedInput
   creator?: Prisma.UserUpdateOneWithoutCreatedPayrollDetailsNestedInput
   modifier?: Prisma.UserUpdateOneWithoutModifiedPayrollDetailsNestedInput
-  payrollSection?: Prisma.PayrollSectionUpdateOneWithoutPayrollDetailsNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutPayrollDetailNestedInput
 }
 
@@ -2874,16 +2853,18 @@ export type PayrollDetailsUncheckedUpdateWithoutEmployeeInput = {
   workDays?: Prisma.IntFieldUpdateOperationsInput | number
   totalHours?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   hourlyRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  allowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  breakfastAllowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  otherAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   salary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   previousLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  loanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   netLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  previousTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  currentTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  netTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  previousChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  challanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  netChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   netSalaryPayable?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   cardSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   cashSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2896,7 +2877,7 @@ export type PayrollDetailsUncheckedUpdateWithoutEmployeeInput = {
   createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   modifiedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   modifiedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  payrollSectionId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutPayrollDetailNestedInput
 }
 
@@ -2908,16 +2889,18 @@ export type PayrollDetailsUncheckedUpdateManyWithoutEmployeeInput = {
   workDays?: Prisma.IntFieldUpdateOperationsInput | number
   totalHours?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   hourlyRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  allowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  breakfastAllowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  otherAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   salary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   previousLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  loanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   netLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  previousTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  currentTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  netTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  previousChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  challanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  netChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   netSalaryPayable?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   cardSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   cashSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2930,140 +2913,7 @@ export type PayrollDetailsUncheckedUpdateManyWithoutEmployeeInput = {
   createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   modifiedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   modifiedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  payrollSectionId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-}
-
-export type PayrollDetailsCreateManyPayrollSectionInput = {
-  id?: number
-  payrollId: number
-  payrollMonth: number
-  payrollYear: number
-  employeeId: number
-  workDays: number
-  totalHours: runtime.Decimal | runtime.DecimalJsLike | number | string
-  hourlyRate: runtime.Decimal | runtime.DecimalJsLike | number | string
-  allowance: runtime.Decimal | runtime.DecimalJsLike | number | string
-  salary: runtime.Decimal | runtime.DecimalJsLike | number | string
-  previousLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  currentLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  netLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  previousTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  currentTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  netTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  netSalaryPayable: runtime.Decimal | runtime.DecimalJsLike | number | string
-  cardSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
-  cashSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
-  overTime: runtime.Decimal | runtime.DecimalJsLike | number | string
-  remarks?: string | null
-  paymentMethodId?: number | null
-  payrollStatusId?: number | null
-  branchId?: number | null
-  createdDate?: Date | string
-  createdBy?: number | null
-  modifiedDate?: Date | string
-  modifiedBy?: number | null
-}
-
-export type PayrollDetailsUpdateWithoutPayrollSectionInput = {
-  payrollMonth?: Prisma.IntFieldUpdateOperationsInput | number
-  payrollYear?: Prisma.IntFieldUpdateOperationsInput | number
-  workDays?: Prisma.IntFieldUpdateOperationsInput | number
-  totalHours?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  hourlyRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  allowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  salary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  previousLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  currentLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  netLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  previousTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  currentTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  netTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  netSalaryPayable?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  cardSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  cashSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  overTime?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  modifiedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  payrollSummary?: Prisma.PayrollSummaryUpdateOneRequiredWithoutDetailsNestedInput
-  employee?: Prisma.EmployeeUpdateOneRequiredWithoutPayrollDetailsNestedInput
-  paymentMethod?: Prisma.PaymentMethodUpdateOneWithoutPayrollDetailsNestedInput
-  payrollStatus?: Prisma.PayrollStatusUpdateOneWithoutPayrollDetailsNestedInput
-  branch?: Prisma.BranchUpdateOneWithoutPayrollDetailsNestedInput
-  creator?: Prisma.UserUpdateOneWithoutCreatedPayrollDetailsNestedInput
-  modifier?: Prisma.UserUpdateOneWithoutModifiedPayrollDetailsNestedInput
-  ledgers?: Prisma.LedgerUpdateManyWithoutPayrollDetailNestedInput
-}
-
-export type PayrollDetailsUncheckedUpdateWithoutPayrollSectionInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  payrollId?: Prisma.IntFieldUpdateOperationsInput | number
-  payrollMonth?: Prisma.IntFieldUpdateOperationsInput | number
-  payrollYear?: Prisma.IntFieldUpdateOperationsInput | number
-  employeeId?: Prisma.IntFieldUpdateOperationsInput | number
-  workDays?: Prisma.IntFieldUpdateOperationsInput | number
-  totalHours?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  hourlyRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  allowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  salary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  previousLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  currentLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  netLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  previousTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  currentTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  netTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  netSalaryPayable?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  cardSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  cashSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  overTime?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  paymentMethodId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  payrollStatusId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  modifiedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  modifiedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutPayrollDetailNestedInput
-}
-
-export type PayrollDetailsUncheckedUpdateManyWithoutPayrollSectionInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  payrollId?: Prisma.IntFieldUpdateOperationsInput | number
-  payrollMonth?: Prisma.IntFieldUpdateOperationsInput | number
-  payrollYear?: Prisma.IntFieldUpdateOperationsInput | number
-  employeeId?: Prisma.IntFieldUpdateOperationsInput | number
-  workDays?: Prisma.IntFieldUpdateOperationsInput | number
-  totalHours?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  hourlyRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  allowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  salary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  previousLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  currentLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  netLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  previousTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  currentTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  netTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  netSalaryPayable?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  cardSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  cashSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  overTime?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  paymentMethodId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  payrollStatusId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  modifiedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  modifiedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type PayrollDetailsCreateManyPayrollStatusInput = {
@@ -3075,16 +2925,18 @@ export type PayrollDetailsCreateManyPayrollStatusInput = {
   workDays: number
   totalHours: runtime.Decimal | runtime.DecimalJsLike | number | string
   hourlyRate: runtime.Decimal | runtime.DecimalJsLike | number | string
-  allowance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  breakfastAllowance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  otherAllowances: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAllowances: runtime.Decimal | runtime.DecimalJsLike | number | string
   salary: runtime.Decimal | runtime.DecimalJsLike | number | string
   previousLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
   currentLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  loanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
   netLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  previousTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  currentTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  netTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  previousChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  challanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
+  netChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
   netSalaryPayable: runtime.Decimal | runtime.DecimalJsLike | number | string
   cardSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
   cashSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -3096,7 +2948,7 @@ export type PayrollDetailsCreateManyPayrollStatusInput = {
   createdBy?: number | null
   modifiedDate?: Date | string
   modifiedBy?: number | null
-  payrollSectionId?: number | null
+  isLocked?: boolean
 }
 
 export type PayrollDetailsUpdateWithoutPayrollStatusInput = {
@@ -3105,16 +2957,18 @@ export type PayrollDetailsUpdateWithoutPayrollStatusInput = {
   workDays?: Prisma.IntFieldUpdateOperationsInput | number
   totalHours?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   hourlyRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  allowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  breakfastAllowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  otherAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   salary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   previousLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  loanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   netLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  previousTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  currentTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  netTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  previousChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  challanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  netChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   netSalaryPayable?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   cardSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   cashSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -3122,13 +2976,13 @@ export type PayrollDetailsUpdateWithoutPayrollStatusInput = {
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   modifiedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
   payrollSummary?: Prisma.PayrollSummaryUpdateOneRequiredWithoutDetailsNestedInput
   employee?: Prisma.EmployeeUpdateOneRequiredWithoutPayrollDetailsNestedInput
   paymentMethod?: Prisma.PaymentMethodUpdateOneWithoutPayrollDetailsNestedInput
   branch?: Prisma.BranchUpdateOneWithoutPayrollDetailsNestedInput
   creator?: Prisma.UserUpdateOneWithoutCreatedPayrollDetailsNestedInput
   modifier?: Prisma.UserUpdateOneWithoutModifiedPayrollDetailsNestedInput
-  payrollSection?: Prisma.PayrollSectionUpdateOneWithoutPayrollDetailsNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutPayrollDetailNestedInput
 }
 
@@ -3141,16 +2995,18 @@ export type PayrollDetailsUncheckedUpdateWithoutPayrollStatusInput = {
   workDays?: Prisma.IntFieldUpdateOperationsInput | number
   totalHours?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   hourlyRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  allowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  breakfastAllowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  otherAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   salary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   previousLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  loanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   netLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  previousTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  currentTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  netTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  previousChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  challanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  netChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   netSalaryPayable?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   cardSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   cashSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -3162,7 +3018,7 @@ export type PayrollDetailsUncheckedUpdateWithoutPayrollStatusInput = {
   createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   modifiedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   modifiedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  payrollSectionId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutPayrollDetailNestedInput
 }
 
@@ -3175,16 +3031,18 @@ export type PayrollDetailsUncheckedUpdateManyWithoutPayrollStatusInput = {
   workDays?: Prisma.IntFieldUpdateOperationsInput | number
   totalHours?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   hourlyRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  allowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  breakfastAllowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  otherAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   salary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   previousLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  loanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   netLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  previousTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  currentTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  netTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  previousChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  challanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  netChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   netSalaryPayable?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   cardSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   cashSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -3196,7 +3054,7 @@ export type PayrollDetailsUncheckedUpdateManyWithoutPayrollStatusInput = {
   createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   modifiedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   modifiedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  payrollSectionId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type PayrollDetailsCreateManyPayrollSummaryInput = {
@@ -3207,16 +3065,18 @@ export type PayrollDetailsCreateManyPayrollSummaryInput = {
   workDays: number
   totalHours: runtime.Decimal | runtime.DecimalJsLike | number | string
   hourlyRate: runtime.Decimal | runtime.DecimalJsLike | number | string
-  allowance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  breakfastAllowance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  otherAllowances: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAllowances: runtime.Decimal | runtime.DecimalJsLike | number | string
   salary: runtime.Decimal | runtime.DecimalJsLike | number | string
   previousLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
   currentLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  loanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
   netLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  previousTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  currentTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  netTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  previousChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  challanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
+  netChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
   netSalaryPayable: runtime.Decimal | runtime.DecimalJsLike | number | string
   cardSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
   cashSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -3229,7 +3089,7 @@ export type PayrollDetailsCreateManyPayrollSummaryInput = {
   createdBy?: number | null
   modifiedDate?: Date | string
   modifiedBy?: number | null
-  payrollSectionId?: number | null
+  isLocked?: boolean
 }
 
 export type PayrollDetailsUpdateWithoutPayrollSummaryInput = {
@@ -3238,16 +3098,18 @@ export type PayrollDetailsUpdateWithoutPayrollSummaryInput = {
   workDays?: Prisma.IntFieldUpdateOperationsInput | number
   totalHours?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   hourlyRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  allowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  breakfastAllowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  otherAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   salary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   previousLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  loanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   netLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  previousTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  currentTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  netTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  previousChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  challanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  netChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   netSalaryPayable?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   cardSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   cashSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -3255,13 +3117,13 @@ export type PayrollDetailsUpdateWithoutPayrollSummaryInput = {
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   modifiedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
   employee?: Prisma.EmployeeUpdateOneRequiredWithoutPayrollDetailsNestedInput
   paymentMethod?: Prisma.PaymentMethodUpdateOneWithoutPayrollDetailsNestedInput
   payrollStatus?: Prisma.PayrollStatusUpdateOneWithoutPayrollDetailsNestedInput
   branch?: Prisma.BranchUpdateOneWithoutPayrollDetailsNestedInput
   creator?: Prisma.UserUpdateOneWithoutCreatedPayrollDetailsNestedInput
   modifier?: Prisma.UserUpdateOneWithoutModifiedPayrollDetailsNestedInput
-  payrollSection?: Prisma.PayrollSectionUpdateOneWithoutPayrollDetailsNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutPayrollDetailNestedInput
 }
 
@@ -3273,16 +3135,18 @@ export type PayrollDetailsUncheckedUpdateWithoutPayrollSummaryInput = {
   workDays?: Prisma.IntFieldUpdateOperationsInput | number
   totalHours?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   hourlyRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  allowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  breakfastAllowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  otherAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   salary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   previousLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  loanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   netLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  previousTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  currentTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  netTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  previousChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  challanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  netChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   netSalaryPayable?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   cardSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   cashSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -3295,7 +3159,7 @@ export type PayrollDetailsUncheckedUpdateWithoutPayrollSummaryInput = {
   createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   modifiedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   modifiedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  payrollSectionId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutPayrollDetailNestedInput
 }
 
@@ -3307,16 +3171,18 @@ export type PayrollDetailsUncheckedUpdateManyWithoutPayrollSummaryInput = {
   workDays?: Prisma.IntFieldUpdateOperationsInput | number
   totalHours?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   hourlyRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  allowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  breakfastAllowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  otherAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   salary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   previousLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  loanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   netLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  previousTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  currentTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  netTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  previousChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  challanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  netChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   netSalaryPayable?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   cardSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   cashSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -3329,7 +3195,7 @@ export type PayrollDetailsUncheckedUpdateManyWithoutPayrollSummaryInput = {
   createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   modifiedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   modifiedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  payrollSectionId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type PayrollDetailsCreateManyPaymentMethodInput = {
@@ -3341,16 +3207,18 @@ export type PayrollDetailsCreateManyPaymentMethodInput = {
   workDays: number
   totalHours: runtime.Decimal | runtime.DecimalJsLike | number | string
   hourlyRate: runtime.Decimal | runtime.DecimalJsLike | number | string
-  allowance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  breakfastAllowance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  otherAllowances: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAllowances: runtime.Decimal | runtime.DecimalJsLike | number | string
   salary: runtime.Decimal | runtime.DecimalJsLike | number | string
   previousLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
   currentLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  loanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
   netLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  previousTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  currentTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
-  netTrafficChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  previousChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  challanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
+  netChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
   netSalaryPayable: runtime.Decimal | runtime.DecimalJsLike | number | string
   cardSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
   cashSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -3362,7 +3230,7 @@ export type PayrollDetailsCreateManyPaymentMethodInput = {
   createdBy?: number | null
   modifiedDate?: Date | string
   modifiedBy?: number | null
-  payrollSectionId?: number | null
+  isLocked?: boolean
 }
 
 export type PayrollDetailsUpdateWithoutPaymentMethodInput = {
@@ -3371,16 +3239,18 @@ export type PayrollDetailsUpdateWithoutPaymentMethodInput = {
   workDays?: Prisma.IntFieldUpdateOperationsInput | number
   totalHours?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   hourlyRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  allowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  breakfastAllowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  otherAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   salary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   previousLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  loanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   netLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  previousTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  currentTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  netTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  previousChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  challanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  netChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   netSalaryPayable?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   cardSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   cashSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -3388,13 +3258,13 @@ export type PayrollDetailsUpdateWithoutPaymentMethodInput = {
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   modifiedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
   payrollSummary?: Prisma.PayrollSummaryUpdateOneRequiredWithoutDetailsNestedInput
   employee?: Prisma.EmployeeUpdateOneRequiredWithoutPayrollDetailsNestedInput
   payrollStatus?: Prisma.PayrollStatusUpdateOneWithoutPayrollDetailsNestedInput
   branch?: Prisma.BranchUpdateOneWithoutPayrollDetailsNestedInput
   creator?: Prisma.UserUpdateOneWithoutCreatedPayrollDetailsNestedInput
   modifier?: Prisma.UserUpdateOneWithoutModifiedPayrollDetailsNestedInput
-  payrollSection?: Prisma.PayrollSectionUpdateOneWithoutPayrollDetailsNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutPayrollDetailNestedInput
 }
 
@@ -3407,16 +3277,18 @@ export type PayrollDetailsUncheckedUpdateWithoutPaymentMethodInput = {
   workDays?: Prisma.IntFieldUpdateOperationsInput | number
   totalHours?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   hourlyRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  allowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  breakfastAllowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  otherAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   salary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   previousLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  loanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   netLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  previousTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  currentTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  netTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  previousChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  challanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  netChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   netSalaryPayable?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   cardSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   cashSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -3428,7 +3300,7 @@ export type PayrollDetailsUncheckedUpdateWithoutPaymentMethodInput = {
   createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   modifiedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   modifiedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  payrollSectionId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutPayrollDetailNestedInput
 }
 
@@ -3441,16 +3313,18 @@ export type PayrollDetailsUncheckedUpdateManyWithoutPaymentMethodInput = {
   workDays?: Prisma.IntFieldUpdateOperationsInput | number
   totalHours?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   hourlyRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  allowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  breakfastAllowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  otherAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   salary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   previousLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  loanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   netLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  previousTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  currentTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  deductionTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  netTrafficChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  previousChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  challanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  netChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   netSalaryPayable?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   cardSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   cashSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -3462,7 +3336,7 @@ export type PayrollDetailsUncheckedUpdateManyWithoutPaymentMethodInput = {
   createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   modifiedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   modifiedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  payrollSectionId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 
@@ -3505,16 +3379,18 @@ export type PayrollDetailsSelect<ExtArgs extends runtime.Types.Extensions.Intern
   workDays?: boolean
   totalHours?: boolean
   hourlyRate?: boolean
-  allowance?: boolean
+  breakfastAllowance?: boolean
+  otherAllowances?: boolean
+  totalAllowances?: boolean
   salary?: boolean
   previousLoan?: boolean
   currentLoan?: boolean
-  deductionLoan?: boolean
+  loanDeduction?: boolean
   netLoan?: boolean
-  previousTrafficChallan?: boolean
-  currentTrafficChallan?: boolean
-  deductionTrafficChallan?: boolean
-  netTrafficChallan?: boolean
+  previousChallan?: boolean
+  currentChallan?: boolean
+  challanDeduction?: boolean
+  netChallan?: boolean
   netSalaryPayable?: boolean
   cardSalary?: boolean
   cashSalary?: boolean
@@ -3527,7 +3403,7 @@ export type PayrollDetailsSelect<ExtArgs extends runtime.Types.Extensions.Intern
   createdBy?: boolean
   modifiedDate?: boolean
   modifiedBy?: boolean
-  payrollSectionId?: boolean
+  isLocked?: boolean
   payrollSummary?: boolean | Prisma.PayrollSummaryDefaultArgs<ExtArgs>
   employee?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
   paymentMethod?: boolean | Prisma.PayrollDetails$paymentMethodArgs<ExtArgs>
@@ -3535,7 +3411,6 @@ export type PayrollDetailsSelect<ExtArgs extends runtime.Types.Extensions.Intern
   branch?: boolean | Prisma.PayrollDetails$branchArgs<ExtArgs>
   creator?: boolean | Prisma.PayrollDetails$creatorArgs<ExtArgs>
   modifier?: boolean | Prisma.PayrollDetails$modifierArgs<ExtArgs>
-  payrollSection?: boolean | Prisma.PayrollDetails$payrollSectionArgs<ExtArgs>
   ledgers?: boolean | Prisma.PayrollDetails$ledgersArgs<ExtArgs>
   _count?: boolean | Prisma.PayrollDetailsCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["payrollDetails"]>
@@ -3549,16 +3424,18 @@ export type PayrollDetailsSelectCreateManyAndReturn<ExtArgs extends runtime.Type
   workDays?: boolean
   totalHours?: boolean
   hourlyRate?: boolean
-  allowance?: boolean
+  breakfastAllowance?: boolean
+  otherAllowances?: boolean
+  totalAllowances?: boolean
   salary?: boolean
   previousLoan?: boolean
   currentLoan?: boolean
-  deductionLoan?: boolean
+  loanDeduction?: boolean
   netLoan?: boolean
-  previousTrafficChallan?: boolean
-  currentTrafficChallan?: boolean
-  deductionTrafficChallan?: boolean
-  netTrafficChallan?: boolean
+  previousChallan?: boolean
+  currentChallan?: boolean
+  challanDeduction?: boolean
+  netChallan?: boolean
   netSalaryPayable?: boolean
   cardSalary?: boolean
   cashSalary?: boolean
@@ -3571,7 +3448,7 @@ export type PayrollDetailsSelectCreateManyAndReturn<ExtArgs extends runtime.Type
   createdBy?: boolean
   modifiedDate?: boolean
   modifiedBy?: boolean
-  payrollSectionId?: boolean
+  isLocked?: boolean
   payrollSummary?: boolean | Prisma.PayrollSummaryDefaultArgs<ExtArgs>
   employee?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
   paymentMethod?: boolean | Prisma.PayrollDetails$paymentMethodArgs<ExtArgs>
@@ -3579,7 +3456,6 @@ export type PayrollDetailsSelectCreateManyAndReturn<ExtArgs extends runtime.Type
   branch?: boolean | Prisma.PayrollDetails$branchArgs<ExtArgs>
   creator?: boolean | Prisma.PayrollDetails$creatorArgs<ExtArgs>
   modifier?: boolean | Prisma.PayrollDetails$modifierArgs<ExtArgs>
-  payrollSection?: boolean | Prisma.PayrollDetails$payrollSectionArgs<ExtArgs>
 }, ExtArgs["result"]["payrollDetails"]>
 
 export type PayrollDetailsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -3591,16 +3467,18 @@ export type PayrollDetailsSelectUpdateManyAndReturn<ExtArgs extends runtime.Type
   workDays?: boolean
   totalHours?: boolean
   hourlyRate?: boolean
-  allowance?: boolean
+  breakfastAllowance?: boolean
+  otherAllowances?: boolean
+  totalAllowances?: boolean
   salary?: boolean
   previousLoan?: boolean
   currentLoan?: boolean
-  deductionLoan?: boolean
+  loanDeduction?: boolean
   netLoan?: boolean
-  previousTrafficChallan?: boolean
-  currentTrafficChallan?: boolean
-  deductionTrafficChallan?: boolean
-  netTrafficChallan?: boolean
+  previousChallan?: boolean
+  currentChallan?: boolean
+  challanDeduction?: boolean
+  netChallan?: boolean
   netSalaryPayable?: boolean
   cardSalary?: boolean
   cashSalary?: boolean
@@ -3613,7 +3491,7 @@ export type PayrollDetailsSelectUpdateManyAndReturn<ExtArgs extends runtime.Type
   createdBy?: boolean
   modifiedDate?: boolean
   modifiedBy?: boolean
-  payrollSectionId?: boolean
+  isLocked?: boolean
   payrollSummary?: boolean | Prisma.PayrollSummaryDefaultArgs<ExtArgs>
   employee?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
   paymentMethod?: boolean | Prisma.PayrollDetails$paymentMethodArgs<ExtArgs>
@@ -3621,7 +3499,6 @@ export type PayrollDetailsSelectUpdateManyAndReturn<ExtArgs extends runtime.Type
   branch?: boolean | Prisma.PayrollDetails$branchArgs<ExtArgs>
   creator?: boolean | Prisma.PayrollDetails$creatorArgs<ExtArgs>
   modifier?: boolean | Prisma.PayrollDetails$modifierArgs<ExtArgs>
-  payrollSection?: boolean | Prisma.PayrollDetails$payrollSectionArgs<ExtArgs>
 }, ExtArgs["result"]["payrollDetails"]>
 
 export type PayrollDetailsSelectScalar = {
@@ -3633,16 +3510,18 @@ export type PayrollDetailsSelectScalar = {
   workDays?: boolean
   totalHours?: boolean
   hourlyRate?: boolean
-  allowance?: boolean
+  breakfastAllowance?: boolean
+  otherAllowances?: boolean
+  totalAllowances?: boolean
   salary?: boolean
   previousLoan?: boolean
   currentLoan?: boolean
-  deductionLoan?: boolean
+  loanDeduction?: boolean
   netLoan?: boolean
-  previousTrafficChallan?: boolean
-  currentTrafficChallan?: boolean
-  deductionTrafficChallan?: boolean
-  netTrafficChallan?: boolean
+  previousChallan?: boolean
+  currentChallan?: boolean
+  challanDeduction?: boolean
+  netChallan?: boolean
   netSalaryPayable?: boolean
   cardSalary?: boolean
   cashSalary?: boolean
@@ -3655,10 +3534,10 @@ export type PayrollDetailsSelectScalar = {
   createdBy?: boolean
   modifiedDate?: boolean
   modifiedBy?: boolean
-  payrollSectionId?: boolean
+  isLocked?: boolean
 }
 
-export type PayrollDetailsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "payrollId" | "payrollMonth" | "payrollYear" | "employeeId" | "workDays" | "totalHours" | "hourlyRate" | "allowance" | "salary" | "previousLoan" | "currentLoan" | "deductionLoan" | "netLoan" | "previousTrafficChallan" | "currentTrafficChallan" | "deductionTrafficChallan" | "netTrafficChallan" | "netSalaryPayable" | "cardSalary" | "cashSalary" | "overTime" | "remarks" | "paymentMethodId" | "payrollStatusId" | "branchId" | "createdDate" | "createdBy" | "modifiedDate" | "modifiedBy" | "payrollSectionId", ExtArgs["result"]["payrollDetails"]>
+export type PayrollDetailsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "payrollId" | "payrollMonth" | "payrollYear" | "employeeId" | "workDays" | "totalHours" | "hourlyRate" | "breakfastAllowance" | "otherAllowances" | "totalAllowances" | "salary" | "previousLoan" | "currentLoan" | "loanDeduction" | "netLoan" | "previousChallan" | "currentChallan" | "challanDeduction" | "netChallan" | "netSalaryPayable" | "cardSalary" | "cashSalary" | "overTime" | "remarks" | "paymentMethodId" | "payrollStatusId" | "branchId" | "createdDate" | "createdBy" | "modifiedDate" | "modifiedBy" | "isLocked", ExtArgs["result"]["payrollDetails"]>
 export type PayrollDetailsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   payrollSummary?: boolean | Prisma.PayrollSummaryDefaultArgs<ExtArgs>
   employee?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
@@ -3667,7 +3546,6 @@ export type PayrollDetailsInclude<ExtArgs extends runtime.Types.Extensions.Inter
   branch?: boolean | Prisma.PayrollDetails$branchArgs<ExtArgs>
   creator?: boolean | Prisma.PayrollDetails$creatorArgs<ExtArgs>
   modifier?: boolean | Prisma.PayrollDetails$modifierArgs<ExtArgs>
-  payrollSection?: boolean | Prisma.PayrollDetails$payrollSectionArgs<ExtArgs>
   ledgers?: boolean | Prisma.PayrollDetails$ledgersArgs<ExtArgs>
   _count?: boolean | Prisma.PayrollDetailsCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -3679,7 +3557,6 @@ export type PayrollDetailsIncludeCreateManyAndReturn<ExtArgs extends runtime.Typ
   branch?: boolean | Prisma.PayrollDetails$branchArgs<ExtArgs>
   creator?: boolean | Prisma.PayrollDetails$creatorArgs<ExtArgs>
   modifier?: boolean | Prisma.PayrollDetails$modifierArgs<ExtArgs>
-  payrollSection?: boolean | Prisma.PayrollDetails$payrollSectionArgs<ExtArgs>
 }
 export type PayrollDetailsIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   payrollSummary?: boolean | Prisma.PayrollSummaryDefaultArgs<ExtArgs>
@@ -3689,7 +3566,6 @@ export type PayrollDetailsIncludeUpdateManyAndReturn<ExtArgs extends runtime.Typ
   branch?: boolean | Prisma.PayrollDetails$branchArgs<ExtArgs>
   creator?: boolean | Prisma.PayrollDetails$creatorArgs<ExtArgs>
   modifier?: boolean | Prisma.PayrollDetails$modifierArgs<ExtArgs>
-  payrollSection?: boolean | Prisma.PayrollDetails$payrollSectionArgs<ExtArgs>
 }
 
 export type $PayrollDetailsPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3702,7 +3578,6 @@ export type $PayrollDetailsPayload<ExtArgs extends runtime.Types.Extensions.Inte
     branch: Prisma.$BranchPayload<ExtArgs> | null
     creator: Prisma.$UserPayload<ExtArgs> | null
     modifier: Prisma.$UserPayload<ExtArgs> | null
-    payrollSection: Prisma.$PayrollSectionPayload<ExtArgs> | null
     ledgers: Prisma.$LedgerPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -3714,16 +3589,18 @@ export type $PayrollDetailsPayload<ExtArgs extends runtime.Types.Extensions.Inte
     workDays: number
     totalHours: runtime.Decimal
     hourlyRate: runtime.Decimal
-    allowance: runtime.Decimal
+    breakfastAllowance: runtime.Decimal
+    otherAllowances: runtime.Decimal
+    totalAllowances: runtime.Decimal
     salary: runtime.Decimal
     previousLoan: runtime.Decimal
     currentLoan: runtime.Decimal
-    deductionLoan: runtime.Decimal
+    loanDeduction: runtime.Decimal
     netLoan: runtime.Decimal
-    previousTrafficChallan: runtime.Decimal
-    currentTrafficChallan: runtime.Decimal
-    deductionTrafficChallan: runtime.Decimal
-    netTrafficChallan: runtime.Decimal
+    previousChallan: runtime.Decimal
+    currentChallan: runtime.Decimal
+    challanDeduction: runtime.Decimal
+    netChallan: runtime.Decimal
     netSalaryPayable: runtime.Decimal
     cardSalary: runtime.Decimal
     cashSalary: runtime.Decimal
@@ -3736,7 +3613,7 @@ export type $PayrollDetailsPayload<ExtArgs extends runtime.Types.Extensions.Inte
     createdBy: number | null
     modifiedDate: Date
     modifiedBy: number | null
-    payrollSectionId: number | null
+    isLocked: boolean
   }, ExtArgs["result"]["payrollDetails"]>
   composites: {}
 }
@@ -4138,7 +4015,6 @@ export interface Prisma__PayrollDetailsClient<T, Null = never, ExtArgs extends r
   branch<T extends Prisma.PayrollDetails$branchArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PayrollDetails$branchArgs<ExtArgs>>): Prisma.Prisma__BranchClient<runtime.Types.Result.GetResult<Prisma.$BranchPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   creator<T extends Prisma.PayrollDetails$creatorArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PayrollDetails$creatorArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   modifier<T extends Prisma.PayrollDetails$modifierArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PayrollDetails$modifierArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  payrollSection<T extends Prisma.PayrollDetails$payrollSectionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PayrollDetails$payrollSectionArgs<ExtArgs>>): Prisma.Prisma__PayrollSectionClient<runtime.Types.Result.GetResult<Prisma.$PayrollSectionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   ledgers<T extends Prisma.PayrollDetails$ledgersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PayrollDetails$ledgersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LedgerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -4177,16 +4053,18 @@ export interface PayrollDetailsFieldRefs {
   readonly workDays: Prisma.FieldRef<"PayrollDetails", 'Int'>
   readonly totalHours: Prisma.FieldRef<"PayrollDetails", 'Decimal'>
   readonly hourlyRate: Prisma.FieldRef<"PayrollDetails", 'Decimal'>
-  readonly allowance: Prisma.FieldRef<"PayrollDetails", 'Decimal'>
+  readonly breakfastAllowance: Prisma.FieldRef<"PayrollDetails", 'Decimal'>
+  readonly otherAllowances: Prisma.FieldRef<"PayrollDetails", 'Decimal'>
+  readonly totalAllowances: Prisma.FieldRef<"PayrollDetails", 'Decimal'>
   readonly salary: Prisma.FieldRef<"PayrollDetails", 'Decimal'>
   readonly previousLoan: Prisma.FieldRef<"PayrollDetails", 'Decimal'>
   readonly currentLoan: Prisma.FieldRef<"PayrollDetails", 'Decimal'>
-  readonly deductionLoan: Prisma.FieldRef<"PayrollDetails", 'Decimal'>
+  readonly loanDeduction: Prisma.FieldRef<"PayrollDetails", 'Decimal'>
   readonly netLoan: Prisma.FieldRef<"PayrollDetails", 'Decimal'>
-  readonly previousTrafficChallan: Prisma.FieldRef<"PayrollDetails", 'Decimal'>
-  readonly currentTrafficChallan: Prisma.FieldRef<"PayrollDetails", 'Decimal'>
-  readonly deductionTrafficChallan: Prisma.FieldRef<"PayrollDetails", 'Decimal'>
-  readonly netTrafficChallan: Prisma.FieldRef<"PayrollDetails", 'Decimal'>
+  readonly previousChallan: Prisma.FieldRef<"PayrollDetails", 'Decimal'>
+  readonly currentChallan: Prisma.FieldRef<"PayrollDetails", 'Decimal'>
+  readonly challanDeduction: Prisma.FieldRef<"PayrollDetails", 'Decimal'>
+  readonly netChallan: Prisma.FieldRef<"PayrollDetails", 'Decimal'>
   readonly netSalaryPayable: Prisma.FieldRef<"PayrollDetails", 'Decimal'>
   readonly cardSalary: Prisma.FieldRef<"PayrollDetails", 'Decimal'>
   readonly cashSalary: Prisma.FieldRef<"PayrollDetails", 'Decimal'>
@@ -4199,7 +4077,7 @@ export interface PayrollDetailsFieldRefs {
   readonly createdBy: Prisma.FieldRef<"PayrollDetails", 'Int'>
   readonly modifiedDate: Prisma.FieldRef<"PayrollDetails", 'DateTime'>
   readonly modifiedBy: Prisma.FieldRef<"PayrollDetails", 'Int'>
-  readonly payrollSectionId: Prisma.FieldRef<"PayrollDetails", 'Int'>
+  readonly isLocked: Prisma.FieldRef<"PayrollDetails", 'Boolean'>
 }
     
 
@@ -4688,25 +4566,6 @@ export type PayrollDetails$modifierArgs<ExtArgs extends runtime.Types.Extensions
    */
   include?: Prisma.UserInclude<ExtArgs> | null
   where?: Prisma.UserWhereInput
-}
-
-/**
- * PayrollDetails.payrollSection
- */
-export type PayrollDetails$payrollSectionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the PayrollSection
-   */
-  select?: Prisma.PayrollSectionSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the PayrollSection
-   */
-  omit?: Prisma.PayrollSectionOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.PayrollSectionInclude<ExtArgs> | null
-  where?: Prisma.PayrollSectionWhereInput
 }
 
 /**

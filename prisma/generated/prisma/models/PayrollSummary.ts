@@ -31,10 +31,16 @@ export type PayrollSummaryAvgAggregateOutputType = {
   payrollMonth: number | null
   payrollYear: number | null
   totalSalary: runtime.Decimal | null
-  totalPreviousAdvance: runtime.Decimal | null
-  totalCurrentAdvance: runtime.Decimal | null
-  totalDeduction: runtime.Decimal | null
+  totalBreakfastAllowance: runtime.Decimal | null
+  totalOtherAllowances: runtime.Decimal | null
+  totalPreviousLoan: runtime.Decimal | null
+  totalCurrentLoan: runtime.Decimal | null
+  totalLoanDeduction: runtime.Decimal | null
   totalNetLoan: runtime.Decimal | null
+  totalPreviousChallan: runtime.Decimal | null
+  totalCurrentChallan: runtime.Decimal | null
+  totalChallanDeduction: runtime.Decimal | null
+  totalNetChallan: runtime.Decimal | null
   totalNetSalaryPayable: runtime.Decimal | null
   totalCardSalary: runtime.Decimal | null
   totalCashSalary: runtime.Decimal | null
@@ -49,10 +55,16 @@ export type PayrollSummarySumAggregateOutputType = {
   payrollMonth: number | null
   payrollYear: number | null
   totalSalary: runtime.Decimal | null
-  totalPreviousAdvance: runtime.Decimal | null
-  totalCurrentAdvance: runtime.Decimal | null
-  totalDeduction: runtime.Decimal | null
+  totalBreakfastAllowance: runtime.Decimal | null
+  totalOtherAllowances: runtime.Decimal | null
+  totalPreviousLoan: runtime.Decimal | null
+  totalCurrentLoan: runtime.Decimal | null
+  totalLoanDeduction: runtime.Decimal | null
   totalNetLoan: runtime.Decimal | null
+  totalPreviousChallan: runtime.Decimal | null
+  totalCurrentChallan: runtime.Decimal | null
+  totalChallanDeduction: runtime.Decimal | null
+  totalNetChallan: runtime.Decimal | null
   totalNetSalaryPayable: runtime.Decimal | null
   totalCardSalary: runtime.Decimal | null
   totalCashSalary: runtime.Decimal | null
@@ -67,10 +79,16 @@ export type PayrollSummaryMinAggregateOutputType = {
   payrollMonth: number | null
   payrollYear: number | null
   totalSalary: runtime.Decimal | null
-  totalPreviousAdvance: runtime.Decimal | null
-  totalCurrentAdvance: runtime.Decimal | null
-  totalDeduction: runtime.Decimal | null
+  totalBreakfastAllowance: runtime.Decimal | null
+  totalOtherAllowances: runtime.Decimal | null
+  totalPreviousLoan: runtime.Decimal | null
+  totalCurrentLoan: runtime.Decimal | null
+  totalLoanDeduction: runtime.Decimal | null
   totalNetLoan: runtime.Decimal | null
+  totalPreviousChallan: runtime.Decimal | null
+  totalCurrentChallan: runtime.Decimal | null
+  totalChallanDeduction: runtime.Decimal | null
+  totalNetChallan: runtime.Decimal | null
   totalNetSalaryPayable: runtime.Decimal | null
   totalCardSalary: runtime.Decimal | null
   totalCashSalary: runtime.Decimal | null
@@ -88,10 +106,16 @@ export type PayrollSummaryMaxAggregateOutputType = {
   payrollMonth: number | null
   payrollYear: number | null
   totalSalary: runtime.Decimal | null
-  totalPreviousAdvance: runtime.Decimal | null
-  totalCurrentAdvance: runtime.Decimal | null
-  totalDeduction: runtime.Decimal | null
+  totalBreakfastAllowance: runtime.Decimal | null
+  totalOtherAllowances: runtime.Decimal | null
+  totalPreviousLoan: runtime.Decimal | null
+  totalCurrentLoan: runtime.Decimal | null
+  totalLoanDeduction: runtime.Decimal | null
   totalNetLoan: runtime.Decimal | null
+  totalPreviousChallan: runtime.Decimal | null
+  totalCurrentChallan: runtime.Decimal | null
+  totalChallanDeduction: runtime.Decimal | null
+  totalNetChallan: runtime.Decimal | null
   totalNetSalaryPayable: runtime.Decimal | null
   totalCardSalary: runtime.Decimal | null
   totalCashSalary: runtime.Decimal | null
@@ -109,10 +133,16 @@ export type PayrollSummaryCountAggregateOutputType = {
   payrollMonth: number
   payrollYear: number
   totalSalary: number
-  totalPreviousAdvance: number
-  totalCurrentAdvance: number
-  totalDeduction: number
+  totalBreakfastAllowance: number
+  totalOtherAllowances: number
+  totalPreviousLoan: number
+  totalCurrentLoan: number
+  totalLoanDeduction: number
   totalNetLoan: number
+  totalPreviousChallan: number
+  totalCurrentChallan: number
+  totalChallanDeduction: number
+  totalNetChallan: number
   totalNetSalaryPayable: number
   totalCardSalary: number
   totalCashSalary: number
@@ -132,10 +162,16 @@ export type PayrollSummaryAvgAggregateInputType = {
   payrollMonth?: true
   payrollYear?: true
   totalSalary?: true
-  totalPreviousAdvance?: true
-  totalCurrentAdvance?: true
-  totalDeduction?: true
+  totalBreakfastAllowance?: true
+  totalOtherAllowances?: true
+  totalPreviousLoan?: true
+  totalCurrentLoan?: true
+  totalLoanDeduction?: true
   totalNetLoan?: true
+  totalPreviousChallan?: true
+  totalCurrentChallan?: true
+  totalChallanDeduction?: true
+  totalNetChallan?: true
   totalNetSalaryPayable?: true
   totalCardSalary?: true
   totalCashSalary?: true
@@ -150,10 +186,16 @@ export type PayrollSummarySumAggregateInputType = {
   payrollMonth?: true
   payrollYear?: true
   totalSalary?: true
-  totalPreviousAdvance?: true
-  totalCurrentAdvance?: true
-  totalDeduction?: true
+  totalBreakfastAllowance?: true
+  totalOtherAllowances?: true
+  totalPreviousLoan?: true
+  totalCurrentLoan?: true
+  totalLoanDeduction?: true
   totalNetLoan?: true
+  totalPreviousChallan?: true
+  totalCurrentChallan?: true
+  totalChallanDeduction?: true
+  totalNetChallan?: true
   totalNetSalaryPayable?: true
   totalCardSalary?: true
   totalCashSalary?: true
@@ -168,10 +210,16 @@ export type PayrollSummaryMinAggregateInputType = {
   payrollMonth?: true
   payrollYear?: true
   totalSalary?: true
-  totalPreviousAdvance?: true
-  totalCurrentAdvance?: true
-  totalDeduction?: true
+  totalBreakfastAllowance?: true
+  totalOtherAllowances?: true
+  totalPreviousLoan?: true
+  totalCurrentLoan?: true
+  totalLoanDeduction?: true
   totalNetLoan?: true
+  totalPreviousChallan?: true
+  totalCurrentChallan?: true
+  totalChallanDeduction?: true
+  totalNetChallan?: true
   totalNetSalaryPayable?: true
   totalCardSalary?: true
   totalCashSalary?: true
@@ -189,10 +237,16 @@ export type PayrollSummaryMaxAggregateInputType = {
   payrollMonth?: true
   payrollYear?: true
   totalSalary?: true
-  totalPreviousAdvance?: true
-  totalCurrentAdvance?: true
-  totalDeduction?: true
+  totalBreakfastAllowance?: true
+  totalOtherAllowances?: true
+  totalPreviousLoan?: true
+  totalCurrentLoan?: true
+  totalLoanDeduction?: true
   totalNetLoan?: true
+  totalPreviousChallan?: true
+  totalCurrentChallan?: true
+  totalChallanDeduction?: true
+  totalNetChallan?: true
   totalNetSalaryPayable?: true
   totalCardSalary?: true
   totalCashSalary?: true
@@ -210,10 +264,16 @@ export type PayrollSummaryCountAggregateInputType = {
   payrollMonth?: true
   payrollYear?: true
   totalSalary?: true
-  totalPreviousAdvance?: true
-  totalCurrentAdvance?: true
-  totalDeduction?: true
+  totalBreakfastAllowance?: true
+  totalOtherAllowances?: true
+  totalPreviousLoan?: true
+  totalCurrentLoan?: true
+  totalLoanDeduction?: true
   totalNetLoan?: true
+  totalPreviousChallan?: true
+  totalCurrentChallan?: true
+  totalChallanDeduction?: true
+  totalNetChallan?: true
   totalNetSalaryPayable?: true
   totalCardSalary?: true
   totalCashSalary?: true
@@ -318,10 +378,16 @@ export type PayrollSummaryGroupByOutputType = {
   payrollMonth: number
   payrollYear: number
   totalSalary: runtime.Decimal
-  totalPreviousAdvance: runtime.Decimal
-  totalCurrentAdvance: runtime.Decimal
-  totalDeduction: runtime.Decimal
+  totalBreakfastAllowance: runtime.Decimal
+  totalOtherAllowances: runtime.Decimal
+  totalPreviousLoan: runtime.Decimal
+  totalCurrentLoan: runtime.Decimal
+  totalLoanDeduction: runtime.Decimal
   totalNetLoan: runtime.Decimal
+  totalPreviousChallan: runtime.Decimal
+  totalCurrentChallan: runtime.Decimal
+  totalChallanDeduction: runtime.Decimal
+  totalNetChallan: runtime.Decimal
   totalNetSalaryPayable: runtime.Decimal
   totalCardSalary: runtime.Decimal
   totalCashSalary: runtime.Decimal
@@ -362,10 +428,16 @@ export type PayrollSummaryWhereInput = {
   payrollMonth?: Prisma.IntFilter<"PayrollSummary"> | number
   payrollYear?: Prisma.IntFilter<"PayrollSummary"> | number
   totalSalary?: Prisma.DecimalFilter<"PayrollSummary"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalPreviousAdvance?: Prisma.DecimalFilter<"PayrollSummary"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalCurrentAdvance?: Prisma.DecimalFilter<"PayrollSummary"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalDeduction?: Prisma.DecimalFilter<"PayrollSummary"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalBreakfastAllowance?: Prisma.DecimalFilter<"PayrollSummary"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalOtherAllowances?: Prisma.DecimalFilter<"PayrollSummary"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousLoan?: Prisma.DecimalFilter<"PayrollSummary"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentLoan?: Prisma.DecimalFilter<"PayrollSummary"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalLoanDeduction?: Prisma.DecimalFilter<"PayrollSummary"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetLoan?: Prisma.DecimalFilter<"PayrollSummary"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousChallan?: Prisma.DecimalFilter<"PayrollSummary"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentChallan?: Prisma.DecimalFilter<"PayrollSummary"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalChallanDeduction?: Prisma.DecimalFilter<"PayrollSummary"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalNetChallan?: Prisma.DecimalFilter<"PayrollSummary"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetSalaryPayable?: Prisma.DecimalFilter<"PayrollSummary"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCardSalary?: Prisma.DecimalFilter<"PayrollSummary"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCashSalary?: Prisma.DecimalFilter<"PayrollSummary"> | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -388,10 +460,16 @@ export type PayrollSummaryOrderByWithRelationInput = {
   payrollMonth?: Prisma.SortOrder
   payrollYear?: Prisma.SortOrder
   totalSalary?: Prisma.SortOrder
-  totalPreviousAdvance?: Prisma.SortOrder
-  totalCurrentAdvance?: Prisma.SortOrder
-  totalDeduction?: Prisma.SortOrder
+  totalBreakfastAllowance?: Prisma.SortOrder
+  totalOtherAllowances?: Prisma.SortOrder
+  totalPreviousLoan?: Prisma.SortOrder
+  totalCurrentLoan?: Prisma.SortOrder
+  totalLoanDeduction?: Prisma.SortOrder
   totalNetLoan?: Prisma.SortOrder
+  totalPreviousChallan?: Prisma.SortOrder
+  totalCurrentChallan?: Prisma.SortOrder
+  totalChallanDeduction?: Prisma.SortOrder
+  totalNetChallan?: Prisma.SortOrder
   totalNetSalaryPayable?: Prisma.SortOrder
   totalCardSalary?: Prisma.SortOrder
   totalCashSalary?: Prisma.SortOrder
@@ -417,10 +495,16 @@ export type PayrollSummaryWhereUniqueInput = Prisma.AtLeast<{
   payrollMonth?: Prisma.IntFilter<"PayrollSummary"> | number
   payrollYear?: Prisma.IntFilter<"PayrollSummary"> | number
   totalSalary?: Prisma.DecimalFilter<"PayrollSummary"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalPreviousAdvance?: Prisma.DecimalFilter<"PayrollSummary"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalCurrentAdvance?: Prisma.DecimalFilter<"PayrollSummary"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalDeduction?: Prisma.DecimalFilter<"PayrollSummary"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalBreakfastAllowance?: Prisma.DecimalFilter<"PayrollSummary"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalOtherAllowances?: Prisma.DecimalFilter<"PayrollSummary"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousLoan?: Prisma.DecimalFilter<"PayrollSummary"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentLoan?: Prisma.DecimalFilter<"PayrollSummary"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalLoanDeduction?: Prisma.DecimalFilter<"PayrollSummary"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetLoan?: Prisma.DecimalFilter<"PayrollSummary"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousChallan?: Prisma.DecimalFilter<"PayrollSummary"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentChallan?: Prisma.DecimalFilter<"PayrollSummary"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalChallanDeduction?: Prisma.DecimalFilter<"PayrollSummary"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalNetChallan?: Prisma.DecimalFilter<"PayrollSummary"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetSalaryPayable?: Prisma.DecimalFilter<"PayrollSummary"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCardSalary?: Prisma.DecimalFilter<"PayrollSummary"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCashSalary?: Prisma.DecimalFilter<"PayrollSummary"> | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -443,10 +527,16 @@ export type PayrollSummaryOrderByWithAggregationInput = {
   payrollMonth?: Prisma.SortOrder
   payrollYear?: Prisma.SortOrder
   totalSalary?: Prisma.SortOrder
-  totalPreviousAdvance?: Prisma.SortOrder
-  totalCurrentAdvance?: Prisma.SortOrder
-  totalDeduction?: Prisma.SortOrder
+  totalBreakfastAllowance?: Prisma.SortOrder
+  totalOtherAllowances?: Prisma.SortOrder
+  totalPreviousLoan?: Prisma.SortOrder
+  totalCurrentLoan?: Prisma.SortOrder
+  totalLoanDeduction?: Prisma.SortOrder
   totalNetLoan?: Prisma.SortOrder
+  totalPreviousChallan?: Prisma.SortOrder
+  totalCurrentChallan?: Prisma.SortOrder
+  totalChallanDeduction?: Prisma.SortOrder
+  totalNetChallan?: Prisma.SortOrder
   totalNetSalaryPayable?: Prisma.SortOrder
   totalCardSalary?: Prisma.SortOrder
   totalCashSalary?: Prisma.SortOrder
@@ -472,10 +562,16 @@ export type PayrollSummaryScalarWhereWithAggregatesInput = {
   payrollMonth?: Prisma.IntWithAggregatesFilter<"PayrollSummary"> | number
   payrollYear?: Prisma.IntWithAggregatesFilter<"PayrollSummary"> | number
   totalSalary?: Prisma.DecimalWithAggregatesFilter<"PayrollSummary"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalPreviousAdvance?: Prisma.DecimalWithAggregatesFilter<"PayrollSummary"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalCurrentAdvance?: Prisma.DecimalWithAggregatesFilter<"PayrollSummary"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalDeduction?: Prisma.DecimalWithAggregatesFilter<"PayrollSummary"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalBreakfastAllowance?: Prisma.DecimalWithAggregatesFilter<"PayrollSummary"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalOtherAllowances?: Prisma.DecimalWithAggregatesFilter<"PayrollSummary"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousLoan?: Prisma.DecimalWithAggregatesFilter<"PayrollSummary"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentLoan?: Prisma.DecimalWithAggregatesFilter<"PayrollSummary"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalLoanDeduction?: Prisma.DecimalWithAggregatesFilter<"PayrollSummary"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetLoan?: Prisma.DecimalWithAggregatesFilter<"PayrollSummary"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousChallan?: Prisma.DecimalWithAggregatesFilter<"PayrollSummary"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentChallan?: Prisma.DecimalWithAggregatesFilter<"PayrollSummary"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalChallanDeduction?: Prisma.DecimalWithAggregatesFilter<"PayrollSummary"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalNetChallan?: Prisma.DecimalWithAggregatesFilter<"PayrollSummary"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetSalaryPayable?: Prisma.DecimalWithAggregatesFilter<"PayrollSummary"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCardSalary?: Prisma.DecimalWithAggregatesFilter<"PayrollSummary"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCashSalary?: Prisma.DecimalWithAggregatesFilter<"PayrollSummary"> | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -492,10 +588,16 @@ export type PayrollSummaryCreateInput = {
   payrollMonth: number
   payrollYear: number
   totalSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalPreviousAdvance: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalCurrentAdvance: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalBreakfastAllowance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalOtherAllowances: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalLoanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalChallanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalNetChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetSalaryPayable: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCardSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCashSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -514,10 +616,16 @@ export type PayrollSummaryUncheckedCreateInput = {
   payrollMonth: number
   payrollYear: number
   totalSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalPreviousAdvance: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalCurrentAdvance: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalBreakfastAllowance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalOtherAllowances: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalLoanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalChallanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalNetChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetSalaryPayable: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCardSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCashSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -535,10 +643,16 @@ export type PayrollSummaryUpdateInput = {
   payrollMonth?: Prisma.IntFieldUpdateOperationsInput | number
   payrollYear?: Prisma.IntFieldUpdateOperationsInput | number
   totalSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalPreviousAdvance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalCurrentAdvance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalBreakfastAllowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalOtherAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalLoanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalChallanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalNetChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetSalaryPayable?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCardSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCashSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -557,10 +671,16 @@ export type PayrollSummaryUncheckedUpdateInput = {
   payrollMonth?: Prisma.IntFieldUpdateOperationsInput | number
   payrollYear?: Prisma.IntFieldUpdateOperationsInput | number
   totalSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalPreviousAdvance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalCurrentAdvance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalBreakfastAllowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalOtherAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalLoanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalChallanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalNetChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetSalaryPayable?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCardSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCashSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -579,10 +699,16 @@ export type PayrollSummaryCreateManyInput = {
   payrollMonth: number
   payrollYear: number
   totalSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalPreviousAdvance: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalCurrentAdvance: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalBreakfastAllowance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalOtherAllowances: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalLoanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalChallanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalNetChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetSalaryPayable: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCardSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCashSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -599,10 +725,16 @@ export type PayrollSummaryUpdateManyMutationInput = {
   payrollMonth?: Prisma.IntFieldUpdateOperationsInput | number
   payrollYear?: Prisma.IntFieldUpdateOperationsInput | number
   totalSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalPreviousAdvance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalCurrentAdvance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalBreakfastAllowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalOtherAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalLoanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalChallanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalNetChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetSalaryPayable?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCardSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCashSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -616,10 +748,16 @@ export type PayrollSummaryUncheckedUpdateManyInput = {
   payrollMonth?: Prisma.IntFieldUpdateOperationsInput | number
   payrollYear?: Prisma.IntFieldUpdateOperationsInput | number
   totalSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalPreviousAdvance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalCurrentAdvance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalBreakfastAllowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalOtherAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalLoanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalChallanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalNetChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetSalaryPayable?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCardSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCashSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -647,10 +785,16 @@ export type PayrollSummaryCountOrderByAggregateInput = {
   payrollMonth?: Prisma.SortOrder
   payrollYear?: Prisma.SortOrder
   totalSalary?: Prisma.SortOrder
-  totalPreviousAdvance?: Prisma.SortOrder
-  totalCurrentAdvance?: Prisma.SortOrder
-  totalDeduction?: Prisma.SortOrder
+  totalBreakfastAllowance?: Prisma.SortOrder
+  totalOtherAllowances?: Prisma.SortOrder
+  totalPreviousLoan?: Prisma.SortOrder
+  totalCurrentLoan?: Prisma.SortOrder
+  totalLoanDeduction?: Prisma.SortOrder
   totalNetLoan?: Prisma.SortOrder
+  totalPreviousChallan?: Prisma.SortOrder
+  totalCurrentChallan?: Prisma.SortOrder
+  totalChallanDeduction?: Prisma.SortOrder
+  totalNetChallan?: Prisma.SortOrder
   totalNetSalaryPayable?: Prisma.SortOrder
   totalCardSalary?: Prisma.SortOrder
   totalCashSalary?: Prisma.SortOrder
@@ -668,10 +812,16 @@ export type PayrollSummaryAvgOrderByAggregateInput = {
   payrollMonth?: Prisma.SortOrder
   payrollYear?: Prisma.SortOrder
   totalSalary?: Prisma.SortOrder
-  totalPreviousAdvance?: Prisma.SortOrder
-  totalCurrentAdvance?: Prisma.SortOrder
-  totalDeduction?: Prisma.SortOrder
+  totalBreakfastAllowance?: Prisma.SortOrder
+  totalOtherAllowances?: Prisma.SortOrder
+  totalPreviousLoan?: Prisma.SortOrder
+  totalCurrentLoan?: Prisma.SortOrder
+  totalLoanDeduction?: Prisma.SortOrder
   totalNetLoan?: Prisma.SortOrder
+  totalPreviousChallan?: Prisma.SortOrder
+  totalCurrentChallan?: Prisma.SortOrder
+  totalChallanDeduction?: Prisma.SortOrder
+  totalNetChallan?: Prisma.SortOrder
   totalNetSalaryPayable?: Prisma.SortOrder
   totalCardSalary?: Prisma.SortOrder
   totalCashSalary?: Prisma.SortOrder
@@ -686,10 +836,16 @@ export type PayrollSummaryMaxOrderByAggregateInput = {
   payrollMonth?: Prisma.SortOrder
   payrollYear?: Prisma.SortOrder
   totalSalary?: Prisma.SortOrder
-  totalPreviousAdvance?: Prisma.SortOrder
-  totalCurrentAdvance?: Prisma.SortOrder
-  totalDeduction?: Prisma.SortOrder
+  totalBreakfastAllowance?: Prisma.SortOrder
+  totalOtherAllowances?: Prisma.SortOrder
+  totalPreviousLoan?: Prisma.SortOrder
+  totalCurrentLoan?: Prisma.SortOrder
+  totalLoanDeduction?: Prisma.SortOrder
   totalNetLoan?: Prisma.SortOrder
+  totalPreviousChallan?: Prisma.SortOrder
+  totalCurrentChallan?: Prisma.SortOrder
+  totalChallanDeduction?: Prisma.SortOrder
+  totalNetChallan?: Prisma.SortOrder
   totalNetSalaryPayable?: Prisma.SortOrder
   totalCardSalary?: Prisma.SortOrder
   totalCashSalary?: Prisma.SortOrder
@@ -707,10 +863,16 @@ export type PayrollSummaryMinOrderByAggregateInput = {
   payrollMonth?: Prisma.SortOrder
   payrollYear?: Prisma.SortOrder
   totalSalary?: Prisma.SortOrder
-  totalPreviousAdvance?: Prisma.SortOrder
-  totalCurrentAdvance?: Prisma.SortOrder
-  totalDeduction?: Prisma.SortOrder
+  totalBreakfastAllowance?: Prisma.SortOrder
+  totalOtherAllowances?: Prisma.SortOrder
+  totalPreviousLoan?: Prisma.SortOrder
+  totalCurrentLoan?: Prisma.SortOrder
+  totalLoanDeduction?: Prisma.SortOrder
   totalNetLoan?: Prisma.SortOrder
+  totalPreviousChallan?: Prisma.SortOrder
+  totalCurrentChallan?: Prisma.SortOrder
+  totalChallanDeduction?: Prisma.SortOrder
+  totalNetChallan?: Prisma.SortOrder
   totalNetSalaryPayable?: Prisma.SortOrder
   totalCardSalary?: Prisma.SortOrder
   totalCashSalary?: Prisma.SortOrder
@@ -728,10 +890,16 @@ export type PayrollSummarySumOrderByAggregateInput = {
   payrollMonth?: Prisma.SortOrder
   payrollYear?: Prisma.SortOrder
   totalSalary?: Prisma.SortOrder
-  totalPreviousAdvance?: Prisma.SortOrder
-  totalCurrentAdvance?: Prisma.SortOrder
-  totalDeduction?: Prisma.SortOrder
+  totalBreakfastAllowance?: Prisma.SortOrder
+  totalOtherAllowances?: Prisma.SortOrder
+  totalPreviousLoan?: Prisma.SortOrder
+  totalCurrentLoan?: Prisma.SortOrder
+  totalLoanDeduction?: Prisma.SortOrder
   totalNetLoan?: Prisma.SortOrder
+  totalPreviousChallan?: Prisma.SortOrder
+  totalCurrentChallan?: Prisma.SortOrder
+  totalChallanDeduction?: Prisma.SortOrder
+  totalNetChallan?: Prisma.SortOrder
   totalNetSalaryPayable?: Prisma.SortOrder
   totalCardSalary?: Prisma.SortOrder
   totalCashSalary?: Prisma.SortOrder
@@ -940,10 +1108,16 @@ export type PayrollSummaryCreateWithoutCreatorInput = {
   payrollMonth: number
   payrollYear: number
   totalSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalPreviousAdvance: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalCurrentAdvance: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalBreakfastAllowance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalOtherAllowances: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalLoanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalChallanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalNetChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetSalaryPayable: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCardSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCashSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -961,10 +1135,16 @@ export type PayrollSummaryUncheckedCreateWithoutCreatorInput = {
   payrollMonth: number
   payrollYear: number
   totalSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalPreviousAdvance: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalCurrentAdvance: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalBreakfastAllowance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalOtherAllowances: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalLoanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalChallanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalNetChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetSalaryPayable: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCardSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCashSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -991,10 +1171,16 @@ export type PayrollSummaryCreateWithoutModifierInput = {
   payrollMonth: number
   payrollYear: number
   totalSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalPreviousAdvance: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalCurrentAdvance: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalBreakfastAllowance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalOtherAllowances: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalLoanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalChallanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalNetChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetSalaryPayable: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCardSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCashSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1012,10 +1198,16 @@ export type PayrollSummaryUncheckedCreateWithoutModifierInput = {
   payrollMonth: number
   payrollYear: number
   totalSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalPreviousAdvance: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalCurrentAdvance: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalBreakfastAllowance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalOtherAllowances: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalLoanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalChallanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalNetChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetSalaryPayable: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCardSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCashSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1062,10 +1254,16 @@ export type PayrollSummaryScalarWhereInput = {
   payrollMonth?: Prisma.IntFilter<"PayrollSummary"> | number
   payrollYear?: Prisma.IntFilter<"PayrollSummary"> | number
   totalSalary?: Prisma.DecimalFilter<"PayrollSummary"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalPreviousAdvance?: Prisma.DecimalFilter<"PayrollSummary"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalCurrentAdvance?: Prisma.DecimalFilter<"PayrollSummary"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalDeduction?: Prisma.DecimalFilter<"PayrollSummary"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalBreakfastAllowance?: Prisma.DecimalFilter<"PayrollSummary"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalOtherAllowances?: Prisma.DecimalFilter<"PayrollSummary"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousLoan?: Prisma.DecimalFilter<"PayrollSummary"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentLoan?: Prisma.DecimalFilter<"PayrollSummary"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalLoanDeduction?: Prisma.DecimalFilter<"PayrollSummary"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetLoan?: Prisma.DecimalFilter<"PayrollSummary"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousChallan?: Prisma.DecimalFilter<"PayrollSummary"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentChallan?: Prisma.DecimalFilter<"PayrollSummary"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalChallanDeduction?: Prisma.DecimalFilter<"PayrollSummary"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalNetChallan?: Prisma.DecimalFilter<"PayrollSummary"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetSalaryPayable?: Prisma.DecimalFilter<"PayrollSummary"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCardSalary?: Prisma.DecimalFilter<"PayrollSummary"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCashSalary?: Prisma.DecimalFilter<"PayrollSummary"> | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1098,10 +1296,16 @@ export type PayrollSummaryCreateWithoutBranchInput = {
   payrollMonth: number
   payrollYear: number
   totalSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalPreviousAdvance: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalCurrentAdvance: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalBreakfastAllowance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalOtherAllowances: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalLoanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalChallanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalNetChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetSalaryPayable: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCardSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCashSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1119,10 +1323,16 @@ export type PayrollSummaryUncheckedCreateWithoutBranchInput = {
   payrollMonth: number
   payrollYear: number
   totalSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalPreviousAdvance: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalCurrentAdvance: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalBreakfastAllowance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalOtherAllowances: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalLoanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalChallanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalNetChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetSalaryPayable: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCardSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCashSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1165,10 +1375,16 @@ export type PayrollSummaryCreateWithoutPayrollStatusInput = {
   payrollMonth: number
   payrollYear: number
   totalSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalPreviousAdvance: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalCurrentAdvance: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalBreakfastAllowance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalOtherAllowances: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalLoanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalChallanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalNetChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetSalaryPayable: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCardSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCashSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1186,10 +1402,16 @@ export type PayrollSummaryUncheckedCreateWithoutPayrollStatusInput = {
   payrollMonth: number
   payrollYear: number
   totalSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalPreviousAdvance: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalCurrentAdvance: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalBreakfastAllowance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalOtherAllowances: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalLoanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalChallanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalNetChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetSalaryPayable: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCardSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCashSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1232,10 +1454,16 @@ export type PayrollSummaryCreateWithoutDetailsInput = {
   payrollMonth: number
   payrollYear: number
   totalSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalPreviousAdvance: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalCurrentAdvance: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalBreakfastAllowance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalOtherAllowances: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalLoanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalChallanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalNetChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetSalaryPayable: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCardSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCashSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1253,10 +1481,16 @@ export type PayrollSummaryUncheckedCreateWithoutDetailsInput = {
   payrollMonth: number
   payrollYear: number
   totalSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalPreviousAdvance: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalCurrentAdvance: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalBreakfastAllowance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalOtherAllowances: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalLoanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalChallanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalNetChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetSalaryPayable: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCardSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCashSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1289,10 +1523,16 @@ export type PayrollSummaryUpdateWithoutDetailsInput = {
   payrollMonth?: Prisma.IntFieldUpdateOperationsInput | number
   payrollYear?: Prisma.IntFieldUpdateOperationsInput | number
   totalSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalPreviousAdvance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalCurrentAdvance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalBreakfastAllowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalOtherAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalLoanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalChallanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalNetChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetSalaryPayable?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCardSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCashSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1310,10 +1550,16 @@ export type PayrollSummaryUncheckedUpdateWithoutDetailsInput = {
   payrollMonth?: Prisma.IntFieldUpdateOperationsInput | number
   payrollYear?: Prisma.IntFieldUpdateOperationsInput | number
   totalSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalPreviousAdvance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalCurrentAdvance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalBreakfastAllowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalOtherAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalLoanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalChallanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalNetChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetSalaryPayable?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCardSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCashSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1331,10 +1577,16 @@ export type PayrollSummaryCreateManyCreatorInput = {
   payrollMonth: number
   payrollYear: number
   totalSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalPreviousAdvance: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalCurrentAdvance: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalBreakfastAllowance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalOtherAllowances: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalLoanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalChallanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalNetChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetSalaryPayable: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCardSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCashSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1351,10 +1603,16 @@ export type PayrollSummaryCreateManyModifierInput = {
   payrollMonth: number
   payrollYear: number
   totalSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalPreviousAdvance: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalCurrentAdvance: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalBreakfastAllowance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalOtherAllowances: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalLoanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalChallanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalNetChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetSalaryPayable: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCardSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCashSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1370,10 +1628,16 @@ export type PayrollSummaryUpdateWithoutCreatorInput = {
   payrollMonth?: Prisma.IntFieldUpdateOperationsInput | number
   payrollYear?: Prisma.IntFieldUpdateOperationsInput | number
   totalSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalPreviousAdvance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalCurrentAdvance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalBreakfastAllowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalOtherAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalLoanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalChallanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalNetChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetSalaryPayable?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCardSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCashSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1391,10 +1655,16 @@ export type PayrollSummaryUncheckedUpdateWithoutCreatorInput = {
   payrollMonth?: Prisma.IntFieldUpdateOperationsInput | number
   payrollYear?: Prisma.IntFieldUpdateOperationsInput | number
   totalSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalPreviousAdvance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalCurrentAdvance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalBreakfastAllowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalOtherAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalLoanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalChallanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalNetChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetSalaryPayable?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCardSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCashSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1412,10 +1682,16 @@ export type PayrollSummaryUncheckedUpdateManyWithoutCreatorInput = {
   payrollMonth?: Prisma.IntFieldUpdateOperationsInput | number
   payrollYear?: Prisma.IntFieldUpdateOperationsInput | number
   totalSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalPreviousAdvance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalCurrentAdvance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalBreakfastAllowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalOtherAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalLoanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalChallanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalNetChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetSalaryPayable?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCardSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCashSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1431,10 +1707,16 @@ export type PayrollSummaryUpdateWithoutModifierInput = {
   payrollMonth?: Prisma.IntFieldUpdateOperationsInput | number
   payrollYear?: Prisma.IntFieldUpdateOperationsInput | number
   totalSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalPreviousAdvance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalCurrentAdvance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalBreakfastAllowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalOtherAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalLoanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalChallanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalNetChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetSalaryPayable?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCardSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCashSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1452,10 +1734,16 @@ export type PayrollSummaryUncheckedUpdateWithoutModifierInput = {
   payrollMonth?: Prisma.IntFieldUpdateOperationsInput | number
   payrollYear?: Prisma.IntFieldUpdateOperationsInput | number
   totalSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalPreviousAdvance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalCurrentAdvance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalBreakfastAllowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalOtherAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalLoanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalChallanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalNetChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetSalaryPayable?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCardSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCashSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1473,10 +1761,16 @@ export type PayrollSummaryUncheckedUpdateManyWithoutModifierInput = {
   payrollMonth?: Prisma.IntFieldUpdateOperationsInput | number
   payrollYear?: Prisma.IntFieldUpdateOperationsInput | number
   totalSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalPreviousAdvance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalCurrentAdvance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalBreakfastAllowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalOtherAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalLoanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalChallanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalNetChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetSalaryPayable?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCardSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCashSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1493,10 +1787,16 @@ export type PayrollSummaryCreateManyBranchInput = {
   payrollMonth: number
   payrollYear: number
   totalSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalPreviousAdvance: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalCurrentAdvance: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalBreakfastAllowance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalOtherAllowances: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalLoanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalChallanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalNetChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetSalaryPayable: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCardSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCashSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1512,10 +1812,16 @@ export type PayrollSummaryUpdateWithoutBranchInput = {
   payrollMonth?: Prisma.IntFieldUpdateOperationsInput | number
   payrollYear?: Prisma.IntFieldUpdateOperationsInput | number
   totalSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalPreviousAdvance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalCurrentAdvance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalBreakfastAllowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalOtherAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalLoanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalChallanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalNetChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetSalaryPayable?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCardSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCashSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1533,10 +1839,16 @@ export type PayrollSummaryUncheckedUpdateWithoutBranchInput = {
   payrollMonth?: Prisma.IntFieldUpdateOperationsInput | number
   payrollYear?: Prisma.IntFieldUpdateOperationsInput | number
   totalSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalPreviousAdvance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalCurrentAdvance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalBreakfastAllowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalOtherAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalLoanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalChallanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalNetChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetSalaryPayable?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCardSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCashSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1554,10 +1866,16 @@ export type PayrollSummaryUncheckedUpdateManyWithoutBranchInput = {
   payrollMonth?: Prisma.IntFieldUpdateOperationsInput | number
   payrollYear?: Prisma.IntFieldUpdateOperationsInput | number
   totalSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalPreviousAdvance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalCurrentAdvance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalBreakfastAllowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalOtherAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalLoanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalChallanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalNetChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetSalaryPayable?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCardSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCashSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1574,10 +1892,16 @@ export type PayrollSummaryCreateManyPayrollStatusInput = {
   payrollMonth: number
   payrollYear: number
   totalSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalPreviousAdvance: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalCurrentAdvance: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalBreakfastAllowance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalOtherAllowances: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalLoanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetLoan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalChallanDeduction: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalNetChallan: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetSalaryPayable: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCardSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCashSalary: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1593,10 +1917,16 @@ export type PayrollSummaryUpdateWithoutPayrollStatusInput = {
   payrollMonth?: Prisma.IntFieldUpdateOperationsInput | number
   payrollYear?: Prisma.IntFieldUpdateOperationsInput | number
   totalSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalPreviousAdvance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalCurrentAdvance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalBreakfastAllowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalOtherAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalLoanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalChallanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalNetChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetSalaryPayable?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCardSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCashSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1614,10 +1944,16 @@ export type PayrollSummaryUncheckedUpdateWithoutPayrollStatusInput = {
   payrollMonth?: Prisma.IntFieldUpdateOperationsInput | number
   payrollYear?: Prisma.IntFieldUpdateOperationsInput | number
   totalSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalPreviousAdvance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalCurrentAdvance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalBreakfastAllowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalOtherAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalLoanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalChallanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalNetChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetSalaryPayable?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCardSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCashSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1635,10 +1971,16 @@ export type PayrollSummaryUncheckedUpdateManyWithoutPayrollStatusInput = {
   payrollMonth?: Prisma.IntFieldUpdateOperationsInput | number
   payrollYear?: Prisma.IntFieldUpdateOperationsInput | number
   totalSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalPreviousAdvance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalCurrentAdvance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalBreakfastAllowance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalOtherAllowances?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalLoanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetLoan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPreviousChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCurrentChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalChallanDeduction?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalNetChallan?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalNetSalaryPayable?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCardSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCashSalary?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1686,10 +2028,16 @@ export type PayrollSummarySelect<ExtArgs extends runtime.Types.Extensions.Intern
   payrollMonth?: boolean
   payrollYear?: boolean
   totalSalary?: boolean
-  totalPreviousAdvance?: boolean
-  totalCurrentAdvance?: boolean
-  totalDeduction?: boolean
+  totalBreakfastAllowance?: boolean
+  totalOtherAllowances?: boolean
+  totalPreviousLoan?: boolean
+  totalCurrentLoan?: boolean
+  totalLoanDeduction?: boolean
   totalNetLoan?: boolean
+  totalPreviousChallan?: boolean
+  totalCurrentChallan?: boolean
+  totalChallanDeduction?: boolean
+  totalNetChallan?: boolean
   totalNetSalaryPayable?: boolean
   totalCardSalary?: boolean
   totalCashSalary?: boolean
@@ -1713,10 +2061,16 @@ export type PayrollSummarySelectCreateManyAndReturn<ExtArgs extends runtime.Type
   payrollMonth?: boolean
   payrollYear?: boolean
   totalSalary?: boolean
-  totalPreviousAdvance?: boolean
-  totalCurrentAdvance?: boolean
-  totalDeduction?: boolean
+  totalBreakfastAllowance?: boolean
+  totalOtherAllowances?: boolean
+  totalPreviousLoan?: boolean
+  totalCurrentLoan?: boolean
+  totalLoanDeduction?: boolean
   totalNetLoan?: boolean
+  totalPreviousChallan?: boolean
+  totalCurrentChallan?: boolean
+  totalChallanDeduction?: boolean
+  totalNetChallan?: boolean
   totalNetSalaryPayable?: boolean
   totalCardSalary?: boolean
   totalCashSalary?: boolean
@@ -1738,10 +2092,16 @@ export type PayrollSummarySelectUpdateManyAndReturn<ExtArgs extends runtime.Type
   payrollMonth?: boolean
   payrollYear?: boolean
   totalSalary?: boolean
-  totalPreviousAdvance?: boolean
-  totalCurrentAdvance?: boolean
-  totalDeduction?: boolean
+  totalBreakfastAllowance?: boolean
+  totalOtherAllowances?: boolean
+  totalPreviousLoan?: boolean
+  totalCurrentLoan?: boolean
+  totalLoanDeduction?: boolean
   totalNetLoan?: boolean
+  totalPreviousChallan?: boolean
+  totalCurrentChallan?: boolean
+  totalChallanDeduction?: boolean
+  totalNetChallan?: boolean
   totalNetSalaryPayable?: boolean
   totalCardSalary?: boolean
   totalCashSalary?: boolean
@@ -1763,10 +2123,16 @@ export type PayrollSummarySelectScalar = {
   payrollMonth?: boolean
   payrollYear?: boolean
   totalSalary?: boolean
-  totalPreviousAdvance?: boolean
-  totalCurrentAdvance?: boolean
-  totalDeduction?: boolean
+  totalBreakfastAllowance?: boolean
+  totalOtherAllowances?: boolean
+  totalPreviousLoan?: boolean
+  totalCurrentLoan?: boolean
+  totalLoanDeduction?: boolean
   totalNetLoan?: boolean
+  totalPreviousChallan?: boolean
+  totalCurrentChallan?: boolean
+  totalChallanDeduction?: boolean
+  totalNetChallan?: boolean
   totalNetSalaryPayable?: boolean
   totalCardSalary?: boolean
   totalCashSalary?: boolean
@@ -1779,7 +2145,7 @@ export type PayrollSummarySelectScalar = {
   modifiedBy?: boolean
 }
 
-export type PayrollSummaryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "payrollMonth" | "payrollYear" | "totalSalary" | "totalPreviousAdvance" | "totalCurrentAdvance" | "totalDeduction" | "totalNetLoan" | "totalNetSalaryPayable" | "totalCardSalary" | "totalCashSalary" | "remarks" | "payrollStatusId" | "branchId" | "createdDate" | "createdBy" | "modifiedDate" | "modifiedBy", ExtArgs["result"]["payrollSummary"]>
+export type PayrollSummaryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "payrollMonth" | "payrollYear" | "totalSalary" | "totalBreakfastAllowance" | "totalOtherAllowances" | "totalPreviousLoan" | "totalCurrentLoan" | "totalLoanDeduction" | "totalNetLoan" | "totalPreviousChallan" | "totalCurrentChallan" | "totalChallanDeduction" | "totalNetChallan" | "totalNetSalaryPayable" | "totalCardSalary" | "totalCashSalary" | "remarks" | "payrollStatusId" | "branchId" | "createdDate" | "createdBy" | "modifiedDate" | "modifiedBy", ExtArgs["result"]["payrollSummary"]>
 export type PayrollSummaryInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   branch?: boolean | Prisma.PayrollSummary$branchArgs<ExtArgs>
   payrollStatus?: boolean | Prisma.PayrollSummary$payrollStatusArgs<ExtArgs>
@@ -1815,10 +2181,16 @@ export type $PayrollSummaryPayload<ExtArgs extends runtime.Types.Extensions.Inte
     payrollMonth: number
     payrollYear: number
     totalSalary: runtime.Decimal
-    totalPreviousAdvance: runtime.Decimal
-    totalCurrentAdvance: runtime.Decimal
-    totalDeduction: runtime.Decimal
+    totalBreakfastAllowance: runtime.Decimal
+    totalOtherAllowances: runtime.Decimal
+    totalPreviousLoan: runtime.Decimal
+    totalCurrentLoan: runtime.Decimal
+    totalLoanDeduction: runtime.Decimal
     totalNetLoan: runtime.Decimal
+    totalPreviousChallan: runtime.Decimal
+    totalCurrentChallan: runtime.Decimal
+    totalChallanDeduction: runtime.Decimal
+    totalNetChallan: runtime.Decimal
     totalNetSalaryPayable: runtime.Decimal
     totalCardSalary: runtime.Decimal
     totalCashSalary: runtime.Decimal
@@ -2261,10 +2633,16 @@ export interface PayrollSummaryFieldRefs {
   readonly payrollMonth: Prisma.FieldRef<"PayrollSummary", 'Int'>
   readonly payrollYear: Prisma.FieldRef<"PayrollSummary", 'Int'>
   readonly totalSalary: Prisma.FieldRef<"PayrollSummary", 'Decimal'>
-  readonly totalPreviousAdvance: Prisma.FieldRef<"PayrollSummary", 'Decimal'>
-  readonly totalCurrentAdvance: Prisma.FieldRef<"PayrollSummary", 'Decimal'>
-  readonly totalDeduction: Prisma.FieldRef<"PayrollSummary", 'Decimal'>
+  readonly totalBreakfastAllowance: Prisma.FieldRef<"PayrollSummary", 'Decimal'>
+  readonly totalOtherAllowances: Prisma.FieldRef<"PayrollSummary", 'Decimal'>
+  readonly totalPreviousLoan: Prisma.FieldRef<"PayrollSummary", 'Decimal'>
+  readonly totalCurrentLoan: Prisma.FieldRef<"PayrollSummary", 'Decimal'>
+  readonly totalLoanDeduction: Prisma.FieldRef<"PayrollSummary", 'Decimal'>
   readonly totalNetLoan: Prisma.FieldRef<"PayrollSummary", 'Decimal'>
+  readonly totalPreviousChallan: Prisma.FieldRef<"PayrollSummary", 'Decimal'>
+  readonly totalCurrentChallan: Prisma.FieldRef<"PayrollSummary", 'Decimal'>
+  readonly totalChallanDeduction: Prisma.FieldRef<"PayrollSummary", 'Decimal'>
+  readonly totalNetChallan: Prisma.FieldRef<"PayrollSummary", 'Decimal'>
   readonly totalNetSalaryPayable: Prisma.FieldRef<"PayrollSummary", 'Decimal'>
   readonly totalCardSalary: Prisma.FieldRef<"PayrollSummary", 'Decimal'>
   readonly totalCashSalary: Prisma.FieldRef<"PayrollSummary", 'Decimal'>

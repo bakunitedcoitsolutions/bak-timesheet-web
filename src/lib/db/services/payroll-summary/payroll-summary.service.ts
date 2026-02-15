@@ -21,10 +21,16 @@ const payrollSummarySelect = {
   payrollMonth: true,
   payrollYear: true,
   totalSalary: true,
-  totalPreviousAdvance: true,
-  totalCurrentAdvance: true,
-  totalDeduction: true,
+  totalBreakfastAllowance: true,
+  totalOtherAllowances: true,
+  totalPreviousLoan: true, // Corrected from totalPreviousAdvance
+  totalCurrentLoan: true, // Corrected from totalCurrentAdvance
+  totalLoanDeduction: true, // Corrected from totalDeduction
   totalNetLoan: true,
+  totalPreviousChallan: true,
+  totalCurrentChallan: true,
+  totalChallanDeduction: true,
+  totalNetChallan: true,
   totalNetSalaryPayable: true,
   totalCardSalary: true,
   totalCashSalary: true,
@@ -77,10 +83,9 @@ export const getPayrollSummariesByYear = async (
     ...summary,
     totalSalary: convertDecimalToNumber(summary.totalSalary) || 0,
     totalPreviousAdvance:
-      convertDecimalToNumber(summary.totalPreviousAdvance) || 0,
-    totalCurrentAdvance:
-      convertDecimalToNumber(summary.totalCurrentAdvance) || 0,
-    totalDeduction: convertDecimalToNumber(summary.totalDeduction) || 0,
+      convertDecimalToNumber(summary.totalPreviousLoan) || 0, // Map DB totalPreviousLoan to DTO totalPreviousAdvance
+    totalCurrentAdvance: convertDecimalToNumber(summary.totalCurrentLoan) || 0, // Map DB totalCurrentLoan to DTO totalCurrentAdvance
+    totalDeduction: convertDecimalToNumber(summary.totalLoanDeduction) || 0, // Map DB totalLoanDeduction to DTO totalDeduction
     totalNetLoan: convertDecimalToNumber(summary.totalNetLoan) || 0,
     totalNetSalaryPayable:
       convertDecimalToNumber(summary.totalNetSalaryPayable) || 0,
@@ -110,23 +115,52 @@ export const updateMonthlyPayrollValues = async (
     (sum, d) => sum + (Number(d.salary) || 0),
     0
   );
-  const totalPreviousAdvance = payrollDetails.reduce(
-    (sum, d) => sum + (Number(d.previousLoan) || 0),
+  const totalBreakfastAllowance = payrollDetails.reduce(
+    (sum, d) => sum + (Number(d.breakfastAllowance) || 0),
+    0
+  );
+  const totalOtherAllowances = payrollDetails.reduce(
+    (sum, d) => sum + (Number(d.otherAllowances) || 0),
     0
   );
 
-  const totalCurrentAdvance = payrollDetails.reduce(
+  const totalPreviousLoan = payrollDetails.reduce(
+    // Corrected variable
+    (sum, d) => sum + (Number(d.previousLoan) || 0),
+    0
+  );
+  const totalCurrentLoan = payrollDetails.reduce(
+    // Corrected variable
     (sum, d) => sum + (Number(d.currentLoan) || 0),
     0
   );
-  const totalDeduction = payrollDetails.reduce(
-    (sum, d) => sum + (Number(d.deductionLoan) || 0),
+  const totalLoanDeduction = payrollDetails.reduce(
+    // Corrected variable
+    (sum, d) => sum + (Number(d.loanDeduction) || 0),
     0
   );
   const totalNetLoan = payrollDetails.reduce(
     (sum, d) => sum + (Number(d.netLoan) || 0),
     0
   );
+
+  const totalPreviousChallan = payrollDetails.reduce(
+    (sum, d) => sum + (Number(d.previousChallan) || 0),
+    0
+  );
+  const totalCurrentChallan = payrollDetails.reduce(
+    (sum, d) => sum + (Number(d.currentChallan) || 0),
+    0
+  );
+  const totalChallanDeduction = payrollDetails.reduce(
+    (sum, d) => sum + (Number(d.challanDeduction) || 0),
+    0
+  );
+  const totalNetChallan = payrollDetails.reduce(
+    (sum, d) => sum + (Number(d.netChallan) || 0),
+    0
+  );
+
   const totalNetSalaryPayable = payrollDetails.reduce(
     (sum, d) => sum + (Number(d.netSalaryPayable) || 0),
     0
@@ -152,15 +186,20 @@ export const updateMonthlyPayrollValues = async (
     payrollYear,
     payrollMonth,
     totalSalary,
-    totalPreviousAdvance,
-    totalCurrentAdvance,
-    totalDeduction,
+    totalBreakfastAllowance,
+    totalOtherAllowances,
+    totalPreviousLoan, // Corrected field
+    totalCurrentLoan, // Corrected field
+    totalLoanDeduction, // Corrected field
     totalNetLoan,
+    totalPreviousChallan,
+    totalCurrentChallan,
+    totalChallanDeduction,
+    totalNetChallan,
     totalNetSalaryPayable,
     totalCardSalary,
     totalCashSalary,
     ...(isPosted ? { payrollStatusId: 3 } : {}),
-    // ...(isPosted ? { postedAt: new Date() } : {}),
   };
 
   if (payrollSummary) {
@@ -263,7 +302,7 @@ const calculateAndSavePayroll = async (
     select: {
       employeeId: true,
       netLoan: true,
-      netTrafficChallan: true,
+      netChallan: true,
     },
   });
 
@@ -272,7 +311,7 @@ const calculateAndSavePayroll = async (
       p.employeeId,
       {
         netLoan: Number(p.netLoan || 0),
-        netTrafficChallan: Number(p.netTrafficChallan || 0),
+        netChallan: Number(p.netChallan || 0),
       },
     ])
   );
@@ -366,28 +405,26 @@ const calculateAndSavePayroll = async (
         return l.type === "LOAN" ? sum + amt : sum - amt;
       }, 0);
 
-    const deductionLoan = 0;
-    const netLoan = previousAdvance + currentAdvance - deductionLoan;
+    const loanDeduction = 0;
+    const netLoan = previousAdvance + currentAdvance - loanDeduction;
 
     // Traffic Challan Balance
-    const previousTrafficChallan = prevDetails
-      ? Number(prevDetails.netTrafficChallan || 0)
+    const previousChallan = prevDetails
+      ? Number(prevDetails.netChallan || 0)
       : 0;
 
-    const currentTrafficChallan = trafficChallans
+    const currentChallan = trafficChallans
       .filter((c) => c.employeeId === emp.id)
       .reduce((sum, c) => {
         const amt = Number(c.amount);
         return c.type === "CHALLAN" ? sum + amt : sum - amt;
       }, 0);
 
-    const deductionTrafficChallan = 0;
-    const netTrafficChallan =
-      previousTrafficChallan + currentTrafficChallan - deductionTrafficChallan;
+    const challanDeduction = 0;
+    const netChallan = previousChallan + currentChallan - challanDeduction;
 
     // Net Payable
-    const netSalaryPayable =
-      totalSalary - deductionLoan - deductionTrafficChallan;
+    const netSalaryPayable = totalSalary - loanDeduction - challanDeduction;
 
     return {
       payrollId,
@@ -397,16 +434,18 @@ const calculateAndSavePayroll = async (
       workDays,
       totalHours,
       hourlyRate,
-      allowance: totalAllowances,
+      breakfastAllowance: 0,
+      otherAllowances: fixedAllowances,
+      totalAllowances,
       salary: totalSalary,
       previousLoan: previousAdvance,
       currentLoan: currentAdvance,
-      deductionLoan,
+      loanDeduction,
       netLoan,
-      previousTrafficChallan,
-      currentTrafficChallan,
-      deductionTrafficChallan,
-      netTrafficChallan,
+      previousChallan,
+      currentChallan,
+      challanDeduction,
+      netChallan,
       netSalaryPayable,
       cardSalary: 0,
       cashSalary: 0,
@@ -429,20 +468,39 @@ const calculateAndSavePayroll = async (
   const totals = payrollDetailsData.reduce(
     (acc, curr) => ({
       totalSalary: acc.totalSalary + curr.salary,
-      totalPreviousAdvance: acc.totalPreviousAdvance + curr.previousLoan,
-      totalCurrentAdvance: acc.totalCurrentAdvance + curr.currentLoan,
-      totalDeduction: acc.totalDeduction + curr.deductionLoan,
+      totalBreakfastAllowance:
+        acc.totalBreakfastAllowance + curr.breakfastAllowance,
+      totalOtherAllowances: acc.totalOtherAllowances + curr.otherAllowances,
+
+      // Fix reduce accumulators for Loan
+      totalPreviousLoan: acc.totalPreviousLoan + curr.previousLoan, // WAS totalPreviousAdvance incorrectly used as key
+      totalCurrentLoan: acc.totalCurrentLoan + curr.currentLoan, // WAS totalCurrentAdvance
+      totalLoanDeduction: acc.totalLoanDeduction + curr.loanDeduction, // WAS totalDeduction
+
       totalNetLoan: acc.totalNetLoan + curr.netLoan,
+      totalPreviousChallan: acc.totalPreviousChallan + curr.previousChallan,
+      totalCurrentChallan: acc.totalCurrentChallan + curr.currentChallan,
+      totalChallanDeduction: acc.totalChallanDeduction + curr.challanDeduction,
+      totalNetChallan: acc.totalNetChallan + curr.netChallan,
       totalNetSalaryPayable: acc.totalNetSalaryPayable + curr.netSalaryPayable,
       totalCardSalary: acc.totalCardSalary + curr.cardSalary,
       totalCashSalary: acc.totalCashSalary + curr.cashSalary,
     }),
     {
       totalSalary: 0,
-      totalPreviousAdvance: 0,
-      totalCurrentAdvance: 0,
-      totalDeduction: 0,
+      totalBreakfastAllowance: 0,
+      totalOtherAllowances: 0,
+
+      // Fix initial accumulator keys
+      totalPreviousLoan: 0,
+      totalCurrentLoan: 0,
+      totalLoanDeduction: 0,
+
       totalNetLoan: 0,
+      totalPreviousChallan: 0,
+      totalCurrentChallan: 0,
+      totalChallanDeduction: 0,
+      totalNetChallan: 0,
       totalNetSalaryPayable: 0,
       totalCardSalary: 0,
       totalCashSalary: 0,
@@ -496,10 +554,19 @@ export const runPayroll = async ({
       payrollMonth,
       payrollStatusId: 1, // Pending
       totalSalary: 0,
-      totalPreviousAdvance: 0,
-      totalCurrentAdvance: 0,
-      totalDeduction: 0,
+      totalBreakfastAllowance: 0,
+      totalOtherAllowances: 0,
+
+      // Corrected Fields for Create
+      totalPreviousLoan: 0,
+      totalCurrentLoan: 0,
+      totalLoanDeduction: 0,
+
       totalNetLoan: 0,
+      totalPreviousChallan: 0,
+      totalCurrentChallan: 0,
+      totalChallanDeduction: 0,
+      totalNetChallan: 0,
       totalNetSalaryPayable: 0,
       totalCardSalary: 0,
       totalCashSalary: 0,
@@ -659,17 +726,14 @@ export const getPayrollDetails = async (
       workDays: d.workDays,
       totalHours: convertDecimalToNumber(d.totalHours) || 0,
       hourlyRate: convertDecimalToNumber(d.hourlyRate) || 0,
-      allowance: convertDecimalToNumber(d.allowance) || 0,
+      allowance: convertDecimalToNumber(d.totalAllowances) || 0,
       salary: convertDecimalToNumber(d.salary) || 0, // Total Salary
       previousLoan: convertDecimalToNumber(d.previousLoan) || 0,
       currentLoan: convertDecimalToNumber(d.currentLoan) || 0,
-      deductionLoan: convertDecimalToNumber(d.deductionLoan) || 0,
-      previousTrafficChallan:
-        convertDecimalToNumber(d.previousTrafficChallan) || 0,
-      currentTrafficChallan:
-        convertDecimalToNumber(d.currentTrafficChallan) || 0,
-      deductionTrafficChallan:
-        convertDecimalToNumber(d.deductionTrafficChallan) || 0,
+      deductionLoan: convertDecimalToNumber(d.loanDeduction) || 0,
+      previousTrafficChallan: convertDecimalToNumber(d.previousChallan) || 0,
+      currentTrafficChallan: convertDecimalToNumber(d.currentChallan) || 0,
+      deductionTrafficChallan: convertDecimalToNumber(d.challanDeduction) || 0,
       netSalaryPayable: convertDecimalToNumber(d.netSalaryPayable) || 0,
       cardSalary: convertDecimalToNumber(d.cardSalary) || 0,
       cashSalary: convertDecimalToNumber(d.cashSalary) || 0,

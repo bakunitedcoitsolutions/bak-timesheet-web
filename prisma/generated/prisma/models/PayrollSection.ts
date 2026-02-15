@@ -237,7 +237,6 @@ export type PayrollSectionWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"PayrollSection"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"PayrollSection"> | Date | string
   employees?: Prisma.EmployeeListRelationFilter
-  payrollDetails?: Prisma.PayrollDetailsListRelationFilter
 }
 
 export type PayrollSectionOrderByWithRelationInput = {
@@ -249,7 +248,6 @@ export type PayrollSectionOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   employees?: Prisma.EmployeeOrderByRelationAggregateInput
-  payrollDetails?: Prisma.PayrollDetailsOrderByRelationAggregateInput
 }
 
 export type PayrollSectionWhereUniqueInput = Prisma.AtLeast<{
@@ -264,7 +262,6 @@ export type PayrollSectionWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"PayrollSection"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"PayrollSection"> | Date | string
   employees?: Prisma.EmployeeListRelationFilter
-  payrollDetails?: Prisma.PayrollDetailsListRelationFilter
 }, "id">
 
 export type PayrollSectionOrderByWithAggregationInput = {
@@ -303,7 +300,6 @@ export type PayrollSectionCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   employees?: Prisma.EmployeeCreateNestedManyWithoutPayrollSectionInput
-  payrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutPayrollSectionInput
 }
 
 export type PayrollSectionUncheckedCreateInput = {
@@ -315,7 +311,6 @@ export type PayrollSectionUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   employees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutPayrollSectionInput
-  payrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutPayrollSectionInput
 }
 
 export type PayrollSectionUpdateInput = {
@@ -326,7 +321,6 @@ export type PayrollSectionUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   employees?: Prisma.EmployeeUpdateManyWithoutPayrollSectionNestedInput
-  payrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutPayrollSectionNestedInput
 }
 
 export type PayrollSectionUncheckedUpdateInput = {
@@ -338,7 +332,6 @@ export type PayrollSectionUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   employees?: Prisma.EmployeeUncheckedUpdateManyWithoutPayrollSectionNestedInput
-  payrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutPayrollSectionNestedInput
 }
 
 export type PayrollSectionCreateManyInput = {
@@ -431,22 +424,6 @@ export type PayrollSectionUpdateOneWithoutEmployeesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.PayrollSectionUpdateToOneWithWhereWithoutEmployeesInput, Prisma.PayrollSectionUpdateWithoutEmployeesInput>, Prisma.PayrollSectionUncheckedUpdateWithoutEmployeesInput>
 }
 
-export type PayrollSectionCreateNestedOneWithoutPayrollDetailsInput = {
-  create?: Prisma.XOR<Prisma.PayrollSectionCreateWithoutPayrollDetailsInput, Prisma.PayrollSectionUncheckedCreateWithoutPayrollDetailsInput>
-  connectOrCreate?: Prisma.PayrollSectionCreateOrConnectWithoutPayrollDetailsInput
-  connect?: Prisma.PayrollSectionWhereUniqueInput
-}
-
-export type PayrollSectionUpdateOneWithoutPayrollDetailsNestedInput = {
-  create?: Prisma.XOR<Prisma.PayrollSectionCreateWithoutPayrollDetailsInput, Prisma.PayrollSectionUncheckedCreateWithoutPayrollDetailsInput>
-  connectOrCreate?: Prisma.PayrollSectionCreateOrConnectWithoutPayrollDetailsInput
-  upsert?: Prisma.PayrollSectionUpsertWithoutPayrollDetailsInput
-  disconnect?: Prisma.PayrollSectionWhereInput | boolean
-  delete?: Prisma.PayrollSectionWhereInput | boolean
-  connect?: Prisma.PayrollSectionWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.PayrollSectionUpdateToOneWithWhereWithoutPayrollDetailsInput, Prisma.PayrollSectionUpdateWithoutPayrollDetailsInput>, Prisma.PayrollSectionUncheckedUpdateWithoutPayrollDetailsInput>
-}
-
 export type PayrollSectionCreateWithoutEmployeesInput = {
   nameEn: string
   nameAr?: string | null
@@ -454,7 +431,6 @@ export type PayrollSectionCreateWithoutEmployeesInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  payrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutPayrollSectionInput
 }
 
 export type PayrollSectionUncheckedCreateWithoutEmployeesInput = {
@@ -465,7 +441,6 @@ export type PayrollSectionUncheckedCreateWithoutEmployeesInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  payrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutPayrollSectionInput
 }
 
 export type PayrollSectionCreateOrConnectWithoutEmployeesInput = {
@@ -491,7 +466,6 @@ export type PayrollSectionUpdateWithoutEmployeesInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  payrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutPayrollSectionNestedInput
 }
 
 export type PayrollSectionUncheckedUpdateWithoutEmployeesInput = {
@@ -502,65 +476,6 @@ export type PayrollSectionUncheckedUpdateWithoutEmployeesInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  payrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutPayrollSectionNestedInput
-}
-
-export type PayrollSectionCreateWithoutPayrollDetailsInput = {
-  nameEn: string
-  nameAr?: string | null
-  displayOrderKey?: number | null
-  isActive?: boolean
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  employees?: Prisma.EmployeeCreateNestedManyWithoutPayrollSectionInput
-}
-
-export type PayrollSectionUncheckedCreateWithoutPayrollDetailsInput = {
-  id?: number
-  nameEn: string
-  nameAr?: string | null
-  displayOrderKey?: number | null
-  isActive?: boolean
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  employees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutPayrollSectionInput
-}
-
-export type PayrollSectionCreateOrConnectWithoutPayrollDetailsInput = {
-  where: Prisma.PayrollSectionWhereUniqueInput
-  create: Prisma.XOR<Prisma.PayrollSectionCreateWithoutPayrollDetailsInput, Prisma.PayrollSectionUncheckedCreateWithoutPayrollDetailsInput>
-}
-
-export type PayrollSectionUpsertWithoutPayrollDetailsInput = {
-  update: Prisma.XOR<Prisma.PayrollSectionUpdateWithoutPayrollDetailsInput, Prisma.PayrollSectionUncheckedUpdateWithoutPayrollDetailsInput>
-  create: Prisma.XOR<Prisma.PayrollSectionCreateWithoutPayrollDetailsInput, Prisma.PayrollSectionUncheckedCreateWithoutPayrollDetailsInput>
-  where?: Prisma.PayrollSectionWhereInput
-}
-
-export type PayrollSectionUpdateToOneWithWhereWithoutPayrollDetailsInput = {
-  where?: Prisma.PayrollSectionWhereInput
-  data: Prisma.XOR<Prisma.PayrollSectionUpdateWithoutPayrollDetailsInput, Prisma.PayrollSectionUncheckedUpdateWithoutPayrollDetailsInput>
-}
-
-export type PayrollSectionUpdateWithoutPayrollDetailsInput = {
-  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
-  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  displayOrderKey?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  employees?: Prisma.EmployeeUpdateManyWithoutPayrollSectionNestedInput
-}
-
-export type PayrollSectionUncheckedUpdateWithoutPayrollDetailsInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
-  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  displayOrderKey?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  employees?: Prisma.EmployeeUncheckedUpdateManyWithoutPayrollSectionNestedInput
 }
 
 
@@ -570,12 +485,10 @@ export type PayrollSectionUncheckedUpdateWithoutPayrollDetailsInput = {
 
 export type PayrollSectionCountOutputType = {
   employees: number
-  payrollDetails: number
 }
 
 export type PayrollSectionCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   employees?: boolean | PayrollSectionCountOutputTypeCountEmployeesArgs
-  payrollDetails?: boolean | PayrollSectionCountOutputTypeCountPayrollDetailsArgs
 }
 
 /**
@@ -595,13 +508,6 @@ export type PayrollSectionCountOutputTypeCountEmployeesArgs<ExtArgs extends runt
   where?: Prisma.EmployeeWhereInput
 }
 
-/**
- * PayrollSectionCountOutputType without action
- */
-export type PayrollSectionCountOutputTypeCountPayrollDetailsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.PayrollDetailsWhereInput
-}
-
 
 export type PayrollSectionSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -612,7 +518,6 @@ export type PayrollSectionSelect<ExtArgs extends runtime.Types.Extensions.Intern
   createdAt?: boolean
   updatedAt?: boolean
   employees?: boolean | Prisma.PayrollSection$employeesArgs<ExtArgs>
-  payrollDetails?: boolean | Prisma.PayrollSection$payrollDetailsArgs<ExtArgs>
   _count?: boolean | Prisma.PayrollSectionCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["payrollSection"]>
 
@@ -649,7 +554,6 @@ export type PayrollSectionSelectScalar = {
 export type PayrollSectionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nameEn" | "nameAr" | "displayOrderKey" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["payrollSection"]>
 export type PayrollSectionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   employees?: boolean | Prisma.PayrollSection$employeesArgs<ExtArgs>
-  payrollDetails?: boolean | Prisma.PayrollSection$payrollDetailsArgs<ExtArgs>
   _count?: boolean | Prisma.PayrollSectionCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type PayrollSectionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -659,7 +563,6 @@ export type $PayrollSectionPayload<ExtArgs extends runtime.Types.Extensions.Inte
   name: "PayrollSection"
   objects: {
     employees: Prisma.$EmployeePayload<ExtArgs>[]
-    payrollDetails: Prisma.$PayrollDetailsPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1064,7 +967,6 @@ readonly fields: PayrollSectionFieldRefs;
 export interface Prisma__PayrollSectionClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   employees<T extends Prisma.PayrollSection$employeesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PayrollSection$employeesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  payrollDetails<T extends Prisma.PayrollSection$payrollDetailsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PayrollSection$payrollDetailsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PayrollDetailsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1510,30 +1412,6 @@ export type PayrollSection$employeesArgs<ExtArgs extends runtime.Types.Extension
   take?: number
   skip?: number
   distinct?: Prisma.EmployeeScalarFieldEnum | Prisma.EmployeeScalarFieldEnum[]
-}
-
-/**
- * PayrollSection.payrollDetails
- */
-export type PayrollSection$payrollDetailsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the PayrollDetails
-   */
-  select?: Prisma.PayrollDetailsSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the PayrollDetails
-   */
-  omit?: Prisma.PayrollDetailsOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.PayrollDetailsInclude<ExtArgs> | null
-  where?: Prisma.PayrollDetailsWhereInput
-  orderBy?: Prisma.PayrollDetailsOrderByWithRelationInput | Prisma.PayrollDetailsOrderByWithRelationInput[]
-  cursor?: Prisma.PayrollDetailsWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.PayrollDetailsScalarFieldEnum | Prisma.PayrollDetailsScalarFieldEnum[]
 }
 
 /**

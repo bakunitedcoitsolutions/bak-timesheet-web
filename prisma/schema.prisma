@@ -347,24 +347,30 @@ model PayrollStatus {
 }
 
 model PayrollSummary {
-  id                    Int      @id @default(autoincrement())
-  payrollMonth          Int
-  payrollYear           Int
-  totalSalary           Decimal  @db.Decimal(10, 2)
-  totalPreviousAdvance  Decimal  @db.Decimal(10, 2)
-  totalCurrentAdvance   Decimal  @db.Decimal(10, 2)
-  totalDeduction        Decimal  @db.Decimal(10, 2)
-  totalNetLoan          Decimal  @db.Decimal(10, 2)
-  totalNetSalaryPayable Decimal  @db.Decimal(10, 2)
-  totalCardSalary       Decimal  @db.Decimal(10, 2)
-  totalCashSalary       Decimal  @db.Decimal(10, 2)
-  remarks               String?  @db.Text
-  payrollStatusId       Int?
-  branchId              Int?
-  createdDate           DateTime @default(now())
-  createdBy             Int?
-  modifiedDate          DateTime @updatedAt
-  modifiedBy            Int?
+  id                      Int      @id @default(autoincrement())
+  payrollMonth            Int
+  payrollYear             Int
+  totalSalary             Decimal  @db.Decimal(10, 2)
+  totalBreakfastAllowance Decimal  @db.Decimal(10, 2)
+  totalOtherAllowances    Decimal  @db.Decimal(10, 2)
+  totalPreviousLoan       Decimal  @db.Decimal(10, 2)
+  totalCurrentLoan        Decimal  @db.Decimal(10, 2)
+  totalLoanDeduction      Decimal  @db.Decimal(10, 2)
+  totalNetLoan            Decimal  @db.Decimal(10, 2)
+  totalPreviousChallan    Decimal  @db.Decimal(10, 2)
+  totalCurrentChallan     Decimal  @db.Decimal(10, 2)
+  totalChallanDeduction   Decimal  @db.Decimal(10, 2)
+  totalNetChallan         Decimal  @db.Decimal(10, 2)
+  totalNetSalaryPayable   Decimal  @db.Decimal(10, 2)
+  totalCardSalary         Decimal  @db.Decimal(10, 2)
+  totalCashSalary         Decimal  @db.Decimal(10, 2)
+  remarks                 String?  @db.Text
+  payrollStatusId         Int?
+  branchId                Int?
+  createdDate             DateTime @default(now())
+  createdBy               Int?
+  modifiedDate            DateTime @updatedAt
+  modifiedBy              Int?
 
   // Relations: PayrollSummary → Other Tables (PayrollSummary has foreign keys)
   branch        Branch?        @relation(fields: [branchId], references: [id])
@@ -409,12 +415,12 @@ model PayrollDetails {
   salary                  Decimal  @db.Decimal(10, 2)
   previousLoan            Decimal  @db.Decimal(10, 2)
   currentLoan             Decimal  @db.Decimal(10, 2)
-  deductionLoan           Decimal  @db.Decimal(10, 2)
+  loanDeduction           Decimal  @db.Decimal(10, 2)
   netLoan                 Decimal  @db.Decimal(10, 2)
-  previousTrafficChallan  Decimal  @db.Decimal(10, 2)
-  currentTrafficChallan   Decimal  @db.Decimal(10, 2)
-  deductionTrafficChallan Decimal  @db.Decimal(10, 2)
-  netTrafficChallan       Decimal  @db.Decimal(10, 2)
+  previousChallan         Decimal  @db.Decimal(10, 2)
+  currentChallan          Decimal  @db.Decimal(10, 2)
+  challanDeduction        Decimal  @db.Decimal(10, 2)
+  netChallan              Decimal  @db.Decimal(10, 2)
   netSalaryPayable        Decimal  @db.Decimal(10, 2)
   cardSalary              Decimal  @db.Decimal(10, 2)
   cashSalary              Decimal  @db.Decimal(10, 2)
