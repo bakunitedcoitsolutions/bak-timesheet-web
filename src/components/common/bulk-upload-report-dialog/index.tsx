@@ -38,7 +38,7 @@ export const BulkUploadReportDialog = ({
   };
 
   const dateBodyTemplate = (rowData: any) => {
-    return dayjs(rowData.date).format("YYYY-MM-DD");
+    return dayjs(rowData.date).format("DD MMMM, YYYY");
   };
 
   const handleDownload = () => {
@@ -123,26 +123,31 @@ export const BulkUploadReportDialog = ({
         className="p-datatable-sm"
         stripedRows
       >
-        <Column field="row" header="Row #" sortable style={{ width: "8rem" }} />
+        <Column
+          field="row"
+          header="Row #"
+          sortable
+          style={{ minWidth: "8rem" }}
+        />
         <Column
           field="employeeCode"
           header="Emp Code"
           sortable
-          style={{ width: "8rem" }}
+          style={{ minWidth: "8rem" }}
         />
         <Column
           field="date"
           header="Date"
           sortable
           body={dateBodyTemplate}
-          style={{ width: "8rem" }}
+          style={{ minWidth: "8rem" }}
         />
         <Column
           field="status"
           header="Status"
           sortable
           body={statusBodyTemplate}
-          style={{ width: "8rem" }}
+          style={{ minWidth: "8rem" }}
         />
         <Column field="message" header="Message" sortable />
       </DataTable>

@@ -261,6 +261,31 @@ export const saveTimesheetEntries = async (
  * Bulk upload timesheet entries from file (CSV/Excel).
  * Resolves employeeCode to employeeId, then upserts timesheet per (employeeId, date).
  */
+// Helper to retry DB operations on connection failure
+async function withRetry<T>(
+  operation: () => Promise<T>,
+  retries = 3,
+  delay = 1000
+): Promise<T> {
+  try {
+    return await operation();
+  } catch (error: any) {
+    const isConnectionError =
+      error?.message?.includes("Connection terminated") ||
+      error?.message?.includes("connection timeout") ||
+      error?.code === "P2024";
+
+    if (isConnectionError && retries > 0) {
+      console.warn(
+        `Database connection error. Retrying... (${retries} attempts left). Error: ${error.message}`
+      );
+      await new Promise((resolve) => setTimeout(resolve, delay));
+      return withRetry(operation, retries - 1, delay * 2);
+    }
+    throw error;
+  }
+}
+
 export const bulkUploadTimesheets = async (
   data: BulkUploadTimesheetData
 ): Promise<BulkUploadTimesheetResult> => {
@@ -277,10 +302,14 @@ export const bulkUploadTimesheets = async (
 
   // Pre-fetch all employees by unique codes in one query
   const uniqueCodes = [...new Set(data.entries.map((e) => e.employeeCode))];
-  const employees = await prisma.employee.findMany({
-    where: { employeeCode: { in: uniqueCodes } },
-    select: { id: true, employeeCode: true },
-  });
+
+  const employees = await withRetry(() =>
+    prisma.employee.findMany({
+      where: { employeeCode: { in: uniqueCodes } },
+      select: { id: true, employeeCode: true },
+    })
+  );
+
   console.log("Service: Employees fetched", {
     found: employees.length,
     uniqueCodes: uniqueCodes.length,
@@ -318,16 +347,18 @@ export const bulkUploadTimesheets = async (
         continue;
       }
 
-      const existing = await prisma.timesheet.findFirst({
-        where: {
-          employeeId: employee.id,
-          date: {
-            gte: dateNormalized,
-            lt: new Date(dateNormalized.getTime() + 24 * 60 * 60 * 1000),
+      const existing = await withRetry(() =>
+        prisma.timesheet.findFirst({
+          where: {
+            employeeId: employee.id,
+            date: {
+              gte: dateNormalized,
+              lt: new Date(dateNormalized.getTime() + 24 * 60 * 60 * 1000),
+            },
           },
-        },
-        select: { id: true },
-      });
+          select: { id: true },
+        })
+      );
 
       if (existing) {
         result.skipped++;
@@ -363,13 +394,15 @@ export const bulkUploadTimesheets = async (
         description: row.description ?? null,
       };
 
-      await prisma.timesheet.create({
-        data: {
-          employeeId: employee.id,
-          date: dateNormalized,
-          ...payload,
-        },
-      });
+      await withRetry(() =>
+        prisma.timesheet.create({
+          data: {
+            employeeId: employee.id,
+            date: dateNormalized,
+            ...payload,
+          },
+        })
+      );
 
       result.success++;
       result.details.push({

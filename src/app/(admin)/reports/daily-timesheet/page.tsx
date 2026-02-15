@@ -425,7 +425,7 @@ const DailyTimesheetReportPage = () => {
         <TitleHeader
           title="DAILY TIMESHEET REPORT"
           onBack={() => router.replace("/reports")}
-          icon={<i className="fa-light fa-calendar-day text-xl!" />}
+          icon={<i className="fa-light fa-calendar-circle-plus text-xl!" />}
           renderInput={() => (
             <div className="w-full lg:w-auto">
               <Button

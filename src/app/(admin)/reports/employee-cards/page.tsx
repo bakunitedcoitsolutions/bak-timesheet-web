@@ -166,7 +166,7 @@ const EmployeesCardReportPage = () => {
         <TitleHeader
           title="EMPLOYEES CARDS REPORT"
           onBack={() => router.replace("/reports")}
-          icon={<i className="fa-light fa-id-card text-xl!" />}
+          icon={<i className="fa-light fa-address-card text-xl!" />}
           renderInput={() => (
             <div className="w-full lg:w-auto">
               <Button
