@@ -1,18 +1,19 @@
 /**
- * Allowance Exclusion Service
- * Business logic for allowance exclusion operations
+ * Allowance Not Available Service
+ * Business logic for allowance not available operations
  */
 
 import { prisma } from "@/lib/db/prisma";
-import type {
-  CreateAllowanceExclusionData,
-  UpdateAllowanceExclusionData,
-  ListAllowanceExclusionsParams,
-  ListAllowanceExclusionsResponse,
-} from "./allowance-exclusion.dto";
+import { AllowanceType } from "../../../../../prisma/generated/prisma/enums";
+import {
+  CreateAllowanceNotAvailableData,
+  UpdateAllowanceNotAvailableData,
+  ListAllowanceNotAvailableParams,
+  ListAllowanceNotAvailableResponse,
+} from "./allowance-not-available.dto";
 
 // Reusable select object
-const allowanceExclusionSelect = {
+const allowanceNotAvailableSelect = {
   id: true,
   nameEn: true,
   nameAr: true,
@@ -35,10 +36,10 @@ const normalizeDate = (date: Date | string | undefined): Date | null => {
 };
 
 /**
- * Create a new allowance exclusion
+ * Create a new allowance not available record
  */
-export const createAllowanceExclusion = async (
-  data: CreateAllowanceExclusionData
+export const createAllowanceNotAvailable = async (
+  data: CreateAllowanceNotAvailableData
 ) => {
   // Validate date range
   const startDate = normalizeDate(data.startDate);
@@ -48,38 +49,38 @@ export const createAllowanceExclusion = async (
     throw new Error("Start date must be before or equal to end date");
   }
 
-  const allowanceExclusion = await prisma.allowanceNotAvailable.create({
+  const allowanceNotAvailable = await prisma.allowanceNotAvailable.create({
     data: {
       nameEn: data.nameEn,
       nameAr: data.nameAr ?? null,
       description: data.description ?? null,
       startDate: startDate!,
       endDate: endDate!,
-      type: data.type,
+      type: data.type as AllowanceType,
       isActive: data.isActive ?? true,
     },
-    select: allowanceExclusionSelect,
+    select: allowanceNotAvailableSelect,
   });
 
-  return allowanceExclusion;
+  return allowanceNotAvailable;
 };
 
 /**
- * Update an allowance exclusion
+ * Update an allowance not available record
  */
-export const updateAllowanceExclusion = async (
+export const updateAllowanceNotAvailable = async (
   id: number,
-  data: UpdateAllowanceExclusionData
+  data: UpdateAllowanceNotAvailableData
 ) => {
-  // Validate allowance exclusion exists
-  const existingAllowanceExclusion =
+  // Validate allowance not available exists
+  const existingAllowanceNotAvailable =
     await prisma.allowanceNotAvailable.findUnique({
       where: { id },
       select: { id: true, startDate: true, endDate: true },
     });
 
-  if (!existingAllowanceExclusion) {
-    throw new Error("Allowance exclusion not found");
+  if (!existingAllowanceNotAvailable) {
+    throw new Error("Allowance not available record not found");
   }
 
   const updateData: any = {};
@@ -92,49 +93,51 @@ export const updateAllowanceExclusion = async (
     updateData.startDate = normalizeDate(data.startDate);
   if (data.endDate !== undefined)
     updateData.endDate = normalizeDate(data.endDate);
-  if (data.type !== undefined) updateData.type = data.type;
+  if (data.type !== undefined) updateData.type = data.type as AllowanceType;
   if (data.isActive !== undefined) updateData.isActive = data.isActive;
 
   // Validate date range if dates are being updated
   const finalStartDate =
-    updateData.startDate ?? existingAllowanceExclusion.startDate;
-  const finalEndDate = updateData.endDate ?? existingAllowanceExclusion.endDate;
+    updateData.startDate ?? existingAllowanceNotAvailable.startDate;
+  const finalEndDate =
+    updateData.endDate ?? existingAllowanceNotAvailable.endDate;
 
   if (finalStartDate && finalEndDate && finalStartDate > finalEndDate) {
     throw new Error("Start date must be before or equal to end date");
   }
 
-  const updatedAllowanceExclusion = await prisma.allowanceNotAvailable.update({
-    where: { id },
-    data: updateData,
-    select: allowanceExclusionSelect,
-  });
+  const updatedAllowanceNotAvailable =
+    await prisma.allowanceNotAvailable.update({
+      where: { id },
+      data: updateData,
+      select: allowanceNotAvailableSelect,
+    });
 
-  return updatedAllowanceExclusion;
+  return updatedAllowanceNotAvailable;
 };
 
 /**
- * Find allowance exclusion by ID
+ * Find allowance not available by ID
  */
-export const findAllowanceExclusionById = async (id: number) => {
-  const allowanceExclusion = await prisma.allowanceNotAvailable.findUnique({
+export const findAllowanceNotAvailableById = async (id: number) => {
+  const allowanceNotAvailable = await prisma.allowanceNotAvailable.findUnique({
     where: { id },
-    select: allowanceExclusionSelect,
+    select: allowanceNotAvailableSelect,
   });
 
-  if (!allowanceExclusion) {
-    throw new Error("Allowance exclusion not found");
+  if (!allowanceNotAvailable) {
+    throw new Error("Allowance not available record not found");
   }
 
-  return allowanceExclusion;
+  return allowanceNotAvailable;
 };
 
 /**
- * List allowance exclusions with pagination, sorting, and search
+ * List allowance not available records with pagination, sorting, and search
  */
-export const listAllowanceExclusions = async (
-  params: ListAllowanceExclusionsParams
-): Promise<ListAllowanceExclusionsResponse> => {
+export const listAllowanceNotAvailable = async (
+  params: ListAllowanceNotAvailableParams
+): Promise<ListAllowanceNotAvailableResponse> => {
   const page = params.page ?? 1;
   const limit = params.limit ?? 10;
   const skip = (page - 1) * limit;
@@ -152,8 +155,8 @@ export const listAllowanceExclusions = async (
   }
 
   // Filter by type
-  if (params.type !== undefined) {
-    where.type = params.type;
+  if (params.type) {
+    where.type = params.type as AllowanceType;
   }
 
   // Filter by isActive
@@ -172,17 +175,17 @@ export const listAllowanceExclusions = async (
   // Get total count
   const total = await prisma.allowanceNotAvailable.count({ where });
 
-  // Get allowance exclusions
-  const allowanceExclusions = await prisma.allowanceNotAvailable.findMany({
+  // Get allowance not available records
+  const allowanceNotAvailables = await prisma.allowanceNotAvailable.findMany({
     where,
     orderBy,
     skip,
     take: limit,
-    select: allowanceExclusionSelect,
+    select: allowanceNotAvailableSelect,
   });
 
   return {
-    allowanceExclusions,
+    allowanceNotAvailables,
     pagination: {
       page,
       limit,
@@ -193,18 +196,18 @@ export const listAllowanceExclusions = async (
 };
 
 /**
- * Delete an allowance exclusion
+ * Delete an allowance not available record
  */
-export const deleteAllowanceExclusion = async (id: number) => {
-  // Validate allowance exclusion exists
-  const existingAllowanceExclusion =
+export const deleteAllowanceNotAvailable = async (id: number) => {
+  // Validate allowance not available exists
+  const existingAllowanceNotAvailable =
     await prisma.allowanceNotAvailable.findUnique({
       where: { id },
       select: { id: true },
     });
 
-  if (!existingAllowanceExclusion) {
-    throw new Error("Allowance exclusion not found");
+  if (!existingAllowanceNotAvailable) {
+    throw new Error("Allowance not available record not found");
   }
 
   await prisma.allowanceNotAvailable.delete({
@@ -220,7 +223,7 @@ export const deleteAllowanceExclusion = async (id: number) => {
  */
 export const isDateExcluded = async (
   date: Date | string,
-  type: "BREAKFAST" | "FOOD" | "MOBILE" | "OTHER"
+  type: AllowanceType
 ): Promise<boolean> => {
   const checkDate = normalizeDate(date);
   if (!checkDate) return false;
@@ -244,7 +247,7 @@ export const isDateExcluded = async (
 export const getActiveExclusionsForDateRange = async (
   startDate: Date | string,
   endDate: Date | string,
-  type?: "BREAKFAST" | "FOOD" | "MOBILE" | "OTHER"
+  type?: AllowanceType
 ) => {
   const start = normalizeDate(startDate);
   const end = normalizeDate(endDate);
@@ -278,7 +281,7 @@ export const getActiveExclusionsForDateRange = async (
 
   const exclusions = await prisma.allowanceNotAvailable.findMany({
     where,
-    select: allowanceExclusionSelect,
+    select: allowanceNotAvailableSelect,
     orderBy: { startDate: "asc" },
   });
 

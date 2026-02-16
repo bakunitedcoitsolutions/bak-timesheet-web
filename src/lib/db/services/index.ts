@@ -14,4 +14,4 @@ export * from "./user-role";
 export * from "./employee";
 export * from "./timesheet";
 export * from "./payroll-summary";
-export * from "./allowance-exclusion";
+export * from "./allowance-not-available";

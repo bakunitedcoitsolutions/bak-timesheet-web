@@ -64,6 +64,10 @@ function findColumnIndex(
     }
   }
 
+  console.warn(
+    `Column not found for field: ${field}. Searched in headers:`,
+    headers
+  );
   return -1;
 }
 
@@ -260,7 +264,8 @@ export function parseExcelFile(file: File): Promise<ParseFileResult> {
         }
 
         const headers = jsonData[0].map((h) => String(h).trim());
-        console.log("parseExcelFile: Headers:", headers);
+        console.log("parseExcelFile: Headers found in file:", headers);
+        console.log("parseExcelFile: First data row (raw):", jsonData[1]);
         const result = parseDataRows(
           jsonData,
           headers,
@@ -332,7 +337,10 @@ export function parseCSVFile(file: File): Promise<ParseFileResult> {
         }
 
         const headers = parseCSVLine(lines[0]);
-        console.log("parseCSVFile: Headers:", headers);
+        console.log("parseCSVFile: Headers found in file:", headers);
+        if (lines.length > 1) {
+          console.log("parseCSVFile: First data row (raw):", lines[1]);
+        }
 
         const rows: any[][] = [];
         for (let i = 1; i < lines.length; i++) {

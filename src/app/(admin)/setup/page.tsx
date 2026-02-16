@@ -67,6 +67,13 @@ const setupOptions: SetupOption[] = [
     icon: "fa-light fa-user-shield",
     route: "/setup/user-roles",
   },
+  {
+    id: "allowance-not-available",
+    title: "Allowance Not Available",
+    description: "Manage allowance not available records",
+    icon: "fa-light fa-money-bill-transfer",
+    route: "/setup/allowance-not-available",
+  },
 ];
 
 const SetupPage = () => {

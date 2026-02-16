@@ -401,48 +401,50 @@ model PaymentMethod {
 }
 
 model PayrollDetails {
-  id                      Int      @id @default(autoincrement())
-  payrollId               Int
-  payrollMonth            Int
-  payrollYear             Int
-  employeeId              Int
-  workDays                Int
-  totalHours              Decimal  @db.Decimal(10, 2)
-  hourlyRate              Decimal  @db.Decimal(10, 2)
-  breakfastAllowance      Decimal  @db.Decimal(10, 2)
-  otherAllowances         Decimal  @db.Decimal(10, 2)
-  totalAllowances         Decimal  @db.Decimal(10, 2)
-  salary                  Decimal  @db.Decimal(10, 2)
-  previousLoan            Decimal  @db.Decimal(10, 2)
-  currentLoan             Decimal  @db.Decimal(10, 2)
-  loanDeduction           Decimal  @db.Decimal(10, 2)
-  netLoan                 Decimal  @db.Decimal(10, 2)
-  previousChallan         Decimal  @db.Decimal(10, 2)
-  currentChallan          Decimal  @db.Decimal(10, 2)
-  challanDeduction        Decimal  @db.Decimal(10, 2)
-  netChallan              Decimal  @db.Decimal(10, 2)
-  netSalaryPayable        Decimal  @db.Decimal(10, 2)
-  cardSalary              Decimal  @db.Decimal(10, 2)
-  cashSalary              Decimal  @db.Decimal(10, 2)
-  overTime                Decimal  @db.Decimal(10, 2)
-  remarks                 String?  @db.Text
-  paymentMethodId         Int?
-  payrollStatusId         Int?
-  branchId                Int?
-  createdDate             DateTime @default(now())
-  createdBy               Int?
-  modifiedDate            DateTime @updatedAt
-  modifiedBy              Int?
-  isLocked                Boolean  @default(false)
+  id                        Int      @id @default(autoincrement())
+  payrollId                 Int
+  payrollMonth              Int
+  payrollYear               Int
+  employeeId                Int
+  workDays                  Int
+  totalHours                Decimal  @db.Decimal(10, 2)
+  hourlyRate                Decimal  @db.Decimal(10, 2)
+  breakfastAllowance        Decimal  @db.Decimal(10, 2)
+  otherAllowances           Decimal  @db.Decimal(10, 2)
+  totalAllowances           Decimal  @db.Decimal(10, 2)
+  salary                    Decimal  @db.Decimal(10, 2)
+  previousLoan              Decimal  @db.Decimal(10, 2)
+  currentLoan               Decimal  @db.Decimal(10, 2)
+  loanDeduction             Decimal  @db.Decimal(10, 2)
+  netLoan                   Decimal  @db.Decimal(10, 2)
+  previousChallan           Decimal  @db.Decimal(10, 2)
+  currentChallan            Decimal  @db.Decimal(10, 2)
+  challanDeduction          Decimal  @db.Decimal(10, 2)
+  netChallan                Decimal  @db.Decimal(10, 2)
+  netSalaryPayable          Decimal  @db.Decimal(10, 2)
+  cardSalary                Decimal  @db.Decimal(10, 2)
+  cashSalary                Decimal  @db.Decimal(10, 2)
+  overTime                  Decimal  @db.Decimal(10, 2)
+  remarks                   String?  @db.Text
+  paymentMethodId           Int?
+  payrollStatusId           Int?
+  branchId                  Int?
+  allowanceNotAvailableId   Int?
+  createdDate               DateTime @default(now())
+  createdBy                 Int?
+  modifiedDate              DateTime @updatedAt
+  modifiedBy                Int?
+  isLocked                  Boolean  @default(false)
 
   // Relations: PayrollDetails → Other Tables
-  payrollSummary PayrollSummary  @relation(fields: [payrollId], references: [id], onDelete: Cascade)
-  employee       Employee        @relation(fields: [employeeId], references: [id], onDelete: Cascade)
-  paymentMethod  PaymentMethod?  @relation(fields: [paymentMethodId], references: [id])
-  payrollStatus  PayrollStatus?  @relation(fields: [payrollStatusId], references: [id])
-  branch         Branch?         @relation(fields: [branchId], references: [id])
-  creator        User?           @relation("PayrollDetailsCreatedBy", fields: [createdBy], references: [id])
-  modifier       User?           @relation("PayrollDetailsModifiedBy", fields: [modifiedBy], references: [id])
+  payrollSummary            PayrollSummary  @relation(fields: [payrollId], references: [id], onDelete: Cascade)
+  employee                  Employee        @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  paymentMethod             PaymentMethod?  @relation(fields: [paymentMethodId], references: [id])
+  payrollStatus             PayrollStatus?  @relation(fields: [payrollStatusId], references: [id])
+  branch                    Branch?         @relation(fields: [branchId], references: [id])
+  allowanceNotAvailable     AllowanceNotAvailable? @relation(fields: [allowanceNotAvailableId], references: [id])
+  creator                   User?           @relation("PayrollDetailsCreatedBy", fields: [createdBy], references: [id])
+  modifier                  User?           @relation("PayrollDetailsModifiedBy", fields: [modifiedBy], references: [id])
 
   // Relations: Other Tables → PayrollDetails
   ledgers Ledger[]
@@ -607,6 +609,8 @@ model AllowanceNotAvailable {
   isActive    Boolean       @default(true) // Allow soft disable without deletion
   createdAt   DateTime      @default(now())
   updatedAt   DateTime      @updatedAt
+
+  payrollDetails PayrollDetails[]
 
   @@index([startDate])
   @@index([endDate])

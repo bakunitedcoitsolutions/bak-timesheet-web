@@ -291,6 +291,7 @@ export const bulkUploadTimesheets = async (
 ): Promise<BulkUploadTimesheetResult> => {
   console.log("Service: bulkUploadTimesheets started", {
     entriesCount: data.entries.length,
+    uniqueEmployeeCodes: new Set(data.entries.map((e) => e.employeeCode)).size,
   });
   const result: BulkUploadTimesheetResult = {
     success: 0,
@@ -321,7 +322,11 @@ export const bulkUploadTimesheets = async (
     const rowNumber = i + 1;
 
     try {
-      if (i % 50 === 0) console.log(`Service: Processing row ${rowNumber}...`);
+      if (i % 50 === 0 || i === data.entries.length - 1) {
+        console.log(
+          `Service: Processing row ${rowNumber}/${data.entries.length}: EmpCode ${row.employeeCode}, Date ${row.date}`
+        );
+      }
 
       const dateNormalized = startOfDayUTC(
         typeof row.date === "string" ? new Date(row.date) : row.date
@@ -412,6 +417,7 @@ export const bulkUploadTimesheets = async (
         status: "success",
         message: "Uploaded successfully",
       });
+      // console.log(`Service: Row ${rowNumber} upserted`);
     } catch (error: any) {
       result.failed++;
       const msg = error?.message ?? "Unknown error";

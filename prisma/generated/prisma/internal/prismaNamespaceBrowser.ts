@@ -393,6 +393,7 @@ export const PayrollDetailsScalarFieldEnum = {
   paymentMethodId: 'paymentMethodId',
   payrollStatusId: 'payrollStatusId',
   branchId: 'branchId',
+  allowanceNotAvailableId: 'allowanceNotAvailableId',
   createdDate: 'createdDate',
   createdBy: 'createdBy',
   modifiedDate: 'modifiedDate',

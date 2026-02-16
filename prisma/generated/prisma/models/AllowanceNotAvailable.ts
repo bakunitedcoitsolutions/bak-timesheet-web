@@ -256,6 +256,7 @@ export type AllowanceNotAvailableWhereInput = {
   isActive?: Prisma.BoolFilter<"AllowanceNotAvailable"> | boolean
   createdAt?: Prisma.DateTimeFilter<"AllowanceNotAvailable"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"AllowanceNotAvailable"> | Date | string
+  payrollDetails?: Prisma.PayrollDetailsListRelationFilter
 }
 
 export type AllowanceNotAvailableOrderByWithRelationInput = {
@@ -269,6 +270,7 @@ export type AllowanceNotAvailableOrderByWithRelationInput = {
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  payrollDetails?: Prisma.PayrollDetailsOrderByRelationAggregateInput
 }
 
 export type AllowanceNotAvailableWhereUniqueInput = Prisma.AtLeast<{
@@ -285,6 +287,7 @@ export type AllowanceNotAvailableWhereUniqueInput = Prisma.AtLeast<{
   isActive?: Prisma.BoolFilter<"AllowanceNotAvailable"> | boolean
   createdAt?: Prisma.DateTimeFilter<"AllowanceNotAvailable"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"AllowanceNotAvailable"> | Date | string
+  payrollDetails?: Prisma.PayrollDetailsListRelationFilter
 }, "id">
 
 export type AllowanceNotAvailableOrderByWithAggregationInput = {
@@ -331,6 +334,7 @@ export type AllowanceNotAvailableCreateInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  payrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutAllowanceNotAvailableInput
 }
 
 export type AllowanceNotAvailableUncheckedCreateInput = {
@@ -344,6 +348,7 @@ export type AllowanceNotAvailableUncheckedCreateInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  payrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutAllowanceNotAvailableInput
 }
 
 export type AllowanceNotAvailableUpdateInput = {
@@ -356,6 +361,7 @@ export type AllowanceNotAvailableUpdateInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  payrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutAllowanceNotAvailableNestedInput
 }
 
 export type AllowanceNotAvailableUncheckedUpdateInput = {
@@ -369,6 +375,7 @@ export type AllowanceNotAvailableUncheckedUpdateInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  payrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutAllowanceNotAvailableNestedInput
 }
 
 export type AllowanceNotAvailableCreateManyInput = {
@@ -407,6 +414,11 @@ export type AllowanceNotAvailableUncheckedUpdateManyInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type AllowanceNotAvailableNullableScalarRelationFilter = {
+  is?: Prisma.AllowanceNotAvailableWhereInput | null
+  isNot?: Prisma.AllowanceNotAvailableWhereInput | null
 }
 
 export type AllowanceNotAvailableCountOrderByAggregateInput = {
@@ -456,10 +468,121 @@ export type AllowanceNotAvailableSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
 }
 
+export type AllowanceNotAvailableCreateNestedOneWithoutPayrollDetailsInput = {
+  create?: Prisma.XOR<Prisma.AllowanceNotAvailableCreateWithoutPayrollDetailsInput, Prisma.AllowanceNotAvailableUncheckedCreateWithoutPayrollDetailsInput>
+  connectOrCreate?: Prisma.AllowanceNotAvailableCreateOrConnectWithoutPayrollDetailsInput
+  connect?: Prisma.AllowanceNotAvailableWhereUniqueInput
+}
+
+export type AllowanceNotAvailableUpdateOneWithoutPayrollDetailsNestedInput = {
+  create?: Prisma.XOR<Prisma.AllowanceNotAvailableCreateWithoutPayrollDetailsInput, Prisma.AllowanceNotAvailableUncheckedCreateWithoutPayrollDetailsInput>
+  connectOrCreate?: Prisma.AllowanceNotAvailableCreateOrConnectWithoutPayrollDetailsInput
+  upsert?: Prisma.AllowanceNotAvailableUpsertWithoutPayrollDetailsInput
+  disconnect?: Prisma.AllowanceNotAvailableWhereInput | boolean
+  delete?: Prisma.AllowanceNotAvailableWhereInput | boolean
+  connect?: Prisma.AllowanceNotAvailableWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.AllowanceNotAvailableUpdateToOneWithWhereWithoutPayrollDetailsInput, Prisma.AllowanceNotAvailableUpdateWithoutPayrollDetailsInput>, Prisma.AllowanceNotAvailableUncheckedUpdateWithoutPayrollDetailsInput>
+}
+
 export type EnumAllowanceTypeFieldUpdateOperationsInput = {
   set?: $Enums.AllowanceType
 }
 
+export type AllowanceNotAvailableCreateWithoutPayrollDetailsInput = {
+  nameEn: string
+  nameAr?: string | null
+  description?: string | null
+  startDate: Date | string
+  endDate: Date | string
+  type: $Enums.AllowanceType
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type AllowanceNotAvailableUncheckedCreateWithoutPayrollDetailsInput = {
+  id?: number
+  nameEn: string
+  nameAr?: string | null
+  description?: string | null
+  startDate: Date | string
+  endDate: Date | string
+  type: $Enums.AllowanceType
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type AllowanceNotAvailableCreateOrConnectWithoutPayrollDetailsInput = {
+  where: Prisma.AllowanceNotAvailableWhereUniqueInput
+  create: Prisma.XOR<Prisma.AllowanceNotAvailableCreateWithoutPayrollDetailsInput, Prisma.AllowanceNotAvailableUncheckedCreateWithoutPayrollDetailsInput>
+}
+
+export type AllowanceNotAvailableUpsertWithoutPayrollDetailsInput = {
+  update: Prisma.XOR<Prisma.AllowanceNotAvailableUpdateWithoutPayrollDetailsInput, Prisma.AllowanceNotAvailableUncheckedUpdateWithoutPayrollDetailsInput>
+  create: Prisma.XOR<Prisma.AllowanceNotAvailableCreateWithoutPayrollDetailsInput, Prisma.AllowanceNotAvailableUncheckedCreateWithoutPayrollDetailsInput>
+  where?: Prisma.AllowanceNotAvailableWhereInput
+}
+
+export type AllowanceNotAvailableUpdateToOneWithWhereWithoutPayrollDetailsInput = {
+  where?: Prisma.AllowanceNotAvailableWhereInput
+  data: Prisma.XOR<Prisma.AllowanceNotAvailableUpdateWithoutPayrollDetailsInput, Prisma.AllowanceNotAvailableUncheckedUpdateWithoutPayrollDetailsInput>
+}
+
+export type AllowanceNotAvailableUpdateWithoutPayrollDetailsInput = {
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  type?: Prisma.EnumAllowanceTypeFieldUpdateOperationsInput | $Enums.AllowanceType
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type AllowanceNotAvailableUncheckedUpdateWithoutPayrollDetailsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  type?: Prisma.EnumAllowanceTypeFieldUpdateOperationsInput | $Enums.AllowanceType
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+
+/**
+ * Count Type AllowanceNotAvailableCountOutputType
+ */
+
+export type AllowanceNotAvailableCountOutputType = {
+  payrollDetails: number
+}
+
+export type AllowanceNotAvailableCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  payrollDetails?: boolean | AllowanceNotAvailableCountOutputTypeCountPayrollDetailsArgs
+}
+
+/**
+ * AllowanceNotAvailableCountOutputType without action
+ */
+export type AllowanceNotAvailableCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AllowanceNotAvailableCountOutputType
+   */
+  select?: Prisma.AllowanceNotAvailableCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * AllowanceNotAvailableCountOutputType without action
+ */
+export type AllowanceNotAvailableCountOutputTypeCountPayrollDetailsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PayrollDetailsWhereInput
+}
 
 
 export type AllowanceNotAvailableSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -473,6 +596,8 @@ export type AllowanceNotAvailableSelect<ExtArgs extends runtime.Types.Extensions
   isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  payrollDetails?: boolean | Prisma.AllowanceNotAvailable$payrollDetailsArgs<ExtArgs>
+  _count?: boolean | Prisma.AllowanceNotAvailableCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["allowanceNotAvailable"]>
 
 export type AllowanceNotAvailableSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -515,10 +640,18 @@ export type AllowanceNotAvailableSelectScalar = {
 }
 
 export type AllowanceNotAvailableOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nameEn" | "nameAr" | "description" | "startDate" | "endDate" | "type" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["allowanceNotAvailable"]>
+export type AllowanceNotAvailableInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  payrollDetails?: boolean | Prisma.AllowanceNotAvailable$payrollDetailsArgs<ExtArgs>
+  _count?: boolean | Prisma.AllowanceNotAvailableCountOutputTypeDefaultArgs<ExtArgs>
+}
+export type AllowanceNotAvailableIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type AllowanceNotAvailableIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
 
 export type $AllowanceNotAvailablePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "AllowanceNotAvailable"
-  objects: {}
+  objects: {
+    payrollDetails: Prisma.$PayrollDetailsPayload<ExtArgs>[]
+  }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     nameEn: string
@@ -924,6 +1057,7 @@ readonly fields: AllowanceNotAvailableFieldRefs;
  */
 export interface Prisma__AllowanceNotAvailableClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  payrollDetails<T extends Prisma.AllowanceNotAvailable$payrollDetailsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AllowanceNotAvailable$payrollDetailsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PayrollDetailsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -980,6 +1114,10 @@ export type AllowanceNotAvailableFindUniqueArgs<ExtArgs extends runtime.Types.Ex
    */
   omit?: Prisma.AllowanceNotAvailableOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AllowanceNotAvailableInclude<ExtArgs> | null
+  /**
    * Filter, which AllowanceNotAvailable to fetch.
    */
   where: Prisma.AllowanceNotAvailableWhereUniqueInput
@@ -998,6 +1136,10 @@ export type AllowanceNotAvailableFindUniqueOrThrowArgs<ExtArgs extends runtime.T
    */
   omit?: Prisma.AllowanceNotAvailableOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AllowanceNotAvailableInclude<ExtArgs> | null
+  /**
    * Filter, which AllowanceNotAvailable to fetch.
    */
   where: Prisma.AllowanceNotAvailableWhereUniqueInput
@@ -1015,6 +1157,10 @@ export type AllowanceNotAvailableFindFirstArgs<ExtArgs extends runtime.Types.Ext
    * Omit specific fields from the AllowanceNotAvailable
    */
   omit?: Prisma.AllowanceNotAvailableOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AllowanceNotAvailableInclude<ExtArgs> | null
   /**
    * Filter, which AllowanceNotAvailable to fetch.
    */
@@ -1064,6 +1210,10 @@ export type AllowanceNotAvailableFindFirstOrThrowArgs<ExtArgs extends runtime.Ty
    */
   omit?: Prisma.AllowanceNotAvailableOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AllowanceNotAvailableInclude<ExtArgs> | null
+  /**
    * Filter, which AllowanceNotAvailable to fetch.
    */
   where?: Prisma.AllowanceNotAvailableWhereInput
@@ -1112,6 +1262,10 @@ export type AllowanceNotAvailableFindManyArgs<ExtArgs extends runtime.Types.Exte
    */
   omit?: Prisma.AllowanceNotAvailableOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AllowanceNotAvailableInclude<ExtArgs> | null
+  /**
    * Filter, which AllowanceNotAvailables to fetch.
    */
   where?: Prisma.AllowanceNotAvailableWhereInput
@@ -1154,6 +1308,10 @@ export type AllowanceNotAvailableCreateArgs<ExtArgs extends runtime.Types.Extens
    * Omit specific fields from the AllowanceNotAvailable
    */
   omit?: Prisma.AllowanceNotAvailableOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AllowanceNotAvailableInclude<ExtArgs> | null
   /**
    * The data needed to create a AllowanceNotAvailable.
    */
@@ -1202,6 +1360,10 @@ export type AllowanceNotAvailableUpdateArgs<ExtArgs extends runtime.Types.Extens
    * Omit specific fields from the AllowanceNotAvailable
    */
   omit?: Prisma.AllowanceNotAvailableOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AllowanceNotAvailableInclude<ExtArgs> | null
   /**
    * The data needed to update a AllowanceNotAvailable.
    */
@@ -1269,6 +1431,10 @@ export type AllowanceNotAvailableUpsertArgs<ExtArgs extends runtime.Types.Extens
    */
   omit?: Prisma.AllowanceNotAvailableOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AllowanceNotAvailableInclude<ExtArgs> | null
+  /**
    * The filter to search for the AllowanceNotAvailable to update in case it exists.
    */
   where: Prisma.AllowanceNotAvailableWhereUniqueInput
@@ -1295,6 +1461,10 @@ export type AllowanceNotAvailableDeleteArgs<ExtArgs extends runtime.Types.Extens
    */
   omit?: Prisma.AllowanceNotAvailableOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AllowanceNotAvailableInclude<ExtArgs> | null
+  /**
    * Filter which AllowanceNotAvailable to delete.
    */
   where: Prisma.AllowanceNotAvailableWhereUniqueInput
@@ -1315,6 +1485,30 @@ export type AllowanceNotAvailableDeleteManyArgs<ExtArgs extends runtime.Types.Ex
 }
 
 /**
+ * AllowanceNotAvailable.payrollDetails
+ */
+export type AllowanceNotAvailable$payrollDetailsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PayrollDetails
+   */
+  select?: Prisma.PayrollDetailsSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PayrollDetails
+   */
+  omit?: Prisma.PayrollDetailsOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PayrollDetailsInclude<ExtArgs> | null
+  where?: Prisma.PayrollDetailsWhereInput
+  orderBy?: Prisma.PayrollDetailsOrderByWithRelationInput | Prisma.PayrollDetailsOrderByWithRelationInput[]
+  cursor?: Prisma.PayrollDetailsWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PayrollDetailsScalarFieldEnum | Prisma.PayrollDetailsScalarFieldEnum[]
+}
+
+/**
  * AllowanceNotAvailable without action
  */
 export type AllowanceNotAvailableDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1326,4 +1520,8 @@ export type AllowanceNotAvailableDefaultArgs<ExtArgs extends runtime.Types.Exten
    * Omit specific fields from the AllowanceNotAvailable
    */
   omit?: Prisma.AllowanceNotAvailableOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AllowanceNotAvailableInclude<ExtArgs> | null
 }

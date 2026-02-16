@@ -550,6 +550,7 @@ const TimesheetPage = () => {
         fileName: file.name,
         type: file.type,
         size: file.size,
+        lastModified: file.lastModified,
       });
       try {
         const fileName = file.name.toLowerCase();
@@ -567,6 +568,7 @@ const TimesheetPage = () => {
           rows: parseResult.data.length,
           errors: parseResult.errors.length,
           firstRow: parseResult.data[0],
+          columnsFound: Object.keys(parseResult.data[0] || {}),
         });
 
         if (parseResult.errors.length > 0) {
@@ -590,7 +592,13 @@ const TimesheetPage = () => {
           { entries: parseResult.data },
           {
             onSuccess: (result: BulkUploadTimesheetResult) => {
-              console.log("bulkUploadTimesheets success", result);
+              console.log("bulkUploadTimesheets success", {
+                successCount: result.success,
+                failedCount: result.failed,
+                skippedCount: result.skipped,
+                detailsLength: result.details.length,
+                resultObject: result,
+              });
               setUploadResult(result);
               setShowReportDialog(true);
               setShowFilePicker(false); // Close picker on success
@@ -613,7 +621,7 @@ const TimesheetPage = () => {
               }
             },
             onError: (error: any) => {
-              console.log("bulkUploadTimesheets error", error);
+              console.error("bulkUploadTimesheets error", error);
               const errorMessage = getErrorMessage(
                 error,
                 "Failed to upload timesheets"
