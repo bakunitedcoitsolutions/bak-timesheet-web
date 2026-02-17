@@ -86,7 +86,7 @@ const PayrollActions = ({
                 onClick={(e) => options.onClick(e)}
                 className={classNames(
                   options.className,
-                  "w-full flex h-12 p-2 pl-4 cursor-pointer border-b border-gray-200"
+                  "w-full flex h-12 p-2 pl-4 cursor-pointer rounded-b-2xl"
                 )}
               >
                 <span
@@ -96,6 +96,8 @@ const PayrollActions = ({
               </div>
             ),
           },
+        ]
+      : [
           {
             label: "Repost",
             icon: "pi pi-replay",
@@ -105,7 +107,7 @@ const PayrollActions = ({
                 onClick={(e) => options.onClick(e)}
                 className={classNames(
                   options.className,
-                  "w-full flex h-12 p-2 pl-4 cursor-pointer rounded-b-2xl"
+                  "w-full flex h-12 p-2 pl-4 cursor-pointer rounded-t-2xl rounded-b-2xl"
                 )}
               >
                 <span
@@ -115,8 +117,7 @@ const PayrollActions = ({
               </div>
             ),
           },
-        ]
-      : [];
+        ];
 
   return (
     <div className="flex relative items-center justify-center gap-2">
@@ -126,23 +127,21 @@ const PayrollActions = ({
         onClick={() => onView(payroll)}
         className="w-14 border-none! shadow-none! h-8 justify-center items-center bg-primary-light! text-primary!"
       />
-      {payroll.status === "Pending" && (
-        <>
-          <div
-            className="absolute w-7 h-7 cursor-pointer -right-[5px] top-[60%] -translate-y-[50%] z-1 justify-center items-center"
-            onClick={(e) => menuRef.current?.toggle(e)}
-          >
-            <i className="pi pi-ellipsis-v text-primary"></i>
-          </div>
-          <Menu
-            popup
-            ref={menuRef}
-            model={menuItems}
-            popupAlignment="right"
-            className="mt-2 shadow-lg rounded-lg p-1 min-w-[150px]"
-          />
-        </>
-      )}
+      <>
+        <div
+          className="absolute w-7 h-7 cursor-pointer -right-[5px] top-[60%] -translate-y-[50%] z-1 justify-center items-center"
+          onClick={(e) => menuRef.current?.toggle(e)}
+        >
+          <i className="pi pi-ellipsis-v text-primary"></i>
+        </div>
+        <Menu
+          popup
+          ref={menuRef}
+          model={menuItems}
+          popupAlignment="right"
+          className="mt-2 shadow-lg rounded-lg p-1 min-w-[150px]"
+        />
+      </>
     </div>
   );
 };
