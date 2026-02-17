@@ -28,6 +28,9 @@ import {
 import { toastService } from "@/lib/toast";
 import { showConfirmDialog } from "@/components/common/confirm-dialog";
 
+import { useListAllowanceNotAvailable } from "@/lib/db/services/allowance-not-available/requests";
+import { RunPayrollDialog } from "./RunPayrollDialog";
+
 const commonColumnProps = {
   sortable: true,
   filterable: true,
@@ -284,8 +287,14 @@ const PayrollPage = () => {
   const [selectedYear, setSelectedYear] = useState<string>(
     yearOptions[0].value
   );
+
+  const [isRunPayrollDialogOpen, setIsRunPayrollDialogOpen] = useState(false);
   const tableRef = useRef<TableRef>(null);
 
+  const {
+    data: allowanceNotAvailable,
+    isLoading: isAllowanceNotAvailableLoading,
+  } = useListAllowanceNotAvailable({});
   const { data: payrollSummaries, isLoading } = useGetPayrollSummaries({
     year: parseInt(selectedYear),
   });
@@ -415,6 +424,25 @@ const PayrollPage = () => {
     });
   };
 
+  const handleRunPayroll = async (
+    year: number,
+    month: number,
+    allowanceId?: number
+  ) => {
+    try {
+      await runPayroll({
+        payrollYear: year,
+        payrollMonth: month,
+        allowanceNotAvailableId: allowanceId,
+      });
+      toastService.showSuccess("Success", "Payroll run successfully");
+      setIsRunPayrollDialogOpen(false);
+    } catch (error: any) {
+      console.error(error);
+      toastService.showError("Error", error.message);
+    }
+  };
+
   const exportCSV = () => {
     tableRef.current?.exportCSV();
   };
@@ -472,29 +500,7 @@ const PayrollPage = () => {
             size="small"
             variant="solid"
             label="Run Payroll"
-            onClick={() => {
-              // Temporary: Use prompt or simple selection.
-              // Since I need to select Month/Year, simplest is a prompt for now or reusing selectedYear
-              // and asking for month.
-              const currentYear = new Date().getFullYear();
-              const input = prompt(
-                "Enter Month (1-12) to run for " + currentYear,
-                (new Date().getMonth() + 1).toString()
-              );
-              if (input) {
-                const month = parseInt(input);
-                if (month >= 1 && month <= 12) {
-                  runPayroll({ payrollYear: currentYear, payrollMonth: month })
-                    .then(() =>
-                      toastService.showSuccess(
-                        "Success",
-                        "Payroll run successfully"
-                      )
-                    )
-                    .catch((e) => toastService.showError("Error", e.message));
-                }
-              }
-            }}
+            onClick={() => setIsRunPayrollDialogOpen(true)}
           />
         </div>
       </div>
@@ -521,6 +527,11 @@ const PayrollPage = () => {
           }
         />
       </div>
+      <RunPayrollDialog
+        visible={isRunPayrollDialogOpen}
+        onHide={() => setIsRunPayrollDialogOpen(false)}
+        onRun={handleRunPayroll}
+      />
     </div>
   );
 };

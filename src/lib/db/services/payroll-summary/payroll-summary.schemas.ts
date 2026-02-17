@@ -18,6 +18,7 @@ export const UpdateMonthlyPayrollValuesSchema = z.object({
 export const RunPayrollSchema = z.object({
   payrollYear: z.number(),
   payrollMonth: z.number(),
+  allowanceNotAvailableId: z.number().optional().nullable(),
 });
 
 export const RepostPayrollSchema = z.object({

@@ -14,6 +14,7 @@ import {
   UpdateMonthlyPayrollValuesInput,
 } from "./payroll-summary.schemas";
 import { convertDecimalToNumber } from "@/lib/db/utils";
+import { AllowanceType } from "../../../../../prisma/generated/prisma/enums";
 
 // Reusable select object
 const payrollSummarySelect = {
@@ -231,9 +232,13 @@ const calculateAndSavePayroll = async (
   payrollId: number,
   payrollYear: number,
   payrollMonth: number,
-  statusId: number
+  statusId: number,
+  allowanceNotAvailableId?: number | null
 ) => {
-  // Calculate Previous Period
+  // Common dates
+  const { startDate, endDate } = getMonthDateRange(payrollYear, payrollMonth);
+
+  // Previous Month
   let prevMonth = payrollMonth - 1;
   let prevYear = payrollYear;
   if (prevMonth === 0) {
@@ -241,12 +246,37 @@ const calculateAndSavePayroll = async (
     prevYear -= 1;
   }
 
-  // Fetch related data for calculations
-  const { startDate, endDate } = getMonthDateRange(payrollYear, payrollMonth);
+  // 1. Fetch Allowance Exclusion Rule
+  let exclusionData: {
+    type: AllowanceType;
+    startDate: Date;
+    endDate: Date;
+  } | null = null;
+  if (allowanceNotAvailableId) {
+    const exclusion = await prisma.allowanceNotAvailable.findUnique({
+      where: { id: allowanceNotAvailableId },
+    });
+    if (exclusion) {
+      exclusionData = exclusion;
+    }
+  }
 
-  // Fetch Timesheets
+  // 2. Fetch Active Employees
+  const employees = await prisma.employee.findMany({
+    where: {
+      statusId: 1, // Active Only as per user request
+    },
+    include: {
+      designation: true,
+    },
+  });
+
+  const employeeIds = employees.map((e) => e.id);
+
+  // 3. Fetch Timesheets (Strict Date Range)
   const timesheets = await prisma.timesheet.findMany({
     where: {
+      employeeId: { in: employeeIds },
       date: {
         gte: startDate,
         lte: endDate,
@@ -254,24 +284,7 @@ const calculateAndSavePayroll = async (
     },
   });
 
-  // Eligible Employees: Active OR Has Timesheets
-  const employeesWithTimesheets = new Set(timesheets.map((t) => t.employeeId));
-
-  const employees = await prisma.employee.findMany({
-    where: {
-      OR: [
-        { statusId: 1 }, // Active
-        { id: { in: Array.from(employeesWithTimesheets) } }, // Inactive/Vacation but has records
-      ],
-    },
-    include: {
-      designation: true,
-    },
-  });
-
-  // Fetch Loans & Challans (Current Month)
-  const employeeIds = employees.map((e) => e.id);
-
+  // 4. Fetch Loans (Strict Date Range)
   const loans = await prisma.loan.findMany({
     where: {
       employeeId: { in: employeeIds },
@@ -282,6 +295,7 @@ const calculateAndSavePayroll = async (
     },
   });
 
+  // 5. Fetch Traffic Challans (Strict Date Range)
   const trafficChallans = await prisma.trafficChallan.findMany({
     where: {
       employeeId: { in: employeeIds },
@@ -292,7 +306,7 @@ const calculateAndSavePayroll = async (
     },
   });
 
-  // Fetch Previous PayrollDetails
+  // 6. Fetch Previous Payroll Details (Closing Balances)
   const previousPayrolls = await prisma.payrollDetails.findMany({
     where: {
       payrollMonth: prevMonth,
@@ -303,6 +317,8 @@ const calculateAndSavePayroll = async (
       employeeId: true,
       netLoan: true,
       netChallan: true,
+      loanDeduction: true,
+      challanDeduction: true,
     },
   });
 
@@ -312,118 +328,148 @@ const calculateAndSavePayroll = async (
       {
         netLoan: Number(p.netLoan || 0),
         netChallan: Number(p.netChallan || 0),
+        loanDeduction: Number(p.loanDeduction || 0),
+        challanDeduction: Number(p.challanDeduction || 0),
       },
     ])
   );
 
-  // Calculate Details
+  // 7. Calculate Details
   const payrollDetailsData = employees.map((emp) => {
-    // Timesheet Stats
+    // A. Timesheet Aggregation
     const empTimesheets = timesheets.filter((t) => t.employeeId === emp.id);
-    let totalDutyHours = 0;
-    let totalOTHours = 0;
-    let totalHours = 0;
+    let totalDutyHours = 0; // Project 1 + Project 2
+    let totalOTHours = 0; // OT 1 + OT 2
+    let totalHours = 0; // Duty + OT
     const workedDaysSet = new Set<string>();
+
+    // Breakfast Calculation Vars
+    let breakfastAllowanceCount = 0;
+    const designationHours = emp.designation?.hoursPerDay || 0;
 
     empTimesheets.forEach((t) => {
       const p1 = t.project1Hours || 0;
       const p2 = t.project2Hours || 0;
       const p1OT = t.project1Overtime || 0;
       const p2OT = t.project2Overtime || 0;
-      const dayTotal = p1 + p2 + p1OT + p2OT;
+
       const duty = p1 + p2;
+      const ot = p1OT + p2OT;
+      const dayTotal = duty + ot;
 
       totalDutyHours += duty;
-      totalOTHours += p1OT + p2OT;
+      totalOTHours += ot;
       totalHours += dayTotal;
 
       if (dayTotal > 0) {
         workedDaysSet.add(t.date.toISOString().split("T")[0]);
       }
+
+      // Breakfast Allowance Validations
+      // Condition 1: Employee check
+      if (emp.breakfastAllowance) {
+        // Condition 2: Not in Exclusion Date Check
+        let isExcludedDate = false;
+        if (exclusionData && exclusionData.type === "BREAKFAST") {
+          if (
+            t.date >= exclusionData.startDate &&
+            t.date <= exclusionData.endDate
+          ) {
+            isExcludedDate = true;
+          }
+        }
+
+        const isFriday = t.date.getDay() === 5;
+        // Condition 3: Project 1 Hours must equal Designation Hours
+        // Note: Strict equality might be tricky with floats, but schema says Int.
+        const isFullDay = p1 === designationHours;
+
+        if (!isExcludedDate && !isFriday && isFullDay) {
+          breakfastAllowanceCount++;
+        }
+      }
     });
 
-    let workDays = workedDaysSet.size;
+    // Total Breakfast Allowance
+    let totalBreakfastAllowance = breakfastAllowanceCount * 10;
 
-    // Breakfast Allowance (Flags)
-    let calculatedFoodAllowance = 0;
-    // empTimesheets.forEach((t) => {
-    //   if (t.project1BfAllowance) calculatedFoodAllowance += 10;
-    //   if (t.project2BfAllowance) calculatedFoodAllowance += 10;
-    // });
+    // Working Days
+    let workDays = 0;
+    if (designationHours > 0) {
+      workDays = totalHours / designationHours;
+    }
 
-    // Salary Logic (Fixed vs Hourly)
+    // B. Other Allowances (Fixed)
+    // "Calculate the Allowances Other than Breakfast (Mobile + Food + Other)"
+    const foodAllowance = Number(emp.foodAllowance || 0);
+    const mobileAllowance = Number(emp.mobileAllowance || 0);
+    const otherAllowance = Number(emp.otherAllowance || 0);
+    const fixedAllowances = foodAllowance + mobileAllowance + otherAllowance;
+
+    const totalAllowances = totalBreakfastAllowance + fixedAllowances;
+
+    // C. Total Salary (Base)
     let hourlyRate = Number(emp.hourlyRate || 0);
     let baseSalary = 0;
 
-    if (emp.isFixed) {
-      const salary = Number(emp.salary || 0);
-      const dailyRate = Math.round(salary / 30);
-      hourlyRate = dailyRate;
-
-      if (emp.isDeductable) {
-        // Deductable: Timesheet Days + All Fridays in current month
-        let payableDays = 0;
-        const tempD = new Date(startDate);
-        while (tempD <= endDate) {
-          const dayStr = tempD.toISOString().split("T")[0];
-          const isFriday = tempD.getDay() === 5;
-          if (isFriday || workedDaysSet.has(dayStr)) {
-            payableDays++;
-          }
-          tempD.setDate(tempD.getDate() + 1);
-        }
-        workDays = payableDays;
-        baseSalary = payableDays * dailyRate;
-      } else {
-        // Non-Deductable: Fixed 30 days
-        workDays = 30;
-        baseSalary = salary;
-      }
+    if (emp.isFixed && !emp.isDeductable) {
+      // Fixed Non Deductible: hourlyRate * designationHours * 30 + Allowance
+      // Note: usually fixed salary comes from `emp.salary`.
+      // But prompt says: `hourlyRate * (hoursPerDay) * 30`.
+      baseSalary = hourlyRate * designationHours * 30;
     } else {
-      // Hourly
+      // Non Fixed (Hourly)
       baseSalary = hourlyRate * totalHours;
     }
 
-    // Allowances
-    const fixedAllowances =
-      Number(emp.foodAllowance || 0) +
-      Number(emp.mobileAllowance || 0) +
-      Number(emp.otherAllowance || 0);
-    const totalAllowances = fixedAllowances + calculatedFoodAllowance;
     const totalSalary = baseSalary + totalAllowances;
 
-    // Loan Balance
+    // D. Loans / Advance
     const prevDetails = previousPayrollMap.get(emp.id);
-    const previousAdvance = prevDetails
-      ? Number(prevDetails.netLoan || 0)
-      : Number(emp.openingBalance || 0);
 
-    const currentAdvance = loans
-      .filter((l) => l.employeeId === emp.id)
-      .reduce((sum, l) => {
-        const amt = Number(l.amount);
-        return l.type === "LOAN" ? sum + amt : sum - amt;
-      }, 0);
+    // "Previous Advance" logic
+    // Default: LastPayroll.netLoan + OpeningBalance
+    const previousLoanBalance =
+      prevDetails && prevDetails.netLoan
+        ? prevDetails.netLoan + Number(emp.openingBalance || 0)
+        : Number(emp.openingBalance || 0);
 
-    const loanDeduction = 0;
-    const netLoan = previousAdvance + currentAdvance - loanDeduction;
+    const currentMonthLoans = loans
+      .filter((l) => l.employeeId === emp.id && l.type === "LOAN")
+      .reduce((sum, l) => sum + Number(l.amount), 0);
 
-    // Traffic Challan Balance
-    const previousChallan = prevDetails
-      ? Number(prevDetails.netChallan || 0)
-      : 0;
+    const currentMonthReturns = loans
+      .filter((l) => l.employeeId === emp.id && l.type === "RETURN")
+      .reduce((sum, l) => sum + Number(l.amount), 0);
 
-    const currentChallan = trafficChallans
-      .filter((c) => c.employeeId === emp.id)
-      .reduce((sum, c) => {
-        const amt = Number(c.amount);
-        return c.type === "CHALLAN" ? sum + amt : sum - amt;
-      }, 0);
+    const currentNetLoan = currentMonthLoans - currentMonthReturns;
 
-    const challanDeduction = 0;
-    const netChallan = previousChallan + currentChallan - challanDeduction;
+    // Total Debt to Recover
+    const totalLoanDebt = previousLoanBalance + currentNetLoan;
 
-    // Net Payable
+    // Deduction: Full Recovery
+    const loanDeduction = totalLoanDebt; // As per instructions "Deduction Advance... + Net Advance"
+
+    const netLoan = 0; // fully deducted
+
+    // E. Traffic Challans
+    const previousChallanBalance = prevDetails ? prevDetails.netChallan : 0;
+
+    const currentMonthChallans = trafficChallans
+      .filter((c) => c.employeeId === emp.id && c.type === "CHALLAN")
+      .reduce((sum, c) => sum + Number(c.amount), 0);
+
+    const currentMonthChallanReturns = trafficChallans
+      .filter((c) => c.employeeId === emp.id && c.type === "RETURN")
+      .reduce((sum, c) => sum + Number(c.amount), 0);
+
+    const currentNetChallan = currentMonthChallans - currentMonthChallanReturns;
+
+    const totalChallanDebt = previousChallanBalance + currentNetChallan;
+    const challanDeduction = totalChallanDebt;
+    const netChallan = 0;
+
+    // F. Net Salary Payable
     const netSalaryPayable = totalSalary - loanDeduction - challanDeduction;
 
     return {
@@ -431,52 +477,43 @@ const calculateAndSavePayroll = async (
       payrollMonth,
       payrollYear,
       employeeId: emp.id,
-      workDays,
-      totalHours,
-      hourlyRate,
-      breakfastAllowance: 0,
-      otherAllowances: fixedAllowances,
-      totalAllowances,
-      salary: totalSalary,
-      previousLoan: previousAdvance,
-      currentLoan: currentAdvance,
-      loanDeduction,
-      netLoan,
-      previousChallan,
-      currentChallan,
-      challanDeduction,
-      netChallan,
-      netSalaryPayable,
+      workDays: Number(workDays.toFixed(2)),
+      totalHours: Number(totalHours.toFixed(2)),
+      hourlyRate: Number(hourlyRate.toFixed(2)),
+      breakfastAllowance: Number(totalBreakfastAllowance.toFixed(2)),
+      otherAllowances: Number(fixedAllowances.toFixed(2)),
+      totalAllowances: Number(totalAllowances.toFixed(2)),
+      salary: Number(totalSalary.toFixed(2)), // Gross Salary
+      previousLoan: Number(previousLoanBalance.toFixed(2)),
+      currentLoan: Number(currentNetLoan.toFixed(2)),
+      loanDeduction: Number(loanDeduction.toFixed(2)),
+      netLoan: Number(netLoan.toFixed(2)),
+      previousChallan: Number(previousChallanBalance.toFixed(2)),
+      currentChallan: Number(currentNetChallan.toFixed(2)),
+      challanDeduction: Number(challanDeduction.toFixed(2)),
+      netChallan: Number(netChallan.toFixed(2)),
+      netSalaryPayable: Number(netSalaryPayable.toFixed(2)),
       cardSalary: 0,
       cashSalary: 0,
-      overTime: totalOTHours,
+      overTime: Number(totalOTHours.toFixed(2)),
       remarks: "",
       payrollStatusId: statusId,
       branchId: emp.branchId,
       payrollSectionId: emp.payrollSectionId,
+      allowanceNotAvailableId: allowanceNotAvailableId || null,
     };
   });
 
-  // Save Data
-  if (payrollDetailsData.length > 0) {
-    await prisma.payrollDetails.createMany({
-      data: payrollDetailsData,
-    });
-  }
-
-  // Update Summary Totals
+  // Calculate Aggregates
   const totals = payrollDetailsData.reduce(
     (acc, curr) => ({
       totalSalary: acc.totalSalary + curr.salary,
       totalBreakfastAllowance:
         acc.totalBreakfastAllowance + curr.breakfastAllowance,
       totalOtherAllowances: acc.totalOtherAllowances + curr.otherAllowances,
-
-      // Fix reduce accumulators for Loan
-      totalPreviousLoan: acc.totalPreviousLoan + curr.previousLoan, // WAS totalPreviousAdvance incorrectly used as key
-      totalCurrentLoan: acc.totalCurrentLoan + curr.currentLoan, // WAS totalCurrentAdvance
-      totalLoanDeduction: acc.totalLoanDeduction + curr.loanDeduction, // WAS totalDeduction
-
+      totalPreviousLoan: acc.totalPreviousLoan + curr.previousLoan,
+      totalCurrentLoan: acc.totalCurrentLoan + curr.currentLoan,
+      totalLoanDeduction: acc.totalLoanDeduction + curr.loanDeduction,
       totalNetLoan: acc.totalNetLoan + curr.netLoan,
       totalPreviousChallan: acc.totalPreviousChallan + curr.previousChallan,
       totalCurrentChallan: acc.totalCurrentChallan + curr.currentChallan,
@@ -490,12 +527,9 @@ const calculateAndSavePayroll = async (
       totalSalary: 0,
       totalBreakfastAllowance: 0,
       totalOtherAllowances: 0,
-
-      // Fix initial accumulator keys
       totalPreviousLoan: 0,
       totalCurrentLoan: 0,
       totalLoanDeduction: 0,
-
       totalNetLoan: 0,
       totalPreviousChallan: 0,
       totalCurrentChallan: 0,
@@ -507,6 +541,14 @@ const calculateAndSavePayroll = async (
     }
   );
 
+  // Save Details
+  if (payrollDetailsData.length > 0) {
+    await prisma.payrollDetails.createMany({
+      data: payrollDetailsData,
+    });
+  }
+
+  // Update Summary
   return await prisma.payrollSummary.update({
     where: { id: payrollId },
     data: {
@@ -519,6 +561,7 @@ const calculateAndSavePayroll = async (
 export const runPayroll = async ({
   payrollYear,
   payrollMonth,
+  allowanceNotAvailableId,
 }: RunPayrollInput) => {
   // 1. Check if there is any active payroll (Pending)
   const activePayroll = await prisma.payrollSummary.findFirst({
@@ -578,7 +621,8 @@ export const runPayroll = async ({
     newPayroll.id,
     payrollYear,
     payrollMonth,
-    1
+    1,
+    allowanceNotAvailableId
   );
 };
 
