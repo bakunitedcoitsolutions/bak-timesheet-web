@@ -389,9 +389,21 @@ export const listTrafficChallans = async (
   // Build where clause
   const where: any = {};
 
-  // Search filter (search in description)
+  // Search filter (search in description, employee name, employee code)
   if (params.search) {
-    where.description = { contains: params.search, mode: "insensitive" };
+    const search = params.search;
+    const searchAsNumber = Number(search);
+    const isNumber = !isNaN(searchAsNumber);
+
+    where.OR = [
+      { description: { contains: search, mode: "insensitive" } },
+      { employee: { nameEn: { contains: search, mode: "insensitive" } } },
+      { employee: { nameAr: { contains: search, mode: "insensitive" } } },
+    ];
+
+    if (isNumber) {
+      where.OR.push({ employee: { employeeCode: searchAsNumber } });
+    }
   }
 
   // Filter by employeeId

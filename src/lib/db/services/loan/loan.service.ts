@@ -383,9 +383,21 @@ export const listLoans = async (
   // Build where clause
   const where: any = {};
 
-  // Search filter (search in remarks)
+  // Search filter (search in remarks, employee name, employee code)
   if (params.search) {
-    where.remarks = { contains: params.search, mode: "insensitive" };
+    const search = params.search;
+    const searchAsNumber = Number(search);
+    const isNumber = !isNaN(searchAsNumber);
+
+    where.OR = [
+      { remarks: { contains: search, mode: "insensitive" } },
+      { employee: { nameEn: { contains: search, mode: "insensitive" } } },
+      { employee: { nameAr: { contains: search, mode: "insensitive" } } },
+    ];
+
+    if (isNumber) {
+      where.OR.push({ employee: { employeeCode: searchAsNumber } });
+    }
   }
 
   // Filter by employeeId
