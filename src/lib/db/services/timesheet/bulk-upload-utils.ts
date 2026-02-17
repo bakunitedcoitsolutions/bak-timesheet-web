@@ -388,7 +388,7 @@ export function parseCSVFile(file: File): Promise<ParseFileResult> {
 export function downloadSampleTemplate(): void {
   const sampleData = [
     {
-      Date: "15-Jan-2024",
+      Date: "08-Feb-2026",
       "Employee Code": 1001,
       "Project 1 ID": 1,
       "Project 1 Hours": 8,
@@ -399,7 +399,29 @@ export function downloadSampleTemplate(): void {
       Description: "Sample entry",
     },
     {
-      Date: "15-Jan-2024",
+      Date: "16-Feb-2026",
+      "Employee Code": 1001,
+      "Project 1 ID": 1,
+      "Project 1 Hours": 8,
+      "Project 1 Overtime": 0,
+      "Project 2 ID": "",
+      "Project 2 Hours": 0,
+      "Project 2 Overtime": 0,
+      Description: "Sample entry",
+    },
+    {
+      Date: "09-Feb-2026",
+      "Employee Code": 1002,
+      "Project 1 ID": 2,
+      "Project 1 Hours": 6,
+      "Project 1 Overtime": 2,
+      "Project 2 ID": "",
+      "Project 2 Hours": 0,
+      "Project 2 Overtime": 0,
+      Description: "",
+    },
+    {
+      Date: "16-Feb-2026",
       "Employee Code": 1002,
       "Project 1 ID": 2,
       "Project 1 Hours": 6,
