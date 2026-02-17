@@ -28,7 +28,6 @@ import {
 import { toastService } from "@/lib/toast";
 import { showConfirmDialog } from "@/components/common/confirm-dialog";
 
-import { useListAllowanceNotAvailable } from "@/lib/db/services/allowance-not-available/requests";
 import { RunPayrollDialog } from "./RunPayrollDialog";
 
 const commonColumnProps = {
@@ -291,10 +290,6 @@ const PayrollPage = () => {
   const [isRunPayrollDialogOpen, setIsRunPayrollDialogOpen] = useState(false);
   const tableRef = useRef<TableRef>(null);
 
-  const {
-    data: allowanceNotAvailable,
-    isLoading: isAllowanceNotAvailableLoading,
-  } = useListAllowanceNotAvailable({});
   const { data: payrollSummaries, isLoading } = useGetPayrollSummaries({
     year: parseInt(selectedYear),
   });
@@ -516,11 +511,10 @@ const PayrollPage = () => {
             handleRepost
           )}
           customHeader={renderHeader}
-          pagination={true}
-          rowsPerPageOptions={[10, 25, 50]}
+          pagination={false}
           rows={10}
           scrollable
-          scrollHeight="65vh"
+          scrollHeight="72vh"
           loading={isLoading}
           loadingIcon={
             <ProgressSpinner style={{ width: "50px", height: "50px" }} />

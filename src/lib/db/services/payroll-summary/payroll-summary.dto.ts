@@ -13,16 +13,20 @@ export interface PayrollSummaryInterface {
   payrollMonth: number;
   payrollYear: number;
   totalSalary: number; // Converted from Decimal
+  totalBreakfastAllowance: number;
+  totalOtherAllowances: number;
   totalPreviousAdvance: number;
   totalCurrentAdvance: number;
   totalDeduction: number;
   totalNetLoan: number;
+  totalPreviousChallan: number;
+  totalCurrentChallan: number;
+  totalChallanDeduction: number;
+  totalNetChallan: number;
   totalNetSalaryPayable: number;
   totalCardSalary: number;
   totalCashSalary: number;
-  remarks: string | null;
   payrollStatusId: number | null;
-  branchId: number | null;
   createdDate: Date;
   createdBy: number | null;
   modifiedDate: Date;
@@ -31,11 +35,6 @@ export interface PayrollSummaryInterface {
 
 export interface PayrollSummaryWithRelations extends PayrollSummaryInterface {
   payrollStatus?: {
-    id: number;
-    nameEn: string;
-    nameAr?: string | null;
-  } | null;
-  branch?: {
     id: number;
     nameEn: string;
     nameAr?: string | null;

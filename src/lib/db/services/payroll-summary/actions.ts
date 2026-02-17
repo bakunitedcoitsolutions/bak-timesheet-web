@@ -8,13 +8,13 @@ import {
   RepostPayrollSchema,
   GetPayrollDetailsSchema,
 } from "./payroll-summary.schemas";
+import { getPayrollSummariesByYear } from "./payroll-summary.service";
+import { getPayrollDetails } from "./payroll-details.service";
 import {
-  updateMonthlyPayrollValues,
-  getPayrollSummariesByYear,
   runPayroll,
   repostPayroll,
-  getPayrollDetails,
-} from "./payroll-summary.service";
+  updateMonthlyPayrollValues,
+} from "./payroll-actions.service";
 
 export const updateMonthlyPayrollValuesAction = serverAction
   .input(UpdateMonthlyPayrollValuesSchema)
