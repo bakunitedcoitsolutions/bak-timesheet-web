@@ -41,6 +41,7 @@ export const bulkUploadTimesheetsAction = serverAction
       console.log("bulkUploadTimesheetsAction called", {
         entriesCount: input.entries.length,
         "payloadSize Approx": JSON.stringify(input).length,
+        firstEntry: input.entries[0], // Log first entry for structure verification
       });
       const response = await bulkUploadTimesheets(input);
       console.log("bulkUploadTimesheetsAction response", response);

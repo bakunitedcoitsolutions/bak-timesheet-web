@@ -4,7 +4,10 @@
  */
 
 import dayjs from "dayjs";
+import customParseFormat from "dayjs/plugin/customParseFormat";
 import * as XLSX from "xlsx";
+
+dayjs.extend(customParseFormat);
 import type { BulkUploadTimesheetRow } from "./timesheet.dto";
 
 export interface ParseFileResult {
@@ -96,15 +99,23 @@ function parseCellValue(value: any, field: keyof BulkUploadTimesheetRow): any {
         return value;
       }
 
-      const parsedDate = dayjs(stringValue, "YYYY-MM-DD");
+      // Use strict parsing for DD-MMM-YYYY
+      const parsedDate = dayjs(stringValue, "DD-MMM-YYYY", true);
+
       if (!parsedDate.isValid()) {
-        throw new Error(`Invalid date: ${stringValue}`);
+        // Fallback or just error? User said "instead of", so likely strict replacement.
+        // But maybe allowing both is safer?
+        // "date format will be ... instead of ...".
+        // Let's try the new format strictly first as requested.
+        throw new Error(
+          `Invalid date format: ${stringValue}. Expected format: DD-MMM-YYYY (e.g. 08-Feb-2026)`
+        );
       }
 
       // Sanity check: if year is > 2100, assume it might be invalid parsing
       if (parsedDate.year() > 2100) {
         throw new Error(
-          `Invalid date (year ${parsedDate.year()}): ${stringValue}. Ensure standard date format (YYYY-MM-DD).`
+          `Invalid date (year ${parsedDate.year()}): ${stringValue}. Ensure standard date format (DD-MMM-YYYY).`
         );
       }
 
@@ -162,9 +173,16 @@ function parseDataRows(
   const data: BulkUploadTimesheetRow[] = [];
   const errors: string[] = [];
 
+  console.log("parseDataRows: Starting to process rows", {
+    totalRows: rows.length,
+  });
+
   for (let i = 1; i < rows.length; i++) {
     const row = getRow(i);
     const rowNumber = i + 1;
+
+    // Verbose: Log every row being processed
+    console.log(`parseDataRows: Processing row ${rowNumber}`, row);
 
     if (row.every((cell) => cell == null || String(cell).trim() === "")) {
       continue;
@@ -220,6 +238,7 @@ function parseDataRows(
 
 export function parseExcelFile(file: File): Promise<ParseFileResult> {
   return new Promise((resolve, reject) => {
+    console.log("parseExcelFile: Starting file read...");
     const reader = new FileReader();
 
     reader.onload = () => {
@@ -249,7 +268,7 @@ export function parseExcelFile(file: File): Promise<ParseFileResult> {
           header: 1,
           defval: "",
           raw: false, // ✅ IMPORTANT: applies Excel formatting => dates become strings
-          dateNF: "yyyy-mm-dd", // or "dd/mm/yyyy" if you prefer
+          dateNF: "dd-mmm-yyyy", // or "dd/mm/yyyy" if you prefer
         }) as any[][];
 
         console.log("parseExcelFile: JSON rows parsed:", jsonData.length);
@@ -308,6 +327,7 @@ function parseCSVLine(line: string): string[] {
 
 export function parseCSVFile(file: File): Promise<ParseFileResult> {
   return new Promise((resolve, reject) => {
+    console.log("parseCSVFile: Starting file read...");
     const reader = new FileReader();
 
     reader.onload = (e) => {
@@ -344,6 +364,7 @@ export function parseCSVFile(file: File): Promise<ParseFileResult> {
 
         const rows: any[][] = [];
         for (let i = 1; i < lines.length; i++) {
+          console.log(`parseCSVFile: Parsing line ${i + 1}`);
           rows.push(parseCSVLine(lines[i]));
         }
         rows.unshift(headers);
@@ -367,7 +388,7 @@ export function parseCSVFile(file: File): Promise<ParseFileResult> {
 export function downloadSampleTemplate(): void {
   const sampleData = [
     {
-      Date: "2024-01-15",
+      Date: "15-Jan-2024",
       "Employee Code": 1001,
       "Project 1 ID": 1,
       "Project 1 Hours": 8,
@@ -378,7 +399,7 @@ export function downloadSampleTemplate(): void {
       Description: "Sample entry",
     },
     {
-      Date: "2024-01-15",
+      Date: "15-Jan-2024",
       "Employee Code": 1002,
       "Project 1 ID": 2,
       "Project 1 Hours": 6,

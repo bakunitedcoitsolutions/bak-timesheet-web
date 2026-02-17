@@ -587,6 +587,7 @@ const TimesheetPage = () => {
 
         console.log("Calling bulkUploadTimesheets mutation...", {
           entriesCount: parseResult.data.length,
+          sampleEntry: parseResult.data[0],
         });
         await bulkUploadTimesheets(
           { entries: parseResult.data },

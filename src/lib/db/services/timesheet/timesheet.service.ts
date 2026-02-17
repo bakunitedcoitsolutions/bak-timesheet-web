@@ -322,11 +322,10 @@ export const bulkUploadTimesheets = async (
     const rowNumber = i + 1;
 
     try {
-      if (i % 50 === 0 || i === data.entries.length - 1) {
-        console.log(
-          `Service: Processing row ${rowNumber}/${data.entries.length}: EmpCode ${row.employeeCode}, Date ${row.date}`
-        );
-      }
+      // Verbose: Log every row start
+      console.log(
+        `Service: Processing row ${rowNumber}/${data.entries.length}: EmpCode ${row.employeeCode}, Date ${row.date}`
+      );
 
       const dateNormalized = startOfDayUTC(
         typeof row.date === "string" ? new Date(row.date) : row.date
@@ -335,6 +334,9 @@ export const bulkUploadTimesheets = async (
       const employee = employeeByCode.get(row.employeeCode);
 
       if (!employee) {
+        console.warn(
+          `Service: Row ${rowNumber}: Employee not found for code ${row.employeeCode}`
+        );
         result.failed++;
         result.details.push({
           row: rowNumber,
@@ -351,6 +353,9 @@ export const bulkUploadTimesheets = async (
         });
         continue;
       }
+      console.log(
+        `Service: Row ${rowNumber}: Employee found: ID ${employee.id}`
+      );
 
       const existing = await withRetry(() =>
         prisma.timesheet.findFirst({
@@ -366,6 +371,9 @@ export const bulkUploadTimesheets = async (
       );
 
       if (existing) {
+        console.log(
+          `Service: Row ${rowNumber}: Skipped - Timesheet already exists (ID: ${existing.id})`
+        );
         result.skipped++;
         result.details.push({
           row: rowNumber,
@@ -399,6 +407,8 @@ export const bulkUploadTimesheets = async (
         description: row.description ?? null,
       };
 
+      // console.log(`Service: Row ${rowNumber}: Preparing payload`, payload);
+
       await withRetry(() =>
         prisma.timesheet.create({
           data: {
@@ -409,6 +419,8 @@ export const bulkUploadTimesheets = async (
         })
       );
 
+      console.log(`Service: Row ${rowNumber}: Successfully created timesheet.`);
+
       result.success++;
       result.details.push({
         row: rowNumber,
@@ -417,8 +429,8 @@ export const bulkUploadTimesheets = async (
         status: "success",
         message: "Uploaded successfully",
       });
-      // console.log(`Service: Row ${rowNumber} upserted`);
     } catch (error: any) {
+      console.error(`Service: Row ${rowNumber}: Failed`, error);
       result.failed++;
       const msg = error?.message ?? "Unknown error";
       result.details.push({
@@ -433,7 +445,6 @@ export const bulkUploadTimesheets = async (
         data: row,
         error: msg,
       });
-      console.error(`Service: Error processing row ${rowNumber}`, error);
     }
   }
 
