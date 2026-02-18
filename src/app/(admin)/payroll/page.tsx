@@ -24,9 +24,12 @@ import {
   useUpdateMonthlyPayrollValues,
   useRunPayroll,
   useRepostPayroll,
+  usePostPayroll,
+  useRecalculatePayrollSummary,
 } from "@/lib/db/services/payroll-summary";
 import { toastService } from "@/lib/toast";
 import { showConfirmDialog } from "@/components/common/confirm-dialog";
+import { getErrorMessage } from "@/utils/helpers";
 
 import { RunPayrollDialog } from "./RunPayrollDialog";
 
@@ -337,6 +340,9 @@ const PayrollPage = () => {
   const { mutateAsync: updatePayrollValues } = useUpdateMonthlyPayrollValues();
   const { mutateAsync: runPayroll } = useRunPayroll();
   const { mutateAsync: repostPayroll } = useRepostPayroll();
+  const { mutateAsync: postPayroll } = usePostPayroll();
+  const { mutateAsync: recalculatePayrollSummary } =
+    useRecalculatePayrollSummary();
 
   const parsePeriod = (period: string) => {
     const [monthStr, yearStr] = period.split(" ");
@@ -362,16 +368,13 @@ const PayrollPage = () => {
 
   const handleRecalculate = async (payroll: PayrollEntry) => {
     try {
-      const { payrollMonth, payrollYear } = parsePeriod(payroll.period);
-      await updatePayrollValues({
-        payrollMonth,
-        payrollYear,
-        isPosted: false,
-      });
+      await recalculatePayrollSummary({ id: payroll.id });
       toastService.showSuccess("Success", "Payroll recalculated successfully");
     } catch (error) {
-      console.error(error);
-      toastService.showError("Error", "Failed to recalculate payroll");
+      toastService.showError(
+        "Error",
+        getErrorMessage(error, "Failed to recalculate payroll")
+      );
     }
   };
 
@@ -382,16 +385,13 @@ const PayrollPage = () => {
       message: `Are you sure you want to post ${payroll.period}?`,
       onAccept: async () => {
         try {
-          const { payrollMonth, payrollYear } = parsePeriod(payroll.period);
-          await updatePayrollValues({
-            payrollMonth,
-            payrollYear,
-            isPosted: true,
-          });
+          await postPayroll({ id: payroll.id });
           toastService.showSuccess("Success", "Payroll posted successfully");
         } catch (error) {
-          console.error(error);
-          toastService.showError("Error", "Failed to post payroll");
+          toastService.showError(
+            "Error",
+            getErrorMessage(error, "Failed to post payroll")
+          );
         }
       },
     });
@@ -410,8 +410,10 @@ const PayrollPage = () => {
           await repostPayroll({ id: Number(payroll.id) });
           toastService.showSuccess("Success", "Payroll reposted successfully");
         } catch (error) {
-          console.error(error);
-          toastService.showError("Error", "Failed to repost payroll");
+          toastService.showError(
+            "Error",
+            getErrorMessage(error, "Failed to repost payroll")
+          );
         }
       },
     });
@@ -431,8 +433,10 @@ const PayrollPage = () => {
       toastService.showSuccess("Success", "Payroll run successfully");
       setIsRunPayrollDialogOpen(false);
     } catch (error: any) {
-      console.error(error);
-      toastService.showError("Error", error.message);
+      toastService.showError(
+        "Error",
+        getErrorMessage(error, "Failed to run payroll")
+      );
     }
   };
 

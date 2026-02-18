@@ -3,6 +3,8 @@ import {
   RunPayrollInput,
   RepostPayrollInput,
   UpdateMonthlyPayrollValuesInput,
+  PostPayrollInput,
+  RecalculatePayrollSummaryInput,
 } from "./payroll-summary.schemas";
 import { AllowanceType } from "../../../../../prisma/generated/prisma/enums";
 
@@ -578,4 +580,90 @@ export const repostPayroll = async ({ id }: RepostPayrollInput) => {
     payrollMonth,
     4
   );
+};
+
+export const postPayroll = async ({ id }: PostPayrollInput) => {
+  // Reuse recalculatePayrollSummary with statusId 3 (Posted)
+  await recalculatePayrollSummary({ id, statusId: 3 });
+
+  // Update all related payroll details status to 3 (Posted)
+  await prisma.payrollDetails.updateMany({
+    where: { payrollId: id },
+    data: { payrollStatusId: 3 },
+  });
+
+  return { id };
+};
+
+export const recalculatePayrollSummary = async ({
+  id,
+  statusId,
+}: RecalculatePayrollSummaryInput) => {
+  // 1. Verify existence
+  const existingPayroll = await prisma.payrollSummary.findUnique({
+    where: { id },
+  });
+
+  if (!existingPayroll) {
+    throw new Error(`Payroll with ID ${id} not found!`);
+  }
+
+  // 2. Fetch all details for this payroll
+  const details = await prisma.payrollDetails.findMany({
+    where: {
+      payrollId: id,
+    },
+  });
+
+  // 3. Calculate Aggregates
+  const totals = details.reduce(
+    (acc, curr) => ({
+      totalSalary: acc.totalSalary + Number(curr.salary || 0),
+      totalBreakfastAllowance:
+        acc.totalBreakfastAllowance + Number(curr.breakfastAllowance || 0),
+      totalOtherAllowances:
+        acc.totalOtherAllowances + Number(curr.otherAllowances || 0),
+      totalPreviousLoan: acc.totalPreviousLoan + Number(curr.previousLoan || 0),
+      totalCurrentLoan: acc.totalCurrentLoan + Number(curr.currentLoan || 0),
+      totalLoanDeduction:
+        acc.totalLoanDeduction + Number(curr.loanDeduction || 0),
+      totalNetLoan: acc.totalNetLoan + Number(curr.netLoan || 0),
+      totalPreviousChallan:
+        acc.totalPreviousChallan + Number(curr.previousChallan || 0),
+      totalCurrentChallan:
+        acc.totalCurrentChallan + Number(curr.currentChallan || 0),
+      totalChallanDeduction:
+        acc.totalChallanDeduction + Number(curr.challanDeduction || 0),
+      totalNetChallan: acc.totalNetChallan + Number(curr.netChallan || 0),
+      totalNetSalaryPayable:
+        acc.totalNetSalaryPayable + Number(curr.netSalaryPayable || 0),
+      totalCardSalary: acc.totalCardSalary + Number(curr.cardSalary || 0),
+      totalCashSalary: acc.totalCashSalary + Number(curr.cashSalary || 0),
+    }),
+    {
+      totalSalary: 0,
+      totalBreakfastAllowance: 0,
+      totalOtherAllowances: 0,
+      totalPreviousLoan: 0,
+      totalCurrentLoan: 0,
+      totalLoanDeduction: 0,
+      totalNetLoan: 0,
+      totalPreviousChallan: 0,
+      totalCurrentChallan: 0,
+      totalChallanDeduction: 0,
+      totalNetChallan: 0,
+      totalNetSalaryPayable: 0,
+      totalCardSalary: 0,
+      totalCashSalary: 0,
+    }
+  );
+
+  // 4. Update Summary with new totals (and optional status)
+  return await prisma.payrollSummary.update({
+    where: { id },
+    data: {
+      ...totals,
+      ...(statusId !== undefined ? { payrollStatusId: statusId } : {}),
+    },
+  });
 };

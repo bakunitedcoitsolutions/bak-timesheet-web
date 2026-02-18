@@ -7,6 +7,8 @@ import {
   getPayrollSummariesByYearAction,
   runPayrollAction,
   repostPayrollAction,
+  postPayrollAction,
+  recalculatePayrollSummaryAction,
 } from "./actions";
 
 export const useUpdateMonthlyPayrollValues = () =>
@@ -33,6 +35,26 @@ export const useRunPayroll = () =>
 export const useRepostPayroll = () =>
   useMutation(repostPayrollAction, {
     mutationKey: ["repost-payroll"],
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["payroll-summaries"],
+      });
+    },
+  });
+
+export const usePostPayroll = () =>
+  useMutation(postPayrollAction, {
+    mutationKey: ["post-payroll"],
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["payroll-summaries"],
+      });
+    },
+  });
+
+export const useRecalculatePayrollSummary = () =>
+  useMutation(recalculatePayrollSummaryAction, {
+    mutationKey: ["recalculate-payroll-summary"],
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ["payroll-summaries"],

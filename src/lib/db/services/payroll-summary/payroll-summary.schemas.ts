@@ -25,12 +25,25 @@ export const RepostPayrollSchema = z.object({
   id: z.number(),
 });
 
+export const PostPayrollSchema = z.object({
+  id: z.number().int().positive(),
+});
+
+export const RecalculatePayrollSummarySchema = z.object({
+  id: z.number().int().positive(),
+  statusId: z.number().int().optional(),
+});
+
 export type UpdateMonthlyPayrollValuesInput = z.infer<
   typeof UpdateMonthlyPayrollValuesSchema
 >;
 
 export type RunPayrollInput = z.infer<typeof RunPayrollSchema>;
 export type RepostPayrollInput = z.infer<typeof RepostPayrollSchema>;
+export type PostPayrollInput = z.infer<typeof PostPayrollSchema>;
+export type RecalculatePayrollSummaryInput = z.infer<
+  typeof RecalculatePayrollSummarySchema
+>;
 
 export const GetPayrollDetailsSchema = z
   .object({

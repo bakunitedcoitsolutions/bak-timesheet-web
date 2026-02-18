@@ -9,6 +9,8 @@ import {
   GetPayrollDetailsSchema,
   GetPayrollDateSchema,
   SavePayrollDetailsBatchSchema,
+  PostPayrollSchema,
+  RecalculatePayrollSummarySchema,
 } from "./payroll-summary.schemas";
 import {
   getPayrollSummariesByYear,
@@ -22,6 +24,8 @@ import {
   runPayroll,
   repostPayroll,
   updateMonthlyPayrollValues,
+  postPayroll,
+  recalculatePayrollSummary,
 } from "./payroll-actions.service";
 
 export const updateMonthlyPayrollValuesAction = serverAction
@@ -40,6 +44,18 @@ export const repostPayrollAction = serverAction
   .input(RepostPayrollSchema)
   .handler(async ({ input }) => {
     await repostPayroll(input);
+  });
+
+export const postPayrollAction = serverAction
+  .input(PostPayrollSchema)
+  .handler(async ({ input }) => {
+    await postPayroll(input);
+  });
+
+export const recalculatePayrollSummaryAction = serverAction
+  .input(RecalculatePayrollSummarySchema)
+  .handler(async ({ input }) => {
+    await recalculatePayrollSummary(input);
   });
 
 export const getPayrollSummariesByYearAction = serverAction
