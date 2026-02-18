@@ -1,14 +1,12 @@
 import { prisma } from "@/lib/db/prisma";
-import type {
-  GetPayrollDetailsParams,
-  PayrollDetailWithRelations,
-} from "./payroll-summary.dto";
-import { convertDecimalToNumber } from "@/lib/db/utils";
+import type { GetPayrollDetailsParams } from "./payroll-summary.dto";
+import { mapPayrollDetailToEntry, PayrollDetailEntry } from "./mappers";
 
 export const getPayrollDetails = async (
   params: GetPayrollDetailsParams
-): Promise<{ details: PayrollDetailWithRelations[]; total: number }> => {
+): Promise<{ details: PayrollDetailEntry[]; total: number }> => {
   const {
+    payrollId,
     year,
     month,
     branchId,
@@ -19,10 +17,23 @@ export const getPayrollDetails = async (
     limit = 1000,
   } = params;
 
-  const where: any = {
-    payrollYear: year,
-    payrollMonth: month,
-  };
+  const where: any = {};
+
+  if (!designationId && !payrollSectionId) {
+    throw new Error(
+      "Either designationId or payrollSectionId must be provided"
+    );
+  }
+
+  if (payrollId) {
+    where.payrollId = payrollId;
+  } else if (year && month) {
+    where.payrollYear = year;
+    where.payrollMonth = month;
+  } else {
+    // This case should ideally not be reached if types are strict, but good for runtime safety
+    throw new Error("PayrollId is required");
+  }
 
   if (branchId) {
     where.branchId = branchId;
@@ -33,29 +44,23 @@ export const getPayrollDetails = async (
   }
 
   if (payrollSectionId) {
-    where.payrollSectionId = payrollSectionId;
+    where.employee = { ...where.employee, payrollSectionId };
   }
 
   if (search) {
-    const searchInt = parseInt(search);
-    if (!isNaN(searchInt)) {
-      where.employee = {
-        ...where.employee,
-        OR: [
-          { employeeCode: searchInt },
-          { nameEn: { contains: search, mode: "insensitive" } },
-          { nameAr: { contains: search, mode: "insensitive" } },
-        ],
-      };
-    } else {
-      where.employee = {
-        ...where.employee,
-        OR: [
-          { nameEn: { contains: search, mode: "insensitive" } },
-          { nameAr: { contains: search, mode: "insensitive" } },
-        ],
-      };
+    const searchNum = parseFloat(search);
+
+    const orConditions: any[] = [
+      { employee: { nameEn: { contains: search, mode: "insensitive" } } },
+      { employee: { nameAr: { contains: search, mode: "insensitive" } } },
+      { remarks: { contains: search, mode: "insensitive" } },
+    ];
+
+    if (Number.isInteger(searchNum)) {
+      orConditions.push({ employee: { employeeCode: searchNum } });
     }
+
+    where.OR = orConditions;
   }
 
   const [details, total] = await Promise.all([
@@ -77,6 +82,20 @@ export const getPayrollDetails = async (
             nameAr: true,
             designationId: true,
             idCardNo: true,
+            profession: true,
+            passportNo: true,
+            passportExpiryDate: true,
+            joiningDate: true,
+            iban: true,
+            bankCode: true,
+            gender: true,
+            nationality: {
+              select: {
+                id: true,
+                nameEn: true,
+                nameAr: true,
+              },
+            },
             designation: {
               select: {
                 id: true,
@@ -92,28 +111,7 @@ export const getPayrollDetails = async (
   ]);
 
   return {
-    details: details.map((d) => ({
-      id: d.id,
-      employeeId: d.employeeId,
-      payrollMonth: d.payrollMonth,
-      payrollYear: d.payrollYear,
-      workDays: d.workDays,
-      totalHours: convertDecimalToNumber(d.totalHours) || 0,
-      hourlyRate: convertDecimalToNumber(d.hourlyRate) || 0,
-      allowance: convertDecimalToNumber(d.totalAllowances) || 0,
-      salary: convertDecimalToNumber(d.salary) || 0, // Total Salary
-      previousLoan: convertDecimalToNumber(d.previousLoan) || 0,
-      currentLoan: convertDecimalToNumber(d.currentLoan) || 0,
-      deductionLoan: convertDecimalToNumber(d.loanDeduction) || 0,
-      previousTrafficChallan: convertDecimalToNumber(d.previousChallan) || 0,
-      currentTrafficChallan: convertDecimalToNumber(d.currentChallan) || 0,
-      deductionTrafficChallan: convertDecimalToNumber(d.challanDeduction) || 0,
-      netSalaryPayable: convertDecimalToNumber(d.netSalaryPayable) || 0,
-      cardSalary: convertDecimalToNumber(d.cardSalary) || 0,
-      cashSalary: convertDecimalToNumber(d.cashSalary) || 0,
-      overTime: convertDecimalToNumber(d.overTime) || 0,
-      employee: d.employee as any,
-    })),
+    details: details.map((d: any) => mapPayrollDetailToEntry(d)),
     total,
   };
 };

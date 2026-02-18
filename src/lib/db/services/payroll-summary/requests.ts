@@ -49,11 +49,23 @@ export const useGetPayrollSummaries = (
   });
 
 // Manually defining input type since schema is defined inside actions.ts for now
-import { getPayrollDetailsAction } from "./actions";
-import { GetPayrollDetailsInput } from "./payroll-summary.schemas";
+import { getPayrollDetailsAction, getPayrollDateAction } from "./actions";
+import {
+  GetPayrollDetailsInput,
+  GetPayrollDateInput,
+} from "./payroll-summary.schemas";
 
 export const useGetPayrollDetails = (input: GetPayrollDetailsInput) =>
   useQuery(getPayrollDetailsAction, {
     queryKey: ["payroll-details", input],
     input,
+    enabled:
+      !!input.payrollId && (!!input.designationId || !!input.payrollSectionId),
+  });
+
+export const useGetPayrollDate = (input: GetPayrollDateInput) =>
+  useQuery(getPayrollDateAction, {
+    queryKey: ["payroll-date", input],
+    input,
+    enabled: !!input.id,
   });

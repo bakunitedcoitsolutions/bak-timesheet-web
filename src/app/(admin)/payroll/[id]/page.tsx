@@ -1,32 +1,30 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 
 import {
+  Input,
+  Table,
+  Badge,
   Button,
   Dropdown,
+  TableRef,
   TitleHeader,
+  TableColumn,
+  NumberInput,
   ExportOptions,
   CustomHeaderProps,
-  Input,
-  NumberInput,
-  Table,
-  TableColumn,
-  TableRef,
-  Badge,
 } from "@/components";
+import { PayrollDetailEntry } from "@/lib/db/services/payroll-summary/mappers";
 import {
-  designationOptions,
-  projects,
-  initialPayrollDetailData,
-  PayrollDetailEntry,
-} from "@/utils/dummy";
-
-const statusOptions = [
-  { label: "Pending", value: "Pending" },
-  { label: "Posted", value: "Posted" },
-];
+  useGetPayrollDetails,
+  useGetPayrollDate,
+} from "@/lib/db/services/payroll-summary";
+import { useDebounce } from "@/hooks";
+import GroupDropdown from "@/components/common/group-dropdown";
+import { parseGroupDropdownFilter, formatPayrollPeriod } from "@/utils/helpers";
+import { useGlobalData } from "@/context/GlobalDataContext";
 
 const tableCommonProps = {
   sortable: false,
@@ -41,25 +39,46 @@ const tableCommonProps = {
 const PayrollDetailPage = () => {
   const router = useRouter();
   const { id: periodParam } = useParams();
-  const [selectedDesignation, setSelectedDesignation] = useState<any>("0");
-  const [payrollData, setPayrollData] = useState<PayrollDetailEntry[]>(
-    initialPayrollDetailData
+  const payrollId = Number(periodParam);
+
+  const [selectedFilter, setSelectedFilter] = useState<string | number | null>(
+    "all"
   );
+  const [payrollData, setPayrollData] = useState<PayrollDetailEntry[]>([]); // Start empty
   const [searchValue, setSearchValue] = useState<string>("");
-  // Get current month in YYYY-MM format
-  const getCurrentMonth = () => {
-    const now = new Date();
-    const year = now.getFullYear();
-    const month = String(now.getMonth() + 1).padStart(2, "0");
-    return `${year}-${month}`;
-    return "";
-  };
 
-  const [selectedMonth, setSelectedMonth] = useState<string>(getCurrentMonth());
+  // Parse filter parameters from GroupDropdown selection
+  const filterParams = parseGroupDropdownFilter(selectedFilter);
+  const debouncedSearch = useDebounce(searchValue, 500);
+
+  const { data: globalData } = useGlobalData();
+
+  const statusOptions = globalData.payrollStatuses.map((s) => ({
+    label: s.nameEn,
+    value: s.id,
+  }));
+
+  // Payment Method options
+  const paymentMethodOptions = globalData.paymentMethods.map((p) => ({
+    label: p.nameEn,
+    value: p.id.toString(),
+  }));
+
+  const { data, isLoading } = useGetPayrollDetails({
+    payrollId: isNaN(payrollId) ? 0 : payrollId,
+    search: debouncedSearch || undefined,
+    designationId: filterParams.designationId,
+    payrollSectionId: filterParams.payrollSectionId,
+  });
+
+  // Map backend data to table format
+  useEffect(() => {
+    if (data?.details) {
+      setPayrollData(data.details);
+    }
+  }, [data]);
+
   const tableRef = useRef<TableRef>(null);
-
-  // Project options (excluding "All Projects")
-  const projectOptions = projects.filter((p) => p.value !== "0");
 
   const updatePayrollEntry = (
     id: number,
@@ -96,7 +115,7 @@ const PayrollDetailPage = () => {
       body: (rowData: PayrollDetailEntry) => (
         <div className="flex items-start gap-2 min-w-0">
           <div className="flex flex-1 flex-col gap-1 min-w-0">
-            <span className="text-sm font-medium leading-tight break-words">
+            <span className="text-sm font-medium leading-tight wrap-break-word">
               {rowData.name}
             </span>
           </div>
@@ -114,7 +133,7 @@ const PayrollDetailPage = () => {
       style: { minWidth: 150 },
       body: (rowData: PayrollDetailEntry) => (
         <div className="w-full flex justify-end">
-          <span className="text-[10px]! text-right font-semibold!">
+          <span className="text-xl! text-right font-medium! font-arabic">
             {rowData.arabicName}
           </span>
         </div>
@@ -125,7 +144,9 @@ const PayrollDetailPage = () => {
       header: "Designation",
       ...tableCommonProps,
       body: (rowData: PayrollDetailEntry) => (
-        <span className="text-sm font-medium!">{rowData.designation}</span>
+        <div className="flex justify-center">
+          <span className="text-sm font-medium!">{rowData.designation}</span>
+        </div>
       ),
     },
     {
@@ -142,7 +163,9 @@ const PayrollDetailPage = () => {
       header: "Nationality",
       ...tableCommonProps,
       body: (rowData: PayrollDetailEntry) => (
-        <span className="text-sm font-medium!">{rowData.nationality}</span>
+        <div className="flex justify-center">
+          <span className="text-sm font-medium!">{rowData.nationality}</span>
+        </div>
       ),
     },
     {
@@ -151,18 +174,10 @@ const PayrollDetailPage = () => {
       ...tableCommonProps,
       body: (rowData: PayrollDetailEntry) => (
         <div className="w-full flex justify-end">
-          <span className="text-[10px]! text-right font-semibold!">
+          <span className="text-xl! text-right font-medium! font-arabic">
             {rowData.professionInId}
           </span>
         </div>
-      ),
-    },
-    {
-      field: "gosiCity",
-      header: "GOSI City",
-      ...tableCommonProps,
-      body: (rowData: PayrollDetailEntry) => (
-        <span className="text-sm font-medium!">{rowData.gosiCity}</span>
       ),
     },
     {
@@ -170,7 +185,9 @@ const PayrollDetailPage = () => {
       header: "Passport No.",
       ...tableCommonProps,
       body: (rowData: PayrollDetailEntry) => (
-        <span className="text-sm font-medium!">{rowData.passportNumber}</span>
+        <div className="flex justify-center">
+          <span className="text-sm font-medium!">{rowData.passportNumber}</span>
+        </div>
       ),
     },
     {
@@ -181,16 +198,6 @@ const PayrollDetailPage = () => {
       body: (rowData: PayrollDetailEntry) => (
         <span className="text-sm font-medium!">
           {rowData.passportExpiryDate}
-        </span>
-      ),
-    },
-    {
-      field: "joiningDate",
-      header: "Joining",
-      ...tableCommonProps,
-      body: (rowData: PayrollDetailEntry) => (
-        <span className="text-sm font-medium!">
-          {rowData.joiningDate || "-"}
         </span>
       ),
     },
@@ -211,23 +218,15 @@ const PayrollDetailPage = () => {
       ),
     },
     {
-      field: "gosiSalary",
-      header: "GOSI Salary",
-      ...tableCommonProps,
-      body: (rowData: PayrollDetailEntry) => (
-        <span className="text-sm font-medium!">
-          {rowData.gosiSalary.toLocaleString()}
-        </span>
-      ),
-    },
-    {
       field: "workDays",
       header: "Work Days",
       ...tableCommonProps,
       body: (rowData: PayrollDetailEntry) => (
-        <span className="text-sm font-medium!">
-          {rowData.workDays.toLocaleString()}
-        </span>
+        <div className="flex justify-center">
+          <span className="text-[15px] font-semibold!">
+            {rowData.workDays.toLocaleString()}
+          </span>
+        </div>
       ),
     },
     {
@@ -236,17 +235,9 @@ const PayrollDetailPage = () => {
       ...tableCommonProps,
       body: (rowData: PayrollDetailEntry) => (
         <div className="flex justify-center">
-          <NumberInput
-            useGrouping={false}
-            disabled={rowData.isLocked}
-            value={rowData.overTime}
-            onValueChange={(e) =>
-              updatePayrollEntry(rowData.id, "overTime", e.value || 0)
-            }
-            className="timesheet-number-input"
-            min={0}
-            showButtons={false}
-          />
+          <span className="text-[15px] font-semibold!">
+            {rowData.overTime.toString()}
+          </span>
         </div>
       ),
     },
@@ -256,17 +247,9 @@ const PayrollDetailPage = () => {
       ...tableCommonProps,
       body: (rowData: PayrollDetailEntry) => (
         <div className="flex justify-center">
-          <NumberInput
-            useGrouping={false}
-            disabled={rowData.isLocked}
-            value={rowData.totalHours}
-            onValueChange={(e) =>
-              updatePayrollEntry(rowData.id, "totalHours", e.value || 0)
-            }
-            className="timesheet-number-input"
-            min={0}
-            showButtons={false}
-          />
+          <span className="text-[15px] font-semibold!">
+            {rowData.totalHours.toString()}
+          </span>
         </div>
       ),
     },
@@ -276,17 +259,9 @@ const PayrollDetailPage = () => {
       ...tableCommonProps,
       body: (rowData: PayrollDetailEntry) => (
         <div className="flex justify-center">
-          <NumberInput
-            useGrouping={false}
-            disabled={rowData.isLocked}
-            value={rowData.hourlyRate}
-            onValueChange={(e) =>
-              updatePayrollEntry(rowData.id, "hourlyRate", e.value || 0)
-            }
-            className="timesheet-number-input"
-            min={0}
-            showButtons={false}
-          />
+          <span className="text-[15px] font-semibold!">
+            {rowData.hourlyRate.toString()}
+          </span>
         </div>
       ),
     },
@@ -296,17 +271,9 @@ const PayrollDetailPage = () => {
       ...tableCommonProps,
       body: (rowData: PayrollDetailEntry) => (
         <div className="flex justify-center">
-          <NumberInput
-            useGrouping={false}
-            disabled={rowData.isLocked}
-            value={rowData.allowance}
-            onValueChange={(e) =>
-              updatePayrollEntry(rowData.id, "allowance", e.value || 0)
-            }
-            className="timesheet-number-input"
-            min={0}
-            showButtons={false}
-          />
+          <span className="text-[15px] font-semibold!">
+            {rowData.allowance.toString()}
+          </span>
         </div>
       ),
     },
@@ -316,17 +283,9 @@ const PayrollDetailPage = () => {
       ...tableCommonProps,
       body: (rowData: PayrollDetailEntry) => (
         <div className="flex justify-center">
-          <NumberInput
-            useGrouping={false}
-            disabled={rowData.isLocked}
-            value={rowData.totalSalary}
-            onValueChange={(e) =>
-              updatePayrollEntry(rowData.id, "totalSalary", e.value || 0)
-            }
-            className="timesheet-number-input"
-            min={0}
-            showButtons={false}
-          />
+          <span className="text-[15px] font-semibold!">
+            {rowData.totalSalary.toString()}
+          </span>
         </div>
       ),
     },
@@ -336,17 +295,9 @@ const PayrollDetailPage = () => {
       ...tableCommonProps,
       body: (rowData: PayrollDetailEntry) => (
         <div className="flex justify-center">
-          <NumberInput
-            useGrouping={false}
-            disabled={rowData.isLocked}
-            value={rowData.previousAdvance}
-            onValueChange={(e) =>
-              updatePayrollEntry(rowData.id, "previousAdvance", e.value || 0)
-            }
-            className="timesheet-number-input"
-            min={0}
-            showButtons={false}
-          />
+          <span className="text-[15px] font-semibold!">
+            {rowData.previousAdvance.toString()}
+          </span>
         </div>
       ),
     },
@@ -356,23 +307,15 @@ const PayrollDetailPage = () => {
       ...tableCommonProps,
       body: (rowData: PayrollDetailEntry) => (
         <div className="flex justify-center">
-          <NumberInput
-            useGrouping={false}
-            disabled={rowData.isLocked}
-            value={rowData.currentAdvance}
-            onValueChange={(e) =>
-              updatePayrollEntry(rowData.id, "currentAdvance", e.value || 0)
-            }
-            className="timesheet-number-input"
-            min={0}
-            showButtons={false}
-          />
+          <span className="text-[15px] font-semibold!">
+            {rowData.currentAdvance.toString()}
+          </span>
         </div>
       ),
     },
     {
       field: "deduction",
-      header: "Deduction",
+      header: "Loan Ded.",
       ...tableCommonProps,
       body: (rowData: PayrollDetailEntry) => (
         <div className="flex justify-center">
@@ -383,7 +326,7 @@ const PayrollDetailPage = () => {
             onValueChange={(e) =>
               updatePayrollEntry(rowData.id, "deduction", e.value || 0)
             }
-            className="timesheet-number-input"
+            className="timesheet-number-input payroll-input"
             min={0}
             showButtons={false}
           />
@@ -396,16 +339,9 @@ const PayrollDetailPage = () => {
       ...tableCommonProps,
       body: (rowData: PayrollDetailEntry) => (
         <div className="flex justify-center">
-          <NumberInput
-            useGrouping={false}
-            disabled={rowData.isLocked}
-            value={rowData.netLoan}
-            onValueChange={(e) =>
-              updatePayrollEntry(rowData.id, "netLoan", e.value || 0)
-            }
-            className="timesheet-number-input"
-            showButtons={false}
-          />
+          <span className="text-[15px] font-semibold!">
+            {rowData.netLoan.toString()}
+          </span>
         </div>
       ),
     },
@@ -415,17 +351,9 @@ const PayrollDetailPage = () => {
       ...tableCommonProps,
       body: (rowData: PayrollDetailEntry) => (
         <div className="flex justify-center">
-          <NumberInput
-            useGrouping={false}
-            disabled={rowData.isLocked}
-            value={rowData.previousTraffic}
-            onValueChange={(e) =>
-              updatePayrollEntry(rowData.id, "previousTraffic", e.value || 0)
-            }
-            className="timesheet-number-input"
-            min={0}
-            showButtons={false}
-          />
+          <span className="text-[15px] font-semibold!">
+            {rowData.previousTraffic.toString()}
+          </span>
         </div>
       ),
     },
@@ -435,17 +363,9 @@ const PayrollDetailPage = () => {
       ...tableCommonProps,
       body: (rowData: PayrollDetailEntry) => (
         <div className="flex justify-center">
-          <NumberInput
-            useGrouping={false}
-            disabled={rowData.isLocked}
-            value={rowData.currentTraffic}
-            onValueChange={(e) =>
-              updatePayrollEntry(rowData.id, "currentTraffic", e.value || 0)
-            }
-            className="timesheet-number-input"
-            min={0}
-            showButtons={false}
-          />
+          <span className="text-[15px] font-semibold!">
+            {rowData.currentTraffic.toString()}
+          </span>
         </div>
       ),
     },
@@ -462,7 +382,7 @@ const PayrollDetailPage = () => {
             onValueChange={(e) =>
               updatePayrollEntry(rowData.id, "trafficDeduction", e.value || 0)
             }
-            className="timesheet-number-input"
+            className="timesheet-number-input payroll-input"
             min={0}
             showButtons={false}
           />
@@ -475,16 +395,9 @@ const PayrollDetailPage = () => {
       ...tableCommonProps,
       body: (rowData: PayrollDetailEntry) => (
         <div className="flex justify-center">
-          <NumberInput
-            useGrouping={false}
-            disabled={rowData.isLocked}
-            value={rowData.netTraffic}
-            onValueChange={(e) =>
-              updatePayrollEntry(rowData.id, "netTraffic", e.value || 0)
-            }
-            className="timesheet-number-input"
-            showButtons={false}
-          />
+          <span className="text-[15px] font-semibold!">
+            {rowData.netTraffic.toString()}
+          </span>
         </div>
       ),
     },
@@ -494,17 +407,9 @@ const PayrollDetailPage = () => {
       ...tableCommonProps,
       body: (rowData: PayrollDetailEntry) => (
         <div className="flex justify-center">
-          <NumberInput
-            useGrouping={false}
-            disabled={rowData.isLocked}
-            value={rowData.netSalaryPayable}
-            onValueChange={(e) =>
-              updatePayrollEntry(rowData.id, "netSalaryPayable", e.value || 0)
-            }
-            className="timesheet-number-input"
-            min={0}
-            showButtons={false}
-          />
+          <span className="text-[15px] font-semibold!">
+            {rowData.netSalaryPayable.toString()}
+          </span>
         </div>
       ),
     },
@@ -521,7 +426,7 @@ const PayrollDetailPage = () => {
             onValueChange={(e) =>
               updatePayrollEntry(rowData.id, "cardSalary", e.value || 0)
             }
-            className="timesheet-number-input"
+            className="timesheet-number-input payroll-input"
             min={0}
             showButtons={false}
           />
@@ -541,7 +446,7 @@ const PayrollDetailPage = () => {
             onValueChange={(e) =>
               updatePayrollEntry(rowData.id, "cashSalary", e.value || 0)
             }
-            className="timesheet-number-input"
+            className="timesheet-number-input payroll-input"
             min={0}
             showButtons={false}
           />
@@ -562,12 +467,12 @@ const PayrollDetailPage = () => {
           onChange={(e) =>
             updatePayrollEntry(rowData.id, "remarks", e.target.value)
           }
-          className="w-full h-10!"
+          className="w-full h-10! payroll-input"
         />
       ),
     },
     {
-      field: "project",
+      field: "paymentMethod",
       header: "Salary Method",
       ...tableCommonProps,
       style: { minWidth: 200, width: 200 },
@@ -575,12 +480,14 @@ const PayrollDetailPage = () => {
         <Dropdown
           small
           filter
-          options={projectOptions}
+          options={paymentMethodOptions}
           disabled={rowData.isLocked}
           className="w-[200px]! h-10!"
           placeholder="Choose Method"
-          value={rowData.project}
-          onChange={(e) => updatePayrollEntry(rowData.id, "project", e.value)}
+          value={rowData.paymentMethod}
+          onChange={(e) =>
+            updatePayrollEntry(rowData.id, "paymentMethod", e.value)
+          }
         />
       ),
     },
@@ -608,23 +515,11 @@ const PayrollDetailPage = () => {
       <div className="flex flex-col lg:flex-row justify-between bg-theme-primary-light items-center gap-3 flex-1 w-full">
         <div className="flex flex-1 items-center gap-3 w-full">
           <div className="w-full lg:w-auto">
-            <Input
-              type="month"
-              value={selectedMonth}
-              onChange={(e) => setSelectedMonth(e.target.value)}
-              className="w-full lg:w-40 h-10.5! date-input"
-              aria-label="Select month & year"
-            />
-          </div>
-          <div className="w-full lg:w-auto">
-            <Dropdown
-              small
-              filter
-              options={designationOptions}
-              className="w-full lg:w-48 h-10.5!"
-              placeholder="Select Designation"
-              value={selectedDesignation}
-              onChange={(e) => setSelectedDesignation(e.value)}
+            <GroupDropdown
+              hideAllOption
+              value={selectedFilter}
+              onChange={setSelectedFilter}
+              className="w-full lg:w-64 h-10.5!"
             />
           </div>
           <div className="w-full lg:w-auto hidden lg:block">
@@ -670,32 +565,22 @@ const PayrollDetailPage = () => {
     tableRef.current?.exportExcel();
   };
 
-  // Format period from URL param (e.g., "12-2025" -> "DEC 2025")
-  const formatPeriod = (period: string | string[] | undefined) => {
-    if (!period || typeof period !== "string") return "PAYROLL";
-    const [month, year] = period.split("-");
-    const monthNames = [
-      "JAN",
-      "FEB",
-      "MAR",
-      "APR",
-      "MAY",
-      "JUN",
-      "JUL",
-      "AUG",
-      "SEP",
-      "OCT",
-      "NOV",
-      "DEC",
-    ];
-    const monthName = monthNames[parseInt(month) - 1] || month;
-    return `${monthName} ${year}`;
-  };
+  // Fetch payroll date info
+  const { data: dateData } = useGetPayrollDate({
+    id: isNaN(payrollId) ? 0 : payrollId,
+  });
+
+  const payrollTitle = dateData
+    ? `PAYROLL DETAILS OF ${formatPayrollPeriod(
+        dateData.payrollMonth,
+        dateData.payrollYear
+      )}`
+    : `PAYROLL DETAILS #${periodParam}`;
 
   return (
     <div className="flex h-full flex-col">
       <TitleHeader
-        title={`PAYROLL DETAILS OF ${formatPeriod(periodParam)}`}
+        title={payrollTitle}
         icon={<i className="fa-light fa-calendar text-xl!" />}
         value={searchValue}
         onChange={(e) => {
@@ -717,13 +602,18 @@ const PayrollDetailPage = () => {
             data={payrollData}
             columns={columns()}
             pagination={true}
-            rowsPerPageOptions={[10, 25, 50, 100]}
-            rows={10}
+            rowsPerPageOptions={[50, 100]}
+            rows={100}
             globalSearch={false}
-            emptyMessage="No payroll data found."
+            emptyMessage={
+              !filterParams.designationId && !filterParams.payrollSectionId
+                ? "No Payroll Section or Designation is Selected"
+                : "No Payroll Data Found"
+            }
             scrollable
             scrollHeight="65vh"
             stripedRows
+            loading={isLoading}
           />
         </div>
       </div>

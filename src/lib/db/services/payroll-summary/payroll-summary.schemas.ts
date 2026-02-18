@@ -32,14 +32,25 @@ export type UpdateMonthlyPayrollValuesInput = z.infer<
 export type RunPayrollInput = z.infer<typeof RunPayrollSchema>;
 export type RepostPayrollInput = z.infer<typeof RepostPayrollSchema>;
 
-export const GetPayrollDetailsSchema = z.object({
-  year: z.number(),
-  month: z.number(),
-  branchId: z.number().optional(),
-  payrollSectionId: z.number().optional(),
-  designationId: z.number().optional(),
-  search: z.string().optional(),
-  page: z.number().optional(),
-  limit: z.number().optional(),
-});
+export const GetPayrollDetailsSchema = z
+  .object({
+    payrollId: z.number(),
+    year: z.number().optional(),
+    month: z.number().optional(),
+    branchId: z.number().optional(),
+    payrollSectionId: z.number().optional(),
+    designationId: z.number().optional(),
+    search: z.string().optional(),
+    page: z.number().optional(),
+    limit: z.number().optional(),
+  })
+  .refine(
+    (data) => data.designationId || data.payrollSectionId,
+    "Either designationId or payrollSectionId must be provided"
+  );
 export type GetPayrollDetailsInput = z.infer<typeof GetPayrollDetailsSchema>;
+
+export const GetPayrollDateSchema = z.object({
+  id: z.number(),
+});
+export type GetPayrollDateInput = z.infer<typeof GetPayrollDateSchema>;

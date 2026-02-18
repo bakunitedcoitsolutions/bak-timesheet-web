@@ -7,8 +7,12 @@ import {
   RunPayrollSchema,
   RepostPayrollSchema,
   GetPayrollDetailsSchema,
+  GetPayrollDateSchema,
 } from "./payroll-summary.schemas";
-import { getPayrollSummariesByYear } from "./payroll-summary.service";
+import {
+  getPayrollSummariesByYear,
+  getPayrollDate,
+} from "./payroll-summary.service";
 import { getPayrollDetails } from "./payroll-details.service";
 import {
   runPayroll,
@@ -45,4 +49,10 @@ export const getPayrollDetailsAction = serverAction
   .input(GetPayrollDetailsSchema)
   .handler(async ({ input }) => {
     return await getPayrollDetails(input);
+  });
+
+export const getPayrollDateAction = serverAction
+  .input(GetPayrollDateSchema)
+  .handler(async ({ input }) => {
+    return await getPayrollDate(input.id);
   });

@@ -270,6 +270,11 @@ body .timesheet-number-input.p-inputnumber .p-inputnumber-input {
   text-align: center !important;
 }
 
+body .payroll-input.p-inputnumber .p-inputnumber-input
+/* ,body .payroll-input .p-inputtext  */ {
+  border: 1px solid var(--color-primary) !important;
+}
+
 body .timesheet-number-input.p-inputnumber .p-inputnumber-input:focus {
   width: 100% !important;
   min-width: 100% !important;
@@ -342,4 +347,12 @@ body .p-datatable .p-datatable-loading-overlay {
 
 body .p-datatable .p-datatable-tbody > tr.p-datatable-emptymessage > td {
   @apply text-primary!;
+}
+
+body .p-datatable .p-datatable-tbody > .row > td.p-frozen-column {
+  @apply z-20!;
+}
+
+body .p-datatable .p-datatable-thead > .row > th.p-frozen-column {
+  @apply z-100!;
 }

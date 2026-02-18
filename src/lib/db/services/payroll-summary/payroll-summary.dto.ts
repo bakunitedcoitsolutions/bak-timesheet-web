@@ -42,8 +42,9 @@ export interface PayrollSummaryWithRelations extends PayrollSummaryInterface {
 }
 
 export interface GetPayrollDetailsParams {
-  year: number;
-  month: number;
+  payrollId: number;
+  year?: number;
+  month?: number;
   branchId?: number;
   payrollSectionId?: number;
   designationId?: number;
@@ -66,14 +67,17 @@ export interface PayrollDetailWithRelations {
   previousLoan: number;
   currentLoan: number;
   deductionLoan: number;
-  // netLoan: number; // Not strictly needed for display if we calculate or just show ded
+  netLoan: number;
   previousTrafficChallan: number;
   currentTrafficChallan: number;
   deductionTrafficChallan: number;
-  // netTrafficChallan: number;
+  netTrafficChallan: number;
   netSalaryPayable: number;
   cardSalary: number;
   cashSalary: number;
+  remarks: string | null;
+  paymentMethodId: number | null;
+  payrollStatusId: number | null;
   overTime: number;
 
   employee: {
@@ -83,6 +87,18 @@ export interface PayrollDetailWithRelations {
     nameAr?: string | null;
     designationId: number | null;
     idCardNo?: string | null;
+    profession?: string | null;
+    passportNo?: string | null;
+    passportExpiryDate?: Date | null;
+    joiningDate?: Date | null;
+    iban?: string | null;
+    bankCode?: string | null;
+    gender?: string | null;
+    nationality?: {
+      id: number;
+      nameEn: string;
+      nameAr?: string | null;
+    } | null;
     designation?: {
       id: number;
       nameEn: string;

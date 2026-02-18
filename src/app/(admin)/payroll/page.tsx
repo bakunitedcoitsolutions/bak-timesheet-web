@@ -330,8 +330,7 @@ const PayrollPage = () => {
   }, [payrollSummaries]);
 
   const handleView = (payroll: PayrollEntry) => {
-    console.log("View payroll:", payroll);
-    // TODO: Navigate to view page or open view modal
+    router.push(`/payroll/${payroll.id}`);
   };
 
   /* New Hook */
