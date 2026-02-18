@@ -79,6 +79,9 @@ export const getPayrollDetails = async (
           select: {
             id: true,
             employeeCode: true,
+            isDeductable: true,
+            isFixed: true,
+            isCardDelivered: true,
             nameEn: true,
             nameAr: true,
             designationId: true,

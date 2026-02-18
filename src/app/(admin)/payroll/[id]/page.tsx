@@ -243,10 +243,15 @@ const PayrollDetailPage = () => {
               {rowData.name}
             </span>
           </div>
-          <div className="flex items-center justify-center gap-x-1 shrink-0">
-            <Badge text="C" />
-            <Badge text="F" />
-          </div>
+          {(rowData.isFixed ||
+            rowData.isDeductable ||
+            rowData.isCardDelivered) && (
+            <div className="flex items-center justify-center gap-x-1 shrink-0">
+              {rowData.isCardDelivered && <Badge variant="success" text="C" />}
+              {rowData.isFixed && <Badge text="F" />}
+              {rowData.isDeductable && <Badge text="D" />}
+            </div>
+          )}
         </div>
       ),
     },

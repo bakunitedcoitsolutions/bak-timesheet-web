@@ -35,6 +35,9 @@ export interface PayrollDetailEntry {
   isLocked: boolean;
   gender: string; // "M" or "F" for gender flag
   payrollSummaryStatusId: number;
+  isFixed: boolean;
+  isDeductable: boolean;
+  isCardDelivered: boolean;
 }
 
 import { PayrollDetailWithRelations } from "./payroll-summary.dto";
@@ -84,5 +87,8 @@ export const mapPayrollDetailToEntry = (
     isLocked: false,
     gender: d?.employee?.gender || "", // Placeholder
     payrollSummaryStatusId: d.payrollSummary?.payrollStatusId ?? 1,
+    isFixed: d?.employee?.isFixed ?? false,
+    isDeductable: d?.employee?.isDeductable ?? false,
+    isCardDelivered: d?.employee?.isCardDelivered ?? false,
   };
 };

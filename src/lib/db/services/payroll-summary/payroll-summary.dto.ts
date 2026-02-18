@@ -94,6 +94,9 @@ export interface PayrollDetailWithRelations {
     iban?: string | null;
     bankCode?: string | null;
     gender?: string | null;
+    isFixed?: boolean | null;
+    isDeductable?: boolean | null;
+    isCardDelivered?: boolean | null;
     nationality?: {
       id: number;
       nameEn: string;
