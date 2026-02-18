@@ -160,6 +160,14 @@ const PayrollDetailPage = () => {
     field: keyof PayrollDetailEntry,
     value: any
   ) => {
+    setPayrollEntry(id, field, value);
+  };
+
+  const setPayrollEntry = (
+    id: number,
+    field: keyof PayrollDetailEntry,
+    value: any
+  ) => {
     setPayrollData((prev) =>
       prev.map((entry) => {
         if (entry.id === id) {
@@ -168,6 +176,23 @@ const PayrollDetailPage = () => {
         return entry;
       })
     );
+  };
+
+  const scrollToTop = () => {
+    // PrimeReact DataTable scrollable body class
+    const scrollableBody = document.querySelector(".p-datatable-wrapper");
+    if (scrollableBody) {
+      scrollableBody.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
+  // Scroll to top when filter changes
+  useEffect(() => {
+    scrollToTop();
+  }, [selectedFilter]);
+
+  const onPage = () => {
+    scrollToTop();
   };
 
   const calculateNetSalaryPayable = (entry: PayrollDetailEntry) => {
@@ -756,6 +781,7 @@ const PayrollDetailPage = () => {
             scrollHeight="65vh"
             stripedRows
             loading={isLoading}
+            onPage={onPage}
           />
         </div>
       </div>
