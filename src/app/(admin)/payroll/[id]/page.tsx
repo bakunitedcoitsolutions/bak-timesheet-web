@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
 
 import {
@@ -22,6 +22,7 @@ import {
   useGetPayrollDate,
   useSavePayrollDetailsBatch,
 } from "@/lib/db/services/payroll-summary";
+import { queryClient } from "@/lib/react-query";
 import { toastService } from "@/lib/toast";
 import { useDebounce } from "@/hooks";
 import GroupDropdown from "@/components/common/group-dropdown";
@@ -83,6 +84,35 @@ const PayrollDetailPage = () => {
   const { mutateAsync: savePayrollDetails } = useSavePayrollDetailsBatch();
   const [isSaving, setIsSaving] = useState(false);
 
+  const saveSingleRow = async (row: PayrollDetailEntry) => {
+    try {
+      const entry = {
+        id: row.id,
+        loanDeduction: row.loanDeduction,
+        challanDeduction: row.challanDeduction,
+        netSalaryPayable: calculateNetSalaryPayable(row),
+        netLoan: calculateNetLoan(row),
+        netChallan: calculateNetTrafficChallan(row),
+        cardSalary: row.cardSalary,
+        cashSalary: row.cashSalary,
+        remarks: row.remarks,
+        paymentMethodId: row.paymentMethodId,
+        payrollStatusId: row.payrollStatusId,
+      };
+
+      const result = await savePayrollDetails({ entries: [entry] });
+      toastService.showSuccess(
+        "Saved",
+        `Row saved successfully for ${row.name}`
+      );
+    } catch (error: any) {
+      toastService.showError(
+        "Error",
+        error.message || "Failed to save payroll details"
+      );
+    }
+  };
+
   const handleSave = async () => {
     setIsSaving(true);
     try {
@@ -100,7 +130,15 @@ const PayrollDetailPage = () => {
         payrollStatusId: row.payrollStatusId,
       }));
 
-      const result = await savePayrollDetails({ entries });
+      const result = await savePayrollDetails(
+        { entries },
+        {
+          onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ["payroll-details"] });
+            queryClient.invalidateQueries({ queryKey: ["payroll-summaries"] });
+          },
+        }
+      );
       toastService.showSuccess(
         "Saved",
         `${result.saved} payroll entr${result.saved === 1 ? "y" : "ies"} saved successfully`
@@ -486,6 +524,11 @@ const PayrollDetailPage = () => {
             className="timesheet-number-input payroll-input"
             min={0}
             showButtons={false}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                saveSingleRow(rowData);
+              }
+            }}
           />
         </div>
       ),
@@ -506,6 +549,11 @@ const PayrollDetailPage = () => {
             className="timesheet-number-input payroll-input"
             min={0}
             showButtons={false}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                saveSingleRow(rowData);
+              }
+            }}
           />
         </div>
       ),
@@ -525,6 +573,11 @@ const PayrollDetailPage = () => {
             updatePayrollEntry(rowData.id, "remarks", e.target.value)
           }
           className="w-full h-10! payroll-input"
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              saveSingleRow(rowData);
+            }
+          }}
         />
       ),
     },
@@ -569,6 +622,29 @@ const PayrollDetailPage = () => {
             updatePayrollEntry(rowData.id, "payrollStatusId", e.value)
           }
         />
+      ),
+    },
+    {
+      field: "id",
+      header: "Actions",
+      ...tableCommonProps,
+      sortable: false,
+      filterable: false,
+      style: { minWidth: 80, width: 80, textAlign: "center" },
+      body: (rowData: PayrollDetailEntry) => (
+        <div className="flex justify-center">
+          <Button
+            rounded
+            size="small"
+            variant="text"
+            icon="pi pi-save text-lg!"
+            tooltipOptions={{ position: "top" }}
+            onClick={() => saveSingleRow(rowData)}
+            disabled={rowData.isLocked || isSaving}
+            className="w-8 h-8!"
+            tooltip="Save Row"
+          />
+        </div>
       ),
     },
   ];

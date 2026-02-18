@@ -77,12 +77,4 @@ export const useGetPayrollDate = (input: GetPayrollDateInput) =>
 export const useSavePayrollDetailsBatch = () =>
   useMutation(savePayrollDetailsBatchAction, {
     mutationKey: ["save-payroll-details-batch"],
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["payroll-details"],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["payroll-summaries"],
-      });
-    },
   });
