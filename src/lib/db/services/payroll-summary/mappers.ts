@@ -34,6 +34,7 @@ export interface PayrollDetailEntry {
   payrollStatusId: number;
   isLocked: boolean;
   gender: string; // "M" or "F" for gender flag
+  payrollSummaryStatusId: number;
 }
 
 import { PayrollDetailWithRelations } from "./payroll-summary.dto";
@@ -82,5 +83,6 @@ export const mapPayrollDetailToEntry = (
     payrollStatusId: d.payrollStatusId ?? 1,
     isLocked: false,
     gender: d?.employee?.gender || "", // Placeholder
+    payrollSummaryStatusId: d.payrollSummary?.payrollStatusId ?? 1,
   };
 };

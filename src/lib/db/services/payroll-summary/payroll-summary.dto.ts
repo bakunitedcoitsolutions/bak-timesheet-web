@@ -105,4 +105,8 @@ export interface PayrollDetailWithRelations {
       nameAr?: string | null;
     } | null;
   };
+
+  payrollSummary: {
+    payrollStatusId: number | null;
+  };
 }

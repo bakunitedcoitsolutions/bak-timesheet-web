@@ -106,6 +106,11 @@ export const getPayrollDetails = async (
             },
           },
         },
+        payrollSummary: {
+          select: {
+            payrollStatusId: true,
+          },
+        },
       },
     }),
     prisma.payrollDetails.count({ where }),

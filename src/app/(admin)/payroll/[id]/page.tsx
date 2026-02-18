@@ -215,12 +215,15 @@ const PayrollDetailPage = () => {
     );
   };
 
+  console.log("payrollData", payrollData);
+
   const columns = (): TableColumn<PayrollDetailEntry>[] => [
     {
       field: "empCode",
       header: "Emp. Code",
       ...tableCommonProps,
-      style: { minWidth: 120 },
+      style: { minWidth: 120, zIndex: 1 },
+      headerStyle: { zIndex: 10 },
       frozen: true,
       body: (rowData: PayrollDetailEntry) => (
         <span className="text-sm font-semibold!">{rowData.empCode}</span>
@@ -230,7 +233,8 @@ const PayrollDetailPage = () => {
       field: "name",
       header: "Name",
       ...tableCommonProps,
-      style: { minWidth: 300 },
+      style: { minWidth: 300, zIndex: 1 },
+      headerStyle: { zIndex: 10 },
       frozen: true,
       body: (rowData: PayrollDetailEntry) => (
         <div className="flex items-start gap-2 min-w-0">
@@ -441,7 +445,7 @@ const PayrollDetailPage = () => {
         <div className="flex justify-center">
           <NumberInput
             useGrouping={false}
-            disabled={rowData.isLocked}
+            disabled={rowData.payrollSummaryStatusId === 3}
             value={rowData.loanDeduction}
             onValueChange={(e) =>
               updatePayrollEntry(rowData.id, "loanDeduction", e.value || 0)
@@ -497,7 +501,7 @@ const PayrollDetailPage = () => {
         <div className="flex justify-center">
           <NumberInput
             useGrouping={false}
-            disabled={rowData.isLocked}
+            disabled={rowData.payrollSummaryStatusId === 3}
             value={rowData.challanDeduction}
             onValueChange={(e) =>
               updatePayrollEntry(rowData.id, "challanDeduction", e.value || 0)
@@ -541,7 +545,7 @@ const PayrollDetailPage = () => {
         <div className="flex justify-center">
           <NumberInput
             useGrouping={false}
-            disabled={rowData.isLocked}
+            disabled={rowData.payrollSummaryStatusId === 3}
             value={rowData.cardSalary}
             onValueChange={(e) =>
               updatePayrollEntry(rowData.id, "cardSalary", e.value || 0)
@@ -566,7 +570,7 @@ const PayrollDetailPage = () => {
         <div className="flex justify-center">
           <NumberInput
             useGrouping={false}
-            disabled={rowData.isLocked}
+            disabled={rowData.payrollSummaryStatusId === 3}
             value={rowData.cashSalary}
             onValueChange={(e) =>
               updatePayrollEntry(rowData.id, "cashSalary", e.value || 0)
@@ -591,7 +595,7 @@ const PayrollDetailPage = () => {
       body: (rowData: PayrollDetailEntry) => (
         <Input
           small
-          disabled={rowData.isLocked}
+          disabled={rowData.payrollSummaryStatusId === 3}
           placeholder="Add remarks"
           value={rowData.remarks}
           onChange={(e) =>
@@ -616,7 +620,7 @@ const PayrollDetailPage = () => {
           small
           filter
           options={paymentMethodOptions}
-          disabled={rowData.isLocked}
+          disabled={rowData.payrollSummaryStatusId === 3}
           className="w-[200px]! h-10!"
           placeholder="Choose Method"
           value={rowData.paymentMethodId?.toString()}
@@ -639,7 +643,7 @@ const PayrollDetailPage = () => {
         <Dropdown
           small
           options={statusOptions}
-          disabled={rowData.isLocked}
+          disabled={rowData.payrollSummaryStatusId === 3}
           className="w-[150px]! h-10!"
           placeholder="Pending"
           value={rowData.payrollStatusId}
