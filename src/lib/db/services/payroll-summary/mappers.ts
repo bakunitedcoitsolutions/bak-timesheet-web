@@ -20,18 +20,18 @@ export interface PayrollDetailEntry {
   totalSalary: number;
   previousAdvance: number;
   currentAdvance: number;
-  deduction: number;
+  loanDeduction: number;
   netLoan: number;
-  previousTraffic: number;
-  currentTraffic: number;
-  trafficDeduction: number;
-  netTraffic: number;
+  previousChallan: number;
+  currentChallan: number; // Fixed typo in previous step thought process, it is currentChallan
+  challanDeduction: number;
+  netChallan: number;
   netSalaryPayable: number;
   cardSalary: number;
   cashSalary: number;
   remarks: string;
-  paymentMethod: string | null;
-  status: number;
+  paymentMethodId: number | null;
+  payrollStatusId: number;
   isLocked: boolean;
   gender: string; // "M" or "F" for gender flag
 }
@@ -68,18 +68,18 @@ export const mapPayrollDetailToEntry = (
     totalSalary: convertDecimalToNumber(d.salary) || 0,
     previousAdvance: convertDecimalToNumber(d.previousLoan) || 0,
     currentAdvance: convertDecimalToNumber(d.currentLoan) || 0,
-    deduction: convertDecimalToNumber(d.deductionLoan) || 0,
+    loanDeduction: convertDecimalToNumber(d.loanDeduction) || 0,
     netLoan: convertDecimalToNumber(d.netLoan) || 0,
-    previousTraffic: convertDecimalToNumber(d.previousTrafficChallan) || 0,
-    currentTraffic: convertDecimalToNumber(d.currentTrafficChallan) || 0,
-    trafficDeduction: convertDecimalToNumber(d.deductionTrafficChallan) || 0,
-    netTraffic: convertDecimalToNumber(d.netTrafficChallan) || 0,
+    previousChallan: convertDecimalToNumber(d.previousChallan) || 0,
+    currentChallan: convertDecimalToNumber(d.currentChallan) || 0,
+    challanDeduction: convertDecimalToNumber(d.challanDeduction) || 0,
+    netChallan: convertDecimalToNumber(d.netChallan) || 0,
     netSalaryPayable: convertDecimalToNumber(d.netSalaryPayable) || 0,
     cardSalary: convertDecimalToNumber(d.cardSalary) || 0,
     cashSalary: convertDecimalToNumber(d.cashSalary) || 0,
     remarks: d.remarks || "",
-    paymentMethod: d.paymentMethodId?.toString() || "",
-    status: d.payrollStatusId ?? 1,
+    paymentMethodId: d.paymentMethodId || null,
+    payrollStatusId: d.payrollStatusId ?? 1,
     isLocked: false,
     gender: d?.employee?.gender || "", // Placeholder
   };

@@ -8,12 +8,16 @@ import {
   RepostPayrollSchema,
   GetPayrollDetailsSchema,
   GetPayrollDateSchema,
+  SavePayrollDetailsBatchSchema,
 } from "./payroll-summary.schemas";
 import {
   getPayrollSummariesByYear,
   getPayrollDate,
 } from "./payroll-summary.service";
-import { getPayrollDetails } from "./payroll-details.service";
+import {
+  getPayrollDetails,
+  savePayrollDetailsBatch,
+} from "./payroll-details.service";
 import {
   runPayroll,
   repostPayroll,
@@ -55,4 +59,10 @@ export const getPayrollDateAction = serverAction
   .input(GetPayrollDateSchema)
   .handler(async ({ input }) => {
     return await getPayrollDate(input.id);
+  });
+
+export const savePayrollDetailsBatchAction = serverAction
+  .input(SavePayrollDetailsBatchSchema)
+  .handler(async ({ input }) => {
+    return await savePayrollDetailsBatch(input);
   });

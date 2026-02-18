@@ -20,7 +20,9 @@ import { PayrollDetailEntry } from "@/lib/db/services/payroll-summary/mappers";
 import {
   useGetPayrollDetails,
   useGetPayrollDate,
+  useSavePayrollDetailsBatch,
 } from "@/lib/db/services/payroll-summary";
+import { toastService } from "@/lib/toast";
 import { useDebounce } from "@/hooks";
 import GroupDropdown from "@/components/common/group-dropdown";
 import { parseGroupDropdownFilter, formatPayrollPeriod } from "@/utils/helpers";
@@ -78,6 +80,41 @@ const PayrollDetailPage = () => {
     }
   }, [data]);
 
+  const { mutateAsync: savePayrollDetails } = useSavePayrollDetailsBatch();
+  const [isSaving, setIsSaving] = useState(false);
+
+  const handleSave = async () => {
+    setIsSaving(true);
+    try {
+      const entries = payrollData.map((row) => ({
+        id: row.id,
+        loanDeduction: row.loanDeduction,
+        challanDeduction: row.challanDeduction,
+        netSalaryPayable: calculateNetSalaryPayable(row),
+        netLoan: calculateNetLoan(row),
+        netChallan: calculateNetTrafficChallan(row),
+        cardSalary: row.cardSalary,
+        cashSalary: row.cashSalary,
+        remarks: row.remarks,
+        paymentMethodId: row.paymentMethodId,
+        payrollStatusId: row.payrollStatusId,
+      }));
+
+      const result = await savePayrollDetails({ entries });
+      toastService.showSuccess(
+        "Saved",
+        `${result.saved} payroll entr${result.saved === 1 ? "y" : "ies"} saved successfully`
+      );
+    } catch (error: any) {
+      toastService.showError(
+        "Error",
+        error.message || "Failed to save payroll details"
+      );
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
   const tableRef = useRef<TableRef>(null);
 
   const updatePayrollEntry = (
@@ -92,6 +129,26 @@ const PayrollDetailPage = () => {
         }
         return entry;
       })
+    );
+  };
+
+  const calculateNetSalaryPayable = (entry: PayrollDetailEntry) => {
+    return entry.totalSalary - entry.loanDeduction - entry.challanDeduction;
+  };
+
+  const calculateNetLoan = (entry: PayrollDetailEntry) => {
+    return (
+      (entry?.previousAdvance ?? 0) +
+      (entry.currentAdvance ?? 0) -
+      (entry.loanDeduction ?? 0)
+    );
+  };
+
+  const calculateNetTrafficChallan = (entry: PayrollDetailEntry) => {
+    return (
+      (entry?.previousChallan ?? 0) +
+      (entry.currentChallan ?? 0) -
+      (entry.challanDeduction ?? 0)
     );
   };
 
@@ -314,7 +371,7 @@ const PayrollDetailPage = () => {
       ),
     },
     {
-      field: "deduction",
+      field: "loanDeduction",
       header: "Loan Ded.",
       ...tableCommonProps,
       body: (rowData: PayrollDetailEntry) => (
@@ -322,9 +379,9 @@ const PayrollDetailPage = () => {
           <NumberInput
             useGrouping={false}
             disabled={rowData.isLocked}
-            value={rowData.deduction}
+            value={rowData.loanDeduction}
             onValueChange={(e) =>
-              updatePayrollEntry(rowData.id, "deduction", e.value || 0)
+              updatePayrollEntry(rowData.id, "loanDeduction", e.value || 0)
             }
             className="timesheet-number-input payroll-input"
             min={0}
@@ -339,38 +396,38 @@ const PayrollDetailPage = () => {
       ...tableCommonProps,
       body: (rowData: PayrollDetailEntry) => (
         <div className="flex justify-center">
-          <span className="text-[15px] font-semibold!">
-            {rowData.netLoan.toString()}
+          <span className="text-[15px] font-semibold! text-primary!">
+            {calculateNetLoan(rowData).toString()}
           </span>
         </div>
       ),
     },
     {
-      field: "previousTraffic",
+      field: "previousChallan",
       header: "Prev. Traff.",
       ...tableCommonProps,
       body: (rowData: PayrollDetailEntry) => (
         <div className="flex justify-center">
           <span className="text-[15px] font-semibold!">
-            {rowData.previousTraffic.toString()}
+            {rowData.previousChallan.toString()}
           </span>
         </div>
       ),
     },
     {
-      field: "currentTraffic",
+      field: "currentChallan",
       header: "Curr. Traff.",
       ...tableCommonProps,
       body: (rowData: PayrollDetailEntry) => (
         <div className="flex justify-center">
           <span className="text-[15px] font-semibold!">
-            {rowData.currentTraffic.toString()}
+            {rowData.currentChallan.toString()}
           </span>
         </div>
       ),
     },
     {
-      field: "trafficDeduction",
+      field: "challanDeduction",
       header: "Traff. Ded.",
       ...tableCommonProps,
       body: (rowData: PayrollDetailEntry) => (
@@ -378,9 +435,9 @@ const PayrollDetailPage = () => {
           <NumberInput
             useGrouping={false}
             disabled={rowData.isLocked}
-            value={rowData.trafficDeduction}
+            value={rowData.challanDeduction}
             onValueChange={(e) =>
-              updatePayrollEntry(rowData.id, "trafficDeduction", e.value || 0)
+              updatePayrollEntry(rowData.id, "challanDeduction", e.value || 0)
             }
             className="timesheet-number-input payroll-input"
             min={0}
@@ -390,13 +447,13 @@ const PayrollDetailPage = () => {
       ),
     },
     {
-      field: "netTraffic",
+      field: "netChallan",
       header: "Net Traff.",
       ...tableCommonProps,
       body: (rowData: PayrollDetailEntry) => (
         <div className="flex justify-center">
-          <span className="text-[15px] font-semibold!">
-            {rowData.netTraffic.toString()}
+          <span className="text-[15px] font-semibold! text-primary!">
+            {calculateNetTrafficChallan(rowData).toString()}
           </span>
         </div>
       ),
@@ -407,8 +464,8 @@ const PayrollDetailPage = () => {
       ...tableCommonProps,
       body: (rowData: PayrollDetailEntry) => (
         <div className="flex justify-center">
-          <span className="text-[15px] font-semibold!">
-            {rowData.netSalaryPayable.toString()}
+          <span className="text-[15px] font-semibold! text-primary!">
+            {calculateNetSalaryPayable(rowData).toString()}
           </span>
         </div>
       ),
@@ -472,7 +529,7 @@ const PayrollDetailPage = () => {
       ),
     },
     {
-      field: "paymentMethod",
+      field: "paymentMethodId",
       header: "Salary Method",
       ...tableCommonProps,
       style: { minWidth: 200, width: 200 },
@@ -484,15 +541,19 @@ const PayrollDetailPage = () => {
           disabled={rowData.isLocked}
           className="w-[200px]! h-10!"
           placeholder="Choose Method"
-          value={rowData.paymentMethod}
+          value={rowData.paymentMethodId?.toString()}
           onChange={(e) =>
-            updatePayrollEntry(rowData.id, "paymentMethod", e.value)
+            updatePayrollEntry(
+              rowData.id,
+              "paymentMethodId",
+              e.value ? Number(e.value) : null
+            )
           }
         />
       ),
     },
     {
-      field: "status",
+      field: "payrollStatusId",
       header: "Status",
       ...tableCommonProps,
       style: { minWidth: 150, width: 150 },
@@ -503,8 +564,10 @@ const PayrollDetailPage = () => {
           disabled={rowData.isLocked}
           className="w-[150px]! h-10!"
           placeholder="Pending"
-          value={rowData.status}
-          onChange={(e) => updatePayrollEntry(rowData.id, "status", e.value)}
+          value={rowData.payrollStatusId}
+          onChange={(e) =>
+            updatePayrollEntry(rowData.id, "payrollStatusId", e.value)
+          }
         />
       ),
     },
@@ -550,6 +613,9 @@ const PayrollDetailPage = () => {
               size="small"
               className="w-full bg-primary-light! text-primary! border-primary-light! lg:w-28 h-10!"
               label="Save"
+              onClick={handleSave}
+              loading={isSaving}
+              disabled={isLoading || isSaving}
             />
           </div>
         </div>

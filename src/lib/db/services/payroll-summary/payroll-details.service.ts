@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/db/prisma";
 import type { GetPayrollDetailsParams } from "./payroll-summary.dto";
 import { mapPayrollDetailToEntry, PayrollDetailEntry } from "./mappers";
+import { SavePayrollDetailsBatchInput } from "./payroll-summary.schemas";
 
 export const getPayrollDetails = async (
   params: GetPayrollDetailsParams
@@ -114,4 +115,90 @@ export const getPayrollDetails = async (
     details: details.map((d: any) => mapPayrollDetailToEntry(d)),
     total,
   };
+};
+
+/**
+ * Save multiple payroll detail entries.
+ * Processes entries in batches, each batch in its own transaction.
+ */
+export const savePayrollDetailsBatch = async (
+  input: SavePayrollDetailsBatchInput
+): Promise<{ saved: number }> => {
+  const { entries } = input;
+  const batchSize = 50;
+  let saved = 0;
+
+  for (let i = 0; i < entries.length; i += batchSize) {
+    const batch = entries.slice(i, i + batchSize);
+    await prisma.$transaction(
+      async (tx) => {
+        for (const entry of batch) {
+          const { id, ...data } = entry;
+
+          // Prepare update data, only including defined fields
+          const updateData: any = {};
+          if (data.loanDeduction !== undefined && data.loanDeduction !== null)
+            updateData.loanDeduction = data.loanDeduction;
+
+          if (
+            data.challanDeduction !== undefined &&
+            data.challanDeduction !== null
+          )
+            updateData.challanDeduction = data.challanDeduction;
+
+          if (data.cardSalary !== undefined && data.cardSalary !== null)
+            updateData.cardSalary = data.cardSalary;
+
+          if (data.cashSalary !== undefined && data.cashSalary !== null)
+            updateData.cashSalary = data.cashSalary;
+
+          if (data.remarks !== undefined) updateData.remarks = data.remarks;
+
+          if (
+            data.paymentMethodId !== undefined &&
+            data.paymentMethodId !== null
+          )
+            updateData.paymentMethodId = data.paymentMethodId;
+
+          if (
+            data.payrollStatusId !== undefined &&
+            data.payrollStatusId !== null
+          )
+            updateData.payrollStatusId = data.payrollStatusId;
+
+          if (
+            data.netSalaryPayable !== undefined &&
+            data.netSalaryPayable !== null
+          )
+            updateData.netSalaryPayable = data.netSalaryPayable;
+
+          if (data.netLoan !== undefined && data.netLoan !== null)
+            updateData.netLoan = data.netLoan;
+
+          if (data.netChallan !== undefined && data.netChallan !== null)
+            updateData.netChallan = data.netChallan;
+
+          if (Object.keys(updateData).length > 0) {
+            console.log(
+              "save payroll ==> ",
+              "id ==> ",
+              id,
+              " data ==> ",
+              updateData
+            );
+            await tx.payrollDetails.update({
+              where: { id },
+              data: updateData,
+            });
+          }
+          saved++;
+        }
+      },
+      {
+        timeout: 20000,
+      }
+    );
+  }
+
+  return { saved };
 };

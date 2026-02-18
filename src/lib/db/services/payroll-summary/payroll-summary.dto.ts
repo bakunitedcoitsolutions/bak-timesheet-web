@@ -66,12 +66,12 @@ export interface PayrollDetailWithRelations {
   salary: number; // Total Salary (Decimal to number)
   previousLoan: number;
   currentLoan: number;
-  deductionLoan: number;
+  loanDeduction: number;
   netLoan: number;
-  previousTrafficChallan: number;
-  currentTrafficChallan: number;
-  deductionTrafficChallan: number;
-  netTrafficChallan: number;
+  previousChallan: number;
+  currentChallan: number;
+  challanDeduction: number;
+  netChallan: number;
   netSalaryPayable: number;
   cardSalary: number;
   cashSalary: number;

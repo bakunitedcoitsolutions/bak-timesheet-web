@@ -49,7 +49,11 @@ export const useGetPayrollSummaries = (
   });
 
 // Manually defining input type since schema is defined inside actions.ts for now
-import { getPayrollDetailsAction, getPayrollDateAction } from "./actions";
+import {
+  getPayrollDetailsAction,
+  getPayrollDateAction,
+  savePayrollDetailsBatchAction,
+} from "./actions";
 import {
   GetPayrollDetailsInput,
   GetPayrollDateInput,
@@ -68,4 +72,17 @@ export const useGetPayrollDate = (input: GetPayrollDateInput) =>
     queryKey: ["payroll-date", input],
     input,
     enabled: !!input.id,
+  });
+
+export const useSavePayrollDetailsBatch = () =>
+  useMutation(savePayrollDetailsBatchAction, {
+    mutationKey: ["save-payroll-details-batch"],
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["payroll-details"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["payroll-summaries"],
+      });
+    },
   });
