@@ -62,7 +62,9 @@ export interface PayrollDetailWithRelations {
   workDays: number;
   totalHours: number; // Decimal to number
   hourlyRate: number; // Decimal to number
-  allowance: number; // Decimal to number
+  breakfastAllowance: number; // breakfastAllowance from DB
+  otherAllowances: number; // otherAllowances from DB
+  totalAllowances: number; // totalAllowances from DB
   salary: number; // Total Salary (Decimal to number)
   previousLoan: number;
   currentLoan: number;

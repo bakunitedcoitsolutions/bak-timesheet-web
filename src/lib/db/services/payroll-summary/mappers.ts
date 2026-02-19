@@ -16,14 +16,16 @@ export interface PayrollDetailEntry {
   overTime: number;
   totalHours: number;
   hourlyRate: number;
-  allowance: number;
+  breakfastAllowance: number;
+  otherAllowances: number;
+  totalAllowances: number;
   totalSalary: number;
   previousAdvance: number;
   currentAdvance: number;
   loanDeduction: number;
   netLoan: number;
   previousChallan: number;
-  currentChallan: number; // Fixed typo in previous step thought process, it is currentChallan
+  currentChallan: number;
   challanDeduction: number;
   netChallan: number;
   netSalaryPayable: number;
@@ -68,7 +70,9 @@ export const mapPayrollDetailToEntry = (
     overTime: convertDecimalToNumber(d.overTime) || 0,
     totalHours: convertDecimalToNumber(d.totalHours) || 0,
     hourlyRate: convertDecimalToNumber(d.hourlyRate) || 0,
-    allowance: convertDecimalToNumber(d.allowance) || 0,
+    breakfastAllowance: convertDecimalToNumber(d.breakfastAllowance) || 0,
+    otherAllowances: convertDecimalToNumber(d.otherAllowances) || 0,
+    totalAllowances: convertDecimalToNumber(d.totalAllowances) || 0,
     totalSalary: convertDecimalToNumber(d.salary) || 0,
     previousAdvance: convertDecimalToNumber(d.previousLoan) || 0,
     currentAdvance: convertDecimalToNumber(d.currentLoan) || 0,
@@ -85,7 +89,7 @@ export const mapPayrollDetailToEntry = (
     paymentMethodId: d.paymentMethodId || null,
     payrollStatusId: d.payrollStatusId ?? 1,
     isLocked: false,
-    gender: d?.employee?.gender || "", // Placeholder
+    gender: d?.employee?.gender || "",
     payrollSummaryStatusId: d.payrollSummary?.payrollStatusId ?? 1,
     isFixed: d?.employee?.isFixed ?? false,
     isDeductable: d?.employee?.isDeductable ?? false,

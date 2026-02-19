@@ -255,19 +255,6 @@ const PayrollDetailPage = () => {
       ),
     },
     {
-      field: "arabicName",
-      header: "Name (Ar)",
-      ...tableCommonProps,
-      style: { minWidth: 150 },
-      body: (rowData: PayrollDetailEntry) => (
-        <div className="w-full flex justify-end">
-          <span className="text-xl! text-right font-medium! font-arabic">
-            {rowData.arabicName}
-          </span>
-        </div>
-      ),
-    },
-    {
       field: "designation",
       header: "Designation",
       ...tableCommonProps,
@@ -284,65 +271,6 @@ const PayrollDetailPage = () => {
       style: { minWidth: 150 },
       body: (rowData: PayrollDetailEntry) => (
         <span className="text-sm font-medium!">{rowData.idNumber}</span>
-      ),
-    },
-    {
-      field: "nationality",
-      header: "Nationality",
-      ...tableCommonProps,
-      body: (rowData: PayrollDetailEntry) => (
-        <div className="flex justify-center">
-          <span className="text-sm font-medium!">{rowData.nationality}</span>
-        </div>
-      ),
-    },
-    {
-      field: "professionInId",
-      header: "Profession",
-      ...tableCommonProps,
-      body: (rowData: PayrollDetailEntry) => (
-        <div className="w-full flex justify-end">
-          <span className="text-xl! text-right font-medium! font-arabic">
-            {rowData.professionInId}
-          </span>
-        </div>
-      ),
-    },
-    {
-      field: "passportNumber",
-      header: "Passport No.",
-      ...tableCommonProps,
-      body: (rowData: PayrollDetailEntry) => (
-        <div className="flex justify-center">
-          <span className="text-sm font-medium!">{rowData.passportNumber}</span>
-        </div>
-      ),
-    },
-    {
-      field: "passportExpiryDate",
-      header: "Passport Exp.",
-      ...tableCommonProps,
-      style: { minWidth: 130 },
-      body: (rowData: PayrollDetailEntry) => (
-        <span className="text-sm font-medium!">
-          {rowData.passportExpiryDate}
-        </span>
-      ),
-    },
-    {
-      field: "iban",
-      header: "IBAN",
-      ...tableCommonProps,
-      body: (rowData: PayrollDetailEntry) => (
-        <span className="text-sm font-medium!">{rowData.iban}</span>
-      ),
-    },
-    {
-      field: "bankCode",
-      header: "Bank Code",
-      ...tableCommonProps,
-      body: (rowData: PayrollDetailEntry) => (
-        <span className="text-sm font-medium!">{rowData.bankCode}</span>
       ),
     },
     {
@@ -394,13 +322,39 @@ const PayrollDetailPage = () => {
       ),
     },
     {
-      field: "allowance",
-      header: "Allowance",
+      field: "breakfastAllowance",
+      header: "Brkfst. Allow.",
       ...tableCommonProps,
       body: (rowData: PayrollDetailEntry) => (
         <div className="flex justify-center">
           <span className="text-[15px] font-semibold!">
-            {rowData.allowance.toString()}
+            {rowData.breakfastAllowance.toString()}
+          </span>
+        </div>
+      ),
+    },
+    {
+      field: "otherAllowances",
+      header: "Other Allow.",
+      ...tableCommonProps,
+      body: (rowData: PayrollDetailEntry) => (
+        <div className="flex justify-center">
+          <span className="text-[15px] font-semibold!">
+            {rowData.otherAllowances.toString()}
+          </span>
+        </div>
+      ),
+    },
+    {
+      field: "totalAllowances",
+      header: "Total Allow.",
+      ...tableCommonProps,
+      body: (rowData: PayrollDetailEntry) => (
+        <div className="flex justify-center">
+          <span className="text-[15px] font-semibold!">
+            {(
+              (rowData.breakfastAllowance ?? 0) + (rowData.otherAllowances ?? 0)
+            ).toString()}
           </span>
         </div>
       ),
