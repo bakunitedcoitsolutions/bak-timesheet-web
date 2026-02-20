@@ -3,7 +3,7 @@
  * Functions to parse CSV and Excel files for timesheet bulk upload
  */
 
-import dayjs from "dayjs";
+import dayjs from "@/lib/dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import * as XLSX from "xlsx";
 
@@ -96,32 +96,26 @@ function parseCellValue(value: any, field: keyof BulkUploadTimesheetRow): any {
 
     case "date": {
       if (value instanceof Date) {
-        return value;
+        // Parse as UTC date string to avoid local-TZ shifting
+        return dayjs.utc(dayjs(value).format("YYYY-MM-DD")).toDate();
       }
 
-      // Use strict parsing for DD-MMM-YYYY
-      const parsedDate = dayjs(stringValue, "DD-MMM-YYYY", true);
+      // Use strict UTC parsing for DD-MMM-YYYY so the date is never shifted
+      const parsedDate = dayjs.utc(stringValue, "DD-MMM-YYYY", true);
 
       if (!parsedDate.isValid()) {
-        // Fallback or just error? User said "instead of", so likely strict replacement.
-        // But maybe allowing both is safer?
-        // "date format will be ... instead of ...".
-        // Let's try the new format strictly first as requested.
         throw new Error(
-          `Invalid date format: ${stringValue}. Expected format: DD-MMM-YYYY (e.g. 08-Feb-2026)`
+          `Invalid date format: ${stringValue}. Expected format: DD-MMM-YYYY (e.g. 20-Feb-2026)`
         );
       }
 
-      // Sanity check: if year is > 2100, assume it might be invalid parsing
       if (parsedDate.year() > 2100) {
         throw new Error(
           `Invalid date (year ${parsedDate.year()}): ${stringValue}. Ensure standard date format (DD-MMM-YYYY).`
         );
       }
 
-      const toDate = parsedDate.toDate();
-
-      return toDate;
+      return parsedDate.toDate();
     }
 
     case "project1Id":

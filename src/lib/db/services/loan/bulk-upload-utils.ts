@@ -3,7 +3,7 @@
  * Functions to parse CSV and Excel files for loan bulk upload
  */
 
-import dayjs from "dayjs";
+import dayjs from "@/lib/dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import * as XLSX from "xlsx";
 
@@ -104,28 +104,26 @@ function parseCellValue(value: any, field: keyof BulkUploadLoanRow): any {
 
     case "date": {
       if (value instanceof Date) {
-        return value;
+        // Normalize to UTC midnight to avoid local-TZ shift
+        return dayjs.utc(dayjs(value).format("YYYY-MM-DD")).toDate();
       }
 
-      // Use strict parsing for DD-MMM-YYYY
-      const parsedDate = dayjs(stringValue, "DD-MMM-YYYY", true);
+      // Parse strictly as UTC midnight to avoid timezone offset shifting the date
+      const parsedDate = dayjs.utc(stringValue, "DD-MMM-YYYY", true);
 
       if (!parsedDate.isValid()) {
         throw new Error(
-          `Invalid date format: ${stringValue}. Expected format: DD-MMM-YYYY (e.g. 08-Feb-2026)`
+          `Invalid date format: ${stringValue}. Expected format: DD-MMM-YYYY (e.g. 20-Feb-2026)`
         );
       }
 
-      // Sanity check: if year is > 2100, assume it might be invalid parsing
       if (parsedDate.year() > 2100) {
         throw new Error(
           `Invalid date (year ${parsedDate.year()}): ${stringValue}. Ensure standard date format (DD-MMM-YYYY).`
         );
       }
 
-      const toDate = parsedDate.toDate();
-
-      return toDate;
+      return parsedDate.toDate();
     }
 
     case "remarks":

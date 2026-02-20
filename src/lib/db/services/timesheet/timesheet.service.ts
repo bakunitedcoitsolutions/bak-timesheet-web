@@ -3,10 +3,7 @@
  * Fetches timesheet records for a date, optionally filters employees by payroll section or designation, and merges into page rows.
  */
 
-import dayjs from "dayjs";
-import utc from "dayjs/plugin/utc";
-
-dayjs.extend(utc);
+import dayjs from "@/lib/dayjs";
 
 import { prisma } from "@/lib/db/prisma";
 import type {
@@ -24,10 +21,25 @@ import type {
 } from "./timesheet.dto";
 
 /**
- * Get timesheet page data: employees (optionally filtered by payrollSectionId or designationId) merged with
- * timesheet records for the selected date. One row per employee; timesheet fields
- * filled when a record exists for that employee and date.
+ * Normalize date to start of day UTC for DB consistency.
+ * Forces the date to be UTC midnight of the same calendar day,
+ * preventing timezone shifts (e.g. +5 hours becoming previous day in UTC).
  */
+function startOfDayUTC(date: Date): Date {
+  return dayjs.utc(dayjs(date).format("YYYY-MM-DD")).startOf("day").toDate();
+}
+
+/**
+ * Build start and end of day in UTC from a given Date.
+ */
+function getDayRange(date: Date): { startOfDay: Date; endOfDay: Date } {
+  const d = dayjs.utc(dayjs(date).format("YYYY-MM-DD"));
+  return {
+    startOfDay: d.startOf("day").toDate(),
+    endOfDay: d.endOf("day").toDate(),
+  };
+}
+
 /**
  * Get timesheet page data: employees (optionally filtered by payrollSectionId or designationId) merged with
  * timesheet records for the selected date. One row per employee; timesheet fields
@@ -45,35 +57,9 @@ export const getTimesheetPageData = async (
     search,
   } = params;
 
-  // Start and end of day (UTC) from the given date
-  const startOfDay = new Date(
-    Date.UTC(
-      date.getUTCFullYear(),
-      date.getUTCMonth(),
-      date.getUTCDate(),
-      0,
-      0,
-      0,
-      0
-    )
-  );
-  const endOfDay = new Date(
-    Date.UTC(
-      date.getUTCFullYear(),
-      date.getUTCMonth(),
-      date.getUTCDate(),
-      23,
-      59,
-      59,
-      999
-    )
-  );
+  const { startOfDay, endOfDay } = getDayRange(date);
 
-  // 1. Fetch all timesheets for this date (we need all to merge, or we could filter by employee IDs after fetching employees)
-  // Optimization: we can fetch timesheets only for the fetched employees later, but for now fetching all for the day is likely fine unless scale is huge.
-  // Better approach for pagination: Fetch paginated employees first, then fetch timesheets for those employees.
-
-  // 2. Build employee filter: optional payrollSectionId and/or designationId
+  // Build employee filter: optional payrollSectionId and/or designationId
   const employeeWhere: any = {};
 
   if (search) {
@@ -100,7 +86,7 @@ export const getTimesheetPageData = async (
     where: Object.keys(employeeWhere).length > 0 ? employeeWhere : undefined,
   });
 
-  // 3. Fetch employees (filtered or all) with pagination
+  // Fetch employees (filtered or all) with pagination
   const employees = await prisma.employee.findMany({
     where: Object.keys(employeeWhere).length > 0 ? employeeWhere : undefined,
     orderBy: [{ employeeCode: "asc" }],
@@ -119,17 +105,12 @@ export const getTimesheetPageData = async (
     },
   });
 
-  // 4. Fetch timesheets only for these employees
+  // Fetch timesheets only for the paginated employees
   const employeeIds = employees.map((e) => e.id);
   const timesheets = await prisma.timesheet.findMany({
     where: {
-      date: {
-        gte: startOfDay,
-        lte: endOfDay,
-      },
-      employeeId: {
-        in: employeeIds,
-      },
+      date: { gte: startOfDay, lte: endOfDay },
+      employeeId: { in: employeeIds },
     },
     select: {
       id: true,
@@ -150,11 +131,9 @@ export const getTimesheetPageData = async (
     timesheets.map((t) => [t.employeeId, t])
   );
 
-  // 5. Build one row per employee (DB keys; merged with timesheet when present)
+  // Build one row per employee (merged with timesheet when present)
   const rows: TimesheetPageRow[] = employees.map((emp, index) => {
     const ts = timesheetByEmployeeId.get(emp.id);
-    // Row number should be relative to the whole dataset or page? Usually relative to start.
-    // Let's make it absolute row number (e.g. 51, 52...)
     const distinctRowNumber = (page - 1) * limit + index + 1;
 
     return {
@@ -167,7 +146,6 @@ export const getTimesheetPageData = async (
       designationNameEn: emp.designation?.nameEn ?? "",
       isFixed: emp.isFixed,
       isLocked: false,
-      // isLocked: ts?.isLocked ?? false,
       project1Id: ts?.project1Id ?? null,
       project1Hours: ts?.project1Hours ?? null,
       project1Overtime: ts?.project1Overtime ?? null,
@@ -189,16 +167,6 @@ export const getTimesheetPageData = async (
     },
   };
 };
-
-/**
- * Normalize date to start of day UTC for DB consistency
- */
-// Force the date to be UTC Midnight of the same calendar day.
-// This prevents timezone shifts (e.g. +5 hours becoming previous day in UTC).
-// We take the "2026-02-01" part and say "This is 2026-02-01 00:00:00 UTC".
-function startOfDayUTC(date: Date): Date {
-  return dayjs.utc(dayjs(date).format("YYYY-MM-DD")).toDate();
-}
 
 /** Max entries per transaction to avoid long-running transactions and timeouts */
 const SAVE_BATCH_SIZE = 50;
@@ -258,10 +226,8 @@ export const saveTimesheetEntries = async (
 };
 
 /**
- * Bulk upload timesheet entries from file (CSV/Excel).
- * Resolves employeeCode to employeeId, then upserts timesheet per (employeeId, date).
+ * Helper to retry DB operations on connection failure.
  */
-// Helper to retry DB operations on connection failure
 async function withRetry<T>(
   operation: () => Promise<T>,
   retries = 3,
@@ -286,6 +252,10 @@ async function withRetry<T>(
   }
 }
 
+/**
+ * Bulk upload timesheet entries from file (CSV/Excel).
+ * Resolves employeeCode to employeeId, then upserts timesheet per (employeeId, date).
+ */
 export const bulkUploadTimesheets = async (
   data: BulkUploadTimesheetData
 ): Promise<BulkUploadTimesheetResult> => {
@@ -298,7 +268,7 @@ export const bulkUploadTimesheets = async (
     failed: 0,
     skipped: 0,
     details: [],
-    errors: [], // Keep for backward compatibility if needed, but details covers it
+    errors: [],
   };
 
   // Pre-fetch all employees by unique codes in one query
@@ -322,7 +292,6 @@ export const bulkUploadTimesheets = async (
     const rowNumber = i + 1;
 
     try {
-      // Verbose: Log every row start
       console.log(
         `Service: Processing row ${rowNumber}/${data.entries.length}: EmpCode ${row.employeeCode}, Date ${row.date}`
       );
@@ -345,7 +314,6 @@ export const bulkUploadTimesheets = async (
           status: "failed",
           message: `Employee with code ${row.employeeCode} not found`,
         });
-        // Also push to errors for compat
         result.errors.push({
           row: rowNumber,
           data: row,
@@ -363,7 +331,7 @@ export const bulkUploadTimesheets = async (
             employeeId: employee.id,
             date: {
               gte: dateNormalized,
-              lt: new Date(dateNormalized.getTime() + 24 * 60 * 60 * 1000),
+              lt: dayjs.utc(dateNormalized).add(1, "day").toDate(),
             },
           },
           select: { id: true },
@@ -406,8 +374,6 @@ export const bulkUploadTimesheets = async (
         totalHours: totalHours > 0 ? totalHours : null,
         description: row.description ?? null,
       };
-
-      // console.log(`Service: Row ${rowNumber}: Preparing payload`, payload);
 
       await withRetry(() =>
         prisma.timesheet.create({
@@ -475,10 +441,11 @@ export const getMonthlyTimesheetReportData = async (
     showFixedSalary,
   } = params;
 
-  // Calculate month boundaries (UTC)
-  const startDate = new Date(Date.UTC(year, month - 1, 1, 0, 0, 0));
-  const endDate = new Date(Date.UTC(year, month, 0, 23, 59, 59, 999));
-  const daysInMonth = endDate.getUTCDate();
+  // Calculate month boundaries (UTC) using dayjs
+  const monthStart = dayjs.utc(`${year}-${String(month).padStart(2, "0")}-01`);
+  const startDate = monthStart.startOf("month").toDate();
+  const endDate = monthStart.endOf("month").toDate();
+  const daysInMonth = monthStart.daysInMonth();
 
   // 1. Fetch Employees
   const employees = await prisma.employee.findMany({
@@ -517,15 +484,10 @@ export const getMonthlyTimesheetReportData = async (
   // 2. Fetch Timesheets for the month
   const timesheets = await prisma.timesheet.findMany({
     where: {
-      date: {
-        gte: startDate,
-        lte: endDate,
-      },
+      date: { gte: startDate, lte: endDate },
       ...(employeeId ? { employeeId } : {}),
       ...(projectId
-        ? {
-            OR: [{ project1Id: projectId }, { project2Id: projectId }],
-          }
+        ? { OR: [{ project1Id: projectId }, { project2Id: projectId }] }
         : {}),
     },
     include: {
@@ -534,10 +496,10 @@ export const getMonthlyTimesheetReportData = async (
     },
   });
 
-  // 3. Map timesheets by employee and date
+  // 3. Map timesheets by "employeeId-dayOfMonth" key
   const timesheetMap = new Map<string, (typeof timesheets)[0]>();
   timesheets.forEach((ts) => {
-    const key = `${ts.employeeId}-${ts.date.getUTCDate()}`;
+    const key = `${ts.employeeId}-${dayjs.utc(ts.date).date()}`;
     timesheetMap.set(key, ts);
   });
 
@@ -549,11 +511,11 @@ export const getMonthlyTimesheetReportData = async (
 
     for (let day = 1; day <= daysInMonth; day++) {
       const ts = timesheetMap.get(`${emp.id}-${day}`);
-      const dateString = new Date(Date.UTC(year, month - 1, day));
-      const isFriday = dateString.getUTCDay() === 5;
+      const dayInMonth = monthStart.date(day);
+      const isFriday = dayInMonth.day() === 5; // 5 = Friday
 
       const record: DailyTimesheetRecord = {
-        date: `${day.toString().padStart(2, "0")}-${dateString.toLocaleString("en-US", { month: "short" })}`,
+        date: dayInMonth.format("DD-MMM"),
         day,
         project1Id: ts?.project1Id ?? null,
         project1Name: ts?.project1?.nameEn ?? null,
@@ -573,14 +535,12 @@ export const getMonthlyTimesheetReportData = async (
             : null,
       };
 
-      // Always count all hours for totals, regardless of project filtering
       totalHours += record.project1Hours + record.project2Hours;
       totalOT += record.project1Overtime + record.project2Overtime;
 
       dailyRecords.push(record);
     }
 
-    // Optional: Filter out employees with no hours if showAbsents is false
     const grandTotal = totalHours + totalOT;
 
     return {
@@ -614,43 +574,17 @@ export const getMonthlyTimesheetReportData = async (
 export const getDailyTimesheetReportData = async (
   params: import("./timesheet.schemas").GetDailyTimesheetReportInput
 ): Promise<GetTimesheetPageDataResponse> => {
-  // Reuse logic from getTimesheetPageData but without pagination
   const {
     date,
     payrollSectionId,
     designationId,
     employeeCodes,
-    projectId, // Note: getTimesheetPageData doesn't fully support filtering by project *on employees* in the same way, but let's adapting.
+    projectId,
     showAbsents,
     showFixedSalary,
   } = params;
 
-  // We can actually reuse getTimesheetPageData if we allow passing huge limit
-  // But getTimesheetPageData doesn't support 'employeeCodes' or 'showAbsents' in the same way.
-  // It's cleaner to implement a dedicated function that returns rows.
-
-  const startOfDay = new Date(
-    Date.UTC(
-      date.getUTCFullYear(),
-      date.getUTCMonth(),
-      date.getUTCDate(),
-      0,
-      0,
-      0,
-      0
-    )
-  );
-  const endOfDay = new Date(
-    Date.UTC(
-      date.getUTCFullYear(),
-      date.getUTCMonth(),
-      date.getUTCDate(),
-      23,
-      59,
-      59,
-      999
-    )
-  );
+  const { startOfDay, endOfDay } = getDayRange(date);
 
   const employeeWhere: any = {};
 
@@ -695,13 +629,8 @@ export const getDailyTimesheetReportData = async (
 
   // Fetch timesheets
   const timesheetWhere: any = {
-    date: {
-      gte: startOfDay,
-      lte: endOfDay,
-    },
-    employeeId: {
-      in: employeeIds,
-    },
+    date: { gte: startOfDay, lte: endOfDay },
+    employeeId: { in: employeeIds },
   };
 
   if (projectId) {
@@ -721,29 +650,21 @@ export const getDailyTimesheetReportData = async (
   );
 
   // Build rows
-  let rows: any[] = [];
+  const rows: any[] = [];
 
   employees.forEach((emp, index) => {
     const ts = timesheetByEmployeeId.get(emp.id);
 
-    // If filtering by project, and this employee has no timesheet for that project,
-    // AND we are strictly filtering (which we are via timesheetWhere),
-    // then if ts is missing, it means they didn't work on that project.
-    // However, we fetched employees *separately*.
-    // If projectId is set, we strictly only want employees who worked on that project?
-    // Usually reports show everyone, but filtered by project means "show work done on project".
-
     if (projectId && !ts) {
-      // If searching by project, exclude employees who didn't work on it
+      // Exclude employees who didn't work on the filtered project
       return;
     }
 
     if (!showAbsents && !ts) {
-      // If NOT showing absents, exclude employees with no timesheet
+      // Exclude employees with no timesheet when absents are hidden
       return;
     }
 
-    // Calculate totals
     const p1H = ts?.project1Hours ?? 0;
     const p1OT = ts?.project1Overtime ?? 0;
     const p2H = ts?.project2Hours ?? 0;
@@ -762,8 +683,8 @@ export const getDailyTimesheetReportData = async (
       employeeCode: emp.employeeCode,
       nameEn: emp.nameEn,
       nameAr: emp.nameAr,
-      designationNameEn: emp.designation?.nameEn ?? "", // Keep consistent naming
-      designationName: emp.designation?.nameEn ?? "", // For report
+      designationNameEn: emp.designation?.nameEn ?? "",
+      designationName: emp.designation?.nameEn ?? "",
       sectionName: emp.payrollSection?.nameEn ?? "Unassigned",
       idCardNo: emp.idCardNo,
       isFixed: emp.isFixed,
@@ -776,14 +697,14 @@ export const getDailyTimesheetReportData = async (
       project2Name: ts?.project2?.nameEn ?? null,
       project2Hours: p2H,
       project2Overtime: p2OT,
-      totalHours: total, // Use calculated total
+      totalHours: total,
       description: ts?.description ?? null,
       remarks: ts?.description ?? null,
     });
   });
 
   return {
-    rows: rows as any, // Cast to any to fit or define a new type if needed
+    rows: rows as any,
     pagination: {
       page: 1,
       limit: rows.length,
