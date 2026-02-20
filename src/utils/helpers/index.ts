@@ -9,3 +9,4 @@ export * from "./file-upload-utils";
 export * from "./file-name-utils";
 export * from "./filter-utils";
 export * from "./date-utils";
+export * from "./number-utils";

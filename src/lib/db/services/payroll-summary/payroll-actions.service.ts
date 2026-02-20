@@ -23,8 +23,15 @@ const calculateAndSavePayroll = async (
   statusId: number,
   allowanceNotAvailableId?: number | null
 ) => {
+  console.log(
+    `[calculateAndSavePayroll] Starting — payrollId=${payrollId}, year=${payrollYear}, month=${payrollMonth}, statusId=${statusId}, allowanceNotAvailableId=${allowanceNotAvailableId ?? "none"}`
+  );
+
   // Common dates
   const { startDate, endDate } = getMonthDateRange(payrollYear, payrollMonth);
+  console.log(
+    `[calculateAndSavePayroll] Date range: ${startDate.toISOString()} → ${endDate.toISOString()}`
+  );
 
   // Previous Month
   let prevMonth = payrollMonth - 1;
@@ -35,6 +42,9 @@ const calculateAndSavePayroll = async (
   }
 
   // 1. Fetch Allowance Exclusion Rule
+  console.log(
+    `[calculateAndSavePayroll] Step 1: Fetching Allowance Exclusion Rule...`
+  );
   let exclusionData: {
     type: AllowanceType;
     startDate: Date;
@@ -48,8 +58,12 @@ const calculateAndSavePayroll = async (
       exclusionData = exclusion;
     }
   }
+  console.log(
+    `[calculateAndSavePayroll] Step 1 done: exclusionData=${exclusionData ? `type=${exclusionData.type}, ${exclusionData.startDate.toISOString()} → ${exclusionData.endDate.toISOString()}` : "none"}`
+  );
 
   // 2. Fetch Active Employees
+  console.log(`[calculateAndSavePayroll] Step 2: Fetching active employees...`);
   const employees = await prisma.employee.findMany({
     where: {
       statusId: 1, // Active Only as per user request
@@ -58,10 +72,16 @@ const calculateAndSavePayroll = async (
       designation: true,
     },
   });
+  console.log(
+    `[calculateAndSavePayroll] Step 2 done: Found ${employees.length} active employee(s).`
+  );
 
   const employeeIds = employees.map((e) => e.id);
 
   // 3. Fetch Timesheets (Strict Date Range)
+  console.log(
+    `[calculateAndSavePayroll] Step 3: Fetching timesheets for ${startDate.toISOString()} → ${endDate.toISOString()}...`
+  );
   const timesheets = await prisma.timesheet.findMany({
     where: {
       employeeId: { in: employeeIds },
@@ -71,8 +91,12 @@ const calculateAndSavePayroll = async (
       },
     },
   });
+  console.log(
+    `[calculateAndSavePayroll] Step 3 done: Found ${timesheets.length} timesheet record(s).`
+  );
 
   // 4. Fetch Loans (Strict Date Range)
+  console.log(`[calculateAndSavePayroll] Step 4: Fetching loans...`);
   const loans = await prisma.loan.findMany({
     where: {
       employeeId: { in: employeeIds },
@@ -82,8 +106,12 @@ const calculateAndSavePayroll = async (
       },
     },
   });
+  console.log(
+    `[calculateAndSavePayroll] Step 4 done: Found ${loans.length} loan record(s).`
+  );
 
   // 5. Fetch Traffic Challans (Strict Date Range)
+  console.log(`[calculateAndSavePayroll] Step 5: Fetching traffic challans...`);
   const trafficChallans = await prisma.trafficChallan.findMany({
     where: {
       employeeId: { in: employeeIds },
@@ -93,8 +121,14 @@ const calculateAndSavePayroll = async (
       },
     },
   });
+  console.log(
+    `[calculateAndSavePayroll] Step 5 done: Found ${trafficChallans.length} traffic challan record(s).`
+  );
 
   // 6. Fetch Previous Payroll Details (Closing Balances)
+  console.log(
+    `[calculateAndSavePayroll] Step 6: Fetching previous payroll details for ${prevMonth}/${prevYear}...`
+  );
   const previousPayrolls = await prisma.payrollDetails.findMany({
     where: {
       payrollMonth: prevMonth,
@@ -109,6 +143,9 @@ const calculateAndSavePayroll = async (
       challanDeduction: true,
     },
   });
+  console.log(
+    `[calculateAndSavePayroll] Step 6 done: Found ${previousPayrolls.length} previous payroll detail record(s).`
+  );
 
   const previousPayrollMap = new Map(
     previousPayrolls.map((p) => [
@@ -123,6 +160,9 @@ const calculateAndSavePayroll = async (
   );
 
   // 7. Calculate Details
+  console.log(
+    `[calculateAndSavePayroll] Step 7: Calculating payroll details for ${employees.length} employee(s)...`
+  );
   const payrollDetailsData = employees.map((emp) => {
     // A. Timesheet Aggregation
     const empTimesheets = timesheets.filter((t) => t.employeeId === emp.id);
@@ -185,6 +225,9 @@ const calculateAndSavePayroll = async (
     let workDays = 0;
     if (designationHours > 0) {
       workDays = totalHours / designationHours;
+      if (workDays > 30) {
+        workDays = 30;
+      }
     }
 
     // B. Other Allowances (Fixed)
@@ -265,7 +308,7 @@ const calculateAndSavePayroll = async (
       payrollMonth,
       payrollYear,
       employeeId: emp.id,
-      workDays: Number(workDays.toFixed(2)),
+      workDays: Math.round(Number(workDays)),
       totalHours: Number(totalHours.toFixed(2)),
       hourlyRate: Number(hourlyRate.toFixed(2)),
       breakfastAllowance: Number(totalBreakfastAllowance.toFixed(2)),
@@ -287,7 +330,6 @@ const calculateAndSavePayroll = async (
       remarks: "",
       payrollStatusId: statusId,
       branchId: emp.branchId,
-      payrollSectionId: emp.payrollSectionId,
       allowanceNotAvailableId: allowanceNotAvailableId || null,
     };
   });
@@ -330,20 +372,31 @@ const calculateAndSavePayroll = async (
   );
 
   // Save Details
+  console.log(
+    `[calculateAndSavePayroll] Step 8: Saving ${payrollDetailsData.length} PayrollDetail record(s)...`
+  );
   if (payrollDetailsData.length > 0) {
     await prisma.payrollDetails.createMany({
       data: payrollDetailsData,
     });
   }
+  console.log(`[calculateAndSavePayroll] Step 8 done: PayrollDetails saved.`);
 
   // Update Summary
-  return await prisma.payrollSummary.update({
+  console.log(
+    `[calculateAndSavePayroll] Step 9: Updating PayrollSummary (id=${payrollId})...`
+  );
+  const updatedSummary = await prisma.payrollSummary.update({
     where: { id: payrollId },
     data: {
       ...totals,
       payrollStatusId: statusId,
     },
   });
+  console.log(
+    `[calculateAndSavePayroll] Step 9 done: PayrollSummary updated. calculateAndSavePayroll finished.`
+  );
+  return updatedSummary;
 };
 
 /**
@@ -476,7 +529,14 @@ export const runPayroll = async ({
   payrollMonth,
   allowanceNotAvailableId,
 }: RunPayrollInput) => {
+  console.log(
+    `[runPayroll] Starting — year=${payrollYear}, month=${payrollMonth}, allowanceNotAvailableId=${allowanceNotAvailableId ?? "none"}`
+  );
+
   // 1. Check if there is any active payroll (Pending)
+  console.log(
+    `[runPayroll] Step 1: Checking for an active (Pending) payroll...`
+  );
   const activePayroll = await prisma.payrollSummary.findFirst({
     where: {
       payrollStatusId: 1, // Pending
@@ -484,12 +544,19 @@ export const runPayroll = async ({
   });
 
   if (activePayroll) {
+    console.log(
+      `[runPayroll] Step 1 failed: Active payroll found (id=${activePayroll.id}). Aborting.`
+    );
     throw new Error(
       "There is active payroll, you cannot run the payroll when there is an active payroll"
     );
   }
+  console.log(`[runPayroll] Step 1 passed: No active payroll found.`);
 
   // 2. Check if payroll already exists
+  console.log(
+    `[runPayroll] Step 2: Checking if payroll already exists for ${payrollMonth}/${payrollYear}...`
+  );
   const existingPayroll = await prisma.payrollSummary.findFirst({
     where: {
       payrollYear,
@@ -498,12 +565,17 @@ export const runPayroll = async ({
   });
 
   if (existingPayroll) {
+    console.log(
+      `[runPayroll] Step 2 failed: Payroll already exists (id=${existingPayroll.id}). Aborting.`
+    );
     throw new Error(
       `Payroll for the month of ${payrollMonth}/${payrollYear} has already been generated!`
     );
   }
+  console.log(`[runPayroll] Step 2 passed: No existing payroll found.`);
 
-  // 1. Create Empty Payroll Summary (Status 1: Pending)
+  // 3. Create Empty Payroll Summary (Status 1: Pending)
+  console.log(`[runPayroll] Step 3: Creating empty PayrollSummary record...`);
   const newPayroll = await prisma.payrollSummary.create({
     data: {
       payrollYear,
@@ -528,15 +600,23 @@ export const runPayroll = async ({
       totalCashSalary: 0,
     },
   });
+  console.log(
+    `[runPayroll] Step 3 done: PayrollSummary created with id=${newPayroll.id}.`
+  );
 
-  // 2. Calculate and Save
-  return await calculateAndSavePayroll(
+  // 4. Calculate and Save
+  console.log(`[runPayroll] Step 4: Calling calculateAndSavePayroll...`);
+  const result = await calculateAndSavePayroll(
     newPayroll.id,
     payrollYear,
     payrollMonth,
     1,
     allowanceNotAvailableId
   );
+  console.log(
+    `[runPayroll] Step 4 done: runPayroll completed successfully for payrollId=${newPayroll.id}.`
+  );
+  return result;
 };
 
 export const repostPayroll = async ({ id }: RepostPayrollInput) => {

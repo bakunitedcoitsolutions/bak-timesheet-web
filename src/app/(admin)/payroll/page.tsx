@@ -547,7 +547,7 @@ const PayrollPage = () => {
         payrollMonth: month,
         allowanceNotAvailableId: allowanceId,
       });
-      toastService.showSuccess("Success", "Payroll run successfully");
+      toastService.showSuccess("Success", "Payroll ran successfully");
       setIsRunPayrollDialogOpen(false);
     } catch (error: any) {
       toastService.showError(

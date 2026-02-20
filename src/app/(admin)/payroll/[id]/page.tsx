@@ -26,7 +26,11 @@ import { queryClient } from "@/lib/react-query";
 import { toastService } from "@/lib/toast";
 import { useDebounce } from "@/hooks";
 import GroupDropdown from "@/components/common/group-dropdown";
-import { parseGroupDropdownFilter, formatPayrollPeriod } from "@/utils/helpers";
+import {
+  parseGroupDropdownFilter,
+  formatPayrollPeriod,
+  formatNum,
+} from "@/utils/helpers";
 import { useGlobalData } from "@/context/GlobalDataContext";
 
 const tableCommonProps = {
@@ -215,8 +219,6 @@ const PayrollDetailPage = () => {
     );
   };
 
-  console.log("payrollData", payrollData);
-
   const columns = (): TableColumn<PayrollDetailEntry>[] => [
     {
       field: "empCode",
@@ -280,7 +282,7 @@ const PayrollDetailPage = () => {
       body: (rowData: PayrollDetailEntry) => (
         <div className="flex justify-center">
           <span className="text-[15px] font-semibold!">
-            {rowData.workDays.toLocaleString()}
+            {rowData.workDays.toString()}
           </span>
         </div>
       ),
@@ -292,7 +294,7 @@ const PayrollDetailPage = () => {
       body: (rowData: PayrollDetailEntry) => (
         <div className="flex justify-center">
           <span className="text-[15px] font-semibold!">
-            {rowData.overTime.toString()}
+            {formatNum(rowData.overTime).toString()}
           </span>
         </div>
       ),
@@ -304,7 +306,7 @@ const PayrollDetailPage = () => {
       body: (rowData: PayrollDetailEntry) => (
         <div className="flex justify-center">
           <span className="text-[15px] font-semibold!">
-            {rowData.totalHours.toString()}
+            {formatNum(rowData.totalHours).toString()}
           </span>
         </div>
       ),
@@ -316,7 +318,7 @@ const PayrollDetailPage = () => {
       body: (rowData: PayrollDetailEntry) => (
         <div className="flex justify-center">
           <span className="text-[15px] font-semibold!">
-            {rowData.hourlyRate.toString()}
+            {formatNum(rowData.hourlyRate).toString()}
           </span>
         </div>
       ),
@@ -328,7 +330,7 @@ const PayrollDetailPage = () => {
       body: (rowData: PayrollDetailEntry) => (
         <div className="flex justify-center">
           <span className="text-[15px] font-semibold!">
-            {rowData.breakfastAllowance.toString()}
+            {formatNum(rowData.breakfastAllowance).toString()}
           </span>
         </div>
       ),
@@ -340,7 +342,7 @@ const PayrollDetailPage = () => {
       body: (rowData: PayrollDetailEntry) => (
         <div className="flex justify-center">
           <span className="text-[15px] font-semibold!">
-            {rowData.otherAllowances.toString()}
+            {formatNum(rowData.otherAllowances).toString()}
           </span>
         </div>
       ),
@@ -352,9 +354,9 @@ const PayrollDetailPage = () => {
       body: (rowData: PayrollDetailEntry) => (
         <div className="flex justify-center">
           <span className="text-[15px] font-semibold!">
-            {(
+            {formatNum(
               (rowData.breakfastAllowance ?? 0) + (rowData.otherAllowances ?? 0)
-            ).toString()}
+            )}
           </span>
         </div>
       ),
@@ -366,7 +368,7 @@ const PayrollDetailPage = () => {
       body: (rowData: PayrollDetailEntry) => (
         <div className="flex justify-center">
           <span className="text-[15px] font-semibold!">
-            {rowData.totalSalary.toString()}
+            {formatNum(rowData.totalSalary).toString()}
           </span>
         </div>
       ),
@@ -378,7 +380,7 @@ const PayrollDetailPage = () => {
       body: (rowData: PayrollDetailEntry) => (
         <div className="flex justify-center">
           <span className="text-[15px] font-semibold!">
-            {rowData.previousAdvance.toString()}
+            {formatNum(rowData.previousAdvance).toString()}
           </span>
         </div>
       ),
@@ -390,7 +392,7 @@ const PayrollDetailPage = () => {
       body: (rowData: PayrollDetailEntry) => (
         <div className="flex justify-center">
           <span className="text-[15px] font-semibold!">
-            {rowData.currentAdvance.toString()}
+            {formatNum(rowData.currentAdvance).toString()}
           </span>
         </div>
       ),
@@ -422,7 +424,7 @@ const PayrollDetailPage = () => {
       body: (rowData: PayrollDetailEntry) => (
         <div className="flex justify-center">
           <span className="text-[15px] font-semibold! text-primary!">
-            {calculateNetLoan(rowData).toString()}
+            {formatNum(calculateNetLoan(rowData)).toString()}
           </span>
         </div>
       ),
@@ -434,7 +436,7 @@ const PayrollDetailPage = () => {
       body: (rowData: PayrollDetailEntry) => (
         <div className="flex justify-center">
           <span className="text-[15px] font-semibold!">
-            {rowData.previousChallan.toString()}
+            {formatNum(rowData.previousChallan).toString()}
           </span>
         </div>
       ),
@@ -446,7 +448,7 @@ const PayrollDetailPage = () => {
       body: (rowData: PayrollDetailEntry) => (
         <div className="flex justify-center">
           <span className="text-[15px] font-semibold!">
-            {rowData.currentChallan.toString()}
+            {formatNum(rowData.currentChallan).toString()}
           </span>
         </div>
       ),
@@ -478,7 +480,7 @@ const PayrollDetailPage = () => {
       body: (rowData: PayrollDetailEntry) => (
         <div className="flex justify-center">
           <span className="text-[15px] font-semibold! text-primary!">
-            {calculateNetTrafficChallan(rowData).toString()}
+            {formatNum(calculateNetTrafficChallan(rowData)).toString()}
           </span>
         </div>
       ),
@@ -490,7 +492,7 @@ const PayrollDetailPage = () => {
       body: (rowData: PayrollDetailEntry) => (
         <div className="flex justify-center">
           <span className="text-[15px] font-semibold! text-primary!">
-            {calculateNetSalaryPayable(rowData).toString()}
+            {formatNum(calculateNetSalaryPayable(rowData)).toString()}
           </span>
         </div>
       ),

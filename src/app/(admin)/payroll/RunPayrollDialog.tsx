@@ -9,7 +9,11 @@ import { useListAllowanceNotAvailable } from "@/lib/db/services/allowance-not-av
 interface RunPayrollDialogProps {
   visible: boolean;
   onHide: () => void;
-  onRun: (year: number, month: number, allowanceId?: number) => void;
+  onRun: (
+    year: number,
+    month: number,
+    allowanceId?: number
+  ) => Promise<void> | void;
 }
 
 export const RunPayrollDialog = ({
@@ -23,6 +27,7 @@ export const RunPayrollDialog = ({
   const [year, setYear] = useState<number>(currentYear);
   const [month, setMonth] = useState<number>(currentMonth);
   const [allowanceId, setAllowanceId] = useState<number | undefined>(undefined);
+  const [isRunning, setIsRunning] = useState(false);
 
   const { data: allowanceData, isLoading } = useListAllowanceNotAvailable({});
 
@@ -56,8 +61,13 @@ export const RunPayrollDialog = ({
     );
   }, [allowanceData]);
 
-  const handleRun = () => {
-    onRun(year, month, allowanceId);
+  const handleRun = async () => {
+    setIsRunning(true);
+    try {
+      await onRun(year, month, allowanceId);
+    } finally {
+      setIsRunning(false);
+    }
   };
 
   return (
@@ -76,9 +86,11 @@ export const RunPayrollDialog = ({
             className="p-button-text w-48"
           />
           <Button
-            label="Run"
-            icon="pi pi-check"
+            label={isRunning ? "Running..." : "Run"}
+            {...(!isRunning && { icon: "pi pi-check" })}
             onClick={handleRun}
+            loading={isRunning}
+            disabled={isRunning}
             autoFocus
             size="small"
             className="w-28!"
