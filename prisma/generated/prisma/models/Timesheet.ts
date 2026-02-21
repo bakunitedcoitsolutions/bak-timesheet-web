@@ -65,6 +65,8 @@ export type TimesheetMinAggregateOutputType = {
   createdAt: Date | null
   updatedAt: Date | null
   isLocked: boolean | null
+  isPosted: boolean | null
+  isManual: boolean | null
 }
 
 export type TimesheetMaxAggregateOutputType = {
@@ -82,6 +84,8 @@ export type TimesheetMaxAggregateOutputType = {
   createdAt: Date | null
   updatedAt: Date | null
   isLocked: boolean | null
+  isPosted: boolean | null
+  isManual: boolean | null
 }
 
 export type TimesheetCountAggregateOutputType = {
@@ -99,6 +103,8 @@ export type TimesheetCountAggregateOutputType = {
   createdAt: number
   updatedAt: number
   isLocked: number
+  isPosted: number
+  isManual: number
   _all: number
 }
 
@@ -142,6 +148,8 @@ export type TimesheetMinAggregateInputType = {
   createdAt?: true
   updatedAt?: true
   isLocked?: true
+  isPosted?: true
+  isManual?: true
 }
 
 export type TimesheetMaxAggregateInputType = {
@@ -159,6 +167,8 @@ export type TimesheetMaxAggregateInputType = {
   createdAt?: true
   updatedAt?: true
   isLocked?: true
+  isPosted?: true
+  isManual?: true
 }
 
 export type TimesheetCountAggregateInputType = {
@@ -176,6 +186,8 @@ export type TimesheetCountAggregateInputType = {
   createdAt?: true
   updatedAt?: true
   isLocked?: true
+  isPosted?: true
+  isManual?: true
   _all?: true
 }
 
@@ -280,6 +292,8 @@ export type TimesheetGroupByOutputType = {
   createdAt: Date
   updatedAt: Date
   isLocked: boolean
+  isPosted: boolean
+  isManual: boolean
   _count: TimesheetCountAggregateOutputType | null
   _avg: TimesheetAvgAggregateOutputType | null
   _sum: TimesheetSumAggregateOutputType | null
@@ -320,6 +334,8 @@ export type TimesheetWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Timesheet"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Timesheet"> | Date | string
   isLocked?: Prisma.BoolFilter<"Timesheet"> | boolean
+  isPosted?: Prisma.BoolFilter<"Timesheet"> | boolean
+  isManual?: Prisma.BoolFilter<"Timesheet"> | boolean
   employee?: Prisma.XOR<Prisma.EmployeeScalarRelationFilter, Prisma.EmployeeWhereInput>
   project1?: Prisma.XOR<Prisma.ProjectNullableScalarRelationFilter, Prisma.ProjectWhereInput> | null
   project2?: Prisma.XOR<Prisma.ProjectNullableScalarRelationFilter, Prisma.ProjectWhereInput> | null
@@ -340,6 +356,8 @@ export type TimesheetOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   isLocked?: Prisma.SortOrder
+  isPosted?: Prisma.SortOrder
+  isManual?: Prisma.SortOrder
   employee?: Prisma.EmployeeOrderByWithRelationInput
   project1?: Prisma.ProjectOrderByWithRelationInput
   project2?: Prisma.ProjectOrderByWithRelationInput
@@ -363,6 +381,8 @@ export type TimesheetWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"Timesheet"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Timesheet"> | Date | string
   isLocked?: Prisma.BoolFilter<"Timesheet"> | boolean
+  isPosted?: Prisma.BoolFilter<"Timesheet"> | boolean
+  isManual?: Prisma.BoolFilter<"Timesheet"> | boolean
   employee?: Prisma.XOR<Prisma.EmployeeScalarRelationFilter, Prisma.EmployeeWhereInput>
   project1?: Prisma.XOR<Prisma.ProjectNullableScalarRelationFilter, Prisma.ProjectWhereInput> | null
   project2?: Prisma.XOR<Prisma.ProjectNullableScalarRelationFilter, Prisma.ProjectWhereInput> | null
@@ -383,6 +403,8 @@ export type TimesheetOrderByWithAggregationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   isLocked?: Prisma.SortOrder
+  isPosted?: Prisma.SortOrder
+  isManual?: Prisma.SortOrder
   _count?: Prisma.TimesheetCountOrderByAggregateInput
   _avg?: Prisma.TimesheetAvgOrderByAggregateInput
   _max?: Prisma.TimesheetMaxOrderByAggregateInput
@@ -408,6 +430,8 @@ export type TimesheetScalarWhereWithAggregatesInput = {
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Timesheet"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Timesheet"> | Date | string
   isLocked?: Prisma.BoolWithAggregatesFilter<"Timesheet"> | boolean
+  isPosted?: Prisma.BoolWithAggregatesFilter<"Timesheet"> | boolean
+  isManual?: Prisma.BoolWithAggregatesFilter<"Timesheet"> | boolean
 }
 
 export type TimesheetCreateInput = {
@@ -421,6 +445,8 @@ export type TimesheetCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   isLocked?: boolean
+  isPosted?: boolean
+  isManual?: boolean
   employee: Prisma.EmployeeCreateNestedOneWithoutTimesheetsInput
   project1?: Prisma.ProjectCreateNestedOneWithoutTimesheetsAsProject1Input
   project2?: Prisma.ProjectCreateNestedOneWithoutTimesheetsAsProject2Input
@@ -441,6 +467,8 @@ export type TimesheetUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   isLocked?: boolean
+  isPosted?: boolean
+  isManual?: boolean
 }
 
 export type TimesheetUpdateInput = {
@@ -454,6 +482,8 @@ export type TimesheetUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPosted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isManual?: Prisma.BoolFieldUpdateOperationsInput | boolean
   employee?: Prisma.EmployeeUpdateOneRequiredWithoutTimesheetsNestedInput
   project1?: Prisma.ProjectUpdateOneWithoutTimesheetsAsProject1NestedInput
   project2?: Prisma.ProjectUpdateOneWithoutTimesheetsAsProject2NestedInput
@@ -474,6 +504,8 @@ export type TimesheetUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPosted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isManual?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type TimesheetCreateManyInput = {
@@ -491,6 +523,8 @@ export type TimesheetCreateManyInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   isLocked?: boolean
+  isPosted?: boolean
+  isManual?: boolean
 }
 
 export type TimesheetUpdateManyMutationInput = {
@@ -504,6 +538,8 @@ export type TimesheetUpdateManyMutationInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPosted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isManual?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type TimesheetUncheckedUpdateManyInput = {
@@ -521,6 +557,8 @@ export type TimesheetUncheckedUpdateManyInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPosted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isManual?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type TimesheetListRelationFilter = {
@@ -548,6 +586,8 @@ export type TimesheetCountOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   isLocked?: Prisma.SortOrder
+  isPosted?: Prisma.SortOrder
+  isManual?: Prisma.SortOrder
 }
 
 export type TimesheetAvgOrderByAggregateInput = {
@@ -577,6 +617,8 @@ export type TimesheetMaxOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   isLocked?: Prisma.SortOrder
+  isPosted?: Prisma.SortOrder
+  isManual?: Prisma.SortOrder
 }
 
 export type TimesheetMinOrderByAggregateInput = {
@@ -594,6 +636,8 @@ export type TimesheetMinOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   isLocked?: Prisma.SortOrder
+  isPosted?: Prisma.SortOrder
+  isManual?: Prisma.SortOrder
 }
 
 export type TimesheetSumOrderByAggregateInput = {
@@ -745,6 +789,8 @@ export type TimesheetCreateWithoutEmployeeInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   isLocked?: boolean
+  isPosted?: boolean
+  isManual?: boolean
   project1?: Prisma.ProjectCreateNestedOneWithoutTimesheetsAsProject1Input
   project2?: Prisma.ProjectCreateNestedOneWithoutTimesheetsAsProject2Input
 }
@@ -763,6 +809,8 @@ export type TimesheetUncheckedCreateWithoutEmployeeInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   isLocked?: boolean
+  isPosted?: boolean
+  isManual?: boolean
 }
 
 export type TimesheetCreateOrConnectWithoutEmployeeInput = {
@@ -809,6 +857,8 @@ export type TimesheetScalarWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Timesheet"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Timesheet"> | Date | string
   isLocked?: Prisma.BoolFilter<"Timesheet"> | boolean
+  isPosted?: Prisma.BoolFilter<"Timesheet"> | boolean
+  isManual?: Prisma.BoolFilter<"Timesheet"> | boolean
 }
 
 export type TimesheetCreateWithoutProject1Input = {
@@ -822,6 +872,8 @@ export type TimesheetCreateWithoutProject1Input = {
   createdAt?: Date | string
   updatedAt?: Date | string
   isLocked?: boolean
+  isPosted?: boolean
+  isManual?: boolean
   employee: Prisma.EmployeeCreateNestedOneWithoutTimesheetsInput
   project2?: Prisma.ProjectCreateNestedOneWithoutTimesheetsAsProject2Input
 }
@@ -840,6 +892,8 @@ export type TimesheetUncheckedCreateWithoutProject1Input = {
   createdAt?: Date | string
   updatedAt?: Date | string
   isLocked?: boolean
+  isPosted?: boolean
+  isManual?: boolean
 }
 
 export type TimesheetCreateOrConnectWithoutProject1Input = {
@@ -863,6 +917,8 @@ export type TimesheetCreateWithoutProject2Input = {
   createdAt?: Date | string
   updatedAt?: Date | string
   isLocked?: boolean
+  isPosted?: boolean
+  isManual?: boolean
   employee: Prisma.EmployeeCreateNestedOneWithoutTimesheetsInput
   project1?: Prisma.ProjectCreateNestedOneWithoutTimesheetsAsProject1Input
 }
@@ -881,6 +937,8 @@ export type TimesheetUncheckedCreateWithoutProject2Input = {
   createdAt?: Date | string
   updatedAt?: Date | string
   isLocked?: boolean
+  isPosted?: boolean
+  isManual?: boolean
 }
 
 export type TimesheetCreateOrConnectWithoutProject2Input = {
@@ -939,6 +997,8 @@ export type TimesheetCreateManyEmployeeInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   isLocked?: boolean
+  isPosted?: boolean
+  isManual?: boolean
 }
 
 export type TimesheetUpdateWithoutEmployeeInput = {
@@ -952,6 +1012,8 @@ export type TimesheetUpdateWithoutEmployeeInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPosted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isManual?: Prisma.BoolFieldUpdateOperationsInput | boolean
   project1?: Prisma.ProjectUpdateOneWithoutTimesheetsAsProject1NestedInput
   project2?: Prisma.ProjectUpdateOneWithoutTimesheetsAsProject2NestedInput
 }
@@ -970,6 +1032,8 @@ export type TimesheetUncheckedUpdateWithoutEmployeeInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPosted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isManual?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type TimesheetUncheckedUpdateManyWithoutEmployeeInput = {
@@ -986,6 +1050,8 @@ export type TimesheetUncheckedUpdateManyWithoutEmployeeInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPosted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isManual?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type TimesheetCreateManyProject1Input = {
@@ -1002,6 +1068,8 @@ export type TimesheetCreateManyProject1Input = {
   createdAt?: Date | string
   updatedAt?: Date | string
   isLocked?: boolean
+  isPosted?: boolean
+  isManual?: boolean
 }
 
 export type TimesheetCreateManyProject2Input = {
@@ -1018,6 +1086,8 @@ export type TimesheetCreateManyProject2Input = {
   createdAt?: Date | string
   updatedAt?: Date | string
   isLocked?: boolean
+  isPosted?: boolean
+  isManual?: boolean
 }
 
 export type TimesheetUpdateWithoutProject1Input = {
@@ -1031,6 +1101,8 @@ export type TimesheetUpdateWithoutProject1Input = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPosted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isManual?: Prisma.BoolFieldUpdateOperationsInput | boolean
   employee?: Prisma.EmployeeUpdateOneRequiredWithoutTimesheetsNestedInput
   project2?: Prisma.ProjectUpdateOneWithoutTimesheetsAsProject2NestedInput
 }
@@ -1049,6 +1121,8 @@ export type TimesheetUncheckedUpdateWithoutProject1Input = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPosted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isManual?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type TimesheetUncheckedUpdateManyWithoutProject1Input = {
@@ -1065,6 +1139,8 @@ export type TimesheetUncheckedUpdateManyWithoutProject1Input = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPosted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isManual?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type TimesheetUpdateWithoutProject2Input = {
@@ -1078,6 +1154,8 @@ export type TimesheetUpdateWithoutProject2Input = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPosted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isManual?: Prisma.BoolFieldUpdateOperationsInput | boolean
   employee?: Prisma.EmployeeUpdateOneRequiredWithoutTimesheetsNestedInput
   project1?: Prisma.ProjectUpdateOneWithoutTimesheetsAsProject1NestedInput
 }
@@ -1096,6 +1174,8 @@ export type TimesheetUncheckedUpdateWithoutProject2Input = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPosted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isManual?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type TimesheetUncheckedUpdateManyWithoutProject2Input = {
@@ -1112,6 +1192,8 @@ export type TimesheetUncheckedUpdateManyWithoutProject2Input = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPosted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isManual?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 
@@ -1131,6 +1213,8 @@ export type TimesheetSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   createdAt?: boolean
   updatedAt?: boolean
   isLocked?: boolean
+  isPosted?: boolean
+  isManual?: boolean
   employee?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
   project1?: boolean | Prisma.Timesheet$project1Args<ExtArgs>
   project2?: boolean | Prisma.Timesheet$project2Args<ExtArgs>
@@ -1151,6 +1235,8 @@ export type TimesheetSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   createdAt?: boolean
   updatedAt?: boolean
   isLocked?: boolean
+  isPosted?: boolean
+  isManual?: boolean
   employee?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
   project1?: boolean | Prisma.Timesheet$project1Args<ExtArgs>
   project2?: boolean | Prisma.Timesheet$project2Args<ExtArgs>
@@ -1171,6 +1257,8 @@ export type TimesheetSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
   createdAt?: boolean
   updatedAt?: boolean
   isLocked?: boolean
+  isPosted?: boolean
+  isManual?: boolean
   employee?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
   project1?: boolean | Prisma.Timesheet$project1Args<ExtArgs>
   project2?: boolean | Prisma.Timesheet$project2Args<ExtArgs>
@@ -1191,9 +1279,11 @@ export type TimesheetSelectScalar = {
   createdAt?: boolean
   updatedAt?: boolean
   isLocked?: boolean
+  isPosted?: boolean
+  isManual?: boolean
 }
 
-export type TimesheetOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "employeeId" | "date" | "project1Id" | "project1Hours" | "project1Overtime" | "project2Id" | "project2Hours" | "project2Overtime" | "totalHours" | "description" | "createdAt" | "updatedAt" | "isLocked", ExtArgs["result"]["timesheet"]>
+export type TimesheetOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "employeeId" | "date" | "project1Id" | "project1Hours" | "project1Overtime" | "project2Id" | "project2Hours" | "project2Overtime" | "totalHours" | "description" | "createdAt" | "updatedAt" | "isLocked" | "isPosted" | "isManual", ExtArgs["result"]["timesheet"]>
 export type TimesheetInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   employee?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
   project1?: boolean | Prisma.Timesheet$project1Args<ExtArgs>
@@ -1232,6 +1322,8 @@ export type $TimesheetPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     createdAt: Date
     updatedAt: Date
     isLocked: boolean
+    isPosted: boolean
+    isManual: boolean
   }, ExtArgs["result"]["timesheet"]>
   composites: {}
 }
@@ -1672,6 +1764,8 @@ export interface TimesheetFieldRefs {
   readonly createdAt: Prisma.FieldRef<"Timesheet", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Timesheet", 'DateTime'>
   readonly isLocked: Prisma.FieldRef<"Timesheet", 'Boolean'>
+  readonly isPosted: Prisma.FieldRef<"Timesheet", 'Boolean'>
+  readonly isManual: Prisma.FieldRef<"Timesheet", 'Boolean'>
 }
     
 

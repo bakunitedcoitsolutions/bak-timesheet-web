@@ -44,10 +44,9 @@ export const bulkUploadTimesheetsAction = serverAction
         firstEntry: input.entries[0], // Log first entry for structure verification
       });
       const response = await bulkUploadTimesheets(input);
-      console.log("bulkUploadTimesheetsAction response", response);
       return response;
     } catch (error) {
-      console.error("bulkUploadTimesheetsAction error", error);
+      console.log("bulkUploadTimesheetsAction error", error);
       throw error;
     }
   });

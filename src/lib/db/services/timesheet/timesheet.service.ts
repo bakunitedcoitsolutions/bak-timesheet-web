@@ -40,6 +40,44 @@ function getDayRange(date: Date): { startOfDay: Date; endOfDay: Date } {
   };
 }
 
+type TimesheetRow = {
+  project1Id?: number | null;
+  project1Hours?: number | null;
+  project1Overtime?: number | null;
+  project2Id?: number | null;
+  project2Hours?: number | null;
+  project2Overtime?: number | null;
+  description?: string | null;
+};
+
+/**
+ * Build a Prisma-ready timesheet data payload from a row of hours data.
+ * Calculates totalHours from the four hour fields and clamps to null when zero.
+ */
+function buildTimesheetPayload(row: TimesheetRow) {
+  const p1H = row.project1Hours ?? 0;
+  const p1OT = row.project1Overtime ?? 0;
+  const p2H = row.project2Hours ?? 0;
+  const p2OT = row.project2Overtime ?? 0;
+  const totalHours =
+    (typeof p1H === "number" ? p1H : 0) +
+    (typeof p1OT === "number" ? p1OT : 0) +
+    (typeof p2H === "number" ? p2H : 0) +
+    (typeof p2OT === "number" ? p2OT : 0);
+
+  return {
+    isLocked: true,
+    project1Id: row.project1Id ?? null,
+    project1Hours: p1H,
+    project1Overtime: p1OT,
+    project2Id: row.project2Id ?? null,
+    project2Hours: p2H,
+    project2Overtime: p2OT,
+    totalHours: totalHours > 0 ? totalHours : null,
+    description: row.description ?? null,
+  };
+}
+
 /**
  * Get timesheet page data: employees (optionally filtered by payrollSectionId or designationId) merged with
  * timesheet records for the selected date. One row per employee; timesheet fields
@@ -322,7 +360,7 @@ export const bulkUploadTimesheets = async (
         continue;
       }
       console.log(
-        `Service: Row ${rowNumber}: Employee found: ID ${employee.id}`
+        `Service: Row ${rowNumber}: DateNormalized ${dateNormalized}, Employee found: ID ${employee.id} for ${row.employeeCode}`
       );
 
       const existing = await withRetry(() =>
@@ -334,46 +372,61 @@ export const bulkUploadTimesheets = async (
               lt: dayjs.utc(dateNormalized).add(1, "day").toDate(),
             },
           },
-          select: { id: true },
+          select: {
+            id: true,
+            project1Hours: true,
+            project1Overtime: true,
+            project2Hours: true,
+            project2Overtime: true,
+          },
         })
       );
 
       if (existing) {
-        console.log(
-          `Service: Row ${rowNumber}: Skipped - Timesheet already exists (ID: ${existing.id})`
+        const hasHours =
+          (existing.project1Hours ?? 0) > 0 ||
+          (existing.project1Overtime ?? 0) > 0 ||
+          (existing.project2Hours ?? 0) > 0 ||
+          (existing.project2Overtime ?? 0) > 0;
+
+        if (hasHours) {
+          console.log(
+            `Service: Row ${rowNumber}: Skipped - Timesheet already exists with hours (ID: ${existing.id})`
+          );
+          result.skipped++;
+          result.details.push({
+            row: rowNumber,
+            employeeCode: row.employeeCode,
+            date: dateNormalized,
+            status: "skipped",
+            message: "Timesheet already exists with hours",
+          });
+          continue;
+        }
+
+        // Existing record has no hours — overwrite it
+        const payload = buildTimesheetPayload(row);
+        await withRetry(() =>
+          prisma.timesheet.update({
+            where: { id: existing.id },
+            data: payload,
+          })
         );
-        result.skipped++;
+        console.log(
+          `Service: Row ${rowNumber}: Updated existing empty timesheet (ID: ${existing.id}).`
+        );
+        result.success++;
         result.details.push({
           row: rowNumber,
           employeeCode: row.employeeCode,
           date: dateNormalized,
-          status: "skipped",
-          message: "Timesheet already exists",
+          status: "success",
+          message: "Updated existing empty timesheet",
         });
         continue;
       }
 
-      const p1H = row.project1Hours ?? 0;
-      const p1OT = row.project1Overtime ?? 0;
-      const p2H = row.project2Hours ?? 0;
-      const p2OT = row.project2Overtime ?? 0;
-      const totalHours =
-        (typeof p1H === "number" ? p1H : 0) +
-        (typeof p1OT === "number" ? p1OT : 0) +
-        (typeof p2H === "number" ? p2H : 0) +
-        (typeof p2OT === "number" ? p2OT : 0);
-
-      const payload = {
-        isLocked: true,
-        project1Id: row.project1Id ?? null,
-        project1Hours: p1H,
-        project1Overtime: p1OT,
-        project2Id: row.project2Id ?? null,
-        project2Hours: p2H,
-        project2Overtime: p2OT,
-        totalHours: totalHours > 0 ? totalHours : null,
-        description: row.description ?? null,
-      };
+      const payload = buildTimesheetPayload(row);
 
       await withRetry(() =>
         prisma.timesheet.create({

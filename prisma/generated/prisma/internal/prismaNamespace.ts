@@ -2292,7 +2292,9 @@ export const TimesheetScalarFieldEnum = {
   description: 'description',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  isLocked: 'isLocked'
+  isLocked: 'isLocked',
+  isPosted: 'isPosted',
+  isManual: 'isManual'
 } as const
 
 export type TimesheetScalarFieldEnum = (typeof TimesheetScalarFieldEnum)[keyof typeof TimesheetScalarFieldEnum]
