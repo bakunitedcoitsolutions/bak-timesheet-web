@@ -227,6 +227,7 @@ export const saveTimesheetEntries = async (
         for (const entry of batch) {
           const data = {
             isLocked: true,
+            isManual: true,
             project1Id: entry.project1Id,
             project1Hours: entry.project1Hours,
             project1Overtime: entry.project1Overtime,
