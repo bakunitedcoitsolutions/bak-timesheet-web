@@ -21,6 +21,7 @@ import {
   useGetPayrollDetails,
   useGetPayrollDate,
   useSavePayrollDetailsBatch,
+  useRefreshPayrollDetailRow,
 } from "@/lib/db/services/payroll-summary";
 import { queryClient } from "@/lib/react-query";
 import { toastService } from "@/lib/toast";
@@ -86,10 +87,13 @@ const PayrollDetailPage = () => {
   }, [data]);
 
   const { mutateAsync: savePayrollDetails } = useSavePayrollDetailsBatch();
+  const { mutateAsync: refreshDetailRow } = useRefreshPayrollDetailRow();
   const [isSaving, setIsSaving] = useState(false);
+  const [isRefreshing, setIsRefreshing] = useState(false);
 
   const saveSingleRow = async (row: PayrollDetailEntry) => {
     try {
+      setIsSaving(true);
       const entry = {
         id: row.id,
         loanDeduction: row.loanDeduction,
@@ -104,16 +108,36 @@ const PayrollDetailPage = () => {
         payrollStatusId: row.payrollStatusId,
       };
 
-      const result = await savePayrollDetails({ entries: [entry] });
+      await savePayrollDetails({ entries: [entry] });
       toastService.showSuccess(
         "Saved",
-        `Row saved successfully for ${row.name}`
+        `Row saved successfully for ${row.empCode} - ${row.name}`
       );
     } catch (error: any) {
       toastService.showError(
         "Error",
         error.message || "Failed to save payroll details"
       );
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
+  const refreshSingleRow = async (row: PayrollDetailEntry) => {
+    try {
+      setIsRefreshing(true);
+      await refreshDetailRow({ payrollDetailId: row.id });
+      toastService.showSuccess(
+        "Refreshed",
+        `Row refreshed successfully for ${row.empCode} - ${row.name}`
+      );
+    } catch (error: any) {
+      toastService.showError(
+        "Error",
+        error.message || "Failed to refresh payroll details"
+      );
+    } finally {
+      setIsRefreshing(false);
     }
   };
 
@@ -621,17 +645,46 @@ const PayrollDetailPage = () => {
       filterable: false,
       style: { minWidth: 80, width: 80, textAlign: "center" },
       body: (rowData: PayrollDetailEntry) => (
-        <div className="flex justify-center">
+        <div className="flex justify-center gap-2">
           <Button
             rounded
             size="small"
             variant="text"
-            icon="pi pi-save text-lg!"
+            {...(isSaving
+              ? { loading: true }
+              : {
+                  icon: "pi pi-save text-lg!",
+                })}
             tooltipOptions={{ position: "top" }}
             onClick={() => saveSingleRow(rowData)}
-            disabled={rowData.isLocked || isSaving}
+            disabled={
+              rowData.isLocked ||
+              isSaving ||
+              isRefreshing ||
+              rowData.payrollSummaryStatusId === 3
+            }
             className="w-8 h-8!"
             tooltip="Save Row"
+          />
+          <Button
+            rounded
+            size="small"
+            variant="text"
+            tooltipOptions={{ position: "top" }}
+            {...(isRefreshing
+              ? { loading: true }
+              : {
+                  icon: "pi pi-refresh text-lg!",
+                })}
+            onClick={() => refreshSingleRow(rowData)}
+            disabled={
+              rowData.isLocked ||
+              isSaving ||
+              isRefreshing ||
+              rowData.payrollSummaryStatusId === 3
+            }
+            className="w-8 h-8!"
+            tooltip="Refresh"
           />
         </div>
       ),

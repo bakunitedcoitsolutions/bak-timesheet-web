@@ -89,3 +89,11 @@ export const SavePayrollDetailsBatchSchema = z.object({
 export type SavePayrollDetailsBatchInput = z.infer<
   typeof SavePayrollDetailsBatchSchema
 >;
+
+export const RefreshPayrollDetailRowSchema = z.object({
+  payrollDetailId: z.number().int().positive(),
+});
+
+export type RefreshPayrollDetailRowInput = z.infer<
+  typeof RefreshPayrollDetailRowSchema
+>;

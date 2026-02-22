@@ -11,6 +11,18 @@ import {
   recalculatePayrollSummaryAction,
 } from "./actions";
 
+// Manually defining input type since schema is defined inside actions.ts for now
+import {
+  getPayrollDetailsAction,
+  getPayrollDateAction,
+  savePayrollDetailsBatchAction,
+  refreshPayrollDetailRowAction,
+} from "./actions";
+import {
+  GetPayrollDetailsInput,
+  GetPayrollDateInput,
+} from "./payroll-summary.schemas";
+
 export const useUpdateMonthlyPayrollValues = () =>
   useMutation(updateMonthlyPayrollValuesAction, {
     mutationKey: ["update-monthly-payroll-values"],
@@ -70,17 +82,6 @@ export const useGetPayrollSummaries = (
     input,
   });
 
-// Manually defining input type since schema is defined inside actions.ts for now
-import {
-  getPayrollDetailsAction,
-  getPayrollDateAction,
-  savePayrollDetailsBatchAction,
-} from "./actions";
-import {
-  GetPayrollDetailsInput,
-  GetPayrollDateInput,
-} from "./payroll-summary.schemas";
-
 export const useGetPayrollDetails = (input: GetPayrollDetailsInput) =>
   useQuery(getPayrollDetailsAction, {
     queryKey: ["payroll-details", input],
@@ -100,3 +101,17 @@ export const useSavePayrollDetailsBatch = () =>
   useMutation(savePayrollDetailsBatchAction, {
     mutationKey: ["save-payroll-details-batch"],
   });
+
+export const useRefreshPayrollDetailRow = () => {
+  const { mutateAsync, isPending } = useMutation(
+    refreshPayrollDetailRowAction,
+    {
+      mutationKey: ["refresh-payroll-detail-row"],
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ["payroll-details"] });
+        queryClient.invalidateQueries({ queryKey: ["payroll-summaries"] });
+      },
+    }
+  );
+  return { mutateAsync, isPending };
+};
