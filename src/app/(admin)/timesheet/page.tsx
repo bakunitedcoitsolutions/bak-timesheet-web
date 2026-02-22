@@ -211,6 +211,10 @@ const TimesheetPage = () => {
     [saveTimesheetEntries, selectedDate]
   );
 
+  const isLocked = (rowData: TimesheetPageRow) => {
+    return rowData.isLocked || rowData.isPosted;
+  };
+
   const columns = useMemo(
     (): TableColumn<TimesheetPageRow>[] => [
       {
@@ -222,12 +226,12 @@ const TimesheetPage = () => {
         body: (rowData: TimesheetPageRow) => (
           <div
             className={classNames("flex items-center justify-center gap-1.5", {
-              "w-[40px]": rowData.isLocked,
-              "w-[35px]": !rowData.isLocked,
+              "w-[40px]": isLocked(rowData),
+              "w-[35px]": !isLocked(rowData),
             })}
           >
             <span className="text-sm font-medium">{rowData.rowNumber}</span>
-            {rowData.isLocked && (
+            {isLocked(rowData) && (
               <i className="pi pi-lock text-sm! text-primary"></i>
             )}
           </div>
@@ -287,7 +291,7 @@ const TimesheetPage = () => {
                 small
                 filter
                 options={projectOptions}
-                disabled={rowData.isLocked}
+                disabled={isLocked(rowData)}
                 className="w-full h-10!"
                 placeholder="Select Project"
                 value={
@@ -315,7 +319,7 @@ const TimesheetPage = () => {
           <div className="flex justify-center py-1">
             <NumberInput
               useGrouping={false}
-              disabled={rowData.isLocked}
+              disabled={isLocked(rowData)}
               value={rowData.project1Hours ?? 0}
               onValueChange={(e) =>
                 updateTimesheetEntry(
@@ -341,7 +345,7 @@ const TimesheetPage = () => {
           <div className="flex justify-center">
             <NumberInput
               useGrouping={false}
-              disabled={rowData.isLocked}
+              disabled={isLocked(rowData)}
               value={rowData.project1Overtime ?? 0}
               onValueChange={(e) =>
                 updateTimesheetEntry(
@@ -370,7 +374,7 @@ const TimesheetPage = () => {
                 small
                 filter
                 options={projectOptions}
-                disabled={rowData.isLocked}
+                disabled={isLocked(rowData)}
                 className="w-full h-10!"
                 placeholder="Select Project"
                 value={
@@ -398,7 +402,7 @@ const TimesheetPage = () => {
           <div className="flex justify-center">
             <NumberInput
               useGrouping={false}
-              disabled={rowData.isLocked}
+              disabled={isLocked(rowData)}
               value={rowData.project2Hours ?? 0}
               onValueChange={(e) =>
                 updateTimesheetEntry(
@@ -424,7 +428,7 @@ const TimesheetPage = () => {
           <div className="flex justify-center">
             <NumberInput
               useGrouping={false}
-              disabled={rowData.isLocked}
+              disabled={isLocked(rowData)}
               value={rowData.project2Overtime ?? 0}
               onValueChange={(e) =>
                 updateTimesheetEntry(
@@ -460,7 +464,7 @@ const TimesheetPage = () => {
         style: { minWidth: "300px" },
         body: (rowData: TimesheetPageRow) => (
           <Input
-            disabled={rowData.isLocked}
+            disabled={isLocked(rowData)}
             placeholder="Add remarks..."
             value={rowData.description ?? ""}
             onChange={(e) =>
@@ -491,7 +495,7 @@ const TimesheetPage = () => {
               icon="pi pi-save text-lg!"
               tooltipOptions={{ position: "top" }}
               onClick={() => saveSingleRow(rowData)}
-              disabled={rowData.isLocked || isLoadingTimesheet}
+              disabled={isLocked(rowData) || isLoadingTimesheet}
             />
           </div>
         ),
