@@ -493,9 +493,9 @@ export const updateMonthlyPayrollValues = async (
     totalSalary,
     totalBreakfastAllowance,
     totalOtherAllowances,
-    totalPreviousLoan, // Corrected field
-    totalCurrentLoan, // Corrected field
-    totalLoanDeduction, // Corrected field
+    totalPreviousLoan,
+    totalCurrentLoan,
+    totalLoanDeduction,
     totalNetLoan,
     totalPreviousChallan,
     totalCurrentChallan,

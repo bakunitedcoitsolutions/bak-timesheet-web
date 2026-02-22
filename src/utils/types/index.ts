@@ -1,6 +1,8 @@
 export interface PayrollEntry {
   id: number;
   period: string; // "JAN 2025" format
+  month: number; // 1-12
+  year: number;
   salary: number;
   breakfastAllowance: number;
   otherAllowances: number;

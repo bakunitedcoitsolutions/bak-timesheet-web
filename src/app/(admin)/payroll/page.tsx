@@ -40,12 +40,18 @@ const commonColumnProps = {
   showClearButton: false,
 };
 
+const CUTOFF_YEAR = 2026;
+const CUTOFF_MONTH = 2; // February
+
+const isBeforeCutoff = (year: number, month: number) =>
+  year < CUTOFF_YEAR || (year === CUTOFF_YEAR && month < CUTOFF_MONTH);
+
 interface PayrollActionsProps {
   payroll: PayrollEntry;
   onView: (payroll: PayrollEntry) => void;
   onRecalculate: (payroll: PayrollEntry) => void;
   onPost: (payroll: PayrollEntry) => void;
-  onRepost: (payroll: PayrollEntry) => void;
+  onRepost: (payroll: PayrollEntry, isRerun: boolean) => void;
 }
 
 const PayrollActions = ({
@@ -98,12 +104,31 @@ const PayrollActions = ({
               </div>
             ),
           },
+          {
+            label: "Rerun",
+            icon: "pi pi-replay",
+            command: () => onRepost(payroll, true),
+            template: (item: MenuItem, options: MenuItemOptions) => (
+              <div
+                onClick={(e) => options.onClick(e)}
+                className={classNames(
+                  options.className,
+                  "w-full flex h-12 p-2 pl-4 cursor-pointer rounded-t-2xl rounded-b-2xl"
+                )}
+              >
+                <span
+                  className={classNames(item.icon, "mr-2 text-[#FFA617]!")}
+                ></span>
+                <p className="font-medium text-sm">{item.label}</p>
+              </div>
+            ),
+          },
         ]
       : [
           {
             label: "Repost",
             icon: "pi pi-replay",
-            command: () => onRepost(payroll),
+            command: () => onRepost(payroll, false),
             template: (item: MenuItem, options: MenuItemOptions) => (
               <div
                 onClick={(e) => options.onClick(e)}
@@ -121,6 +146,8 @@ const PayrollActions = ({
           },
         ];
 
+  const hideActions = isBeforeCutoff(payroll.year, payroll.month);
+
   return (
     <div className="flex relative items-center justify-center gap-2">
       <Button
@@ -129,21 +156,23 @@ const PayrollActions = ({
         onClick={() => onView(payroll)}
         className="w-14 border-none! shadow-none! h-8 justify-center items-center bg-primary-light! text-primary!"
       />
-      <>
-        <div
-          className="absolute w-7 h-7 cursor-pointer -right-[5px] top-[60%] -translate-y-[50%] z-1 justify-center items-center"
-          onClick={(e) => menuRef.current?.toggle(e)}
-        >
-          <i className="pi pi-ellipsis-v text-primary"></i>
-        </div>
-        <Menu
-          popup
-          ref={menuRef}
-          model={menuItems}
-          popupAlignment="right"
-          className="mt-2 shadow-lg rounded-lg p-1 min-w-[150px]"
-        />
-      </>
+      {!hideActions && (
+        <>
+          <div
+            className="absolute w-7 h-7 cursor-pointer -right-[5px] top-[60%] -translate-y-[50%] z-1 justify-center items-center"
+            onClick={(e) => menuRef.current?.toggle(e)}
+          >
+            <i className="pi pi-ellipsis-v text-primary"></i>
+          </div>
+          <Menu
+            popup
+            ref={menuRef}
+            model={menuItems}
+            popupAlignment="right"
+            className="mt-2 shadow-lg rounded-lg p-1 min-w-[150px]"
+          />
+        </>
+      )}
     </div>
   );
 };
@@ -152,7 +181,7 @@ const columns = (
   handleView: (payroll: PayrollEntry) => void,
   handleRecalculate: (payroll: PayrollEntry) => void,
   handlePost: (payroll: PayrollEntry) => void,
-  handleRepost: (payroll: PayrollEntry) => void
+  handleRepost: (payroll: PayrollEntry, isRerun: boolean) => void
 ): TableColumn<PayrollEntry>[] => [
   {
     field: "period",
@@ -427,6 +456,8 @@ const PayrollPage = () => {
       return {
         id: summary.id,
         period,
+        month: summary.payrollMonth,
+        year: summary.payrollYear,
         salary: summary.totalSalary,
         breakfastAllowance: summary.totalBreakfastAllowance,
         otherAllowances: summary.totalOtherAllowances,
@@ -460,28 +491,6 @@ const PayrollPage = () => {
   const { mutateAsync: postPayroll } = usePostPayroll();
   const { mutateAsync: recalculatePayrollSummary } =
     useRecalculatePayrollSummary();
-
-  const parsePeriod = (period: string) => {
-    const [monthStr, yearStr] = period.split(" ");
-    const monthIndex = [
-      "JAN",
-      "FEB",
-      "MAR",
-      "APR",
-      "MAY",
-      "JUN",
-      "JUL",
-      "AUG",
-      "SEP",
-      "OCT",
-      "NOV",
-      "DEC",
-    ].indexOf(monthStr.toUpperCase());
-    return {
-      payrollMonth: monthIndex + 1,
-      payrollYear: parseInt(yearStr),
-    };
-  };
 
   const handleRecalculate = async (payroll: PayrollEntry) => {
     try {
@@ -517,19 +526,25 @@ const PayrollPage = () => {
   /* Removed Repost Logic for now as it wasn't requested in C# or explicit plan, but kept function shell if needed? 
      The prompt asked to "Recalculate" and "Post".
      "Repost" logic was just in the dummy UI. I'll leave it as TODO or empty. */
-  const handleRepost = (payroll: PayrollEntry) => {
+  const handleRepost = (payroll: PayrollEntry, isRerun: boolean) => {
     showConfirmDialog({
       icon: "pi pi-replay text-[#FFA617]",
-      title: "Repost Payroll",
-      message: `Are you sure you want to repost ${payroll.period}?`,
+      title: isRerun ? "Rerun Payroll" : "Repost Payroll",
+      message: `Are you sure you want to ${isRerun ? "rerun" : "repost"} ${payroll.period}?`,
       onAccept: async () => {
         try {
           await repostPayroll({ id: Number(payroll.id) });
-          toastService.showSuccess("Success", "Payroll reposted successfully");
+          toastService.showSuccess(
+            "Success",
+            `Payroll ${isRerun ? "reran" : "reposted"} successfully`
+          );
         } catch (error) {
           toastService.showError(
             "Error",
-            getErrorMessage(error, "Failed to repost payroll")
+            getErrorMessage(
+              error,
+              `Failed to ${isRerun ? "rerun" : "repost"} payroll`
+            )
           );
         }
       },
