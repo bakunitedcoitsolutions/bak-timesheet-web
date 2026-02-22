@@ -1571,43 +1571,43 @@ async function main() {
   // console.log(`✅ Seeded ${projects.length} projects`);
 
   // Seed Employees from JSON file
-  console.log("📝 Seeding Employees from employee-data.json...");
-  const employeeDataPath = path.join(__dirname, "employee-data.json");
-  const employeeDataRaw = fs.readFileSync(employeeDataPath, "utf-8");
-  const employeeData = JSON.parse(employeeDataRaw);
+  // console.log("📝 Seeding Employees from employee-data.json...");
+  // const employeeDataPath = path.join(__dirname, "employee-data.json");
+  // const employeeDataRaw = fs.readFileSync(employeeDataPath, "utf-8");
+  // const employeeData = JSON.parse(employeeDataRaw);
 
-  // Convert date strings to Date objects
-  const employees = employeeData.map((emp: any) => ({
-    ...emp,
-    dob: emp.dob ? new Date(emp.dob) : null,
-    contractStartDate: emp.contractStartDate
-      ? new Date(emp.contractStartDate)
-      : null,
-    contractEndDate: emp.contractEndDate ? new Date(emp.contractEndDate) : null,
-    joiningDate: emp.joiningDate ? new Date(emp.joiningDate) : null,
-    idCardExpiryDate: emp.idCardExpiryDate
-      ? new Date(emp.idCardExpiryDate)
-      : null,
-    passportExpiryDate: emp.passportExpiryDate
-      ? new Date(emp.passportExpiryDate)
-      : null,
-    lastExitDate: emp.lastExitDate ? new Date(emp.lastExitDate) : null,
-    lastEntryDate: emp.lastEntryDate ? new Date(emp.lastEntryDate) : null,
-  }));
+  // // Convert date strings to Date objects
+  // const employees = employeeData.map((emp: any) => ({
+  //   ...emp,
+  //   dob: emp.dob ? new Date(emp.dob) : null,
+  //   contractStartDate: emp.contractStartDate
+  //     ? new Date(emp.contractStartDate)
+  //     : null,
+  //   contractEndDate: emp.contractEndDate ? new Date(emp.contractEndDate) : null,
+  //   joiningDate: emp.joiningDate ? new Date(emp.joiningDate) : null,
+  //   idCardExpiryDate: emp.idCardExpiryDate
+  //     ? new Date(emp.idCardExpiryDate)
+  //     : null,
+  //   passportExpiryDate: emp.passportExpiryDate
+  //     ? new Date(emp.passportExpiryDate)
+  //     : null,
+  //   lastExitDate: emp.lastExitDate ? new Date(emp.lastExitDate) : null,
+  //   lastEntryDate: emp.lastEntryDate ? new Date(emp.lastEntryDate) : null,
+  // }));
 
-  for (const employee of employees) {
-    console.log(
-      `  - Seeding employee: ${employee.nameEn} (Code: ${employee.employeeCode}, ID: ${employee.id})`
-    );
-    await prisma.employee.upsert({
-      where: { id: employee.id },
-      update: employee,
-      create: employee,
-    });
-  }
-  console.log(
-    `✅ Seeded ${employees.length} employees from employee-data.json`
-  );
+  // for (const employee of employees) {
+  //   console.log(
+  //     `  - Seeding employee: ${employee.nameEn} (Code: ${employee.employeeCode}, ID: ${employee.id})`
+  //   );
+  //   await prisma.employee.upsert({
+  //     where: { id: employee.id },
+  //     update: employee,
+  //     create: employee,
+  //   });
+  // }
+  // console.log(
+  //   `✅ Seeded ${employees.length} employees from employee-data.json`
+  // );
 
   // // Seed Employee Loans
   // console.log("\n📝 Seeding Employee Loans...");
@@ -1617,17 +1617,17 @@ async function main() {
   // console.log("\n📝 Seeding Traffic Challans...");
   // await seedTrafficChallans(prisma);
 
-  // // Seed Timesheets
+  // Seed Timesheets
   // console.log("\n📝 Seeding Timesheets...");
   // await seedTimesheets(prisma);
 
   // Seed Payroll Summary
-  console.log("\n📝 Seeding Payroll Summary...");
-  await seedPayrollSummary(prisma);
+  // console.log("\n📝 Seeding Payroll Summary...");
+  // await seedPayrollSummary(prisma);
 
-  // Seed Payroll Summary
-  console.log("\n📝 Seeding Payroll Summary...");
-  await seedPayrollDetails(prisma);
+  // Seed Payroll Details
+  // console.log("\n📝 Seeding Payroll Details...");
+  // await seedPayrollDetails(prisma);
 
   // Reset Sequences
   await resetSequences();
