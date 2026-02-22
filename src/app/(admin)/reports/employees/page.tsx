@@ -370,15 +370,29 @@ const EmployeesReportPage = () => {
         ),
       },
       {
-        field: "openingBalance",
-        header: "Opening",
+        field: "openingAdvanceBalance",
+        header: "Opening Advance",
         ...tableCommonProps,
         align: "center",
         style: { minWidth: 120 },
         body: (rowData) => (
           <span className="text-sm">
-            {rowData.openingBalance
-              ? Number(rowData.openingBalance).toLocaleString()
+            {rowData.openingAdvanceBalance
+              ? Number(rowData.openingAdvanceBalance).toLocaleString()
+              : "-"}
+          </span>
+        ),
+      },
+      {
+        field: "openingTrafficViolationBalance",
+        header: "Opening Traffic Violation",
+        ...tableCommonProps,
+        align: "center",
+        style: { minWidth: 120 },
+        body: (rowData) => (
+          <span className="text-sm">
+            {rowData.openingTrafficViolationBalance
+              ? Number(rowData.openingTrafficViolationBalance).toLocaleString()
               : "-"}
           </span>
         ),

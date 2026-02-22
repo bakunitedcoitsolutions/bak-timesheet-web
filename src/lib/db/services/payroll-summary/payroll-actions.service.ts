@@ -257,11 +257,11 @@ const calculateAndSavePayroll = async (
     const prevDetails = previousPayrollMap.get(emp.id);
 
     // "Previous Advance" logic
-    // Default: LastPayroll.netLoan + OpeningBalance
+    // Default: LastPayroll.netLoan + OpeningAdvanceBalance
     const previousLoanBalance =
       prevDetails && prevDetails.netLoan
-        ? prevDetails.netLoan + Number(emp.openingBalance || 0)
-        : Number(emp.openingBalance || 0);
+        ? prevDetails.netLoan + Number(emp.openingAdvanceBalance || 0)
+        : Number(emp.openingAdvanceBalance || 0);
 
     const currentMonthLoans = loans
       .filter((l) => l.employeeId === emp.id && l.type === "LOAN")
@@ -282,7 +282,14 @@ const calculateAndSavePayroll = async (
     const netLoan = 0; // fully deducted
 
     // E. Traffic Challans
-    const previousChallanBalance = prevDetails ? prevDetails.netChallan : 0;
+
+    // "Previous Traffic Challan" logic
+    // Default: LastPayroll.netLoan + OpeningTrafficViolationBalance
+    const previousChallanBalance =
+      prevDetails && prevDetails.netChallan
+        ? prevDetails.netChallan +
+          Number(emp.openingTrafficViolationBalance || 0)
+        : Number(emp.openingTrafficViolationBalance || 0);
 
     const currentMonthChallans = trafficChallans
       .filter((c) => c.employeeId === emp.id && c.type === "CHALLAN")
@@ -782,8 +789,8 @@ export const repostPayroll = async ({ id }: RepostPayrollInput) => {
     // Running loan totals (display fields)
     const prevData = previousPayrollMap.get(emp.id);
     const previousLoanBalance = prevData?.netLoan
-      ? prevData.netLoan + Number(emp.openingBalance || 0)
-      : Number(emp.openingBalance || 0);
+      ? prevData.netLoan + Number(emp.openingAdvanceBalance || 0)
+      : Number(emp.openingAdvanceBalance || 0);
     const currentNetLoan =
       loans
         .filter((l) => l.employeeId === emp.id && l.type === "LOAN")
@@ -792,7 +799,9 @@ export const repostPayroll = async ({ id }: RepostPayrollInput) => {
         .filter((l) => l.employeeId === emp.id && l.type === "RETURN")
         .reduce((s, l) => s + Number(l.amount), 0);
 
-    const previousChallanBalance = prevData ? prevData.netChallan : 0;
+    const previousChallanBalance = prevData?.netChallan
+      ? prevData.netChallan + Number(emp.openingTrafficViolationBalance || 0)
+      : Number(emp.openingTrafficViolationBalance || 0);
     const currentNetChallan =
       trafficChallans
         .filter((c) => c.employeeId === emp.id && c.type === "CHALLAN")
@@ -1142,8 +1151,8 @@ export const refreshPayrollDetailRow = async ({
   // the user-set loanDeduction and netLoan.
   const previousLoanBalance =
     prevDetail && prevDetail.netLoan
-      ? Number(prevDetail.netLoan) + Number(emp.openingBalance || 0)
-      : Number(emp.openingBalance || 0);
+      ? Number(prevDetail.netLoan) + Number(emp.openingAdvanceBalance || 0)
+      : Number(emp.openingAdvanceBalance || 0);
 
   const currentMonthLoans = empLoans
     .filter((l) => l.type === "LOAN")
@@ -1153,10 +1162,13 @@ export const refreshPayrollDetailRow = async ({
     .reduce((sum, l) => sum + Number(l.amount), 0);
   const currentNetLoan = currentMonthLoans - currentMonthReturns;
 
-  // Challans — same: recalculate display fields but PRESERVE user-set challanDeduction / netChallan.
-  const previousChallanBalance = prevDetail
-    ? Number(prevDetail.netChallan || 0)
-    : 0;
+  // Challan — recalculate display fields (previousLoan, currentLoan) but PRESERVE
+  // the user-set challanDeduction and netChallan.
+  const previousChallanBalance =
+    prevDetail && prevDetail.netChallan
+      ? Number(prevDetail.netChallan) +
+        Number(emp.openingTrafficViolationBalance || 0)
+      : Number(emp.openingTrafficViolationBalance || 0);
   const currentMonthChallans = empChallans
     .filter((c) => c.type === "CHALLAN")
     .reduce((sum, c) => sum + Number(c.amount), 0);

@@ -44,7 +44,8 @@ export type EmployeeAvgAggregateOutputType = {
   nationalityId: number | null
   gosiSalary: runtime.Decimal | null
   gosiCityId: number | null
-  openingBalance: runtime.Decimal | null
+  openingAdvanceBalance: runtime.Decimal | null
+  openingTrafficViolationBalance: runtime.Decimal | null
 }
 
 export type EmployeeSumAggregateOutputType = {
@@ -65,7 +66,8 @@ export type EmployeeSumAggregateOutputType = {
   nationalityId: number | null
   gosiSalary: runtime.Decimal | null
   gosiCityId: number | null
-  openingBalance: runtime.Decimal | null
+  openingAdvanceBalance: runtime.Decimal | null
+  openingTrafficViolationBalance: runtime.Decimal | null
 }
 
 export type EmployeeMinAggregateOutputType = {
@@ -112,7 +114,8 @@ export type EmployeeMinAggregateOutputType = {
   iban: string | null
   gosiSalary: runtime.Decimal | null
   gosiCityId: number | null
-  openingBalance: runtime.Decimal | null
+  openingAdvanceBalance: runtime.Decimal | null
+  openingTrafficViolationBalance: runtime.Decimal | null
   isCardDelivered: boolean | null
   cardDocument: string | null
   createdAt: Date | null
@@ -163,7 +166,8 @@ export type EmployeeMaxAggregateOutputType = {
   iban: string | null
   gosiSalary: runtime.Decimal | null
   gosiCityId: number | null
-  openingBalance: runtime.Decimal | null
+  openingAdvanceBalance: runtime.Decimal | null
+  openingTrafficViolationBalance: runtime.Decimal | null
   isCardDelivered: boolean | null
   cardDocument: string | null
   createdAt: Date | null
@@ -214,7 +218,8 @@ export type EmployeeCountAggregateOutputType = {
   iban: number
   gosiSalary: number
   gosiCityId: number
-  openingBalance: number
+  openingAdvanceBalance: number
+  openingTrafficViolationBalance: number
   isCardDelivered: number
   cardDocument: number
   createdAt: number
@@ -241,7 +246,8 @@ export type EmployeeAvgAggregateInputType = {
   nationalityId?: true
   gosiSalary?: true
   gosiCityId?: true
-  openingBalance?: true
+  openingAdvanceBalance?: true
+  openingTrafficViolationBalance?: true
 }
 
 export type EmployeeSumAggregateInputType = {
@@ -262,7 +268,8 @@ export type EmployeeSumAggregateInputType = {
   nationalityId?: true
   gosiSalary?: true
   gosiCityId?: true
-  openingBalance?: true
+  openingAdvanceBalance?: true
+  openingTrafficViolationBalance?: true
 }
 
 export type EmployeeMinAggregateInputType = {
@@ -309,7 +316,8 @@ export type EmployeeMinAggregateInputType = {
   iban?: true
   gosiSalary?: true
   gosiCityId?: true
-  openingBalance?: true
+  openingAdvanceBalance?: true
+  openingTrafficViolationBalance?: true
   isCardDelivered?: true
   cardDocument?: true
   createdAt?: true
@@ -360,7 +368,8 @@ export type EmployeeMaxAggregateInputType = {
   iban?: true
   gosiSalary?: true
   gosiCityId?: true
-  openingBalance?: true
+  openingAdvanceBalance?: true
+  openingTrafficViolationBalance?: true
   isCardDelivered?: true
   cardDocument?: true
   createdAt?: true
@@ -411,7 +420,8 @@ export type EmployeeCountAggregateInputType = {
   iban?: true
   gosiSalary?: true
   gosiCityId?: true
-  openingBalance?: true
+  openingAdvanceBalance?: true
+  openingTrafficViolationBalance?: true
   isCardDelivered?: true
   cardDocument?: true
   createdAt?: true
@@ -549,7 +559,8 @@ export type EmployeeGroupByOutputType = {
   iban: string | null
   gosiSalary: runtime.Decimal | null
   gosiCityId: number | null
-  openingBalance: runtime.Decimal | null
+  openingAdvanceBalance: runtime.Decimal | null
+  openingTrafficViolationBalance: runtime.Decimal | null
   isCardDelivered: boolean
   cardDocument: string | null
   createdAt: Date
@@ -623,7 +634,8 @@ export type EmployeeWhereInput = {
   iban?: Prisma.StringNullableFilter<"Employee"> | string | null
   gosiSalary?: Prisma.DecimalNullableFilter<"Employee"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   gosiCityId?: Prisma.IntNullableFilter<"Employee"> | number | null
-  openingBalance?: Prisma.DecimalNullableFilter<"Employee"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: Prisma.DecimalNullableFilter<"Employee"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: Prisma.DecimalNullableFilter<"Employee"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: Prisma.BoolFilter<"Employee"> | boolean
   cardDocument?: Prisma.StringNullableFilter<"Employee"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Employee"> | Date | string
@@ -688,7 +700,8 @@ export type EmployeeOrderByWithRelationInput = {
   iban?: Prisma.SortOrderInput | Prisma.SortOrder
   gosiSalary?: Prisma.SortOrderInput | Prisma.SortOrder
   gosiCityId?: Prisma.SortOrderInput | Prisma.SortOrder
-  openingBalance?: Prisma.SortOrderInput | Prisma.SortOrder
+  openingAdvanceBalance?: Prisma.SortOrderInput | Prisma.SortOrder
+  openingTrafficViolationBalance?: Prisma.SortOrderInput | Prisma.SortOrder
   isCardDelivered?: Prisma.SortOrder
   cardDocument?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -756,7 +769,8 @@ export type EmployeeWhereUniqueInput = Prisma.AtLeast<{
   iban?: Prisma.StringNullableFilter<"Employee"> | string | null
   gosiSalary?: Prisma.DecimalNullableFilter<"Employee"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   gosiCityId?: Prisma.IntNullableFilter<"Employee"> | number | null
-  openingBalance?: Prisma.DecimalNullableFilter<"Employee"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: Prisma.DecimalNullableFilter<"Employee"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: Prisma.DecimalNullableFilter<"Employee"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: Prisma.BoolFilter<"Employee"> | boolean
   cardDocument?: Prisma.StringNullableFilter<"Employee"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Employee"> | Date | string
@@ -821,7 +835,8 @@ export type EmployeeOrderByWithAggregationInput = {
   iban?: Prisma.SortOrderInput | Prisma.SortOrder
   gosiSalary?: Prisma.SortOrderInput | Prisma.SortOrder
   gosiCityId?: Prisma.SortOrderInput | Prisma.SortOrder
-  openingBalance?: Prisma.SortOrderInput | Prisma.SortOrder
+  openingAdvanceBalance?: Prisma.SortOrderInput | Prisma.SortOrder
+  openingTrafficViolationBalance?: Prisma.SortOrderInput | Prisma.SortOrder
   isCardDelivered?: Prisma.SortOrder
   cardDocument?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -880,7 +895,8 @@ export type EmployeeScalarWhereWithAggregatesInput = {
   iban?: Prisma.StringNullableWithAggregatesFilter<"Employee"> | string | null
   gosiSalary?: Prisma.DecimalNullableWithAggregatesFilter<"Employee"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   gosiCityId?: Prisma.IntNullableWithAggregatesFilter<"Employee"> | number | null
-  openingBalance?: Prisma.DecimalNullableWithAggregatesFilter<"Employee"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: Prisma.DecimalNullableWithAggregatesFilter<"Employee"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: Prisma.DecimalNullableWithAggregatesFilter<"Employee"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: Prisma.BoolWithAggregatesFilter<"Employee"> | boolean
   cardDocument?: Prisma.StringNullableWithAggregatesFilter<"Employee"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Employee"> | Date | string
@@ -922,7 +938,8 @@ export type EmployeeCreateInput = {
   bankCode?: string | null
   iban?: string | null
   gosiSalary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  openingBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: boolean
   cardDocument?: string | null
   createdAt?: Date | string
@@ -987,7 +1004,8 @@ export type EmployeeUncheckedCreateInput = {
   iban?: string | null
   gosiSalary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   gosiCityId?: number | null
-  openingBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: boolean
   cardDocument?: string | null
   createdAt?: Date | string
@@ -1035,7 +1053,8 @@ export type EmployeeUpdateInput = {
   bankCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gosiSalary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  openingBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1100,7 +1119,8 @@ export type EmployeeUncheckedUpdateInput = {
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gosiSalary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   gosiCityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  openingBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1157,7 +1177,8 @@ export type EmployeeCreateManyInput = {
   iban?: string | null
   gosiSalary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   gosiCityId?: number | null
-  openingBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: boolean
   cardDocument?: string | null
   createdAt?: Date | string
@@ -1199,7 +1220,8 @@ export type EmployeeUpdateManyMutationInput = {
   bankCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gosiSalary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  openingBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1250,7 +1272,8 @@ export type EmployeeUncheckedUpdateManyInput = {
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gosiSalary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   gosiCityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  openingBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1311,7 +1334,8 @@ export type EmployeeCountOrderByAggregateInput = {
   iban?: Prisma.SortOrder
   gosiSalary?: Prisma.SortOrder
   gosiCityId?: Prisma.SortOrder
-  openingBalance?: Prisma.SortOrder
+  openingAdvanceBalance?: Prisma.SortOrder
+  openingTrafficViolationBalance?: Prisma.SortOrder
   isCardDelivered?: Prisma.SortOrder
   cardDocument?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -1336,7 +1360,8 @@ export type EmployeeAvgOrderByAggregateInput = {
   nationalityId?: Prisma.SortOrder
   gosiSalary?: Prisma.SortOrder
   gosiCityId?: Prisma.SortOrder
-  openingBalance?: Prisma.SortOrder
+  openingAdvanceBalance?: Prisma.SortOrder
+  openingTrafficViolationBalance?: Prisma.SortOrder
 }
 
 export type EmployeeMaxOrderByAggregateInput = {
@@ -1383,7 +1408,8 @@ export type EmployeeMaxOrderByAggregateInput = {
   iban?: Prisma.SortOrder
   gosiSalary?: Prisma.SortOrder
   gosiCityId?: Prisma.SortOrder
-  openingBalance?: Prisma.SortOrder
+  openingAdvanceBalance?: Prisma.SortOrder
+  openingTrafficViolationBalance?: Prisma.SortOrder
   isCardDelivered?: Prisma.SortOrder
   cardDocument?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -1434,7 +1460,8 @@ export type EmployeeMinOrderByAggregateInput = {
   iban?: Prisma.SortOrder
   gosiSalary?: Prisma.SortOrder
   gosiCityId?: Prisma.SortOrder
-  openingBalance?: Prisma.SortOrder
+  openingAdvanceBalance?: Prisma.SortOrder
+  openingTrafficViolationBalance?: Prisma.SortOrder
   isCardDelivered?: Prisma.SortOrder
   cardDocument?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -1459,7 +1486,8 @@ export type EmployeeSumOrderByAggregateInput = {
   nationalityId?: Prisma.SortOrder
   gosiSalary?: Prisma.SortOrder
   gosiCityId?: Prisma.SortOrder
-  openingBalance?: Prisma.SortOrder
+  openingAdvanceBalance?: Prisma.SortOrder
+  openingTrafficViolationBalance?: Prisma.SortOrder
 }
 
 export type EmployeeScalarRelationFilter = {
@@ -1941,7 +1969,8 @@ export type EmployeeCreateWithoutBranchInput = {
   bankCode?: string | null
   iban?: string | null
   gosiSalary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  openingBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: boolean
   cardDocument?: string | null
   createdAt?: Date | string
@@ -2004,7 +2033,8 @@ export type EmployeeUncheckedCreateWithoutBranchInput = {
   iban?: string | null
   gosiSalary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   gosiCityId?: number | null
-  openingBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: boolean
   cardDocument?: string | null
   createdAt?: Date | string
@@ -2090,7 +2120,8 @@ export type EmployeeScalarWhereInput = {
   iban?: Prisma.StringNullableFilter<"Employee"> | string | null
   gosiSalary?: Prisma.DecimalNullableFilter<"Employee"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   gosiCityId?: Prisma.IntNullableFilter<"Employee"> | number | null
-  openingBalance?: Prisma.DecimalNullableFilter<"Employee"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: Prisma.DecimalNullableFilter<"Employee"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: Prisma.DecimalNullableFilter<"Employee"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: Prisma.BoolFilter<"Employee"> | boolean
   cardDocument?: Prisma.StringNullableFilter<"Employee"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Employee"> | Date | string
@@ -2132,7 +2163,8 @@ export type EmployeeCreateWithoutCityInput = {
   bankCode?: string | null
   iban?: string | null
   gosiSalary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  openingBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: boolean
   cardDocument?: string | null
   createdAt?: Date | string
@@ -2195,7 +2227,8 @@ export type EmployeeUncheckedCreateWithoutCityInput = {
   iban?: string | null
   gosiSalary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   gosiCityId?: number | null
-  openingBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: boolean
   cardDocument?: string | null
   createdAt?: Date | string
@@ -2269,7 +2302,8 @@ export type EmployeeCreateWithoutCountryInput = {
   bankCode?: string | null
   iban?: string | null
   gosiSalary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  openingBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: boolean
   cardDocument?: string | null
   createdAt?: Date | string
@@ -2332,7 +2366,8 @@ export type EmployeeUncheckedCreateWithoutCountryInput = {
   iban?: string | null
   gosiSalary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   gosiCityId?: number | null
-  openingBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: boolean
   cardDocument?: string | null
   createdAt?: Date | string
@@ -2390,7 +2425,8 @@ export type EmployeeCreateWithoutNationalityInput = {
   bankCode?: string | null
   iban?: string | null
   gosiSalary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  openingBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: boolean
   cardDocument?: string | null
   createdAt?: Date | string
@@ -2453,7 +2489,8 @@ export type EmployeeUncheckedCreateWithoutNationalityInput = {
   iban?: string | null
   gosiSalary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   gosiCityId?: number | null
-  openingBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: boolean
   cardDocument?: string | null
   createdAt?: Date | string
@@ -2543,7 +2580,8 @@ export type EmployeeCreateWithoutGosiCityInput = {
   bankCode?: string | null
   iban?: string | null
   gosiSalary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  openingBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: boolean
   cardDocument?: string | null
   createdAt?: Date | string
@@ -2606,7 +2644,8 @@ export type EmployeeUncheckedCreateWithoutGosiCityInput = {
   bankCode?: string | null
   iban?: string | null
   gosiSalary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  openingBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: boolean
   cardDocument?: string | null
   createdAt?: Date | string
@@ -2680,7 +2719,8 @@ export type EmployeeCreateWithoutDesignationInput = {
   bankCode?: string | null
   iban?: string | null
   gosiSalary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  openingBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: boolean
   cardDocument?: string | null
   createdAt?: Date | string
@@ -2743,7 +2783,8 @@ export type EmployeeUncheckedCreateWithoutDesignationInput = {
   iban?: string | null
   gosiSalary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   gosiCityId?: number | null
-  openingBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: boolean
   cardDocument?: string | null
   createdAt?: Date | string
@@ -2817,7 +2858,8 @@ export type EmployeeCreateWithoutStatusInput = {
   bankCode?: string | null
   iban?: string | null
   gosiSalary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  openingBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: boolean
   cardDocument?: string | null
   createdAt?: Date | string
@@ -2880,7 +2922,8 @@ export type EmployeeUncheckedCreateWithoutStatusInput = {
   iban?: string | null
   gosiSalary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   gosiCityId?: number | null
-  openingBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: boolean
   cardDocument?: string | null
   createdAt?: Date | string
@@ -2954,7 +2997,8 @@ export type EmployeeCreateWithoutTimesheetsInput = {
   bankCode?: string | null
   iban?: string | null
   gosiSalary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  openingBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: boolean
   cardDocument?: string | null
   createdAt?: Date | string
@@ -3018,7 +3062,8 @@ export type EmployeeUncheckedCreateWithoutTimesheetsInput = {
   iban?: string | null
   gosiSalary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   gosiCityId?: number | null
-  openingBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: boolean
   cardDocument?: string | null
   createdAt?: Date | string
@@ -3081,7 +3126,8 @@ export type EmployeeUpdateWithoutTimesheetsInput = {
   bankCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gosiSalary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  openingBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3145,7 +3191,8 @@ export type EmployeeUncheckedUpdateWithoutTimesheetsInput = {
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gosiSalary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   gosiCityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  openingBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3192,7 +3239,8 @@ export type EmployeeCreateWithoutPayrollSectionInput = {
   bankCode?: string | null
   iban?: string | null
   gosiSalary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  openingBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: boolean
   cardDocument?: string | null
   createdAt?: Date | string
@@ -3255,7 +3303,8 @@ export type EmployeeUncheckedCreateWithoutPayrollSectionInput = {
   iban?: string | null
   gosiSalary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   gosiCityId?: number | null
-  openingBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: boolean
   cardDocument?: string | null
   createdAt?: Date | string
@@ -3329,7 +3378,8 @@ export type EmployeeCreateWithoutPayrollDetailsInput = {
   bankCode?: string | null
   iban?: string | null
   gosiSalary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  openingBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: boolean
   cardDocument?: string | null
   createdAt?: Date | string
@@ -3393,7 +3443,8 @@ export type EmployeeUncheckedCreateWithoutPayrollDetailsInput = {
   iban?: string | null
   gosiSalary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   gosiCityId?: number | null
-  openingBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: boolean
   cardDocument?: string | null
   createdAt?: Date | string
@@ -3456,7 +3507,8 @@ export type EmployeeUpdateWithoutPayrollDetailsInput = {
   bankCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gosiSalary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  openingBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3520,7 +3572,8 @@ export type EmployeeUncheckedUpdateWithoutPayrollDetailsInput = {
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gosiSalary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   gosiCityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  openingBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3567,7 +3620,8 @@ export type EmployeeCreateWithoutLoansInput = {
   bankCode?: string | null
   iban?: string | null
   gosiSalary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  openingBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: boolean
   cardDocument?: string | null
   createdAt?: Date | string
@@ -3631,7 +3685,8 @@ export type EmployeeUncheckedCreateWithoutLoansInput = {
   iban?: string | null
   gosiSalary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   gosiCityId?: number | null
-  openingBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: boolean
   cardDocument?: string | null
   createdAt?: Date | string
@@ -3694,7 +3749,8 @@ export type EmployeeUpdateWithoutLoansInput = {
   bankCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gosiSalary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  openingBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3758,7 +3814,8 @@ export type EmployeeUncheckedUpdateWithoutLoansInput = {
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gosiSalary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   gosiCityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  openingBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3805,7 +3862,8 @@ export type EmployeeCreateWithoutTrafficChallansInput = {
   bankCode?: string | null
   iban?: string | null
   gosiSalary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  openingBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: boolean
   cardDocument?: string | null
   createdAt?: Date | string
@@ -3869,7 +3927,8 @@ export type EmployeeUncheckedCreateWithoutTrafficChallansInput = {
   iban?: string | null
   gosiSalary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   gosiCityId?: number | null
-  openingBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: boolean
   cardDocument?: string | null
   createdAt?: Date | string
@@ -3932,7 +3991,8 @@ export type EmployeeUpdateWithoutTrafficChallansInput = {
   bankCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gosiSalary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  openingBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3996,7 +4056,8 @@ export type EmployeeUncheckedUpdateWithoutTrafficChallansInput = {
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gosiSalary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   gosiCityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  openingBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4043,7 +4104,8 @@ export type EmployeeCreateWithoutExitReentriesInput = {
   bankCode?: string | null
   iban?: string | null
   gosiSalary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  openingBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: boolean
   cardDocument?: string | null
   createdAt?: Date | string
@@ -4107,7 +4169,8 @@ export type EmployeeUncheckedCreateWithoutExitReentriesInput = {
   iban?: string | null
   gosiSalary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   gosiCityId?: number | null
-  openingBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: boolean
   cardDocument?: string | null
   createdAt?: Date | string
@@ -4170,7 +4233,8 @@ export type EmployeeUpdateWithoutExitReentriesInput = {
   bankCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gosiSalary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  openingBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4234,7 +4298,8 @@ export type EmployeeUncheckedUpdateWithoutExitReentriesInput = {
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gosiSalary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   gosiCityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  openingBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4281,7 +4346,8 @@ export type EmployeeCreateWithoutLedgersInput = {
   bankCode?: string | null
   iban?: string | null
   gosiSalary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  openingBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: boolean
   cardDocument?: string | null
   createdAt?: Date | string
@@ -4345,7 +4411,8 @@ export type EmployeeUncheckedCreateWithoutLedgersInput = {
   iban?: string | null
   gosiSalary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   gosiCityId?: number | null
-  openingBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: boolean
   cardDocument?: string | null
   createdAt?: Date | string
@@ -4408,7 +4475,8 @@ export type EmployeeUpdateWithoutLedgersInput = {
   bankCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gosiSalary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  openingBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4472,7 +4540,8 @@ export type EmployeeUncheckedUpdateWithoutLedgersInput = {
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gosiSalary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   gosiCityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  openingBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4527,7 +4596,8 @@ export type EmployeeCreateManyBranchInput = {
   iban?: string | null
   gosiSalary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   gosiCityId?: number | null
-  openingBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: boolean
   cardDocument?: string | null
   createdAt?: Date | string
@@ -4569,7 +4639,8 @@ export type EmployeeUpdateWithoutBranchInput = {
   bankCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gosiSalary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  openingBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4632,7 +4703,8 @@ export type EmployeeUncheckedUpdateWithoutBranchInput = {
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gosiSalary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   gosiCityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  openingBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4688,7 +4760,8 @@ export type EmployeeUncheckedUpdateManyWithoutBranchInput = {
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gosiSalary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   gosiCityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  openingBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4738,7 +4811,8 @@ export type EmployeeCreateManyCityInput = {
   iban?: string | null
   gosiSalary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   gosiCityId?: number | null
-  openingBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: boolean
   cardDocument?: string | null
   createdAt?: Date | string
@@ -4780,7 +4854,8 @@ export type EmployeeUpdateWithoutCityInput = {
   bankCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gosiSalary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  openingBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4843,7 +4918,8 @@ export type EmployeeUncheckedUpdateWithoutCityInput = {
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gosiSalary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   gosiCityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  openingBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4899,7 +4975,8 @@ export type EmployeeUncheckedUpdateManyWithoutCityInput = {
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gosiSalary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   gosiCityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  openingBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4949,7 +5026,8 @@ export type EmployeeCreateManyCountryInput = {
   iban?: string | null
   gosiSalary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   gosiCityId?: number | null
-  openingBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: boolean
   cardDocument?: string | null
   createdAt?: Date | string
@@ -4999,7 +5077,8 @@ export type EmployeeCreateManyNationalityInput = {
   iban?: string | null
   gosiSalary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   gosiCityId?: number | null
-  openingBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: boolean
   cardDocument?: string | null
   createdAt?: Date | string
@@ -5041,7 +5120,8 @@ export type EmployeeUpdateWithoutCountryInput = {
   bankCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gosiSalary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  openingBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -5104,7 +5184,8 @@ export type EmployeeUncheckedUpdateWithoutCountryInput = {
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gosiSalary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   gosiCityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  openingBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -5160,7 +5241,8 @@ export type EmployeeUncheckedUpdateManyWithoutCountryInput = {
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gosiSalary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   gosiCityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  openingBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -5202,7 +5284,8 @@ export type EmployeeUpdateWithoutNationalityInput = {
   bankCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gosiSalary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  openingBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -5265,7 +5348,8 @@ export type EmployeeUncheckedUpdateWithoutNationalityInput = {
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gosiSalary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   gosiCityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  openingBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -5321,7 +5405,8 @@ export type EmployeeUncheckedUpdateManyWithoutNationalityInput = {
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gosiSalary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   gosiCityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  openingBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -5371,7 +5456,8 @@ export type EmployeeCreateManyGosiCityInput = {
   bankCode?: string | null
   iban?: string | null
   gosiSalary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  openingBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: boolean
   cardDocument?: string | null
   createdAt?: Date | string
@@ -5413,7 +5499,8 @@ export type EmployeeUpdateWithoutGosiCityInput = {
   bankCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gosiSalary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  openingBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -5476,7 +5563,8 @@ export type EmployeeUncheckedUpdateWithoutGosiCityInput = {
   bankCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gosiSalary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  openingBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -5532,7 +5620,8 @@ export type EmployeeUncheckedUpdateManyWithoutGosiCityInput = {
   bankCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gosiSalary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  openingBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -5582,7 +5671,8 @@ export type EmployeeCreateManyDesignationInput = {
   iban?: string | null
   gosiSalary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   gosiCityId?: number | null
-  openingBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: boolean
   cardDocument?: string | null
   createdAt?: Date | string
@@ -5624,7 +5714,8 @@ export type EmployeeUpdateWithoutDesignationInput = {
   bankCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gosiSalary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  openingBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -5687,7 +5778,8 @@ export type EmployeeUncheckedUpdateWithoutDesignationInput = {
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gosiSalary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   gosiCityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  openingBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -5743,7 +5835,8 @@ export type EmployeeUncheckedUpdateManyWithoutDesignationInput = {
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gosiSalary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   gosiCityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  openingBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -5793,7 +5886,8 @@ export type EmployeeCreateManyStatusInput = {
   iban?: string | null
   gosiSalary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   gosiCityId?: number | null
-  openingBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: boolean
   cardDocument?: string | null
   createdAt?: Date | string
@@ -5835,7 +5929,8 @@ export type EmployeeUpdateWithoutStatusInput = {
   bankCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gosiSalary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  openingBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -5898,7 +5993,8 @@ export type EmployeeUncheckedUpdateWithoutStatusInput = {
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gosiSalary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   gosiCityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  openingBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -5954,7 +6050,8 @@ export type EmployeeUncheckedUpdateManyWithoutStatusInput = {
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gosiSalary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   gosiCityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  openingBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -6004,7 +6101,8 @@ export type EmployeeCreateManyPayrollSectionInput = {
   iban?: string | null
   gosiSalary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   gosiCityId?: number | null
-  openingBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: boolean
   cardDocument?: string | null
   createdAt?: Date | string
@@ -6046,7 +6144,8 @@ export type EmployeeUpdateWithoutPayrollSectionInput = {
   bankCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gosiSalary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  openingBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -6109,7 +6208,8 @@ export type EmployeeUncheckedUpdateWithoutPayrollSectionInput = {
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gosiSalary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   gosiCityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  openingBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -6165,7 +6265,8 @@ export type EmployeeUncheckedUpdateManyWithoutPayrollSectionInput = {
   iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gosiSalary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   gosiCityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  openingBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingAdvanceBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  openingTrafficViolationBalance?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -6292,7 +6393,8 @@ export type EmployeeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   iban?: boolean
   gosiSalary?: boolean
   gosiCityId?: boolean
-  openingBalance?: boolean
+  openingAdvanceBalance?: boolean
+  openingTrafficViolationBalance?: boolean
   isCardDelivered?: boolean
   cardDocument?: boolean
   createdAt?: boolean
@@ -6358,7 +6460,8 @@ export type EmployeeSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   iban?: boolean
   gosiSalary?: boolean
   gosiCityId?: boolean
-  openingBalance?: boolean
+  openingAdvanceBalance?: boolean
+  openingTrafficViolationBalance?: boolean
   isCardDelivered?: boolean
   cardDocument?: boolean
   createdAt?: boolean
@@ -6417,7 +6520,8 @@ export type EmployeeSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   iban?: boolean
   gosiSalary?: boolean
   gosiCityId?: boolean
-  openingBalance?: boolean
+  openingAdvanceBalance?: boolean
+  openingTrafficViolationBalance?: boolean
   isCardDelivered?: boolean
   cardDocument?: boolean
   createdAt?: boolean
@@ -6476,14 +6580,15 @@ export type EmployeeSelectScalar = {
   iban?: boolean
   gosiSalary?: boolean
   gosiCityId?: boolean
-  openingBalance?: boolean
+  openingAdvanceBalance?: boolean
+  openingTrafficViolationBalance?: boolean
   isCardDelivered?: boolean
   cardDocument?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type EmployeeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "profilePicture" | "employeeCode" | "nameEn" | "nameAr" | "dob" | "phone" | "gender" | "countryId" | "cityId" | "statusId" | "branchId" | "designationId" | "payrollSectionId" | "isDeductable" | "isFixed" | "workingDays" | "hourlyRate" | "salary" | "breakfastAllowance" | "foodAllowance" | "mobileAllowance" | "otherAllowance" | "contractStartDate" | "contractEndDate" | "contractDocument" | "contractEndReason" | "joiningDate" | "idCardNo" | "idCardExpiryDate" | "idCardDocument" | "profession" | "nationalityId" | "passportNo" | "passportExpiryDate" | "passportDocument" | "lastExitDate" | "lastEntryDate" | "bankName" | "bankCode" | "iban" | "gosiSalary" | "gosiCityId" | "openingBalance" | "isCardDelivered" | "cardDocument" | "createdAt" | "updatedAt", ExtArgs["result"]["employee"]>
+export type EmployeeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "profilePicture" | "employeeCode" | "nameEn" | "nameAr" | "dob" | "phone" | "gender" | "countryId" | "cityId" | "statusId" | "branchId" | "designationId" | "payrollSectionId" | "isDeductable" | "isFixed" | "workingDays" | "hourlyRate" | "salary" | "breakfastAllowance" | "foodAllowance" | "mobileAllowance" | "otherAllowance" | "contractStartDate" | "contractEndDate" | "contractDocument" | "contractEndReason" | "joiningDate" | "idCardNo" | "idCardExpiryDate" | "idCardDocument" | "profession" | "nationalityId" | "passportNo" | "passportExpiryDate" | "passportDocument" | "lastExitDate" | "lastEntryDate" | "bankName" | "bankCode" | "iban" | "gosiSalary" | "gosiCityId" | "openingAdvanceBalance" | "openingTrafficViolationBalance" | "isCardDelivered" | "cardDocument" | "createdAt" | "updatedAt", ExtArgs["result"]["employee"]>
 export type EmployeeInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   country?: boolean | Prisma.Employee$countryArgs<ExtArgs>
   nationality?: boolean | Prisma.Employee$nationalityArgs<ExtArgs>
@@ -6584,7 +6689,8 @@ export type $EmployeePayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     iban: string | null
     gosiSalary: runtime.Decimal | null
     gosiCityId: number | null
-    openingBalance: runtime.Decimal | null
+    openingAdvanceBalance: runtime.Decimal | null
+    openingTrafficViolationBalance: runtime.Decimal | null
     isCardDelivered: boolean
     cardDocument: string | null
     createdAt: Date
@@ -7069,7 +7175,8 @@ export interface EmployeeFieldRefs {
   readonly iban: Prisma.FieldRef<"Employee", 'String'>
   readonly gosiSalary: Prisma.FieldRef<"Employee", 'Decimal'>
   readonly gosiCityId: Prisma.FieldRef<"Employee", 'Int'>
-  readonly openingBalance: Prisma.FieldRef<"Employee", 'Decimal'>
+  readonly openingAdvanceBalance: Prisma.FieldRef<"Employee", 'Decimal'>
+  readonly openingTrafficViolationBalance: Prisma.FieldRef<"Employee", 'Decimal'>
   readonly isCardDelivered: Prisma.FieldRef<"Employee", 'Boolean'>
   readonly cardDocument: Prisma.FieldRef<"Employee", 'String'>
   readonly createdAt: Prisma.FieldRef<"Employee", 'DateTime'>

@@ -1610,8 +1610,8 @@ async function main() {
   // );
 
   // // Seed Employee Loans
-  // console.log("\n📝 Seeding Employee Loans...");
-  // await seedEmployeeLoans(prisma);
+  console.log("\n📝 Seeding Employee Loans...");
+  await seedEmployeeLoans(prisma);
 
   // // Seed Traffic Challans
   // console.log("\n📝 Seeding Traffic Challans...");

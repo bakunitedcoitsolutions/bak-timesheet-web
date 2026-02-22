@@ -339,6 +339,8 @@ const LoansPage = () => {
           parseResult = await parseExcelFile(file);
         }
 
+        console.log("parseResult data ==> ", parseResult.data);
+
         if (parseResult.errors.length > 0) {
           toastService.showWarn(
             "Parse Warnings",
@@ -352,36 +354,36 @@ const LoansPage = () => {
           throw new Error("No valid data found in file");
         }
 
-        // Upload the data
-        await bulkUploadLoans(
-          { loans: parseResult.data },
-          {
-            onSuccess: (result: BulkUploadLoanResult) => {
-              const message =
-                result.success > 0
-                  ? `Successfully uploaded ${result.success} loan(s)`
-                  : "Upload completed";
+        // // Upload the data
+        // await bulkUploadLoans(
+        //   { loans: parseResult.data },
+        //   {
+        //     onSuccess: (result: BulkUploadLoanResult) => {
+        //       const message =
+        //         result.success > 0
+        //           ? `Successfully uploaded ${result.success} loan(s)`
+        //           : "Upload completed";
 
-              if (result.failed > 0) {
-                toastService.showWarn(
-                  "Upload Complete",
-                  `${message}. ${result.failed} failed. Check console for details.`
-                );
-                console.error("Upload errors:", result.errors);
-              } else {
-                toastService.showSuccess("Success", message);
-              }
-            },
-            onError: (error: any) => {
-              const errorMessage = getErrorMessage(
-                error,
-                "Failed to upload loans"
-              );
-              toastService.showError("Error", errorMessage);
-              throw error; // Re-throw to prevent dialog from closing
-            },
-          }
-        );
+        //       if (result.failed > 0) {
+        //         toastService.showWarn(
+        //           "Upload Complete",
+        //           `${message}. ${result.failed} failed. Check console for details.`
+        //         );
+        //         console.error("Upload errors:", result.errors);
+        //       } else {
+        //         toastService.showSuccess("Success", message);
+        //       }
+        //     },
+        //     onError: (error: any) => {
+        //       const errorMessage = getErrorMessage(
+        //         error,
+        //         "Failed to upload loans"
+        //       );
+        //       toastService.showError("Error", errorMessage);
+        //       throw error; // Re-throw to prevent dialog from closing
+        //     },
+        //   }
+        // );
       } catch (error: any) {
         const errorMessage = getErrorMessage(error, "Failed to parse file");
         toastService.showError("Error", errorMessage);

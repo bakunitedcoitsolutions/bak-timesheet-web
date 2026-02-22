@@ -752,7 +752,7 @@ const TimesheetPage = () => {
                 globalSearch={false}
                 emptyMessage="No timesheet data found. Select a date and payroll section."
                 rowClassName={(rowData: TimesheetPageRow) =>
-                  rowData.isLocked ? "locked-row" : ""
+                  isLocked(rowData) ? "locked-row" : ""
                 }
                 scrollable
                 scrollHeight="65vh"

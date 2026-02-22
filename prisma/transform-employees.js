@@ -202,7 +202,7 @@ function transformEmployee(row) {
     gosiCityId,
 
     // Step 5: Loan & Card Details
-    openingBalance: parseDecimal(row.OpeningBalanceLoan),
+    openingAdvanceBalance: parseDecimal(row.OpeningBalanceLoan),
     isCardDelivered: parseBoolean(row.IsCardDelivered),
     cardDocument: null, // Not in CSV
   };

@@ -89,7 +89,8 @@ export interface UpdateEmployeeStep4Data {
 // ---------------------------------------------------------------------------
 
 export interface UpdateEmployeeStep5Data {
-  openingBalance?: number | Prisma.Decimal;
+  openingAdvanceBalance?: number | Prisma.Decimal;
+  openingTrafficViolationBalance?: number | Prisma.Decimal;
   isCardDelivered?: boolean;
   cardDocument?: string; // URL from Supabase Storage
 }
@@ -182,7 +183,8 @@ export interface EmployeeInterface {
   gosiSalary: number | null; // Converted from Decimal
   gosiCityId: number | null;
   // Step 5
-  openingBalance: number | null; // Converted from Decimal
+  openingAdvanceBalance: number | null; // Converted from Decimal
+  openingTrafficViolationBalance: number | null; // Converted from Decimal
   isCardDelivered: boolean;
   cardDocument: string | null;
   // Timestamps

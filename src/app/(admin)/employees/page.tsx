@@ -296,14 +296,26 @@ const columns = (
     ),
   },
   {
-    field: "openingBalance",
-    header: "Opening Balance",
+    field: "openingAdvanceBalance",
+    header: "Open. Adv. Bal.",
     sortable: false,
     filterable: false,
     style: { minWidth: 150 },
     body: (rowData: ListedEmployee) => (
       <span className="text-sm">
-        {rowData.openingBalance?.toString() || "-"}
+        {rowData.openingAdvanceBalance?.toString() || "-"}
+      </span>
+    ),
+  },
+  {
+    field: "openingTrafficViolationBalance",
+    header: "Open. Traff. Bal.",
+    sortable: false,
+    filterable: false,
+    style: { minWidth: 150 },
+    body: (rowData: ListedEmployee) => (
+      <span className="text-sm">
+        {rowData.openingTrafficViolationBalance?.toString() || "-"}
       </span>
     ),
   },

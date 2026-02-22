@@ -68,7 +68,8 @@ const employeeSelect = {
   gosiSalary: true,
   gosiCityId: true,
   // Step 5
-  openingBalance: true,
+  openingAdvanceBalance: true,
+  openingTrafficViolationBalance: true,
   isCardDelivered: true,
   cardDocument: true,
   // Timestamps
@@ -158,7 +159,12 @@ export const createEmployeeStep1 = async (data: CreateEmployeeStep1Data) => {
         mobileAllowance: convertDecimalToNumber(employee.mobileAllowance),
         otherAllowance: convertDecimalToNumber(employee.otherAllowance),
         gosiSalary: convertDecimalToNumber(employee.gosiSalary),
-        openingBalance: convertDecimalToNumber(employee.openingBalance),
+        openingAdvanceBalance: convertDecimalToNumber(
+          employee.openingAdvanceBalance
+        ),
+        openingTrafficViolationBalance: convertDecimalToNumber(
+          employee.openingTrafficViolationBalance
+        ),
       };
     },
     {
@@ -231,7 +237,12 @@ export const updateEmployeeStep1 = async (
         mobileAllowance: convertDecimalToNumber(employee.mobileAllowance),
         otherAllowance: convertDecimalToNumber(employee.otherAllowance),
         gosiSalary: convertDecimalToNumber(employee.gosiSalary),
-        openingBalance: convertDecimalToNumber(employee.openingBalance),
+        openingAdvanceBalance: convertDecimalToNumber(
+          employee.openingAdvanceBalance
+        ),
+        openingTrafficViolationBalance: convertDecimalToNumber(
+          employee.openingTrafficViolationBalance
+        ),
       };
     },
     {
@@ -374,7 +385,12 @@ export const updateEmployeeStep2 = async (
     mobileAllowance: convertDecimalToNumber(employee.mobileAllowance),
     otherAllowance: convertDecimalToNumber(employee.otherAllowance),
     gosiSalary: convertDecimalToNumber(employee.gosiSalary),
-    openingBalance: convertDecimalToNumber(employee.openingBalance),
+    openingAdvanceBalance: convertDecimalToNumber(
+      employee.openingAdvanceBalance
+    ),
+    openingTrafficViolationBalance: convertDecimalToNumber(
+      employee.openingTrafficViolationBalance
+    ),
   };
 };
 
@@ -428,7 +444,12 @@ export const updateEmployeeStep3 = async (
     mobileAllowance: convertDecimalToNumber(employee.mobileAllowance),
     otherAllowance: convertDecimalToNumber(employee.otherAllowance),
     gosiSalary: convertDecimalToNumber(employee.gosiSalary),
-    openingBalance: convertDecimalToNumber(employee.openingBalance),
+    openingAdvanceBalance: convertDecimalToNumber(
+      employee.openingAdvanceBalance
+    ),
+    openingTrafficViolationBalance: convertDecimalToNumber(
+      employee.openingTrafficViolationBalance
+    ),
   };
 };
 
@@ -485,7 +506,12 @@ export const updateEmployeeStep4 = async (
     mobileAllowance: convertDecimalToNumber(employee.mobileAllowance),
     otherAllowance: convertDecimalToNumber(employee.otherAllowance),
     gosiSalary: convertDecimalToNumber(employee.gosiSalary),
-    openingBalance: convertDecimalToNumber(employee.openingBalance),
+    openingAdvanceBalance: convertDecimalToNumber(
+      employee.openingAdvanceBalance
+    ),
+    openingTrafficViolationBalance: convertDecimalToNumber(
+      employee.openingTrafficViolationBalance
+    ),
   };
 };
 
@@ -508,8 +534,11 @@ export const updateEmployeeStep5 = async (
 
   const updateData: any = {};
 
-  if (data.openingBalance !== undefined)
-    updateData.openingBalance = data.openingBalance ?? null;
+  if (data.openingAdvanceBalance !== undefined)
+    updateData.openingAdvanceBalance = data.openingAdvanceBalance ?? null;
+  if (data.openingTrafficViolationBalance !== undefined)
+    updateData.openingTrafficViolationBalance =
+      data.openingTrafficViolationBalance ?? null;
   if (data.isCardDelivered !== undefined)
     updateData.isCardDelivered = data.isCardDelivered;
   if (data.cardDocument !== undefined)
@@ -530,7 +559,12 @@ export const updateEmployeeStep5 = async (
     mobileAllowance: convertDecimalToNumber(employee.mobileAllowance),
     otherAllowance: convertDecimalToNumber(employee.otherAllowance),
     gosiSalary: convertDecimalToNumber(employee.gosiSalary),
-    openingBalance: convertDecimalToNumber(employee.openingBalance),
+    openingAdvanceBalance: convertDecimalToNumber(
+      employee.openingAdvanceBalance
+    ),
+    openingTrafficViolationBalance: convertDecimalToNumber(
+      employee.openingTrafficViolationBalance
+    ),
   };
 };
 
@@ -556,7 +590,12 @@ export const findEmployeeById = async (id: number) => {
     mobileAllowance: convertDecimalToNumber(employee.mobileAllowance),
     otherAllowance: convertDecimalToNumber(employee.otherAllowance),
     gosiSalary: convertDecimalToNumber(employee.gosiSalary),
-    openingBalance: convertDecimalToNumber(employee.openingBalance),
+    openingAdvanceBalance: convertDecimalToNumber(
+      employee.openingAdvanceBalance
+    ),
+    openingTrafficViolationBalance: convertDecimalToNumber(
+      employee.openingTrafficViolationBalance
+    ),
   };
 };
 
@@ -729,7 +768,12 @@ export const listEmployees = async (
     mobileAllowance: convertDecimalToNumber(employee.mobileAllowance),
     otherAllowance: convertDecimalToNumber(employee.otherAllowance),
     gosiSalary: convertDecimalToNumber(employee.gosiSalary),
-    openingBalance: convertDecimalToNumber(employee.openingBalance),
+    openingAdvanceBalance: convertDecimalToNumber(
+      employee.openingAdvanceBalance
+    ),
+    openingTrafficViolationBalance: convertDecimalToNumber(
+      employee.openingTrafficViolationBalance
+    ),
   }));
 
   return {

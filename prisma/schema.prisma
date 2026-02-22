@@ -171,12 +171,12 @@ model Employee {
   isDeductable       Boolean   @default(false)
   isFixed            Boolean   @default(false)
   workingDays        Int?
-  hourlyRate         Decimal?  @db.Decimal(10, 1)
-  salary             Decimal?  @db.Decimal(10, 1)
+  hourlyRate         Decimal?  @db.Decimal(10, 2)
+  salary             Decimal?  @db.Decimal(10, 2)
   breakfastAllowance Boolean   @default(false)
-  foodAllowance      Decimal?  @db.Decimal(10, 1)
-  mobileAllowance    Decimal?  @db.Decimal(10, 1)
-  otherAllowance     Decimal?  @db.Decimal(10, 1)
+  foodAllowance      Decimal?  @db.Decimal(10, 2)
+  mobileAllowance    Decimal?  @db.Decimal(10, 2)
+  otherAllowance     Decimal?  @db.Decimal(10, 2)
   contractStartDate  DateTime?
   contractEndDate    DateTime?
   contractDocument   String?
@@ -200,11 +200,12 @@ model Employee {
   bankName   String?
   bankCode   String?
   iban       String?
-  gosiSalary Decimal? @db.Decimal(10, 1)
+  gosiSalary Decimal? @db.Decimal(10, 2)
   gosiCityId Int?
 
   // Step 5 - Loan & Bank Card Details
-  openingBalance  Decimal? @db.Decimal(10, 1)
+  openingAdvanceBalance  Decimal? @db.Decimal(10, 2)
+  openingTrafficViolationBalance  Decimal? @db.Decimal(10, 2)
   isCardDelivered Boolean  @default(false)
   cardDocument    String?
 
