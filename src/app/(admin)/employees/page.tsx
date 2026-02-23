@@ -176,9 +176,19 @@ const columns = (
     ...commonColumnProps,
     style: { minWidth: "250px" },
     body: (rowData: ListedEmployee) => (
-      <span className="text-sm uppercase font-medium whitespace-nowrap">
-        {rowData.nameEn}
-      </span>
+      <div className="flex items-start gap-2 min-w-0">
+        <div className="flex flex-1 flex-col gap-1 min-w-0">
+          <span className="text-sm font-medium leading-tight wrap-break-word">
+            {rowData.nameEn}
+          </span>
+        </div>
+        {(rowData.isFixed || rowData.isDeductable) && (
+          <div className="flex items-center justify-center gap-x-1 shrink-0">
+            {rowData.isFixed && <Badge text="F" />}
+            {rowData.isDeductable && <Badge text="D" />}
+          </div>
+        )}
+      </div>
     ),
   },
   {
@@ -280,19 +290,13 @@ const columns = (
     filterable: false,
     style: { minWidth: 150 },
     body: (rowData: ListedEmployee) => (
-      <div className="flex justify-between gap-2">
-        <span className="text-sm font-semibold">
-          {rowData.salary && rowData.salary > 0 ? (
-            rowData.salary.toString()
-          ) : (
-            <span className="text-text-gray font-normal">N/A</span>
-          )}
-        </span>
-        <div className="flex items-start gap-2">
-          {rowData.isFixed && <Badge text="F" />}
-          {rowData.isDeductable && <Badge text="D" />}
-        </div>
-      </div>
+      <span className="text-sm font-semibold">
+        {rowData.salary && rowData.salary > 0 ? (
+          rowData.salary.toString()
+        ) : (
+          <span className="text-text-gray font-normal">N/A</span>
+        )}
+      </span>
     ),
   },
   {

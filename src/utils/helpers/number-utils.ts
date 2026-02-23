@@ -6,7 +6,7 @@
  */
 export const formatNum = (
   val: number | string | null | undefined,
-  decimalPlaces = 1
+  decimalPlaces = 2
 ): string => {
   const n = Number(val ?? 0);
   if (isNaN(n)) return "0";

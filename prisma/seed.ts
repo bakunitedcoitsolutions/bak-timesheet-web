@@ -35,6 +35,7 @@ import * as path from "path";
 import { seedEmployeeLoans } from "./seeds/employee-loans";
 import { seedTrafficChallans } from "./seeds/traffic-challans";
 import { seedTimesheets } from "./seeds/timesheets";
+import { updateEmployeeRates } from "./seeds/update-employee-rates";
 
 import { PrismaClient } from "./generated/prisma/client";
 import { seedPayrollSummary } from "./seeds/payroll-summary";
@@ -1610,8 +1611,8 @@ async function main() {
   // );
 
   // // Seed Employee Loans
-  console.log("\n📝 Seeding Employee Loans...");
-  await seedEmployeeLoans(prisma);
+  // console.log("\n📝 Seeding Employee Loans...");
+  // await seedEmployeeLoans(prisma);
 
   // // Seed Traffic Challans
   // console.log("\n📝 Seeding Traffic Challans...");
@@ -1628,6 +1629,10 @@ async function main() {
   // Seed Payroll Details
   // console.log("\n📝 Seeding Payroll Details...");
   // await seedPayrollDetails(prisma);
+
+  // Update Employee Rates
+  // console.log("\n📝 Updating Employee Rates...");
+  // await updateEmployeeRates(prisma);
 
   // Reset Sequences
   await resetSequences();
