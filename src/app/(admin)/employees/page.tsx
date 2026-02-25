@@ -185,7 +185,7 @@ const columns = (
         {(rowData.isFixed || rowData.isDeductable) && (
           <div className="flex items-center justify-center gap-x-1 shrink-0">
             {rowData.isFixed && <Badge text="F" />}
-            {rowData.isDeductable && <Badge text="D" />}
+            {rowData.isFixed && rowData.isDeductable && <Badge text="D" />}
           </div>
         )}
       </div>

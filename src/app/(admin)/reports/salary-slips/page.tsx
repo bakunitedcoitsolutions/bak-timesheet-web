@@ -13,30 +13,24 @@ import {
   GroupDropdown,
   AutoScrollChips,
 } from "@/components";
-import { parseGroupDropdownFilter } from "@/utils/helpers";
-import { useGetEmployees } from "@/lib/db/services/employee";
-import { ListedEmployee } from "@/lib/db/services/employee/employee.dto";
-import {
-  useGlobalData,
-  GlobalDataDesignation,
-} from "@/context/GlobalDataContext";
+import { parseGroupDropdownFilter, formatPayrollPeriod } from "@/utils/helpers";
+import { useGetSalarySlipData } from "@/lib/db/services/payroll-summary";
+import { PayrollDetailEntry } from "@/lib/db/services/payroll-summary/mappers";
+import { toastService } from "@/lib/toast";
 
+// ── Salary slip grid (memoised for print performance) ─────────────────────────
 const SalarySlipGrid = memo(
   ({
-    employees,
-    getDesignationName,
+    entries,
     monthYear,
   }: {
-    employees: ListedEmployee[];
-    getDesignationName: (id: number | null) => string | undefined;
+    entries: PayrollDetailEntry[];
     monthYear: string;
   }) => {
-    // Determine how many slips per page.
-    // Adjusted to 3 slips per page as requested
     const slipsPerPage = 3;
-    const chunks = [];
-    for (let i = 0; i < employees.length; i += slipsPerPage) {
-      chunks.push(employees.slice(i, i + slipsPerPage));
+    const chunks: PayrollDetailEntry[][] = [];
+    for (let i = 0; i < entries.length; i += slipsPerPage) {
+      chunks.push(entries.slice(i, i + slipsPerPage));
     }
 
     return (
@@ -48,13 +42,12 @@ const SalarySlipGrid = memo(
               chunkIndex < chunks.length - 1 ? "print:break-after-page" : ""
             }`}
           >
-            {chunk.map((employee) => (
-              <div key={employee.id} className="print:break-inside-avoid">
-                <SalarySlip
-                  employee={employee}
-                  designationName={getDesignationName(employee.designationId)}
-                  monthYear={monthYear}
-                />
+            {chunk.map((entry) => (
+              <div
+                key={`${entry.id}-${entry.empCode}`}
+                className="print:break-inside-avoid"
+              >
+                <SalarySlip entry={entry} monthYear={monthYear} />
               </div>
             ))}
           </div>
@@ -63,20 +56,23 @@ const SalarySlipGrid = memo(
     );
   }
 );
+SalarySlipGrid.displayName = "SalarySlipGrid";
 
-// Filter Component
+// ── Filter section ─────────────────────────────────────────────────────────────
 const FilterSection = memo(
   ({
     onSearch,
     selectedDate,
     onDateChange,
+    isLoading,
   }: {
     onSearch: (
-      employeeCodes: string[] | null,
+      employeeCodes: number[] | null,
       filter: string | number | null
     ) => void;
-    selectedDate: Date;
+    selectedDate: Date | null;
     onDateChange: (date: Date) => void;
+    isLoading: boolean;
   }) => {
     const [employeeCodes, setEmployeeCodes] = useState<string[]>([]);
     const [selectedFilter, setSelectedFilter] = useState<
@@ -84,18 +80,25 @@ const FilterSection = memo(
     >("all");
 
     const handleSearch = () => {
-      onSearch(employeeCodes.length > 0 ? employeeCodes : null, selectedFilter);
+      const codes =
+        employeeCodes.length > 0
+          ? employeeCodes.map((c) => parseInt(c, 10)).filter((n) => !isNaN(n))
+          : null;
+      onSearch(codes, selectedFilter);
     };
+
+    const monthValue = selectedDate
+      ? `${selectedDate.getFullYear()}-${String(selectedDate.getMonth() + 1).padStart(2, "0")}`
+      : "";
 
     return (
       <div className="bg-[#F5E6E8] w-full flex flex-col xl:flex-row justify-between gap-x-10 gap-y-4 px-6 py-6 print:hidden">
         <div className="grid flex-1 grid-cols-1 md:grid-cols-4 lg:grid-cols-5 gap-3 items-center">
+          {/* Month — required */}
           <div className="w-full">
             <Input
               type="month"
-              value={`${selectedDate.getFullYear()}-${String(
-                selectedDate.getMonth() + 1
-              ).padStart(2, "0")}`}
+              value={monthValue}
               onChange={(e) => {
                 if (e.target.value) {
                   const [y, m] = e.target.value.split("-").map(Number);
@@ -103,9 +106,11 @@ const FilterSection = memo(
                 }
               }}
               className="w-full h-10!"
-              placeholder="Select Month"
+              placeholder="Select Month *"
             />
           </div>
+
+          {/* Employee codes */}
           <div className="w-full">
             <AutoScrollChips
               value={employeeCodes}
@@ -116,6 +121,8 @@ const FilterSection = memo(
               className="w-full h-10!"
             />
           </div>
+
+          {/* Designation / Section */}
           <div className="w-full">
             <GroupDropdown
               value={selectedFilter}
@@ -124,12 +131,20 @@ const FilterSection = memo(
               placeholder="Select Section / Designation"
             />
           </div>
+
+          {/* Search button — disabled until month is selected */}
           <div className="w-full col-span-1 lg:col-span-2 md:flex md:justify-end">
             <Button
               size="small"
               label="Search"
               onClick={handleSearch}
               className="w-full md:w-32 h-10!"
+              disabled={!selectedDate || isLoading}
+              loading={isLoading}
+              tooltip={
+                !selectedDate ? "Please select a month first" : undefined
+              }
+              tooltipOptions={{ position: "top" }}
             />
           </div>
         </div>
@@ -137,59 +152,57 @@ const FilterSection = memo(
     );
   }
 );
+FilterSection.displayName = "FilterSection";
 
+// ── Page ───────────────────────────────────────────────────────────────────────
 const SalarySlipsPage = () => {
   const router = useRouter();
   const contentRef = useRef<HTMLDivElement>(null);
   const reactToPrintFn = useReactToPrint({ contentRef });
 
-  // Query states
-  const [queryEmployeeCodes, setQueryEmployeeCodes] = useState<string[] | null>(
-    null
-  );
-  const [queryFilter, setQueryFilter] = useState<string | number | null>("all");
-  const [selectedDate, setSelectedDate] = useState<Date>(new Date());
+  const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
+  const [slipEntries, setSlipEntries] = useState<PayrollDetailEntry[]>([]);
+  const [monthYearLabel, setMonthYearLabel] = useState<string>("");
 
-  const filterParams = parseGroupDropdownFilter(queryFilter);
+  const { mutateAsync: fetchSlipData, isPending: isLoading } =
+    useGetSalarySlipData();
 
-  // Data Fetching
-  const { data: employeesResponse, isLoading } = useGetEmployees({
-    page: 1,
-    limit: 1000,
-    employeeCodes: queryEmployeeCodes || undefined,
-    designationId: filterParams.designationId,
-    payrollSectionId: filterParams.payrollSectionId,
-    sortBy: "employeeCode",
-    sortOrder: "asc",
-  });
-
-  const employees: ListedEmployee[] = employeesResponse?.employees ?? [];
-  const { data: globalData } = useGlobalData();
-  const designations: GlobalDataDesignation[] = globalData.designations || [];
-
-  // Helper to get designation name
-  const getDesignationName = (id: number | null) => {
-    if (!id) return undefined;
-    const designation = designations.find((d) => d.id === id);
-    return designation?.nameEn;
-  };
-
-  const handlePrint = () => {
-    reactToPrintFn();
-  };
-
-  const handleSearch = (
-    employeeCodes: string[] | null,
+  const handleSearch = async (
+    employeeCodes: number[] | null,
     filter: string | number | null
   ) => {
-    setQueryEmployeeCodes(employeeCodes);
-    setQueryFilter(filter);
-  };
+    if (!selectedDate) return;
 
-  const monthYearString = selectedDate.toLocaleString("default", {
-    month: "long",
-    year: "numeric",
-  });
+    const filterParams = parseGroupDropdownFilter(filter);
+    const payrollYear = selectedDate.getFullYear();
+    const payrollMonth = selectedDate.getMonth() + 1;
+
+    try {
+      const result = await fetchSlipData({
+        payrollYear,
+        payrollMonth,
+        designationId: filterParams.designationId ?? undefined,
+        payrollSectionId: filterParams.payrollSectionId ?? undefined,
+        employeeCodes: employeeCodes ?? undefined,
+      });
+
+      const entries = (result ?? []) as PayrollDetailEntry[];
+      setSlipEntries(entries);
+      setMonthYearLabel(formatPayrollPeriod(payrollMonth, payrollYear));
+
+      if (entries.length === 0) {
+        toastService.showInfo(
+          "No Results",
+          "No employee data found for the selected filters."
+        );
+      }
+    } catch (error: any) {
+      toastService.showError(
+        "Error",
+        error.message || "Failed to load salary slips."
+      );
+    }
+  };
 
   return (
     <div className="h-full bg-white flex flex-col">
@@ -205,7 +218,8 @@ const SalarySlipsPage = () => {
                 label="Print"
                 icon="pi pi-print"
                 variant="outlined"
-                onClick={handlePrint}
+                onClick={() => reactToPrintFn()}
+                disabled={slipEntries.length === 0}
                 className="w-full lg:w-28 h-10! bg-white!"
               />
             </div>
@@ -216,6 +230,7 @@ const SalarySlipsPage = () => {
             onSearch={handleSearch}
             selectedDate={selectedDate}
             onDateChange={setSelectedDate}
+            isLoading={isLoading}
           />
         </div>
       </div>
@@ -228,16 +243,14 @@ const SalarySlipsPage = () => {
           <div className="flex items-center justify-center h-64">
             <ProgressSpinner style={{ width: "50px", height: "50px" }} />
           </div>
-        ) : employees.length === 0 ? (
+        ) : slipEntries.length === 0 ? (
           <div className="flex items-center justify-center h-64 text-gray-500">
-            No employees found.
+            {selectedDate
+              ? "No employees found for the selected filters."
+              : "Select a month and click Search to generate salary slips."}
           </div>
         ) : (
-          <SalarySlipGrid
-            employees={employees}
-            getDesignationName={getDesignationName}
-            monthYear={monthYearString}
-          />
+          <SalarySlipGrid entries={slipEntries} monthYear={monthYearLabel} />
         )}
       </div>
 
@@ -267,7 +280,6 @@ const SalarySlipsPage = () => {
           .print\\:block {
             display: block !important;
           }
-          /* Ensure backgrounds print */
           * {
             -webkit-print-color-adjust: exact !important;
             print-color-adjust: exact !important;

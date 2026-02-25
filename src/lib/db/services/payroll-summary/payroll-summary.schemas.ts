@@ -97,3 +97,13 @@ export const RefreshPayrollDetailRowSchema = z.object({
 export type RefreshPayrollDetailRowInput = z.infer<
   typeof RefreshPayrollDetailRowSchema
 >;
+
+export const GetSalarySlipDataSchema = z.object({
+  payrollYear: z.number().int(),
+  payrollMonth: z.number().int().min(1).max(12),
+  designationId: z.number().int().optional().nullable(),
+  payrollSectionId: z.number().int().optional().nullable(),
+  employeeCodes: z.array(z.number().int()).optional().nullable(),
+});
+
+export type GetSalarySlipDataInput = z.infer<typeof GetSalarySlipDataSchema>;

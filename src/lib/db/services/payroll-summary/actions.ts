@@ -12,6 +12,7 @@ import {
   PostPayrollSchema,
   RecalculatePayrollSummarySchema,
   RefreshPayrollDetailRowSchema,
+  GetSalarySlipDataSchema,
 } from "./payroll-summary.schemas";
 import {
   getPayrollSummariesByYear,
@@ -29,6 +30,7 @@ import {
   recalculatePayrollSummary,
   refreshPayrollDetailRow,
 } from "./payroll-actions.service";
+import { getSalarySlipData } from "./salary-slip.service";
 
 export const updateMonthlyPayrollValuesAction = serverAction
   .input(UpdateMonthlyPayrollValuesSchema)
@@ -89,4 +91,10 @@ export const refreshPayrollDetailRowAction = serverAction
   .input(RefreshPayrollDetailRowSchema)
   .handler(async ({ input }) => {
     return await refreshPayrollDetailRow(input);
+  });
+
+export const getSalarySlipDataAction = serverAction
+  .input(GetSalarySlipDataSchema)
+  .handler(async ({ input }) => {
+    return await getSalarySlipData(input);
   });

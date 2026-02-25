@@ -17,6 +17,7 @@ import {
   getPayrollDateAction,
   savePayrollDetailsBatchAction,
   refreshPayrollDetailRowAction,
+  getSalarySlipDataAction,
 } from "./actions";
 import {
   GetPayrollDetailsInput,
@@ -115,3 +116,8 @@ export const useRefreshPayrollDetailRow = () => {
   );
   return { mutateAsync, isPending };
 };
+
+export const useGetSalarySlipData = () =>
+  useMutation(getSalarySlipDataAction, {
+    mutationKey: ["get-salary-slip-data"],
+  });
