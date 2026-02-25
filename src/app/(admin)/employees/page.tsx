@@ -24,18 +24,18 @@ import {
   toPrimeReactSortOrder,
   parseGroupDropdownFilter,
 } from "@/utils/helpers";
+import {
+  useGlobalData,
+  GlobalDataGeneral,
+  GlobalDataDesignation,
+} from "@/context/GlobalDataContext";
 import { useDebounce } from "@/hooks";
 import { toastService } from "@/lib/toast";
+import { STORAGE_CONFIG } from "@/utils/constants";
 import { showConfirmDialog } from "@/components/common/confirm-dialog";
-import { COMMON_QUERY_INPUT, STORAGE_CONFIG } from "@/utils/constants";
 import { ListedEmployee } from "@/lib/db/services/employee/employee.dto";
 import { useDeleteEmployee, useGetEmployees } from "@/lib/db/services/employee";
 import { ListEmployeesSortableField } from "@/lib/db/services/employee/employee.dto";
-import {
-  useGlobalData,
-  GlobalDataDesignation,
-  GlobalDataGeneral,
-} from "@/context/GlobalDataContext";
 
 // Constants
 const SORTABLE_FIELDS = {
@@ -64,13 +64,34 @@ const commonColumnProps = {
 
 type SortableField = keyof typeof SORTABLE_FIELDS;
 
+const RenderDot = ({ statusId }: { statusId: number | null }) => {
+  if (statusId === 1) {
+    return (
+      <div className="absolute z-10 -top-0.5 -right-0.5 w-3 h-3 bg-theme-green rounded-full" />
+    );
+  }
+  if (statusId === 7) {
+    return (
+      <div className="absolute z-10 -top-0.5 -right-0.5 w-3 h-3 bg-theme-red rounded-full" />
+    );
+  }
+  if (statusId === 4) {
+    return (
+      <div className="absolute z-10 -top-0.5 -right-0.5 w-3 h-3 bg-orange-400 rounded-full" />
+    );
+  }
+  return null;
+};
+
 // Helper component for profile picture with signed URL
 const EmployeeProfilePicture = ({
+  statusId,
   profilePicture,
   employeeName,
 }: {
   profilePicture: string | null;
   employeeName: string;
+  statusId: number | null;
 }) => {
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -113,6 +134,7 @@ const EmployeeProfilePicture = ({
   if (imageUrl) {
     return (
       <div className="relative w-12 h-12 rounded-xl overflow-hidden shrink-0">
+        <RenderDot statusId={statusId} />
         <Image
           width={48}
           height={48}
@@ -125,7 +147,8 @@ const EmployeeProfilePicture = ({
   }
 
   return (
-    <div className="w-12 h-12 bg-gray-200 rounded-xl flex items-center justify-center shrink-0">
+    <div className="w-12 h-12 bg-gray-200 rounded-xl flex items-center justify-center shrink-0 relative">
+      <RenderDot statusId={statusId} />
       <i className="pi pi-user text-gray-400 text-xl"></i>
     </div>
   );
@@ -158,6 +181,7 @@ const columns = (
     body: (rowData: ListedEmployee) => (
       <div className="flex items-center gap-5">
         <EmployeeProfilePicture
+          statusId={rowData.statusId}
           profilePicture={rowData.profilePicture}
           employeeName={rowData.nameEn}
         />

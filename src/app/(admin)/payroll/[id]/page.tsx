@@ -426,7 +426,7 @@ const PayrollDetailPage = () => {
       body: (rowData: PayrollDetailEntry) => (
         <div className="flex justify-center">
           <span className="text-[15px] font-semibold!">
-            {formatNum(rowData.totalSalary).toString()}
+            {formatNum(rowData.totalSalary, 0).toString()}
           </span>
         </div>
       ),
@@ -550,7 +550,7 @@ const PayrollDetailPage = () => {
       body: (rowData: PayrollDetailEntry) => (
         <div className="flex justify-center">
           <span className="text-[15px] font-semibold! text-primary!">
-            {formatNum(calculateNetSalaryPayable(rowData)).toString()}
+            {formatNum(calculateNetSalaryPayable(rowData), 0).toString()}
           </span>
         </div>
       ),

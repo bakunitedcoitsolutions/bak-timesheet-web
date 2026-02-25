@@ -13,7 +13,7 @@ import {
   GroupDropdown,
   AutoScrollChips,
 } from "@/components";
-import { parseGroupDropdownFilter, formatPayrollPeriod } from "@/utils/helpers";
+import { parseGroupDropdownFilter } from "@/utils/helpers";
 import { useGetSalarySlipData } from "@/lib/db/services/payroll-summary";
 import { PayrollDetailEntry } from "@/lib/db/services/payroll-summary/mappers";
 import { toastService } from "@/lib/toast";
@@ -188,8 +188,12 @@ const SalarySlipsPage = () => {
 
       const entries = (result ?? []) as PayrollDetailEntry[];
       setSlipEntries(entries);
-      setMonthYearLabel(formatPayrollPeriod(payrollMonth, payrollYear));
-
+      setMonthYearLabel(
+        new Date(payrollYear, payrollMonth - 1).toLocaleString("default", {
+          month: "long",
+          year: "numeric",
+        })
+      );
       if (entries.length === 0) {
         toastService.showInfo(
           "No Results",

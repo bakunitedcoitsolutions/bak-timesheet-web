@@ -104,19 +104,19 @@ export const SalarySlip = ({
                     {entry.workDays}
                   </td>
                   <td className="border border-gray-300 py-0.5 px-1">
-                    {formatNum(entry.overTime)}
+                    {formatNum(entry.overTime, 0)}
                   </td>
                   <td className="border border-gray-300 py-0.5 px-1">
-                    {formatNum(entry.totalHours)}
+                    {formatNum(entry.totalHours, 0)}
                   </td>
                   <td className="border border-gray-300 py-0.5 px-1">
                     {formatNum(entry.hourlyRate)}
                   </td>
                   <td className="border border-gray-300 py-0.5 px-1">
-                    {formatNum(entry.totalAllowances)}
+                    {formatNum(entry.totalAllowances, 0)}
                   </td>
                   <td className="border border-gray-300 py-0.5 px-1 font-bold">
-                    {formatNum(entry.totalSalary)}
+                    {formatNum(entry.totalSalary, 0)}
                   </td>
                 </tr>
               </tbody>
@@ -142,13 +142,13 @@ export const SalarySlip = ({
                 </div>
                 <div className="grid grid-cols-3 text-center border-b border-gray-300 flex-1 items-center">
                   <div className="border-r border-gray-300 py-0.5">
-                    {formatNum(entry.previousAdvance)}
+                    {formatNum(entry.previousAdvance, 0)}
                   </div>
                   <div className="border-r border-gray-300 py-0.5">
-                    {formatNum(entry.currentAdvance)}
+                    {formatNum(entry.currentAdvance, 0)}
                   </div>
                   <div className="py-0.5 text-red-600">
-                    {formatNum(entry.loanDeduction)}
+                    {formatNum(entry.loanDeduction, 0)}
                   </div>
                 </div>
                 <div className="grid grid-cols-3 text-center items-center py-0.5 bg-gray-50">
@@ -156,7 +156,7 @@ export const SalarySlip = ({
                     Net Advance / Loan Balance:
                   </div>
                   <div className="py-0.5 font-bold">
-                    {formatNum(entry.netLoan)}
+                    {formatNum(entry.netLoan, 0)}
                   </div>
                 </div>
               </div>
@@ -179,13 +179,13 @@ export const SalarySlip = ({
                 </div>
                 <div className="grid grid-cols-3 text-center border-b border-gray-300 flex-1 items-center">
                   <div className="border-r border-gray-300 py-0.5">
-                    {formatNum(entry.previousChallan)}
+                    {formatNum(entry.previousChallan, 0)}
                   </div>
                   <div className="border-r border-gray-300 py-0.5">
-                    {formatNum(entry.currentChallan)}
+                    {formatNum(entry.currentChallan, 0)}
                   </div>
                   <div className="py-0.5 text-red-600">
-                    {formatNum(entry.challanDeduction)}
+                    {formatNum(entry.challanDeduction, 0)}
                   </div>
                 </div>
                 <div className="grid grid-cols-3 text-center items-center py-0.5 bg-gray-50">
@@ -193,7 +193,7 @@ export const SalarySlip = ({
                     Net Traffic Challan Balance:
                   </div>
                   <div className="py-0.5 font-bold text-xs">
-                    {formatNum(entry.netChallan)}
+                    {formatNum(entry.netChallan, 0)}
                   </div>
                 </div>
               </div>
@@ -204,8 +204,8 @@ export const SalarySlip = ({
               <div className="flex bg-gray-100">
                 <div className="py-1 px-4 flex-1 flex items-center justify-start">
                   <span className="font-bold text-xs mr-2">
-                    Cash: {formatNum(entry.cashSalary)} | Card:{" "}
-                    {formatNum(entry.cardSalary)}
+                    Cash: {formatNum(entry.cashSalary, 0)} | Card:{" "}
+                    {formatNum(entry.cardSalary, 0)}
                   </span>
                 </div>
                 <div className="py-1 px-4 flex-1 flex items-center justify-end">
@@ -213,7 +213,7 @@ export const SalarySlip = ({
                     Net Salary:
                   </span>
                   <span className="font-bold text-sm text-black">
-                    {formatNum(entry.netSalaryPayable)}
+                    {formatNum(entry.netSalaryPayable, 0)}
                   </span>
                 </div>
               </div>
