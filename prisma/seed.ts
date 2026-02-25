@@ -32,8 +32,6 @@ import { Pool } from "pg";
 import { PrismaPg } from "@prisma/adapter-pg";
 import * as fs from "fs";
 import * as path from "path";
-import { seedEmployeeLoans } from "./seeds/employee-loans";
-import { seedTrafficChallans } from "./seeds/traffic-challans";
 import { seedTimesheets } from "./seeds/timesheets";
 import { updateEmployeeRates } from "./seeds/update-employee-rates";
 

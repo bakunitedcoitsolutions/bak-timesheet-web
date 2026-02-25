@@ -22,6 +22,7 @@ import {
   useGetPayrollDate,
   useSavePayrollDetailsBatch,
   useRefreshPayrollDetailRow,
+  useRepostPayroll,
 } from "@/lib/db/services/payroll-summary";
 import { queryClient } from "@/lib/react-query";
 import { toastService } from "@/lib/toast";
@@ -88,8 +89,10 @@ const PayrollDetailPage = () => {
 
   const { mutateAsync: savePayrollDetails } = useSavePayrollDetailsBatch();
   const { mutateAsync: refreshDetailRow } = useRefreshPayrollDetailRow();
+  const { mutateAsync: repostPayroll } = useRepostPayroll();
   const [isSaving, setIsSaving] = useState(false);
-  const [isRefreshing, setIsRefreshing] = useState(false);
+  const [refreshingRowId, setRefreshingRowId] = useState<number | null>(null);
+  const [isRefreshingAll, setIsRefreshingAll] = useState(false);
 
   const saveSingleRow = async (row: PayrollDetailEntry) => {
     try {
@@ -125,8 +128,17 @@ const PayrollDetailPage = () => {
 
   const refreshSingleRow = async (row: PayrollDetailEntry) => {
     try {
-      setIsRefreshing(true);
-      await refreshDetailRow({ payrollDetailId: row.id });
+      setRefreshingRowId(row.id);
+      const result = await refreshDetailRow({ payrollDetailId: row.id });
+      // Immediately patch the local state with the freshly recalculated row
+      // so the table updates without waiting for a background query refetch.
+      if (result && result.updatedEntry) {
+        setPayrollData((prev) =>
+          prev.map((entry) =>
+            entry.id === row.id ? result.updatedEntry : entry
+          )
+        );
+      }
       toastService.showSuccess(
         "Refreshed",
         `Row refreshed successfully for ${row.empCode} - ${row.name}`
@@ -137,7 +149,7 @@ const PayrollDetailPage = () => {
         error.message || "Failed to refresh payroll details"
       );
     } finally {
-      setIsRefreshing(false);
+      setRefreshingRowId(null);
     }
   };
 
@@ -178,6 +190,26 @@ const PayrollDetailPage = () => {
       );
     } finally {
       setIsSaving(false);
+    }
+  };
+
+  const handleRefreshAll = async () => {
+    try {
+      setIsRefreshingAll(true);
+      await repostPayroll({ id: payrollId });
+      queryClient.invalidateQueries({ queryKey: ["payroll-details"] });
+      queryClient.invalidateQueries({ queryKey: ["payroll-summaries"] });
+      toastService.showSuccess(
+        "Refreshed",
+        "Payroll recalculated successfully for all employees"
+      );
+    } catch (error: any) {
+      toastService.showError(
+        "Error",
+        error.message || "Failed to refresh payroll"
+      );
+    } finally {
+      setIsRefreshingAll(false);
     }
   };
 
@@ -286,7 +318,9 @@ const PayrollDetailPage = () => {
       ...tableCommonProps,
       body: (rowData: PayrollDetailEntry) => (
         <div className="flex justify-center">
-          <span className="text-sm font-medium!">{rowData.designation}</span>
+          <span className="text-sm text-center font-medium!">
+            {rowData.designation}
+          </span>
         </div>
       ),
     },
@@ -660,7 +694,7 @@ const PayrollDetailPage = () => {
             disabled={
               rowData.isLocked ||
               isSaving ||
-              isRefreshing ||
+              !!refreshingRowId ||
               rowData.payrollSummaryStatusId === 3
             }
             className="w-8 h-8!"
@@ -671,7 +705,7 @@ const PayrollDetailPage = () => {
             size="small"
             variant="text"
             tooltipOptions={{ position: "top" }}
-            {...(isRefreshing
+            {...(refreshingRowId === rowData.id
               ? { loading: true }
               : {
                   icon: "pi pi-refresh text-lg!",
@@ -680,7 +714,7 @@ const PayrollDetailPage = () => {
             disabled={
               rowData.isLocked ||
               isSaving ||
-              isRefreshing ||
+              !!refreshingRowId ||
               rowData.payrollSummaryStatusId === 3
             }
             className="w-8 h-8!"
@@ -706,8 +740,13 @@ const PayrollDetailPage = () => {
           <div className="w-full lg:w-auto hidden lg:block">
             <Button
               size="small"
-              className="w-full xl:w-28 2xl:w-32 h-10!"
-              label="Search"
+              className="w-full xl:w-32 2xl:w-36 h-10!"
+              label="Refresh"
+              {...(isRefreshingAll
+                ? { loading: true }
+                : { icon: "pi pi-refresh" })}
+              disabled={isRefreshingAll || isSaving}
+              onClick={handleRefreshAll}
             />
           </div>
         </div>
@@ -716,7 +755,12 @@ const PayrollDetailPage = () => {
             <Button
               size="small"
               className="w-full lg:w-auto h-10!"
-              label="Search"
+              label="Refresh"
+              {...(isRefreshingAll
+                ? { loading: true }
+                : { icon: "pi pi-refresh" })}
+              disabled={isRefreshingAll || isSaving}
+              onClick={handleRefreshAll}
             />
           </div>
           <div className="w-full lg:w-auto">
@@ -729,11 +773,11 @@ const PayrollDetailPage = () => {
           <div className="w-full lg:w-auto">
             <Button
               size="small"
-              className="w-full bg-primary-light! text-primary! border-primary-light! lg:w-28 h-10!"
               label="Save"
               onClick={handleSave}
               loading={isSaving}
               disabled={isLoading || isSaving}
+              className="w-full bg-primary-light! text-primary! border-primary-light! lg:w-28 h-10!"
             />
           </div>
         </div>
@@ -797,7 +841,7 @@ const PayrollDetailPage = () => {
             scrollable
             scrollHeight="65vh"
             stripedRows
-            loading={isLoading}
+            loading={isLoading || isRefreshingAll}
             onPage={onPage}
           />
         </div>

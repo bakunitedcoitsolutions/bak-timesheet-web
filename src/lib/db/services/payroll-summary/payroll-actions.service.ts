@@ -8,6 +8,7 @@ import {
   UpdateMonthlyPayrollValuesInput,
 } from "./payroll-summary.schemas";
 import { AllowanceType } from "../../../../../prisma/generated/prisma/enums";
+import { mapPayrollDetailToEntry } from "./mappers";
 
 // Helper to getting start/end of month
 const getMonthDateRange = (year: number, month: number) => {
@@ -1216,5 +1217,46 @@ export const refreshPayrollDetailRow = async ({
   // 8. Recalculate parent summary totals
   await recalculatePayrollSummary({ id: payrollId });
 
-  return { payrollDetailId, payrollId };
+  // 9. Return the freshly updated row (with all relations) so the UI can
+  //    immediately patch its local state without waiting for a background refetch.
+  const updatedDetail = await prisma.payrollDetails.findUnique({
+    where: { id: payrollDetailId },
+    include: {
+      employee: {
+        select: {
+          id: true,
+          employeeCode: true,
+          isDeductable: true,
+          isFixed: true,
+          isCardDelivered: true,
+          nameEn: true,
+          nameAr: true,
+          designationId: true,
+          idCardNo: true,
+          profession: true,
+          passportNo: true,
+          passportExpiryDate: true,
+          joiningDate: true,
+          iban: true,
+          bankCode: true,
+          gender: true,
+          nationality: { select: { id: true, nameEn: true, nameAr: true } },
+          designation: { select: { id: true, nameEn: true, nameAr: true } },
+        },
+      },
+      payrollSummary: {
+        select: { payrollStatusId: true },
+      },
+    },
+  });
+
+  if (!updatedDetail) {
+    throw new Error(`PayrollDetail ${payrollDetailId} not found after update`);
+  }
+
+  return {
+    payrollDetailId,
+    payrollId,
+    updatedEntry: mapPayrollDetailToEntry(updatedDetail as any),
+  };
 };
