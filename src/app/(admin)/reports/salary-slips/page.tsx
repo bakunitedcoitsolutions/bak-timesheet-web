@@ -110,6 +110,16 @@ const FilterSection = memo(
             />
           </div>
 
+          {/* Designation / Section */}
+          <div className="w-full">
+            <GroupDropdown
+              value={selectedFilter}
+              className="w-full h-10.5!"
+              onChange={setSelectedFilter}
+              placeholder="Select Section / Designation"
+            />
+          </div>
+
           {/* Employee codes */}
           <div className="w-full">
             <AutoScrollChips
@@ -119,16 +129,6 @@ const FilterSection = memo(
               allowDuplicate={false}
               placeholder="Employee Codes"
               className="w-full h-10!"
-            />
-          </div>
-
-          {/* Designation / Section */}
-          <div className="w-full">
-            <GroupDropdown
-              value={selectedFilter}
-              className="w-full h-10.5!"
-              onChange={setSelectedFilter}
-              placeholder="Select Section / Designation"
             />
           </div>
 
