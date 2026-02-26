@@ -78,22 +78,25 @@ export const SalarySlip = ({
             <table className="text-center border-collapse border border-gray-300 table-fixed w-full">
               <thead>
                 <tr className="bg-gray-50">
-                  <th className="border border-gray-300 py-0.5 px-1 font-bold text-gray-700 w-[13%]">
+                  <th className="border border-gray-300 py-0.5 px-1 font-bold text-gray-700 w-[11%]">
                     Work Days
                   </th>
-                  <th className="border border-gray-300 py-0.5 px-1 font-bold text-gray-700 w-[13%]">
+                  <th className="border border-gray-300 py-0.5 px-1 font-bold text-gray-700 w-[11%]">
                     Over Time
                   </th>
-                  <th className="border border-gray-300 py-0.5 px-1 font-bold text-gray-700 w-[13%]">
-                    Total Hrs
+                  <th className="border border-gray-300 py-0.5 px-1 font-bold text-gray-700 w-[11%]">
+                    Total Hours
                   </th>
-                  <th className="border border-gray-300 py-0.5 px-1 font-bold text-gray-700 w-[13%]">
-                    Rate/Hr
+                  <th className="border border-gray-300 py-0.5 px-1 font-bold text-gray-700 w-[11%]">
+                    Rate/Hour
                   </th>
-                  <th className="border border-gray-300 py-0.5 px-1 font-bold text-gray-700 w-[13%]">
+                  <th className="border border-gray-300 py-0.5 px-1 font-bold text-gray-700 w-[11%]">
+                    Breakfast Alw.
+                  </th>
+                  <th className="border border-gray-300 py-0.5 px-1 font-bold text-gray-700 w-[11%]">
                     Allowance
                   </th>
-                  <th className="border border-gray-300 py-0.5 px-1 font-bold text-gray-700 w-[13%]">
+                  <th className="border border-gray-300 py-0.5 px-1 font-bold text-gray-700 w-[11%]">
                     Salary
                   </th>
                 </tr>
@@ -113,7 +116,10 @@ export const SalarySlip = ({
                     {formatNum(entry.hourlyRate)}
                   </td>
                   <td className="border border-gray-300 py-0.5 px-1">
-                    {formatNum(entry.totalAllowances, 0)}
+                    {formatNum(entry.breakfastAllowance, 0)}
+                  </td>
+                  <td className="border border-gray-300 py-0.5 px-1">
+                    {formatNum(entry.otherAllowances, 0)}
                   </td>
                   <td className="border border-gray-300 py-0.5 px-1 font-bold">
                     {formatNum(entry.totalSalary, 0)}
@@ -164,7 +170,7 @@ export const SalarySlip = ({
               {/* Traffic Challan */}
               <div className="border border-gray-300 flex flex-col h-full">
                 <div className="bg-primary-light/50 border-b border-gray-300 py-0.5 px-1 font-bold text-center text-primary text-[9px]">
-                  Traffic Challan
+                  Traffic Challans
                 </div>
                 <div className="grid grid-cols-3 text-center border-b border-gray-300 bg-gray-50 text-[9px]">
                   <div className="border-r border-gray-300 py-0.5 font-semibold text-gray-600">

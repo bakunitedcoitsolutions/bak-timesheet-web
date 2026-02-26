@@ -266,7 +266,7 @@ export const getSalarySlipData = async (
       challanDeduction: Number(challanDeduction.toFixed(2)),
       netChallan,
       netSalaryPayable: Number(netSalaryPayable.toFixed(2)),
-      cardSalary: 0,
+      cardSalary: Number(netSalaryPayable.toFixed(2)),
       cashSalary: 0,
       remarks: "",
       paymentMethodId: null,
