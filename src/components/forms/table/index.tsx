@@ -141,7 +141,6 @@ const CustomTable = forwardRef<TableRef, CustomTableProps<any>>(
     const [first, setFirst] = useState(0);
     const [rows, setRows] = useState(rowsPerPage);
     const dt = useRef<DataTable<any>>(null);
-
     // Reset pagination when data changes
     React.useEffect(() => {
       setFirst(0);

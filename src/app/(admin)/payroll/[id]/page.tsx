@@ -29,7 +29,7 @@ import {
   formatPayrollPeriod,
   parseGroupDropdownFilter,
 } from "@/utils/helpers";
-import { useDebounce } from "@/hooks";
+import { useDebounce, useSavePayrollRow } from "@/hooks";
 import { toastService } from "@/lib/toast";
 import { queryClient } from "@/lib/react-query";
 import { useGlobalData } from "@/context/GlobalDataContext";
@@ -62,50 +62,17 @@ const calculateNetTrafficChallan = (entry: PayrollDetailEntry) =>
 const ActionButtons = ({
   rowData,
   onRefreshComplete,
+  isSavingAll,
 }: {
   rowData: PayrollDetailEntry;
   onRefreshComplete: (updated: PayrollDetailEntry) => void;
+  isSavingAll: boolean;
 }) => {
-  const [isSaving, setIsSaving] = useState(false);
+  const { saveRow, isSaving } = useSavePayrollRow();
   const [isRefreshing, setIsRefreshing] = useState(false);
-  const { mutateAsync: savePayrollDetails } = useSavePayrollDetailsBatch();
   const { mutateAsync: refreshDetailRow } = useRefreshPayrollDetailRow();
 
   const isLocked = rowData.isLocked || rowData.payrollSummaryStatusId === 3;
-
-  const handleSaveRow = async () => {
-    try {
-      setIsSaving(true);
-      await savePayrollDetails({
-        entries: [
-          {
-            id: rowData.id,
-            loanDeduction: rowData.loanDeduction,
-            challanDeduction: rowData.challanDeduction,
-            netSalaryPayable: calculateNetSalaryPayable(rowData),
-            netLoan: calculateNetLoan(rowData),
-            netChallan: calculateNetTrafficChallan(rowData),
-            cardSalary: rowData.cardSalary,
-            cashSalary: rowData.cashSalary,
-            remarks: rowData.remarks,
-            paymentMethodId: rowData.paymentMethodId,
-            payrollStatusId: rowData.payrollStatusId,
-          },
-        ],
-      });
-      toastService.showSuccess(
-        "Saved",
-        `Row saved successfully for ${rowData.empCode} - ${rowData.name}`
-      );
-    } catch (error: any) {
-      toastService.showError(
-        "Error",
-        error.message || "Failed to save payroll details"
-      );
-    } finally {
-      setIsSaving(false);
-    }
-  };
 
   const handleRefreshRow = async () => {
     try {
@@ -136,8 +103,8 @@ const ActionButtons = ({
         variant="text"
         {...(isSaving ? { loading: true } : { icon: "pi pi-save text-lg!" })}
         tooltipOptions={{ position: "top" }}
-        onClick={handleSaveRow}
-        disabled={isLocked || isSaving || isRefreshing}
+        onClick={() => saveRow(rowData)}
+        disabled={isLocked || isSaving || isRefreshing || isSavingAll}
         className="w-8 h-8!"
         tooltip="Save Row"
       />
@@ -150,7 +117,7 @@ const ActionButtons = ({
           ? { loading: true }
           : { icon: "pi pi-refresh text-lg!" })}
         onClick={handleRefreshRow}
-        disabled={isLocked || isSaving || isRefreshing}
+        disabled={isLocked || isSaving || isRefreshing || isSavingAll}
         className="w-8 h-8!"
         tooltip="Refresh"
       />
@@ -160,6 +127,7 @@ const ActionButtons = ({
 
 const PayrollDetailPage = () => {
   const router = useRouter();
+  const tableRef = useRef<TableRef>(null);
   const { id: periodParam } = useParams();
   const payrollId = Number(periodParam);
 
@@ -212,8 +180,10 @@ const PayrollDetailPage = () => {
   }, [data]);
 
   const { mutateAsync: savePayrollDetails } = useSavePayrollDetailsBatch();
+  const { saveRow: saveRowOnEnter } = useSavePayrollRow();
   const { mutateAsync: repostPayroll } = useRepostPayroll();
-  const [isSaving, setIsSaving] = useState(false);
+  const [isSavingRow, setIsSavingRow] = useState(false);
+  const [isSavingAll, setIsSavingAll] = useState(false);
   const [isRefreshingAll, setIsRefreshingAll] = useState(false);
 
   const handleRowRefreshComplete = (updated: PayrollDetailEntry) => {
@@ -223,7 +193,7 @@ const PayrollDetailPage = () => {
   };
 
   const handleSave = async () => {
-    setIsSaving(true);
+    setIsSavingAll(true);
     try {
       const entries = payrollData.map((row) => ({
         id: row.id,
@@ -258,7 +228,7 @@ const PayrollDetailPage = () => {
         error.message || "Failed to save payroll details"
       );
     } finally {
-      setIsSaving(false);
+      setIsSavingAll(false);
     }
   };
 
@@ -281,8 +251,6 @@ const PayrollDetailPage = () => {
       setIsRefreshingAll(false);
     }
   };
-
-  const tableRef = useRef<TableRef>(null);
 
   const updatePayrollEntry = (
     id: number,
@@ -322,6 +290,17 @@ const PayrollDetailPage = () => {
 
   const onPage = () => {
     scrollToTop();
+  };
+
+  const handleSaveSingleRowOnEnter = (payrollId: number) => {
+    setTimeout(async () => {
+      if (!payrollId) return;
+      const rowData = payrollData.find((r) => r.id === payrollId);
+      if (!rowData) return;
+      setIsSavingRow(true);
+      await saveRowOnEnter(rowData);
+      setIsSavingRow(false);
+    }, 100);
   };
 
   const columns = (): TableColumn<PayrollDetailEntry>[] => [
@@ -520,6 +499,11 @@ const PayrollDetailPage = () => {
             className="timesheet-number-input payroll-input"
             min={0}
             showButtons={false}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                handleSaveSingleRowOnEnter(rowData.id);
+              }
+            }}
           />
         </div>
       ),
@@ -576,6 +560,11 @@ const PayrollDetailPage = () => {
             className="timesheet-number-input payroll-input"
             min={0}
             showButtons={false}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                handleSaveSingleRowOnEnter(rowData.id);
+              }
+            }}
           />
         </div>
       ),
@@ -620,6 +609,11 @@ const PayrollDetailPage = () => {
             className="timesheet-number-input payroll-input"
             min={0}
             showButtons={false}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                handleSaveSingleRowOnEnter(rowData.id);
+              }
+            }}
           />
         </div>
       ),
@@ -640,6 +634,11 @@ const PayrollDetailPage = () => {
             className="timesheet-number-input payroll-input"
             min={0}
             showButtons={false}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                handleSaveSingleRowOnEnter(rowData.id);
+              }
+            }}
           />
         </div>
       ),
@@ -659,6 +658,11 @@ const PayrollDetailPage = () => {
             updatePayrollEntry(rowData.id, "remarks", e.target.value)
           }
           className="w-full h-10! payroll-input"
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              handleSaveSingleRowOnEnter(rowData.id);
+            }
+          }}
         />
       ),
     },
@@ -715,6 +719,7 @@ const PayrollDetailPage = () => {
       body: (rowData: PayrollDetailEntry) => (
         <ActionButtons
           rowData={rowData}
+          isSavingAll={isSavingAll}
           onRefreshComplete={handleRowRefreshComplete}
         />
       ),
@@ -741,7 +746,7 @@ const PayrollDetailPage = () => {
               {...(isRefreshingAll
                 ? { loading: true }
                 : { icon: "pi pi-refresh" })}
-              disabled={isRefreshingAll || isSaving}
+              disabled={isLoading || isSavingAll || isRefreshingAll}
               onClick={handleRefreshAll}
             />
           </div>
@@ -755,7 +760,7 @@ const PayrollDetailPage = () => {
               {...(isRefreshingAll
                 ? { loading: true }
                 : { icon: "pi pi-refresh" })}
-              disabled={isRefreshingAll || isSaving}
+              disabled={isLoading || isSavingAll || isRefreshingAll}
               onClick={handleRefreshAll}
             />
           </div>
@@ -771,8 +776,8 @@ const PayrollDetailPage = () => {
               size="small"
               label="Save"
               onClick={handleSave}
-              loading={isSaving}
-              disabled={isLoading || isSaving}
+              loading={isSavingAll}
+              disabled={isLoading || isSavingAll || isRefreshingAll}
               className="w-full bg-primary-light! text-primary! border-primary-light! lg:w-28 h-10!"
             />
           </div>
@@ -827,7 +832,7 @@ const PayrollDetailPage = () => {
             columns={columns()}
             pagination={true}
             rowsPerPageOptions={[50, 100]}
-            rows={100}
+            rows={50}
             globalSearch={false}
             emptyMessage={
               !filterParams.designationId && !filterParams.payrollSectionId
@@ -837,7 +842,7 @@ const PayrollDetailPage = () => {
             scrollable
             scrollHeight="65vh"
             stripedRows
-            loading={isLoading || isRefreshingAll}
+            loading={isLoading || isRefreshingAll || isSavingAll || isSavingRow}
             onPage={onPage}
           />
         </div>
