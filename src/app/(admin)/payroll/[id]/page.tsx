@@ -260,6 +260,29 @@ const PayrollDetailPage = () => {
     setPayrollEntry(id, field, value);
   };
 
+  /**
+   * When the user edits cardSalary or cashSalary, keep the pair
+   * summing to netSalaryPayable. If the typed value exceeds net,
+   * cap it and zero the other field.
+   */
+  const updateSalaryPair = (
+    id: number,
+    changed: "cardSalary" | "cashSalary",
+    rawValue: number
+  ) => {
+    setPayrollData((prev) =>
+      prev.map((entry) => {
+        if (entry.id !== id) return entry;
+        const net = calculateNetSalaryPayable(entry);
+        const capped = Math.min(rawValue, net);
+        const other = net - capped;
+        return changed === "cardSalary"
+          ? { ...entry, cardSalary: capped, cashSalary: other }
+          : { ...entry, cashSalary: capped, cardSalary: other };
+      })
+    );
+  };
+
   const setPayrollEntry = (
     id: number,
     field: keyof PayrollDetailEntry,
@@ -604,16 +627,11 @@ const PayrollDetailPage = () => {
             disabled={rowData.payrollSummaryStatusId === 3}
             value={rowData.cardSalary}
             onValueChange={(e) =>
-              updatePayrollEntry(rowData.id, "cardSalary", e.value || 0)
+              updateSalaryPair(rowData.id, "cardSalary", e.value ?? 0)
             }
             className="timesheet-number-input payroll-input"
             min={0}
             showButtons={false}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                handleSaveSingleRowOnEnter(rowData.id);
-              }
-            }}
           />
         </div>
       ),
@@ -629,16 +647,11 @@ const PayrollDetailPage = () => {
             disabled={rowData.payrollSummaryStatusId === 3}
             value={rowData.cashSalary}
             onValueChange={(e) =>
-              updatePayrollEntry(rowData.id, "cashSalary", e.value || 0)
+              updateSalaryPair(rowData.id, "cashSalary", e.value ?? 0)
             }
             className="timesheet-number-input payroll-input"
             min={0}
             showButtons={false}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                handleSaveSingleRowOnEnter(rowData.id);
-              }
-            }}
           />
         </div>
       ),
