@@ -212,8 +212,8 @@ export const getSalarySlipData = async (
       empLoans
         .filter((l) => l.type === "RETURN")
         .reduce((s, l) => s + Number(l.amount), 0);
-    const loanDeduction = previousLoanBalance + currentNetLoan;
-    const netLoan = 0; // new calculation — no saved deduction
+    const loanDeduction = 0;
+    const netLoan = previousLoanBalance + currentNetLoan;
 
     const previousChallanBalance = prevData?.netChallan
       ? prevData.netChallan + Number(emp.openingTrafficViolationBalance || 0)
@@ -225,8 +225,8 @@ export const getSalarySlipData = async (
       empChallans
         .filter((c) => c.type === "RETURN")
         .reduce((s, c) => s + Number(c.amount), 0);
-    const challanDeduction = previousChallanBalance + currentNetChallan;
-    const netChallan = 0;
+    const challanDeduction = 0;
+    const netChallan = previousChallanBalance + currentNetChallan;
 
     const netSalaryPayable = totalSalary - loanDeduction - challanDeduction;
 
