@@ -18,22 +18,22 @@ import {
 } from "@/components";
 import { PayrollDetailEntry } from "@/lib/db/services/payroll-summary/mappers";
 import {
-  useGetPayrollDetails,
+  useRepostPayroll,
   useGetPayrollDate,
+  useGetPayrollDetails,
   useSavePayrollDetailsBatch,
   useRefreshPayrollDetailRow,
-  useRepostPayroll,
 } from "@/lib/db/services/payroll-summary";
-import { queryClient } from "@/lib/react-query";
-import { toastService } from "@/lib/toast";
-import { useDebounce } from "@/hooks";
-import GroupDropdown from "@/components/common/group-dropdown";
 import {
-  parseGroupDropdownFilter,
-  formatPayrollPeriod,
   formatNum,
+  formatPayrollPeriod,
+  parseGroupDropdownFilter,
 } from "@/utils/helpers";
+import { useDebounce } from "@/hooks";
+import { toastService } from "@/lib/toast";
+import { queryClient } from "@/lib/react-query";
 import { useGlobalData } from "@/context/GlobalDataContext";
+import GroupDropdown from "@/components/common/group-dropdown";
 
 const tableCommonProps = {
   sortable: false,
@@ -45,13 +45,126 @@ const tableCommonProps = {
   headerClassName: "text-sm! font-semibold",
 };
 
+// --- Module-level helpers ---
+const calculateNetSalaryPayable = (entry: PayrollDetailEntry) =>
+  entry.totalSalary - entry.loanDeduction - entry.challanDeduction;
+
+const calculateNetLoan = (entry: PayrollDetailEntry) =>
+  (entry?.previousAdvance ?? 0) +
+  (entry.currentAdvance ?? 0) -
+  (entry.loanDeduction ?? 0);
+
+const calculateNetTrafficChallan = (entry: PayrollDetailEntry) =>
+  (entry?.previousChallan ?? 0) +
+  (entry.currentChallan ?? 0) -
+  (entry.challanDeduction ?? 0);
+
+const ActionButtons = ({
+  rowData,
+  onRefreshComplete,
+}: {
+  rowData: PayrollDetailEntry;
+  onRefreshComplete: (updated: PayrollDetailEntry) => void;
+}) => {
+  const [isSaving, setIsSaving] = useState(false);
+  const [isRefreshing, setIsRefreshing] = useState(false);
+  const { mutateAsync: savePayrollDetails } = useSavePayrollDetailsBatch();
+  const { mutateAsync: refreshDetailRow } = useRefreshPayrollDetailRow();
+
+  const isLocked = rowData.isLocked || rowData.payrollSummaryStatusId === 3;
+
+  const handleSaveRow = async () => {
+    try {
+      setIsSaving(true);
+      await savePayrollDetails({
+        entries: [
+          {
+            id: rowData.id,
+            loanDeduction: rowData.loanDeduction,
+            challanDeduction: rowData.challanDeduction,
+            netSalaryPayable: calculateNetSalaryPayable(rowData),
+            netLoan: calculateNetLoan(rowData),
+            netChallan: calculateNetTrafficChallan(rowData),
+            cardSalary: rowData.cardSalary,
+            cashSalary: rowData.cashSalary,
+            remarks: rowData.remarks,
+            paymentMethodId: rowData.paymentMethodId,
+            payrollStatusId: rowData.payrollStatusId,
+          },
+        ],
+      });
+      toastService.showSuccess(
+        "Saved",
+        `Row saved successfully for ${rowData.empCode} - ${rowData.name}`
+      );
+    } catch (error: any) {
+      toastService.showError(
+        "Error",
+        error.message || "Failed to save payroll details"
+      );
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
+  const handleRefreshRow = async () => {
+    try {
+      setIsRefreshing(true);
+      const result = await refreshDetailRow({ payrollDetailId: rowData.id });
+      if (result?.updatedEntry) {
+        onRefreshComplete(result.updatedEntry);
+      }
+      toastService.showSuccess(
+        "Refreshed",
+        `Row refreshed successfully for ${rowData.empCode} - ${rowData.name}`
+      );
+    } catch (error: any) {
+      toastService.showError(
+        "Error",
+        error.message || "Failed to refresh payroll details"
+      );
+    } finally {
+      setIsRefreshing(false);
+    }
+  };
+
+  return (
+    <div className="flex justify-center gap-2">
+      <Button
+        rounded
+        size="small"
+        variant="text"
+        {...(isSaving ? { loading: true } : { icon: "pi pi-save text-lg!" })}
+        tooltipOptions={{ position: "top" }}
+        onClick={handleSaveRow}
+        disabled={isLocked || isSaving || isRefreshing}
+        className="w-8 h-8!"
+        tooltip="Save Row"
+      />
+      <Button
+        rounded
+        size="small"
+        variant="text"
+        tooltipOptions={{ position: "top" }}
+        {...(isRefreshing
+          ? { loading: true }
+          : { icon: "pi pi-refresh text-lg!" })}
+        onClick={handleRefreshRow}
+        disabled={isLocked || isSaving || isRefreshing}
+        className="w-8 h-8!"
+        tooltip="Refresh"
+      />
+    </div>
+  );
+};
+
 const PayrollDetailPage = () => {
   const router = useRouter();
   const { id: periodParam } = useParams();
   const payrollId = Number(periodParam);
 
   const [selectedFilter, setSelectedFilter] = useState<string | number | null>(
-    "all"
+    null
   );
   const [payrollData, setPayrollData] = useState<PayrollDetailEntry[]>([]); // Start empty
   const [searchValue, setSearchValue] = useState<string>("");
@@ -61,6 +174,17 @@ const PayrollDetailPage = () => {
   const debouncedSearch = useDebounce(searchValue, 500);
 
   const { data: globalData } = useGlobalData();
+
+  useEffect(() => {
+    if (selectedFilter !== null) return;
+    // Auto-select "Forman Construction" payroll section on first load
+    const formanSection = globalData.payrollSections?.find((s) =>
+      s.nameEn?.toLowerCase().includes("forman")
+    );
+    if (formanSection) {
+      setSelectedFilter(`payroll-${formanSection.id}`);
+    }
+  }, [globalData.payrollSections]);
 
   const statusOptions = globalData.payrollStatuses.map((s) => ({
     label: s.nameEn,
@@ -88,69 +212,14 @@ const PayrollDetailPage = () => {
   }, [data]);
 
   const { mutateAsync: savePayrollDetails } = useSavePayrollDetailsBatch();
-  const { mutateAsync: refreshDetailRow } = useRefreshPayrollDetailRow();
   const { mutateAsync: repostPayroll } = useRepostPayroll();
   const [isSaving, setIsSaving] = useState(false);
-  const [refreshingRowId, setRefreshingRowId] = useState<number | null>(null);
   const [isRefreshingAll, setIsRefreshingAll] = useState(false);
 
-  const saveSingleRow = async (row: PayrollDetailEntry) => {
-    try {
-      setIsSaving(true);
-      const entry = {
-        id: row.id,
-        loanDeduction: row.loanDeduction,
-        challanDeduction: row.challanDeduction,
-        netSalaryPayable: calculateNetSalaryPayable(row),
-        netLoan: calculateNetLoan(row),
-        netChallan: calculateNetTrafficChallan(row),
-        cardSalary: row.cardSalary,
-        cashSalary: row.cashSalary,
-        remarks: row.remarks,
-        paymentMethodId: row.paymentMethodId,
-        payrollStatusId: row.payrollStatusId,
-      };
-
-      await savePayrollDetails({ entries: [entry] });
-      toastService.showSuccess(
-        "Saved",
-        `Row saved successfully for ${row.empCode} - ${row.name}`
-      );
-    } catch (error: any) {
-      toastService.showError(
-        "Error",
-        error.message || "Failed to save payroll details"
-      );
-    } finally {
-      setIsSaving(false);
-    }
-  };
-
-  const refreshSingleRow = async (row: PayrollDetailEntry) => {
-    try {
-      setRefreshingRowId(row.id);
-      const result = await refreshDetailRow({ payrollDetailId: row.id });
-      // Immediately patch the local state with the freshly recalculated row
-      // so the table updates without waiting for a background query refetch.
-      if (result && result.updatedEntry) {
-        setPayrollData((prev) =>
-          prev.map((entry) =>
-            entry.id === row.id ? result.updatedEntry : entry
-          )
-        );
-      }
-      toastService.showSuccess(
-        "Refreshed",
-        `Row refreshed successfully for ${row.empCode} - ${row.name}`
-      );
-    } catch (error: any) {
-      toastService.showError(
-        "Error",
-        error.message || "Failed to refresh payroll details"
-      );
-    } finally {
-      setRefreshingRowId(null);
-    }
+  const handleRowRefreshComplete = (updated: PayrollDetailEntry) => {
+    setPayrollData((prev) =>
+      prev.map((entry) => (entry.id === updated.id ? updated : entry))
+    );
   };
 
   const handleSave = async () => {
@@ -253,26 +322,6 @@ const PayrollDetailPage = () => {
 
   const onPage = () => {
     scrollToTop();
-  };
-
-  const calculateNetSalaryPayable = (entry: PayrollDetailEntry) => {
-    return entry.totalSalary - entry.loanDeduction - entry.challanDeduction;
-  };
-
-  const calculateNetLoan = (entry: PayrollDetailEntry) => {
-    return (
-      (entry?.previousAdvance ?? 0) +
-      (entry.currentAdvance ?? 0) -
-      (entry.loanDeduction ?? 0)
-    );
-  };
-
-  const calculateNetTrafficChallan = (entry: PayrollDetailEntry) => {
-    return (
-      (entry?.previousChallan ?? 0) +
-      (entry.currentChallan ?? 0) -
-      (entry.challanDeduction ?? 0)
-    );
   };
 
   const columns = (): TableColumn<PayrollDetailEntry>[] => [
@@ -571,11 +620,6 @@ const PayrollDetailPage = () => {
             className="timesheet-number-input payroll-input"
             min={0}
             showButtons={false}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                saveSingleRow(rowData);
-              }
-            }}
           />
         </div>
       ),
@@ -596,11 +640,6 @@ const PayrollDetailPage = () => {
             className="timesheet-number-input payroll-input"
             min={0}
             showButtons={false}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                saveSingleRow(rowData);
-              }
-            }}
           />
         </div>
       ),
@@ -620,11 +659,6 @@ const PayrollDetailPage = () => {
             updatePayrollEntry(rowData.id, "remarks", e.target.value)
           }
           className="w-full h-10! payroll-input"
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              saveSingleRow(rowData);
-            }
-          }}
         />
       ),
     },
@@ -660,7 +694,7 @@ const PayrollDetailPage = () => {
       body: (rowData: PayrollDetailEntry) => (
         <Dropdown
           small
-          options={statusOptions}
+          options={statusOptions.slice(0, 2)}
           disabled={rowData.payrollSummaryStatusId === 3}
           className="w-[150px]! h-10!"
           placeholder="Pending"
@@ -679,48 +713,10 @@ const PayrollDetailPage = () => {
       filterable: false,
       style: { minWidth: 80, width: 80, textAlign: "center" },
       body: (rowData: PayrollDetailEntry) => (
-        <div className="flex justify-center gap-2">
-          <Button
-            rounded
-            size="small"
-            variant="text"
-            {...(isSaving
-              ? { loading: true }
-              : {
-                  icon: "pi pi-save text-lg!",
-                })}
-            tooltipOptions={{ position: "top" }}
-            onClick={() => saveSingleRow(rowData)}
-            disabled={
-              rowData.isLocked ||
-              isSaving ||
-              !!refreshingRowId ||
-              rowData.payrollSummaryStatusId === 3
-            }
-            className="w-8 h-8!"
-            tooltip="Save Row"
-          />
-          <Button
-            rounded
-            size="small"
-            variant="text"
-            tooltipOptions={{ position: "top" }}
-            {...(refreshingRowId === rowData.id
-              ? { loading: true }
-              : {
-                  icon: "pi pi-refresh text-lg!",
-                })}
-            onClick={() => refreshSingleRow(rowData)}
-            disabled={
-              rowData.isLocked ||
-              isSaving ||
-              !!refreshingRowId ||
-              rowData.payrollSummaryStatusId === 3
-            }
-            className="w-8 h-8!"
-            tooltip="Refresh"
-          />
-        </div>
+        <ActionButtons
+          rowData={rowData}
+          onRefreshComplete={handleRowRefreshComplete}
+        />
       ),
     },
   ];

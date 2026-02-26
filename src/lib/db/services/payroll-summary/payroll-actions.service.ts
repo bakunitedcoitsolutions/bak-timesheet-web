@@ -278,12 +278,11 @@ const calculateAndSavePayroll = async (
     const totalLoanDebt = previousLoanBalance + currentNetLoan;
 
     // Deduction: Full Recovery
-    const loanDeduction = totalLoanDebt; // As per instructions "Deduction Advance... + Net Advance"
+    const loanDeduction = 0; // As per instructions "Deduction Advance... + Net Advance"
 
-    const netLoan = 0; // fully deducted
+    const netLoan = totalLoanDebt; // fully deducted
 
     // E. Traffic Challans
-
     // "Previous Traffic Challan" logic
     // Default: LastPayroll.netLoan + OpeningTrafficViolationBalance
     const previousChallanBalance =
@@ -303,8 +302,8 @@ const calculateAndSavePayroll = async (
     const currentNetChallan = currentMonthChallans - currentMonthChallanReturns;
 
     const totalChallanDebt = previousChallanBalance + currentNetChallan;
-    const challanDeduction = totalChallanDebt;
-    const netChallan = 0;
+    const challanDeduction = 0;
+    const netChallan = totalChallanDebt;
 
     // F. Net Salary Payable
     const netSalaryPayable = totalSalary - loanDeduction - challanDeduction;
@@ -330,7 +329,7 @@ const calculateAndSavePayroll = async (
       challanDeduction: Number(challanDeduction.toFixed(2)),
       netChallan: Number(netChallan.toFixed(2)),
       netSalaryPayable: Number(netSalaryPayable.toFixed(2)),
-      cardSalary: 0,
+      cardSalary: Number(netSalaryPayable.toFixed(0)),
       cashSalary: 0,
       overTime: Number(totalOTHours.toFixed(2)),
       remarks: "",
@@ -844,8 +843,9 @@ export const repostPayroll = async ({ id }: RepostPayrollInput) => {
       });
     } else {
       // New employee — create a fresh row
-      const loanDeduction = previousLoanBalance + currentNetLoan;
-      const challanDeduction = previousChallanBalance + currentNetChallan;
+      const loanDeduction = 0;
+      const challanDeduction = 0;
+      const netSalaryPayable = totalSalary - loanDeduction - challanDeduction;
       await prisma.payrollDetails.create({
         data: {
           payrollId: id,
@@ -863,15 +863,13 @@ export const repostPayroll = async ({ id }: RepostPayrollInput) => {
           previousLoan: Number(previousLoanBalance.toFixed(2)),
           currentLoan: Number(currentNetLoan.toFixed(2)),
           loanDeduction: Number(loanDeduction.toFixed(2)),
-          netLoan: 0,
+          netLoan: previousLoanBalance + currentNetLoan,
           previousChallan: Number(previousChallanBalance.toFixed(2)),
           currentChallan: Number(currentNetChallan.toFixed(2)),
           challanDeduction: Number(challanDeduction.toFixed(2)),
-          netChallan: 0,
-          netSalaryPayable: Number(
-            (totalSalary - loanDeduction - challanDeduction).toFixed(2)
-          ),
-          cardSalary: 0,
+          netChallan: previousChallanBalance + currentNetChallan,
+          netSalaryPayable: Number(netSalaryPayable.toFixed(2)),
+          cardSalary: Number(netSalaryPayable.toFixed(0)),
           cashSalary: 0,
           remarks: "",
           payrollStatusId: 1, // Pending

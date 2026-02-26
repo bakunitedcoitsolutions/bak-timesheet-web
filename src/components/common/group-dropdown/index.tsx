@@ -7,6 +7,7 @@ import {
   GlobalDataDesignation,
   GlobalDataGeneral,
 } from "@/context/GlobalDataContext";
+import { Skeleton } from "primereact/skeleton";
 
 const GroupDropdown = ({
   value,
@@ -22,7 +23,7 @@ const GroupDropdown = ({
   onChange: (value: any) => void;
 }) => {
   // Fetch global data
-  const { data: globalData } = useGlobalData();
+  const { data: globalData, isLoading } = useGlobalData();
   const designations = globalData.designations || [];
   const payrollSections = globalData.payrollSections || [];
 
@@ -78,6 +79,14 @@ const GroupDropdown = ({
     },
     []
   );
+
+  if (isLoading) {
+    return (
+      <div className="w-full h-10 rounded-xl! overflow-hidden">
+        <Skeleton width="10rem" height="40px" className="rounded-xl"></Skeleton>
+      </div>
+    );
+  }
 
   return (
     <Dropdown

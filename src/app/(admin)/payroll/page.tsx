@@ -31,6 +31,7 @@ import { toastService } from "@/lib/toast";
 import { getErrorMessage } from "@/utils/helpers";
 import { RunPayrollDialog } from "./RunPayrollDialog";
 import { showConfirmDialog } from "@/components/common/confirm-dialog";
+import Link from "next/link";
 
 const commonColumnProps = {
   sortable: true,
@@ -191,7 +192,11 @@ const columns = (
     alignHeader: "center",
     style: { minWidth: "150px" },
     body: (rowData: PayrollEntry) => (
-      <span className="text-sm font-semibold">{rowData.period}</span>
+      <Link href={`/payroll/${rowData.id}`}>
+        <span className="text-sm font-semibold text-primary underline">
+          {rowData.period}
+        </span>
+      </Link>
     ),
   },
   {
