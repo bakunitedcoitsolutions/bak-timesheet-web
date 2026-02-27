@@ -9,6 +9,7 @@ import {
   repostPayrollAction,
   postPayrollAction,
   recalculatePayrollSummaryAction,
+  getPayrollSummaryStatusByMonthYearAction,
 } from "./actions";
 
 // Manually defining input type since schema is defined inside actions.ts for now
@@ -22,6 +23,7 @@ import {
 import {
   GetPayrollDetailsInput,
   GetPayrollDateInput,
+  GetPayrollSummaryByMonthYearInput,
 } from "./payroll-summary.schemas";
 
 export const useUpdateMonthlyPayrollValues = () =>
@@ -89,6 +91,7 @@ export const useGetPayrollDetails = (input: GetPayrollDetailsInput) =>
     input,
     enabled:
       !!input.payrollId && (!!input.designationId || !!input.payrollSectionId),
+    staleTime: 60 * 1000, // 60 seconds — avoids refetch on window focus/remount
   });
 
 export const useGetPayrollDate = (input: GetPayrollDateInput) =>
@@ -120,4 +123,13 @@ export const useRefreshPayrollDetailRow = () => {
 export const useGetSalarySlipData = () =>
   useMutation(getSalarySlipDataAction, {
     mutationKey: ["get-salary-slip-data"],
+  });
+
+export const useGetPayrollSummaryStatus = (
+  input: GetPayrollSummaryByMonthYearInput
+) =>
+  useQuery(getPayrollSummaryStatusByMonthYearAction, {
+    queryKey: ["payroll-summary-status", input],
+    input,
+    enabled: !!input.month && !!input.year,
   });

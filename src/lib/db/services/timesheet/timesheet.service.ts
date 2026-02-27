@@ -162,7 +162,6 @@ export const getTimesheetPageData = async (
       totalHours: true,
       description: true,
       isLocked: true,
-      isPosted: true,
     },
   });
 
@@ -186,7 +185,6 @@ export const getTimesheetPageData = async (
       isFixed: emp.isFixed,
       isLocked: false,
       // isLocked: ts?.isLocked ?? false,
-      isPosted: ts?.isPosted ?? false,
       project1Id: ts?.project1Id ?? null,
       project1Hours: ts?.project1Hours ?? null,
       project1Overtime: ts?.project1Overtime ?? null,

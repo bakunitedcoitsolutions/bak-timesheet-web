@@ -42,7 +42,7 @@ const commonColumnProps = {
 };
 
 const CUTOFF_YEAR = 2026;
-const CUTOFF_MONTH = 2; // February
+const CUTOFF_MONTH = 1; // January
 
 const isBeforeCutoff = (year: number, month: number) =>
   year < CUTOFF_YEAR || (year === CUTOFF_YEAR && month < CUTOFF_MONTH);

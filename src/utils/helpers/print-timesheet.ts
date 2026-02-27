@@ -84,7 +84,7 @@ export const printTimesheetReport = (
               <div class="employee-header">
                 <div class="employee-info">
                   ${report.employeeCode} - ${report.nameEn} 
-                  <span style="font-weight: normal; color: #000;">(${report.designationName || "-"})</span>
+                  <span style="font-weight: normal; color: #000;">(${report.designationName || ""}${report.isFixed ? " - Fixed" : ""})</span>
                 </div>
                 <div class="employee-meta">
                   ID# ${report.idCardNo || "N/A"}

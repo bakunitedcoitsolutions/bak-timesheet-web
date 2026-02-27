@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useMemo } from "react";
 import { useParams, useRouter } from "next/navigation";
 
 import {
@@ -136,10 +136,17 @@ const PayrollDetailPage = () => {
   );
   const [payrollData, setPayrollData] = useState<PayrollDetailEntry[]>([]); // Start empty
   const [searchValue, setSearchValue] = useState<string>("");
+  const [page, setPage] = useState<number>(1);
+  const [limit, setLimit] = useState<number>(50);
 
   // Parse filter parameters from GroupDropdown selection
   const filterParams = parseGroupDropdownFilter(selectedFilter);
   const debouncedSearch = useDebounce(searchValue, 500);
+
+  // Reset to first page when filter or search changes
+  useEffect(() => {
+    setPage(1);
+  }, [selectedFilter, debouncedSearch]);
 
   const { data: globalData } = useGlobalData();
 
@@ -170,7 +177,11 @@ const PayrollDetailPage = () => {
     search: debouncedSearch || undefined,
     designationId: filterParams.designationId,
     payrollSectionId: filterParams.payrollSectionId,
+    page,
+    limit,
   });
+
+  const total = data?.total ?? 0;
 
   // Map backend data to table format
   useEffect(() => {
@@ -311,7 +322,9 @@ const PayrollDetailPage = () => {
     scrollToTop();
   }, [selectedFilter]);
 
-  const onPage = () => {
+  const onPage = (event: any) => {
+    setPage(event.page + 1);
+    setLimit(event.rows);
     scrollToTop();
   };
 
@@ -326,418 +339,431 @@ const PayrollDetailPage = () => {
     }, 100);
   };
 
-  const columns = (): TableColumn<PayrollDetailEntry>[] => [
-    {
-      field: "empCode",
-      header: "Emp. Code",
-      ...tableCommonProps,
-      style: { minWidth: 120, zIndex: 1 },
-      headerStyle: { zIndex: 10 },
-      frozen: true,
-      body: (rowData: PayrollDetailEntry) => (
-        <span className="text-sm font-semibold!">{rowData.empCode}</span>
-      ),
-    },
-    {
-      field: "name",
-      header: "Name",
-      ...tableCommonProps,
-      style: { minWidth: 300, zIndex: 1 },
-      headerStyle: { zIndex: 10 },
-      frozen: true,
-      body: (rowData: PayrollDetailEntry) => (
-        <div className="flex items-start gap-2 min-w-0">
-          <div className="flex flex-1 flex-col gap-1 min-w-0">
-            <span className="text-sm font-medium leading-tight wrap-break-word">
-              {rowData.name}
+  const columns = useMemo(
+    (): TableColumn<PayrollDetailEntry>[] => [
+      {
+        field: "empCode",
+        header: "Emp. Code",
+        ...tableCommonProps,
+        style: { minWidth: 120, zIndex: 1 },
+        headerStyle: { zIndex: 10 },
+        frozen: true,
+        body: (rowData: PayrollDetailEntry) => (
+          <span className="text-sm font-semibold!">{rowData.empCode}</span>
+        ),
+      },
+      {
+        field: "name",
+        header: "Name",
+        ...tableCommonProps,
+        style: { minWidth: 300, zIndex: 1 },
+        headerStyle: { zIndex: 10 },
+        frozen: true,
+        body: (rowData: PayrollDetailEntry) => (
+          <div className="flex items-start gap-2 min-w-0">
+            <div className="flex flex-1 flex-col gap-1 min-w-0">
+              <span className="text-sm font-medium leading-tight wrap-break-word">
+                {rowData.name}
+              </span>
+            </div>
+            {(rowData.isFixed ||
+              rowData.isDeductable ||
+              rowData.isCardDelivered) && (
+              <div className="flex items-center justify-center gap-x-1 shrink-0">
+                {rowData.isCardDelivered && <Badge text="C" />}
+                {rowData.isFixed && <Badge text="F" />}
+              </div>
+            )}
+          </div>
+        ),
+      },
+      {
+        field: "designation",
+        header: "Designation",
+        ...tableCommonProps,
+        body: (rowData: PayrollDetailEntry) => (
+          <div className="flex justify-center">
+            <span className="text-sm text-center font-medium!">
+              {rowData.designation}
             </span>
           </div>
-          {(rowData.isFixed ||
-            rowData.isDeductable ||
-            rowData.isCardDelivered) && (
-            <div className="flex items-center justify-center gap-x-1 shrink-0">
-              {rowData.isCardDelivered && <Badge text="C" />}
-              {rowData.isFixed && <Badge text="F" />}
-            </div>
-          )}
-        </div>
-      ),
-    },
-    {
-      field: "designation",
-      header: "Designation",
-      ...tableCommonProps,
-      body: (rowData: PayrollDetailEntry) => (
-        <div className="flex justify-center">
-          <span className="text-sm text-center font-medium!">
-            {rowData.designation}
-          </span>
-        </div>
-      ),
-    },
-    {
-      field: "idNumber",
-      header: "ID Number",
-      ...tableCommonProps,
-      style: { minWidth: 150 },
-      body: (rowData: PayrollDetailEntry) => (
-        <span className="text-sm font-medium!">{rowData.idNumber}</span>
-      ),
-    },
-    {
-      field: "workDays",
-      header: "Work Days",
-      ...tableCommonProps,
-      body: (rowData: PayrollDetailEntry) => (
-        <div className="flex justify-center">
-          <span className="text-[15px] font-semibold!">
-            {rowData.workDays.toString()}
-          </span>
-        </div>
-      ),
-    },
-    {
-      field: "overTime",
-      header: "Over Time",
-      ...tableCommonProps,
-      body: (rowData: PayrollDetailEntry) => (
-        <div className="flex justify-center">
-          <span className="text-[15px] font-semibold!">
-            {formatNum(rowData.overTime).toString()}
-          </span>
-        </div>
-      ),
-    },
-    {
-      field: "totalHours",
-      header: "Total Hours",
-      ...tableCommonProps,
-      body: (rowData: PayrollDetailEntry) => (
-        <div className="flex justify-center">
-          <span className="text-[15px] font-semibold!">
-            {formatNum(rowData.totalHours).toString()}
-          </span>
-        </div>
-      ),
-    },
-    {
-      field: "hourlyRate",
-      header: "Hourly Rate",
-      ...tableCommonProps,
-      body: (rowData: PayrollDetailEntry) => (
-        <div className="flex justify-center">
-          <span className="text-[15px] font-semibold!">
-            {formatNum(rowData.hourlyRate).toString()}
-          </span>
-        </div>
-      ),
-    },
-    {
-      field: "breakfastAllowance",
-      header: "Brkfst. Allow.",
-      ...tableCommonProps,
-      body: (rowData: PayrollDetailEntry) => (
-        <div className="flex justify-center">
-          <span className="text-[15px] font-semibold!">
-            {formatNum(rowData.breakfastAllowance).toString()}
-          </span>
-        </div>
-      ),
-    },
-    {
-      field: "otherAllowances",
-      header: "Other Allow.",
-      ...tableCommonProps,
-      body: (rowData: PayrollDetailEntry) => (
-        <div className="flex justify-center">
-          <span className="text-[15px] font-semibold!">
-            {formatNum(rowData.otherAllowances).toString()}
-          </span>
-        </div>
-      ),
-    },
-    {
-      field: "totalAllowances",
-      header: "Total Allow.",
-      ...tableCommonProps,
-      body: (rowData: PayrollDetailEntry) => (
-        <div className="flex justify-center">
-          <span className="text-[15px] font-semibold!">
-            {formatNum(
-              (rowData.breakfastAllowance ?? 0) + (rowData.otherAllowances ?? 0)
-            )}
-          </span>
-        </div>
-      ),
-    },
-    {
-      field: "totalSalary",
-      header: "Total Salary",
-      ...tableCommonProps,
-      body: (rowData: PayrollDetailEntry) => (
-        <div className="flex justify-center">
-          <span className="text-[15px] font-semibold!">
-            {formatNum(rowData.totalSalary, 0).toString()}
-          </span>
-        </div>
-      ),
-    },
-    {
-      field: "previousAdvance",
-      header: "Prev. Adv.",
-      ...tableCommonProps,
-      body: (rowData: PayrollDetailEntry) => (
-        <div className="flex justify-center">
-          <span className="text-[15px] font-semibold!">
-            {formatNum(rowData.previousAdvance).toString()}
-          </span>
-        </div>
-      ),
-    },
-    {
-      field: "currentAdvance",
-      header: "Curr. Adv.",
-      ...tableCommonProps,
-      body: (rowData: PayrollDetailEntry) => (
-        <div className="flex justify-center">
-          <span className="text-[15px] font-semibold!">
-            {formatNum(rowData.currentAdvance).toString()}
-          </span>
-        </div>
-      ),
-    },
-    {
-      field: "loanDeduction",
-      header: "Loan Ded.",
-      ...tableCommonProps,
-      body: (rowData: PayrollDetailEntry) => (
-        <div className="flex justify-center">
-          <NumberInput
-            useGrouping={false}
+        ),
+      },
+      {
+        field: "idNumber",
+        header: "ID Number",
+        ...tableCommonProps,
+        style: { minWidth: 150 },
+        body: (rowData: PayrollDetailEntry) => (
+          <span className="text-sm font-medium!">{rowData.idNumber}</span>
+        ),
+      },
+      {
+        field: "workDays",
+        header: "Work Days",
+        ...tableCommonProps,
+        body: (rowData: PayrollDetailEntry) => (
+          <div className="flex justify-center">
+            <span className="text-[15px] font-semibold!">
+              {rowData.workDays.toString()}
+            </span>
+          </div>
+        ),
+      },
+      {
+        field: "overTime",
+        header: "Over Time",
+        ...tableCommonProps,
+        body: (rowData: PayrollDetailEntry) => (
+          <div className="flex justify-center">
+            <span className="text-[15px] font-semibold!">
+              {formatNum(rowData.overTime).toString()}
+            </span>
+          </div>
+        ),
+      },
+      {
+        field: "totalHours",
+        header: "Total Hours",
+        ...tableCommonProps,
+        body: (rowData: PayrollDetailEntry) => (
+          <div className="flex justify-center">
+            <span className="text-[15px] font-semibold!">
+              {formatNum(rowData.totalHours).toString()}
+            </span>
+          </div>
+        ),
+      },
+      {
+        field: "hourlyRate",
+        header: "Hourly Rate",
+        ...tableCommonProps,
+        body: (rowData: PayrollDetailEntry) => (
+          <div className="flex justify-center">
+            <span className="text-[15px] font-semibold!">
+              {formatNum(rowData.hourlyRate).toString()}
+            </span>
+          </div>
+        ),
+      },
+      {
+        field: "breakfastAllowance",
+        header: "Brkfst. Allow.",
+        ...tableCommonProps,
+        body: (rowData: PayrollDetailEntry) => (
+          <div className="flex justify-center">
+            <span className="text-[15px] font-semibold!">
+              {formatNum(rowData.breakfastAllowance).toString()}
+            </span>
+          </div>
+        ),
+      },
+      {
+        field: "otherAllowances",
+        header: "Other Allow.",
+        ...tableCommonProps,
+        body: (rowData: PayrollDetailEntry) => (
+          <div className="flex justify-center">
+            <span className="text-[15px] font-semibold!">
+              {formatNum(rowData.otherAllowances).toString()}
+            </span>
+          </div>
+        ),
+      },
+      {
+        field: "totalAllowances",
+        header: "Total Allow.",
+        ...tableCommonProps,
+        body: (rowData: PayrollDetailEntry) => (
+          <div className="flex justify-center">
+            <span className="text-[15px] font-semibold!">
+              {formatNum(
+                (rowData.breakfastAllowance ?? 0) +
+                  (rowData.otherAllowances ?? 0)
+              )}
+            </span>
+          </div>
+        ),
+      },
+      {
+        field: "totalSalary",
+        header: "Total Salary",
+        ...tableCommonProps,
+        body: (rowData: PayrollDetailEntry) => (
+          <div className="flex justify-center">
+            <span className="text-[15px] font-semibold!">
+              {formatNum(rowData.totalSalary, 0).toString()}
+            </span>
+          </div>
+        ),
+      },
+      {
+        field: "previousAdvance",
+        header: "Prev. Adv.",
+        ...tableCommonProps,
+        body: (rowData: PayrollDetailEntry) => (
+          <div className="flex justify-center">
+            <span className="text-[15px] font-semibold!">
+              {formatNum(rowData.previousAdvance).toString()}
+            </span>
+          </div>
+        ),
+      },
+      {
+        field: "currentAdvance",
+        header: "Curr. Adv.",
+        ...tableCommonProps,
+        body: (rowData: PayrollDetailEntry) => (
+          <div className="flex justify-center">
+            <span className="text-[15px] font-semibold!">
+              {formatNum(rowData.currentAdvance).toString()}
+            </span>
+          </div>
+        ),
+      },
+      {
+        field: "loanDeduction",
+        header: "Loan Ded.",
+        ...tableCommonProps,
+        body: (rowData: PayrollDetailEntry) => (
+          <div className="flex justify-center">
+            <NumberInput
+              useGrouping={false}
+              disabled={rowData.payrollSummaryStatusId === 3}
+              value={rowData.loanDeduction}
+              onValueChange={(e) =>
+                updatePayrollEntry(rowData.id, "loanDeduction", e.value || 0)
+              }
+              className="timesheet-number-input payroll-input"
+              min={0}
+              showButtons={false}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  handleSaveSingleRowOnEnter(rowData.id);
+                }
+              }}
+            />
+          </div>
+        ),
+      },
+      {
+        field: "netLoan",
+        header: "Net Loan",
+        ...tableCommonProps,
+        body: (rowData: PayrollDetailEntry) => (
+          <div className="flex justify-center">
+            <span className="text-[15px] font-semibold! text-primary!">
+              {formatNum(calculateNetLoan(rowData)).toString()}
+            </span>
+          </div>
+        ),
+      },
+      {
+        field: "previousChallan",
+        header: "Prev. Traff.",
+        ...tableCommonProps,
+        body: (rowData: PayrollDetailEntry) => (
+          <div className="flex justify-center">
+            <span className="text-[15px] font-semibold!">
+              {formatNum(rowData.previousChallan).toString()}
+            </span>
+          </div>
+        ),
+      },
+      {
+        field: "currentChallan",
+        header: "Curr. Traff.",
+        ...tableCommonProps,
+        body: (rowData: PayrollDetailEntry) => (
+          <div className="flex justify-center">
+            <span className="text-[15px] font-semibold!">
+              {formatNum(rowData.currentChallan).toString()}
+            </span>
+          </div>
+        ),
+      },
+      {
+        field: "challanDeduction",
+        header: "Traff. Ded.",
+        ...tableCommonProps,
+        body: (rowData: PayrollDetailEntry) => (
+          <div className="flex justify-center">
+            <NumberInput
+              useGrouping={false}
+              disabled={rowData.payrollSummaryStatusId === 3}
+              value={rowData.challanDeduction}
+              onValueChange={(e) =>
+                updatePayrollEntry(rowData.id, "challanDeduction", e.value || 0)
+              }
+              className="timesheet-number-input payroll-input"
+              min={0}
+              showButtons={false}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  handleSaveSingleRowOnEnter(rowData.id);
+                }
+              }}
+            />
+          </div>
+        ),
+      },
+      {
+        field: "netChallan",
+        header: "Net Traff.",
+        ...tableCommonProps,
+        body: (rowData: PayrollDetailEntry) => (
+          <div className="flex justify-center">
+            <span className="text-[15px] font-semibold! text-primary!">
+              {formatNum(calculateNetTrafficChallan(rowData)).toString()}
+            </span>
+          </div>
+        ),
+      },
+      {
+        field: "netSalaryPayable",
+        header: "Net Salary",
+        ...tableCommonProps,
+        body: (rowData: PayrollDetailEntry) => (
+          <div className="flex justify-center">
+            <span className="text-[15px] font-semibold! text-primary!">
+              {formatNum(calculateNetSalaryPayable(rowData), 0).toString()}
+            </span>
+          </div>
+        ),
+      },
+      {
+        field: "cardSalary",
+        header: "Card Salary",
+        ...tableCommonProps,
+        body: (rowData: PayrollDetailEntry) => (
+          <div className="flex justify-center">
+            <NumberInput
+              useGrouping={false}
+              disabled={rowData.payrollSummaryStatusId === 3}
+              value={rowData.cardSalary}
+              onValueChange={(e) =>
+                updateSalaryPair(rowData.id, "cardSalary", e.value ?? 0)
+              }
+              className="timesheet-number-input payroll-input"
+              min={0}
+              showButtons={false}
+            />
+          </div>
+        ),
+      },
+      {
+        field: "cashSalary",
+        header: "Cash Salary",
+        ...tableCommonProps,
+        body: (rowData: PayrollDetailEntry) => (
+          <div className="flex justify-center">
+            <NumberInput
+              useGrouping={false}
+              disabled={rowData.payrollSummaryStatusId === 3}
+              value={rowData.cashSalary}
+              onValueChange={(e) =>
+                updateSalaryPair(rowData.id, "cashSalary", e.value ?? 0)
+              }
+              className="timesheet-number-input payroll-input"
+              min={0}
+              showButtons={false}
+            />
+          </div>
+        ),
+      },
+      {
+        field: "remarks",
+        header: "Remarks",
+        ...tableCommonProps,
+        style: { minWidth: 200 },
+        body: (rowData: PayrollDetailEntry) => (
+          <Input
+            small
             disabled={rowData.payrollSummaryStatusId === 3}
-            value={rowData.loanDeduction}
-            onValueChange={(e) =>
-              updatePayrollEntry(rowData.id, "loanDeduction", e.value || 0)
+            placeholder="Add remarks"
+            value={rowData.remarks}
+            onChange={(e) =>
+              updatePayrollEntry(rowData.id, "remarks", e.target.value)
             }
-            className="timesheet-number-input payroll-input"
-            min={0}
-            showButtons={false}
+            className="w-full h-10! payroll-input"
             onKeyDown={(e) => {
               if (e.key === "Enter") {
                 handleSaveSingleRowOnEnter(rowData.id);
               }
             }}
           />
-        </div>
-      ),
-    },
-    {
-      field: "netLoan",
-      header: "Net Loan",
-      ...tableCommonProps,
-      body: (rowData: PayrollDetailEntry) => (
-        <div className="flex justify-center">
-          <span className="text-[15px] font-semibold! text-primary!">
-            {formatNum(calculateNetLoan(rowData)).toString()}
-          </span>
-        </div>
-      ),
-    },
-    {
-      field: "previousChallan",
-      header: "Prev. Traff.",
-      ...tableCommonProps,
-      body: (rowData: PayrollDetailEntry) => (
-        <div className="flex justify-center">
-          <span className="text-[15px] font-semibold!">
-            {formatNum(rowData.previousChallan).toString()}
-          </span>
-        </div>
-      ),
-    },
-    {
-      field: "currentChallan",
-      header: "Curr. Traff.",
-      ...tableCommonProps,
-      body: (rowData: PayrollDetailEntry) => (
-        <div className="flex justify-center">
-          <span className="text-[15px] font-semibold!">
-            {formatNum(rowData.currentChallan).toString()}
-          </span>
-        </div>
-      ),
-    },
-    {
-      field: "challanDeduction",
-      header: "Traff. Ded.",
-      ...tableCommonProps,
-      body: (rowData: PayrollDetailEntry) => (
-        <div className="flex justify-center">
-          <NumberInput
-            useGrouping={false}
+        ),
+      },
+      {
+        field: "paymentMethodId",
+        header: "Salary Method",
+        ...tableCommonProps,
+        style: { minWidth: 200, width: 200 },
+        body: (rowData: PayrollDetailEntry) => (
+          <Dropdown
+            small
+            filter
+            options={paymentMethodOptions}
             disabled={rowData.payrollSummaryStatusId === 3}
-            value={rowData.challanDeduction}
-            onValueChange={(e) =>
-              updatePayrollEntry(rowData.id, "challanDeduction", e.value || 0)
+            className="w-[200px]! h-10!"
+            placeholder="Choose Method"
+            value={rowData.paymentMethodId?.toString()}
+            onChange={(e) =>
+              updatePayrollEntry(
+                rowData.id,
+                "paymentMethodId",
+                e.value ? Number(e.value) : null
+              )
             }
-            className="timesheet-number-input payroll-input"
-            min={0}
-            showButtons={false}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                handleSaveSingleRowOnEnter(rowData.id);
-              }
-            }}
           />
-        </div>
-      ),
-    },
-    {
-      field: "netChallan",
-      header: "Net Traff.",
-      ...tableCommonProps,
-      body: (rowData: PayrollDetailEntry) => (
-        <div className="flex justify-center">
-          <span className="text-[15px] font-semibold! text-primary!">
-            {formatNum(calculateNetTrafficChallan(rowData)).toString()}
-          </span>
-        </div>
-      ),
-    },
-    {
-      field: "netSalaryPayable",
-      header: "Net Salary",
-      ...tableCommonProps,
-      body: (rowData: PayrollDetailEntry) => (
-        <div className="flex justify-center">
-          <span className="text-[15px] font-semibold! text-primary!">
-            {formatNum(calculateNetSalaryPayable(rowData), 0).toString()}
-          </span>
-        </div>
-      ),
-    },
-    {
-      field: "cardSalary",
-      header: "Card Salary",
-      ...tableCommonProps,
-      body: (rowData: PayrollDetailEntry) => (
-        <div className="flex justify-center">
-          <NumberInput
-            useGrouping={false}
+        ),
+      },
+      {
+        field: "payrollStatusId",
+        header: "Status",
+        ...tableCommonProps,
+        style: { minWidth: 150, width: 150 },
+        body: (rowData: PayrollDetailEntry) => (
+          <Dropdown
+            small
+            options={statusOptions.slice(0, 2)}
             disabled={rowData.payrollSummaryStatusId === 3}
-            value={rowData.cardSalary}
-            onValueChange={(e) =>
-              updateSalaryPair(rowData.id, "cardSalary", e.value ?? 0)
+            className="w-[150px]! h-10!"
+            placeholder="Pending"
+            value={rowData.payrollStatusId}
+            onChange={(e) =>
+              updatePayrollEntry(rowData.id, "payrollStatusId", e.value)
             }
-            className="timesheet-number-input payroll-input"
-            min={0}
-            showButtons={false}
           />
-        </div>
-      ),
-    },
-    {
-      field: "cashSalary",
-      header: "Cash Salary",
-      ...tableCommonProps,
-      body: (rowData: PayrollDetailEntry) => (
-        <div className="flex justify-center">
-          <NumberInput
-            useGrouping={false}
-            disabled={rowData.payrollSummaryStatusId === 3}
-            value={rowData.cashSalary}
-            onValueChange={(e) =>
-              updateSalaryPair(rowData.id, "cashSalary", e.value ?? 0)
-            }
-            className="timesheet-number-input payroll-input"
-            min={0}
-            showButtons={false}
+        ),
+      },
+      {
+        field: "id",
+        header: "Actions",
+        ...tableCommonProps,
+        sortable: false,
+        filterable: false,
+        style: { minWidth: 80, width: 80, textAlign: "center" },
+        body: (rowData: PayrollDetailEntry) => (
+          <ActionButtons
+            rowData={rowData}
+            isSavingAll={isSavingAll}
+            onRefreshComplete={handleRowRefreshComplete}
           />
-        </div>
-      ),
-    },
-    {
-      field: "remarks",
-      header: "Remarks",
-      ...tableCommonProps,
-      style: { minWidth: 200 },
-      body: (rowData: PayrollDetailEntry) => (
-        <Input
-          small
-          disabled={rowData.payrollSummaryStatusId === 3}
-          placeholder="Add remarks"
-          value={rowData.remarks}
-          onChange={(e) =>
-            updatePayrollEntry(rowData.id, "remarks", e.target.value)
-          }
-          className="w-full h-10! payroll-input"
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              handleSaveSingleRowOnEnter(rowData.id);
-            }
-          }}
-        />
-      ),
-    },
-    {
-      field: "paymentMethodId",
-      header: "Salary Method",
-      ...tableCommonProps,
-      style: { minWidth: 200, width: 200 },
-      body: (rowData: PayrollDetailEntry) => (
-        <Dropdown
-          small
-          filter
-          options={paymentMethodOptions}
-          disabled={rowData.payrollSummaryStatusId === 3}
-          className="w-[200px]! h-10!"
-          placeholder="Choose Method"
-          value={rowData.paymentMethodId?.toString()}
-          onChange={(e) =>
-            updatePayrollEntry(
-              rowData.id,
-              "paymentMethodId",
-              e.value ? Number(e.value) : null
-            )
-          }
-        />
-      ),
-    },
-    {
-      field: "payrollStatusId",
-      header: "Status",
-      ...tableCommonProps,
-      style: { minWidth: 150, width: 150 },
-      body: (rowData: PayrollDetailEntry) => (
-        <Dropdown
-          small
-          options={statusOptions.slice(0, 2)}
-          disabled={rowData.payrollSummaryStatusId === 3}
-          className="w-[150px]! h-10!"
-          placeholder="Pending"
-          value={rowData.payrollStatusId}
-          onChange={(e) =>
-            updatePayrollEntry(rowData.id, "payrollStatusId", e.value)
-          }
-        />
-      ),
-    },
-    {
-      field: "id",
-      header: "Actions",
-      ...tableCommonProps,
-      sortable: false,
-      filterable: false,
-      style: { minWidth: 80, width: 80, textAlign: "center" },
-      body: (rowData: PayrollDetailEntry) => (
-        <ActionButtons
-          rowData={rowData}
-          isSavingAll={isSavingAll}
-          onRefreshComplete={handleRowRefreshComplete}
-        />
-      ),
-    },
-  ];
+        ),
+      },
+    ],
+    // Rebuilt only when data that drives disabled/options states changes
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [
+      payrollData,
+      isSavingAll,
+      isSavingRow,
+      isLoading,
+      statusOptions,
+      paymentMethodOptions,
+    ]
+  );
 
   const renderHeader = ({ exportCSV, exportExcel }: CustomHeaderProps) => {
     return (
@@ -838,14 +864,17 @@ const PayrollDetailPage = () => {
         })}
         <div className="bg-white h-full rounded-xl overflow-hidden">
           <Table
+            lazy
             ref={tableRef}
             dataKey="id"
             extraSmall
             data={payrollData}
-            columns={columns()}
+            columns={columns}
             pagination={true}
             rowsPerPageOptions={[50, 100]}
-            rows={50}
+            rows={limit}
+            totalRecords={total}
+            first={(page - 1) * limit}
             globalSearch={false}
             emptyMessage={
               !filterParams.designationId && !filterParams.payrollSectionId

@@ -67,17 +67,17 @@ type SortableField = keyof typeof SORTABLE_FIELDS;
 const RenderDot = ({ statusId }: { statusId: number | null }) => {
   if (statusId === 1) {
     return (
-      <div className="absolute z-10 -top-0.5 -right-0.5 w-3 h-3 bg-theme-green rounded-full" />
+      <div className="absolute -top-0.5 -right-0.5 w-3 h-3 bg-theme-green rounded-full" />
     );
   }
   if (statusId === 7) {
     return (
-      <div className="absolute z-10 -top-0.5 -right-0.5 w-3 h-3 bg-theme-red rounded-full" />
+      <div className="absolute -top-0.5 -right-0.5 w-3 h-3 bg-theme-red rounded-full" />
     );
   }
   if (statusId === 4) {
     return (
-      <div className="absolute z-10 -top-0.5 -right-0.5 w-3 h-3 bg-orange-400 rounded-full" />
+      <div className="absolute -top-0.5 -right-0.5 w-3 h-3 bg-orange-400 rounded-full" />
     );
   }
   return null;

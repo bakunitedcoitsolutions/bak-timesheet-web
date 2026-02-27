@@ -29,6 +29,7 @@ import {
   useSaveTimesheetEntries,
   useBulkUploadTimesheets,
 } from "@/lib/db/services/timesheet/requests";
+import { useGetPayrollSummaryStatus } from "@/lib/db/services/payroll-summary/requests";
 import type {
   TimesheetPageRow,
   SaveTimesheetEntryItem,
@@ -64,6 +65,17 @@ const TimesheetPage = () => {
   const [showReportDialog, setShowReportDialog] = useState(false);
   const [uploadedFileName, setUploadedFileName] = useState<string>("");
   const tableRef = useRef<TableRef>(null);
+
+  // Derive month and year from the selected date for payroll status lookup
+  const { month: selectedMonth, year: selectedYear } = useMemo(() => {
+    const d = new Date(selectedDate);
+    return { month: d.getMonth() + 1, year: d.getFullYear() };
+  }, [selectedDate]);
+
+  const { data: payrollSummaryStatus } = useGetPayrollSummaryStatus({
+    month: selectedMonth,
+    year: selectedYear,
+  });
 
   useEffect(() => {
     setPage(1);
@@ -211,8 +223,10 @@ const TimesheetPage = () => {
     [saveTimesheetEntries, selectedDate]
   );
 
+  const isPayrollPosted = payrollSummaryStatus?.payrollStatusId === 3;
+
   const isLocked = (rowData: TimesheetPageRow) => {
-    return rowData.isLocked || rowData.isPosted;
+    return rowData.isLocked || isPayrollPosted;
   };
 
   const columns = useMemo(

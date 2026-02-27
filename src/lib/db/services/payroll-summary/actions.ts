@@ -13,10 +13,12 @@ import {
   RecalculatePayrollSummarySchema,
   RefreshPayrollDetailRowSchema,
   GetSalarySlipDataSchema,
+  GetPayrollSummaryByMonthYearSchema,
 } from "./payroll-summary.schemas";
 import {
   getPayrollSummariesByYear,
   getPayrollDate,
+  getPayrollSummaryStatusByMonthYear,
 } from "./payroll-summary.service";
 import {
   getPayrollDetails,
@@ -97,4 +99,10 @@ export const getSalarySlipDataAction = serverAction
   .input(GetSalarySlipDataSchema)
   .handler(async ({ input }) => {
     return await getSalarySlipData(input);
+  });
+
+export const getPayrollSummaryStatusByMonthYearAction = serverAction
+  .input(GetPayrollSummaryByMonthYearSchema)
+  .handler(async ({ input }) => {
+    return await getPayrollSummaryStatusByMonthYear(input.month, input.year);
   });

@@ -483,7 +483,8 @@ const MonthlyTimesheetReportPage = () => {
             <div className="border border-primary/50 py-3 px-4 bg-gray-50 flex justify-between items-center">
               <span className="font-semibold text-primary text-sm uppercase">
                 {rowData.employeeCode} - {rowData.nameEn} (
-                {rowData.designationName || "-"})
+                {rowData.designationName || ""}
+                {rowData.isFixed ? " - Fixed" : ""})
               </span>
               <div className="flex items-center gap-4">
                 <span className="text-sm text-gray-700 font-semibold whitespace-nowrap">

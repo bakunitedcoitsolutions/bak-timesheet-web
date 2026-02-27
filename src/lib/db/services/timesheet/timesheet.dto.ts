@@ -25,7 +25,6 @@ export interface TimesheetPageRow {
   designationNameEn: string;
   isFixed: boolean;
   isLocked: boolean;
-  isPosted: boolean;
   project1Id: number | null;
   project1Hours: number | null;
   project1Overtime: number | null;

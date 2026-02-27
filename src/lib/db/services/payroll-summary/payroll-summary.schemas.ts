@@ -107,3 +107,11 @@ export const GetSalarySlipDataSchema = z.object({
 });
 
 export type GetSalarySlipDataInput = z.infer<typeof GetSalarySlipDataSchema>;
+
+export const GetPayrollSummaryByMonthYearSchema = z.object({
+  month: z.number().int().min(1).max(12),
+  year: z.number().int(),
+});
+export type GetPayrollSummaryByMonthYearInput = z.infer<
+  typeof GetPayrollSummaryByMonthYearSchema
+>;

@@ -116,3 +116,25 @@ export const getPayrollDate = async (
 
   return payroll;
 };
+
+/**
+ * Get payroll summary status for a specific month and year
+ */
+export const getPayrollSummaryStatusByMonthYear = async (
+  month: number,
+  year: number
+): Promise<{
+  id: number;
+  payrollStatusId: number | null;
+  payrollStatus: { id: number; nameEn: string } | null;
+} | null> => {
+  const summary = await prisma.payrollSummary.findFirst({
+    where: { payrollMonth: month, payrollYear: year },
+    select: {
+      id: true,
+      payrollStatusId: true,
+      payrollStatus: { select: { id: true, nameEn: true } },
+    },
+  });
+  return summary ?? null;
+};

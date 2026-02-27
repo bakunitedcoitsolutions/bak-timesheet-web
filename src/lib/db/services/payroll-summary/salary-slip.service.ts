@@ -1,7 +1,6 @@
 import { prisma } from "@/lib/db/prisma";
 import { GetSalarySlipDataInput } from "./payroll-summary.schemas";
 import { mapPayrollDetailToEntry, PayrollDetailEntry } from "./mappers";
-import { AllowanceType } from "../../../../../prisma/generated/prisma/enums";
 
 const getMonthDateRange = (year: number, month: number) => {
   const startDate = new Date(Date.UTC(year, month - 1, 1));
@@ -186,7 +185,9 @@ export const getSalarySlipData = async (
 
     const totalBreakfastAllowance = breakfastAllowanceCount * 10;
     const workDays =
-      designationHours > 0 ? Math.min(totalHours / designationHours, 30) : 0;
+      designationHours > 0
+        ? Math.min(totalDutyHours / designationHours, 31)
+        : 0;
 
     const fixedAllowances =
       Number(emp.foodAllowance || 0) +
@@ -250,23 +251,23 @@ export const getSalarySlipData = async (
       iban: (emp as any).iban || "",
       bankCode: (emp as any).bankCode || "",
       workDays: Math.round(workDays),
-      overTime: Number(totalOTHours.toFixed(2)),
-      totalHours: Number(totalHours.toFixed(2)),
+      overTime: Number(totalOTHours.toFixed(0)),
+      totalHours: Number(totalHours.toFixed(0)),
       hourlyRate: Number(hourlyRate.toFixed(2)),
-      breakfastAllowance: Number(totalBreakfastAllowance.toFixed(2)),
-      otherAllowances: Number(fixedAllowances.toFixed(2)),
-      totalAllowances: Number(totalAllowances.toFixed(2)),
-      totalSalary: Number(totalSalary.toFixed(2)),
-      previousAdvance: Number(previousLoanBalance.toFixed(2)),
-      currentAdvance: Number(currentNetLoan.toFixed(2)),
-      loanDeduction: Number(loanDeduction.toFixed(2)),
+      breakfastAllowance: Number(totalBreakfastAllowance.toFixed(0)),
+      otherAllowances: Number(fixedAllowances.toFixed(0)),
+      totalAllowances: Number(totalAllowances.toFixed(0)),
+      totalSalary: Number(totalSalary.toFixed(0)),
+      previousAdvance: Number(previousLoanBalance.toFixed(0)),
+      currentAdvance: Number(currentNetLoan.toFixed(0)),
+      loanDeduction: Number(loanDeduction.toFixed(0)),
       netLoan,
-      previousChallan: Number(previousChallanBalance.toFixed(2)),
-      currentChallan: Number(currentNetChallan.toFixed(2)),
-      challanDeduction: Number(challanDeduction.toFixed(2)),
+      previousChallan: Number(previousChallanBalance.toFixed(0)),
+      currentChallan: Number(currentNetChallan.toFixed(0)),
+      challanDeduction: Number(challanDeduction.toFixed(0)),
       netChallan,
-      netSalaryPayable: Number(netSalaryPayable.toFixed(2)),
-      cardSalary: Number(netSalaryPayable.toFixed(2)),
+      netSalaryPayable: Number(netSalaryPayable.toFixed(0)),
+      cardSalary: Number(netSalaryPayable.toFixed(0)),
       cashSalary: 0,
       remarks: "",
       paymentMethodId: null,

@@ -7,8 +7,8 @@ import {
   RecalculatePayrollSummaryInput,
   UpdateMonthlyPayrollValuesInput,
 } from "./payroll-summary.schemas";
-import { AllowanceType } from "../../../../../prisma/generated/prisma/enums";
 import { mapPayrollDetailToEntry } from "./mappers";
+import { AllowanceType } from "../../../../../prisma/generated/prisma/enums";
 
 // Helper to getting start/end of month
 const getMonthDateRange = (year: number, month: number) => {
@@ -224,10 +224,10 @@ const calculateAndSavePayroll = async (
     let totalBreakfastAllowance = breakfastAllowanceCount * 10;
 
     // Working Days
-    let workDays = 0;
-    if (designationHours > 0) {
-      workDays = Math.min(totalHours / designationHours, 30);
-    }
+    const workDays =
+      designationHours > 0
+        ? Math.min(totalDutyHours / designationHours, 31)
+        : 0;
 
     // B. Other Allowances (Fixed)
     // "Calculate the Allowances Other than Breakfast (Mobile + Food + Other)"
@@ -314,24 +314,24 @@ const calculateAndSavePayroll = async (
       payrollYear,
       employeeId: emp.id,
       workDays: Math.round(Number(workDays)),
-      totalHours: Number(totalHours.toFixed(2)),
+      totalHours: Number(totalHours.toFixed(0)),
       hourlyRate: Number(hourlyRate.toFixed(2)),
-      breakfastAllowance: Number(totalBreakfastAllowance.toFixed(2)),
-      otherAllowances: Number(fixedAllowances.toFixed(2)),
-      totalAllowances: Number(totalAllowances.toFixed(2)),
-      salary: Number(totalSalary.toFixed(2)), // Gross Salary
-      previousLoan: Number(previousLoanBalance.toFixed(2)),
-      currentLoan: Number(currentNetLoan.toFixed(2)),
-      loanDeduction: Number(loanDeduction.toFixed(2)),
-      netLoan: Number(netLoan.toFixed(2)),
-      previousChallan: Number(previousChallanBalance.toFixed(2)),
-      currentChallan: Number(currentNetChallan.toFixed(2)),
-      challanDeduction: Number(challanDeduction.toFixed(2)),
-      netChallan: Number(netChallan.toFixed(2)),
-      netSalaryPayable: Number(netSalaryPayable.toFixed(2)),
+      breakfastAllowance: Number(totalBreakfastAllowance.toFixed(0)),
+      otherAllowances: Number(fixedAllowances.toFixed(0)),
+      totalAllowances: Number(totalAllowances.toFixed(0)),
+      salary: Number(totalSalary.toFixed(0)), // Gross Salary
+      previousLoan: Number(previousLoanBalance.toFixed(0)),
+      currentLoan: Number(currentNetLoan.toFixed(0)),
+      loanDeduction: Number(loanDeduction.toFixed(0)),
+      netLoan: Number(netLoan.toFixed(0)),
+      previousChallan: Number(previousChallanBalance.toFixed(0)),
+      currentChallan: Number(currentNetChallan.toFixed(0)),
+      challanDeduction: Number(challanDeduction.toFixed(0)),
+      netChallan: Number(netChallan.toFixed(0)),
+      netSalaryPayable: Number(netSalaryPayable.toFixed(0)),
       cardSalary: Number(netSalaryPayable.toFixed(0)),
       cashSalary: 0,
-      overTime: Number(totalOTHours.toFixed(2)),
+      overTime: Number(totalOTHours.toFixed(0)),
       remarks: "",
       payrollStatusId: statusId,
       branchId: emp.branchId,
@@ -771,7 +771,9 @@ export const repostPayroll = async ({ id }: RepostPayrollInput) => {
 
     const totalBreakfastAllowance = breakfastAllowanceCount * 10;
     const workDays =
-      designationHours > 0 ? Math.min(totalHours / designationHours, 30) : 0;
+      designationHours > 0
+        ? Math.min(totalDutyHours / designationHours, 31)
+        : 0;
 
     const fixedAllowances =
       Number(emp.foodAllowance || 0) +
@@ -825,18 +827,18 @@ export const repostPayroll = async ({ id }: RepostPayrollInput) => {
         where: { id: existingRow.id },
         data: {
           workDays: Math.round(workDays),
-          overTime: Number(totalOTHours.toFixed(2)),
-          totalHours: Number(totalHours.toFixed(2)),
+          overTime: Number(totalOTHours.toFixed(0)),
+          totalHours: Number(totalHours.toFixed(0)),
           hourlyRate: Number(hourlyRate.toFixed(2)),
-          breakfastAllowance: Number(totalBreakfastAllowance.toFixed(2)),
-          otherAllowances: Number(fixedAllowances.toFixed(2)),
-          totalAllowances: Number(totalAllowances.toFixed(2)),
-          salary: Number(totalSalary.toFixed(2)),
-          previousLoan: Number(previousLoanBalance.toFixed(2)),
-          currentLoan: Number(currentNetLoan.toFixed(2)),
-          previousChallan: Number(previousChallanBalance.toFixed(2)),
-          currentChallan: Number(currentNetChallan.toFixed(2)),
-          netSalaryPayable: Number(netSalaryPayable.toFixed(2)),
+          breakfastAllowance: Number(totalBreakfastAllowance.toFixed(0)),
+          otherAllowances: Number(fixedAllowances.toFixed(0)),
+          totalAllowances: Number(totalAllowances.toFixed(0)),
+          salary: Number(totalSalary.toFixed(0)),
+          previousLoan: Number(previousLoanBalance.toFixed(0)),
+          currentLoan: Number(currentNetLoan.toFixed(0)),
+          previousChallan: Number(previousChallanBalance.toFixed(0)),
+          currentChallan: Number(currentNetChallan.toFixed(0)),
+          netSalaryPayable: Number(netSalaryPayable.toFixed(0)),
           // loanDeduction, netLoan, challanDeduction, netChallan,
           // cardSalary, cashSalary, remarks, paymentMethodId, payrollStatusId preserved
         },
@@ -853,22 +855,22 @@ export const repostPayroll = async ({ id }: RepostPayrollInput) => {
           payrollYear,
           employeeId: emp.id,
           workDays: Math.round(workDays),
-          overTime: Number(totalOTHours.toFixed(2)),
-          totalHours: Number(totalHours.toFixed(2)),
+          overTime: Number(totalOTHours.toFixed(0)),
+          totalHours: Number(totalHours.toFixed(0)),
           hourlyRate: Number(hourlyRate.toFixed(2)),
-          breakfastAllowance: Number(totalBreakfastAllowance.toFixed(2)),
-          otherAllowances: Number(fixedAllowances.toFixed(2)),
-          totalAllowances: Number(totalAllowances.toFixed(2)),
-          salary: Number(totalSalary.toFixed(2)),
-          previousLoan: Number(previousLoanBalance.toFixed(2)),
-          currentLoan: Number(currentNetLoan.toFixed(2)),
-          loanDeduction: Number(loanDeduction.toFixed(2)),
+          breakfastAllowance: Number(totalBreakfastAllowance.toFixed(0)),
+          otherAllowances: Number(fixedAllowances.toFixed(0)),
+          totalAllowances: Number(totalAllowances.toFixed(0)),
+          salary: Number(totalSalary.toFixed(0)),
+          previousLoan: Number(previousLoanBalance.toFixed(0)),
+          currentLoan: Number(currentNetLoan.toFixed(0)),
+          loanDeduction: Number(loanDeduction.toFixed(0)),
           netLoan: previousLoanBalance + currentNetLoan,
-          previousChallan: Number(previousChallanBalance.toFixed(2)),
-          currentChallan: Number(currentNetChallan.toFixed(2)),
-          challanDeduction: Number(challanDeduction.toFixed(2)),
+          previousChallan: Number(previousChallanBalance.toFixed(0)),
+          currentChallan: Number(currentNetChallan.toFixed(0)),
+          challanDeduction: Number(challanDeduction.toFixed(0)),
           netChallan: previousChallanBalance + currentNetChallan,
-          netSalaryPayable: Number(netSalaryPayable.toFixed(2)),
+          netSalaryPayable: Number(netSalaryPayable.toFixed(0)),
           cardSalary: Number(netSalaryPayable.toFixed(0)),
           cashSalary: 0,
           remarks: "",
@@ -893,32 +895,11 @@ export const postPayroll = async ({ id }: PostPayrollInput) => {
   // Reuse recalculatePayrollSummary with statusId 3 (Posted)
   await recalculatePayrollSummary({ id, statusId: 3 });
 
-  // Fetch payroll details to get employee IDs and the payroll month/year
-  const payrollDetails = await prisma.payrollDetails.findMany({
-    where: { payrollId: id },
-    select: { employeeId: true, payrollYear: true, payrollMonth: true },
-  });
-
   // Update all related payroll details status to 2 (Done)
   await prisma.payrollDetails.updateMany({
     where: { payrollId: id },
     data: { payrollStatusId: 2 },
   });
-
-  // Mark all timesheet records for these employees within the payroll month as posted
-  if (payrollDetails.length > 0) {
-    const { payrollYear, payrollMonth } = payrollDetails[0];
-    const employeeIds = payrollDetails.map((d) => d.employeeId);
-    const { startDate, endDate } = getMonthDateRange(payrollYear, payrollMonth);
-
-    await prisma.timesheet.updateMany({
-      where: {
-        employeeId: { in: employeeIds },
-        date: { gte: startDate, lte: endDate },
-      },
-      data: { isPosted: true },
-    });
-  }
 
   return { id };
 };
@@ -1126,10 +1107,8 @@ export const refreshPayrollDetailRow = async ({
 
   const totalBreakfastAllowance = breakfastAllowanceCount * 10;
 
-  let workDays = 0;
-  if (designationHours > 0) {
-    workDays = Math.min(totalHours / designationHours, 30);
-  }
+  const workDays =
+    designationHours > 0 ? Math.min(totalDutyHours / designationHours, 31) : 0;
 
   const foodAllowance = Number(emp.foodAllowance || 0);
   const mobileAllowance = Number(emp.mobileAllowance || 0);
@@ -1192,20 +1171,20 @@ export const refreshPayrollDetailRow = async ({
     data: {
       // Recalculated (attendance / salary / allowance)
       workDays: Math.round(workDays),
-      overTime: Number(totalOTHours.toFixed(2)),
-      totalHours: Number(totalHours.toFixed(2)),
+      overTime: Number(totalOTHours.toFixed(0)),
+      totalHours: Number(totalHours.toFixed(0)),
       hourlyRate: Number(hourlyRate.toFixed(2)),
-      breakfastAllowance: Number(totalBreakfastAllowance.toFixed(2)),
-      otherAllowances: Number(fixedAllowances.toFixed(2)),
-      totalAllowances: Number(totalAllowances.toFixed(2)),
-      salary: Number(totalSalary.toFixed(2)),
+      breakfastAllowance: Number(totalBreakfastAllowance.toFixed(0)),
+      otherAllowances: Number(fixedAllowances.toFixed(0)),
+      totalAllowances: Number(totalAllowances.toFixed(0)),
+      salary: Number(totalSalary.toFixed(0)),
       // Recalculated display-only loan/challan running totals
-      previousLoan: Number(previousLoanBalance.toFixed(2)),
-      currentLoan: Number(currentNetLoan.toFixed(2)),
-      previousChallan: Number(previousChallanBalance.toFixed(2)),
-      currentChallan: Number(currentNetChallan.toFixed(2)),
+      previousLoan: Number(previousLoanBalance.toFixed(0)),
+      currentLoan: Number(currentNetLoan.toFixed(0)),
+      previousChallan: Number(previousChallanBalance.toFixed(0)),
+      currentChallan: Number(currentNetChallan.toFixed(0)),
       // Net salary recalculated against preserved deductions
-      netSalaryPayable: Number(netSalaryPayable.toFixed(2)),
+      netSalaryPayable: Number(netSalaryPayable.toFixed(0)),
       // Preserved — loanDeduction, netLoan, challanDeduction, netChallan,
       // cardSalary, cashSalary, remarks, paymentMethodId, payrollStatusId
       // are intentionally NOT updated here.

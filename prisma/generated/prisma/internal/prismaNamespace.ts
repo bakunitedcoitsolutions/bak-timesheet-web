@@ -2294,7 +2294,6 @@ export const TimesheetScalarFieldEnum = {
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   isLocked: 'isLocked',
-  isPosted: 'isPosted',
   isManual: 'isManual'
 } as const
 
