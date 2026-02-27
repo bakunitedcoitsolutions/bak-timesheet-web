@@ -3,6 +3,9 @@
 import { useState, useRef, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { Paginator } from "primereact/paginator";
+import { ColumnGroup } from "primereact/columngroup";
+import { Row } from "primereact/row";
+import { Column } from "primereact/column";
 
 import {
   Input,
@@ -103,7 +106,7 @@ const PayrollReportPage = () => {
     [reportResponse]
   );
 
-  // ── group by section ──────────────────────────────────────────────────────
+  // ── group by section (skip empty sections) ──────────────────────────────
   const sections = useMemo(() => {
     const map = new Map<string, { rows: PayrollReportRow[]; order: number }>();
     allRows.forEach((r) => {
@@ -248,7 +251,7 @@ const PayrollReportPage = () => {
         field: "breakfastAllowance",
         header: "Brf. Alw.",
         body: (r) => (
-          <span className="text-sm text-center block">
+          <span className="text-sm text-center font-semibold block">
             {fmt(r.breakfastAllowance)}
           </span>
         ),
@@ -258,7 +261,7 @@ const PayrollReportPage = () => {
         field: "otherAllowances",
         header: "Alw.",
         body: (r) => (
-          <span className="text-sm text-center block">
+          <span className="text-sm text-center font-semibold block">
             {fmt(r.otherAllowances)}
           </span>
         ),
@@ -268,7 +271,7 @@ const PayrollReportPage = () => {
         field: "totalAllowances",
         header: "Total Alw.",
         body: (r) => (
-          <span className="text-sm text-center block">
+          <span className="text-sm text-center font-semibold block">
             {fmt(r.totalAllowances)}
           </span>
         ),
@@ -288,7 +291,7 @@ const PayrollReportPage = () => {
         field: "previousAdvance",
         header: "Prev. Adv.",
         body: (r) => (
-          <span className="text-sm text-center block">
+          <span className="text-sm text-center font-semibold block">
             {fmt(r.previousAdvance)}
           </span>
         ),
@@ -298,7 +301,7 @@ const PayrollReportPage = () => {
         field: "currentAdvance",
         header: "Curr. Adv.",
         body: (r) => (
-          <span className="text-sm text-center block">
+          <span className="text-sm text-center font-semibold block">
             {fmt(r.currentAdvance)}
           </span>
         ),
@@ -308,7 +311,7 @@ const PayrollReportPage = () => {
         field: "loanDeduction",
         header: "Loan Ded.",
         body: (r) => (
-          <span className="text-sm text-center block">
+          <span className="text-sm text-center font-semibold block">
             {fmt(r.loanDeduction)}
           </span>
         ),
@@ -328,7 +331,7 @@ const PayrollReportPage = () => {
         field: "previousChallan",
         header: "Prev. Traff.",
         body: (r) => (
-          <span className="text-sm text-center block">
+          <span className="text-sm text-center font-semibold block">
             {fmt(r.previousChallan)}
           </span>
         ),
@@ -338,7 +341,7 @@ const PayrollReportPage = () => {
         field: "currentChallan",
         header: "Curr. Traff.",
         body: (r) => (
-          <span className="text-sm text-center block">
+          <span className="text-sm text-center font-semibold block">
             {fmt(r.currentChallan)}
           </span>
         ),
@@ -348,7 +351,7 @@ const PayrollReportPage = () => {
         field: "challanDeduction",
         header: "Traff. Ded.",
         body: (r) => (
-          <span className="text-sm text-center block">
+          <span className="text-sm text-center font-semibold block">
             {fmt(r.challanDeduction)}
           </span>
         ),
@@ -378,7 +381,9 @@ const PayrollReportPage = () => {
         field: "cardSalary",
         header: "Card Salary",
         body: (r) => (
-          <span className="text-sm text-center block">{fmt(r.cardSalary)}</span>
+          <span className="text-sm text-center font-semibold block">
+            {fmt(r.cardSalary)}
+          </span>
         ),
       },
       {
@@ -386,7 +391,9 @@ const PayrollReportPage = () => {
         field: "cashSalary",
         header: "Cash Salary",
         body: (r) => (
-          <span className="text-sm text-center block">{fmt(r.cashSalary)}</span>
+          <span className="text-sm text-center font-semibold block">
+            {fmt(r.cashSalary)}
+          </span>
         ),
       },
       {
@@ -395,7 +402,9 @@ const PayrollReportPage = () => {
         header: "Remarks",
         style: { minWidth: 150 },
         body: (r) => (
-          <span className="text-sm text-gray-500">{r.remarks || ""}</span>
+          <span className="text-sm text-gray-500 text-left!">
+            {r.remarks || ""}
+          </span>
         ),
       },
     ],
@@ -408,6 +417,77 @@ const PayrollReportPage = () => {
       .filter((r) => r.sectionName === sectionName)
       .reduce((s, r) => s + (((r as any)[key] as number) || 0), 0);
 
+  // ── grand total (all visible rows) ────────────────────────────────────────
+  const NUMERIC_KEYS: (keyof PayrollDetailEntry)[] = [
+    "workDays",
+    "overTime",
+    "totalHours",
+    "hourlyRate",
+    "breakfastAllowance",
+    "otherAllowances",
+    "totalAllowances",
+    "totalSalary",
+    "previousAdvance",
+    "currentAdvance",
+    "loanDeduction",
+    "netLoan",
+    "previousChallan",
+    "currentChallan",
+    "challanDeduction",
+    "netChallan",
+    "netSalaryPayable",
+    "cardSalary",
+    "cashSalary",
+  ];
+  const grandTotals = useMemo(
+    () =>
+      NUMERIC_KEYS.reduce(
+        (acc, k) => ({
+          ...acc,
+          [k]: visibleData.reduce(
+            (s, r) => s + (((r as any)[k] as number) || 0),
+            0
+          ),
+        }),
+        {} as Record<string, number>
+      ),
+    [visibleData]
+  );
+  const gt = (k: keyof PayrollDetailEntry) =>
+    fmt((grandTotals[k as string] as number) || 0);
+
+  // ── grand total footer column group ──────────────────────────────────────
+  const footerColumnGroup =
+    visibleSections.length > 1 && visibleData.length > 0 ? (
+      <ColumnGroup>
+        <Row>
+          <Column
+            colSpan={5}
+            footer="GRAND TOTAL :"
+            footerStyle={{
+              textAlign: "right",
+              fontWeight: "bold",
+              fontSize: 13,
+              color: "var(--primary-color)",
+            }}
+          />
+          {NUMERIC_KEYS.map((k) => (
+            <Column
+              key={String(k)}
+              footer={gt(k)}
+              footerStyle={{
+                textAlign: "center",
+                fontWeight: "bold",
+                fontSize: 13,
+                color: "var(--primary-color)",
+              }}
+            />
+          ))}
+          {/* remarks column */}
+          <Column footer="" />
+        </Row>
+      </ColumnGroup>
+    ) : undefined;
   // ── section header template ───────────────────────────────────────────────
   const rowGroupHeaderTemplate = (rowData: PayrollReportRow) => (
     <div className="border border-primary/50 py-2 px-4 bg-gray-50 flex justify-between items-center">
@@ -423,6 +503,9 @@ const PayrollReportPage = () => {
   // ── section footer template ───────────────────────────────────────────────
   const rowGroupFooterTemplate = (rowData: PayrollReportRow) => {
     const sn = rowData.sectionName;
+    const sectionCount = visibleData.filter((r) => r.sectionName === sn).length;
+    // Don't show a total row if there's only one record in the section
+    if (sectionCount <= 1) return null;
     const s = (k: keyof PayrollDetailEntry) => fmt(sumSection(sn, k));
     const colSpan = 5; // #, Code, Full Name, ID No, Designation
     return (
@@ -617,6 +700,7 @@ const PayrollReportPage = () => {
           groupRowsBy="sectionName"
           rowGroupHeaderTemplate={rowGroupHeaderTemplate}
           rowGroupFooterTemplate={rowGroupFooterTemplate}
+          footerColumnGroup={footerColumnGroup}
           tableClassName="report-table"
           emptyMessage="No payroll data found. Select a month and click Refresh."
           scrollable
