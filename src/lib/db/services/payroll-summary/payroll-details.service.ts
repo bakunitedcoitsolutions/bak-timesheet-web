@@ -1,7 +1,10 @@
 import { prisma } from "@/lib/db/prisma";
 import type { GetPayrollDetailsParams } from "./payroll-summary.dto";
 import { mapPayrollDetailToEntry, PayrollDetailEntry } from "./mappers";
-import { SavePayrollDetailsBatchInput } from "./payroll-summary.schemas";
+import {
+  SavePayrollDetailsBatchInput,
+  GetPayrollReportInput,
+} from "./payroll-summary.schemas";
 
 export const getPayrollDetails = async (
   params: GetPayrollDetailsParams
@@ -209,4 +212,84 @@ export const savePayrollDetailsBatch = async (
   }
 
   return { saved };
+};
+
+/**
+ * Get payroll report data from payroll details for a given month/year.
+ * Grouped by payroll section name for display.
+ */
+export const getPayrollReport = async (
+  params: GetPayrollReportInput
+): Promise<{ details: PayrollDetailEntry[]; total: number }> => {
+  const {
+    month,
+    year,
+    payrollSectionId,
+    designationId,
+    employeeCodes,
+    paymentMethodId,
+  } = params;
+
+  const where: any = {
+    payrollYear: year,
+    payrollMonth: month,
+  };
+
+  const employeeFilter: any = {};
+
+  if (payrollSectionId) employeeFilter.payrollSectionId = payrollSectionId;
+  if (designationId) employeeFilter.designationId = designationId;
+  if (employeeCodes && employeeCodes.length > 0)
+    employeeFilter.employeeCode = { in: employeeCodes };
+
+  if (Object.keys(employeeFilter).length > 0) {
+    where.employee = employeeFilter;
+  }
+
+  if (paymentMethodId) where.paymentMethodId = paymentMethodId;
+
+  const details = await prisma.payrollDetails.findMany({
+    where,
+    orderBy: [
+      { employee: { payrollSection: { displayOrderKey: "asc" } } },
+      { employee: { employeeCode: "asc" } },
+    ],
+    include: {
+      employee: {
+        select: {
+          id: true,
+          employeeCode: true,
+          isDeductable: true,
+          isFixed: true,
+          isCardDelivered: true,
+          nameEn: true,
+          nameAr: true,
+          designationId: true,
+          idCardNo: true,
+          profession: true,
+          passportNo: true,
+          passportExpiryDate: true,
+          joiningDate: true,
+          iban: true,
+          bankCode: true,
+          gender: true,
+          payrollSectionId: true,
+          payrollSection: {
+            select: { id: true, nameEn: true, displayOrderKey: true },
+          },
+          nationality: { select: { id: true, nameEn: true, nameAr: true } },
+          designation: { select: { id: true, nameEn: true, nameAr: true } },
+        },
+      },
+      payrollSummary: { select: { payrollStatusId: true } },
+    },
+  });
+
+  const mapped = details.map((d: any) => ({
+    ...mapPayrollDetailToEntry(d),
+    sectionName: d.employee?.payrollSection?.nameEn ?? "Unassigned",
+    sectionOrder: d.employee?.payrollSection?.displayOrderKey ?? 9999,
+  }));
+
+  return { details: mapped, total: mapped.length };
 };

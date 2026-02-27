@@ -10,6 +10,7 @@ import {
   postPayrollAction,
   recalculatePayrollSummaryAction,
   getPayrollSummaryStatusByMonthYearAction,
+  getPayrollReportAction,
 } from "./actions";
 
 // Manually defining input type since schema is defined inside actions.ts for now
@@ -24,6 +25,7 @@ import {
   GetPayrollDetailsInput,
   GetPayrollDateInput,
   GetPayrollSummaryByMonthYearInput,
+  GetPayrollReportInput,
 } from "./payroll-summary.schemas";
 
 export const useUpdateMonthlyPayrollValues = () =>
@@ -132,4 +134,12 @@ export const useGetPayrollSummaryStatus = (
     queryKey: ["payroll-summary-status", input],
     input,
     enabled: !!input.month && !!input.year,
+  });
+
+export const useGetPayrollReport = (input: GetPayrollReportInput) =>
+  useQuery(getPayrollReportAction, {
+    queryKey: ["payroll-report", input],
+    input,
+    enabled: !!input.month && !!input.year,
+    staleTime: 60 * 1000,
   });

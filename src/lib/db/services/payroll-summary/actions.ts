@@ -14,6 +14,7 @@ import {
   RefreshPayrollDetailRowSchema,
   GetSalarySlipDataSchema,
   GetPayrollSummaryByMonthYearSchema,
+  GetPayrollReportSchema,
 } from "./payroll-summary.schemas";
 import {
   getPayrollSummariesByYear,
@@ -23,6 +24,7 @@ import {
 import {
   getPayrollDetails,
   savePayrollDetailsBatch,
+  getPayrollReport,
 } from "./payroll-details.service";
 import {
   runPayroll,
@@ -105,4 +107,10 @@ export const getPayrollSummaryStatusByMonthYearAction = serverAction
   .input(GetPayrollSummaryByMonthYearSchema)
   .handler(async ({ input }) => {
     return await getPayrollSummaryStatusByMonthYear(input.month, input.year);
+  });
+
+export const getPayrollReportAction = serverAction
+  .input(GetPayrollReportSchema)
+  .handler(async ({ input }) => {
+    return await getPayrollReport(input);
   });
