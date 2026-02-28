@@ -18,11 +18,7 @@ import {
   GroupDropdown,
   AutoScrollChips,
 } from "@/components";
-import {
-  formatNum,
-  formatPayrollPeriod,
-  parseGroupDropdownFilter,
-} from "@/utils/helpers";
+import { formatPayrollPeriod, parseGroupDropdownFilter } from "@/utils/helpers";
 import { useGlobalData } from "@/context/GlobalDataContext";
 import { useGetPayrollReport } from "@/lib/db/services/payroll-summary/requests";
 import { PayrollDetailEntry } from "@/lib/db/services/payroll-summary/mappers";
@@ -42,7 +38,8 @@ const getMonthYear = () => {
   return { month: d.getMonth() + 1, year: d.getFullYear() };
 };
 
-const fmt = (v: number) => formatNum(v || 0);
+const fmt = (v: number) => v || 0;
+const fmtHR = (v: number) => Number(v || 0).toFixed(2);
 
 const tableCommonProps: TableColumn<PayrollReportRow> = {
   sortable: false,
@@ -242,7 +239,7 @@ const PayrollReportPage = () => {
         header: "Hourly Rate",
         body: (r) => (
           <span className="text-sm text-center font-semibold bold">
-            {fmt(r.hourlyRate)}
+            {fmtHR(r.hourlyRate)}
           </span>
         ),
       },
@@ -469,7 +466,7 @@ const PayrollReportPage = () => {
               color: "#ffffff",
               textAlign: "right",
               fontWeight: "900",
-              fontSize: 13,
+              fontSize: 14,
               letterSpacing: "0.06em",
               padding: "10px 20px 10px 8px",
               borderTop: "2px solid var(--primary-color)",
@@ -478,13 +475,13 @@ const PayrollReportPage = () => {
           {NUMERIC_KEYS.map((k) => (
             <Column
               key={String(k)}
-              footer={gt(k)}
+              footer={k === "hourlyRate" ? "-" : gt(k)}
               footerStyle={{
                 background: "var(--primary-color) !important",
                 color: "#ffffff",
                 textAlign: "center",
                 fontWeight: "900",
-                fontSize: 13,
+                fontSize: 14,
                 padding: "10px 6px",
                 borderTop: "2px solid var(--primary-color)",
               }}
@@ -526,68 +523,68 @@ const PayrollReportPage = () => {
       <>
         <td
           colSpan={colSpan}
-          className="bg-table-header-footer font-bold! text-right! px-3! text-sm! uppercase! text-primary!"
+          className="bg-primary-light! text-primary! font-bold! text-right! px-3! text-sm! uppercase!"
         >
           {sn} - Total :
         </td>
-        <td className="bg-table-header-footer font-bold! text-center! text-sm!">
+        <td className="bg-primary-light! text-primary! font-bold! text-center! text-sm!">
           {s("workDays")}
         </td>
-        <td className="bg-table-header-footer font-bold! text-center! text-sm!">
+        <td className="bg-primary-light! text-primary! font-bold! text-center! text-sm!">
           {s("overTime")}
         </td>
-        <td className="bg-table-header-footer font-bold! text-center! text-sm!">
+        <td className="bg-primary-light! text-primary! font-bold! text-center! text-sm!">
           {s("totalHours")}
         </td>
-        <td className="bg-table-header-footer font-bold! text-center! text-sm!">
-          {s("hourlyRate")}
+        <td className="bg-primary-light! text-primary! font-bold! text-center! text-sm!">
+          -
         </td>
-        <td className="bg-table-header-footer font-bold! text-center! text-sm!">
+        <td className="bg-primary-light! text-primary! font-bold! text-center! text-sm!">
           {s("breakfastAllowance")}
         </td>
-        <td className="bg-table-header-footer font-bold! text-center! text-sm!">
+        <td className="bg-primary-light! text-primary! font-bold! text-center! text-sm!">
           {s("otherAllowances")}
         </td>
-        <td className="bg-table-header-footer font-bold! text-center! text-sm!">
+        <td className="bg-primary-light! text-primary! font-bold! text-center! text-sm!">
           {s("totalAllowances")}
         </td>
-        <td className="bg-table-header-footer font-bold! text-center! text-sm!">
+        <td className="bg-primary-light! text-primary! font-bold! text-center! text-sm!">
           {s("totalSalary")}
         </td>
-        <td className="bg-table-header-footer font-bold! text-center! text-sm!">
+        <td className="bg-primary-light! text-primary! font-bold! text-center! text-sm!">
           {s("previousAdvance")}
         </td>
-        <td className="bg-table-header-footer font-bold! text-center! text-sm!">
+        <td className="bg-primary-light! text-primary! font-bold! text-center! text-sm!">
           {s("currentAdvance")}
         </td>
-        <td className="bg-table-header-footer font-bold! text-center! text-sm!">
+        <td className="bg-primary-light! text-primary! font-bold! text-center! text-sm!">
           {s("loanDeduction")}
         </td>
-        <td className="bg-table-header-footer font-bold! text-center! text-sm! text-primary!">
+        <td className="bg-primary-light! text-primary! font-bold! text-center! text-sm!">
           {s("netLoan")}
         </td>
-        <td className="bg-table-header-footer font-bold! text-center! text-sm!">
+        <td className="bg-primary-light! text-primary! font-bold! text-center! text-sm!">
           {s("previousChallan")}
         </td>
-        <td className="bg-table-header-footer font-bold! text-center! text-sm!">
+        <td className="bg-primary-light! text-primary! font-bold! text-center! text-sm!">
           {s("currentChallan")}
         </td>
-        <td className="bg-table-header-footer font-bold! text-center! text-sm!">
+        <td className="bg-primary-light! text-primary! font-bold! text-center! text-sm!">
           {s("challanDeduction")}
         </td>
-        <td className="bg-table-header-footer font-bold! text-center! text-sm! text-primary!">
+        <td className="bg-primary-light! text-primary! font-bold! text-center! text-sm!">
           {s("netChallan")}
         </td>
-        <td className="bg-table-header-footer font-bold! text-center! text-sm! text-primary!">
+        <td className="bg-primary-light! text-primary! font-bold! text-center! text-sm!">
           {s("netSalaryPayable")}
         </td>
-        <td className="bg-table-header-footer font-bold! text-center! text-sm!">
+        <td className="bg-primary-light! text-primary! font-bold! text-center! text-sm!">
           {s("cardSalary")}
         </td>
-        <td className="bg-table-header-footer font-bold! text-center! text-sm!">
+        <td className="bg-primary-light! text-primary! font-bold! text-center! text-sm!">
           {s("cashSalary")}
         </td>
-        <td className="bg-table-header-footer" />
+        <td className="bg-primary-light!" />
       </>
     );
   };

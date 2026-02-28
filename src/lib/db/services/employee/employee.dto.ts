@@ -45,11 +45,11 @@ export interface UpdateEmployeeStep2Data {
   isFixed?: boolean;
   workingDays?: number;
   hourlyRate?: number | Prisma.Decimal;
-  salary?: number | Prisma.Decimal;
+  salary?: number;
   breakfastAllowance?: boolean;
-  foodAllowance?: number | Prisma.Decimal;
-  mobileAllowance?: number | Prisma.Decimal;
-  otherAllowance?: number | Prisma.Decimal;
+  foodAllowance?: number;
+  mobileAllowance?: number;
+  otherAllowance?: number;
   contractStartDate?: Date | string;
   contractEndDate?: Date | string;
   contractDocument?: string; // URL from Supabase Storage
@@ -80,7 +80,7 @@ export interface UpdateEmployeeStep4Data {
   bankName?: string;
   bankCode?: string;
   iban?: string;
-  gosiSalary?: number | Prisma.Decimal;
+  gosiSalary?: number;
   gosiCityId?: number;
 }
 
@@ -89,8 +89,8 @@ export interface UpdateEmployeeStep4Data {
 // ---------------------------------------------------------------------------
 
 export interface UpdateEmployeeStep5Data {
-  openingAdvanceBalance?: number | Prisma.Decimal;
-  openingTrafficViolationBalance?: number | Prisma.Decimal;
+  openingAdvanceBalance?: number;
+  openingTrafficViolationBalance?: number;
   isCardDelivered?: boolean;
   cardDocument?: string; // URL from Supabase Storage
 }

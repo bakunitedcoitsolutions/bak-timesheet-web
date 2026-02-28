@@ -171,12 +171,12 @@ model Employee {
   isDeductable       Boolean   @default(false)
   isFixed            Boolean   @default(false)
   workingDays        Int?
-  hourlyRate         Decimal?  @db.Decimal(10, 2)
-  salary             Decimal?  @db.Decimal(10, 2)
+  hourlyRate         Decimal  @db.Decimal(10, 2)
+  salary             Int?
   breakfastAllowance Boolean   @default(false)
-  foodAllowance      Decimal?  @db.Decimal(10, 2)
-  mobileAllowance    Decimal?  @db.Decimal(10, 2)
-  otherAllowance     Decimal?  @db.Decimal(10, 2)
+  foodAllowance      Int?
+  mobileAllowance    Int?
+  otherAllowance     Int?
   contractStartDate  DateTime?
   contractEndDate    DateTime?
   contractDocument   String?
@@ -200,12 +200,12 @@ model Employee {
   bankName   String?
   bankCode   String?
   iban       String?
-  gosiSalary Decimal? @db.Decimal(10, 2)
+  gosiSalary Int?
   gosiCityId Int?
 
   // Step 5 - Loan & Bank Card Details
-  openingAdvanceBalance  Decimal? @db.Decimal(10, 2)
-  openingTrafficViolationBalance  Decimal? @db.Decimal(10, 2)
+  openingAdvanceBalance            Int?
+  openingTrafficViolationBalance   Int?
   isCardDelivered Boolean  @default(false)
   cardDocument    String?
 
@@ -352,20 +352,20 @@ model PayrollSummary {
   id                      Int      @id @default(autoincrement())
   payrollMonth            Int
   payrollYear             Int
-  totalSalary             Decimal  @db.Decimal(10, 2)
-  totalBreakfastAllowance Decimal  @db.Decimal(10, 2)
-  totalOtherAllowances    Decimal  @db.Decimal(10, 2)
-  totalPreviousLoan       Decimal  @db.Decimal(10, 2)
-  totalCurrentLoan        Decimal  @db.Decimal(10, 2)
-  totalLoanDeduction      Decimal  @db.Decimal(10, 2)
-  totalNetLoan            Decimal  @db.Decimal(10, 2)
-  totalPreviousChallan    Decimal  @db.Decimal(10, 2)
-  totalCurrentChallan     Decimal  @db.Decimal(10, 2)
-  totalChallanDeduction   Decimal  @db.Decimal(10, 2)
-  totalNetChallan         Decimal  @db.Decimal(10, 2)
-  totalNetSalaryPayable   Decimal  @db.Decimal(10, 2)
-  totalCardSalary         Decimal  @db.Decimal(10, 2)
-  totalCashSalary         Decimal  @db.Decimal(10, 2)
+  totalSalary             Int
+  totalBreakfastAllowance Int
+  totalOtherAllowances    Int
+  totalPreviousLoan       Int
+  totalCurrentLoan        Int
+  totalLoanDeduction      Int
+  totalNetLoan            Int
+  totalPreviousChallan    Int
+  totalCurrentChallan     Int
+  totalChallanDeduction   Int
+  totalNetChallan         Int
+  totalNetSalaryPayable   Int
+  totalCardSalary         Int
+  totalCashSalary         Int
   remarks                 String?  @db.Text
   payrollStatusId         Int?
   branchId                Int?
@@ -409,24 +409,24 @@ model PayrollDetails {
   payrollYear               Int
   employeeId                Int
   workDays                  Int
-  totalHours                Decimal  @db.Decimal(10, 2)
+  totalHours                Int
   hourlyRate                Decimal  @db.Decimal(10, 2)
-  breakfastAllowance        Decimal  @db.Decimal(10, 2)
-  otherAllowances           Decimal  @db.Decimal(10, 2)
-  totalAllowances           Decimal  @db.Decimal(10, 2)
-  salary                    Decimal  @db.Decimal(10, 2)
-  previousLoan              Decimal  @db.Decimal(10, 2)
-  currentLoan               Decimal  @db.Decimal(10, 2)
-  loanDeduction             Decimal  @db.Decimal(10, 2)
-  netLoan                   Decimal  @db.Decimal(10, 2)
-  previousChallan           Decimal  @db.Decimal(10, 2)
-  currentChallan            Decimal  @db.Decimal(10, 2)
-  challanDeduction          Decimal  @db.Decimal(10, 2)
-  netChallan                Decimal  @db.Decimal(10, 2)
-  netSalaryPayable          Decimal  @db.Decimal(10, 2)
-  cardSalary                Decimal  @db.Decimal(10, 2)
-  cashSalary                Decimal  @db.Decimal(10, 2)
-  overTime                  Decimal  @db.Decimal(10, 2)
+  breakfastAllowance        Int
+  otherAllowances           Int
+  totalAllowances           Int
+  salary                    Int
+  previousLoan              Int
+  currentLoan               Int
+  loanDeduction             Int
+  netLoan                   Int
+  previousChallan           Int
+  currentChallan            Int
+  challanDeduction          Int
+  netChallan                Int
+  netSalaryPayable          Int
+  cardSalary                Int
+  cashSalary                Int
+  overTime                  Int
   remarks                   String?  @db.Text
   paymentMethodId           Int?
   payrollStatusId           Int?
@@ -475,7 +475,7 @@ model Loan {
   employeeId Int
   date       DateTime
   type       LoanType
-  amount     Decimal  @db.Decimal(10, 2)
+  amount     Int
   remarks    String?  @db.Text
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
@@ -505,7 +505,7 @@ model TrafficChallan {
   employeeId  Int
   date        DateTime
   type        TrafficChallanType
-  amount      Decimal            @db.Decimal(10, 2)
+  amount      Int
   description String?            @db.Text
   createdAt   DateTime           @default(now())
   updatedAt   DateTime           @updatedAt
@@ -571,8 +571,8 @@ model Ledger {
   date             DateTime
   type             LedgerType
   amountType       AmountType
-  amount           Decimal    @db.Decimal(10, 2)
-  balance          Decimal    @db.Decimal(10, 2)
+  amount           Int
+  balance          Int
   description      String     @db.Text
   reference        String?
   createdAt        DateTime   @default(now())

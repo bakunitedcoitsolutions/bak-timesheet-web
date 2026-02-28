@@ -13,7 +13,6 @@ import type {
   BulkUploadLoanData,
   BulkUploadLoanResult,
 } from "./loan.dto";
-import { convertDecimalToNumber } from "@/lib/db/utils";
 
 // Type helper for Prisma transaction client
 type PrismaTransactionClient = Parameters<
@@ -137,7 +136,7 @@ export const createLoan = async (data: CreateLoanData) => {
     // Convert Decimal to number for client serialization
     return {
       ...loan,
-      amount: convertDecimalToNumber(loan.amount),
+      amount: loan.amount,
     };
   });
 };
@@ -158,7 +157,7 @@ export const findLoanById = async (id: number) => {
   // Convert Decimal to number for client serialization
   return {
     ...loan,
-    amount: convertDecimalToNumber(loan.amount),
+    amount: loan.amount,
   };
 };
 
@@ -330,7 +329,7 @@ export const updateLoan = async (id: number, data: UpdateLoanData) => {
     // Convert Decimal to number for client serialization
     return {
       ...loan,
-      amount: convertDecimalToNumber(loan.amount),
+      amount: loan.amount,
     };
   });
 };
@@ -444,7 +443,7 @@ export const listLoans = async (
   // Convert Decimal to number for client serialization
   const transformedLoans = loans.map((loan) => ({
     ...loan,
-    amount: convertDecimalToNumber(loan.amount),
+    amount: loan.amount,
   }));
 
   return {

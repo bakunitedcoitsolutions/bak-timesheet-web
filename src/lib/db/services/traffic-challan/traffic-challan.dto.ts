@@ -3,15 +3,13 @@
  * Type definitions for traffic challan service operations
  */
 
-import type { Prisma } from "../../../../../prisma/generated/prisma/client";
-
 export type TrafficChallanType = "CHALLAN" | "RETURN";
 
 export interface CreateTrafficChallanData {
   employeeId: number;
   date: Date | string;
   type: TrafficChallanType;
-  amount: number | Prisma.Decimal;
+  amount: number;
   description?: string;
 }
 
@@ -19,7 +17,7 @@ export interface UpdateTrafficChallanData {
   employeeId?: number;
   date?: Date | string;
   type?: TrafficChallanType;
-  amount?: number | Prisma.Decimal;
+  amount?: number;
   description?: string;
 }
 
@@ -77,7 +75,7 @@ export interface BulkUploadTrafficChallanRow {
   employeeCode: number; // Employee code (required)
   date: Date | string;
   type: TrafficChallanType;
-  amount: number | Prisma.Decimal;
+  amount: number;
   description?: string;
 }
 

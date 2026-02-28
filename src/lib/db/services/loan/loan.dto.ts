@@ -3,15 +3,13 @@
  * Type definitions for loan service operations
  */
 
-import type { Prisma } from "../../../../../prisma/generated/prisma/client";
-
 export type LoanType = "LOAN" | "RETURN";
 
 export interface CreateLoanData {
   employeeId: number;
   date: Date | string;
   type: LoanType;
-  amount: number | Prisma.Decimal;
+  amount: number;
   remarks?: string;
 }
 
@@ -19,7 +17,7 @@ export interface UpdateLoanData {
   employeeId?: number;
   date?: Date | string;
   type?: LoanType;
-  amount?: number | Prisma.Decimal;
+  amount?: number;
   remarks?: string;
 }
 
@@ -73,7 +71,7 @@ export interface BulkUploadLoanRow {
   employeeCode: number; // Employee code (required)
   date: Date | string;
   type: LoanType;
-  amount: number | Prisma.Decimal;
+  amount: number;
   remarks?: string;
 }
 

@@ -8,7 +8,6 @@ import type {
   GetPayrollSummaryByYearParams,
   PayrollSummaryWithRelations,
 } from "./payroll-summary.dto";
-import { convertDecimalToNumber } from "@/lib/db/utils";
 
 // Reusable select object
 const payrollSummarySelect = {
@@ -70,27 +69,27 @@ export const getPayrollSummariesByYear = async (
     id: summary.id,
     payrollMonth: summary.payrollMonth,
     payrollYear: summary.payrollYear,
-    totalSalary: convertDecimalToNumber(summary.totalSalary) || 0,
+    totalSalary: summary.totalSalary || 0,
     totalBreakfastAllowance:
-      convertDecimalToNumber(summary.totalBreakfastAllowance) || 0,
+      summary.totalBreakfastAllowance || 0,
     totalOtherAllowances:
-      convertDecimalToNumber(summary.totalOtherAllowances) || 0,
+      summary.totalOtherAllowances || 0,
     totalPreviousAdvance:
-      convertDecimalToNumber(summary.totalPreviousLoan) || 0,
-    totalCurrentAdvance: convertDecimalToNumber(summary.totalCurrentLoan) || 0,
-    totalDeduction: convertDecimalToNumber(summary.totalLoanDeduction) || 0,
-    totalNetLoan: convertDecimalToNumber(summary.totalNetLoan) || 0,
+      summary.totalPreviousLoan || 0,
+    totalCurrentAdvance: summary.totalCurrentLoan || 0,
+    totalDeduction: summary.totalLoanDeduction || 0,
+    totalNetLoan: summary.totalNetLoan || 0,
     totalPreviousChallan:
-      convertDecimalToNumber(summary.totalPreviousChallan) || 0,
+      summary.totalPreviousChallan || 0,
     totalCurrentChallan:
-      convertDecimalToNumber(summary.totalCurrentChallan) || 0,
+      summary.totalCurrentChallan || 0,
     totalChallanDeduction:
-      convertDecimalToNumber(summary.totalChallanDeduction) || 0,
-    totalNetChallan: convertDecimalToNumber(summary.totalNetChallan) || 0,
+      summary.totalChallanDeduction || 0,
+    totalNetChallan: summary.totalNetChallan || 0,
     totalNetSalaryPayable:
-      convertDecimalToNumber(summary.totalNetSalaryPayable) || 0,
-    totalCardSalary: convertDecimalToNumber(summary.totalCardSalary) || 0,
-    totalCashSalary: convertDecimalToNumber(summary.totalCashSalary) || 0,
+      summary.totalNetSalaryPayable || 0,
+    totalCardSalary: summary.totalCardSalary || 0,
+    totalCashSalary: summary.totalCashSalary || 0,
     payrollStatusId: summary.payrollStatusId,
     createdDate: summary.createdDate,
     createdBy: summary.createdBy,

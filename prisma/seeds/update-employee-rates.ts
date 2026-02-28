@@ -102,7 +102,7 @@ export async function updateEmployeeRates(prisma: PrismaClient) {
     await prisma.employee.update({
       where: { id: rec.id },
       data: {
-        hourlyRate: rec.hourlyRate,
+        hourlyRate: rec.hourlyRate ?? 0,
         salary: rec.salary,
       },
     });

@@ -29,13 +29,13 @@ export type AggregateTrafficChallan = {
 export type TrafficChallanAvgAggregateOutputType = {
   id: number | null
   employeeId: number | null
-  amount: runtime.Decimal | null
+  amount: number | null
 }
 
 export type TrafficChallanSumAggregateOutputType = {
   id: number | null
   employeeId: number | null
-  amount: runtime.Decimal | null
+  amount: number | null
 }
 
 export type TrafficChallanMinAggregateOutputType = {
@@ -43,7 +43,7 @@ export type TrafficChallanMinAggregateOutputType = {
   employeeId: number | null
   date: Date | null
   type: $Enums.TrafficChallanType | null
-  amount: runtime.Decimal | null
+  amount: number | null
   description: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -54,7 +54,7 @@ export type TrafficChallanMaxAggregateOutputType = {
   employeeId: number | null
   date: Date | null
   type: $Enums.TrafficChallanType | null
-  amount: runtime.Decimal | null
+  amount: number | null
   description: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -210,7 +210,7 @@ export type TrafficChallanGroupByOutputType = {
   employeeId: number
   date: Date
   type: $Enums.TrafficChallanType
-  amount: runtime.Decimal
+  amount: number
   description: string | null
   createdAt: Date
   updatedAt: Date
@@ -244,7 +244,7 @@ export type TrafficChallanWhereInput = {
   employeeId?: Prisma.IntFilter<"TrafficChallan"> | number
   date?: Prisma.DateTimeFilter<"TrafficChallan"> | Date | string
   type?: Prisma.EnumTrafficChallanTypeFilter<"TrafficChallan"> | $Enums.TrafficChallanType
-  amount?: Prisma.DecimalFilter<"TrafficChallan"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  amount?: Prisma.IntFilter<"TrafficChallan"> | number
   description?: Prisma.StringNullableFilter<"TrafficChallan"> | string | null
   createdAt?: Prisma.DateTimeFilter<"TrafficChallan"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"TrafficChallan"> | Date | string
@@ -273,7 +273,7 @@ export type TrafficChallanWhereUniqueInput = Prisma.AtLeast<{
   employeeId?: Prisma.IntFilter<"TrafficChallan"> | number
   date?: Prisma.DateTimeFilter<"TrafficChallan"> | Date | string
   type?: Prisma.EnumTrafficChallanTypeFilter<"TrafficChallan"> | $Enums.TrafficChallanType
-  amount?: Prisma.DecimalFilter<"TrafficChallan"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  amount?: Prisma.IntFilter<"TrafficChallan"> | number
   description?: Prisma.StringNullableFilter<"TrafficChallan"> | string | null
   createdAt?: Prisma.DateTimeFilter<"TrafficChallan"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"TrafficChallan"> | Date | string
@@ -305,7 +305,7 @@ export type TrafficChallanScalarWhereWithAggregatesInput = {
   employeeId?: Prisma.IntWithAggregatesFilter<"TrafficChallan"> | number
   date?: Prisma.DateTimeWithAggregatesFilter<"TrafficChallan"> | Date | string
   type?: Prisma.EnumTrafficChallanTypeWithAggregatesFilter<"TrafficChallan"> | $Enums.TrafficChallanType
-  amount?: Prisma.DecimalWithAggregatesFilter<"TrafficChallan"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  amount?: Prisma.IntWithAggregatesFilter<"TrafficChallan"> | number
   description?: Prisma.StringNullableWithAggregatesFilter<"TrafficChallan"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"TrafficChallan"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"TrafficChallan"> | Date | string
@@ -314,7 +314,7 @@ export type TrafficChallanScalarWhereWithAggregatesInput = {
 export type TrafficChallanCreateInput = {
   date: Date | string
   type: $Enums.TrafficChallanType
-  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  amount: number
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -327,7 +327,7 @@ export type TrafficChallanUncheckedCreateInput = {
   employeeId: number
   date: Date | string
   type: $Enums.TrafficChallanType
-  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  amount: number
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -337,7 +337,7 @@ export type TrafficChallanUncheckedCreateInput = {
 export type TrafficChallanUpdateInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   type?: Prisma.EnumTrafficChallanTypeFieldUpdateOperationsInput | $Enums.TrafficChallanType
-  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  amount?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -350,7 +350,7 @@ export type TrafficChallanUncheckedUpdateInput = {
   employeeId?: Prisma.IntFieldUpdateOperationsInput | number
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   type?: Prisma.EnumTrafficChallanTypeFieldUpdateOperationsInput | $Enums.TrafficChallanType
-  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  amount?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -362,7 +362,7 @@ export type TrafficChallanCreateManyInput = {
   employeeId: number
   date: Date | string
   type: $Enums.TrafficChallanType
-  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  amount: number
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -371,7 +371,7 @@ export type TrafficChallanCreateManyInput = {
 export type TrafficChallanUpdateManyMutationInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   type?: Prisma.EnumTrafficChallanTypeFieldUpdateOperationsInput | $Enums.TrafficChallanType
-  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  amount?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -382,7 +382,7 @@ export type TrafficChallanUncheckedUpdateManyInput = {
   employeeId?: Prisma.IntFieldUpdateOperationsInput | number
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   type?: Prisma.EnumTrafficChallanTypeFieldUpdateOperationsInput | $Enums.TrafficChallanType
-  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  amount?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -513,7 +513,7 @@ export type TrafficChallanUpdateOneWithoutLedgersNestedInput = {
 export type TrafficChallanCreateWithoutEmployeeInput = {
   date: Date | string
   type: $Enums.TrafficChallanType
-  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  amount: number
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -524,7 +524,7 @@ export type TrafficChallanUncheckedCreateWithoutEmployeeInput = {
   id?: number
   date: Date | string
   type: $Enums.TrafficChallanType
-  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  amount: number
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -565,7 +565,7 @@ export type TrafficChallanScalarWhereInput = {
   employeeId?: Prisma.IntFilter<"TrafficChallan"> | number
   date?: Prisma.DateTimeFilter<"TrafficChallan"> | Date | string
   type?: Prisma.EnumTrafficChallanTypeFilter<"TrafficChallan"> | $Enums.TrafficChallanType
-  amount?: Prisma.DecimalFilter<"TrafficChallan"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  amount?: Prisma.IntFilter<"TrafficChallan"> | number
   description?: Prisma.StringNullableFilter<"TrafficChallan"> | string | null
   createdAt?: Prisma.DateTimeFilter<"TrafficChallan"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"TrafficChallan"> | Date | string
@@ -574,7 +574,7 @@ export type TrafficChallanScalarWhereInput = {
 export type TrafficChallanCreateWithoutLedgersInput = {
   date: Date | string
   type: $Enums.TrafficChallanType
-  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  amount: number
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -586,7 +586,7 @@ export type TrafficChallanUncheckedCreateWithoutLedgersInput = {
   employeeId: number
   date: Date | string
   type: $Enums.TrafficChallanType
-  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  amount: number
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -611,7 +611,7 @@ export type TrafficChallanUpdateToOneWithWhereWithoutLedgersInput = {
 export type TrafficChallanUpdateWithoutLedgersInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   type?: Prisma.EnumTrafficChallanTypeFieldUpdateOperationsInput | $Enums.TrafficChallanType
-  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  amount?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -623,7 +623,7 @@ export type TrafficChallanUncheckedUpdateWithoutLedgersInput = {
   employeeId?: Prisma.IntFieldUpdateOperationsInput | number
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   type?: Prisma.EnumTrafficChallanTypeFieldUpdateOperationsInput | $Enums.TrafficChallanType
-  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  amount?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -633,7 +633,7 @@ export type TrafficChallanCreateManyEmployeeInput = {
   id?: number
   date: Date | string
   type: $Enums.TrafficChallanType
-  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  amount: number
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -642,7 +642,7 @@ export type TrafficChallanCreateManyEmployeeInput = {
 export type TrafficChallanUpdateWithoutEmployeeInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   type?: Prisma.EnumTrafficChallanTypeFieldUpdateOperationsInput | $Enums.TrafficChallanType
-  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  amount?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -653,7 +653,7 @@ export type TrafficChallanUncheckedUpdateWithoutEmployeeInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   type?: Prisma.EnumTrafficChallanTypeFieldUpdateOperationsInput | $Enums.TrafficChallanType
-  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  amount?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -664,7 +664,7 @@ export type TrafficChallanUncheckedUpdateManyWithoutEmployeeInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   type?: Prisma.EnumTrafficChallanTypeFieldUpdateOperationsInput | $Enums.TrafficChallanType
-  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  amount?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -774,7 +774,7 @@ export type $TrafficChallanPayload<ExtArgs extends runtime.Types.Extensions.Inte
     employeeId: number
     date: Date
     type: $Enums.TrafficChallanType
-    amount: runtime.Decimal
+    amount: number
     description: string | null
     createdAt: Date
     updatedAt: Date
@@ -1207,7 +1207,7 @@ export interface TrafficChallanFieldRefs {
   readonly employeeId: Prisma.FieldRef<"TrafficChallan", 'Int'>
   readonly date: Prisma.FieldRef<"TrafficChallan", 'DateTime'>
   readonly type: Prisma.FieldRef<"TrafficChallan", 'TrafficChallanType'>
-  readonly amount: Prisma.FieldRef<"TrafficChallan", 'Decimal'>
+  readonly amount: Prisma.FieldRef<"TrafficChallan", 'Int'>
   readonly description: Prisma.FieldRef<"TrafficChallan", 'String'>
   readonly createdAt: Prisma.FieldRef<"TrafficChallan", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"TrafficChallan", 'DateTime'>

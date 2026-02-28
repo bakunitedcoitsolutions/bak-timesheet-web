@@ -13,7 +13,6 @@ import type {
   BulkUploadTrafficChallanData,
   BulkUploadTrafficChallanResult,
 } from "./traffic-challan.dto";
-import { convertDecimalToNumber } from "@/lib/db/utils";
 
 // Type helper for Prisma transaction client
 type PrismaTransactionClient = Parameters<
@@ -137,7 +136,7 @@ export const createTrafficChallan = async (data: CreateTrafficChallanData) => {
     // Convert Decimal to number for client serialization
     return {
       ...trafficChallan,
-      amount: convertDecimalToNumber(trafficChallan.amount),
+      amount: trafficChallan.amount,
     };
   });
 };
@@ -158,7 +157,7 @@ export const findTrafficChallanById = async (id: number) => {
   // Convert Decimal to number for client serialization
   return {
     ...trafficChallan,
-    amount: convertDecimalToNumber(trafficChallan.amount),
+    amount: trafficChallan.amount,
   };
 };
 
@@ -336,7 +335,7 @@ export const updateTrafficChallan = async (
     // Convert Decimal to number for client serialization
     return {
       ...trafficChallan,
-      amount: convertDecimalToNumber(trafficChallan.amount),
+      amount: trafficChallan.amount,
     };
   });
 };
@@ -450,7 +449,7 @@ export const listTrafficChallans = async (
   // Convert Decimal to number for client serialization
   const transformedTrafficChallans = trafficChallans.map((challan) => ({
     ...challan,
-    amount: convertDecimalToNumber(challan.amount),
+    amount: challan.amount,
   }));
 
   return {

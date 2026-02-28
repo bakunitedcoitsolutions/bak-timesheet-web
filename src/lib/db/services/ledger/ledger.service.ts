@@ -12,7 +12,6 @@ import type {
 /**
  * Helper function to convert Decimal to number for client serialization
  */
-import { convertDecimalToNumber } from "@/lib/db/utils";
 
 /**
  * Get ledger entries by employee code
@@ -70,8 +69,8 @@ export const getLedgerByEmployeeCode = async (
   // Convert Decimal fields to numbers for client serialization
   const transformedLedgerEntries = ledgerEntries.map((entry) => ({
     ...entry,
-    amount: convertDecimalToNumber(entry.amount) || 0,
-    balance: convertDecimalToNumber(entry.balance) || 0,
+    amount: entry.amount || 0,
+    balance: entry.balance || 0,
   }));
 
   return {

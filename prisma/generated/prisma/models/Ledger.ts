@@ -29,8 +29,8 @@ export type AggregateLedger = {
 export type LedgerAvgAggregateOutputType = {
   id: number | null
   employeeId: number | null
-  amount: runtime.Decimal | null
-  balance: runtime.Decimal | null
+  amount: number | null
+  balance: number | null
   payrollDetailId: number | null
   loanId: number | null
   trafficChallanId: number | null
@@ -39,8 +39,8 @@ export type LedgerAvgAggregateOutputType = {
 export type LedgerSumAggregateOutputType = {
   id: number | null
   employeeId: number | null
-  amount: runtime.Decimal | null
-  balance: runtime.Decimal | null
+  amount: number | null
+  balance: number | null
   payrollDetailId: number | null
   loanId: number | null
   trafficChallanId: number | null
@@ -52,8 +52,8 @@ export type LedgerMinAggregateOutputType = {
   date: Date | null
   type: $Enums.LedgerType | null
   amountType: $Enums.AmountType | null
-  amount: runtime.Decimal | null
-  balance: runtime.Decimal | null
+  amount: number | null
+  balance: number | null
   description: string | null
   reference: string | null
   createdAt: Date | null
@@ -69,8 +69,8 @@ export type LedgerMaxAggregateOutputType = {
   date: Date | null
   type: $Enums.LedgerType | null
   amountType: $Enums.AmountType | null
-  amount: runtime.Decimal | null
-  balance: runtime.Decimal | null
+  amount: number | null
+  balance: number | null
   description: string | null
   reference: string | null
   createdAt: Date | null
@@ -263,8 +263,8 @@ export type LedgerGroupByOutputType = {
   date: Date
   type: $Enums.LedgerType
   amountType: $Enums.AmountType
-  amount: runtime.Decimal
-  balance: runtime.Decimal
+  amount: number
+  balance: number
   description: string
   reference: string | null
   createdAt: Date
@@ -303,8 +303,8 @@ export type LedgerWhereInput = {
   date?: Prisma.DateTimeFilter<"Ledger"> | Date | string
   type?: Prisma.EnumLedgerTypeFilter<"Ledger"> | $Enums.LedgerType
   amountType?: Prisma.EnumAmountTypeFilter<"Ledger"> | $Enums.AmountType
-  amount?: Prisma.DecimalFilter<"Ledger"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  balance?: Prisma.DecimalFilter<"Ledger"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  amount?: Prisma.IntFilter<"Ledger"> | number
+  balance?: Prisma.IntFilter<"Ledger"> | number
   description?: Prisma.StringFilter<"Ledger"> | string
   reference?: Prisma.StringNullableFilter<"Ledger"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Ledger"> | Date | string
@@ -348,8 +348,8 @@ export type LedgerWhereUniqueInput = Prisma.AtLeast<{
   date?: Prisma.DateTimeFilter<"Ledger"> | Date | string
   type?: Prisma.EnumLedgerTypeFilter<"Ledger"> | $Enums.LedgerType
   amountType?: Prisma.EnumAmountTypeFilter<"Ledger"> | $Enums.AmountType
-  amount?: Prisma.DecimalFilter<"Ledger"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  balance?: Prisma.DecimalFilter<"Ledger"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  amount?: Prisma.IntFilter<"Ledger"> | number
+  balance?: Prisma.IntFilter<"Ledger"> | number
   description?: Prisma.StringFilter<"Ledger"> | string
   reference?: Prisma.StringNullableFilter<"Ledger"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Ledger"> | Date | string
@@ -394,8 +394,8 @@ export type LedgerScalarWhereWithAggregatesInput = {
   date?: Prisma.DateTimeWithAggregatesFilter<"Ledger"> | Date | string
   type?: Prisma.EnumLedgerTypeWithAggregatesFilter<"Ledger"> | $Enums.LedgerType
   amountType?: Prisma.EnumAmountTypeWithAggregatesFilter<"Ledger"> | $Enums.AmountType
-  amount?: Prisma.DecimalWithAggregatesFilter<"Ledger"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  balance?: Prisma.DecimalWithAggregatesFilter<"Ledger"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  amount?: Prisma.IntWithAggregatesFilter<"Ledger"> | number
+  balance?: Prisma.IntWithAggregatesFilter<"Ledger"> | number
   description?: Prisma.StringWithAggregatesFilter<"Ledger"> | string
   reference?: Prisma.StringNullableWithAggregatesFilter<"Ledger"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Ledger"> | Date | string
@@ -409,8 +409,8 @@ export type LedgerCreateInput = {
   date: Date | string
   type: $Enums.LedgerType
   amountType: $Enums.AmountType
-  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
-  balance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  amount: number
+  balance: number
   description: string
   reference?: string | null
   createdAt?: Date | string
@@ -427,8 +427,8 @@ export type LedgerUncheckedCreateInput = {
   date: Date | string
   type: $Enums.LedgerType
   amountType: $Enums.AmountType
-  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
-  balance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  amount: number
+  balance: number
   description: string
   reference?: string | null
   createdAt?: Date | string
@@ -442,8 +442,8 @@ export type LedgerUpdateInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
   amountType?: Prisma.EnumAmountTypeFieldUpdateOperationsInput | $Enums.AmountType
-  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  amount?: Prisma.IntFieldUpdateOperationsInput | number
+  balance?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.StringFieldUpdateOperationsInput | string
   reference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -460,8 +460,8 @@ export type LedgerUncheckedUpdateInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
   amountType?: Prisma.EnumAmountTypeFieldUpdateOperationsInput | $Enums.AmountType
-  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  amount?: Prisma.IntFieldUpdateOperationsInput | number
+  balance?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.StringFieldUpdateOperationsInput | string
   reference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -477,8 +477,8 @@ export type LedgerCreateManyInput = {
   date: Date | string
   type: $Enums.LedgerType
   amountType: $Enums.AmountType
-  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
-  balance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  amount: number
+  balance: number
   description: string
   reference?: string | null
   createdAt?: Date | string
@@ -492,8 +492,8 @@ export type LedgerUpdateManyMutationInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
   amountType?: Prisma.EnumAmountTypeFieldUpdateOperationsInput | $Enums.AmountType
-  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  amount?: Prisma.IntFieldUpdateOperationsInput | number
+  balance?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.StringFieldUpdateOperationsInput | string
   reference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -506,8 +506,8 @@ export type LedgerUncheckedUpdateManyInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
   amountType?: Prisma.EnumAmountTypeFieldUpdateOperationsInput | $Enums.AmountType
-  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  amount?: Prisma.IntFieldUpdateOperationsInput | number
+  balance?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.StringFieldUpdateOperationsInput | string
   reference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -778,8 +778,8 @@ export type LedgerCreateWithoutEmployeeInput = {
   date: Date | string
   type: $Enums.LedgerType
   amountType: $Enums.AmountType
-  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
-  balance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  amount: number
+  balance: number
   description: string
   reference?: string | null
   createdAt?: Date | string
@@ -794,8 +794,8 @@ export type LedgerUncheckedCreateWithoutEmployeeInput = {
   date: Date | string
   type: $Enums.LedgerType
   amountType: $Enums.AmountType
-  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
-  balance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  amount: number
+  balance: number
   description: string
   reference?: string | null
   createdAt?: Date | string
@@ -840,8 +840,8 @@ export type LedgerScalarWhereInput = {
   date?: Prisma.DateTimeFilter<"Ledger"> | Date | string
   type?: Prisma.EnumLedgerTypeFilter<"Ledger"> | $Enums.LedgerType
   amountType?: Prisma.EnumAmountTypeFilter<"Ledger"> | $Enums.AmountType
-  amount?: Prisma.DecimalFilter<"Ledger"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  balance?: Prisma.DecimalFilter<"Ledger"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  amount?: Prisma.IntFilter<"Ledger"> | number
+  balance?: Prisma.IntFilter<"Ledger"> | number
   description?: Prisma.StringFilter<"Ledger"> | string
   reference?: Prisma.StringNullableFilter<"Ledger"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Ledger"> | Date | string
@@ -855,8 +855,8 @@ export type LedgerCreateWithoutPayrollDetailInput = {
   date: Date | string
   type: $Enums.LedgerType
   amountType: $Enums.AmountType
-  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
-  balance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  amount: number
+  balance: number
   description: string
   reference?: string | null
   createdAt?: Date | string
@@ -872,8 +872,8 @@ export type LedgerUncheckedCreateWithoutPayrollDetailInput = {
   date: Date | string
   type: $Enums.LedgerType
   amountType: $Enums.AmountType
-  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
-  balance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  amount: number
+  balance: number
   description: string
   reference?: string | null
   createdAt?: Date | string
@@ -912,8 +912,8 @@ export type LedgerCreateWithoutLoanInput = {
   date: Date | string
   type: $Enums.LedgerType
   amountType: $Enums.AmountType
-  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
-  balance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  amount: number
+  balance: number
   description: string
   reference?: string | null
   createdAt?: Date | string
@@ -929,8 +929,8 @@ export type LedgerUncheckedCreateWithoutLoanInput = {
   date: Date | string
   type: $Enums.LedgerType
   amountType: $Enums.AmountType
-  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
-  balance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  amount: number
+  balance: number
   description: string
   reference?: string | null
   createdAt?: Date | string
@@ -969,8 +969,8 @@ export type LedgerCreateWithoutTrafficChallanInput = {
   date: Date | string
   type: $Enums.LedgerType
   amountType: $Enums.AmountType
-  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
-  balance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  amount: number
+  balance: number
   description: string
   reference?: string | null
   createdAt?: Date | string
@@ -986,8 +986,8 @@ export type LedgerUncheckedCreateWithoutTrafficChallanInput = {
   date: Date | string
   type: $Enums.LedgerType
   amountType: $Enums.AmountType
-  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
-  balance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  amount: number
+  balance: number
   description: string
   reference?: string | null
   createdAt?: Date | string
@@ -1027,8 +1027,8 @@ export type LedgerCreateManyEmployeeInput = {
   date: Date | string
   type: $Enums.LedgerType
   amountType: $Enums.AmountType
-  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
-  balance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  amount: number
+  balance: number
   description: string
   reference?: string | null
   createdAt?: Date | string
@@ -1042,8 +1042,8 @@ export type LedgerUpdateWithoutEmployeeInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
   amountType?: Prisma.EnumAmountTypeFieldUpdateOperationsInput | $Enums.AmountType
-  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  amount?: Prisma.IntFieldUpdateOperationsInput | number
+  balance?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.StringFieldUpdateOperationsInput | string
   reference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1058,8 +1058,8 @@ export type LedgerUncheckedUpdateWithoutEmployeeInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
   amountType?: Prisma.EnumAmountTypeFieldUpdateOperationsInput | $Enums.AmountType
-  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  amount?: Prisma.IntFieldUpdateOperationsInput | number
+  balance?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.StringFieldUpdateOperationsInput | string
   reference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1074,8 +1074,8 @@ export type LedgerUncheckedUpdateManyWithoutEmployeeInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
   amountType?: Prisma.EnumAmountTypeFieldUpdateOperationsInput | $Enums.AmountType
-  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  amount?: Prisma.IntFieldUpdateOperationsInput | number
+  balance?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.StringFieldUpdateOperationsInput | string
   reference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1091,8 +1091,8 @@ export type LedgerCreateManyPayrollDetailInput = {
   date: Date | string
   type: $Enums.LedgerType
   amountType: $Enums.AmountType
-  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
-  balance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  amount: number
+  balance: number
   description: string
   reference?: string | null
   createdAt?: Date | string
@@ -1105,8 +1105,8 @@ export type LedgerUpdateWithoutPayrollDetailInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
   amountType?: Prisma.EnumAmountTypeFieldUpdateOperationsInput | $Enums.AmountType
-  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  amount?: Prisma.IntFieldUpdateOperationsInput | number
+  balance?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.StringFieldUpdateOperationsInput | string
   reference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1122,8 +1122,8 @@ export type LedgerUncheckedUpdateWithoutPayrollDetailInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
   amountType?: Prisma.EnumAmountTypeFieldUpdateOperationsInput | $Enums.AmountType
-  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  amount?: Prisma.IntFieldUpdateOperationsInput | number
+  balance?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.StringFieldUpdateOperationsInput | string
   reference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1138,8 +1138,8 @@ export type LedgerUncheckedUpdateManyWithoutPayrollDetailInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
   amountType?: Prisma.EnumAmountTypeFieldUpdateOperationsInput | $Enums.AmountType
-  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  amount?: Prisma.IntFieldUpdateOperationsInput | number
+  balance?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.StringFieldUpdateOperationsInput | string
   reference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1154,8 +1154,8 @@ export type LedgerCreateManyLoanInput = {
   date: Date | string
   type: $Enums.LedgerType
   amountType: $Enums.AmountType
-  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
-  balance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  amount: number
+  balance: number
   description: string
   reference?: string | null
   createdAt?: Date | string
@@ -1168,8 +1168,8 @@ export type LedgerUpdateWithoutLoanInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
   amountType?: Prisma.EnumAmountTypeFieldUpdateOperationsInput | $Enums.AmountType
-  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  amount?: Prisma.IntFieldUpdateOperationsInput | number
+  balance?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.StringFieldUpdateOperationsInput | string
   reference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1185,8 +1185,8 @@ export type LedgerUncheckedUpdateWithoutLoanInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
   amountType?: Prisma.EnumAmountTypeFieldUpdateOperationsInput | $Enums.AmountType
-  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  amount?: Prisma.IntFieldUpdateOperationsInput | number
+  balance?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.StringFieldUpdateOperationsInput | string
   reference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1201,8 +1201,8 @@ export type LedgerUncheckedUpdateManyWithoutLoanInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
   amountType?: Prisma.EnumAmountTypeFieldUpdateOperationsInput | $Enums.AmountType
-  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  amount?: Prisma.IntFieldUpdateOperationsInput | number
+  balance?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.StringFieldUpdateOperationsInput | string
   reference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1217,8 +1217,8 @@ export type LedgerCreateManyTrafficChallanInput = {
   date: Date | string
   type: $Enums.LedgerType
   amountType: $Enums.AmountType
-  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
-  balance: runtime.Decimal | runtime.DecimalJsLike | number | string
+  amount: number
+  balance: number
   description: string
   reference?: string | null
   createdAt?: Date | string
@@ -1231,8 +1231,8 @@ export type LedgerUpdateWithoutTrafficChallanInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
   amountType?: Prisma.EnumAmountTypeFieldUpdateOperationsInput | $Enums.AmountType
-  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  amount?: Prisma.IntFieldUpdateOperationsInput | number
+  balance?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.StringFieldUpdateOperationsInput | string
   reference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1248,8 +1248,8 @@ export type LedgerUncheckedUpdateWithoutTrafficChallanInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
   amountType?: Prisma.EnumAmountTypeFieldUpdateOperationsInput | $Enums.AmountType
-  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  amount?: Prisma.IntFieldUpdateOperationsInput | number
+  balance?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.StringFieldUpdateOperationsInput | string
   reference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1264,8 +1264,8 @@ export type LedgerUncheckedUpdateManyWithoutTrafficChallanInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
   amountType?: Prisma.EnumAmountTypeFieldUpdateOperationsInput | $Enums.AmountType
-  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  amount?: Prisma.IntFieldUpdateOperationsInput | number
+  balance?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.StringFieldUpdateOperationsInput | string
   reference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1390,8 +1390,8 @@ export type $LedgerPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     date: Date
     type: $Enums.LedgerType
     amountType: $Enums.AmountType
-    amount: runtime.Decimal
-    balance: runtime.Decimal
+    amount: number
+    balance: number
     description: string
     reference: string | null
     createdAt: Date
@@ -1831,8 +1831,8 @@ export interface LedgerFieldRefs {
   readonly date: Prisma.FieldRef<"Ledger", 'DateTime'>
   readonly type: Prisma.FieldRef<"Ledger", 'LedgerType'>
   readonly amountType: Prisma.FieldRef<"Ledger", 'AmountType'>
-  readonly amount: Prisma.FieldRef<"Ledger", 'Decimal'>
-  readonly balance: Prisma.FieldRef<"Ledger", 'Decimal'>
+  readonly amount: Prisma.FieldRef<"Ledger", 'Int'>
+  readonly balance: Prisma.FieldRef<"Ledger", 'Int'>
   readonly description: Prisma.FieldRef<"Ledger", 'String'>
   readonly reference: Prisma.FieldRef<"Ledger", 'String'>
   readonly createdAt: Prisma.FieldRef<"Ledger", 'DateTime'>
