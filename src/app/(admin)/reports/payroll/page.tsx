@@ -136,11 +136,13 @@ const PayrollReportPage = () => {
   );
 
   // ── handlers ──────────────────────────────────────────────────────────────
-  const handleRefresh = () => {
+  const handleRefresh = (paramMonthYear?: { month: number; year: number }) => {
     const fp = parseGroupDropdownFilter(selectedFilter);
+    const M = paramMonthYear?.month ?? monthYear.month;
+    const Y = paramMonthYear?.year ?? monthYear.year;
     setAppliedQuery({
-      month: monthYear.month,
-      year: monthYear.year,
+      month: M,
+      year: Y,
       payrollSectionId: fp.payrollSectionId ?? null,
       designationId: fp.designationId ?? null,
       employeeCodes:
@@ -615,11 +617,20 @@ const PayrollReportPage = () => {
             type="month"
             className="w-full h-10!"
             placeholder="Select Month"
+            disabled={isLoading}
             value={`${monthYear.year}-${String(monthYear.month).padStart(2, "0")}`}
             onChange={(e) => {
               if (!e.target.value) return;
               const [y, m] = e.target.value.split("-").map(Number);
               setMonthYear({ month: m, year: y });
+            }}
+            onKeyDown={(e: any) => {
+              if (e.key === "Enter") {
+                if (!e?.target) return;
+                if (!e?.target?.value) return;
+                const [y, m] = e?.target?.value?.split?.("-")?.map?.(Number);
+                handleRefresh({ month: m, year: y });
+              }
             }}
           />
           <AutoScrollChips
@@ -646,10 +657,10 @@ const PayrollReportPage = () => {
           <Button
             size="small"
             label="Refresh"
-            icon={isLoading ? undefined : "pi pi-refresh"}
             loading={isLoading}
-            onClick={handleRefresh}
             className="w-full h-10!"
+            onClick={() => handleRefresh()}
+            icon={isLoading ? undefined : "pi pi-refresh"}
           />
         </div>
       </div>
@@ -715,7 +726,7 @@ const PayrollReportPage = () => {
           tableClassName="report-table"
           emptyMessage="No payroll data found. Select a month and click Refresh."
           scrollable
-          scrollHeight="calc(100vh - 270px)"
+          scrollHeight="calc(100vh - 310px)"
         />
       </div>
     </div>
