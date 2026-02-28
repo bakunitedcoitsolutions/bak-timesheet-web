@@ -465,10 +465,14 @@ const PayrollReportPage = () => {
             colSpan={5}
             footer="GRAND TOTAL :"
             footerStyle={{
+              background: "var(--primary-color) !important",
+              color: "#ffffff",
               textAlign: "right",
-              fontWeight: "bold",
+              fontWeight: "900",
               fontSize: 13,
-              color: "var(--primary-color)",
+              letterSpacing: "0.06em",
+              padding: "10px 20px 10px 8px",
+              borderTop: "2px solid var(--primary-color)",
             }}
           />
           {NUMERIC_KEYS.map((k) => (
@@ -476,18 +480,28 @@ const PayrollReportPage = () => {
               key={String(k)}
               footer={gt(k)}
               footerStyle={{
+                background: "var(--primary-color) !important",
+                color: "#ffffff",
                 textAlign: "center",
-                fontWeight: "bold",
+                fontWeight: "900",
                 fontSize: 13,
-                color: "var(--primary-color)",
+                padding: "10px 6px",
+                borderTop: "2px solid var(--primary-color)",
               }}
             />
           ))}
           {/* remarks column */}
-          <Column footer="" />
+          <Column
+            footer=""
+            footerStyle={{
+              background: "var(--primary-color) !important",
+              borderTop: "2px solid var(--primary-color)",
+            }}
+          />
         </Row>
       </ColumnGroup>
     ) : undefined;
+
   // ── section header template ───────────────────────────────────────────────
   const rowGroupHeaderTemplate = (rowData: PayrollReportRow) => (
     <div className="border border-primary/50 py-2 px-4 bg-gray-50 flex justify-between items-center">
