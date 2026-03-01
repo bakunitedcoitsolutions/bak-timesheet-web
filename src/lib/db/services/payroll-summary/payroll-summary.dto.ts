@@ -114,4 +114,10 @@ export interface PayrollDetailWithRelations {
   payrollSummary: {
     payrollStatusId: number | null;
   };
+
+  paymentMethod?: {
+    id: number;
+    nameEn: string;
+    nameAr?: string | null;
+  } | null;
 }

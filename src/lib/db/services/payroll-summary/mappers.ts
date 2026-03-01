@@ -33,6 +33,7 @@ export interface PayrollDetailEntry {
   cashSalary: number;
   remarks: string;
   paymentMethodId: number | null;
+  paymentMethodName: string;
   payrollStatusId: number;
   isLocked: boolean;
   gender: string; // "M" or "F" for gender flag
@@ -87,6 +88,7 @@ export const mapPayrollDetailToEntry = (
     cashSalary: d.cashSalary || 0,
     remarks: d.remarks || "",
     paymentMethodId: d.paymentMethodId || null,
+    paymentMethodName: (d as any).paymentMethod?.nameEn || "",
     payrollStatusId: d.payrollStatusId ?? 1,
     isLocked: false,
     gender: d?.employee?.gender || "",

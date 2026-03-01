@@ -278,6 +278,7 @@ export const getSalarySlipData = async (
       isFixed: emp.isFixed,
       isDeductable: emp.isDeductable,
       isCardDelivered: emp.isCardDelivered,
+      paymentMethodName: "",
     };
 
     results.push(entry);

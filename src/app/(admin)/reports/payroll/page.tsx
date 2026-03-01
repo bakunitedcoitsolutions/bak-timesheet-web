@@ -19,6 +19,7 @@ import {
   AutoScrollChips,
 } from "@/components";
 import { formatPayrollPeriod, parseGroupDropdownFilter } from "@/utils/helpers";
+import { printPayrollReport } from "@/utils/helpers/print-payroll-report";
 import { useGlobalData } from "@/context/GlobalDataContext";
 import { useGetPayrollReport } from "@/lib/db/services/payroll-summary/requests";
 import { PayrollDetailEntry } from "@/lib/db/services/payroll-summary/mappers";
@@ -67,7 +68,7 @@ const PayrollReportPage = () => {
     "all"
   );
   const [employeeCodeChips, setEmployeeCodeChips] = useState<string[]>([]);
-  const [paymentMethodId, setPaymentMethodId] = useState<number | null>(null);
+  const [paymentMethodId, setPaymentMethodId] = useState<number | null>(0);
 
   // ── applied query (only updated on Refresh) ────────────────────────────────
   const [appliedQuery, setAppliedQuery] = useState<{
@@ -86,7 +87,7 @@ const PayrollReportPage = () => {
   // ── options ───────────────────────────────────────────────────────────────
   const paymentMethodOptions = useMemo(
     () => [
-      { label: "All Methods", value: null },
+      { label: "All Methods", value: 0 },
       ...globalData.paymentMethods.map((p) => ({
         label: p.nameEn,
         value: p.id,
@@ -149,7 +150,7 @@ const PayrollReportPage = () => {
         employeeCodeChips.length > 0
           ? employeeCodeChips.map(Number).filter(Boolean)
           : null,
-      paymentMethodId: paymentMethodId ?? null,
+      paymentMethodId: paymentMethodId === 0 ? null : (paymentMethodId ?? null),
     });
     setFirstSection(0);
   };
@@ -402,7 +403,9 @@ const PayrollReportPage = () => {
         style: { minWidth: 150 },
         body: (r) => (
           <span className="text-sm text-gray-500 text-left!">
-            {r.remarks || ""}
+            {!!r.remarks
+              ? `${r.remarks}\n(${r.paymentMethodName})`
+              : r.paymentMethodName}
           </span>
         ),
       },
@@ -605,7 +608,38 @@ const PayrollReportPage = () => {
               label="Print"
               icon="pi pi-print"
               variant="outlined"
-              onClick={() => window.print()}
+              onClick={() => {
+                if (allRows.length === 0) return;
+
+                const appliedPaymentMethodName = appliedQuery.paymentMethodId
+                  ? paymentMethodOptions.find(
+                      (p) => p.value === appliedQuery.paymentMethodId
+                    )?.label || null
+                  : null;
+
+                let sectionOrDesignationName = null;
+                if (appliedQuery.payrollSectionId) {
+                  sectionOrDesignationName = globalData.payrollSections.find(
+                    (s: any) => s.id === appliedQuery.payrollSectionId
+                  )?.nameEn;
+                } else if (appliedQuery.designationId) {
+                  sectionOrDesignationName = globalData.designations.find(
+                    (d: any) => d.id === appliedQuery.designationId
+                  )?.nameEn;
+                }
+
+                printPayrollReport(
+                  allRows,
+                  appliedQuery.month,
+                  appliedQuery.year,
+                  {
+                    paymentMethodName: appliedPaymentMethodName,
+                    sectionOrDesignationName,
+                    employeeCodes:
+                      appliedQuery.employeeCodes?.map(String) || null,
+                  }
+                );
+              }}
               className="w-full lg:w-28 h-10! bg-white!"
             />
           )}

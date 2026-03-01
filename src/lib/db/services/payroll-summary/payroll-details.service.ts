@@ -117,6 +117,13 @@ export const getPayrollDetails = async (
             payrollStatusId: true,
           },
         },
+        paymentMethod: {
+          select: {
+            id: true,
+            nameEn: true,
+            nameAr: true,
+          },
+        },
       },
     }),
     prisma.payrollDetails.count({ where }),
@@ -282,6 +289,9 @@ export const getPayrollReport = async (
         },
       },
       payrollSummary: { select: { payrollStatusId: true } },
+      paymentMethod: {
+        select: { id: true, nameEn: true, nameAr: true },
+      },
     },
   });
 
