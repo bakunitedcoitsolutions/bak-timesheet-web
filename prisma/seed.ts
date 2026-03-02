@@ -38,6 +38,7 @@ import { updateEmployeeRates } from "./seeds/update-employee-rates";
 import { PrismaClient } from "./generated/prisma/client";
 import { seedPayrollSummary } from "./seeds/payroll-summary";
 import { seedPayrollDetails } from "./seeds/payroll-details";
+import { updateLoanAndTraffic } from "./seeds/update-loan-traffic-2025-2026";
 const prisma = new PrismaClient({
   adapter: new PrismaPg(
     new Pool({
@@ -1632,8 +1633,11 @@ async function main() {
   // console.log("\n📝 Updating Employee Rates...");
   // await updateEmployeeRates(prisma);
 
-  // Reset Sequences
-  await resetSequences();
+  console.log("\n📝 Updating Loan and Traffic 2025-2026...");
+  await updateLoanAndTraffic(prisma);
+
+  // // Reset Sequences
+  // await resetSequences();
 
   console.log("� Database seed completed successfully!");
 }
