@@ -18,5 +18,5 @@ export interface PayrollEntry {
   cardSalary: number;
   cashSalary: number;
   remarks: string | null;
-  status: "Posted" | "Pending";
+  status: "Posted" | "Pending" | "Revision";
 }

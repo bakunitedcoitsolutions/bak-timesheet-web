@@ -63,9 +63,9 @@ const PayrollActions = ({
   onRecalculate,
 }: PayrollActionsProps) => {
   const menuRef = useRef<Menu | null>(null);
-
+  const payrollStatus = payroll.status;
   const menuItems: MenuItem[] =
-    payroll.status === "Pending"
+    payrollStatus === "Pending" || payrollStatus === "Revision"
       ? [
           {
             label: "Recalculate",
@@ -95,7 +95,7 @@ const PayrollActions = ({
                 onClick={(e) => options.onClick(e)}
                 className={classNames(
                   options.className,
-                  "w-full flex h-12 p-2 pl-4 cursor-pointer rounded-b-2xl"
+                  "w-full flex h-12 p-2 pl-4 cursor-pointer border-b border-gray-200"
                 )}
               >
                 <span
@@ -114,7 +114,7 @@ const PayrollActions = ({
                 onClick={(e) => options.onClick(e)}
                 className={classNames(
                   options.className,
-                  "w-full flex h-12 p-2 pl-4 cursor-pointer rounded-t-2xl rounded-b-2xl"
+                  "w-full flex h-12 p-2 pl-4 cursor-pointer rounded-b-2xl"
                 )}
               >
                 <span
@@ -399,7 +399,13 @@ const columns = (
     body: (rowData: PayrollEntry) => (
       <TypeBadge
         text={rowData.status}
-        variant={rowData.status === "Pending" ? "warning" : "success"}
+        variant={
+          rowData.status === "Pending"
+            ? "warning"
+            : rowData.status === "Revision"
+              ? "danger"
+              : "success"
+        }
       />
     ),
   },
@@ -480,7 +486,8 @@ const PayrollPage = () => {
         remarks: null,
         status: (summary.payrollStatus?.nameEn || "Pending") as
           | "Posted"
-          | "Pending",
+          | "Pending"
+          | "Revision",
       };
     });
   }, [payrollSummaries]);
