@@ -231,7 +231,7 @@ export const getPayrollReport = async (
   const {
     month,
     year,
-    payrollSectionId,
+    payrollSectionIds,
     designationId,
     employeeCodes,
     paymentMethodId,
@@ -244,7 +244,8 @@ export const getPayrollReport = async (
 
   const employeeFilter: any = {};
 
-  if (payrollSectionId) employeeFilter.payrollSectionId = payrollSectionId;
+  if (payrollSectionIds && payrollSectionIds.length > 0)
+    employeeFilter.payrollSectionId = { in: payrollSectionIds };
   if (designationId) employeeFilter.designationId = designationId;
   if (employeeCodes && employeeCodes.length > 0)
     employeeFilter.employeeCode = { in: employeeCodes };

@@ -15,14 +15,15 @@ import {
   Dropdown,
   TitleHeader,
   TableColumn,
-  GroupDropdown,
   AutoScrollChips,
 } from "@/components";
-import { formatPayrollPeriod, parseGroupDropdownFilter } from "@/utils/helpers";
+import MultiSelect from "@/components/forms/multi-select";
+import { formatPayrollPeriod } from "@/utils/helpers";
 import { printPayrollReport } from "@/utils/helpers/print-payroll-report";
 import { useGlobalData } from "@/context/GlobalDataContext";
 import { useGetPayrollReport } from "@/lib/db/services/payroll-summary/requests";
 import { PayrollDetailEntry } from "@/lib/db/services/payroll-summary/mappers";
+import ModifiedMultiSelect from "@/components/forms/multi-select";
 
 // ─── types ───────────────────────────────────────────────────────────────────
 
@@ -64,9 +65,7 @@ const PayrollReportPage = () => {
 
   // ── local filter controls ──────────────────────────────────────────────────
   const [monthYear, setMonthYear] = useState(getMonthYear);
-  const [selectedFilter, setSelectedFilter] = useState<string | number | null>(
-    "all"
-  );
+  const [selectedSections, setSelectedSections] = useState<number[]>([]);
   const [employeeCodeChips, setEmployeeCodeChips] = useState<string[]>([]);
   const [paymentMethodId, setPaymentMethodId] = useState<number | null>(0);
 
@@ -74,7 +73,7 @@ const PayrollReportPage = () => {
   const [appliedQuery, setAppliedQuery] = useState<{
     month: number;
     year: number;
-    payrollSectionId?: number | null;
+    payrollSectionIds?: number[] | null;
     designationId?: number | null;
     employeeCodes?: number[] | null;
     paymentMethodId?: number | null;
@@ -94,6 +93,15 @@ const PayrollReportPage = () => {
       })),
     ],
     [globalData.paymentMethods]
+  );
+
+  const sectionOptions = useMemo(
+    () =>
+      globalData.payrollSections.map((s) => ({
+        label: s.nameEn,
+        value: s.id,
+      })),
+    [globalData.payrollSections]
   );
 
   // ── fetch ─────────────────────────────────────────────────────────────────
@@ -138,14 +146,13 @@ const PayrollReportPage = () => {
 
   // ── handlers ──────────────────────────────────────────────────────────────
   const handleRefresh = (paramMonthYear?: { month: number; year: number }) => {
-    const fp = parseGroupDropdownFilter(selectedFilter);
     const M = paramMonthYear?.month ?? monthYear.month;
     const Y = paramMonthYear?.year ?? monthYear.year;
     setAppliedQuery({
       month: M,
       year: Y,
-      payrollSectionId: fp.payrollSectionId ?? null,
-      designationId: fp.designationId ?? null,
+      payrollSectionIds: selectedSections.length > 0 ? selectedSections : null,
+      designationId: null,
       employeeCodes:
         employeeCodeChips.length > 0
           ? employeeCodeChips.map(Number).filter(Boolean)
@@ -618,10 +625,17 @@ const PayrollReportPage = () => {
                   : null;
 
                 let sectionOrDesignationName = null;
-                if (appliedQuery.payrollSectionId) {
-                  sectionOrDesignationName = globalData.payrollSections.find(
-                    (s: any) => s.id === appliedQuery.payrollSectionId
-                  )?.nameEn;
+                if (
+                  appliedQuery.payrollSectionIds &&
+                  appliedQuery.payrollSectionIds.length > 0
+                ) {
+                  const sectionNames = globalData.payrollSections
+                    .filter((s: any) =>
+                      appliedQuery.payrollSectionIds!.includes(s.id)
+                    )
+                    .map((s: any) => s.nameEn)
+                    .join(", ");
+                  sectionOrDesignationName = sectionNames || null;
                 } else if (appliedQuery.designationId) {
                   sectionOrDesignationName = globalData.designations.find(
                     (d: any) => d.id === appliedQuery.designationId
@@ -675,11 +689,15 @@ const PayrollReportPage = () => {
             className="w-full h-10!"
             onChange={(e) => setEmployeeCodeChips(e.value ?? [])}
           />
-          <GroupDropdown
-            value={selectedFilter}
+          <ModifiedMultiSelect
+            options={sectionOptions}
+            selectedItem={selectedSections}
+            setSelectedItem={setSelectedSections}
+            placeholder="Select Payroll Sections"
             className="w-full h-10.5!"
-            onChange={setSelectedFilter}
-            placeholder="Section / Designation"
+            filter
+            small
+            showClear
           />
           <Dropdown
             options={paymentMethodOptions}
