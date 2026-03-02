@@ -15,10 +15,12 @@ const GroupDropdown = ({
   hideAllOption = false,
   className = "w-full",
   placeholder = "Choose",
+  disabled = false,
 }: {
   value: any;
   className?: string;
   placeholder?: string;
+  disabled?: boolean;
   hideAllOption?: boolean;
   onChange: (value: any) => void;
 }) => {
@@ -101,6 +103,7 @@ const GroupDropdown = ({
       placeholder={placeholder}
       options={getGroupedDesignations}
       onChange={(e) => onChange(e.value)}
+      disabled={disabled}
       optionGroupTemplate={optionGroupTemplate}
       panelClassName="designation-dropdown-panel"
     />

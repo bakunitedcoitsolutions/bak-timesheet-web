@@ -614,10 +614,16 @@ export const getMonthlyTimesheetReportData = async (
     };
   });
 
-  // Filter out reports with zero hours if showAbsents is false
-  const filteredReports = showAbsents
-    ? reports
-    : reports.filter((r) => r.grandTotal > 0);
+  // Filter reports based on showAbsents flag
+  let filteredReports = reports;
+
+  if (showAbsents) {
+    // Absent: non-fixed employee and total project1 + project2 hours < 240
+    filteredReports = reports.filter((r) => !r.isFixed && r.grandTotal < 240);
+  } else {
+    // Default behavior: only show reports with > 0 hours
+    filteredReports = reports.filter((r) => r.grandTotal > 0);
+  }
 
   return { reports: filteredReports };
 };
@@ -726,8 +732,16 @@ export const getDailyTimesheetReportData = async (
     const p2OT = ts?.project2Overtime ?? 0;
     const total = p1H + p1OT + p2H + p2OT;
 
-    if (!showAbsents && total === 0) {
-      return;
+    if (showAbsents) {
+      // For daily report, absent means non-fixed employee and 0 hours today
+      if (emp.isFixed || total > 0) {
+        return;
+      }
+    } else {
+      // Normal behavior: only show if total > 0
+      if (total === 0) {
+        return;
+      }
     }
 
     rows.push({

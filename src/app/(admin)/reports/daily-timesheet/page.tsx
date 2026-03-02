@@ -75,6 +75,11 @@ const FilterSection = memo(
                   onDateChange(new Date(e.target.value));
                 }
               }}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  handleRefresh();
+                }
+              }}
               className="w-full h-10!"
               placeholder="Select Date"
             />
@@ -86,7 +91,17 @@ const FilterSection = memo(
               allowDuplicate={false}
               placeholder="Employee Codes"
               className="w-full h-10!"
-              onChange={(e) => setEmployeeCodes(e.value ?? [])}
+              onChange={(e) => {
+                const codes = e.value ?? [];
+                setEmployeeCodes(codes);
+                // If employee code is present, clear other filters
+                if (codes.length > 0) {
+                  setSelectedFilter("all");
+                  setProjectId(null);
+                  setShowAbsents(false);
+                  setShowFixedSalary(false);
+                }
+              }}
             />
           </div>
           <div className="w-full">
@@ -95,6 +110,7 @@ const FilterSection = memo(
               className="w-full h-10.5!"
               onChange={setSelectedFilter}
               placeholder="Select Section / Designation"
+              disabled={employeeCodes.length > 0}
             />
           </div>
           <div className="w-full">
@@ -105,15 +121,23 @@ const FilterSection = memo(
               onChange={(e) => setProjectId(e.value)}
               className="w-full h-10!"
               placeholder="Select Project"
+              disabled={employeeCodes.length > 0}
             />
           </div>
           <div className="w-full">
             <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2">
+              <div
+                className={`flex items-center gap-2 ${employeeCodes.length > 0 ? "opacity-50" : ""}`}
+              >
                 <Checkbox
                   inputId="absents"
                   checked={showAbsents}
-                  onChange={(e) => setShowAbsents(e.checked ?? false)}
+                  disabled={employeeCodes.length > 0}
+                  onChange={(e) => {
+                    const checked = e.checked ?? false;
+                    setShowAbsents(checked);
+                    if (checked) setShowFixedSalary(false);
+                  }}
                 />
                 <label
                   htmlFor="absents"
@@ -122,11 +146,18 @@ const FilterSection = memo(
                   Absents
                 </label>
               </div>
-              <div className="flex items-center gap-2">
+              <div
+                className={`flex items-center gap-2 ${employeeCodes.length > 0 ? "opacity-50" : ""}`}
+              >
                 <Checkbox
                   inputId="fixedSalary"
                   checked={showFixedSalary}
-                  onChange={(e) => setShowFixedSalary(e.checked ?? false)}
+                  disabled={employeeCodes.length > 0}
+                  onChange={(e) => {
+                    const checked = e.checked ?? false;
+                    setShowFixedSalary(checked);
+                    if (checked) setShowAbsents(false);
+                  }}
                 />
                 <label
                   htmlFor="fixedSalary"
