@@ -28,10 +28,12 @@ const FilterSection = memo(
     onSearch,
     selectedDate,
     onDateChange,
+    isLoading,
   }: {
     onSearch: (params: any) => void;
     selectedDate: Date;
     onDateChange: (date: Date) => void;
+    isLoading: boolean;
   }) => {
     const [employeeCodes, setEmployeeCodes] = useState<string[]>([]);
     const [selectedFilter, setSelectedFilter] = useState<
@@ -76,9 +78,10 @@ const FilterSection = memo(
                 }
               }}
               onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  handleRefresh();
+                if (e.key !== "Enter" || isLoading) {
+                  return;
                 }
+                handleRefresh();
               }}
               className="w-full h-10!"
               placeholder="Select Date"
@@ -173,6 +176,8 @@ const FilterSection = memo(
               size="small"
               label="Refresh"
               onClick={handleRefresh}
+              loading={isLoading}
+              disabled={isLoading}
               className="w-full md:w-32 h-10!"
             />
           </div>
@@ -475,6 +480,7 @@ const DailyTimesheetReportPage = () => {
             onSearch={handleSearch}
             selectedDate={selectedDate}
             onDateChange={setSelectedDate}
+            isLoading={isLoading}
           />
         </div>
       </div>

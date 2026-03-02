@@ -105,6 +105,12 @@ const FilterSection = memo(
                   onDateChange(new Date(y, m - 1));
                 }
               }}
+              onKeyDown={(e) => {
+                if (e.key !== "Enter" || !selectedDate || isLoading) {
+                  return;
+                }
+                handleSearch();
+              }}
               className="w-full h-10!"
               placeholder="Select Month *"
             />
