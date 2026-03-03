@@ -23,6 +23,8 @@ export const RunPayrollSchema = z.object({
 
 export const RepostPayrollSchema = z.object({
   id: z.number(),
+  designationId: z.number().int().optional().nullable(),
+  payrollSectionId: z.number().int().optional().nullable(),
 });
 
 export const PostPayrollSchema = z.object({

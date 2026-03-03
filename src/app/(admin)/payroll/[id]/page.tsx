@@ -246,12 +246,18 @@ const PayrollDetailPage = () => {
   const handleRefreshAll = async () => {
     try {
       setIsRefreshingAll(true);
-      await repostPayroll({ id: payrollId });
+      await repostPayroll({
+        id: payrollId,
+        designationId: filterParams.designationId ?? null,
+        payrollSectionId: filterParams.payrollSectionId ?? null,
+      });
       queryClient.invalidateQueries({ queryKey: ["payroll-details"] });
       queryClient.invalidateQueries({ queryKey: ["payroll-summaries"] });
       toastService.showSuccess(
         "Refreshed",
-        "Payroll recalculated successfully for all employees"
+        filterParams.designationId || filterParams.payrollSectionId
+          ? "Payroll refreshed successfully for selected section/designation"
+          : "Payroll refreshed successfully for all employees"
       );
     } catch (error: any) {
       toastService.showError(

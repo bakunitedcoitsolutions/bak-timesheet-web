@@ -624,7 +624,11 @@ export const runPayroll = async ({
   return result;
 };
 
-export const repostPayroll = async ({ id }: RepostPayrollInput) => {
+export const repostPayroll = async ({
+  id,
+  designationId,
+  payrollSectionId,
+}: RepostPayrollInput) => {
   // Check if there is any active payroll (Pending) that is NOT this one
   const activePayroll = await prisma.payrollSummary.findFirst({
     where: {
@@ -685,9 +689,13 @@ export const repostPayroll = async ({ id }: RepostPayrollInput) => {
     if (exclusion) exclusionData = exclusion;
   }
 
-  // Fetch all active employees
+  // Fetch active employees matching the filter
+  const employeeWhere: any = { statusId: 1 };
+  if (designationId) employeeWhere.designationId = designationId;
+  if (payrollSectionId) employeeWhere.payrollSectionId = payrollSectionId;
+
   const employees = await prisma.employee.findMany({
-    where: { statusId: 1 },
+    where: employeeWhere,
     include: { designation: true },
   });
   const employeeIds = employees.map((e) => e.id);
