@@ -739,7 +739,7 @@ export const getDailyTimesheetReportData = async (
       }
     } else {
       // Normal behavior: only show if total > 0
-      if (total === 0) {
+      if (total === 0 && !ts?.description) {
         return;
       }
     }

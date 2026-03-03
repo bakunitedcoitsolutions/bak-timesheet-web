@@ -307,7 +307,7 @@ const MonthlyTimesheetReportPage = () => {
         project2Hours: record.project2Hours,
         project2Overtime: record.project2Overtime,
         isFriday: record.isFriday,
-        remarks: record.remarks,
+        remarks: record.description ?? record.remarks,
         dayTotal:
           record.project1Hours +
           record.project1Overtime +
