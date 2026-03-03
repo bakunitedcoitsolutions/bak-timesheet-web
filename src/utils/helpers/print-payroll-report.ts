@@ -1,4 +1,4 @@
-import { formatPayrollPeriod } from "@/utils/helpers";
+import { formatNum, formatPayrollPeriod } from "@/utils/helpers";
 import { PayrollDetailEntry } from "@/lib/db/services/payroll-summary/mappers";
 
 export type PayrollReportRow = PayrollDetailEntry & {
@@ -45,7 +45,7 @@ export const printPayrollReport = (
     .sort((a, b) => a[1].order - b[1].order)
     .map(([name, { rows }]) => ({ name, rows }));
 
-  const fmt = (v?: number | null) => v || 0;
+  const fmt = (v?: number | null) => formatNum(v || 0);
   const fmtHR = (v?: number | null) => Number(v || 0).toFixed(2);
 
   const colGroupHtml = `

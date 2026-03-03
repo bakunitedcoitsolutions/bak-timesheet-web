@@ -197,13 +197,6 @@ export const savePayrollDetailsBatch = async (
             updateData.netChallan = data.netChallan;
 
           if (Object.keys(updateData).length > 0) {
-            console.log(
-              "save payroll ==> ",
-              "id ==> ",
-              id,
-              " data ==> ",
-              updateData
-            );
             await tx.payrollDetails.update({
               where: { id },
               data: updateData,

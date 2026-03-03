@@ -11,6 +11,8 @@ export const formatNum = (
 ): string => {
   const n = Number(val ?? 0);
   if (isNaN(n)) return "0";
-  if (decimalPlaces === 0) return Math.round(n).toString();
-  return n % 1 === 0 ? n.toString() : n.toFixed(decimalPlaces);
+  return new Intl.NumberFormat("en-US", {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: decimalPlaces,
+  }).format(n);
 };

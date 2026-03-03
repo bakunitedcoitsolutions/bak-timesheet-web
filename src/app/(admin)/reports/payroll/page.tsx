@@ -1,11 +1,11 @@
 "use client";
 
 import { useState, useRef, useMemo } from "react";
+import { Row } from "primereact/row";
+import { Column } from "primereact/column";
 import { useRouter } from "next/navigation";
 import { Paginator } from "primereact/paginator";
 import { ColumnGroup } from "primereact/columngroup";
-import { Row } from "primereact/row";
-import { Column } from "primereact/column";
 
 import {
   Input,
@@ -17,13 +17,12 @@ import {
   TableColumn,
   AutoScrollChips,
 } from "@/components";
-import MultiSelect from "@/components/forms/multi-select";
-import { formatPayrollPeriod } from "@/utils/helpers";
-import { printPayrollReport } from "@/utils/helpers/print-payroll-report";
+import { formatNum, formatPayrollPeriod } from "@/utils/helpers";
 import { useGlobalData } from "@/context/GlobalDataContext";
-import { useGetPayrollReport } from "@/lib/db/services/payroll-summary/requests";
-import { PayrollDetailEntry } from "@/lib/db/services/payroll-summary/mappers";
 import ModifiedMultiSelect from "@/components/forms/multi-select";
+import { printPayrollReport } from "@/utils/helpers/print-payroll-report";
+import { PayrollDetailEntry } from "@/lib/db/services/payroll-summary/mappers";
+import { useGetPayrollReport } from "@/lib/db/services/payroll-summary/requests";
 
 // ─── types ───────────────────────────────────────────────────────────────────
 
@@ -40,7 +39,7 @@ const getMonthYear = () => {
   return { month: d.getMonth() + 1, year: d.getFullYear() };
 };
 
-const fmt = (v: number) => v || 0;
+const fmt = (v: number) => formatNum(v || 0);
 const fmtHR = (v: number) => Number(v || 0).toFixed(2);
 
 const tableCommonProps: TableColumn<PayrollReportRow> = {

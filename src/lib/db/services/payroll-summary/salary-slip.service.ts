@@ -250,7 +250,7 @@ export const getSalarySlipData = async (
         : "",
       iban: (emp as any).iban || "",
       bankCode: (emp as any).bankCode || "",
-      workDays: Math.round(workDays),
+      workDays: Math.round(Number(workDays)),
       overTime: Number(totalOTHours),
       totalHours: Number(totalHours),
       hourlyRate: Number(hourlyRate.toFixed(2)),
