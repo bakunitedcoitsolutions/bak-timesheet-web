@@ -66,7 +66,7 @@ export const getLedgerByEmployeeCode = async (
   ledgerEntries.push({
     id: idCounter++,
     employeeId: employee.id,
-    date: null,
+    date: startDate,
     type: "SALARY",
     amountType: "DEBIT", // Prevents mapping to table columns
     amount: 0,

@@ -132,11 +132,6 @@ const LedgerPage = () => {
     setSearchEmployeeCode(code);
   }, [employeeCode]);
 
-  // Print handler
-  const handlePrint = useCallback(() => {
-    tableRef.current?.print();
-  }, []);
-
   // Calculate totals
   const totals = useMemo(() => {
     return ledgerData.reduce(
@@ -158,6 +153,19 @@ const LedgerPage = () => {
       { salary: 0, loan: 0, challan: 0, deduction: 0 }
     );
   }, [ledgerData]);
+
+  // Print handler
+  const handlePrint = useCallback(() => {
+    if (!employee || ledgerData.length === 0) return;
+    import("@/utils/helpers/print-ledger-report").then((module) => {
+      module.printLedgerReport(
+        ledgerData,
+        employee,
+        totals,
+        employeeDesignation
+      );
+    });
+  }, [employee, ledgerData, totals, employeeDesignation]);
 
   const tableCommonProps = {
     sortable: false,
