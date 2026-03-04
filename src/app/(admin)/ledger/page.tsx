@@ -174,7 +174,9 @@ const LedgerPage = () => {
         align: "center",
         style: { minWidth: 50, width: 50 },
         body: (rowData: LedgerEntry) => (
-          <span className="text-sm font-medium">{rowData.id}</span>
+          <span className="text-sm font-medium text-gray-500">
+            {rowData.id}
+          </span>
         ),
         footer: () => <span></span>,
       },
@@ -196,7 +198,7 @@ const LedgerPage = () => {
         body: (rowData: LedgerEntry) => (
           <span className="text-sm">{rowData.description}</span>
         ),
-        footer: () => <span className="text-sm font-semibold">Total:</span>,
+        footer: () => <span className="text-sm font-bold">Total:</span>,
       },
       {
         field: "salary",
@@ -205,12 +207,12 @@ const LedgerPage = () => {
         align: "center",
         style: { minWidth: 130 },
         body: (rowData: LedgerEntry) => (
-          <span className="text-sm font-semibold">
+          <span className="text-sm">
             {rowData.salary !== null ? rowData.salary.toLocaleString() : ""}
           </span>
         ),
         footer: () => (
-          <span className="text-sm font-semibold">
+          <span className="text-sm font-bold">
             {totals.salary > 0 ? totals.salary.toLocaleString() : ""}
           </span>
         ),
@@ -222,12 +224,12 @@ const LedgerPage = () => {
         align: "center",
         style: { minWidth: 130 },
         body: (rowData: LedgerEntry) => (
-          <span className="text-sm font-semibold">
+          <span className="text-sm">
             {rowData.loan !== null ? rowData.loan.toLocaleString() : ""}
           </span>
         ),
         footer: () => (
-          <span className="text-sm font-semibold">
+          <span className="text-sm font-bold">
             {totals.loan > 0 ? totals.loan.toLocaleString() : "0"}
           </span>
         ),
@@ -239,12 +241,12 @@ const LedgerPage = () => {
         align: "center",
         style: { minWidth: 130 },
         body: (rowData: LedgerEntry) => (
-          <span className="text-sm font-semibold">
+          <span className="text-sm">
             {rowData.challan !== null ? rowData.challan.toLocaleString() : ""}
           </span>
         ),
         footer: () => (
-          <span className="text-sm font-semibold">
+          <span className="text-sm font-bold">
             {totals.challan > 0 ? totals.challan.toLocaleString() : "0"}
           </span>
         ),
@@ -256,14 +258,14 @@ const LedgerPage = () => {
         align: "center",
         style: { minWidth: 130 },
         body: (rowData: LedgerEntry) => (
-          <span className="text-sm font-semibold">
+          <span className="text-sm text-red-600">
             {rowData.deduction !== null
               ? rowData.deduction.toLocaleString()
               : ""}
           </span>
         ),
         footer: () => (
-          <span className="text-sm font-semibold">
+          <span className="text-sm font-bold text-red-600">
             {totals.deduction > 0 ? totals.deduction.toLocaleString() : "0"}
           </span>
         ),
@@ -275,14 +277,24 @@ const LedgerPage = () => {
         align: "center",
         style: { minWidth: 130 },
         body: (rowData: LedgerEntry) => (
-          <span className="text-sm font-semibold">
+          <span className="text-sm font-medium">
             {rowData.balance.toLocaleString()}
           </span>
         ),
-        footer: () => <span></span>,
+        footer: () => {
+          const closingBalance =
+            ledgerData.length > 0
+              ? ledgerData[ledgerData.length - 1].balance
+              : 0;
+          return (
+            <span className="text-sm font-bold text-primary">
+              {closingBalance.toLocaleString()}
+            </span>
+          );
+        },
       },
     ],
-    [totals]
+    [totals, ledgerData]
   );
 
   const renderHeader = useCallback(() => {
@@ -324,6 +336,12 @@ const LedgerPage = () => {
 
   const renderEmployeeInfo = useCallback(
     (isPrinting: boolean) => {
+      if (isLoading) {
+        return (
+          <div className="text-sm text-gray-500">Searching for employee...</div>
+        );
+      }
+
       if (!employee) {
         return (
           <div className="text-sm text-gray-500">
@@ -348,7 +366,7 @@ const LedgerPage = () => {
             })}
           >
             <div className="flex gap-x-2">
-              <span className="font-semibold">{employee.employeeCode}</span>
+              <span className="font-bold">{employee.employeeCode}</span>
               <span className="text-gray-400 font-semibold">-</span>
               <span className="font-semibold">{employeeName}</span>
             </div>
@@ -363,8 +381,10 @@ const LedgerPage = () => {
                   |
                 </span>
                 <div className="flex gap-x-2">
-                  <span className="text-xs text-gray-600">ID Card:</span>
-                  <span className="text-xs font-medium ">{idCardNumber}</span>
+                  <span className="text-sm text-gray-600">ID Card:</span>
+                  <span className="text-sm font-semibold text-primary">
+                    {idCardNumber}
+                  </span>
                 </div>
               </div>
             )}
@@ -376,7 +396,7 @@ const LedgerPage = () => {
                 "w-full sm:w-auto": !isPrinting,
               })}
             >
-              <span className="font-bold text-right">
+              <span className="font-bold text-right text-primary">
                 {employeeDesignation}
               </span>
             </div>
@@ -394,61 +414,74 @@ const LedgerPage = () => {
   );
 
   return (
-    <div className="flex h-full flex-col">
-      <TitleHeader
-        showBack={false}
-        title="EMPLOYEE LEDGER"
-        icon={<i className="fa-light fa-book-open-lines text-xl!" />}
-        renderInput={() => (
-          <div className="w-full lg:w-auto">
-            <Button
-              size="small"
-              label="Print"
-              icon="pi pi-print"
-              variant="outlined"
-              className="w-full lg:w-28 h-10! bg-white!"
-              onClick={handlePrint}
-            />
-          </div>
-        )}
-      />
-      <div className="bg-[#F5E6E8] px-6 py-4">{renderHeader()}</div>
-      <div className="flex flex-1 flex-col gap-4 px-6 pt-4 pb-6 bg-theme-primary-light min-h-0">
-        {/* Employee Info Section */}
-        <div className="bg-white rounded-xl py-4 px-4">
-          {renderEmployeeInfo(false)}
-        </div>
-
-        {/* Table Section */}
-        <div className="bg-white h-full rounded-xl overflow-hidden min-h-0">
-          {isLoading ? (
-            <div className="flex justify-center items-center h-full min-h-[400px]">
-              <ProgressSpinner style={{ width: "50px", height: "50px" }} />
+    <>
+      <div className="flex h-full flex-col">
+        <TitleHeader
+          showBack={false}
+          title="EMPLOYEE LEDGER"
+          icon={<i className="fa-light fa-book-open-lines text-xl!" />}
+          renderInput={() => (
+            <div className="w-full lg:w-auto">
+              <Button
+                size="small"
+                label="Print"
+                icon="pi pi-print"
+                variant="outlined"
+                className="w-full lg:w-28 h-10! bg-white!"
+                onClick={handlePrint}
+              />
             </div>
-          ) : (
-            <Table
-              ref={tableRef}
-              dataKey="id"
-              data={ledgerData}
-              columns={columns}
-              pagination={false}
-              globalSearch={false}
-              emptyMessage={
-                searchEmployeeCode
-                  ? "No ledger data found for this employee."
-                  : "Enter employee code and click Search to view ledger."
-              }
-              scrollable
-              scrollHeight="80vh"
-              showGridlines
-              printTitle="EMPLOYEE LEDGER"
-              tableClassName="report-table"
-              printHeaderContent={renderEmployeeInfo(true)}
-            />
           )}
+        />
+        <div className="bg-[#F5E6E8] px-6 py-4">{renderHeader()}</div>
+        <div className="flex flex-1 flex-col gap-4 px-6 pt-4 pb-6 bg-theme-primary-light min-h-0">
+          {/* Employee Info Section */}
+          <div className="bg-white rounded-xl py-4 px-4">
+            {renderEmployeeInfo(false)}
+          </div>
+
+          {/* Table Section */}
+          <div className="bg-white h-full rounded-xl overflow-hidden min-h-0">
+            {isLoading ? (
+              <div className="flex justify-center items-center h-full min-h-[400px]">
+                <ProgressSpinner style={{ width: "50px", height: "50px" }} />
+              </div>
+            ) : (
+              <Table
+                ref={tableRef}
+                dataKey="id"
+                data={ledgerData}
+                columns={columns}
+                pagination={false}
+                globalSearch={false}
+                emptyMessage={
+                  searchEmployeeCode
+                    ? "No ledger data found for this employee."
+                    : "Enter employee code and click Search to view ledger."
+                }
+                scrollable
+                scrollHeight="80vh"
+                showGridlines
+                printTitle="EMPLOYEE LEDGER"
+                tableClassName="report-table"
+                printHeaderContent={renderEmployeeInfo(true)}
+              />
+            )}
+          </div>
         </div>
       </div>
-    </div>
+
+      <style jsx global>{`
+        @media print {
+          tr.p-datatable-row,
+          tr.p-rowgroup-footer,
+          tr.p-rowgroup-header {
+            break-inside: avoid;
+            page-break-inside: avoid;
+          }
+        }
+      `}</style>
+    </>
   );
 };
 
