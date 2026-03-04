@@ -324,30 +324,6 @@ const columns = (
     ),
   },
   {
-    field: "openingAdvanceBalance",
-    header: "Open. Adv. Bal.",
-    sortable: false,
-    filterable: false,
-    style: { minWidth: 150 },
-    body: (rowData: ListedEmployee) => (
-      <span className="text-sm">
-        {rowData.openingAdvanceBalance?.toString() || "-"}
-      </span>
-    ),
-  },
-  {
-    field: "openingTrafficViolationBalance",
-    header: "Open. Traff. Bal.",
-    sortable: false,
-    filterable: false,
-    style: { minWidth: 150 },
-    body: (rowData: ListedEmployee) => (
-      <span className="text-sm">
-        {rowData.openingTrafficViolationBalance?.toString() || "-"}
-      </span>
-    ),
-  },
-  {
     field: "nationality",
     header: "Nationality",
     ...commonColumnProps,

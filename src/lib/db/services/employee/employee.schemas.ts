@@ -95,8 +95,6 @@ export const UpdateEmployeeStep4Schema = z.object({
 
 export const UpdateEmployeeStep5Schema = z.object({
   id: z.number().int().positive(),
-  openingAdvanceBalance: z.number().optional(),
-  openingTrafficViolationBalance: z.number().optional(),
   isCardDelivered: z.boolean().optional(),
   cardDocument: z.string().optional(),
 });

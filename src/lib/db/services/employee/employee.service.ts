@@ -68,8 +68,6 @@ const employeeSelect = {
   gosiSalary: true,
   gosiCityId: true,
   // Step 5
-  openingAdvanceBalance: true,
-  openingTrafficViolationBalance: true,
   isCardDelivered: true,
   cardDocument: true,
   // Timestamps
@@ -160,8 +158,6 @@ export const createEmployeeStep1 = async (data: CreateEmployeeStep1Data) => {
         mobileAllowance: employee.mobileAllowance,
         otherAllowance: employee.otherAllowance,
         gosiSalary: employee.gosiSalary,
-        openingAdvanceBalance: employee.openingAdvanceBalance,
-        openingTrafficViolationBalance: employee.openingTrafficViolationBalance,
       };
     },
     {
@@ -234,8 +230,6 @@ export const updateEmployeeStep1 = async (
         mobileAllowance: employee.mobileAllowance,
         otherAllowance: employee.otherAllowance,
         gosiSalary: employee.gosiSalary,
-        openingAdvanceBalance: employee.openingAdvanceBalance,
-        openingTrafficViolationBalance: employee.openingTrafficViolationBalance,
       };
     },
     {
@@ -378,8 +372,6 @@ export const updateEmployeeStep2 = async (
     mobileAllowance: employee.mobileAllowance,
     otherAllowance: employee.otherAllowance,
     gosiSalary: employee.gosiSalary,
-    openingAdvanceBalance: employee.openingAdvanceBalance,
-    openingTrafficViolationBalance: employee.openingTrafficViolationBalance,
   };
 };
 
@@ -433,8 +425,6 @@ export const updateEmployeeStep3 = async (
     mobileAllowance: employee.mobileAllowance,
     otherAllowance: employee.otherAllowance,
     gosiSalary: employee.gosiSalary,
-    openingAdvanceBalance: employee.openingAdvanceBalance,
-    openingTrafficViolationBalance: employee.openingTrafficViolationBalance,
   };
 };
 
@@ -491,8 +481,6 @@ export const updateEmployeeStep4 = async (
     mobileAllowance: employee.mobileAllowance,
     otherAllowance: employee.otherAllowance,
     gosiSalary: employee.gosiSalary,
-    openingAdvanceBalance: employee.openingAdvanceBalance,
-    openingTrafficViolationBalance: employee.openingTrafficViolationBalance,
   };
 };
 
@@ -515,11 +503,6 @@ export const updateEmployeeStep5 = async (
 
   const updateData: any = {};
 
-  if (data.openingAdvanceBalance !== undefined)
-    updateData.openingAdvanceBalance = data.openingAdvanceBalance ?? null;
-  if (data.openingTrafficViolationBalance !== undefined)
-    updateData.openingTrafficViolationBalance =
-      data.openingTrafficViolationBalance ?? null;
   if (data.isCardDelivered !== undefined)
     updateData.isCardDelivered = data.isCardDelivered;
   if (data.cardDocument !== undefined)
@@ -540,8 +523,6 @@ export const updateEmployeeStep5 = async (
     mobileAllowance: employee.mobileAllowance,
     otherAllowance: employee.otherAllowance,
     gosiSalary: employee.gosiSalary,
-    openingAdvanceBalance: employee.openingAdvanceBalance,
-    openingTrafficViolationBalance: employee.openingTrafficViolationBalance,
   };
 };
 
@@ -567,8 +548,6 @@ export const findEmployeeById = async (id: number) => {
     mobileAllowance: employee.mobileAllowance,
     otherAllowance: employee.otherAllowance,
     gosiSalary: employee.gosiSalary,
-    openingAdvanceBalance: employee.openingAdvanceBalance,
-    openingTrafficViolationBalance: employee.openingTrafficViolationBalance,
   };
 };
 
@@ -741,8 +720,6 @@ export const listEmployees = async (
     mobileAllowance: employee.mobileAllowance,
     otherAllowance: employee.otherAllowance,
     gosiSalary: employee.gosiSalary,
-    openingAdvanceBalance: employee.openingAdvanceBalance,
-    openingTrafficViolationBalance: employee.openingTrafficViolationBalance,
   }));
 
   return {

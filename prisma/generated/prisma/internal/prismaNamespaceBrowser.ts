@@ -226,8 +226,6 @@ export const EmployeeScalarFieldEnum = {
   iban: 'iban',
   gosiSalary: 'gosiSalary',
   gosiCityId: 'gosiCityId',
-  openingAdvanceBalance: 'openingAdvanceBalance',
-  openingTrafficViolationBalance: 'openingTrafficViolationBalance',
   isCardDelivered: 'isCardDelivered',
   cardDocument: 'cardDocument',
   createdAt: 'createdAt',

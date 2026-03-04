@@ -46,8 +46,6 @@ const Step5 = forwardRef<Step5Handle, Step5Props>(({ employeeId }, ref) => {
 
   const defaultValues = {
     id: employeeId ?? 0,
-    openingAdvanceBalance: undefined,
-    openingTrafficViolationBalance: undefined,
     isCardDelivered: false,
     cardDocument: "",
   };
@@ -82,14 +80,6 @@ const Step5 = forwardRef<Step5Handle, Step5Props>(({ employeeId }, ref) => {
     if (foundEmployee && employeeId) {
       const setEmployee = {
         id: foundEmployee.id,
-        openingAdvanceBalance:
-          foundEmployee.openingAdvanceBalance != null
-            ? Number(foundEmployee.openingAdvanceBalance)
-            : undefined,
-        openingTrafficViolationBalance:
-          foundEmployee.openingTrafficViolationBalance != null
-            ? Number(foundEmployee.openingTrafficViolationBalance)
-            : undefined,
         isCardDelivered: foundEmployee.isCardDelivered ?? false,
         cardDocument: foundEmployee.cardDocument || "",
       };
@@ -113,9 +103,6 @@ const Step5 = forwardRef<Step5Handle, Step5Props>(({ employeeId }, ref) => {
           : cardDocUpload.selectedFile
             ? "" // Will upload after save
             : data.cardDocument || "",
-        openingAdvanceBalance: data.openingAdvanceBalance ?? null,
-        openingTrafficViolationBalance:
-          data.openingTrafficViolationBalance ?? null,
       };
 
       await updateEmployee(submitData);
@@ -134,9 +121,6 @@ const Step5 = forwardRef<Step5Handle, Step5Props>(({ employeeId }, ref) => {
               await updateEmployee(updateData);
             },
             {
-              openingAdvanceBalance: data.openingAdvanceBalance,
-              openingTrafficViolationBalance:
-                data.openingTrafficViolationBalance,
               isCardDelivered: data.isCardDelivered,
             },
             "cardDocument"
@@ -202,33 +186,6 @@ const Step5 = forwardRef<Step5Handle, Step5Props>(({ employeeId }, ref) => {
   return (
     <Form form={form} onSubmit={onFormSubmit}>
       <div className="flex flex-1 md:flex-none flex-col gap-10 py-6">
-        <div className="flex flex-col gap-4">
-          <StepperFormHeading title="Loan Details" />
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 lg:gap-y-8 px-6">
-            <FormItem
-              name="openingAdvanceBalance"
-              className={classNames(FORM_FIELD_WIDTHS["2"])}
-            >
-              <NumberInput
-                label="Opening Advance Balance"
-                className="w-full"
-                useGrouping={false}
-                placeholder="Enter advance balance"
-              />
-            </FormItem>
-            <FormItem
-              name="openingTrafficViolationBalance"
-              className={classNames(FORM_FIELD_WIDTHS["2"])}
-            >
-              <NumberInput
-                label="Opening Traffic Violation Balance"
-                className="w-full"
-                useGrouping={false}
-                placeholder="Enter traffic violation balance"
-              />
-            </FormItem>
-          </div>
-        </div>
         <div className="flex flex-col gap-4">
           <StepperFormHeading title="Bank Card Details" />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 lg:gap-y-8 px-6">

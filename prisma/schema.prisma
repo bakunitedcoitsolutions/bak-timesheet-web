@@ -204,8 +204,6 @@ model Employee {
   gosiCityId Int?
 
   // Step 5 - Loan & Bank Card Details
-  openingAdvanceBalance            Int?
-  openingTrafficViolationBalance   Int?
   isCardDelivered Boolean  @default(false)
   cardDocument    String?
 

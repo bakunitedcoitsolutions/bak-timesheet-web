@@ -370,34 +370,6 @@ const EmployeesReportPage = () => {
         ),
       },
       {
-        field: "openingAdvanceBalance",
-        header: "Opening Advance",
-        ...tableCommonProps,
-        align: "center",
-        style: { minWidth: 120 },
-        body: (rowData) => (
-          <span className="text-sm">
-            {rowData.openingAdvanceBalance
-              ? Number(rowData.openingAdvanceBalance).toLocaleString()
-              : "-"}
-          </span>
-        ),
-      },
-      {
-        field: "openingTrafficViolationBalance",
-        header: "Opening Traffic Violation",
-        ...tableCommonProps,
-        align: "center",
-        style: { minWidth: 120 },
-        body: (rowData) => (
-          <span className="text-sm">
-            {rowData.openingTrafficViolationBalance
-              ? Number(rowData.openingTrafficViolationBalance).toLocaleString()
-              : "-"}
-          </span>
-        ),
-      },
-      {
         field: "isFixed",
         header: "Fixed",
         ...tableCommonProps,

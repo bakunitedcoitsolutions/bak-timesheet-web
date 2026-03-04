@@ -203,9 +203,7 @@ export const getSalarySlipData = async (
     const totalSalary = baseSalary + totalAllowances;
 
     const prevData = prevMap.get(emp.id);
-    const previousLoanBalance = prevData?.netLoan
-      ? prevData.netLoan + Number(emp.openingAdvanceBalance || 0)
-      : Number(emp.openingAdvanceBalance || 0);
+    const previousLoanBalance = prevData?.netLoan ? prevData.netLoan : 0;
     const currentNetLoan =
       empLoans
         .filter((l) => l.type === "LOAN")
@@ -217,8 +215,8 @@ export const getSalarySlipData = async (
     const netLoan = previousLoanBalance + currentNetLoan;
 
     const previousChallanBalance = prevData?.netChallan
-      ? prevData.netChallan + Number(emp.openingTrafficViolationBalance || 0)
-      : Number(emp.openingTrafficViolationBalance || 0);
+      ? prevData.netChallan
+      : 0;
     const currentNetChallan =
       empChallans
         .filter((c) => c.type === "CHALLAN")
