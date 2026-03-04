@@ -459,7 +459,7 @@ const PayrollDetailPage = () => {
         body: (rowData: PayrollDetailEntry) => (
           <div className="flex justify-center">
             <span className="text-[15px] font-semibold!">
-              {rowData.breakfastAllowance}
+              {formatNum(rowData.breakfastAllowance ?? 0)}
             </span>
           </div>
         ),
@@ -471,7 +471,7 @@ const PayrollDetailPage = () => {
         body: (rowData: PayrollDetailEntry) => (
           <div className="flex justify-center">
             <span className="text-[15px] font-semibold!">
-              {rowData.otherAllowances}
+              {formatNum(rowData.otherAllowances ?? 0)}
             </span>
           </div>
         ),
@@ -483,7 +483,7 @@ const PayrollDetailPage = () => {
         body: (rowData: PayrollDetailEntry) => (
           <div className="flex justify-center">
             <span className="text-[15px] font-semibold!">
-              {rowData.breakfastAllowance ?? 0 + (rowData.otherAllowances ?? 0)}
+              {formatNum(rowData.totalAllowances ?? 0)}
             </span>
           </div>
         ),
@@ -495,7 +495,7 @@ const PayrollDetailPage = () => {
         body: (rowData: PayrollDetailEntry) => (
           <div className="flex justify-center">
             <span className="text-[15px] font-semibold!">
-              {rowData.totalSalary}
+              {formatNum(rowData.totalSalary)}
             </span>
           </div>
         ),
@@ -507,7 +507,7 @@ const PayrollDetailPage = () => {
         body: (rowData: PayrollDetailEntry) => (
           <div className="flex justify-center">
             <span className="text-[15px] font-semibold!">
-              {rowData.previousAdvance}
+              {formatNum(rowData.previousAdvance)}
             </span>
           </div>
         ),
@@ -519,7 +519,7 @@ const PayrollDetailPage = () => {
         body: (rowData: PayrollDetailEntry) => (
           <div className="flex justify-center">
             <span className="text-[15px] font-semibold!">
-              {rowData.currentAdvance}
+              {formatNum(rowData.currentAdvance)}
             </span>
           </div>
         ),
@@ -556,7 +556,7 @@ const PayrollDetailPage = () => {
         body: (rowData: PayrollDetailEntry) => (
           <div className="flex justify-center">
             <span className="text-[15px] font-semibold! text-primary!">
-              {calculateNetLoan(rowData).toString()}
+              {formatNum(calculateNetLoan(rowData))}
             </span>
           </div>
         ),
@@ -568,7 +568,7 @@ const PayrollDetailPage = () => {
         body: (rowData: PayrollDetailEntry) => (
           <div className="flex justify-center">
             <span className="text-[15px] font-semibold!">
-              {rowData.previousChallan}
+              {formatNum(rowData.previousChallan)}
             </span>
           </div>
         ),
@@ -580,7 +580,7 @@ const PayrollDetailPage = () => {
         body: (rowData: PayrollDetailEntry) => (
           <div className="flex justify-center">
             <span className="text-[15px] font-semibold!">
-              {rowData.currentChallan}
+              {formatNum(rowData.currentChallan)}
             </span>
           </div>
         ),
@@ -617,7 +617,7 @@ const PayrollDetailPage = () => {
         body: (rowData: PayrollDetailEntry) => (
           <div className="flex justify-center">
             <span className="text-[15px] font-semibold! text-primary!">
-              {calculateNetTrafficChallan(rowData).toString()}
+              {formatNum(calculateNetTrafficChallan(rowData))}
             </span>
           </div>
         ),
@@ -629,7 +629,7 @@ const PayrollDetailPage = () => {
         body: (rowData: PayrollDetailEntry) => (
           <div className="flex justify-center">
             <span className="text-[15px] font-semibold! text-primary!">
-              {calculateNetSalaryPayable(rowData).toString()}
+              {formatNum(calculateNetSalaryPayable(rowData))}
             </span>
           </div>
         ),
