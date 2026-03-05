@@ -40,7 +40,11 @@ const LedgerPage = () => {
   const tableRef = useRef<TableRef>(null);
 
   // Fetch ledger data
-  const { data: ledgerResponse, isLoading } = useGetLedgerByEmployeeCode({
+  const {
+    data: ledgerResponse,
+    isLoading,
+    refetch,
+  } = useGetLedgerByEmployeeCode({
     employeeCode: searchEmployeeCode || 0,
   });
 
@@ -134,8 +138,12 @@ const LedgerPage = () => {
       toastService.showError("Error", "Please enter a valid employee code");
       return;
     }
-    setSearchEmployeeCode(code);
-  }, [employeeCode]);
+    if (code === searchEmployeeCode) {
+      refetch();
+    } else {
+      setSearchEmployeeCode(code);
+    }
+  }, [employeeCode, searchEmployeeCode, refetch]);
 
   // Calculate totals
   const totals = useMemo(() => {
