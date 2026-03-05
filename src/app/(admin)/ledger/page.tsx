@@ -100,6 +100,11 @@ const LedgerPage = () => {
         }
       }
 
+      if (entry.description === "Opening Balance") {
+        loan = entry.openingLoan || null;
+        challan = entry.openingChallan || null;
+      }
+
       return {
         id: entry.id,
         date,

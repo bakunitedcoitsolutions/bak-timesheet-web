@@ -28,7 +28,7 @@ export const printLedgerReport = (
   if (!printWindow) return;
 
   const fmt = (v?: number | null) =>
-    v !== null && v !== undefined && v !== 0 ? formatNum(v) : "";
+    v !== null && v !== undefined && v !== 0 ? formatNum(v) : "-";
   // For zeros in the footer or specific columns, we might just want "0" or empty.
   // The UI showed empty for missing, and formatNum handles grouping.
 
@@ -137,10 +137,10 @@ export const printLedgerReport = (
                 ? `
               <tr>
                 <td colspan="3" class="bg-footer text-right font-bold" style="padding-right: 15px;">Total:</td>
-                <td class="bg-footer font-bold">${totals.salary > 0 ? formatNum(totals.salary) : ""}</td>
-                <td class="bg-footer font-bold">${totals.loan > 0 ? formatNum(totals.loan) : "0"}</td>
-                <td class="bg-footer font-bold">${totals.challan > 0 ? formatNum(totals.challan) : "0"}</td>
-                <td class="bg-footer font-bold text-red">${totals.deduction > 0 ? formatNum(totals.deduction) : "0"}</td>
+                <td class="bg-footer font-bold">${totals.salary > 0 ? formatNum(totals.salary) : "-"}</td>
+                <td class="bg-footer font-bold">${totals.loan > 0 ? formatNum(totals.loan) : "-"}</td>
+                <td class="bg-footer font-bold">${totals.challan > 0 ? formatNum(totals.challan) : "-"}</td>
+                <td class="bg-footer font-bold text-red">${totals.deduction > 0 ? formatNum(totals.deduction) : "-"}</td>
                 <td class="bg-footer font-bold text-primary">${formatNum(closingBalance)}</td>
               </tr>
             `

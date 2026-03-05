@@ -54,8 +54,12 @@ export const getLedgerByEmployeeCode = async (
   });
 
   let currentBalance = 0;
+  let openingLoan = 0;
+  let openingChallan = 0;
   if (janPayroll) {
-    currentBalance = janPayroll.previousLoan + janPayroll.previousChallan;
+    openingLoan = janPayroll.previousLoan;
+    openingChallan = janPayroll.previousChallan;
+    currentBalance = openingLoan + openingChallan;
   }
 
   // Generate Ledger Entries Array
@@ -78,6 +82,8 @@ export const getLedgerByEmployeeCode = async (
     payrollDetailId: null,
     loanId: null,
     trafficChallanId: null,
+    openingLoan,
+    openingChallan,
   });
 
   // 2. Fetch all loans from Jan 1st

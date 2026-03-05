@@ -25,6 +25,8 @@ export interface LedgerEntryInterface {
   payrollDetailId: number | null;
   loanId: number | null;
   trafficChallanId: number | null;
+  openingLoan?: number;
+  openingChallan?: number;
 }
 
 export interface EmployeeInfo {
