@@ -38,6 +38,7 @@ import { updateEmployeeRates } from "./seeds/update-employee-rates";
 import { PrismaClient } from "./generated/prisma/client";
 import { seedPayrollSummary } from "./seeds/payroll-summary";
 import { seedPayrollDetails } from "./seeds/payroll-details";
+import { fixNetSalary } from "./seeds/fix-net-salary";
 
 const prisma = new PrismaClient({
   adapter: new PrismaPg(
@@ -1633,7 +1634,11 @@ async function main() {
   // console.log("\n📝 Updating Employee Rates...");
   // await updateEmployeeRates(prisma);
 
+  console.log("\n📝 Fixing Net Salary Payable Data...");
+  await fixNetSalary(prisma);
+
   // // Reset Sequences
+
   // await resetSequences();
 
   console.log("� Database seed completed successfully!");

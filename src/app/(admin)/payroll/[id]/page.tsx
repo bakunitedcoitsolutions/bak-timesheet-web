@@ -334,13 +334,34 @@ const PayrollDetailPage = () => {
     scrollToTop();
   };
 
-  const handleSaveSingleRowOnEnter = (payrollId: number) => {
+  const handleSaveSingleRowOnEnter = (
+    payrollId: number,
+    fieldName?: keyof PayrollDetailEntry,
+    value?: any
+  ) => {
     setTimeout(async () => {
       if (!payrollId) return;
-      const rowData = payrollData.find((r) => r.id === payrollId);
-      if (!rowData) return;
+      const row = payrollData.find((r) => r.id === payrollId);
+      if (!row) return;
+
+      const updatedRow = fieldName ? { ...row, [fieldName]: value } : row;
+
+      const payloadToSave = {
+        id: updatedRow.id,
+        loanDeduction: updatedRow.loanDeduction,
+        challanDeduction: updatedRow.challanDeduction,
+        netSalaryPayable: calculateNetSalaryPayable(updatedRow),
+        netLoan: calculateNetLoan(updatedRow),
+        netChallan: calculateNetTrafficChallan(updatedRow),
+        cardSalary: updatedRow.cardSalary,
+        cashSalary: updatedRow.cashSalary,
+        remarks: updatedRow.remarks,
+        paymentMethodId: updatedRow.paymentMethodId,
+        payrollStatusId: updatedRow.payrollStatusId,
+      };
+
       setIsSavingRow(true);
-      await saveRowOnEnter(rowData);
+      await saveRowOnEnter(payloadToSave as any);
       setIsSavingRow(false);
     }, 100);
   };
@@ -540,9 +561,12 @@ const PayrollDetailPage = () => {
               className="timesheet-number-input payroll-input"
               min={0}
               showButtons={false}
-              onKeyDown={(e) => {
+              onKeyDown={(e: any) => {
                 if (e.key === "Enter") {
-                  handleSaveSingleRowOnEnter(rowData.id);
+                  const val =
+                    Number(e.currentTarget.value.replace(/,/g, "")) || 0;
+                  handleSaveSingleRowOnEnter(rowData.id, "loanDeduction", val);
+                  updatePayrollEntry(rowData.id, "loanDeduction", val);
                 }
               }}
             />
@@ -601,9 +625,16 @@ const PayrollDetailPage = () => {
               className="timesheet-number-input payroll-input"
               min={0}
               showButtons={false}
-              onKeyDown={(e) => {
+              onKeyDown={(e: any) => {
                 if (e.key === "Enter") {
-                  handleSaveSingleRowOnEnter(rowData.id);
+                  const val =
+                    Number(e.currentTarget.value.replace(/,/g, "")) || 0;
+                  handleSaveSingleRowOnEnter(
+                    rowData.id,
+                    "challanDeduction",
+                    val
+                  );
+                  updatePayrollEntry(rowData.id, "challanDeduction", val);
                 }
               }}
             />
@@ -689,9 +720,11 @@ const PayrollDetailPage = () => {
               updatePayrollEntry(rowData.id, "remarks", e.target.value)
             }
             className="w-full h-10! payroll-input"
-            onKeyDown={(e) => {
+            onKeyDown={(e: any) => {
               if (e.key === "Enter") {
-                handleSaveSingleRowOnEnter(rowData.id);
+                const val = e.currentTarget.value;
+                handleSaveSingleRowOnEnter(rowData.id, "remarks", val);
+                updatePayrollEntry(rowData.id, "remarks", val);
               }
             }}
           />

@@ -141,8 +141,6 @@ const calculateAndSavePayroll = async (
       employeeId: true,
       netLoan: true,
       netChallan: true,
-      loanDeduction: true,
-      challanDeduction: true,
     },
   });
   console.log(
@@ -155,8 +153,6 @@ const calculateAndSavePayroll = async (
       {
         netLoan: Number(p.netLoan || 0),
         netChallan: Number(p.netChallan || 0),
-        loanDeduction: Number(p.loanDeduction || 0),
-        challanDeduction: Number(p.challanDeduction || 0),
       },
     ])
   );
@@ -262,6 +258,11 @@ const calculateAndSavePayroll = async (
     const previousLoanBalance =
       prevDetails && prevDetails.netLoan ? prevDetails.netLoan : 0;
 
+    if (Number(emp.employeeCode) === 20007) {
+      console.log("prevDetails ==> ", prevDetails?.netLoan);
+      console.log("prevMonth ==> ", prevMonth);
+      console.log("prevYear ==> ", prevYear);
+    }
     const currentMonthLoans = loans
       .filter((l) => l.employeeId === emp.id && l.type === "LOAN")
       .reduce((sum, l) => sum + Number(l.amount), 0);

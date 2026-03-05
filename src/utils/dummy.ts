@@ -3254,3 +3254,52 @@ export type {
 
 // These are designation ids which has breakfast allowance
 // 1, 2, 3, 4, 5, 8, 9, 20, 21, 22, 23, 37, 40, 44
+
+type PayrollMini = {
+  id: number;
+  payrollId: number;
+  employeeCode: number;
+  employeeId: number;
+  salary: number;
+
+  previousChallan: number;
+  currentChallan: number;
+  challanDeduction: number;
+  netChallan: number;
+
+  previousLoan: number;
+  currentLoan: number;
+  loanDeduction: number;
+  netLoan: number;
+
+  netSalaryPayable: number;
+  cardSalary: number;
+  cashSalary: number;
+};
+
+export function calculatePayroll(rows: PayrollMini[]): PayrollMini[] {
+  return rows.map((row) => {
+    const r = { ...row };
+
+    // ---- Loan ----
+    r.netLoan = r.previousLoan + r.currentLoan - r.loanDeduction;
+
+    // ---- Challan ----
+    r.netChallan = r.previousChallan + r.currentChallan - r.challanDeduction;
+
+    // ---- Net Salary ----
+    r.netSalaryPayable = r.salary - r.loanDeduction - r.challanDeduction;
+
+    // ---- Salary Distribution ----
+    if (r.cardSalary > 0 && r.cashSalary === 0) {
+      r.cardSalary = r.netSalaryPayable;
+    } else if (r.cashSalary > 0 && r.cardSalary === 0) {
+      r.cashSalary = r.netSalaryPayable;
+    } else if (r.cardSalary > 0 && r.cashSalary > 0) {
+      r.cashSalary = r.netSalaryPayable - r.cardSalary;
+      r.cardSalary = r.netSalaryPayable - r.cashSalary;
+    }
+
+    return r;
+  });
+}
