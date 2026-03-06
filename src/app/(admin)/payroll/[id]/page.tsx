@@ -561,14 +561,14 @@ const PayrollDetailPage = () => {
               className="timesheet-number-input payroll-input"
               min={0}
               showButtons={false}
-              onKeyDown={(e: any) => {
-                if (e.key === "Enter") {
-                  const val =
-                    Number(e.currentTarget.value.replace(/,/g, "")) || 0;
-                  handleSaveSingleRowOnEnter(rowData.id, "loanDeduction", val);
-                  updatePayrollEntry(rowData.id, "loanDeduction", val);
-                }
-              }}
+              // onKeyDown={(e: any) => {
+              //   if (e.key === "Enter") {
+              //     const val =
+              //       Number(e.currentTarget.value.replace(/,/g, "")) || 0;
+              //     handleSaveSingleRowOnEnter(rowData.id, "loanDeduction", val);
+              //     updatePayrollEntry(rowData.id, "loanDeduction", val);
+              //   }
+              // }}
             />
           </div>
         ),
@@ -625,18 +625,18 @@ const PayrollDetailPage = () => {
               className="timesheet-number-input payroll-input"
               min={0}
               showButtons={false}
-              onKeyDown={(e: any) => {
-                if (e.key === "Enter") {
-                  const val =
-                    Number(e.currentTarget.value.replace(/,/g, "")) || 0;
-                  handleSaveSingleRowOnEnter(
-                    rowData.id,
-                    "challanDeduction",
-                    val
-                  );
-                  updatePayrollEntry(rowData.id, "challanDeduction", val);
-                }
-              }}
+              // onKeyDown={(e: any) => {
+              //   if (e.key === "Enter") {
+              //     const val =
+              //       Number(e.currentTarget.value.replace(/,/g, "")) || 0;
+              //     handleSaveSingleRowOnEnter(
+              //       rowData.id,
+              //       "challanDeduction",
+              //       val
+              //     );
+              //     updatePayrollEntry(rowData.id, "challanDeduction", val);
+              //   }
+              // }}
             />
           </div>
         ),
@@ -901,6 +901,7 @@ const PayrollDetailPage = () => {
         <div className="bg-white h-full rounded-xl overflow-hidden">
           <Table
             lazy
+            rowHover
             ref={tableRef}
             dataKey="id"
             extraSmall
