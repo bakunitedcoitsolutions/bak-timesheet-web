@@ -109,7 +109,7 @@ export const printLedgerReport = (
               <th class="text-left">Description</th>
               <th>Salary</th>
               <th>Loan</th>
-              <th>Challan</th>
+              <th>Traffic</th>
               <th>Deduction</th>
               <th>Balance</th>
             </tr>

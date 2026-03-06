@@ -167,10 +167,10 @@ export const SalarySlip = ({
                 </div>
               </div>
 
-              {/* Traffic Challan */}
+              {/* Traffic Violations */}
               <div className="border border-gray-300 flex flex-col h-full">
                 <div className="bg-primary-light/50 border-b border-gray-300 py-0.5 px-1 font-bold text-center text-primary text-[9px]">
-                  Traffic Challans
+                  Traffic Violations
                 </div>
                 <div className="grid grid-cols-3 text-center border-b border-gray-300 bg-gray-50 text-[9px]">
                   <div className="border-r border-gray-300 py-0.5 font-semibold text-gray-600">
@@ -196,7 +196,7 @@ export const SalarySlip = ({
                 </div>
                 <div className="grid grid-cols-3 text-center items-center py-0.5 bg-gray-50">
                   <div className="col-span-2 border-r border-gray-300 py-0.5 font-bold text-gray-700 text-right text-[9px] pr-2">
-                    Net Traffic Challan Balance:
+                    Net Traffic Violation Balance:
                   </div>
                   <div className="py-0.5 font-bold text-xs">
                     {formatNum(entry.netChallan)}

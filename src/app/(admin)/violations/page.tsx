@@ -228,7 +228,7 @@ const ChallansPage = () => {
   // Memoized handlers
   const handleEdit = useCallback(
     (challan: ListedTrafficChallan) => {
-      router.push(`/challans/${challan.id}`);
+      router.push(`/violations/${challan.id}`);
     },
     [router]
   );
@@ -237,8 +237,8 @@ const ChallansPage = () => {
     (challan: ListedTrafficChallan) => {
       showConfirmDialog({
         icon: "pi pi-trash",
-        title: "Delete Traffic Challan",
-        message: `Are you sure you want to delete this traffic challan record?`,
+        title: "Delete Traffic Violation",
+        message: `Are you sure you want to delete this traffic Violation record?`,
         onAccept: async () => {
           await deleteTrafficChallan(
             { id: challan.id },
@@ -246,13 +246,13 @@ const ChallansPage = () => {
               onSuccess: () => {
                 toastService.showInfo(
                   "Done",
-                  "Traffic challan deleted successfully"
+                  "Traffic Violation deleted successfully"
                 );
               },
               onError: (error: any) => {
                 const errorMessage = getErrorMessage(
                   error,
-                  "Failed to delete traffic challan"
+                  "Failed to delete traffic Violation"
                 );
                 toastService.showError("Error", errorMessage);
               },
@@ -360,7 +360,7 @@ const ChallansPage = () => {
             onSuccess: (result) => {
               const message =
                 result.success > 0
-                  ? `Successfully uploaded ${result.success} traffic challan(s)`
+                  ? `Successfully uploaded ${result.success} traffic violation(s)`
                   : "Upload completed";
 
               if (result.failed > 0) {
@@ -376,7 +376,7 @@ const ChallansPage = () => {
             onError: (error: any) => {
               const errorMessage = getErrorMessage(
                 error,
-                "Failed to upload traffic challans"
+                "Failed to upload traffic Violations"
               );
               toastService.showError("Error", errorMessage);
               throw error; // Re-throw to prevent dialog from closing
@@ -453,10 +453,10 @@ const ChallansPage = () => {
         <div className="flex flex-col md:flex-row justify-between items-center gap-3 shrink-0">
           <div className="w-full md:w-auto flex flex-1 flex-col gap-1">
             <h1 className="text-2xl font-semibold text-gray-900">
-              Traffic Voilation Management
+              Traffic Violation Management
             </h1>
             <p className="text-sm text-gray-600 mt-1">
-              View, manage traffic voilation records, and voilation details.
+              View, manage traffic Violation records, and Violation details.
             </p>
           </div>
           <div className="w-full md:w-auto">
@@ -464,8 +464,8 @@ const ChallansPage = () => {
               size="small"
               variant="solid"
               icon="pi pi-plus"
-              label="Add Voilation"
-              onClick={() => router.push("/voilations/new")}
+              label="Add Violation"
+              onClick={() => router.push("/violations/new")}
             />
           </div>
         </div>
@@ -501,7 +501,7 @@ const ChallansPage = () => {
 
       <BulkUploadDialog
         visible={showFilePicker}
-        title="Upload Challans"
+        title="Upload Violations"
         onHide={() => {
           setShowFilePicker(false);
         }}

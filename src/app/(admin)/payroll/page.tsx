@@ -290,7 +290,7 @@ const columns = (
   },
   {
     field: "previousChallan",
-    header: "Prev. Challan",
+    header: "Prev. Traff.",
     ...commonColumnProps,
     align: "center",
     alignHeader: "center",
@@ -303,7 +303,7 @@ const columns = (
   },
   {
     field: "currentChallan",
-    header: "Curr. Challan",
+    header: "Curr. Traff.",
     ...commonColumnProps,
     align: "center",
     alignHeader: "center",
@@ -314,7 +314,7 @@ const columns = (
   },
   {
     field: "challanDeduction",
-    header: "Challan Ded.",
+    header: "Traffic Ded.",
     ...commonColumnProps,
     align: "center",
     alignHeader: "center",
@@ -327,7 +327,7 @@ const columns = (
   },
   {
     field: "netChallan",
-    header: "Net Challan",
+    header: "Net Traffic",
     ...commonColumnProps,
     align: "center",
     alignHeader: "center",

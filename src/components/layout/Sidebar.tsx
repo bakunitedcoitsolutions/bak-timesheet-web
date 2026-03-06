@@ -46,9 +46,9 @@ const menuItems: MenuItem[] = [
   },
   { label: "Loans", icon: "fa-light fa-newspaper text-xl!", href: "/loans" },
   {
-    label: "Traffic Voilations",
+    label: "Traffic Violations",
     icon: "fa-light fa-ticket text-xl!",
-    href: "/voilations",
+    href: "/violations",
   },
   {
     label: "Payroll",

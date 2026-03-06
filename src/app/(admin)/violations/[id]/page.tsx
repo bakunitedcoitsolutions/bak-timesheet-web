@@ -125,13 +125,13 @@ const UpsertChallanPage = () => {
       await createTrafficChallan(data);
       toastService.showSuccess(
         "Done",
-        "Traffic voilation created successfully"
+        "Traffic Violation created successfully"
       );
-      router.replace("/voilations");
+      router.replace("/violations");
     } catch (error) {
       const errorMessage = getErrorMessage(
         error,
-        "Failed to create traffic voilation"
+        "Failed to create traffic Violation"
       );
       toastService.showError("Error", errorMessage);
     }
@@ -145,13 +145,13 @@ const UpsertChallanPage = () => {
       });
       toastService.showSuccess(
         "Done",
-        "Traffic voilation updated successfully"
+        "Traffic Violation updated successfully"
       );
-      router.replace("/challans");
+      router.replace("/violations");
     } catch (error) {
       const errorMessage = getErrorMessage(
         error,
-        "Failed to update traffic voilation"
+        "Failed to update traffic Violation"
       );
       toastService.showError("Error", errorMessage);
     }
@@ -161,7 +161,7 @@ const UpsertChallanPage = () => {
     <div className="flex flex-col h-full gap-6 px-6 py-6">
       <div className="flex h-full justify-between flex-1 md:flex-none flex-col gap-4 py-6 bg-white rounded-lg">
         <StepperFormHeading
-          title={isAddMode ? "Add Voilation" : "Edit Voilation"}
+          title={isAddMode ? "Add Violation" : "Edit Violation"}
         />
         {isLoading ? (
           <div className="flex justify-center items-center h-full">
@@ -239,7 +239,7 @@ const UpsertChallanPage = () => {
                 size="small"
                 variant="text"
                 disabled={isSubmitting}
-                onClick={() => router.replace("/challans")}
+                onClick={() => router.replace("/violations")}
               >
                 Cancel
               </Button>

@@ -51,13 +51,13 @@ export const FEATURES_CONFIG: FeatureConfig[] = [
     ],
   },
   {
-    key: "trafficChallans",
-    label: "Traffic Challans",
+    key: "trafficViolations",
+    label: "Traffic Violations",
     permissions: [
       { key: "full", label: "Full Access" },
-      { key: "add", label: "Add Challan" },
-      { key: "edit", label: "Edit Challan" },
-      { key: "view", label: "View Challan" },
+      { key: "add", label: "Add Traffic Violation" },
+      { key: "edit", label: "Edit Traffic Violation" },
+      { key: "view", label: "View Traffic Violation" },
     ],
   },
   {
@@ -103,7 +103,7 @@ export const createEmptyPrivileges = (): UserPrivileges => {
     timesheet: { full: false, add: false, edit: false, view: false },
     projects: { full: false, add: false, edit: false, view: false },
     loans: { full: false, add: false, edit: false, view: false },
-    trafficChallans: {
+    trafficViolations: {
       full: false,
       add: false,
       edit: false,

@@ -257,7 +257,7 @@ const LedgerPage = () => {
       },
       {
         field: "challan",
-        header: "Challan",
+        header: "Traffic",
         ...tableCommonProps,
         align: "center",
         style: { minWidth: 130 },

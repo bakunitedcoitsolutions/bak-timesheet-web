@@ -2459,7 +2459,7 @@ export interface UserPrivileges {
   timesheet?: FeaturePermissions;
   projects?: FeaturePermissions;
   loans?: FeaturePermissions;
-  trafficChallans?: FeaturePermissions;
+  trafficViolations?: FeaturePermissions;
   exitReentry?: FeaturePermissions;
   payroll?: FeaturePermissions;
   ledger?: FeaturePermissions;
