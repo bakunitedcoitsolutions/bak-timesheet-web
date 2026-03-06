@@ -69,8 +69,8 @@ const setupOptions: SetupOption[] = [
   },
   {
     id: "allowance-not-available",
-    title: "Allowance Not Available",
-    description: "Manage allowance not available records",
+    title: "Allowance Not Allowed",
+    description: "Manage allowance not allowed records",
     icon: "fa-light fa-money-bill-transfer",
     route: "/setup/allowance-not-available",
   },

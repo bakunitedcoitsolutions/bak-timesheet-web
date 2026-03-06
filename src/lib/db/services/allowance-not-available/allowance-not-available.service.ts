@@ -1,6 +1,6 @@
 /**
- * Allowance Not Available Service
- * Business logic for allowance not available operations
+ * Allowance Not Allowed Service
+ * Business logic for allowance not allowed operations
  */
 
 import { prisma } from "@/lib/db/prisma";

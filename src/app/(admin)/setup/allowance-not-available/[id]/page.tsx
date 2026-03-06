@@ -153,8 +153,8 @@ const UpsertAllowanceNotAvailablePage = () => {
         <StepperFormHeading
           title={
             isAddMode
-              ? "Add Allowance Not Available"
-              : "Edit Allowance Not Available"
+              ? "Add Allowance Not Allowed"
+              : "Edit Allowance Not Allowed"
           }
         />
         {isLoading ? (

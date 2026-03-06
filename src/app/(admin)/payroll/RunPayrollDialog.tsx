@@ -121,7 +121,7 @@ export const RunPayrollDialog = ({
         </div>
         <div className="flex flex-col gap-2">
           <label className="font-medium text-sm">
-            Allowance Not Available (Optional)
+            Allowance Not Allowed (Optional)
           </label>
           <Dropdown
             value={allowanceId}
