@@ -1,88 +1,84 @@
 /**
- * Next.js 16 Middleware
+ * Next.js Middleware Proxy
  * Handles authentication and authorization for protected routes
- * Uses Next.js 16 middleware patterns with NextAuth v5
- *
- * Note: Make sure next-auth is installed: npm install next-auth
  */
 
 import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
-import { getToken } from "next-auth/jwt";
-import { getUserActiveStatus } from "@/lib/auth/security";
-import { prisma } from "./lib";
+import NextAuth from "next-auth";
+import { authConfig } from "@/lib/auth/auth.config";
 
-export async function proxy(request: NextRequest) {
-  const { pathname } = request.nextUrl;
+const { auth } = NextAuth(authConfig);
 
-  // Public routes that don't require authentication
-  const publicRoutes = [
-    "/login",
-    "/api/auth",
-    "/_next",
-    "/favicon.ico",
-    "/assets",
-  ];
-  return NextResponse.next();
+// Define the route to feature mapping
+const ROUTE_FEATURE_MAP: Record<string, string> = {
+  "/employees": "employees",
+  "/timesheet": "timesheet",
+  "/projects": "projects",
+  "/loans": "loans",
+  "/violations": "trafficViolations",
+  "/exit-reentry": "exitReentry",
+  "/payroll": "payroll",
+  "/ledger": "ledger",
+  "/users": "usersManagement",
+  "/reports": "reports",
+  "/setup": "setup",
+};
 
-  // Check if route is public
-  const isPublicRoute = publicRoutes.some((route) =>
-    pathname.startsWith(route)
-  );
+export const proxy = auth((req) => {
+  const isLoggedIn = !!req.auth;
+  const { pathname } = req.nextUrl;
 
-  if (isPublicRoute) {
-    return NextResponse.next();
-  }
+  // Public paths that do not require authentication
+  const isPublicPath =
+    pathname.startsWith("/login") ||
+    pathname.startsWith("/api") ||
+    pathname.startsWith("/_next") ||
+    pathname.includes(".");
 
-  // Get token from NextAuth v5
-  const tokenResult = await getToken({
-    req: request,
-    secret: process.env.NEXT_AUTH_SECRET,
-    salt: "authjs.session-token", // Required for NextAuth v5
-  });
-
-  // Redirect to login if not authenticated
-  if (!tokenResult || !tokenResult?.id) {
-    const loginUrl = new URL("/login", request.url);
+  // If user is not logged in and it's not a public path, redirect to login
+  if (!isLoggedIn && !isPublicPath) {
+    const loginUrl = new URL("/login", req.nextUrl.origin);
     loginUrl.searchParams.set("callbackUrl", pathname);
     return NextResponse.redirect(loginUrl);
   }
 
-  // At this point, we know token exists and has an id (checked above)
-  // Type assertion is safe because we've verified tokenResult and tokenResult.id exist
-  const userId = tokenResult?.id as number;
-
-  // Check if user is active using Redis cache (fast check)
-  // This ensures inactive users are immediately blocked even if they have a valid token
-  // Uses Upstash Redis for fast lookups without hitting the database on every request
-  const isActive = await getUserActiveStatus(userId);
-
-  if (!isActive) {
-    // User has been deactivated - force logout
-    const loginUrl = new URL("/login", request.url);
-    loginUrl.searchParams.set("error", "AccountInactive");
-    loginUrl.searchParams.set("callbackUrl", pathname);
-    return NextResponse.redirect(loginUrl);
+  // If user is logged in, restrict access to the login page
+  if (isLoggedIn && pathname.startsWith("/login")) {
+    return NextResponse.redirect(new URL("/", req.nextUrl.origin));
   }
 
-  // Role-based access control will be handled elsewhere
-  // For now, just ensure user is authenticated and active
-  // TODO: Add role/permission checks as needed
+  // Privilege-based Authorization checks for Access-Enabled Users (roleId: 4)
+  if (isLoggedIn && req.auth) {
+    const user = req.auth.user as any;
+    const roleId = user.roleId as number;
+
+    // Only apply restriction logic to Access-Enabled User (Role ID 4)
+    if (roleId === 4) {
+      // Find the base protected route the path matches
+      const matchedRoute = Object.keys(ROUTE_FEATURE_MAP).find(
+        (route) => pathname === route || pathname.startsWith(`${route}/`)
+      );
+
+      if (matchedRoute) {
+        const featureKey = ROUTE_FEATURE_MAP[matchedRoute];
+        const userPrivileges = user.privileges || {};
+        const featurePermissions = userPrivileges[featureKey] || {};
+
+        // Deny access if they don't have at least 'view' or 'full' permissions
+        if (!featurePermissions.view && !featurePermissions.full) {
+          // Redirect to the dashboard
+          return NextResponse.redirect(new URL("/", req.nextUrl.origin));
+        }
+      }
+    }
+  }
 
   return NextResponse.next();
-}
+});
 
+// Configure matcher to limit the scope of the middleware
 export const config = {
   matcher: [
-    /*
-     * Match all request paths except:
-     * - api/auth (NextAuth routes)
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     * - public files (public folder)
-     * - static assets
-     */
-    "/((?!api/auth|_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico)$).*)",
+    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
   ],
 };

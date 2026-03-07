@@ -1,37 +1,71 @@
 "use client";
 
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { Suspense, useState } from "react";
+import { signIn } from "next-auth/react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Button } from "primereact/button";
 import { Password } from "primereact/password";
 import { InputText } from "primereact/inputtext";
+import { useSignIn } from "@/lib/db/services/user/requests";
 import { loginSchema, type LoginFormData } from "@/utils/schemas";
 
-const AuthPage = () => {
+const AuthPageContent = () => {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const [authError, setAuthError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const { mutateAsync: signInMutate } = useSignIn();
+  const defaultValues = {
+    email: "",
+    password: "",
+  };
   const {
+    reset,
     control,
-    register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
-    defaultValues: {
-      email: "",
-      password: "",
-    },
+    defaultValues,
   });
 
   const onSubmit = async (data: LoginFormData) => {
     try {
-      // TODO: Add login API call here
-      console.log("Login data:", data);
-      router.replace("/");
-    } catch (error) {
-      console.error("Login error:", error);
+      setAuthError("");
+      setIsLoading(true);
+
+      // Step 1: Verify credentials via server action (Prisma + bcrypt)
+      try {
+        await signInMutate(data);
+      } catch (err: any) {
+        setAuthError(err?.message || "Invalid email or password");
+        return;
+      }
+
+      // Step 2: Create the NextAuth session on the client
+      const result = await signIn("credentials", {
+        redirect: false,
+        email: data.email,
+        password: data.password,
+      });
+
+      if (result?.error) {
+        setAuthError("Invalid email or password");
+      } else {
+        const callbackUrl = searchParams?.get("callbackUrl") || "/";
+        reset(defaultValues);
+        router.refresh();
+        router.replace(callbackUrl);
+      }
+    } catch (error: any) {
+      console.log("error ==> ", error);
+      setAuthError(error?.message ?? "An unexpected error occurred");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -101,6 +135,7 @@ const AuthPage = () => {
                   <InputText
                     id="email"
                     {...field}
+                    disabled={isLoading}
                     className={`w-full p-3 border border-gray-300 rounded-xl focus:ring-1 transition-colors ${
                       errors.email ? "p-invalid" : ""
                     }`}
@@ -131,10 +166,17 @@ const AuthPage = () => {
                     {...field}
                     toggleMask
                     feedback={false}
+                    disabled={isLoading}
                     className="w-full"
                     inputClassName={`w-full p-3 border border-gray-300 rounded-xl focus:ring-1 transition-colors ${
                       errors.password ? "p-invalid" : ""
                     }`}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" && !isLoading) {
+                        e?.preventDefault?.();
+                        handleSubmit(onSubmit)();
+                      }
+                    }}
                     placeholder="xxxxxxxx"
                   />
                 )}
@@ -146,12 +188,18 @@ const AuthPage = () => {
               )}
             </div>
 
+            {authError && (
+              <div className="text-red-500 text-sm text-center font-medium bg-red-50 p-2 rounded-lg">
+                {authError}
+              </div>
+            )}
+
             <Button
               type="button"
               className="w-full"
-              loading={isSubmitting}
+              loading={isLoading}
               style={{ borderRadius: "12px" }}
-              label={isSubmitting ? "Processing..." : "Sign In"}
+              label={isLoading ? "Signing..." : "Sign In"}
               onClick={handleSubmit(onSubmit)}
             />
           </form>
@@ -227,4 +275,10 @@ const AuthPage = () => {
   );
 };
 
-export default AuthPage;
+export default function AuthPage() {
+  return (
+    <Suspense>
+      <AuthPageContent />
+    </Suspense>
+  );
+}

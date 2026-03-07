@@ -3,8 +3,11 @@
 import { useRef } from "react";
 import { Menu } from "primereact/menu";
 import { classNames } from "primereact/utils";
-import { useRouter, usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { MenuItem, MenuItemOptions } from "primereact/menuitem";
+import { useSession } from "next-auth/react";
+import { useSignOut } from "@/lib/db/services/user/requests";
+import { useRouter } from "next/navigation";
 
 interface HeaderProps {
   collapsed: boolean;
@@ -15,6 +18,18 @@ export default function Header({ collapsed, setCollapsed }: HeaderProps) {
   const router = useRouter();
   const pathname = usePathname();
   const menuRight = useRef<Menu | null>(null);
+  const { data: session } = useSession();
+  const { mutateAsync: signOut, isPending: isSigningOut } = useSignOut();
+
+  const userName = (session?.user as any)?.name || "User";
+  const userRole = (session?.user as any)?.role || "-";
+
+  const handleLogout = async () => {
+    try {
+      await signOut(undefined as any);
+      router.replace("/login");
+    } catch {}
+  };
 
   const getPageTitle = (path: string) => {
     if (path === "/") return "Dashboard";
@@ -36,10 +51,8 @@ export default function Header({ collapsed, setCollapsed }: HeaderProps) {
   const menuItem = [
     {
       label: "Profile",
-      icon: "fa-regular fa-arrow-right-from-bracket text-base!",
-      command: () => {
-        router.replace("/login");
-      },
+      icon: "fa-regular fa-circle-user text-base!",
+      command: () => {},
       template: (item: MenuItem, options: MenuItemOptions) => {
         return (
           <div
@@ -55,19 +68,19 @@ export default function Header({ collapsed, setCollapsed }: HeaderProps) {
               className="w-9 h-9 rounded-full border border-primary/60"
             />
             <div>
-              <p className="font-medium text-sm">Shariq Ahmed</p>
-              <p className="font-medium text-xs text-foreground/70">Admin</p>
+              <p className="font-medium text-sm">{userName}</p>
+              <p className="font-medium text-xs text-foreground/70">
+                {userRole}
+              </p>
             </div>
           </div>
         );
       },
     },
     {
-      label: "Logout",
+      label: isSigningOut ? "Logging out..." : "Logout",
       icon: "fa-regular fa-arrow-right-from-bracket text-base!",
-      command: () => {
-        router.replace("/login");
-      },
+      command: handleLogout,
       template: (item: MenuItem, options: MenuItemOptions) => {
         return (
           <div

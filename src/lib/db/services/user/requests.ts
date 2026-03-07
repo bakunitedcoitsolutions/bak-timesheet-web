@@ -8,6 +8,8 @@ import {
   updateUserAction,
   getUserByIdAction,
   deleteUserAction,
+  signInAction,
+  signOutAction,
 } from "./actions";
 
 export const useGetUsers = (input: ListUsersParamsInput) =>
@@ -15,6 +17,10 @@ export const useGetUsers = (input: ListUsersParamsInput) =>
     queryKey: ["users", input],
     input,
   });
+
+export const useSignIn = () => useMutation(signInAction);
+
+export const useSignOut = () => useMutation(signOutAction);
 
 export const useCreateUser = () =>
   useMutation(createUserAction, {

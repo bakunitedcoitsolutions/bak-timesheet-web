@@ -1,14 +1,4 @@
-/**
- * NextAuth Configuration (Node.js Only)
- * Contains the Credentials provider which relies on Prisma and bcrypt
- * This file CANNOT be used in Edge runtimes like middleware.ts
- */
-
-import { compare } from "bcryptjs";
 import { NextAuthConfig } from "next-auth";
-import CredentialsProvider from "next-auth/providers/credentials";
-
-import { prisma } from "@/lib/db/prisma";
 import { getUserActiveStatus } from "./security";
 
 /**
@@ -16,7 +6,7 @@ import { getUserActiveStatus } from "./security";
  * Contains only session, callbacks, and cookies. NO Node.js imports (Prisma, bcrypt).
  * Can be safely imported in middleware.ts.
  */
-const authConfig: NextAuthConfig = {
+export const authConfig: NextAuthConfig = {
   providers: [], // Providers are added in config.ts
   session: {
     strategy: "jwt",
@@ -83,55 +73,4 @@ const authConfig: NextAuthConfig = {
   },
   secret: process.env.NEXT_AUTH_SECRET,
   debug: process.env.NODE_ENV === "development",
-};
-
-export const authOptions: NextAuthConfig = {
-  ...authConfig,
-  providers: [
-    CredentialsProvider({
-      // name: "Credentials",
-      credentials: {
-        email: { label: "Email", type: "email" },
-        password: { label: "Password", type: "password" },
-      },
-      async authorize(credentials) {
-        if (!credentials?.email || !credentials?.password) {
-          throw new Error("Email and password are required");
-        }
-
-        // Find user by email
-        const user = await prisma.user.findUnique({
-          where: { email: credentials.email as string },
-          include: {
-            userRole: true,
-            branch: true,
-            privileges: true,
-          },
-        });
-
-        if (!user || !user.password) {
-          throw new Error("Invalid email or password");
-        }
-
-        // Check if user is active
-        if (!user.isActive) {
-          throw new Error("Account is inactive");
-        }
-
-        // Verify password
-        const isPasswordValid = await compare(
-          credentials.password as string,
-          user.password
-        );
-
-        if (!isPasswordValid) {
-          throw new Error("Invalid email or password");
-        }
-
-        // Return entire user object except password
-        const { password, ...userWithoutPassword } = user;
-        return userWithoutPassword as any;
-      },
-    }),
-  ],
 };

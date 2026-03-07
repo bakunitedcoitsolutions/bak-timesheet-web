@@ -4,6 +4,7 @@
  */
 
 import { DefaultSession } from "next-auth";
+import "next-auth/jwt";
 import { UserPrivileges } from "@/utils/dummy";
 
 declare module "next-auth" {

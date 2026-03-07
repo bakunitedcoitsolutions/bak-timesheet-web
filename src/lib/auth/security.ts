@@ -61,7 +61,7 @@ export async function getUserActiveStatus(userId: number): Promise<boolean> {
 
   // Cache miss - fetch from database (2 Redis calls: get + set)
   const user = await prisma.user.findUnique({
-    where: { id: userId },
+    where: { id: Number(userId) },
     select: { isActive: true },
   });
 

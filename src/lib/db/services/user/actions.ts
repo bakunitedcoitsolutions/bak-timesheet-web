@@ -21,12 +21,45 @@ import { cache } from "@/lib/redis";
 import { getSharedUserPrivilegesAction } from "../shared/actions";
 import { CACHE_KEYS } from "../shared/constants";
 
+import { compare } from "bcryptjs";
+import { prisma } from "@/lib/db/prisma";
+import { loginSchema } from "@/utils/schemas";
+import { signOut } from "@/lib/auth";
+
 export const listUsersAction = serverAction
   .input(ListUsersParamsSchema)
   .handler(async ({ input }) => {
     const response = await listUsers(input);
     return response;
   });
+
+export const signInAction = serverAction
+  .input(loginSchema)
+  .handler(async ({ input }) => {
+    const user = await prisma.user.findUnique({
+      where: { email: input.email },
+    });
+
+    if (!user || !user.password) {
+      throw new Error("Invalid email or password");
+    }
+
+    if (!user.isActive) {
+      throw new Error("Account is inactive. Please contact an administrator.");
+    }
+
+    const isPasswordValid = await compare(input.password, user.password);
+    if (!isPasswordValid) {
+      throw new Error("Invalid email or password");
+    }
+
+    return { ok: true };
+  });
+
+export const signOutAction = serverAction.handler(async () => {
+  await signOut({ redirect: false });
+  return { ok: true };
+});
 
 export const createUserAction = serverAction
   .input(CreateUserSchema)
