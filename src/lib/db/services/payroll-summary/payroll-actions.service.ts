@@ -197,10 +197,13 @@ const calculateAndSavePayroll = async (
         // Condition 2: Not in Exclusion Date Check
         let isExcludedDate = false;
         if (exclusionData && exclusionData.type === "BREAKFAST") {
-          if (
-            t.date >= exclusionData.startDate &&
-            t.date <= exclusionData.endDate
-          ) {
+          const tTime = new Date(t.date);
+          tTime.setUTCHours(0, 0, 0, 0);
+          const startTime = new Date(exclusionData.startDate);
+          startTime.setUTCHours(0, 0, 0, 0);
+          const endTime = new Date(exclusionData.endDate);
+          endTime.setUTCHours(0, 0, 0, 0);
+          if (tTime >= startTime && tTime <= endTime) {
             isExcludedDate = true;
           }
         }
@@ -759,10 +762,13 @@ export const repostPayroll = async ({
       if (emp.breakfastAllowance) {
         let isExcludedDate = false;
         if (exclusionData && exclusionData.type === "BREAKFAST") {
-          if (
-            t.date >= exclusionData.startDate &&
-            t.date <= exclusionData.endDate
-          ) {
+          const tTime = new Date(t.date);
+          tTime.setUTCHours(0, 0, 0, 0);
+          const startTime = new Date(exclusionData.startDate);
+          startTime.setUTCHours(0, 0, 0, 0);
+          const endTime = new Date(exclusionData.endDate);
+          endTime.setUTCHours(0, 0, 0, 0);
+          if (tTime >= startTime && tTime <= endTime) {
             isExcludedDate = true;
           }
         }
@@ -1092,10 +1098,13 @@ export const refreshPayrollDetailRow = async ({
     if (emp.breakfastAllowance) {
       let isExcludedDate = false;
       if (exclusionData && exclusionData.type === "BREAKFAST") {
-        if (
-          t.date >= exclusionData.startDate &&
-          t.date <= exclusionData.endDate
-        ) {
+        const tTime = new Date(t.date);
+        tTime.setUTCHours(0, 0, 0, 0);
+        const startTime = new Date(exclusionData.startDate);
+        startTime.setUTCHours(0, 0, 0, 0);
+        const endTime = new Date(exclusionData.endDate);
+        endTime.setUTCHours(0, 0, 0, 0);
+        if (tTime >= startTime && tTime <= endTime) {
           isExcludedDate = true;
         }
       }
