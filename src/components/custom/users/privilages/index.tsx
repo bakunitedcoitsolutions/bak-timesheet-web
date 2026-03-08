@@ -1,7 +1,7 @@
 import { Checkbox } from "@/components/forms";
 import { classNames } from "primereact/utils";
 
-import { UserPrivileges, FeaturePermissions } from "@/utils/dummy";
+import { UserPrivileges, FeaturePermissions } from "@/utils/user.utility";
 import { FEATURES_CONFIG, FORM_FIELD_WIDTHS } from "@/utils/constants";
 
 const Privileges = ({

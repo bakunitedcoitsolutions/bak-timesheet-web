@@ -1,7 +1,7 @@
 import { Checkbox } from "@/components/forms";
 import { classNames } from "primereact/utils";
 
-import { ReportsPrivileges } from "@/utils/dummy";
+import { ReportsPrivileges } from "@/utils/user.utility";
 import { FORM_FIELD_WIDTHS, REPORT_OPTIONS } from "@/utils/constants";
 
 interface ReportsSectionProps {

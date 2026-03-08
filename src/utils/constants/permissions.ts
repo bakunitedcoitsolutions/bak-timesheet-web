@@ -1,4 +1,4 @@
-import { UserPrivileges, FeaturePermissions } from "@/utils/dummy";
+import { UserPrivileges, FeaturePermissions } from "@/utils/user.utility";
 
 export interface FeatureConfig {
   key: keyof UserPrivileges;

@@ -4,7 +4,7 @@
  */
 
 import type { BranchInterface } from "../branch";
-import type { UserPrivileges } from "@/utils/dummy";
+import type { UserPrivileges } from "@/utils/user.utility";
 import type { UserRoleInterface } from "../user-role";
 
 // ---------------------------------------------------------------------------

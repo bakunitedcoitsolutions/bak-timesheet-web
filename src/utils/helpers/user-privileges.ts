@@ -3,7 +3,7 @@ import {
   UserPrivileges,
   FeaturePermissions,
   ReportsPrivileges,
-} from "@/utils/dummy";
+} from "@/utils/user.utility";
 import { FEATURES_CONFIG } from "@/utils/constants/permissions";
 import { REPORT_OPTIONS } from "@/utils/constants/reports";
 

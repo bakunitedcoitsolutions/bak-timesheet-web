@@ -14,7 +14,7 @@ import {
   determineBranchIdForUpdate,
   validateBranchManagerBranchId,
 } from "@/utils/helpers/user-branch";
-import type { UserPrivileges } from "@/utils/dummy";
+import type { UserPrivileges } from "@/utils/user.utility";
 import type {
   CreateUserData,
   UpdateUserData,

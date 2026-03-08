@@ -5,7 +5,7 @@
 
 import { DefaultSession } from "next-auth";
 import "next-auth/jwt";
-import { UserPrivileges } from "@/utils/dummy";
+import { UserPrivileges } from "@/utils/user.utility";
 
 declare module "next-auth" {
   interface Session {

@@ -9,3 +9,10 @@ export { default as Badge } from "./badge";
 export { default as TypeBadge } from "./type-badge";
 export { default as GroupDropdown } from "./group-dropdown";
 export * from "./AutoScrollChips";
+export { default as Access, useAccess } from "./access";
+export type {
+  AccessProps,
+  Permission,
+  Feature,
+  UseAccessReturn,
+} from "./access";
