@@ -139,14 +139,15 @@ const PayrollDetailPage = () => {
   const [page, setPage] = useState<number>(1);
   const [limit, setLimit] = useState<number>(50);
 
+  const [activeSearch, setActiveSearch] = useState<string>("");
+
   // Parse filter parameters from GroupDropdown selection
   const filterParams = parseGroupDropdownFilter(selectedFilter);
-  const debouncedSearch = useDebounce(searchValue, 500);
 
   // Reset to first page when filter or search changes
   useEffect(() => {
     setPage(1);
-  }, [selectedFilter, debouncedSearch]);
+  }, [selectedFilter, activeSearch]);
 
   const { data: globalData } = useGlobalData();
 
@@ -174,7 +175,7 @@ const PayrollDetailPage = () => {
 
   const { data, isLoading } = useGetPayrollDetails({
     payrollId: isNaN(payrollId) ? 0 : payrollId,
-    search: debouncedSearch || undefined,
+    search: activeSearch || undefined,
     designationId: filterParams.designationId,
     payrollSectionId: filterParams.payrollSectionId,
     page,
@@ -886,12 +887,24 @@ const PayrollDetailPage = () => {
       <TitleHeader
         title={payrollTitle}
         icon={<i className="fa-light fa-calendar text-xl!" />}
-        value={searchValue}
-        onChange={(e) => {
-          const value = e.target.value;
-          setSearchValue(value);
-        }}
         onBack={() => router.replace("/payroll")}
+        renderInput={() => (
+          <div className="w-full md:w-80">
+            <Input
+              value={searchValue}
+              className="w-full"
+              icon="pi pi-search"
+              iconPosition="left"
+              placeholder="Search (Press Enter)"
+              onChange={(e) => setSearchValue(e.target.value)}
+              onKeyDown={(e: any) => {
+                if (e.key === "Enter") {
+                  setActiveSearch(searchValue);
+                }
+              }}
+            />
+          </div>
+        )}
       />
       <div className="flex flex-1 flex-col gap-4 px-6 py-6 bg-theme-primary-light">
         {renderHeader({

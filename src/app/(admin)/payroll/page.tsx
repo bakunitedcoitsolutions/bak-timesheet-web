@@ -52,7 +52,7 @@ interface PayrollActionsProps {
   onView: (payroll: PayrollEntry) => void;
   onRecalculate: (payroll: PayrollEntry) => void;
   onPost: (payroll: PayrollEntry) => void;
-  onRepost: (payroll: PayrollEntry, isRerun: boolean) => void;
+  onRepost: (payroll: PayrollEntry, isRefresh: boolean) => void;
 }
 
 const PayrollActions = ({
@@ -106,7 +106,7 @@ const PayrollActions = ({
             ),
           },
           {
-            label: "Rerun",
+            label: "Refresh",
             icon: "pi pi-replay",
             command: () => onRepost(payroll, true),
             template: (item: MenuItem, options: MenuItemOptions) => (
@@ -182,7 +182,7 @@ const columns = (
   handleView: (payroll: PayrollEntry) => void,
   handleRecalculate: (payroll: PayrollEntry) => void,
   handlePost: (payroll: PayrollEntry) => void,
-  handleRepost: (payroll: PayrollEntry, isRerun: boolean) => void
+  handleRepost: (payroll: PayrollEntry, isRefresh: boolean) => void
 ): TableColumn<PayrollEntry>[] => [
   {
     field: "period",
@@ -538,24 +538,24 @@ const PayrollPage = () => {
   /* Removed Repost Logic for now as it wasn't requested in C# or explicit plan, but kept function shell if needed? 
      The prompt asked to "Recalculate" and "Post".
      "Repost" logic was just in the dummy UI. I'll leave it as TODO or empty. */
-  const handleRepost = (payroll: PayrollEntry, isRerun: boolean) => {
+  const handleRepost = (payroll: PayrollEntry, isRefresh: boolean) => {
     showConfirmDialog({
       icon: "pi pi-replay text-[#FFA617]",
-      title: isRerun ? "Rerun Payroll" : "Repost Payroll",
-      message: `Are you sure you want to ${isRerun ? "rerun" : "repost"} ${payroll.period}?`,
+      title: isRefresh ? "Refresh Payroll" : "Repost Payroll",
+      message: `Are you sure you want to ${isRefresh ? "refresh" : "repost"} ${payroll.period}?`,
       onAccept: async () => {
         try {
           await repostPayroll({ id: Number(payroll.id) });
           toastService.showSuccess(
             "Success",
-            `Payroll ${isRerun ? "reran" : "reposted"} successfully`
+            `Payroll ${isRefresh ? "refreshed" : "reposted"} successfully`
           );
         } catch (error) {
           toastService.showError(
             "Error",
             getErrorMessage(
               error,
-              `Failed to ${isRerun ? "rerun" : "repost"} payroll`
+              `Failed to ${isRefresh ? "refresh" : "repost"} payroll`
             )
           );
         }

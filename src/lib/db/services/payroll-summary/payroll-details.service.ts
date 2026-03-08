@@ -1,10 +1,10 @@
 import { prisma } from "@/lib/db/prisma";
+import {
+  GetPayrollReportInput,
+  SavePayrollDetailsBatchInput,
+} from "./payroll-summary.schemas";
 import type { GetPayrollDetailsParams } from "./payroll-summary.dto";
 import { mapPayrollDetailToEntry, PayrollDetailEntry } from "./mappers";
-import {
-  SavePayrollDetailsBatchInput,
-  GetPayrollReportInput,
-} from "./payroll-summary.schemas";
 
 export const getPayrollDetails = async (
   params: GetPayrollDetailsParams
@@ -62,6 +62,21 @@ export const getPayrollDetails = async (
 
     if (Number.isInteger(searchNum)) {
       orConditions.push({ employee: { employeeCode: searchNum } });
+
+      // If it's a number (employee code search), we should avoid all other filters
+      // regardless of designation or payroll sections.
+      // We keep the top-level payroll boundaries though (payrollId, branchId)
+      if (where.employee && where.employee.designationId) {
+        delete where.employee.designationId;
+      }
+      if (where.employee && where.employee.payrollSectionId) {
+        delete where.employee.payrollSectionId;
+      }
+
+      // If employee object is now empty, clean it up
+      if (where.employee && Object.keys(where.employee).length === 0) {
+        delete where.employee;
+      }
     }
 
     where.OR = orConditions;

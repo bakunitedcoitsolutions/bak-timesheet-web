@@ -7,12 +7,13 @@ import {
   RecalculatePayrollSummaryInput,
   UpdateMonthlyPayrollValuesInput,
 } from "./payroll-summary.schemas";
+import dayjs from "dayjs";
 import { mapPayrollDetailToEntry } from "./mappers";
 import { AllowanceType } from "../../../../../prisma/generated/prisma/enums";
 
 // Helper to getting start/end of month
 const getMonthDateRange = (year: number, month: number) => {
-  const startDate = new Date(Date.UTC(year, month - 1, 1));
+  const startDate = new Date(Date.UTC(year, month - 1, 1, 0, 0, 0, 0));
   const endDate = new Date(Date.UTC(year, month, 0, 23, 59, 59, 999));
   return { startDate, endDate };
 };
@@ -197,18 +198,18 @@ const calculateAndSavePayroll = async (
         // Condition 2: Not in Exclusion Date Check
         let isExcludedDate = false;
         if (exclusionData && exclusionData.type === "BREAKFAST") {
-          const tTime = new Date(t.date);
-          tTime.setUTCHours(0, 0, 0, 0);
-          const startTime = new Date(exclusionData.startDate);
-          startTime.setUTCHours(0, 0, 0, 0);
-          const endTime = new Date(exclusionData.endDate);
-          endTime.setUTCHours(0, 0, 0, 0);
-          if (tTime >= startTime && tTime <= endTime) {
+          const tTime = dayjs(t.date).startOf("day");
+          const startTime = dayjs(exclusionData.startDate).startOf("day");
+          const endTime = dayjs(exclusionData.endDate).startOf("day");
+          if (
+            tTime.valueOf() >= startTime.valueOf() &&
+            tTime.valueOf() <= endTime.valueOf()
+          ) {
             isExcludedDate = true;
           }
         }
 
-        const isFriday = t.date.getDay() === 5;
+        const isFriday = dayjs(t.date).day() === 5;
         // Condition 3: Project 1 Hours must equal Designation Hours
         // Note: Strict equality might be tricky with floats, but schema says Int.
         const isFullDay = p1 === designationHours;
@@ -762,17 +763,17 @@ export const repostPayroll = async ({
       if (emp.breakfastAllowance) {
         let isExcludedDate = false;
         if (exclusionData && exclusionData.type === "BREAKFAST") {
-          const tTime = new Date(t.date);
-          tTime.setUTCHours(0, 0, 0, 0);
-          const startTime = new Date(exclusionData.startDate);
-          startTime.setUTCHours(0, 0, 0, 0);
-          const endTime = new Date(exclusionData.endDate);
-          endTime.setUTCHours(0, 0, 0, 0);
-          if (tTime >= startTime && tTime <= endTime) {
+          const tTime = dayjs(t.date).startOf("day");
+          const startTime = dayjs(exclusionData.startDate).startOf("day");
+          const endTime = dayjs(exclusionData.endDate).startOf("day");
+          if (
+            tTime.valueOf() >= startTime.valueOf() &&
+            tTime.valueOf() <= endTime.valueOf()
+          ) {
             isExcludedDate = true;
           }
         }
-        const isFriday = t.date.getDay() === 5;
+        const isFriday = dayjs(t.date).day() === 5;
         if (!isExcludedDate && !isFriday && p1 === designationHours) {
           breakfastAllowanceCount++;
         }
@@ -1046,6 +1047,9 @@ export const refreshPayrollDetailRow = async ({
       employeeId: emp.id,
       date: { gte: startDate, lte: endDate },
     },
+    orderBy: {
+      date: "asc",
+    },
   });
 
   // 4. Loans
@@ -1097,21 +1101,54 @@ export const refreshPayrollDetailRow = async ({
 
     if (emp.breakfastAllowance) {
       let isExcludedDate = false;
-      if (exclusionData && exclusionData.type === "BREAKFAST") {
-        const tTime = new Date(t.date);
-        tTime.setUTCHours(0, 0, 0, 0);
-        const startTime = new Date(exclusionData.startDate);
-        startTime.setUTCHours(0, 0, 0, 0);
-        const endTime = new Date(exclusionData.endDate);
-        endTime.setUTCHours(0, 0, 0, 0);
-        if (tTime >= startTime && tTime <= endTime) {
+      const tTime = dayjs(t.date).startOf("day");
+      const startTime = exclusionData
+        ? dayjs(exclusionData.startDate).startOf("day")
+        : null;
+      const endTime = exclusionData
+        ? dayjs(exclusionData.endDate).startOf("day")
+        : null;
+
+      console.log(`\n--- Processing date: ${tTime.format("YYYY-MM-DD")} ---`);
+
+      if (
+        exclusionData &&
+        exclusionData.type === "BREAKFAST" &&
+        startTime &&
+        endTime
+      ) {
+        console.log(
+          `Checking exclusion range: >= ${startTime.format("YYYY-MM-DD")} to <= ${endTime.format("YYYY-MM-DD")}`
+        );
+
+        if (
+          tTime.valueOf() >= startTime.valueOf() &&
+          tTime.valueOf() <= endTime.valueOf()
+        ) {
           isExcludedDate = true;
+          console.log(`Date IS excluded!`);
+        } else {
+          console.log(`Date NOT excluded.`);
         }
       }
-      const isFriday = t.date.getDay() === 5;
+
+      const isFriday = tTime.day() === 5;
+      console.log(`Is Friday? ${isFriday}`);
+
       const isFullDay = p1 === designationHours;
+      console.log(
+        `Is Full Day? ${isFullDay} (p1: ${p1}, req: ${designationHours})`
+      );
+
       if (!isExcludedDate && !isFriday && isFullDay) {
         breakfastAllowanceCount++;
+        console.log(
+          `Counted +1 Breakfast! Current Total: ${breakfastAllowanceCount}`
+        );
+      } else {
+        console.log(
+          `Did NOT count Breakfast (Excluded: ${isExcludedDate}, Friday: ${isFriday}, Full Day: ${isFullDay})`
+        );
       }
     }
   });
