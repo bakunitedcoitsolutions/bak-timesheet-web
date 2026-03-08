@@ -1,14 +1,16 @@
 "use client";
 
+import Link from "next/link";
 import { useRef } from "react";
 import { Menu } from "primereact/menu";
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 import { classNames } from "primereact/utils";
 import { usePathname } from "next/navigation";
 import { MenuItem, MenuItemOptions } from "primereact/menuitem";
-import { useSession } from "next-auth/react";
-import { useSignOut } from "@/lib/db/services/user/requests";
-import { useRouter } from "next/navigation";
+
 import { USER_ROLES } from "@/utils/user.utility";
+import { useSignOut } from "@/lib/db/services/user/requests";
 
 interface HeaderProps {
   collapsed: boolean;
@@ -70,9 +72,9 @@ export default function Header({ collapsed, setCollapsed }: HeaderProps) {
               alt="User"
               className="w-9 h-9 rounded-full border border-primary/60"
             />
-            <div>
-              <p className="font-medium text-sm">{userName}</p>
-              <p className="font-medium text-xs text-foreground/70">
+            <div className="overflow-hidden">
+              <p className="font-medium text-sm truncate">{userName}</p>
+              <p className="font-medium text-xs text-foreground/70 truncate">
                 {userRole}
               </p>
             </div>
@@ -103,8 +105,8 @@ export default function Header({ collapsed, setCollapsed }: HeaderProps) {
 
   return (
     <header className="h-16 bg-white flex items-center justify-between px-6 sticky top-0 z-20 transition-all duration-300 ease-in-out print:hidden">
-      <div className="flex items-center gap-4">
-        {!isAccessEnabled && (
+      <div className="flex items-center gap-4 z-10">
+        {!isAccessEnabled ? (
           <>
             <button
               onClick={() => setCollapsed(!collapsed)}
@@ -127,12 +129,37 @@ export default function Header({ collapsed, setCollapsed }: HeaderProps) {
 
             <div className="h-6 w-px bg-gray-200 mx-1"></div>
           </>
+        ) : (
+          <Link
+            href="/"
+            className="flex items-center gap-3 cursor-pointer group"
+          >
+            {pathname !== "/" && (
+              <button className="w-10 h-10 flex items-center justify-center rounded-full bg-transparent text-primary cursor-pointer">
+                <i className="fa-regular fa-arrow-left-long text-xl!" />
+              </button>
+            )}
+            <div className="flex items-center gap-2">
+              <img
+                src="/assets/images/bak_transparent_logo.png"
+                alt="BAK United"
+                className="h-10 object-contain group-hover:opacity-90 transition-opacity"
+              />
+              <span className="font-bold text-[17px] text-primary hidden md:inline group-hover:opacity-90 transition-opacity">
+                BAK Timesheet
+              </span>
+            </div>
+          </Link>
         )}
-
-        <h1 className="text-lg font-semibold tracking-wide">{pageTitle}</h1>
       </div>
 
-      <div className="flex items-center gap-4">
+      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex justify-center pointer-events-none">
+        <h1 className="text-lg font-semibold tracking-wide pointer-events-auto">
+          {pageTitle}
+        </h1>
+      </div>
+
+      <div className="flex items-center gap-4 z-10">
         <div
           className={classNames("flex items-center cursor-pointer gap-x-1", {
             "justify-center": collapsed,

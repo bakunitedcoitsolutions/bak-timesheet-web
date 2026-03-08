@@ -11,7 +11,7 @@ import {
   UserPrivileges,
   ReportsPrivileges,
   FeaturePermissions,
-} from "@/utils/dummy";
+} from "@/utils/user.utility";
 import {
   useUpdateUser,
   useCreateUser,
