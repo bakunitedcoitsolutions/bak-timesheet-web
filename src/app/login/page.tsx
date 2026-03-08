@@ -3,14 +3,14 @@
 import Image from "next/image";
 import { Suspense, useState } from "react";
 import { signIn } from "next-auth/react";
-import { useRouter, useSearchParams } from "next/navigation";
-import { Controller, useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-
 import { Button } from "primereact/button";
 import { Password } from "primereact/password";
 import { InputText } from "primereact/inputtext";
-import { useSignIn } from "@/lib/db/services/user/requests";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Controller, useForm } from "react-hook-form";
+import { useRouter, useSearchParams } from "next/navigation";
+
+import { toastService } from "@/lib/toast";
 import { loginSchema, type LoginFormData } from "@/utils/schemas";
 
 const AuthPageContent = () => {
@@ -18,7 +18,6 @@ const AuthPageContent = () => {
   const searchParams = useSearchParams();
   const [authError, setAuthError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const { mutateAsync: signInMutate } = useSignIn();
   const defaultValues = {
     email: "",
     password: "",
@@ -38,15 +37,7 @@ const AuthPageContent = () => {
       setAuthError("");
       setIsLoading(true);
 
-      // Step 1: Verify credentials via server action (Prisma + bcrypt)
-      try {
-        await signInMutate(data);
-      } catch (err: any) {
-        setAuthError(err?.message || "Invalid email or password");
-        return;
-      }
-
-      // Step 2: Create the NextAuth session on the client
+      // Single sign-in call — NextAuth authorize handles Prisma + bcrypt
       const result = await signIn("credentials", {
         redirect: false,
         email: data.email,
@@ -58,11 +49,13 @@ const AuthPageContent = () => {
       } else {
         const callbackUrl = searchParams?.get("callbackUrl") || "/";
         reset(defaultValues);
-        router.refresh();
+        toastService.showSuccess(
+          `Welcome back!`,
+          "You have signed in successfully."
+        );
         router.replace(callbackUrl);
       }
     } catch (error: any) {
-      console.log("error ==> ", error);
       setAuthError(error?.message ?? "An unexpected error occurred");
     } finally {
       setIsLoading(false);
@@ -135,6 +128,8 @@ const AuthPageContent = () => {
                   <InputText
                     id="email"
                     {...field}
+                    type="email"
+                    autoComplete="email"
                     disabled={isLoading}
                     className={`w-full p-3 border border-gray-300 rounded-xl focus:ring-1 transition-colors ${
                       errors.email ? "p-invalid" : ""
@@ -163,14 +158,16 @@ const AuthPageContent = () => {
                 render={({ field }) => (
                   <Password
                     id="password"
-                    {...field}
+                    {...(field as any)}
                     toggleMask
+                    type="password"
                     feedback={false}
                     disabled={isLoading}
                     className="w-full"
                     inputClassName={`w-full p-3 border border-gray-300 rounded-xl focus:ring-1 transition-colors ${
                       errors.password ? "p-invalid" : ""
                     }`}
+                    autoComplete="current-password"
                     onKeyDown={(e) => {
                       if (e.key === "Enter" && !isLoading) {
                         e?.preventDefault?.();
