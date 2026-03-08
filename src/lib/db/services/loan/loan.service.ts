@@ -10,6 +10,7 @@ import type {
   UpdateLoanData,
   ListLoansParams,
   ListLoansResponse,
+  ListedLoan,
   BulkUploadLoanData,
   BulkUploadLoanResult,
 } from "./loan.dto";
@@ -33,6 +34,11 @@ const loanSelect = {
     select: {
       nameEn: true,
       employeeCode: true,
+      designation: {
+        select: {
+          nameEn: true,
+        },
+      },
     },
   },
 };
@@ -454,6 +460,68 @@ export const listLoans = async (
       total,
       totalPages: Math.ceil(total / limit),
     },
+  };
+};
+
+/**
+ * List ALL loans (no pagination) — used for exports
+ */
+export interface ListAllLoansParams {
+  search?: string;
+  employeeId?: number;
+  type?: "LOAN" | "RETURN";
+  startDate?: Date | string;
+  endDate?: Date | string;
+}
+
+export const listAllLoans = async (
+  params: ListAllLoansParams
+): Promise<{ loans: ListedLoan[] }> => {
+  // Build where clause (same logic as listLoans, minus pagination)
+  const where: any = {};
+
+  if (params.search) {
+    const search = params.search;
+    const searchAsNumber = Number(search);
+    const isNumber = !isNaN(searchAsNumber);
+
+    where.OR = [
+      { remarks: { contains: search, mode: "insensitive" } },
+      { employee: { nameEn: { contains: search, mode: "insensitive" } } },
+      { employee: { nameAr: { contains: search, mode: "insensitive" } } },
+    ];
+
+    if (isNumber) {
+      where.OR.push({ employee: { employeeCode: searchAsNumber } });
+    }
+  }
+
+  if (params.employeeId !== undefined) {
+    where.employeeId = params.employeeId;
+  }
+
+  if (params.type !== undefined) {
+    where.type = params.type;
+  }
+
+  if (params.startDate || params.endDate) {
+    where.date = {};
+    if (params.startDate) {
+      where.date.gte = dayjs(params.startDate).toDate();
+    }
+    if (params.endDate) {
+      where.date.lte = dayjs(params.endDate).toDate();
+    }
+  }
+
+  const loans = await prisma.loan.findMany({
+    where,
+    select: loanSelect,
+    orderBy: { date: "asc" },
+  });
+
+  return {
+    loans: loans.map((loan) => ({ ...loan, amount: loan.amount })),
   };
 };
 

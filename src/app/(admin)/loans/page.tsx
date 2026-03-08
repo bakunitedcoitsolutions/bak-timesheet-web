@@ -39,6 +39,11 @@ import {
   parseExcelFile,
   downloadSampleTemplate,
 } from "@/lib/db/services/loan/bulk-upload-utils";
+import {
+  exportLoansToExcel,
+  exportLoansToCSV,
+} from "@/lib/db/services/loan/loan-export-utils";
+import { listAllLoansAction } from "@/lib/db/services/loan/actions";
 
 // Constants
 const SORTABLE_FIELDS = {
@@ -263,13 +268,41 @@ const LoansPage = () => {
     [deleteLoan]
   );
 
-  const exportCSV = useCallback(() => {
-    tableRef.current?.exportCSV();
-  }, []);
+  const exportCSV = useCallback(async () => {
+    try {
+      const monthLabel = selectedDate
+        ? dayjs(selectedDate).format("MMM-YYYY")
+        : undefined;
+      const [result] = await listAllLoansAction({
+        ...(dateFilter && {
+          startDate: dateFilter.startDate,
+          endDate: dateFilter.endDate,
+        }),
+        ...(debouncedSearch ? { search: debouncedSearch } : {}),
+      });
+      exportLoansToCSV(result?.loans ?? [], monthLabel);
+    } catch (err) {
+      console.error("Export CSV failed:", err);
+    }
+  }, [selectedDate, dateFilter, debouncedSearch]);
 
-  const exportExcel = useCallback(() => {
-    tableRef.current?.exportExcel();
-  }, []);
+  const exportExcel = useCallback(async () => {
+    try {
+      const monthLabel = selectedDate
+        ? dayjs(selectedDate).format("MMM-YYYY")
+        : undefined;
+      const [result] = await listAllLoansAction({
+        ...(dateFilter && {
+          startDate: dateFilter.startDate,
+          endDate: dateFilter.endDate,
+        }),
+        ...(debouncedSearch ? { search: debouncedSearch } : {}),
+      });
+      await exportLoansToExcel(result?.loans ?? [], monthLabel);
+    } catch (err) {
+      console.error("Export Excel failed:", err);
+    }
+  }, [selectedDate, dateFilter, debouncedSearch]);
 
   const handlePageChange = useCallback(
     (e: { page?: number; rows?: number }) => {

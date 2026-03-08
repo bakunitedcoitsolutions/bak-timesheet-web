@@ -50,6 +50,9 @@ export interface ListedLoan extends LoanInterface {
   employee?: {
     nameEn: string;
     employeeCode: number;
+    designation?: {
+      nameEn: string;
+    } | null;
   };
 }
 

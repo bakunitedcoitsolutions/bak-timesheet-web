@@ -7,6 +7,7 @@ import {
   listLoans,
   deleteLoan,
   bulkUploadLoans,
+  listAllLoans,
 } from "./loan.service";
 import {
   CreateLoanSchema,
@@ -15,11 +16,13 @@ import {
   GetLoanByIdSchema,
   DeleteLoanSchema,
   BulkUploadLoanSchema,
+  ListAllLoansParamsSchema,
   CreateLoanInput,
   UpdateLoanInput,
   GetLoanByIdInput,
   DeleteLoanInput,
   BulkUploadLoanInput,
+  ListAllLoansParamsInput,
 } from "./loan.schemas";
 
 // Create Loan
@@ -68,5 +71,13 @@ export const bulkUploadLoansAction = serverAction
   .input(BulkUploadLoanSchema)
   .handler(async ({ input }: { input: BulkUploadLoanInput }) => {
     const response = await bulkUploadLoans(input);
+    return response;
+  });
+
+// List ALL Loans (no pagination) — for exports
+export const listAllLoansAction = serverAction
+  .input(ListAllLoansParamsSchema)
+  .handler(async ({ input }: { input: ListAllLoansParamsInput }) => {
+    const response = await listAllLoans(input);
     return response;
   });

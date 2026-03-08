@@ -28,14 +28,7 @@ export const ListLoansParamsSchema = z.object({
   limit: z.number().int().positive().optional(),
   search: z.string().optional(),
   sortOrder: z.enum(["asc", "desc"]).optional(),
-  sortBy: z
-    .enum([
-      "date",
-      "type",
-      "amount",
-      "createdAt",
-    ])
-    .optional(),
+  sortBy: z.enum(["date", "type", "amount", "createdAt"]).optional(),
   employeeId: z.number().int().positive().optional(),
   type: z.enum(["LOAN", "RETURN"]).optional(),
   startDate: z.coerce.date().optional(),
@@ -59,7 +52,9 @@ export const BulkUploadLoanRowSchema = z.object({
 });
 
 export const BulkUploadLoanSchema = z.object({
-  loans: z.array(BulkUploadLoanRowSchema).min(1, "At least one loan is required"),
+  loans: z
+    .array(BulkUploadLoanRowSchema)
+    .min(1, "At least one loan is required"),
 });
 
 // Type exports for use in actions
@@ -69,3 +64,14 @@ export type ListLoansParamsInput = z.infer<typeof ListLoansParamsSchema>;
 export type GetLoanByIdInput = z.infer<typeof GetLoanByIdSchema>;
 export type DeleteLoanInput = z.infer<typeof DeleteLoanSchema>;
 export type BulkUploadLoanInput = z.infer<typeof BulkUploadLoanSchema>;
+
+// Export-all (no pagination)
+export const ListAllLoansParamsSchema = z.object({
+  search: z.string().optional(),
+  employeeId: z.number().int().positive().optional(),
+  type: z.enum(["LOAN", "RETURN"]).optional(),
+  startDate: z.coerce.date().optional(),
+  endDate: z.coerce.date().optional(),
+});
+
+export type ListAllLoansParamsInput = z.infer<typeof ListAllLoansParamsSchema>;
