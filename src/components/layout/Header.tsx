@@ -128,6 +128,7 @@ export default function Header({ collapsed, setCollapsed }: HeaderProps) {
             </button>
 
             <div className="h-6 w-px bg-gray-200 mx-1"></div>
+            <h1 className="text-lg font-semibold tracking-wide">{pageTitle}</h1>
           </>
         ) : (
           <Link
@@ -153,11 +154,13 @@ export default function Header({ collapsed, setCollapsed }: HeaderProps) {
         )}
       </div>
 
-      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex justify-center pointer-events-none">
-        <h1 className="text-lg font-semibold tracking-wide pointer-events-auto">
-          {pageTitle}
-        </h1>
-      </div>
+      {isAccessEnabled && (
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex justify-center pointer-events-none">
+          <h1 className="text-lg font-semibold tracking-wide pointer-events-auto">
+            {pageTitle}
+          </h1>
+        </div>
+      )}
 
       <div className="flex items-center gap-4 z-10">
         <div
