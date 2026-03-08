@@ -2,22 +2,32 @@
  * Access Control Component & Hook
  *
  * Usage:
- *   <Access feature="loans" permission="add">
- *     <AddButton />   {/* only rendered if user can add loans *\/}
+ *   // Sidebar — just check if feature section is enabled (any access)
+ *   <Access feature="loans">
+ *     <SidebarItem />
  *   </Access>
  *
- *   <Access role="Admin">…</Access>
- *   <Access role={["Admin", "Manager"]}>…</Access>
+ *   // Inside the page — check a specific action
+ *   <Access feature="loans" permission="add">
+ *     <AddButton />
+ *   </Access>
  *
- *   const { can, role, isAdmin } = useAccess();
- *   if (can("loans", "edit")) { … }
+ *   const { can, canAccess, isAdmin } = useAccess();
+ *   canAccess("loans")         // feature enabled? (sidebar)
+ *   can("loans", "edit")       // specific action? (inside page)
+ *   if (isAdmin) { … }
  */
 
 "use client";
 
 import React from "react";
 import { useSession } from "next-auth/react";
-import type { UserPrivileges, FeaturePermissions } from "@/utils/user.utility";
+import type {
+  UserPrivileges,
+  FeaturePermissions,
+  UserRole,
+} from "@/utils/user.utility";
+import { USER_ROLES } from "@/utils/user.utility";
 
 // ---------------------------------------------------------------------------
 // Types
@@ -29,11 +39,13 @@ export type Feature = keyof UserPrivileges;
 
 export interface AccessProps {
   /** Feature key from UserPrivileges (e.g. "loans", "payroll") */
-  feature?: Feature;
-  /** Required permission level on that feature */
+  feature: Feature;
+  /**
+   * Required permission level.
+   * Omit to just check if the feature section is enabled (use for sidebar items).
+   * Specify to check a specific action (use for buttons/forms inside the page).
+   */
   permission?: Permission;
-  /** Required role(s). Checked independently from feature/permission. */
-  role?: string | string[];
   /** What to render when access is denied. Defaults to null. */
   fallback?: React.ReactNode;
   children: React.ReactNode;
@@ -43,32 +55,45 @@ export interface AccessProps {
 // Core logic (shared between hook and component)
 // ---------------------------------------------------------------------------
 
-const FULL_ACCESS_ROLES = ["Admin", "Manager", "Branch Manager"] as const;
+/**
+ * Checks if a feature section is enabled at all — regardless of which
+ * sub-permissions are set. Use this for sidebar visibility.
+ *
+ * An Access-Enabled User has access to a feature section if the key
+ * exists in their privilege map (even if no sub-permissions are ticked).
+ */
+export function checkFeatureEnabled(
+  role: UserRole | string | number,
+  privileges: UserPrivileges | null | undefined,
+  feature: Feature
+): boolean {
+  const roleId = Number(role);
+  if (roleId === USER_ROLES.ADMIN) return true;
+  if (roleId === USER_ROLES.MANAGER || roleId === USER_ROLES.BRANCH_MANAGER) {
+    return feature !== "usersManagement" && feature !== "setup";
+  }
+  // Access-Enabled User: feature must exist in their privilege map
+  if (!privileges) return false;
+  return feature in privileges && privileges[feature] != null;
+}
 
 /**
- * Returns true if the user has the required permission for a feature.
- * @param role           - session.user.role
- * @param privileges     - session.user.privileges
- * @param feature        - feature key
- * @param permission     - required permission level (default "view")
+ * Checks if the user can perform a specific permission on a feature.
+ * Use this for action-level checks (add button, edit form, etc.).
  */
 export function checkFeatureAccess(
-  role: string,
+  role: UserRole | string | number,
   privileges: UserPrivileges | null | undefined,
   feature: Feature,
-  permission: Permission = "view"
+  permission: Permission
 ): boolean {
+  const roleId = Number(role);
   // Admin & Manager always have full access
-  if (role === "Admin") return true;
+  if (roleId === USER_ROLES.ADMIN) return true;
 
-  // Manager: full access except user management
-  if (role === "Manager") {
-    return feature !== "usersManagement";
-  }
-
-  // Branch Manager: same as Manager (extend here if needed)
-  if (role === "Branch Manager") {
-    return feature !== "usersManagement";
+  // Manager: full access except user management and setup
+  if (roleId === USER_ROLES.MANAGER || roleId === USER_ROLES.BRANCH_MANAGER) {
+    return feature !== "usersManagement" && feature !== "setup";
   }
 
   // Access-Enabled User: check custom privilege map
@@ -88,11 +113,11 @@ export function checkFeatureAccess(
  * Returns true if the user has the required role.
  */
 export function checkRoleAccess(
-  userRole: string,
-  required: string | string[]
+  userRole: UserRole | string | number,
+  required: UserRole | UserRole[] | string | string[] | number | number[]
 ): boolean {
   const roles = Array.isArray(required) ? required : [required];
-  return roles.includes(userRole);
+  return roles.some((r) => Number(r) === Number(userRole));
 }
 
 // ---------------------------------------------------------------------------
@@ -100,45 +125,57 @@ export function checkRoleAccess(
 // ---------------------------------------------------------------------------
 
 export interface UseAccessReturn {
-  /** Current user's role string */
-  role: string | undefined;
+  /** Current user's role */
+  role: UserRole | undefined;
   /** Whether the session is still loading */
   isLoading: boolean;
   isAdmin: boolean;
   isManager: boolean;
+  isBranchManager: boolean;
   /**
-   * Check if user can perform `permission` on `feature`.
-   * Returns false while session is loading.
+   * Check if a feature section is enabled (for sidebar items).
+   * Returns true if the user has ANY access to the feature.
    */
-  can: (feature: Feature, permission?: Permission) => boolean;
+  canAccess: (feature: Feature) => boolean;
+  /**
+   * Check if user can perform a specific permission on a feature (for action buttons).
+   */
+  can: (feature: Feature, permission: Permission) => boolean;
   /**
    * Check if user has one of the given roles.
    */
-  hasRole: (role: string | string[]) => boolean;
+  hasRole: (role: UserRole | UserRole[]) => boolean;
 }
 
 export function useAccess(): UseAccessReturn {
   const { data: session, status } = useSession();
 
   const isLoading = status === "loading";
-  const role = session?.user?.role;
+  const roleId = (session?.user as any)?.roleId as number | undefined;
   const privileges = session?.user?.privileges;
 
-  const can = (feature: Feature, permission: Permission = "view"): boolean => {
-    if (isLoading || !role) return false;
-    return checkFeatureAccess(role, privileges, feature, permission);
+  const canAccess = (feature: Feature): boolean => {
+    if (isLoading || !roleId) return false;
+    return checkFeatureEnabled(roleId, privileges, feature);
   };
 
-  const hasRole = (required: string | string[]): boolean => {
-    if (isLoading || !role) return false;
-    return checkRoleAccess(role, required);
+  const can = (feature: Feature, permission: Permission): boolean => {
+    if (isLoading || !roleId) return false;
+    return checkFeatureAccess(roleId, privileges, feature, permission);
+  };
+
+  const hasRole = (required: UserRole | UserRole[]): boolean => {
+    if (isLoading || !roleId) return false;
+    return checkRoleAccess(roleId, required);
   };
 
   return {
-    role,
+    role: roleId as UserRole | undefined,
     isLoading,
-    isAdmin: role === "Admin",
-    isManager: role === "Manager",
+    isAdmin: roleId === USER_ROLES.ADMIN,
+    isManager: roleId === USER_ROLES.MANAGER,
+    isBranchManager: roleId === USER_ROLES.BRANCH_MANAGER,
+    canAccess,
     can,
     hasRole,
   };
@@ -158,7 +195,6 @@ export function useAccess(): UseAccessReturn {
 export function Access({
   feature,
   permission = "view",
-  role,
   fallback = null,
   children,
 }: AccessProps): React.ReactElement | null {
@@ -167,18 +203,12 @@ export function Access({
   // While loading, render nothing to avoid flicker
   if (status === "loading") return null;
 
-  const userRole = session?.user?.role ?? "";
+  const userRoleId = (session?.user as any)?.roleId as number | undefined;
   const privileges = session?.user?.privileges;
 
-  let hasAccess = false;
-
-  if (role) {
-    hasAccess = checkRoleAccess(userRole, role);
-  }
-
-  if (!hasAccess && feature) {
-    hasAccess = checkFeatureAccess(userRole, privileges, feature, permission);
-  }
+  const hasAccess = permission
+    ? checkFeatureAccess(userRoleId || 0, privileges, feature, permission)
+    : checkFeatureEnabled(userRoleId || 0, privileges, feature);
 
   return hasAccess ? <>{children}</> : <>{fallback}</>;
 }

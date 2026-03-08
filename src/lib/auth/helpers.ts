@@ -4,6 +4,7 @@
 
 import { auth } from "./auth";
 import { cache } from "@/lib/redis/upstash";
+import { USER_ROLES } from "@/utils/user.utility";
 
 /**
  * Get current session on server side
@@ -23,12 +24,14 @@ export async function getCurrentUser() {
 /**
  * Check if user has specific role
  */
-export async function hasRole(role: string | string[]): Promise<boolean> {
+export async function hasRole(
+  role: string | string[] | number | number[]
+): Promise<boolean> {
   const user = await getCurrentUser();
   if (!user) return false;
 
   const roles = Array.isArray(role) ? role : [role];
-  return roles.includes(user.role);
+  return roles.some((r) => Number(r) === Number(user.role));
 }
 
 /**
@@ -41,21 +44,23 @@ export async function hasPermission(
   const user = await getCurrentUser();
   if (!user) return false;
 
+  const roleId = Number(user.role);
+
   // Admin has all permissions
-  if (user.role === "Admin") return true;
+  if (roleId === USER_ROLES.ADMIN) return true;
 
   // Manager has all permissions except user management
-  if (user.role === "Manager" && feature === "users") return false;
-  if (user.role === "Manager") return true;
+  if (roleId === USER_ROLES.MANAGER && feature === "users") return false;
+  if (roleId === USER_ROLES.MANAGER) return true;
 
   // Branch Manager - check branch access
-  if (user.role === "Branch Manager") {
+  if (roleId === USER_ROLES.BRANCH_MANAGER) {
     // Add branch-specific logic here
     return true;
   }
 
   // Access-Enabled User - check custom privileges
-  if (user.role === "Access-Enabled User" && user.privileges) {
+  if (roleId === USER_ROLES.ACCESS_ENABLED && user.privileges) {
     const featurePrivileges =
       user.privileges[feature as keyof typeof user.privileges];
     if (!featurePrivileges) return false;

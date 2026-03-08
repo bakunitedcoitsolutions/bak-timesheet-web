@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import Sidebar from "./Sidebar";
 import Header from "./Header";
 import { classNames } from "primereact/utils";
+import { useAccess } from "@/components";
+import { USER_ROLES } from "@/utils/user.utility";
 
 export default function AdminLayout({
   children,
@@ -11,6 +13,8 @@ export default function AdminLayout({
   children: React.ReactNode;
 }) {
   const [collapsed, setCollapsed] = useState(false);
+  const { role } = useAccess();
+  const isAccessEnabled = Number(role) === USER_ROLES.ACCESS_ENABLED;
 
   React.useEffect(() => {
     const handleResize = () => {
@@ -30,14 +34,17 @@ export default function AdminLayout({
 
   return (
     <div className="min-h-screen bg-white flex">
-      <Sidebar collapsed={collapsed} setCollapsed={setCollapsed} />
+      {!isAccessEnabled && (
+        <Sidebar collapsed={collapsed} setCollapsed={setCollapsed} />
+      )}
 
       <div
         className={classNames(
           "flex-1 flex flex-col min-w-0 transition-all duration-300 ease-in-out",
           {
-            "md:ml-64": !collapsed,
-            "md:ml-20": collapsed,
+            "md:ml-64": !isAccessEnabled && !collapsed,
+            "md:ml-20": !isAccessEnabled && collapsed,
+            "ml-0": isAccessEnabled,
             "print:ml-0!": true,
           }
         )}

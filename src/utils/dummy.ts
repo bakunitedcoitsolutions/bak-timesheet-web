@@ -1,6 +1,15 @@
 import { PayrollEntry } from "@/utils/types";
+import { Feature } from "@/utils/user.utility";
 
-const stats = [
+export const stats: Array<{
+  title: string;
+  value: string;
+  iconBg: string;
+  icon: string;
+  bg: string;
+  link: string;
+  feature: Feature;
+}> = [
   {
     title: "Active Employees",
     value: "16,689",
@@ -8,6 +17,7 @@ const stats = [
     icon: "fa-light fa-address-card text-xl!",
     bg: "linear-gradient(180deg, rgba(99, 91, 255, 0.12) 0%, rgba(99, 91, 255, 0.03) 100%)",
     link: "/employees",
+    feature: "employees",
   },
   {
     title: "Active Projects",
@@ -16,6 +26,7 @@ const stats = [
     icon: "fa-light fa-building text-xl!",
     bg: "linear-gradient(180deg, rgba(54, 199, 108, 0.13) 0%, rgba(54, 199, 108, 0.03) 100%)",
     link: "/projects",
+    feature: "projects",
   },
   {
     title: "Active Users",
@@ -24,6 +35,7 @@ const stats = [
     iconBg: "#16CDC7",
     bg: "linear-gradient(180deg, rgba(22, 205, 199, 0.13) 0%, rgba(22, 205, 199, 0.03) 100%)",
     link: "/users",
+    feature: "usersManagement",
   },
   {
     title: "Active Loans",
@@ -32,6 +44,7 @@ const stats = [
     iconBg: "#F89F7F",
     bg: "linear-gradient(180deg, #FFC6B1 0%, rgba(255, 198, 177, 0.1) 100%)",
     link: "/loans",
+    feature: "loans",
   },
 ];
 
@@ -3205,7 +3218,6 @@ const payrollSectionsData: PayrollSection[] = [
 ];
 
 export {
-  stats,
   projectsData,
   expensesByProject,
   branches,

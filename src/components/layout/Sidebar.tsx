@@ -5,73 +5,13 @@ import { useState } from "react";
 import { classNames } from "primereact/utils";
 import { usePathname } from "next/navigation";
 
-interface MenuItem {
-  icon: string;
-  href?: string;
-  label: string;
-  divider?: boolean;
-  items?: MenuItem[];
-}
+import type { MenuItem } from "@/utils/user.utility";
+import { menuItems } from "@/utils/user.utility";
 
 interface SidebarProps {
   collapsed: boolean;
   setCollapsed: (collapsed: boolean) => void;
 }
-const menuItems: MenuItem[] = [
-  { label: "Dashboard", icon: "fa-regular fa-layer-group text-xl!", href: "/" },
-  {
-    label: "Employees",
-    icon: "fa-light fa-address-card text-xl!",
-    href: "/employees",
-  },
-  {
-    label: "Timesheet",
-    icon: "fa-light fa-calendar text-xl!",
-    href: "/timesheet",
-  },
-  {
-    label: "Projects",
-    icon: "fa-light fa-building text-xl!",
-    href: "/projects",
-  },
-  {
-    label: "Reports",
-    icon: "fa-sharp fa-light fa-file-chart-column text-xl!",
-    href: "/reports",
-  },
-  {
-    divider: true,
-    label: "",
-    icon: "",
-  },
-  { label: "Loans", icon: "fa-light fa-newspaper text-xl!", href: "/loans" },
-  {
-    label: "Traffic Violations",
-    icon: "fa-light fa-ticket text-xl!",
-    href: "/violations",
-  },
-  {
-    label: "Payroll",
-    icon: "fa-sharp fa-light fa-book-open-reader text-xl!",
-    href: "/payroll",
-  },
-  {
-    label: "Ledger",
-    icon: "fa-light fa-book-open-lines text-xl!",
-    href: "/ledger",
-  },
-  {
-    label: "Exit Re-entry",
-    icon: "fa-light fa-diamond-turn-right text-xl!",
-    href: "/exit-reentry",
-  },
-  { label: "Users Mgmt.", icon: "pi pi-users text-2xl!", href: "/users" },
-  {
-    label: "Setup",
-    icon: "fa-light fa-gear text-xl!",
-    href: "/setup",
-  },
-];
 
 export default function Sidebar({ collapsed, setCollapsed }: SidebarProps) {
   const pathname = usePathname();

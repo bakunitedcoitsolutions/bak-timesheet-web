@@ -8,6 +8,7 @@ import { MenuItem, MenuItemOptions } from "primereact/menuitem";
 import { useSession } from "next-auth/react";
 import { useSignOut } from "@/lib/db/services/user/requests";
 import { useRouter } from "next/navigation";
+import { USER_ROLES } from "@/utils/user.utility";
 
 interface HeaderProps {
   collapsed: boolean;
@@ -23,6 +24,8 @@ export default function Header({ collapsed, setCollapsed }: HeaderProps) {
 
   const userName = (session?.user as any)?.name || "User";
   const userRole = (session?.user as any)?.role || "-";
+  const userRoleId = (session?.user as any)?.roleId;
+  const isAccessEnabled = userRoleId === USER_ROLES.ACCESS_ENABLED;
 
   const handleLogout = async () => {
     try {
@@ -101,25 +104,30 @@ export default function Header({ collapsed, setCollapsed }: HeaderProps) {
   return (
     <header className="h-16 bg-white flex items-center justify-between px-6 sticky top-0 z-20 transition-all duration-300 ease-in-out print:hidden">
       <div className="flex items-center gap-4">
-        <button
-          onClick={() => setCollapsed(!collapsed)}
-          className={classNames(
-            "w-10 h-10 flex items-center justify-center cursor-pointer rounded-full  focus:outline-none transition-all duration-300",
-            {
-              "bg-primary-light text-primary": !collapsed,
-              "bg-transparent text-primary hover:bg-primary-light": collapsed,
-            }
-          )}
-        >
-          <i
-            className={classNames("pi duration-200", {
-              "rotate-0 pi-chevron-left": !collapsed,
-              "rotate-180 pi-bars text-xl!": collapsed,
-            })}
-          />
-        </button>
+        {!isAccessEnabled && (
+          <>
+            <button
+              onClick={() => setCollapsed(!collapsed)}
+              className={classNames(
+                "w-10 h-10 flex items-center justify-center cursor-pointer rounded-full  focus:outline-none transition-all duration-300",
+                {
+                  "bg-primary-light text-primary": !collapsed,
+                  "bg-transparent text-primary hover:bg-primary-light":
+                    collapsed,
+                }
+              )}
+            >
+              <i
+                className={classNames("pi duration-200", {
+                  "rotate-0 pi-chevron-left": !collapsed,
+                  "rotate-180 pi-bars text-xl!": collapsed,
+                })}
+              />
+            </button>
 
-        <div className="h-6 w-px bg-gray-200 mx-1"></div>
+            <div className="h-6 w-px bg-gray-200 mx-1"></div>
+          </>
+        )}
 
         <h1 className="text-lg font-semibold tracking-wide">{pageTitle}</h1>
       </div>

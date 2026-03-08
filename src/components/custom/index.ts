@@ -4,3 +4,4 @@ export { default as PieChart } from "./pie-chart";
 export * from "./employee";
 export * from "./users";
 export { EmployeeCard } from "./EmployeeCard";
+export * from "./home";
