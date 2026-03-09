@@ -2,21 +2,23 @@
 import { useRouter } from "next/navigation";
 import { memo, useState, useRef } from "react";
 import { useReactToPrint } from "react-to-print";
-import { centuryGothic, tanseekArabic } from "@/app/fonts";
 import { ProgressSpinner } from "primereact/progressspinner";
 
 import {
   Input,
   Button,
+  Dropdown,
   SalarySlip,
   TitleHeader,
   GroupDropdown,
   AutoScrollChips,
 } from "@/components";
+import { toastService } from "@/lib/toast";
 import { parseGroupDropdownFilter } from "@/utils/helpers";
+import { centuryGothic, tanseekArabic } from "@/app/fonts";
+import { useGlobalData } from "@/context/GlobalDataContext";
 import { useGetSalarySlipData } from "@/lib/db/services/payroll-summary";
 import { PayrollDetailEntry } from "@/lib/db/services/payroll-summary/mappers";
-import { toastService } from "@/lib/toast";
 
 // ── Salary slip grid (memoised for print performance) ─────────────────────────
 const SalarySlipGrid = memo(
@@ -56,7 +58,6 @@ const SalarySlipGrid = memo(
     );
   }
 );
-SalarySlipGrid.displayName = "SalarySlipGrid";
 
 // ── Filter section ─────────────────────────────────────────────────────────────
 const FilterSection = memo(
@@ -68,7 +69,8 @@ const FilterSection = memo(
   }: {
     onSearch: (
       employeeCodes: number[] | null,
-      filter: string | number | null
+      filter: string | number | null,
+      paymentMethodId: number | null
     ) => void;
     selectedDate: Date | null;
     onDateChange: (date: Date) => void;
@@ -78,13 +80,20 @@ const FilterSection = memo(
     const [selectedFilter, setSelectedFilter] = useState<
       string | number | null
     >("all");
+    const [paymentMethodId, setPaymentMethodId] = useState<number | null>(null);
+
+    const { data: globalData } = useGlobalData();
+    const paymentMethodOptions = globalData.paymentMethods.map((p) => ({
+      label: p.nameEn,
+      value: p.id,
+    }));
 
     const handleSearch = () => {
       const codes =
         employeeCodes.length > 0
           ? employeeCodes.map((c) => parseInt(c, 10)).filter((n) => !isNaN(n))
           : null;
-      onSearch(codes, selectedFilter);
+      onSearch(codes, selectedFilter, paymentMethodId);
     };
 
     const monthValue = selectedDate
@@ -93,7 +102,7 @@ const FilterSection = memo(
 
     return (
       <div className="bg-[#F5E6E8] w-full flex flex-col xl:flex-row justify-between gap-x-10 gap-y-4 px-6 py-6 print:hidden">
-        <div className="grid flex-1 grid-cols-1 md:grid-cols-4 lg:grid-cols-5 gap-3 items-center">
+        <div className="grid flex-1 grid-cols-1 lg:grid-cols-5 gap-3 items-center">
           {/* Month — required */}
           <div className="w-full">
             <Input
@@ -138,13 +147,24 @@ const FilterSection = memo(
             />
           </div>
 
+          {/* Payment Method */}
+          <div className="w-full">
+            <Dropdown
+              options={paymentMethodOptions}
+              value={paymentMethodId}
+              onChange={(e: any) => setPaymentMethodId(e.value ?? null)}
+              className="w-full h-10.5!"
+              placeholder="Payment Method"
+            />
+          </div>
+
           {/* Search button — disabled until month is selected */}
-          <div className="w-full col-span-1 lg:col-span-2 md:flex md:justify-end">
+          <div className="w-full lg:flex lg:justify-end">
             <Button
               size="small"
               label="Search"
               onClick={handleSearch}
-              className="w-full md:w-32 h-10!"
+              className="w-full lg:w-32 h-10!"
               disabled={!selectedDate || isLoading}
               loading={isLoading}
               tooltip={
@@ -175,7 +195,8 @@ const SalarySlipsPage = () => {
 
   const handleSearch = async (
     employeeCodes: number[] | null,
-    filter: string | number | null
+    filter: string | number | null,
+    paymentMethodId: number | null
   ) => {
     if (!selectedDate) return;
 
@@ -190,6 +211,7 @@ const SalarySlipsPage = () => {
         designationId: filterParams.designationId ?? undefined,
         payrollSectionId: filterParams.payrollSectionId ?? undefined,
         employeeCodes: employeeCodes ?? undefined,
+        paymentMethodId: paymentMethodId ?? undefined,
       });
 
       const entries = (result ?? []) as PayrollDetailEntry[];

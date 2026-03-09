@@ -106,6 +106,7 @@ export const GetSalarySlipDataSchema = z.object({
   designationId: z.number().int().optional().nullable(),
   payrollSectionId: z.number().int().optional().nullable(),
   employeeCodes: z.array(z.number().int()).optional().nullable(),
+  paymentMethodId: z.number().int().optional().nullable(),
 });
 
 export type GetSalarySlipDataInput = z.infer<typeof GetSalarySlipDataSchema>;

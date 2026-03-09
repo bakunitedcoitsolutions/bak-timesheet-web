@@ -77,12 +77,18 @@ export const getSalarySlipData = async (
     payrollSummary: { select: { payrollStatusId: true } },
   } as const;
 
+  const savedWhere: any = {
+    payrollYear,
+    payrollMonth,
+    employeeId: { in: employeeIds },
+  };
+
+  if (input.paymentMethodId !== undefined && input.paymentMethodId !== null) {
+    savedWhere.paymentMethodId = input.paymentMethodId;
+  }
+
   const savedDetails = await prisma.payrollDetails.findMany({
-    where: {
-      payrollYear,
-      payrollMonth,
-      employeeId: { in: employeeIds },
-    },
+    where: savedWhere,
     include: PAYROLL_DETAIL_INCLUDE,
     orderBy: { employee: { employeeCode: "asc" } },
   });
@@ -228,6 +234,12 @@ export const getSalarySlipData = async (
     const netChallan = previousChallanBalance + currentNetChallan;
 
     const netSalaryPayable = totalSalary - loanDeduction - challanDeduction;
+
+    // If the user expects a specific payment method, skip on-the-fly calculations
+    // since on-the-fly records don't have a payment method yet (they are pending save).
+    if (input.paymentMethodId !== undefined && input.paymentMethodId !== null) {
+      continue;
+    }
 
     // Build a synthetic PayrollDetailEntry (no DB id — use employeeId as placeholder)
     const entry: PayrollDetailEntry = {
