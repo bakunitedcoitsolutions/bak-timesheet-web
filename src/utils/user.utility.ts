@@ -112,7 +112,7 @@ export const menuItems: MenuItem[] = [
     icon: "fa-light fa-file-chart-column text-xl!",
     href: "/reports",
   },
-  { divider: true, label: "", icon: "" },
+  { divider: true, label: "", icon: "", feature: "divider" as Feature },
   {
     label: "Loans",
     description: "Manage employee loan requests and status",
