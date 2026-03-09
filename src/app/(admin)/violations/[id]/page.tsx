@@ -1,11 +1,13 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { classNames } from "primereact/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useParams, useRouter } from "next/navigation";
 import { ProgressSpinner } from "primereact/progressspinner";
+import dayjs from "dayjs";
+import { useGetPayrollSummaryStatus } from "@/lib/db/services/payroll-summary/requests";
 
 import {
   useUpdateTrafficChallan,
@@ -116,6 +118,42 @@ const UpsertChallanPage = () => {
     formState: { isSubmitting },
   } = form;
 
+  const dateValue = form.watch("date");
+
+  const { month: selectedMonth, year: selectedYear } = useMemo(() => {
+    if (isEditMode) {
+      if (!foundChallan?.date) return { month: 0, year: 0 };
+      const d = dayjs(foundChallan.date);
+      return { month: d.month() + 1, year: d.year() };
+    } else {
+      const d = dayjs(dateValue || new Date());
+      return { month: d.month() + 1, year: d.year() };
+    }
+  }, [isEditMode, foundChallan?.date, dateValue]);
+
+  const { data: payrollSummaryStatus } = useGetPayrollSummaryStatus({
+    month: selectedMonth,
+    year: selectedYear,
+  });
+
+  const isPayrollPosted = payrollSummaryStatus?.payrollStatusId === 3;
+
+  useEffect(() => {
+    if (isEditMode && isPayrollPosted) {
+      toastService.showError(
+        "Access Denied",
+        "Cannot edit traffic violation as payroll for this month is already posted."
+      );
+      router.replace("/violations");
+    } else if (isAddMode && isPayrollPosted && dateValue) {
+      toastService.showError(
+        "Error",
+        "Cannot add traffic violation for this date as payroll for this month is already posted."
+      );
+      form.setValue("date", dayjs().format("YYYY-MM-DD"));
+    }
+  }, [isEditMode, isAddMode, isPayrollPosted, dateValue, router, form]);
+
   // Redirect to 404 page if the entity is invalid
   useEffect(() => {
     if (isInvalid) {
@@ -140,6 +178,13 @@ const UpsertChallanPage = () => {
   }, [foundChallan, isEditMode, reset]);
 
   const onFormSubmit = handleSubmit(async (data) => {
+    if (isPayrollPosted) {
+      toastService.showError(
+        "Error",
+        "Cannot save as payroll for this month is already posted."
+      );
+      return;
+    }
     if (isAddMode) {
       await handleCreateChallan(data);
     } else {
