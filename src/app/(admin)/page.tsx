@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { useAccess } from "@/components";
 import {
   NormalDashboard,
@@ -11,8 +10,12 @@ import { USER_ROLES } from "@/utils/user.utility";
 const HomePage = () => {
   const { role, isLoading } = useAccess();
 
-  // Show nothing while checking access to avoid layout shifts
-  if (isLoading) return null;
+  if (isLoading)
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <div className="custom-loader"></div>
+      </div>
+    );
 
   if (Number(role) === USER_ROLES.ACCESS_ENABLED) {
     return <AccessEnabledDashboard />;
