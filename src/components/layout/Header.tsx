@@ -9,6 +9,7 @@ import { classNames } from "primereact/utils";
 import { usePathname } from "next/navigation";
 import { MenuItem, MenuItemOptions } from "primereact/menuitem";
 
+import { useAccess } from "../common";
 import { USER_ROLES } from "@/utils/user.utility";
 import { useSignOut } from "@/lib/db/services/user/requests";
 
@@ -18,6 +19,7 @@ interface HeaderProps {
 }
 
 export default function Header({ collapsed, setCollapsed }: HeaderProps) {
+  const { role, isLoading } = useAccess();
   const router = useRouter();
   const pathname = usePathname();
   const menuRight = useRef<Menu | null>(null);
@@ -26,8 +28,7 @@ export default function Header({ collapsed, setCollapsed }: HeaderProps) {
 
   const userName = (session?.user as any)?.name || "User";
   const userRole = (session?.user as any)?.role || "-";
-  const userRoleId = (session?.user as any)?.roleId;
-  const isAccessEnabled = userRoleId === USER_ROLES.ACCESS_ENABLED;
+  const isAccessEnabled = Number(role) === USER_ROLES.ACCESS_ENABLED;
 
   const handleLogout = async () => {
     try {
@@ -106,55 +107,61 @@ export default function Header({ collapsed, setCollapsed }: HeaderProps) {
   return (
     <header className="h-16 bg-white flex items-center justify-between px-6 sticky top-0 z-20 transition-all duration-300 ease-in-out print:hidden">
       <div className="flex items-center gap-4 z-10">
-        {!isAccessEnabled ? (
+        {!isLoading && (
           <>
-            <button
-              onClick={() => setCollapsed(!collapsed)}
-              className={classNames(
-                "w-10 h-10 flex items-center justify-center cursor-pointer rounded-full  focus:outline-none transition-all duration-300",
-                {
-                  "bg-primary-light text-primary": !collapsed,
-                  "bg-transparent text-primary hover:bg-primary-light":
-                    collapsed,
-                }
-              )}
-            >
-              <i
-                className={classNames("pi duration-200", {
-                  "rotate-0 pi-chevron-left": !collapsed,
-                  "rotate-180 pi-bars text-xl!": collapsed,
-                })}
-              />
-            </button>
+            {!isAccessEnabled ? (
+              <>
+                <button
+                  onClick={() => setCollapsed(!collapsed)}
+                  className={classNames(
+                    "w-10 h-10 flex items-center justify-center cursor-pointer rounded-full  focus:outline-none transition-all duration-300",
+                    {
+                      "bg-primary-light text-primary": !collapsed,
+                      "bg-transparent text-primary hover:bg-primary-light":
+                        collapsed,
+                    }
+                  )}
+                >
+                  <i
+                    className={classNames("pi duration-200", {
+                      "rotate-0 pi-chevron-left": !collapsed,
+                      "rotate-180 pi-bars text-xl!": collapsed,
+                    })}
+                  />
+                </button>
 
-            <div className="h-6 w-px bg-gray-200 mx-1"></div>
-            <h1 className="text-lg font-semibold tracking-wide">{pageTitle}</h1>
-          </>
-        ) : (
-          <Link
-            href="/"
-            className="flex items-center gap-3 cursor-pointer group"
-          >
-            {pathname !== "/" && (
-              <button className="w-10 h-10 flex items-center justify-center rounded-full bg-transparent text-primary cursor-pointer">
-                <i className="fa-regular fa-arrow-left-long text-xl!" />
-              </button>
+                <div className="h-6 w-px bg-gray-200 mx-1"></div>
+                <h1 className="text-lg font-semibold tracking-wide">
+                  {pageTitle}
+                </h1>
+              </>
+            ) : (
+              <Link
+                href="/"
+                className="flex items-center gap-3 cursor-pointer group"
+              >
+                {pathname !== "/" && (
+                  <button className="w-10 h-10 flex items-center justify-center rounded-full bg-transparent text-primary cursor-pointer">
+                    <i className="fa-regular fa-arrow-left-long text-xl!" />
+                  </button>
+                )}
+                <div className="flex items-center gap-2">
+                  <img
+                    src="/assets/images/bak_transparent_logo.png"
+                    alt="BAK United"
+                    className="h-10 object-contain group-hover:opacity-90 transition-opacity"
+                  />
+                  <span className="font-bold text-[17px] text-primary hidden md:inline group-hover:opacity-90 transition-opacity">
+                    BAK Timesheet
+                  </span>
+                </div>
+              </Link>
             )}
-            <div className="flex items-center gap-2">
-              <img
-                src="/assets/images/bak_transparent_logo.png"
-                alt="BAK United"
-                className="h-10 object-contain group-hover:opacity-90 transition-opacity"
-              />
-              <span className="font-bold text-[17px] text-primary hidden md:inline group-hover:opacity-90 transition-opacity">
-                BAK Timesheet
-              </span>
-            </div>
-          </Link>
+          </>
         )}
       </div>
 
-      {isAccessEnabled && (
+      {isAccessEnabled && !isLoading && (
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex justify-center pointer-events-none">
           <h1 className="text-lg font-semibold tracking-wide pointer-events-auto">
             {pageTitle}

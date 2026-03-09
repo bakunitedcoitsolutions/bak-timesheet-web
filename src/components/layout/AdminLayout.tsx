@@ -13,7 +13,7 @@ export default function AdminLayout({
   children: React.ReactNode;
 }) {
   const [collapsed, setCollapsed] = useState(false);
-  const { role } = useAccess();
+  const { role, isLoading } = useAccess();
   const isAccessEnabled = Number(role) === USER_ROLES.ACCESS_ENABLED;
 
   React.useEffect(() => {
@@ -34,7 +34,7 @@ export default function AdminLayout({
 
   return (
     <div className="min-h-screen bg-white flex">
-      {!isAccessEnabled && (
+      {!isAccessEnabled && !isLoading && (
         <Sidebar collapsed={collapsed} setCollapsed={setCollapsed} />
       )}
 
@@ -42,9 +42,9 @@ export default function AdminLayout({
         className={classNames(
           "flex-1 flex flex-col min-w-0 transition-all duration-300 ease-in-out",
           {
-            "md:ml-64": !isAccessEnabled && !collapsed,
-            "md:ml-20": !isAccessEnabled && collapsed,
-            "ml-0": isAccessEnabled,
+            "md:ml-64": !isAccessEnabled && !collapsed && !isLoading,
+            "md:ml-20": !isAccessEnabled && collapsed && !isLoading,
+            "ml-0": isAccessEnabled || isLoading,
             "print:ml-0!": true,
           }
         )}
