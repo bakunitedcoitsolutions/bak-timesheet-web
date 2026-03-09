@@ -52,6 +52,19 @@ export const proxy = auth((req) => {
     const user = req.auth.user as any;
     const roleId = user.roleId as number;
 
+    // Restrict /setup and /users (or /user) for all roles except Super Admin (Role ID 1)
+    if (roleId !== 1) {
+      if (
+        pathname.startsWith("/setup") ||
+        pathname.startsWith("/setup/") ||
+        pathname.startsWith("/users") ||
+        pathname.startsWith("/user/") ||
+        pathname === "/user"
+      ) {
+        return NextResponse.redirect(new URL("/", req.nextUrl.origin));
+      }
+    }
+
     // Only apply restriction logic to Access-Enabled User (Role ID 4)
     if (roleId === 4) {
       // Find the base protected route the path matches

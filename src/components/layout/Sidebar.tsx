@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 
 import type { MenuItem } from "@/utils/user.utility";
 import { menuItems } from "@/utils/user.utility";
+import { Access } from "../common";
 
 interface SidebarProps {
   collapsed: boolean;
@@ -68,144 +69,147 @@ export default function Sidebar({ collapsed, setCollapsed }: SidebarProps) {
     const expanded = isExpanded(item.label);
 
     return (
-      <li key={item.label} title={item.label}>
-        <div
-          className={classNames(
-            "flex items-center h-[44px] px-4 rounded-xl mx-auto cursor-pointer transition-colors duration-200 justify-between text-[15px] group",
-            {
-              "bg-primary text-white shadow-[0px_8px_20px_-8px_#4D5BEC3B]!":
-                isActive,
-              "bg-transparent text-black": !isActive,
-              "w-[90%]": !collapsed,
-              "w-[65%]": collapsed,
-            }
-          )}
-          onClick={() => {
-            if (hasSubmenu) {
-              if (collapsed) {
-                setCollapsed(false);
-                if (!expanded) {
+      <Access key={item.label} feature={item.feature}>
+        <li title={item.label}>
+          <div
+            className={classNames(
+              "flex items-center h-[44px] px-4 rounded-xl mx-auto cursor-pointer transition-colors duration-200 justify-between text-[15px] group",
+              {
+                "bg-primary text-white shadow-[0px_8px_20px_-8px_#4D5BEC3B]!":
+                  isActive,
+                "bg-transparent text-black": !isActive,
+                "w-[90%]": !collapsed,
+                "w-[65%]": collapsed,
+              }
+            )}
+            onClick={() => {
+              if (hasSubmenu) {
+                if (collapsed) {
+                  setCollapsed(false);
+                  if (!expanded) {
+                    toggleSubmenu(item.label);
+                  }
+                } else {
                   toggleSubmenu(item.label);
                 }
-              } else {
-                toggleSubmenu(item.label);
               }
-            }
-          }}
-        >
-          {item.href && !hasSubmenu ? (
-            <Link
-              href={item.href}
-              className={classNames(
-                "flex text-center items-center w-full gap-x-3"
-              )}
-              onClick={() => onClickMenuItem()}
-            >
-              <i
-                className={classNames(item.icon, {
-                  "text-white!": isActive,
-                  "text-[#98A4AE] group-hover:text-primary!": !isActive,
-                })}
-              />
-              {!collapsed && (
-                <span
-                  className={classNames({
-                    "font-semibold": isActive,
-                    "font-normal group-hover:text-primary!": !isActive,
+            }}
+          >
+            {item.href && !hasSubmenu ? (
+              <Link
+                href={item.href}
+                className={classNames(
+                  "flex text-center items-center w-full gap-x-3"
+                )}
+                onClick={() => onClickMenuItem()}
+              >
+                <i
+                  className={classNames(item.icon, {
+                    "text-white!": isActive,
+                    "text-[#98A4AE] group-hover:text-primary!": !isActive,
                   })}
-                >
-                  {item.label}
-                </span>
-              )}
-            </Link>
-          ) : (
-            <div className="flex items-center w-full gap-x-3">
-              <i
-                className={classNames(item.icon, {
-                  "text-white!": isActive,
-                  "text-[#98A4AE] group-hover:text-primary!": !isActive,
-                })}
-              />
-              {!collapsed && (
-                <>
+                />
+                {!collapsed && (
                   <span
-                    className={classNames("font-normal flex-1", {
-                      "text-white! font-semibold": isActive,
-                      "text-black font-normal group-hover:text-primary!":
-                        !isActive,
+                    className={classNames({
+                      "font-semibold": isActive,
+                      "font-normal group-hover:text-primary!": !isActive,
                     })}
                   >
                     {item.label}
                   </span>
-                  {hasSubmenu && (
-                    <i
-                      className={classNames(
-                        "pi pi-chevron-down text-sm! duration-200",
-                        {
-                          "rotate-0": !expanded,
-                          "rotate-180": expanded,
-                          "text-white!": isActive,
-                          "text-[#98A4AE] group-hover:text-primary!": !isActive,
-                        }
-                      )}
-                    />
-                  )}
-                </>
-              )}
-            </div>
-          )}
-        </div>
-
-        {/* Submenu */}
-        <div
-          className={classNames(
-            "overflow-hidden transition-all duration-300 ease-in-out",
-            {
-              "max-h-0": !expanded || collapsed,
-              "max-h-[1000px]": expanded && !collapsed && hasSubmenu,
-            }
-          )}
-        >
-          <ul className="list-none p-0 m-0">
-            {item.items?.map((subItem) => {
-              const isSubActive =
-                subItem.href === "/"
-                  ? pathname === "/"
-                  : pathname.startsWith(subItem.href || "");
-              return (
-                <li key={subItem.label}>
-                  <Link
-                    href={subItem.href || "#"}
-                    className={classNames(
-                      "flex items-center pl-15 pr-1 h-[40px] cursor-pointer transition-colors duration-200 group gap-x-2",
-                      {
-                        "text-primary font-semibold": isSubActive,
-                        "text-black": !isSubActive,
-                      }
-                    )}
-                    onClick={() => onClickMenuItem()}
-                  >
-                    <i
-                      className={classNames(subItem.icon, {
-                        "text-primary": isSubActive,
-                        "text-[#98A4AE] group-hover:text-primary!":
-                          !isSubActive,
-                      })}
-                    />
+                )}
+              </Link>
+            ) : (
+              <div className="flex items-center w-full gap-x-3">
+                <i
+                  className={classNames(item.icon, {
+                    "text-white!": isActive,
+                    "text-[#98A4AE] group-hover:text-primary!": !isActive,
+                  })}
+                />
+                {!collapsed && (
+                  <>
                     <span
-                      className={classNames("text-xs font-normal", {
-                        "group-hover:text-primary!": !isSubActive,
+                      className={classNames("font-normal flex-1", {
+                        "text-white! font-semibold": isActive,
+                        "text-black font-normal group-hover:text-primary!":
+                          !isActive,
                       })}
                     >
-                      {subItem.label}
+                      {item.label}
                     </span>
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      </li>
+                    {hasSubmenu && (
+                      <i
+                        className={classNames(
+                          "pi pi-chevron-down text-sm! duration-200",
+                          {
+                            "rotate-0": !expanded,
+                            "rotate-180": expanded,
+                            "text-white!": isActive,
+                            "text-[#98A4AE] group-hover:text-primary!":
+                              !isActive,
+                          }
+                        )}
+                      />
+                    )}
+                  </>
+                )}
+              </div>
+            )}
+          </div>
+
+          {/* Submenu */}
+          <div
+            className={classNames(
+              "overflow-hidden transition-all duration-300 ease-in-out",
+              {
+                "max-h-0": !expanded || collapsed,
+                "max-h-[1000px]": expanded && !collapsed && hasSubmenu,
+              }
+            )}
+          >
+            <ul className="list-none p-0 m-0">
+              {item.items?.map((subItem) => {
+                const isSubActive =
+                  subItem.href === "/"
+                    ? pathname === "/"
+                    : pathname.startsWith(subItem.href || "");
+                return (
+                  <li key={subItem.label}>
+                    <Link
+                      href={subItem.href || "#"}
+                      className={classNames(
+                        "flex items-center pl-15 pr-1 h-[40px] cursor-pointer transition-colors duration-200 group gap-x-2",
+                        {
+                          "text-primary font-semibold": isSubActive,
+                          "text-black": !isSubActive,
+                        }
+                      )}
+                      onClick={() => onClickMenuItem()}
+                    >
+                      <i
+                        className={classNames(subItem.icon, {
+                          "text-primary": isSubActive,
+                          "text-[#98A4AE] group-hover:text-primary!":
+                            !isSubActive,
+                        })}
+                      />
+                      <span
+                        className={classNames("text-xs font-normal", {
+                          "group-hover:text-primary!": !isSubActive,
+                        })}
+                      >
+                        {subItem.label}
+                      </span>
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </li>
+      </Access>
     );
   };
 

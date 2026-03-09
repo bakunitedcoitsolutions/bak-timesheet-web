@@ -73,7 +73,7 @@ export interface MenuItem {
   description?: string;
   divider?: boolean;
   items?: MenuItem[];
-  feature?: Feature; // Used to identify the privilege key matching this Menu Item
+  feature: Feature; // Used to identify the privilege key matching this Menu Item
 }
 
 export const menuItems: MenuItem[] = [
