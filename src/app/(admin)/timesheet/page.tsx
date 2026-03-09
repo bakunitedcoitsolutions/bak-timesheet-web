@@ -68,8 +68,9 @@ const TimesheetPage = () => {
   const tableRef = useRef<TableRef>(null);
 
   const { can, role } = useAccess();
-  const canEdit = can("timesheet", "edit") || can("timesheet", "full");
-  const canAdd = can("timesheet", "add") || can("timesheet", "full");
+  const hasFull = can("timesheet", "full");
+  const canEdit = can("timesheet", "edit");
+  const canAdd = can("timesheet", "add");
 
   // Derive month and year from the selected date for payroll status lookup
   const { month: selectedMonth, year: selectedYear } = useMemo(() => {
@@ -233,11 +234,12 @@ const TimesheetPage = () => {
   const isLocked = useCallback(
     (rowData: TimesheetPageRow) => {
       if (isPayrollPosted) return true;
+      if (role === 4 && hasFull) return false;
       if (role === 4 && !canEdit && rowData.timesheetId) return true;
       if (role === 4 && !canAdd && !rowData.timesheetId) return true;
       return false;
     },
-    [isPayrollPosted, canEdit, canAdd, role]
+    [isPayrollPosted, canEdit, canAdd, role, hasFull]
   );
 
   const columns = useMemo(

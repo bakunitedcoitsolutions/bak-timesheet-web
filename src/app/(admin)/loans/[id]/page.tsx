@@ -30,7 +30,7 @@ import {
   NumberInput,
   Textarea,
 } from "@/components/forms";
-import { StepperFormHeading } from "@/components";
+import { StepperFormHeading, useAccess } from "@/components";
 
 const loanTypeOptions = [
   { label: "Loan", value: "LOAN" },
@@ -52,9 +52,33 @@ const UpsertLoanPage = () => {
 
   const { mutateAsync: createLoan } = useCreateLoan();
   const { mutateAsync: updateLoan } = useUpdateLoan();
-  const { data: foundLoan, isLoading } = useGetLoanById({
+  const { data: foundLoan, isLoading: isLoanLoading } = useGetLoanById({
     id: loanId ? Number(loanId) : 0,
   });
+
+  const { can, isLoading: isAccessLoading } = useAccess();
+  const canEdit = can("loans", "edit") || can("loans", "full");
+  const canAdd = can("loans", "add") || can("loans", "full");
+
+  // Redirect if insufficient permissions
+  useEffect(() => {
+    if (isAccessLoading) return;
+    if (isAddMode && !canAdd) {
+      toastService.showError(
+        "Access Denied",
+        "You do not have permission to add loans."
+      );
+      router.replace("/loans");
+    } else if (isEditMode && !canEdit) {
+      toastService.showError(
+        "Access Denied",
+        "You do not have permission to edit loans."
+      );
+      router.replace("/loans");
+    }
+  }, [isAddMode, isEditMode, canAdd, canEdit, isAccessLoading, router]);
+
+  const isLoading = isLoanLoading || isAccessLoading;
 
   // Fetch employees
   const { data: globalData } = useGlobalData();

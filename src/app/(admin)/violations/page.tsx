@@ -9,6 +9,7 @@ import {
   Table,
   Button,
   TableRef,
+  useAccess,
   TypeBadge,
   TableColumn,
   TableActions,
@@ -34,6 +35,7 @@ import {
   parseExcelFile,
   downloadSampleTemplate,
 } from "@/lib/db/services/traffic-challan/bulk-upload-utils";
+import { useGetPayrollSummaryStatus } from "@/lib/db/services/payroll-summary/requests";
 import { ListedTrafficChallan } from "@/lib/db/services/traffic-challan/traffic-challan.dto";
 import { ListTrafficChallansSortableField } from "@/lib/db/services/traffic-challan/traffic-challan.dto";
 
@@ -58,7 +60,10 @@ type SortableField = keyof typeof SORTABLE_FIELDS;
 
 const columns = (
   handleEdit: (challan: ListedTrafficChallan) => void,
-  handleDelete: (challan: ListedTrafficChallan) => void
+  handleDelete: (challan: ListedTrafficChallan) => void,
+  isLocked: (challan: ListedTrafficChallan) => boolean,
+  canEdit: boolean,
+  role: number | string | undefined
 ): TableColumn<ListedTrafficChallan>[] => [
   {
     field: "id",
@@ -141,21 +146,25 @@ const columns = (
       <span className="text-sm line-clamp-2">{rowData.description || "-"}</span>
     ),
   },
-  {
-    field: "actions",
-    header: "Actions",
-    sortable: false,
-    filterable: false,
-    align: "center",
-    style: { minWidth: 150 },
-    body: (rowData: ListedTrafficChallan) => (
-      <TableActions
-        rowData={rowData}
-        onEdit={handleEdit}
-        onDelete={handleDelete}
-      />
-    ),
-  },
+  ...(canEdit
+    ? [
+        {
+          field: "actions",
+          header: "Actions",
+          sortable: false,
+          filterable: false,
+          align: "center",
+          style: { minWidth: 150 },
+          body: (rowData: ListedTrafficChallan) => (
+            <TableActions
+              rowData={rowData}
+              onEdit={!isLocked(rowData) ? handleEdit : undefined}
+              onDelete={Number(role) !== 4 ? handleDelete : undefined}
+            />
+          ),
+        } as TableColumn<ListedTrafficChallan>,
+      ]
+    : []),
 ];
 
 const ChallansPage = () => {
@@ -175,6 +184,33 @@ const ChallansPage = () => {
   const { mutateAsync: deleteTrafficChallan } = useDeleteTrafficChallan();
   const { mutateAsync: bulkUploadTrafficChallans } =
     useBulkUploadTrafficChallans();
+
+  const { can, role } = useAccess();
+  const hasFull = can("trafficViolations", "full");
+  const canEdit = can("trafficViolations", "edit");
+  const canAdd = can("trafficViolations", "add");
+
+  const { month: selectedMonth, year: selectedYear } = useMemo(() => {
+    const d = dayjs(selectedDate || new Date());
+    return { month: d.month() + 1, year: d.year() };
+  }, [selectedDate]);
+
+  const { data: payrollSummaryStatus } = useGetPayrollSummaryStatus({
+    month: selectedMonth,
+    year: selectedYear,
+  });
+
+  const isPayrollPosted = payrollSummaryStatus?.payrollStatusId === 3;
+
+  const isLocked = useCallback(
+    (rowData: ListedTrafficChallan) => {
+      if (isPayrollPosted) return true;
+      if (role === 4 && hasFull) return false;
+      if (role === 4 && !canEdit) return true;
+      return false;
+    },
+    [isPayrollPosted, canEdit, role, hasFull]
+  );
 
   // Debounce search input
   const debouncedSearch = useDebounce(searchValue, 500);
@@ -313,8 +349,8 @@ const ChallansPage = () => {
 
   // Memoized columns
   const tableColumns = useMemo(
-    () => columns(handleEdit, handleDelete),
-    [handleEdit, handleDelete]
+    () => columns(handleEdit, handleDelete, isLocked, canEdit, role),
+    [handleEdit, handleDelete, isLocked, canEdit, role]
   );
 
   // Bulk upload handlers
@@ -427,14 +463,16 @@ const ChallansPage = () => {
               buttonClassName="w-full md:w-auto h-9!"
             />
           </div>
-          <div className="w-full lg:w-auto">
-            <BulkUploadOptions
-              uploadCSV={handleUploadCSV}
-              uploadExcel={handleUploadExcel}
-              downloadTemplate={downloadSampleTemplate}
-              buttonClassName="w-full md:w-auto h-9!"
-            />
-          </div>
+          {canAdd && (
+            <div className="w-full lg:w-auto">
+              <BulkUploadOptions
+                uploadCSV={handleUploadCSV}
+                uploadExcel={handleUploadExcel}
+                downloadTemplate={downloadSampleTemplate}
+                buttonClassName="w-full md:w-auto h-9!"
+              />
+            </div>
+          )}
         </div>
       </div>
     );
@@ -459,15 +497,17 @@ const ChallansPage = () => {
               View, manage traffic Violation records, and Violation details.
             </p>
           </div>
-          <div className="w-full md:w-auto">
-            <Button
-              size="small"
-              variant="solid"
-              icon="pi pi-plus"
-              label="Add Violation"
-              onClick={() => router.push("/violations/new")}
-            />
-          </div>
+          {canAdd && (
+            <div className="w-full md:w-auto">
+              <Button
+                size="small"
+                variant="solid"
+                icon="pi pi-plus"
+                label="Add Violation"
+                onClick={() => router.push("/violations/new")}
+              />
+            </div>
+          )}
         </div>
         <div className="bg-white flex-1 rounded-xl overflow-hidden min-h-0">
           <Table

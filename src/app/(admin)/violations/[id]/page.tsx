@@ -30,7 +30,7 @@ import {
   NumberInput,
   Textarea,
 } from "@/components/forms";
-import { StepperFormHeading } from "@/components";
+import { StepperFormHeading, useAccess } from "@/components";
 
 const challanTypeOptions = [
   { label: "Challan", value: "CHALLAN" },
@@ -52,9 +52,36 @@ const UpsertChallanPage = () => {
 
   const { mutateAsync: createTrafficChallan } = useCreateTrafficChallan();
   const { mutateAsync: updateTrafficChallan } = useUpdateTrafficChallan();
-  const { data: foundChallan, isLoading } = useGetTrafficChallanById({
-    id: challanId ? Number(challanId) : 0,
-  });
+  const { data: foundChallan, isLoading: isChallanLoading } =
+    useGetTrafficChallanById({
+      id: challanId ? Number(challanId) : 0,
+    });
+
+  const { can, isLoading: isAccessLoading } = useAccess();
+  const canEdit =
+    can("trafficViolations", "edit") || can("trafficViolations", "full");
+  const canAdd =
+    can("trafficViolations", "add") || can("trafficViolations", "full");
+
+  // Redirect if insufficient permissions
+  useEffect(() => {
+    if (isAccessLoading) return;
+    if (isAddMode && !canAdd) {
+      toastService.showError(
+        "Access Denied",
+        "You do not have permission to add traffic violations."
+      );
+      router.replace("/violations");
+    } else if (isEditMode && !canEdit) {
+      toastService.showError(
+        "Access Denied",
+        "You do not have permission to edit traffic violations."
+      );
+      router.replace("/violations");
+    }
+  }, [isAddMode, isEditMode, canAdd, canEdit, isAccessLoading, router]);
+
+  const isLoading = isChallanLoading || isAccessLoading;
 
   // Fetch employees
   const { data: globalData } = useGlobalData();
