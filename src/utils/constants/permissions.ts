@@ -74,8 +74,6 @@ export const FEATURES_CONFIG: FeatureConfig[] = [
     key: "payroll",
     label: "Payroll",
     permissions: [
-      { key: "full", label: "Full Access" },
-      { key: "add", label: "Add Payroll" },
       { key: "edit", label: "Edit Payroll" },
       { key: "view", label: "View Payroll" },
     ],
@@ -83,11 +81,6 @@ export const FEATURES_CONFIG: FeatureConfig[] = [
   {
     key: "ledger",
     label: "Ledger",
-    permissions: [{ key: "full", label: "Full Access" }],
-  },
-  {
-    key: "setup",
-    label: "Setup",
     permissions: [{ key: "full", label: "Full Access" }],
   },
   {
