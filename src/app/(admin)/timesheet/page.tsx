@@ -19,11 +19,12 @@ import {
   BulkUploadDialog,
   BulkUploadReportDialog,
   CustomHeaderProps,
+  useAccess,
 } from "@/components";
 import { useDebounce } from "@/hooks";
 import { toastService } from "@/lib/toast";
-import { useGlobalData, GlobalDataGeneral } from "@/context/GlobalDataContext";
 import { parseGroupDropdownFilter, getErrorMessage } from "@/utils/helpers";
+import { useGlobalData, GlobalDataGeneral } from "@/context/GlobalDataContext";
 import {
   useGetTimesheetPageData,
   useSaveTimesheetEntries,
@@ -65,6 +66,10 @@ const TimesheetPage = () => {
   const [showReportDialog, setShowReportDialog] = useState(false);
   const [uploadedFileName, setUploadedFileName] = useState<string>("");
   const tableRef = useRef<TableRef>(null);
+
+  const { can, role } = useAccess();
+  const canEdit = can("timesheet", "edit") || can("timesheet", "full");
+  const canAdd = can("timesheet", "add") || can("timesheet", "full");
 
   // Derive month and year from the selected date for payroll status lookup
   const { month: selectedMonth, year: selectedYear } = useMemo(() => {
@@ -225,9 +230,15 @@ const TimesheetPage = () => {
 
   const isPayrollPosted = payrollSummaryStatus?.payrollStatusId === 3;
 
-  const isLocked = (rowData: TimesheetPageRow) => {
-    return rowData.isLocked || isPayrollPosted;
-  };
+  const isLocked = useCallback(
+    (rowData: TimesheetPageRow) => {
+      if (isPayrollPosted) return true;
+      if (role === 4 && !canEdit && rowData.timesheetId) return true;
+      if (role === 4 && !canAdd && !rowData.timesheetId) return true;
+      return false;
+    },
+    [isPayrollPosted, canEdit, canAdd, role]
+  );
 
   const columns = useMemo(
     (): TableColumn<TimesheetPageRow>[] => [
@@ -515,7 +526,7 @@ const TimesheetPage = () => {
         ),
       },
     ],
-    [projectOptions, isLoadingTimesheet]
+    [projectOptions, isLoadingTimesheet, isLocked]
   );
 
   const updateTimesheetEntries = async () => {
@@ -697,24 +708,28 @@ const TimesheetPage = () => {
               buttonClassName="w-full lg:w-auto h-9!"
             />
           </div>
-          <div className="w-full lg:w-auto">
-            <BulkUploadOptions
-              uploadCSV={handleUploadCSV}
-              uploadExcel={handleUploadExcel}
-              downloadTemplate={downloadSampleTemplate}
-              buttonClassName="w-full lg:w-auto h-9!"
-            />
-          </div>
-          <div className=" w-full lg:w-auto">
-            <Button
-              size="small"
-              label="Update"
-              loading={isLoading}
-              disabled={isLoadingTimesheet}
-              onClick={updateTimesheetEntries}
-              className="w-full xl:w-28 2xl:w-32 h-10!"
-            />
-          </div>
+          {canAdd && (
+            <div className="w-full lg:w-auto">
+              <BulkUploadOptions
+                uploadCSV={handleUploadCSV}
+                uploadExcel={handleUploadExcel}
+                downloadTemplate={downloadSampleTemplate}
+                buttonClassName="w-full lg:w-auto h-9!"
+              />
+            </div>
+          )}
+          {(canAdd || canEdit) && (
+            <div className=" w-full lg:w-auto">
+              <Button
+                size="small"
+                label="Update"
+                loading={isLoading}
+                disabled={isLoadingTimesheet}
+                onClick={updateTimesheetEntries}
+                className="w-full xl:w-28 2xl:w-32 h-10!"
+              />
+            </div>
+          )}
         </div>
       </div>
     );

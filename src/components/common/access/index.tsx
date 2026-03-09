@@ -145,15 +145,14 @@ export interface UseAccessReturn {
    * Check if user has one of the given roles.
    */
   hasRole: (role: UserRole | UserRole[]) => boolean;
+  privileges: UserPrivileges | null | undefined;
 }
 
 export function useAccess(): UseAccessReturn {
   const { data: session, status } = useSession();
-
   const isLoading = status === "loading";
   const roleId = (session?.user as any)?.roleId as number | undefined;
   const privileges = session?.user?.privileges;
-
   const canAccess = (feature: Feature): boolean => {
     if (isLoading || !roleId) return false;
     return checkFeatureEnabled(roleId, privileges, feature);
@@ -178,6 +177,7 @@ export function useAccess(): UseAccessReturn {
     canAccess,
     can,
     hasRole,
+    privileges,
   };
 }
 
