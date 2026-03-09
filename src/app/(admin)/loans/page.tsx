@@ -71,6 +71,7 @@ const columns = (
   handleDelete: (loan: ListedLoan) => void,
   isLocked: (loan: ListedLoan) => boolean,
   canEdit: boolean,
+  isPayrollPosted: boolean,
   role: number | string | undefined
 ): TableColumn<ListedLoan>[] => [
   {
@@ -154,7 +155,7 @@ const columns = (
       <span className="text-sm line-clamp-2">{rowData.remarks || "-"}</span>
     ),
   },
-  ...(canEdit
+  ...(canEdit && !isPayrollPosted
     ? [
         {
           field: "actions",
@@ -167,7 +168,11 @@ const columns = (
             <TableActions
               rowData={rowData}
               onEdit={!isLocked(rowData) ? handleEdit : undefined}
-              onDelete={Number(role) !== 4 ? handleDelete : undefined}
+              onDelete={
+                Number(role) !== 4 && !isLocked(rowData)
+                  ? handleDelete
+                  : undefined
+              }
             />
           ),
         } as TableColumn<ListedLoan>,
@@ -378,8 +383,16 @@ const LoansPage = () => {
 
   // Memoized columns
   const tableColumns = useMemo(
-    () => columns(handleEdit, handleDelete, isLocked, canEdit, role),
-    [handleEdit, handleDelete, isLocked, canEdit, role]
+    () =>
+      columns(
+        handleEdit,
+        handleDelete,
+        isLocked,
+        canEdit,
+        isPayrollPosted,
+        role
+      ),
+    [handleEdit, handleDelete, isLocked, canEdit, role, isPayrollPosted]
   );
 
   // Bulk upload handlers

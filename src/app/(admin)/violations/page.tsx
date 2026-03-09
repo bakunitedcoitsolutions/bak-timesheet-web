@@ -63,6 +63,7 @@ const columns = (
   handleDelete: (challan: ListedTrafficChallan) => void,
   isLocked: (challan: ListedTrafficChallan) => boolean,
   canEdit: boolean,
+  isPayrollPosted: boolean,
   role: number | string | undefined
 ): TableColumn<ListedTrafficChallan>[] => [
   {
@@ -146,7 +147,7 @@ const columns = (
       <span className="text-sm line-clamp-2">{rowData.description || "-"}</span>
     ),
   },
-  ...(canEdit
+  ...(canEdit && !isPayrollPosted
     ? [
         {
           field: "actions",
@@ -159,7 +160,11 @@ const columns = (
             <TableActions
               rowData={rowData}
               onEdit={!isLocked(rowData) ? handleEdit : undefined}
-              onDelete={Number(role) !== 4 ? handleDelete : undefined}
+              onDelete={
+                Number(role) !== 4 && !isLocked(rowData)
+                  ? handleDelete
+                  : undefined
+              }
             />
           ),
         } as TableColumn<ListedTrafficChallan>,
@@ -202,15 +207,12 @@ const ChallansPage = () => {
 
   const isPayrollPosted = payrollSummaryStatus?.payrollStatusId === 3;
 
-  const isLocked = useCallback(
-    (rowData: ListedTrafficChallan) => {
-      if (isPayrollPosted) return true;
-      if (role === 4 && hasFull) return false;
-      if (role === 4 && !canEdit) return true;
-      return false;
-    },
-    [isPayrollPosted, canEdit, role, hasFull]
-  );
+  const isLocked = useCallback(() => {
+    if (isPayrollPosted) return true;
+    if (role === 4 && hasFull) return false;
+    if (role === 4 && !canEdit) return true;
+    return false;
+  }, [isPayrollPosted, canEdit, role, hasFull]);
 
   // Debounce search input
   const debouncedSearch = useDebounce(searchValue, 500);
@@ -347,10 +349,23 @@ const ChallansPage = () => {
     [page, handlePageReset, handleSortByChange, handleSortOrderChange]
   );
 
+  // // Memoized columns
+  // const tableColumns = useMemo(
+  //   () => columns(handleEdit, handleDelete, isLocked, canEdit, role),
+  //   [handleEdit, handleDelete, isLocked, canEdit, role]
+  // );
   // Memoized columns
   const tableColumns = useMemo(
-    () => columns(handleEdit, handleDelete, isLocked, canEdit, role),
-    [handleEdit, handleDelete, isLocked, canEdit, role]
+    () =>
+      columns(
+        handleEdit,
+        handleDelete,
+        isLocked,
+        canEdit,
+        isPayrollPosted,
+        role
+      ),
+    [handleEdit, handleDelete, isLocked, canEdit, role, isPayrollPosted]
   );
 
   // Bulk upload handlers
