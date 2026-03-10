@@ -157,7 +157,7 @@ model Employee {
   employeeCode   Int       @unique
   nameEn         String
   nameAr         String?
-  dob            DateTime?
+  dob            DateTime? @db.Date
   phone          String?
 
   // Step 2
@@ -177,24 +177,24 @@ model Employee {
   foodAllowance      Int?
   mobileAllowance    Int?
   otherAllowance     Int?
-  contractStartDate  DateTime?
-  contractEndDate    DateTime?
+  contractStartDate  DateTime? @db.Date
+  contractEndDate    DateTime? @db.Date
   contractDocument   String?
   contractEndReason  String?   @db.Text
-  joiningDate        DateTime?
+  joiningDate        DateTime? @db.Date
 
   // Step 3
   idCardNo           String?
-  idCardExpiryDate   DateTime?
+  idCardExpiryDate   DateTime? @db.Date
   idCardDocument     String?
   profession         String?
   nationalityId      Int?
   passportNo         String?
-  passportExpiryDate DateTime?
+  passportExpiryDate DateTime? @db.Date
   passportDocument   String?
 
-  lastExitDate  DateTime?
-  lastEntryDate DateTime?
+  lastExitDate  DateTime? @db.Date
+  lastEntryDate DateTime? @db.Date
 
   // Step 4
   bankName   String?
@@ -291,7 +291,7 @@ model Project {
 model Timesheet {
   id               Int      @id @default(autoincrement())
   employeeId       Int
-  date             DateTime // Compulsory date field
+  date             DateTime @db.Date // Compulsory date field
   project1Id       Int?
   project1Hours    Int?
   project1Overtime Int?
@@ -471,7 +471,7 @@ enum LoanType {
 model Loan {
   id         Int      @id @default(autoincrement())
   employeeId Int
-  date       DateTime
+  date       DateTime @db.Date
   type       LoanType
   amount     Int
   remarks    String?  @db.Text
@@ -501,7 +501,7 @@ enum TrafficChallanType {
 model TrafficChallan {
   id          Int                @id @default(autoincrement())
   employeeId  Int
-  date        DateTime
+  date        DateTime           @db.Date
   type        TrafficChallanType
   amount      Int
   description String?            @db.Text
@@ -532,7 +532,7 @@ model ExitReentry {
   id            Int             @id @default(autoincrement())
   employeeId    Int
   designationId Int?
-  date          DateTime
+  date          DateTime        @db.Date
   type          ExitReentryType
   remarks       String?         @db.Text
   createdAt     DateTime        @default(now())
@@ -566,7 +566,7 @@ enum AmountType {
 model Ledger {
   id               Int        @id @default(autoincrement())
   employeeId       Int?
-  date             DateTime
+  date             DateTime   @db.Date
   type             LedgerType
   amountType       AmountType
   amount           Int
@@ -603,8 +603,8 @@ model AllowanceNotAvailable {
   nameEn      String // e.g., "Ramadan 2026"
   nameAr      String? // e.g., "رمضان 2026"
   description String?       @db.Text // Optional description/reason
-  startDate   DateTime // Start date of the exclusion period
-  endDate     DateTime // End date of the exclusion period
+  startDate   DateTime      @db.Date // Start date of the exclusion period
+  endDate     DateTime      @db.Date // End date of the exclusion period
   type        AllowanceType // Type of allowance to exclude (BREAKFAST)
   isActive    Boolean       @default(true) // Allow soft disable without deletion
   createdAt   DateTime      @default(now())
