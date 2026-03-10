@@ -4,6 +4,7 @@
  */
 
 import { prisma } from "@/lib/db/prisma";
+import dayjs from "@/lib/dayjs";
 import { AllowanceType } from "../../../../../prisma/generated/prisma/enums";
 import {
   CreateAllowanceNotAvailableData,
@@ -32,7 +33,7 @@ const allowanceNotAvailableSelect = {
 const normalizeDate = (date: Date | string | undefined): Date | null => {
   if (!date) return null;
   if (date instanceof Date) return date;
-  return new Date(date);
+  return dayjs(date).toDate();
 };
 
 /**
