@@ -82,6 +82,30 @@ export const proxy = auth((req) => {
           // Redirect to the dashboard
           return NextResponse.redirect(new URL("/", req.nextUrl.origin));
         }
+
+        // Additional check for specific reports
+        if (
+          featureKey === "reports" &&
+          pathname !== "/reports" &&
+          pathname.startsWith("/reports/")
+        ) {
+          // Extract the reportId from pathname, e.g., '/reports/payroll' -> 'payroll'
+          const pathSegments = pathname.split("/").filter(Boolean);
+          const reportId = pathSegments[1];
+
+          if (reportId) {
+            const reportItems = featurePermissions.items || [];
+            const isReportAllowed = reportItems.some(
+              (item: any) => item.reportId === reportId && item.enabled
+            );
+
+            if (!isReportAllowed) {
+              return NextResponse.redirect(
+                new URL("/reports", req.nextUrl.origin)
+              );
+            }
+          }
+        }
       }
     }
   }
