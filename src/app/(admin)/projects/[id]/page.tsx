@@ -29,11 +29,13 @@ import {
   FormItem,
   Textarea,
 } from "@/components/forms";
-import { StepperFormHeading } from "@/components";
+import { StepperFormHeading, useAccess } from "@/components";
 
 const UpsertProjectPage = () => {
   const router = useRouter();
   const { id: projectIdParam } = useParams();
+  const { role } = useAccess();
+  const isAccessEnabledUser = role === 4;
   const {
     isInvalid,
     isAddMode,
@@ -81,12 +83,18 @@ const UpsertProjectPage = () => {
     formState: { isSubmitting, errors },
   } = form;
 
-  // Redirect to 404 page if the entity is invalid
+  // Redirect to 404 page if the entity is invalid or user lacks access
   useEffect(() => {
     if (isInvalid) {
       router.replace("/404");
+    } else if (isAccessEnabledUser) {
+      toastService.showError(
+        "Access Denied",
+        "You do not have permission to access this page"
+      );
+      router.replace("/projects");
     }
-  }, [isInvalid, router]);
+  }, [isInvalid, isAccessEnabledUser, router]);
 
   useEffect(() => {
     if (foundProject) {

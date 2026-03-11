@@ -13,6 +13,7 @@ import {
   TableColumn,
   TableActions,
   ExportOptions,
+  useAccess,
 } from "@/components";
 import {
   getErrorMessage,
@@ -50,7 +51,8 @@ type SortableField = keyof typeof SORTABLE_FIELDS;
 
 const columns = (
   handleEdit: (project: ListedProject) => void,
-  handleDelete: (project: ListedProject) => void
+  handleDelete: (project: ListedProject) => void,
+  isAccessEnabledUser: boolean
 ): TableColumn<ListedProject>[] => [
   {
     field: "id",
@@ -117,21 +119,25 @@ const columns = (
       />
     ),
   },
-  {
-    field: "actions",
-    header: "Actions",
-    sortable: false,
-    filterable: false,
-    align: "center",
-    style: { minWidth: 150 },
-    body: (rowData: ListedProject) => (
-      <TableActions
-        rowData={rowData}
-        onEdit={handleEdit}
-        onDelete={handleDelete}
-      />
-    ),
-  },
+  ...(!isAccessEnabledUser
+    ? [
+        {
+          field: "actions",
+          header: "Actions",
+          sortable: false,
+          filterable: false,
+          align: "center" as const,
+          style: { minWidth: 150 },
+          body: (rowData: ListedProject) => (
+            <TableActions
+              rowData={rowData}
+              onEdit={handleEdit}
+              onDelete={handleDelete}
+            />
+          ),
+        },
+      ]
+    : []),
 ];
 
 const ProjectsPage = () => {
@@ -142,6 +148,7 @@ const ProjectsPage = () => {
   const [sortBy, setSortBy] = useState<
     SortableField | ListProjectsSortableField
   >("createdAt");
+  const { role } = useAccess();
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
   const [columnFilters, setColumnFilters] = useState<Record<string, string>>(
     {}
@@ -196,6 +203,7 @@ const ProjectsPage = () => {
     description: debouncedColumnFilters.description,
   });
 
+  const isAccessEnabledUser = role === 4;
   const projects = projectsResponse?.projects ?? [];
   const {
     total,
@@ -293,8 +301,8 @@ const ProjectsPage = () => {
 
   // Memoized columns
   const tableColumns = useMemo(
-    () => columns(handleEdit, handleDelete),
-    [handleEdit, handleDelete]
+    () => columns(handleEdit, handleDelete, isAccessEnabledUser),
+    [handleEdit, handleDelete, isAccessEnabledUser]
   );
 
   // Memoized header renderer
@@ -334,15 +342,17 @@ const ProjectsPage = () => {
             View, manage project records, and project details.
           </p>
         </div>
-        <div className="w-full md:w-auto">
-          <Button
-            size="small"
-            variant="solid"
-            icon="pi pi-plus"
-            label="New Project"
-            onClick={() => router.push("/projects/new")}
-          />
-        </div>
+        {!isAccessEnabledUser && (
+          <div className="w-full md:w-auto">
+            <Button
+              size="small"
+              variant="solid"
+              icon="pi pi-plus"
+              label="New Project"
+              onClick={() => router.push("/projects/new")}
+            />
+          </div>
+        )}
       </div>
       <div className="bg-white flex-1 rounded-xl overflow-hidden min-h-0">
         <Table
