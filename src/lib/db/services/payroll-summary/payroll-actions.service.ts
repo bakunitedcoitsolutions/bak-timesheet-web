@@ -18,6 +18,37 @@ const getMonthDateRange = (year: number, month: number) => {
   return { startDate, endDate };
 };
 
+// Helper to determine how net salary is split between card and cash
+const getSalarySplit = (
+  netSalaryPayable: number,
+  existingCard: number = 0,
+  existingCash: number = 0
+) => {
+  const netSal = Number(netSalaryPayable);
+  let cardSalary: number;
+  let cashSalary: number;
+
+  if (existingCard > 0 && existingCash === 0) {
+    // Card only — all goes to card
+    cardSalary = netSal;
+    cashSalary = 0;
+  } else if (existingCash > 0 && existingCard === 0) {
+    // Cash only — all goes to cash
+    cashSalary = netSal;
+    cardSalary = 0;
+  } else if (existingCard > 0 && existingCash > 0) {
+    // Both — cash stays the same, card = net - cash
+    cashSalary = existingCash;
+    cardSalary = netSal - existingCash;
+  } else {
+    // Fallback or new record — default to card
+    cardSalary = netSal;
+    cashSalary = 0;
+  }
+
+  return { cardSalary, cashSalary };
+};
+
 // --- Helper: Shared Calculation Logic ---
 const calculateAndSavePayroll = async (
   payrollId: number,
@@ -329,8 +360,7 @@ const calculateAndSavePayroll = async (
       challanDeduction: Number(challanDeduction),
       netChallan: Number(netChallan),
       netSalaryPayable: Number(netSalaryPayable),
-      cardSalary: Number(netSalaryPayable),
-      cashSalary: 0,
+      ...getSalarySplit(netSalaryPayable),
       overTime: Number(totalOTHours),
       remarks: "",
       payrollStatusId: statusId,
@@ -831,6 +861,13 @@ export const repostPayroll = async ({
       );
       const netSalaryPayable =
         totalSalary - preservedLoanDeduction - preservedChallanDeduction;
+      const netSal = Number(netSalaryPayable);
+
+      const split = getSalarySplit(
+        netSal,
+        Number(existingRow.cardSalary || 0),
+        Number(existingRow.cashSalary || 0)
+      );
 
       await prisma.payrollDetails.update({
         where: { id: existingRow.id },
@@ -847,9 +884,11 @@ export const repostPayroll = async ({
           currentLoan: Number(currentNetLoan),
           previousChallan: Number(previousChallanBalance),
           currentChallan: Number(currentNetChallan),
-          netSalaryPayable: Number(netSalaryPayable),
+          netSalaryPayable: netSal,
+          cardSalary: split.cardSalary,
+          cashSalary: split.cashSalary,
           // loanDeduction, netLoan, challanDeduction, netChallan,
-          // cardSalary, cashSalary, remarks, paymentMethodId, payrollStatusId preserved
+          // remarks, paymentMethodId, payrollStatusId preserved
         },
       });
     } else {
@@ -880,8 +919,7 @@ export const repostPayroll = async ({
           challanDeduction: Number(challanDeduction),
           netChallan: previousChallanBalance + currentNetChallan,
           netSalaryPayable: Number(netSalaryPayable),
-          cardSalary: Number(netSalaryPayable),
-          cashSalary: 0,
+          ...getSalarySplit(netSalaryPayable),
           remarks: "",
           payrollStatusId: 1, // Pending
           branchId: emp.branchId,
@@ -1228,8 +1266,13 @@ export const refreshPayrollDetailRow = async ({
       currentChallan: Number(currentNetChallan),
       // Net salary recalculated against preserved deductions
       netSalaryPayable: Number(netSalaryPayable),
+      ...getSalarySplit(
+        netSalaryPayable,
+        Number(existingDetail.cardSalary || 0),
+        Number(existingDetail.cashSalary || 0)
+      ),
       // Preserved — loanDeduction, netLoan, challanDeduction, netChallan,
-      // cardSalary, cashSalary, remarks, paymentMethodId, payrollStatusId
+      // remarks, paymentMethodId, payrollStatusId
       // are intentionally NOT updated here.
     },
   });
