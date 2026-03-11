@@ -22,6 +22,11 @@ import { formatNum, formatPayrollPeriod } from "@/utils/helpers";
 import { useGlobalData } from "@/context/GlobalDataContext";
 import ModifiedMultiSelect from "@/components/forms/multi-select";
 import { printPayrollReport } from "@/utils/helpers/print-payroll-report";
+import {
+  exportPayrollExcel,
+  exportPayrollCSV,
+  PayrollReportRow as ExportPayrollReportRow,
+} from "@/utils/helpers/export-payroll-report";
 import { PayrollDetailEntry } from "@/lib/db/services/payroll-summary/mappers";
 import { useGetPayrollReport } from "@/lib/db/services/payroll-summary/requests";
 
@@ -612,8 +617,22 @@ const PayrollReportPage = () => {
           renderInput={() => (
             <div className="flex items-center gap-5">
               <ExportOptions
-                exportCSV={() => {}}
-                exportExcel={() => {}}
+                exportCSV={() => {
+                  if (allRows.length === 0) return;
+                  exportPayrollCSV(
+                    allRows as ExportPayrollReportRow[],
+                    appliedQuery.month,
+                    appliedQuery.year
+                  );
+                }}
+                exportExcel={() => {
+                  if (allRows.length === 0) return;
+                  exportPayrollExcel(
+                    allRows as ExportPayrollReportRow[],
+                    appliedQuery.month,
+                    appliedQuery.year
+                  );
+                }}
                 buttonClassName="w-full lg:w-28 h-10! border-2 border-white! text-white!"
               />
               <Button
