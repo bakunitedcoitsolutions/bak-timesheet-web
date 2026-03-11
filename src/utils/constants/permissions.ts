@@ -33,12 +33,7 @@ export const FEATURES_CONFIG: FeatureConfig[] = [
   {
     key: "projects",
     label: "Projects",
-    permissions: [
-      { key: "full", label: "Full Access" },
-      { key: "add", label: "Add Project" },
-      { key: "edit", label: "Edit Project" },
-      { key: "view", label: "View Project" },
-    ],
+    permissions: [{ key: "full", label: "Full Access" }],
   },
   {
     key: "loans",
@@ -68,14 +63,6 @@ export const FEATURES_CONFIG: FeatureConfig[] = [
       { key: "add", label: "Add Exit Re-entry" },
       { key: "edit", label: "Edit Exit Re-entry" },
       { key: "view", label: "View Exit Re-entry" },
-    ],
-  },
-  {
-    key: "payroll",
-    label: "Payroll",
-    permissions: [
-      { key: "edit", label: "Edit Payroll" },
-      { key: "view", label: "View Payroll" },
     ],
   },
   {

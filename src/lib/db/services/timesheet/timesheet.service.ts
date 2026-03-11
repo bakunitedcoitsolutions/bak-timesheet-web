@@ -97,20 +97,44 @@ export const getTimesheetPageData = async (
 
   const { startOfDay, endOfDay } = getDayRange(date);
 
-  // Build employee filter: optional payrollSectionId and/or designationId
-  const employeeWhere: any = {};
+  // Find any employee IDs that have a timesheet on this date (regardless of status)
+  const timesheetsOnDate = await prisma.timesheet.findMany({
+    where: { date: { gte: startOfDay, lte: endOfDay } },
+    select: { employeeId: true },
+  });
+  const employeeIdsWithAttendance = timesheetsOnDate.map((t) => t.employeeId);
+
+  // Build employee filter:
+  // - Active employees (statusId: 1), OR
+  // - Any employee (any status) who has an attendance record on this date
+  const baseStatusFilter: any = {
+    OR: [
+      { statusId: 1 },
+      ...(employeeIdsWithAttendance.length > 0
+        ? [{ id: { in: employeeIdsWithAttendance } }]
+        : []),
+    ],
+  };
+
+  const employeeWhere: any = { ...baseStatusFilter };
 
   if (search) {
     const searchNumber = Number(search);
-    employeeWhere.OR = [
-      { nameEn: { contains: search, mode: "insensitive" } },
-      { nameAr: { contains: search, mode: "insensitive" } },
+    // Combine search with status/attendance filter using AND
+    employeeWhere.AND = [
+      baseStatusFilter,
+      {
+        OR: [
+          { nameEn: { contains: search, mode: "insensitive" } },
+          { nameAr: { contains: search, mode: "insensitive" } },
+          ...(!isNaN(searchNumber) ? [{ employeeCode: searchNumber }] : []),
+        ],
+      },
     ];
-    if (!isNaN(searchNumber)) {
-      employeeWhere.OR.push({ employeeCode: searchNumber });
-    }
+    // Remove the top-level OR since it's now inside AND
+    delete employeeWhere.OR;
   } else {
-    // Only apply filters if no search is performed (global search behavior)
+    // Only apply section/designation filters if no search
     if (payrollSectionId != null && payrollSectionId > 0) {
       employeeWhere.payrollSectionId = payrollSectionId;
     }
@@ -120,13 +144,11 @@ export const getTimesheetPageData = async (
   }
 
   // Count total employees for pagination
-  const totalEmployees = await prisma.employee.count({
-    where: Object.keys(employeeWhere).length > 0 ? employeeWhere : undefined,
-  });
+  const totalEmployees = await prisma.employee.count({ where: employeeWhere });
 
   // Fetch employees (filtered or all) with pagination
   const employees = await prisma.employee.findMany({
-    where: Object.keys(employeeWhere).length > 0 ? employeeWhere : undefined,
+    where: employeeWhere,
     orderBy: [{ employeeCode: "asc" }],
     skip: (page - 1) * limit,
     take: limit,
