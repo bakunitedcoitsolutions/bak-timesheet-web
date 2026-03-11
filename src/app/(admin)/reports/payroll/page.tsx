@@ -16,6 +16,7 @@ import {
   TitleHeader,
   TableColumn,
   AutoScrollChips,
+  ExportOptions,
 } from "@/components";
 import { formatNum, formatPayrollPeriod } from "@/utils/helpers";
 import { useGlobalData } from "@/context/GlobalDataContext";
@@ -609,52 +610,59 @@ const PayrollReportPage = () => {
           onBack={() => router.replace("/reports")}
           icon={<i className="fa-light fa-money-check-dollar-pen text-xl!" />}
           renderInput={() => (
-            <Button
-              size="small"
-              label="Print"
-              icon="pi pi-print"
-              variant="outlined"
-              onClick={() => {
-                if (allRows.length === 0) return;
+            <div className="flex items-center gap-5">
+              <ExportOptions
+                exportCSV={() => {}}
+                exportExcel={() => {}}
+                buttonClassName="w-full lg:w-28 h-10! border-2 border-white! text-white!"
+              />
+              <Button
+                size="small"
+                label="Print"
+                icon="pi pi-print"
+                variant="outlined"
+                onClick={() => {
+                  if (allRows.length === 0) return;
 
-                const appliedPaymentMethodName = appliedQuery.paymentMethodId
-                  ? paymentMethodOptions.find(
-                      (p) => p.value === appliedQuery.paymentMethodId
-                    )?.label || null
-                  : null;
+                  const appliedPaymentMethodName = appliedQuery.paymentMethodId
+                    ? paymentMethodOptions.find(
+                        (p) => p.value === appliedQuery.paymentMethodId
+                      )?.label || null
+                    : null;
 
-                let sectionOrDesignationName = null;
-                if (
-                  appliedQuery.payrollSectionIds &&
-                  appliedQuery.payrollSectionIds.length > 0
-                ) {
-                  const sectionNames = globalData.payrollSections
-                    .filter((s: any) =>
-                      appliedQuery.payrollSectionIds!.includes(s.id)
-                    )
-                    .map((s: any) => s.nameEn)
-                    .join(", ");
-                  sectionOrDesignationName = sectionNames || null;
-                } else if (appliedQuery.designationId) {
-                  sectionOrDesignationName = globalData.designations.find(
-                    (d: any) => d.id === appliedQuery.designationId
-                  )?.nameEn;
-                }
-
-                printPayrollReport(
-                  allRows,
-                  appliedQuery.month,
-                  appliedQuery.year,
-                  {
-                    paymentMethodName: appliedPaymentMethodName,
-                    sectionOrDesignationName,
-                    employeeCodes:
-                      appliedQuery.employeeCodes?.map(String) || null,
+                  let sectionOrDesignationName = null;
+                  if (
+                    appliedQuery.payrollSectionIds &&
+                    appliedQuery.payrollSectionIds.length > 0
+                  ) {
+                    const sectionNames = globalData.payrollSections
+                      .filter((s: any) =>
+                        appliedQuery.payrollSectionIds!.includes(s.id)
+                      )
+                      .map((s: any) => s.nameEn)
+                      .join(", ");
+                    sectionOrDesignationName = sectionNames || null;
+                  } else if (appliedQuery.designationId) {
+                    sectionOrDesignationName = globalData.designations.find(
+                      (d: any) => d.id === appliedQuery.designationId
+                    )?.nameEn;
                   }
-                );
-              }}
-              className="w-full lg:w-28 h-10! bg-white!"
-            />
+
+                  printPayrollReport(
+                    allRows,
+                    appliedQuery.month,
+                    appliedQuery.year,
+                    {
+                      paymentMethodName: appliedPaymentMethodName,
+                      sectionOrDesignationName,
+                      employeeCodes:
+                        appliedQuery.employeeCodes?.map(String) || null,
+                    }
+                  );
+                }}
+                className="w-full lg:w-28 h-10! bg-white!"
+              />
+            </div>
           )}
         />
 

@@ -13,8 +13,6 @@ import {
   TitleHeader,
   TableColumn,
   NumberInput,
-  ExportOptions,
-  CustomHeaderProps,
 } from "@/components";
 import { PayrollDetailEntry } from "@/lib/db/services/payroll-summary/mappers";
 import {
@@ -802,7 +800,7 @@ const PayrollDetailPage = () => {
     ]
   );
 
-  const renderHeader = ({ exportCSV, exportExcel }: CustomHeaderProps) => {
+  const renderHeader = () => {
     return (
       <div className="flex flex-col lg:flex-row justify-between bg-theme-primary-light items-center gap-3 flex-1 w-full">
         <div className="flex flex-1 items-center gap-3 w-full">
@@ -841,13 +839,6 @@ const PayrollDetailPage = () => {
             />
           </div>
           <div className="w-full lg:w-auto">
-            <ExportOptions
-              exportCSV={exportCSV || (() => {})}
-              exportExcel={exportExcel || (() => {})}
-              buttonClassName="w-full lg:w-auto h-9!"
-            />
-          </div>
-          <div className="w-full lg:w-auto">
             <Button
               size="small"
               label="Save"
@@ -860,14 +851,6 @@ const PayrollDetailPage = () => {
         </div>
       </div>
     );
-  };
-
-  const exportCSV = () => {
-    tableRef.current?.exportCSV();
-  };
-
-  const exportExcel = () => {
-    tableRef.current?.exportExcel();
   };
 
   // Fetch payroll date info
@@ -907,10 +890,7 @@ const PayrollDetailPage = () => {
         )}
       />
       <div className="flex flex-1 flex-col gap-4 px-6 py-6 bg-theme-primary-light">
-        {renderHeader({
-          exportCSV,
-          exportExcel,
-        })}
+        {renderHeader()}
         <div className="bg-white h-full rounded-xl overflow-hidden">
           <Table
             lazy

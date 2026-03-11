@@ -50,31 +50,31 @@ export const printPayrollReport = (
 
   const colGroupHtml = `
     <colgroup>
-      <col style="width: 15px;" />
-      <col style="width: 40px;" />
-      <col style="width: 130px;" />
-      <col style="width: 60px;" />
-      <col style="width: 60px;" />
-      <col style="width: 40px;" />
-      <col style="width: 40px;" />
-      <col style="width: 40px;" />
-      <col style="width: 40px;" />
-      <col style="width: 40px;" />
-      <col style="width: 40px;" />
-      <col style="width: 40px;" />
-      <col style="width: 40px;" />
-      <col style="width: 40px;" />
-      <col style="width: 40px;" />
-      <col style="width: 40px;" />
-      <col style="width: 40px;" />
-      <col style="width: 40px;" />
-      <col style="width: 40px;" />
-      <col style="width: 40px;" />
-      <col style="width: 40px;" />
-      <col style="width: 45px;" />
-      <col style="width: 40px;" />
-      <col style="width: 40px;" />
-      <col style="width: 60px;" />
+      <col style="width: 14px;" />
+      <col style="width: 36px;" />
+      <col style="width: 135px;" />
+      <col style="width: 55px;" />
+      <col style="width: 55px;" />
+      <col style="width: 32px;" />
+      <col style="width: 32px;" />
+      <col style="width: 36px;" />
+      <col style="width: 36px;" />
+      <col style="width: 36px;" />
+      <col style="width: 36px;" />
+      <col style="width: 36px;" />
+      <col style="width: 48px;" />
+      <col style="width: 36px;" />
+      <col style="width: 36px;" />
+      <col style="width: 36px;" />
+      <col style="width: 48px;" />
+      <col style="width: 36px;" />
+      <col style="width: 36px;" />
+      <col style="width: 36px;" />
+      <col style="width: 48px;" />
+      <col style="width: 52px;" />
+      <col style="width: 48px;" />
+      <col style="width: 48px;" />
+      <col style="width: 55px;" />
     </colgroup>
   `;
 
@@ -98,9 +98,10 @@ export const printPayrollReport = (
           .section-title { font-weight: bold; font-size: 11px; text-transform: uppercase; color: #b91c1c; }
           .section-meta { font-size: 9px; font-weight: bold; color: black; background: #b91c1c; color: white; padding: 2px 6px; border-radius: 3px; }
           
-          table { width: 100%; border-collapse: collapse; border: 1px solid #ddd; font-size: 8px; table-layout: fixed; }
-          th, td { border: 1px solid #ddd; padding: 3px 2px; text-align: center; word-wrap: break-word; }
+          table { width: 100%; border-collapse: collapse; border: 1px solid #ddd; font-size: 7.5px; table-layout: fixed; }
+          th, td { border: 1px solid #ddd; padding: 2px 1px; text-align: center; white-space: nowrap; overflow: hidden; }
           th { background-color: #f3f4f6; font-weight: bold; }
+          .wrap { white-space: normal; overflow: visible; word-wrap: break-word; word-break: break-word; }
           
           .text-left { text-align: left; }
           .text-right { text-align: right; }
@@ -182,9 +183,9 @@ export const printPayrollReport = (
                   <tr>
                     <td>${i + 1}</td>
                     <td>${row.empCode}</td>
-                    <td class="text-left" style="font-size: 8.5px; display: flex; justify-content: space-between; align-items: center;">${row.name} ${row.isFixed ? '<span style="background: #e5e7eb; padding: 1px 3px; border-radius: 2px; font-size: 7px; margin-left: 10px;">F</span>' : ""}</td>
+                    <td class="text-left wrap"><div style="font-size: 8.5px; display: flex; justify-content: space-between; align-items: center;">${row.name} ${row.isFixed ? '<span style="background: #e5e7eb; padding: 1px 3px; border-radius: 2px; font-size: 7px; margin-left: 10px;">F</span>' : ""}</div></td>
                     <td>${row.idNumber || "-"}</td>
-                    <td>${row.designation || "-"}</td>
+                    <td class="wrap">${row.designation || "-"}</td>
                     <td>${fmt(row.workDays)}</td>
                     <td>${fmt(row.overTime)}</td>
                     <td>${fmt(row.totalHours)}</td>
@@ -204,7 +205,7 @@ export const printPayrollReport = (
                     <td class="text-primary font-bold" style="font-size: 9px;">${fmt(row.netSalaryPayable)}</td>
                     <td>${fmt(row.cardSalary)}</td>
                     <td>${fmt(row.cashSalary)}</td>
-                    <td class="text-center" style="color: #666; font-size: 7px;">${
+                    <td class="text-center wrap" style="color: #666; font-size: 7px;">${
                       !!row.remarks
                         ? `${row.remarks}<br/>(${row.paymentMethodName || ""})`
                         : row.paymentMethodName || ""
@@ -257,7 +258,8 @@ export const printPayrollReport = (
             ${colGroupHtml}
             <tbody>
               <tr>
-                 <td class="bg-footer text-right text-primary" colspan="5" style="font-size: 11px; padding: 6px 10px;">GRAND TOTAL:</td>
+                 <td class="bg-footer text-center text-primary font-bold" style="font-size: 10px; padding: 6px 4px;" colspan="2">${data.length}</td>
+                 <td class="bg-footer text-right text-primary" colspan="3" style="font-size: 11px; padding: 6px 10px;">GRAND TOTAL:</td>
                  <td class="bg-footer text-center" style="font-size: 8.5px;">${fmt(data.reduce((sum, r) => sum + (r.workDays || 0), 0))}</td>
                  <td class="bg-footer text-center" style="font-size: 8.5px;">${fmt(data.reduce((sum, r) => sum + (r.overTime || 0), 0))}</td>
                  <td class="bg-footer text-center" style="font-size: 8.5px;">${fmt(data.reduce((sum, r) => sum + (r.totalHours || 0), 0))}</td>
@@ -291,7 +293,7 @@ export const printPayrollReport = (
             setTimeout(function() {
               window.print();
               window.close();
-            }, 500);
+            }, 300);
           };
         </script>
       </body>

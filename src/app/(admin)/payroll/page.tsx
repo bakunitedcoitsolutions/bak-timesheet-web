@@ -14,7 +14,6 @@ import {
   Dropdown,
   TypeBadge,
   TableColumn,
-  ExportOptions,
   CustomHeaderProps,
 } from "@/components";
 import { PayrollEntry } from "@/utils/types";
@@ -584,14 +583,6 @@ const PayrollPage = () => {
     }
   };
 
-  const exportCSV = () => {
-    tableRef.current?.exportCSV();
-  };
-
-  const exportExcel = () => {
-    tableRef.current?.exportExcel();
-  };
-
   const renderHeader = ({ value, onChange }: CustomHeaderProps) => {
     return (
       <div className="flex flex-col md:flex-row justify-between items-center gap-3 flex-1 w-full">
@@ -607,9 +598,6 @@ const PayrollPage = () => {
           />
         </div>
         <div className="flex items-center gap-3 w-full md:w-auto">
-          <div>
-            <ExportOptions exportCSV={exportCSV} exportExcel={exportExcel} />
-          </div>
           <div className="w-full md:w-auto">
             <Input
               small
