@@ -153,6 +153,7 @@ const FilterSection = memo(
           {/* Payment Method */}
           <div className="w-full">
             <Dropdown
+              filter
               options={paymentMethodOptions}
               value={paymentMethodId}
               onChange={(e: any) => setPaymentMethodId(e.value ?? null)}

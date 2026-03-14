@@ -726,6 +726,7 @@ const PayrollReportPage = () => {
             showClear
           />
           <Dropdown
+            filter
             options={paymentMethodOptions}
             value={paymentMethodId}
             onChange={(e) => setPaymentMethodId(e.value ?? null)}
