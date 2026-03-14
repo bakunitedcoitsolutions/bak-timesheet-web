@@ -182,7 +182,6 @@ const UpsertUserPage = () => {
 
   const handleAddUser = async (data: Record<string, any>) => {
     try {
-      console.log("Form submitted: Add User", data);
       await createUser(data, {
         onSuccess: () => {
           toastService.showSuccess("Success", "User created successfully");
@@ -198,7 +197,6 @@ const UpsertUserPage = () => {
   };
 
   const handleUpdateUser = async (data: Record<string, any>) => {
-    console.log("Form submitted: Update User", data);
     try {
       await updateUser(data, {
         onSuccess: () => {

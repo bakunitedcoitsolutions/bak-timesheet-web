@@ -44,14 +44,6 @@ export const REPORT_OPTIONS: ReportOption[] = [
     filterOptions: [{ key: "enableAllFilters", label: "Enable all filters" }],
   },
   {
-    id: "employee-leave-statement",
-    title: "Employee Leave Statement",
-    description: "View employee leave records and statements",
-    icon: "fa-light fa-file-chart-pie",
-    route: "/reports/employee-leave-statement",
-    filterOptions: [{ key: "enableAllFilters", label: "Enable all filters" }],
-  },
-  {
     id: "employee-cards",
     title: "Employee Cards",
     description: "View and manage employee card information",
