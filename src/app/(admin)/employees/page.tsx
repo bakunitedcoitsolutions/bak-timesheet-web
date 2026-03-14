@@ -15,6 +15,7 @@ import {
   TableColumn,
   TableActions,
   GroupDropdown,
+  useAccess,
 } from "@/components";
 import {
   getSignedUrl,
@@ -154,12 +155,21 @@ const EmployeeProfilePicture = ({
   );
 };
 
-const columns = (
-  handlePrint: (employee: ListedEmployee) => void,
-  handleEdit: (employee: ListedEmployee) => void,
-  handleDelete: (employee: ListedEmployee) => void,
-  handleViewCard: (employee: ListedEmployee) => void
-): TableColumn<ListedEmployee>[] => [
+const columns = ({
+  role,
+  canEdit,
+  handlePrint,
+  handleEdit,
+  handleDelete,
+  handleViewCard,
+}: {
+  canEdit: boolean;
+  role: number | string | undefined;
+  handlePrint: (employee: ListedEmployee) => void;
+  handleEdit: (employee: ListedEmployee) => void;
+  handleDelete: (employee: ListedEmployee) => void;
+  handleViewCard: (employee: ListedEmployee) => void;
+}): TableColumn<ListedEmployee>[] => [
   {
     field: "id",
     header: "#",
@@ -387,8 +397,8 @@ const columns = (
     body: (rowData: ListedEmployee) => (
       <TableActions
         rowData={rowData}
-        onEdit={handleEdit}
-        onDelete={handleDelete}
+        onDelete={Number(role) !== 4 ? handleDelete : undefined}
+        onEdit={canEdit || Number(role) !== 4 ? handleEdit : undefined}
         beforeActions={[
           {
             icon: "pi pi-print text-lg!",
@@ -420,6 +430,10 @@ const EmployeesPage = () => {
   );
   const tableRef = useRef<TableRef>(null);
   const { mutateAsync: deleteEmployee } = useDeleteEmployee();
+
+  const { can, role } = useAccess();
+  const canEdit = can("employees", "edit");
+  const canAdd = can("employees", "add");
 
   // Debounce search input and column filters
   const debouncedSearch = useDebounce(searchValue, 500);
@@ -622,8 +636,16 @@ const EmployeesPage = () => {
 
   // Memoized columns
   const tableColumns = useMemo(
-    () => columns(handlePrint, handleEdit, handleDelete, handleViewCard),
-    [handlePrint, handleEdit, handleDelete, handleViewCard]
+    () =>
+      columns({
+        role,
+        canEdit,
+        handleEdit,
+        handlePrint,
+        handleDelete,
+        handleViewCard,
+      }),
+    [handlePrint, role, handleEdit, canEdit, handleDelete, handleViewCard]
   );
 
   // Memoized header renderer
@@ -664,15 +686,17 @@ const EmployeesPage = () => {
             details.
           </p>
         </div>
-        <div className="w-full md:w-auto">
-          <Button
-            size="small"
-            variant="solid"
-            icon="pi pi-plus"
-            label="New Employee"
-            onClick={() => router.push("/employees/new")}
-          />
-        </div>
+        {canAdd && (
+          <div className="w-full md:w-auto">
+            <Button
+              size="small"
+              variant="solid"
+              icon="pi pi-plus"
+              label="New Employee"
+              onClick={() => router.push("/employees/new")}
+            />
+          </div>
+        )}
       </div>
       <div className="bg-white flex-1 rounded-xl overflow-hidden min-h-0">
         <Table
