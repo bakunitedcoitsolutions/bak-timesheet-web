@@ -15,6 +15,7 @@ import {
   TableColumn,
   GroupDropdown,
   AutoScrollChips,
+  useAccess,
 } from "@/components";
 import { parseGroupDropdownFilter } from "@/utils/helpers";
 import { centuryGothic, tanseekArabic } from "@/app/fonts";
@@ -22,6 +23,7 @@ import { TimesheetPageRow } from "@/lib/db/services/timesheet/timesheet.dto";
 import { useGlobalData, GlobalDataGeneral } from "@/context/GlobalDataContext";
 import { useGetDailyTimesheetReport } from "@/lib/db/services/timesheet/requests";
 import { printDailyTimesheetReport } from "@/utils/helpers/print-daily-timesheet";
+import { classNames } from "primereact/utils";
 
 const FilterSection = memo(
   ({
@@ -35,6 +37,9 @@ const FilterSection = memo(
     onDateChange: (date: Date) => void;
     isLoading: boolean;
   }) => {
+    const { canAccessFilter } = useAccess();
+    const isAllowedAllFilters = canAccessFilter("reports", "daily-timesheet");
+
     const [employeeCodes, setEmployeeCodes] = useState<string[]>([]);
     const [selectedFilter, setSelectedFilter] = useState<
       string | number | null
@@ -67,7 +72,12 @@ const FilterSection = memo(
 
     return (
       <div className="bg-[#F5E6E8] w-full flex flex-col xl:flex-row justify-between gap-x-10 gap-y-4 px-6 py-6 print:hidden">
-        <div className="grid flex-1 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-3 items-center">
+        <div
+          className={classNames("grid flex-1 grid-cols-1 gap-3 items-center", {
+            "lg:grid-cols-3 md:grid-cols-2 xl:grid-cols-6": isAllowedAllFilters,
+            "md:grid-cols-3": !isAllowedAllFilters,
+          })}
+        >
           <div className="w-full">
             <Input
               type="date"
@@ -87,35 +97,39 @@ const FilterSection = memo(
               placeholder="Select Date"
             />
           </div>
-          <div className="w-full">
-            <AutoScrollChips
-              keyfilter="int"
-              value={employeeCodes}
-              allowDuplicate={false}
-              placeholder="Employee Codes"
-              className="w-full h-10!"
-              onChange={(e) => {
-                const codes = e.value ?? [];
-                setEmployeeCodes(codes);
-                // If employee code is present, clear other filters
-                if (codes.length > 0) {
-                  setSelectedFilter("all");
-                  setProjectId(null);
-                  setShowAbsents(false);
-                  setShowFixedSalary(false);
-                }
-              }}
-            />
-          </div>
-          <div className="w-full">
-            <GroupDropdown
-              value={selectedFilter}
-              className="w-full h-10.5!"
-              onChange={setSelectedFilter}
-              placeholder="Select Section / Designation"
-              disabled={employeeCodes.length > 0}
-            />
-          </div>
+          {isAllowedAllFilters && (
+            <>
+              <div className="w-full">
+                <AutoScrollChips
+                  keyfilter="int"
+                  value={employeeCodes}
+                  allowDuplicate={false}
+                  placeholder="Employee Codes"
+                  className="w-full h-10!"
+                  onChange={(e) => {
+                    const codes = e.value ?? [];
+                    setEmployeeCodes(codes);
+                    // If employee code is present, clear other filters
+                    if (codes.length > 0) {
+                      setSelectedFilter("all");
+                      setProjectId(null);
+                      setShowAbsents(false);
+                      setShowFixedSalary(false);
+                    }
+                  }}
+                />
+              </div>
+              <div className="w-full">
+                <GroupDropdown
+                  value={selectedFilter}
+                  className="w-full h-10.5!"
+                  onChange={setSelectedFilter}
+                  placeholder="Select Section / Designation"
+                  disabled={employeeCodes.length > 0}
+                />
+              </div>
+            </>
+          )}
           <div className="w-full">
             <Dropdown
               filter
@@ -127,50 +141,52 @@ const FilterSection = memo(
               disabled={employeeCodes.length > 0}
             />
           </div>
-          <div className="w-full">
-            <div className="flex items-center gap-4">
-              <div
-                className={`flex items-center gap-2 ${employeeCodes.length > 0 ? "opacity-50" : ""}`}
-              >
-                <Checkbox
-                  inputId="absents"
-                  checked={showAbsents}
-                  disabled={employeeCodes.length > 0}
-                  onChange={(e) => {
-                    const checked = e.checked ?? false;
-                    setShowAbsents(checked);
-                    if (checked) setShowFixedSalary(false);
-                  }}
-                />
-                <label
-                  htmlFor="absents"
-                  className="text-sm cursor-pointer select-none whitespace-nowrap"
+          {isAllowedAllFilters && (
+            <div className="w-full">
+              <div className="flex items-center gap-4">
+                <div
+                  className={`flex items-center gap-2 ${employeeCodes.length > 0 ? "opacity-50" : ""}`}
                 >
-                  Absents
-                </label>
-              </div>
-              <div
-                className={`flex items-center gap-2 ${employeeCodes.length > 0 ? "opacity-50" : ""}`}
-              >
-                <Checkbox
-                  inputId="fixedSalary"
-                  checked={showFixedSalary}
-                  disabled={employeeCodes.length > 0}
-                  onChange={(e) => {
-                    const checked = e.checked ?? false;
-                    setShowFixedSalary(checked);
-                    if (checked) setShowAbsents(false);
-                  }}
-                />
-                <label
-                  htmlFor="fixedSalary"
-                  className="text-sm cursor-pointer select-none whitespace-nowrap"
+                  <Checkbox
+                    inputId="absents"
+                    checked={showAbsents}
+                    disabled={employeeCodes.length > 0}
+                    onChange={(e) => {
+                      const checked = e.checked ?? false;
+                      setShowAbsents(checked);
+                      if (checked) setShowFixedSalary(false);
+                    }}
+                  />
+                  <label
+                    htmlFor="absents"
+                    className="text-sm cursor-pointer select-none whitespace-nowrap"
+                  >
+                    Absents
+                  </label>
+                </div>
+                <div
+                  className={`flex items-center gap-2 ${employeeCodes.length > 0 ? "opacity-50" : ""}`}
                 >
-                  Fixed Salary
-                </label>
+                  <Checkbox
+                    inputId="fixedSalary"
+                    checked={showFixedSalary}
+                    disabled={employeeCodes.length > 0}
+                    onChange={(e) => {
+                      const checked = e.checked ?? false;
+                      setShowFixedSalary(checked);
+                      if (checked) setShowAbsents(false);
+                    }}
+                  />
+                  <label
+                    htmlFor="fixedSalary"
+                    className="text-sm cursor-pointer select-none whitespace-nowrap"
+                  >
+                    Fixed Salary
+                  </label>
+                </div>
               </div>
             </div>
-          </div>
+          )}
           <div className="w-full flex justify-end">
             <Button
               size="small"

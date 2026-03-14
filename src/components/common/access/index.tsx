@@ -46,6 +46,10 @@ export interface AccessProps {
    * Specify to check a specific action (use for buttons/forms inside the page).
    */
   permission?: Permission;
+  /** Optional — specific report ID when checking report-level permissions */
+  reportId?: string;
+  /** Optional — specific filter key when checking report filter permissions */
+  filterKey?: string;
   /** What to render when access is denied. Defaults to null. */
   fallback?: React.ReactNode;
   children: React.ReactNode;
@@ -110,6 +114,34 @@ export function checkFeatureAccess(
 }
 
 /**
+ * Checks if a specific filter for a specific report is enabled.
+ */
+export function checkReportFilterAccess(
+  role: UserRole | string | number,
+  privileges: UserPrivileges | null | undefined,
+  reportId: string
+): boolean {
+  const roleId = Number(role);
+  // Admin & Manager usually have access to all filters
+  if (roleId === USER_ROLES.ADMIN) return true;
+  if (roleId === USER_ROLES.MANAGER || roleId === USER_ROLES.BRANCH_MANAGER) {
+    return true;
+  }
+
+  if (!privileges || !privileges.reports) return false;
+
+  const reportItems = privileges.reports.items || [];
+  const report = reportItems.find((r) => r.reportId === reportId);
+
+  // If report is not enabled or doesn't exist, they can't see the filter
+  if (!report || !report.enabled) return false;
+
+  // If filters are not defined, assume full access to filters if report is enabled
+  if (!report.filters || report.filters.length === 0) return true;
+  return report?.filters?.length > 0;
+}
+
+/**
  * Returns true if the user has the required role.
  */
 export function checkRoleAccess(
@@ -145,6 +177,10 @@ export interface UseAccessReturn {
    * Check if user has one of the given roles.
    */
   hasRole: (role: UserRole | UserRole[]) => boolean;
+  /**
+   * Check if a specific filter is enabled for a report.
+   */
+  canAccessFilter: (reportId: string, filterKey: string) => boolean;
   privileges: UserPrivileges | null | undefined;
 }
 
@@ -168,6 +204,11 @@ export function useAccess(): UseAccessReturn {
     return checkRoleAccess(roleId, required);
   };
 
+  const canAccessFilter = (reportId: string): boolean => {
+    if (isLoading || !roleId) return false;
+    return checkReportFilterAccess(roleId, privileges, reportId);
+  };
+
   return {
     role: roleId as UserRole | undefined,
     isLoading,
@@ -177,6 +218,7 @@ export function useAccess(): UseAccessReturn {
     canAccess,
     can,
     hasRole,
+    canAccessFilter,
     privileges,
   };
 }
@@ -195,6 +237,8 @@ export function useAccess(): UseAccessReturn {
 export function Access({
   feature,
   permission = "view",
+  reportId,
+  filterKey,
   fallback = null,
   children,
 }: AccessProps): React.ReactElement | null {
@@ -206,9 +250,15 @@ export function Access({
   const userRoleId = (session?.user as any)?.roleId as number | undefined;
   const privileges = session?.user?.privileges;
 
-  const hasAccess = permission
-    ? checkFeatureAccess(userRoleId || 0, privileges, feature, permission)
-    : checkFeatureEnabled(userRoleId || 0, privileges, feature);
+  let hasAccess = false;
+
+  if (reportId && filterKey) {
+    hasAccess = checkReportFilterAccess(userRoleId || 0, privileges, reportId);
+  } else {
+    hasAccess = permission
+      ? checkFeatureAccess(userRoleId || 0, privileges, feature, permission)
+      : checkFeatureEnabled(userRoleId || 0, privileges, feature);
+  }
 
   return hasAccess ? <>{children}</> : <>{fallback}</>;
 }
