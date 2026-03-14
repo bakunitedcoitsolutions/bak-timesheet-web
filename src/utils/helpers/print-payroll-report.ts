@@ -110,7 +110,7 @@ export const printPayrollReport = (
           .bg-footer { background-color: #f3f4f6; font-weight: bold; }
 
           @media print {
-            @page { size: A4 landscape; margin: 0.8cm; }
+            @page { size: A4 landscape; margin: 0.8cm 0.8cm 1.5cm 0.8cm; }
             html, body {
               background-color: white !important;
               color: black !important;
