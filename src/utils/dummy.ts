@@ -1,4 +1,3 @@
-import { PayrollEntry } from "@/utils/types";
 import { Feature } from "@/utils/user.utility";
 
 export const stats: Array<{

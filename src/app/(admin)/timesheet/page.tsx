@@ -703,13 +703,6 @@ const TimesheetPage = () => {
           </div>
         </div>
         <div className="flex items-center gap-3 w-full lg:w-auto">
-          <div className="w-full lg:w-auto">
-            <ExportOptions
-              exportCSV={exportCSV || (() => {})}
-              exportExcel={exportExcel || (() => {})}
-              buttonClassName="w-full lg:w-auto h-9!"
-            />
-          </div>
           {canAdd && (
             <div className="w-full lg:w-auto">
               <BulkUploadOptions

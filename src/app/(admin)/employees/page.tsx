@@ -14,7 +14,6 @@ import {
   TypeBadge,
   TableColumn,
   TableActions,
-  ExportOptions,
   GroupDropdown,
 } from "@/components";
 import {
@@ -32,6 +31,7 @@ import {
 import { useDebounce } from "@/hooks";
 import { toastService } from "@/lib/toast";
 import { STORAGE_CONFIG } from "@/utils/constants";
+import { devConsole, devError } from "@/utils/helpers/functions";
 import { showConfirmDialog } from "@/components/common/confirm-dialog";
 import { ListedEmployee } from "@/lib/db/services/employee/employee.dto";
 import { useDeleteEmployee, useGetEmployees } from "@/lib/db/services/employee";
@@ -115,7 +115,7 @@ const EmployeeProfilePicture = ({
         setImageUrl(signedUrl);
       })
       .catch((error) => {
-        console.error("Failed to get signed URL:", error);
+        devError("Failed to get signed URL:", error);
         setImageUrl(null);
       })
       .finally(() => {
@@ -554,7 +554,7 @@ const EmployeesPage = () => {
   );
 
   const handlePrint = useCallback((employee: ListedEmployee) => {
-    console.log("Print employee:", employee);
+    devConsole("Print employee card:", employee);
     // TODO: Implement print functionality
   }, []);
 
@@ -566,7 +566,7 @@ const EmployeesPage = () => {
           window.open(signedUrl, "_blank");
         })
         .catch((error) => {
-          console.error("Failed to get signed URL:", error);
+          devError("Failed to get signed URL:", error);
           toastService.showError("Error", "Failed to load card document");
         });
     }
@@ -634,11 +634,6 @@ const EmployeesPage = () => {
           <GroupDropdown value={selectedFilter} onChange={setSelectedFilter} />
         </div>
         <div className="flex items-center gap-3 w-full md:w-auto justify-end">
-          <div className="flex items-center gap-3 w-full md:w-auto justify-end">
-            <div>
-              <ExportOptions exportCSV={exportCSV} exportExcel={exportExcel} />
-            </div>
-          </div>
           <div className="w-full md:w-auto">
             <Input
               small
