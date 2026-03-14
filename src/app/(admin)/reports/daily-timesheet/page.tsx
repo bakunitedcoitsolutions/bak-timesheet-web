@@ -74,7 +74,7 @@ const FilterSection = memo(
       <div className="bg-[#F5E6E8] w-full flex flex-col xl:flex-row justify-between gap-x-10 gap-y-4 px-6 py-6 print:hidden">
         <div
           className={classNames("grid flex-1 grid-cols-1 gap-3 items-center", {
-            "lg:grid-cols-3 md:grid-cols-2 xl:grid-cols-6": isAllowedAllFilters,
+            "md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6": isAllowedAllFilters,
             "md:grid-cols-3": !isAllowedAllFilters,
           })}
         >
