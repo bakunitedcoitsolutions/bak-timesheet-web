@@ -3,6 +3,7 @@
 import dayjs from "dayjs";
 import { memo, useState, useRef, useMemo } from "react";
 import { useRouter } from "next/navigation";
+import { classNames } from "primereact/utils";
 import { Checkbox } from "primereact/checkbox";
 import { Paginator } from "primereact/paginator";
 
@@ -23,7 +24,6 @@ import { TimesheetPageRow } from "@/lib/db/services/timesheet/timesheet.dto";
 import { useGlobalData, GlobalDataGeneral } from "@/context/GlobalDataContext";
 import { useGetDailyTimesheetReport } from "@/lib/db/services/timesheet/requests";
 import { printDailyTimesheetReport } from "@/utils/helpers/print-daily-timesheet";
-import { classNames } from "primereact/utils";
 
 const FilterSection = memo(
   ({
@@ -37,8 +37,8 @@ const FilterSection = memo(
     onDateChange: (date: Date) => void;
     isLoading: boolean;
   }) => {
-    const { canAccessFilter } = useAccess();
-    const isAllowedAllFilters = canAccessFilter("reports", "daily-timesheet");
+    const { canAccessFilter, isLoading: isLoadingAccess } = useAccess();
+    const isAllowedAllFilters = canAccessFilter("daily-timesheet");
 
     const [employeeCodes, setEmployeeCodes] = useState<string[]>([]);
     const [selectedFilter, setSelectedFilter] = useState<
@@ -78,125 +78,129 @@ const FilterSection = memo(
             "md:grid-cols-3": !isAllowedAllFilters,
           })}
         >
-          <div className="w-full">
-            <Input
-              type="date"
-              value={dayjs(selectedDate).format("YYYY-MM-DD")}
-              onChange={(e) => {
-                if (e.target.value) {
-                  onDateChange(new Date(e.target.value));
-                }
-              }}
-              onKeyDown={(e) => {
-                if (e.key !== "Enter" || isLoading) {
-                  return;
-                }
-                handleRefresh();
-              }}
-              className="w-full h-10!"
-              placeholder="Select Date"
-            />
-          </div>
-          {isAllowedAllFilters && (
+          {!isLoadingAccess && (
             <>
               <div className="w-full">
-                <AutoScrollChips
-                  keyfilter="int"
-                  value={employeeCodes}
-                  allowDuplicate={false}
-                  placeholder="Employee Codes"
-                  className="w-full h-10!"
+                <Input
+                  type="date"
+                  value={dayjs(selectedDate).format("YYYY-MM-DD")}
                   onChange={(e) => {
-                    const codes = e.value ?? [];
-                    setEmployeeCodes(codes);
-                    // If employee code is present, clear other filters
-                    if (codes.length > 0) {
-                      setSelectedFilter("all");
-                      setProjectId(null);
-                      setShowAbsents(false);
-                      setShowFixedSalary(false);
+                    if (e.target.value) {
+                      onDateChange(new Date(e.target.value));
                     }
                   }}
+                  onKeyDown={(e) => {
+                    if (e.key !== "Enter" || isLoading) {
+                      return;
+                    }
+                    handleRefresh();
+                  }}
+                  className="w-full h-10!"
+                  placeholder="Select Date"
                 />
               </div>
+              {isAllowedAllFilters && (
+                <>
+                  <div className="w-full">
+                    <AutoScrollChips
+                      keyfilter="int"
+                      value={employeeCodes}
+                      allowDuplicate={false}
+                      placeholder="Employee Codes"
+                      className="w-full h-10!"
+                      onChange={(e) => {
+                        const codes = e.value ?? [];
+                        setEmployeeCodes(codes);
+                        // If employee code is present, clear other filters
+                        if (codes.length > 0) {
+                          setSelectedFilter("all");
+                          setProjectId(null);
+                          setShowAbsents(false);
+                          setShowFixedSalary(false);
+                        }
+                      }}
+                    />
+                  </div>
+                  <div className="w-full">
+                    <GroupDropdown
+                      value={selectedFilter}
+                      className="w-full h-10.5!"
+                      onChange={setSelectedFilter}
+                      placeholder="Select Section / Designation"
+                      disabled={employeeCodes.length > 0}
+                    />
+                  </div>
+                </>
+              )}
               <div className="w-full">
-                <GroupDropdown
-                  value={selectedFilter}
-                  className="w-full h-10.5!"
-                  onChange={setSelectedFilter}
-                  placeholder="Select Section / Designation"
+                <Dropdown
+                  filter
+                  options={projectOptions}
+                  value={projectId}
+                  onChange={(e) => setProjectId(e.value)}
+                  className="w-full h-10!"
+                  placeholder="Select Project"
                   disabled={employeeCodes.length > 0}
+                />
+              </div>
+              {isAllowedAllFilters && (
+                <div className="w-full">
+                  <div className="flex items-center gap-4">
+                    <div
+                      className={`flex items-center gap-2 ${employeeCodes.length > 0 ? "opacity-50" : ""}`}
+                    >
+                      <Checkbox
+                        inputId="absents"
+                        checked={showAbsents}
+                        disabled={employeeCodes.length > 0}
+                        onChange={(e) => {
+                          const checked = e.checked ?? false;
+                          setShowAbsents(checked);
+                          if (checked) setShowFixedSalary(false);
+                        }}
+                      />
+                      <label
+                        htmlFor="absents"
+                        className="text-sm cursor-pointer select-none whitespace-nowrap"
+                      >
+                        Absents
+                      </label>
+                    </div>
+                    <div
+                      className={`flex items-center gap-2 ${employeeCodes.length > 0 ? "opacity-50" : ""}`}
+                    >
+                      <Checkbox
+                        inputId="fixedSalary"
+                        checked={showFixedSalary}
+                        disabled={employeeCodes.length > 0}
+                        onChange={(e) => {
+                          const checked = e.checked ?? false;
+                          setShowFixedSalary(checked);
+                          if (checked) setShowAbsents(false);
+                        }}
+                      />
+                      <label
+                        htmlFor="fixedSalary"
+                        className="text-sm cursor-pointer select-none whitespace-nowrap"
+                      >
+                        Fixed Salary
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              )}
+              <div className="w-full flex justify-end">
+                <Button
+                  size="small"
+                  label="Refresh"
+                  onClick={handleRefresh}
+                  loading={isLoading}
+                  disabled={isLoading}
+                  className="w-full md:w-32 h-10!"
                 />
               </div>
             </>
           )}
-          <div className="w-full">
-            <Dropdown
-              filter
-              options={projectOptions}
-              value={projectId}
-              onChange={(e) => setProjectId(e.value)}
-              className="w-full h-10!"
-              placeholder="Select Project"
-              disabled={employeeCodes.length > 0}
-            />
-          </div>
-          {isAllowedAllFilters && (
-            <div className="w-full">
-              <div className="flex items-center gap-4">
-                <div
-                  className={`flex items-center gap-2 ${employeeCodes.length > 0 ? "opacity-50" : ""}`}
-                >
-                  <Checkbox
-                    inputId="absents"
-                    checked={showAbsents}
-                    disabled={employeeCodes.length > 0}
-                    onChange={(e) => {
-                      const checked = e.checked ?? false;
-                      setShowAbsents(checked);
-                      if (checked) setShowFixedSalary(false);
-                    }}
-                  />
-                  <label
-                    htmlFor="absents"
-                    className="text-sm cursor-pointer select-none whitespace-nowrap"
-                  >
-                    Absents
-                  </label>
-                </div>
-                <div
-                  className={`flex items-center gap-2 ${employeeCodes.length > 0 ? "opacity-50" : ""}`}
-                >
-                  <Checkbox
-                    inputId="fixedSalary"
-                    checked={showFixedSalary}
-                    disabled={employeeCodes.length > 0}
-                    onChange={(e) => {
-                      const checked = e.checked ?? false;
-                      setShowFixedSalary(checked);
-                      if (checked) setShowAbsents(false);
-                    }}
-                  />
-                  <label
-                    htmlFor="fixedSalary"
-                    className="text-sm cursor-pointer select-none whitespace-nowrap"
-                  >
-                    Fixed Salary
-                  </label>
-                </div>
-              </div>
-            </div>
-          )}
-          <div className="w-full flex justify-end">
-            <Button
-              size="small"
-              label="Refresh"
-              onClick={handleRefresh}
-              loading={isLoading}
-              disabled={isLoading}
-              className="w-full md:w-32 h-10!"
-            />
-          </div>
         </div>
       </div>
     );

@@ -138,7 +138,7 @@ export function checkReportFilterAccess(
 
   // If filters are not defined, assume full access to filters if report is enabled
   if (!report.filters || report.filters.length === 0) return true;
-  return report?.filters?.length > 0;
+  return report?.filters?.every((f) => f.enabled);
 }
 
 /**
@@ -180,7 +180,7 @@ export interface UseAccessReturn {
   /**
    * Check if a specific filter is enabled for a report.
    */
-  canAccessFilter: (reportId: string, filterKey: string) => boolean;
+  canAccessFilter: (reportId: string) => boolean;
   privileges: UserPrivileges | null | undefined;
 }
 
