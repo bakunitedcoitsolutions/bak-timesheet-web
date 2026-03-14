@@ -184,7 +184,10 @@ FilterSection.displayName = "FilterSection";
 const SalarySlipsPage = () => {
   const router = useRouter();
   const contentRef = useRef<HTMLDivElement>(null);
-  const reactToPrintFn = useReactToPrint({ contentRef });
+  const reactToPrintFn = useReactToPrint({
+    contentRef,
+    pageStyle: "@page { size: A4; margin: 0 0 1.5cm 0; }",
+  });
 
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
   const [slipEntries, setSlipEntries] = useState<PayrollDetailEntry[]>([]);
@@ -291,7 +294,7 @@ const SalarySlipsPage = () => {
         @media print {
           @page {
             size: A4;
-            margin: 5mm;
+            margin: 0.5cm 0 1.5cm 0;
           }
           body {
             background: white;
