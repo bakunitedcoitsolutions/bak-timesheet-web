@@ -52,9 +52,9 @@ const SalarySlipGrid = memo(
                 <SalarySlip entry={entry} monthYear={monthYear} />
               </div>
             ))}
-            <div className="flex-col items-center text-center hidden print:flex w-full">
+            {/* <div className="flex-col items-center text-center hidden print:flex w-full">
               {chunkIndex + 1}/{chunks.length}
-            </div>
+            </div> */}
           </div>
         ))}
       </div>
@@ -298,7 +298,7 @@ const SalarySlipsPage = () => {
         @media print {
           @page {
             size: A4;
-            margin: 0.5cm;
+            margin: 0.5cm 0.5cm 1.5cm 0.5cm;
           }
           body {
             background: white;
