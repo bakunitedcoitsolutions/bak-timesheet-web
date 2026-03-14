@@ -30,6 +30,7 @@ import {
   GlobalDataDesignation,
 } from "@/context/GlobalDataContext";
 import { useFileUpload } from "@/hooks";
+import { devConsole, devError } from "@/utils/helpers/functions";
 
 interface Step2Props {
   employeeId?: number | null;
@@ -279,7 +280,7 @@ const Step2 = forwardRef<Step2Handle, Step2Props>(({ employeeId }, ref) => {
             "contractDocument"
           );
         } catch (error: any) {
-          console.warn("Failed to upload contract document:", error);
+          devConsole("Failed to upload contract document:", error);
         }
       }
 
@@ -291,7 +292,7 @@ const Step2 = forwardRef<Step2Handle, Step2Props>(({ employeeId }, ref) => {
 
       return true;
     } catch (error: any) {
-      console.error("Error:", error);
+      devError("Error:", error);
       toastService.showError(
         "Error",
         getErrorMessage(error) || "Failed to save employee"

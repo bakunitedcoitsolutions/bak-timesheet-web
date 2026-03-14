@@ -24,6 +24,7 @@ import { UpdateEmployeeStep3Schema } from "@/lib/db/services/employee/employee.s
 import { useStepperForm } from "@/context";
 import { useFileUpload } from "@/hooks";
 import { GlobalDataGeneral, useGlobalData } from "@/context/GlobalDataContext";
+import { devError, devWarn } from "@/utils/helpers/functions";
 
 interface Step3Props {
   employeeId?: number | null;
@@ -174,7 +175,7 @@ const Step3 = forwardRef<Step3Handle, Step3Props>(({ employeeId }, ref) => {
             "idCardDocument"
           );
         } catch (error: any) {
-          console.warn("Failed to upload ID card document:", error);
+          devWarn("Failed to upload ID card document:", error);
         }
       }
 
@@ -202,7 +203,7 @@ const Step3 = forwardRef<Step3Handle, Step3Props>(({ employeeId }, ref) => {
             "passportDocument"
           );
         } catch (error: any) {
-          console.warn("Failed to upload passport document:", error);
+          devWarn("Failed to upload passport document:", error);
         }
       }
 
@@ -220,7 +221,7 @@ const Step3 = forwardRef<Step3Handle, Step3Props>(({ employeeId }, ref) => {
 
       return true;
     } catch (error: any) {
-      console.error("Error:", error);
+      devError("Error:", error);
       toastService.showError(
         "Error",
         getErrorMessage(error) || "Failed to save employee"

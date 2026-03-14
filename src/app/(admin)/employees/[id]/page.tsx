@@ -9,13 +9,16 @@ import {
   Step3,
   Step4,
   Step5,
+  useAccess,
   type Step1Handle,
   type Step2Handle,
   type Step3Handle,
   type Step4Handle,
   type Step5Handle,
 } from "@/components";
+import { toastService } from "@/lib/toast";
 import { getEntityModeFromParam } from "@/helpers";
+import { devConsole } from "@/utils/helpers/functions";
 import { StepperForm, StepperStep } from "@/components/forms";
 
 const steps: StepperStep[] = [
@@ -38,6 +41,32 @@ const UpsertEmployeePage = () => {
     addKeyword: "new",
     param: employeeIdParam,
   });
+
+  const { can, isLoading: isAccessLoading } = useAccess();
+  const canEdit = can("employees", "edit") || can("employees", "full");
+  const canAdd = can("employees", "add") || can("employees", "full");
+
+  const toastShownRef = useRef(false);
+
+  // Redirect if insufficient permissions
+  useEffect(() => {
+    if (isAccessLoading || toastShownRef.current) return;
+    if (isAddMode && !canAdd) {
+      toastShownRef.current = true;
+      toastService.showError(
+        "Access Denied",
+        "You do not have permission to add employees."
+      );
+      router.replace("/employees");
+    } else if (isEditMode && !canEdit) {
+      toastShownRef.current = true;
+      toastService.showError(
+        "Access Denied",
+        "You do not have permission to edit employees."
+      );
+      router.replace("/employees");
+    }
+  }, [isAddMode, isEditMode, canAdd, canEdit, isAccessLoading, router]);
 
   const [currentEmployeeId, setCurrentEmployeeId] = useState<number | null>(
     isEditMode && employeeId ? Number(employeeId) : null
@@ -100,7 +129,7 @@ const UpsertEmployeePage = () => {
   };
 
   const handleSubmit = async (data: Record<string, any>) => {
-    console.log("Form submitted:", data);
+    devConsole("Form submitted:", data);
     router.replace(`/employees`);
   };
 
@@ -110,9 +139,9 @@ const UpsertEmployeePage = () => {
         return (
           <Step1
             ref={step1Ref}
-            employeeId={currentEmployeeId}
             isAddMode={isAddMode}
             isEditMode={isEditMode}
+            employeeId={currentEmployeeId}
             onStepComplete={handleStepComplete}
           />
         );
@@ -137,9 +166,9 @@ const UpsertEmployeePage = () => {
       <StepperForm
         steps={steps}
         onSubmit={handleSubmit}
+        isEditMode={isEditMode}
         initialStep={initialStep}
         onStepSave={handleStepSave}
-        isEditMode={isEditMode}
         className="w-full h-full"
       >
         {renderStepContent}

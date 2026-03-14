@@ -23,6 +23,7 @@ import {
 import { UpdateEmployeeStep5Schema } from "@/lib/db/services/employee/employee.schemas";
 import { useStepperForm } from "@/context";
 import { useFileUpload } from "@/hooks";
+import { devError, devWarn } from "@/utils/helpers/functions";
 
 interface Step5Props {
   employeeId?: number | null;
@@ -126,7 +127,7 @@ const Step5 = forwardRef<Step5Handle, Step5Props>(({ employeeId }, ref) => {
             "cardDocument"
           );
         } catch (error: any) {
-          console.warn("Failed to upload card document:", error);
+          devWarn("Failed to upload card document:", error);
         }
       }
 
@@ -138,7 +139,7 @@ const Step5 = forwardRef<Step5Handle, Step5Props>(({ employeeId }, ref) => {
 
       return true;
     } catch (error: any) {
-      console.error("Error:", error);
+      devError("Error:", error);
       toastService.showError(
         "Error",
         getErrorMessage(error) || "Failed to save employee"

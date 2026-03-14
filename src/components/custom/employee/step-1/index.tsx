@@ -27,9 +27,10 @@ import {
   CreateEmployeeStep1Schema,
   UpdateEmployeeStep1Schema,
 } from "@/lib/db/services/employee/employee.schemas";
-import { useStepperForm } from "@/context";
 import { useFileUpload } from "@/hooks";
+import { useStepperForm } from "@/context";
 import { useRouter } from "next/navigation";
+import { devConsole, devError } from "@/utils/helpers/functions";
 
 interface Step1Props {
   employeeId?: number | null;
@@ -180,7 +181,7 @@ const Step1 = forwardRef<Step1Handle, Step1Props>(
             );
           } catch (error: any) {
             // Profile picture is optional, don't fail the whole operation
-            console.warn("Failed to upload profile picture after save:", error);
+            devConsole("Failed to upload profile picture after save:", error);
           }
         }
 
@@ -194,7 +195,7 @@ const Step1 = forwardRef<Step1Handle, Step1Props>(
 
         return true;
       } catch (error: any) {
-        console.error("Error:", error);
+        devError("Error:", error);
 
         // Provide more specific error messages for transaction timeouts
         let errorMessage = getErrorMessage(error) || "Failed to save employee";

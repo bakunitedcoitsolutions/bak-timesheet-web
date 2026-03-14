@@ -23,6 +23,7 @@ import {
 import { UpdateEmployeeStep4Schema } from "@/lib/db/services/employee/employee.schemas";
 import { useStepperForm } from "@/context";
 import { GlobalDataGeneral, useGlobalData } from "@/context/GlobalDataContext";
+import { devError } from "@/utils/helpers/functions";
 
 interface Step4Props {
   employeeId?: number | null;
@@ -109,7 +110,7 @@ const Step4 = forwardRef<Step4Handle, Step4Props>(({ employeeId }, ref) => {
 
       return true;
     } catch (error: any) {
-      console.error("Error:", error);
+      devError("Error:", error);
       toastService.showError(
         "Error",
         getErrorMessage(error) || "Failed to save employee"
