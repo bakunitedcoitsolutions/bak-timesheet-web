@@ -1,5 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
+import { classNames } from "primereact/utils";
 import { memo, useState, useRef } from "react";
 import { useReactToPrint } from "react-to-print";
 import { ProgressSpinner } from "primereact/progressspinner";
@@ -12,6 +13,7 @@ import {
   TitleHeader,
   GroupDropdown,
   AutoScrollChips,
+  useAccess,
 } from "@/components";
 import { toastService } from "@/lib/toast";
 import { parseGroupDropdownFilter } from "@/utils/helpers";
@@ -79,6 +81,9 @@ const FilterSection = memo(
     onDateChange: (date: Date) => void;
     isLoading: boolean;
   }) => {
+    const { canAccessFilter, isLoading: isLoadingAccess } = useAccess();
+    const isAllowedAllFilters = canAccessFilter("salary-slips");
+
     const [employeeCodes, setEmployeeCodes] = useState<string[]>([]);
     const [selectedFilter, setSelectedFilter] = useState<
       string | number | null
@@ -105,78 +110,91 @@ const FilterSection = memo(
 
     return (
       <div className="bg-[#F5E6E8] w-full flex flex-col xl:flex-row justify-between gap-x-10 gap-y-4 px-6 py-6 print:hidden">
-        <div className="grid flex-1 grid-cols-1 lg:grid-cols-5 gap-3 items-center">
-          {/* Month — required */}
-          <div className="w-full">
-            <Input
-              type="month"
-              value={monthValue}
-              onChange={(e) => {
-                if (e.target.value) {
-                  const [y, m] = e.target.value.split("-").map(Number);
-                  onDateChange(new Date(y, m - 1));
-                }
-              }}
-              onKeyDown={(e) => {
-                if (e.key !== "Enter" || !selectedDate || isLoading) {
-                  return;
-                }
-                handleSearch();
-              }}
-              className="w-full h-10!"
-              placeholder="Select Month *"
-            />
-          </div>
+        <div
+          className={classNames("grid flex-1 grid-cols-1 gap-3 items-center", {
+            "md:grid-cols-2 lg:grid-cols-5": isAllowedAllFilters,
+            "lg:grid-cols-3": !isAllowedAllFilters,
+          })}
+        >
+          {!isLoadingAccess && (
+            <>
+              {/* Month — required */}
+              <div className="w-full">
+                <Input
+                  type="month"
+                  value={monthValue}
+                  onChange={(e) => {
+                    if (e.target.value) {
+                      const [y, m] = e.target.value.split("-").map(Number);
+                      onDateChange(new Date(y, m - 1));
+                    }
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key !== "Enter" || !selectedDate || isLoading) {
+                      return;
+                    }
+                    handleSearch();
+                  }}
+                  className="w-full h-10!"
+                  placeholder="Select Month *"
+                />
+              </div>
 
-          {/* Designation / Section */}
-          <div className="w-full">
-            <GroupDropdown
-              value={selectedFilter}
-              className="w-full h-10.5!"
-              onChange={setSelectedFilter}
-              placeholder="Select Section / Designation"
-            />
-          </div>
+              {/* Designation / Section */}
+              {isAllowedAllFilters && (
+                <div className="w-full">
+                  <GroupDropdown
+                    value={selectedFilter}
+                    className="w-full h-10.5!"
+                    onChange={setSelectedFilter}
+                    placeholder="Select Section / Designation"
+                  />
+                </div>
+              )}
 
-          {/* Employee codes */}
-          <div className="w-full">
-            <AutoScrollChips
-              value={employeeCodes}
-              onChange={(e) => setEmployeeCodes(e.value ?? [])}
-              keyfilter="int"
-              allowDuplicate={false}
-              placeholder="Employee Codes"
-              className="w-full h-10!"
-            />
-          </div>
+              {/* Employee codes */}
+              <div className="w-full">
+                <AutoScrollChips
+                  value={employeeCodes}
+                  onChange={(e) => setEmployeeCodes(e.value ?? [])}
+                  keyfilter="int"
+                  allowDuplicate={false}
+                  placeholder="Employee Codes"
+                  className="w-full h-10!"
+                />
+              </div>
 
-          {/* Payment Method */}
-          <div className="w-full">
-            <Dropdown
-              filter
-              options={paymentMethodOptions}
-              value={paymentMethodId}
-              onChange={(e: any) => setPaymentMethodId(e.value ?? null)}
-              className="w-full h-10.5!"
-              placeholder="Payment Method"
-            />
-          </div>
+              {/* Payment Method */}
+              {isAllowedAllFilters && (
+                <div className="w-full">
+                  <Dropdown
+                    filter
+                    options={paymentMethodOptions}
+                    value={paymentMethodId}
+                    onChange={(e: any) => setPaymentMethodId(e.value ?? null)}
+                    className="w-full h-10.5!"
+                    placeholder="Payment Method"
+                  />
+                </div>
+              )}
 
-          {/* Search button — disabled until month is selected */}
-          <div className="w-full lg:flex lg:justify-end">
-            <Button
-              size="small"
-              label="Search"
-              onClick={handleSearch}
-              className="w-full lg:w-32 h-10!"
-              disabled={!selectedDate || isLoading}
-              loading={isLoading}
-              tooltip={
-                !selectedDate ? "Please select a month first" : undefined
-              }
-              tooltipOptions={{ position: "top" }}
-            />
-          </div>
+              {/* Search button — disabled until month is selected */}
+              <div className="w-full lg:flex lg:justify-end">
+                <Button
+                  size="small"
+                  label="Search"
+                  onClick={handleSearch}
+                  className="w-full lg:w-32 h-10!"
+                  disabled={!selectedDate || isLoading}
+                  loading={isLoading}
+                  tooltip={
+                    !selectedDate ? "Please select a month first" : undefined
+                  }
+                  tooltipOptions={{ position: "top" }}
+                />
+              </div>
+            </>
+          )}
         </div>
       </div>
     );
