@@ -414,8 +414,8 @@ export const printGroupedTable = <T extends Record<string, any>>({
 
     // Generate table HTML
     const tableHTML = `
-      <div style="margin-bottom: 30px; page-break-after: auto; width: 100%; overflow: visible;">
-        <div style="background-color: #f3f4f6; padding: 12px; font-weight: 600; font-size: 14px; text-transform: uppercase; border: 1px solid #ddd; border-bottom: none;">
+      <div class="group-wrapper" style="margin-bottom: 20px; width: 100%;">
+        <div class="group-header" style="background-color: #f3f4f6; padding: 10px 12px; font-weight: 700; font-size: 13px; text-transform: uppercase; border: 1px solid #ddd; border-bottom: none;">
           ${group}
         </div>
         <table style="width: 100%; border-collapse: collapse; border: 1px solid #ddd; table-layout: auto;">
@@ -427,7 +427,7 @@ export const printGroupedTable = <T extends Record<string, any>>({
                   const widthStyle = minWidth
                     ? `min-width: ${minWidth};`
                     : `width: ${columnWidthPercent}%;`;
-                  return `<th style="border: 1px solid #ddd; padding: 8px; background-color: #f3f4f6; font-weight: bold; text-align: ${alignments[idx]}; ${widthStyle} white-space: nowrap;">${header}</th>`;
+                  return `<th style="border: 1px solid #ddd; padding: 6px 8px; background-color: #f8fafc; font-weight: bold; text-align: ${alignments[idx]}; ${widthStyle} white-space: nowrap; font-size: 11px;">${header}</th>`;
                 })
                 .join("")}
             </tr>
@@ -442,7 +442,7 @@ export const printGroupedTable = <T extends Record<string, any>>({
                       const widthStyle = minWidth
                         ? `min-width: ${minWidth};`
                         : `width: ${columnWidthPercent}%;`;
-                      return `<td style="border: 1px solid #ddd; padding: 8px; text-align: ${alignments[idx]}; ${widthStyle} word-wrap: break-word; overflow-wrap: break-word;">${cell}</td>`;
+                      return `<td style="border: 1px solid #ddd; padding: 6px 8px; text-align: ${alignments[idx]}; ${widthStyle} word-wrap: break-word; overflow-wrap: break-word; font-size: 11px;">${cell}</td>`;
                     })
                     .join("")}</tr>`
               )
@@ -529,8 +529,16 @@ export const printGroupedTable = <T extends Record<string, any>>({
               word-wrap: break-word;
               overflow-wrap: break-word;
             }
-            div {
-              page-break-inside: avoid;
+            .group-wrapper {
+              page-break-inside: auto;
+              break-inside: auto;
+              margin-bottom: 15px !important;
+            }
+            .group-header {
+              page-break-after: avoid;
+              break-after: avoid;
+              background-color: #f3f4f6 !important;
+              -webkit-print-color-adjust: exact;
             }
             .print-header {
               page-break-after: avoid;

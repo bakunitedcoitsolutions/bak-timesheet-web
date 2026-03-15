@@ -12,12 +12,14 @@ const ExportOptions = ({
   // exportPdf,
   buttonClassName,
   loading,
+  disabled,
 }: {
   exportCSV: () => void;
   exportExcel: () => void;
   // exportPdf: () => void;
   buttonClassName?: string;
   loading?: boolean;
+  disabled?: boolean;
 }) => {
   const menuRight = useRef<Menu | null>(null);
 
@@ -96,7 +98,7 @@ const ExportOptions = ({
         label="Export"
         variant="outlined"
         loading={loading}
-        disabled={loading}
+        disabled={disabled || loading}
         icon={loading ? undefined : "pi pi-download lg:text-lg!"}
         className={classNames("h-10! rounded-lg!", buttonClassName)}
         onClick={(event) => menuRight?.current?.toggle?.(event)}

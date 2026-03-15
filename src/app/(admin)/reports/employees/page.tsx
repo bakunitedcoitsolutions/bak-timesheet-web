@@ -160,9 +160,10 @@ const EmployeesReportPage = () => {
   const [querySearch, setQuerySearch] = useState<string>("");
   const [queryFilter, setQueryFilter] = useState<string | number | null>("all");
   const [queryStatusId, setQueryStatusId] = useState<number>(1); // Default to Active (1)
-  const [selectedColumn, setSelectedColumn] = useState<string[]>([]);
+  const [selectedColumn, setSelectedColumn] = useState<string[]>(["employeeCode", "nameEn", "designationName", "phone"]);
   const [zeroRate, setZeroRate] = useState<boolean>(false);
   const [isExporting, setIsExporting] = useState<boolean>(false);
+  const [isPrinting, setIsPrinting] = useState<boolean>(false);
 
   // Pagination states
   const [first, setFirst] = useState(0);
@@ -814,37 +815,66 @@ const EmployeesReportPage = () => {
   const columns = useMemo(() => allColumns, [allColumns]);
 
   // Print handler
-  const handlePrint = () => {
-    const columnsToPrint = allColumns.filter((col) => {
-      if (col.field === "id") return true;
-      if (selectedColumn.length === 0) return true;
-      return selectedColumn.includes(col.field as string);
-    });
+  const handlePrint = async () => {
+    setIsPrinting(true);
+    try {
+      const [response, error] = await listEmployeesAction({
+        limit: 9999, // Fetch all for print
+        search: querySearch || undefined,
+        designationId: filterParams.designationId,
+        payrollSectionId: filterParams.payrollSectionId,
+        statusId: queryStatusId === 0 ? undefined : queryStatusId,
+        sortBy: "employeeCode",
+        sortOrder: "asc",
+        zeroRate,
+      });
 
-    const printTitle = zeroRate
-      ? "EMPLOYEES REPORT (ZERO RATE)"
-      : "EMPLOYEES REPORT";
+      if (error || !response?.employees) {
+        toastService.showError(
+          "Error",
+          error?.message || "Failed to fetch data for printing"
+        );
+        return;
+      }
 
-    const commonPrintProps = {
-      data: employees,
-      columns: columnsToPrint.map((col) => ({
-        field: col.field,
-        header: (col.header as string) || "",
-        align: (col.align || "left") as "left" | "center" | "right",
-        style: col.style,
-        body: col.body,
-      })),
-      printTitle: printTitle,
-      printHeaderContent: printTitle,
-    };
+      const allData = response.employees.map((emp: ListedEmployee, index: number) =>
+        mapEmployeeToExportRow(emp, index)
+      );
 
-    if (hasActiveFilter) {
-      printTable(commonPrintProps);
-    } else {
+      const columnsToPrint = allColumns.filter((col) => {
+        if (col.field === "id") return true;
+        if (selectedColumn.length === 0) return true;
+        return selectedColumn.includes(col.field as string);
+      });
+
+      const printTitle = zeroRate
+        ? "EMPLOYEES REPORT (ZERO RATE)"
+        : "EMPLOYEES REPORT";
+
+      const commonPrintProps = {
+        data: allData,
+        columns: columnsToPrint.map((col) => ({
+          field: col.field,
+          header: (col.header as string) || "",
+          align: (col.align || "left") as "left" | "center" | "right",
+          style: col.style,
+          body: col.body,
+        })),
+        printTitle: printTitle,
+        // Using printTitle only in main title area to avoid clutter
+      };
+
       printGroupedTable({
         ...commonPrintProps,
         groupBy: "sectionName",
       });
+    } catch (err: any) {
+      toastService.showError(
+        "Error",
+        err.message || "An unexpected error occurred during printing"
+      );
+    } finally {
+      setIsPrinting(false);
     }
   };
 
@@ -860,6 +890,7 @@ const EmployeesReportPage = () => {
               <div className="flex items-center gap-5">
                 <ExportOptions
                   loading={isExporting}
+                  disabled={isLoading || isPrinting || isExporting || employees.length === 0}
                   exportCSV={async () => {
                     const allData = await fetchAllEmployees();
                     if (allData.length === 0) return;
@@ -877,6 +908,8 @@ const EmployeesReportPage = () => {
                   label="Print"
                   icon="pi pi-print"
                   variant="outlined"
+                  loading={isPrinting}
+                  disabled={isLoading || isPrinting || isExporting || employees.length === 0}
                   className="w-full lg:w-28 h-10! bg-white!"
                   onClick={handlePrint}
                 />
