@@ -697,6 +697,37 @@ export const listEmployees = async (
     take: limit,
     select: {
       ...employeeSelect,
+      country: {
+        select: {
+          nameEn: true,
+        },
+      },
+      city: {
+        select: {
+          nameEn: true,
+        },
+      },
+      status: {
+        select: {
+          nameEn: true,
+        },
+      },
+      branch: {
+        select: {
+          nameEn: true,
+        },
+      },
+      designation: {
+        select: {
+          nameEn: true,
+          nameAr: true,
+        },
+      },
+      gosiCity: {
+        select: {
+          nameEn: true,
+        },
+      },
       nationality: {
         select: {
           nameEn: true,

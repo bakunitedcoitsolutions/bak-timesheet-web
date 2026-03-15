@@ -204,10 +204,12 @@ const EmployeesReportPage = () => {
     if (!employeesResponse?.employees) return [];
 
     const groupCounters: Record<number | string, number> = {};
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
 
     let data = employeesResponse.employees.map((emp: ListedEmployee) => {
-      const designation = designationMap.get(emp.designationId ?? -1);
-      const status = statusMap.get(emp.statusId ?? -1); // Handle null statusId
+      const designation = emp.designation;
+      const status = emp.status;
 
       const sectionId = emp.payrollSectionId ?? "unassigned";
       groupCounters[sectionId] = (groupCounters[sectionId] || 0) + 1;
@@ -218,18 +220,33 @@ const EmployeesReportPage = () => {
         (Number(emp.mobileAllowance) || 0) +
         (Number(emp.otherAllowance) || 0);
 
+      // Calculate contract remaining days
+      let contractRemainingDays: number | null = null;
+      if (emp.contractStartDate && emp.contractEndDate) {
+        const endDate = new Date(emp.contractEndDate);
+        endDate.setHours(0, 0, 0, 0);
+        const diffTime = endDate.getTime() - today.getTime();
+        contractRemainingDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+      }
+
       return {
         ...emp,
         designationName: designation?.nameEn,
         sectionName: emp.payrollSection?.nameEn || "Unassigned",
         statusName: status?.nameEn,
+        countryName: emp.country?.nameEn || "-",
+        cityName: emp.city?.nameEn || "-",
+        branchName: emp.branch?.nameEn || "-",
+        gosiCityName: emp.gosiCity?.nameEn || "-",
+        nationalityName: emp.nationality?.nameEn || "-",
         totalAllowance,
+        contractRemainingDays,
         groupSerial: groupCounters[sectionId],
       };
     });
 
     return data;
-  }, [employeesResponse?.employees, designationMap, statusMap]); // Updated dependencies
+  }, [employeesResponse?.employees]);
 
   // Handle Search
   const handleSearch = (
@@ -248,14 +265,31 @@ const EmployeesReportPage = () => {
     filterable: false,
   };
 
+  // Document view button template
+  const documentBodyTemplate = (rowData: any, field: string) => {
+    const url = rowData[field];
+    if (!url) return <span className="text-sm text-gray-400">-</span>;
+    return (
+      <Button
+        size="small"
+        icon="pi pi-external-link"
+        label="View"
+        variant="text"
+        className="text-primary p-0 h-6! text-xs"
+        onClick={() => window.open(url, "_blank")}
+      />
+    );
+  };
+
   // Define all available columns
   const allColumns = useMemo(
     (): TableColumn<any>[] => [
+      // Frozen Columns
       {
-        field: "id", // Will be used for row index in body
+        field: "id",
         header: "#",
         ...tableCommonProps,
-        sortable: false,
+        frozen: true,
         align: "center",
         style: { minWidth: 50, width: 50 },
         body: (rowData, options) => (
@@ -270,6 +304,7 @@ const EmployeesReportPage = () => {
         field: "employeeCode",
         header: "Code",
         ...tableCommonProps,
+        frozen: true,
         style: { minWidth: 100 },
         body: (rowData) => (
           <span className="text-sm">{rowData.employeeCode}</span>
@@ -279,6 +314,7 @@ const EmployeesReportPage = () => {
         field: "nameEn",
         header: "Name",
         ...tableCommonProps,
+        frozen: true,
         style: { minWidth: 250 },
         body: (rowData) => (
           <div className="flex flex-col gap-1">
@@ -287,64 +323,110 @@ const EmployeesReportPage = () => {
           </div>
         ),
       },
+      // Regular Columns
       {
-        field: "idCardNo",
-        header: "ID Card",
+        field: "dob",
+        header: "Birth Date",
         ...tableCommonProps,
-        style: { minWidth: 150 },
+        style: { minWidth: 120 },
         body: (rowData) => (
-          <div className="flex flex-col gap-1">
-            <span className="text-sm">{rowData.idCardNo}</span>
-            {rowData.idCardExpiryDate && (
-              <span className="text-sm text-gray-600">
-                Exp: {new Date(rowData.idCardExpiryDate).toLocaleDateString()}
-              </span>
-            )}
-          </div>
+          <span className="text-sm">
+            {rowData.dob ? new Date(rowData.dob).toLocaleDateString() : "-"}
+          </span>
         ),
       },
       {
-        field: "passportNo",
-        header: "Passport",
+        field: "phone",
+        header: "Mobile No.",
+        ...tableCommonProps,
+        style: { minWidth: 130 },
+        body: (rowData) => <span className="text-sm">{rowData.phone || "-"}</span>,
+      },
+      // Contract Details
+      {
+        field: "gender",
+        header: "Gender",
+        ...tableCommonProps,
+        align: "center",
+        style: { minWidth: 100 },
+        body: (rowData) => (
+          <span className="text-sm capitalize">{rowData.gender || "-"}</span>
+        ),
+      },
+      {
+        field: "countryName",
+        header: "Country",
+        ...tableCommonProps,
+        style: { minWidth: 120 },
+        body: (rowData) => <span className="text-sm">{rowData.countryName}</span>,
+      },
+      {
+        field: "cityName",
+        header: "City",
+        ...tableCommonProps,
+        style: { minWidth: 120 },
+        body: (rowData) => <span className="text-sm">{rowData.cityName}</span>,
+      },
+      {
+        field: "statusName",
+        header: "Status",
+        ...tableCommonProps,
+        align: "center",
+        style: { minWidth: 120 },
+        body: (rowData) => <span className="text-sm">{rowData.statusName}</span>,
+      },
+      {
+        field: "branchName",
+        header: "Branch",
         ...tableCommonProps,
         style: { minWidth: 150 },
-        body: (rowData) => (
-          <div className="flex flex-col gap-1">
-            {rowData.passportNo ? (
-              <>
-                <span className="text-sm">{rowData.passportNo}</span>
-                {rowData.passportExpiryDate && (
-                  <span className="text-sm text-gray-600">
-                    Exp:{" "}
-                    {new Date(rowData.passportExpiryDate).toLocaleDateString()}
-                  </span>
-                )}
-              </>
-            ) : (
-              <span className="text-sm text-gray-400">-</span>
-            )}
-          </div>
-        ),
+        body: (rowData) => <span className="text-sm">{rowData.branchName}</span>,
       },
       {
         field: "designationName",
         header: "Designation",
         ...tableCommonProps,
+        style: { minWidth: 180 },
+        body: (rowData) => <span className="text-sm">{rowData.designationName}</span>,
+      },
+      {
+        field: "sectionName",
+        header: "Payroll Section",
+        ...tableCommonProps,
         style: { minWidth: 150 },
+        body: (rowData) => <span className="text-sm">{rowData.sectionName}</span>,
+      },
+      {
+        field: "isFixed",
+        header: "Is Fixed?",
+        ...tableCommonProps,
+        align: "center",
+        style: { minWidth: 100 },
         body: (rowData) => (
-          <span className="text-sm">{rowData.designationName}</span>
+          <span className="text-sm">{rowData.isFixed ? "Yes" : "No"}</span>
         ),
       },
       {
-        field: "iban",
-        header: "IBAN",
+        field: "isDeductable",
+        header: "Is Deductable?",
         ...tableCommonProps,
-        style: { minWidth: 200 },
-        body: (rowData) => <span className="text-sm">{rowData.iban}</span>,
+        align: "center",
+        style: { minWidth: 120 },
+        body: (rowData) => (
+          <span className="text-sm">{rowData.isDeductable ? "Yes" : "No"}</span>
+        ),
       },
       {
-        field: "salary", // Assuming "Goal Salary" maps to salary? Or strict salary?
-        header: "Basic Salary",
+        field: "workingDays",
+        header: "Working Days",
+        ...tableCommonProps,
+        align: "center",
+        style: { minWidth: 120 },
+        body: (rowData) => <span className="text-sm">{rowData.workingDays || "-"}</span>,
+      },
+      {
+        field: "salary",
+        header: "Salary",
         ...tableCommonProps,
         align: "center",
         style: { minWidth: 120 },
@@ -356,10 +438,10 @@ const EmployeesReportPage = () => {
       },
       {
         field: "hourlyRate",
-        header: "Rate",
+        header: "Hourly Rate",
         ...tableCommonProps,
         align: "center",
-        style: { minWidth: 100 },
+        style: { minWidth: 120 },
         body: (rowData) => (
           <span className="text-sm">
             {rowData.hourlyRate ? Number(rowData.hourlyRate).toFixed(2) : "-"}
@@ -367,70 +449,239 @@ const EmployeesReportPage = () => {
         ),
       },
       {
-        field: "totalAllowance",
-        header: "Allowance",
+        field: "breakfastAllowance",
+        header: "Breakfast All.",
         ...tableCommonProps,
         align: "center",
         style: { minWidth: 120 },
         body: (rowData) => (
+          <span className="text-sm">{rowData.breakfastAllowance ? "Yes" : "No"}</span>
+        ),
+      },
+      {
+        field: "foodAllowance",
+        header: "Food Allowance",
+        ...tableCommonProps,
+        align: "center",
+        style: { minWidth: 140 },
+        body: (rowData) => (
           <span className="text-sm">
-            {rowData.totalAllowance.toLocaleString()}
+            {rowData.foodAllowance ? Number(rowData.foodAllowance).toLocaleString() : "-"}
           </span>
         ),
       },
       {
-        field: "isDeductable",
-        header: "Deductable",
+        field: "mobileAllowance",
+        header: "Mobile Allowance",
         ...tableCommonProps,
         align: "center",
-        style: { minWidth: 120 },
+        style: { minWidth: 140 },
         body: (rowData) => (
-          <span className="text-sm">{rowData.isDeductable ? "Yes" : "No"}</span>
+          <span className="text-sm">
+            {rowData.mobileAllowance ? Number(rowData.mobileAllowance).toLocaleString() : "-"}
+          </span>
         ),
       },
       {
-        field: "statusName",
-        header: "Status",
+        field: "otherAllowance",
+        header: "Other Allowance",
         ...tableCommonProps,
         align: "center",
-        style: { minWidth: 100 },
+        style: { minWidth: 140 },
         body: (rowData) => (
-          <span className="text-sm">{rowData.statusName}</span>
+          <span className="text-sm">
+            {rowData.otherAllowance ? Number(rowData.otherAllowance).toLocaleString() : "-"}
+          </span>
         ),
+      },
+      {
+        field: "contractStartDate",
+        header: "Contract Start",
+        ...tableCommonProps,
+        style: { minWidth: 130 },
+        body: (rowData) => (
+          <span className="text-sm">
+            {rowData.contractStartDate ? new Date(rowData.contractStartDate).toLocaleDateString() : "-"}
+          </span>
+        ),
+      },
+      {
+        field: "contractEndDate",
+        header: "Contract End",
+        ...tableCommonProps,
+        style: { minWidth: 130 },
+        body: (rowData) => (
+          <span className="text-sm">
+            {rowData.contractEndDate ? new Date(rowData.contractEndDate).toLocaleDateString() : "-"}
+          </span>
+        ),
+      },
+      {
+        field: "contractRemainingDays",
+        header: "Contract Rem. Days",
+        ...tableCommonProps,
+        align: "center",
+        style: { minWidth: 150 },
+        body: (rowData) => {
+          const days = rowData.contractRemainingDays;
+          if (days === null) return <span className="text-sm text-gray-400">-</span>;
+          const isExpired = days < 0;
+          return (
+            <span className={`text-sm font-semibold ${isExpired ? "text-red-600" : "text-green-600"}`}>
+              {days} days {isExpired ? "(Exp)" : ""}
+            </span>
+          );
+        },
       },
       {
         field: "joiningDate",
-        header: "Joining",
+        header: "Joining Date",
         ...tableCommonProps,
-        align: "center",
-        style: { minWidth: 120 },
+        style: { minWidth: 130 },
         body: (rowData) => (
           <span className="text-sm">
-            {rowData.joiningDate
-              ? new Date(rowData.joiningDate).toLocaleDateString()
-              : "-"}
+            {rowData.joiningDate ? new Date(rowData.joiningDate).toLocaleDateString() : "-"}
           </span>
         ),
       },
       {
-        field: "isFixed",
-        header: "Fixed",
+        field: "contractEndReason",
+        header: "End Reason",
         ...tableCommonProps,
-        align: "center",
-        style: { minWidth: 100 },
+        style: { minWidth: 200 },
         body: (rowData) => (
-          <span className="text-sm">{rowData.isFixed ? "Yes" : "No"}</span>
+          <span className="text-sm line-clamp-2">{rowData.contractEndReason || "-"}</span>
         ),
       },
       {
-        field: "gender",
-        header: "Gender",
+        field: "contractDocument",
+        header: "Contract Doc",
         ...tableCommonProps,
         align: "center",
-        style: { minWidth: 100 },
+        style: { minWidth: 120 },
+        body: (rowData) => documentBodyTemplate(rowData, "contractDocument"),
+      },
+      // Identity
+      {
+        field: "idCardNo",
+        header: "ID Card No.",
+        ...tableCommonProps,
+        style: { minWidth: 150 },
+        body: (rowData) => <span className="text-sm">{rowData.idCardNo || "-"}</span>,
+      },
+      {
+        field: "idCardExpiryDate",
+        header: "ID Card Expiry",
+        ...tableCommonProps,
+        style: { minWidth: 130 },
         body: (rowData) => (
-          <span className="text-sm capitalize">{rowData.gender}</span>
+          <span className="text-sm">
+            {rowData.idCardExpiryDate ? new Date(rowData.idCardExpiryDate).toLocaleDateString() : "-"}
+          </span>
         ),
+      },
+      {
+        field: "profession",
+        header: "Profession",
+        ...tableCommonProps,
+        style: { minWidth: 150 },
+        body: (rowData) => <span className="text-sm">{rowData.profession || "-"}</span>,
+      },
+      {
+        field: "idCardDocument",
+        header: "ID Card Doc",
+        ...tableCommonProps,
+        align: "center",
+        style: { minWidth: 120 },
+        body: (rowData) => documentBodyTemplate(rowData, "idCardDocument"),
+      },
+      // Passport
+      {
+        field: "nationalityName",
+        header: "Nationality",
+        ...tableCommonProps,
+        style: { minWidth: 150 },
+        body: (rowData) => <span className="text-sm">{rowData.nationalityName}</span>,
+      },
+      {
+        field: "passportNo",
+        header: "Passport No.",
+        ...tableCommonProps,
+        style: { minWidth: 140 },
+        body: (rowData) => <span className="text-sm">{rowData.passportNo || "-"}</span>,
+      },
+      {
+        field: "passportExpiryDate",
+        header: "Passport Expiry",
+        ...tableCommonProps,
+        style: { minWidth: 130 },
+        body: (rowData) => (
+          <span className="text-sm">
+            {rowData.passportExpiryDate ? new Date(rowData.passportExpiryDate).toLocaleDateString() : "-"}
+          </span>
+        ),
+      },
+      {
+        field: "passportDocument",
+        header: "Passport Doc",
+        ...tableCommonProps,
+        align: "center",
+        style: { minWidth: 120 },
+        body: (rowData) => documentBodyTemplate(rowData, "passportDocument"),
+      },
+      // Bank Details
+      {
+        field: "bankName",
+        header: "Bank Name",
+        ...tableCommonProps,
+        style: { minWidth: 150 },
+        body: (rowData) => <span className="text-sm">{rowData.bankName || "-"}</span>,
+      },
+      {
+        field: "bankCode",
+        header: "Bank Code",
+        ...tableCommonProps,
+        style: { minWidth: 120 },
+        body: (rowData) => <span className="text-sm">{rowData.bankCode || "-"}</span>,
+      },
+      // GOSI Details
+      {
+        field: "gosiSalary",
+        header: "GOSI Salary",
+        ...tableCommonProps,
+        align: "center",
+        style: { minWidth: 130 },
+        body: (rowData) => (
+          <span className="text-sm">
+            {rowData.gosiSalary ? Number(rowData.gosiSalary).toLocaleString() : "-"}
+          </span>
+        ),
+      },
+      {
+        field: "gosiCityName",
+        header: "GOSI City",
+        ...tableCommonProps,
+        style: { minWidth: 120 },
+        body: (rowData) => <span className="text-sm">{rowData.gosiCityName}</span>,
+      },
+      // Bank Card Details
+      {
+        field: "isCardDelivered",
+        header: "Card Delivered?",
+        ...tableCommonProps,
+        align: "center",
+        style: { minWidth: 140 },
+        body: (rowData) => (
+          <span className="text-sm">{rowData.isCardDelivered ? "Yes" : "No"}</span>
+        ),
+      },
+      {
+        field: "cardDocument",
+        header: "Card Doc",
+        ...tableCommonProps,
+        align: "center",
+        style: { minWidth: 120 },
+        body: (rowData) => documentBodyTemplate(rowData, "cardDocument"),
       },
     ],
     []
@@ -577,7 +828,7 @@ const EmployeesReportPage = () => {
           tableClassName="report-table"
           emptyMessage="No employees data found."
           scrollable
-          scrollHeight="72vh"
+          scrollHeight="75vh"
         />
       </div>
     </div>

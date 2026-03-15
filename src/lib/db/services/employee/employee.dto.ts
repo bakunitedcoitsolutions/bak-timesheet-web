@@ -189,6 +189,25 @@ export interface EmployeeInterface {
 }
 
 export interface ListedEmployee extends EmployeeInterface {
+  country: {
+    nameEn: string;
+  } | null;
+  city: {
+    nameEn: string;
+  } | null;
+  status: {
+    nameEn: string;
+  } | null;
+  branch: {
+    nameEn: string;
+  } | null;
+  designation: {
+    nameEn: string;
+    nameAr: string | null;
+  } | null;
+  gosiCity: {
+    nameEn: string;
+  } | null;
   nationality: {
     nameEn: string;
   } | null;
