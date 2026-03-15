@@ -70,10 +70,10 @@ const authConfig: NextAuthConfig = {
         }
 
         // Check if session has been invalidated (e.g., password change)
-        const isInvalid = await isSessionInvalid(userId);
-        if (isInvalid) {
-          throw new Error("Session invalidated");
-        }
+        // const isInv`alid = await isSessionInvalid(userId);
+        // if (isInvalid) {
+        //   throw new Error("Session invalidated");
+        // }`
       }
 
       // Refresh data handling is moved to the Node.js boundary where Prisma is available
