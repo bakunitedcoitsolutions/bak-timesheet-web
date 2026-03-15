@@ -862,6 +862,7 @@ const EmployeesReportPage = () => {
         })),
         printTitle: printTitle,
         // Using printTitle only in main title area to avoid clutter
+        landscape: columnsToPrint.length > 5,
       };
 
       printGroupedTable({
