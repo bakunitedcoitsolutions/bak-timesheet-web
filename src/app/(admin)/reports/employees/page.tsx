@@ -160,7 +160,12 @@ const EmployeesReportPage = () => {
   const [querySearch, setQuerySearch] = useState<string>("");
   const [queryFilter, setQueryFilter] = useState<string | number | null>("all");
   const [queryStatusId, setQueryStatusId] = useState<number>(1); // Default to Active (1)
-  const [selectedColumn, setSelectedColumn] = useState<string[]>(["employeeCode", "nameEn", "designationName", "phone"]);
+  const [selectedColumn, setSelectedColumn] = useState<string[]>([
+    "employeeCode",
+    "nameEn",
+    "designationName",
+    "phone",
+  ]);
   const [zeroRate, setZeroRate] = useState<boolean>(false);
   const [isExporting, setIsExporting] = useState<boolean>(false);
   const [isPrinting, setIsPrinting] = useState<boolean>(false);
@@ -189,27 +194,6 @@ const EmployeesReportPage = () => {
     sortOrder: "asc",
     zeroRate,
   });
-
-  const { data: designationsResponse } = useGetDesignations(COMMON_QUERY_INPUT);
-  const designations: ListedDesignation[] =
-    designationsResponse?.designations ?? [];
-
-  const { data: statusesResponse } = useGetEmployeeStatuses({
-    ...COMMON_QUERY_INPUT,
-    sortBy: "nameEn",
-  });
-  const statuses: ListedEmployeeStatus[] =
-    statusesResponse?.employeeStatuses ?? [];
-
-  // Create Maps for O(1) Access
-  const designationMap = useMemo(
-    () => new Map(designations.map((d) => [d.id, d])),
-    [designations]
-  );
-  const statusMap = useMemo(
-    () => new Map(statuses.map((s) => [s.id, s])),
-    [statuses]
-  );
 
   // Fetch all employees for export
   const fetchAllEmployees = async () => {
@@ -837,8 +821,9 @@ const EmployeesReportPage = () => {
         return;
       }
 
-      const allData = response.employees.map((emp: ListedEmployee, index: number) =>
-        mapEmployeeToExportRow(emp, index)
+      const allData = response.employees.map(
+        (emp: ListedEmployee, index: number) =>
+          mapEmployeeToExportRow(emp, index)
       );
 
       const columnsToPrint = allColumns.filter((col) => {
@@ -848,8 +833,8 @@ const EmployeesReportPage = () => {
       });
 
       const printTitle = zeroRate
-        ? "EMPLOYEES REPORT (ZERO RATE)"
-        : "EMPLOYEES REPORT";
+        ? `EMPLOYEES REPORT (ZERO RATE)`
+        : `EMPLOYEES REPORT`;
 
       const commonPrintProps = {
         data: allData,
@@ -861,8 +846,12 @@ const EmployeesReportPage = () => {
           body: col.body,
         })),
         printTitle: printTitle,
+        printSubTitle:
+          response.employees.length > 1
+            ? `${response.employees.length} Employee(s)`
+            : "",
         // Using printTitle only in main title area to avoid clutter
-        landscape: columnsToPrint.length > 5,
+        landscape: columnsToPrint.length > 6,
       };
 
       printGroupedTable({
@@ -891,7 +880,12 @@ const EmployeesReportPage = () => {
               <div className="flex items-center gap-5">
                 <ExportOptions
                   loading={isExporting}
-                  disabled={isLoading || isPrinting || isExporting || employees.length === 0}
+                  disabled={
+                    isLoading ||
+                    isPrinting ||
+                    isExporting ||
+                    employees.length === 0
+                  }
                   exportCSV={async () => {
                     const allData = await fetchAllEmployees();
                     if (allData.length === 0) return;
@@ -910,7 +904,12 @@ const EmployeesReportPage = () => {
                   icon="pi pi-print"
                   variant="outlined"
                   loading={isPrinting}
-                  disabled={isLoading || isPrinting || isExporting || employees.length === 0}
+                  disabled={
+                    isLoading ||
+                    isPrinting ||
+                    isExporting ||
+                    employees.length === 0
+                  }
                   className="w-full lg:w-28 h-10! bg-white!"
                   onClick={handlePrint}
                 />

@@ -116,6 +116,7 @@ export interface PrintTableOptions<T = any> {
   data: T[];
   columns: PrintTableColumn<T>[];
   printTitle?: string;
+  printSubTitle?: string;
   printHeaderContent?: ReactNode;
   landscape?: boolean;
 }
@@ -125,6 +126,7 @@ export interface PrintGroupedTableOptions<T = any> {
   columns: PrintTableColumn<T>[];
   groupBy: keyof T | string;
   printTitle?: string;
+  printSubTitle?: string;
   printHeaderContent?: string | ReactNode;
   landscape?: boolean;
 }
@@ -355,6 +357,7 @@ export const printGroupedTable = <T extends Record<string, any>>({
   columns,
   groupBy,
   printTitle,
+  printSubTitle,
   printHeaderContent,
   landscape,
 }: PrintGroupedTableOptions<T>) => {
@@ -392,29 +395,35 @@ export const printGroupedTable = <T extends Record<string, any>>({
       const groupHeaderRow = `
       <tr>
         <td colspan="${headers.length}" class="group-header-row" style="background-color: #f3f4f6; padding: 10px 12px; font-weight: 700; font-size: 13px; text-transform: uppercase; border: 1px solid #ddd;">
-          ${group}
+          ${group} ~ (${groupData.length})
         </td>
       </tr>
     `;
 
       // Data Rows
       const dataRows = groupData
-        .map((row) => {
+        .map((row, rowIndex) => {
+          // Explicitly pass group-relative index
           const cells = columns
             .map((col, idx) => {
               const field = col.field as string;
               let cellValue = "";
 
               if (col.body) {
-                const bodyResult = col.body(row, {
-                  rowIndex: groupData.indexOf(row),
+                // IMPORTANT: We override groupSerial for the print columns that check it
+                // to ensure sequencing starts from 1 per group
+                const rowWithGroupIndex = { ...row, groupSerial: rowIndex + 1 };
+                const bodyResult = col.body(rowWithGroupIndex, {
+                  rowIndex: rowIndex,
                 });
                 cellValue = nodeToHTML(bodyResult);
               } else {
                 const value = (row as any)[field];
                 if (value !== null && value !== undefined) {
                   cellValue =
-                    typeof value === "object" ? JSON.stringify(value) : String(value);
+                    typeof value === "object"
+                      ? JSON.stringify(value)
+                      : String(value);
                 }
               }
 
@@ -519,7 +528,14 @@ export const printGroupedTable = <T extends Record<string, any>>({
         </style>
       </head>
       <body>
-        ${printTitle ? `<div class="print-header"><h1>${printTitle}</h1></div>` : ""}
+        ${
+          printTitle
+            ? `<div class="print-header">
+                <h1>${printTitle}</h1>
+                ${!!printSubTitle ? `<p style="color: #6b7280; font-size: 14px; margin-top: 5px;">${printSubTitle}</p>` : ""}
+              </div>`
+            : ""
+        }
         ${headerHTML}
         ${tableHTML}
       </body>
