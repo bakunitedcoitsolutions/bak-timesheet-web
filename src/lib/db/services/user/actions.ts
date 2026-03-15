@@ -1,5 +1,5 @@
 "use server";
-import { publicAction, serverAction } from "@/lib/zsa/zsa-action";
+import { serverAction } from "@/lib/zsa/zsa-action";
 import {
   createUser,
   deleteUser,
@@ -33,7 +33,7 @@ export const listUsersAction = serverAction
     return response;
   });
 
-export const signInAction = publicAction
+export const signInAction = serverAction
   .input(loginSchema)
   .handler(async ({ input }) => {
     const user = await prisma.user.findUnique({
@@ -56,7 +56,7 @@ export const signInAction = publicAction
     return { ok: true };
   });
 
-export const signOutAction = publicAction.handler(async () => {
+export const signOutAction = serverAction.handler(async () => {
   await signOut({ redirect: false });
   return { ok: true };
 });
