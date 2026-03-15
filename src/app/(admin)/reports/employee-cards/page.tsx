@@ -139,19 +139,23 @@ const EmployeesCardReportPage = () => {
     null
   );
   const [queryFilter, setQueryFilter] = useState<string | number | null>("all");
+  const [hasSearched, setHasSearched] = useState(false);
 
   const filterParams = parseGroupDropdownFilter(queryFilter);
 
   // Data Fetching
-  const { data: employeesResponse, isLoading } = useGetEmployees({
-    page: 1,
-    limit: 1000, // Fetch all for report (or a large number)
-    employeeCodes: queryEmployeeCodes || undefined,
-    designationId: filterParams.designationId,
-    payrollSectionId: filterParams.payrollSectionId,
-    sortBy: "employeeCode",
-    sortOrder: "asc",
-  });
+  const { data: employeesResponse, isLoading } = useGetEmployees(
+    {
+      page: 1,
+      limit: 1000, // Fetch all for report (or a large number)
+      employeeCodes: queryEmployeeCodes || undefined,
+      designationId: filterParams.designationId,
+      payrollSectionId: filterParams.payrollSectionId,
+      sortBy: "employeeCode",
+      sortOrder: "asc",
+    },
+    { enabled: hasSearched }
+  );
 
   const employees: ListedEmployee[] = employeesResponse?.employees ?? [];
   const { data: globalData } = useGlobalData();
@@ -174,6 +178,7 @@ const EmployeesCardReportPage = () => {
   ) => {
     setQueryEmployeeCodes(employeeCodes);
     setQueryFilter(filter);
+    setHasSearched(true);
   };
 
   return (
@@ -209,9 +214,17 @@ const EmployeesCardReportPage = () => {
           <div className="flex items-center justify-center h-64">
             <ProgressSpinner style={{ width: "50px", height: "50px" }} />
           </div>
+        ) : !hasSearched ? (
+          <div className="flex flex-col items-center justify-center h-64 text-gray-500 gap-4">
+            <i className="fa-light fa-magnifying-glass text-4xl text-gray-300" />
+            <p className="text-lg font-medium">Ready to search</p>
+            <p className="text-sm">
+              Use the filters above to search for employees and view their cards.
+            </p>
+          </div>
         ) : employees.length === 0 ? (
-          <div className="flex items-center justify-center h-64 text-gray-500">
-            No employees found.
+          <div className="flex flex-col items-center justify-center h-64 text-gray-500 gap-2">
+            <p>No employees found matching your criteria.</p>
           </div>
         ) : (
           <EmployeeGrid

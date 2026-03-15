@@ -105,10 +105,14 @@ export const useUpdateEmployeeStep5 = () =>
   });
 
 // List Employees
-export const useGetEmployees = (input: ListEmployeesParamsInput) =>
+export const useGetEmployees = (
+  input: ListEmployeesParamsInput,
+  options?: any
+) =>
   useQuery(listEmployeesAction, {
     queryKey: ["employees", input],
     input,
+    ...options,
   });
 
 // Get Employee By ID
