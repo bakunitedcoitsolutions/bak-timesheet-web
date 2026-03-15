@@ -2,26 +2,28 @@
 import { useRef, useState, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { Checkbox } from "primereact/checkbox";
+import { Paginator } from "primereact/paginator";
 import { InputNumberChangeEvent } from "primereact/inputnumber";
 
 import {
   Table,
   Button,
   TableRef,
-  TitleHeader,
-  TableColumn,
   MultiSelect,
-  GroupDropdown,
+  TableColumn,
   NumberInput,
+  TitleHeader,
+  GroupDropdown,
 } from "@/components";
+import { Dropdown } from "@/components";
 import { COMMON_QUERY_INPUT } from "@/utils/constants";
 import { parseGroupDropdownFilter } from "@/utils/helpers";
 import { useGetEmployees } from "@/lib/db/services/employee";
 import { ListedDesignation } from "@/lib/db/services/designation";
 import { ListedEmployeeStatus } from "@/lib/db/services/employee-status";
-import { printGroupedTable, printTable } from "@/utils/helpers/print-utils";
 import { ListedEmployee } from "@/lib/db/services/employee/employee.dto";
 import { useGetDesignations } from "@/lib/db/services/designation/requests";
+import { printGroupedTable, printTable } from "@/utils/helpers/print-utils";
 import { useGetEmployeeStatuses } from "@/lib/db/services/employee-status/requests";
 
 // Filter Component
@@ -33,7 +35,11 @@ const FilterSection = ({
   zeroRate,
   onZeroRateChange,
 }: {
-  onSearch: (search: string, filter: string | number | null) => void;
+  onSearch: (
+    search: string,
+    filter: string | number | null,
+    statusId: number
+  ) => void;
   selectedColumns: string[];
   columnOptions: { label: string; value: string }[];
   onColumnChange: (value: string[]) => void;
@@ -44,19 +50,34 @@ const FilterSection = ({
   const [selectedFilter, setSelectedFilter] = useState<string | number | null>(
     "all"
   );
+  const [statusId, setStatusId] = useState<number>(1); // Default to Active (1)
+
+  const { data: statusesResponse } = useGetEmployeeStatuses({
+    ...COMMON_QUERY_INPUT,
+    sortBy: "nameEn",
+  });
+  const statuses: ListedEmployeeStatus[] =
+    statusesResponse?.employeeStatuses ?? [];
+
+  const statusOptions = useMemo(() => {
+    return [
+      { label: "All Statuses", value: 0 },
+      ...statuses.map((s) => ({ label: s.nameEn, value: s.id })),
+    ];
+  }, [statuses]);
 
   const handleSearch = () => {
-    onSearch(searchValue, selectedFilter);
+    onSearch(searchValue, selectedFilter, statusId);
   };
 
   return (
     <div className="bg-[#F5E6E8] w-full flex flex-col xl:flex-row justify-between gap-x-10 gap-y-4 px-6 py-6 print:hidden">
-      <div className="grid flex-1 grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-3 items-center">
+      <div className="grid flex-1 grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-3 items-center">
         <div className="w-full">
           <NumberInput
             small
             useGrouping={false}
-            placeholder="Employee Codes / Name"
+            placeholder="Employee Codes"
             value={!!searchValue ? parseInt(searchValue) : undefined}
             onChange={(e: InputNumberChangeEvent) =>
               setSearchValue(e.value?.toString() || "")
@@ -77,6 +98,15 @@ const FilterSection = ({
             onChange={setSelectedFilter}
           />
         </div>
+        <div className="w-full lg:col-span-1">
+          <Dropdown
+            value={statusId}
+            options={statusOptions}
+            className="w-full h-10!"
+            placeholder="Select Status"
+            onChange={(e) => setStatusId(e.value)}
+          />
+        </div>
         <div className="w-full lg:col-span-2">
           <MultiSelect
             small
@@ -89,7 +119,7 @@ const FilterSection = ({
         </div>
       </div>
       <div className="flex items-center gap-5 justify-between xl:justify-end">
-        <div className="w-[100px]">
+        <div className="w-fit whitespace-nowrap">
           <div className="flex items-center gap-2">
             <Checkbox
               inputId="zeroRate"
@@ -119,23 +149,30 @@ const EmployeesReportPage = () => {
   // Query states
   const [querySearch, setQuerySearch] = useState<string>("");
   const [queryFilter, setQueryFilter] = useState<string | number | null>("all");
+  const [queryStatusId, setQueryStatusId] = useState<number>(1); // Default to Active (1)
   const [selectedColumn, setSelectedColumn] = useState<string[]>([]);
   const [zeroRate, setZeroRate] = useState<boolean>(false);
+
+  // Pagination states
+  const [first, setFirst] = useState(0);
+  const [rows, setRows] = useState(50);
 
   const filterParams = parseGroupDropdownFilter(queryFilter);
   const hasActiveFilter =
     !!querySearch ||
     !!filterParams.designationId ||
     !!filterParams.payrollSectionId ||
-    filterParams.payrollSectionId === 0;
+    filterParams.payrollSectionId === 0 ||
+    (queryStatusId !== null && queryStatusId !== 1);
 
   // Data Fetching
   const { data: employeesResponse, isLoading } = useGetEmployees({
-    page: 1,
-    limit: 1000,
+    page: Math.floor(first / rows) + 1,
+    limit: rows,
     search: querySearch || undefined,
     designationId: filterParams.designationId,
     payrollSectionId: filterParams.payrollSectionId,
+    statusId: queryStatusId === 0 ? undefined : queryStatusId,
     sortBy: !hasActiveFilter ? "payrollSectionId" : "employeeCode",
     sortOrder: "asc",
     zeroRate,
@@ -195,13 +232,19 @@ const EmployeesReportPage = () => {
   }, [employeesResponse?.employees, designationMap, statusMap]); // Updated dependencies
 
   // Handle Search
-  const handleSearch = (search: string, filter: string | number | null) => {
+  const handleSearch = (
+    search: string,
+    filter: string | number | null,
+    statusId: number
+  ) => {
     setQuerySearch(search);
     setQueryFilter(filter);
+    setQueryStatusId(statusId);
+    setFirst(0); // Reset pagination on search
   };
 
   const tableCommonProps = {
-    sortable: true,
+    sortable: false, // Lazy pagination doesn't support easy client-side sorting with grouping
     filterable: false,
   };
 
@@ -475,6 +518,38 @@ const EmployeesReportPage = () => {
         </div>
       </div>
       <div className="bg-white mt-4 overflow-hidden">
+        {/* Top Paginator */}
+        <div className="mb-4 px-6 print:hidden flex flex-col md:flex-row justify-between items-center gap-4">
+          <span className="text-sm text-gray-600 font-medium">
+            Showing <span className="text-primary font-bold">{first + 1}</span>{" "}
+            to{" "}
+            <span className="text-primary font-bold">
+              {Math.min(
+                first + rows,
+                employeesResponse?.pagination?.total ?? 0
+              )}
+            </span>{" "}
+            of{" "}
+            <span className="text-primary font-bold">
+              {employeesResponse?.pagination?.total ?? 0}
+            </span>{" "}
+            employees
+          </span>
+          <Paginator
+            first={first}
+            rows={rows}
+            totalRecords={employeesResponse?.pagination?.total ?? 0}
+            rowsPerPageOptions={[50, 100]}
+            onPageChange={(e) => {
+              setFirst(e.first);
+              setRows(e.rows);
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }}
+            template="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
+            className="paginator-sm border-none! p-0! bg-transparent!"
+          />
+        </div>
+
         <Table
           dataKey="id"
           showGridlines
@@ -482,16 +557,16 @@ const EmployeesReportPage = () => {
           data={employees}
           columns={columns}
           loading={isLoading}
-          pagination={true}
-          rowsPerPage={100}
+          pagination={false}
           globalSearch={false}
+          lazy
           rowGroupMode={!hasActiveFilter ? "subheader" : undefined}
           groupRowsBy={!hasActiveFilter ? "sectionName" : undefined}
           rowGroupHeaderTemplate={
             !hasActiveFilter
               ? (rowData: any) => (
-                  <div className="border border-primary/50 py-3 px-4 bg-gray-50">
-                    <span className="font-semibold text-primary text-sm uppercase">
+                  <div className="border border-primary/50 py-3 px-4 bg-gray-50 uppercase">
+                    <span className="font-semibold text-primary text-sm">
                       {rowData.sectionName}
                     </span>
                   </div>

@@ -41,7 +41,6 @@ export const REPORT_OPTIONS: ReportOption[] = [
     description: "View comprehensive employee reports",
     icon: "fa-light fa-user-group",
     route: "/reports/employees",
-    filterOptions: [{ key: "enableAllFilters", label: "Enable all filters" }],
   },
   {
     id: "employee-cards",
