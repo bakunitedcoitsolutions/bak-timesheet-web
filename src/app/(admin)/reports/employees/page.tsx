@@ -14,15 +14,25 @@ import {
   NumberInput,
   TitleHeader,
   GroupDropdown,
+  ExportOptions,
 } from "@/components";
 import { Dropdown } from "@/components";
 import { COMMON_QUERY_INPUT } from "@/utils/constants";
 import { parseGroupDropdownFilter } from "@/utils/helpers";
-import { useGetEmployees } from "@/lib/db/services/employee";
+import {
+  useGetEmployees,
+  listEmployeesAction,
+} from "@/lib/db/services/employee";
+import { toastService } from "@/lib/toast";
 import { ListedDesignation } from "@/lib/db/services/designation";
 import { ListedEmployeeStatus } from "@/lib/db/services/employee-status";
 import { ListedEmployee } from "@/lib/db/services/employee/employee.dto";
 import { useGetDesignations } from "@/lib/db/services/designation/requests";
+import {
+  exportEmployeesCSV,
+  exportEmployeesExcel,
+  mapEmployeeToExportRow,
+} from "@/utils/helpers/export-employees-report";
 import { printGroupedTable, printTable } from "@/utils/helpers/print-utils";
 import { useGetEmployeeStatuses } from "@/lib/db/services/employee-status/requests";
 
@@ -152,6 +162,7 @@ const EmployeesReportPage = () => {
   const [queryStatusId, setQueryStatusId] = useState<number>(1); // Default to Active (1)
   const [selectedColumn, setSelectedColumn] = useState<string[]>([]);
   const [zeroRate, setZeroRate] = useState<boolean>(false);
+  const [isExporting, setIsExporting] = useState<boolean>(false);
 
   // Pagination states
   const [first, setFirst] = useState(0);
@@ -198,6 +209,51 @@ const EmployeesReportPage = () => {
     () => new Map(statuses.map((s) => [s.id, s])),
     [statuses]
   );
+
+  // Fetch all employees for export
+  const fetchAllEmployees = async () => {
+    setIsExporting(true);
+    try {
+      const [response, error] = await listEmployeesAction({
+        limit: 9999, // Fetch all
+        search: querySearch || undefined,
+        designationId: filterParams.designationId,
+        payrollSectionId: filterParams.payrollSectionId,
+        statusId: queryStatusId === 0 ? undefined : queryStatusId,
+        sortBy: "employeeCode", // Default sort for export
+        sortOrder: "asc",
+        zeroRate,
+      });
+
+      if (error || !response?.employees) {
+        toastService.showError(
+          "Error",
+          error?.message || "Failed to fetch data"
+        );
+        return [];
+      }
+
+      if (response.employees.length === 0) {
+        toastService.showWarn(
+          "Warning",
+          "No data found for the current filters"
+        );
+        return [];
+      }
+
+      return response.employees.map((emp: ListedEmployee, index: number) =>
+        mapEmployeeToExportRow(emp, index)
+      );
+    } catch (err: any) {
+      toastService.showError(
+        "Error",
+        err.message || "An unexpected error occurred"
+      );
+      return [];
+    } finally {
+      setIsExporting(false);
+    }
+  };
 
   // Construct employees list with mapped data
   const employees: any[] = useMemo(() => {
@@ -270,14 +326,14 @@ const EmployeesReportPage = () => {
     const url = rowData[field];
     if (!url) return <span className="text-sm text-gray-400">-</span>;
     return (
-      <Button
-        size="small"
-        icon="pi pi-external-link"
-        label="View"
-        variant="text"
-        className="text-primary p-0 h-6! text-xs"
-        onClick={() => window.open(url, "_blank")}
-      />
+      <a
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-primary text-sm hover:underline break-all line-clamp-2"
+      >
+        View
+      </a>
     );
   };
 
@@ -340,7 +396,9 @@ const EmployeesReportPage = () => {
         header: "Mobile No.",
         ...tableCommonProps,
         style: { minWidth: 130 },
-        body: (rowData) => <span className="text-sm">{rowData.phone || "-"}</span>,
+        body: (rowData) => (
+          <span className="text-sm">{rowData.phone || "-"}</span>
+        ),
       },
       // Contract Details
       {
@@ -358,7 +416,9 @@ const EmployeesReportPage = () => {
         header: "Country",
         ...tableCommonProps,
         style: { minWidth: 120 },
-        body: (rowData) => <span className="text-sm">{rowData.countryName}</span>,
+        body: (rowData) => (
+          <span className="text-sm">{rowData.countryName}</span>
+        ),
       },
       {
         field: "cityName",
@@ -373,28 +433,36 @@ const EmployeesReportPage = () => {
         ...tableCommonProps,
         align: "center",
         style: { minWidth: 120 },
-        body: (rowData) => <span className="text-sm">{rowData.statusName}</span>,
+        body: (rowData) => (
+          <span className="text-sm">{rowData.statusName}</span>
+        ),
       },
       {
         field: "branchName",
         header: "Branch",
         ...tableCommonProps,
         style: { minWidth: 150 },
-        body: (rowData) => <span className="text-sm">{rowData.branchName}</span>,
+        body: (rowData) => (
+          <span className="text-sm">{rowData.branchName}</span>
+        ),
       },
       {
         field: "designationName",
         header: "Designation",
         ...tableCommonProps,
         style: { minWidth: 180 },
-        body: (rowData) => <span className="text-sm">{rowData.designationName}</span>,
+        body: (rowData) => (
+          <span className="text-sm">{rowData.designationName}</span>
+        ),
       },
       {
         field: "sectionName",
         header: "Payroll Section",
         ...tableCommonProps,
         style: { minWidth: 150 },
-        body: (rowData) => <span className="text-sm">{rowData.sectionName}</span>,
+        body: (rowData) => (
+          <span className="text-sm">{rowData.sectionName}</span>
+        ),
       },
       {
         field: "isFixed",
@@ -422,7 +490,9 @@ const EmployeesReportPage = () => {
         ...tableCommonProps,
         align: "center",
         style: { minWidth: 120 },
-        body: (rowData) => <span className="text-sm">{rowData.workingDays || "-"}</span>,
+        body: (rowData) => (
+          <span className="text-sm">{rowData.workingDays || "-"}</span>
+        ),
       },
       {
         field: "salary",
@@ -455,7 +525,9 @@ const EmployeesReportPage = () => {
         align: "center",
         style: { minWidth: 120 },
         body: (rowData) => (
-          <span className="text-sm">{rowData.breakfastAllowance ? "Yes" : "No"}</span>
+          <span className="text-sm">
+            {rowData.breakfastAllowance ? "Yes" : "No"}
+          </span>
         ),
       },
       {
@@ -466,7 +538,9 @@ const EmployeesReportPage = () => {
         style: { minWidth: 140 },
         body: (rowData) => (
           <span className="text-sm">
-            {rowData.foodAllowance ? Number(rowData.foodAllowance).toLocaleString() : "-"}
+            {rowData.foodAllowance
+              ? Number(rowData.foodAllowance).toLocaleString()
+              : "-"}
           </span>
         ),
       },
@@ -478,7 +552,9 @@ const EmployeesReportPage = () => {
         style: { minWidth: 140 },
         body: (rowData) => (
           <span className="text-sm">
-            {rowData.mobileAllowance ? Number(rowData.mobileAllowance).toLocaleString() : "-"}
+            {rowData.mobileAllowance
+              ? Number(rowData.mobileAllowance).toLocaleString()
+              : "-"}
           </span>
         ),
       },
@@ -490,7 +566,9 @@ const EmployeesReportPage = () => {
         style: { minWidth: 140 },
         body: (rowData) => (
           <span className="text-sm">
-            {rowData.otherAllowance ? Number(rowData.otherAllowance).toLocaleString() : "-"}
+            {rowData.otherAllowance
+              ? Number(rowData.otherAllowance).toLocaleString()
+              : "-"}
           </span>
         ),
       },
@@ -501,7 +579,9 @@ const EmployeesReportPage = () => {
         style: { minWidth: 130 },
         body: (rowData) => (
           <span className="text-sm">
-            {rowData.contractStartDate ? new Date(rowData.contractStartDate).toLocaleDateString() : "-"}
+            {rowData.contractStartDate
+              ? new Date(rowData.contractStartDate).toLocaleDateString()
+              : "-"}
           </span>
         ),
       },
@@ -512,7 +592,9 @@ const EmployeesReportPage = () => {
         style: { minWidth: 130 },
         body: (rowData) => (
           <span className="text-sm">
-            {rowData.contractEndDate ? new Date(rowData.contractEndDate).toLocaleDateString() : "-"}
+            {rowData.contractEndDate
+              ? new Date(rowData.contractEndDate).toLocaleDateString()
+              : "-"}
           </span>
         ),
       },
@@ -524,10 +606,13 @@ const EmployeesReportPage = () => {
         style: { minWidth: 150 },
         body: (rowData) => {
           const days = rowData.contractRemainingDays;
-          if (days === null) return <span className="text-sm text-gray-400">-</span>;
+          if (days === null)
+            return <span className="text-sm text-gray-400">-</span>;
           const isExpired = days < 0;
           return (
-            <span className={`text-sm font-semibold ${isExpired ? "text-red-600" : "text-green-600"}`}>
+            <span
+              className={`text-sm font-semibold ${isExpired ? "text-red-600" : "text-green-600"}`}
+            >
               {days} days {isExpired ? "(Exp)" : ""}
             </span>
           );
@@ -540,7 +625,9 @@ const EmployeesReportPage = () => {
         style: { minWidth: 130 },
         body: (rowData) => (
           <span className="text-sm">
-            {rowData.joiningDate ? new Date(rowData.joiningDate).toLocaleDateString() : "-"}
+            {rowData.joiningDate
+              ? new Date(rowData.joiningDate).toLocaleDateString()
+              : "-"}
           </span>
         ),
       },
@@ -550,7 +637,9 @@ const EmployeesReportPage = () => {
         ...tableCommonProps,
         style: { minWidth: 200 },
         body: (rowData) => (
-          <span className="text-sm line-clamp-2">{rowData.contractEndReason || "-"}</span>
+          <span className="text-sm line-clamp-2">
+            {rowData.contractEndReason || "-"}
+          </span>
         ),
       },
       {
@@ -567,7 +656,9 @@ const EmployeesReportPage = () => {
         header: "ID Card No.",
         ...tableCommonProps,
         style: { minWidth: 150 },
-        body: (rowData) => <span className="text-sm">{rowData.idCardNo || "-"}</span>,
+        body: (rowData) => (
+          <span className="text-sm">{rowData.idCardNo || "-"}</span>
+        ),
       },
       {
         field: "idCardExpiryDate",
@@ -576,7 +667,9 @@ const EmployeesReportPage = () => {
         style: { minWidth: 130 },
         body: (rowData) => (
           <span className="text-sm">
-            {rowData.idCardExpiryDate ? new Date(rowData.idCardExpiryDate).toLocaleDateString() : "-"}
+            {rowData.idCardExpiryDate
+              ? new Date(rowData.idCardExpiryDate).toLocaleDateString()
+              : "-"}
           </span>
         ),
       },
@@ -585,7 +678,9 @@ const EmployeesReportPage = () => {
         header: "Profession",
         ...tableCommonProps,
         style: { minWidth: 150 },
-        body: (rowData) => <span className="text-sm">{rowData.profession || "-"}</span>,
+        body: (rowData) => (
+          <span className="text-sm">{rowData.profession || "-"}</span>
+        ),
       },
       {
         field: "idCardDocument",
@@ -601,14 +696,18 @@ const EmployeesReportPage = () => {
         header: "Nationality",
         ...tableCommonProps,
         style: { minWidth: 150 },
-        body: (rowData) => <span className="text-sm">{rowData.nationalityName}</span>,
+        body: (rowData) => (
+          <span className="text-sm">{rowData.nationalityName}</span>
+        ),
       },
       {
         field: "passportNo",
         header: "Passport No.",
         ...tableCommonProps,
         style: { minWidth: 140 },
-        body: (rowData) => <span className="text-sm">{rowData.passportNo || "-"}</span>,
+        body: (rowData) => (
+          <span className="text-sm">{rowData.passportNo || "-"}</span>
+        ),
       },
       {
         field: "passportExpiryDate",
@@ -617,7 +716,9 @@ const EmployeesReportPage = () => {
         style: { minWidth: 130 },
         body: (rowData) => (
           <span className="text-sm">
-            {rowData.passportExpiryDate ? new Date(rowData.passportExpiryDate).toLocaleDateString() : "-"}
+            {rowData.passportExpiryDate
+              ? new Date(rowData.passportExpiryDate).toLocaleDateString()
+              : "-"}
           </span>
         ),
       },
@@ -635,14 +736,18 @@ const EmployeesReportPage = () => {
         header: "Bank Name",
         ...tableCommonProps,
         style: { minWidth: 150 },
-        body: (rowData) => <span className="text-sm">{rowData.bankName || "-"}</span>,
+        body: (rowData) => (
+          <span className="text-sm">{rowData.bankName || "-"}</span>
+        ),
       },
       {
         field: "bankCode",
         header: "Bank Code",
         ...tableCommonProps,
         style: { minWidth: 120 },
-        body: (rowData) => <span className="text-sm">{rowData.bankCode || "-"}</span>,
+        body: (rowData) => (
+          <span className="text-sm">{rowData.bankCode || "-"}</span>
+        ),
       },
       // GOSI Details
       {
@@ -653,7 +758,9 @@ const EmployeesReportPage = () => {
         style: { minWidth: 130 },
         body: (rowData) => (
           <span className="text-sm">
-            {rowData.gosiSalary ? Number(rowData.gosiSalary).toLocaleString() : "-"}
+            {rowData.gosiSalary
+              ? Number(rowData.gosiSalary).toLocaleString()
+              : "-"}
           </span>
         ),
       },
@@ -662,7 +769,9 @@ const EmployeesReportPage = () => {
         header: "GOSI City",
         ...tableCommonProps,
         style: { minWidth: 120 },
-        body: (rowData) => <span className="text-sm">{rowData.gosiCityName}</span>,
+        body: (rowData) => (
+          <span className="text-sm">{rowData.gosiCityName}</span>
+        ),
       },
       // Bank Card Details
       {
@@ -672,7 +781,9 @@ const EmployeesReportPage = () => {
         align: "center",
         style: { minWidth: 140 },
         body: (rowData) => (
-          <span className="text-sm">{rowData.isCardDelivered ? "Yes" : "No"}</span>
+          <span className="text-sm">
+            {rowData.isCardDelivered ? "Yes" : "No"}
+          </span>
         ),
       },
       {
@@ -746,14 +857,30 @@ const EmployeesReportPage = () => {
           icon={<i className="fa-light fa-user-group text-xl!" />}
           renderInput={() => (
             <div className="w-full lg:w-auto">
-              <Button
-                size="small"
-                label="Print"
-                icon="pi pi-print"
-                variant="outlined"
-                className="w-full lg:w-28 h-10! bg-white!"
-                onClick={handlePrint}
-              />
+              <div className="flex items-center gap-5">
+                <ExportOptions
+                  loading={isExporting}
+                  exportCSV={async () => {
+                    const allData = await fetchAllEmployees();
+                    if (allData.length === 0) return;
+                    exportEmployeesCSV(allData);
+                  }}
+                  exportExcel={async () => {
+                    const allData = await fetchAllEmployees();
+                    if (allData.length === 0) return;
+                    exportEmployeesExcel(allData);
+                  }}
+                  buttonClassName="w-full lg:w-28 h-10! border-2 border-white! text-white!"
+                />
+                <Button
+                  size="small"
+                  label="Print"
+                  icon="pi pi-print"
+                  variant="outlined"
+                  className="w-full lg:w-28 h-10! bg-white!"
+                  onClick={handlePrint}
+                />
+              </div>
             </div>
           )}
         />
@@ -828,7 +955,7 @@ const EmployeesReportPage = () => {
           tableClassName="report-table"
           emptyMessage="No employees data found."
           scrollable
-          scrollHeight="75vh"
+          scrollHeight="70vh"
         />
       </div>
     </div>
