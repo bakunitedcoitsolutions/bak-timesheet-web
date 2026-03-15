@@ -219,6 +219,12 @@ export const updateUser = async (id: number, data: UpdateUserData) => {
     // Hash password if provided
     if (data.password) {
       updateData.password = await hash(data.password, 12);
+
+      // If someone else is changing the password, invalidate the user's sessions
+      // (data.updatedBy is the ID of the user performing the update)
+      // if (data.updatedBy && id !== data.updatedBy) {
+      // }
+      await invalidateUserSessions(id);
     }
 
     // Get current user data before update

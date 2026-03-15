@@ -1,9 +1,32 @@
-import { createServerAction } from "zsa";
+import { createServerActionProcedure } from "zsa";
+import { auth } from "@/lib/auth/auth";
+import { getUserActiveStatus, isSessionInvalid } from "@/lib/auth/security";
 
-export const serverAction = createServerAction().experimental_shapeError(
-  (error) => {
-    const err = error.err;
+const baseProcedure = createServerActionProcedure().handler(async () => {
+  try {
+    const session = await auth();
+    if (session?.user?.id) {
+      const isActive = await getUserActiveStatus(session.user.id);
+      if (!isActive) {
+        throw new Error(
+          "Your account is inactive. Please contact your administrator."
+        );
+      }
 
+      const isInvalid = await isSessionInvalid(session.user.id);
+      if (isInvalid) {
+        throw new Error("Session invalidated. Please log in again.");
+      }
+    }
+    return { session };
+  } catch (error) {
+    throw error;
+  }
+});
+
+export const serverAction = baseProcedure
+  .createServerAction()
+  .experimental_shapeError(({ err }: { err: unknown }) => {
     // Handle Error instances (most common case)
     if (err instanceof Error) {
       return err.message || "Something went wrong";
@@ -43,5 +66,4 @@ export const serverAction = createServerAction().experimental_shapeError(
     } catch {
       return "Something went wrong";
     }
-  }
-);
+  });

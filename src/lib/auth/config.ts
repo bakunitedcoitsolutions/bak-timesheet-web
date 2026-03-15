@@ -9,7 +9,11 @@ import { NextAuthConfig } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
 import { prisma } from "@/lib/db/prisma";
-import { getUserActiveStatus } from "./security";
+import {
+  getUserActiveStatus,
+  isSessionInvalid,
+  clearSessionInvalidation,
+} from "./security";
 
 /**
  * Edge-Compatible NextAuth Configuration
@@ -55,12 +59,20 @@ const authConfig: NextAuthConfig = {
         token.iat = Math.floor(Date.now() / 1000);
       }
 
-      // Check if user is still active on every request (via fast Redis hit)
+      // Check if user is still active or session is invalidated on every request
       if (token.id) {
         const userId = token.id as number;
+
+        // Check active status
         const isActive = await getUserActiveStatus(userId);
         if (!isActive) {
           throw new Error("Account is inactive");
+        }
+
+        // Check if session has been invalidated (e.g., password change)
+        const isInvalid = await isSessionInvalid(userId);
+        if (isInvalid) {
+          throw new Error("Session invalidated");
         }
       }
 
@@ -127,6 +139,9 @@ export const authOptions: NextAuthConfig = {
         if (!isPasswordValid) {
           throw new Error("Invalid email or password");
         }
+
+        // Clear session invalidation on successful login
+        await clearSessionInvalidation(user.id);
 
         // Return entire user object except password
         const { password, ...userWithoutPassword } = user;

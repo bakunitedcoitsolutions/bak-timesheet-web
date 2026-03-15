@@ -36,6 +36,15 @@ export async function invalidateUserSessions(userId: number): Promise<void> {
 }
 
 /**
+ * Check if a user's sessions have been invalidated
+ */
+export async function isSessionInvalid(userId: number): Promise<boolean> {
+  const key = `${TOKEN_SECURITY.SESSION_INVALID_PREFIX}${userId}`;
+  const isInvalid = await cache.get<boolean>(key);
+  return !!isInvalid;
+}
+
+/**
  * Clear session invalidation (when user is reactivated)
  */
 export async function clearSessionInvalidation(userId: number): Promise<void> {
