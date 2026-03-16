@@ -4,6 +4,8 @@ import { SiteWiseReportRow } from "@/lib/db/services/site-wise";
 
 const HEADERS_DETAILED = [
   "#",
+  "Month",
+  "Project Name",
   "Emp. Code",
   "Employee Name",
   "Project Hours",
@@ -77,7 +79,7 @@ export function exportSiteWiseExcel(
       });
 
       const aggregatedRows = Array.from(empMap.values());
-      const sHours = aggregatedRows.reduce((s, r) => s + (r.projectHours || 0),0);
+      const sHours = aggregatedRows.reduce((s, r) => s + (r.projectHours || 0), 0);
       const sOT = aggregatedRows.reduce((s, r) => s + (r.projectOT || 0), 0);
       const sSalary = aggregatedRows.reduce((s, r) => s + (r.totalSalary || 0), 0);
 
@@ -88,6 +90,8 @@ export function exportSiteWiseExcel(
       aggregatedRows.forEach((r, i) => {
         sheetData.push([
           i + 1,
+          r.month || "",
+          r.projectName || "",
           r.empCode || "",
           r.employeeName || "",
           r.projectHours,
@@ -99,6 +103,8 @@ export function exportSiteWiseExcel(
 
       // Project Total Row
       sheetData.push([
+        "",
+        "",
         "",
         "",
         `${pn} - TOTAL :`,
@@ -131,6 +137,8 @@ export function exportSiteWiseExcel(
     sheetData.push([
       "",
       "",
+      "",
+      "",
       "GRAND TOTAL :",
       totalHours,
       totalOT,
@@ -154,6 +162,8 @@ export function exportSiteWiseExcel(
       ]
     : [
         { wch: 5 },
+        { wch: 12 },
+        { wch: 30 },
         { wch: 15 },
         { wch: 40 },
         { wch: 15 },
@@ -243,6 +253,8 @@ export function exportSiteWiseCSV(
       aggregatedRows.forEach((r, i) => {
         sheetData.push([
           i + 1,
+          r.month || "",
+          r.projectName || "",
           r.empCode || "",
           r.employeeName || "",
           r.projectHours,
@@ -254,6 +266,8 @@ export function exportSiteWiseCSV(
 
       // Project Total Row
       sheetData.push([
+        "",
+        "",
         "",
         "",
         `${pn} - TOTAL :`,
@@ -284,6 +298,8 @@ export function exportSiteWiseCSV(
     ]);
   } else {
     sheetData.push([
+      "",
+      "",
       "",
       "",
       "GRAND TOTAL :",
