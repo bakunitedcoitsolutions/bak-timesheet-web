@@ -73,6 +73,7 @@ const PayrollReportPage = () => {
   const [selectedSections, setSelectedSections] = useState<number[]>([]);
   const [employeeCodeChips, setEmployeeCodeChips] = useState<string[]>([]);
   const [paymentMethodId, setPaymentMethodId] = useState<number | null>(0);
+  const [isFirstLoad, setIsFirstLoad] = useState(true);
 
   // ── applied query (only updated on Refresh) ────────────────────────────────
   const [appliedQuery, setAppliedQuery] = useState<{
@@ -110,7 +111,10 @@ const PayrollReportPage = () => {
   );
 
   // ── fetch ─────────────────────────────────────────────────────────────────
-  const { data: reportResponse, isLoading } = useGetPayrollReport(appliedQuery);
+  const { data: reportResponse, isLoading } = useGetPayrollReport(
+    appliedQuery,
+    !isFirstLoad
+  );
 
   const allRows = useMemo(
     () => (reportResponse?.details ?? []) as PayrollReportRow[],
@@ -165,6 +169,7 @@ const PayrollReportPage = () => {
       paymentMethodId: paymentMethodId === 0 ? null : (paymentMethodId ?? null),
     });
     setFirstSection(0);
+    setIsFirstLoad(false);
   };
 
   // ── columns ───────────────────────────────────────────────────────────────
@@ -803,7 +808,12 @@ const PayrollReportPage = () => {
           rowGroupFooterTemplate={rowGroupFooterTemplate}
           footerColumnGroup={footerColumnGroup}
           tableClassName="report-table"
-          emptyMessage="No payroll data found. Select a month and click Refresh."
+          emptyMessage={
+            isFirstLoad
+              ? "Select a month and click Refresh to load data."
+              : reportResponse?.message ||
+                "No payroll data found for the selected filters."
+          }
           scrollable
           scrollHeight="calc(100vh - 310px)"
         />

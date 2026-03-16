@@ -136,10 +136,10 @@ export const useGetPayrollSummaryStatus = (
     enabled: !!input.month && !!input.year,
   });
 
-export const useGetPayrollReport = (input: GetPayrollReportInput) =>
+export const useGetPayrollReport = (input: GetPayrollReportInput, enabled: boolean = true) =>
   useQuery(getPayrollReportAction, {
     queryKey: ["payroll-report", input],
     input,
-    enabled: !!input.month && !!input.year,
+    enabled: enabled && !!input.month && !!input.year,
     staleTime: 60 * 1000,
   });
