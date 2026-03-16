@@ -113,11 +113,11 @@ export const printDetailedSiteWiseReport = (
     formattedMonthHead.toUpperCase(),
     filters.employeeCodes?.length 
       ? `EMP CODES: ${filters.employeeCodes.join(", ")}` 
-      : "EMP CODE: ALL",
+      : null,
     (filters.projectNames && filters.projectNames !== "All") ? `PROJECT: ${filters.projectNames}` : null,
   ].filter(Boolean).join(" | ");
 
-  // Group by Project
+  // Group and Aggregate by Project & Employee
   const projectGroups: Record<string, SiteWiseReportRow[]> = {};
   data.forEach(r => {
     const pn = r.projectName || "Unassigned Project";
@@ -128,10 +128,26 @@ export const printDetailedSiteWiseReport = (
   const sortedProjectNames = Object.keys(projectGroups).sort();
 
   let contentHtml = sortedProjectNames.map(pn => {
-    const rows = projectGroups[pn];
-    const sHours = rows.reduce((s, r) => s + (r.projectHours || 0), 0);
-    const sOT = rows.reduce((s, r) => s + (r.projectOT || 0), 0);
-    const sSalary = rows.reduce((s, r) => s + (r.totalSalary || 0), 0);
+    const rawRows = projectGroups[pn];
+    
+    // Aggregate by employee within each project
+    const empMap = new Map<number | string, SiteWiseReportRow>();
+    rawRows.forEach(r => {
+      const key = r.empCode || "NoCode";
+      if (!empMap.has(key)) {
+        empMap.set(key, { ...r });
+      } else {
+        const existing = empMap.get(key)!;
+        existing.projectHours = (existing.projectHours || 0) + (r.projectHours || 0);
+        existing.projectOT = (existing.projectOT || 0) + (r.projectOT || 0);
+        existing.totalSalary = (existing.totalSalary || 0) + (r.totalSalary || 0);
+      }
+    });
+    
+    const aggregatedRows = Array.from(empMap.values());
+    const sHours = aggregatedRows.reduce((s, r) => s + (r.projectHours || 0), 0);
+    const sOT = aggregatedRows.reduce((s, r) => s + (r.projectOT || 0), 0);
+    const sSalary = aggregatedRows.reduce((s, r) => s + (r.totalSalary || 0), 0);
 
     return `
       <div class="section-container">
@@ -142,20 +158,18 @@ export const printDetailedSiteWiseReport = (
           <thead>
             <tr>
               <th style="width: 30px;">#</th>
-              <th style="width: 70px;">Month</th>
-              <th style="width: 50px;">Emp. Code</th>
+              <th style="width: 80px;">Emp. Code</th>
               <th class="text-left">Employee Name</th>
-              <th style="width: 60px;">P. Hours</th>
-              <th style="width: 60px;">P. OT</th>
-              <th style="width: 50px;">Rate</th>
-              <th style="width: 70px;">Total Salary</th>
+              <th style="width: 85px;">Project Hours</th>
+              <th style="width: 85px;">Project OT</th>
+              <th style="width: 70px;">Rate</th>
+              <th style="width: 90px;">Total Salary</th>
             </tr>
           </thead>
           <tbody>
-            ${rows.map((r, i) => `
+            ${aggregatedRows.map((r, i) => `
               <tr>
                 <td>${i + 1}</td>
-                <td>${r.month}</td>
                 <td>${r.empCode || "-"}</td>
                 <td class="text-left">${r.employeeName || "-"}</td>
                 <td>${fmt(r.projectHours)}</td>
@@ -164,15 +178,13 @@ export const printDetailedSiteWiseReport = (
                 <td class="text-primary font-bold">${fmt(r.totalSalary)}</td>
               </tr>
             `).join("")}
-            ${rows.length > 1 ? `
-              <tr class="bg-footer">
-                <td colspan="4" class="text-right px-4 text-primary">${pn} - TOTAL:</td>
-                <td class="text-primary">${fmt(sHours)}</td>
-                <td class="text-primary">${fmt(sOT)}</td>
-                <td></td>
-                <td class="text-primary">${fmt(sSalary)}</td>
-              </tr>
-            ` : ""}
+            <tr class="bg-footer">
+              <td colspan="3" class="text-right px-4 text-primary">${pn} - TOTAL :</td>
+              <td class="text-primary font-bold">${fmt(sHours)}</td>
+              <td class="text-primary font-bold">${fmt(sOT)}</td>
+              <td></td>
+              <td class="text-primary font-bold">${fmt(sSalary)}</td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -189,11 +201,11 @@ export const printDetailedSiteWiseReport = (
       <table>
         <tbody>
           <tr class="bg-footer">
-            <td colspan="4" class="text-right px-4 text-primary" style="font-size: 11px;">GRAND TOTAL:</td>
-            <td style="width: 60px;" class="text-primary">${fmt(gHours)}</td>
-            <td style="width: 60px;" class="text-primary">${fmt(gOT)}</td>
-            <td style="width: 50px;"></td>
-            <td style="width: 70px;" class="text-primary">${fmt(gSalary)}</td>
+            <td colspan="3" class="text-right px-4 text-primary" style="font-size: 11px;">GRAND TOTAL :</td>
+            <td style="width: 85px;" class="text-primary font-bold">${fmt(gHours)}</td>
+            <td style="width: 85px;" class="text-primary font-bold">${fmt(gOT)}</td>
+            <td style="width: 70px;"></td>
+            <td style="width: 90px;" class="text-primary font-bold">${fmt(gSalary)}</td>
           </tr>
         </tbody>
       </table>
@@ -242,7 +254,8 @@ const generatePrintHtml = (title: string, filters: string, content: string, mont
               margin: 0.5cm 0.5cm 1.5cm 0.5cm; 
             }
             body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-            .section-container { page-break-inside: avoid; border-bottom: 1px solid #f3f4f6; margin-bottom: 10px; padding-bottom: 10px; }
+            .section-container { page-break-inside: auto; border-bottom: 1px solid #f3f4f6; margin-bottom: 10px; padding-bottom: 10px; }
+            tr { page-break-inside: avoid; }
           }
         </style>
       </head>
