@@ -1,10 +1,11 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef } from "react";
 import { useRouter } from "next/navigation";
+import { Paginator } from "primereact/paginator";
 import { Button, TitleHeader, ExportOptions } from "@/components";
 import { useGlobalData } from "@/context/GlobalDataContext";
-import { useGetSiteWiseReport } from "@/lib/db/services/site-wise";
+import { useGetSiteWiseReport, SiteWiseReportRow } from "@/lib/db/services/site-wise";
 import {
   exportSiteWiseExcel,
   exportSiteWiseCSV,
@@ -37,6 +38,7 @@ export default function SiteWiseReportPage() {
   });
 
   const [isFirstLoad, setIsFirstLoad] = useState(true);
+  const contentRef = useRef<HTMLDivElement>(null);
 
   // Fetch Data
   const { data: reportResponse, isLoading } = useGetSiteWiseReport(
@@ -89,6 +91,26 @@ export default function SiteWiseReportPage() {
       setIsPrinting(false);
     }
   };
+
+  const filterSummary = useMemo(() => {
+    const monthNames = [
+      "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+    ];
+    const mStr = monthNames[appliedQuery.month - 1];
+    const codesStr = appliedQuery.employeeCodes?.length 
+      ? appliedQuery.employeeCodes.join(", ") 
+      : "All";
+    
+    const pNames = appliedQuery.projectIds && appliedQuery.projectIds.length > 0
+      ? globalData.projects
+          .filter(p => appliedQuery.projectIds!.includes(p.id))
+          .map(p => p.nameEn)
+          .join(", ")
+      : "All";
+
+    return `(Month: ${mStr}-${appliedQuery.year} | Emp Code: ${codesStr} | Project: ${pNames})`;
+  }, [appliedQuery, globalData.projects]);
 
   return (
     <div className="h-full bg-white flex flex-col">
@@ -160,19 +182,25 @@ export default function SiteWiseReportPage() {
         initialSummarize={false}
       />
 
-      <div className="flex-1 min-h-0 mt-2 bg-white overflow-auto">
+      <div ref={contentRef} className="flex-1 min-h-0 bg-white flex flex-col">
         {reportResponse?.message && reportData.length === 0 && (
           <div className="flex items-center justify-center h-40 text-primary font-semibold">
             {reportResponse.message}
           </div>
         )}
 
-        {reportData.length > 0 &&
-          (appliedQuery.summarize ? (
-            <SummarizedTable data={reportData} isLoading={isLoading} />
-          ) : (
-            <DetailedTable data={reportData} isLoading={isLoading} />
-          ))}
+        <div className="flex-1 min-h-0">
+          {reportData.length > 0 &&
+            (appliedQuery.summarize ? (
+              <SummarizedTable data={reportData} isLoading={isLoading} />
+            ) : (
+              <DetailedTable 
+                data={reportData} 
+                isLoading={isLoading} 
+                filterSummary={filterSummary}
+              />
+            ))}
+        </div>
       </div>
     </div>
   );
