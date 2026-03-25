@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useMemo } from "react";
+import { memo, useState, useRef, useMemo } from "react";
 import { Row } from "primereact/row";
 import { Column } from "primereact/column";
 import { useRouter } from "next/navigation";
@@ -17,6 +17,7 @@ import {
   TableColumn,
   AutoScrollChips,
   ExportOptions,
+  useAccess,
 } from "@/components";
 import { formatNum, formatPayrollPeriod } from "@/utils/helpers";
 import { useGlobalData } from "@/context/GlobalDataContext";
@@ -29,6 +30,7 @@ import {
 } from "@/utils/helpers/export-payroll-report";
 import { PayrollDetailEntry } from "@/lib/db/services/payroll-summary/mappers";
 import { useGetPayrollReport } from "@/lib/db/services/payroll-summary/requests";
+import { classNames } from "primereact/utils";
 
 // ─── types ───────────────────────────────────────────────────────────────────
 
@@ -61,19 +63,152 @@ const tableCommonProps: TableColumn<PayrollReportRow> = {
   style: { minWidth: 75 },
 };
 
+// ─── FilterSection ──────────────────────────────────────────────────────────
+
+const FilterSection = memo(
+  ({
+    onSearch,
+    isLoading,
+  }: {
+    onSearch: (params: any) => void;
+    isLoading: boolean;
+  }) => {
+    const { canAccessFilter, isLoading: isLoadingAccess } = useAccess();
+    const isAllowedAllFilters = canAccessFilter("payroll");
+
+    const { data: globalData } = useGlobalData();
+
+    // ── local filter controls ──────────────────────────────────────────────────
+    const [monthYear, setMonthYear] = useState(getMonthYear);
+    const [selectedSections, setSelectedSections] = useState<number[]>([]);
+    const [employeeCodeChips, setEmployeeCodeChips] = useState<string[]>([]);
+    const [paymentMethodId, setPaymentMethodId] = useState<number | null>(0);
+
+    // ── options ───────────────────────────────────────────────────────────────
+    const paymentMethodOptions = useMemo(
+      () => [
+        { label: "All Methods", value: 0 },
+        ...globalData.paymentMethods.map((p) => ({
+          label: p.nameEn,
+          value: p.id,
+        })),
+      ],
+      [globalData.paymentMethods]
+    );
+
+    const sectionOptions = useMemo(
+      () =>
+        globalData.payrollSections.map((s) => ({
+          label: s.nameEn,
+          value: s.id,
+        })),
+      [globalData.payrollSections]
+    );
+
+    const handleRefresh = (paramMonthYear?: {
+      month: number;
+      year: number;
+    }) => {
+      onSearch({
+        month: paramMonthYear?.month ?? monthYear.month,
+        year: paramMonthYear?.year ?? monthYear.year,
+        payrollSectionIds:
+          selectedSections.length > 0 ? selectedSections : null,
+        employeeCodes:
+          employeeCodeChips.length > 0
+            ? employeeCodeChips.map(Number).filter(Boolean)
+            : null,
+        paymentMethodId:
+          paymentMethodId === 0 ? null : (paymentMethodId ?? null),
+      });
+    };
+
+    return (
+      <div
+        className={classNames(
+          "bg-[#F5E6E8] px-6 py-5 grid grid-cols-1 gap-3 items-center print:hidden",
+          {
+            "md:grid-cols-3": !isAllowedAllFilters,
+            "md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5": isAllowedAllFilters,
+          }
+        )}
+      >
+        {!isLoadingAccess && (
+          <>
+            <Input
+              type="month"
+              className="w-full h-10!"
+              placeholder="Select Month"
+              disabled={isLoading}
+              value={`${monthYear.year}-${String(monthYear.month).padStart(2, "0")}`}
+              onChange={(e) => {
+                if (!e.target.value) return;
+                const [y, m] = e.target.value.split("-").map(Number);
+                setMonthYear({ month: m, year: y });
+              }}
+              onKeyDown={(e: any) => {
+                if (e.key === "Enter") {
+                  if (!e?.target) return;
+                  if (!e?.target?.value) return;
+                  const [y, m] = e?.target?.value?.split?.("-")?.map?.(Number);
+                  handleRefresh({ month: m, year: y });
+                }
+              }}
+            />
+            <AutoScrollChips
+              keyfilter="int"
+              value={employeeCodeChips}
+              allowDuplicate={false}
+              placeholder="Employee Codes"
+              className="w-full h-10!"
+              onChange={(e) => setEmployeeCodeChips(e.value ?? [])}
+            />
+            {isAllowedAllFilters && (
+              <>
+                <ModifiedMultiSelect
+                  options={sectionOptions}
+                  selectedItem={selectedSections}
+                  setSelectedItem={setSelectedSections}
+                  placeholder="Select Payroll Sections"
+                  className="w-full h-10.5!"
+                  filter
+                  small
+                  showClear
+                />
+                <Dropdown
+                  filter
+                  options={paymentMethodOptions}
+                  value={paymentMethodId}
+                  onChange={(e) => setPaymentMethodId(e.value ?? null)}
+                  className="w-full h-10!"
+                  placeholder="Payment Method"
+                />
+              </>
+            )}
+
+            <div className="w-full flex justify-end">
+              <Button
+                size="small"
+                label="Refresh"
+                loading={isLoading}
+                className="w-full xl:w-36 h-10!"
+                onClick={() => handleRefresh()}
+                icon={isLoading ? undefined : "pi pi-refresh"}
+              />
+            </div>
+          </>
+        )}
+      </div>
+    );
+  }
+);
+
 // ─── PayrollReportPage ────────────────────────────────────────────────────────
 
 const PayrollReportPage = () => {
   const router = useRouter();
   const contentRef = useRef<HTMLDivElement>(null);
   const { data: globalData } = useGlobalData();
-
-  // ── local filter controls ──────────────────────────────────────────────────
-  const [monthYear, setMonthYear] = useState(getMonthYear);
-  const [selectedSections, setSelectedSections] = useState<number[]>([]);
-  const [employeeCodeChips, setEmployeeCodeChips] = useState<string[]>([]);
-  const [paymentMethodId, setPaymentMethodId] = useState<number | null>(0);
-  const [isFirstLoad, setIsFirstLoad] = useState(true);
 
   // ── applied query (only updated on Refresh) ────────────────────────────────
   const [appliedQuery, setAppliedQuery] = useState<{
@@ -85,30 +220,11 @@ const PayrollReportPage = () => {
     paymentMethodId?: number | null;
   }>(getMonthYear);
 
+  const [isFirstLoad, setIsFirstLoad] = useState(true);
+
   // ── section pagination ────────────────────────────────────────────────────
   const [firstSection, setFirstSection] = useState(0);
   const [sectionsPerPage, setSectionsPerPage] = useState(3);
-
-  // ── options ───────────────────────────────────────────────────────────────
-  const paymentMethodOptions = useMemo(
-    () => [
-      { label: "All Methods", value: 0 },
-      ...globalData.paymentMethods.map((p) => ({
-        label: p.nameEn,
-        value: p.id,
-      })),
-    ],
-    [globalData.paymentMethods]
-  );
-
-  const sectionOptions = useMemo(
-    () =>
-      globalData.payrollSections.map((s) => ({
-        label: s.nameEn,
-        value: s.id,
-      })),
-    [globalData.payrollSections]
-  );
 
   // ── fetch ─────────────────────────────────────────────────────────────────
   const { data: reportResponse, isLoading } = useGetPayrollReport(
@@ -154,19 +270,11 @@ const PayrollReportPage = () => {
   );
 
   // ── handlers ──────────────────────────────────────────────────────────────
-  const handleRefresh = (paramMonthYear?: { month: number; year: number }) => {
-    const M = paramMonthYear?.month ?? monthYear.month;
-    const Y = paramMonthYear?.year ?? monthYear.year;
+  const handleRefresh = (params: any) => {
     setAppliedQuery({
-      month: M,
-      year: Y,
-      payrollSectionIds: selectedSections.length > 0 ? selectedSections : null,
-      designationId: null,
-      employeeCodes:
-        employeeCodeChips.length > 0
-          ? employeeCodeChips.map(Number).filter(Boolean)
-          : null,
-      paymentMethodId: paymentMethodId === 0 ? null : (paymentMethodId ?? null),
+      ...appliedQuery,
+      ...params,
+      designationId: null, // Always null for this report currently
     });
     setFirstSection(0);
     setIsFirstLoad(false);
@@ -648,6 +756,14 @@ const PayrollReportPage = () => {
                 onClick={() => {
                   if (allRows.length === 0) return;
 
+                  const paymentMethodOptions = [
+                    { label: "All Methods", value: 0 },
+                    ...globalData.paymentMethods.map((p) => ({
+                      label: p.nameEn,
+                      value: p.id,
+                    })),
+                  ];
+
                   const appliedPaymentMethodName = appliedQuery.paymentMethodId
                     ? paymentMethodOptions.find(
                         (p) => p.value === appliedQuery.paymentMethodId
@@ -690,63 +806,7 @@ const PayrollReportPage = () => {
           )}
         />
 
-        {/* ── filters ──────────────────────────────────────────────────────── */}
-        <div className="bg-theme-primary-light px-6 py-5 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-3 items-center">
-          <Input
-            type="month"
-            className="w-full h-10!"
-            placeholder="Select Month"
-            disabled={isLoading}
-            value={`${monthYear.year}-${String(monthYear.month).padStart(2, "0")}`}
-            onChange={(e) => {
-              if (!e.target.value) return;
-              const [y, m] = e.target.value.split("-").map(Number);
-              setMonthYear({ month: m, year: y });
-            }}
-            onKeyDown={(e: any) => {
-              if (e.key === "Enter") {
-                if (!e?.target) return;
-                if (!e?.target?.value) return;
-                const [y, m] = e?.target?.value?.split?.("-")?.map?.(Number);
-                handleRefresh({ month: m, year: y });
-              }
-            }}
-          />
-          <AutoScrollChips
-            keyfilter="int"
-            value={employeeCodeChips}
-            allowDuplicate={false}
-            placeholder="Employee Codes"
-            className="w-full h-10!"
-            onChange={(e) => setEmployeeCodeChips(e.value ?? [])}
-          />
-          <ModifiedMultiSelect
-            options={sectionOptions}
-            selectedItem={selectedSections}
-            setSelectedItem={setSelectedSections}
-            placeholder="Select Payroll Sections"
-            className="w-full h-10.5!"
-            filter
-            small
-            showClear
-          />
-          <Dropdown
-            filter
-            options={paymentMethodOptions}
-            value={paymentMethodId}
-            onChange={(e) => setPaymentMethodId(e.value ?? null)}
-            className="w-full h-10!"
-            placeholder="Payment Method"
-          />
-          <Button
-            size="small"
-            label="Refresh"
-            loading={isLoading}
-            className="w-full h-10!"
-            onClick={() => handleRefresh()}
-            icon={isLoading ? undefined : "pi pi-refresh"}
-          />
-        </div>
+        <FilterSection onSearch={handleRefresh} isLoading={isLoading} />
       </div>
 
       {/* ── section paginator ─────────────────────────────────────────────── */}

@@ -20,6 +20,14 @@ export const REPORT_OPTIONS: ReportOption[] = [
     filterOptions: [{ key: "enableAllFilters", label: "Enable all filters" }],
   },
   {
+    id: "payroll",
+    title: "Payroll Report",
+    description: "Generate and view employee payroll report",
+    icon: "fa-light fa-file-contract",
+    route: "/reports/payroll",
+    filterOptions: [{ key: "enableAllFilters", label: "Enable all filters" }],
+  },
+  {
     id: "daily-timesheet",
     title: "Daily Timesheet",
     description: "View and manage daily timesheet records",
