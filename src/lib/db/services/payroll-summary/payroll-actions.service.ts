@@ -574,7 +574,7 @@ export const runPayroll = async ({
   );
   const activePayroll = await prisma.payrollSummary.findFirst({
     where: {
-      payrollStatusId: 1, // Pending
+      payrollStatusId: { in: [1, 4] }, // Pending or Revision
     },
   });
 
@@ -662,7 +662,7 @@ export const repostPayroll = async ({
   // Check if there is any active payroll (Pending) that is NOT this one
   const activePayroll = await prisma.payrollSummary.findFirst({
     where: {
-      payrollStatusId: 1, // Pending
+      payrollStatusId: { in: [1, 4] }, // Pending or Revision
       NOT: { id }, // exclude the payroll being reposted
     },
   });
