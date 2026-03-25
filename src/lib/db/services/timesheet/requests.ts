@@ -48,7 +48,8 @@ export const useBulkUploadTimesheets = () =>
   });
 
 export const useGetMonthlyTimesheetReport = (
-  input: GetMonthlyTimesheetReportInput
+  input: GetMonthlyTimesheetReportInput,
+  enabled: boolean = true
 ) =>
   useQuery(getMonthlyTimesheetReportAction, {
     queryKey: [
@@ -64,11 +65,12 @@ export const useGetMonthlyTimesheetReport = (
       input.showFixedSalary,
     ],
     input,
-    enabled: !!input.month && !!input.year,
+    enabled: enabled && !!input.month && !!input.year,
   });
 
 export const useGetDailyTimesheetReport = (
-  input: GetDailyTimesheetReportInput
+  input: GetDailyTimesheetReportInput,
+  enabled: boolean = true
 ) =>
   useQuery(getDailyTimesheetReportAction, {
     queryKey: [
@@ -82,5 +84,5 @@ export const useGetDailyTimesheetReport = (
       input.showFixedSalary,
     ],
     input,
-    enabled: !!input.date,
+    enabled: enabled && !!input.date,
   });

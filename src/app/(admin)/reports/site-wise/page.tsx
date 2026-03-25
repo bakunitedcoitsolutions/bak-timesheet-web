@@ -34,7 +34,7 @@ export default function SiteWiseReportPage() {
     ...getMonthYear(),
     employeeCodes: null as number[] | null,
     projectIds: null as number[] | null,
-    summarize: false,
+    summarize: true,
   });
 
   const [isFirstLoad, setIsFirstLoad] = useState(true);
@@ -179,7 +179,7 @@ export default function SiteWiseReportPage() {
         initialMonthYear={getMonthYear()}
         initialEmployeeCodes={[]}
         initialSelectedProjects={[]}
-        initialSummarize={false}
+        initialSummarize={true}
       />
 
       <div ref={contentRef} className="flex-1 min-h-0 bg-white flex flex-col">

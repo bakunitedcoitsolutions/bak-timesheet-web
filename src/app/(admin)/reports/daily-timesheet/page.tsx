@@ -215,6 +215,7 @@ const DailyTimesheetReportPage = () => {
   // Filter states
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
   const [queryDate, setQueryDate] = useState<Date>(new Date()); // Date used for fetching data
+  const [isFirstLoad, setIsFirstLoad] = useState(true);
   const [filter, setFilter] = useState({
     employeeCodes: null as string[] | null,
     projectId: null as number | null,
@@ -229,15 +230,18 @@ const DailyTimesheetReportPage = () => {
   const [sectionsPerPage, setSectionsPerPage] = useState(3);
 
   // Use the new daily report hook
-  const { data: reportResponse, isLoading } = useGetDailyTimesheetReport({
-    date: queryDate,
-    employeeCodes: filter.employeeCodes,
-    projectId: filter.projectId,
-    designationId: filter.designationId,
-    payrollSectionId: filter.payrollSectionId,
-    showAbsents: filter.showAbsents,
-    showFixedSalary: filter.showFixedSalary,
-  });
+  const { data: reportResponse, isLoading } = useGetDailyTimesheetReport(
+    {
+      date: queryDate,
+      employeeCodes: filter.employeeCodes,
+      projectId: filter.projectId,
+      designationId: filter.designationId,
+      payrollSectionId: filter.payrollSectionId,
+      showAbsents: filter.showAbsents,
+      showFixedSalary: filter.showFixedSalary,
+    },
+    !isFirstLoad
+  );
 
   const reportData = (reportResponse?.rows as any as TimesheetPageRow[]) || [];
 
@@ -296,6 +300,7 @@ const DailyTimesheetReportPage = () => {
     });
     setQueryDate(selectedDate); // Trigger search by updating queryDate
     setFirstSection(0); // Reset pagination on search
+    setIsFirstLoad(false);
   };
 
   const handlePrint = () => {

@@ -263,6 +263,7 @@ const MonthlyTimesheetReportPage = () => {
   const [queryDate, setQueryDate] = useState<Date>(
     dayjs().startOf("month").toDate()
   );
+  const [isFirstLoad, setIsFirstLoad] = useState(true);
   const [filter, setFilter] = useState({
     employeeCodes: null as string[] | null,
     projectId: null as number | null,
@@ -277,16 +278,19 @@ const MonthlyTimesheetReportPage = () => {
   const [rows, setRows] = useState(10);
 
   // Use the monthly report hook
-  const { data: reportResponse, isLoading } = useGetMonthlyTimesheetReport({
-    month: queryDate.getMonth() + 1,
-    year: queryDate.getFullYear(),
-    employeeCodes: filter.employeeCodes,
-    projectId: filter.projectId,
-    designationId: filter.designationId,
-    payrollSectionId: filter.payrollSectionId,
-    showAbsents: filter.showAbsents,
-    showFixedSalary: filter.showFixedSalary,
-  });
+  const { data: reportResponse, isLoading } = useGetMonthlyTimesheetReport(
+    {
+      month: queryDate.getMonth() + 1,
+      year: queryDate.getFullYear(),
+      employeeCodes: filter.employeeCodes,
+      projectId: filter.projectId,
+      designationId: filter.designationId,
+      payrollSectionId: filter.payrollSectionId,
+      showAbsents: filter.showAbsents,
+      showFixedSalary: filter.showFixedSalary,
+    },
+    !isFirstLoad
+  );
 
   const reports: EmployeeMonthlyReport[] = reportResponse?.reports || [];
   const monthName =
@@ -345,6 +349,7 @@ const MonthlyTimesheetReportPage = () => {
     });
     setQueryDate(selectedDate);
     setFirst(0);
+    setIsFirstLoad(false);
   };
 
   const handlePrint = () => {

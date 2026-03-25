@@ -1,25 +1,11 @@
+import dayjs from "dayjs";
 import { prisma } from "@/lib/db/prisma";
 import { GetSiteWiseReportInput, SiteWiseReportRow } from "./site-wise.schemas";
 
 export const getSiteWiseReport = async (input: GetSiteWiseReportInput) => {
   const { month, year, employeeCodes, projectIds, summarize } = input;
 
-  const monthNames = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
-  const monthName = monthNames[month - 1];
-  const formattedMonth = `${monthName}, ${year}`;
+  const formattedMonth = dayjs().year(year).month(month - 1).format("MMMM, YYYY");
 
   // 1. Find if payroll exists for this period
   const payrollSummary = await prisma.payrollSummary.findFirst({
@@ -67,8 +53,8 @@ export const getSiteWiseReport = async (input: GetSiteWiseReportInput) => {
 
   // 3. Fetch Timesheets for these employees in this month
   // We need to be careful with date range
-  const startDate = new Date(year, month - 1, 1);
-  const endDate = new Date(year, month, 0); // Last day of month
+  const startDate = dayjs().year(year).month(month - 1).startOf("month").toDate();
+  const endDate = dayjs().year(year).month(month - 1).endOf("month").toDate();
 
   const timesheets = await prisma.timesheet.findMany({
     where: {
