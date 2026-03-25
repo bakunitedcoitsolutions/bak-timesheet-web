@@ -8,6 +8,9 @@ export interface SiteWiseReportRow {
   projectHours: number;
   projectOT: number;
   breakfastAllowance: number;
+  otherAllowance: number;
+  totalAllowance: number;
+  baseSalary: number;
   empCode?: number;
   employeeName?: string;
   hourlyRate?: number;

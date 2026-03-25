@@ -70,6 +70,12 @@ export const DetailedTable = ({
             existing.projectOT = (existing.projectOT || 0) + (r.projectOT || 0);
             existing.breakfastAllowance =
               (existing.breakfastAllowance || 0) + (r.breakfastAllowance || 0);
+            existing.otherAllowance =
+              (existing.otherAllowance || 0) + (r.otherAllowance || 0);
+            existing.totalAllowance =
+              (existing.totalAllowance || 0) + (r.totalAllowance || 0);
+            existing.baseSalary =
+              (existing.baseSalary || 0) + (r.baseSalary || 0);
             existing.totalSalary =
               (existing.totalSalary || 0) + (r.totalSalary || 0);
           }
@@ -163,12 +169,45 @@ export const DetailedTable = ({
       },
       {
         ...tableCommonProps,
+        field: "baseSalary",
+        header: "Salary",
+        style: { width: "100px" },
+        body: (r) => (
+          <span className="text-sm text-center block font-semibold text-gray-700">
+            {fmt(r.baseSalary)}
+          </span>
+        ),
+      },
+      {
+        ...tableCommonProps,
         field: "breakfastAllowance",
         header: "Brf. Alw.",
         style: { width: "100px" },
         body: (r) => (
-          <span className="text-sm text-center block font-semibold text-blue-600">
+          <span className="text-sm text-center block font-semibold text-primary/80">
             {fmt(r.breakfastAllowance)}
+          </span>
+        ),
+      },
+      {
+        ...tableCommonProps,
+        field: "otherAllowance",
+        header: "Other Alw.",
+        style: { width: "100px" },
+        body: (r) => (
+          <span className="text-sm text-center block font-semibold text-primary/80">
+            {fmt(r.otherAllowance)}
+          </span>
+        ),
+      },
+      {
+        ...tableCommonProps,
+        field: "totalAllowance",
+        header: "Total Alw.",
+        style: { width: "100px" },
+        body: (r) => (
+          <span className="text-sm text-center block font-bold text-primary/80">
+            {fmt(r.totalAllowance)}
           </span>
         ),
       },
@@ -194,9 +233,20 @@ export const DetailedTable = ({
         ot: acc.ot + (curr.projectOT || 0),
         breakfastAllowance:
           acc.breakfastAllowance + (curr.breakfastAllowance || 0),
+        otherAllowance: acc.otherAllowance + (curr.otherAllowance || 0),
+        totalAllowance: acc.totalAllowance + (curr.totalAllowance || 0),
+        baseSalary: acc.baseSalary + (curr.baseSalary || 0),
         salary: acc.salary + (curr.totalSalary || 0),
       }),
-      { hours: 0, ot: 0, breakfastAllowance: 0, salary: 0 }
+      {
+        hours: 0,
+        ot: 0,
+        breakfastAllowance: 0,
+        otherAllowance: 0,
+        totalAllowance: 0,
+        baseSalary: 0,
+        salary: 0,
+      }
     );
   }, [data]);
 
@@ -233,6 +283,18 @@ export const DetailedTable = ({
       (s, row) => s + (row.breakfastAllowance || 0),
       0
     );
+    const pOther = groupRows.reduce(
+      (s, row) => s + (row.otherAllowance || 0),
+      0
+    );
+    const pTotalAllowance = groupRows.reduce(
+      (s, row) => s + (row.totalAllowance || 0),
+      0
+    );
+    const pBaseSalary = groupRows.reduce(
+      (s, row) => s + (row.baseSalary || 0),
+      0
+    );
     const pSalary = groupRows.reduce((s, row) => s + (row.totalSalary || 0), 0);
 
     return (
@@ -249,9 +311,18 @@ export const DetailedTable = ({
         <td className="bg-primary-light! text-primary! font-bold! text-center! text-sm!">
           {fmt(pOT)}
         </td>
-        <td colSpan={1} className="bg-primary-light!" />
+        <td className="bg-primary-light! text-primary! font-bold! text-center! text-sm!"></td>
+        <td className="bg-primary-light! text-primary! font-bold! text-center! text-sm!">
+          {fmt(pBaseSalary)}
+        </td>
         <td className="bg-primary-light! text-primary! font-bold! text-center! text-sm!">
           {fmt(pBreakfast)}
+        </td>
+        <td className="bg-primary-light! text-primary! font-bold! text-center! text-sm!">
+          {fmt(pOther)}
+        </td>
+        <td className="bg-primary-light! text-primary! font-bold! text-center! text-sm!">
+          {fmt(pTotalAllowance)}
         </td>
         <td className="bg-primary-light! text-primary! font-bold! text-center! text-sm!">
           {fmt(pSalary)}
@@ -279,15 +350,21 @@ export const DetailedTable = ({
         />
         <Column footer={fmt(grandTotals.hours)} footerStyle={commonStyle} />
         <Column footer={fmt(grandTotals.ot)} footerStyle={commonStyle} />
+        <Column colSpan={1} footerStyle={commonStyle} />
         <Column
-          colSpan={1}
-          footerStyle={{
-            background: "var(--primary-color) !important",
-            borderTop: "2px solid var(--primary-color)",
-          }}
+          footer={fmt(grandTotals.baseSalary)}
+          footerStyle={commonStyle}
         />
         <Column
           footer={fmt(grandTotals.breakfastAllowance)}
+          footerStyle={commonStyle}
+        />
+        <Column
+          footer={fmt(grandTotals.otherAllowance)}
+          footerStyle={commonStyle}
+        />
+        <Column
+          footer={fmt(grandTotals.totalAllowance)}
           footerStyle={commonStyle}
         />
         <Column footer={fmt(grandTotals.salary)} footerStyle={commonStyle} />

@@ -5,7 +5,10 @@ import { GetSiteWiseReportInput, SiteWiseReportRow } from "./site-wise.schemas";
 export const getSiteWiseReport = async (input: GetSiteWiseReportInput) => {
   const { month, year, employeeCodes, projectIds, summarize } = input;
 
-  const formattedMonth = dayjs().year(year).month(month - 1).format("MMMM, YYYY");
+  const formattedMonth = dayjs()
+    .year(year)
+    .month(month - 1)
+    .format("MMMM, YYYY");
 
   // 1. Find if payroll exists for this period
   const payrollSummary = await prisma.payrollSummary.findFirst({
@@ -57,8 +60,16 @@ export const getSiteWiseReport = async (input: GetSiteWiseReportInput) => {
 
   // 3. Fetch Timesheets for these employees in this month
   // We need to be careful with date range
-  const startDate = dayjs().year(year).month(month - 1).startOf("month").toDate();
-  const endDate = dayjs().year(year).month(month - 1).endOf("month").toDate();
+  const startDate = dayjs()
+    .year(year)
+    .month(month - 1)
+    .startOf("month")
+    .toDate();
+  const endDate = dayjs()
+    .year(year)
+    .month(month - 1)
+    .endOf("month")
+    .toDate();
 
   const timesheets = await prisma.timesheet.findMany({
     where: {
@@ -88,12 +99,26 @@ export const getSiteWiseReport = async (input: GetSiteWiseReportInput) => {
   // 4. Transform into SiteWiseReportRow
   const rawRows: SiteWiseReportRow[] = [];
 
-  const employeeAllowanceMap = new Map<number, number>(
+  const employeeBreakfastAllowanceMap = new Map<number, number>(
     payrollDetails.map((pd) => [
       pd.employeeId,
       Number(pd.breakfastAllowance) || 0,
     ])
   );
+
+  const employeeOtherAllowanceMap = new Map<number, number>(
+    payrollDetails.map((pd) => [pd.employeeId, Number(pd.otherAllowances) || 0])
+  );
+
+  // Pre-calculate total hours per employee for allowance distribution
+  const empTotalHoursMap = new Map<number, number>();
+  timesheets.forEach((ts) => {
+    const total = (ts.project1Hours || 0) + (ts.project2Hours || 0);
+    empTotalHoursMap.set(
+      ts.employeeId,
+      (empTotalHoursMap.get(ts.employeeId) || 0) + total
+    );
+  });
 
   timesheets.forEach((ts) => {
     const pd = employeeMap.get(ts.employeeId);
@@ -102,6 +127,12 @@ export const getSiteWiseReport = async (input: GetSiteWiseReportInput) => {
     const designationHours = (pd.employee as any).designation?.hoursPerDay || 0;
     const hourlyRate = Number(pd.hourlyRate);
 
+    const totalEmpHours = empTotalHoursMap.get(ts.employeeId) || 0;
+    const totalOtherAllowanceAmount =
+      employeeOtherAllowanceMap.get(ts.employeeId) || 0;
+    const allowancePerHour =
+      totalEmpHours > 0 ? totalOtherAllowanceAmount / totalEmpHours : 0;
+
     // Handle Project 1
     if (ts.project1Id && ts.project1) {
       if (!projectIds || projectIds.includes(ts.project1Id)) {
@@ -109,13 +140,22 @@ export const getSiteWiseReport = async (input: GetSiteWiseReportInput) => {
         const ot = ts.project1Overtime || 0;
 
         let project1BreakfastAllowance = 0;
-        let remainingAllowance = employeeAllowanceMap.get(ts.employeeId) || 0;
+        let remainingBreakfastAllowance =
+          employeeBreakfastAllowanceMap.get(ts.employeeId) || 0;
 
-        if (hours === designationHours && remainingAllowance >= 10) {
+        if (hours === designationHours && remainingBreakfastAllowance >= 10) {
           project1BreakfastAllowance = 10;
-          remainingAllowance -= 10;
-          employeeAllowanceMap.set(ts.employeeId, remainingAllowance);
+          remainingBreakfastAllowance -= 10;
+          employeeBreakfastAllowanceMap.set(
+            ts.employeeId,
+            remainingBreakfastAllowance
+          );
         }
+
+        const project1OtherAllowance = hours * allowancePerHour;
+        const project1TotalAllowance =
+          project1BreakfastAllowance + project1OtherAllowance;
+        const baseSalary = (hours + ot) * hourlyRate;
 
         rawRows.push({
           id: `${ts.id}-p1`,
@@ -125,10 +165,13 @@ export const getSiteWiseReport = async (input: GetSiteWiseReportInput) => {
           projectHours: hours,
           projectOT: ot,
           breakfastAllowance: project1BreakfastAllowance,
+          otherAllowance: project1OtherAllowance,
+          totalAllowance: project1TotalAllowance,
+          baseSalary: baseSalary,
           empCode: pd.employee.employeeCode,
           employeeName: pd.employee.nameEn,
           hourlyRate: hourlyRate,
-          totalSalary: (hours + ot) * hourlyRate + project1BreakfastAllowance,
+          totalSalary: baseSalary + project1TotalAllowance,
         });
       }
     }
@@ -139,6 +182,10 @@ export const getSiteWiseReport = async (input: GetSiteWiseReportInput) => {
         const hours = ts.project2Hours || 0;
         const ot = ts.project2Overtime || 0;
 
+        const project2OtherAllowance = hours * allowancePerHour;
+        const project2TotalAllowance = project2OtherAllowance;
+        const baseSalary = (hours + ot) * hourlyRate;
+
         rawRows.push({
           id: `${ts.id}-p2`,
           month: formattedMonth,
@@ -147,10 +194,13 @@ export const getSiteWiseReport = async (input: GetSiteWiseReportInput) => {
           projectHours: hours,
           projectOT: ot,
           breakfastAllowance: 0,
+          otherAllowance: project2OtherAllowance,
+          totalAllowance: project2TotalAllowance,
+          baseSalary: baseSalary,
           empCode: pd.employee.employeeCode,
           employeeName: pd.employee.nameEn,
           hourlyRate: hourlyRate,
-          totalSalary: (hours + ot) * hourlyRate,
+          totalSalary: baseSalary + project2TotalAllowance,
         });
       }
     }
@@ -166,6 +216,9 @@ export const getSiteWiseReport = async (input: GetSiteWiseReportInput) => {
         existing.projectHours += row.projectHours;
         existing.projectOT += row.projectOT;
         existing.breakfastAllowance += row.breakfastAllowance;
+        existing.otherAllowance += row.otherAllowance;
+        existing.totalAllowance += row.totalAllowance;
+        existing.baseSalary += row.baseSalary;
         existing.totalSalary += row.totalSalary;
       } else {
         summaryMap.set(row.projectId, {
@@ -176,6 +229,9 @@ export const getSiteWiseReport = async (input: GetSiteWiseReportInput) => {
           projectHours: row.projectHours,
           projectOT: row.projectOT,
           breakfastAllowance: row.breakfastAllowance,
+          otherAllowance: row.otherAllowance,
+          totalAllowance: row.totalAllowance,
+          baseSalary: row.baseSalary,
           totalSalary: row.totalSalary,
           // Exclude employee specific info in summary
         });

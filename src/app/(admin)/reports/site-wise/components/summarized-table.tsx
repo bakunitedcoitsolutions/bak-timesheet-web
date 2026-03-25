@@ -1,12 +1,13 @@
 "use client";
 
-import { Table, TableColumn } from "@/components";
+import { useMemo } from "react";
 import { Row } from "primereact/row";
 import { Column } from "primereact/column";
 import { ColumnGroup } from "primereact/columngroup";
-import { SiteWiseReportRow } from "@/lib/db/services/site-wise";
+
 import { formatNum } from "@/utils/helpers";
-import { useMemo } from "react";
+import { Table, TableColumn } from "@/components";
+import { SiteWiseReportRow } from "@/lib/db/services/site-wise";
 
 const fmt = (v: number) => formatNum(v || 0);
 
@@ -62,7 +63,7 @@ export const SummarizedTable = ({ data, isLoading }: SummarizedTableProps) => {
         field: "projectHours",
         header: "Project Hours",
         body: (r) => (
-          <span className="font-semibold text-center block">
+          <span className="font-semibold text-sm text-center block">
             {fmt(r.projectHours)}
           </span>
         ),
@@ -72,7 +73,7 @@ export const SummarizedTable = ({ data, isLoading }: SummarizedTableProps) => {
         field: "projectOT",
         header: "Project OT",
         body: (r) => (
-          <span className="font-semibold text-center block">
+          <span className="font-semibold text-sm text-center block">
             {fmt(r.projectOT)}
           </span>
         ),
@@ -82,8 +83,18 @@ export const SummarizedTable = ({ data, isLoading }: SummarizedTableProps) => {
         field: "totalHours",
         header: "Total Hours",
         body: (r) => (
-          <span className="font-semibold text-center block">
+          <span className="font-semibold text-sm text-center block">
             {fmt(r.projectHours + r.projectOT)}
+          </span>
+        ),
+      },
+      {
+        ...tableCommonProps,
+        field: "baseSalary",
+        header: "Salary",
+        body: (r) => (
+          <span className="font-semibold text-sm text-center block text-gray-700">
+            {fmt(r.baseSalary)}
           </span>
         ),
       },
@@ -92,8 +103,28 @@ export const SummarizedTable = ({ data, isLoading }: SummarizedTableProps) => {
         field: "breakfastAllowance",
         header: "Brf. Alw.",
         body: (r) => (
-          <span className="font-semibold text-center block text-blue-600">
+          <span className="font-semibold text-sm text-center block text-primary/80">
             {fmt(r.breakfastAllowance)}
+          </span>
+        ),
+      },
+      {
+        ...tableCommonProps,
+        field: "otherAllowance",
+        header: "Other Alw.",
+        body: (r) => (
+          <span className="font-semibold text-sm text-center block text-primary/80">
+            {fmt(r.otherAllowance)}
+          </span>
+        ),
+      },
+      {
+        ...tableCommonProps,
+        field: "totalAllowance",
+        header: "Total Alw.",
+        body: (r) => (
+          <span className="font-bold text-sm text-center block text-primary/80">
+            {fmt(r.totalAllowance)}
           </span>
         ),
       },
@@ -118,9 +149,20 @@ export const SummarizedTable = ({ data, isLoading }: SummarizedTableProps) => {
         ot: acc.ot + (curr.projectOT || 0),
         breakfastAllowance:
           acc.breakfastAllowance + (curr.breakfastAllowance || 0),
+        otherAllowance: acc.otherAllowance + (curr.otherAllowance || 0),
+        totalAllowance: acc.totalAllowance + (curr.totalAllowance || 0),
+        baseSalary: acc.baseSalary + (curr.baseSalary || 0),
         salary: acc.salary + (curr.totalSalary || 0),
       }),
-      { hours: 0, ot: 0, breakfastAllowance: 0, salary: 0 }
+      {
+        hours: 0,
+        ot: 0,
+        breakfastAllowance: 0,
+        otherAllowance: 0,
+        totalAllowance: 0,
+        baseSalary: 0,
+        salary: 0,
+      }
     );
   }, [data]);
 
@@ -139,7 +181,7 @@ export const SummarizedTable = ({ data, isLoading }: SummarizedTableProps) => {
       <Row>
         <Column
           colSpan={3}
-          footer="GRAND TOTAL :"
+          footer="GRAND TOTAL:"
           footerStyle={{
             background: "var(--primary-color) !important",
             color: "#ffffff",
@@ -157,8 +199,17 @@ export const SummarizedTable = ({ data, isLoading }: SummarizedTableProps) => {
           footer={fmt(totals.hours + totals.ot)}
           footerStyle={similarStyle}
         />
+        <Column footer={fmt(totals.baseSalary)} footerStyle={similarStyle} />
         <Column
           footer={fmt(totals.breakfastAllowance)}
+          footerStyle={similarStyle}
+        />
+        <Column
+          footer={fmt(totals.otherAllowance)}
+          footerStyle={similarStyle}
+        />
+        <Column
+          footer={fmt(totals.totalAllowance)}
           footerStyle={similarStyle}
         />
         <Column footer={fmt(totals.salary)} footerStyle={similarStyle} />

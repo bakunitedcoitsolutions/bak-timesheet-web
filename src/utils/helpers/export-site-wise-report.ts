@@ -11,7 +11,10 @@ const HEADERS_DETAILED = [
   "Project Hours",
   "Project OT",
   "Hourly Rate",
+  "Salary",
   "Brf. Alw.",
+  "Other Alw.",
+  "Total Alw.",
   "Total Salary",
 ];
 
@@ -22,7 +25,10 @@ const HEADERS_SUMMARIZED = [
   "Project Hours",
   "Project OT",
   "Total Hours",
+  "Salary",
   "Brf. Alw.",
+  "Other Alw.",
+  "Total Alw.",
   "Total Salary",
 ];
 
@@ -48,7 +54,10 @@ export function exportSiteWiseExcel(
         r.projectHours,
         r.projectOT,
         (r.projectHours || 0) + (r.projectOT || 0),
+        r.baseSalary,
         r.breakfastAllowance,
+        r.otherAllowance,
+        r.totalAllowance,
         r.totalSalary,
       ]);
     });
@@ -78,16 +87,42 @@ export function exportSiteWiseExcel(
           existing.projectOT = (existing.projectOT || 0) + (r.projectOT || 0);
           existing.breakfastAllowance =
             (existing.breakfastAllowance || 0) + (r.breakfastAllowance || 0);
+          existing.otherAllowance =
+            (existing.otherAllowance || 0) + (r.otherAllowance || 0);
+          existing.totalAllowance =
+            (existing.totalAllowance || 0) + (r.totalAllowance || 0);
+          existing.baseSalary = (existing.baseSalary || 0) + (r.baseSalary || 0);
           existing.totalSalary =
             (existing.totalSalary || 0) + (r.totalSalary || 0);
         }
       });
 
       const aggregatedRows = Array.from(empMap.values());
-      const sHours = aggregatedRows.reduce((s, r) => s + (r.projectHours || 0), 0);
+      const sHours = aggregatedRows.reduce(
+        (s, r) => s + (r.projectHours || 0),
+        0
+      );
       const sOT = aggregatedRows.reduce((s, r) => s + (r.projectOT || 0), 0);
-      const sBreakfast = aggregatedRows.reduce((s, r) => s + (r.breakfastAllowance || 0), 0);
-      const sSalary = aggregatedRows.reduce((s, r) => s + (r.totalSalary || 0), 0);
+      const sBreakfast = aggregatedRows.reduce(
+        (s, r) => s + (r.breakfastAllowance || 0),
+        0
+      );
+      const sOther = aggregatedRows.reduce(
+        (s, r) => s + (r.otherAllowance || 0),
+        0
+      );
+      const sTotalAllowance = aggregatedRows.reduce(
+        (s, r) => s + (r.totalAllowance || 0),
+        0
+      );
+      const sBaseSalary = aggregatedRows.reduce(
+        (s, r) => s + (r.baseSalary || 0),
+        0
+      );
+      const sSalary = aggregatedRows.reduce(
+        (s, r) => s + (r.totalSalary || 0),
+        0
+      );
 
       // Project Header Row
       sheetData.push(["", "", pn.toUpperCase()]);
@@ -103,7 +138,10 @@ export function exportSiteWiseExcel(
           r.projectHours,
           r.projectOT,
           r.hourlyRate || 0,
+          r.baseSalary,
           r.breakfastAllowance,
+          r.otherAllowance,
+          r.totalAllowance,
           r.totalSalary,
         ]);
       });
@@ -118,7 +156,10 @@ export function exportSiteWiseExcel(
         sHours,
         sOT,
         "",
+        sBaseSalary,
         sBreakfast,
+        sOther,
+        sTotalAllowance,
         sSalary,
       ]);
       sheetData.push([]); // Spacer
@@ -132,6 +173,12 @@ export function exportSiteWiseExcel(
     (s, r) => s + (r.breakfastAllowance || 0),
     0
   );
+  const totalOther = data.reduce((s, r) => s + (r.otherAllowance || 0), 0);
+  const totalAllowance = data.reduce(
+    (s, r) => s + (r.totalAllowance || 0),
+    0
+  );
+  const totalBaseSalary = data.reduce((s, r) => s + (r.baseSalary || 0), 0);
   const totalSalary = data.reduce((s, r) => s + (r.totalSalary || 0), 0);
 
   if (summarized) {
@@ -143,7 +190,10 @@ export function exportSiteWiseExcel(
       totalHours,
       totalOT,
       totalHours + totalOT,
+      totalBaseSalary,
       totalBreakfast,
+      totalOther,
+      totalAllowance,
       totalSalary,
     ]);
   } else {
@@ -156,7 +206,10 @@ export function exportSiteWiseExcel(
       totalHours,
       totalOT,
       "",
+      totalBaseSalary,
       totalBreakfast,
+      totalOther,
+      totalAllowance,
       totalSalary,
     ]);
   }
@@ -174,6 +227,9 @@ export function exportSiteWiseExcel(
         { wch: 15 },
         { wch: 15 },
         { wch: 15 },
+        { wch: 15 },
+        { wch: 15 },
+        { wch: 15 },
       ]
     : [
         { wch: 5 },
@@ -186,12 +242,13 @@ export function exportSiteWiseExcel(
         { wch: 12 },
         { wch: 15 },
         { wch: 15 },
+        { wch: 15 },
+        { wch: 15 },
+        { wch: 15 },
       ];
 
   // Merge title row
-  ws["!merges"] = [
-    { s: { r: 0, c: 0 }, e: { r: 0, c: headers.length - 1 } },
-  ];
+  ws["!merges"] = [{ s: { r: 0, c: 0 }, e: { r: 0, c: headers.length - 1 } }];
 
   const wb = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb, ws, "Site Wise Report");
@@ -225,7 +282,10 @@ export function exportSiteWiseCSV(
         r.projectHours,
         r.projectOT,
         (r.projectHours || 0) + (r.projectOT || 0),
+        r.baseSalary,
         r.breakfastAllowance,
+        r.otherAllowance,
+        r.totalAllowance,
         r.totalSalary,
       ]);
     });
@@ -255,16 +315,42 @@ export function exportSiteWiseCSV(
           existing.projectOT = (existing.projectOT || 0) + (r.projectOT || 0);
           existing.breakfastAllowance =
             (existing.breakfastAllowance || 0) + (r.breakfastAllowance || 0);
+          existing.otherAllowance =
+            (existing.otherAllowance || 0) + (r.otherAllowance || 0);
+          existing.totalAllowance =
+            (existing.totalAllowance || 0) + (r.totalAllowance || 0);
+          existing.baseSalary = (existing.baseSalary || 0) + (r.baseSalary || 0);
           existing.totalSalary =
             (existing.totalSalary || 0) + (r.totalSalary || 0);
         }
       });
 
       const aggregatedRows = Array.from(empMap.values());
-      const sHours = aggregatedRows.reduce((s, r) => s + (r.projectHours || 0), 0);
+      const sHours = aggregatedRows.reduce(
+        (s, r) => s + (r.projectHours || 0),
+        0
+      );
       const sOT = aggregatedRows.reduce((s, r) => s + (r.projectOT || 0), 0);
-      const sBreakfast = aggregatedRows.reduce((s, r) => s + (r.breakfastAllowance || 0), 0);
-      const sSalary = aggregatedRows.reduce((s, r) => s + (r.totalSalary || 0), 0);
+      const sBreakfast = aggregatedRows.reduce(
+        (s, r) => s + (r.breakfastAllowance || 0),
+        0
+      );
+      const sOther = aggregatedRows.reduce(
+        (s, r) => s + (r.otherAllowance || 0),
+        0
+      );
+      const sTotalAllowance = aggregatedRows.reduce(
+        (s, r) => s + (r.totalAllowance || 0),
+        0
+      );
+      const sBaseSalary = aggregatedRows.reduce(
+        (s, r) => s + (r.baseSalary || 0),
+        0
+      );
+      const sSalary = aggregatedRows.reduce(
+        (s, r) => s + (r.totalSalary || 0),
+        0
+      );
 
       // Project Header Row
       sheetData.push(["", "", pn.toUpperCase()]);
@@ -280,7 +366,10 @@ export function exportSiteWiseCSV(
           r.projectHours,
           r.projectOT,
           r.hourlyRate || 0,
+          r.baseSalary,
           r.breakfastAllowance,
+          r.otherAllowance,
+          r.totalAllowance,
           r.totalSalary,
         ]);
       });
@@ -295,7 +384,10 @@ export function exportSiteWiseCSV(
         sHours,
         sOT,
         "",
+        sBaseSalary,
         sBreakfast,
+        sOther,
+        sTotalAllowance,
         sSalary,
       ]);
       sheetData.push([]); // Spacer
@@ -309,6 +401,12 @@ export function exportSiteWiseCSV(
     (s, r) => s + (r.breakfastAllowance || 0),
     0
   );
+  const totalOther = data.reduce((s, r) => s + (r.otherAllowance || 0), 0);
+  const totalAllowance = data.reduce(
+    (s, r) => s + (r.totalAllowance || 0),
+    0
+  );
+  const totalBaseSalary = data.reduce((s, r) => s + (r.baseSalary || 0), 0);
   const totalSalary = data.reduce((s, r) => s + (r.totalSalary || 0), 0);
 
   if (summarized) {
@@ -320,7 +418,10 @@ export function exportSiteWiseCSV(
       totalHours,
       totalOT,
       totalHours + totalOT,
+      totalBaseSalary,
       totalBreakfast,
+      totalOther,
+      totalAllowance,
       totalSalary,
     ]);
   } else {
@@ -333,7 +434,10 @@ export function exportSiteWiseCSV(
       totalHours,
       totalOT,
       "",
+      totalBaseSalary,
       totalBreakfast,
+      totalOther,
+      totalAllowance,
       totalSalary,
     ]);
   }
