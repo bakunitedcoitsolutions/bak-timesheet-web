@@ -89,6 +89,16 @@ export const SummarizedTable = ({ data, isLoading }: SummarizedTableProps) => {
       },
       {
         ...tableCommonProps,
+        field: "breakfastAllowance",
+        header: "Brf. Alw.",
+        body: (r) => (
+          <span className="font-semibold text-center block text-blue-600">
+            {fmt(r.breakfastAllowance)}
+          </span>
+        ),
+      },
+      {
+        ...tableCommonProps,
         field: "totalSalary",
         header: "Total Salary",
         body: (r) => (
@@ -106,9 +116,11 @@ export const SummarizedTable = ({ data, isLoading }: SummarizedTableProps) => {
       (acc, curr) => ({
         hours: acc.hours + (curr.projectHours || 0),
         ot: acc.ot + (curr.projectOT || 0),
+        breakfastAllowance:
+          acc.breakfastAllowance + (curr.breakfastAllowance || 0),
         salary: acc.salary + (curr.totalSalary || 0),
       }),
-      { hours: 0, ot: 0, salary: 0 }
+      { hours: 0, ot: 0, breakfastAllowance: 0, salary: 0 }
     );
   }, [data]);
 
@@ -143,6 +155,10 @@ export const SummarizedTable = ({ data, isLoading }: SummarizedTableProps) => {
         <Column footer={fmt(totals.ot)} footerStyle={similarStyle} />
         <Column
           footer={fmt(totals.hours + totals.ot)}
+          footerStyle={similarStyle}
+        />
+        <Column
+          footer={fmt(totals.breakfastAllowance)}
           footerStyle={similarStyle}
         />
         <Column footer={fmt(totals.salary)} footerStyle={similarStyle} />

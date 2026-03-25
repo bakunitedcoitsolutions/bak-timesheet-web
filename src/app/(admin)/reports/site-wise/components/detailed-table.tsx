@@ -3,10 +3,11 @@
 import { useMemo, useState, useEffect } from "react";
 import { Row } from "primereact/row";
 import { Column } from "primereact/column";
-import { formatNum } from "@/utils/helpers";
 import { Paginator } from "primereact/paginator";
-import { Table, TableColumn } from "@/components";
 import { ColumnGroup } from "primereact/columngroup";
+
+import { formatNum } from "@/utils/helpers";
+import { Table, TableColumn } from "@/components";
 import { SiteWiseReportRow } from "@/lib/db/services/site-wise";
 
 const fmt = (v: number) => formatNum(v || 0);
@@ -67,6 +68,8 @@ export const DetailedTable = ({
             existing.projectHours =
               (existing.projectHours || 0) + (r.projectHours || 0);
             existing.projectOT = (existing.projectOT || 0) + (r.projectOT || 0);
+            existing.breakfastAllowance =
+              (existing.breakfastAllowance || 0) + (r.breakfastAllowance || 0);
             existing.totalSalary =
               (existing.totalSalary || 0) + (r.totalSalary || 0);
           }
@@ -160,6 +163,17 @@ export const DetailedTable = ({
       },
       {
         ...tableCommonProps,
+        field: "breakfastAllowance",
+        header: "Brf. Alw.",
+        style: { width: "100px" },
+        body: (r) => (
+          <span className="text-sm text-center block font-semibold text-blue-600">
+            {fmt(r.breakfastAllowance)}
+          </span>
+        ),
+      },
+      {
+        ...tableCommonProps,
         field: "totalSalary",
         header: "Total Salary",
         style: { width: "120px" },
@@ -178,9 +192,11 @@ export const DetailedTable = ({
       (acc, curr) => ({
         hours: acc.hours + (curr.projectHours || 0),
         ot: acc.ot + (curr.projectOT || 0),
+        breakfastAllowance:
+          acc.breakfastAllowance + (curr.breakfastAllowance || 0),
         salary: acc.salary + (curr.totalSalary || 0),
       }),
-      { hours: 0, ot: 0, salary: 0 }
+      { hours: 0, ot: 0, breakfastAllowance: 0, salary: 0 }
     );
   }, [data]);
 
@@ -213,6 +229,10 @@ export const DetailedTable = ({
 
     const pHours = groupRows.reduce((s, row) => s + (row.projectHours || 0), 0);
     const pOT = groupRows.reduce((s, row) => s + (row.projectOT || 0), 0);
+    const pBreakfast = groupRows.reduce(
+      (s, row) => s + (row.breakfastAllowance || 0),
+      0
+    );
     const pSalary = groupRows.reduce((s, row) => s + (row.totalSalary || 0), 0);
 
     return (
@@ -231,6 +251,9 @@ export const DetailedTable = ({
         </td>
         <td colSpan={1} className="bg-primary-light!" />
         <td className="bg-primary-light! text-primary! font-bold! text-center! text-sm!">
+          {fmt(pBreakfast)}
+        </td>
+        <td className="bg-primary-light! text-primary! font-bold! text-center! text-sm!">
           {fmt(pSalary)}
         </td>
       </>
@@ -242,7 +265,7 @@ export const DetailedTable = ({
       <Row>
         <Column
           colSpan={3}
-          footer="GRAND TOTAL :"
+          footer="GRAND TOTAL:"
           footerStyle={{
             background: "var(--primary-color) !important",
             color: "#ffffff",
@@ -262,6 +285,10 @@ export const DetailedTable = ({
             background: "var(--primary-color) !important",
             borderTop: "2px solid var(--primary-color)",
           }}
+        />
+        <Column
+          footer={fmt(grandTotals.breakfastAllowance)}
+          footerStyle={commonStyle}
         />
         <Column footer={fmt(grandTotals.salary)} footerStyle={commonStyle} />
       </Row>

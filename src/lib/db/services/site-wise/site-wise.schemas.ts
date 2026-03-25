@@ -7,6 +7,7 @@ export interface SiteWiseReportRow {
   projectName: string;
   projectHours: number;
   projectOT: number;
+  breakfastAllowance: number;
   empCode?: number;
   employeeName?: string;
   hourlyRate?: number;

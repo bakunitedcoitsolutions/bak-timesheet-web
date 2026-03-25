@@ -37,7 +37,11 @@ export const getSiteWiseReport = async (input: GetSiteWiseReportInput) => {
         : {}),
     },
     include: {
-      employee: true,
+      employee: {
+        include: {
+          designation: true,
+        },
+      },
     },
   });
 
@@ -76,15 +80,26 @@ export const getSiteWiseReport = async (input: GetSiteWiseReportInput) => {
       project1: true,
       project2: true,
     },
+    orderBy: {
+      date: "asc",
+    },
   });
 
   // 4. Transform into SiteWiseReportRow
   const rawRows: SiteWiseReportRow[] = [];
 
+  const employeeAllowanceMap = new Map<number, number>(
+    payrollDetails.map((pd) => [
+      pd.employeeId,
+      Number(pd.breakfastAllowance) || 0,
+    ])
+  );
+
   timesheets.forEach((ts) => {
     const pd = employeeMap.get(ts.employeeId);
     if (!pd) return;
 
+    const designationHours = (pd.employee as any).designation?.hoursPerDay || 0;
     const hourlyRate = Number(pd.hourlyRate);
 
     // Handle Project 1
@@ -92,6 +107,16 @@ export const getSiteWiseReport = async (input: GetSiteWiseReportInput) => {
       if (!projectIds || projectIds.includes(ts.project1Id)) {
         const hours = ts.project1Hours || 0;
         const ot = ts.project1Overtime || 0;
+
+        let project1BreakfastAllowance = 0;
+        let remainingAllowance = employeeAllowanceMap.get(ts.employeeId) || 0;
+
+        if (hours === designationHours && remainingAllowance >= 10) {
+          project1BreakfastAllowance = 10;
+          remainingAllowance -= 10;
+          employeeAllowanceMap.set(ts.employeeId, remainingAllowance);
+        }
+
         rawRows.push({
           id: `${ts.id}-p1`,
           month: formattedMonth,
@@ -99,10 +124,11 @@ export const getSiteWiseReport = async (input: GetSiteWiseReportInput) => {
           projectName: ts.project1.nameEn,
           projectHours: hours,
           projectOT: ot,
+          breakfastAllowance: project1BreakfastAllowance,
           empCode: pd.employee.employeeCode,
           employeeName: pd.employee.nameEn,
           hourlyRate: hourlyRate,
-          totalSalary: (hours + ot) * hourlyRate,
+          totalSalary: (hours + ot) * hourlyRate + project1BreakfastAllowance,
         });
       }
     }
@@ -112,6 +138,7 @@ export const getSiteWiseReport = async (input: GetSiteWiseReportInput) => {
       if (!projectIds || projectIds.includes(ts.project2Id)) {
         const hours = ts.project2Hours || 0;
         const ot = ts.project2Overtime || 0;
+
         rawRows.push({
           id: `${ts.id}-p2`,
           month: formattedMonth,
@@ -119,6 +146,7 @@ export const getSiteWiseReport = async (input: GetSiteWiseReportInput) => {
           projectName: ts.project2.nameEn,
           projectHours: hours,
           projectOT: ot,
+          breakfastAllowance: 0,
           empCode: pd.employee.employeeCode,
           employeeName: pd.employee.nameEn,
           hourlyRate: hourlyRate,
@@ -137,6 +165,7 @@ export const getSiteWiseReport = async (input: GetSiteWiseReportInput) => {
       if (existing) {
         existing.projectHours += row.projectHours;
         existing.projectOT += row.projectOT;
+        existing.breakfastAllowance += row.breakfastAllowance;
         existing.totalSalary += row.totalSalary;
       } else {
         summaryMap.set(row.projectId, {
@@ -146,6 +175,7 @@ export const getSiteWiseReport = async (input: GetSiteWiseReportInput) => {
           projectName: row.projectName,
           projectHours: row.projectHours,
           projectOT: row.projectOT,
+          breakfastAllowance: row.breakfastAllowance,
           totalSalary: row.totalSalary,
           // Exclude employee specific info in summary
         });
