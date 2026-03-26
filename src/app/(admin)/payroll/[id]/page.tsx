@@ -1,127 +1,32 @@
 "use client";
 
-import { useRef, useState, useEffect, useMemo } from "react";
+import { useRef, useState, useEffect } from "react";
+import { FilterMatchMode } from "primereact/api";
 import { useParams, useRouter } from "next/navigation";
+import { DataTableFilterMeta } from "primereact/datatable";
 
-import {
-  Input,
-  Table,
-  Badge,
-  Button,
-  Dropdown,
-  TableRef,
-  TitleHeader,
-  TableColumn,
-  NumberInput,
-} from "@/components";
-import { PayrollDetailEntry } from "@/lib/db/services/payroll-summary/mappers";
 import {
   useRepostPayroll,
   useGetPayrollDate,
   useGetPayrollDetails,
   useSavePayrollDetailsBatch,
-  useRefreshPayrollDetailRow,
 } from "@/lib/db/services/payroll-summary";
-import {
-  formatNum,
-  formatPayrollPeriod,
-  parseGroupDropdownFilter,
-} from "@/utils/helpers";
-import { useDebounce, useSavePayrollRow } from "@/hooks";
 import { toastService } from "@/lib/toast";
+import { useSavePayrollRow } from "@/hooks";
 import { queryClient } from "@/lib/react-query";
 import { useGlobalData } from "@/context/GlobalDataContext";
-import GroupDropdown from "@/components/common/group-dropdown";
+import { Input, Table, TableRef, TitleHeader } from "@/components";
+import { PayrollDetailEntry } from "@/lib/db/services/payroll-summary/mappers";
+import { formatPayrollPeriod, parseGroupDropdownFilter } from "@/utils/helpers";
 
-const tableCommonProps = {
-  sortable: false,
-  filterable: true,
-  smallFilter: true,
-  showFilterMenu: false,
-  showClearButton: false,
-  style: { minWidth: 120 },
-  headerClassName: "text-sm! font-semibold",
-};
-
-// --- Module-level helpers ---
-const calculateNetSalaryPayable = (entry: PayrollDetailEntry) =>
-  entry.totalSalary - entry.loanDeduction - entry.challanDeduction;
-
-const calculateNetLoan = (entry: PayrollDetailEntry) =>
-  (entry?.previousAdvance ?? 0) +
-  (entry.currentAdvance ?? 0) -
-  (entry.loanDeduction ?? 0);
-
-const calculateNetTrafficChallan = (entry: PayrollDetailEntry) =>
-  (entry?.previousChallan ?? 0) +
-  (entry.currentChallan ?? 0) -
-  (entry.challanDeduction ?? 0);
-
-const ActionButtons = ({
-  rowData,
-  onRefreshComplete,
-  isSavingAll,
-}: {
-  rowData: PayrollDetailEntry;
-  onRefreshComplete: (updated: PayrollDetailEntry) => void;
-  isSavingAll: boolean;
-}) => {
-  const { saveRow, isSaving } = useSavePayrollRow();
-  const [isRefreshing, setIsRefreshing] = useState(false);
-  const { mutateAsync: refreshDetailRow } = useRefreshPayrollDetailRow();
-
-  const isLocked = rowData.isLocked || rowData.payrollSummaryStatusId === 3;
-
-  const handleRefreshRow = async () => {
-    try {
-      setIsRefreshing(true);
-      const result = await refreshDetailRow({ payrollDetailId: rowData.id });
-      if (result?.updatedEntry) {
-        onRefreshComplete(result.updatedEntry);
-      }
-      toastService.showSuccess(
-        "Refreshed",
-        `Row refreshed successfully for ${rowData.empCode} - ${rowData.name}`
-      );
-    } catch (error: any) {
-      toastService.showError(
-        "Error",
-        error.message || "Failed to refresh payroll details"
-      );
-    } finally {
-      setIsRefreshing(false);
-    }
-  };
-
-  return (
-    <div className="flex justify-center gap-2">
-      <Button
-        rounded
-        size="small"
-        variant="text"
-        {...(isSaving ? { loading: true } : { icon: "pi pi-save text-lg!" })}
-        tooltipOptions={{ position: "top" }}
-        onClick={() => saveRow(rowData)}
-        disabled={isLocked || isSaving || isRefreshing || isSavingAll}
-        className="w-8 h-8!"
-        tooltip="Save Row"
-      />
-      <Button
-        rounded
-        size="small"
-        variant="text"
-        tooltipOptions={{ position: "top" }}
-        {...(isRefreshing
-          ? { loading: true }
-          : { icon: "pi pi-refresh text-lg!" })}
-        onClick={handleRefreshRow}
-        disabled={isLocked || isSaving || isRefreshing || isSavingAll}
-        className="w-8 h-8!"
-        tooltip="Refresh"
-      />
-    </div>
-  );
-};
+// Extracted components and utilities
+import {
+  calculateNetLoan,
+  calculateNetSalaryPayable,
+  calculateNetTrafficChallan,
+} from "./utils";
+import { PayrollHeader } from "./components/PayrollHeader";
+import { usePayrollTableColumns } from "./components/PayrollTableColumns";
 
 const PayrollDetailPage = () => {
   const router = useRouter();
@@ -132,49 +37,64 @@ const PayrollDetailPage = () => {
   const [selectedFilter, setSelectedFilter] = useState<string | number | null>(
     null
   );
-  const [payrollData, setPayrollData] = useState<PayrollDetailEntry[]>([]); // Start empty
+  const [payrollData, setPayrollData] = useState<PayrollDetailEntry[]>([]);
   const [searchValue, setSearchValue] = useState<string>("");
   const [page, setPage] = useState<number>(1);
   const [limit, setLimit] = useState<number>(50);
-
   const [activeSearch, setActiveSearch] = useState<string>("");
+  const [tableFilters, setTableFilters] = useState<DataTableFilterMeta>({
+    global: { value: null, matchMode: FilterMatchMode.CONTAINS },
+    empCode: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
+    name: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
+    idNumber: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
+    designation: { value: null, matchMode: FilterMatchMode.EQUALS },
+    remarks: { value: null, matchMode: FilterMatchMode.CONTAINS },
+  });
 
-  // Parse filter parameters from GroupDropdown selection
   const filterParams = parseGroupDropdownFilter(selectedFilter);
 
-  // Reset to first page when filter or search changes
   useEffect(() => {
     setPage(1);
-  }, [selectedFilter, activeSearch]);
+  }, [selectedFilter, activeSearch, tableFilters]);
 
   const { data: globalData } = useGlobalData();
 
   useEffect(() => {
     if (selectedFilter !== null) return;
-    // Auto-select "Forman Construction" payroll section on first load
     const formanSection = globalData.payrollSections?.find((s) =>
       s.nameEn?.toLowerCase().includes("forman")
     );
     if (formanSection) {
       setSelectedFilter(`payroll-${formanSection.id}`);
     }
-  }, [globalData.payrollSections]);
+  }, [globalData.payrollSections, selectedFilter]);
 
   const statusOptions = globalData.payrollStatuses.map((s) => ({
-    label: s.nameEn,
+    label: s.nameEn || "Unknown",
     value: s.id,
   }));
 
-  // Payment Method options
   const paymentMethodOptions = globalData.paymentMethods.map((p) => ({
-    label: p.nameEn,
+    label: p.nameEn || "Unknown",
     value: p.id.toString(),
   }));
 
+  // Map individual column filters to search if multiple are present
+  const getSearchValue = () => {
+    if (activeSearch) return activeSearch;
+    // Simple priority for column-level text filters
+    const nameFilter = (tableFilters.name as any)?.value;
+    const codeFilter = (tableFilters.empCode as any)?.value;
+    const idFilter = (tableFilters.idNumber as any)?.value;
+    const remarksFilter = (tableFilters.remarks as any)?.value;
+    return nameFilter || codeFilter || idFilter || remarksFilter || undefined;
+  };
+
   const { data, isLoading } = useGetPayrollDetails({
     payrollId: isNaN(payrollId) ? 0 : payrollId,
-    search: activeSearch || undefined,
-    designationId: filterParams.designationId,
+    search: getSearchValue(),
+    designationId:
+      (tableFilters.designation as any)?.value || filterParams.designationId,
     payrollSectionId: filterParams.payrollSectionId,
     page,
     limit,
@@ -182,7 +102,6 @@ const PayrollDetailPage = () => {
 
   const total = data?.total ?? 0;
 
-  // Map backend data to table format
   useEffect(() => {
     if (data?.details) {
       setPayrollData(data.details);
@@ -219,15 +138,9 @@ const PayrollDetailPage = () => {
         payrollStatusId: row.payrollStatusId,
       }));
 
-      const result = await savePayrollDetails(
-        { entries },
-        {
-          onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ["payroll-details"] });
-            queryClient.invalidateQueries({ queryKey: ["payroll-summaries"] });
-          },
-        }
-      );
+      const result = await savePayrollDetails({ entries });
+      queryClient.invalidateQueries({ queryKey: ["payroll-details"] });
+      queryClient.invalidateQueries({ queryKey: ["payroll-summaries"] });
       toastService.showSuccess(
         "Saved",
         `${result.saved} payroll entr${result.saved === 1 ? "y" : "ies"} saved successfully`
@@ -268,19 +181,22 @@ const PayrollDetailPage = () => {
     }
   };
 
+  const onFilter = (filters: DataTableFilterMeta) => {
+    setTableFilters(filters);
+  };
+
   const updatePayrollEntry = (
     id: number,
     field: keyof PayrollDetailEntry,
     value: any
   ) => {
-    setPayrollEntry(id, field, value);
+    setPayrollData((prev) =>
+      prev.map((entry) =>
+        entry.id === id ? { ...entry, [field]: value } : entry
+      )
+    );
   };
 
-  /**
-   * When the user edits cardSalary or cashSalary, keep the pair
-   * summing to netSalaryPayable. If the typed value exceeds net,
-   * cap it and zero the other field.
-   */
   const updateSalaryPair = (
     id: number,
     changed: "cardSalary" | "cashSalary",
@@ -299,30 +215,11 @@ const PayrollDetailPage = () => {
     );
   };
 
-  const setPayrollEntry = (
-    id: number,
-    field: keyof PayrollDetailEntry,
-    value: any
-  ) => {
-    setPayrollData((prev) =>
-      prev.map((entry) => {
-        if (entry.id === id) {
-          return { ...entry, [field]: value };
-        }
-        return entry;
-      })
-    );
-  };
-
   const scrollToTop = () => {
-    // PrimeReact DataTable scrollable body class
     const scrollableBody = document.querySelector(".p-datatable-wrapper");
-    if (scrollableBody) {
-      scrollableBody.scrollTo({ top: 0, behavior: "smooth" });
-    }
+    if (scrollableBody) scrollableBody.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  // Scroll to top when filter changes
   useEffect(() => {
     scrollToTop();
   }, [selectedFilter]);
@@ -344,7 +241,6 @@ const PayrollDetailPage = () => {
       if (!row) return;
 
       const updatedRow = fieldName ? { ...row, [fieldName]: value } : row;
-
       const payloadToSave = {
         id: updatedRow.id,
         loanDeduction: updatedRow.loanDeduction,
@@ -365,504 +261,25 @@ const PayrollDetailPage = () => {
     }, 100);
   };
 
-  const columns = useMemo(
-    (): TableColumn<PayrollDetailEntry>[] => [
-      {
-        field: "empCode",
-        header: "Emp. Code",
-        ...tableCommonProps,
-        style: { minWidth: 120, zIndex: 1 },
-        headerStyle: { zIndex: 10 },
-        frozen: true,
-        body: (rowData: PayrollDetailEntry) => (
-          <span className="text-sm font-semibold!">{rowData.empCode}</span>
-        ),
-      },
-      {
-        field: "name",
-        header: "Name",
-        ...tableCommonProps,
-        style: { minWidth: 300, zIndex: 1 },
-        headerStyle: { zIndex: 10 },
-        frozen: true,
-        body: (rowData: PayrollDetailEntry) => (
-          <div className="flex items-start gap-2 min-w-0">
-            <div className="flex flex-1 flex-col gap-1 min-w-0">
-              <span className="text-sm font-medium leading-tight wrap-break-word">
-                {rowData.name}
-              </span>
-            </div>
-            {(rowData.isFixed ||
-              rowData.isDeductable ||
-              rowData.isCardDelivered) && (
-              <div className="flex items-center justify-center gap-x-1 shrink-0">
-                {rowData.isCardDelivered && <Badge text="C" />}
-                {rowData.isFixed && <Badge text="F" />}
-              </div>
-            )}
-          </div>
-        ),
-      },
-      {
-        field: "designation",
-        header: "Designation",
-        ...tableCommonProps,
-        body: (rowData: PayrollDetailEntry) => (
-          <div className="flex justify-center">
-            <span className="text-sm text-center font-medium!">
-              {rowData.designation}
-            </span>
-          </div>
-        ),
-      },
-      {
-        field: "idNumber",
-        header: "ID Number",
-        ...tableCommonProps,
-        style: { minWidth: 150 },
-        body: (rowData: PayrollDetailEntry) => (
-          <span className="text-sm font-medium!">{rowData.idNumber}</span>
-        ),
-      },
-      {
-        field: "workDays",
-        header: "Work Days",
-        ...tableCommonProps,
-        body: (rowData: PayrollDetailEntry) => (
-          <div className="flex justify-center">
-            <span className="text-[15px] font-semibold!">
-              {rowData.workDays.toString()}
-            </span>
-          </div>
-        ),
-      },
-      {
-        field: "overTime",
-        header: "Over Time",
-        ...tableCommonProps,
-        body: (rowData: PayrollDetailEntry) => (
-          <div className="flex justify-center">
-            <span className="text-[15px] font-semibold!">
-              {rowData.overTime}
-            </span>
-          </div>
-        ),
-      },
-      {
-        field: "totalHours",
-        header: "Total Hours",
-        ...tableCommonProps,
-        body: (rowData: PayrollDetailEntry) => (
-          <div className="flex justify-center">
-            <span className="text-[15px] font-semibold!">
-              {rowData.totalHours}
-            </span>
-          </div>
-        ),
-      },
-      {
-        field: "hourlyRate",
-        header: "Hourly Rate",
-        ...tableCommonProps,
-        body: (rowData: PayrollDetailEntry) => (
-          <div className="flex justify-center">
-            <span className="text-[15px] font-semibold!">
-              {formatNum(rowData.hourlyRate, 2).toString()}
-            </span>
-          </div>
-        ),
-      },
-      {
-        field: "breakfastAllowance",
-        header: "Brkfst. Allow.",
-        ...tableCommonProps,
-        body: (rowData: PayrollDetailEntry) => (
-          <div className="flex justify-center">
-            <span className="text-[15px] font-semibold!">
-              {formatNum(rowData.breakfastAllowance ?? 0)}
-            </span>
-          </div>
-        ),
-      },
-      {
-        field: "otherAllowances",
-        header: "Other Allow.",
-        ...tableCommonProps,
-        body: (rowData: PayrollDetailEntry) => (
-          <div className="flex justify-center">
-            <span className="text-[15px] font-semibold!">
-              {formatNum(rowData.otherAllowances ?? 0)}
-            </span>
-          </div>
-        ),
-      },
-      {
-        field: "totalAllowances",
-        header: "Total Allow.",
-        ...tableCommonProps,
-        body: (rowData: PayrollDetailEntry) => (
-          <div className="flex justify-center">
-            <span className="text-[15px] font-semibold!">
-              {formatNum(rowData.totalAllowances ?? 0)}
-            </span>
-          </div>
-        ),
-      },
-      {
-        field: "totalSalary",
-        header: "Total Salary",
-        ...tableCommonProps,
-        body: (rowData: PayrollDetailEntry) => (
-          <div className="flex justify-center">
-            <span className="text-[15px] font-semibold!">
-              {formatNum(rowData.totalSalary)}
-            </span>
-          </div>
-        ),
-      },
-      {
-        field: "previousAdvance",
-        header: "Prev. Adv.",
-        ...tableCommonProps,
-        body: (rowData: PayrollDetailEntry) => (
-          <div className="flex justify-center">
-            <span className="text-[15px] font-semibold!">
-              {formatNum(rowData.previousAdvance)}
-            </span>
-          </div>
-        ),
-      },
-      {
-        field: "currentAdvance",
-        header: "Curr. Adv.",
-        ...tableCommonProps,
-        body: (rowData: PayrollDetailEntry) => (
-          <div className="flex justify-center">
-            <span className="text-[15px] font-semibold!">
-              {formatNum(rowData.currentAdvance)}
-            </span>
-          </div>
-        ),
-      },
-      {
-        field: "loanDeduction",
-        header: "Loan Ded.",
-        ...tableCommonProps,
-        body: (rowData: PayrollDetailEntry) => (
-          <div className="flex justify-center">
-            <NumberInput
-              useGrouping={false}
-              disabled={rowData.payrollSummaryStatusId === 3}
-              value={rowData.loanDeduction}
-              onValueChange={(e) =>
-                updatePayrollEntry(rowData.id, "loanDeduction", e.value || 0)
-              }
-              className="timesheet-number-input payroll-input"
-              min={0}
-              showButtons={false}
-              // onKeyDown={(e: any) => {
-              //   if (e.key === "Enter") {
-              //     const val =
-              //       Number(e.currentTarget.value.replace(/,/g, "")) || 0;
-              //     handleSaveSingleRowOnEnter(rowData.id, "loanDeduction", val);
-              //     updatePayrollEntry(rowData.id, "loanDeduction", val);
-              //   }
-              // }}
-            />
-          </div>
-        ),
-      },
-      {
-        field: "netLoan",
-        header: "Net Loan",
-        ...tableCommonProps,
-        body: (rowData: PayrollDetailEntry) => (
-          <div className="flex justify-center">
-            <span className="text-[15px] font-semibold! text-primary!">
-              {formatNum(calculateNetLoan(rowData))}
-            </span>
-          </div>
-        ),
-      },
-      {
-        field: "previousChallan",
-        header: "Prev. Traff.",
-        ...tableCommonProps,
-        body: (rowData: PayrollDetailEntry) => (
-          <div className="flex justify-center">
-            <span className="text-[15px] font-semibold!">
-              {formatNum(rowData.previousChallan)}
-            </span>
-          </div>
-        ),
-      },
-      {
-        field: "currentChallan",
-        header: "Curr. Traff.",
-        ...tableCommonProps,
-        body: (rowData: PayrollDetailEntry) => (
-          <div className="flex justify-center">
-            <span className="text-[15px] font-semibold!">
-              {formatNum(rowData.currentChallan)}
-            </span>
-          </div>
-        ),
-      },
-      {
-        field: "challanDeduction",
-        header: "Traff. Ded.",
-        ...tableCommonProps,
-        body: (rowData: PayrollDetailEntry) => (
-          <div className="flex justify-center">
-            <NumberInput
-              useGrouping={false}
-              disabled={rowData.payrollSummaryStatusId === 3}
-              value={rowData.challanDeduction}
-              onValueChange={(e) =>
-                updatePayrollEntry(rowData.id, "challanDeduction", e.value || 0)
-              }
-              className="timesheet-number-input payroll-input"
-              min={0}
-              showButtons={false}
-              // onKeyDown={(e: any) => {
-              //   if (e.key === "Enter") {
-              //     const val =
-              //       Number(e.currentTarget.value.replace(/,/g, "")) || 0;
-              //     handleSaveSingleRowOnEnter(
-              //       rowData.id,
-              //       "challanDeduction",
-              //       val
-              //     );
-              //     updatePayrollEntry(rowData.id, "challanDeduction", val);
-              //   }
-              // }}
-            />
-          </div>
-        ),
-      },
-      {
-        field: "netChallan",
-        header: "Net Traff.",
-        ...tableCommonProps,
-        body: (rowData: PayrollDetailEntry) => (
-          <div className="flex justify-center">
-            <span className="text-[15px] font-semibold! text-primary!">
-              {formatNum(calculateNetTrafficChallan(rowData))}
-            </span>
-          </div>
-        ),
-      },
-      {
-        field: "netSalaryPayable",
-        header: "Net Salary",
-        ...tableCommonProps,
-        body: (rowData: PayrollDetailEntry) => (
-          <div className="flex justify-center">
-            <span className="text-[15px] font-semibold! text-primary!">
-              {formatNum(calculateNetSalaryPayable(rowData))}
-            </span>
-          </div>
-        ),
-      },
-      {
-        field: "cardSalary",
-        header: "Card Salary",
-        ...tableCommonProps,
-        body: (rowData: PayrollDetailEntry) => (
-          <div className="flex justify-center">
-            <NumberInput
-              useGrouping={false}
-              disabled={rowData.payrollSummaryStatusId === 3}
-              value={rowData.cardSalary}
-              onValueChange={(e) =>
-                updateSalaryPair(rowData.id, "cardSalary", e.value ?? 0)
-              }
-              className="timesheet-number-input payroll-input"
-              min={0}
-              showButtons={false}
-            />
-          </div>
-        ),
-      },
-      {
-        field: "cashSalary",
-        header: "Cash Salary",
-        ...tableCommonProps,
-        body: (rowData: PayrollDetailEntry) => (
-          <div className="flex justify-center">
-            <NumberInput
-              useGrouping={false}
-              disabled={rowData.payrollSummaryStatusId === 3}
-              value={rowData.cashSalary}
-              onValueChange={(e) =>
-                updateSalaryPair(rowData.id, "cashSalary", e.value ?? 0)
-              }
-              className="timesheet-number-input payroll-input"
-              min={0}
-              showButtons={false}
-            />
-          </div>
-        ),
-      },
-      {
-        field: "remarks",
-        header: "Remarks",
-        ...tableCommonProps,
-        style: { minWidth: 200 },
-        body: (rowData: PayrollDetailEntry) => (
-          <Input
-            small
-            disabled={rowData.payrollSummaryStatusId === 3}
-            placeholder="Add remarks"
-            value={rowData.remarks}
-            onChange={(e) =>
-              updatePayrollEntry(rowData.id, "remarks", e.target.value)
-            }
-            className="w-full h-10! payroll-input"
-            onKeyDown={(e: any) => {
-              if (e.key === "Enter") {
-                const val = e.currentTarget.value;
-                handleSaveSingleRowOnEnter(rowData.id, "remarks", val);
-                updatePayrollEntry(rowData.id, "remarks", val);
-              }
-            }}
-          />
-        ),
-      },
-      {
-        field: "paymentMethodId",
-        header: "Salary Method",
-        ...tableCommonProps,
-        style: { minWidth: 200, width: 200 },
-        body: (rowData: PayrollDetailEntry) => (
-          <Dropdown
-            small
-            filter
-            options={paymentMethodOptions}
-            disabled={rowData.payrollSummaryStatusId === 3}
-            className="w-[200px]! h-10!"
-            placeholder="Choose Method"
-            value={rowData.paymentMethodId?.toString()}
-            onChange={(e) =>
-              updatePayrollEntry(
-                rowData.id,
-                "paymentMethodId",
-                e.value ? Number(e.value) : null
-              )
-            }
-          />
-        ),
-      },
-      {
-        field: "payrollStatusId",
-        header: "Status",
-        ...tableCommonProps,
-        style: { minWidth: 150, width: 150 },
-        body: (rowData: PayrollDetailEntry) => (
-          <Dropdown
-            small
-            options={statusOptions.slice(0, 2)}
-            disabled={rowData.payrollSummaryStatusId === 3}
-            className="w-[150px]! h-10!"
-            placeholder="Pending"
-            value={rowData.payrollStatusId}
-            onChange={(e) =>
-              updatePayrollEntry(rowData.id, "payrollStatusId", e.value)
-            }
-          />
-        ),
-      },
-      {
-        field: "id",
-        header: "Actions",
-        ...tableCommonProps,
-        sortable: false,
-        filterable: false,
-        style: { minWidth: 80, width: 80, textAlign: "center" },
-        body: (rowData: PayrollDetailEntry) => (
-          <ActionButtons
-            rowData={rowData}
-            isSavingAll={isSavingAll}
-            onRefreshComplete={handleRowRefreshComplete}
-          />
-        ),
-      },
-    ],
-    // Rebuilt only when data that drives disabled/options states changes
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [
-      payrollData,
-      isSavingAll,
-      isSavingRow,
-      isLoading,
-      statusOptions,
-      paymentMethodOptions,
-    ]
-  );
+  const columns = usePayrollTableColumns({
+    isLoading,
+    payrollData,
+    isSavingAll,
+    isSavingRow,
+    statusOptions,
+    updateSalaryPair,
+    updatePayrollEntry,
+    paymentMethodOptions,
+    handleRowRefreshComplete,
+    handleSaveSingleRowOnEnter,
+  });
 
-  const renderHeader = () => {
-    return (
-      <div className="flex flex-col lg:flex-row justify-between bg-theme-primary-light items-center gap-3 flex-1 w-full">
-        <div className="flex flex-1 items-center gap-3 w-full">
-          <div className="w-full lg:w-auto">
-            <GroupDropdown
-              hideAllOption
-              value={selectedFilter}
-              onChange={setSelectedFilter}
-              className="w-full lg:w-64 h-10.5!"
-            />
-          </div>
-          <div className="w-full lg:w-auto hidden lg:block">
-            <Button
-              size="small"
-              className="w-full xl:w-32 2xl:w-36 h-10!"
-              label="Refresh"
-              {...(isRefreshingAll
-                ? { loading: true }
-                : { icon: "pi pi-refresh" })}
-              disabled={isLoading || isSavingAll || isRefreshingAll}
-              onClick={handleRefreshAll}
-            />
-          </div>
-        </div>
-        <div className="flex items-center gap-3 w-full lg:w-auto">
-          <div className="block lg:hidden w-full lg:w-auto">
-            <Button
-              size="small"
-              className="w-full lg:w-auto h-10!"
-              label="Refresh"
-              {...(isRefreshingAll
-                ? { loading: true }
-                : { icon: "pi pi-refresh" })}
-              disabled={isLoading || isSavingAll || isRefreshingAll}
-              onClick={handleRefreshAll}
-            />
-          </div>
-          <div className="w-full lg:w-auto">
-            <Button
-              size="small"
-              label="Save"
-              onClick={handleSave}
-              loading={isSavingAll}
-              disabled={isLoading || isSavingAll || isRefreshingAll}
-              className="w-full bg-primary-light! text-primary! border-primary-light! lg:w-28 h-10!"
-            />
-          </div>
-        </div>
-      </div>
-    );
-  };
-
-  // Fetch payroll date info
   const { data: dateData } = useGetPayrollDate({
     id: isNaN(payrollId) ? 0 : payrollId,
   });
 
   const payrollTitle = dateData
-    ? `PAYROLL DETAILS OF ${formatPayrollPeriod(
-        dateData.payrollMonth,
-        dateData.payrollYear
-      )}`
+    ? `PAYROLL DETAILS OF ${formatPayrollPeriod(dateData.payrollMonth, dateData.payrollYear)}`
     : `PAYROLL DETAILS #${periodParam}`;
 
   return (
@@ -881,16 +298,22 @@ const PayrollDetailPage = () => {
               placeholder="Search (Press Enter)"
               onChange={(e) => setSearchValue(e.target.value)}
               onKeyDown={(e: any) => {
-                if (e.key === "Enter") {
-                  setActiveSearch(searchValue);
-                }
+                if (e.key === "Enter") setActiveSearch(searchValue);
               }}
             />
           </div>
         )}
       />
       <div className="flex flex-1 flex-col gap-4 px-6 py-6 bg-theme-primary-light">
-        {renderHeader()}
+        <PayrollHeader
+          isLoading={isLoading}
+          handleSave={handleSave}
+          isSavingAll={isSavingAll}
+          selectedFilter={selectedFilter}
+          isRefreshingAll={isRefreshingAll}
+          handleRefreshAll={handleRefreshAll}
+          setSelectedFilter={setSelectedFilter}
+        />
         <div className="bg-white h-full rounded-xl overflow-hidden">
           <Table
             lazy
@@ -906,16 +329,18 @@ const PayrollDetailPage = () => {
             totalRecords={total}
             first={(page - 1) * limit}
             globalSearch={false}
+            filters={tableFilters}
             emptyMessage={
               !filterParams.designationId && !filterParams.payrollSectionId
                 ? "No Payroll Section or Designation is Selected"
                 : "No Payroll Data Found"
             }
             scrollable
-            scrollHeight="65vh"
             stripedRows
-            loading={isLoading || isRefreshingAll || isSavingAll || isSavingRow}
             onPage={onPage}
+            scrollHeight="65vh"
+            onFilter={onFilter}
+            loading={isLoading || isRefreshingAll || isSavingAll || isSavingRow}
           />
         </div>
       </div>

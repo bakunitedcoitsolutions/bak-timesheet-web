@@ -16,8 +16,9 @@ import { IconField } from "primereact/iconfield";
 import { InputIcon } from "primereact/inputicon";
 import { FilterMatchMode } from "primereact/api";
 import { Column, ColumnProps } from "primereact/column";
-import { smallTextFilterTemplate } from "./filter-templates";
+
 import { printTable } from "@/utils/helpers/print-utils";
+import { smallTextFilterTemplate } from "./filter-templates";
 
 export interface CustomHeaderProps {
   value?: string;
@@ -97,6 +98,7 @@ export interface CustomTableProps<
     exportPdf?: () => void;
     print?: () => void;
   }) => ReactNode;
+  filters?: DataTableFilterMeta;
   onFilter?: (filters: DataTableFilterMeta) => void;
   exportable?: boolean;
   extraSmall?: boolean;
@@ -126,6 +128,7 @@ const CustomTable = forwardRef<TableRef, CustomTableProps<any>>(
       selection,
       tableClassName,
       customHeader,
+      filters: propsFilters,
       onFilter,
       exportable = false,
       exportColumns,
@@ -141,6 +144,9 @@ const CustomTable = forwardRef<TableRef, CustomTableProps<any>>(
     const [first, setFirst] = useState(0);
     const [rows, setRows] = useState(rowsPerPage);
     const dt = useRef<DataTable<any>>(null);
+
+    // If filters are provided from parent, don't reset them in useEffect
+    const isControlled = propsFilters !== undefined;
     // Reset pagination when data changes
     React.useEffect(() => {
       setFirst(0);
@@ -148,6 +154,7 @@ const CustomTable = forwardRef<TableRef, CustomTableProps<any>>(
 
     // Initialize filters based on columns
     React.useEffect(() => {
+      if (isControlled) return;
       const initialFilters: DataTableFilterMeta = {
         global: { value: null, matchMode: FilterMatchMode.CONTAINS },
       };
@@ -404,6 +411,9 @@ const CustomTable = forwardRef<TableRef, CustomTableProps<any>>(
         });
         setFilters(initialFilters);
         setGlobalFilterValue("");
+        if (onFilter) {
+          onFilter(initialFilters);
+        }
       },
     }));
 
@@ -417,9 +427,11 @@ const CustomTable = forwardRef<TableRef, CustomTableProps<any>>(
           rows={rows}
           rowsPerPageOptions={rowsPerPageOptions}
           dataKey={dataKey}
-          filters={hasFilterableColumns ? filters : undefined}
+          filters={hasFilterableColumns ? propsFilters || filters : undefined}
           onFilter={(e) => {
-            setFilters(e.filters);
+            if (!isControlled) {
+              setFilters(e.filters);
+            }
             if (onFilter) {
               onFilter(e.filters);
             }

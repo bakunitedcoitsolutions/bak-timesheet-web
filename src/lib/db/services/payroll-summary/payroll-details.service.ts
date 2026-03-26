@@ -57,6 +57,7 @@ export const getPayrollDetails = async (
     const orConditions: any[] = [
       { employee: { nameEn: { contains: search, mode: "insensitive" } } },
       { employee: { nameAr: { contains: search, mode: "insensitive" } } },
+      { employee: { idCardNo: { contains: search, mode: "insensitive" } } },
       { remarks: { contains: search, mode: "insensitive" } },
     ];
 
