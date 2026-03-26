@@ -183,12 +183,15 @@ function parseDataRows(
     }
 
     try {
+      const date = parseCellValue(row[dateIndex], "date");
+      const employeeCode = parseCellValue(
+        row[employeeCodeIndex],
+        "employeeCode"
+      ) as number;
+
       const entry: BulkUploadTimesheetRow = {
-        date: parseCellValue(row[dateIndex], "date"),
-        employeeCode: parseCellValue(
-          row[employeeCodeIndex],
-          "employeeCode"
-        ) as number,
+        date,
+        employeeCode,
       };
 
       if (project1IdIndex !== -1 && row[project1IdIndex] != null)

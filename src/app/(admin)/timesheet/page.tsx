@@ -14,7 +14,6 @@ import {
   NumberInput,
   TitleHeader,
   TableColumn,
-  ExportOptions,
   GroupDropdown,
   BulkUploadDialog,
   CustomHeaderProps,
@@ -607,7 +606,7 @@ const TimesheetPage = () => {
             "Parse Warnings",
             `${parseResult.errors.length} row(s) had errors. Check console for details.`
           );
-          console.error("Parse errors:", parseResult.errors);
+          console.log("Parse errors:", parseResult.errors);
         }
 
         if (parseResult.data.length === 0) {
@@ -653,7 +652,7 @@ const TimesheetPage = () => {
               }
             },
             onError: (error: any) => {
-              console.error("bulkUploadTimesheets error", error);
+              console.log("bulkUploadTimesheets error", error);
               const errorMessage = getErrorMessage(
                 error,
                 "Failed to upload timesheets"

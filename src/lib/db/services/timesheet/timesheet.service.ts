@@ -349,6 +349,26 @@ export const bulkUploadTimesheets = async (
   });
   const employeeByCode = new Map(employees.map((e) => [e.employeeCode, e]));
 
+  // Pre-fetch all projects by unique IDs in one query
+  const uniqueProjectIds = [
+    ...new Set(
+      data.entries.flatMap((e) => [e.project1Id, e.project2Id]).filter(Boolean)
+    ),
+  ] as number[];
+
+  const projects = await withRetry(() =>
+    prisma.project.findMany({
+      where: { id: { in: uniqueProjectIds } },
+      select: { id: true, isActive: true, nameEn: true },
+    })
+  );
+
+  console.log("Service: Projects fetched", {
+    found: projects.length,
+    requested: uniqueProjectIds.length,
+  });
+  const projectById = new Map(projects.map((p) => [p.id, p]));
+
   for (let i = 0; i < data.entries.length; i++) {
     const row = data.entries[i];
     const rowNumber = i + 1;
@@ -363,6 +383,7 @@ export const bulkUploadTimesheets = async (
       );
 
       const employee = employeeByCode.get(row.employeeCode);
+      let projectValidationError: string | null = null;
 
       if (!employee) {
         console.warn(
@@ -386,6 +407,59 @@ export const bulkUploadTimesheets = async (
       console.log(
         `Service: Row ${rowNumber}: DateNormalized ${dateNormalized}, Employee found: ID ${employee.id} for ${row.employeeCode}`
       );
+
+      // Validate Projects
+      const projectsToValidate = [];
+      
+      // 1. Project 1 ID is mandatory
+      if (!row.project1Id) {
+        projectValidationError = "Project 1 ID is required and cannot be empty";
+      } else {
+        projectsToValidate.push({ id: row.project1Id, name: "Project 1" });
+      }
+
+      // 2. Project 2 ID is mandatory if Project 2 hours or OT is provided
+      if (!projectValidationError) {
+        const p2Hours = row.project2Hours ?? 0;
+        const p2OT = row.project2Overtime ?? 0;
+        if ((p2Hours > 0 || p2OT > 0) && !row.project2Id) {
+          projectValidationError = "Project 2 ID is required when Project 2 Hours or Overtime is provided";
+        } else if (row.project2Id) {
+          projectsToValidate.push({ id: row.project2Id, name: "Project 2" });
+        }
+      }
+
+      if (!projectValidationError) {
+        for (const p of projectsToValidate) {
+          const project = projectById.get(p.id!);
+          if (!project) {
+            projectValidationError = `${p.name} ID ${p.id} does not exist`;
+            break;
+          }
+          if (!project.isActive) {
+            projectValidationError = `${p.name} ID ${p.id} (${project.nameEn}) is inactive`;
+            break;
+          }
+        }
+      }
+
+      if (projectValidationError) {
+        console.warn(`Service: Row ${rowNumber}: ${projectValidationError}`);
+        result.failed++;
+        result.details.push({
+          row: rowNumber,
+          employeeCode: row.employeeCode,
+          date: dateNormalized,
+          status: "failed",
+          message: projectValidationError,
+        });
+        result.errors.push({
+          row: rowNumber,
+          data: row,
+          error: projectValidationError,
+        });
+        continue;
+      }
 
       const existing = await withRetry(() =>
         prisma.timesheet.findFirst({
