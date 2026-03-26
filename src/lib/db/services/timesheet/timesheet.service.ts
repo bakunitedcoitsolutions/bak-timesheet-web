@@ -339,7 +339,12 @@ export const bulkUploadTimesheets = async (
   const employees = await withRetry(() =>
     prisma.employee.findMany({
       where: { employeeCode: { in: uniqueCodes } },
-      select: { id: true, employeeCode: true },
+      select: {
+        id: true,
+        employeeCode: true,
+        statusId: true,
+        status: { select: { nameEn: true } },
+      },
     })
   );
 
@@ -401,6 +406,27 @@ export const bulkUploadTimesheets = async (
           row: rowNumber,
           data: row,
           error: `Employee with code ${row.employeeCode} not found`,
+        });
+        continue;
+      }
+
+      // Validate Employee Status
+      if (employee.statusId !== 1) {
+        const statusName = (employee as any).status?.nameEn ?? "Unknown";
+        const msg = `Employee is not active (Status: ${statusName})`;
+        console.warn(`Service: Row ${rowNumber}: ${msg}`);
+        result.failed++;
+        result.details.push({
+          row: rowNumber,
+          employeeCode: row.employeeCode,
+          date: dateNormalized,
+          status: "failed",
+          message: msg,
+        });
+        result.errors.push({
+          row: rowNumber,
+          data: row,
+          error: msg,
         });
         continue;
       }
