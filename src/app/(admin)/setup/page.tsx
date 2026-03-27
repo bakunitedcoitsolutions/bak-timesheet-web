@@ -68,6 +68,13 @@ const setupOptions: SetupOption[] = [
     route: "/setup/user-roles",
   },
   {
+    id: "payment-methods",
+    title: "Payment Methods",
+    description: "Manage payment methods",
+    icon: "fa-light fa-credit-card",
+    route: "/setup/payment-methods",
+  },
+  {
     id: "allowance-not-available",
     title: "Allowance Not Allowed",
     description: "Manage allowance not allowed records",

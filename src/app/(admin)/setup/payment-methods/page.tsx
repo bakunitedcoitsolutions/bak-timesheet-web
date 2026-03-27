@@ -1,0 +1,325 @@
+"use client";
+import { useRouter } from "next/navigation";
+import { ProgressSpinner } from "primereact/progressspinner";
+import { useRef, useState, useEffect, useMemo, useCallback } from "react";
+
+import {
+  Input,
+  Table,
+  Button,
+  TableRef,
+  TypeBadge,
+  TableColumn,
+  TableActions,
+  ExportOptions,
+} from "@/components";
+import {
+  getErrorMessage,
+  createSortHandler,
+  toPrimeReactSortOrder,
+} from "@/utils/helpers";
+import { ListedPaymentMethod } from "@/lib/db/services/payment-method/payment-method.dto";
+import { useDebounce } from "@/hooks";
+import { toastService } from "@/lib/toast";
+import { showConfirmDialog } from "@/components/common/confirm-dialog";
+import {
+  useDeletePaymentMethod,
+  useGetPaymentMethods,
+} from "@/lib/db/services/payment-method/requests";
+
+// Constants
+const SORTABLE_FIELDS = {
+  nameEn: "nameEn",
+  nameAr: "nameAr",
+  isActive: "isActive",
+  createdAt: "createdAt",
+} as const;
+
+const commonColumnProps = {
+  sortable: true,
+  filterable: true,
+  smallFilter: true,
+  showFilterMenu: false,
+  showClearButton: false,
+  style: { minWidth: 200 },
+};
+
+type SortableField = keyof typeof SORTABLE_FIELDS;
+
+const columns = (
+  handleEdit: (paymentMethod: ListedPaymentMethod) => void,
+  handleDelete: (paymentMethod: ListedPaymentMethod) => void
+): TableColumn<ListedPaymentMethod>[] => [
+  {
+    field: "id",
+    header: "#",
+    sortable: false,
+    filterable: false,
+    align: "center",
+    style: { minWidth: "70px" },
+    headerStyle: { minWidth: "70px" },
+    body: (rowData: ListedPaymentMethod) => (
+      <div className={"flex items-center justify-center gap-1.5 w-[40px]"}>
+        <span className="text-sm font-medium">{rowData?.id}</span>
+      </div>
+    ),
+  },
+  {
+    field: "nameEn",
+    header: "Name",
+    ...commonColumnProps,
+    style: { minWidth: "250px" },
+    body: (rowData: ListedPaymentMethod) => (
+      <span className="text-sm">{rowData.nameEn}</span>
+    ),
+  },
+  {
+    field: "nameAr",
+    header: "Arabic Name",
+    ...commonColumnProps,
+    style: { minWidth: "200px" },
+    body: (rowData: ListedPaymentMethod) => (
+      <div className="w-full flex flex-1 justify-end">
+        <span className="text-xl! text-right font-arabic">
+          {rowData.nameAr || ""}
+        </span>
+      </div>
+    ),
+  },
+  {
+    field: "isActive",
+    header: "Status",
+    sortable: true,
+    filterable: false,
+    style: { minWidth: 130 },
+    align: "center",
+    body: (rowData: ListedPaymentMethod) => (
+      <TypeBadge
+        text={rowData.isActive ? "Active" : "In-Active"}
+        variant={rowData.isActive ? "success" : "danger"}
+      />
+    ),
+  },
+  {
+    field: "actions",
+    header: "Actions",
+    sortable: false,
+    filterable: false,
+    align: "center",
+    style: { minWidth: 150 },
+    body: (rowData: ListedPaymentMethod) => (
+      <TableActions
+        rowData={rowData}
+        onEdit={handleEdit}
+        onDelete={handleDelete}
+      />
+    ),
+  },
+];
+
+const PaymentMethodsPage = () => {
+  const router = useRouter();
+  const [searchValue, setSearchValue] = useState<string>("");
+  const [page, setPage] = useState<number>(1);
+  const [limit, setLimit] = useState<number>(10);
+  const [sortBy, setSortBy] = useState<SortableField>("createdAt");
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
+  const tableRef = useRef<TableRef>(null);
+  const { mutateAsync: deletePaymentMethod } = useDeletePaymentMethod();
+
+  // Debounce search input
+  const debouncedSearch = useDebounce(searchValue, 500);
+
+  // Reset to first page when search value changes
+  useEffect(() => {
+    if (searchValue !== debouncedSearch && page !== 1) {
+      setPage(1);
+    }
+  }, [searchValue, debouncedSearch, page]);
+
+  const { data: paymentMethodsResponse, isLoading } = useGetPaymentMethods({
+    page,
+    limit,
+    sortBy,
+    sortOrder,
+    search: debouncedSearch || undefined,
+  });
+
+  const paymentMethods = paymentMethodsResponse?.paymentMethods ?? [];
+  const {
+    total,
+    page: currentPage,
+    limit: currentLimit,
+  } = paymentMethodsResponse?.pagination ?? {
+    page: 1,
+    limit: 10,
+    total: 0,
+    totalPages: 0,
+  };
+
+  // Memoized handlers
+  const handleEdit = useCallback(
+    (paymentMethod: ListedPaymentMethod) => {
+      router.push(`/setup/payment-methods/${paymentMethod.id}`);
+    },
+    [router]
+  );
+
+  const handleDelete = useCallback(
+    (paymentMethod: ListedPaymentMethod) => {
+      showConfirmDialog({
+        icon: "pi pi-trash",
+        title: "Delete Payment Method",
+        message: `Are you sure you want to delete "${paymentMethod.nameEn}"?`,
+        onAccept: async () => {
+          await deletePaymentMethod(
+            { id: paymentMethod.id },
+            {
+              onSuccess: () => {
+                toastService.showInfo(
+                  "Done",
+                  "Payment Method deleted successfully"
+                );
+              },
+              onError: (error: any) => {
+                const errorMessage = getErrorMessage(
+                  error,
+                  "Failed to delete payment method"
+                );
+                toastService.showError("Error", errorMessage);
+              },
+            }
+          );
+        },
+      });
+    },
+    [deletePaymentMethod]
+  );
+
+  const exportCSV = useCallback(() => {
+    tableRef.current?.exportCSV();
+  }, []);
+
+  const exportExcel = useCallback(() => {
+    tableRef.current?.exportExcel();
+  }, []);
+
+  const handlePageChange = useCallback(
+    (e: { page?: number; rows?: number }) => {
+      setPage((e.page ?? 0) + 1);
+      setLimit(e.rows ?? currentLimit);
+    },
+    [currentLimit]
+  );
+
+  const handlePageReset = useCallback(() => {
+    setPage(1);
+  }, []);
+
+  const handleSortByChange = useCallback((field: SortableField | undefined) => {
+    setSortBy(field ?? "createdAt");
+  }, []);
+
+  const handleSortOrderChange = useCallback(
+    (order: "asc" | "desc" | undefined) => {
+      setSortOrder(order ?? "desc");
+    },
+    []
+  );
+
+  const sortHandler = useMemo(
+    () =>
+      createSortHandler({
+        fieldMap: SORTABLE_FIELDS,
+        currentPage: page,
+        onSortByChange: handleSortByChange,
+        onSortOrderChange: handleSortOrderChange,
+        onPageReset: handlePageReset,
+      }),
+    [page, handlePageReset, handleSortByChange, handleSortOrderChange]
+  );
+
+  const tableColumns = useMemo(
+    () => columns(handleEdit, handleDelete),
+    [handleEdit, handleDelete]
+  );
+
+  const renderHeader = useCallback(() => {
+    return (
+      <div className="flex flex-col md:flex-row justify-between items-center gap-3 flex-1 w-full">
+        <div className="w-full md:w-auto">
+          <Input
+            small
+            className="w-full"
+            value={searchValue}
+            icon="pi pi-search"
+            iconPosition="left"
+            onChange={(e) => {
+              setSearchValue(e.target.value);
+            }}
+            placeholder="Search"
+          />
+        </div>
+        <div className="flex items-center gap-3 w-full md:w-auto justify-end">
+          <div>
+            <ExportOptions exportCSV={exportCSV} exportExcel={exportExcel} />
+          </div>
+        </div>
+      </div>
+    );
+  }, [searchValue, exportCSV, exportExcel]);
+
+  return (
+    <div className="flex h-full flex-col gap-6 px-6 py-6">
+      <div className="flex flex-col md:flex-row justify-between items-center gap-3 shrink-0">
+        <div className="w-full md:w-auto flex flex-1 flex-col gap-1">
+          <h1 className="text-2xl font-semibold text-gray-900">
+            Payment Method Management
+          </h1>
+          <p className="text-sm text-gray-600 mt-1">
+            View, manage payment method records.
+          </p>
+        </div>
+        <div className="w-full md:w-auto">
+          <Button
+            size="small"
+            variant="solid"
+            icon="pi pi-plus"
+            label="Add Payment Method"
+            onClick={() => router.push("/setup/payment-methods/new")}
+          />
+        </div>
+      </div>
+      <div className="bg-white flex-1 rounded-xl overflow-hidden min-h-0">
+        <Table
+          dataKey="id"
+          removableSort
+          data={paymentMethods}
+          ref={tableRef}
+          loading={isLoading}
+          loadingIcon={
+            <ProgressSpinner style={{ width: "50px", height: "50px" }} />
+          }
+          customHeader={renderHeader}
+          columns={tableColumns}
+          sortMode="single"
+          onPage={handlePageChange}
+          onSort={sortHandler}
+          sortField={sortBy}
+          lazy={true}
+          sortOrder={toPrimeReactSortOrder(sortOrder) as any}
+          pagination={true}
+          rowsPerPageOptions={[10, 25, 50]}
+          rows={currentLimit}
+          first={(currentPage - 1) * currentLimit}
+          totalRecords={total}
+          globalSearch={true}
+          scrollable
+          scrollHeight="65vh"
+        />
+      </div>
+    </div>
+  );
+};
+
+export default PaymentMethodsPage;
