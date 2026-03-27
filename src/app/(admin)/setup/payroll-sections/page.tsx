@@ -33,6 +33,7 @@ const SORTABLE_FIELDS = {
   nameAr: "nameAr",
   isActive: "isActive",
   displayOrderKey: "displayOrderKey",
+  branchId: "branchId",
 } as const;
 
 const commonColumnProps = {
@@ -84,6 +85,17 @@ const columns = (
           {rowData.nameAr || ""}
         </span>
       </div>
+    ),
+  },
+  {
+    field: "branchId",
+    header: "Branch",
+    ...commonColumnProps,
+    style: { minWidth: "150px" },
+    body: (rowData: ListedPayrollSection) => (
+      <span className="text-sm">
+        {rowData.branch?.nameEn ?? "-"}
+      </span>
     ),
   },
   {

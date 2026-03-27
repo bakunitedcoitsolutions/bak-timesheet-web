@@ -22,6 +22,14 @@ const payrollSectionSelect = {
   nameEn: true,
   nameAr: true,
   displayOrderKey: true,
+  branchId: true,
+  branch: {
+    select: {
+      id: true,
+      nameEn: true,
+      nameAr: true,
+    },
+  },
   isActive: true,
   createdAt: true,
   updatedAt: true,
@@ -93,6 +101,7 @@ export const createPayrollSection = async (data: CreatePayrollSectionData) => {
         nameEn: data.nameEn,
         nameAr: data.nameAr,
         displayOrderKey: finalDisplayOrderKey,
+        branchId: data.branchId ?? null,
         isActive: data.isActive ?? true,
       },
       select: payrollSectionSelect,
@@ -254,6 +263,7 @@ export const updatePayrollSection = async (
     if (data.nameAr !== undefined) updateData.nameAr = data.nameAr;
     if (data.displayOrderKey !== undefined)
       updateData.displayOrderKey = data.displayOrderKey ?? null;
+    if (data.branchId !== undefined) updateData.branchId = data.branchId ?? null;
     if (data.isActive !== undefined) updateData.isActive = data.isActive;
 
     const updatedPayrollSection = await tx.payrollSection.update({
@@ -370,6 +380,7 @@ export const listPayrollSections = async (
       "nameAr",
       "isActive",
       "displayOrderKey",
+      "branchId",
     ] as const;
 
     // Only allow sorting by the specified valid fields

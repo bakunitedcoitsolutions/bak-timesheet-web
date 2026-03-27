@@ -102,6 +102,7 @@ model Branch {
   projects         Project[]
   payrollSummaries PayrollSummary[]
   payrollDetails   PayrollDetails[]
+  payrollSections  PayrollSection[]
 }
 
 model City {
@@ -324,10 +325,14 @@ model PayrollSection {
   id              Int      @id @default(autoincrement())
   nameEn          String
   nameAr          String?
+  branchId        Int?     @default(1)
   displayOrderKey Int?
   isActive        Boolean  @default(true)
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
+
+  // Relations: Project → Other Tables (Project has foreign keys)
+  branch Branch? @relation(fields: [branchId], references: [id])
 
   // Relations: Other Tables → PayrollSection (Other tables have foreign keys pointing to PayrollSection)
   employees      Employee[]

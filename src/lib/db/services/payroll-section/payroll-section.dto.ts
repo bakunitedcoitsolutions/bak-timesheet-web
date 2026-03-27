@@ -7,6 +7,7 @@ export interface CreatePayrollSectionData {
   nameEn: string;
   nameAr?: string;
   displayOrderKey?: number;
+  branchId?: number;
   isActive?: boolean;
 }
 
@@ -14,6 +15,7 @@ export interface UpdatePayrollSectionData {
   nameEn?: string;
   nameAr?: string;
   displayOrderKey?: number;
+  branchId?: number;
   isActive?: boolean;
 }
 
@@ -21,7 +23,8 @@ export type ListPayrollSectionsSortableField =
   | "nameEn"
   | "nameAr"
   | "isActive"
-  | "displayOrderKey";
+  | "displayOrderKey"
+  | "branchId";
 
 export interface ListPayrollSectionsParams {
   page?: number;
@@ -36,6 +39,12 @@ export interface PayrollSectionInterface {
   nameEn: string;
   nameAr: string | null;
   displayOrderKey: number | null;
+  branchId: number | null;
+  branch?: {
+    id: number;
+    nameEn: string;
+    nameAr: string | null;
+  } | null;
   isActive: boolean;
   createdAt: Date | any;
   updatedAt: Date | any;

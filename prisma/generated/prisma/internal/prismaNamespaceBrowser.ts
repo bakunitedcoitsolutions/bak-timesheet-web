@@ -301,6 +301,7 @@ export const PayrollSectionScalarFieldEnum = {
   id: 'id',
   nameEn: 'nameEn',
   nameAr: 'nameAr',
+  branchId: 'branchId',
   displayOrderKey: 'displayOrderKey',
   isActive: 'isActive',
   createdAt: 'createdAt',

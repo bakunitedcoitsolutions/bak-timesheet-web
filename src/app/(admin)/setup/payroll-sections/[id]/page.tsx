@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { classNames } from "primereact/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -12,6 +12,7 @@ import {
   useCreatePayrollSection,
   useGetPayrollSectionById,
 } from "@/lib/db/services/payroll-section/requests";
+import { useGlobalData } from "@/context/GlobalDataContext";
 import {
   CreatePayrollSectionSchema,
   UpdatePayrollSectionSchema,
@@ -21,10 +22,10 @@ import { getEntityModeFromParam } from "@/helpers";
 import { getErrorMessage } from "@/utils/helpers";
 import { FORM_FIELD_WIDTHS, STATUS_OPTIONS } from "@/utils/constants";
 import {
+  Form,
   Input,
   Button,
   Dropdown,
-  Form,
   FormItem,
   NumberInput,
 } from "@/components/forms";
@@ -49,11 +50,23 @@ const UpsertPayrollSectionPage = () => {
     id: payrollSectionId ? Number(payrollSectionId) : 0,
   });
 
+  const { data: globalData } = useGlobalData();
+
+  const branchOptions = useMemo(() => {
+    return (
+      globalData.branches?.map((branch: any) => ({
+        label: branch.nameEn,
+        value: branch.id,
+      })) ?? []
+    );
+  }, [globalData.branches]);
+
   const defaultValues = {
     ...(isEditMode ? { id: 0 } : {}),
     nameEn: "",
     nameAr: "",
     displayOrderKey: undefined,
+    branchId: undefined,
     isActive: true,
   };
 
@@ -86,6 +99,7 @@ const UpsertPayrollSectionPage = () => {
         nameEn: foundPayrollSection?.nameEn,
         nameAr: foundPayrollSection?.nameAr,
         displayOrderKey: foundPayrollSection?.displayOrderKey ?? undefined,
+        branchId: foundPayrollSection?.branchId ?? undefined,
         isActive: foundPayrollSection?.isActive,
       };
       reset(setPayrollSection);
@@ -186,6 +200,17 @@ const UpsertPayrollSectionPage = () => {
                       className="w-full"
                       label="Display Order"
                       placeholder="Enter display order"
+                    />
+                  </FormItem>
+                </div>
+                <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
+                  <FormItem name="branchId">
+                    <Dropdown
+                      label="Branch"
+                      className="w-full"
+                      placeholder="Select branch"
+                      options={branchOptions}
+                      filter
                     />
                   </FormItem>
                 </div>

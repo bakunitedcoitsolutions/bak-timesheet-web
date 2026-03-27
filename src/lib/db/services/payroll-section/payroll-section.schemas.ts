@@ -10,6 +10,7 @@ export const CreatePayrollSectionSchema = z.object({
   nameEn: z.string().min(2, "Name is required"),
   nameAr: z.string().min(2, "Arabic name is required").optional(),
   displayOrderKey: z.number().int().optional(),
+  branchId: z.number().int().optional(),
   isActive: z.boolean().default(true).optional(),
 });
 
@@ -18,6 +19,7 @@ export const UpdatePayrollSectionSchema = z.object({
   nameEn: z.string().min(2, "Name is required").optional(),
   nameAr: z.string().min(2, "Arabic name is required").optional(),
   displayOrderKey: z.number().int().optional(),
+  branchId: z.number().int().optional(),
   isActive: z.boolean().optional(),
 });
 
@@ -27,7 +29,7 @@ export const ListPayrollSectionsParamsSchema = z.object({
   search: z.string().optional(),
   sortOrder: z.enum(["asc", "desc"]).optional(),
   sortBy: z
-    .enum(["nameEn", "nameAr", "isActive", "displayOrderKey"])
+    .enum(["nameEn", "nameAr", "isActive", "displayOrderKey", "branchId"])
     .optional(),
 });
 
