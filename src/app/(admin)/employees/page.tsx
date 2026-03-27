@@ -1,22 +1,9 @@
 "use client";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { DataTableFilterMeta } from "primereact/datatable";
 import { ProgressSpinner } from "primereact/progressspinner";
 import { useRef, useState, useEffect, useMemo, useCallback } from "react";
 
-import {
-  Input,
-  Table,
-  Badge,
-  Button,
-  TableRef,
-  TypeBadge,
-  TableColumn,
-  TableActions,
-  GroupDropdown,
-  useAccess,
-} from "@/components";
 import {
   getSignedUrl,
   getErrorMessage,
@@ -24,19 +11,23 @@ import {
   toPrimeReactSortOrder,
   parseGroupDropdownFilter,
 } from "@/utils/helpers";
-import {
-  useGlobalData,
-  GlobalDataGeneral,
-  GlobalDataDesignation,
-} from "@/context/GlobalDataContext";
 import { useDebounce } from "@/hooks";
 import { toastService } from "@/lib/toast";
 import { STORAGE_CONFIG } from "@/utils/constants";
+import { useGlobalData } from "@/context/GlobalDataContext";
 import { devConsole, devError } from "@/utils/helpers/functions";
 import { showConfirmDialog } from "@/components/common/confirm-dialog";
 import { ListedEmployee } from "@/lib/db/services/employee/employee.dto";
 import { useDeleteEmployee, useGetEmployees } from "@/lib/db/services/employee";
+import { Input, Table, TableRef, useAccess, GroupDropdown } from "@/components";
 import { ListEmployeesSortableField } from "@/lib/db/services/employee/employee.dto";
+
+// Components
+import { EmployeeHeader } from "./components/EmployeeHeader";
+import { getEmployeeTableColumns } from "./components/EmployeeTableColumns";
+
+// Helpers
+import { getModifiedEmployeesData, parseDataTableFilters } from "./helpers";
 
 // Constants
 const SORTABLE_FIELDS = {
@@ -54,364 +45,7 @@ const SORTABLE_FIELDS = {
   nationality: "nationality",
 } as const;
 
-const commonColumnProps = {
-  sortable: true,
-  filterable: true,
-  smallFilter: true,
-  showFilterMenu: false,
-  showClearButton: false,
-  style: { minWidth: 200 },
-};
-
 type SortableField = keyof typeof SORTABLE_FIELDS;
-
-const RenderDot = ({ statusId }: { statusId: number | null }) => {
-  if (statusId === 1) {
-    return (
-      <div className="absolute -top-0.5 -right-0.5 w-3 h-3 bg-theme-green rounded-full" />
-    );
-  }
-  if (statusId === 7) {
-    return (
-      <div className="absolute -top-0.5 -right-0.5 w-3 h-3 bg-theme-red rounded-full" />
-    );
-  }
-  if (statusId === 4) {
-    return (
-      <div className="absolute -top-0.5 -right-0.5 w-3 h-3 bg-orange-400 rounded-full" />
-    );
-  }
-  return null;
-};
-
-// Helper component for profile picture with signed URL
-const EmployeeProfilePicture = ({
-  statusId,
-  profilePicture,
-  employeeName,
-}: {
-  profilePicture: string | null;
-  employeeName: string;
-  statusId: number | null;
-}) => {
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    if (!profilePicture) {
-      setIsLoading(false);
-      return;
-    }
-
-    // Check if it's already a URL
-    if (profilePicture.startsWith("http")) {
-      setImageUrl(profilePicture);
-      setIsLoading(false);
-      return;
-    }
-
-    // Generate signed URL for private file
-    getSignedUrl(STORAGE_CONFIG.EMPLOYEES_BUCKET, profilePicture, 3600)
-      .then((signedUrl) => {
-        setImageUrl(signedUrl);
-      })
-      .catch((error) => {
-        devError("Failed to get signed URL:", error);
-        setImageUrl(null);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }, [profilePicture]);
-
-  if (isLoading) {
-    return (
-      <div className="w-12 h-12 bg-gray-200 rounded-xl flex items-center justify-center shrink-0">
-        <i className="pi pi-spin pi-spinner text-gray-400 text-sm"></i>
-      </div>
-    );
-  }
-
-  if (imageUrl) {
-    return (
-      <div className="relative w-12 h-12 rounded-xl overflow-hidden shrink-0">
-        <RenderDot statusId={statusId} />
-        <Image
-          width={48}
-          height={48}
-          src={imageUrl}
-          alt={employeeName || "Employee"}
-          className="object-cover w-full h-full"
-        />
-      </div>
-    );
-  }
-
-  return (
-    <div className="w-12 h-12 bg-gray-200 rounded-xl flex items-center justify-center shrink-0 relative">
-      <RenderDot statusId={statusId} />
-      <i className="pi pi-user text-gray-400 text-xl"></i>
-    </div>
-  );
-};
-
-const columns = ({
-  role,
-  canEdit,
-  handlePrint,
-  handleEdit,
-  handleDelete,
-  handleViewCard,
-}: {
-  canEdit: boolean;
-  role: number | string | undefined;
-  handlePrint: (employee: ListedEmployee) => void;
-  handleEdit: (employee: ListedEmployee) => void;
-  handleDelete: (employee: ListedEmployee) => void;
-  handleViewCard: (employee: ListedEmployee) => void;
-}): TableColumn<ListedEmployee>[] => [
-  {
-    field: "id",
-    header: "#",
-    sortable: false,
-    filterable: false,
-    align: "center",
-    style: { minWidth: "70px" },
-    headerStyle: { minWidth: "70px" },
-    body: (rowData: ListedEmployee) => (
-      <div className={"flex items-center justify-center gap-1.5 w-[40px]"}>
-        <span className="text-sm font-medium">{rowData?.id}</span>
-      </div>
-    ),
-  },
-  {
-    field: "employeeCode",
-    header: "Emp. Code",
-    ...commonColumnProps,
-    body: (rowData: ListedEmployee) => (
-      <div className="flex items-center gap-5">
-        <EmployeeProfilePicture
-          statusId={rowData.statusId}
-          profilePicture={rowData.profilePicture}
-          employeeName={rowData.nameEn}
-        />
-        <span
-          className="text-sm font-semibold text-primary underline cursor-pointer"
-          onClick={() => handleEdit(rowData)}
-        >
-          {rowData.employeeCode}
-        </span>
-      </div>
-    ),
-  },
-  {
-    field: "nameEn",
-    header: "Name (En)",
-    ...commonColumnProps,
-    style: { minWidth: "250px" },
-    body: (rowData: ListedEmployee) => (
-      <div className="flex items-start gap-2 min-w-0">
-        <div className="flex flex-1 flex-col gap-1 min-w-0">
-          <span className="text-sm font-medium leading-tight wrap-break-word">
-            {rowData.nameEn}
-          </span>
-        </div>
-        {(rowData.isFixed || rowData.isDeductable) && (
-          <div className="flex items-center justify-center gap-x-1 shrink-0">
-            {rowData.isFixed && <Badge text="F" />}
-            {rowData.isFixed && rowData.isDeductable && <Badge text="D" />}
-          </div>
-        )}
-      </div>
-    ),
-  },
-  {
-    field: "nameAr",
-    header: "Name (Ar)",
-    ...commonColumnProps,
-    body: (rowData: ListedEmployee) => (
-      <div className="w-full flex flex-1 justify-end">
-        <span className="text-right font-medium font-arabic">
-          {rowData.nameAr || ""}
-        </span>
-      </div>
-    ),
-  },
-  {
-    field: "gender",
-    header: "Gender",
-    style: { minWidth: 100 },
-    filterable: false,
-    sortable: true,
-    body: (rowData: ListedEmployee) => (
-      <div className="w-full flex flex-1 justify-center">
-        <span className="text-sm">
-          {rowData.gender === "male"
-            ? "M"
-            : rowData.gender === "female"
-              ? "F"
-              : "-"}
-        </span>
-      </div>
-    ),
-  },
-  {
-    field: "idCardNo",
-    header: "ID No.",
-    ...commonColumnProps,
-    body: (rowData: ListedEmployee) => (
-      <span className="text-sm">{rowData.idCardNo || "-"}</span>
-    ),
-  },
-  {
-    field: "designationId",
-    header: "Designation",
-    sortable: false,
-    filterable: false,
-    style: { minWidth: 150 },
-    body: (rowData: any) => (
-      <span className="text-sm">
-        {rowData?.designationName ? rowData.designationName : "-"}
-      </span>
-    ),
-  },
-  {
-    field: "payrollSectionId",
-    header: "Payroll Sect.",
-    sortable: false,
-    filterable: false,
-    style: { minWidth: 150 },
-    body: (rowData: any) => (
-      <span className="text-sm">
-        {rowData?.payrollSectionName ? rowData.payrollSectionName : "-"}
-      </span>
-    ),
-  },
-  {
-    field: "profession",
-    header: "Profession",
-    ...commonColumnProps,
-    body: (rowData: ListedEmployee) => (
-      <div className="w-full flex flex-1 justify-end">
-        <span className="text-right font-medium font-arabic">
-          {rowData.profession || ""}
-        </span>
-      </div>
-    ),
-  },
-  {
-    field: "hourlyRate",
-    header: "Hourly Rate",
-    sortable: false,
-    filterable: false,
-    style: { minWidth: 120 },
-    body: (rowData: ListedEmployee) => (
-      <div className="flex items-start justify-center gap-2">
-        <span className="text-sm font-semibold">
-          {rowData.hourlyRate && rowData.hourlyRate > 0 ? (
-            rowData.hourlyRate.toString()
-          ) : (
-            <span className="text-text-gray font-normal">N/A</span>
-          )}
-        </span>
-      </div>
-    ),
-  },
-  {
-    field: "salary",
-    header: "Salary",
-    sortable: false,
-    filterable: false,
-    style: { minWidth: 150 },
-    body: (rowData: ListedEmployee) => (
-      <span className="text-sm font-semibold">
-        {rowData.salary && rowData.salary > 0 ? (
-          rowData.salary.toString()
-        ) : (
-          <span className="text-text-gray font-normal">N/A</span>
-        )}
-      </span>
-    ),
-  },
-  {
-    field: "nationality",
-    header: "Nationality",
-    ...commonColumnProps,
-    body: (rowData: ListedEmployee) => (
-      <span className="text-sm">{rowData?.nationality?.nameEn || "-"}</span>
-    ),
-  },
-  {
-    field: "phone",
-    header: "Contact No.",
-    ...commonColumnProps,
-    body: (rowData: ListedEmployee) => (
-      <span className="text-sm">{rowData.phone || "-"}</span>
-    ),
-  },
-  {
-    field: "isCardDelivered",
-    header: "Card Delivered?",
-    sortable: false,
-    filterable: false,
-    style: { minWidth: 150 },
-    align: "center",
-    body: (rowData: ListedEmployee) => (
-      <div className="w-full flex flex-1 justify-center">
-        <TypeBadge
-          text={rowData.isCardDelivered ? "Yes" : "No"}
-          variant={rowData.isCardDelivered ? "success" : "danger"}
-        />
-      </div>
-    ),
-  },
-  {
-    field: "cardDocument",
-    header: "ID Card",
-    sortable: false,
-    filterable: false,
-    style: { minWidth: 100 },
-    align: "center",
-    body: (rowData: ListedEmployee) => (
-      <div className="w-full flex flex-1 justify-center">
-        {rowData.cardDocument ? (
-          <span
-            className="text-sm text-center text-primary underline cursor-pointer"
-            onClick={() => handleViewCard(rowData)}
-          >
-            View
-          </span>
-        ) : (
-          <span className="text-sm text-center text-text-gray">N/A</span>
-        )}
-      </div>
-    ),
-  },
-  {
-    field: "actions",
-    header: "Actions",
-    sortable: false,
-    filterable: false,
-    align: "center",
-    style: { minWidth: 150 },
-    body: (rowData: ListedEmployee) => (
-      <TableActions
-        rowData={rowData}
-        onDelete={Number(role) !== 4 ? handleDelete : undefined}
-        onEdit={canEdit || Number(role) !== 4 ? handleEdit : undefined}
-        beforeActions={[
-          {
-            icon: "pi pi-print text-lg!",
-            label: "Print",
-            severity: "secondary",
-            onClick: handlePrint,
-            tooltip: "Print",
-          },
-        ]}
-      />
-    ),
-  },
-];
 
 const EmployeesPage = () => {
   const router = useRouter();
@@ -460,19 +94,7 @@ const EmployeesPage = () => {
   }, [debouncedColumnFilters]);
 
   const handleFilterChange = useCallback((filters: DataTableFilterMeta) => {
-    const newFilters: Record<string, string> = {};
-
-    Object.entries(filters).forEach(([field, filterMeta]) => {
-      // Skip global filter
-      if (field === "global") return;
-
-      // Handle different filter meta structures
-      const meta = filterMeta as any;
-      if (meta && meta.value) {
-        newFilters[field] = meta.value;
-      }
-    });
-
+    const newFilters = parseDataTableFilters(filters);
     setColumnFilters(newFilters);
   }, []);
 
@@ -514,21 +136,7 @@ const EmployeesPage = () => {
   const payrollSections = globalData.payrollSections || [];
 
   const modifyEmployeesData = useMemo(() => {
-    return employees.map((employee: ListedEmployee) => {
-      const designation = designations.find(
-        (designation: GlobalDataDesignation) =>
-          designation.id === employee.designationId
-      );
-      const payrollSection = payrollSections.find(
-        (payrollSection: GlobalDataGeneral) =>
-          payrollSection.id === employee.payrollSectionId
-      );
-      return {
-        ...employee,
-        designationName: designation?.nameEn,
-        payrollSectionName: payrollSection?.nameEn,
-      };
-    });
+    return getModifiedEmployeesData(employees, designations, payrollSections);
   }, [employees, designations, payrollSections]);
 
   // Memoized handlers
@@ -586,14 +194,6 @@ const EmployeesPage = () => {
     }
   }, []);
 
-  const exportCSV = useCallback(() => {
-    tableRef.current?.exportCSV();
-  }, []);
-
-  const exportExcel = useCallback(() => {
-    tableRef.current?.exportExcel();
-  }, []);
-
   const handlePageChange = useCallback(
     (e: { page?: number; rows?: number }) => {
       const newPage = (e.page ?? 0) + 1;
@@ -637,7 +237,7 @@ const EmployeesPage = () => {
   // Memoized columns
   const tableColumns = useMemo(
     () =>
-      columns({
+      getEmployeeTableColumns({
         role,
         canEdit,
         handleEdit,
@@ -672,32 +272,14 @@ const EmployeesPage = () => {
         </div>
       </div>
     );
-  }, [searchValue, exportCSV, exportExcel, selectedFilter]);
+  }, [searchValue, selectedFilter]);
 
   return (
     <div className="flex h-full flex-col gap-6 px-6 py-6">
-      <div className="flex flex-col md:flex-row justify-between items-center gap-3 shrink-0">
-        <div className="w-full md:w-auto flex flex-1 flex-col gap-1">
-          <h1 className="text-2xl font-semibold text-gray-900">
-            Employee Management
-          </h1>
-          <p className="text-sm text-gray-600 mt-1">
-            View, manage employee records, personal information, and employment
-            details.
-          </p>
-        </div>
-        {canAdd && (
-          <div className="w-full md:w-auto">
-            <Button
-              size="small"
-              variant="solid"
-              icon="pi pi-plus"
-              label="New Employee"
-              onClick={() => router.push("/employees/new")}
-            />
-          </div>
-        )}
-      </div>
+      <EmployeeHeader
+        canAdd={canAdd}
+        onNewEmployee={() => router.push("/employees/new")}
+      />
       <div className="bg-white flex-1 rounded-xl overflow-hidden min-h-0">
         <Table
           dataKey="id"
