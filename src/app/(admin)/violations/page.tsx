@@ -1,26 +1,15 @@
 "use client";
-import { useRouter } from "next/navigation";
-import { ProgressSpinner } from "primereact/progressspinner";
-import { useRef, useState, useEffect, useMemo, useCallback } from "react";
 import dayjs from "dayjs";
+import { useRouter } from "next/navigation";
+import { useRef, useState, useEffect, useMemo, useCallback } from "react";
 
 import {
-  Input,
-  Table,
-  Button,
   TableRef,
   useAccess,
-  TypeBadge,
-  TableColumn,
-  TableActions,
-  ExportOptions,
-  BulkUploadOptions,
-  BulkUploadDialog,
 } from "@/components";
 import {
   getErrorMessage,
   createSortHandler,
-  toPrimeReactSortOrder,
 } from "@/utils/helpers";
 import { useDebounce } from "@/hooks";
 import { toastService } from "@/lib/toast";
@@ -36,141 +25,14 @@ import {
   downloadSampleTemplate,
 } from "@/lib/db/services/traffic-challan/bulk-upload-utils";
 import { useGetPayrollSummaryStatus } from "@/lib/db/services/payroll-summary/requests";
-import { ListedTrafficChallan } from "@/lib/db/services/traffic-challan/traffic-challan.dto";
-import { ListTrafficChallansSortableField } from "@/lib/db/services/traffic-challan/traffic-challan.dto";
+import { ListedTrafficChallan, ListTrafficChallansSortableField } from "@/lib/db/services/traffic-challan/traffic-challan.dto";
 
-// Constants
-const SORTABLE_FIELDS = {
-  date: "date",
-  type: "type",
-  amount: "amount",
-  createdAt: "createdAt",
-} as const;
-
-const commonColumnProps = {
-  sortable: true,
-  filterable: false,
-  smallFilter: true,
-  showFilterMenu: false,
-  showClearButton: false,
-  style: { minWidth: 200 },
-};
-
-type SortableField = keyof typeof SORTABLE_FIELDS;
-
-const columns = (
-  handleEdit: (challan: ListedTrafficChallan) => void,
-  handleDelete: (challan: ListedTrafficChallan) => void,
-  isLocked: (challan: ListedTrafficChallan) => boolean,
-  canEdit: boolean,
-  isPayrollPosted: boolean,
-  role: number | string | undefined
-): TableColumn<ListedTrafficChallan>[] => [
-  {
-    field: "id",
-    header: "#",
-    sortable: false,
-    filterable: false,
-    align: "center",
-    style: { minWidth: "70px" },
-    headerStyle: { minWidth: "70px" },
-    body: (rowData: ListedTrafficChallan) => (
-      <div className={"flex items-center justify-center gap-1.5 w-[40px]"}>
-        <span className="text-sm font-medium">{rowData?.id}</span>
-      </div>
-    ),
-  },
-  {
-    field: "date",
-    header: "Date",
-    ...commonColumnProps,
-    style: { minWidth: "100px" },
-    body: (rowData: ListedTrafficChallan) => {
-      return (
-        <span className="text-sm">
-          {dayjs(rowData.date).format("DD/MM/YYYY")}
-        </span>
-      );
-    },
-  },
-  {
-    field: "employee",
-    header: "Employee",
-    ...commonColumnProps,
-    sortable: false,
-    style: { minWidth: "250px" },
-    body: (rowData: ListedTrafficChallan) => (
-      <span className="text-sm line-clamp-2">
-        {!!rowData.employee?.employeeCode && (
-          <span className="font-semibold text-primary">
-            {rowData.employee?.employeeCode}
-            {!!rowData.employee?.nameEn ? " - " : ""}
-          </span>
-        )}
-        {!!rowData.employee?.nameEn && <span>{rowData.employee?.nameEn}</span>}
-      </span>
-    ),
-  },
-  {
-    field: "type",
-    header: "Type",
-    ...commonColumnProps,
-    filterable: false,
-    style: { minWidth: "120px" },
-    align: "center",
-    body: (rowData: ListedTrafficChallan) => (
-      <TypeBadge
-        text={rowData.type}
-        variant={rowData.type === "CHALLAN" ? "warning" : "success"}
-      />
-    ),
-  },
-  {
-    field: "amount",
-    header: "Amount",
-    ...commonColumnProps,
-    style: { minWidth: "150px" },
-    align: "right",
-    body: (rowData: ListedTrafficChallan) => (
-      <span className="text-sm font-semibold">
-        {rowData.amount?.toLocaleString() || "0"}
-      </span>
-    ),
-  },
-  {
-    field: "description",
-    header: "Description",
-    ...commonColumnProps,
-    sortable: false,
-    style: { minWidth: "300px" },
-    body: (rowData: ListedTrafficChallan) => (
-      <span className="text-sm line-clamp-2">{rowData.description || "-"}</span>
-    ),
-  },
-  ...(canEdit && !isPayrollPosted
-    ? [
-        {
-          field: "actions",
-          header: "Actions",
-          sortable: false,
-          filterable: false,
-          align: "center",
-          style: { minWidth: 150 },
-          body: (rowData: ListedTrafficChallan) => (
-            <TableActions
-              rowData={rowData}
-              onEdit={!isLocked(rowData) ? handleEdit : undefined}
-              onDelete={
-                Number(role) !== 4 && !isLocked(rowData)
-                  ? handleDelete
-                  : undefined
-              }
-            />
-          ),
-        } as TableColumn<ListedTrafficChallan>,
-      ]
-    : []),
-];
+// Sub-components and Helpers
+import { SORTABLE_FIELDS, SortableField, createColumns, checkIsLocked } from "./helpers";
+import { ViolationsHeader } from "./components/ViolationsHeader";
+import { ViolationsFilters } from "./components/ViolationsFilters";
+import { ViolationsTable } from "./components/ViolationsTable";
+import { ViolationsDialogs } from "./components/ViolationsDialogs";
 
 const ChallansPage = () => {
   const router = useRouter();
@@ -207,12 +69,9 @@ const ChallansPage = () => {
 
   const isPayrollPosted = payrollSummaryStatus?.payrollStatusId === 3;
 
-  const isLocked = useCallback(() => {
-    if (isPayrollPosted) return true;
-    if (role === 4 && hasFull) return false;
-    if (role === 4 && !canEdit) return true;
-    return false;
-  }, [isPayrollPosted, canEdit, role, hasFull]);
+  const isLocked = useMemo(() => {
+    return checkIsLocked(isPayrollPosted, role, hasFull, canEdit);
+  }, [isPayrollPosted, role, hasFull, canEdit]);
 
   // Debounce search input
   const debouncedSearch = useDebounce(searchValue, 500);
@@ -228,16 +87,14 @@ const ChallansPage = () => {
   }, [selectedDate]);
 
   // Convert selected date to Date object for API
-  // Set startDate to beginning of day and endDate to end of day
-  const dateFilter = selectedDate
-    ? (() => {
-        const date = dayjs(selectedDate);
-        return {
-          startDate: date.startOf("month").toDate(),
-          endDate: date.endOf("month").toDate(),
-        };
-      })()
-    : undefined;
+  const dateFilter = useMemo(() => {
+    if (!selectedDate) return undefined;
+    const date = dayjs(selectedDate);
+    return {
+      startDate: date.startOf("month").toDate(),
+      endDate: date.endOf("month").toDate(),
+    };
+  }, [selectedDate]);
 
   const { data: challansResponse, isLoading } = useGetTrafficChallans({
     page,
@@ -349,23 +206,17 @@ const ChallansPage = () => {
     [page, handlePageReset, handleSortByChange, handleSortOrderChange]
   );
 
-  // // Memoized columns
-  // const tableColumns = useMemo(
-  //   () => columns(handleEdit, handleDelete, isLocked, canEdit, role),
-  //   [handleEdit, handleDelete, isLocked, canEdit, role]
-  // );
   // Memoized columns
   const tableColumns = useMemo(
     () =>
-      columns(
+      createColumns(
         handleEdit,
         handleDelete,
         isLocked,
         canEdit,
-        isPayrollPosted,
         role
       ),
-    [handleEdit, handleDelete, isLocked, canEdit, role, isPayrollPosted]
+    [handleEdit, handleDelete, isLocked, canEdit, role]
   );
 
   // Bulk upload handlers
@@ -446,130 +297,57 @@ const ChallansPage = () => {
   // Memoized header renderer
   const renderHeader = useCallback(() => {
     return (
-      <div className="flex flex-col md:flex-row justify-between items-center gap-3 flex-1 w-full">
-        <div className="flex flex-1 items-center gap-3 w-full md:w-auto">
-          <div className="w-full md:w-auto">
-            <Input
-              small
-              type="month"
-              value={selectedDate}
-              onChange={(e) => setSelectedDate(e.target.value)}
-              className="w-full md:w-44"
-              placeholder="Select Date"
-            />
-          </div>
-          <div className="w-full md:w-auto">
-            <Input
-              small
-              value={searchValue}
-              className="w-full md:w-64"
-              icon="pi pi-search"
-              iconPosition="left"
-              onChange={(e) => setSearchValue(e.target.value)}
-              placeholder="Search by description..."
-            />
-          </div>
-        </div>
-        <div className="flex items-center gap-3 w-full md:w-auto">
-          <div className="w-full md:w-auto">
-            <ExportOptions
-              exportCSV={exportCSV}
-              exportExcel={exportExcel}
-              buttonClassName="w-full md:w-auto h-9!"
-            />
-          </div>
-          {canAdd && (
-            <div className="w-full lg:w-auto">
-              <BulkUploadOptions
-                uploadCSV={handleUploadCSV}
-                uploadExcel={handleUploadExcel}
-                downloadTemplate={downloadSampleTemplate}
-                buttonClassName="w-full md:w-auto h-9!"
-              />
-            </div>
-          )}
-        </div>
-      </div>
+      <ViolationsFilters
+        selectedDate={selectedDate}
+        onDateChange={setSelectedDate}
+        searchValue={searchValue}
+        onSearchChange={setSearchValue}
+        onExportCSV={exportCSV}
+        onExportExcel={exportExcel}
+        canAdd={canAdd}
+        onUploadCSV={handleUploadCSV}
+        onUploadExcel={handleUploadExcel}
+        onDownloadTemplate={downloadSampleTemplate}
+      />
     );
   }, [
     searchValue,
     selectedDate,
     exportCSV,
     exportExcel,
+    canAdd,
     handleUploadCSV,
     handleUploadExcel,
   ]);
 
   return (
-    <>
-      <div className="flex h-full flex-col gap-6 px-6 py-6">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-3 shrink-0">
-          <div className="w-full md:w-auto flex flex-1 flex-col gap-1">
-            <h1 className="text-2xl font-semibold text-gray-900">
-              Traffic Violation Management
-            </h1>
-            <p className="text-sm text-gray-600 mt-1">
-              View, manage traffic Violation records, and Violation details.
-            </p>
-          </div>
-          {canAdd && (
-            <div className="w-full md:w-auto">
-              <Button
-                size="small"
-                variant="solid"
-                icon="pi pi-plus"
-                label="Add Violation"
-                onClick={() => router.push("/violations/new")}
-              />
-            </div>
-          )}
-        </div>
-        <div className="bg-white flex-1 rounded-xl overflow-hidden min-h-0">
-          <Table
-            dataKey="id"
-            removableSort
-            data={challans}
-            ref={tableRef}
-            loading={isLoading}
-            loadingIcon={
-              <ProgressSpinner style={{ width: "50px", height: "50px" }} />
-            }
-            customHeader={renderHeader}
-            columns={tableColumns}
-            sortMode="single"
-            onPage={handlePageChange}
-            onSort={sortHandler}
-            sortField={sortBy}
-            lazy
-            sortOrder={toPrimeReactSortOrder(sortOrder) as any}
-            pagination={true}
-            rowsPerPageOptions={[10, 25, 50]}
-            rows={currentLimit}
-            first={(currentPage - 1) * currentLimit}
-            totalRecords={total}
-            globalSearch={true}
-            scrollable
-            scrollHeight="65vh"
-          />
-        </div>
-      </div>
-
-      <BulkUploadDialog
-        visible={showFilePicker}
-        title="Upload Violations"
-        onHide={() => {
-          setShowFilePicker(false);
-        }}
-        onUpload={handleUpload}
-        accept={{
-          "text/csv": [".csv"],
-          "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": [
-            ".xlsx",
-          ],
-          "application/vnd.ms-excel": [".xls"],
-        }}
+    <div className="flex h-full flex-col gap-6 px-6 py-6 font-primary">
+      <ViolationsHeader
+        canAdd={canAdd}
+        onAdd={() => router.push("/violations/new")}
       />
-    </>
+
+      <ViolationsTable
+        tableRef={tableRef}
+        challans={challans}
+        isLoading={isLoading}
+        columns={tableColumns}
+        renderHeader={renderHeader}
+        page={currentPage}
+        limit={currentLimit}
+        total={total}
+        sortBy={sortBy}
+        sortOrder={sortOrder}
+        onPageChange={handlePageChange}
+        onSort={sortHandler}
+      />
+
+      <ViolationsDialogs
+        showFilePicker={showFilePicker}
+        onHide={() => setShowFilePicker(false)}
+        onUpload={handleUpload}
+      />
+    </div>
   );
 };
 
