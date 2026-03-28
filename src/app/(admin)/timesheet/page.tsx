@@ -1,24 +1,16 @@
 "use client";
 import { useRef, useState, useMemo, useEffect, useCallback } from "react";
 import { classNames } from "primereact/utils";
-import { ProgressSpinner } from "primereact/progressspinner";
 
 import {
   Input,
   Badge,
-  Table,
   Button,
   TableRef,
   Dropdown,
   useAccess,
   NumberInput,
-  TitleHeader,
   TableColumn,
-  GroupDropdown,
-  BulkUploadDialog,
-  CustomHeaderProps,
-  BulkUploadOptions,
-  BulkUploadReportDialog,
 } from "@/components";
 import { useDebounce } from "@/hooks";
 import { toastService } from "@/lib/toast";
@@ -42,11 +34,15 @@ import {
 } from "@/lib/db/services/timesheet/bulk-upload-utils";
 import { validateProjectId } from "@/utils/helpers/main-utils";
 
+// Sub-components and Helpers
+import { getTodayDateString, isLocked as checkIsLocked } from "./helpers";
+import { TimesheetHeader } from "./components/TimesheetHeader";
+import { TimesheetActions } from "./components/TimesheetActions";
+import { TimesheetTable } from "./components/TimesheetTable";
+import { TimesheetDialogs } from "./components/TimesheetDialogs";
+
 /** Stable empty array so useMemo/useEffect deps don't change every render when no data */
 const EMPTY_ROWS: TimesheetPageRow[] = [];
-
-/** Today's date in YYYY-MM-DD */
-const getTodayDateString = () => new Date().toISOString().slice(0, 10);
 
 const TimesheetPage = () => {
   const [selectedDate, setSelectedDate] =
@@ -81,6 +77,8 @@ const TimesheetPage = () => {
     month: selectedMonth,
     year: selectedYear,
   });
+
+  const isPayrollPosted = payrollSummaryStatus?.payrollStatusId === 3;
 
   useEffect(() => {
     setPage(1);
@@ -228,17 +226,18 @@ const TimesheetPage = () => {
     [saveTimesheetEntries, selectedDate]
   );
 
-  const isPayrollPosted = payrollSummaryStatus?.payrollStatusId === 3;
-
   const isLocked = useCallback(
     (rowData: TimesheetPageRow) => {
-      if (isPayrollPosted) return true;
-      if (role === 4 && hasFull) return false;
-      if (role === 4 && !canEdit && rowData.timesheetId) return true;
-      if (role === 4 && !canAdd && !rowData.timesheetId) return true;
-      return false;
+      return checkIsLocked(
+        rowData,
+        isPayrollPosted,
+        role,
+        hasFull,
+        canEdit,
+        canAdd
+      );
     },
-    [isPayrollPosted, canEdit, canAdd, role, hasFull]
+    [isPayrollPosted, role, hasFull, canEdit, canAdd]
   );
 
   const columns = useMemo(
@@ -527,7 +526,7 @@ const TimesheetPage = () => {
         ),
       },
     ],
-    [projectOptions, isLoadingTimesheet, isLocked]
+    [projectOptions, isLoadingTimesheet, isLocked, saveSingleRow, updateTimesheetEntry]
   );
 
   const updateTimesheetEntries = async () => {
@@ -576,65 +575,38 @@ const TimesheetPage = () => {
 
   const handleUpload = useCallback(
     async (file: File) => {
-      console.log("handleUpload started", {
-        fileName: file.name,
-        type: file.type,
-        size: file.size,
-        lastModified: file.lastModified,
-      });
       try {
         const fileName = file.name.toLowerCase();
         setUploadedFileName(file.name);
         const isCSV = fileName.endsWith(".csv") || file.type === "text/csv";
 
-        console.log("Parsing file...", { isCSV });
         let parseResult;
         if (isCSV) {
           parseResult = await parseCSVFile(file);
         } else {
           parseResult = await parseExcelFile(file);
         }
-        console.log("File parsed", {
-          rows: parseResult.data.length,
-          errors: parseResult.errors.length,
-          firstRow: parseResult.data[0],
-          columnsFound: Object.keys(parseResult.data[0] || {}),
-        });
 
         if (parseResult.errors.length > 0) {
           toastService.showWarn(
             "Parse Warnings",
             `${parseResult.errors.length} row(s) had errors. Check console for details.`
           );
-          console.log("Parse errors:", parseResult.errors);
         }
 
         if (parseResult.data.length === 0) {
-          console.log("No valid data found in file");
           toastService.showError("Error", "No valid data found in file");
           throw new Error("No valid data found in file");
         }
 
-        console.log("Calling bulkUploadTimesheets mutation...", {
-          entriesCount: parseResult.data.length,
-          sampleEntry: parseResult.data[0],
-        });
         await bulkUploadTimesheets(
           { entries: parseResult.data },
           {
             onSuccess: (result: BulkUploadTimesheetResult) => {
-              console.log("bulkUploadTimesheets success", {
-                successCount: result.success,
-                failedCount: result.failed,
-                skippedCount: result.skipped,
-                detailsLength: result.details.length,
-                resultObject: result,
-              });
               setUploadResult(result);
               setShowReportDialog(true);
               setShowFilePicker(false); // Close picker on success
 
-              // Only show toast if EVERYTHING failed or general error, otherwise dialog handles details
               if (
                 result.success === 0 &&
                 result.failed > 0 &&
@@ -652,7 +624,6 @@ const TimesheetPage = () => {
               }
             },
             onError: (error: any) => {
-              console.log("bulkUploadTimesheets error", error);
               const errorMessage = getErrorMessage(
                 error,
                 "Failed to upload timesheets"
@@ -663,7 +634,6 @@ const TimesheetPage = () => {
           }
         );
       } catch (error: any) {
-        console.log("handleUpload exception", error);
         const errorMessage = getErrorMessage(error, "Failed to parse file");
         toastService.showError("Error", errorMessage);
         throw error;
@@ -672,142 +642,55 @@ const TimesheetPage = () => {
     [bulkUploadTimesheets]
   );
 
-  const renderHeader = ({ exportCSV, exportExcel }: CustomHeaderProps) => {
-    return (
-      <div className="flex flex-col lg:flex-row justify-between bg-theme-primary-light items-center gap-3 flex-1 w-full">
-        <div className="flex flex-1 items-center gap-3 w-full">
-          <div className="w-full lg:w-auto">
-            <Input
-              type="date"
-              placeholder="Select Date"
-              className="w-full lg:w-40 h-10.5!"
-              value={selectedDate}
-              onChange={(e) => setSelectedDate(e.target.value)}
-            />
-          </div>
-          <div className="w-full lg:w-auto">
-            <GroupDropdown
-              value={selectedFilter}
-              onChange={setSelectedFilter}
-              className="w-full lg:w-48"
-            />
-          </div>
-          <div className="w-full lg:w-auto hidden xl:block">
-            <Button
-              size="small"
-              label="Refresh"
-              className="w-full xl:w-28 2xl:w-32 h-10!"
-              onClick={() => refetchTimesheet()}
-            />
-          </div>
-        </div>
-        <div className="flex items-center gap-3 w-full lg:w-auto">
-          {canAdd && (
-            <div className="w-full lg:w-auto">
-              <BulkUploadOptions
-                uploadCSV={handleUploadCSV}
-                uploadExcel={handleUploadExcel}
-                downloadTemplate={downloadSampleTemplate}
-                buttonClassName="w-full lg:w-auto h-9!"
-              />
-            </div>
-          )}
-          {(canAdd || canEdit) && (
-            <div className=" w-full lg:w-auto">
-              <Button
-                size="small"
-                label="Update"
-                loading={isLoading}
-                disabled={isLoadingTimesheet}
-                onClick={updateTimesheetEntries}
-                className="w-full xl:w-28 2xl:w-32 h-10!"
-              />
-            </div>
-          )}
-        </div>
-      </div>
-    );
-  };
-
-  const exportCSV = () => {
-    tableRef.current?.exportCSV();
-  };
-
-  const exportExcel = () => {
-    tableRef.current?.exportExcel();
-  };
-
   return (
     <>
       <div className="flex h-full flex-col">
-        <TitleHeader
-          showBack={false}
-          title="ATTENDANCE SHEET"
-          icon={<i className="fa-light fa-calendar text-xl!" />}
-          value={searchValue}
-          onChange={(e) => {
-            const value = e.target.value;
-            setSearchValue(value);
-          }}
+        <TimesheetHeader
+          searchValue={searchValue}
+          onSearchChange={(e) => setSearchValue(e.target.value)}
         />
         <div className="flex flex-1 flex-col gap-4 px-6 py-6 bg-theme-primary-light min-h-0">
-          {renderHeader({
-            exportCSV,
-            exportExcel,
-          })}
-          <div className="bg-white h-full rounded-xl overflow-hidden min-h-0 relative">
-            {isLoadingTimesheet || isLoadingGlobalData ? (
-              <div className="flex items-center justify-center h-[72vh]">
-                <ProgressSpinner style={{ width: "40px", height: "40px" }} />
-              </div>
-            ) : (
-              <Table
-                lazy
-                dataKey="id"
-                ref={tableRef}
-                columns={columns}
-                pagination={true}
-                data={timesheetData}
-                rows={currentLimit}
-                totalRecords={total}
-                onPage={handlePageChange}
-                first={(currentPage - 1) * currentLimit}
-                globalSearch={false}
-                emptyMessage="No timesheet data found. Select a date and payroll section."
-                rowClassName={(rowData: TimesheetPageRow) =>
-                  isLocked(rowData) ? "locked-row" : ""
-                }
-                scrollable
-                scrollHeight="65vh"
-              />
-            )}
-          </div>
+          <TimesheetActions
+            selectedDate={selectedDate}
+            onDateChange={setSelectedDate}
+            selectedFilter={selectedFilter}
+            onFilterChange={setSelectedFilter}
+            onRefresh={() => refetchTimesheet()}
+            onUploadCSV={handleUploadCSV}
+            onUploadExcel={handleUploadExcel}
+            onUpdate={updateTimesheetEntries}
+            isLoading={isLoading}
+            isLoadingTimesheet={isLoadingTimesheet}
+            canAdd={canAdd}
+            canEdit={canEdit}
+            downloadSampleTemplate={downloadSampleTemplate}
+          />
+          <TimesheetTable
+            tableRef={tableRef}
+            data={timesheetData}
+            columns={columns}
+            isLoading={isLoadingTimesheet || isLoadingGlobalData}
+            onPage={handlePageChange}
+            totalRecords={total}
+            rows={currentLimit}
+            currentPage={currentPage}
+            isLocked={isLocked}
+          />
         </div>
       </div>
 
-      <BulkUploadDialog
-        visible={showFilePicker}
-        title="Upload Timesheets"
-        onHide={() => setShowFilePicker(false)}
+      <TimesheetDialogs
+        showFilePicker={showFilePicker}
+        onHideFilePicker={() => setShowFilePicker(false)}
         onUpload={handleUpload}
-        accept={{
-          "text/csv": [".csv"],
-          "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": [
-            ".xlsx",
-          ],
-          "application/vnd.ms-excel": [".xls"],
-        }}
-      />
-
-      <BulkUploadReportDialog
-        visible={showReportDialog}
-        onHide={() => {
+        showReportDialog={showReportDialog}
+        onHideReportDialog={() => {
           setShowReportDialog(false);
           setUploadResult(null);
           setUploadedFileName("");
         }}
-        result={uploadResult}
-        fileName={uploadedFileName}
+        uploadResult={uploadResult}
+        uploadedFileName={uploadedFileName}
       />
     </>
   );

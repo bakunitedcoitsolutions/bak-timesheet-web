@@ -24,8 +24,8 @@ import { ProjectTable } from "./components/ProjectTable";
 
 // Helpers
 import {
-  SORTABLE_FIELDS,
   SortableField,
+  SORTABLE_FIELDS,
   getProjectTableColumns,
 } from "./helpers";
 
@@ -189,14 +189,17 @@ const ProjectsPage = () => {
     [handleEdit, handleDelete, isAccessEnabledUser]
   );
 
-  const renderHeader = useCallback(() => (
-    <ProjectFilters
-      searchValue={searchValue}
-      onSearchChange={setSearchValue}
-      exportCSV={exportCSV}
-      exportExcel={exportExcel}
-    />
-  ), [searchValue, exportCSV, exportExcel]);
+  const renderHeader = useCallback(
+    () => (
+      <ProjectFilters
+        searchValue={searchValue}
+        onSearchChange={setSearchValue}
+        exportCSV={exportCSV}
+        exportExcel={exportExcel}
+      />
+    ),
+    [searchValue, exportCSV, exportExcel]
+  );
 
   return (
     <div className="flex h-full flex-col gap-6 px-6 py-6">
@@ -204,7 +207,7 @@ const ProjectsPage = () => {
         isAccessEnabledUser={isAccessEnabledUser}
         onNewProject={() => router.push("/projects/new")}
       />
-      
+
       <ProjectTable
         projects={projects}
         isLoading={isLoading}
