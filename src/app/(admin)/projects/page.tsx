@@ -1,27 +1,14 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { ProgressSpinner } from "primereact/progressspinner";
 import { DataTableFilterMeta } from "primereact/datatable";
 import { useRef, useState, useEffect, useMemo, useCallback } from "react";
 
+import { TableRef, useAccess } from "@/components";
+import { getErrorMessage, createSortHandler } from "@/utils/helpers";
 import {
-  Input,
-  Table,
-  Button,
-  TableRef,
-  TypeBadge,
-  TableColumn,
-  TableActions,
-  ExportOptions,
-  useAccess,
-} from "@/components";
-import {
-  getErrorMessage,
-  createSortHandler,
-  toPrimeReactSortOrder,
-} from "@/utils/helpers";
-import { ListedProject } from "@/lib/db/services/project/project.dto";
-import { ListProjectsSortableField } from "@/lib/db/services/project/project.dto";
+  ListedProject,
+  ListProjectsSortableField,
+} from "@/lib/db/services/project/project.dto";
 import { useDebounce } from "@/hooks";
 import { toastService } from "@/lib/toast";
 import { showConfirmDialog } from "@/components/common/confirm-dialog";
@@ -30,115 +17,17 @@ import {
   useGetProjects,
 } from "@/lib/db/services/project/requests";
 
-// Constants
-const SORTABLE_FIELDS = {
-  nameEn: "nameEn",
-  nameAr: "nameAr",
-  isActive: "isActive",
-  createdAt: "createdAt",
-} as const;
+// Components
+import { ProjectHeader } from "./components/ProjectHeader";
+import { ProjectFilters } from "./components/ProjectFilters";
+import { ProjectTable } from "./components/ProjectTable";
 
-const commonColumnProps = {
-  sortable: true,
-  filterable: true,
-  smallFilter: true,
-  showFilterMenu: false,
-  showClearButton: false,
-  style: { minWidth: 200 },
-};
-
-type SortableField = keyof typeof SORTABLE_FIELDS;
-
-const columns = (
-  handleEdit: (project: ListedProject) => void,
-  handleDelete: (project: ListedProject) => void,
-  isAccessEnabledUser: boolean
-): TableColumn<ListedProject>[] => [
-  {
-    field: "id",
-    header: "#",
-    sortable: false,
-    filterable: false,
-    align: "center",
-    style: { minWidth: "70px" },
-    headerStyle: { minWidth: "70px" },
-    body: (rowData: ListedProject) => (
-      <div className={"flex items-center justify-center gap-1.5 w-[40px]"}>
-        <span className="text-sm font-medium">{rowData?.id}</span>
-      </div>
-    ),
-  },
-  {
-    field: "nameEn",
-    header: "Project Name",
-    ...commonColumnProps,
-    style: { minWidth: "250px" },
-    body: (rowData: ListedProject) => (
-      <span className="text-sm uppercase font-medium whitespace-nowrap">
-        {rowData.nameEn}
-      </span>
-    ),
-  },
-  {
-    field: "nameAr",
-    header: "Arabic Name",
-    ...commonColumnProps,
-    style: { minWidth: "200px" },
-    body: (rowData: ListedProject) => (
-      <div className="w-full flex flex-1 justify-end">
-        <span className="text-xl! text-right font-arabic">
-          {rowData.nameAr || ""}
-        </span>
-      </div>
-    ),
-  },
-  {
-    field: "description",
-    header: "Description",
-    sortable: false,
-    filterable: true,
-    smallFilter: true,
-    showFilterMenu: false,
-    showClearButton: false,
-    style: { minWidth: 250 },
-    body: (rowData: ListedProject) => (
-      <span className="text-sm line-clamp-2">{rowData.description || "-"}</span>
-    ),
-  },
-  {
-    field: "isActive",
-    header: "Status",
-    sortable: true,
-    filterable: false,
-    style: { minWidth: 100 },
-    align: "center",
-    body: (rowData: ListedProject) => (
-      <TypeBadge
-        text={rowData.isActive ? "Active" : "Inactive"}
-        variant={rowData.isActive ? "success" : "danger"}
-      />
-    ),
-  },
-  ...(!isAccessEnabledUser
-    ? [
-        {
-          field: "actions",
-          header: "Actions",
-          sortable: false,
-          filterable: false,
-          align: "center" as const,
-          style: { minWidth: 150 },
-          body: (rowData: ListedProject) => (
-            <TableActions
-              rowData={rowData}
-              onEdit={handleEdit}
-              onDelete={handleDelete}
-            />
-          ),
-        },
-      ]
-    : []),
-];
+// Helpers
+import {
+  SORTABLE_FIELDS,
+  SortableField,
+  getProjectTableColumns,
+} from "./helpers";
 
 const ProjectsPage = () => {
   const router = useRouter();
@@ -262,7 +151,6 @@ const ProjectsPage = () => {
 
   const handlePageChange = useCallback(
     (e: { page?: number; rows?: number }) => {
-      // PrimeReact uses 0-based page index, our API uses 1-based
       setPage((e.page ?? 0) + 1);
       setLimit(e.rows ?? currentLimit);
     },
@@ -273,12 +161,10 @@ const ProjectsPage = () => {
     setPage(1);
   }, []);
 
-  // Wrapper for setSortBy to handle undefined (reset to default)
   const handleSortByChange = useCallback((field: SortableField | undefined) => {
     setSortBy(field ?? "createdAt");
   }, []);
 
-  // Wrapper for setSortOrder to handle undefined (reset to default)
   const handleSortOrderChange = useCallback(
     (order: "asc" | "desc" | undefined) => {
       setSortOrder(order ?? "desc");
@@ -286,7 +172,6 @@ const ProjectsPage = () => {
     []
   );
 
-  // Memoized sort handler
   const sortHandler = useMemo(
     () =>
       createSortHandler({
@@ -299,90 +184,42 @@ const ProjectsPage = () => {
     [page, handlePageReset, handleSortByChange, handleSortOrderChange]
   );
 
-  // Memoized columns
   const tableColumns = useMemo(
-    () => columns(handleEdit, handleDelete, isAccessEnabledUser),
+    () => getProjectTableColumns(handleEdit, handleDelete, isAccessEnabledUser),
     [handleEdit, handleDelete, isAccessEnabledUser]
   );
 
-  // Memoized header renderer
-  const renderHeader = useCallback(() => {
-    return (
-      <div className="flex flex-col md:flex-row justify-between items-center gap-3 flex-1 w-full">
-        <div className="w-full md:w-auto">
-          <Input
-            small
-            className="w-full"
-            value={searchValue}
-            icon="pi pi-search"
-            iconPosition="left"
-            onChange={(e) => {
-              setSearchValue(e.target.value);
-            }}
-            placeholder="Search"
-          />
-        </div>
-        <div className="flex items-center gap-3 w-full md:w-auto justify-end">
-          <div>
-            <ExportOptions exportCSV={exportCSV} exportExcel={exportExcel} />
-          </div>
-        </div>
-      </div>
-    );
-  }, [searchValue, exportCSV, exportExcel]);
+  const renderHeader = useCallback(() => (
+    <ProjectFilters
+      searchValue={searchValue}
+      onSearchChange={setSearchValue}
+      exportCSV={exportCSV}
+      exportExcel={exportExcel}
+    />
+  ), [searchValue, exportCSV, exportExcel]);
 
   return (
     <div className="flex h-full flex-col gap-6 px-6 py-6">
-      <div className="flex flex-col md:flex-row justify-between items-center gap-3 shrink-0">
-        <div className="w-full md:w-auto flex flex-1 flex-col gap-1">
-          <h1 className="text-2xl font-semibold text-gray-900">
-            Project Management
-          </h1>
-          <p className="text-sm text-gray-600 mt-1">
-            View, manage project records, and project details.
-          </p>
-        </div>
-        {!isAccessEnabledUser && (
-          <div className="w-full md:w-auto">
-            <Button
-              size="small"
-              variant="solid"
-              icon="pi pi-plus"
-              label="New Project"
-              onClick={() => router.push("/projects/new")}
-            />
-          </div>
-        )}
-      </div>
-      <div className="bg-white flex-1 rounded-xl overflow-hidden min-h-0">
-        <Table
-          dataKey="id"
-          removableSort
-          data={projects}
-          ref={tableRef}
-          loading={isLoading}
-          loadingIcon={
-            <ProgressSpinner style={{ width: "50px", height: "50px" }} />
-          }
-          customHeader={renderHeader}
-          columns={tableColumns}
-          sortMode="single"
-          onPage={handlePageChange}
-          onSort={sortHandler}
-          onFilter={handleFilterChange}
-          sortField={sortBy}
-          lazy={true}
-          sortOrder={toPrimeReactSortOrder(sortOrder) as any}
-          pagination={true}
-          rowsPerPageOptions={[10, 25, 50]}
-          rows={currentLimit}
-          first={(currentPage - 1) * currentLimit}
-          totalRecords={total}
-          globalSearch={true}
-          scrollable
-          scrollHeight="65vh"
-        />
-      </div>
+      <ProjectHeader
+        isAccessEnabledUser={isAccessEnabledUser}
+        onNewProject={() => router.push("/projects/new")}
+      />
+      
+      <ProjectTable
+        projects={projects}
+        isLoading={isLoading}
+        tableRef={tableRef}
+        columns={tableColumns}
+        renderHeader={renderHeader}
+        onPageChange={handlePageChange}
+        onSort={sortHandler}
+        onFilter={handleFilterChange}
+        sortBy={sortBy}
+        sortOrder={sortOrder}
+        currentLimit={currentLimit}
+        currentPage={currentPage}
+        total={total}
+      />
     </div>
   );
 };
