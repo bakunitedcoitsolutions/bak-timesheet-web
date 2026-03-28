@@ -2,13 +2,12 @@
 
 import { useEffect, useMemo } from "react";
 import { useForm } from "react-hook-form";
-import { classNames } from "primereact/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useParams, useRouter } from "next/navigation";
 import { ProgressSpinner } from "primereact/progressspinner";
 import dayjs from "dayjs";
-import { useGetPayrollSummaryStatus } from "@/lib/db/services/payroll-summary/requests";
 
+import { useGetPayrollSummaryStatus } from "@/lib/db/services/payroll-summary/requests";
 import {
   useUpdateLoan,
   useCreateLoan,
@@ -22,22 +21,15 @@ import { useGlobalData, GlobalDataEmployee } from "@/context/GlobalDataContext";
 import { toastService } from "@/lib/toast";
 import { getEntityModeFromParam } from "@/helpers";
 import { getErrorMessage } from "@/utils/helpers";
-import { FORM_FIELD_WIDTHS } from "@/utils/constants";
-import {
-  Input,
-  Button,
-  Dropdown,
-  Form,
-  FormItem,
-  NumberInput,
-  Textarea,
-} from "@/components/forms";
+
 import { StepperFormHeading, useAccess } from "@/components";
 
-const loanTypeOptions = [
-  { label: "Loan", value: "LOAN" },
-  { label: "Return", value: "RETURN" },
-];
+// Components
+import { LoanForm } from "./components/LoanForm";
+import { LoanFormActions } from "./components/LoanFormActions";
+
+// Helpers
+import { loanTypeOptions } from "./helpers";
 
 const UpsertLoanPage = () => {
   const router = useRouter();
@@ -86,10 +78,14 @@ const UpsertLoanPage = () => {
   const { data: globalData } = useGlobalData();
   const employees = globalData.employees || [];
 
-  const employeeOptions = employees.map((employee: GlobalDataEmployee) => ({
-    label: `${employee.employeeCode} - ${employee.nameEn}`,
-    value: employee.id,
-  }));
+  const employeeOptions = useMemo(
+    () =>
+      employees.map((employee: GlobalDataEmployee) => ({
+        label: `${employee.employeeCode} - ${employee.nameEn}`,
+        value: employee.id,
+      })),
+    [employees]
+  );
 
   const zodSchema = isEditMode ? UpdateLoanSchema : CreateLoanSchema;
 
@@ -219,91 +215,16 @@ const UpsertLoanPage = () => {
           </div>
         ) : (
           <>
-            <Form
+            <LoanForm
               form={form}
-              className="w-full h-full content-start md:max-w-5xl"
-            >
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 md:gap-y-4 md:py-5 px-6 mt-5 md:mt-0 flex-1">
-                <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
-                  <FormItem name="date">
-                    <Input
-                      type="date"
-                      label="Date"
-                      className="w-full"
-                      placeholder="Select date"
-                    />
-                  </FormItem>
-                </div>
-
-                <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
-                  <FormItem name="employeeId">
-                    <Dropdown
-                      label="Employee"
-                      className="w-full"
-                      placeholder="Choose employee"
-                      options={employeeOptions}
-                      filter
-                      showClear
-                    />
-                  </FormItem>
-                </div>
-
-                <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
-                  <FormItem name="type">
-                    <Dropdown
-                      label="Type"
-                      className="w-full"
-                      placeholder="Choose type"
-                      options={loanTypeOptions}
-                    />
-                  </FormItem>
-                </div>
-
-                <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
-                  <FormItem name="amount">
-                    <NumberInput
-                      label="Amount"
-                      className="w-full"
-                      placeholder="Enter amount"
-                      min={0}
-                      mode="decimal"
-                    />
-                  </FormItem>
-                </div>
-
-                <div className={classNames("md:col-span-2")}>
-                  <FormItem name="remarks">
-                    <Textarea
-                      label="Remarks"
-                      className="w-full"
-                      placeholder="Enter remarks..."
-                      rows={4}
-                    />
-                  </FormItem>
-                </div>
-              </div>
-            </Form>
-
-            <div className="flex items-center gap-3 justify-end px-6">
-              <Button
-                size="small"
-                variant="text"
-                disabled={isSubmitting}
-                onClick={() => router.replace("/loans")}
-              >
-                Cancel
-              </Button>
-              <Button
-                size="small"
-                variant="solid"
-                onClick={onFormSubmit}
-                loading={isSubmitting}
-                disabled={isSubmitting}
-                className="w-28 justify-center! gap-1"
-              >
-                Save
-              </Button>
-            </div>
+              employeeOptions={employeeOptions}
+              loanTypeOptions={loanTypeOptions}
+            />
+            <LoanFormActions
+              onSave={onFormSubmit}
+              isSubmitting={isSubmitting}
+              onCancel={() => router.replace("/loans")}
+            />
           </>
         )}
       </div>

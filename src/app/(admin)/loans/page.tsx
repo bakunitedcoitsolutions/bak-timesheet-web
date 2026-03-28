@@ -1,26 +1,16 @@
 "use client";
 import dayjs from "dayjs";
 import { useRouter } from "next/navigation";
-import { ProgressSpinner } from "primereact/progressspinner";
 import { useRef, useState, useEffect, useMemo, useCallback } from "react";
 
 import {
-  Input,
-  Table,
-  Button,
   TableRef,
   useAccess,
-  TypeBadge,
-  TableColumn,
-  TableActions,
-  ExportOptions,
   BulkUploadDialog,
-  BulkUploadOptions,
 } from "@/components";
 import {
   getErrorMessage,
   createSortHandler,
-  toPrimeReactSortOrder,
 } from "@/utils/helpers";
 import { useDebounce } from "@/hooks";
 import { toastService } from "@/lib/toast";
@@ -47,138 +37,17 @@ import {
 import { listAllLoansAction } from "@/lib/db/services/loan/actions";
 import { useGetPayrollSummaryStatus } from "@/lib/db/services/payroll-summary/requests";
 
-// Constants
-const SORTABLE_FIELDS = {
-  date: "date",
-  type: "type",
-  amount: "amount",
-  createdAt: "createdAt",
-} as const;
+// Components
+import { LoansHeader } from "./components/LoansHeader";
+import { LoansFilters } from "./components/LoansFilters";
+import { LoansTable } from "./components/LoansTable";
 
-const commonColumnProps = {
-  sortable: true,
-  filterable: false,
-  smallFilter: true,
-  showFilterMenu: false,
-  showClearButton: false,
-  style: { minWidth: 200 },
-};
-
-type SortableField = keyof typeof SORTABLE_FIELDS;
-
-const columns = (
-  handleEdit: (loan: ListedLoan) => void,
-  handleDelete: (loan: ListedLoan) => void,
-  isLocked: (loan: ListedLoan) => boolean,
-  canEdit: boolean,
-  isPayrollPosted: boolean,
-  role: number | string | undefined
-): TableColumn<ListedLoan>[] => [
-  {
-    field: "id",
-    header: "#",
-    sortable: false,
-    filterable: false,
-    align: "center",
-    style: { minWidth: "70px" },
-    headerStyle: { minWidth: "70px" },
-    body: (rowData: ListedLoan) => (
-      <div className={"flex items-center justify-center gap-1.5 w-[40px]"}>
-        <span className="text-sm font-medium">{rowData?.id}</span>
-      </div>
-    ),
-  },
-  {
-    field: "date",
-    header: "Date",
-    ...commonColumnProps,
-    style: { minWidth: "100px" },
-    body: (rowData: ListedLoan) => {
-      return (
-        <span className="text-sm">
-          {dayjs(rowData.date).format("DD/MM/YYYY")}
-        </span>
-      );
-    },
-  },
-  {
-    field: "employeeId",
-    header: "Employee",
-    ...commonColumnProps,
-    sortable: false,
-    style: { minWidth: "250px" },
-    body: (rowData: ListedLoan) => (
-      <span className="text-sm line-clamp-2">
-        {!!rowData.employee?.employeeCode && (
-          <span className="font-semibold text-primary">
-            {rowData.employee?.employeeCode}
-            {!!rowData.employee?.nameEn ? " - " : ""}
-          </span>
-        )}
-        {!!rowData.employee?.nameEn && <span>{rowData.employee?.nameEn}</span>}
-      </span>
-    ),
-  },
-  {
-    field: "type",
-    header: "Type",
-    ...commonColumnProps,
-    filterable: false,
-    style: { minWidth: "120px" },
-    align: "center",
-    body: (rowData: ListedLoan) => (
-      <TypeBadge
-        text={rowData.type}
-        variant={rowData.type === "LOAN" ? "warning" : "success"}
-      />
-    ),
-  },
-  {
-    field: "amount",
-    header: "Amount",
-    ...commonColumnProps,
-    style: { minWidth: "150px" },
-    align: "right",
-    body: (rowData: ListedLoan) => (
-      <span className="text-sm font-semibold">
-        {rowData.amount?.toLocaleString() || "0"}
-      </span>
-    ),
-  },
-  {
-    field: "remarks",
-    header: "Remarks",
-    ...commonColumnProps,
-    sortable: false,
-    style: { minWidth: "300px" },
-    body: (rowData: ListedLoan) => (
-      <span className="text-sm line-clamp-2">{rowData.remarks || "-"}</span>
-    ),
-  },
-  ...(canEdit && !isPayrollPosted
-    ? [
-        {
-          field: "actions",
-          header: "Actions",
-          sortable: false,
-          filterable: false,
-          align: "center",
-          style: { minWidth: 150 },
-          body: (rowData: ListedLoan) => (
-            <TableActions
-              rowData={rowData}
-              onEdit={!isLocked(rowData) ? handleEdit : undefined}
-              onDelete={
-                Number(role) !== 4 && !isLocked(rowData)
-                  ? handleDelete
-                  : undefined
-              }
-            />
-          ),
-        } as TableColumn<ListedLoan>,
-      ]
-    : []),
-];
+// Helpers
+import {
+  SORTABLE_FIELDS,
+  getLoansTableColumns,
+  SortableField,
+} from "./helpers";
 
 const LoansPage = () => {
   const router = useRouter();
@@ -194,6 +63,7 @@ const LoansPage = () => {
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
   const [showFilePicker, setShowFilePicker] = useState<boolean>(false);
   const tableRef = useRef<TableRef>(null);
+  
   const { mutateAsync: deleteLoan } = useDeleteLoan();
   const { mutateAsync: bulkUploadLoans } = useBulkUploadLoans();
 
@@ -235,7 +105,6 @@ const LoansPage = () => {
   }, [selectedDate]);
 
   // Convert selected date to Date object for API
-  // Set startDate to beginning of day and endDate to end of day
   const dateFilter = selectedDate
     ? (() => {
         const date = dayjs(selectedDate);
@@ -344,7 +213,6 @@ const LoansPage = () => {
 
   const handlePageChange = useCallback(
     (e: { page?: number; rows?: number }) => {
-      // PrimeReact uses 0-based page index, our API uses 1-based
       setPage((e.page ?? 0) + 1);
       setLimit(e.rows ?? currentLimit);
     },
@@ -355,12 +223,10 @@ const LoansPage = () => {
     setPage(1);
   }, []);
 
-  // Wrapper for setSortBy to handle undefined (reset to default)
   const handleSortByChange = useCallback((field: SortableField | undefined) => {
     setSortBy(field ?? "createdAt");
   }, []);
 
-  // Wrapper for setSortOrder to handle undefined (reset to default)
   const handleSortOrderChange = useCallback(
     (order: "asc" | "desc" | undefined) => {
       setSortOrder(order ?? "desc");
@@ -368,7 +234,6 @@ const LoansPage = () => {
     []
   );
 
-  // Memoized sort handler
   const sortHandler = useMemo(
     () =>
       createSortHandler({
@@ -381,10 +246,9 @@ const LoansPage = () => {
     [page, handlePageReset, handleSortByChange, handleSortOrderChange]
   );
 
-  // Memoized columns
   const tableColumns = useMemo(
     () =>
-      columns(
+      getLoansTableColumns(
         handleEdit,
         handleDelete,
         isLocked,
@@ -395,19 +259,9 @@ const LoansPage = () => {
     [handleEdit, handleDelete, isLocked, canEdit, role, isPayrollPosted]
   );
 
-  // Bulk upload handlers
-  const handleUploadCSV = useCallback(() => {
-    setShowFilePicker(true);
-  }, []);
-
-  const handleUploadExcel = useCallback(() => {
-    setShowFilePicker(true);
-  }, []);
-
   const handleUpload = useCallback(
     async (file: File) => {
       try {
-        // Detect file type from file extension or MIME type
         const fileName = file.name.toLowerCase();
         const isCSV = fileName.endsWith(".csv") || file.type === "text/csv";
 
@@ -431,7 +285,6 @@ const LoansPage = () => {
           throw new Error("No valid data found in file");
         }
 
-        // Upload the data
         await bulkUploadLoans(
           { loans: parseResult.data },
           {
@@ -457,136 +310,67 @@ const LoansPage = () => {
                 "Failed to upload loans"
               );
               toastService.showError("Error", errorMessage);
-              throw error; // Re-throw to prevent dialog from closing
+              throw error;
             },
           }
         );
       } catch (error: any) {
         const errorMessage = getErrorMessage(error, "Failed to parse file");
         toastService.showError("Error", errorMessage);
-        throw error; // Re-throw to prevent dialog from closing
+        throw error;
       }
     },
     [bulkUploadLoans]
   );
 
-  // Memoized header renderer
-  const renderHeader = useCallback(() => {
-    return (
-      <div className="flex flex-col md:flex-row justify-between items-center gap-3 flex-1 w-full">
-        <div className="flex flex-1 items-center gap-3 w-full md:w-auto">
-          <div className="w-full md:w-auto">
-            <Input
-              small
-              type="month"
-              value={selectedDate}
-              onChange={(e) => setSelectedDate(e.target.value)}
-              className="w-full md:w-44"
-              placeholder="Select Date"
-            />
-          </div>
-          <div className="w-full md:w-auto">
-            <Input
-              small
-              value={searchValue}
-              className="w-full md:w-64"
-              icon="pi pi-search"
-              iconPosition="left"
-              onChange={(e) => setSearchValue(e.target.value)}
-              placeholder="Search by remarks..."
-            />
-          </div>
-        </div>
-        <div className="flex items-center gap-3 w-full md:w-auto">
-          <div className="w-full md:w-auto">
-            <ExportOptions
-              exportCSV={exportCSV}
-              exportExcel={exportExcel}
-              buttonClassName="w-full md:w-auto h-9!"
-            />
-          </div>
-          {canAdd && (
-            <div className="w-full lg:w-auto">
-              <BulkUploadOptions
-                uploadCSV={handleUploadCSV}
-                uploadExcel={handleUploadExcel}
-                downloadTemplate={downloadSampleTemplate}
-                buttonClassName="w-full md:w-auto h-9!"
-              />
-            </div>
-          )}
-        </div>
-      </div>
-    );
-  }, [
-    searchValue,
+  const renderFilters = useCallback(() => (
+    <LoansFilters
+      selectedDate={selectedDate}
+      setSelectedDate={setSelectedDate}
+      searchValue={searchValue}
+      setSearchValue={setSearchValue}
+      exportCSV={exportCSV}
+      exportExcel={exportExcel}
+      canAdd={canAdd}
+      uploadCSV={() => setShowFilePicker(true)}
+      uploadExcel={() => setShowFilePicker(true)}
+      downloadTemplate={downloadSampleTemplate}
+    />
+  ), [
     selectedDate,
+    searchValue,
     exportCSV,
     exportExcel,
-    handleUploadCSV,
-    handleUploadExcel,
+    canAdd,
   ]);
 
   return (
     <>
       <div className="flex h-full flex-col gap-6 px-6 py-6">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-3 shrink-0">
-          <div className="w-full md:w-auto flex flex-1 flex-col gap-1">
-            <h1 className="text-2xl font-semibold text-gray-900">
-              Loan Management
-            </h1>
-            <p className="text-sm text-gray-600 mt-1">
-              View, manage loan records, and loan details.
-            </p>
-          </div>
-          {canAdd && (
-            <div className="w-full md:w-auto">
-              <Button
-                size="small"
-                variant="solid"
-                icon="pi pi-plus"
-                label="Add Loan"
-                onClick={() => router.push("/loans/new")}
-              />
-            </div>
-          )}
-        </div>
-        <div className="bg-white flex-1 rounded-xl overflow-hidden min-h-0">
-          <Table
-            dataKey="id"
-            removableSort
-            data={loans}
-            ref={tableRef}
-            loading={isLoading}
-            loadingIcon={
-              <ProgressSpinner style={{ width: "50px", height: "50px" }} />
-            }
-            customHeader={renderHeader}
-            columns={tableColumns}
-            sortMode="single"
-            onPage={handlePageChange}
-            lazy
-            onSort={sortHandler}
-            sortField={sortBy}
-            sortOrder={toPrimeReactSortOrder(sortOrder) as any}
-            pagination={true}
-            rowsPerPageOptions={[10, 25, 50]}
-            rows={currentLimit}
-            first={(currentPage - 1) * currentLimit}
-            totalRecords={total}
-            globalSearch={true}
-            scrollable
-            scrollHeight="65vh"
-          />
-        </div>
+        <LoansHeader
+          canAdd={canAdd}
+          onAddLoan={() => router.push("/loans/new")}
+        />
+        <LoansTable
+          tableRef={tableRef}
+          loans={loans}
+          isLoading={isLoading}
+          renderHeader={renderFilters}
+          tableColumns={tableColumns}
+          handlePageChange={handlePageChange}
+          sortHandler={sortHandler}
+          sortBy={sortBy}
+          sortOrder={sortOrder}
+          currentLimit={currentLimit}
+          currentPage={currentPage}
+          total={total}
+        />
       </div>
 
       <BulkUploadDialog
         visible={showFilePicker}
         title="Upload Loans"
-        onHide={() => {
-          setShowFilePicker(false);
-        }}
+        onHide={() => setShowFilePicker(false)}
         onUpload={handleUpload}
         accept={{
           "text/csv": [".csv"],
