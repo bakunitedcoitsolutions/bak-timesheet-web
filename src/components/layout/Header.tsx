@@ -142,7 +142,7 @@ export default function Header({ collapsed, setCollapsed }: HeaderProps) {
               >
                 {pathname !== "/" && (
                   <button className="w-10 h-10 flex items-center justify-center rounded-full bg-transparent text-primary cursor-pointer">
-                    <i className="fa-regular fa-arrow-left-long text-xl!" />
+                    <i className="pi pi-home text-xl!" />
                   </button>
                 )}
                 <div className="flex items-center gap-2">
