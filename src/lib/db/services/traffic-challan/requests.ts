@@ -13,7 +13,6 @@ import {
   deleteTrafficChallanAction,
   bulkUploadTrafficChallansAction,
 } from "./actions";
-import { BulkUploadTrafficChallanInput } from "./traffic-challan.schemas";
 
 export const useGetTrafficChallans = (input: ListTrafficChallansParamsInput) =>
   useQuery(listTrafficChallansAction, {
@@ -44,9 +43,7 @@ export const useUpdateTrafficChallan = () =>
     },
   });
 
-export const useGetTrafficChallanById = (
-  input: GetTrafficChallanByIdInput
-) =>
+export const useGetTrafficChallanById = (input: GetTrafficChallanByIdInput) =>
   useQuery(getTrafficChallanByIdAction, {
     queryKey: ["traffic-challan", input.id],
     input,

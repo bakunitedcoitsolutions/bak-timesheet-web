@@ -249,7 +249,6 @@ export type TrafficChallanWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"TrafficChallan"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"TrafficChallan"> | Date | string
   employee?: Prisma.XOR<Prisma.EmployeeScalarRelationFilter, Prisma.EmployeeWhereInput>
-  ledgers?: Prisma.LedgerListRelationFilter
 }
 
 export type TrafficChallanOrderByWithRelationInput = {
@@ -262,7 +261,6 @@ export type TrafficChallanOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   employee?: Prisma.EmployeeOrderByWithRelationInput
-  ledgers?: Prisma.LedgerOrderByRelationAggregateInput
 }
 
 export type TrafficChallanWhereUniqueInput = Prisma.AtLeast<{
@@ -278,7 +276,6 @@ export type TrafficChallanWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"TrafficChallan"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"TrafficChallan"> | Date | string
   employee?: Prisma.XOR<Prisma.EmployeeScalarRelationFilter, Prisma.EmployeeWhereInput>
-  ledgers?: Prisma.LedgerListRelationFilter
 }, "id">
 
 export type TrafficChallanOrderByWithAggregationInput = {
@@ -319,7 +316,6 @@ export type TrafficChallanCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   employee: Prisma.EmployeeCreateNestedOneWithoutTrafficChallansInput
-  ledgers?: Prisma.LedgerCreateNestedManyWithoutTrafficChallanInput
 }
 
 export type TrafficChallanUncheckedCreateInput = {
@@ -331,7 +327,6 @@ export type TrafficChallanUncheckedCreateInput = {
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutTrafficChallanInput
 }
 
 export type TrafficChallanUpdateInput = {
@@ -342,7 +337,6 @@ export type TrafficChallanUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   employee?: Prisma.EmployeeUpdateOneRequiredWithoutTrafficChallansNestedInput
-  ledgers?: Prisma.LedgerUpdateManyWithoutTrafficChallanNestedInput
 }
 
 export type TrafficChallanUncheckedUpdateInput = {
@@ -354,7 +348,6 @@ export type TrafficChallanUncheckedUpdateInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutTrafficChallanNestedInput
 }
 
 export type TrafficChallanCreateManyInput = {
@@ -443,11 +436,6 @@ export type TrafficChallanSumOrderByAggregateInput = {
   amount?: Prisma.SortOrder
 }
 
-export type TrafficChallanNullableScalarRelationFilter = {
-  is?: Prisma.TrafficChallanWhereInput | null
-  isNot?: Prisma.TrafficChallanWhereInput | null
-}
-
 export type TrafficChallanCreateNestedManyWithoutEmployeeInput = {
   create?: Prisma.XOR<Prisma.TrafficChallanCreateWithoutEmployeeInput, Prisma.TrafficChallanUncheckedCreateWithoutEmployeeInput> | Prisma.TrafficChallanCreateWithoutEmployeeInput[] | Prisma.TrafficChallanUncheckedCreateWithoutEmployeeInput[]
   connectOrCreate?: Prisma.TrafficChallanCreateOrConnectWithoutEmployeeInput | Prisma.TrafficChallanCreateOrConnectWithoutEmployeeInput[]
@@ -494,22 +482,6 @@ export type EnumTrafficChallanTypeFieldUpdateOperationsInput = {
   set?: $Enums.TrafficChallanType
 }
 
-export type TrafficChallanCreateNestedOneWithoutLedgersInput = {
-  create?: Prisma.XOR<Prisma.TrafficChallanCreateWithoutLedgersInput, Prisma.TrafficChallanUncheckedCreateWithoutLedgersInput>
-  connectOrCreate?: Prisma.TrafficChallanCreateOrConnectWithoutLedgersInput
-  connect?: Prisma.TrafficChallanWhereUniqueInput
-}
-
-export type TrafficChallanUpdateOneWithoutLedgersNestedInput = {
-  create?: Prisma.XOR<Prisma.TrafficChallanCreateWithoutLedgersInput, Prisma.TrafficChallanUncheckedCreateWithoutLedgersInput>
-  connectOrCreate?: Prisma.TrafficChallanCreateOrConnectWithoutLedgersInput
-  upsert?: Prisma.TrafficChallanUpsertWithoutLedgersInput
-  disconnect?: Prisma.TrafficChallanWhereInput | boolean
-  delete?: Prisma.TrafficChallanWhereInput | boolean
-  connect?: Prisma.TrafficChallanWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.TrafficChallanUpdateToOneWithWhereWithoutLedgersInput, Prisma.TrafficChallanUpdateWithoutLedgersInput>, Prisma.TrafficChallanUncheckedUpdateWithoutLedgersInput>
-}
-
 export type TrafficChallanCreateWithoutEmployeeInput = {
   date: Date | string
   type: $Enums.TrafficChallanType
@@ -517,7 +489,6 @@ export type TrafficChallanCreateWithoutEmployeeInput = {
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  ledgers?: Prisma.LedgerCreateNestedManyWithoutTrafficChallanInput
 }
 
 export type TrafficChallanUncheckedCreateWithoutEmployeeInput = {
@@ -528,7 +499,6 @@ export type TrafficChallanUncheckedCreateWithoutEmployeeInput = {
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutTrafficChallanInput
 }
 
 export type TrafficChallanCreateOrConnectWithoutEmployeeInput = {
@@ -571,64 +541,6 @@ export type TrafficChallanScalarWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"TrafficChallan"> | Date | string
 }
 
-export type TrafficChallanCreateWithoutLedgersInput = {
-  date: Date | string
-  type: $Enums.TrafficChallanType
-  amount: number
-  description?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  employee: Prisma.EmployeeCreateNestedOneWithoutTrafficChallansInput
-}
-
-export type TrafficChallanUncheckedCreateWithoutLedgersInput = {
-  id?: number
-  employeeId: number
-  date: Date | string
-  type: $Enums.TrafficChallanType
-  amount: number
-  description?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-}
-
-export type TrafficChallanCreateOrConnectWithoutLedgersInput = {
-  where: Prisma.TrafficChallanWhereUniqueInput
-  create: Prisma.XOR<Prisma.TrafficChallanCreateWithoutLedgersInput, Prisma.TrafficChallanUncheckedCreateWithoutLedgersInput>
-}
-
-export type TrafficChallanUpsertWithoutLedgersInput = {
-  update: Prisma.XOR<Prisma.TrafficChallanUpdateWithoutLedgersInput, Prisma.TrafficChallanUncheckedUpdateWithoutLedgersInput>
-  create: Prisma.XOR<Prisma.TrafficChallanCreateWithoutLedgersInput, Prisma.TrafficChallanUncheckedCreateWithoutLedgersInput>
-  where?: Prisma.TrafficChallanWhereInput
-}
-
-export type TrafficChallanUpdateToOneWithWhereWithoutLedgersInput = {
-  where?: Prisma.TrafficChallanWhereInput
-  data: Prisma.XOR<Prisma.TrafficChallanUpdateWithoutLedgersInput, Prisma.TrafficChallanUncheckedUpdateWithoutLedgersInput>
-}
-
-export type TrafficChallanUpdateWithoutLedgersInput = {
-  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  type?: Prisma.EnumTrafficChallanTypeFieldUpdateOperationsInput | $Enums.TrafficChallanType
-  amount?: Prisma.IntFieldUpdateOperationsInput | number
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  employee?: Prisma.EmployeeUpdateOneRequiredWithoutTrafficChallansNestedInput
-}
-
-export type TrafficChallanUncheckedUpdateWithoutLedgersInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  employeeId?: Prisma.IntFieldUpdateOperationsInput | number
-  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  type?: Prisma.EnumTrafficChallanTypeFieldUpdateOperationsInput | $Enums.TrafficChallanType
-  amount?: Prisma.IntFieldUpdateOperationsInput | number
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
 export type TrafficChallanCreateManyEmployeeInput = {
   id?: number
   date: Date | string
@@ -646,7 +558,6 @@ export type TrafficChallanUpdateWithoutEmployeeInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  ledgers?: Prisma.LedgerUpdateManyWithoutTrafficChallanNestedInput
 }
 
 export type TrafficChallanUncheckedUpdateWithoutEmployeeInput = {
@@ -657,7 +568,6 @@ export type TrafficChallanUncheckedUpdateWithoutEmployeeInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutTrafficChallanNestedInput
 }
 
 export type TrafficChallanUncheckedUpdateManyWithoutEmployeeInput = {
@@ -671,35 +581,6 @@ export type TrafficChallanUncheckedUpdateManyWithoutEmployeeInput = {
 }
 
 
-/**
- * Count Type TrafficChallanCountOutputType
- */
-
-export type TrafficChallanCountOutputType = {
-  ledgers: number
-}
-
-export type TrafficChallanCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  ledgers?: boolean | TrafficChallanCountOutputTypeCountLedgersArgs
-}
-
-/**
- * TrafficChallanCountOutputType without action
- */
-export type TrafficChallanCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the TrafficChallanCountOutputType
-   */
-  select?: Prisma.TrafficChallanCountOutputTypeSelect<ExtArgs> | null
-}
-
-/**
- * TrafficChallanCountOutputType without action
- */
-export type TrafficChallanCountOutputTypeCountLedgersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.LedgerWhereInput
-}
-
 
 export type TrafficChallanSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -711,8 +592,6 @@ export type TrafficChallanSelect<ExtArgs extends runtime.Types.Extensions.Intern
   createdAt?: boolean
   updatedAt?: boolean
   employee?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
-  ledgers?: boolean | Prisma.TrafficChallan$ledgersArgs<ExtArgs>
-  _count?: boolean | Prisma.TrafficChallanCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["trafficChallan"]>
 
 export type TrafficChallanSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -753,8 +632,6 @@ export type TrafficChallanSelectScalar = {
 export type TrafficChallanOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "employeeId" | "date" | "type" | "amount" | "description" | "createdAt" | "updatedAt", ExtArgs["result"]["trafficChallan"]>
 export type TrafficChallanInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   employee?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
-  ledgers?: boolean | Prisma.TrafficChallan$ledgersArgs<ExtArgs>
-  _count?: boolean | Prisma.TrafficChallanCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type TrafficChallanIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   employee?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
@@ -767,7 +644,6 @@ export type $TrafficChallanPayload<ExtArgs extends runtime.Types.Extensions.Inte
   name: "TrafficChallan"
   objects: {
     employee: Prisma.$EmployeePayload<ExtArgs>
-    ledgers: Prisma.$LedgerPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1173,7 +1049,6 @@ readonly fields: TrafficChallanFieldRefs;
 export interface Prisma__TrafficChallanClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   employee<T extends Prisma.EmployeeDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.EmployeeDefaultArgs<ExtArgs>>): Prisma.Prisma__EmployeeClient<runtime.Types.Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  ledgers<T extends Prisma.TrafficChallan$ledgersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TrafficChallan$ledgersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LedgerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1604,30 +1479,6 @@ export type TrafficChallanDeleteManyArgs<ExtArgs extends runtime.Types.Extension
    * Limit how many TrafficChallans to delete.
    */
   limit?: number
-}
-
-/**
- * TrafficChallan.ledgers
- */
-export type TrafficChallan$ledgersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Ledger
-   */
-  select?: Prisma.LedgerSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Ledger
-   */
-  omit?: Prisma.LedgerOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.LedgerInclude<ExtArgs> | null
-  where?: Prisma.LedgerWhereInput
-  orderBy?: Prisma.LedgerOrderByWithRelationInput | Prisma.LedgerOrderByWithRelationInput[]
-  cursor?: Prisma.LedgerWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.LedgerScalarFieldEnum | Prisma.LedgerScalarFieldEnum[]
 }
 
 /**

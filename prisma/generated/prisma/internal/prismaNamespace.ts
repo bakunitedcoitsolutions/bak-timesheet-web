@@ -404,7 +404,6 @@ export const ModelName = {
   Loan: 'Loan',
   TrafficChallan: 'TrafficChallan',
   ExitReentry: 'ExitReentry',
-  Ledger: 'Ledger',
   AllowanceNotAvailable: 'AllowanceNotAvailable'
 } as const
 
@@ -421,7 +420,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "userRole" | "userPrivilege" | "branch" | "city" | "country" | "gosiCity" | "employee" | "designation" | "employeeStatus" | "project" | "timesheet" | "payrollSection" | "payrollStatus" | "payrollSummary" | "paymentMethod" | "payrollDetails" | "loan" | "trafficChallan" | "exitReentry" | "ledger" | "allowanceNotAvailable"
+    modelProps: "user" | "userRole" | "userPrivilege" | "branch" | "city" | "country" | "gosiCity" | "employee" | "designation" | "employeeStatus" | "project" | "timesheet" | "payrollSection" | "payrollStatus" | "payrollSummary" | "paymentMethod" | "payrollDetails" | "loan" | "trafficChallan" | "exitReentry" | "allowanceNotAvailable"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1905,80 +1904,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
-    Ledger: {
-      payload: Prisma.$LedgerPayload<ExtArgs>
-      fields: Prisma.LedgerFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.LedgerFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LedgerPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.LedgerFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LedgerPayload>
-        }
-        findFirst: {
-          args: Prisma.LedgerFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LedgerPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.LedgerFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LedgerPayload>
-        }
-        findMany: {
-          args: Prisma.LedgerFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LedgerPayload>[]
-        }
-        create: {
-          args: Prisma.LedgerCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LedgerPayload>
-        }
-        createMany: {
-          args: Prisma.LedgerCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.LedgerCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LedgerPayload>[]
-        }
-        delete: {
-          args: Prisma.LedgerDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LedgerPayload>
-        }
-        update: {
-          args: Prisma.LedgerUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LedgerPayload>
-        }
-        deleteMany: {
-          args: Prisma.LedgerDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.LedgerUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.LedgerUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LedgerPayload>[]
-        }
-        upsert: {
-          args: Prisma.LedgerUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LedgerPayload>
-        }
-        aggregate: {
-          args: Prisma.LedgerAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateLedger>
-        }
-        groupBy: {
-          args: Prisma.LedgerGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.LedgerGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.LedgerCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.LedgerCountAggregateOutputType> | number
-        }
-      }
-    }
     AllowanceNotAvailable: {
       payload: Prisma.$AllowanceNotAvailablePayload<ExtArgs>
       fields: Prisma.AllowanceNotAvailableFieldRefs
@@ -2448,26 +2373,6 @@ export const ExitReentryScalarFieldEnum = {
 export type ExitReentryScalarFieldEnum = (typeof ExitReentryScalarFieldEnum)[keyof typeof ExitReentryScalarFieldEnum]
 
 
-export const LedgerScalarFieldEnum = {
-  id: 'id',
-  employeeId: 'employeeId',
-  date: 'date',
-  type: 'type',
-  amountType: 'amountType',
-  amount: 'amount',
-  balance: 'balance',
-  description: 'description',
-  reference: 'reference',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  payrollDetailId: 'payrollDetailId',
-  loanId: 'loanId',
-  trafficChallanId: 'trafficChallanId'
-} as const
-
-export type LedgerScalarFieldEnum = (typeof LedgerScalarFieldEnum)[keyof typeof LedgerScalarFieldEnum]
-
-
 export const AllowanceNotAvailableScalarFieldEnum = {
   id: 'id',
   nameEn: 'nameEn',
@@ -2650,34 +2555,6 @@ export type ListEnumExitReentryTypeFieldRefInput<$PrismaModel> = FieldRefInputTy
 
 
 /**
- * Reference to a field of type 'LedgerType'
- */
-export type EnumLedgerTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LedgerType'>
-    
-
-
-/**
- * Reference to a field of type 'LedgerType[]'
- */
-export type ListEnumLedgerTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LedgerType[]'>
-    
-
-
-/**
- * Reference to a field of type 'AmountType'
- */
-export type EnumAmountTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AmountType'>
-    
-
-
-/**
- * Reference to a field of type 'AmountType[]'
- */
-export type ListEnumAmountTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AmountType[]'>
-    
-
-
-/**
  * Reference to a field of type 'AllowanceType'
  */
 export type EnumAllowanceTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AllowanceType'>
@@ -2819,7 +2696,6 @@ export type GlobalOmitConfig = {
   loan?: Prisma.LoanOmit
   trafficChallan?: Prisma.TrafficChallanOmit
   exitReentry?: Prisma.ExitReentryOmit
-  ledger?: Prisma.LedgerOmit
   allowanceNotAvailable?: Prisma.AllowanceNotAvailableOmit
 }
 

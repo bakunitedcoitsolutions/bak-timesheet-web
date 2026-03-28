@@ -28,14 +28,7 @@ export const ListTrafficChallansParamsSchema = z.object({
   limit: z.number().int().positive().optional(),
   search: z.string().optional(),
   sortOrder: z.enum(["asc", "desc"]).optional(),
-  sortBy: z
-    .enum([
-      "date",
-      "type",
-      "amount",
-      "createdAt",
-    ])
-    .optional(),
+  sortBy: z.enum(["date", "type", "amount", "createdAt"]).optional(),
   employeeId: z.number().int().positive().optional(),
   type: z.enum(["CHALLAN", "RETURN"]).optional(),
   startDate: z.coerce.date().optional(),
@@ -59,7 +52,9 @@ export const BulkUploadTrafficChallanRowSchema = z.object({
 });
 
 export const BulkUploadTrafficChallanSchema = z.object({
-  trafficChallans: z.array(BulkUploadTrafficChallanRowSchema).min(1, "At least one traffic challan is required"),
+  trafficChallans: z
+    .array(BulkUploadTrafficChallanRowSchema)
+    .min(1, "At least one traffic challan is required"),
 });
 
 // Type exports for use in actions
@@ -78,4 +73,19 @@ export type GetTrafficChallanByIdInput = z.infer<
 export type DeleteTrafficChallanInput = z.infer<
   typeof DeleteTrafficChallanSchema
 >;
-export type BulkUploadTrafficChallanInput = z.infer<typeof BulkUploadTrafficChallanSchema>;
+export type BulkUploadTrafficChallanInput = z.infer<
+  typeof BulkUploadTrafficChallanSchema
+>;
+
+// Export-all (no pagination)
+export const ListAllTrafficChallansParamsSchema = z.object({
+  search: z.string().optional(),
+  employeeId: z.number().int().positive().optional(),
+  type: z.enum(["CHALLAN", "RETURN"]).optional(),
+  startDate: z.coerce.date().optional(),
+  endDate: z.coerce.date().optional(),
+});
+
+export type ListAllTrafficChallansParamsInput = z.infer<
+  typeof ListAllTrafficChallansParamsSchema
+>;

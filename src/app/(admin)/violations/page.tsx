@@ -3,14 +3,8 @@ import dayjs from "dayjs";
 import { useRouter } from "next/navigation";
 import { useRef, useState, useEffect, useMemo, useCallback } from "react";
 
-import {
-  TableRef,
-  useAccess,
-} from "@/components";
-import {
-  getErrorMessage,
-  createSortHandler,
-} from "@/utils/helpers";
+import { TableRef, useAccess } from "@/components";
+import { getErrorMessage, createSortHandler } from "@/utils/helpers";
 import { useDebounce } from "@/hooks";
 import { toastService } from "@/lib/toast";
 import { showConfirmDialog } from "@/components/common/confirm-dialog";
@@ -25,10 +19,18 @@ import {
   downloadSampleTemplate,
 } from "@/lib/db/services/traffic-challan/bulk-upload-utils";
 import { useGetPayrollSummaryStatus } from "@/lib/db/services/payroll-summary/requests";
-import { ListedTrafficChallan, ListTrafficChallansSortableField } from "@/lib/db/services/traffic-challan/traffic-challan.dto";
+import {
+  ListedTrafficChallan,
+  ListTrafficChallansSortableField,
+} from "@/lib/db/services/traffic-challan/traffic-challan.dto";
 
 // Sub-components and Helpers
-import { SORTABLE_FIELDS, SortableField, createColumns, checkIsLocked } from "./helpers";
+import {
+  SORTABLE_FIELDS,
+  SortableField,
+  createColumns,
+  checkIsLocked,
+} from "./helpers";
 import { ViolationsHeader } from "./components/ViolationsHeader";
 import { ViolationsFilters } from "./components/ViolationsFilters";
 import { ViolationsTable } from "./components/ViolationsTable";
@@ -48,6 +50,7 @@ const ChallansPage = () => {
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
   const [showFilePicker, setShowFilePicker] = useState<boolean>(false);
   const tableRef = useRef<TableRef>(null);
+
   const { mutateAsync: deleteTrafficChallan } = useDeleteTrafficChallan();
   const { mutateAsync: bulkUploadTrafficChallans } =
     useBulkUploadTrafficChallans();
@@ -87,14 +90,15 @@ const ChallansPage = () => {
   }, [selectedDate]);
 
   // Convert selected date to Date object for API
-  const dateFilter = useMemo(() => {
-    if (!selectedDate) return undefined;
-    const date = dayjs(selectedDate);
-    return {
-      startDate: date.startOf("month").toDate(),
-      endDate: date.endOf("month").toDate(),
-    };
-  }, [selectedDate]);
+  const dateFilter = selectedDate
+    ? (() => {
+        const date = dayjs(selectedDate);
+        return {
+          startDate: date.startOf("month").toDate(),
+          endDate: date.endOf("month").toDate(),
+        };
+      })()
+    : undefined;
 
   const { data: challansResponse, isLoading } = useGetTrafficChallans({
     page,
@@ -180,12 +184,10 @@ const ChallansPage = () => {
     setPage(1);
   }, []);
 
-  // Wrapper for setSortBy to handle undefined (reset to default)
   const handleSortByChange = useCallback((field: SortableField | undefined) => {
     setSortBy(field ?? "createdAt");
   }, []);
 
-  // Wrapper for setSortOrder to handle undefined (reset to default)
   const handleSortOrderChange = useCallback(
     (order: "asc" | "desc" | undefined) => {
       setSortOrder(order ?? "desc");
@@ -208,14 +210,7 @@ const ChallansPage = () => {
 
   // Memoized columns
   const tableColumns = useMemo(
-    () =>
-      createColumns(
-        handleEdit,
-        handleDelete,
-        isLocked,
-        canEdit,
-        role
-      ),
+    () => createColumns(handleEdit, handleDelete, isLocked, canEdit, role),
     [handleEdit, handleDelete, isLocked, canEdit, role]
   );
 

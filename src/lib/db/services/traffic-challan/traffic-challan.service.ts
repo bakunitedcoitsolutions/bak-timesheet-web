@@ -12,6 +12,7 @@ import type {
   ListTrafficChallansResponse,
   BulkUploadTrafficChallanData,
   BulkUploadTrafficChallanResult,
+  ListedTrafficChallan,
 } from "./traffic-challan.dto";
 
 // Type helper for Prisma transaction client
@@ -33,6 +34,11 @@ const trafficChallanSelect = {
     select: {
       nameEn: true,
       employeeCode: true,
+      designation: {
+        select: {
+          nameEn: true,
+        },
+      },
     },
   },
 };
@@ -63,48 +69,6 @@ async function createTrafficChallanWithLedger(
       description: description,
     },
     select: trafficChallanSelect,
-  });
-
-  // Determine amount type: CHALLAN = DEBIT, RETURN = CREDIT
-  const amountType = data.type === "CHALLAN" ? "DEBIT" : "CREDIT";
-
-  // Get the previous balance (balance of the entry just before this one, based on createdAt)
-  const previousEntry = await tx.ledger.findFirst({
-    where: {
-      employeeId: data.employeeId,
-    },
-    orderBy: [{ createdAt: "desc" }],
-    select: { balance: true },
-  });
-
-  // Calculate previous balance (0 if no previous entry)
-  let previousBalance = 0;
-  if (previousEntry) {
-    previousBalance = Number(previousEntry.balance);
-  }
-
-  // Calculate new balance for current entry
-  // CREDIT increases balance, DEBIT decreases balance
-  const amountNum = Number(data.amount);
-  let newBalance = previousBalance;
-  if (amountType === "CREDIT") {
-    newBalance = previousBalance + amountNum;
-  } else if (amountType === "DEBIT") {
-    newBalance = previousBalance - amountNum;
-  }
-
-  // Create ledger entry with calculated balance
-  await tx.ledger.create({
-    data: {
-      employeeId: data.employeeId,
-      date: dayjs(data.date).toDate(),
-      type: "CHALLAN",
-      amountType: amountType as "CREDIT" | "DEBIT",
-      amount: data.amount,
-      balance: newBalance,
-      description: `Challan ${!!description ? `(${description})` : ""}`,
-      trafficChallanId: trafficChallan.id,
-    },
   });
 
   return trafficChallan;
@@ -213,125 +177,6 @@ export const updateTrafficChallan = async (
       select: trafficChallanSelect,
     });
 
-    // Find and update the corresponding ledger entry
-    const ledgerEntry = await tx.ledger.findFirst({
-      where: { trafficChallanId: id },
-      select: {
-        id: true,
-        createdAt: true,
-        amount: true,
-        amountType: true,
-        balance: true,
-        date: true,
-      },
-    });
-
-    if (ledgerEntry) {
-      const employeeId = data.employeeId ?? existingTrafficChallan.employeeId;
-
-      const description =
-        updateData?.description ?? existingTrafficChallan?.description ?? "";
-
-      // Determine amount type: CHALLAN = DEBIT, RETURN = CREDIT
-      // Note: DEBIT means Return amount, CREDIT means challan amount (per user clarification)
-      const challanType = data.type ?? existingTrafficChallan.type;
-      const amountType = challanType === "CHALLAN" ? "DEBIT" : "CREDIT";
-
-      const newAmount = data.amount ?? existingTrafficChallan.amount;
-      const newDate = data.date
-        ? dayjs(data.date).toDate()
-        : new Date(existingTrafficChallan.date);
-
-      // Check if amount or amountType changed (date changes don't trigger balance recalculation)
-      const oldAmount = Number(ledgerEntry.amount);
-      const newAmountNum = Number(newAmount);
-      const amountChanged = oldAmount !== newAmountNum;
-      const amountTypeChanged = ledgerEntry.amountType !== amountType;
-
-      // Only update balances if amount or amountType changed
-      if (amountChanged || amountTypeChanged) {
-        // Get the previous balance (balance of the entry just before this one, based on createdAt)
-        const previousEntry = await tx.ledger.findFirst({
-          where: {
-            employeeId: employeeId,
-            id: { not: ledgerEntry.id }, // Exclude current entry
-            createdAt: { lt: ledgerEntry.createdAt },
-          },
-          orderBy: [{ createdAt: "desc" }],
-          select: { balance: true },
-        });
-
-        // Calculate previous balance (0 if no previous entry)
-        let previousBalance = 0;
-        if (previousEntry) {
-          previousBalance = Number(previousEntry.balance);
-        }
-
-        // Calculate new balance for current entry
-        // CREDIT increases balance, DEBIT decreases balance
-        let newBalance = previousBalance;
-        if (amountType === "CREDIT") {
-          newBalance = previousBalance + newAmountNum;
-        } else if (amountType === "DEBIT") {
-          newBalance = previousBalance - newAmountNum;
-        }
-
-        // Update the current ledger entry
-        await tx.ledger.update({
-          where: { id: ledgerEntry.id },
-          data: {
-            employeeId: employeeId,
-            date: newDate,
-            type: "CHALLAN",
-            amountType: amountType as "CREDIT" | "DEBIT",
-            amount: newAmount,
-            balance: newBalance,
-            description: `Challan ${!!description ? `(${description})` : ""}`,
-          },
-        });
-
-        // Get all ledger entries after this one (based on createdAt)
-        const subsequentEntries = await tx.ledger.findMany({
-          where: {
-            employeeId: employeeId,
-            id: { not: ledgerEntry.id }, // Exclude current entry
-            createdAt: { gt: ledgerEntry.createdAt },
-          },
-          orderBy: [{ createdAt: "asc" }],
-          select: { id: true, amount: true, amountType: true, balance: true },
-        });
-
-        // Recalculate balances for all subsequent entries
-        let currentBalance = newBalance;
-        for (const entry of subsequentEntries) {
-          const entryAmount = Number(entry.amount);
-          if (entry.amountType === "CREDIT") {
-            currentBalance = currentBalance + entryAmount;
-          } else if (entry.amountType === "DEBIT") {
-            currentBalance = currentBalance - entryAmount;
-          }
-
-          await tx.ledger.update({
-            where: { id: entry.id },
-            data: { balance: currentBalance },
-          });
-        }
-      } else {
-        // Amount and amountType didn't change, just update other fields
-        await tx.ledger.update({
-          where: { id: ledgerEntry.id },
-          data: {
-            employeeId: employeeId,
-            date: newDate,
-            type: "CHALLAN",
-            amountType: amountType as "CREDIT" | "DEBIT",
-            amount: newAmount,
-            description: `Challan ${!!description ? `(${description})` : ""}`,
-          },
-        });
-      }
-    }
-
     // Convert Decimal to number for client serialization
     return {
       ...trafficChallan,
@@ -353,18 +198,6 @@ export const deleteTrafficChallan = async (id: number) => {
 
     if (!existingTrafficChallan) {
       throw new Error("Traffic challan not found");
-    }
-
-    // Find and delete the corresponding ledger entry
-    const ledgerEntry = await tx.ledger.findFirst({
-      where: { trafficChallanId: id },
-      select: { id: true },
-    });
-
-    if (ledgerEntry) {
-      await tx.ledger.delete({
-        where: { id: ledgerEntry.id },
-      });
     }
 
     await tx.trafficChallan.delete({
@@ -464,6 +297,71 @@ export const listTrafficChallans = async (
 };
 
 /**
+ * List ALL traffic challans (no pagination) — used for exports
+ */
+export interface ListAllTrafficChallanParams {
+  search?: string;
+  employeeId?: number;
+  type?: "CHALLAN" | "RETURN";
+  startDate?: Date | string;
+  endDate?: Date | string;
+}
+
+export const listAllTrafficChallans = async (
+  params: ListAllTrafficChallanParams
+): Promise<{ trafficChallans: ListedTrafficChallan[] }> => {
+  // Build where clause (same logic as listLoans, minus pagination)
+  const where: any = {};
+
+  if (params.search) {
+    const search = params.search;
+    const searchAsNumber = Number(search);
+    const isNumber = !isNaN(searchAsNumber);
+
+    where.OR = [
+      { description: { contains: search, mode: "insensitive" } },
+      { employee: { nameEn: { contains: search, mode: "insensitive" } } },
+      { employee: { nameAr: { contains: search, mode: "insensitive" } } },
+    ];
+
+    if (isNumber) {
+      where.OR.push({ employee: { employeeCode: searchAsNumber } });
+    }
+  }
+
+  if (params.employeeId !== undefined) {
+    where.employeeId = params.employeeId;
+  }
+
+  if (params.type !== undefined) {
+    where.type = params.type;
+  }
+
+  if (params.startDate || params.endDate) {
+    where.date = {};
+    if (params.startDate) {
+      where.date.gte = dayjs(params.startDate).toDate();
+    }
+    if (params.endDate) {
+      where.date.lte = dayjs(params.endDate).toDate();
+    }
+  }
+
+  const trafficChallans = await prisma.trafficChallan.findMany({
+    where,
+    select: trafficChallanSelect,
+    orderBy: { date: "asc" },
+  });
+
+  return {
+    trafficChallans: trafficChallans.map((trafficChallan) => ({
+      ...trafficChallan,
+      amount: trafficChallan.amount,
+    })),
+  };
+};
+
+/**
  * Bulk upload traffic challans
  */
 export const bulkUploadTrafficChallans = async (
@@ -504,6 +402,15 @@ export const bulkUploadTrafficChallans = async (
 
       result.success++;
     } catch (error: any) {
+      console.error(error);
+      console.error(error.message);
+      console.error(error.stack);
+      console.error(error.cause);
+      console.error(error.code);
+      console.error(error.name);
+      console.error(error.syscall);
+      console.error(error.address);
+      console.error(error.port);
       result.failed++;
       result.errors.push({
         row: rowNumber,

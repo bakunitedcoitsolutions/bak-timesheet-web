@@ -331,40 +331,6 @@ export type EnumExitReentryTypeWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumExitReentryTypeFilter<$PrismaModel>
 }
 
-export type EnumLedgerTypeFilter<$PrismaModel = never> = {
-  equals?: $Enums.LedgerType | Prisma.EnumLedgerTypeFieldRefInput<$PrismaModel>
-  in?: $Enums.LedgerType[] | Prisma.ListEnumLedgerTypeFieldRefInput<$PrismaModel>
-  notIn?: $Enums.LedgerType[] | Prisma.ListEnumLedgerTypeFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumLedgerTypeFilter<$PrismaModel> | $Enums.LedgerType
-}
-
-export type EnumAmountTypeFilter<$PrismaModel = never> = {
-  equals?: $Enums.AmountType | Prisma.EnumAmountTypeFieldRefInput<$PrismaModel>
-  in?: $Enums.AmountType[] | Prisma.ListEnumAmountTypeFieldRefInput<$PrismaModel>
-  notIn?: $Enums.AmountType[] | Prisma.ListEnumAmountTypeFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumAmountTypeFilter<$PrismaModel> | $Enums.AmountType
-}
-
-export type EnumLedgerTypeWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.LedgerType | Prisma.EnumLedgerTypeFieldRefInput<$PrismaModel>
-  in?: $Enums.LedgerType[] | Prisma.ListEnumLedgerTypeFieldRefInput<$PrismaModel>
-  notIn?: $Enums.LedgerType[] | Prisma.ListEnumLedgerTypeFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumLedgerTypeWithAggregatesFilter<$PrismaModel> | $Enums.LedgerType
-  _count?: Prisma.NestedIntFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumLedgerTypeFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumLedgerTypeFilter<$PrismaModel>
-}
-
-export type EnumAmountTypeWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.AmountType | Prisma.EnumAmountTypeFieldRefInput<$PrismaModel>
-  in?: $Enums.AmountType[] | Prisma.ListEnumAmountTypeFieldRefInput<$PrismaModel>
-  notIn?: $Enums.AmountType[] | Prisma.ListEnumAmountTypeFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumAmountTypeWithAggregatesFilter<$PrismaModel> | $Enums.AmountType
-  _count?: Prisma.NestedIntFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumAmountTypeFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumAmountTypeFilter<$PrismaModel>
-}
-
 export type EnumAllowanceTypeFilter<$PrismaModel = never> = {
   equals?: $Enums.AllowanceType | Prisma.EnumAllowanceTypeFieldRefInput<$PrismaModel>
   in?: $Enums.AllowanceType[] | Prisma.ListEnumAllowanceTypeFieldRefInput<$PrismaModel>
@@ -683,40 +649,6 @@ export type NestedEnumExitReentryTypeWithAggregatesFilter<$PrismaModel = never> 
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumExitReentryTypeFilter<$PrismaModel>
   _max?: Prisma.NestedEnumExitReentryTypeFilter<$PrismaModel>
-}
-
-export type NestedEnumLedgerTypeFilter<$PrismaModel = never> = {
-  equals?: $Enums.LedgerType | Prisma.EnumLedgerTypeFieldRefInput<$PrismaModel>
-  in?: $Enums.LedgerType[] | Prisma.ListEnumLedgerTypeFieldRefInput<$PrismaModel>
-  notIn?: $Enums.LedgerType[] | Prisma.ListEnumLedgerTypeFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumLedgerTypeFilter<$PrismaModel> | $Enums.LedgerType
-}
-
-export type NestedEnumAmountTypeFilter<$PrismaModel = never> = {
-  equals?: $Enums.AmountType | Prisma.EnumAmountTypeFieldRefInput<$PrismaModel>
-  in?: $Enums.AmountType[] | Prisma.ListEnumAmountTypeFieldRefInput<$PrismaModel>
-  notIn?: $Enums.AmountType[] | Prisma.ListEnumAmountTypeFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumAmountTypeFilter<$PrismaModel> | $Enums.AmountType
-}
-
-export type NestedEnumLedgerTypeWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.LedgerType | Prisma.EnumLedgerTypeFieldRefInput<$PrismaModel>
-  in?: $Enums.LedgerType[] | Prisma.ListEnumLedgerTypeFieldRefInput<$PrismaModel>
-  notIn?: $Enums.LedgerType[] | Prisma.ListEnumLedgerTypeFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumLedgerTypeWithAggregatesFilter<$PrismaModel> | $Enums.LedgerType
-  _count?: Prisma.NestedIntFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumLedgerTypeFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumLedgerTypeFilter<$PrismaModel>
-}
-
-export type NestedEnumAmountTypeWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.AmountType | Prisma.EnumAmountTypeFieldRefInput<$PrismaModel>
-  in?: $Enums.AmountType[] | Prisma.ListEnumAmountTypeFieldRefInput<$PrismaModel>
-  notIn?: $Enums.AmountType[] | Prisma.ListEnumAmountTypeFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumAmountTypeWithAggregatesFilter<$PrismaModel> | $Enums.AmountType
-  _count?: Prisma.NestedIntFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumAmountTypeFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumAmountTypeFilter<$PrismaModel>
 }
 
 export type NestedEnumAllowanceTypeFilter<$PrismaModel = never> = {

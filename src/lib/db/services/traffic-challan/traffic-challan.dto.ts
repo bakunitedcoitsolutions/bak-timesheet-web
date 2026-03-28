@@ -54,6 +54,9 @@ export interface ListedTrafficChallan extends TrafficChallanInterface {
   employee?: {
     nameEn: string;
     employeeCode: number;
+    designation?: {
+      nameEn: string;
+    } | null;
   };
 }
 

@@ -71,7 +71,6 @@ export const ModelName = {
   Loan: 'Loan',
   TrafficChallan: 'TrafficChallan',
   ExitReentry: 'ExitReentry',
-  Ledger: 'Ledger',
   AllowanceNotAvailable: 'AllowanceNotAvailable'
 } as const
 
@@ -445,26 +444,6 @@ export const ExitReentryScalarFieldEnum = {
 } as const
 
 export type ExitReentryScalarFieldEnum = (typeof ExitReentryScalarFieldEnum)[keyof typeof ExitReentryScalarFieldEnum]
-
-
-export const LedgerScalarFieldEnum = {
-  id: 'id',
-  employeeId: 'employeeId',
-  date: 'date',
-  type: 'type',
-  amountType: 'amountType',
-  amount: 'amount',
-  balance: 'balance',
-  description: 'description',
-  reference: 'reference',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  payrollDetailId: 'payrollDetailId',
-  loanId: 'loanId',
-  trafficChallanId: 'trafficChallanId'
-} as const
-
-export type LedgerScalarFieldEnum = (typeof LedgerScalarFieldEnum)[keyof typeof LedgerScalarFieldEnum]
 
 
 export const AllowanceNotAvailableScalarFieldEnum = {

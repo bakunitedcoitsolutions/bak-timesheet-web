@@ -1,5 +1,4 @@
 "use client";
-import React from "react";
 import { Input, ExportOptions, BulkUploadOptions } from "@/components";
 
 interface ViolationsFiltersProps {

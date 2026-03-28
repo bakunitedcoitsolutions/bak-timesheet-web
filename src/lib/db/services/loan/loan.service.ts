@@ -71,48 +71,6 @@ async function createLoanWithLedger(
     select: loanSelect,
   });
 
-  // Determine amount type: LOAN = DEBIT, RETURN = CREDIT
-  const amountType = data.type === "LOAN" ? "DEBIT" : "CREDIT";
-
-  // Get the previous balance (balance of the entry just before this one, based on createdAt)
-  const previousEntry = await tx.ledger.findFirst({
-    where: {
-      employeeId: data.employeeId,
-    },
-    orderBy: [{ createdAt: "desc" }],
-    select: { balance: true },
-  });
-
-  // Calculate previous balance (0 if no previous entry)
-  let previousBalance = 0;
-  if (previousEntry) {
-    previousBalance = Number(previousEntry.balance);
-  }
-
-  // Calculate new balance for current entry
-  // CREDIT increases balance, DEBIT decreases balance
-  const amountNum = Number(data.amount);
-  let newBalance = previousBalance;
-  if (amountType === "CREDIT") {
-    newBalance = previousBalance + amountNum;
-  } else if (amountType === "DEBIT") {
-    newBalance = previousBalance - amountNum;
-  }
-
-  // Create ledger entry with calculated balance
-  await tx.ledger.create({
-    data: {
-      employeeId: data.employeeId,
-      date: dayjs(data.date).toDate(),
-      type: "LOAN",
-      amountType: amountType as "CREDIT" | "DEBIT",
-      amount: data.amount,
-      balance: newBalance,
-      description: `Loan ${!!remarks ? `(${remarks})` : ""}`,
-      loanId: loan.id,
-    },
-  });
-
   return loan;
 }
 
@@ -215,123 +173,6 @@ export const updateLoan = async (id: number, data: UpdateLoanData) => {
       select: loanSelect,
     });
 
-    // Find and update the corresponding ledger entry
-    const ledgerEntry = await tx.ledger.findFirst({
-      where: { loanId: id },
-      select: {
-        id: true,
-        createdAt: true,
-        amount: true,
-        amountType: true,
-        balance: true,
-        date: true,
-      },
-    });
-
-    if (ledgerEntry) {
-      const employeeId = data.employeeId ?? existingLoan.employeeId;
-
-      const remarks = updateData?.remarks ?? existingLoan?.remarks ?? "";
-
-      // Determine amount type: LOAN = DEBIT, RETURN = CREDIT
-      const loanType = data.type ?? existingLoan.type;
-      const amountType = loanType === "LOAN" ? "DEBIT" : "CREDIT";
-
-      const newAmount = data.amount ?? existingLoan.amount;
-      const newDate = data.date
-        ? dayjs(data.date).toDate()
-        : new Date(existingLoan.date);
-
-      // Check if amount or amountType changed (date changes don't trigger balance recalculation)
-      const oldAmount = Number(ledgerEntry.amount);
-      const newAmountNum = Number(newAmount);
-      const amountChanged = oldAmount !== newAmountNum;
-      const amountTypeChanged = ledgerEntry.amountType !== amountType;
-
-      // Only update balances if amount or amountType changed
-      if (amountChanged || amountTypeChanged) {
-        // Get the previous balance (balance of the entry just before this one, based on createdAt)
-        const previousEntry = await tx.ledger.findFirst({
-          where: {
-            employeeId: employeeId,
-            id: { not: ledgerEntry.id }, // Exclude current entry
-            createdAt: { lt: ledgerEntry.createdAt },
-          },
-          orderBy: [{ createdAt: "desc" }],
-          select: { balance: true },
-        });
-
-        // Calculate previous balance (0 if no previous entry)
-        let previousBalance = 0;
-        if (previousEntry) {
-          previousBalance = Number(previousEntry.balance);
-        }
-
-        // Calculate new balance for current entry
-        // CREDIT increases balance, DEBIT decreases balance
-        let newBalance = previousBalance;
-        if (amountType === "CREDIT") {
-          newBalance = previousBalance + newAmountNum;
-        } else if (amountType === "DEBIT") {
-          newBalance = previousBalance - newAmountNum;
-        }
-
-        // Update the current ledger entry
-        await tx.ledger.update({
-          where: { id: ledgerEntry.id },
-          data: {
-            employeeId: employeeId,
-            date: newDate,
-            type: "LOAN",
-            amountType: amountType as "CREDIT" | "DEBIT",
-            amount: newAmount,
-            balance: newBalance,
-            description: `Loan ${!!remarks ? `(${remarks})` : ""}`,
-          },
-        });
-
-        // Get all ledger entries after this one (based on createdAt)
-        const subsequentEntries = await tx.ledger.findMany({
-          where: {
-            employeeId: employeeId,
-            id: { not: ledgerEntry.id }, // Exclude current entry
-            createdAt: { gt: ledgerEntry.createdAt },
-          },
-          orderBy: [{ createdAt: "asc" }],
-          select: { id: true, amount: true, amountType: true, balance: true },
-        });
-
-        // Recalculate balances for all subsequent entries
-        let currentBalance = newBalance;
-        for (const entry of subsequentEntries) {
-          const entryAmount = Number(entry.amount);
-          if (entry.amountType === "CREDIT") {
-            currentBalance = currentBalance + entryAmount;
-          } else if (entry.amountType === "DEBIT") {
-            currentBalance = currentBalance - entryAmount;
-          }
-
-          await tx.ledger.update({
-            where: { id: entry.id },
-            data: { balance: currentBalance },
-          });
-        }
-      } else {
-        // Amount and amountType didn't change, just update other fields
-        await tx.ledger.update({
-          where: { id: ledgerEntry.id },
-          data: {
-            employeeId: employeeId,
-            date: newDate,
-            type: "LOAN",
-            amountType: amountType as "CREDIT" | "DEBIT",
-            amount: newAmount,
-            description: `Loan ${!!remarks ? `(${remarks})` : ""}`,
-          },
-        });
-      }
-    }
-
     // Convert Decimal to number for client serialization
     return {
       ...loan,
@@ -353,18 +194,6 @@ export const deleteLoan = async (id: number) => {
 
     if (!existingLoan) {
       throw new Error("Loan not found");
-    }
-
-    // Find and delete the corresponding ledger entry
-    const ledgerEntry = await tx.ledger.findFirst({
-      where: { loanId: id },
-      select: { id: true },
-    });
-
-    if (ledgerEntry) {
-      await tx.ledger.delete({
-        where: { id: ledgerEntry.id },
-      });
     }
 
     await tx.loan.delete({

@@ -227,7 +227,6 @@ model Employee {
   trafficChallans TrafficChallan[]
   exitReentries   ExitReentry[]
   payrollDetails  PayrollDetails[]
-  ledgers         Ledger[]
 
   @@index([employeeCode])
   @@index([countryId])
@@ -451,9 +450,6 @@ model PayrollDetails {
   creator                   User?           @relation("PayrollDetailsCreatedBy", fields: [createdBy], references: [id])
   modifier                  User?           @relation("PayrollDetailsModifiedBy", fields: [modifiedBy], references: [id])
 
-  // Relations: Other Tables → PayrollDetails
-  ledgers Ledger[]
-
   @@index([payrollId])
   @@index([employeeId])
   @@index([payrollMonth, payrollYear])
@@ -486,9 +482,6 @@ model Loan {
   // Relations: Loan → Other Tables (Loan has foreign keys)
   employee Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
 
-  // Relations: Other Tables → Loan (Other tables have foreign keys pointing to Loan)
-  ledgers Ledger[]
-
   @@index([employeeId])
   @@index([date])
   @@index([type])
@@ -515,9 +508,6 @@ model TrafficChallan {
 
   // Relations: TrafficChallan → Other Tables (TrafficChallan has foreign keys)
   employee Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
-
-  // Relations: Other Tables → TrafficChallan (Other tables have foreign keys pointing to TrafficChallan)
-  ledgers Ledger[]
 
   @@index([employeeId])
   @@index([date])
@@ -551,49 +541,6 @@ model ExitReentry {
   @@index([designationId])
   @@index([date])
   @@index([type])
-}
-
-// ============================================
-// LEDGER
-// ============================================
-
-enum LedgerType {
-  SALARY
-  LOAN
-  CHALLAN
-}
-
-enum AmountType {
-  CREDIT
-  DEBIT
-}
-
-model Ledger {
-  id               Int        @id @default(autoincrement())
-  employeeId       Int?
-  date             DateTime   @db.Date
-  type             LedgerType
-  amountType       AmountType
-  amount           Int
-  balance          Int
-  description      String     @db.Text
-  reference        String?
-  createdAt        DateTime   @default(now())
-  updatedAt        DateTime   @updatedAt
-  payrollDetailId  Int?
-  loanId           Int?
-  trafficChallanId Int?
-
-  // Relations: Ledger → Other Tables (Ledger has foreign keys)
-  employee       Employee?       @relation(fields: [employeeId], references: [id], onDelete: Cascade)
-  payrollDetail  PayrollDetails? @relation(fields: [payrollDetailId], references: [id], onDelete: Cascade)
-  loan           Loan?           @relation(fields: [loanId], references: [id], onDelete: Cascade)
-  trafficChallan TrafficChallan? @relation(fields: [trafficChallanId], references: [id], onDelete: Cascade)
-
-  @@index([date])
-  @@index([employeeId])
-  @@index([type])
-  @@index([amountType])
 }
 
 enum AllowanceType {

@@ -3,15 +3,8 @@ import dayjs from "dayjs";
 import { useRouter } from "next/navigation";
 import { useRef, useState, useEffect, useMemo, useCallback } from "react";
 
-import {
-  TableRef,
-  useAccess,
-  BulkUploadDialog,
-} from "@/components";
-import {
-  getErrorMessage,
-  createSortHandler,
-} from "@/utils/helpers";
+import { TableRef, useAccess, BulkUploadDialog } from "@/components";
+import { getErrorMessage, createSortHandler } from "@/utils/helpers";
 import { useDebounce } from "@/hooks";
 import { toastService } from "@/lib/toast";
 import {
@@ -63,7 +56,7 @@ const LoansPage = () => {
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
   const [showFilePicker, setShowFilePicker] = useState<boolean>(false);
   const tableRef = useRef<TableRef>(null);
-  
+
   const { mutateAsync: deleteLoan } = useDeleteLoan();
   const { mutateAsync: bulkUploadLoans } = useBulkUploadLoans();
 
@@ -323,26 +316,23 @@ const LoansPage = () => {
     [bulkUploadLoans]
   );
 
-  const renderFilters = useCallback(() => (
-    <LoansFilters
-      selectedDate={selectedDate}
-      setSelectedDate={setSelectedDate}
-      searchValue={searchValue}
-      setSearchValue={setSearchValue}
-      exportCSV={exportCSV}
-      exportExcel={exportExcel}
-      canAdd={canAdd}
-      uploadCSV={() => setShowFilePicker(true)}
-      uploadExcel={() => setShowFilePicker(true)}
-      downloadTemplate={downloadSampleTemplate}
-    />
-  ), [
-    selectedDate,
-    searchValue,
-    exportCSV,
-    exportExcel,
-    canAdd,
-  ]);
+  const renderFilters = useCallback(
+    () => (
+      <LoansFilters
+        selectedDate={selectedDate}
+        setSelectedDate={setSelectedDate}
+        searchValue={searchValue}
+        setSearchValue={setSearchValue}
+        exportCSV={exportCSV}
+        exportExcel={exportExcel}
+        canAdd={canAdd}
+        uploadCSV={() => setShowFilePicker(true)}
+        uploadExcel={() => setShowFilePicker(true)}
+        downloadTemplate={downloadSampleTemplate}
+      />
+    ),
+    [selectedDate, searchValue, exportCSV, exportExcel, canAdd]
+  );
 
   return (
     <>

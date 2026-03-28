@@ -33,23 +33,6 @@ export const ExitReentryType = {
 export type ExitReentryType = (typeof ExitReentryType)[keyof typeof ExitReentryType]
 
 
-export const LedgerType = {
-  SALARY: 'SALARY',
-  LOAN: 'LOAN',
-  CHALLAN: 'CHALLAN'
-} as const
-
-export type LedgerType = (typeof LedgerType)[keyof typeof LedgerType]
-
-
-export const AmountType = {
-  CREDIT: 'CREDIT',
-  DEBIT: 'DEBIT'
-} as const
-
-export type AmountType = (typeof AmountType)[keyof typeof AmountType]
-
-
 export const AllowanceType = {
   BREAKFAST: 'BREAKFAST',
   FOOD: 'FOOD',

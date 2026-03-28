@@ -7,6 +7,7 @@ import {
   listTrafficChallans,
   deleteTrafficChallan,
   bulkUploadTrafficChallans,
+  listAllTrafficChallans,
 } from "./traffic-challan.service";
 import {
   CreateTrafficChallanSchema,
@@ -20,6 +21,8 @@ import {
   GetTrafficChallanByIdInput,
   DeleteTrafficChallanInput,
   BulkUploadTrafficChallanInput,
+  ListAllTrafficChallansParamsInput,
+  ListAllTrafficChallansParamsSchema,
 } from "./traffic-challan.schemas";
 
 // Create Traffic Challan
@@ -68,5 +71,13 @@ export const bulkUploadTrafficChallansAction = serverAction
   .input(BulkUploadTrafficChallanSchema)
   .handler(async ({ input }: { input: BulkUploadTrafficChallanInput }) => {
     const response = await bulkUploadTrafficChallans(input);
+    return response;
+  });
+
+// List ALL Traffic Challans (no pagination) — for exports
+export const listAllTrafficChallansAction = serverAction
+  .input(ListAllTrafficChallansParamsSchema)
+  .handler(async ({ input }: { input: ListAllTrafficChallansParamsInput }) => {
+    const response = await listAllTrafficChallans(input);
     return response;
   });

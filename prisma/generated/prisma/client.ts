@@ -140,11 +140,6 @@ export type TrafficChallan = Prisma.TrafficChallanModel
  */
 export type ExitReentry = Prisma.ExitReentryModel
 /**
- * Model Ledger
- * 
- */
-export type Ledger = Prisma.LedgerModel
-/**
  * Model AllowanceNotAvailable
  * 
  */
