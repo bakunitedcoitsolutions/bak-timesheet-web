@@ -44,10 +44,9 @@ const trafficChallanSelect = {
 };
 
 /**
- * Internal reusable function to create a traffic challan with ledger entry
- * This function handles the creation of both traffic challan and ledger entry with balance calculation
+ * Internal reusable function to create a traffic challan
  */
-async function createTrafficChallanWithLedger(
+async function createTrafficChallanInternal(
   tx: PrismaTransactionClient,
   data: {
     employeeId: number;
@@ -89,7 +88,7 @@ export const createTrafficChallan = async (data: CreateTrafficChallanData) => {
       throw new Error(`Employee with ID ${data.employeeId} does not exist`);
     }
 
-    const trafficChallan = await createTrafficChallanWithLedger(tx, {
+    const trafficChallan = await createTrafficChallanInternal(tx, {
       employeeId: data.employeeId,
       date: data.date,
       type: data.type,
@@ -390,8 +389,8 @@ export const bulkUploadTrafficChallans = async (
           throw new Error(`Employee with code ${row.employeeCode} not found`);
         }
 
-        // Create traffic challan with ledger entry using reusable function
-        await createTrafficChallanWithLedger(tx, {
+        // Create traffic challan using reusable function
+        await createTrafficChallanInternal(tx, {
           employeeId: employee.id,
           date: row.date,
           type: row.type,

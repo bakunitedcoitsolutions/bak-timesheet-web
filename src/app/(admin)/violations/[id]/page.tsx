@@ -1,14 +1,11 @@
 "use client";
 
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useCallback } from "react";
 import { useForm } from "react-hook-form";
-import { classNames } from "primereact/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useParams, useRouter } from "next/navigation";
 import { ProgressSpinner } from "primereact/progressspinner";
-import dayjs from "dayjs";
 import { useGetPayrollSummaryStatus } from "@/lib/db/services/payroll-summary/requests";
-
 import {
   useUpdateTrafficChallan,
   useCreateTrafficChallan,
@@ -22,22 +19,14 @@ import { useGlobalData, GlobalDataEmployee } from "@/context/GlobalDataContext";
 import { toastService } from "@/lib/toast";
 import { getEntityModeFromParam } from "@/helpers";
 import { getErrorMessage } from "@/utils/helpers";
-import { FORM_FIELD_WIDTHS } from "@/utils/constants";
+import { useAccess } from "@/components";
+import { ViolationsUpsertHeader } from "./components/ViolationsUpsertHeader";
+import { ViolationsForm } from "./components/ViolationsForm";
 import {
-  Input,
-  Button,
-  Dropdown,
-  Form,
-  FormItem,
-  NumberInput,
-  Textarea,
-} from "@/components/forms";
-import { StepperFormHeading, useAccess } from "@/components";
-
-const challanTypeOptions = [
-  { label: "Challan", value: "CHALLAN" },
-  { label: "Return", value: "RETURN" },
-];
+  VIOLATION_DEFAULT_VALUES,
+  getMonthYearFromDate,
+  checkIsPayrollPosted,
+} from "./helpers";
 
 const UpsertChallanPage = () => {
   const router = useRouter();
@@ -89,46 +78,40 @@ const UpsertChallanPage = () => {
   const { data: globalData } = useGlobalData();
   const employees = globalData.employees || [];
 
-  const employeeOptions = employees.map((employee: GlobalDataEmployee) => ({
-    label: `${employee.employeeCode} - ${employee.nameEn}`,
-    value: employee.id,
-  }));
+  const employeeOptions = useMemo(
+    () =>
+      employees.map((employee: GlobalDataEmployee) => ({
+        label: `${employee.employeeCode} - ${employee.nameEn}`,
+        value: employee.id,
+      })),
+    [employees]
+  );
 
   const zodSchema = isEditMode
     ? UpdateTrafficChallanSchema
     : CreateTrafficChallanSchema;
 
-  const defaultValues = {
-    ...(isEditMode ? { id: 0 } : {}),
-    employeeId: undefined as number | undefined,
-    date: "",
-    type: undefined as "CHALLAN" | "RETURN" | undefined,
-    amount: undefined as number | undefined,
-    description: "",
-  };
-
   const form = useForm({
     resolver: zodResolver(zodSchema) as any,
-    defaultValues,
+    defaultValues: {
+      ...VIOLATION_DEFAULT_VALUES,
+      ...(isEditMode ? { id: 0 } : {}),
+    },
   });
 
   const {
     reset,
     handleSubmit,
     formState: { isSubmitting },
+    watch,
+    setValue,
   } = form;
 
-  const dateValue = form.watch("date");
+  const dateValue = watch("date");
 
   const { month: selectedMonth, year: selectedYear } = useMemo(() => {
-    if (isEditMode) {
-      if (!foundChallan?.date) return { month: 0, year: 0 };
-      const d = dayjs(foundChallan.date);
-      return { month: d.month() + 1, year: d.year() };
-    } else {
-      const d = dayjs(dateValue || new Date());
-      return { month: d.month() + 1, year: d.year() };
-    }
+    const targetDate = isEditMode ? foundChallan?.date : dateValue;
+    return getMonthYearFromDate(targetDate);
   }, [isEditMode, foundChallan?.date, dateValue]);
 
   const { data: payrollSummaryStatus } = useGetPayrollSummaryStatus({
@@ -136,7 +119,10 @@ const UpsertChallanPage = () => {
     year: selectedYear,
   });
 
-  const isPayrollPosted = payrollSummaryStatus?.payrollStatusId === 3;
+  const isPayrollPosted = checkIsPayrollPosted(
+    payrollSummaryStatus,
+    isEditMode ? foundChallan?.date : dateValue
+  );
 
   useEffect(() => {
     if (isEditMode && isPayrollPosted) {
@@ -150,9 +136,9 @@ const UpsertChallanPage = () => {
         "Error",
         "Cannot add traffic violation for this date as payroll for this month is already posted."
       );
-      form.setValue("date", dayjs().format("YYYY-MM-DD"));
+      setValue("date", "");
     }
-  }, [isEditMode, isAddMode, isPayrollPosted, dateValue, router, form]);
+  }, [isEditMode, isAddMode, isPayrollPosted, dateValue, router, setValue]);
 
   // Redirect to 404 page if the entity is invalid
   useEffect(() => {
@@ -176,21 +162,6 @@ const UpsertChallanPage = () => {
       reset(setChallan);
     }
   }, [foundChallan, isEditMode, reset]);
-
-  const onFormSubmit = handleSubmit(async (data) => {
-    if (isPayrollPosted) {
-      toastService.showError(
-        "Error",
-        "Cannot save as payroll for this month is already posted."
-      );
-      return;
-    }
-    if (isAddMode) {
-      await handleCreateChallan(data);
-    } else {
-      await handleUpdateChallan(data);
-    }
-  });
 
   const handleCreateChallan = async (data: any) => {
     try {
@@ -229,104 +200,41 @@ const UpsertChallanPage = () => {
     }
   };
 
+  const onFormSubmit = handleSubmit(async (data) => {
+    if (isPayrollPosted) {
+      toastService.showError(
+        "Error",
+        "Cannot save as payroll for this month is already posted."
+      );
+      return;
+    }
+    if (isAddMode) {
+      await handleCreateChallan(data);
+    } else {
+      await handleUpdateChallan(data);
+    }
+  });
+
+  const onCancel = useCallback(() => {
+    router.replace("/violations");
+  }, [router]);
+
   return (
-    <div className="flex flex-col h-full gap-6 px-6 py-6">
-      <div className="flex h-full justify-between flex-1 md:flex-none flex-col gap-4 py-6 bg-white rounded-lg">
-        <StepperFormHeading
-          title={isAddMode ? "Add Violation" : "Edit Violation"}
-        />
+    <div className="flex flex-col h-full gap-6 px-6 py-6 font-primary">
+      <div className="flex bg-white h-full justify-between flex-1 md:flex-none flex-col gap-4 py-8 rounded-xl shadow-[0px_4px_24px_-8px_#4D5BEC3B]">
+        <ViolationsUpsertHeader isAddMode={isAddMode} />
         {isLoading ? (
           <div className="flex justify-center items-center h-full">
             <ProgressSpinner style={{ width: "50px", height: "50px" }} />
           </div>
         ) : (
-          <>
-            <Form
-              form={form}
-              className="w-full h-full content-start md:max-w-5xl"
-            >
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 md:gap-y-4 md:py-5 px-6 mt-5 md:mt-0 flex-1">
-                <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
-                  <FormItem name="date">
-                    <Input
-                      type="date"
-                      label="Date"
-                      className="w-full"
-                      placeholder="Select date"
-                    />
-                  </FormItem>
-                </div>
-
-                <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
-                  <FormItem name="employeeId">
-                    <Dropdown
-                      label="Employee"
-                      className="w-full"
-                      placeholder="Choose employee"
-                      options={employeeOptions}
-                      filter
-                      showClear
-                    />
-                  </FormItem>
-                </div>
-
-                <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
-                  <FormItem name="type">
-                    <Dropdown
-                      label="Type"
-                      className="w-full"
-                      placeholder="Choose type"
-                      options={challanTypeOptions}
-                    />
-                  </FormItem>
-                </div>
-
-                <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
-                  <FormItem name="amount">
-                    <NumberInput
-                      label="Amount"
-                      className="w-full"
-                      placeholder="Enter amount"
-                      min={0}
-                      mode="decimal"
-                    />
-                  </FormItem>
-                </div>
-
-                <div className={classNames("md:col-span-2")}>
-                  <FormItem name="description">
-                    <Textarea
-                      label="Description"
-                      className="w-full"
-                      placeholder="Enter description..."
-                      rows={4}
-                    />
-                  </FormItem>
-                </div>
-              </div>
-            </Form>
-
-            <div className="flex items-center gap-3 justify-end px-6">
-              <Button
-                size="small"
-                variant="text"
-                disabled={isSubmitting}
-                onClick={() => router.replace("/violations")}
-              >
-                Cancel
-              </Button>
-              <Button
-                size="small"
-                variant="solid"
-                onClick={onFormSubmit}
-                loading={isSubmitting}
-                disabled={isSubmitting}
-                className="w-28 justify-center! gap-1"
-              >
-                Save
-              </Button>
-            </div>
-          </>
+          <ViolationsForm
+            form={form}
+            employeeOptions={employeeOptions}
+            isSubmitting={isSubmitting}
+            onCancel={onCancel}
+            onSubmit={onFormSubmit}
+          />
         )}
       </div>
     </div>
