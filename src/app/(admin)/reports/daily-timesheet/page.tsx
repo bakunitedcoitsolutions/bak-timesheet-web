@@ -11,6 +11,7 @@ import { useGlobalData } from "@/context/GlobalDataContext";
 import { TimesheetPageRow } from "@/lib/db/services/timesheet/timesheet.dto";
 import { useGetDailyTimesheetReport } from "@/lib/db/services/timesheet/requests";
 import { printDailyTimesheetReport } from "@/utils/helpers/print-daily-timesheet";
+import dayjs from "@/lib/dayjs";
 
 // Extracted Components
 import { ReportTable } from "./components/report-table";
@@ -23,8 +24,8 @@ const DailyTimesheetReportPage = () => {
   const { data: globalData } = useGlobalData();
 
   // Filter states
-  const [selectedDate, setSelectedDate] = useState<Date>(new Date());
-  const [queryDate, setQueryDate] = useState<Date>(new Date());
+  const [selectedDate, setSelectedDate] = useState<Date>(dayjs().toDate());
+  const [queryDate, setQueryDate] = useState<Date>(dayjs().toDate());
   const [isFirstLoad, setIsFirstLoad] = useState(true);
   const [filter, setFilter] = useState({
     employeeCodes: null as string[] | null,

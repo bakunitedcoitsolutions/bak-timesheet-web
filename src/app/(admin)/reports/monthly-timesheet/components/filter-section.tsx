@@ -22,9 +22,14 @@ interface FilterSectionProps {
 }
 
 export const FilterSection = memo(
-  ({ onSearch, selectedDate, onDateChange, isLoading }: FilterSectionProps) => {
+  ({
+    onSearch,
+    selectedDate,
+    onDateChange,
+    isLoading,
+  }: FilterSectionProps) => {
     const { canAccessFilter, isLoading: isLoadingAccess } = useAccess();
-    const isAllowedAllFilters = canAccessFilter("daily-timesheet");
+    const isAllowedAllFilters = canAccessFilter("monthly-timesheet");
 
     const [employeeCodes, setEmployeeCodes] = useState<string[]>([]);
     const [selectedFilter, setSelectedFilter] = useState<
@@ -43,14 +48,14 @@ export const FilterSection = memo(
         label: p.nameEn,
         value: p.id,
       }));
-      return [{ label: "All Projects", value: 0 }, ...options];
+      return [{ label: "All Projects", value: null }, ...options];
     }, [projects]);
 
     const handleRefresh = () => {
       onSearch({
         employeeCodes: employeeCodes.length > 0 ? employeeCodes : null,
         selectedFilter,
-        projectId: projectId === 0 ? null : projectId,
+        projectId,
         showAbsents,
         showFixedSalary,
       });
@@ -68,11 +73,17 @@ export const FilterSection = memo(
             <>
               <div className="w-full">
                 <Input
-                  type="date"
-                  value={dayjs(selectedDate).format("YYYY-MM-DD")}
+                  type="month"
+                  value={dayjs(selectedDate).format("YYYY-MM")}
                   onChange={(e) => {
                     if (e.target.value) {
-                      onDateChange(dayjs(e.target.value).toDate());
+                      const [y, m] = e.target.value.split("-").map(Number);
+                      onDateChange(
+                        dayjs()
+                          .year(y)
+                          .month(m - 1)
+                          .toDate()
+                      );
                     }
                   }}
                   onKeyDown={(e) => {
@@ -82,31 +93,31 @@ export const FilterSection = memo(
                     handleRefresh();
                   }}
                   className="w-full h-10!"
-                  placeholder="Select Date"
+                  placeholder="Select Month"
+                />
+              </div>
+              <div className="w-full">
+                <AutoScrollChips
+                  keyfilter="int"
+                  value={employeeCodes}
+                  allowDuplicate={false}
+                  placeholder="Employee Codes"
+                  className="w-full h-10!"
+                  onChange={(e) => {
+                    const codes = e.value ?? [];
+                    setEmployeeCodes(codes);
+                    // If employee code is present, clear other filters
+                    if (codes.length > 0) {
+                      setSelectedFilter("all");
+                      setProjectId(null);
+                      setShowAbsents(false);
+                      setShowFixedSalary(false);
+                    }
+                  }}
                 />
               </div>
               {isAllowedAllFilters && (
                 <>
-                  <div className="w-full">
-                    <AutoScrollChips
-                      keyfilter="int"
-                      value={employeeCodes}
-                      allowDuplicate={false}
-                      placeholder="Employee Codes"
-                      className="w-full h-10!"
-                      onChange={(e) => {
-                        const codes = e.value ?? [];
-                        setEmployeeCodes(codes);
-                        // If employee code is present, clear other filters
-                        if (codes.length > 0) {
-                          setSelectedFilter("all");
-                          setProjectId(null);
-                          setShowAbsents(false);
-                          setShowFixedSalary(false);
-                        }
-                      }}
-                    />
-                  </div>
                   <div className="w-full">
                     <GroupDropdown
                       value={selectedFilter}
@@ -116,19 +127,19 @@ export const FilterSection = memo(
                       disabled={employeeCodes.length > 0}
                     />
                   </div>
+                  <div className="w-full">
+                    <Dropdown
+                      filter
+                      options={projectOptions}
+                      value={projectId}
+                      onChange={(e) => setProjectId(e.value)}
+                      className="w-full h-10!"
+                      placeholder="Select Project"
+                      disabled={employeeCodes.length > 0}
+                    />
+                  </div>
                 </>
               )}
-              <div className="w-full">
-                <Dropdown
-                  filter
-                  options={projectOptions}
-                  value={projectId}
-                  onChange={(e) => setProjectId(e.value)}
-                  className="w-full h-10!"
-                  placeholder="Select Project"
-                  disabled={employeeCodes.length > 0}
-                />
-              </div>
               {isAllowedAllFilters && (
                 <div className="w-full">
                   <div className="flex items-center gap-4">
