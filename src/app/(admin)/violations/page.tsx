@@ -1,5 +1,4 @@
 "use client";
-import dayjs from "dayjs";
 import { useRouter } from "next/navigation";
 import { useRef, useState, useEffect, useMemo, useCallback } from "react";
 
@@ -31,6 +30,7 @@ import {
   createColumns,
   checkIsLocked,
 } from "./helpers";
+import dayjs from "@/lib/dayjs";
 import { ViolationsHeader } from "./components/ViolationsHeader";
 import { ViolationsFilters } from "./components/ViolationsFilters";
 import { ViolationsTable } from "./components/ViolationsTable";
@@ -92,7 +92,7 @@ const ChallansPage = () => {
   // Convert selected date to Date object for API
   const dateFilter = selectedDate
     ? (() => {
-        const date = dayjs(selectedDate);
+        const date = dayjs(selectedDate, "YYYY-MM");
         return {
           startDate: date.startOf("month").toDate(),
           endDate: date.endOf("month").toDate(),

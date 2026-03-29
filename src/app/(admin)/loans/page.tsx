@@ -1,5 +1,4 @@
 "use client";
-import dayjs from "dayjs";
 import { useRouter } from "next/navigation";
 import { useRef, useState, useEffect, useMemo, useCallback } from "react";
 
@@ -41,6 +40,7 @@ import {
   getLoansTableColumns,
   SortableField,
 } from "./helpers";
+import dayjs from "@/lib/dayjs";
 
 const LoansPage = () => {
   const router = useRouter();

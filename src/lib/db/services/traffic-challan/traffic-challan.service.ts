@@ -3,7 +3,6 @@
  * Business logic for traffic challan operations
  */
 
-import dayjs from "dayjs";
 import { prisma } from "@/lib/db/prisma";
 import type {
   CreateTrafficChallanData,
@@ -14,6 +13,7 @@ import type {
   BulkUploadTrafficChallanResult,
   ListedTrafficChallan,
 } from "./traffic-challan.dto";
+import dayjs from "@/lib/dayjs";
 
 // Type helper for Prisma transaction client
 type PrismaTransactionClient = Parameters<
@@ -251,7 +251,7 @@ export const listTrafficChallans = async (
   if (params.startDate || params.endDate) {
     where.date = {};
     if (params.startDate) {
-      where.date.gte = dayjs(params.startDate).toDate();
+      where.date.gt = dayjs(params.startDate).toDate();
     }
     if (params.endDate) {
       where.date.lte = dayjs(params.endDate).toDate();

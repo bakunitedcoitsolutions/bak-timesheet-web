@@ -3,7 +3,6 @@
  * Business logic for loan operations
  */
 
-import dayjs from "dayjs";
 import { prisma } from "@/lib/db/prisma";
 import type {
   CreateLoanData,
@@ -14,6 +13,7 @@ import type {
   BulkUploadLoanData,
   BulkUploadLoanResult,
 } from "./loan.dto";
+import dayjs from "@/lib/dayjs";
 
 // Type helper for Prisma transaction client
 type PrismaTransactionClient = Parameters<
@@ -248,7 +248,7 @@ export const listLoans = async (
   if (params.startDate || params.endDate) {
     where.date = {};
     if (params.startDate) {
-      where.date.gte = dayjs(params.startDate).toDate();
+      where.date.gt = dayjs(params.startDate).toDate();
     }
     if (params.endDate) {
       where.date.lte = dayjs(params.endDate).toDate();
@@ -336,7 +336,7 @@ export const listAllLoans = async (
   if (params.startDate || params.endDate) {
     where.date = {};
     if (params.startDate) {
-      where.date.gte = dayjs(params.startDate).toDate();
+      where.date.gt = dayjs(params.startDate).toDate();
     }
     if (params.endDate) {
       where.date.lte = dayjs(params.endDate).toDate();
