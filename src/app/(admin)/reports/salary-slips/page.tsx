@@ -1,208 +1,22 @@
 "use client";
+
+import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
-import { classNames } from "primereact/utils";
-import { memo, useState, useRef } from "react";
 import { useReactToPrint } from "react-to-print";
 import { ProgressSpinner } from "primereact/progressspinner";
 
-import {
-  Input,
-  Button,
-  Dropdown,
-  SalarySlip,
-  TitleHeader,
-  GroupDropdown,
-  AutoScrollChips,
-  useAccess,
-} from "@/components";
+import dayjs from "@/lib/dayjs";
 import { toastService } from "@/lib/toast";
+import { Button, TitleHeader } from "@/components";
 import { parseGroupDropdownFilter } from "@/utils/helpers";
 import { centuryGothic, tanseekArabic } from "@/app/fonts";
-import { useGlobalData } from "@/context/GlobalDataContext";
 import { useGetSalarySlipData } from "@/lib/db/services/payroll-summary";
 import { PayrollDetailEntry } from "@/lib/db/services/payroll-summary/mappers";
 
-// ── Salary slip grid (memoised for print performance) ─────────────────────────
-const SalarySlipGrid = memo(
-  ({
-    entries,
-    monthYear,
-  }: {
-    entries: PayrollDetailEntry[];
-    monthYear: string;
-  }) => {
-    const slipsPerPage = 3;
-    const chunks: PayrollDetailEntry[][] = [];
-    for (let i = 0; i < entries.length; i += slipsPerPage) {
-      chunks.push(entries.slice(i, i + slipsPerPage));
-    }
+// Extracted Components
+import { FilterSection } from "./components/filter-section";
+import { SalarySlipGrid } from "./components/salary-slip-grid";
 
-    return (
-      <div className="flex flex-col gap-5">
-        {chunks.map((chunk, chunkIndex) => (
-          <div
-            key={chunkIndex}
-            className={`flex flex-col gap-6 print:gap-4 ${
-              chunkIndex < chunks.length - 1 ? "print:break-after-page" : ""
-            }`}
-          >
-            {chunk.map((entry) => (
-              <div
-                key={`${entry.id}-${entry.empCode}`}
-                className="print:break-inside-avoid"
-              >
-                <SalarySlip entry={entry} monthYear={monthYear} />
-              </div>
-            ))}
-            {/* <div className="flex-col items-center text-center hidden print:flex w-full">
-              {chunkIndex + 1}/{chunks.length}
-            </div> */}
-          </div>
-        ))}
-      </div>
-    );
-  }
-);
-
-// ── Filter section ─────────────────────────────────────────────────────────────
-const FilterSection = memo(
-  ({
-    onSearch,
-    selectedDate,
-    onDateChange,
-    isLoading,
-  }: {
-    onSearch: (
-      employeeCodes: number[] | null,
-      filter: string | number | null,
-      paymentMethodId: number | null
-    ) => void;
-    selectedDate: Date | null;
-    onDateChange: (date: Date) => void;
-    isLoading: boolean;
-  }) => {
-    const { canAccessFilter, isLoading: isLoadingAccess } = useAccess();
-    const isAllowedAllFilters = canAccessFilter("salary-slips");
-
-    const [employeeCodes, setEmployeeCodes] = useState<string[]>([]);
-    const [selectedFilter, setSelectedFilter] = useState<
-      string | number | null
-    >("all");
-    const [paymentMethodId, setPaymentMethodId] = useState<number | null>(null);
-
-    const { data: globalData } = useGlobalData();
-    const paymentMethodOptions = globalData.paymentMethods.map((p) => ({
-      label: p.nameEn,
-      value: p.id,
-    }));
-
-    const handleSearch = () => {
-      const codes =
-        employeeCodes.length > 0
-          ? employeeCodes.map((c) => parseInt(c, 10)).filter((n) => !isNaN(n))
-          : null;
-      onSearch(codes, selectedFilter, paymentMethodId);
-    };
-
-    const monthValue = selectedDate
-      ? `${selectedDate.getFullYear()}-${String(selectedDate.getMonth() + 1).padStart(2, "0")}`
-      : "";
-
-    return (
-      <div className="bg-[#F5E6E8] w-full flex flex-col xl:flex-row justify-between gap-x-10 gap-y-4 px-6 py-6 print:hidden">
-        <div
-          className={classNames("grid flex-1 grid-cols-1 gap-3 items-center", {
-            "md:grid-cols-2 lg:grid-cols-5": isAllowedAllFilters,
-            "lg:grid-cols-3": !isAllowedAllFilters,
-          })}
-        >
-          {!isLoadingAccess && (
-            <>
-              {/* Month — required */}
-              <div className="w-full">
-                <Input
-                  type="month"
-                  value={monthValue}
-                  onChange={(e) => {
-                    if (e.target.value) {
-                      const [y, m] = e.target.value.split("-").map(Number);
-                      onDateChange(new Date(y, m - 1));
-                    }
-                  }}
-                  onKeyDown={(e) => {
-                    if (e.key !== "Enter" || !selectedDate || isLoading) {
-                      return;
-                    }
-                    handleSearch();
-                  }}
-                  className="w-full h-10!"
-                  placeholder="Select Month *"
-                />
-              </div>
-
-              {/* Designation / Section */}
-              {isAllowedAllFilters && (
-                <div className="w-full">
-                  <GroupDropdown
-                    value={selectedFilter}
-                    className="w-full h-10.5!"
-                    onChange={setSelectedFilter}
-                    placeholder="Select Section / Designation"
-                  />
-                </div>
-              )}
-
-              {/* Employee codes */}
-              <div className="w-full">
-                <AutoScrollChips
-                  value={employeeCodes}
-                  onChange={(e) => setEmployeeCodes(e.value ?? [])}
-                  keyfilter="int"
-                  allowDuplicate={false}
-                  placeholder="Employee Codes"
-                  className="w-full h-10!"
-                />
-              </div>
-
-              {/* Payment Method */}
-              {isAllowedAllFilters && (
-                <div className="w-full">
-                  <Dropdown
-                    filter
-                    options={paymentMethodOptions}
-                    value={paymentMethodId}
-                    onChange={(e: any) => setPaymentMethodId(e.value ?? null)}
-                    className="w-full h-10.5!"
-                    placeholder="Payment Method"
-                  />
-                </div>
-              )}
-
-              {/* Search button — disabled until month is selected */}
-              <div className="w-full lg:flex lg:justify-end">
-                <Button
-                  size="small"
-                  label="Search"
-                  onClick={handleSearch}
-                  className="w-full lg:w-32 h-10!"
-                  disabled={!selectedDate || isLoading}
-                  loading={isLoading}
-                  tooltip={
-                    !selectedDate ? "Please select a month first" : undefined
-                  }
-                  tooltipOptions={{ position: "top" }}
-                />
-              </div>
-            </>
-          )}
-        </div>
-      </div>
-    );
-  }
-);
-FilterSection.displayName = "FilterSection";
-
-// ── Page ───────────────────────────────────────────────────────────────────────
 const SalarySlipsPage = () => {
   const router = useRouter();
   const contentRef = useRef<HTMLDivElement>(null);
@@ -211,7 +25,9 @@ const SalarySlipsPage = () => {
     pageStyle: "@page { size: A4; margin: 0 0 1.5cm 0; }",
   });
 
-  const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
+  const [selectedDate, setSelectedDate] = useState<Date | null>(
+    dayjs().toDate()
+  );
   const [slipEntries, setSlipEntries] = useState<PayrollDetailEntry[]>([]);
   const [monthYearLabel, setMonthYearLabel] = useState<string>("");
 
@@ -242,11 +58,12 @@ const SalarySlipsPage = () => {
       const entries = (result ?? []) as PayrollDetailEntry[];
       setSlipEntries(entries);
       setMonthYearLabel(
-        new Date(payrollYear, payrollMonth - 1).toLocaleString("default", {
-          month: "long",
-          year: "numeric",
-        })
+        dayjs()
+          .year(payrollYear)
+          .month(payrollMonth - 1)
+          .format("MMMM YYYY")
       );
+
       if (entries.length === 0) {
         toastService.showInfo(
           "No Results",
