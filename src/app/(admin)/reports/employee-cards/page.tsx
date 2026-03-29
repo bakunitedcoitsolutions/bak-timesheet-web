@@ -1,143 +1,28 @@
 "use client";
-import { useRouter } from "next/navigation";
-import { memo, useState, useRef } from "react";
-import { useReactToPrint } from "react-to-print";
-import { centuryGothic, tanseekArabic } from "@/app/fonts";
-import { ProgressSpinner } from "primereact/progressspinner";
 
-import {
-  Button,
-  TitleHeader,
-  EmployeeCard,
-  GroupDropdown,
-  AutoScrollChips,
-  useAccess,
-} from "@/components";
-import {
-  useGlobalData,
-  GlobalDataDesignation,
-} from "@/context/GlobalDataContext";
+import { useState, useRef } from "react";
+import { useRouter } from "next/navigation";
+import { useReactToPrint } from "react-to-print";
+import { ProgressSpinner } from "primereact/progressspinner";
+import { centuryGothic, tanseekArabic } from "@/app/fonts";
+
+import { Button, TitleHeader } from "@/components";
+import { useGlobalData, GlobalDataDesignation } from "@/context/GlobalDataContext";
 import { parseGroupDropdownFilter } from "@/utils/helpers";
 import { useGetEmployees } from "@/lib/db/services/employee";
 import { ListedEmployee } from "@/lib/db/services/employee/employee.dto";
-import { classNames } from "primereact/utils";
 
-const EmployeeGrid = memo(
-  ({
-    employees,
-    getDesignationName,
-  }: {
-    employees: ListedEmployee[];
-    getDesignationName: (id: number | null) => string | undefined;
-  }) => {
-    // Chunk employees into groups of 9
-    const chunkSize = 9;
-    const chunks = [];
-    for (let i = 0; i < employees.length; i += chunkSize) {
-      chunks.push(employees.slice(i, i + chunkSize));
-    }
-
-    return (
-      <div className="flex flex-row flex-wrap gap-5 print:block">
-        {chunks.map((chunk, chunkIndex) => (
-          <div
-            key={chunkIndex}
-            className={`contents print:grid print:grid-cols-3 print:gap-x-4 print:gap-y-4 ${
-              chunkIndex < chunks.length - 1 ? "print:break-after-page" : ""
-            }`}
-          >
-            {chunk.map((employee) => (
-              <div key={employee.id} className="print:break-inside-avoid">
-                <EmployeeCard
-                  employee={employee}
-                  designationName={getDesignationName(employee.designationId)}
-                />
-              </div>
-            ))}
-          </div>
-        ))}
-      </div>
-    );
-  }
-);
-
-// Filter Component
-const FilterSection = memo(
-  ({
-    onSearch,
-  }: {
-    onSearch: (
-      employeeCodes: string[] | null,
-      filter: string | number | null
-    ) => void;
-  }) => {
-    const { canAccessFilter, isLoading: isLoadingAccess } = useAccess();
-    const isAllowedAllFilters = canAccessFilter("employee-cards");
-
-    const [employeeCodes, setEmployeeCodes] = useState<string[]>([]);
-    const [selectedFilter, setSelectedFilter] = useState<
-      string | number | null
-    >("all");
-
-    const handleSearch = () => {
-      onSearch(employeeCodes.length > 0 ? employeeCodes : null, selectedFilter);
-    };
-
-    return (
-      <div className="bg-[#F5E6E8] w-full flex flex-col xl:flex-row justify-between gap-x-10 gap-y-4 px-6 py-6 print:hidden">
-        <div
-          className={classNames("grid flex-1 grid-cols-1  gap-3 items-center", {
-            "md:grid-cols-3 lg:grid-cols-4": isAllowedAllFilters,
-            "lg:grid-cols-3": !isAllowedAllFilters,
-          })}
-        >
-          {!isLoadingAccess && (
-            <>
-              <div className="w-full">
-                <AutoScrollChips
-                  value={employeeCodes}
-                  onChange={(e) => setEmployeeCodes(e.value ?? [])}
-                  keyfilter="int"
-                  allowDuplicate={false}
-                  placeholder="Employee Codes"
-                  className="w-full h-10!"
-                />
-              </div>
-              {isAllowedAllFilters && (
-                <div className="w-full">
-                  <GroupDropdown
-                    value={selectedFilter}
-                    className="w-full h-10.5!"
-                    onChange={setSelectedFilter}
-                    placeholder="Select Section / Designation"
-                  />
-                </div>
-              )}
-              <div className="w-full col-span-1 lg:col-span-2 md:flex md:justify-end">
-                <Button
-                  size="small"
-                  label="Search"
-                  onClick={handleSearch}
-                  className="w-full md:w-32 h-10!"
-                />
-              </div>
-            </>
-          )}
-        </div>
-      </div>
-    );
-  }
-);
+// Extracted Components
+import { FilterSection } from "./components/filter-section";
+import { EmployeeGrid } from "./components/employee-grid";
 
 const EmployeesCardReportPage = () => {
   const router = useRouter();
   const contentRef = useRef<HTMLDivElement>(null);
   const reactToPrintFn = useReactToPrint({ contentRef });
 
-  // Query states (what is actually used for fetching)
-  const [queryEmployeeCodes, setQueryEmployeeCodes] = useState<string[] | null>(
-    null
-  );
+  // Query states
+  const [queryEmployeeCodes, setQueryEmployeeCodes] = useState<string[] | null>(null);
   const [queryFilter, setQueryFilter] = useState<string | number | null>("all");
   const [hasSearched, setHasSearched] = useState(false);
 
@@ -147,7 +32,7 @@ const EmployeesCardReportPage = () => {
   const { data: employeesResponse, isLoading } = useGetEmployees(
     {
       page: 1,
-      limit: 1000, // Fetch all for report (or a large number)
+      limit: 1000,
       employeeCodes: queryEmployeeCodes || undefined,
       designationId: filterParams.designationId,
       payrollSectionId: filterParams.payrollSectionId,
