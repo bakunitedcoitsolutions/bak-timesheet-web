@@ -2,10 +2,9 @@
 
 import { useState, useMemo, useRef } from "react";
 import { useRouter } from "next/navigation";
-import { Paginator } from "primereact/paginator";
 import { Button, TitleHeader, ExportOptions } from "@/components";
 import { useGlobalData } from "@/context/GlobalDataContext";
-import { useGetSiteWiseReport, SiteWiseReportRow } from "@/lib/db/services/site-wise";
+import { useGetSiteWiseReport } from "@/lib/db/services/site-wise";
 import {
   exportSiteWiseExcel,
   exportSiteWiseCSV,
@@ -94,20 +93,31 @@ export default function SiteWiseReportPage() {
 
   const filterSummary = useMemo(() => {
     const monthNames = [
-      "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
     ];
     const mStr = monthNames[appliedQuery.month - 1];
-    const codesStr = appliedQuery.employeeCodes?.length 
-      ? appliedQuery.employeeCodes.join(", ") 
+    const codesStr = appliedQuery.employeeCodes?.length
+      ? appliedQuery.employeeCodes.join(", ")
       : "All";
-    
-    const pNames = appliedQuery.projectIds && appliedQuery.projectIds.length > 0
-      ? globalData.projects
-          .filter(p => appliedQuery.projectIds!.includes(p.id))
-          .map(p => p.nameEn)
-          .join(", ")
-      : "All";
+
+    const pNames =
+      appliedQuery.projectIds && appliedQuery.projectIds.length > 0
+        ? globalData.projects
+            .filter((p) => appliedQuery.projectIds!.includes(p.id))
+            .map((p) => p.nameEn)
+            .join(", ")
+        : "All";
 
     return `(Month: ${mStr}-${appliedQuery.year} | Emp Code: ${codesStr} | Project: ${pNames})`;
   }, [appliedQuery, globalData.projects]);
@@ -194,9 +204,9 @@ export default function SiteWiseReportPage() {
             (appliedQuery.summarize ? (
               <SummarizedTable data={reportData} isLoading={isLoading} />
             ) : (
-              <DetailedTable 
-                data={reportData} 
-                isLoading={isLoading} 
+              <DetailedTable
+                data={reportData}
+                isLoading={isLoading}
                 filterSummary={filterSummary}
               />
             ))}

@@ -1,4 +1,4 @@
-import dayjs from "dayjs";
+import dayjs from "@/lib/dayjs";
 import { prisma } from "@/lib/db/prisma";
 import { GetSiteWiseReportInput, SiteWiseReportRow } from "./site-wise.schemas";
 
