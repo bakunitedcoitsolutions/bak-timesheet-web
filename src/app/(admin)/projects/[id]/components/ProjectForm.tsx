@@ -1,22 +1,22 @@
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
 import { classNames } from "primereact/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter } from "next/navigation";
 
+import {
+  Form,
+  Input,
+  Button,
+  Dropdown,
+  FormItem,
+  Textarea,
+} from "@/components/forms";
 import {
   CreateProjectSchema,
   UpdateProjectSchema,
 } from "@/lib/db/services/project/project.schemas";
 import { FORM_FIELD_WIDTHS, STATUS_OPTIONS } from "@/utils/constants";
-import {
-  Input,
-  Button,
-  Dropdown,
-  Form,
-  FormItem,
-  Textarea,
-} from "@/components/forms";
 
 interface ProjectFormProps {
   isAddMode: boolean;
@@ -25,15 +25,18 @@ interface ProjectFormProps {
   branchOptions: { label: string; value: number }[];
   onSubmit: (data: any) => Promise<void>;
   isSubmitting: boolean;
+  isBranchScoped?: boolean;
+  userBranchId?: number | null;
 }
 
 export const ProjectForm = ({
-  isAddMode,
+  onSubmit,
   isEditMode,
   initialData,
-  branchOptions,
-  onSubmit,
   isSubmitting,
+  userBranchId,
+  branchOptions,
+  isBranchScoped,
 }: ProjectFormProps) => {
   const router = useRouter();
   const zodSchema = isEditMode ? UpdateProjectSchema : CreateProjectSchema;
@@ -42,7 +45,7 @@ export const ProjectForm = ({
     ...(isEditMode ? { id: 0 } : {}),
     nameEn: "",
     nameAr: "",
-    branchId: undefined,
+    branchId: isBranchScoped ? (userBranchId as number) : undefined,
     description: "",
     isActive: true,
   };
@@ -60,20 +63,25 @@ export const ProjectForm = ({
         ...(isEditMode ? { id: initialData?.id ?? 0 } : {}),
         nameEn: initialData?.nameEn,
         nameAr: initialData?.nameAr ?? "",
-        branchId: initialData?.branchId ?? undefined,
+        branchId: isBranchScoped
+          ? (userBranchId as number)
+          : (initialData?.branchId ?? undefined),
         description: initialData?.description ?? "",
         isActive: initialData?.isActive,
       };
       reset(setProject);
+    } else if (isBranchScoped) {
+      // In add mode for branch scoped user, ensure branchId is set
+      reset({
+        ...defaultValues,
+        branchId: userBranchId as number,
+      });
     }
-  }, [initialData, isEditMode, reset]);
+  }, [initialData, isEditMode, reset, isBranchScoped, userBranchId]);
 
   return (
     <>
-      <Form
-        form={form}
-        className="w-full h-full content-start md:max-w-5xl"
-      >
+      <Form form={form} className="w-full h-full content-start md:max-w-5xl">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 md:gap-y-4 md:py-5 px-6 mt-5 md:mt-0 flex-1">
           <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
             <FormItem name="nameEn">
@@ -96,11 +104,12 @@ export const ProjectForm = ({
           <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
             <FormItem name="branchId">
               <Dropdown
+                showClear
                 label="Branch"
                 className="w-full"
-                placeholder="Choose branch"
                 options={branchOptions}
-                showClear
+                disabled={isBranchScoped}
+                placeholder="Choose branch"
               />
             </FormItem>
           </div>

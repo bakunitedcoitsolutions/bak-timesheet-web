@@ -1,11 +1,13 @@
 "use server";
+import { auth } from "@/lib/auth/auth";
 import { serverAction } from "@/lib/zsa/zsa-action";
+import { USER_ROLES } from "@/utils/user.utility";
 import {
+  listProjects,
   createProject,
   updateProject,
-  findProjectById,
-  listProjects,
   deleteProject,
+  findProjectById,
 } from "./project.service";
 import { cache } from "@/lib/redis";
 import {
@@ -14,19 +16,30 @@ import {
 } from "../shared/actions";
 import { CACHE_KEYS } from "../shared/constants";
 import {
+  DeleteProjectInput,
   CreateProjectSchema,
   UpdateProjectSchema,
-  ListProjectsParamsSchema,
-  GetProjectByIdSchema,
-  DeleteProjectSchema,
   GetProjectByIdInput,
-  DeleteProjectInput,
+  DeleteProjectSchema,
+  GetProjectByIdSchema,
+  ListProjectsParamsSchema,
 } from "./project.schemas";
 
 // Create Project
 export const createProjectAction = serverAction
   .input(CreateProjectSchema)
   .handler(async ({ input }) => {
+    const session = await auth();
+    const roleId = session?.user?.roleId;
+    const userBranchId = session?.user?.branchId;
+
+    if (
+      roleId === USER_ROLES.BRANCH_MANAGER ||
+      roleId === USER_ROLES.BRANCH_USER
+    ) {
+      input.branchId = userBranchId as number;
+    }
+
     const response = await createProject(input);
     await cache.delete(CACHE_KEYS.PROJECTS);
     getSharedProjectsAction();
@@ -38,6 +51,17 @@ export const createProjectAction = serverAction
 export const updateProjectAction = serverAction
   .input(UpdateProjectSchema)
   .handler(async ({ input }) => {
+    const session = await auth();
+    const roleId = session?.user?.roleId;
+    const userBranchId = session?.user?.branchId;
+
+    if (
+      roleId === USER_ROLES.BRANCH_MANAGER ||
+      roleId === USER_ROLES.BRANCH_USER
+    ) {
+      input.branchId = userBranchId as number;
+    }
+
     const { id, ...rest } = input;
     const response = await updateProject(id, rest);
     await cache.delete(CACHE_KEYS.PROJECTS);
@@ -50,7 +74,17 @@ export const updateProjectAction = serverAction
 export const listProjectsAction = serverAction
   .input(ListProjectsParamsSchema)
   .handler(async ({ input }) => {
-    const response = await listProjects(input);
+    const session = await auth();
+    const roleId = session?.user?.roleId;
+    const userBranchId = session?.user?.branchId;
+
+    const isBranchScoped =
+      roleId === USER_ROLES.BRANCH_MANAGER || roleId === USER_ROLES.BRANCH_USER;
+
+    const response = await listProjects({
+      ...input,
+      branchId: isBranchScoped ? (userBranchId as number) : undefined,
+    });
     return response;
   });
 

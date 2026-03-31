@@ -9,17 +9,17 @@ import {
   useCreateProject,
   useGetProjectById,
 } from "@/lib/db/services/project/requests";
-import { useGlobalData, GlobalDataGeneral } from "@/context/GlobalDataContext";
 import { toastService } from "@/lib/toast";
 import { getEntityModeFromParam } from "@/helpers";
 import { getErrorMessage } from "@/utils/helpers";
-import { StepperFormHeading, useAccess } from "@/components";
 import { ProjectForm } from "./components/ProjectForm";
+import { StepperFormHeading, useAccess } from "@/components";
+import { useGlobalData, GlobalDataGeneral } from "@/context/GlobalDataContext";
 
 const UpsertProjectPage = () => {
   const router = useRouter();
   const { id: projectIdParam } = useParams();
-  const { role } = useAccess();
+  const { role, isBranchScoped, branchId: userBranchId } = useAccess();
   const isAccessEnabledUser = role === 4;
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -56,8 +56,26 @@ const UpsertProjectPage = () => {
         "You do not have permission to access this page"
       );
       router.replace("/projects");
+    } else if (
+      isEditMode &&
+      isBranchScoped &&
+      foundProject &&
+      foundProject.branchId !== userBranchId
+    ) {
+      toastService.showError(
+        "Access Denied",
+        "You do not have permission to edit this project"
+      );
+      router.replace("/projects");
     }
-  }, [isInvalid, isAccessEnabledUser, router]);
+  }, [
+    isInvalid,
+    isAccessEnabledUser,
+    isBranchScoped,
+    foundProject,
+    userBranchId,
+    isEditMode,
+  ]);
 
   const handleFormSubmit = async (data: any) => {
     setIsSubmitting(true);
@@ -96,9 +114,11 @@ const UpsertProjectPage = () => {
             isAddMode={isAddMode}
             isEditMode={isEditMode}
             initialData={foundProject}
-            branchOptions={branchOptions}
             onSubmit={handleFormSubmit}
             isSubmitting={isSubmitting}
+            userBranchId={userBranchId}
+            branchOptions={branchOptions}
+            isBranchScoped={isBranchScoped}
           />
         )}
       </div>

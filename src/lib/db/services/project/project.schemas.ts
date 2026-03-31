@@ -29,7 +29,6 @@ export const ListProjectsParamsSchema = z.object({
   search: z.string().optional(),
   sortOrder: z.enum(["asc", "desc"]).optional(),
   sortBy: z.enum(["nameEn", "nameAr", "isActive", "createdAt"]).optional(),
-  branchId: z.number().int().positive().optional(),
   isActive: z.boolean().optional(),
   // Column filters
   nameEn: z.string().optional(),
