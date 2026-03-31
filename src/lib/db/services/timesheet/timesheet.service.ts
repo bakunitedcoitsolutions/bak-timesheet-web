@@ -18,6 +18,7 @@ import type {
   GetMonthlyTimesheetReportResponse,
   DailyTimesheetRecord,
   EmployeeMonthlyReport,
+  GetDailyTimesheetReportParams,
 } from "./timesheet.dto";
 
 /**
@@ -93,6 +94,7 @@ export const getTimesheetPageData = async (
     page = 1,
     limit = 50,
     search,
+    branchId,
   } = params;
 
   const { startOfDay, endOfDay } = getDayRange(date);
@@ -140,6 +142,9 @@ export const getTimesheetPageData = async (
     }
     if (designationId != null && designationId > 0) {
       employeeWhere.designationId = designationId;
+    }
+    if (branchId != null && branchId > 0) {
+      employeeWhere.branchId = branchId;
     }
   }
 
@@ -343,6 +348,7 @@ export const bulkUploadTimesheets = async (
         id: true,
         employeeCode: true,
         statusId: true,
+        branchId: true,
         status: { select: { nameEn: true } },
       },
     })
@@ -364,7 +370,7 @@ export const bulkUploadTimesheets = async (
   const projects = await withRetry(() =>
     prisma.project.findMany({
       where: { id: { in: uniqueProjectIds } },
-      select: { id: true, isActive: true, nameEn: true },
+      select: { id: true, isActive: true, nameEn: true, branchId: true },
     })
   );
 
@@ -430,13 +436,33 @@ export const bulkUploadTimesheets = async (
         });
         continue;
       }
+
+      // Validate Employee Branch for branch user
+      if (data.branchId && employee.branchId !== data.branchId) {
+        const msg = `Employee does not belong to your branch`;
+        console.warn(`Service: Row ${rowNumber}: ${msg}`);
+        result.failed++;
+        result.details.push({
+          row: rowNumber,
+          employeeCode: row.employeeCode,
+          date: dateNormalized,
+          status: "failed",
+          message: msg,
+        });
+        result.errors.push({
+          row: rowNumber,
+          data: row,
+          error: msg,
+        });
+        continue;
+      }
       console.log(
         `Service: Row ${rowNumber}: DateNormalized ${dateNormalized}, Employee found: ID ${employee.id} for ${row.employeeCode}`
       );
 
       // Validate Projects
       const projectsToValidate = [];
-      
+
       // 1. Project 1 ID is mandatory
       if (!row.project1Id) {
         projectValidationError = "Project 1 ID is required and cannot be empty";
@@ -449,7 +475,8 @@ export const bulkUploadTimesheets = async (
         const p2Hours = row.project2Hours ?? 0;
         const p2OT = row.project2Overtime ?? 0;
         if ((p2Hours > 0 || p2OT > 0) && !row.project2Id) {
-          projectValidationError = "Project 2 ID is required when Project 2 Hours or Overtime is provided";
+          projectValidationError =
+            "Project 2 ID is required when Project 2 Hours or Overtime is provided";
         } else if (row.project2Id) {
           projectsToValidate.push({ id: row.project2Id, name: "Project 2" });
         }
@@ -464,6 +491,10 @@ export const bulkUploadTimesheets = async (
           }
           if (!project.isActive) {
             projectValidationError = `${p.name} ID ${p.id} (${project.nameEn}) is inactive`;
+            break;
+          }
+          if (data.branchId && project.branchId !== data.branchId) {
+            projectValidationError = `${p.name} ID ${p.id} (${project.nameEn}) does not belong to your branch`;
             break;
           }
         }
@@ -616,6 +647,7 @@ export const getMonthlyTimesheetReportData = async (
     payrollSectionId,
     showAbsents,
     showFixedSalary,
+    branchId,
   } = params;
 
   // Calculate month boundaries (UTC) using dayjs
@@ -640,6 +672,7 @@ export const getMonthlyTimesheetReportData = async (
       ...(designationId ? { designationId } : {}),
       ...(payrollSectionId ? { payrollSectionId } : {}),
       ...(showFixedSalary ? { isFixed: true } : {}),
+      ...(branchId ? { branchId } : {}),
     },
     select: {
       id: true,
@@ -666,6 +699,7 @@ export const getMonthlyTimesheetReportData = async (
       ...(projectId
         ? { OR: [{ project1Id: projectId }, { project2Id: projectId }] }
         : {}),
+      ...(branchId ? { employee: { branchId } } : {}),
     },
     include: {
       project1: { select: { nameEn: true } },
@@ -755,7 +789,7 @@ export const getMonthlyTimesheetReportData = async (
  * Fetches all relevant records for the specific date.
  */
 export const getDailyTimesheetReportData = async (
-  params: import("./timesheet.schemas").GetDailyTimesheetReportInput
+  params: GetDailyTimesheetReportParams
 ): Promise<GetTimesheetPageDataResponse> => {
   const {
     date,
@@ -765,6 +799,7 @@ export const getDailyTimesheetReportData = async (
     projectId,
     showAbsents,
     showFixedSalary,
+    branchId,
   } = params;
 
   const { startOfDay, endOfDay } = getDayRange(date);
@@ -785,6 +820,9 @@ export const getDailyTimesheetReportData = async (
   }
   if (showFixedSalary) {
     employeeWhere.isFixed = true;
+  }
+  if (branchId != null && branchId > 0) {
+    employeeWhere.branchId = branchId;
   }
 
   // Fetch ALL matching employees

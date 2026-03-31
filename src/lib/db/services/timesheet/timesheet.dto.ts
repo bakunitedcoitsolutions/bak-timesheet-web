@@ -12,6 +12,7 @@ export interface GetTimesheetPageDataParams {
   page?: number;
   limit?: number;
   search?: string;
+  branchId?: number | null;
 }
 
 /** Single row for the timesheet table (keys aligned with DB: Employee + Timesheet) */
@@ -86,6 +87,7 @@ export interface BulkUploadTimesheetRow {
 
 export interface BulkUploadTimesheetData {
   entries: BulkUploadTimesheetRow[];
+  branchId?: number | null;
 }
 
 export interface BulkUploadTimesheetResult {
@@ -116,6 +118,7 @@ export interface GetMonthlyTimesheetReportParams {
   payrollSectionId?: number | null;
   showAbsents?: boolean;
   showFixedSalary?: boolean;
+  branchId?: number | null;
 }
 
 export interface DailyTimesheetRecord {
@@ -152,4 +155,15 @@ export interface EmployeeMonthlyReport {
 
 export interface GetMonthlyTimesheetReportResponse {
   reports: EmployeeMonthlyReport[];
+}
+
+export interface GetDailyTimesheetReportParams {
+  date: Date;
+  employeeCodes?: string[] | null;
+  projectId?: number | null;
+  designationId?: number | null;
+  payrollSectionId?: number | null;
+  showAbsents?: boolean;
+  showFixedSalary?: boolean;
+  branchId?: number | null;
 }

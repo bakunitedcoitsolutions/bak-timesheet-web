@@ -40,6 +40,7 @@ export const getSharedEmployeesAction = serverAction
           employeeCode: true,
           nameEn: true,
           designationId: true,
+          branchId: true,
         },
         where: { statusId: 1 },
         orderBy: { employeeCode: "asc" },
@@ -71,7 +72,7 @@ export const getSharedProjectsAction = serverAction
   .handler(async () => {
     return getOrFetch(CACHE_KEYS.PROJECTS, () =>
       prisma.project.findMany({
-        select: { id: true, nameEn: true },
+        select: { id: true, nameEn: true, branchId: true },
         where: { isActive: true },
         orderBy: { nameEn: "asc" },
       })

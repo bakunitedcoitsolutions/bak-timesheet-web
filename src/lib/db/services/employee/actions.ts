@@ -124,15 +124,13 @@ export const listEmployeesAction = serverAction
     const roleId = session?.user?.roleId;
     const userBranchId = session?.user?.branchId;
 
-    if (
-      roleId === USER_ROLES.BRANCH_MANAGER ||
-      roleId === USER_ROLES.BRANCH_USER
-    ) {
-      // Force filter by user's branch
-      input.branchId = userBranchId as number;
-    }
+    const isBranchScoped =
+      roleId === USER_ROLES.BRANCH_MANAGER || roleId === USER_ROLES.BRANCH_USER;
 
-    const response = await listEmployees(input);
+    const response = await listEmployees({
+      ...input,
+      branchId: isBranchScoped ? (userBranchId as number) : undefined,
+    });
     return response;
   });
 

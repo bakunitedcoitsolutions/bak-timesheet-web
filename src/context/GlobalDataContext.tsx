@@ -1,13 +1,6 @@
 "use client";
 
-import React, {
-  createContext,
-  useContext,
-  useEffect,
-  useMemo,
-  useCallback,
-  useState,
-} from "react";
+import React, { createContext, useContext, useEffect, useMemo } from "react";
 import { getGlobalDataAction } from "@/lib/db/services/shared/actions";
 import { useAccess } from "@/components/common";
 
@@ -29,6 +22,7 @@ export interface GlobalDataEmployee {
   employeeCode: number;
   designationId: number;
   nameEn: string;
+  branchId: number;
 }
 
 export interface GlobalDataDesignation {
@@ -125,6 +119,12 @@ export const GlobalDataProvider = ({
     if (isBranchScoped && userBranchId) {
       return {
         ...data,
+        employees: data?.employees?.filter?.(
+          (emp) => emp.branchId === userBranchId
+        ),
+        projects: data?.projects?.filter?.(
+          (project) => project.branchId === userBranchId
+        ),
         payrollSections: data?.payrollSections?.filter?.(
           (section) => section.branchId === userBranchId
         ),
