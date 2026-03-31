@@ -1,5 +1,7 @@
 "use server";
 import { serverAction } from "@/lib/zsa/zsa-action";
+import { auth } from "@/lib/auth/auth";
+import { USER_ROLES } from "@/utils/user.utility";
 import {
   createEmployeeStep1,
   updateEmployeeStep1,
@@ -40,6 +42,20 @@ import {
 export const createEmployeeStep1Action = serverAction
   .input(CreateEmployeeStep1Schema)
   .handler(async ({ input }) => {
+    const session = await auth();
+    const roleId = session?.user?.roleId;
+    const userBranchId = session?.user?.branchId;
+
+    // For branch-scoped users, always force their branch
+    if (
+      roleId === USER_ROLES.BRANCH_MANAGER ||
+      roleId === USER_ROLES.BRANCH_USER
+    ) {
+      if (!userBranchId) throw new Error("User has no assigned branch");
+      // Note: createEmployeeStep1 doesn't take branchId yet, it's added in Step 2.
+      // But we should ensure they are authorized to create.
+    }
+
     const response = await createEmployeeStep1(input);
     // Invalidate and refresh cache
     await cache.delete(CACHE_KEYS.EMPLOYEES);
@@ -104,6 +120,18 @@ export const updateEmployeeStep5Action = serverAction
 export const listEmployeesAction = serverAction
   .input(ListEmployeesParamsSchema)
   .handler(async ({ input }) => {
+    const session = await auth();
+    const roleId = session?.user?.roleId;
+    const userBranchId = session?.user?.branchId;
+
+    if (
+      roleId === USER_ROLES.BRANCH_MANAGER ||
+      roleId === USER_ROLES.BRANCH_USER
+    ) {
+      // Force filter by user's branch
+      input.branchId = userBranchId as number;
+    }
+
     const response = await listEmployees(input);
     return response;
   });

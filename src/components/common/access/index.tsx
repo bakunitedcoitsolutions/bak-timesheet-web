@@ -164,6 +164,10 @@ export interface UseAccessReturn {
   isAdmin: boolean;
   isManager: boolean;
   isBranchManager: boolean;
+  isBranchUser: boolean;
+  isBranchScoped: boolean;
+  /** The branch ID assigned to this user (if any) */
+  branchId: number | null | undefined;
   /**
    * Check if a feature section is enabled (for sidebar items).
    * Returns true if the user has ANY access to the feature.
@@ -215,6 +219,10 @@ export function useAccess(): UseAccessReturn {
     isAdmin: roleId === USER_ROLES.ADMIN,
     isManager: roleId === USER_ROLES.MANAGER,
     isBranchManager: roleId === USER_ROLES.BRANCH_MANAGER,
+    isBranchUser: roleId === USER_ROLES.BRANCH_USER,
+    isBranchScoped:
+      roleId === USER_ROLES.BRANCH_MANAGER || roleId === USER_ROLES.BRANCH_USER,
+    branchId: (session?.user as any)?.branchId as number | undefined,
     canAccess,
     can,
     hasRole,

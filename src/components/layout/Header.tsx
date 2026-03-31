@@ -10,6 +10,7 @@ import { usePathname } from "next/navigation";
 import { MenuItem, MenuItemOptions } from "primereact/menuitem";
 
 import { useAccess } from "../common";
+import { queryClient } from "@/lib/react-query";
 import { USER_ROLES } from "@/utils/user.utility";
 import { useSignOut } from "@/lib/db/services/user/requests";
 
@@ -33,6 +34,7 @@ export default function Header({ collapsed, setCollapsed }: HeaderProps) {
   const handleLogout = async () => {
     try {
       await signOut(undefined as any);
+      queryClient.clear();
       router.replace("/login");
     } catch {}
   };

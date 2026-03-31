@@ -172,14 +172,16 @@ export const menuItems: MenuItem[] = [
  * User Role Access Level Definitions:
  *   1. Admin             — Full access to all branches and features
  *   2. Manager           — Full access except user management
- *   3. Branch Manager    — Full access except user management (branch-scoped)
- *   4. Access-Enabled User — Customisable per-feature privileges
+ *   3. Branch Manager     — Full access except user management (branch-scoped)
+ *   4. Access-Enabled User  — Customisable per-feature privileges (all-branches access)
+ *   5. Branch User         — Customisable per-feature privileges (branch-scoped)
  */
 export const USER_ROLES = {
   ADMIN: 1,
   MANAGER: 2,
   BRANCH_MANAGER: 3,
   ACCESS_ENABLED: 4,
+  BRANCH_USER: 5,
 } as const;
 
 export type UserRole = (typeof USER_ROLES)[keyof typeof USER_ROLES];

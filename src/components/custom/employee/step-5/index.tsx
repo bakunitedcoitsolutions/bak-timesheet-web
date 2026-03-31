@@ -1,29 +1,11 @@
 "use client";
-import { useEffect, useImperativeHandle, forwardRef } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { classNames } from "primereact/utils";
+import { useImperativeHandle, forwardRef } from "react";
 import { ProgressSpinner } from "primereact/progressspinner";
 
-import { FORM_FIELD_WIDTHS, STORAGE_CONFIG } from "@/utils/constants";
 import { StepperFormHeading } from "@/components/common";
-import {
-  Dropdown,
-  FilePicker,
-  Form,
-  FormItem,
-  NumberInput,
-} from "@/components/forms";
-import { getErrorMessage, FILE_TYPES } from "@/utils/helpers";
-import { toastService } from "@/lib/toast";
-import {
-  useUpdateEmployeeStep5,
-  useGetEmployeeById,
-} from "@/lib/db/services/employee";
-import { UpdateEmployeeStep5Schema } from "@/lib/db/services/employee/employee.schemas";
-import { useStepperForm } from "@/context";
-import { useFileUpload } from "@/hooks";
-import { devError, devWarn } from "@/utils/helpers/functions";
+import { Form } from "@/components/forms";
+import { useStep5Logic } from "./hooks/use-step5-logic";
+import BankCardDetailsSection from "./components/bank-card-details-section";
 
 interface Step5Props {
   employeeId?: number | null;
@@ -34,123 +16,16 @@ export interface Step5Handle {
 }
 
 const Step5 = forwardRef<Step5Handle, Step5Props>(({ employeeId }, ref) => {
-  const { setIsSubmitting } = useStepperForm();
-
-  const { mutateAsync: updateEmployee } = useUpdateEmployeeStep5();
   const {
-    data: foundEmployee,
-    isLoading: isLoadingEmployee,
-    refetch: refetchEmployee,
-  } = useGetEmployeeById({
-    id: employeeId ?? 0,
-  });
-
-  const defaultValues = {
-    id: employeeId ?? 0,
-    isCardDelivered: false,
-    cardDocument: "",
-  };
-
-  const form = useForm({
-    resolver: zodResolver(UpdateEmployeeStep5Schema),
-    defaultValues,
-  });
-
-  const {
-    reset,
+    form,
+    isLoadingEmployee,
+    cardDocUpload,
+    cardDocPickerValue,
+    isCardDeliveredOptions,
+    handleFormSubmit,
+    onFormSubmit,
     handleSubmit,
-    setValue,
-    formState: { errors },
-  } = form;
-
-  // File upload hook for card document
-  const cardDocUpload = useFileUpload({
-    existingFilePath: foundEmployee?.cardDocument || null,
-    bucket: STORAGE_CONFIG.EMPLOYEES_BUCKET,
-    folder: "documents/cards",
-    acceptedTypes: [...FILE_TYPES.IMAGES, "application/pdf"],
-    maxSizeMB: 10,
-    isPublic: false,
-    onUploadSuccess: (filePath) => {
-      setValue("cardDocument", filePath);
-    },
-  });
-
-  // Load employee data when in edit mode
-  useEffect(() => {
-    if (foundEmployee && employeeId) {
-      const setEmployee = {
-        id: foundEmployee.id,
-        isCardDelivered: foundEmployee.isCardDelivered ?? false,
-        cardDocument: foundEmployee.cardDocument || "",
-      };
-      reset(setEmployee);
-    }
-  }, [foundEmployee, employeeId, reset]);
-
-  const handleFormSubmit = async (data: any): Promise<boolean> => {
-    if (!employeeId) {
-      toastService.showError("Error", "Employee ID is required");
-      return false;
-    }
-
-    setIsSubmitting(true);
-    try {
-      // Prepare submit data
-      const submitData = {
-        ...data,
-        cardDocument: cardDocUpload.shouldDelete
-          ? ""
-          : cardDocUpload.selectedFile
-            ? "" // Will upload after save
-            : data.cardDocument || "",
-      };
-
-      await updateEmployee(submitData);
-      toastService.showSuccess("Success", "Employee updated successfully");
-
-      // Upload card document if new file selected
-      if (
-        cardDocUpload.selectedFile &&
-        employeeId &&
-        !cardDocUpload.shouldDelete
-      ) {
-        try {
-          await cardDocUpload.uploadFileAfterSave(
-            employeeId,
-            async (updateData: any) => {
-              await updateEmployee(updateData);
-            },
-            {
-              isCardDelivered: data.isCardDelivered,
-            },
-            "cardDocument"
-          );
-        } catch (error: any) {
-          devWarn("Failed to upload card document:", error);
-        }
-      }
-
-      // Clear delete flag after successful save
-      if (cardDocUpload.shouldDelete) {
-        cardDocUpload.clearDeletion();
-        await refetchEmployee();
-      }
-
-      return true;
-    } catch (error: any) {
-      devError("Error:", error);
-      toastService.showError(
-        "Error",
-        getErrorMessage(error) || "Failed to save employee"
-      );
-      return false;
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  const onFormSubmit = handleSubmit(handleFormSubmit);
+  } = useStep5Logic({ employeeId });
 
   // Expose submit method via ref
   useImperativeHandle(ref, () => ({
@@ -172,55 +47,16 @@ const Step5 = forwardRef<Step5Handle, Step5Props>(({ employeeId }, ref) => {
     );
   }
 
-  const existingCardDoc = cardDocUpload.getExistingFileObject();
-  const cardDocPickerValue = cardDocUpload.selectedFile
-    ? [cardDocUpload.selectedFile]
-    : existingCardDoc
-      ? [existingCardDoc]
-      : [];
-
-  const isCardDeliveredOptions = [
-    { label: "Yes", value: true },
-    { label: "No", value: false },
-  ];
-
   return (
     <Form form={form} onSubmit={onFormSubmit}>
       <div className="flex flex-1 md:flex-none flex-col gap-10 py-6">
         <div className="flex flex-col gap-4">
           <StepperFormHeading title="Bank Card Details" />
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 lg:gap-y-8 px-6">
-            <FormItem
-              name="isCardDelivered"
-              className={classNames(FORM_FIELD_WIDTHS["2"])}
-            >
-              <Dropdown
-                className="w-full"
-                label="Is Card Delivered?"
-                options={isCardDeliveredOptions}
-                placeholder="Choose"
-              />
-            </FormItem>
-            <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
-              <div className="w-full md:w-60 xl:w-72">
-                <FilePicker
-                  multiple={false}
-                  className="w-full"
-                  label="Card Document"
-                  disabled={cardDocUpload.isUploading}
-                  dropText="Drop card document here or"
-                  browseText="browse"
-                  value={cardDocPickerValue}
-                  accept={{
-                    "image/jpeg": [".jpg", ".jpeg"],
-                    "image/png": [".png"],
-                    "application/pdf": [".pdf"],
-                  }}
-                  onFileSelect={cardDocUpload.handleFileSelect}
-                />
-              </div>
-            </div>
-          </div>
+          <BankCardDetailsSection
+            isCardDeliveredOptions={isCardDeliveredOptions}
+            fileUpload={cardDocUpload}
+            pickerValue={cardDocPickerValue}
+          />
         </div>
       </div>
     </Form>
