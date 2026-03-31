@@ -1,7 +1,15 @@
 "use client";
 
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  useCallback,
+  useState,
+} from "react";
 import { getGlobalDataAction } from "@/lib/db/services/shared/actions";
+import { useAccess } from "@/components/common";
 
 export interface GlobalDataCity {
   id: number;
@@ -12,6 +20,7 @@ export interface GlobalDataCity {
 export interface GlobalDataGeneral {
   id: number;
   nameEn: string;
+  branchId?: number | null;
   displayOrderKey?: number | null;
 }
 
@@ -110,9 +119,23 @@ export const GlobalDataProvider = ({
     fetchData();
   }, []);
 
-  const value = React.useMemo(
-    () => ({ data, isLoading, refresh: fetchData }),
-    [data, isLoading, fetchData]
+  const { isBranchScoped, branchId: userBranchId } = useAccess();
+
+  const filteredData = useMemo(() => {
+    if (isBranchScoped && userBranchId) {
+      return {
+        ...data,
+        payrollSections: data?.payrollSections?.filter?.(
+          (section) => section.branchId === userBranchId
+        ),
+      };
+    }
+    return data;
+  }, [data, isBranchScoped, userBranchId]);
+
+  const value = useMemo(
+    () => ({ data: filteredData, isLoading, refresh: fetchData }),
+    [filteredData, isLoading, fetchData]
   );
 
   return (

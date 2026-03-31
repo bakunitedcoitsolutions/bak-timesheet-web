@@ -84,7 +84,12 @@ export const getSharedPayrollSectionsAction = serverAction
   .handler(async () => {
     return getOrFetch(CACHE_KEYS.PAYROLL_SECTIONS, () =>
       prisma.payrollSection.findMany({
-        select: { id: true, nameEn: true, displayOrderKey: true },
+        select: {
+          id: true,
+          nameEn: true,
+          branchId: true,
+          displayOrderKey: true,
+        },
         where: { isActive: true },
         orderBy: { displayOrderKey: "asc" },
       })
