@@ -9,6 +9,7 @@ export interface LedgerEntry {
   id: number;
   date: string;
   description: string;
+  netSalary: number | null;
   salary: number | null;
   loan: number | null;
   challan: number | null;
@@ -20,6 +21,7 @@ export interface LedgerEntry {
  * Interface for calculation totals
  */
 export interface LedgerTotals {
+  netSalary: number;
   salary: number;
   loan: number;
   challan: number;
@@ -43,6 +45,7 @@ export const transformLedgerEntries = (
       : "";
 
     // Initialize columns
+    let netSalary: number | null = null;
     let salary: number | null = null;
     let loan: number | null = null;
     let challan: number | null = null;
@@ -50,7 +53,8 @@ export const transformLedgerEntries = (
 
     // Map ledger entry to table columns based on type and amountType
     if (entry.type === "SALARY" && entry.amountType === "CREDIT") {
-      salary = entry.amount;
+      netSalary = entry.amount;
+      salary = entry.salary ?? null;
     } else if (entry.type === "LOAN") {
       if (entry.amountType === "DEBIT") {
         // Loan taken
@@ -70,16 +74,17 @@ export const transformLedgerEntries = (
     }
 
     if (entry.description === "Opening Balance") {
-      loan = entry.openingLoan || null;
-      challan = entry.openingChallan || null;
+      loan = entry.openingLoan ?? null;
+      challan = entry.openingChallan ?? null;
     }
 
     return {
       id: entry.id,
       date,
       description: entry.description,
-      salary,
+      netSalary,
       loan,
+      salary,
       challan,
       deduction,
       balance: entry.balance,
@@ -93,13 +98,14 @@ export const transformLedgerEntries = (
 export const calculateLedgerTotals = (data: LedgerEntry[]): LedgerTotals => {
   return data.reduce(
     (acc, entry) => {
+      acc.netSalary += entry.netSalary || 0;
       acc.salary += entry.salary || 0;
       acc.loan += entry.loan || 0;
       acc.challan += entry.challan || 0;
       acc.deduction += entry.deduction || 0;
       return acc;
     },
-    { salary: 0, loan: 0, challan: 0, deduction: 0 }
+    { netSalary: 0, salary: 0, loan: 0, challan: 0, deduction: 0 }
   );
 };
 
@@ -162,6 +168,23 @@ export const getLedgerTableColumns = (
       footer: () => (
         <span className="text-sm font-bold">
           {totals.salary > 0 ? totals.salary.toLocaleString() : ""}
+        </span>
+      ),
+    },
+    {
+      field: "netSalary",
+      header: "Net Salary",
+      ...tableCommonProps,
+      align: "center",
+      style: { minWidth: 130 },
+      body: (rowData: LedgerEntry) => (
+        <span className="text-sm">
+          {rowData.netSalary !== null ? rowData.netSalary.toLocaleString() : ""}
+        </span>
+      ),
+      footer: () => (
+        <span className="text-sm font-bold">
+          {totals.netSalary > 0 ? totals.netSalary.toLocaleString() : ""}
         </span>
       ),
     },

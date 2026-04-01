@@ -1,27 +1,25 @@
 "use client";
-import { useRef, useState, useMemo, useCallback } from "react";
+import { useRef, useState, useMemo, useCallback, useEffect } from "react";
 
-import {
-  TableRef,
-} from "@/components";
-import { toastService } from "@/lib/toast";
 import {
   useGlobalData,
   GlobalDataDesignation,
 } from "@/context/GlobalDataContext";
+import { TableRef } from "@/components";
+import { toastService } from "@/lib/toast";
 import { useGetLedgerByEmployeeCode } from "@/lib/db/services/ledger/requests";
 
 // Components
-import { LedgerHeader } from "./components/LedgerHeader";
-import { LedgerSearch } from "./components/LedgerSearch";
-import { LedgerEmployeeInfo } from "./components/LedgerEmployeeInfo";
 import { LedgerTable } from "./components/LedgerTable";
+import { LedgerSearch } from "./components/LedgerSearch";
+import { LedgerHeader } from "./components/LedgerHeader";
+import { LedgerEmployeeInfo } from "./components/LedgerEmployeeInfo";
 
 // Helpers
 import {
-  transformLedgerEntries,
-  calculateLedgerTotals,
   getLedgerTableColumns,
+  calculateLedgerTotals,
+  transformLedgerEntries,
 } from "./helpers";
 
 const LedgerPage = () => {
@@ -36,6 +34,7 @@ const LedgerPage = () => {
     data: ledgerResponse,
     isLoading,
     refetch,
+    error,
   } = useGetLedgerByEmployeeCode({
     employeeCode: searchEmployeeCode || 0,
   });
@@ -66,6 +65,18 @@ const LedgerPage = () => {
       ? designationsMap.get(employee.designationId)!.nameEn
       : "";
   const idCardNumber = employee?.idCardNo || "";
+
+  // Handle errors from the server (e.g., Access Denied)
+  useEffect(() => {
+    if (error) {
+      toastService.showError(
+        "Error",
+        (error as any) || "An error occurred while fetching the ledger."
+      );
+      setSearchEmployeeCode(null);
+      setEmployeeCode("");
+    }
+  }, [error, toastService]);
 
   // Handle search
   const handleSearch = useCallback(() => {

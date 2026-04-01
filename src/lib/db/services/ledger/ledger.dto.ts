@@ -8,6 +8,7 @@ export type AmountType = "CREDIT" | "DEBIT";
 
 export interface GetLedgerByEmployeeCodeParams {
   employeeCode: number;
+  branchId?: number;
 }
 
 export interface LedgerEntryInterface {
@@ -27,6 +28,7 @@ export interface LedgerEntryInterface {
   trafficChallanId: number | null;
   openingLoan?: number;
   openingChallan?: number;
+  salary?: number;
 }
 
 export interface EmployeeInfo {
@@ -36,6 +38,7 @@ export interface EmployeeInfo {
   nameAr: string | null;
   designationId: number | null;
   idCardNo: string | null;
+  branchId: number | null;
 }
 
 export interface GetLedgerByEmployeeCodeResponse {

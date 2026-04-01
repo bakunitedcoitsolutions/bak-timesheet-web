@@ -27,14 +27,19 @@ export const getLedgerByEmployeeCode = async (
       nameAr: true,
       designationId: true,
       idCardNo: true,
+      branchId: true,
     },
   });
 
   if (!employee) {
-    return {
-      employee: null,
-      ledgerEntries: [],
-    };
+    throw new Error("Employee not found");
+  }
+
+  // Security validation: verify branch assignment for branch-scoped users
+  if (params.branchId && employee.branchId !== params.branchId) {
+    throw new Error(
+      "Access Denied: The requested employee belongs to another branch."
+    );
   }
 
   const targetYear = 2026;
@@ -130,6 +135,7 @@ export const getLedgerByEmployeeCode = async (
     amount: number;
     sourceId: number;
     sourceType: "PAYROLL" | "LOAN" | "CHALLAN";
+    salary?: number;
   }
 
   const unifiedRecords: UnifiedRecord[] = [];
@@ -195,6 +201,7 @@ export const getLedgerByEmployeeCode = async (
       amount: payroll.netSalaryPayable || 0, // Using netSalaryPayable based on the requirement for netSalary
       sourceId: payroll.id,
       sourceType: "PAYROLL",
+      salary: payroll.salary || 0,
     });
 
     // 2nd Component: Loan Deduction
@@ -208,6 +215,7 @@ export const getLedgerByEmployeeCode = async (
         amount: payroll.loanDeduction,
         sourceId: payroll.id,
         sourceType: "PAYROLL",
+        salary: payroll.salary || 0,
       });
     }
 
@@ -222,6 +230,7 @@ export const getLedgerByEmployeeCode = async (
         amount: payroll.challanDeduction,
         sourceId: payroll.id,
         sourceType: "PAYROLL",
+        salary: payroll.salary || 0,
       });
     }
   }
@@ -268,6 +277,7 @@ export const getLedgerByEmployeeCode = async (
       loanId: record.sourceType === "LOAN" ? record.sourceId : null,
       trafficChallanId:
         record.sourceType === "CHALLAN" ? record.sourceId : null,
+      salary: record.salary,
     });
   }
 
@@ -279,6 +289,7 @@ export const getLedgerByEmployeeCode = async (
       nameAr: employee.nameAr,
       designationId: employee.designationId,
       idCardNo: employee.idCardNo,
+      branchId: employee.branchId,
     },
     ledgerEntries,
   };

@@ -1,7 +1,6 @@
 "use server";
-import { auth } from "@/lib/auth/auth";
 import { serverAction } from "@/lib/zsa/zsa-action";
-import { USER_ROLES } from "@/utils/user.utility";
+import { getServerAccessContext } from "@/lib/auth/helpers";
 import {
   listProjects,
   createProject,
@@ -29,14 +28,9 @@ import {
 export const createProjectAction = serverAction
   .input(CreateProjectSchema)
   .handler(async ({ input }) => {
-    const session = await auth();
-    const roleId = session?.user?.roleId;
-    const userBranchId = session?.user?.branchId;
+    const { isBranchScoped, userBranchId } = await getServerAccessContext();
 
-    if (
-      roleId === USER_ROLES.BRANCH_MANAGER ||
-      roleId === USER_ROLES.BRANCH_USER
-    ) {
+    if (isBranchScoped) {
       input.branchId = userBranchId as number;
     }
 
@@ -51,14 +45,9 @@ export const createProjectAction = serverAction
 export const updateProjectAction = serverAction
   .input(UpdateProjectSchema)
   .handler(async ({ input }) => {
-    const session = await auth();
-    const roleId = session?.user?.roleId;
-    const userBranchId = session?.user?.branchId;
+    const { isBranchScoped, userBranchId } = await getServerAccessContext();
 
-    if (
-      roleId === USER_ROLES.BRANCH_MANAGER ||
-      roleId === USER_ROLES.BRANCH_USER
-    ) {
+    if (isBranchScoped) {
       input.branchId = userBranchId as number;
     }
 
@@ -74,16 +63,11 @@ export const updateProjectAction = serverAction
 export const listProjectsAction = serverAction
   .input(ListProjectsParamsSchema)
   .handler(async ({ input }) => {
-    const session = await auth();
-    const roleId = session?.user?.roleId;
-    const userBranchId = session?.user?.branchId;
-
-    const isBranchScoped =
-      roleId === USER_ROLES.BRANCH_MANAGER || roleId === USER_ROLES.BRANCH_USER;
+    const { isBranchScoped, userBranchId } = await getServerAccessContext();
 
     const response = await listProjects({
       ...input,
-      branchId: isBranchScoped ? (userBranchId as number) : undefined,
+      branchId: isBranchScoped ? userBranchId : undefined,
     });
     return response;
   });

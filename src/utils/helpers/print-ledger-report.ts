@@ -6,6 +6,7 @@ export interface PrintLedgerEntry {
   date: string;
   description: string;
   salary: number | null;
+  netSalary: number | null;
   loan: number | null;
   challan: number | null;
   deduction: number | null;
@@ -17,6 +18,7 @@ export const printLedgerReport = (
   employee: EmployeeInfo,
   totals: {
     salary: number;
+    netSalary: number;
     loan: number;
     challan: number;
     deduction: number;
@@ -36,12 +38,13 @@ export const printLedgerReport = (
     <colgroup>
       <col style="width: 4%;" />
       <col style="width: 14%;" />
-      <col style="width: 34%;" />
+      <col style="width: 26%;" />
+      <col style="width: 10%;" />
+      <col style="width: 10%;" />
+      <col style="width: 10%;" />
+      <col style="width: 10%;" />
+      <col style="width: 10%;" />
       <col style="width: 12%;" />
-      <col style="width: 12%;" />
-      <col style="width: 12%;" />
-      <col style="width: 12%;" />
-      <col style="width: 14%;" />
     </colgroup>
   `;
 
@@ -108,6 +111,7 @@ export const printLedgerReport = (
               <th>Date</th>
               <th class="text-left">Description</th>
               <th>Salary</th>
+              <th>Net Salary</th>
               <th>Loan</th>
               <th>Traffic</th>
               <th>Deduction</th>
@@ -123,6 +127,7 @@ export const printLedgerReport = (
                 <td class="text-left">${row.date}</td>
                 <td class="text-left">${row.description}</td>
                 <td>${fmt(row.salary)}</td>
+                <td>${fmt(row.netSalary)}</td>
                 <td>${fmt(row.loan)}</td>
                 <td>${fmt(row.challan)}</td>
                 <td class="text-red">${fmt(row.deduction)}</td>
@@ -138,6 +143,7 @@ export const printLedgerReport = (
               <tr>
                 <td colspan="3" class="bg-footer text-right font-bold" style="padding-right: 15px;">Total:</td>
                 <td class="bg-footer font-bold">${totals.salary > 0 ? formatNum(totals.salary) : "-"}</td>
+                <td class="bg-footer font-bold">${totals.netSalary > 0 ? formatNum(totals.netSalary) : "-"}</td>
                 <td class="bg-footer font-bold">${totals.loan > 0 ? formatNum(totals.loan) : "-"}</td>
                 <td class="bg-footer font-bold">${totals.challan > 0 ? formatNum(totals.challan) : "-"}</td>
                 <td class="bg-footer font-bold text-red">${totals.deduction > 0 ? formatNum(totals.deduction) : "-"}</td>
@@ -146,7 +152,7 @@ export const printLedgerReport = (
             `
                 : `
               <tr>
-                <td colspan="8" style="padding: 20px 0;">No ledger data found for this employee.</td>
+                <td colspan="9" style="padding: 20px 0;">No ledger data found for this employee.</td>
               </tr>
             `
             }

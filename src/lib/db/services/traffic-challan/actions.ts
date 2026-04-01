@@ -1,5 +1,6 @@
 "use server";
 import { serverAction } from "@/lib/zsa/zsa-action";
+import { getServerAccessContext } from "@/lib/auth/helpers";
 import {
   createTrafficChallan,
   updateTrafficChallan,
@@ -24,25 +25,12 @@ import {
   ListAllTrafficChallansParamsInput,
   ListAllTrafficChallansParamsSchema,
 } from "./traffic-challan.schemas";
-import { auth } from "@/lib/auth";
-import { USER_ROLES } from "@/utils/user.utility";
-
-const getAccessContext = async () => {
-  const session = await auth();
-  const roleId = session?.user?.roleId ? Number(session.user.roleId) : undefined;
-  const userBranchId = session?.user?.branchId ? Number(session.user.branchId) : undefined;
-  
-  const isBranchScoped =
-    roleId === USER_ROLES.BRANCH_MANAGER || roleId === USER_ROLES.BRANCH_USER;
-
-  return { isBranchScoped, userBranchId };
-};
 
 // Create Traffic Challan
 export const createTrafficChallanAction = serverAction
   .input(CreateTrafficChallanSchema)
   .handler(async ({ input }: { input: CreateTrafficChallanInput }) => {
-    const { isBranchScoped, userBranchId } = await getAccessContext();
+    const { isBranchScoped, userBranchId } = await getServerAccessContext();
     
     const response = await createTrafficChallan({
       ...input,
@@ -55,7 +43,7 @@ export const createTrafficChallanAction = serverAction
 export const updateTrafficChallanAction = serverAction
   .input(UpdateTrafficChallanSchema)
   .handler(async ({ input }: { input: UpdateTrafficChallanInput }) => {
-    const { isBranchScoped, userBranchId } = await getAccessContext();
+    const { isBranchScoped, userBranchId } = await getServerAccessContext();
     const { id, ...rest } = input;
     
     const response = await updateTrafficChallan(id, {
@@ -69,7 +57,7 @@ export const updateTrafficChallanAction = serverAction
 export const listTrafficChallansAction = serverAction
   .input(ListTrafficChallansParamsSchema)
   .handler(async ({ input }) => {
-    const { isBranchScoped, userBranchId } = await getAccessContext();
+    const { isBranchScoped, userBranchId } = await getServerAccessContext();
     
     const response = await listTrafficChallans({
       ...input,
@@ -90,7 +78,7 @@ export const getTrafficChallanByIdAction = serverAction
 export const deleteTrafficChallanAction = serverAction
   .input(DeleteTrafficChallanSchema)
   .handler(async ({ input }: { input: DeleteTrafficChallanInput }) => {
-    const { isBranchScoped, userBranchId } = await getAccessContext();
+    const { isBranchScoped, userBranchId } = await getServerAccessContext();
     
     const response = await deleteTrafficChallan(
       input.id,
@@ -103,7 +91,7 @@ export const deleteTrafficChallanAction = serverAction
 export const bulkUploadTrafficChallansAction = serverAction
   .input(BulkUploadTrafficChallanSchema)
   .handler(async ({ input }: { input: BulkUploadTrafficChallanInput }) => {
-    const { isBranchScoped, userBranchId } = await getAccessContext();
+    const { isBranchScoped, userBranchId } = await getServerAccessContext();
     
     const response = await bulkUploadTrafficChallans({
       ...input,
@@ -116,7 +104,7 @@ export const bulkUploadTrafficChallansAction = serverAction
 export const listAllTrafficChallansAction = serverAction
   .input(ListAllTrafficChallansParamsSchema)
   .handler(async ({ input }: { input: ListAllTrafficChallansParamsInput }) => {
-    const { isBranchScoped, userBranchId } = await getAccessContext();
+    const { isBranchScoped, userBranchId } = await getServerAccessContext();
     
     const response = await listAllTrafficChallans({
       ...input,

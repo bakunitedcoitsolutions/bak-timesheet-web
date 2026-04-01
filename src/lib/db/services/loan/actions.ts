@@ -1,7 +1,6 @@
 "use server";
-import { auth } from "@/lib/auth/auth";
-import { USER_ROLES } from "@/utils/user.utility";
 import { serverAction } from "@/lib/zsa/zsa-action";
+import { getServerAccessContext } from "@/lib/auth/helpers";
 import {
   listLoans,
   createLoan,
@@ -31,16 +30,11 @@ import {
 export const createLoanAction = serverAction
   .input(CreateLoanSchema)
   .handler(async ({ input }: { input: CreateLoanInput }) => {
-    const session = await auth();
-    const roleId = session?.user?.roleId;
-    const userBranchId = session?.user?.branchId;
-
-    const isBranchScoped =
-      roleId === USER_ROLES.BRANCH_MANAGER || roleId === USER_ROLES.BRANCH_USER;
+    const { isBranchScoped, userBranchId } = await getServerAccessContext();
 
     const response = await createLoan({
       ...input,
-      branchId: isBranchScoped ? (userBranchId as number) : undefined,
+      branchId: isBranchScoped ? userBranchId : undefined,
     });
     return response;
   });
@@ -49,17 +43,12 @@ export const createLoanAction = serverAction
 export const updateLoanAction = serverAction
   .input(UpdateLoanSchema)
   .handler(async ({ input }: { input: UpdateLoanInput }) => {
-    const session = await auth();
-    const roleId = session?.user?.roleId;
-    const userBranchId = session?.user?.branchId;
-
-    const isBranchScoped =
-      roleId === USER_ROLES.BRANCH_MANAGER || roleId === USER_ROLES.BRANCH_USER;
+    const { isBranchScoped, userBranchId } = await getServerAccessContext();
 
     const { id, ...rest } = input;
     const response = await updateLoan(id, {
       ...rest,
-      branchId: isBranchScoped ? (userBranchId as number) : undefined,
+      branchId: isBranchScoped ? userBranchId : undefined,
     });
     return response;
   });
@@ -68,16 +57,11 @@ export const updateLoanAction = serverAction
 export const listLoansAction = serverAction
   .input(ListLoansParamsSchema)
   .handler(async ({ input }) => {
-    const session = await auth();
-    const roleId = session?.user?.roleId;
-    const userBranchId = session?.user?.branchId;
-
-    const isBranchScoped =
-      roleId === USER_ROLES.BRANCH_MANAGER || roleId === USER_ROLES.BRANCH_USER;
+    const { isBranchScoped, userBranchId } = await getServerAccessContext();
 
     const response = await listLoans({
       ...input,
-      branchId: isBranchScoped ? (userBranchId as number) : undefined,
+      branchId: isBranchScoped ? userBranchId : undefined,
     });
     return response;
   });
@@ -94,16 +78,11 @@ export const getLoanByIdAction = serverAction
 export const deleteLoanAction = serverAction
   .input(DeleteLoanSchema)
   .handler(async ({ input }: { input: DeleteLoanInput }) => {
-    const session = await auth();
-    const roleId = session?.user?.roleId;
-    const userBranchId = session?.user?.branchId;
-
-    const isBranchScoped =
-      roleId === USER_ROLES.BRANCH_MANAGER || roleId === USER_ROLES.BRANCH_USER;
+    const { isBranchScoped, userBranchId } = await getServerAccessContext();
 
     const response = await deleteLoan(
       input.id,
-      isBranchScoped ? (userBranchId as number) : undefined
+      isBranchScoped ? userBranchId : undefined
     );
     return response;
   });
@@ -112,16 +91,11 @@ export const deleteLoanAction = serverAction
 export const bulkUploadLoansAction = serverAction
   .input(BulkUploadLoanSchema)
   .handler(async ({ input }: { input: BulkUploadLoanInput }) => {
-    const session = await auth();
-    const roleId = session?.user?.roleId;
-    const userBranchId = session?.user?.branchId;
-
-    const isBranchScoped =
-      roleId === USER_ROLES.BRANCH_MANAGER || roleId === USER_ROLES.BRANCH_USER;
+    const { isBranchScoped, userBranchId } = await getServerAccessContext();
 
     const response = await bulkUploadLoans({
       ...input,
-      branchId: isBranchScoped ? (userBranchId as number) : undefined,
+      branchId: isBranchScoped ? userBranchId : undefined,
     });
     return response;
   });
@@ -130,16 +104,11 @@ export const bulkUploadLoansAction = serverAction
 export const listAllLoansAction = serverAction
   .input(ListAllLoansParamsSchema)
   .handler(async ({ input }: { input: ListAllLoansParamsInput }) => {
-    const session = await auth();
-    const roleId = session?.user?.roleId;
-    const userBranchId = session?.user?.branchId;
-
-    const isBranchScoped =
-      roleId === USER_ROLES.BRANCH_MANAGER || roleId === USER_ROLES.BRANCH_USER;
+    const { isBranchScoped, userBranchId } = await getServerAccessContext();
 
     const response = await listAllLoans({
       ...input,
-      branchId: isBranchScoped ? (userBranchId as number) : undefined,
+      branchId: isBranchScoped ? userBranchId : undefined,
     });
     return response;
   });

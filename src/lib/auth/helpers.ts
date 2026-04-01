@@ -92,3 +92,25 @@ export async function getCachedUserSession<T>(
   const key = `user:session:${userId}`;
   return cache.get<T>(key);
 }
+
+/**
+ * Get server-side access context
+ * Centralized logic for branch-scoped permissions
+ */
+export async function getServerAccessContext() {
+  const session = await auth();
+  const roleId = session?.user?.roleId ? Number(session.user.roleId) : undefined;
+  const userBranchId = session?.user?.branchId
+    ? Number(session.user.branchId)
+    : undefined;
+
+  const isBranchScoped =
+    roleId === USER_ROLES.BRANCH_MANAGER || roleId === USER_ROLES.BRANCH_USER;
+
+  return {
+    isBranchScoped,
+    userBranchId,
+    roleId,
+    session,
+  };
+}
