@@ -104,12 +104,17 @@ export const getPayrollSummariesByYear = async (
  */
 export const getPayrollDate = async (
   id: number
-): Promise<{ payrollMonth: number; payrollYear: number } | null> => {
+): Promise<{
+  payrollMonth: number;
+  payrollYear: number;
+  payrollStatusId: number | null;
+} | null> => {
   const payroll = await prisma.payrollSummary.findUnique({
     where: { id },
     select: {
       payrollMonth: true,
       payrollYear: true,
+      payrollStatusId: true,
     },
   });
 

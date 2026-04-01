@@ -9,6 +9,7 @@ import {
 } from "./payroll-summary.schemas";
 import dayjs from "dayjs";
 import { mapPayrollDetailToEntry } from "./mappers";
+import { getServerAccessContext } from "@/lib/auth/helpers";
 import { AllowanceType } from "../../../../../prisma/generated/prisma/enums";
 
 // Helper to getting start/end of month
@@ -659,6 +660,8 @@ export const repostPayroll = async ({
   designationId,
   payrollSectionId,
 }: RepostPayrollInput) => {
+  const { isBranchScoped, userBranchId } = await getServerAccessContext();
+
   // Check if there is any active payroll (Pending) that is NOT this one
   const activePayroll = await prisma.payrollSummary.findFirst({
     where: {
@@ -695,7 +698,10 @@ export const repostPayroll = async ({
 
   // Fetch existing detail rows keyed by employeeId so we can update in-place
   const existingDetails = await prisma.payrollDetails.findMany({
-    where: { payrollId: id },
+    where: {
+      payrollId: id,
+      ...(isBranchScoped ? { branchId: userBranchId } : {}),
+    },
   });
   const existingDetailMap = new Map(
     existingDetails.map((d) => [d.employeeId, d])
@@ -723,6 +729,9 @@ export const repostPayroll = async ({
   const employeeWhere: any = { statusId: 1 };
   if (designationId) employeeWhere.designationId = designationId;
   if (payrollSectionId) employeeWhere.payrollSectionId = payrollSectionId;
+  if (isBranchScoped) {
+    employeeWhere.branchId = userBranchId;
+  }
 
   const employees = await prisma.employee.findMany({
     where: employeeWhere,
@@ -756,6 +765,7 @@ export const repostPayroll = async ({
       payrollMonth: prevMonth,
       payrollYear: prevYear,
       employeeId: { in: employeeIds },
+      ...(isBranchScoped ? { branchId: userBranchId } : {}),
     },
     select: { employeeId: true, netLoan: true, netChallan: true },
   });
@@ -1032,9 +1042,13 @@ export const recalculatePayrollSummary = async ({
 export const refreshPayrollDetailRow = async ({
   payrollDetailId,
 }: RefreshPayrollDetailRowInput) => {
+  const { isBranchScoped, userBranchId } = await getServerAccessContext();
   // 1. Fetch the existing PayrollDetails row with its parent summary
   const existingDetail = await prisma.payrollDetails.findUnique({
-    where: { id: payrollDetailId },
+    where: {
+      id: payrollDetailId,
+      ...(isBranchScoped ? { branchId: userBranchId } : {}),
+    },
     include: {
       payrollSummary: true,
       employee: {

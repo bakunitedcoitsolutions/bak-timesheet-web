@@ -59,16 +59,6 @@ const PayrollDetailPage = () => {
 
   const { data: globalData } = useGlobalData();
 
-  useEffect(() => {
-    if (selectedFilter !== null) return;
-    const formanSection = globalData.payrollSections?.find((s) =>
-      s.nameEn?.toLowerCase().includes("forman")
-    );
-    if (formanSection) {
-      setSelectedFilter(`payroll-${formanSection.id}`);
-    }
-  }, [globalData.payrollSections, selectedFilter]);
-
   const statusOptions = globalData.payrollStatuses.map((s) => ({
     label: s.nameEn || "Unknown",
     value: s.id,
@@ -313,6 +303,7 @@ const PayrollDetailPage = () => {
           isRefreshingAll={isRefreshingAll}
           handleRefreshAll={handleRefreshAll}
           setSelectedFilter={setSelectedFilter}
+          isPosted={dateData?.payrollStatusId === 3}
         />
         <div className="bg-white h-full rounded-xl overflow-hidden">
           <Table

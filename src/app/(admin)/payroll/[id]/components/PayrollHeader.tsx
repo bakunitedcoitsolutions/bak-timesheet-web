@@ -9,6 +9,7 @@ interface PayrollHeaderProps {
   isRefreshingAll: boolean;
   isLoading: boolean;
   isSavingAll: boolean;
+  isPosted?: boolean;
   handleRefreshAll: () => void;
   handleSave: () => void;
 }
@@ -19,6 +20,7 @@ export const PayrollHeader = ({
   isRefreshingAll,
   isLoading,
   isSavingAll,
+  isPosted = false,
   handleRefreshAll,
   handleSave,
 }: PayrollHeaderProps) => {
@@ -33,43 +35,47 @@ export const PayrollHeader = ({
             className="w-full lg:w-64 h-10.5!"
           />
         </div>
-        <div className="w-full lg:w-auto hidden lg:block">
-          <Button
-            size="small"
-            className="w-full xl:w-32 2xl:w-36 h-10!"
-            label="Refresh"
-            {...(isRefreshingAll
-              ? { loading: true }
-              : { icon: "pi pi-refresh" })}
-            disabled={isLoading || isSavingAll || isRefreshingAll}
-            onClick={handleRefreshAll}
-          />
-        </div>
+        {!isPosted && (
+          <div className="w-full lg:w-auto hidden lg:block">
+            <Button
+              size="small"
+              className="w-full xl:w-32 2xl:w-36 h-10!"
+              label="Refresh"
+              {...(isRefreshingAll
+                ? { loading: true }
+                : { icon: "pi pi-refresh" })}
+              disabled={isLoading || isSavingAll || isRefreshingAll}
+              onClick={handleRefreshAll}
+            />
+          </div>
+        )}
       </div>
-      <div className="flex items-center gap-3 w-full lg:w-auto">
-        <div className="block lg:hidden w-full lg:w-auto">
-          <Button
-            size="small"
-            className="w-full lg:w-auto h-10!"
-            label="Refresh"
-            {...(isRefreshingAll
-              ? { loading: true }
-              : { icon: "pi pi-refresh" })}
-            disabled={isLoading || isSavingAll || isRefreshingAll}
-            onClick={handleRefreshAll}
-          />
+      {!isPosted && (
+        <div className="flex items-center gap-3 w-full lg:w-auto">
+          <div className="block lg:hidden w-full lg:w-auto">
+            <Button
+              size="small"
+              className="w-full lg:w-auto h-10!"
+              label="Refresh"
+              {...(isRefreshingAll
+                ? { loading: true }
+                : { icon: "pi pi-refresh" })}
+              disabled={isLoading || isSavingAll || isRefreshingAll}
+              onClick={handleRefreshAll}
+            />
+          </div>
+          <div className="w-full lg:w-auto">
+            <Button
+              size="small"
+              label="Save"
+              onClick={handleSave}
+              loading={isSavingAll}
+              disabled={isLoading || isSavingAll || isRefreshingAll}
+              className="w-full bg-primary-light! text-primary! border-primary-light! lg:w-28 h-10!"
+            />
+          </div>
         </div>
-        <div className="w-full lg:w-auto">
-          <Button
-            size="small"
-            label="Save"
-            onClick={handleSave}
-            loading={isSavingAll}
-            disabled={isLoading || isSavingAll || isRefreshingAll}
-            className="w-full bg-primary-light! text-primary! border-primary-light! lg:w-28 h-10!"
-          />
-        </div>
-      </div>
+      )}
     </div>
   );
 };

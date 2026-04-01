@@ -25,6 +25,8 @@ export const ActionButtons = ({
 
   const isLocked = rowData.isLocked || rowData.payrollSummaryStatusId === 3;
 
+  if (isLocked) return null;
+
   const handleRefreshRow = async () => {
     try {
       setIsRefreshing(true);
@@ -55,7 +57,7 @@ export const ActionButtons = ({
         {...(isSaving ? { loading: true } : { icon: "pi pi-save text-lg!" })}
         tooltipOptions={{ position: "top" }}
         onClick={() => saveRow(rowData)}
-        disabled={isLocked || isSaving || isRefreshing || isSavingAll}
+        disabled={isSaving || isRefreshing || isSavingAll}
         className="w-8 h-8!"
         tooltip="Save Row"
       />
@@ -68,7 +70,7 @@ export const ActionButtons = ({
           ? { loading: true }
           : { icon: "pi pi-refresh text-lg!" })}
         onClick={handleRefreshRow}
-        disabled={isLocked || isSaving || isRefreshing || isSavingAll}
+        disabled={isSaving || isRefreshing || isSavingAll}
         className="w-8 h-8!"
         tooltip="Refresh"
       />

@@ -3,6 +3,7 @@ import {
   GetPayrollReportInput,
   SavePayrollDetailsBatchInput,
 } from "./payroll-summary.schemas";
+import { getServerAccessContext } from "@/lib/auth/helpers";
 import type { GetPayrollDetailsParams } from "./payroll-summary.dto";
 import { mapPayrollDetailToEntry, PayrollDetailEntry } from "./mappers";
 
@@ -20,6 +21,7 @@ export const getPayrollDetails = async (
     page = 1,
     limit = 1000,
   } = params;
+  const { isBranchScoped, userBranchId } = await getServerAccessContext();
 
   const where: any = {};
 
@@ -39,7 +41,9 @@ export const getPayrollDetails = async (
     throw new Error("PayrollId is required");
   }
 
-  if (branchId) {
+  if (isBranchScoped) {
+    where.branchId = userBranchId;
+  } else if (branchId) {
     where.branchId = branchId;
   }
 
@@ -162,6 +166,8 @@ export const savePayrollDetailsBatch = async (
   const batchSize = 50;
   let saved = 0;
 
+  const { isBranchScoped, userBranchId } = await getServerAccessContext();
+
   for (let i = 0; i < entries.length; i += batchSize) {
     const batch = entries.slice(i, i + batchSize);
     await prisma.$transaction(
@@ -214,7 +220,10 @@ export const savePayrollDetailsBatch = async (
 
           if (Object.keys(updateData).length > 0) {
             await tx.payrollDetails.update({
-              where: { id },
+              where: {
+                id,
+                ...(isBranchScoped ? { branchId: userBranchId } : {}),
+              },
               data: updateData,
             });
           }
