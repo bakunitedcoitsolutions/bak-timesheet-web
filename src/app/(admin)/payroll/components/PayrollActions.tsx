@@ -12,6 +12,7 @@ interface PayrollActionsProps {
   onRecalculate: (payroll: PayrollEntry) => void;
   onPost: (payroll: PayrollEntry) => void;
   onRepost: (payroll: PayrollEntry, isRefresh: boolean) => void;
+  showExtraActions?: boolean;
 }
 
 export const PayrollActions = ({
@@ -20,6 +21,7 @@ export const PayrollActions = ({
   onPost,
   onRepost,
   onRecalculate,
+  showExtraActions = true,
 }: PayrollActionsProps) => {
   const menuRef = useRef<Menu | null>(null);
   const payrollStatus = payroll.status;
@@ -117,7 +119,7 @@ export const PayrollActions = ({
         onClick={() => onView(payroll)}
         className="w-14 border-none! shadow-none! h-8 justify-center items-center bg-primary-light! text-primary!"
       />
-      {!hideActions && (
+      {showExtraActions && !hideActions && (
         <>
           <div
             className="absolute w-7 h-7 cursor-pointer -right-[5px] top-[60%] -translate-y-[50%] z-1 justify-center items-center"

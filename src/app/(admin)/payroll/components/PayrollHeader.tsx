@@ -2,9 +2,13 @@ import { Button } from "@/components";
 
 interface PayrollHeaderProps {
   onRunPayroll: () => void;
+  showRunPayroll?: boolean;
 }
 
-export const PayrollHeader = ({ onRunPayroll }: PayrollHeaderProps) => {
+export const PayrollHeader = ({
+  onRunPayroll,
+  showRunPayroll = true,
+}: PayrollHeaderProps) => {
   return (
     <div className="flex flex-col md:flex-row justify-between items-center gap-3 shrink-0">
       <div className="w-full md:w-auto flex flex-1 flex-col gap-1">
@@ -15,14 +19,16 @@ export const PayrollHeader = ({ onRunPayroll }: PayrollHeaderProps) => {
           View, manage payroll records, and payroll details.
         </p>
       </div>
-      <div className="w-full md:w-auto">
-        <Button
-          size="small"
-          variant="solid"
-          label="Run Payroll"
-          onClick={onRunPayroll}
-        />
-      </div>
+      {showRunPayroll && (
+        <div className="w-full md:w-auto">
+          <Button
+            size="small"
+            variant="solid"
+            label="Run Payroll"
+            onClick={onRunPayroll}
+          />
+        </div>
+      )}
     </div>
   );
 };

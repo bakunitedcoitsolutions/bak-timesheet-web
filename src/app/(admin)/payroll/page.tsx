@@ -3,6 +3,7 @@ import { useState, useRef, useMemo, useCallback } from "react";
 import { useRouter } from "next/navigation";
 
 import { TableRef, CustomHeaderProps } from "@/components";
+import { useAccess } from "@/components/common";
 import { PayrollEntry } from "@/utils/types";
 import {
   useRunPayroll,
@@ -36,6 +37,9 @@ const PayrollPage = () => {
   );
   const [isRunPayrollDialogOpen, setIsRunPayrollDialogOpen] = useState(false);
   const tableRef = useRef<TableRef>(null);
+
+  const { isAdmin, isManager } = useAccess();
+  const isAdminOrManager = isAdmin || isManager;
 
   const { data: payrollSummaries, isLoading } = useGetPayrollSummaries({
     year: parseInt(selectedYear),
@@ -153,9 +157,16 @@ const PayrollPage = () => {
         handleView,
         handleRecalculate,
         handlePost,
-        handleRepost
+        handleRepost,
+        isAdminOrManager
       ),
-    [handleView, handleRecalculate, handlePost, handleRepost]
+    [
+      handleView,
+      handleRecalculate,
+      handlePost,
+      handleRepost,
+      isAdminOrManager,
+    ]
   );
 
   const renderFiltersWithProps = useCallback(
@@ -173,7 +184,10 @@ const PayrollPage = () => {
 
   return (
     <div className="flex h-full flex-col gap-6 px-6 py-6">
-      <PayrollHeader onRunPayroll={() => setIsRunPayrollDialogOpen(true)} />
+      <PayrollHeader
+        showRunPayroll={isAdminOrManager}
+        onRunPayroll={() => setIsRunPayrollDialogOpen(true)}
+      />
 
       <PayrollTable
         tableRef={tableRef}
