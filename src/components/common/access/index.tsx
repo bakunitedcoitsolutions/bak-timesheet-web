@@ -191,7 +191,9 @@ export interface UseAccessReturn {
 export function useAccess(): UseAccessReturn {
   const { data: session, status } = useSession();
   const isLoading = status === "loading";
-  const roleId = (session?.user as any)?.roleId as number | undefined;
+
+  // Consistently treat IDs as numbers (handles potential string values in tokens)
+  const roleId = session?.user?.roleId ? Number(session.user.roleId) : undefined;
   const privileges = session?.user?.privileges;
   const canAccess = (feature: Feature): boolean => {
     if (isLoading || !roleId) return false;
@@ -222,7 +224,7 @@ export function useAccess(): UseAccessReturn {
     isBranchUser: roleId === USER_ROLES.BRANCH_USER,
     isBranchScoped:
       roleId === USER_ROLES.BRANCH_MANAGER || roleId === USER_ROLES.BRANCH_USER,
-    branchId: (session?.user as any)?.branchId as number | undefined,
+    branchId: session?.user?.branchId ? Number(session.user.branchId) : undefined,
     canAccess,
     can,
     hasRole,

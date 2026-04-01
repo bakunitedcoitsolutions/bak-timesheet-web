@@ -19,6 +19,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${centuryGothic.variable} ${tanseekArabic.variable} antialiased`}
+        suppressHydrationWarning
       >
         <Providers>
           <CustomConfirmDialog />

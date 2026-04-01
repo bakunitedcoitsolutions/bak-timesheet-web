@@ -1,13 +1,12 @@
 "use client";
 
 import { useEffect, useMemo } from "react";
+import dayjs from "dayjs";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useParams, useRouter } from "next/navigation";
 import { ProgressSpinner } from "primereact/progressspinner";
-import dayjs from "dayjs";
 
-import { useGetPayrollSummaryStatus } from "@/lib/db/services/payroll-summary/requests";
 import {
   useUpdateLoan,
   useCreateLoan,
@@ -17,19 +16,17 @@ import {
   CreateLoanSchema,
   UpdateLoanSchema,
 } from "@/lib/db/services/loan/loan.schemas";
-import { useGlobalData, GlobalDataEmployee } from "@/context/GlobalDataContext";
 import { toastService } from "@/lib/toast";
-import { getEntityModeFromParam } from "@/helpers";
+import { loanTypeOptions } from "./helpers";
 import { getErrorMessage } from "@/utils/helpers";
-
+import { getEntityModeFromParam } from "@/helpers";
 import { StepperFormHeading, useAccess } from "@/components";
+import { useGlobalData, GlobalDataEmployee } from "@/context/GlobalDataContext";
+import { useGetPayrollSummaryStatus } from "@/lib/db/services/payroll-summary/requests";
 
 // Components
 import { LoanForm } from "./components/LoanForm";
 import { LoanFormActions } from "./components/LoanFormActions";
-
-// Helpers
-import { loanTypeOptions } from "./helpers";
 
 const UpsertLoanPage = () => {
   const router = useRouter();
@@ -50,11 +47,15 @@ const UpsertLoanPage = () => {
     id: loanId ? Number(loanId) : 0,
   });
 
-  const { can, isLoading: isAccessLoading } = useAccess();
+  const {
+    can,
+    isBranchScoped,
+    branchId: userBranchId,
+    isLoading: isAccessLoading,
+  } = useAccess();
   const canEdit = can("loans", "edit") || can("loans", "full");
   const canAdd = can("loans", "add") || can("loans", "full");
 
-  // Redirect if insufficient permissions
   useEffect(() => {
     if (isAccessLoading) return;
     if (isAddMode && !canAdd) {
@@ -63,20 +64,50 @@ const UpsertLoanPage = () => {
         "You do not have permission to add loans."
       );
       router.replace("/loans");
-    } else if (isEditMode && !canEdit) {
+      return;
+    }
+    if (isEditMode && !canEdit) {
       toastService.showError(
         "Access Denied",
         "You do not have permission to edit loans."
       );
       router.replace("/loans");
+      return;
     }
-  }, [isAddMode, isEditMode, canAdd, canEdit, isAccessLoading, router]);
+    if (
+      isEditMode &&
+      isBranchScoped &&
+      foundLoan &&
+      Number(foundLoan.employee?.branchId) !== Number(userBranchId)
+    ) {
+      toastService.showError(
+        "Access Denied",
+        `You do not have permission to edit this loan.`
+      );
+      router.replace("/loans");
+      return;
+    }
+  }, [
+    router,
+    canAdd,
+    canEdit,
+    isAddMode,
+    foundLoan,
+    isEditMode,
+    userBranchId,
+    isBranchScoped,
+    isAccessLoading,
+    isLoanLoading,
+  ]);
 
   const isLoading = isLoanLoading || isAccessLoading;
 
   // Fetch employees
   const { data: globalData } = useGlobalData();
-  const employees = globalData.employees || [];
+  const employees = (globalData.employees || []).filter(
+    (emp: GlobalDataEmployee) =>
+      !isBranchScoped || emp.branchId === userBranchId
+  );
 
   const employeeOptions = useMemo(
     () =>

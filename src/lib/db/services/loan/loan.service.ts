@@ -5,11 +5,11 @@
 
 import { prisma } from "@/lib/db/prisma";
 import type {
+  ListedLoan,
   CreateLoanData,
   UpdateLoanData,
   ListLoansParams,
   ListLoansResponse,
-  ListedLoan,
   BulkUploadLoanData,
   BulkUploadLoanResult,
 } from "./loan.dto";
@@ -34,6 +34,7 @@ const loanSelect = {
     select: {
       nameEn: true,
       employeeCode: true,
+      branchId: true,
       designation: {
         select: {
           nameEn: true,
@@ -89,6 +90,17 @@ export const createLoan = async (data: CreateLoanData) => {
       throw new Error(`Employee with ID ${data.employeeId} does not exist`);
     }
 
+    // Validate Branch
+    if (data.branchId) {
+      const employeeWithBranch = await tx.employee.findUnique({
+        where: { id: data.employeeId },
+        select: { branchId: true },
+      });
+      if (employeeWithBranch?.branchId !== data.branchId) {
+        throw new Error("Employee does not belong to your branch");
+      }
+    }
+
     const loan = await createLoanWithLedger(tx, {
       employeeId: data.employeeId,
       date: data.date,
@@ -135,16 +147,17 @@ export const updateLoan = async (id: number, data: UpdateLoanData) => {
       where: { id },
       select: {
         id: true,
-        employeeId: true,
-        date: true,
-        type: true,
-        amount: true,
-        remarks: true,
+        employee: { select: { branchId: true } },
       },
     });
 
     if (!existingLoan) {
       throw new Error("Loan not found");
+    }
+
+    // Security validation: verify branch assignment for branch-scoped users
+    if (data.branchId && existingLoan.employee?.branchId !== data.branchId) {
+      throw new Error("Access Denied: Loan belongs to another branch.");
     }
 
     // Validate employee if provided
@@ -184,16 +197,24 @@ export const updateLoan = async (id: number, data: UpdateLoanData) => {
 /**
  * Delete loan
  */
-export const deleteLoan = async (id: number) => {
+export const deleteLoan = async (id: number, branchId?: number) => {
   return prisma.$transaction(async (tx: PrismaTransactionClient) => {
     // Check if loan exists
     const existingLoan = await tx.loan.findUnique({
       where: { id },
-      select: { id: true },
+      select: {
+        id: true,
+        employee: { select: { branchId: true } },
+      },
     });
 
     if (!existingLoan) {
       throw new Error("Loan not found");
+    }
+
+    // Security validation: verify branch assignment for branch-scoped users
+    if (branchId && existingLoan.employee?.branchId !== branchId) {
+      throw new Error("Access Denied: Loan belongs to another branch.");
     }
 
     await tx.loan.delete({
@@ -237,6 +258,14 @@ export const listLoans = async (
   // Filter by employeeId
   if (params.employeeId !== undefined) {
     where.employeeId = params.employeeId;
+  }
+
+  // Filter by branchId via employee relation
+  if (params.branchId) {
+    where.employee = {
+      ...(where.employee || {}),
+      branchId: params.branchId,
+    };
   }
 
   // Filter by type
@@ -298,6 +327,7 @@ export const listLoans = async (
 export interface ListAllLoansParams {
   search?: string;
   employeeId?: number;
+  branchId?: number | null;
   type?: "LOAN" | "RETURN";
   startDate?: Date | string;
   endDate?: Date | string;
@@ -327,6 +357,14 @@ export const listAllLoans = async (
 
   if (params.employeeId !== undefined) {
     where.employeeId = params.employeeId;
+  }
+
+  // Filter by branchId via employee relation
+  if (params.branchId) {
+    where.employee = {
+      ...(where.employee || {}),
+      branchId: params.branchId,
+    };
   }
 
   if (params.type !== undefined) {
@@ -381,6 +419,19 @@ export const bulkUploadLoans = async (
 
         if (!employee) {
           throw new Error(`Employee with code ${row.employeeCode} not found`);
+        }
+
+        // Validate Branch for branch user
+        if (data.branchId) {
+          const employeeWithBranch = await tx.employee.findUnique({
+            where: { id: employee.id },
+            select: { branchId: true },
+          });
+          if (employeeWithBranch?.branchId !== data.branchId) {
+            throw new Error(
+              `Employee ${row.employeeCode} does not belong to your branch`
+            );
+          }
         }
 
         // Create loan with ledger entry using reusable function

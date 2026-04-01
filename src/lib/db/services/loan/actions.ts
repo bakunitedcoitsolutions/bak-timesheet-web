@@ -1,26 +1,28 @@
 "use server";
+import { auth } from "@/lib/auth/auth";
+import { USER_ROLES } from "@/utils/user.utility";
 import { serverAction } from "@/lib/zsa/zsa-action";
 import {
+  listLoans,
   createLoan,
   updateLoan,
-  findLoanById,
-  listLoans,
   deleteLoan,
-  bulkUploadLoans,
+  findLoanById,
   listAllLoans,
+  bulkUploadLoans,
 } from "./loan.service";
 import {
   CreateLoanSchema,
   UpdateLoanSchema,
-  ListLoansParamsSchema,
-  GetLoanByIdSchema,
   DeleteLoanSchema,
+  GetLoanByIdSchema,
   BulkUploadLoanSchema,
+  ListLoansParamsSchema,
   ListAllLoansParamsSchema,
   CreateLoanInput,
   UpdateLoanInput,
-  GetLoanByIdInput,
   DeleteLoanInput,
+  GetLoanByIdInput,
   BulkUploadLoanInput,
   ListAllLoansParamsInput,
 } from "./loan.schemas";
@@ -29,7 +31,17 @@ import {
 export const createLoanAction = serverAction
   .input(CreateLoanSchema)
   .handler(async ({ input }: { input: CreateLoanInput }) => {
-    const response = await createLoan(input);
+    const session = await auth();
+    const roleId = session?.user?.roleId;
+    const userBranchId = session?.user?.branchId;
+
+    const isBranchScoped =
+      roleId === USER_ROLES.BRANCH_MANAGER || roleId === USER_ROLES.BRANCH_USER;
+
+    const response = await createLoan({
+      ...input,
+      branchId: isBranchScoped ? (userBranchId as number) : undefined,
+    });
     return response;
   });
 
@@ -37,8 +49,18 @@ export const createLoanAction = serverAction
 export const updateLoanAction = serverAction
   .input(UpdateLoanSchema)
   .handler(async ({ input }: { input: UpdateLoanInput }) => {
+    const session = await auth();
+    const roleId = session?.user?.roleId;
+    const userBranchId = session?.user?.branchId;
+
+    const isBranchScoped =
+      roleId === USER_ROLES.BRANCH_MANAGER || roleId === USER_ROLES.BRANCH_USER;
+
     const { id, ...rest } = input;
-    const response = await updateLoan(id, rest);
+    const response = await updateLoan(id, {
+      ...rest,
+      branchId: isBranchScoped ? (userBranchId as number) : undefined,
+    });
     return response;
   });
 
@@ -46,7 +68,17 @@ export const updateLoanAction = serverAction
 export const listLoansAction = serverAction
   .input(ListLoansParamsSchema)
   .handler(async ({ input }) => {
-    const response = await listLoans(input);
+    const session = await auth();
+    const roleId = session?.user?.roleId;
+    const userBranchId = session?.user?.branchId;
+
+    const isBranchScoped =
+      roleId === USER_ROLES.BRANCH_MANAGER || roleId === USER_ROLES.BRANCH_USER;
+
+    const response = await listLoans({
+      ...input,
+      branchId: isBranchScoped ? (userBranchId as number) : undefined,
+    });
     return response;
   });
 
@@ -62,7 +94,17 @@ export const getLoanByIdAction = serverAction
 export const deleteLoanAction = serverAction
   .input(DeleteLoanSchema)
   .handler(async ({ input }: { input: DeleteLoanInput }) => {
-    const response = await deleteLoan(input.id);
+    const session = await auth();
+    const roleId = session?.user?.roleId;
+    const userBranchId = session?.user?.branchId;
+
+    const isBranchScoped =
+      roleId === USER_ROLES.BRANCH_MANAGER || roleId === USER_ROLES.BRANCH_USER;
+
+    const response = await deleteLoan(
+      input.id,
+      isBranchScoped ? (userBranchId as number) : undefined
+    );
     return response;
   });
 
@@ -70,7 +112,17 @@ export const deleteLoanAction = serverAction
 export const bulkUploadLoansAction = serverAction
   .input(BulkUploadLoanSchema)
   .handler(async ({ input }: { input: BulkUploadLoanInput }) => {
-    const response = await bulkUploadLoans(input);
+    const session = await auth();
+    const roleId = session?.user?.roleId;
+    const userBranchId = session?.user?.branchId;
+
+    const isBranchScoped =
+      roleId === USER_ROLES.BRANCH_MANAGER || roleId === USER_ROLES.BRANCH_USER;
+
+    const response = await bulkUploadLoans({
+      ...input,
+      branchId: isBranchScoped ? (userBranchId as number) : undefined,
+    });
     return response;
   });
 
@@ -78,6 +130,16 @@ export const bulkUploadLoansAction = serverAction
 export const listAllLoansAction = serverAction
   .input(ListAllLoansParamsSchema)
   .handler(async ({ input }: { input: ListAllLoansParamsInput }) => {
-    const response = await listAllLoans(input);
+    const session = await auth();
+    const roleId = session?.user?.roleId;
+    const userBranchId = session?.user?.branchId;
+
+    const isBranchScoped =
+      roleId === USER_ROLES.BRANCH_MANAGER || roleId === USER_ROLES.BRANCH_USER;
+
+    const response = await listAllLoans({
+      ...input,
+      branchId: isBranchScoped ? (userBranchId as number) : undefined,
+    });
     return response;
   });

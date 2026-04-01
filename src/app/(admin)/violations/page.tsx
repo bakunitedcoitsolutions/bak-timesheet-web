@@ -238,11 +238,17 @@ const ChallansPage = () => {
         }
 
         if (parseResult.errors.length > 0) {
+          const errorSummary =
+            parseResult.errors.length > 3
+              ? parseResult.errors.slice(0, 3).join("; ") +
+                ` and ${parseResult.errors.length - 3} more...`
+              : parseResult.errors.join("; ");
+
           toastService.showWarn(
             "Parse Warnings",
-            `${parseResult.errors.length} row(s) had errors. Check console for details.`
+            `Valid: ${parseResult.data.length}, Errors: ${parseResult.errors.length}. Reasons: ${errorSummary}`
           );
-          console.error("Parse errors:", parseResult.errors);
+          console.log("Parse errors:", parseResult.errors);
         }
 
         if (parseResult.data.length === 0) {
@@ -255,18 +261,21 @@ const ChallansPage = () => {
           { trafficChallans: parseResult.data },
           {
             onSuccess: (result) => {
-              const message =
-                result.success > 0
-                  ? `Successfully uploaded ${result.success} traffic violation(s)`
-                  : "Upload completed";
-
               if (result.failed > 0) {
+                const errorSummary =
+                  result.errors.length > 3
+                    ? result.errors.slice(0, 3).join("; ") +
+                      ` and ${result.errors.length - 3} more...`
+                    : result.errors
+                        ?.map((error: any) => error?.error ?? "")
+                        .join("; ");
+
                 toastService.showWarn(
                   "Upload Complete",
-                  `${message}. ${result.failed} failed. Check console for details.`
+                  `Done: ${result.success}, Errors: ${result.failed}. Reasons: ${errorSummary}`
                 );
-                console.error("Upload errors:", result.errors);
               } else {
+                const message = `Successfully uploaded ${result.success} traffic violation(s)`;
                 toastService.showSuccess("Success", message);
               }
             },

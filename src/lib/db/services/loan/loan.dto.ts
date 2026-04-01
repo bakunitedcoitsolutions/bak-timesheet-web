@@ -11,6 +11,7 @@ export interface CreateLoanData {
   type: LoanType;
   amount: number;
   remarks?: string;
+  branchId?: number | null;
 }
 
 export interface UpdateLoanData {
@@ -19,6 +20,7 @@ export interface UpdateLoanData {
   type?: LoanType;
   amount?: number;
   remarks?: string;
+  branchId?: number | null;
 }
 
 export type ListLoansSortableField = "date" | "type" | "amount" | "createdAt";
@@ -33,6 +35,7 @@ export interface ListLoansParams {
   type?: LoanType;
   startDate?: Date | string;
   endDate?: Date | string;
+  branchId?: number | null;
 }
 
 export interface LoanInterface {
@@ -50,6 +53,7 @@ export interface ListedLoan extends LoanInterface {
   employee?: {
     nameEn: string;
     employeeCode: number;
+    branchId: number | null;
     designation?: {
       nameEn: string;
     } | null;
@@ -80,6 +84,7 @@ export interface BulkUploadLoanRow {
 
 export interface BulkUploadLoanData {
   loans: BulkUploadLoanRow[];
+  branchId?: number | null;
 }
 
 export interface BulkUploadLoanResult {
