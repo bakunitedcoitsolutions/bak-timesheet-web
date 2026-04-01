@@ -84,7 +84,9 @@ const UpsertLoanPage = () => {
         "Access Denied",
         `You do not have permission to edit this loan.`
       );
-      router.replace("/loans");
+      setTimeout(() => {
+        router.replace("/loans");
+      }, 100);
       return;
     }
   }, [
@@ -102,12 +104,9 @@ const UpsertLoanPage = () => {
 
   const isLoading = isLoanLoading || isAccessLoading;
 
-  // Fetch employees
+  // Fetch employees (already filtered by branch in GlobalDataContext)
   const { data: globalData } = useGlobalData();
-  const employees = (globalData.employees || []).filter(
-    (emp: GlobalDataEmployee) =>
-      !isBranchScoped || emp.branchId === userBranchId
-  );
+  const employees = globalData.employees || [];
 
   const employeeOptions = useMemo(
     () =>

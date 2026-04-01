@@ -48,7 +48,12 @@ const UpsertChallanPage = () => {
       id: challanId ? Number(challanId) : 0,
     });
 
-  const { can, isLoading: isAccessLoading } = useAccess();
+  const {
+    can,
+    isBranchScoped,
+    branchId: userBranchId,
+    isLoading: isAccessLoading,
+  } = useAccess();
   const canEdit =
     can("trafficViolations", "edit") || can("trafficViolations", "full");
   const canAdd =
@@ -69,12 +74,35 @@ const UpsertChallanPage = () => {
         "You do not have permission to edit traffic violations."
       );
       router.replace("/violations");
+    } else if (
+      isEditMode &&
+      isBranchScoped &&
+      foundChallan &&
+      Number(foundChallan.employee?.branchId) !== Number(userBranchId)
+    ) {
+      toastService.showError(
+        "Access Denied",
+        "You do not have permission to edit this traffic violation."
+      );
+      setTimeout(() => {
+        router.replace("/violations");
+      }, 100);
     }
-  }, [isAddMode, isEditMode, canAdd, canEdit, isAccessLoading, router]);
+  }, [
+    isAddMode,
+    isEditMode,
+    canAdd,
+    canEdit,
+    foundChallan,
+    isBranchScoped,
+    userBranchId,
+    isAccessLoading,
+    router,
+  ]);
 
   const isLoading = isChallanLoading || isAccessLoading;
 
-  // Fetch employees
+  // Fetch employees (already filtered by branch in GlobalDataContext)
   const { data: globalData } = useGlobalData();
   const employees = globalData.employees || [];
 

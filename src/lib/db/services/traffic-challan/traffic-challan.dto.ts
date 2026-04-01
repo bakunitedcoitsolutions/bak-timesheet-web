@@ -11,6 +11,7 @@ export interface CreateTrafficChallanData {
   type: TrafficChallanType;
   amount: number;
   description?: string;
+  branchId?: number | null;
 }
 
 export interface UpdateTrafficChallanData {
@@ -19,6 +20,7 @@ export interface UpdateTrafficChallanData {
   type?: TrafficChallanType;
   amount?: number;
   description?: string;
+  branchId?: number | null;
 }
 
 export type ListTrafficChallansSortableField =
@@ -37,6 +39,7 @@ export interface ListTrafficChallansParams {
   type?: TrafficChallanType;
   startDate?: Date | string;
   endDate?: Date | string;
+  branchId?: number | null;
 }
 
 export interface TrafficChallanInterface {
@@ -54,6 +57,7 @@ export interface ListedTrafficChallan extends TrafficChallanInterface {
   employee?: {
     nameEn: string;
     employeeCode: number;
+    branchId: number | null;
     designation?: {
       nameEn: string;
     } | null;
@@ -84,6 +88,7 @@ export interface BulkUploadTrafficChallanRow {
 
 export interface BulkUploadTrafficChallanData {
   trafficChallans: BulkUploadTrafficChallanRow[];
+  branchId?: number;
 }
 
 export interface BulkUploadTrafficChallanResult {
@@ -94,4 +99,16 @@ export interface BulkUploadTrafficChallanResult {
     data: BulkUploadTrafficChallanRow;
     error: string;
   }>;
+}
+
+/**
+ * List ALL traffic challans (no pagination) — used for exports
+ */
+export interface ListAllTrafficChallanParams {
+  search?: string;
+  employeeId?: number;
+  type?: "CHALLAN" | "RETURN";
+  startDate?: Date | string;
+  endDate?: Date | string;
+  branchId?: number | null;
 }

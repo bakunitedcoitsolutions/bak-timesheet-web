@@ -24,12 +24,30 @@ import {
   ListAllTrafficChallansParamsInput,
   ListAllTrafficChallansParamsSchema,
 } from "./traffic-challan.schemas";
+import { auth } from "@/lib/auth";
+import { USER_ROLES } from "@/utils/user.utility";
+
+const getAccessContext = async () => {
+  const session = await auth();
+  const roleId = session?.user?.roleId ? Number(session.user.roleId) : undefined;
+  const userBranchId = session?.user?.branchId ? Number(session.user.branchId) : undefined;
+  
+  const isBranchScoped =
+    roleId === USER_ROLES.BRANCH_MANAGER || roleId === USER_ROLES.BRANCH_USER;
+
+  return { isBranchScoped, userBranchId };
+};
 
 // Create Traffic Challan
 export const createTrafficChallanAction = serverAction
   .input(CreateTrafficChallanSchema)
   .handler(async ({ input }: { input: CreateTrafficChallanInput }) => {
-    const response = await createTrafficChallan(input);
+    const { isBranchScoped, userBranchId } = await getAccessContext();
+    
+    const response = await createTrafficChallan({
+      ...input,
+      branchId: isBranchScoped ? userBranchId : undefined,
+    });
     return response;
   });
 
@@ -37,8 +55,13 @@ export const createTrafficChallanAction = serverAction
 export const updateTrafficChallanAction = serverAction
   .input(UpdateTrafficChallanSchema)
   .handler(async ({ input }: { input: UpdateTrafficChallanInput }) => {
+    const { isBranchScoped, userBranchId } = await getAccessContext();
     const { id, ...rest } = input;
-    const response = await updateTrafficChallan(id, rest);
+    
+    const response = await updateTrafficChallan(id, {
+      ...rest,
+      branchId: isBranchScoped ? userBranchId : undefined,
+    });
     return response;
   });
 
@@ -46,7 +69,12 @@ export const updateTrafficChallanAction = serverAction
 export const listTrafficChallansAction = serverAction
   .input(ListTrafficChallansParamsSchema)
   .handler(async ({ input }) => {
-    const response = await listTrafficChallans(input);
+    const { isBranchScoped, userBranchId } = await getAccessContext();
+    
+    const response = await listTrafficChallans({
+      ...input,
+      branchId: isBranchScoped ? userBranchId : undefined,
+    });
     return response;
   });
 
@@ -62,7 +90,12 @@ export const getTrafficChallanByIdAction = serverAction
 export const deleteTrafficChallanAction = serverAction
   .input(DeleteTrafficChallanSchema)
   .handler(async ({ input }: { input: DeleteTrafficChallanInput }) => {
-    const response = await deleteTrafficChallan(input.id);
+    const { isBranchScoped, userBranchId } = await getAccessContext();
+    
+    const response = await deleteTrafficChallan(
+      input.id,
+      isBranchScoped ? userBranchId : undefined
+    );
     return response;
   });
 
@@ -70,7 +103,12 @@ export const deleteTrafficChallanAction = serverAction
 export const bulkUploadTrafficChallansAction = serverAction
   .input(BulkUploadTrafficChallanSchema)
   .handler(async ({ input }: { input: BulkUploadTrafficChallanInput }) => {
-    const response = await bulkUploadTrafficChallans(input);
+    const { isBranchScoped, userBranchId } = await getAccessContext();
+    
+    const response = await bulkUploadTrafficChallans({
+      ...input,
+      branchId: isBranchScoped ? userBranchId : undefined,
+    });
     return response;
   });
 
@@ -78,6 +116,11 @@ export const bulkUploadTrafficChallansAction = serverAction
 export const listAllTrafficChallansAction = serverAction
   .input(ListAllTrafficChallansParamsSchema)
   .handler(async ({ input }: { input: ListAllTrafficChallansParamsInput }) => {
-    const response = await listAllTrafficChallans(input);
+    const { isBranchScoped, userBranchId } = await getAccessContext();
+    
+    const response = await listAllTrafficChallans({
+      ...input,
+      branchId: isBranchScoped ? userBranchId : undefined,
+    });
     return response;
   });

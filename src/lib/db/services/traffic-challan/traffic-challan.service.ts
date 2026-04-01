@@ -12,6 +12,7 @@ import type {
   BulkUploadTrafficChallanData,
   BulkUploadTrafficChallanResult,
   ListedTrafficChallan,
+  ListAllTrafficChallanParams,
 } from "./traffic-challan.dto";
 import dayjs from "@/lib/dayjs";
 
@@ -34,6 +35,7 @@ const trafficChallanSelect = {
     select: {
       nameEn: true,
       employeeCode: true,
+      branchId: true,
       designation: {
         select: {
           nameEn: true,
@@ -78,14 +80,21 @@ async function createTrafficChallanInternal(
  */
 export const createTrafficChallan = async (data: CreateTrafficChallanData) => {
   return prisma.$transaction(async (tx: PrismaTransactionClient) => {
-    // Validate employee exists
+    // Validate employee exists and check branch assignment
     const employee = await tx.employee.findUnique({
       where: { id: data.employeeId },
-      select: { id: true },
+      select: { id: true, branchId: true },
     });
 
     if (!employee) {
       throw new Error(`Employee with ID ${data.employeeId} does not exist`);
+    }
+
+    // Security validation: verify branch assignment for branch-scoped users
+    if (data.branchId && employee.branchId !== data.branchId) {
+      throw new Error(
+        "Access Denied: The selected employee belongs to another branch."
+      );
     }
 
     const trafficChallan = await createTrafficChallanInternal(tx, {
@@ -99,7 +108,7 @@ export const createTrafficChallan = async (data: CreateTrafficChallanData) => {
     // Convert Decimal to number for client serialization
     return {
       ...trafficChallan,
-      amount: trafficChallan.amount,
+      amount: Number(trafficChallan.amount),
     };
   });
 };
@@ -120,7 +129,7 @@ export const findTrafficChallanById = async (id: number) => {
   // Convert Decimal to number for client serialization
   return {
     ...trafficChallan,
-    amount: trafficChallan.amount,
+    amount: Number(trafficChallan.amount),
   };
 };
 
@@ -137,11 +146,7 @@ export const updateTrafficChallan = async (
       where: { id },
       select: {
         id: true,
-        employeeId: true,
-        date: true,
-        type: true,
-        amount: true,
-        description: true,
+        employee: { select: { branchId: true } },
       },
     });
 
@@ -149,15 +154,27 @@ export const updateTrafficChallan = async (
       throw new Error("Traffic challan not found");
     }
 
+    // Security validation: verify branch assignment for branch-scoped users
+    if (data.branchId && existingTrafficChallan.employee?.branchId !== data.branchId) {
+      throw new Error("Access Denied: Traffic violation belongs to another branch.");
+    }
+
     // Validate employee if provided
     if (data.employeeId !== undefined) {
       const employee = await tx.employee.findUnique({
         where: { id: data.employeeId },
-        select: { id: true },
+        select: { id: true, branchId: true },
       });
 
       if (!employee) {
         throw new Error(`Employee with ID ${data.employeeId} does not exist`);
+      }
+
+      // Security validation: verify branch assignment for new employee
+      if (data.branchId && employee.branchId !== data.branchId) {
+        throw new Error(
+          "Access Denied: The selected employee belongs to another branch."
+        );
       }
     }
 
@@ -179,7 +196,7 @@ export const updateTrafficChallan = async (
     // Convert Decimal to number for client serialization
     return {
       ...trafficChallan,
-      amount: trafficChallan.amount,
+      amount: Number(trafficChallan.amount),
     };
   });
 };
@@ -187,16 +204,24 @@ export const updateTrafficChallan = async (
 /**
  * Delete traffic challan
  */
-export const deleteTrafficChallan = async (id: number) => {
+export const deleteTrafficChallan = async (id: number, branchId?: number | null) => {
   return prisma.$transaction(async (tx: PrismaTransactionClient) => {
     // Check if traffic challan exists
     const existingTrafficChallan = await tx.trafficChallan.findUnique({
       where: { id },
-      select: { id: true },
+      select: {
+        id: true,
+        employee: { select: { branchId: true } },
+      },
     });
 
     if (!existingTrafficChallan) {
       throw new Error("Traffic challan not found");
+    }
+
+    // Security validation: verify branch assignment for branch-scoped users
+    if (branchId && existingTrafficChallan.employee?.branchId !== branchId) {
+      throw new Error("Access Denied: Traffic violation belongs to another branch.");
     }
 
     await tx.trafficChallan.delete({
@@ -258,6 +283,14 @@ export const listTrafficChallans = async (
     }
   }
 
+  // Filter by branchId
+  if (params.branchId !== undefined && params.branchId !== null) {
+    where.employee = {
+      ...where.employee,
+      branchId: params.branchId,
+    };
+  }
+
   // Build orderBy clause
   const orderBy: any = {};
   if (params.sortBy) {
@@ -281,7 +314,7 @@ export const listTrafficChallans = async (
   // Convert Decimal to number for client serialization
   const transformedTrafficChallans = trafficChallans.map((challan) => ({
     ...challan,
-    amount: challan.amount,
+    amount: Number(challan.amount),
   }));
 
   return {
@@ -298,18 +331,10 @@ export const listTrafficChallans = async (
 /**
  * List ALL traffic challans (no pagination) — used for exports
  */
-export interface ListAllTrafficChallanParams {
-  search?: string;
-  employeeId?: number;
-  type?: "CHALLAN" | "RETURN";
-  startDate?: Date | string;
-  endDate?: Date | string;
-}
-
 export const listAllTrafficChallans = async (
   params: ListAllTrafficChallanParams
 ): Promise<{ trafficChallans: ListedTrafficChallan[] }> => {
-  // Build where clause (same logic as listLoans, minus pagination)
+  // Build where clause
   const where: any = {};
 
   if (params.search) {
@@ -346,6 +371,14 @@ export const listAllTrafficChallans = async (
     }
   }
 
+  // Filter by branchId
+  if (params.branchId !== undefined && params.branchId !== null) {
+    where.employee = {
+      ...where.employee,
+      branchId: params.branchId,
+    };
+  }
+
   const trafficChallans = await prisma.trafficChallan.findMany({
     where,
     select: trafficChallanSelect,
@@ -355,7 +388,7 @@ export const listAllTrafficChallans = async (
   return {
     trafficChallans: trafficChallans.map((trafficChallan) => ({
       ...trafficChallan,
-      amount: trafficChallan.amount,
+      amount: Number(trafficChallan.amount),
     })),
   };
 };
@@ -382,11 +415,18 @@ export const bulkUploadTrafficChallans = async (
         // Resolve employeeId from employeeCode
         const employee = await tx.employee.findUnique({
           where: { employeeCode: row.employeeCode },
-          select: { id: true },
+          select: { id: true, branchId: true },
         });
 
         if (!employee) {
           throw new Error(`Employee with code ${row.employeeCode} not found`);
+        }
+
+        // Security validation for bulk upload: verify branch assignment
+        if (data.branchId && employee.branchId !== data.branchId) {
+          throw new Error(
+            `Access Denied: Employee ${row.employeeCode} belongs to another branch.`
+          );
         }
 
         // Create traffic challan using reusable function
@@ -401,15 +441,6 @@ export const bulkUploadTrafficChallans = async (
 
       result.success++;
     } catch (error: any) {
-      console.error(error);
-      console.error(error.message);
-      console.error(error.stack);
-      console.error(error.cause);
-      console.error(error.code);
-      console.error(error.name);
-      console.error(error.syscall);
-      console.error(error.address);
-      console.error(error.port);
       result.failed++;
       result.errors.push({
         row: rowNumber,
