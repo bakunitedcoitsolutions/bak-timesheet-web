@@ -111,7 +111,7 @@ export const printLedgerReport = (
               <th>Date</th>
               <th class="text-left">Description</th>
               <th>Salary</th>
-              <th>Net Salary</th>
+              <th>Paid Salary</th>
               <th>Loan</th>
               <th>Traffic</th>
               <th>Deduction</th>

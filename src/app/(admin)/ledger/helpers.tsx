@@ -173,7 +173,7 @@ export const getLedgerTableColumns = (
     },
     {
       field: "netSalary",
-      header: "Net Salary",
+      header: "Paid Salary",
       ...tableCommonProps,
       align: "center",
       style: { minWidth: 130 },
