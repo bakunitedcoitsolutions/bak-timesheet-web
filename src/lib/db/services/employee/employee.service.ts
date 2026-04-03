@@ -1,9 +1,5 @@
-/**
- * Employee Service
- * Business logic for employee operations
- */
-
 import { prisma } from "@/lib/db/prisma";
+import { getServerAccessContext } from "@/lib/auth/helpers";
 import type {
   ListEmployeesParams,
   ListEmployeesResponse,
@@ -561,6 +557,13 @@ export const listEmployees = async (
   const limit = params.limit ?? 10;
   const skip = (page - 1) * limit;
 
+  const { isBranchScoped, userBranchId } = await getServerAccessContext();
+  let branchId = params.branchId;
+
+  if (isBranchScoped) {
+    branchId = userBranchId as number;
+  }
+
   // Build where clause with AND conditions
   const whereConditions: any[] = [];
 
@@ -633,8 +636,8 @@ export const listEmployees = async (
   }
 
   // Filter by branchId
-  if (params.branchId !== undefined) {
-    whereConditions.push({ branchId: params.branchId });
+  if (branchId !== undefined) {
+    whereConditions.push({ branchId: branchId });
   }
 
   // Filter by Zero Rate
