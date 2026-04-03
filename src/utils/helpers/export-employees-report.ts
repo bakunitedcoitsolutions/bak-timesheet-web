@@ -121,124 +121,41 @@ export function mapEmployeeToExportRow(
   } as EmployeeExportRow;
 }
 
-const HEADERS = [
-  "#",
-  "Employee Code",
-  "Name (EN)",
-  "Name (AR)",
-  "Birth Date",
-  "Mobile No.",
-  "Gender",
-  "Country",
-  "City",
-  "Status",
-  "Branch",
-  "Designation",
-  "Payroll Section",
-  "Is Fixed?",
-  "Is Deductable?",
-  "Working Days",
-  "Salary",
-  "Hourly Rate",
-  "Breakfast All.",
-  "Food Allowance",
-  "Mobile Allowance",
-  "Other Allowance",
-  "Contract Start",
-  "Contract End",
-  "Contract Rem. Days",
-  "Joining Date",
-  "End Reason",
-  "Contract Doc",
-  "ID Card No.",
-  "ID Card Expiry",
-  "Profession",
-  "ID Card Doc",
-  "Nationality",
-  "Passport No.",
-  "Passport Expiry",
-  "Passport Doc",
-  "Bank Name",
-  "Bank Code",
-  "IBAN",
-  "GOSI Salary",
-  "GOSI City",
-  "Card Delivered?",
-  "Card Doc",
-];
-
-function buildRow(r: EmployeeExportRow): (string | number)[] {
-  return [
-    r.groupSerial,
-    r.employeeCode,
-    r.nameEn,
-    r.nameAr || "",
-    r.dob || "",
-    r.phone || "",
-    r.gender || "",
-    r.countryName || "",
-    r.cityName || "",
-    r.statusName || "",
-    r.branchName || "",
-    r.designationName || "",
-    r.sectionName || "",
-    r.isFixed || "",
-    r.isDeductable || "",
-    r.workingDays || 0,
-    r.salary || 0,
-    r.hourlyRate || 0,
-    r.breakfastAllowance || "",
-    r.foodAllowance || 0,
-    r.mobileAllowance || 0,
-    r.otherAllowance || 0,
-    r.contractStartDate || "",
-    r.contractEndDate || "",
-    r.contractRemainingDays || "",
-    r.joiningDate || "",
-    r.contractEndReason || "",
-    r.contractDocument || "",
-    r.idCardNo || "",
-    r.idCardExpiryDate || "",
-    r.profession || "",
-    r.idCardDocument || "",
-    r.nationalityName || "",
-    r.passportNo || "",
-    r.passportExpiryDate || "",
-    r.passportDocument || "",
-    r.bankName || "",
-    r.bankCode || "",
-    r.iban || "",
-    r.gosiSalary || 0,
-    r.gosiCityName || "",
-    r.isCardDelivered || "",
-    r.cardDocument || "",
-  ];
+function buildRow(
+  r: EmployeeExportRow,
+  columns: { header: string; key: string }[]
+): (string | number)[] {
+  return columns.map((col) => (r as any)[col.key] ?? "");
 }
 
-function buildSheetData(data: EmployeeExportRow[]): (string | number)[][] {
-  const rows: (string | number)[][] = [
-    ["EMPLOYEES REPORT"],
-    [],
-    HEADERS,
-  ];
+function buildSheetData(
+  data: EmployeeExportRow[],
+  columns: { header: string; key: string }[]
+): (string | number)[][] {
+  const headers = columns.map((col) => col.header);
+  const rows: (string | number)[][] = [["EMPLOYEES REPORT"], [], headers];
 
   data.forEach((r) => {
-    rows.push(buildRow(r));
+    rows.push(buildRow(r, columns));
   });
 
   return rows;
 }
 
-export function exportEmployeesExcel(data: EmployeeExportRow[]) {
-  const rows = buildSheetData(data);
+export function exportEmployeesExcel(
+  data: EmployeeExportRow[],
+  columns: { header: string; key: string }[]
+) {
+  const rows = buildSheetData(data, columns);
   const ws = XLSX.utils.aoa_to_sheet(rows);
 
   // Set column widths (rough estimate)
-  ws["!cols"] = HEADERS.map(() => ({ wch: 15 }));
-  ws["!cols"][2] = { wch: 30 }; // Name EN
-  ws["!cols"][3] = { wch: 30 }; // Name AR
+  ws["!cols"] = columns.map((col) => {
+    if (col.key === "nameEn" || col.key === "nameAr") return { wch: 30 };
+    return { wch: 15 };
+  });
 
-  ws["!merges"] = [{ s: { r: 0, c: 0 }, e: { r: 0, c: HEADERS.length - 1 } }];
+  ws["!merges"] = [{ s: { r: 0, c: 0 }, e: { r: 0, c: columns.length - 1 } }];
 
   const wb = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb, ws, "Employees Report");
@@ -250,8 +167,11 @@ export function exportEmployeesExcel(data: EmployeeExportRow[]) {
   );
 }
 
-export function exportEmployeesCSV(data: EmployeeExportRow[]) {
-  const rows = buildSheetData(data);
+export function exportEmployeesCSV(
+  data: EmployeeExportRow[],
+  columns: { header: string; key: string }[]
+) {
+  const rows = buildSheetData(data, columns);
   const escape = (v: string | number) => {
     const s = String(v);
     if (s.includes(",") || s.includes('"') || s.includes("\n")) {

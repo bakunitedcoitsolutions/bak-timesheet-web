@@ -212,11 +212,39 @@ const EmployeesReportPage = () => {
                 loading={isExporting}
                 exportCSV={async () => {
                   const data = await fetchAllEmployees();
-                  if (data && data.length > 0) exportEmployeesCSV(data);
+                  if (data && data.length > 0) {
+                    const exportCols = [
+                      { header: "#", key: "groupSerial" },
+                      { header: "Code", key: "employeeCode" },
+                      { header: "Name (EN)", key: "nameEn" },
+                      { header: "Name (AR)", key: "nameAr" },
+                      ...selectedColumns.map((colKey) => ({
+                        header:
+                          availableColumns.find((c) => c.value === colKey)
+                            ?.label || colKey,
+                        key: colKey,
+                      })),
+                    ];
+                    exportEmployeesCSV(data, exportCols);
+                  }
                 }}
                 exportExcel={async () => {
                   const data = await fetchAllEmployees();
-                  if (data && data.length > 0) exportEmployeesExcel(data);
+                  if (data && data.length > 0) {
+                    const exportCols = [
+                      { header: "#", key: "groupSerial" },
+                      { header: "Code", key: "employeeCode" },
+                      { header: "Name (EN)", key: "nameEn" },
+                      { header: "Name (AR)", key: "nameAr" },
+                      ...selectedColumns.map((colKey) => ({
+                        header:
+                          availableColumns.find((c) => c.value === colKey)
+                            ?.label || colKey,
+                        key: colKey,
+                      })),
+                    ];
+                    exportEmployeesExcel(data, exportCols);
+                  }
                 }}
                 buttonClassName="w-full lg:w-28 h-10! border-2 border-white! text-white!"
               />
