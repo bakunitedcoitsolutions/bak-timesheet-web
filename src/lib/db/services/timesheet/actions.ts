@@ -1,6 +1,6 @@
 "use server";
-import { auth } from "@/lib/auth/auth";
-import { USER_ROLES } from "@/utils/user.utility";
+
+import { getServerAccessContext } from "@/lib/auth/helpers";
 import { serverAction } from "@/lib/zsa/zsa-action";
 import {
   getTimesheetPageData,
@@ -25,17 +25,7 @@ import {
 export const getTimesheetPageDataAction = serverAction
   .input(GetTimesheetPageDataSchema)
   .handler(async ({ input }: { input: GetTimesheetPageDataInput }) => {
-    const session = await auth();
-    const roleId = session?.user?.roleId;
-    const userBranchId = session?.user?.branchId;
-
-    const isBranchScoped =
-      roleId === USER_ROLES.BRANCH_MANAGER || roleId === USER_ROLES.BRANCH_USER;
-
-    const response = await getTimesheetPageData({
-      ...input,
-      branchId: isBranchScoped ? (userBranchId as number) : undefined,
-    });
+    const response = await getTimesheetPageData(input);
     return response;
   });
 
@@ -50,22 +40,17 @@ export const bulkUploadTimesheetsAction = serverAction
   .input(BulkUploadTimesheetsSchema)
   .handler(async ({ input }: { input: BulkUploadTimesheetsInput }) => {
     try {
-      const session = await auth();
-      const roleId = session?.user?.roleId;
-      const userBranchId = session?.user?.branchId;
-
-      const isBranchScoped =
-        roleId === USER_ROLES.BRANCH_MANAGER ||
-        roleId === USER_ROLES.BRANCH_USER;
+      const { isBranchScoped, userBranchId } = await getServerAccessContext();
 
       console.log("bulkUploadTimesheetsAction called", {
         entriesCount: input.entries.length,
         "payloadSize Approx": JSON.stringify(input).length,
-        firstEntry: input.entries[0], // Log first entry for structure verification
+        firstEntry: input.entries[0],
       });
+
       const response = await bulkUploadTimesheets({
         ...input,
-        branchId: isBranchScoped ? (userBranchId as number) : undefined,
+        branchId: isBranchScoped ? userBranchId : undefined,
       });
       return response;
     } catch (error) {
@@ -77,32 +62,13 @@ export const bulkUploadTimesheetsAction = serverAction
 export const getMonthlyTimesheetReportAction = serverAction
   .input(GetMonthlyTimesheetReportSchema)
   .handler(async ({ input }: { input: GetMonthlyTimesheetReportInput }) => {
-    const session = await auth();
-    const roleId = session?.user?.roleId;
-    const userBranchId = session?.user?.branchId;
-
-    const isBranchScoped =
-      roleId === USER_ROLES.BRANCH_MANAGER || roleId === USER_ROLES.BRANCH_USER;
-
-    const response = await getMonthlyTimesheetReportData({
-      ...input,
-      branchId: isBranchScoped ? (userBranchId as number) : undefined,
-    });
+    const response = await getMonthlyTimesheetReportData(input);
     return response;
   });
+
 export const getDailyTimesheetReportAction = serverAction
   .input(GetDailyTimesheetReportSchema)
   .handler(async ({ input }: { input: GetDailyTimesheetReportInput }) => {
-    const session = await auth();
-    const roleId = session?.user?.roleId;
-    const userBranchId = session?.user?.branchId;
-
-    const isBranchScoped =
-      roleId === USER_ROLES.BRANCH_MANAGER || roleId === USER_ROLES.BRANCH_USER;
-
-    const response = await getDailyTimesheetReportData({
-      ...input,
-      branchId: isBranchScoped ? (userBranchId as number) : undefined,
-    });
+    const response = await getDailyTimesheetReportData(input);
     return response;
   });

@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/db/prisma";
+import { getServerAccessContext } from "@/lib/auth/helpers";
 import { GetSalarySlipDataInput } from "./payroll-summary.schemas";
 import { mapPayrollDetailToEntry, PayrollDetailEntry } from "./mappers";
 
@@ -28,10 +29,15 @@ export const getSalarySlipData = async (
     employeeCodes,
   } = input;
 
+  const { isBranchScoped, userBranchId } = await getServerAccessContext();
   const { startDate, endDate } = getMonthDateRange(payrollYear, payrollMonth);
 
   // ── 1. Resolve target employees ──────────────────────────────────────────
   const employeeWhere: any = { statusId: 1 };
+
+  if (isBranchScoped) {
+    employeeWhere.branchId = userBranchId;
+  }
 
   if (employeeCodes && employeeCodes.length > 0) {
     employeeWhere.employeeCode = { in: employeeCodes };
@@ -81,6 +87,7 @@ export const getSalarySlipData = async (
     payrollYear,
     payrollMonth,
     employeeId: { in: employeeIds },
+    ...(isBranchScoped ? { branchId: userBranchId } : {}),
   };
 
   if (input.paymentMethodId !== undefined && input.paymentMethodId !== null) {

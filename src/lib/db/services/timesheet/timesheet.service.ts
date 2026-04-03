@@ -1,11 +1,6 @@
-/**
- * Timesheet Service
- * Fetches timesheet records for a date, optionally filters employees by payroll section or designation, and merges into page rows.
- */
-
 import dayjs from "@/lib/dayjs";
-
 import { prisma } from "@/lib/db/prisma";
+import { getServerAccessContext } from "@/lib/auth/helpers";
 import type {
   GetTimesheetPageDataParams,
   GetTimesheetPageDataResponse,
@@ -94,8 +89,13 @@ export const getTimesheetPageData = async (
     page = 1,
     limit = 50,
     search,
-    branchId,
   } = params;
+  let { branchId } = params;
+
+  const { isBranchScoped, userBranchId } = await getServerAccessContext();
+  if (isBranchScoped) {
+    branchId = userBranchId;
+  }
 
   const { startOfDay, endOfDay } = getDayRange(date);
 
@@ -647,8 +647,13 @@ export const getMonthlyTimesheetReportData = async (
     payrollSectionId,
     showAbsents,
     showFixedSalary,
-    branchId,
   } = params;
+  let { branchId } = params;
+
+  const { isBranchScoped, userBranchId } = await getServerAccessContext();
+  if (isBranchScoped) {
+    branchId = userBranchId;
+  }
 
   // Calculate month boundaries (UTC) using dayjs
   const monthStart = dayjs.utc(`${year}-${String(month).padStart(2, "0")}-01`);
@@ -799,8 +804,13 @@ export const getDailyTimesheetReportData = async (
     projectId,
     showAbsents,
     showFixedSalary,
-    branchId,
   } = params;
+  let { branchId } = params;
+
+  const { isBranchScoped, userBranchId } = await getServerAccessContext();
+  if (isBranchScoped) {
+    branchId = userBranchId;
+  }
 
   const { startOfDay, endOfDay } = getDayRange(date);
 
