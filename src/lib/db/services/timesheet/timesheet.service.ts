@@ -1,4 +1,5 @@
 import dayjs from "@/lib/dayjs";
+import { refreshPayrollForEmployeesIfActive } from "../payroll-summary/payroll-actions.service";
 import { prisma } from "@/lib/db/prisma";
 import { getServerAccessContext } from "@/lib/auth/helpers";
 import type {
@@ -288,6 +289,12 @@ export const saveTimesheetEntries = async (
       }
     );
   }
+
+  // Trigger payroll refresh for each unique employee in the saved entries
+  const uniqueEmployeeIds = Array.from(
+    new Set(entries.map((e) => e.employeeId))
+  );
+  await refreshPayrollForEmployeesIfActive(uniqueEmployeeIds, dateNormalized);
 
   return { saved };
 };
@@ -627,6 +634,32 @@ export const bulkUploadTimesheets = async (
     skipped: result.skipped,
     failed: result.failed,
   });
+
+  // Trigger payroll refresh for all affected months/employees
+  const refreshDetails: Map<string, Set<number>> = new Map();
+  for (const detail of result.details) {
+    if (detail.status === "success") {
+      // Find employee ID from the code (already fetched in bulkUploadTimesheets)
+      const emp = employeeByCode.get(detail.employeeCode);
+      if (emp) {
+        const dateKey = dayjs(detail.date).format("YYYY-MM");
+        if (!refreshDetails.has(dateKey)) {
+          refreshDetails.set(dateKey, new Set());
+        }
+        refreshDetails.get(dateKey)!.add(emp.id);
+      }
+    }
+  }
+
+  for (const [dateKey, employeeIds] of refreshDetails.entries()) {
+    const [year, month] = dateKey.split("-").map(Number);
+    const dateObj = dayjs()
+      .year(year)
+      .month(month - 1)
+      .toDate();
+    await refreshPayrollForEmployeesIfActive(Array.from(employeeIds), dateObj);
+  }
+
   return result;
 };
 

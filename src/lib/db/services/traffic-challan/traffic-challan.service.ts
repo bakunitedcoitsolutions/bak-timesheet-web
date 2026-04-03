@@ -15,6 +15,7 @@ import type {
   ListAllTrafficChallanParams,
 } from "./traffic-challan.dto";
 import dayjs from "@/lib/dayjs";
+import { refreshPayrollForEmployeesIfActive } from "../payroll-summary/payroll-actions.service";
 
 // Type helper for Prisma transaction client
 type PrismaTransactionClient = Parameters<
@@ -79,7 +80,7 @@ async function createTrafficChallanInternal(
  * Create a new traffic challan
  */
 export const createTrafficChallan = async (data: CreateTrafficChallanData) => {
-  return prisma.$transaction(async (tx: PrismaTransactionClient) => {
+  const result = await prisma.$transaction(async (tx: PrismaTransactionClient) => {
     // Validate employee exists and check branch assignment
     const employee = await tx.employee.findUnique({
       where: { id: data.employeeId },
@@ -111,6 +112,11 @@ export const createTrafficChallan = async (data: CreateTrafficChallanData) => {
       amount: Number(trafficChallan.amount),
     };
   });
+
+  // Trigger payroll refresh if active
+  await refreshPayrollForEmployeesIfActive([data.employeeId], data.date);
+
+  return result;
 };
 
 /**
@@ -140,7 +146,7 @@ export const updateTrafficChallan = async (
   id: number,
   data: UpdateTrafficChallanData
 ) => {
-  return prisma.$transaction(async (tx: PrismaTransactionClient) => {
+  const result = await prisma.$transaction(async (tx: PrismaTransactionClient) => {
     // Check if traffic challan exists and get current data
     const existingTrafficChallan = await tx.trafficChallan.findUnique({
       where: { id },
@@ -199,6 +205,11 @@ export const updateTrafficChallan = async (
       amount: Number(trafficChallan.amount),
     };
   });
+
+  // Trigger payroll refresh if active
+  await refreshPayrollForEmployeesIfActive([result.employeeId], result.date);
+
+  return result;
 };
 
 /**
@@ -211,6 +222,8 @@ export const deleteTrafficChallan = async (id: number, branchId?: number | null)
       where: { id },
       select: {
         id: true,
+        employeeId: true,
+        date: true,
         employee: { select: { branchId: true } },
       },
     });
@@ -227,6 +240,12 @@ export const deleteTrafficChallan = async (id: number, branchId?: number | null)
     await tx.trafficChallan.delete({
       where: { id },
     });
+
+    // Trigger payroll refresh if active
+    await refreshPayrollForEmployeesIfActive(
+      [existingTrafficChallan.employeeId],
+      existingTrafficChallan.date
+    );
 
     return { success: true };
   });
@@ -399,7 +418,8 @@ export const listAllTrafficChallans = async (
 export const bulkUploadTrafficChallans = async (
   data: BulkUploadTrafficChallanData
 ): Promise<BulkUploadTrafficChallanResult> => {
-  const result: BulkUploadTrafficChallanResult = {
+  const refreshDetails: Map<string, Set<number>> = new Map();
+  const res: BulkUploadTrafficChallanResult = {
     success: 0,
     failed: 0,
     errors: [],
@@ -437,12 +457,19 @@ export const bulkUploadTrafficChallans = async (
           amount: row.amount,
           description: row.description,
         });
+
+        // Collect info for batch refresh
+        const dateKey = dayjs(row.date).format("YYYY-MM");
+        if (!refreshDetails.has(dateKey)) {
+          refreshDetails.set(dateKey, new Set());
+        }
+        refreshDetails.get(dateKey)!.add(employee.id);
       });
 
-      result.success++;
+      res.success++;
     } catch (error: any) {
-      result.failed++;
-      result.errors.push({
+      res.failed++;
+      res.errors.push({
         row: rowNumber,
         data: row,
         error: error.message || "Unknown error",
@@ -450,5 +477,12 @@ export const bulkUploadTrafficChallans = async (
     }
   }
 
-  return result;
+  // Trigger payroll refresh for all affected months/employees
+  for (const [dateKey, employeeIds] of refreshDetails.entries()) {
+    const [year, month] = dateKey.split("-").map(Number);
+    const dateObj = dayjs().year(year).month(month - 1).toDate();
+    await refreshPayrollForEmployeesIfActive(Array.from(employeeIds), dateObj);
+  }
+
+  return res;
 };

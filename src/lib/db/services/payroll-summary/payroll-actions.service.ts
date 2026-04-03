@@ -1337,3 +1337,62 @@ export const refreshPayrollDetailRow = async ({
     updatedEntry: mapPayrollDetailToEntry(updatedDetail as any),
   };
 };
+
+/**
+ * Automatically refresh payroll details for a list of employees if a payroll is in 'Active' (Pending) or 'Revision' status.
+ */
+export const refreshPayrollForEmployeesIfActive = async (
+  employeeIds: number[],
+  date: Date | string
+) => {
+  if (!employeeIds.length) return;
+
+  const d = dayjs(date);
+  const month = d.month() + 1; // 1-indexed
+  const year = d.year();
+
+  console.log(
+    `[refreshPayrollForEmployeesIfActive] Triggered for employees: [${employeeIds.join(", ")}], Month: ${month}/${year}`
+  );
+
+  // Find if there is an active (Pending/Revision) payroll for the month/year
+  const activePayroll = await prisma.payrollSummary.findFirst({
+    where: {
+      payrollMonth: month,
+      payrollYear: year,
+      payrollStatusId: { in: [1, 4] }, // 1: Pending, 4: Revision
+    },
+    select: { id: true, payrollStatusId: true },
+  });
+
+  if (activePayroll) {
+    console.log(
+      `[refreshPayrollForEmployeesIfActive] Active payroll found (ID: ${activePayroll.id}, Status: ${activePayroll.payrollStatusId}).`
+    );
+
+    // Find all employee detail rows for the active payroll in one query
+    const details = await prisma.payrollDetails.findMany({
+      where: {
+        payrollId: activePayroll.id,
+        employeeId: { in: employeeIds },
+      },
+      select: { id: true, employeeId: true },
+    });
+
+    console.log(
+      `[refreshPayrollForEmployeesIfActive] Found ${details.length} payroll detail rows to refresh.`
+    );
+
+    // Recalculate each employee's row
+    for (const detail of details) {
+      console.log(
+        `[refreshPayrollForEmployeesIfActive] Refreshing detail ID: ${detail.id} for employee ID: ${detail.employeeId}`
+      );
+      await refreshPayrollDetailRow({ payrollDetailId: detail.id });
+    }
+  } else {
+    console.log(
+      `[refreshPayrollForEmployeesIfActive] No active/revision payroll found for ${month}/${year}. skipping refresh.`
+    );
+  }
+};

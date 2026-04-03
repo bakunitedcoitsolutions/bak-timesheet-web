@@ -14,6 +14,7 @@ import type {
   BulkUploadLoanResult,
 } from "./loan.dto";
 import dayjs from "@/lib/dayjs";
+import { refreshPayrollForEmployeesIfActive } from "../payroll-summary/payroll-actions.service";
 
 // Type helper for Prisma transaction client
 type PrismaTransactionClient = Parameters<
@@ -79,42 +80,49 @@ async function createLoanWithLedger(
  * Create a new loan
  */
 export const createLoan = async (data: CreateLoanData) => {
-  return prisma.$transaction(async (tx: PrismaTransactionClient) => {
-    // Validate employee exists
-    const employee = await tx.employee.findUnique({
-      where: { id: data.employeeId },
-      select: { id: true },
-    });
-
-    if (!employee) {
-      throw new Error(`Employee with ID ${data.employeeId} does not exist`);
-    }
-
-    // Validate Branch
-    if (data.branchId) {
-      const employeeWithBranch = await tx.employee.findUnique({
+  const result = await prisma.$transaction(
+    async (tx: PrismaTransactionClient) => {
+      // Validate employee exists
+      const employee = await tx.employee.findUnique({
         where: { id: data.employeeId },
-        select: { branchId: true },
+        select: { id: true },
       });
-      if (employeeWithBranch?.branchId !== data.branchId) {
-        throw new Error("Employee does not belong to your branch");
+
+      if (!employee) {
+        throw new Error(`Employee with ID ${data.employeeId} does not exist`);
       }
+
+      // Validate Branch
+      if (data.branchId) {
+        const employeeWithBranch = await tx.employee.findUnique({
+          where: { id: data.employeeId },
+          select: { branchId: true },
+        });
+        if (employeeWithBranch?.branchId !== data.branchId) {
+          throw new Error("Employee does not belong to your branch");
+        }
+      }
+
+      const loan = await createLoanWithLedger(tx, {
+        employeeId: data.employeeId,
+        date: data.date,
+        type: data.type,
+        amount: data.amount,
+        remarks: data.remarks,
+      });
+
+      // Convert Decimal to number for client serialization
+      return {
+        ...loan,
+        amount: loan.amount,
+      };
     }
+  );
 
-    const loan = await createLoanWithLedger(tx, {
-      employeeId: data.employeeId,
-      date: data.date,
-      type: data.type,
-      amount: data.amount,
-      remarks: data.remarks,
-    });
+  // Trigger payroll refresh if active
+  await refreshPayrollForEmployeesIfActive([data.employeeId], data.date);
 
-    // Convert Decimal to number for client serialization
-    return {
-      ...loan,
-      amount: loan.amount,
-    };
-  });
+  return result;
 };
 
 /**
@@ -141,57 +149,65 @@ export const findLoanById = async (id: number) => {
  * Update loan
  */
 export const updateLoan = async (id: number, data: UpdateLoanData) => {
-  return prisma.$transaction(async (tx: PrismaTransactionClient) => {
-    // Check if loan exists and get current data
-    const existingLoan = await tx.loan.findUnique({
-      where: { id },
-      select: {
-        id: true,
-        employee: { select: { branchId: true } },
-      },
-    });
-
-    if (!existingLoan) {
-      throw new Error("Loan not found");
-    }
-
-    // Security validation: verify branch assignment for branch-scoped users
-    if (data.branchId && existingLoan.employee?.branchId !== data.branchId) {
-      throw new Error("Access Denied: Loan belongs to another branch.");
-    }
-
-    // Validate employee if provided
-    if (data.employeeId !== undefined) {
-      const employee = await tx.employee.findUnique({
-        where: { id: data.employeeId },
-        select: { id: true },
+  const result = await prisma.$transaction(
+    async (tx: PrismaTransactionClient) => {
+      // Check if loan exists and get current data
+      const existingLoan = await tx.loan.findUnique({
+        where: { id },
+        select: {
+          id: true,
+          employee: { select: { branchId: true } },
+        },
       });
 
-      if (!employee) {
-        throw new Error(`Employee with ID ${data.employeeId} does not exist`);
+      if (!existingLoan) {
+        throw new Error("Loan not found");
       }
+
+      // Security validation: verify branch assignment for branch-scoped users
+      if (data.branchId && existingLoan.employee?.branchId !== data.branchId) {
+        throw new Error("Access Denied: Loan belongs to another branch.");
+      }
+
+      // Validate employee if provided
+      if (data.employeeId !== undefined) {
+        const employee = await tx.employee.findUnique({
+          where: { id: data.employeeId },
+          select: { id: true },
+        });
+
+        if (!employee) {
+          throw new Error(`Employee with ID ${data.employeeId} does not exist`);
+        }
+      }
+
+      const updateData: any = {};
+
+      if (data.employeeId !== undefined)
+        updateData.employeeId = data.employeeId;
+      if (data.date !== undefined) updateData.date = dayjs(data.date).toDate();
+      if (data.type !== undefined) updateData.type = data.type;
+      if (data.amount !== undefined) updateData.amount = data.amount;
+      if (data.remarks !== undefined) updateData.remarks = data.remarks ?? null;
+
+      const loan = await tx.loan.update({
+        where: { id },
+        data: updateData,
+        select: loanSelect,
+      });
+
+      // Convert Decimal to number for client serialization
+      return {
+        ...loan,
+        amount: loan.amount,
+      };
     }
+  );
 
-    const updateData: any = {};
+  // Trigger payroll refresh if active
+  await refreshPayrollForEmployeesIfActive([result.employeeId], result.date);
 
-    if (data.employeeId !== undefined) updateData.employeeId = data.employeeId;
-    if (data.date !== undefined) updateData.date = dayjs(data.date).toDate();
-    if (data.type !== undefined) updateData.type = data.type;
-    if (data.amount !== undefined) updateData.amount = data.amount;
-    if (data.remarks !== undefined) updateData.remarks = data.remarks ?? null;
-
-    const loan = await tx.loan.update({
-      where: { id },
-      data: updateData,
-      select: loanSelect,
-    });
-
-    // Convert Decimal to number for client serialization
-    return {
-      ...loan,
-      amount: loan.amount,
-    };
-  });
+  return result;
 };
 
 /**
@@ -204,6 +220,8 @@ export const deleteLoan = async (id: number, branchId?: number) => {
       where: { id },
       select: {
         id: true,
+        employeeId: true,
+        date: true,
         employee: { select: { branchId: true } },
       },
     });
@@ -220,6 +238,12 @@ export const deleteLoan = async (id: number, branchId?: number) => {
     await tx.loan.delete({
       where: { id },
     });
+
+    // Trigger payroll refresh if active
+    await refreshPayrollForEmployeesIfActive(
+      [existingLoan.employeeId],
+      existingLoan.date
+    );
 
     return { success: true };
   });
@@ -398,7 +422,8 @@ export const listAllLoans = async (
 export const bulkUploadLoans = async (
   data: BulkUploadLoanData
 ): Promise<BulkUploadLoanResult> => {
-  const result: BulkUploadLoanResult = {
+  const refreshDetails: Map<string, Set<number>> = new Map();
+  const res: BulkUploadLoanResult = {
     success: 0,
     failed: 0,
     errors: [],
@@ -442,21 +467,20 @@ export const bulkUploadLoans = async (
           amount: row.amount,
           remarks: row.remarks,
         });
+
+        // Collect info for batch refresh
+        const dateKey = dayjs(row.date).format("YYYY-MM");
+        if (!refreshDetails.has(dateKey)) {
+          refreshDetails.set(dateKey, new Set());
+        }
+        refreshDetails.get(dateKey)!.add(employee.id);
       });
 
-      result.success++;
+      res.success++;
     } catch (error: any) {
       console.error(error);
-      console.error(error.message);
-      console.error(error.stack);
-      console.error(error.cause);
-      console.error(error.code);
-      console.error(error.name);
-      console.error(error.syscall);
-      console.error(error.address);
-      console.error(error.port);
-      result.failed++;
-      result.errors.push({
+      res.failed++;
+      res.errors.push({
         row: rowNumber,
         data: row,
         error: error.message || "Unknown error",
@@ -464,5 +488,15 @@ export const bulkUploadLoans = async (
     }
   }
 
-  return result;
+  // Trigger payroll refresh for all affected months/employees
+  for (const [dateKey, employeeIds] of refreshDetails.entries()) {
+    const [year, month] = dateKey.split("-").map(Number);
+    const dateObj = dayjs()
+      .year(year)
+      .month(month - 1)
+      .toDate();
+    await refreshPayrollForEmployeesIfActive(Array.from(employeeIds), dateObj);
+  }
+
+  return res;
 };
