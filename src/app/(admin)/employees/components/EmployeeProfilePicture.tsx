@@ -75,7 +75,7 @@ export const EmployeeProfilePicture = ({
 
   if (imageUrl) {
     return (
-      <div className="relative w-12 h-12 rounded-xl overflow-hidden shrink-0">
+      <div className="relative w-12 h-12 rounded-xl shrink-0">
         <RenderDot statusId={statusId} />
         <Image
           width={48}
