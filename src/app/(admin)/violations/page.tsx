@@ -22,6 +22,13 @@ import {
   ListedTrafficChallan,
   ListTrafficChallansSortableField,
 } from "@/lib/db/services/traffic-challan/traffic-challan.dto";
+import {
+  listAllTrafficChallansAction,
+} from "@/lib/db/services/traffic-challan/actions";
+import {
+  exportTrafficChallansToExcel,
+  exportTrafficChallansToCSV,
+} from "@/lib/db/services/traffic-challan/traffic-challan-export-utils";
 
 // Sub-components and Helpers
 import {
@@ -163,13 +170,55 @@ const ChallansPage = () => {
     [deleteTrafficChallan]
   );
 
-  const exportCSV = useCallback(() => {
-    tableRef.current?.exportCSV();
-  }, []);
+  const exportCSV = useCallback(async () => {
+    try {
+      const monthLabel = selectedDate
+        ? dayjs(selectedDate).format("MMM-YYYY")
+        : undefined;
+      const [result, error] = await listAllTrafficChallansAction({
+        ...(dateFilter && {
+          startDate: dateFilter.startDate,
+          endDate: dateFilter.endDate,
+        }),
+        ...(debouncedSearch ? { search: debouncedSearch } : {}),
+      });
 
-  const exportExcel = useCallback(() => {
-    tableRef.current?.exportExcel();
-  }, []);
+      if (error) {
+        toastService.showError("Error", "Failed to fetch violations for export");
+        return;
+      }
+
+      exportTrafficChallansToCSV(result?.trafficChallans ?? [], monthLabel);
+    } catch (err) {
+      console.log("Export CSV failed:", err);
+      toastService.showError("Error", "An unexpected error occurred during export");
+    }
+  }, [selectedDate, dateFilter, debouncedSearch]);
+
+  const exportExcel = useCallback(async () => {
+    try {
+      const monthLabel = selectedDate
+        ? dayjs(selectedDate).format("MMM-YYYY")
+        : undefined;
+      const [result, error] = await listAllTrafficChallansAction({
+        ...(dateFilter && {
+          startDate: dateFilter.startDate,
+          endDate: dateFilter.endDate,
+        }),
+        ...(debouncedSearch ? { search: debouncedSearch } : {}),
+      });
+
+      if (error) {
+        toastService.showError("Error", "Failed to fetch violations for export");
+        return;
+      }
+
+      await exportTrafficChallansToExcel(result?.trafficChallans ?? [], monthLabel);
+    } catch (err) {
+      console.log("Export Excel failed:", err);
+      toastService.showError("Error", "An unexpected error occurred during export");
+    }
+  }, [selectedDate, dateFilter, debouncedSearch]);
 
   const handlePageChange = useCallback(
     (e: { page?: number; rows?: number }) => {
