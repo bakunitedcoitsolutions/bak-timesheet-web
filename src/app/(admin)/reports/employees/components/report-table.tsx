@@ -60,7 +60,7 @@ export const ReportTable = ({
         header: "Code",
         ...tableCommonProps,
         frozen: true,
-        style: { minWidth: 100 },
+        style: { minWidth: 100, width: 100 },
         body: (rowData) => (
           <span className="text-sm">{rowData.employeeCode}</span>
         ),
@@ -70,7 +70,7 @@ export const ReportTable = ({
         header: "Name",
         ...tableCommonProps,
         frozen: true,
-        style: { minWidth: 250 },
+        style: { minWidth: 250, width: 300 },
         body: (rowData) => (
           <div className="flex flex-col gap-1">
             <span className="text-sm">{rowData.nameEn}</span>
@@ -493,8 +493,7 @@ export const ReportTable = ({
 
   const columns = useMemo(() => {
     return allColumns.filter(
-      (col) =>
-        col.frozen || selectedColumns.includes(col.field as string)
+      (col) => col.frozen || selectedColumns.includes(col.field as string)
     );
   }, [allColumns, selectedColumns]);
 
