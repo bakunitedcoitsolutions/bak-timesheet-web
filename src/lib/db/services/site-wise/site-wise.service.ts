@@ -2,7 +2,10 @@ import dayjs from "@/lib/dayjs";
 import { prisma } from "@/lib/db/prisma";
 import { GetSiteWiseReportInput, SiteWiseReportRow } from "./site-wise.schemas";
 
-export const getSiteWiseReport = async (input: GetSiteWiseReportInput) => {
+export const getSiteWiseReport = async (
+  input: GetSiteWiseReportInput,
+  branchId?: number | null
+) => {
   const { month, year, employeeCodes, projectIds, summarize } = input;
 
   const formattedMonth = dayjs()
@@ -31,6 +34,7 @@ export const getSiteWiseReport = async (input: GetSiteWiseReportInput) => {
     where: {
       payrollMonth: month,
       payrollYear: year,
+      ...(branchId ? { branchId } : {}),
       ...(employeeCodes && employeeCodes.length > 0
         ? {
             employee: {
