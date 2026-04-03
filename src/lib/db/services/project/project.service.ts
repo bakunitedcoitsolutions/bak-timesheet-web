@@ -4,6 +4,7 @@
  */
 
 import { prisma } from "@/lib/db/prisma";
+import { getServerAccessContext } from "@/lib/auth/helpers";
 import type {
   CreateProjectData,
   UpdateProjectData,
@@ -26,6 +27,11 @@ const projectSelect = {
   isActive: true,
   createdAt: true,
   updatedAt: true,
+  branch: {
+    select: {
+      nameEn: true,
+    },
+  },
 };
 
 /**
@@ -188,12 +194,21 @@ export const deleteProject = async (id: number) => {
 export const listProjects = async (
   params: ListProjectsParams
 ): Promise<ListProjectsResponse> => {
+  const { isBranchScoped, userBranchId } = await getServerAccessContext();
+
   const page = params.page ?? 1;
   const limit = params.limit ?? 10;
   const skip = (page - 1) * limit;
 
   // Build where clause
   const where: any = {};
+
+  // Apply internal branch scoping
+  if (isBranchScoped) {
+    where.branchId = userBranchId;
+  } else if (params.branchId !== undefined) {
+    where.branchId = params.branchId;
+  }
 
   // Search filter
   if (params.search) {
@@ -202,11 +217,6 @@ export const listProjects = async (
       { nameAr: { contains: params.search, mode: "insensitive" } },
       { description: { contains: params.search, mode: "insensitive" } },
     ];
-  }
-
-  // Filter by branchId
-  if (params.branchId !== undefined) {
-    where.branchId = params.branchId;
   }
 
   // Filter by isActive
@@ -239,19 +249,19 @@ export const listProjects = async (
   // Get projects
   const projects = await prisma.project.findMany({
     where,
-    skip,
-    take: limit,
+    skip: limit === -1 ? undefined : skip,
+    take: limit === -1 ? undefined : limit,
     select: projectSelect,
     orderBy,
   });
 
   return {
-    projects,
+    projects: projects as any,
     pagination: {
       page,
       limit,
       total,
-      totalPages: Math.ceil(total / limit),
+      totalPages: limit === -1 ? 1 : Math.ceil(total / limit),
     },
   };
 };

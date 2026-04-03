@@ -48,6 +48,9 @@ export interface ProjectInterface {
   isActive: boolean;
   createdAt: Date | any;
   updatedAt: Date | any;
+  branch?: {
+    nameEn: string;
+  } | null;
 }
 
 export interface ListedProject extends ProjectInterface {}

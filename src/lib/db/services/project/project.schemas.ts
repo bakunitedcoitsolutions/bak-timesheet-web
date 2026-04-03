@@ -24,8 +24,8 @@ export const UpdateProjectSchema = z.object({
 });
 
 export const ListProjectsParamsSchema = z.object({
-  page: z.number().int().positive().optional(),
-  limit: z.number().int().positive().optional(),
+  page: z.number().int().min(1).optional(),
+  limit: z.number().int().min(-1).optional(),
   search: z.string().optional(),
   sortOrder: z.enum(["asc", "desc"]).optional(),
   sortBy: z.enum(["nameEn", "nameAr", "isActive", "createdAt"]).optional(),

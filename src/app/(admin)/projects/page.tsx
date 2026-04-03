@@ -16,6 +16,11 @@ import {
   useDeleteProject,
   useGetProjects,
 } from "@/lib/db/services/project/requests";
+import { listProjectsAction } from "@/lib/db/services/project/actions";
+import {
+  exportProjectsCSV,
+  exportProjectsExcel,
+} from "@/utils/helpers/export-projects-report";
 
 // Components
 import { ProjectHeader } from "./components/ProjectHeader";
@@ -141,12 +146,32 @@ const ProjectsPage = () => {
     [deleteProject]
   );
 
-  const exportCSV = useCallback(() => {
-    tableRef.current?.exportCSV();
+  const exportCSV = useCallback(async () => {
+    const [response, error] = await listProjectsAction({
+      limit: -1,
+      isActive: true,
+    });
+    if (error) {
+      toastService.showError("Error", "Failed to fetch projects for export");
+      return;
+    }
+    if (response?.projects) {
+      exportProjectsCSV(response.projects);
+    }
   }, []);
 
-  const exportExcel = useCallback(() => {
-    tableRef.current?.exportExcel();
+  const exportExcel = useCallback(async () => {
+    const [response, error] = await listProjectsAction({
+      limit: -1,
+      isActive: true,
+    });
+    if (error) {
+      toastService.showError("Error", "Failed to fetch projects for export");
+      return;
+    }
+    if (response?.projects) {
+      exportProjectsExcel(response.projects);
+    }
   }, []);
 
   const handlePageChange = useCallback(
