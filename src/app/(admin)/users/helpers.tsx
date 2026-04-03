@@ -34,9 +34,11 @@ export const createColumns = (
     filterable: false,
     style: { minWidth: "70px" },
     headerStyle: { minWidth: "70px" },
-    body: (rowData: ListedUser) => (
+    body: (_: ListedUser, options: any) => (
       <div className={"flex items-center justify-center gap-1.5 w-[40px]"}>
-        <span className="text-sm font-medium">{rowData?.id}</span>
+        <span className="text-sm font-medium">
+          {Number(options?.rowIndex) + 1}
+        </span>
       </div>
     ),
   },

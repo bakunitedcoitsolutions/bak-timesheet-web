@@ -17,9 +17,11 @@ const getAccessDefinition = (access: string): string => {
   const definitions: Record<string, string> = {
     Admin: "Can do anything of all branches (all functionalities)",
     Manager: "Can do anything of all branches except user management",
-    Branch: "Can do anything within assigned branch only",
+    "Branch Manager": "Can do anything within assigned branch only",
     "Access-Enabled User":
       "Customizable permissions with checkboxes for each feature",
+    "Branch User":
+      "Customizable permissions with checkboxes for each feature under assigned branch",
   };
   return definitions[access] || "";
 };
@@ -42,9 +44,11 @@ const columns = (): TableColumn<UserRoleInterface>[] => [
     align: "center",
     style: { minWidth: "70px" },
     headerStyle: { minWidth: "70px" },
-    body: (rowData: UserRoleInterface) => (
+    body: (_: UserRoleInterface, options: any) => (
       <div className={"flex items-center justify-center gap-1.5 w-[40px]"}>
-        <span className="text-sm font-medium">{rowData?.id}</span>
+        <span className="text-sm font-medium">
+          {Number(options?.rowIndex) + 1}
+        </span>
       </div>
     ),
   },

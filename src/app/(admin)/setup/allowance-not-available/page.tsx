@@ -60,9 +60,11 @@ const columns = (
     align: "center",
     style: { minWidth: "50px" },
     headerStyle: { minWidth: "50px" },
-    body: (rowData: ListedAllowanceNotAvailable) => (
+    body: (_: ListedAllowanceNotAvailable, options: any) => (
       <div className={"flex items-center justify-center gap-1.5 w-[40px]"}>
-        <span className="text-sm font-medium">{rowData?.id}</span>
+        <span className="text-sm font-medium">
+          {Number(options?.rowIndex) + 1}
+        </span>
       </div>
     ),
   },
