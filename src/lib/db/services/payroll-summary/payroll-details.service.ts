@@ -254,10 +254,12 @@ export const getPayrollReport = async (
     employeeCodes,
     paymentMethodId,
   } = params;
+  const { isBranchScoped, userBranchId } = await getServerAccessContext();
 
   const where: any = {
     payrollYear: year,
     payrollMonth: month,
+    ...(isBranchScoped ? { branchId: userBranchId } : {}),
   };
 
   const employeeFilter: any = {};
