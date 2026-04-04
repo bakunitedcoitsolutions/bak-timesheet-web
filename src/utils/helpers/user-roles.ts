@@ -29,6 +29,7 @@ export function getRoleName(userRoleId: number): string {
     [USER_ROLES.MANAGER]: "Manager",
     [USER_ROLES.BRANCH_MANAGER]: "Branch Manager",
     [USER_ROLES.ACCESS_ENABLED]: "Access-Enabled User",
+    [USER_ROLES.BRANCH_USER]: "Branch User",
   };
   return roleMap[userRoleId] || "Unknown";
 }

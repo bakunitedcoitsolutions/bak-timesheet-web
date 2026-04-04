@@ -79,8 +79,8 @@ const LoansPage = () => {
 
   const isLocked = useCallback(() => {
     if (isPayrollPosted) return true;
-    if (role === 4 && hasFull) return false;
-    if (role === 4 && !canEdit) return true;
+    if ((role === 4 || role === 5) && hasFull) return false;
+    if ((role === 4 || role === 5) && !canEdit) return true;
     return false;
   }, [isPayrollPosted, canEdit, role, hasFull]);
 

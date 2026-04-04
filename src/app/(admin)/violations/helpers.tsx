@@ -31,8 +31,8 @@ export const checkIsLocked = (
   canEdit: boolean
 ) => {
   if (isPayrollPosted) return true;
-  if (Number(role) === 4 && hasFull) return false;
-  if (Number(role) === 4 && !canEdit) return true;
+  if ((Number(role) === 4 || Number(role) === 5) && hasFull) return false;
+  if ((Number(role) === 4 || Number(role) === 5) && !canEdit) return true;
   return false;
 };
 
@@ -139,7 +139,11 @@ export const createColumns = (
             <TableActions
               rowData={rowData}
               onEdit={handleEdit}
-              onDelete={Number(role) !== 4 ? handleDelete : undefined}
+              onDelete={
+                Number(role) !== 4 && Number(role) !== 5
+                  ? handleDelete
+                  : undefined
+              }
             />
           ),
         } as TableColumn<ListedTrafficChallan>,

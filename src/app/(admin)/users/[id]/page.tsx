@@ -119,7 +119,7 @@ const UpsertUserPage = () => {
         password: "",
       };
       reset(setUser);
-      if (foundUser?.userRole?.id === 4) {
+      if (foundUser?.userRole?.id === 4 || foundUser?.userRole?.id === 5) {
         setTimeout(() => {
           setPrivileges(foundUser?.privileges?.privileges ?? {});
         }, 300);
@@ -138,7 +138,7 @@ const UpsertUserPage = () => {
     const submitData = {
       ...data,
       email: data?.email?.toLowerCase?.()?.trim?.(),
-      privileges: selectedUserRoleId === 4 ? privileges : undefined, // Include privileges if Access-Enabled User role
+      privileges: (selectedUserRoleId === 4 || selectedUserRoleId === 5) ? privileges : undefined, // Include privileges if Access-Enabled User or Branch User role
     };
     if (isAddMode) {
       await handleAddUser(submitData);

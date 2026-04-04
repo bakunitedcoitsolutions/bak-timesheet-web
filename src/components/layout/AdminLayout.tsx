@@ -1,9 +1,10 @@
 "use client";
 
 import React, { useState } from "react";
-import Sidebar from "./Sidebar";
-import Header from "./Header";
 import { classNames } from "primereact/utils";
+
+import Header from "./Header";
+import Sidebar from "./Sidebar";
 import { useAccess } from "@/components";
 import { USER_ROLES } from "@/utils/user.utility";
 
@@ -14,7 +15,9 @@ export default function AdminLayout({
 }) {
   const [collapsed, setCollapsed] = useState(false);
   const { role, isLoading } = useAccess();
-  const isAccessEnabled = Number(role) === USER_ROLES.ACCESS_ENABLED;
+  const isAccessEnabled =
+    Number(role) === USER_ROLES.ACCESS_ENABLED ||
+    Number(role) === USER_ROLES.BRANCH_USER;
 
   React.useEffect(() => {
     const handleResize = () => {

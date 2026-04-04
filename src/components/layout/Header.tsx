@@ -29,7 +29,9 @@ export default function Header({ collapsed, setCollapsed }: HeaderProps) {
 
   const userName = (session?.user as any)?.name || "User";
   const userRole = (session?.user as any)?.role || "-";
-  const isAccessEnabled = Number(role) === USER_ROLES.ACCESS_ENABLED;
+  const isAccessEnabled =
+    Number(role) === USER_ROLES.ACCESS_ENABLED ||
+    Number(role) === USER_ROLES.BRANCH_USER;
 
   const handleLogout = async () => {
     try {

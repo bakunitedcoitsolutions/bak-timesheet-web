@@ -90,9 +90,14 @@ export const createUser = async (data: CreateUserData) => {
             : data.branchId
           : null;
 
-      // Validate: Branch Manager (roleId: 3) must have branchId
-      if (data.userRoleId === 3 && !normalizedBranchId) {
-        throw new Error("Branch Manager must be assigned to a branch");
+      // Validate: Branch Manager (3) or Branch User (5) must have branchId
+      if (
+        (data.userRoleId === 3 || data.userRoleId === 5) &&
+        !normalizedBranchId
+      ) {
+        const roleName =
+          data.userRoleId === 3 ? "Branch Manager" : "Branch User";
+        throw new Error(`${roleName} must be assigned to a branch`);
       }
 
       // Validate branchId exists if provided
@@ -144,7 +149,7 @@ export const createUser = async (data: CreateUserData) => {
       });
 
       // Create privileges if user has "Access-Enabled User" role (roleId: 4)
-      if (data.userRoleId === 4 && data.privileges) {
+      if ((data.userRoleId === 4 || data.userRoleId === 5) && data.privileges) {
         await tx.userPrivilege.create({
           data: {
             userId: newUser.id,
@@ -302,7 +307,10 @@ export const updateUser = async (id: number, data: UpdateUserData) => {
     const finalRoleIdForPrivileges =
       data.userRoleId !== undefined ? data.userRoleId : currentUser.userRoleId;
 
-    if (finalRoleIdForPrivileges === 4 && data.privileges !== undefined) {
+    if (
+      (finalRoleIdForPrivileges === 4 || finalRoleIdForPrivileges === 5) &&
+      data.privileges !== undefined
+    ) {
       await tx.userPrivilege.upsert({
         where: { userId: id },
         create: {
@@ -313,8 +321,12 @@ export const updateUser = async (id: number, data: UpdateUserData) => {
           privileges: data.privileges as any,
         },
       });
-    } else if (data.userRoleId !== undefined && data.userRoleId !== 4) {
-      // Remove privileges if role changed to something other than "Access-Enabled User"
+    } else if (
+      data.userRoleId !== undefined &&
+      data.userRoleId !== 4 &&
+      data.userRoleId !== 5
+    ) {
+      // Remove privileges if role changed to something other than "Access-Enabled User" (4) or "Branch User" (5)
       await tx.userPrivilege.deleteMany({
         where: { userId: id },
       });

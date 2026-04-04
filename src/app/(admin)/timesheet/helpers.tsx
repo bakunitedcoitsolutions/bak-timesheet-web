@@ -1,5 +1,5 @@
-import { TimesheetPageRow } from "@/lib/db/services/timesheet/timesheet.dto";
 import { USER_ROLES } from "@/utils/user.utility";
+import { TimesheetPageRow } from "@/lib/db/services/timesheet/timesheet.dto";
 
 /** Today's date in YYYY-MM-DD */
 export const getTodayDateString = () => new Date().toISOString().slice(0, 10);
@@ -16,8 +16,22 @@ export const isLocked = (
   canAdd: boolean
 ) => {
   if (isPayrollPosted) return true;
-  if (role === USER_ROLES.ACCESS_ENABLED && hasFull) return false;
-  if (role === USER_ROLES.ACCESS_ENABLED && !canEdit && rowData.timesheetId) return true;
-  if (role === USER_ROLES.ACCESS_ENABLED && !canAdd && !rowData.timesheetId) return true;
+  if (
+    (role === USER_ROLES.ACCESS_ENABLED || role === USER_ROLES.BRANCH_USER) &&
+    hasFull
+  )
+    return false;
+  if (
+    (role === USER_ROLES.ACCESS_ENABLED || role === USER_ROLES.BRANCH_USER) &&
+    !canEdit &&
+    rowData.timesheetId
+  )
+    return true;
+  if (
+    (role === USER_ROLES.ACCESS_ENABLED || role === USER_ROLES.BRANCH_USER) &&
+    !canAdd &&
+    !rowData.timesheetId
+  )
+    return true;
   return false;
 };

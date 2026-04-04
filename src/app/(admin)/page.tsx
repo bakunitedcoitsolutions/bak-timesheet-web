@@ -1,10 +1,10 @@
 "use client";
 
-import { useAccess } from "@/components";
 import {
   NormalDashboard,
   AccessEnabledDashboard,
 } from "@/components/custom/home";
+import { useAccess } from "@/components";
 import { USER_ROLES } from "@/utils/user.utility";
 
 const HomePage = () => {
@@ -17,7 +17,10 @@ const HomePage = () => {
       </div>
     );
 
-  if (Number(role) === USER_ROLES.ACCESS_ENABLED) {
+  if (
+    Number(role) === USER_ROLES.ACCESS_ENABLED ||
+    Number(role) === USER_ROLES.BRANCH_USER
+  ) {
     return <AccessEnabledDashboard />;
   }
 

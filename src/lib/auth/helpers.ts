@@ -59,8 +59,12 @@ export async function hasPermission(
     return true;
   }
 
-  // Access-Enabled User - check custom privileges
-  if (roleId === USER_ROLES.ACCESS_ENABLED && user.privileges) {
+  // Access-Enabled User & Branch User - check custom privileges
+  if (
+    (roleId === USER_ROLES.ACCESS_ENABLED ||
+      roleId === USER_ROLES.BRANCH_USER) &&
+    user.privileges
+  ) {
     const featurePrivileges =
       user.privileges[feature as keyof typeof user.privileges];
     if (!featurePrivileges) return false;

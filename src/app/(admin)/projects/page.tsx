@@ -97,7 +97,7 @@ const ProjectsPage = () => {
     description: debouncedColumnFilters.description,
   });
 
-  const isAccessEnabledUser = role === 4;
+  const isAccessEnabledUser = role === 4 || role === 5;
   const projects = projectsResponse?.projects ?? [];
   const {
     total,

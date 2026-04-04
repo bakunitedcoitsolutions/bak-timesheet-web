@@ -23,19 +23,24 @@ export function determineBranchIdForUpdate(
 } {
   const finalRoleId = newRoleId !== undefined ? newRoleId : currentRoleId;
 
-  // Check if changing from Branch Manager (roleId: 3) to another role
-  const isChangingFromBranchManager = currentRoleId === 3 && finalRoleId !== 3;
+  // Roles that require a branch assignment (3: Branch Manager, 5: Branch User)
+  const isScopedRole = (roleId: number) => roleId === 3 || roleId === 5;
 
-  // Check if changing to Branch Manager (roleId: 3) from another role
-  const isChangingToBranchManager = currentRoleId !== 3 && finalRoleId === 3;
+  // Check if changing from a scoped role to another role
+  const isChangingFromScopedRole =
+    isScopedRole(currentRoleId) && !isScopedRole(finalRoleId);
+
+  // Check if changing to a scoped role from another role
+  const isChangingToScopedRole =
+    !isScopedRole(currentRoleId) && isScopedRole(finalRoleId);
 
   let branchIdToSet: number | null | undefined;
 
-  if (isChangingFromBranchManager) {
-    // Changing from Branch Manager (3) to Admin (1) or Manager (2) - clear branchId
+  if (isChangingFromScopedRole) {
+    // Changing from Scoped Role (3, 5) to Admin (1) or Manager (2) - clear branchId
     branchIdToSet = null;
-  } else if (isChangingToBranchManager) {
-    // Changing to Branch Manager (3) from Admin/Manager - must provide branchId
+  } else if (isChangingToScopedRole) {
+    // Changing to Scoped Role (3, 5) from Admin/Manager - must provide branchId
     // Use provided branchId (validation will catch if not provided)
     branchIdToSet = providedBranchId;
   } else if (providedBranchId !== undefined) {
@@ -55,17 +60,19 @@ export function determineBranchIdForUpdate(
 }
 
 /**
- * Validate that Branch Manager has a branchId
+ * Validate that scoped users (Branch Manager or Branch User) have a branchId
  *
  * @param roleId - User role ID
  * @param branchId - Branch ID to validate
- * @throws Error if Branch Manager (roleId: 3) doesn't have a branchId
+ * @throws Error if scoped user doesn't have a branchId
  */
 export function validateBranchManagerBranchId(
   roleId: number,
   branchId: number | null | undefined
 ): void {
-  if (roleId === 3 && !branchId) {
-    throw new Error("Branch Manager must be assigned to a branch");
+  // Scoped User roles: Branch Manager (3), Branch User (5)
+  if ((roleId === 3 || roleId === 5) && !branchId) {
+    const roleName = roleId === 3 ? "Branch Manager" : "Branch User";
+    throw new Error(`${roleName} must be assigned to a branch`);
   }
 }

@@ -22,7 +22,7 @@ export const UserPrivilegesSection = ({
   handleReportFilterToggle,
   selectedUserRoleId,
 }: UserPrivilegesSectionProps) => {
-  if (selectedUserRoleId !== 4) return null;
+  if (selectedUserRoleId !== 4 && selectedUserRoleId !== 5) return null;
 
   return (
     <div className="flex flex-col gap-4 px-6 md:max-w-5xl">

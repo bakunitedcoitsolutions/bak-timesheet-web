@@ -20,7 +20,7 @@ const UpsertProjectPage = () => {
   const router = useRouter();
   const { id: projectIdParam } = useParams();
   const { role, isBranchScoped, branchId: userBranchId } = useAccess();
-  const isAccessEnabledUser = role === 4;
+  const isAccessEnabledUser = role === 4 || role === 5;
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const {

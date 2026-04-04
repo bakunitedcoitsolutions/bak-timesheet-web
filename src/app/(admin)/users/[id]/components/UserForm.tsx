@@ -26,11 +26,7 @@ export const UserForm = ({
     <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 md:gap-y-4 md:py-5 px-6 mt-5 md:mt-0 flex-1">
       <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
         <FormItem name="nameEn">
-          <Input
-            label="Name"
-            className="w-full"
-            placeholder="Enter name"
-          />
+          <Input label="Name" className="w-full" placeholder="Enter name" />
         </FormItem>
       </div>
       <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
@@ -85,7 +81,7 @@ export const UserForm = ({
           />
         </FormItem>
       </div>
-      {selectedUserRoleId === 3 && (
+      {(selectedUserRoleId === 3 || selectedUserRoleId === 5) && (
         <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
           <FormItem name="branchId">
             <Dropdown

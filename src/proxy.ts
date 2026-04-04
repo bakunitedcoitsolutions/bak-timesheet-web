@@ -65,8 +65,8 @@ export const proxy = auth((req) => {
       }
     }
 
-    // Only apply restriction logic to Access-Enabled User (Role ID 4)
-    if (roleId === 4) {
+    // Apply restriction logic to Access-Enabled User (Role ID 4) and Branch User (Role ID 5)
+    if (roleId === 4 || roleId === 5) {
       // Find the base protected route the path matches
       const matchedRoute = Object.keys(ROUTE_FEATURE_MAP).find(
         (route) => pathname === route || pathname.startsWith(`${route}/`)
