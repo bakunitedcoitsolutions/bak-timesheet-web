@@ -1,15 +1,25 @@
-import { Input, ExportOptions } from "@/components";
+import { Input, ExportOptions, Dropdown } from "@/components";
 
 interface ProjectFiltersProps {
   searchValue: string;
   onSearchChange: (value: string) => void;
+  status: "all" | "active" | "inactive";
+  onStatusChange: (value: "all" | "active" | "inactive") => void;
   exportCSV: () => void;
   exportExcel: () => void;
 }
 
+const STATUS_OPTIONS = [
+  { label: "All", value: "all" },
+  { label: "Active", value: "active" },
+  { label: "Inactive", value: "inactive" },
+];
+
 export const ProjectFilters = ({
   searchValue,
   onSearchChange,
+  status,
+  onStatusChange,
   exportCSV,
   exportExcel,
 }: ProjectFiltersProps) => {
@@ -27,7 +37,17 @@ export const ProjectFilters = ({
         />
       </div>
       <div className="flex items-center gap-3 w-full md:w-auto justify-end">
-        <div>
+        <div className="w-full md:w-[150px]">
+          <Dropdown
+            small
+            value={status}
+            className="w-full"
+            placeholder="Status"
+            options={STATUS_OPTIONS}
+            onChange={(e) => onStatusChange(e.value)}
+          />
+        </div>
+        <div className="w-auto">
           <ExportOptions exportCSV={exportCSV} exportExcel={exportExcel} />
         </div>
       </div>

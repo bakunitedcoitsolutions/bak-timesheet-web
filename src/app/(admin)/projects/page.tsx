@@ -43,6 +43,7 @@ const ProjectsPage = () => {
     SortableField | ListProjectsSortableField
   >("createdAt");
   const { role } = useAccess();
+  const [status, setStatus] = useState<"all" | "active" | "inactive">("all");
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
   const [columnFilters, setColumnFilters] = useState<Record<string, string>>(
     {}
@@ -66,7 +67,7 @@ const ProjectsPage = () => {
     if (page !== 1) {
       setPage(1);
     }
-  }, [debouncedColumnFilters]);
+  }, [debouncedColumnFilters, status]);
 
   const handleFilterChange = useCallback((filters: DataTableFilterMeta) => {
     const newFilters: Record<string, string> = {};
@@ -91,6 +92,8 @@ const ProjectsPage = () => {
     sortBy: sortBy as ListProjectsSortableField,
     sortOrder,
     search: debouncedSearch || undefined,
+    isActive:
+      status === "active" ? true : status === "inactive" ? false : undefined,
     // Column filters
     nameEn: debouncedColumnFilters.nameEn,
     nameAr: debouncedColumnFilters.nameAr,
@@ -149,7 +152,8 @@ const ProjectsPage = () => {
   const exportCSV = useCallback(async () => {
     const [response, error] = await listProjectsAction({
       limit: -1,
-      isActive: true,
+      isActive:
+        status === "active" ? true : status === "inactive" ? false : undefined,
     });
     if (error) {
       toastService.showError("Error", "Failed to fetch projects for export");
@@ -158,12 +162,13 @@ const ProjectsPage = () => {
     if (response?.projects) {
       exportProjectsCSV(response.projects);
     }
-  }, []);
+  }, [status]);
 
   const exportExcel = useCallback(async () => {
     const [response, error] = await listProjectsAction({
       limit: -1,
-      isActive: true,
+      isActive:
+        status === "active" ? true : status === "inactive" ? false : undefined,
     });
     if (error) {
       toastService.showError("Error", "Failed to fetch projects for export");
@@ -172,7 +177,7 @@ const ProjectsPage = () => {
     if (response?.projects) {
       exportProjectsExcel(response.projects);
     }
-  }, []);
+  }, [status]);
 
   const handlePageChange = useCallback(
     (e: { page?: number; rows?: number }) => {
@@ -219,11 +224,13 @@ const ProjectsPage = () => {
       <ProjectFilters
         searchValue={searchValue}
         onSearchChange={setSearchValue}
+        status={status}
+        onStatusChange={setStatus}
         exportCSV={exportCSV}
         exportExcel={exportExcel}
       />
     ),
-    [searchValue, exportCSV, exportExcel]
+    [searchValue, status, exportCSV, exportExcel]
   );
 
   return (
