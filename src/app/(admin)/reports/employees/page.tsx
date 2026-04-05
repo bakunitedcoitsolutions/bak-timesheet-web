@@ -32,10 +32,9 @@ const EmployeesReportPage = () => {
   const [queryFilter, setQueryFilter] = useState<string | number | null>("all");
   const [queryStatusId, setQueryStatusId] = useState<number>(1); // Default to Active (1)
   const [selectedColumns, setSelectedColumns] = useState<string[]>([
-    "employeeCode",
-    "nameEn",
     "designationName",
     "phone",
+    "statusName",
   ]);
   const [zeroRate, setZeroRate] = useState<boolean>(false);
   const [isExporting, setIsExporting] = useState<boolean>(false);
@@ -174,8 +173,8 @@ const EmployeesReportPage = () => {
     const allData = await fetchAllEmployees();
     if (allData && allData.length > 0) {
       const columns = [
-        { header: "Code", field: "employeeCode" },
-        { header: "Name (EN)", field: "nameEn" },
+        { header: "Code", field: "employeeCode", style: { minWidth: "70px" } },
+        { header: "Name (EN)", field: "nameEn", style: { minWidth: "280px" } },
         { header: "Designation", field: "designationName" },
         { header: "Section", field: "sectionName" },
         { header: "Mobile No", field: "phone" },
@@ -188,12 +187,14 @@ const EmployeesReportPage = () => {
           columns,
           groupBy: "sectionName",
           printTitle: "EMPLOYEES REPORT",
+          printSubTitle: `${allData?.length} Employee(s)`,
         });
       } else {
         printTable({
           data: allData,
           columns,
           printTitle: "EMPLOYEES REPORT",
+          printSubTitle: `${allData?.length} Employee(s)`,
         });
       }
     }
@@ -209,6 +210,7 @@ const EmployeesReportPage = () => {
           renderInput={() => (
             <div className="flex items-center gap-5">
               <ExportOptions
+                disabled={isExporting}
                 loading={isExporting}
                 exportCSV={async () => {
                   const data = await fetchAllEmployees();
@@ -218,12 +220,19 @@ const EmployeesReportPage = () => {
                       { header: "Code", key: "employeeCode" },
                       { header: "Name (EN)", key: "nameEn" },
                       { header: "Name (AR)", key: "nameAr" },
-                      ...selectedColumns.map((colKey) => ({
-                        header:
-                          availableColumns.find((c) => c.value === colKey)
-                            ?.label || colKey,
-                        key: colKey,
-                      })),
+                      ...selectedColumns
+                        .filter(
+                          (col) =>
+                            col !== "employeeCode" &&
+                            col !== "nameEn" &&
+                            col !== "nameAr"
+                        )
+                        .map((colKey) => ({
+                          header:
+                            availableColumns.find((c) => c.value === colKey)
+                              ?.label || colKey,
+                          key: colKey,
+                        })),
                     ];
                     exportEmployeesCSV(data, exportCols);
                   }
@@ -236,12 +245,19 @@ const EmployeesReportPage = () => {
                       { header: "Code", key: "employeeCode" },
                       { header: "Name (EN)", key: "nameEn" },
                       { header: "Name (AR)", key: "nameAr" },
-                      ...selectedColumns.map((colKey) => ({
-                        header:
-                          availableColumns.find((c) => c.value === colKey)
-                            ?.label || colKey,
-                        key: colKey,
-                      })),
+                      ...selectedColumns
+                        .filter(
+                          (col) =>
+                            col !== "employeeCode" &&
+                            col !== "nameEn" &&
+                            col !== "nameAr"
+                        )
+                        .map((colKey) => ({
+                          header:
+                            availableColumns.find((c) => c.value === colKey)
+                              ?.label || colKey,
+                          key: colKey,
+                        })),
                     ];
                     exportEmployeesExcel(data, exportCols);
                   }
@@ -253,6 +269,8 @@ const EmployeesReportPage = () => {
                 label="Print"
                 icon="pi pi-print"
                 variant="outlined"
+                loading={isExporting}
+                disabled={isExporting}
                 onClick={handlePrint}
                 className="w-full lg:w-28 h-10! bg-white!"
               />

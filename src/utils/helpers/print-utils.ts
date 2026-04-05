@@ -138,6 +138,7 @@ export const printTable = <T extends Record<string, any>>({
   data,
   columns,
   printTitle,
+  printSubTitle,
   printHeaderContent,
   landscape,
 }: PrintTableOptions<T>) => {
@@ -268,11 +269,11 @@ export const printTable = <T extends Record<string, any>>({
             margin-bottom: 20px;
             padding-bottom: 10px;
             border-bottom: 2px solid #000;
+            text-align: center;
           }
           .print-header h1 {
             font-size: 18px;
             margin-bottom: 10px;
-            text-align: center;
           }
           .print-header-content {
             display: flex;
@@ -332,7 +333,14 @@ export const printTable = <T extends Record<string, any>>({
         </style>
       </head>
       <body>
-        ${printTitle ? `<div class="print-header"><h1>${printTitle}</h1></div>` : ""}
+        ${
+          printTitle
+            ? `<div class="print-header">
+                <h1 style="text-align: center;">${printTitle}</h1>
+                ${!!printSubTitle ? `<p style="color: #6b7280; font-size: 14px; margin-top: 3px; text-align: center; width: 100%;">${printSubTitle}</p>` : ""}
+              </div>`
+            : ""
+        }
         ${headerHTML}
         ${tableHTML}
       </body>
@@ -532,7 +540,7 @@ export const printGroupedTable = <T extends Record<string, any>>({
           printTitle
             ? `<div class="print-header">
                 <h1>${printTitle}</h1>
-                ${!!printSubTitle ? `<p style="color: #6b7280; font-size: 14px; margin-top: 5px;">${printSubTitle}</p>` : ""}
+                ${!!printSubTitle ? `<p style="color: #6b7280; font-size: 14px; margin-top: 5px; text-align: center; width: 100%;">${printSubTitle}</p>` : ""}
               </div>`
             : ""
         }

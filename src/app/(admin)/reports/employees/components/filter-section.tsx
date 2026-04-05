@@ -89,6 +89,8 @@ export const FilterSection = ({
         </div>
         <div className="w-full lg:col-span-1">
           <Dropdown
+            small
+            filter
             value={statusId}
             options={statusOptions}
             className="w-full h-10!"
@@ -99,6 +101,7 @@ export const FilterSection = ({
         <div className="w-full lg:col-span-2">
           <MultiSelect
             small
+            filter
             options={columnOptions}
             className="w-full h-10!"
             placeholder="Select Columns"
