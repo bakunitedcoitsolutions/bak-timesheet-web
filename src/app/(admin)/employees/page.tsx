@@ -22,8 +22,8 @@ import {
 import { useDebounce } from "@/hooks";
 import { toastService } from "@/lib/toast";
 import { STORAGE_CONFIG } from "@/utils/constants";
+import { devError } from "@/utils/helpers/functions";
 import { useGlobalData } from "@/context/GlobalDataContext";
-import { devConsole, devError } from "@/utils/helpers/functions";
 import { showConfirmDialog } from "@/components/common/confirm-dialog";
 import { ListedEmployee } from "@/lib/db/services/employee/employee.dto";
 import { useDeleteEmployee, useGetEmployees } from "@/lib/db/services/employee";
@@ -145,7 +145,6 @@ const EmployeesPage = () => {
   const payrollSections = globalData.payrollSections || [];
   const employeeStatuses = globalData.employeeStatuses || [];
 
-
   const modifyEmployeesData = useMemo(() => {
     return getModifiedEmployeesData(employees, designations, payrollSections);
   }, [employees, designations, payrollSections]);
@@ -185,11 +184,6 @@ const EmployeesPage = () => {
     },
     [deleteEmployee]
   );
-
-  const handlePrint = useCallback((employee: ListedEmployee) => {
-    devConsole("Print employee card:", employee);
-    // TODO: Implement print functionality
-  }, []);
 
   const handleViewCard = useCallback((employee: ListedEmployee) => {
     if (employee.cardDocument) {
@@ -252,11 +246,10 @@ const EmployeesPage = () => {
         role,
         canEdit,
         handleEdit,
-        handlePrint,
         handleDelete,
         handleViewCard,
       }),
-    [handlePrint, role, handleEdit, canEdit, handleDelete, handleViewCard]
+    [role, handleEdit, canEdit, handleDelete, handleViewCard]
   );
 
   // Memoized header renderer

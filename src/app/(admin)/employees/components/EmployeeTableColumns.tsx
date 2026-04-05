@@ -15,7 +15,6 @@ const commonColumnProps = {
 export interface EmployeeTableColumnsProps {
   role: number | string | undefined;
   canEdit: boolean;
-  handlePrint: (employee: ListedEmployee) => void;
   handleEdit: (employee: ListedEmployee) => void;
   handleDelete: (employee: ListedEmployee) => void;
   handleViewCard: (employee: ListedEmployee) => void;
@@ -24,7 +23,6 @@ export interface EmployeeTableColumnsProps {
 export const getEmployeeTableColumns = ({
   role,
   canEdit,
-  handlePrint,
   handleEdit,
   handleDelete,
   handleViewCard,
@@ -195,6 +193,22 @@ export const getEmployeeTableColumns = ({
     ),
   },
   {
+    field: "branch",
+    header: "Branch",
+    ...commonColumnProps,
+    body: (rowData: ListedEmployee) => (
+      <span className="text-sm">{rowData?.branch?.nameEn || "-"}</span>
+    ),
+  },
+  {
+    field: "subBranch",
+    header: "Sub Branch",
+    ...commonColumnProps,
+    body: (rowData: ListedEmployee) => (
+      <span className="text-sm">{rowData?.subBranch?.nameEn || "-"}</span>
+    ),
+  },
+  {
     field: "nationality",
     header: "Nationality",
     ...commonColumnProps,
@@ -260,15 +274,6 @@ export const getEmployeeTableColumns = ({
         rowData={rowData}
         onDelete={Number(role) !== 4 ? handleDelete : undefined}
         onEdit={canEdit || Number(role) !== 4 ? handleEdit : undefined}
-        beforeActions={[
-          {
-            icon: "pi pi-print text-lg!",
-            label: "Print",
-            severity: "secondary",
-            onClick: handlePrint,
-            tooltip: "Print",
-          },
-        ]}
       />
     ),
   },

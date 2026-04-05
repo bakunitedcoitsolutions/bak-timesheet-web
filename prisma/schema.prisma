@@ -27,7 +27,6 @@ model User {
   password    String? // Hashed password
   userRoleId  Int
   branchId    Int? // Required for Branch Manager (roleId: 3), optional for others
-  subBranchId Int? // Optional
   isActive    Boolean  @default(true)
   createdBy   Int? // ID of user who created this record
   updatedBy   Int? // ID of user who last updated this record
@@ -37,7 +36,6 @@ model User {
   // Relations: User → Other Tables (User has foreign keys)
   userRole   UserRole       @relation(fields: [userRoleId], references: [id])
   branch     Branch?        @relation("UserBranch", fields: [branchId], references: [id])
-  subBranch  Branch?        @relation("UserSubBranch", fields: [subBranchId], references: [id])
   privileges UserPrivilege?
   creator    User?          @relation("UserCreatedBy", fields: [createdBy], references: [id])
   updater    User?          @relation("UserUpdatedBy", fields: [updatedBy], references: [id])
@@ -55,7 +53,6 @@ model User {
   @@index([email])
   @@index([userRoleId])
   @@index([branchId])
-  @@index([subBranchId])
   @@index([createdBy])
   @@index([updatedBy])
 }
@@ -102,7 +99,7 @@ model Branch {
 
   // Relations: Other Tables → Branch (Other tables have foreign keys pointing to Branch)
   users            User[]           @relation("UserBranch")
-  subBranchUsers   User[]           @relation("UserSubBranch")
+  subBranchUsers   Employee[]       @relation("EmployeeSubBranch")
   employees        Employee[]
   projects         Project[]
   payrollSummaries PayrollSummary[]
@@ -172,6 +169,7 @@ model Employee {
   cityId             Int?
   statusId           Int?
   branchId           Int?
+  subBranchId        Int?
   designationId      Int?
   payrollSectionId   Int?
   isDeductable       Boolean   @default(false)
@@ -222,6 +220,7 @@ model Employee {
   city           City?           @relation(fields: [cityId], references: [id])
   status         EmployeeStatus? @relation(fields: [statusId], references: [id])
   branch         Branch?         @relation(fields: [branchId], references: [id])
+  subBranch      Branch?         @relation("EmployeeSubBranch", fields: [subBranchId], references: [id])
   designation    Designation?    @relation(fields: [designationId], references: [id])
   payrollSection PayrollSection? @relation(fields: [payrollSectionId], references: [id])
   gosiCity       GosiCity?       @relation(fields: [gosiCityId], references: [id])

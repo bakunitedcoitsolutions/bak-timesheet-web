@@ -30,7 +30,6 @@ export type UserAvgAggregateOutputType = {
   id: number | null
   userRoleId: number | null
   branchId: number | null
-  subBranchId: number | null
   createdBy: number | null
   updatedBy: number | null
 }
@@ -39,7 +38,6 @@ export type UserSumAggregateOutputType = {
   id: number | null
   userRoleId: number | null
   branchId: number | null
-  subBranchId: number | null
   createdBy: number | null
   updatedBy: number | null
 }
@@ -52,7 +50,6 @@ export type UserMinAggregateOutputType = {
   password: string | null
   userRoleId: number | null
   branchId: number | null
-  subBranchId: number | null
   isActive: boolean | null
   createdBy: number | null
   updatedBy: number | null
@@ -68,7 +65,6 @@ export type UserMaxAggregateOutputType = {
   password: string | null
   userRoleId: number | null
   branchId: number | null
-  subBranchId: number | null
   isActive: boolean | null
   createdBy: number | null
   updatedBy: number | null
@@ -84,7 +80,6 @@ export type UserCountAggregateOutputType = {
   password: number
   userRoleId: number
   branchId: number
-  subBranchId: number
   isActive: number
   createdBy: number
   updatedBy: number
@@ -98,7 +93,6 @@ export type UserAvgAggregateInputType = {
   id?: true
   userRoleId?: true
   branchId?: true
-  subBranchId?: true
   createdBy?: true
   updatedBy?: true
 }
@@ -107,7 +101,6 @@ export type UserSumAggregateInputType = {
   id?: true
   userRoleId?: true
   branchId?: true
-  subBranchId?: true
   createdBy?: true
   updatedBy?: true
 }
@@ -120,7 +113,6 @@ export type UserMinAggregateInputType = {
   password?: true
   userRoleId?: true
   branchId?: true
-  subBranchId?: true
   isActive?: true
   createdBy?: true
   updatedBy?: true
@@ -136,7 +128,6 @@ export type UserMaxAggregateInputType = {
   password?: true
   userRoleId?: true
   branchId?: true
-  subBranchId?: true
   isActive?: true
   createdBy?: true
   updatedBy?: true
@@ -152,7 +143,6 @@ export type UserCountAggregateInputType = {
   password?: true
   userRoleId?: true
   branchId?: true
-  subBranchId?: true
   isActive?: true
   createdBy?: true
   updatedBy?: true
@@ -255,7 +245,6 @@ export type UserGroupByOutputType = {
   password: string | null
   userRoleId: number
   branchId: number | null
-  subBranchId: number | null
   isActive: boolean
   createdBy: number | null
   updatedBy: number | null
@@ -294,7 +283,6 @@ export type UserWhereInput = {
   password?: Prisma.StringNullableFilter<"User"> | string | null
   userRoleId?: Prisma.IntFilter<"User"> | number
   branchId?: Prisma.IntNullableFilter<"User"> | number | null
-  subBranchId?: Prisma.IntNullableFilter<"User"> | number | null
   isActive?: Prisma.BoolFilter<"User"> | boolean
   createdBy?: Prisma.IntNullableFilter<"User"> | number | null
   updatedBy?: Prisma.IntNullableFilter<"User"> | number | null
@@ -302,7 +290,6 @@ export type UserWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   userRole?: Prisma.XOR<Prisma.UserRoleScalarRelationFilter, Prisma.UserRoleWhereInput>
   branch?: Prisma.XOR<Prisma.BranchNullableScalarRelationFilter, Prisma.BranchWhereInput> | null
-  subBranch?: Prisma.XOR<Prisma.BranchNullableScalarRelationFilter, Prisma.BranchWhereInput> | null
   privileges?: Prisma.XOR<Prisma.UserPrivilegeNullableScalarRelationFilter, Prisma.UserPrivilegeWhereInput> | null
   creator?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   updater?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
@@ -322,7 +309,6 @@ export type UserOrderByWithRelationInput = {
   password?: Prisma.SortOrderInput | Prisma.SortOrder
   userRoleId?: Prisma.SortOrder
   branchId?: Prisma.SortOrderInput | Prisma.SortOrder
-  subBranchId?: Prisma.SortOrderInput | Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdBy?: Prisma.SortOrderInput | Prisma.SortOrder
   updatedBy?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -330,7 +316,6 @@ export type UserOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   userRole?: Prisma.UserRoleOrderByWithRelationInput
   branch?: Prisma.BranchOrderByWithRelationInput
-  subBranch?: Prisma.BranchOrderByWithRelationInput
   privileges?: Prisma.UserPrivilegeOrderByWithRelationInput
   creator?: Prisma.UserOrderByWithRelationInput
   updater?: Prisma.UserOrderByWithRelationInput
@@ -353,7 +338,6 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   password?: Prisma.StringNullableFilter<"User"> | string | null
   userRoleId?: Prisma.IntFilter<"User"> | number
   branchId?: Prisma.IntNullableFilter<"User"> | number | null
-  subBranchId?: Prisma.IntNullableFilter<"User"> | number | null
   isActive?: Prisma.BoolFilter<"User"> | boolean
   createdBy?: Prisma.IntNullableFilter<"User"> | number | null
   updatedBy?: Prisma.IntNullableFilter<"User"> | number | null
@@ -361,7 +345,6 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   userRole?: Prisma.XOR<Prisma.UserRoleScalarRelationFilter, Prisma.UserRoleWhereInput>
   branch?: Prisma.XOR<Prisma.BranchNullableScalarRelationFilter, Prisma.BranchWhereInput> | null
-  subBranch?: Prisma.XOR<Prisma.BranchNullableScalarRelationFilter, Prisma.BranchWhereInput> | null
   privileges?: Prisma.XOR<Prisma.UserPrivilegeNullableScalarRelationFilter, Prisma.UserPrivilegeWhereInput> | null
   creator?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   updater?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
@@ -381,7 +364,6 @@ export type UserOrderByWithAggregationInput = {
   password?: Prisma.SortOrderInput | Prisma.SortOrder
   userRoleId?: Prisma.SortOrder
   branchId?: Prisma.SortOrderInput | Prisma.SortOrder
-  subBranchId?: Prisma.SortOrderInput | Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdBy?: Prisma.SortOrderInput | Prisma.SortOrder
   updatedBy?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -405,7 +387,6 @@ export type UserScalarWhereWithAggregatesInput = {
   password?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   userRoleId?: Prisma.IntWithAggregatesFilter<"User"> | number
   branchId?: Prisma.IntNullableWithAggregatesFilter<"User"> | number | null
-  subBranchId?: Prisma.IntNullableWithAggregatesFilter<"User"> | number | null
   isActive?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   createdBy?: Prisma.IntNullableWithAggregatesFilter<"User"> | number | null
   updatedBy?: Prisma.IntNullableWithAggregatesFilter<"User"> | number | null
@@ -423,7 +404,6 @@ export type UserCreateInput = {
   updatedAt?: Date | string
   userRole: Prisma.UserRoleCreateNestedOneWithoutUsersInput
   branch?: Prisma.BranchCreateNestedOneWithoutUsersInput
-  subBranch?: Prisma.BranchCreateNestedOneWithoutSubBranchUsersInput
   privileges?: Prisma.UserPrivilegeCreateNestedOneWithoutUserInput
   creator?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput
   updater?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput
@@ -443,7 +423,6 @@ export type UserUncheckedCreateInput = {
   password?: string | null
   userRoleId: number
   branchId?: number | null
-  subBranchId?: number | null
   isActive?: boolean
   createdBy?: number | null
   updatedBy?: number | null
@@ -468,7 +447,6 @@ export type UserUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userRole?: Prisma.UserRoleUpdateOneRequiredWithoutUsersNestedInput
   branch?: Prisma.BranchUpdateOneWithoutUsersNestedInput
-  subBranch?: Prisma.BranchUpdateOneWithoutSubBranchUsersNestedInput
   privileges?: Prisma.UserPrivilegeUpdateOneWithoutUserNestedInput
   creator?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput
   updater?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput
@@ -488,7 +466,6 @@ export type UserUncheckedUpdateInput = {
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userRoleId?: Prisma.IntFieldUpdateOperationsInput | number
   branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  subBranchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -511,7 +488,6 @@ export type UserCreateManyInput = {
   password?: string | null
   userRoleId: number
   branchId?: number | null
-  subBranchId?: number | null
   isActive?: boolean
   createdBy?: number | null
   updatedBy?: number | null
@@ -537,7 +513,6 @@ export type UserUncheckedUpdateManyInput = {
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userRoleId?: Prisma.IntFieldUpdateOperationsInput | number
   branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  subBranchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -568,7 +543,6 @@ export type UserCountOrderByAggregateInput = {
   password?: Prisma.SortOrder
   userRoleId?: Prisma.SortOrder
   branchId?: Prisma.SortOrder
-  subBranchId?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdBy?: Prisma.SortOrder
   updatedBy?: Prisma.SortOrder
@@ -580,7 +554,6 @@ export type UserAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userRoleId?: Prisma.SortOrder
   branchId?: Prisma.SortOrder
-  subBranchId?: Prisma.SortOrder
   createdBy?: Prisma.SortOrder
   updatedBy?: Prisma.SortOrder
 }
@@ -593,7 +566,6 @@ export type UserMaxOrderByAggregateInput = {
   password?: Prisma.SortOrder
   userRoleId?: Prisma.SortOrder
   branchId?: Prisma.SortOrder
-  subBranchId?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdBy?: Prisma.SortOrder
   updatedBy?: Prisma.SortOrder
@@ -609,7 +581,6 @@ export type UserMinOrderByAggregateInput = {
   password?: Prisma.SortOrder
   userRoleId?: Prisma.SortOrder
   branchId?: Prisma.SortOrder
-  subBranchId?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdBy?: Prisma.SortOrder
   updatedBy?: Prisma.SortOrder
@@ -621,7 +592,6 @@ export type UserSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userRoleId?: Prisma.SortOrder
   branchId?: Prisma.SortOrder
-  subBranchId?: Prisma.SortOrder
   createdBy?: Prisma.SortOrder
   updatedBy?: Prisma.SortOrder
 }
@@ -842,24 +812,10 @@ export type UserCreateNestedManyWithoutBranchInput = {
   connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
 }
 
-export type UserCreateNestedManyWithoutSubBranchInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutSubBranchInput, Prisma.UserUncheckedCreateWithoutSubBranchInput> | Prisma.UserCreateWithoutSubBranchInput[] | Prisma.UserUncheckedCreateWithoutSubBranchInput[]
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSubBranchInput | Prisma.UserCreateOrConnectWithoutSubBranchInput[]
-  createMany?: Prisma.UserCreateManySubBranchInputEnvelope
-  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
-}
-
 export type UserUncheckedCreateNestedManyWithoutBranchInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutBranchInput, Prisma.UserUncheckedCreateWithoutBranchInput> | Prisma.UserCreateWithoutBranchInput[] | Prisma.UserUncheckedCreateWithoutBranchInput[]
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutBranchInput | Prisma.UserCreateOrConnectWithoutBranchInput[]
   createMany?: Prisma.UserCreateManyBranchInputEnvelope
-  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
-}
-
-export type UserUncheckedCreateNestedManyWithoutSubBranchInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutSubBranchInput, Prisma.UserUncheckedCreateWithoutSubBranchInput> | Prisma.UserCreateWithoutSubBranchInput[] | Prisma.UserUncheckedCreateWithoutSubBranchInput[]
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSubBranchInput | Prisma.UserCreateOrConnectWithoutSubBranchInput[]
-  createMany?: Prisma.UserCreateManySubBranchInputEnvelope
   connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
 }
 
@@ -877,20 +833,6 @@ export type UserUpdateManyWithoutBranchNestedInput = {
   deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
 }
 
-export type UserUpdateManyWithoutSubBranchNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutSubBranchInput, Prisma.UserUncheckedCreateWithoutSubBranchInput> | Prisma.UserCreateWithoutSubBranchInput[] | Prisma.UserUncheckedCreateWithoutSubBranchInput[]
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSubBranchInput | Prisma.UserCreateOrConnectWithoutSubBranchInput[]
-  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutSubBranchInput | Prisma.UserUpsertWithWhereUniqueWithoutSubBranchInput[]
-  createMany?: Prisma.UserCreateManySubBranchInputEnvelope
-  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
-  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
-  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
-  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
-  update?: Prisma.UserUpdateWithWhereUniqueWithoutSubBranchInput | Prisma.UserUpdateWithWhereUniqueWithoutSubBranchInput[]
-  updateMany?: Prisma.UserUpdateManyWithWhereWithoutSubBranchInput | Prisma.UserUpdateManyWithWhereWithoutSubBranchInput[]
-  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
-}
-
 export type UserUncheckedUpdateManyWithoutBranchNestedInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutBranchInput, Prisma.UserUncheckedCreateWithoutBranchInput> | Prisma.UserCreateWithoutBranchInput[] | Prisma.UserUncheckedCreateWithoutBranchInput[]
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutBranchInput | Prisma.UserCreateOrConnectWithoutBranchInput[]
@@ -902,20 +844,6 @@ export type UserUncheckedUpdateManyWithoutBranchNestedInput = {
   connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
   update?: Prisma.UserUpdateWithWhereUniqueWithoutBranchInput | Prisma.UserUpdateWithWhereUniqueWithoutBranchInput[]
   updateMany?: Prisma.UserUpdateManyWithWhereWithoutBranchInput | Prisma.UserUpdateManyWithWhereWithoutBranchInput[]
-  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
-}
-
-export type UserUncheckedUpdateManyWithoutSubBranchNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutSubBranchInput, Prisma.UserUncheckedCreateWithoutSubBranchInput> | Prisma.UserCreateWithoutSubBranchInput[] | Prisma.UserUncheckedCreateWithoutSubBranchInput[]
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSubBranchInput | Prisma.UserCreateOrConnectWithoutSubBranchInput[]
-  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutSubBranchInput | Prisma.UserUpsertWithWhereUniqueWithoutSubBranchInput[]
-  createMany?: Prisma.UserCreateManySubBranchInputEnvelope
-  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
-  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
-  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
-  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
-  update?: Prisma.UserUpdateWithWhereUniqueWithoutSubBranchInput | Prisma.UserUpdateWithWhereUniqueWithoutSubBranchInput[]
-  updateMany?: Prisma.UserUpdateManyWithWhereWithoutSubBranchInput | Prisma.UserUpdateManyWithWhereWithoutSubBranchInput[]
   deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
 }
 
@@ -993,7 +921,6 @@ export type UserCreateWithoutCreatedUsersInput = {
   updatedAt?: Date | string
   userRole: Prisma.UserRoleCreateNestedOneWithoutUsersInput
   branch?: Prisma.BranchCreateNestedOneWithoutUsersInput
-  subBranch?: Prisma.BranchCreateNestedOneWithoutSubBranchUsersInput
   privileges?: Prisma.UserPrivilegeCreateNestedOneWithoutUserInput
   creator?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput
   updater?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput
@@ -1012,7 +939,6 @@ export type UserUncheckedCreateWithoutCreatedUsersInput = {
   password?: string | null
   userRoleId: number
   branchId?: number | null
-  subBranchId?: number | null
   isActive?: boolean
   createdBy?: number | null
   updatedBy?: number | null
@@ -1041,7 +967,6 @@ export type UserCreateWithoutUpdatedUsersInput = {
   updatedAt?: Date | string
   userRole: Prisma.UserRoleCreateNestedOneWithoutUsersInput
   branch?: Prisma.BranchCreateNestedOneWithoutUsersInput
-  subBranch?: Prisma.BranchCreateNestedOneWithoutSubBranchUsersInput
   privileges?: Prisma.UserPrivilegeCreateNestedOneWithoutUserInput
   creator?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput
   updater?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput
@@ -1060,7 +985,6 @@ export type UserUncheckedCreateWithoutUpdatedUsersInput = {
   password?: string | null
   userRoleId: number
   branchId?: number | null
-  subBranchId?: number | null
   isActive?: boolean
   createdBy?: number | null
   updatedBy?: number | null
@@ -1089,7 +1013,6 @@ export type UserCreateWithoutCreatorInput = {
   updatedAt?: Date | string
   userRole: Prisma.UserRoleCreateNestedOneWithoutUsersInput
   branch?: Prisma.BranchCreateNestedOneWithoutUsersInput
-  subBranch?: Prisma.BranchCreateNestedOneWithoutSubBranchUsersInput
   privileges?: Prisma.UserPrivilegeCreateNestedOneWithoutUserInput
   updater?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput
   createdUsers?: Prisma.UserCreateNestedManyWithoutCreatorInput
@@ -1108,7 +1031,6 @@ export type UserUncheckedCreateWithoutCreatorInput = {
   password?: string | null
   userRoleId: number
   branchId?: number | null
-  subBranchId?: number | null
   isActive?: boolean
   updatedBy?: number | null
   createdAt?: Date | string
@@ -1142,7 +1064,6 @@ export type UserCreateWithoutUpdaterInput = {
   updatedAt?: Date | string
   userRole: Prisma.UserRoleCreateNestedOneWithoutUsersInput
   branch?: Prisma.BranchCreateNestedOneWithoutUsersInput
-  subBranch?: Prisma.BranchCreateNestedOneWithoutSubBranchUsersInput
   privileges?: Prisma.UserPrivilegeCreateNestedOneWithoutUserInput
   creator?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput
   createdUsers?: Prisma.UserCreateNestedManyWithoutCreatorInput
@@ -1161,7 +1082,6 @@ export type UserUncheckedCreateWithoutUpdaterInput = {
   password?: string | null
   userRoleId: number
   branchId?: number | null
-  subBranchId?: number | null
   isActive?: boolean
   createdBy?: number | null
   createdAt?: Date | string
@@ -1206,7 +1126,6 @@ export type UserUpdateWithoutCreatedUsersInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userRole?: Prisma.UserRoleUpdateOneRequiredWithoutUsersNestedInput
   branch?: Prisma.BranchUpdateOneWithoutUsersNestedInput
-  subBranch?: Prisma.BranchUpdateOneWithoutSubBranchUsersNestedInput
   privileges?: Prisma.UserPrivilegeUpdateOneWithoutUserNestedInput
   creator?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput
   updater?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput
@@ -1225,7 +1144,6 @@ export type UserUncheckedUpdateWithoutCreatedUsersInput = {
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userRoleId?: Prisma.IntFieldUpdateOperationsInput | number
   branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  subBranchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1260,7 +1178,6 @@ export type UserUpdateWithoutUpdatedUsersInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userRole?: Prisma.UserRoleUpdateOneRequiredWithoutUsersNestedInput
   branch?: Prisma.BranchUpdateOneWithoutUsersNestedInput
-  subBranch?: Prisma.BranchUpdateOneWithoutSubBranchUsersNestedInput
   privileges?: Prisma.UserPrivilegeUpdateOneWithoutUserNestedInput
   creator?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput
   updater?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput
@@ -1279,7 +1196,6 @@ export type UserUncheckedUpdateWithoutUpdatedUsersInput = {
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userRoleId?: Prisma.IntFieldUpdateOperationsInput | number
   branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  subBranchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1320,7 +1236,6 @@ export type UserScalarWhereInput = {
   password?: Prisma.StringNullableFilter<"User"> | string | null
   userRoleId?: Prisma.IntFilter<"User"> | number
   branchId?: Prisma.IntNullableFilter<"User"> | number | null
-  subBranchId?: Prisma.IntNullableFilter<"User"> | number | null
   isActive?: Prisma.BoolFilter<"User"> | boolean
   createdBy?: Prisma.IntNullableFilter<"User"> | number | null
   updatedBy?: Prisma.IntNullableFilter<"User"> | number | null
@@ -1353,7 +1268,6 @@ export type UserCreateWithoutUserRoleInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   branch?: Prisma.BranchCreateNestedOneWithoutUsersInput
-  subBranch?: Prisma.BranchCreateNestedOneWithoutSubBranchUsersInput
   privileges?: Prisma.UserPrivilegeCreateNestedOneWithoutUserInput
   creator?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput
   updater?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput
@@ -1372,7 +1286,6 @@ export type UserUncheckedCreateWithoutUserRoleInput = {
   email: string
   password?: string | null
   branchId?: number | null
-  subBranchId?: number | null
   isActive?: boolean
   createdBy?: number | null
   updatedBy?: number | null
@@ -1423,7 +1336,6 @@ export type UserCreateWithoutPrivilegesInput = {
   updatedAt?: Date | string
   userRole: Prisma.UserRoleCreateNestedOneWithoutUsersInput
   branch?: Prisma.BranchCreateNestedOneWithoutUsersInput
-  subBranch?: Prisma.BranchCreateNestedOneWithoutSubBranchUsersInput
   creator?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput
   updater?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput
   createdUsers?: Prisma.UserCreateNestedManyWithoutCreatorInput
@@ -1442,7 +1354,6 @@ export type UserUncheckedCreateWithoutPrivilegesInput = {
   password?: string | null
   userRoleId: number
   branchId?: number | null
-  subBranchId?: number | null
   isActive?: boolean
   createdBy?: number | null
   updatedBy?: number | null
@@ -1482,7 +1393,6 @@ export type UserUpdateWithoutPrivilegesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userRole?: Prisma.UserRoleUpdateOneRequiredWithoutUsersNestedInput
   branch?: Prisma.BranchUpdateOneWithoutUsersNestedInput
-  subBranch?: Prisma.BranchUpdateOneWithoutSubBranchUsersNestedInput
   creator?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput
   updater?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput
   createdUsers?: Prisma.UserUpdateManyWithoutCreatorNestedInput
@@ -1501,7 +1411,6 @@ export type UserUncheckedUpdateWithoutPrivilegesInput = {
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userRoleId?: Prisma.IntFieldUpdateOperationsInput | number
   branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  subBranchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1524,7 +1433,6 @@ export type UserCreateWithoutBranchInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   userRole: Prisma.UserRoleCreateNestedOneWithoutUsersInput
-  subBranch?: Prisma.BranchCreateNestedOneWithoutSubBranchUsersInput
   privileges?: Prisma.UserPrivilegeCreateNestedOneWithoutUserInput
   creator?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput
   updater?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput
@@ -1543,7 +1451,6 @@ export type UserUncheckedCreateWithoutBranchInput = {
   email: string
   password?: string | null
   userRoleId: number
-  subBranchId?: number | null
   isActive?: boolean
   createdBy?: number | null
   updatedBy?: number | null
@@ -1568,59 +1475,6 @@ export type UserCreateManyBranchInputEnvelope = {
   skipDuplicates?: boolean
 }
 
-export type UserCreateWithoutSubBranchInput = {
-  nameEn: string
-  nameAr?: string | null
-  email: string
-  password?: string | null
-  isActive?: boolean
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  userRole: Prisma.UserRoleCreateNestedOneWithoutUsersInput
-  branch?: Prisma.BranchCreateNestedOneWithoutUsersInput
-  privileges?: Prisma.UserPrivilegeCreateNestedOneWithoutUserInput
-  creator?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput
-  updater?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput
-  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatorInput
-  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdaterInput
-  createdPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutCreatorInput
-  modifiedPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutModifierInput
-  createdPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutCreatorInput
-  modifiedPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutModifierInput
-}
-
-export type UserUncheckedCreateWithoutSubBranchInput = {
-  id?: number
-  nameEn: string
-  nameAr?: string | null
-  email: string
-  password?: string | null
-  userRoleId: number
-  branchId?: number | null
-  isActive?: boolean
-  createdBy?: number | null
-  updatedBy?: number | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  privileges?: Prisma.UserPrivilegeUncheckedCreateNestedOneWithoutUserInput
-  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatorInput
-  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdaterInput
-  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutCreatorInput
-  modifiedPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutModifierInput
-  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutCreatorInput
-  modifiedPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutModifierInput
-}
-
-export type UserCreateOrConnectWithoutSubBranchInput = {
-  where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutSubBranchInput, Prisma.UserUncheckedCreateWithoutSubBranchInput>
-}
-
-export type UserCreateManySubBranchInputEnvelope = {
-  data: Prisma.UserCreateManySubBranchInput | Prisma.UserCreateManySubBranchInput[]
-  skipDuplicates?: boolean
-}
-
 export type UserUpsertWithWhereUniqueWithoutBranchInput = {
   where: Prisma.UserWhereUniqueInput
   update: Prisma.XOR<Prisma.UserUpdateWithoutBranchInput, Prisma.UserUncheckedUpdateWithoutBranchInput>
@@ -1637,22 +1491,6 @@ export type UserUpdateManyWithWhereWithoutBranchInput = {
   data: Prisma.XOR<Prisma.UserUpdateManyMutationInput, Prisma.UserUncheckedUpdateManyWithoutBranchInput>
 }
 
-export type UserUpsertWithWhereUniqueWithoutSubBranchInput = {
-  where: Prisma.UserWhereUniqueInput
-  update: Prisma.XOR<Prisma.UserUpdateWithoutSubBranchInput, Prisma.UserUncheckedUpdateWithoutSubBranchInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutSubBranchInput, Prisma.UserUncheckedCreateWithoutSubBranchInput>
-}
-
-export type UserUpdateWithWhereUniqueWithoutSubBranchInput = {
-  where: Prisma.UserWhereUniqueInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutSubBranchInput, Prisma.UserUncheckedUpdateWithoutSubBranchInput>
-}
-
-export type UserUpdateManyWithWhereWithoutSubBranchInput = {
-  where: Prisma.UserScalarWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateManyMutationInput, Prisma.UserUncheckedUpdateManyWithoutSubBranchInput>
-}
-
 export type UserCreateWithoutCreatedPayrollSummariesInput = {
   nameEn: string
   nameAr?: string | null
@@ -1663,7 +1501,6 @@ export type UserCreateWithoutCreatedPayrollSummariesInput = {
   updatedAt?: Date | string
   userRole: Prisma.UserRoleCreateNestedOneWithoutUsersInput
   branch?: Prisma.BranchCreateNestedOneWithoutUsersInput
-  subBranch?: Prisma.BranchCreateNestedOneWithoutSubBranchUsersInput
   privileges?: Prisma.UserPrivilegeCreateNestedOneWithoutUserInput
   creator?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput
   updater?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput
@@ -1682,7 +1519,6 @@ export type UserUncheckedCreateWithoutCreatedPayrollSummariesInput = {
   password?: string | null
   userRoleId: number
   branchId?: number | null
-  subBranchId?: number | null
   isActive?: boolean
   createdBy?: number | null
   updatedBy?: number | null
@@ -1711,7 +1547,6 @@ export type UserCreateWithoutModifiedPayrollSummariesInput = {
   updatedAt?: Date | string
   userRole: Prisma.UserRoleCreateNestedOneWithoutUsersInput
   branch?: Prisma.BranchCreateNestedOneWithoutUsersInput
-  subBranch?: Prisma.BranchCreateNestedOneWithoutSubBranchUsersInput
   privileges?: Prisma.UserPrivilegeCreateNestedOneWithoutUserInput
   creator?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput
   updater?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput
@@ -1730,7 +1565,6 @@ export type UserUncheckedCreateWithoutModifiedPayrollSummariesInput = {
   password?: string | null
   userRoleId: number
   branchId?: number | null
-  subBranchId?: number | null
   isActive?: boolean
   createdBy?: number | null
   updatedBy?: number | null
@@ -1770,7 +1604,6 @@ export type UserUpdateWithoutCreatedPayrollSummariesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userRole?: Prisma.UserRoleUpdateOneRequiredWithoutUsersNestedInput
   branch?: Prisma.BranchUpdateOneWithoutUsersNestedInput
-  subBranch?: Prisma.BranchUpdateOneWithoutSubBranchUsersNestedInput
   privileges?: Prisma.UserPrivilegeUpdateOneWithoutUserNestedInput
   creator?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput
   updater?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput
@@ -1789,7 +1622,6 @@ export type UserUncheckedUpdateWithoutCreatedPayrollSummariesInput = {
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userRoleId?: Prisma.IntFieldUpdateOperationsInput | number
   branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  subBranchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1824,7 +1656,6 @@ export type UserUpdateWithoutModifiedPayrollSummariesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userRole?: Prisma.UserRoleUpdateOneRequiredWithoutUsersNestedInput
   branch?: Prisma.BranchUpdateOneWithoutUsersNestedInput
-  subBranch?: Prisma.BranchUpdateOneWithoutSubBranchUsersNestedInput
   privileges?: Prisma.UserPrivilegeUpdateOneWithoutUserNestedInput
   creator?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput
   updater?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput
@@ -1843,7 +1674,6 @@ export type UserUncheckedUpdateWithoutModifiedPayrollSummariesInput = {
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userRoleId?: Prisma.IntFieldUpdateOperationsInput | number
   branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  subBranchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1867,7 +1697,6 @@ export type UserCreateWithoutCreatedPayrollDetailsInput = {
   updatedAt?: Date | string
   userRole: Prisma.UserRoleCreateNestedOneWithoutUsersInput
   branch?: Prisma.BranchCreateNestedOneWithoutUsersInput
-  subBranch?: Prisma.BranchCreateNestedOneWithoutSubBranchUsersInput
   privileges?: Prisma.UserPrivilegeCreateNestedOneWithoutUserInput
   creator?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput
   updater?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput
@@ -1886,7 +1715,6 @@ export type UserUncheckedCreateWithoutCreatedPayrollDetailsInput = {
   password?: string | null
   userRoleId: number
   branchId?: number | null
-  subBranchId?: number | null
   isActive?: boolean
   createdBy?: number | null
   updatedBy?: number | null
@@ -1915,7 +1743,6 @@ export type UserCreateWithoutModifiedPayrollDetailsInput = {
   updatedAt?: Date | string
   userRole: Prisma.UserRoleCreateNestedOneWithoutUsersInput
   branch?: Prisma.BranchCreateNestedOneWithoutUsersInput
-  subBranch?: Prisma.BranchCreateNestedOneWithoutSubBranchUsersInput
   privileges?: Prisma.UserPrivilegeCreateNestedOneWithoutUserInput
   creator?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput
   updater?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput
@@ -1934,7 +1761,6 @@ export type UserUncheckedCreateWithoutModifiedPayrollDetailsInput = {
   password?: string | null
   userRoleId: number
   branchId?: number | null
-  subBranchId?: number | null
   isActive?: boolean
   createdBy?: number | null
   updatedBy?: number | null
@@ -1974,7 +1800,6 @@ export type UserUpdateWithoutCreatedPayrollDetailsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userRole?: Prisma.UserRoleUpdateOneRequiredWithoutUsersNestedInput
   branch?: Prisma.BranchUpdateOneWithoutUsersNestedInput
-  subBranch?: Prisma.BranchUpdateOneWithoutSubBranchUsersNestedInput
   privileges?: Prisma.UserPrivilegeUpdateOneWithoutUserNestedInput
   creator?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput
   updater?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput
@@ -1993,7 +1818,6 @@ export type UserUncheckedUpdateWithoutCreatedPayrollDetailsInput = {
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userRoleId?: Prisma.IntFieldUpdateOperationsInput | number
   branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  subBranchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -2028,7 +1852,6 @@ export type UserUpdateWithoutModifiedPayrollDetailsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userRole?: Prisma.UserRoleUpdateOneRequiredWithoutUsersNestedInput
   branch?: Prisma.BranchUpdateOneWithoutUsersNestedInput
-  subBranch?: Prisma.BranchUpdateOneWithoutSubBranchUsersNestedInput
   privileges?: Prisma.UserPrivilegeUpdateOneWithoutUserNestedInput
   creator?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput
   updater?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput
@@ -2047,7 +1870,6 @@ export type UserUncheckedUpdateWithoutModifiedPayrollDetailsInput = {
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userRoleId?: Prisma.IntFieldUpdateOperationsInput | number
   branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  subBranchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -2069,7 +1891,6 @@ export type UserCreateManyCreatorInput = {
   password?: string | null
   userRoleId: number
   branchId?: number | null
-  subBranchId?: number | null
   isActive?: boolean
   updatedBy?: number | null
   createdAt?: Date | string
@@ -2084,7 +1905,6 @@ export type UserCreateManyUpdaterInput = {
   password?: string | null
   userRoleId: number
   branchId?: number | null
-  subBranchId?: number | null
   isActive?: boolean
   createdBy?: number | null
   createdAt?: Date | string
@@ -2101,7 +1921,6 @@ export type UserUpdateWithoutCreatorInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userRole?: Prisma.UserRoleUpdateOneRequiredWithoutUsersNestedInput
   branch?: Prisma.BranchUpdateOneWithoutUsersNestedInput
-  subBranch?: Prisma.BranchUpdateOneWithoutSubBranchUsersNestedInput
   privileges?: Prisma.UserPrivilegeUpdateOneWithoutUserNestedInput
   updater?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput
   createdUsers?: Prisma.UserUpdateManyWithoutCreatorNestedInput
@@ -2120,7 +1939,6 @@ export type UserUncheckedUpdateWithoutCreatorInput = {
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userRoleId?: Prisma.IntFieldUpdateOperationsInput | number
   branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  subBranchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2142,7 +1960,6 @@ export type UserUncheckedUpdateManyWithoutCreatorInput = {
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userRoleId?: Prisma.IntFieldUpdateOperationsInput | number
   branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  subBranchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2159,7 +1976,6 @@ export type UserUpdateWithoutUpdaterInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userRole?: Prisma.UserRoleUpdateOneRequiredWithoutUsersNestedInput
   branch?: Prisma.BranchUpdateOneWithoutUsersNestedInput
-  subBranch?: Prisma.BranchUpdateOneWithoutSubBranchUsersNestedInput
   privileges?: Prisma.UserPrivilegeUpdateOneWithoutUserNestedInput
   creator?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput
   createdUsers?: Prisma.UserUpdateManyWithoutCreatorNestedInput
@@ -2178,7 +1994,6 @@ export type UserUncheckedUpdateWithoutUpdaterInput = {
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userRoleId?: Prisma.IntFieldUpdateOperationsInput | number
   branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  subBranchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2200,7 +2015,6 @@ export type UserUncheckedUpdateManyWithoutUpdaterInput = {
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userRoleId?: Prisma.IntFieldUpdateOperationsInput | number
   branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  subBranchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2214,7 +2028,6 @@ export type UserCreateManyUserRoleInput = {
   email: string
   password?: string | null
   branchId?: number | null
-  subBranchId?: number | null
   isActive?: boolean
   createdBy?: number | null
   updatedBy?: number | null
@@ -2231,7 +2044,6 @@ export type UserUpdateWithoutUserRoleInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   branch?: Prisma.BranchUpdateOneWithoutUsersNestedInput
-  subBranch?: Prisma.BranchUpdateOneWithoutSubBranchUsersNestedInput
   privileges?: Prisma.UserPrivilegeUpdateOneWithoutUserNestedInput
   creator?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput
   updater?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput
@@ -2250,7 +2062,6 @@ export type UserUncheckedUpdateWithoutUserRoleInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  subBranchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -2272,7 +2083,6 @@ export type UserUncheckedUpdateManyWithoutUserRoleInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  subBranchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -2287,22 +2097,6 @@ export type UserCreateManyBranchInput = {
   email: string
   password?: string | null
   userRoleId: number
-  subBranchId?: number | null
-  isActive?: boolean
-  createdBy?: number | null
-  updatedBy?: number | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-}
-
-export type UserCreateManySubBranchInput = {
-  id?: number
-  nameEn: string
-  nameAr?: string | null
-  email: string
-  password?: string | null
-  userRoleId: number
-  branchId?: number | null
   isActive?: boolean
   createdBy?: number | null
   updatedBy?: number | null
@@ -2319,7 +2113,6 @@ export type UserUpdateWithoutBranchInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userRole?: Prisma.UserRoleUpdateOneRequiredWithoutUsersNestedInput
-  subBranch?: Prisma.BranchUpdateOneWithoutSubBranchUsersNestedInput
   privileges?: Prisma.UserPrivilegeUpdateOneWithoutUserNestedInput
   creator?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput
   updater?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput
@@ -2338,7 +2131,6 @@ export type UserUncheckedUpdateWithoutBranchInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userRoleId?: Prisma.IntFieldUpdateOperationsInput | number
-  subBranchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -2360,65 +2152,6 @@ export type UserUncheckedUpdateManyWithoutBranchInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userRoleId?: Prisma.IntFieldUpdateOperationsInput | number
-  subBranchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type UserUpdateWithoutSubBranchInput = {
-  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
-  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  userRole?: Prisma.UserRoleUpdateOneRequiredWithoutUsersNestedInput
-  branch?: Prisma.BranchUpdateOneWithoutUsersNestedInput
-  privileges?: Prisma.UserPrivilegeUpdateOneWithoutUserNestedInput
-  creator?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput
-  updater?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput
-  createdUsers?: Prisma.UserUpdateManyWithoutCreatorNestedInput
-  updatedUsers?: Prisma.UserUpdateManyWithoutUpdaterNestedInput
-  createdPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutCreatorNestedInput
-  modifiedPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutModifierNestedInput
-  createdPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutCreatorNestedInput
-  modifiedPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutModifierNestedInput
-}
-
-export type UserUncheckedUpdateWithoutSubBranchInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
-  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  userRoleId?: Prisma.IntFieldUpdateOperationsInput | number
-  branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  privileges?: Prisma.UserPrivilegeUncheckedUpdateOneWithoutUserNestedInput
-  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatorNestedInput
-  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdaterNestedInput
-  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutCreatorNestedInput
-  modifiedPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutModifierNestedInput
-  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutCreatorNestedInput
-  modifiedPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutModifierNestedInput
-}
-
-export type UserUncheckedUpdateManyWithoutSubBranchInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
-  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  userRoleId?: Prisma.IntFieldUpdateOperationsInput | number
-  branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -2510,7 +2243,6 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   password?: boolean
   userRoleId?: boolean
   branchId?: boolean
-  subBranchId?: boolean
   isActive?: boolean
   createdBy?: boolean
   updatedBy?: boolean
@@ -2518,7 +2250,6 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   updatedAt?: boolean
   userRole?: boolean | Prisma.UserRoleDefaultArgs<ExtArgs>
   branch?: boolean | Prisma.User$branchArgs<ExtArgs>
-  subBranch?: boolean | Prisma.User$subBranchArgs<ExtArgs>
   privileges?: boolean | Prisma.User$privilegesArgs<ExtArgs>
   creator?: boolean | Prisma.User$creatorArgs<ExtArgs>
   updater?: boolean | Prisma.User$updaterArgs<ExtArgs>
@@ -2539,7 +2270,6 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   password?: boolean
   userRoleId?: boolean
   branchId?: boolean
-  subBranchId?: boolean
   isActive?: boolean
   createdBy?: boolean
   updatedBy?: boolean
@@ -2547,7 +2277,6 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   updatedAt?: boolean
   userRole?: boolean | Prisma.UserRoleDefaultArgs<ExtArgs>
   branch?: boolean | Prisma.User$branchArgs<ExtArgs>
-  subBranch?: boolean | Prisma.User$subBranchArgs<ExtArgs>
   creator?: boolean | Prisma.User$creatorArgs<ExtArgs>
   updater?: boolean | Prisma.User$updaterArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
@@ -2560,7 +2289,6 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   password?: boolean
   userRoleId?: boolean
   branchId?: boolean
-  subBranchId?: boolean
   isActive?: boolean
   createdBy?: boolean
   updatedBy?: boolean
@@ -2568,7 +2296,6 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   updatedAt?: boolean
   userRole?: boolean | Prisma.UserRoleDefaultArgs<ExtArgs>
   branch?: boolean | Prisma.User$branchArgs<ExtArgs>
-  subBranch?: boolean | Prisma.User$subBranchArgs<ExtArgs>
   creator?: boolean | Prisma.User$creatorArgs<ExtArgs>
   updater?: boolean | Prisma.User$updaterArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
@@ -2581,7 +2308,6 @@ export type UserSelectScalar = {
   password?: boolean
   userRoleId?: boolean
   branchId?: boolean
-  subBranchId?: boolean
   isActive?: boolean
   createdBy?: boolean
   updatedBy?: boolean
@@ -2589,11 +2315,10 @@ export type UserSelectScalar = {
   updatedAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nameEn" | "nameAr" | "email" | "password" | "userRoleId" | "branchId" | "subBranchId" | "isActive" | "createdBy" | "updatedBy" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nameEn" | "nameAr" | "email" | "password" | "userRoleId" | "branchId" | "isActive" | "createdBy" | "updatedBy" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   userRole?: boolean | Prisma.UserRoleDefaultArgs<ExtArgs>
   branch?: boolean | Prisma.User$branchArgs<ExtArgs>
-  subBranch?: boolean | Prisma.User$subBranchArgs<ExtArgs>
   privileges?: boolean | Prisma.User$privilegesArgs<ExtArgs>
   creator?: boolean | Prisma.User$creatorArgs<ExtArgs>
   updater?: boolean | Prisma.User$updaterArgs<ExtArgs>
@@ -2608,14 +2333,12 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   userRole?: boolean | Prisma.UserRoleDefaultArgs<ExtArgs>
   branch?: boolean | Prisma.User$branchArgs<ExtArgs>
-  subBranch?: boolean | Prisma.User$subBranchArgs<ExtArgs>
   creator?: boolean | Prisma.User$creatorArgs<ExtArgs>
   updater?: boolean | Prisma.User$updaterArgs<ExtArgs>
 }
 export type UserIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   userRole?: boolean | Prisma.UserRoleDefaultArgs<ExtArgs>
   branch?: boolean | Prisma.User$branchArgs<ExtArgs>
-  subBranch?: boolean | Prisma.User$subBranchArgs<ExtArgs>
   creator?: boolean | Prisma.User$creatorArgs<ExtArgs>
   updater?: boolean | Prisma.User$updaterArgs<ExtArgs>
 }
@@ -2625,7 +2348,6 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   objects: {
     userRole: Prisma.$UserRolePayload<ExtArgs>
     branch: Prisma.$BranchPayload<ExtArgs> | null
-    subBranch: Prisma.$BranchPayload<ExtArgs> | null
     privileges: Prisma.$UserPrivilegePayload<ExtArgs> | null
     creator: Prisma.$UserPayload<ExtArgs> | null
     updater: Prisma.$UserPayload<ExtArgs> | null
@@ -2644,7 +2366,6 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     password: string | null
     userRoleId: number
     branchId: number | null
-    subBranchId: number | null
     isActive: boolean
     createdBy: number | null
     updatedBy: number | null
@@ -3046,7 +2767,6 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   readonly [Symbol.toStringTag]: "PrismaPromise"
   userRole<T extends Prisma.UserRoleDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserRoleDefaultArgs<ExtArgs>>): Prisma.Prisma__UserRoleClient<runtime.Types.Result.GetResult<Prisma.$UserRolePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   branch<T extends Prisma.User$branchArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$branchArgs<ExtArgs>>): Prisma.Prisma__BranchClient<runtime.Types.Result.GetResult<Prisma.$BranchPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  subBranch<T extends Prisma.User$subBranchArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$subBranchArgs<ExtArgs>>): Prisma.Prisma__BranchClient<runtime.Types.Result.GetResult<Prisma.$BranchPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   privileges<T extends Prisma.User$privilegesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$privilegesArgs<ExtArgs>>): Prisma.Prisma__UserPrivilegeClient<runtime.Types.Result.GetResult<Prisma.$UserPrivilegePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   creator<T extends Prisma.User$creatorArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$creatorArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   updater<T extends Prisma.User$updaterArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$updaterArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
@@ -3092,7 +2812,6 @@ export interface UserFieldRefs {
   readonly password: Prisma.FieldRef<"User", 'String'>
   readonly userRoleId: Prisma.FieldRef<"User", 'Int'>
   readonly branchId: Prisma.FieldRef<"User", 'Int'>
-  readonly subBranchId: Prisma.FieldRef<"User", 'Int'>
   readonly isActive: Prisma.FieldRef<"User", 'Boolean'>
   readonly createdBy: Prisma.FieldRef<"User", 'Int'>
   readonly updatedBy: Prisma.FieldRef<"User", 'Int'>
@@ -3497,25 +3216,6 @@ export type UserDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
  * User.branch
  */
 export type User$branchArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Branch
-   */
-  select?: Prisma.BranchSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Branch
-   */
-  omit?: Prisma.BranchOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.BranchInclude<ExtArgs> | null
-  where?: Prisma.BranchWhereInput
-}
-
-/**
- * User.subBranch
- */
-export type User$subBranchArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the Branch
    */
