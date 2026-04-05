@@ -5,9 +5,9 @@ import { ProgressSpinner } from "primereact/progressspinner";
 import { Form } from "@/components/forms";
 import { StepperFormHeading } from "@/components/common";
 import { useStep2Logic } from "./hooks/use-step2-logic";
-import BasicContractFields from "./components/basic-contract-fields";
 import FinancialFields from "./components/financial-fields";
 import ContractDateFields from "./components/contract-date-fields";
+import BasicContractFields from "./components/basic-contract-fields";
 import ContractAttachmentFields from "./components/contract-attachment-fields";
 
 interface Step2Props {
@@ -76,9 +76,10 @@ const Step2 = forwardRef<Step2Handle, Step2Props>(({ employeeId }, ref) => {
 
           <div className="w-full h-px mt-2 mb-2 bg-primary-light block md:hidden xl:col-span-4" />
 
-          <ContractDateFields remainingDays={remainingDays} />
+          <ContractDateFields />
 
           <ContractAttachmentFields
+            remainingDays={remainingDays}
             contractDocUpload={contractDocUpload}
             contractDocPickerValue={contractDocPickerValue}
           />

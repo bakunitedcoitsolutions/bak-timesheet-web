@@ -15,6 +15,7 @@ export interface GlobalDataGeneral {
   nameEn: string;
   branchId?: number | null;
   displayOrderKey?: number | null;
+  isMain?: boolean;
 }
 
 export interface GlobalDataEmployee {

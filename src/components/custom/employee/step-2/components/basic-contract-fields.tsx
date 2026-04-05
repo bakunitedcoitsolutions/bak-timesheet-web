@@ -16,10 +16,7 @@ const BasicContractFields: React.FC<BasicContractFieldsProps> = ({
   return (
     <>
       {/* First Row */}
-      <FormItem
-        name="gender"
-        className={classNames(FORM_FIELD_WIDTHS["4"])}
-      >
+      <FormItem name="gender" className={classNames(FORM_FIELD_WIDTHS["4"])}>
         <Dropdown
           label="Gender"
           className="w-full"
@@ -27,33 +24,27 @@ const BasicContractFields: React.FC<BasicContractFieldsProps> = ({
           placeholder="Choose"
         />
       </FormItem>
-      <FormItem
-        name="countryId"
-        className={classNames(FORM_FIELD_WIDTHS["4"])}
-      >
+      <FormItem name="countryId" className={classNames(FORM_FIELD_WIDTHS["4"])}>
         <Dropdown
+          filter
           label="Country"
           className="w-full"
           options={options.countries}
           placeholder="Choose"
         />
       </FormItem>
-      <FormItem
-        name="cityId"
-        className={classNames(FORM_FIELD_WIDTHS["4"])}
-      >
+      <FormItem name="cityId" className={classNames(FORM_FIELD_WIDTHS["4"])}>
         <Dropdown
+          filter
           label="City"
           className="w-full"
           options={options.cities}
           placeholder="Choose"
         />
       </FormItem>
-      <FormItem
-        name="statusId"
-        className={classNames(FORM_FIELD_WIDTHS["4"])}
-      >
+      <FormItem name="statusId" className={classNames(FORM_FIELD_WIDTHS["4"])}>
         <Dropdown
+          filter
           label="Employee Status"
           className="w-full"
           options={options.employeeStatuses}
@@ -65,16 +56,29 @@ const BasicContractFields: React.FC<BasicContractFieldsProps> = ({
       <div className="w-full h-px mt-2 mb-2 bg-primary-light block md:hidden" />
 
       {/* Second Row */}
-      <FormItem
-        name="branchId"
-        className={classNames(FORM_FIELD_WIDTHS["4"])}
-      >
+      <FormItem name="branchId" className={classNames(FORM_FIELD_WIDTHS["4"])}>
         <Dropdown
+          filter
           label="Branch"
           className="w-full"
           placeholder="Choose"
-          options={options.branches}
           disabled={isBranchScoped}
+          options={options.branches?.filter?.((branch: any) => branch?.isMain)}
+        />
+      </FormItem>
+      <FormItem
+        name="subBranchId"
+        className={classNames(FORM_FIELD_WIDTHS["4"])}
+      >
+        <Dropdown
+          filter
+          showClear
+          label="Sub Branch"
+          className="w-full"
+          placeholder="Choose"
+          options={
+            options.branches?.filter?.((branch: any) => !branch?.isMain) || []
+          }
         />
       </FormItem>
       <FormItem
@@ -82,6 +86,7 @@ const BasicContractFields: React.FC<BasicContractFieldsProps> = ({
         className={classNames(FORM_FIELD_WIDTHS["4"])}
       >
         <Dropdown
+          filter
           label="Designation"
           className="w-full"
           options={options.designations}
@@ -93,20 +98,10 @@ const BasicContractFields: React.FC<BasicContractFieldsProps> = ({
         className={classNames(FORM_FIELD_WIDTHS["4"])}
       >
         <Dropdown
+          filter
           label="Payroll Section"
           className="w-full"
           options={options.payrollSections}
-          placeholder="Choose"
-        />
-      </FormItem>
-      <FormItem
-        name="isFixed"
-        className={classNames(FORM_FIELD_WIDTHS["4"])}
-      >
-        <Dropdown
-          label="Is Fixed?"
-          className="w-full"
-          options={options.isFixed}
           placeholder="Choose"
         />
       </FormItem>

@@ -48,6 +48,7 @@ export const useStep2Logic = ({ employeeId }: UseStep2LogicProps) => {
     cityId: undefined,
     statusId: undefined,
     branchId: undefined,
+    subBranchId: undefined,
     designationId: 0,
     payrollSectionId: 0,
     isDeductable: false,
@@ -107,7 +108,8 @@ export const useStep2Logic = ({ employeeId }: UseStep2LogicProps) => {
         countryId: foundEmployee.countryId || undefined,
         cityId: foundEmployee.cityId || undefined,
         statusId: foundEmployee.statusId || undefined,
-        branchId: foundEmployee.branchId || undefined,
+        branchId: foundEmployee?.branchId || undefined,
+        subBranchId: foundEmployee?.subBranchId || undefined,
         designationId: foundEmployee.designationId ?? 0,
         payrollSectionId: foundEmployee.payrollSectionId ?? 0,
         isDeductable: foundEmployee.isDeductable ?? false,
@@ -207,11 +209,12 @@ export const useStep2Logic = ({ employeeId }: UseStep2LogicProps) => {
           : contractDocUpload.selectedFile
             ? ""
             : data.contractDocument || "",
+        subBranchId: data?.subBranchId || null,
         contractStartDate: data.contractStartDate || undefined,
         contractEndDate: data.contractEndDate || undefined,
         joiningDate: data.joiningDate || undefined,
       };
-
+      console.log("submitData ==> ", submitData);
       await updateEmployee(submitData);
       toastService.showSuccess("Success", "Employee updated successfully");
 
@@ -234,6 +237,7 @@ export const useStep2Logic = ({ employeeId }: UseStep2LogicProps) => {
               cityId: data.cityId,
               statusId: data.statusId,
               branchId: data.branchId,
+              subBranchId: data.subBranchId,
               isDeductable: data.isDeductable,
               isFixed: data.isFixed,
               workingDays: data.workingDays,
@@ -298,19 +302,26 @@ export const useStep2Logic = ({ employeeId }: UseStep2LogicProps) => {
       branches: globalData.branches.map((branch: GlobalDataGeneral) => ({
         label: branch.nameEn,
         value: branch.id,
+        isMain: branch.isMain,
       })),
-      designations: globalData.designations.map((designation: GlobalDataDesignation) => ({
-        label: designation.nameEn,
-        value: designation.id,
-      })),
-      payrollSections: globalData.payrollSections.map((section: GlobalDataGeneral) => ({
-        label: section.nameEn,
-        value: section.id,
-      })),
-      employeeStatuses: globalData.employeeStatuses.map((status: GlobalDataGeneral) => ({
-        label: status.nameEn,
-        value: status.id,
-      })),
+      designations: globalData.designations.map(
+        (designation: GlobalDataDesignation) => ({
+          label: designation.nameEn,
+          value: designation.id,
+        })
+      ),
+      payrollSections: globalData.payrollSections.map(
+        (section: GlobalDataGeneral) => ({
+          label: section.nameEn,
+          value: section.id,
+        })
+      ),
+      employeeStatuses: globalData.employeeStatuses.map(
+        (status: GlobalDataGeneral) => ({
+          label: status.nameEn,
+          value: status.id,
+        })
+      ),
       isFixed: [
         { label: "Yes", value: true },
         { label: "No", value: false },
@@ -344,7 +355,10 @@ export const useStep2Logic = ({ employeeId }: UseStep2LogicProps) => {
       : existingContractDoc
         ? [existingContractDoc]
         : [];
-  }, [contractDocUpload.selectedFile, contractDocUpload.getExistingFileObject()]);
+  }, [
+    contractDocUpload.selectedFile,
+    contractDocUpload.getExistingFileObject(),
+  ]);
 
   return {
     form,

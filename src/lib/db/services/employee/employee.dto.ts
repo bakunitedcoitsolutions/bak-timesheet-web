@@ -39,7 +39,7 @@ export interface UpdateEmployeeStep2Data {
   cityId?: number;
   statusId?: number;
   branchId?: number;
-  subBranchId?: number;
+  subBranchId?: number | null;
   designationId: number;
   payrollSectionId: number;
   isDeductable?: boolean;
@@ -123,6 +123,7 @@ export interface ListEmployeesParams {
   statusId?: number;
   designationId?: number;
   payrollSectionId?: number;
+  subBranchId?: number;
   // Column filters
   employeeCodes?: string[];
   employeeCode?: string;

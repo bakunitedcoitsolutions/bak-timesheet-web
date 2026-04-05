@@ -4,15 +4,22 @@ import { classNames } from "primereact/utils";
 import { FORM_FIELD_WIDTHS } from "@/utils/constants";
 import { FormItem, Input } from "@/components/forms";
 
-interface ContractDateFieldsProps {
-  remainingDays: string;
-}
+interface ContractDateFieldsProps {}
 
-const ContractDateFields: React.FC<ContractDateFieldsProps> = ({
-  remainingDays,
-}) => {
+const ContractDateFields: React.FC<ContractDateFieldsProps> = ({}) => {
   return (
     <>
+      <FormItem
+        name="joiningDate"
+        className={classNames(FORM_FIELD_WIDTHS["4"])}
+      >
+        <Input
+          type="date"
+          label="Joining Date"
+          className="w-full"
+          placeholder="Enter joining date"
+        />
+      </FormItem>
       <FormItem
         name="contractStartDate"
         className={classNames(FORM_FIELD_WIDTHS["4"])}
@@ -33,27 +40,6 @@ const ContractDateFields: React.FC<ContractDateFieldsProps> = ({
           label="Contract End Date"
           className="w-full"
           placeholder="Enter contract end date"
-        />
-      </FormItem>
-      <div className={classNames(FORM_FIELD_WIDTHS["4"])}>
-        <Input
-          disabled
-          label="Contract Rem. Days"
-          className="w-full"
-          value={remainingDays}
-          placeholder="N/A"
-          onChange={() => {}}
-        />
-      </div>
-      <FormItem
-        name="joiningDate"
-        className={classNames(FORM_FIELD_WIDTHS["4"])}
-      >
-        <Input
-          type="date"
-          label="Joining Date"
-          className="w-full"
-          placeholder="Enter joining date"
         />
       </FormItem>
     </>

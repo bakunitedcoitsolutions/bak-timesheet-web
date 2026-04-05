@@ -653,6 +653,11 @@ export const listEmployees = async (
     whereConditions.push({ branchId: branchId });
   }
 
+  // Filter by subBranchId
+  if (params.subBranchId !== undefined) {
+    whereConditions.push({ subBranchId: params.subBranchId });
+  }
+
   // Filter by Zero Rate
   if (params.zeroRate) {
     whereConditions.push({
