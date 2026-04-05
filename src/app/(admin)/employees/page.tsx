@@ -5,6 +5,14 @@ import { ProgressSpinner } from "primereact/progressspinner";
 import { useRef, useState, useEffect, useMemo, useCallback } from "react";
 
 import {
+  Input,
+  Table,
+  TableRef,
+  Dropdown,
+  useAccess,
+  GroupDropdown,
+} from "@/components";
+import {
   getSignedUrl,
   getErrorMessage,
   createSortHandler,
@@ -19,7 +27,6 @@ import { devConsole, devError } from "@/utils/helpers/functions";
 import { showConfirmDialog } from "@/components/common/confirm-dialog";
 import { ListedEmployee } from "@/lib/db/services/employee/employee.dto";
 import { useDeleteEmployee, useGetEmployees } from "@/lib/db/services/employee";
-import { Input, Table, TableRef, useAccess, GroupDropdown } from "@/components";
 import { ListEmployeesSortableField } from "@/lib/db/services/employee/employee.dto";
 
 // Components
@@ -62,6 +69,7 @@ const EmployeesPage = () => {
   const [columnFilters, setColumnFilters] = useState<Record<string, string>>(
     {}
   );
+  const [selectedStatusId, setSelectedStatusId] = useState<number | "all">(1);
   const tableRef = useRef<TableRef>(null);
   const { mutateAsync: deleteEmployee } = useDeleteEmployee();
 
@@ -91,7 +99,7 @@ const EmployeesPage = () => {
     if (page !== 1) {
       setPage(1);
     }
-  }, [debouncedColumnFilters]);
+  }, [debouncedColumnFilters, selectedStatusId]);
 
   const handleFilterChange = useCallback((filters: DataTableFilterMeta) => {
     const newFilters = parseDataTableFilters(filters);
@@ -109,14 +117,15 @@ const EmployeesPage = () => {
     search: debouncedSearch || undefined,
     designationId: filterParams.designationId,
     payrollSectionId: filterParams.payrollSectionId,
+    statusId: selectedStatusId === "all" ? undefined : selectedStatusId,
     // Column filters
-    employeeCode: debouncedColumnFilters.employeeCode,
+    phone: debouncedColumnFilters.phone,
     nameEn: debouncedColumnFilters.nameEn,
     nameAr: debouncedColumnFilters.nameAr,
-    phone: debouncedColumnFilters.phone,
     idCardNo: debouncedColumnFilters.idCardNo,
     profession: debouncedColumnFilters.profession,
     nationality: debouncedColumnFilters.nationality,
+    employeeCode: debouncedColumnFilters.employeeCode,
   });
 
   const employees = employeesResponse?.employees ?? [];
@@ -134,6 +143,8 @@ const EmployeesPage = () => {
   const { data: globalData } = useGlobalData();
   const designations = globalData.designations || [];
   const payrollSections = globalData.payrollSections || [];
+  const employeeStatuses = globalData.employeeStatuses || [];
+
 
   const modifyEmployeesData = useMemo(() => {
     return getModifiedEmployeesData(employees, designations, payrollSections);
@@ -250,10 +261,30 @@ const EmployeesPage = () => {
 
   // Memoized header renderer
   const renderHeader = useCallback(() => {
+    const statusOptions = [
+      { label: "All Status", value: "all" },
+      ...employeeStatuses.map((s) => ({ label: s.nameEn, value: s.id })),
+    ];
+
     return (
       <div className="flex flex-col md:flex-row justify-between items-center gap-3 flex-1 w-full">
-        <div className="w-full md:w-auto md:min-w-60">
-          <GroupDropdown value={selectedFilter} onChange={setSelectedFilter} />
+        <div className="flex flex-col md:flex-row items-center gap-3 w-full lg:w-auto">
+          <div className="w-full lg:w-60">
+            <GroupDropdown
+              value={selectedFilter}
+              onChange={setSelectedFilter}
+            />
+          </div>
+          <div className="w-full lg:w-60">
+            <Dropdown
+              small
+              value={selectedStatusId}
+              options={statusOptions}
+              onChange={(e) => setSelectedStatusId(e.value ?? "all")}
+              placeholder="Status"
+              className="w-full"
+            />
+          </div>
         </div>
         <div className="flex items-center gap-3 w-full md:w-auto justify-end">
           <div className="w-full md:w-auto">
@@ -272,7 +303,7 @@ const EmployeesPage = () => {
         </div>
       </div>
     );
-  }, [searchValue, selectedFilter]);
+  }, [searchValue, selectedFilter, selectedStatusId, employeeStatuses]);
 
   return (
     <div className="flex h-full flex-col gap-6 px-6 py-6">
