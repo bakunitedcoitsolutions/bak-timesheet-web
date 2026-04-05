@@ -14,6 +14,7 @@ export interface EmployeeExportRow {
   cityName?: string;
   statusName?: string;
   branchName?: string;
+  subBranchName?: string;
   designationName?: string;
   sectionName?: string;
   isFixed?: string;
@@ -76,6 +77,7 @@ export function mapEmployeeToExportRow(
     cityName: emp.city?.nameEn || "-",
     statusName: emp.status?.nameEn || "-",
     branchName: emp.branch?.nameEn || "-",
+    subBranchName: emp.subBranch?.nameEn || "-",
     designationName: emp.designation?.nameEn || "-",
     sectionName: emp.payrollSection?.nameEn || "-",
     isFixed: emp.isFixed ? "Yes" : "No",
