@@ -11,21 +11,20 @@ import {
   TypeBadge,
   TableColumn,
   TableActions,
-  ExportOptions,
 } from "@/components";
 import {
   getErrorMessage,
   createSortHandler,
   toPrimeReactSortOrder,
 } from "@/utils/helpers";
-import { ListedAllowanceNotAvailable } from "@/lib/db/services/allowance-not-available/allowance-not-available.dto";
 import { useDebounce } from "@/hooks";
 import { toastService } from "@/lib/toast";
-import { showConfirmDialog } from "@/components/common/confirm-dialog";
 import {
-  useDeleteAllowanceNotAvailable,
   useListAllowanceNotAvailable,
+  useDeleteAllowanceNotAvailable,
 } from "@/lib/db/services/allowance-not-available/requests";
+import { showConfirmDialog } from "@/components/common/confirm-dialog";
+import { ListedAllowanceNotAvailable } from "@/lib/db/services/allowance-not-available/allowance-not-available.dto";
 
 // Constants
 const SORTABLE_FIELDS = {
@@ -284,14 +283,9 @@ const AllowanceNotAvailablePage = () => {
             placeholder="Search"
           />
         </div>
-        <div className="flex items-center gap-3 w-full md:w-auto justify-end">
-          <div>
-            <ExportOptions exportCSV={exportCSV} exportExcel={exportExcel} />
-          </div>
-        </div>
       </div>
     );
-  }, [searchValue, exportCSV, exportExcel]);
+  }, [searchValue]);
 
   return (
     <div className="flex h-full flex-col gap-6 px-6 py-6">

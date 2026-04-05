@@ -7,6 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useParams, useRouter } from "next/navigation";
 import { ProgressSpinner } from "primereact/progressspinner";
 
+import dayjs from "@/lib/dayjs";
 import {
   useUpdateExitReentry,
   useCreateExitReentry,
@@ -21,19 +22,19 @@ import {
   GlobalDataEmployee,
   GlobalDataDesignation,
 } from "@/context/GlobalDataContext";
-import { toastService } from "@/lib/toast";
-import { getEntityModeFromParam } from "@/helpers";
-import { getErrorMessage } from "@/utils/helpers";
-import { FORM_FIELD_WIDTHS } from "@/utils/constants";
 import {
+  Form,
   Input,
   Button,
   Dropdown,
-  Form,
   FormItem,
   Textarea,
 } from "@/components/forms";
+import { toastService } from "@/lib/toast";
+import { getErrorMessage } from "@/utils/helpers";
 import { StepperFormHeading } from "@/components";
+import { getEntityModeFromParam } from "@/helpers";
+import { FORM_FIELD_WIDTHS } from "@/utils/constants";
 
 const exitReentryTypeOptions = [
   { label: "Exit", value: "EXIT" },
@@ -122,7 +123,7 @@ const UpsertExitReentryPage = () => {
         ...(isEditMode ? { id: foundExitReentry?.id ?? 0 } : {}),
         employeeId: foundExitReentry?.employeeId,
         date: foundExitReentry?.date
-          ? new Date(foundExitReentry.date).toISOString().split("T")[0]
+          ? dayjs(foundExitReentry.date).format("YYYY-MM-DD")
           : "",
         type: foundExitReentry?.type,
         remarks: foundExitReentry?.remarks || "",

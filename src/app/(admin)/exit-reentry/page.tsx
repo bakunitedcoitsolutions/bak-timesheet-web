@@ -1,4 +1,5 @@
 "use client";
+
 import { useRouter } from "next/navigation";
 import { ProgressSpinner } from "primereact/progressspinner";
 import { useRef, useState, useEffect, useMemo, useCallback } from "react";
@@ -8,16 +9,17 @@ import {
   Table,
   Button,
   TableRef,
+  TypeBadge,
   TableColumn,
   TableActions,
   ExportOptions,
-  TypeBadge,
 } from "@/components";
 import {
   getErrorMessage,
   createSortHandler,
   toPrimeReactSortOrder,
 } from "@/utils/helpers";
+import dayjs from "@/lib/dayjs";
 import { useDebounce } from "@/hooks";
 import { toastService } from "@/lib/toast";
 import { showConfirmDialog } from "@/components/common/confirm-dialog";
@@ -88,18 +90,11 @@ const columns = (
     header: "Date",
     ...commonColumnProps,
     style: { minWidth: 150 },
-    body: (rowData: ListedExitReentry) => {
-      const date = new Date(rowData.date);
-      return (
-        <span className="text-sm">
-          {date.toLocaleDateString("en-GB", {
-            day: "2-digit",
-            month: "2-digit",
-            year: "numeric",
-          })}
-        </span>
-      );
-    },
+    body: (rowData: ListedExitReentry) => (
+      <span className="text-sm">
+        {rowData.date ? dayjs(rowData.date).format("DD/MM/YYYY") : "-"}
+      </span>
+    ),
   },
   {
     field: "type",
@@ -172,17 +167,10 @@ const ExitReentryPage = () => {
 
   // Convert selected date to Date object for API
   const dateFilter = selectedDate
-    ? (() => {
-        const selected = new Date(selectedDate);
-        const startOfDay = new Date(selected);
-        startOfDay.setHours(0, 0, 0, 0);
-        const endOfDay = new Date(selected);
-        endOfDay.setHours(23, 59, 59, 999);
-        return {
-          startDate: startOfDay,
-          endDate: endOfDay,
-        };
-      })()
+    ? {
+        startDate: dayjs(selectedDate).startOf("day").toDate(),
+        endDate: dayjs(selectedDate).endOf("day").toDate(),
+      }
     : undefined;
 
   const { data: exitReentriesResponse, isLoading } = useGetExitReentries({

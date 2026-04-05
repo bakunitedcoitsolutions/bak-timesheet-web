@@ -11,21 +11,20 @@ import {
   TypeBadge,
   TableColumn,
   TableActions,
-  ExportOptions,
 } from "@/components";
 import {
   getErrorMessage,
   createSortHandler,
   toPrimeReactSortOrder,
 } from "@/utils/helpers";
-import { ListedCountry } from "@/lib/db/services/country/country.dto";
+import {
+  useGetCountries,
+  useDeleteCountry,
+} from "@/lib/db/services/country/requests";
 import { useDebounce } from "@/hooks";
 import { toastService } from "@/lib/toast";
+import { ListedCountry } from "@/lib/db/services/country/country.dto";
 import { showConfirmDialog } from "@/components/common/confirm-dialog";
-import {
-  useDeleteCountry,
-  useGetCountries,
-} from "@/lib/db/services/country/requests";
 
 // Constants
 const SORTABLE_FIELDS = {
@@ -196,14 +195,6 @@ const CountriesPage = () => {
     [deleteCountry]
   );
 
-  const exportCSV = useCallback(() => {
-    tableRef.current?.exportCSV();
-  }, []);
-
-  const exportExcel = useCallback(() => {
-    tableRef.current?.exportExcel();
-  }, []);
-
   const handlePageChange = useCallback(
     (e: { page?: number; rows?: number }) => {
       // PrimeReact uses 0-based page index, our API uses 1-based
@@ -253,14 +244,9 @@ const CountriesPage = () => {
             placeholder="Search"
           />
         </div>
-        <div className="flex items-center gap-3 w-full md:w-auto justify-end">
-          <div>
-            <ExportOptions exportCSV={exportCSV} exportExcel={exportExcel} />
-          </div>
-        </div>
       </div>
     );
-  }, [searchValue, exportCSV, exportExcel]);
+  }, [searchValue]);
 
   return (
     <div className="flex h-full flex-col gap-6 px-6 py-6">

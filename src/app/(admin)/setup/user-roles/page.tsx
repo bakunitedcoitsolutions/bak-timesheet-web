@@ -2,15 +2,8 @@
 import { ProgressSpinner } from "primereact/progressspinner";
 import { useRef, useState, useMemo, useCallback } from "react";
 
-import {
-  Input,
-  Table,
-  TableRef,
-  TypeBadge,
-  TableColumn,
-  ExportOptions,
-} from "@/components";
 import { useGetUserRoles } from "@/lib/db/services/user-role/requests";
+import { Input, Table, TableRef, TypeBadge, TableColumn } from "@/components";
 import { UserRoleInterface } from "@/lib/db/services/user-role/user-role.service";
 
 const getAccessDefinition = (access: string): string => {
@@ -119,14 +112,6 @@ const UserRolesPage = () => {
     );
   }, [userRoles, searchValue]);
 
-  const exportCSV = useCallback(() => {
-    tableRef.current?.exportCSV();
-  }, []);
-
-  const exportExcel = useCallback(() => {
-    tableRef.current?.exportExcel();
-  }, []);
-
   // Memoized columns
   const tableColumns = useMemo(() => columns(), []);
 
@@ -147,14 +132,9 @@ const UserRolesPage = () => {
             placeholder="Search"
           />
         </div>
-        <div className="flex items-center gap-3 w-full md:w-auto justify-end">
-          <div>
-            <ExportOptions exportCSV={exportCSV} exportExcel={exportExcel} />
-          </div>
-        </div>
       </div>
     );
-  }, [searchValue, exportCSV, exportExcel]);
+  }, [searchValue]);
 
   return (
     <div className="flex h-full flex-col gap-6 px-6 py-6">
