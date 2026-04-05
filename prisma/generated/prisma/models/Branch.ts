@@ -28,16 +28,20 @@ export type AggregateBranch = {
 
 export type BranchAvgAggregateOutputType = {
   id: number | null
+  parentBranchId: number | null
 }
 
 export type BranchSumAggregateOutputType = {
   id: number | null
+  parentBranchId: number | null
 }
 
 export type BranchMinAggregateOutputType = {
   id: number | null
   nameEn: string | null
   nameAr: string | null
+  isMain: boolean | null
+  parentBranchId: number | null
   isActive: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -47,6 +51,8 @@ export type BranchMaxAggregateOutputType = {
   id: number | null
   nameEn: string | null
   nameAr: string | null
+  isMain: boolean | null
+  parentBranchId: number | null
   isActive: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -56,6 +62,8 @@ export type BranchCountAggregateOutputType = {
   id: number
   nameEn: number
   nameAr: number
+  isMain: number
+  parentBranchId: number
   isActive: number
   createdAt: number
   updatedAt: number
@@ -65,16 +73,20 @@ export type BranchCountAggregateOutputType = {
 
 export type BranchAvgAggregateInputType = {
   id?: true
+  parentBranchId?: true
 }
 
 export type BranchSumAggregateInputType = {
   id?: true
+  parentBranchId?: true
 }
 
 export type BranchMinAggregateInputType = {
   id?: true
   nameEn?: true
   nameAr?: true
+  isMain?: true
+  parentBranchId?: true
   isActive?: true
   createdAt?: true
   updatedAt?: true
@@ -84,6 +96,8 @@ export type BranchMaxAggregateInputType = {
   id?: true
   nameEn?: true
   nameAr?: true
+  isMain?: true
+  parentBranchId?: true
   isActive?: true
   createdAt?: true
   updatedAt?: true
@@ -93,6 +107,8 @@ export type BranchCountAggregateInputType = {
   id?: true
   nameEn?: true
   nameAr?: true
+  isMain?: true
+  parentBranchId?: true
   isActive?: true
   createdAt?: true
   updatedAt?: true
@@ -189,6 +205,8 @@ export type BranchGroupByOutputType = {
   id: number
   nameEn: string
   nameAr: string | null
+  isMain: boolean
+  parentBranchId: number | null
   isActive: boolean
   createdAt: Date
   updatedAt: Date
@@ -221,30 +239,40 @@ export type BranchWhereInput = {
   id?: Prisma.IntFilter<"Branch"> | number
   nameEn?: Prisma.StringFilter<"Branch"> | string
   nameAr?: Prisma.StringNullableFilter<"Branch"> | string | null
+  isMain?: Prisma.BoolFilter<"Branch"> | boolean
+  parentBranchId?: Prisma.IntNullableFilter<"Branch"> | number | null
   isActive?: Prisma.BoolFilter<"Branch"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Branch"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Branch"> | Date | string
   users?: Prisma.UserListRelationFilter
+  subBranchUsers?: Prisma.UserListRelationFilter
   employees?: Prisma.EmployeeListRelationFilter
   projects?: Prisma.ProjectListRelationFilter
   payrollSummaries?: Prisma.PayrollSummaryListRelationFilter
   payrollDetails?: Prisma.PayrollDetailsListRelationFilter
   payrollSections?: Prisma.PayrollSectionListRelationFilter
+  parentBranch?: Prisma.XOR<Prisma.BranchNullableScalarRelationFilter, Prisma.BranchWhereInput> | null
+  subBranches?: Prisma.BranchListRelationFilter
 }
 
 export type BranchOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   nameEn?: Prisma.SortOrder
   nameAr?: Prisma.SortOrderInput | Prisma.SortOrder
+  isMain?: Prisma.SortOrder
+  parentBranchId?: Prisma.SortOrderInput | Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   users?: Prisma.UserOrderByRelationAggregateInput
+  subBranchUsers?: Prisma.UserOrderByRelationAggregateInput
   employees?: Prisma.EmployeeOrderByRelationAggregateInput
   projects?: Prisma.ProjectOrderByRelationAggregateInput
   payrollSummaries?: Prisma.PayrollSummaryOrderByRelationAggregateInput
   payrollDetails?: Prisma.PayrollDetailsOrderByRelationAggregateInput
   payrollSections?: Prisma.PayrollSectionOrderByRelationAggregateInput
+  parentBranch?: Prisma.BranchOrderByWithRelationInput
+  subBranches?: Prisma.BranchOrderByRelationAggregateInput
 }
 
 export type BranchWhereUniqueInput = Prisma.AtLeast<{
@@ -254,21 +282,28 @@ export type BranchWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.BranchWhereInput | Prisma.BranchWhereInput[]
   nameEn?: Prisma.StringFilter<"Branch"> | string
   nameAr?: Prisma.StringNullableFilter<"Branch"> | string | null
+  isMain?: Prisma.BoolFilter<"Branch"> | boolean
+  parentBranchId?: Prisma.IntNullableFilter<"Branch"> | number | null
   isActive?: Prisma.BoolFilter<"Branch"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Branch"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Branch"> | Date | string
   users?: Prisma.UserListRelationFilter
+  subBranchUsers?: Prisma.UserListRelationFilter
   employees?: Prisma.EmployeeListRelationFilter
   projects?: Prisma.ProjectListRelationFilter
   payrollSummaries?: Prisma.PayrollSummaryListRelationFilter
   payrollDetails?: Prisma.PayrollDetailsListRelationFilter
   payrollSections?: Prisma.PayrollSectionListRelationFilter
+  parentBranch?: Prisma.XOR<Prisma.BranchNullableScalarRelationFilter, Prisma.BranchWhereInput> | null
+  subBranches?: Prisma.BranchListRelationFilter
 }, "id">
 
 export type BranchOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   nameEn?: Prisma.SortOrder
   nameAr?: Prisma.SortOrderInput | Prisma.SortOrder
+  isMain?: Prisma.SortOrder
+  parentBranchId?: Prisma.SortOrderInput | Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -286,6 +321,8 @@ export type BranchScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"Branch"> | number
   nameEn?: Prisma.StringWithAggregatesFilter<"Branch"> | string
   nameAr?: Prisma.StringNullableWithAggregatesFilter<"Branch"> | string | null
+  isMain?: Prisma.BoolWithAggregatesFilter<"Branch"> | boolean
+  parentBranchId?: Prisma.IntNullableWithAggregatesFilter<"Branch"> | number | null
   isActive?: Prisma.BoolWithAggregatesFilter<"Branch"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Branch"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Branch"> | Date | string
@@ -294,65 +331,83 @@ export type BranchScalarWhereWithAggregatesInput = {
 export type BranchCreateInput = {
   nameEn: string
   nameAr?: string | null
+  isMain?: boolean
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   users?: Prisma.UserCreateNestedManyWithoutBranchInput
+  subBranchUsers?: Prisma.UserCreateNestedManyWithoutSubBranchInput
   employees?: Prisma.EmployeeCreateNestedManyWithoutBranchInput
   projects?: Prisma.ProjectCreateNestedManyWithoutBranchInput
   payrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutBranchInput
   payrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutBranchInput
   payrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutBranchInput
+  parentBranch?: Prisma.BranchCreateNestedOneWithoutSubBranchesInput
+  subBranches?: Prisma.BranchCreateNestedManyWithoutParentBranchInput
 }
 
 export type BranchUncheckedCreateInput = {
   id?: number
   nameEn: string
   nameAr?: string | null
+  isMain?: boolean
+  parentBranchId?: number | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   users?: Prisma.UserUncheckedCreateNestedManyWithoutBranchInput
+  subBranchUsers?: Prisma.UserUncheckedCreateNestedManyWithoutSubBranchInput
   employees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutBranchInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutBranchInput
   payrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutBranchInput
   payrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutBranchInput
   payrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutBranchInput
+  subBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutParentBranchInput
 }
 
 export type BranchUpdateInput = {
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isMain?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserUpdateManyWithoutBranchNestedInput
+  subBranchUsers?: Prisma.UserUpdateManyWithoutSubBranchNestedInput
   employees?: Prisma.EmployeeUpdateManyWithoutBranchNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutBranchNestedInput
   payrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutBranchNestedInput
   payrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutBranchNestedInput
   payrollSections?: Prisma.PayrollSectionUpdateManyWithoutBranchNestedInput
+  parentBranch?: Prisma.BranchUpdateOneWithoutSubBranchesNestedInput
+  subBranches?: Prisma.BranchUpdateManyWithoutParentBranchNestedInput
 }
 
 export type BranchUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isMain?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  parentBranchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserUncheckedUpdateManyWithoutBranchNestedInput
+  subBranchUsers?: Prisma.UserUncheckedUpdateManyWithoutSubBranchNestedInput
   employees?: Prisma.EmployeeUncheckedUpdateManyWithoutBranchNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutBranchNestedInput
   payrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutBranchNestedInput
   payrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutBranchNestedInput
   payrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutBranchNestedInput
+  subBranches?: Prisma.BranchUncheckedUpdateManyWithoutParentBranchNestedInput
 }
 
 export type BranchCreateManyInput = {
   id?: number
   nameEn: string
   nameAr?: string | null
+  isMain?: boolean
+  parentBranchId?: number | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -361,6 +416,7 @@ export type BranchCreateManyInput = {
 export type BranchUpdateManyMutationInput = {
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isMain?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -370,6 +426,8 @@ export type BranchUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isMain?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  parentBranchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -380,10 +438,22 @@ export type BranchNullableScalarRelationFilter = {
   isNot?: Prisma.BranchWhereInput | null
 }
 
+export type BranchListRelationFilter = {
+  every?: Prisma.BranchWhereInput
+  some?: Prisma.BranchWhereInput
+  none?: Prisma.BranchWhereInput
+}
+
+export type BranchOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
+}
+
 export type BranchCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   nameEn?: Prisma.SortOrder
   nameAr?: Prisma.SortOrder
+  isMain?: Prisma.SortOrder
+  parentBranchId?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -391,12 +461,15 @@ export type BranchCountOrderByAggregateInput = {
 
 export type BranchAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  parentBranchId?: Prisma.SortOrder
 }
 
 export type BranchMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   nameEn?: Prisma.SortOrder
   nameAr?: Prisma.SortOrder
+  isMain?: Prisma.SortOrder
+  parentBranchId?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -406,6 +479,8 @@ export type BranchMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   nameEn?: Prisma.SortOrder
   nameAr?: Prisma.SortOrder
+  isMain?: Prisma.SortOrder
+  parentBranchId?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -413,11 +488,18 @@ export type BranchMinOrderByAggregateInput = {
 
 export type BranchSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  parentBranchId?: Prisma.SortOrder
 }
 
 export type BranchCreateNestedOneWithoutUsersInput = {
   create?: Prisma.XOR<Prisma.BranchCreateWithoutUsersInput, Prisma.BranchUncheckedCreateWithoutUsersInput>
   connectOrCreate?: Prisma.BranchCreateOrConnectWithoutUsersInput
+  connect?: Prisma.BranchWhereUniqueInput
+}
+
+export type BranchCreateNestedOneWithoutSubBranchUsersInput = {
+  create?: Prisma.XOR<Prisma.BranchCreateWithoutSubBranchUsersInput, Prisma.BranchUncheckedCreateWithoutSubBranchUsersInput>
+  connectOrCreate?: Prisma.BranchCreateOrConnectWithoutSubBranchUsersInput
   connect?: Prisma.BranchWhereUniqueInput
 }
 
@@ -429,6 +511,74 @@ export type BranchUpdateOneWithoutUsersNestedInput = {
   delete?: Prisma.BranchWhereInput | boolean
   connect?: Prisma.BranchWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.BranchUpdateToOneWithWhereWithoutUsersInput, Prisma.BranchUpdateWithoutUsersInput>, Prisma.BranchUncheckedUpdateWithoutUsersInput>
+}
+
+export type BranchUpdateOneWithoutSubBranchUsersNestedInput = {
+  create?: Prisma.XOR<Prisma.BranchCreateWithoutSubBranchUsersInput, Prisma.BranchUncheckedCreateWithoutSubBranchUsersInput>
+  connectOrCreate?: Prisma.BranchCreateOrConnectWithoutSubBranchUsersInput
+  upsert?: Prisma.BranchUpsertWithoutSubBranchUsersInput
+  disconnect?: Prisma.BranchWhereInput | boolean
+  delete?: Prisma.BranchWhereInput | boolean
+  connect?: Prisma.BranchWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BranchUpdateToOneWithWhereWithoutSubBranchUsersInput, Prisma.BranchUpdateWithoutSubBranchUsersInput>, Prisma.BranchUncheckedUpdateWithoutSubBranchUsersInput>
+}
+
+export type BranchCreateNestedOneWithoutSubBranchesInput = {
+  create?: Prisma.XOR<Prisma.BranchCreateWithoutSubBranchesInput, Prisma.BranchUncheckedCreateWithoutSubBranchesInput>
+  connectOrCreate?: Prisma.BranchCreateOrConnectWithoutSubBranchesInput
+  connect?: Prisma.BranchWhereUniqueInput
+}
+
+export type BranchCreateNestedManyWithoutParentBranchInput = {
+  create?: Prisma.XOR<Prisma.BranchCreateWithoutParentBranchInput, Prisma.BranchUncheckedCreateWithoutParentBranchInput> | Prisma.BranchCreateWithoutParentBranchInput[] | Prisma.BranchUncheckedCreateWithoutParentBranchInput[]
+  connectOrCreate?: Prisma.BranchCreateOrConnectWithoutParentBranchInput | Prisma.BranchCreateOrConnectWithoutParentBranchInput[]
+  createMany?: Prisma.BranchCreateManyParentBranchInputEnvelope
+  connect?: Prisma.BranchWhereUniqueInput | Prisma.BranchWhereUniqueInput[]
+}
+
+export type BranchUncheckedCreateNestedManyWithoutParentBranchInput = {
+  create?: Prisma.XOR<Prisma.BranchCreateWithoutParentBranchInput, Prisma.BranchUncheckedCreateWithoutParentBranchInput> | Prisma.BranchCreateWithoutParentBranchInput[] | Prisma.BranchUncheckedCreateWithoutParentBranchInput[]
+  connectOrCreate?: Prisma.BranchCreateOrConnectWithoutParentBranchInput | Prisma.BranchCreateOrConnectWithoutParentBranchInput[]
+  createMany?: Prisma.BranchCreateManyParentBranchInputEnvelope
+  connect?: Prisma.BranchWhereUniqueInput | Prisma.BranchWhereUniqueInput[]
+}
+
+export type BranchUpdateOneWithoutSubBranchesNestedInput = {
+  create?: Prisma.XOR<Prisma.BranchCreateWithoutSubBranchesInput, Prisma.BranchUncheckedCreateWithoutSubBranchesInput>
+  connectOrCreate?: Prisma.BranchCreateOrConnectWithoutSubBranchesInput
+  upsert?: Prisma.BranchUpsertWithoutSubBranchesInput
+  disconnect?: Prisma.BranchWhereInput | boolean
+  delete?: Prisma.BranchWhereInput | boolean
+  connect?: Prisma.BranchWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BranchUpdateToOneWithWhereWithoutSubBranchesInput, Prisma.BranchUpdateWithoutSubBranchesInput>, Prisma.BranchUncheckedUpdateWithoutSubBranchesInput>
+}
+
+export type BranchUpdateManyWithoutParentBranchNestedInput = {
+  create?: Prisma.XOR<Prisma.BranchCreateWithoutParentBranchInput, Prisma.BranchUncheckedCreateWithoutParentBranchInput> | Prisma.BranchCreateWithoutParentBranchInput[] | Prisma.BranchUncheckedCreateWithoutParentBranchInput[]
+  connectOrCreate?: Prisma.BranchCreateOrConnectWithoutParentBranchInput | Prisma.BranchCreateOrConnectWithoutParentBranchInput[]
+  upsert?: Prisma.BranchUpsertWithWhereUniqueWithoutParentBranchInput | Prisma.BranchUpsertWithWhereUniqueWithoutParentBranchInput[]
+  createMany?: Prisma.BranchCreateManyParentBranchInputEnvelope
+  set?: Prisma.BranchWhereUniqueInput | Prisma.BranchWhereUniqueInput[]
+  disconnect?: Prisma.BranchWhereUniqueInput | Prisma.BranchWhereUniqueInput[]
+  delete?: Prisma.BranchWhereUniqueInput | Prisma.BranchWhereUniqueInput[]
+  connect?: Prisma.BranchWhereUniqueInput | Prisma.BranchWhereUniqueInput[]
+  update?: Prisma.BranchUpdateWithWhereUniqueWithoutParentBranchInput | Prisma.BranchUpdateWithWhereUniqueWithoutParentBranchInput[]
+  updateMany?: Prisma.BranchUpdateManyWithWhereWithoutParentBranchInput | Prisma.BranchUpdateManyWithWhereWithoutParentBranchInput[]
+  deleteMany?: Prisma.BranchScalarWhereInput | Prisma.BranchScalarWhereInput[]
+}
+
+export type BranchUncheckedUpdateManyWithoutParentBranchNestedInput = {
+  create?: Prisma.XOR<Prisma.BranchCreateWithoutParentBranchInput, Prisma.BranchUncheckedCreateWithoutParentBranchInput> | Prisma.BranchCreateWithoutParentBranchInput[] | Prisma.BranchUncheckedCreateWithoutParentBranchInput[]
+  connectOrCreate?: Prisma.BranchCreateOrConnectWithoutParentBranchInput | Prisma.BranchCreateOrConnectWithoutParentBranchInput[]
+  upsert?: Prisma.BranchUpsertWithWhereUniqueWithoutParentBranchInput | Prisma.BranchUpsertWithWhereUniqueWithoutParentBranchInput[]
+  createMany?: Prisma.BranchCreateManyParentBranchInputEnvelope
+  set?: Prisma.BranchWhereUniqueInput | Prisma.BranchWhereUniqueInput[]
+  disconnect?: Prisma.BranchWhereUniqueInput | Prisma.BranchWhereUniqueInput[]
+  delete?: Prisma.BranchWhereUniqueInput | Prisma.BranchWhereUniqueInput[]
+  connect?: Prisma.BranchWhereUniqueInput | Prisma.BranchWhereUniqueInput[]
+  update?: Prisma.BranchUpdateWithWhereUniqueWithoutParentBranchInput | Prisma.BranchUpdateWithWhereUniqueWithoutParentBranchInput[]
+  updateMany?: Prisma.BranchUpdateManyWithWhereWithoutParentBranchInput | Prisma.BranchUpdateManyWithWhereWithoutParentBranchInput[]
+  deleteMany?: Prisma.BranchScalarWhereInput | Prisma.BranchScalarWhereInput[]
 }
 
 export type BranchCreateNestedOneWithoutEmployeesInput = {
@@ -514,33 +664,81 @@ export type BranchUpdateOneWithoutPayrollDetailsNestedInput = {
 export type BranchCreateWithoutUsersInput = {
   nameEn: string
   nameAr?: string | null
+  isMain?: boolean
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  subBranchUsers?: Prisma.UserCreateNestedManyWithoutSubBranchInput
   employees?: Prisma.EmployeeCreateNestedManyWithoutBranchInput
   projects?: Prisma.ProjectCreateNestedManyWithoutBranchInput
   payrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutBranchInput
   payrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutBranchInput
   payrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutBranchInput
+  parentBranch?: Prisma.BranchCreateNestedOneWithoutSubBranchesInput
+  subBranches?: Prisma.BranchCreateNestedManyWithoutParentBranchInput
 }
 
 export type BranchUncheckedCreateWithoutUsersInput = {
   id?: number
   nameEn: string
   nameAr?: string | null
+  isMain?: boolean
+  parentBranchId?: number | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  subBranchUsers?: Prisma.UserUncheckedCreateNestedManyWithoutSubBranchInput
   employees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutBranchInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutBranchInput
   payrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutBranchInput
   payrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutBranchInput
   payrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutBranchInput
+  subBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutParentBranchInput
 }
 
 export type BranchCreateOrConnectWithoutUsersInput = {
   where: Prisma.BranchWhereUniqueInput
   create: Prisma.XOR<Prisma.BranchCreateWithoutUsersInput, Prisma.BranchUncheckedCreateWithoutUsersInput>
+}
+
+export type BranchCreateWithoutSubBranchUsersInput = {
+  nameEn: string
+  nameAr?: string | null
+  isMain?: boolean
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  users?: Prisma.UserCreateNestedManyWithoutBranchInput
+  employees?: Prisma.EmployeeCreateNestedManyWithoutBranchInput
+  projects?: Prisma.ProjectCreateNestedManyWithoutBranchInput
+  payrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutBranchInput
+  payrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutBranchInput
+  payrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutBranchInput
+  parentBranch?: Prisma.BranchCreateNestedOneWithoutSubBranchesInput
+  subBranches?: Prisma.BranchCreateNestedManyWithoutParentBranchInput
+}
+
+export type BranchUncheckedCreateWithoutSubBranchUsersInput = {
+  id?: number
+  nameEn: string
+  nameAr?: string | null
+  isMain?: boolean
+  parentBranchId?: number | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutBranchInput
+  employees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutBranchInput
+  projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutBranchInput
+  payrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutBranchInput
+  payrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutBranchInput
+  payrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutBranchInput
+  subBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutParentBranchInput
+}
+
+export type BranchCreateOrConnectWithoutSubBranchUsersInput = {
+  where: Prisma.BranchWhereUniqueInput
+  create: Prisma.XOR<Prisma.BranchCreateWithoutSubBranchUsersInput, Prisma.BranchUncheckedCreateWithoutSubBranchUsersInput>
 }
 
 export type BranchUpsertWithoutUsersInput = {
@@ -557,23 +755,208 @@ export type BranchUpdateToOneWithWhereWithoutUsersInput = {
 export type BranchUpdateWithoutUsersInput = {
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isMain?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  subBranchUsers?: Prisma.UserUpdateManyWithoutSubBranchNestedInput
   employees?: Prisma.EmployeeUpdateManyWithoutBranchNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutBranchNestedInput
   payrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutBranchNestedInput
   payrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutBranchNestedInput
   payrollSections?: Prisma.PayrollSectionUpdateManyWithoutBranchNestedInput
+  parentBranch?: Prisma.BranchUpdateOneWithoutSubBranchesNestedInput
+  subBranches?: Prisma.BranchUpdateManyWithoutParentBranchNestedInput
 }
 
 export type BranchUncheckedUpdateWithoutUsersInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isMain?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  parentBranchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  subBranchUsers?: Prisma.UserUncheckedUpdateManyWithoutSubBranchNestedInput
+  employees?: Prisma.EmployeeUncheckedUpdateManyWithoutBranchNestedInput
+  projects?: Prisma.ProjectUncheckedUpdateManyWithoutBranchNestedInput
+  payrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutBranchNestedInput
+  payrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutBranchNestedInput
+  payrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutBranchNestedInput
+  subBranches?: Prisma.BranchUncheckedUpdateManyWithoutParentBranchNestedInput
+}
+
+export type BranchUpsertWithoutSubBranchUsersInput = {
+  update: Prisma.XOR<Prisma.BranchUpdateWithoutSubBranchUsersInput, Prisma.BranchUncheckedUpdateWithoutSubBranchUsersInput>
+  create: Prisma.XOR<Prisma.BranchCreateWithoutSubBranchUsersInput, Prisma.BranchUncheckedCreateWithoutSubBranchUsersInput>
+  where?: Prisma.BranchWhereInput
+}
+
+export type BranchUpdateToOneWithWhereWithoutSubBranchUsersInput = {
+  where?: Prisma.BranchWhereInput
+  data: Prisma.XOR<Prisma.BranchUpdateWithoutSubBranchUsersInput, Prisma.BranchUncheckedUpdateWithoutSubBranchUsersInput>
+}
+
+export type BranchUpdateWithoutSubBranchUsersInput = {
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isMain?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserUpdateManyWithoutBranchNestedInput
+  employees?: Prisma.EmployeeUpdateManyWithoutBranchNestedInput
+  projects?: Prisma.ProjectUpdateManyWithoutBranchNestedInput
+  payrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutBranchNestedInput
+  payrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutBranchNestedInput
+  payrollSections?: Prisma.PayrollSectionUpdateManyWithoutBranchNestedInput
+  parentBranch?: Prisma.BranchUpdateOneWithoutSubBranchesNestedInput
+  subBranches?: Prisma.BranchUpdateManyWithoutParentBranchNestedInput
+}
+
+export type BranchUncheckedUpdateWithoutSubBranchUsersInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isMain?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  parentBranchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserUncheckedUpdateManyWithoutBranchNestedInput
+  employees?: Prisma.EmployeeUncheckedUpdateManyWithoutBranchNestedInput
+  projects?: Prisma.ProjectUncheckedUpdateManyWithoutBranchNestedInput
+  payrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutBranchNestedInput
+  payrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutBranchNestedInput
+  payrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutBranchNestedInput
+  subBranches?: Prisma.BranchUncheckedUpdateManyWithoutParentBranchNestedInput
+}
+
+export type BranchCreateWithoutSubBranchesInput = {
+  nameEn: string
+  nameAr?: string | null
+  isMain?: boolean
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  users?: Prisma.UserCreateNestedManyWithoutBranchInput
+  subBranchUsers?: Prisma.UserCreateNestedManyWithoutSubBranchInput
+  employees?: Prisma.EmployeeCreateNestedManyWithoutBranchInput
+  projects?: Prisma.ProjectCreateNestedManyWithoutBranchInput
+  payrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutBranchInput
+  payrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutBranchInput
+  payrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutBranchInput
+  parentBranch?: Prisma.BranchCreateNestedOneWithoutSubBranchesInput
+}
+
+export type BranchUncheckedCreateWithoutSubBranchesInput = {
+  id?: number
+  nameEn: string
+  nameAr?: string | null
+  isMain?: boolean
+  parentBranchId?: number | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutBranchInput
+  subBranchUsers?: Prisma.UserUncheckedCreateNestedManyWithoutSubBranchInput
+  employees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutBranchInput
+  projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutBranchInput
+  payrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutBranchInput
+  payrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutBranchInput
+  payrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutBranchInput
+}
+
+export type BranchCreateOrConnectWithoutSubBranchesInput = {
+  where: Prisma.BranchWhereUniqueInput
+  create: Prisma.XOR<Prisma.BranchCreateWithoutSubBranchesInput, Prisma.BranchUncheckedCreateWithoutSubBranchesInput>
+}
+
+export type BranchCreateWithoutParentBranchInput = {
+  nameEn: string
+  nameAr?: string | null
+  isMain?: boolean
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  users?: Prisma.UserCreateNestedManyWithoutBranchInput
+  subBranchUsers?: Prisma.UserCreateNestedManyWithoutSubBranchInput
+  employees?: Prisma.EmployeeCreateNestedManyWithoutBranchInput
+  projects?: Prisma.ProjectCreateNestedManyWithoutBranchInput
+  payrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutBranchInput
+  payrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutBranchInput
+  payrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutBranchInput
+  subBranches?: Prisma.BranchCreateNestedManyWithoutParentBranchInput
+}
+
+export type BranchUncheckedCreateWithoutParentBranchInput = {
+  id?: number
+  nameEn: string
+  nameAr?: string | null
+  isMain?: boolean
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutBranchInput
+  subBranchUsers?: Prisma.UserUncheckedCreateNestedManyWithoutSubBranchInput
+  employees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutBranchInput
+  projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutBranchInput
+  payrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutBranchInput
+  payrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutBranchInput
+  payrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutBranchInput
+  subBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutParentBranchInput
+}
+
+export type BranchCreateOrConnectWithoutParentBranchInput = {
+  where: Prisma.BranchWhereUniqueInput
+  create: Prisma.XOR<Prisma.BranchCreateWithoutParentBranchInput, Prisma.BranchUncheckedCreateWithoutParentBranchInput>
+}
+
+export type BranchCreateManyParentBranchInputEnvelope = {
+  data: Prisma.BranchCreateManyParentBranchInput | Prisma.BranchCreateManyParentBranchInput[]
+  skipDuplicates?: boolean
+}
+
+export type BranchUpsertWithoutSubBranchesInput = {
+  update: Prisma.XOR<Prisma.BranchUpdateWithoutSubBranchesInput, Prisma.BranchUncheckedUpdateWithoutSubBranchesInput>
+  create: Prisma.XOR<Prisma.BranchCreateWithoutSubBranchesInput, Prisma.BranchUncheckedCreateWithoutSubBranchesInput>
+  where?: Prisma.BranchWhereInput
+}
+
+export type BranchUpdateToOneWithWhereWithoutSubBranchesInput = {
+  where?: Prisma.BranchWhereInput
+  data: Prisma.XOR<Prisma.BranchUpdateWithoutSubBranchesInput, Prisma.BranchUncheckedUpdateWithoutSubBranchesInput>
+}
+
+export type BranchUpdateWithoutSubBranchesInput = {
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isMain?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserUpdateManyWithoutBranchNestedInput
+  subBranchUsers?: Prisma.UserUpdateManyWithoutSubBranchNestedInput
+  employees?: Prisma.EmployeeUpdateManyWithoutBranchNestedInput
+  projects?: Prisma.ProjectUpdateManyWithoutBranchNestedInput
+  payrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutBranchNestedInput
+  payrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutBranchNestedInput
+  payrollSections?: Prisma.PayrollSectionUpdateManyWithoutBranchNestedInput
+  parentBranch?: Prisma.BranchUpdateOneWithoutSubBranchesNestedInput
+}
+
+export type BranchUncheckedUpdateWithoutSubBranchesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isMain?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  parentBranchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserUncheckedUpdateManyWithoutBranchNestedInput
+  subBranchUsers?: Prisma.UserUncheckedUpdateManyWithoutSubBranchNestedInput
   employees?: Prisma.EmployeeUncheckedUpdateManyWithoutBranchNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutBranchNestedInput
   payrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutBranchNestedInput
@@ -581,31 +964,69 @@ export type BranchUncheckedUpdateWithoutUsersInput = {
   payrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutBranchNestedInput
 }
 
+export type BranchUpsertWithWhereUniqueWithoutParentBranchInput = {
+  where: Prisma.BranchWhereUniqueInput
+  update: Prisma.XOR<Prisma.BranchUpdateWithoutParentBranchInput, Prisma.BranchUncheckedUpdateWithoutParentBranchInput>
+  create: Prisma.XOR<Prisma.BranchCreateWithoutParentBranchInput, Prisma.BranchUncheckedCreateWithoutParentBranchInput>
+}
+
+export type BranchUpdateWithWhereUniqueWithoutParentBranchInput = {
+  where: Prisma.BranchWhereUniqueInput
+  data: Prisma.XOR<Prisma.BranchUpdateWithoutParentBranchInput, Prisma.BranchUncheckedUpdateWithoutParentBranchInput>
+}
+
+export type BranchUpdateManyWithWhereWithoutParentBranchInput = {
+  where: Prisma.BranchScalarWhereInput
+  data: Prisma.XOR<Prisma.BranchUpdateManyMutationInput, Prisma.BranchUncheckedUpdateManyWithoutParentBranchInput>
+}
+
+export type BranchScalarWhereInput = {
+  AND?: Prisma.BranchScalarWhereInput | Prisma.BranchScalarWhereInput[]
+  OR?: Prisma.BranchScalarWhereInput[]
+  NOT?: Prisma.BranchScalarWhereInput | Prisma.BranchScalarWhereInput[]
+  id?: Prisma.IntFilter<"Branch"> | number
+  nameEn?: Prisma.StringFilter<"Branch"> | string
+  nameAr?: Prisma.StringNullableFilter<"Branch"> | string | null
+  isMain?: Prisma.BoolFilter<"Branch"> | boolean
+  parentBranchId?: Prisma.IntNullableFilter<"Branch"> | number | null
+  isActive?: Prisma.BoolFilter<"Branch"> | boolean
+  createdAt?: Prisma.DateTimeFilter<"Branch"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Branch"> | Date | string
+}
+
 export type BranchCreateWithoutEmployeesInput = {
   nameEn: string
   nameAr?: string | null
+  isMain?: boolean
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   users?: Prisma.UserCreateNestedManyWithoutBranchInput
+  subBranchUsers?: Prisma.UserCreateNestedManyWithoutSubBranchInput
   projects?: Prisma.ProjectCreateNestedManyWithoutBranchInput
   payrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutBranchInput
   payrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutBranchInput
   payrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutBranchInput
+  parentBranch?: Prisma.BranchCreateNestedOneWithoutSubBranchesInput
+  subBranches?: Prisma.BranchCreateNestedManyWithoutParentBranchInput
 }
 
 export type BranchUncheckedCreateWithoutEmployeesInput = {
   id?: number
   nameEn: string
   nameAr?: string | null
+  isMain?: boolean
+  parentBranchId?: number | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   users?: Prisma.UserUncheckedCreateNestedManyWithoutBranchInput
+  subBranchUsers?: Prisma.UserUncheckedCreateNestedManyWithoutSubBranchInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutBranchInput
   payrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutBranchInput
   payrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutBranchInput
   payrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutBranchInput
+  subBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutParentBranchInput
 }
 
 export type BranchCreateOrConnectWithoutEmployeesInput = {
@@ -627,55 +1048,71 @@ export type BranchUpdateToOneWithWhereWithoutEmployeesInput = {
 export type BranchUpdateWithoutEmployeesInput = {
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isMain?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserUpdateManyWithoutBranchNestedInput
+  subBranchUsers?: Prisma.UserUpdateManyWithoutSubBranchNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutBranchNestedInput
   payrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutBranchNestedInput
   payrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutBranchNestedInput
   payrollSections?: Prisma.PayrollSectionUpdateManyWithoutBranchNestedInput
+  parentBranch?: Prisma.BranchUpdateOneWithoutSubBranchesNestedInput
+  subBranches?: Prisma.BranchUpdateManyWithoutParentBranchNestedInput
 }
 
 export type BranchUncheckedUpdateWithoutEmployeesInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isMain?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  parentBranchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserUncheckedUpdateManyWithoutBranchNestedInput
+  subBranchUsers?: Prisma.UserUncheckedUpdateManyWithoutSubBranchNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutBranchNestedInput
   payrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutBranchNestedInput
   payrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutBranchNestedInput
   payrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutBranchNestedInput
+  subBranches?: Prisma.BranchUncheckedUpdateManyWithoutParentBranchNestedInput
 }
 
 export type BranchCreateWithoutProjectsInput = {
   nameEn: string
   nameAr?: string | null
+  isMain?: boolean
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   users?: Prisma.UserCreateNestedManyWithoutBranchInput
+  subBranchUsers?: Prisma.UserCreateNestedManyWithoutSubBranchInput
   employees?: Prisma.EmployeeCreateNestedManyWithoutBranchInput
   payrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutBranchInput
   payrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutBranchInput
   payrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutBranchInput
+  parentBranch?: Prisma.BranchCreateNestedOneWithoutSubBranchesInput
+  subBranches?: Prisma.BranchCreateNestedManyWithoutParentBranchInput
 }
 
 export type BranchUncheckedCreateWithoutProjectsInput = {
   id?: number
   nameEn: string
   nameAr?: string | null
+  isMain?: boolean
+  parentBranchId?: number | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   users?: Prisma.UserUncheckedCreateNestedManyWithoutBranchInput
+  subBranchUsers?: Prisma.UserUncheckedCreateNestedManyWithoutSubBranchInput
   employees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutBranchInput
   payrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutBranchInput
   payrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutBranchInput
   payrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutBranchInput
+  subBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutParentBranchInput
 }
 
 export type BranchCreateOrConnectWithoutProjectsInput = {
@@ -697,55 +1134,71 @@ export type BranchUpdateToOneWithWhereWithoutProjectsInput = {
 export type BranchUpdateWithoutProjectsInput = {
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isMain?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserUpdateManyWithoutBranchNestedInput
+  subBranchUsers?: Prisma.UserUpdateManyWithoutSubBranchNestedInput
   employees?: Prisma.EmployeeUpdateManyWithoutBranchNestedInput
   payrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutBranchNestedInput
   payrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutBranchNestedInput
   payrollSections?: Prisma.PayrollSectionUpdateManyWithoutBranchNestedInput
+  parentBranch?: Prisma.BranchUpdateOneWithoutSubBranchesNestedInput
+  subBranches?: Prisma.BranchUpdateManyWithoutParentBranchNestedInput
 }
 
 export type BranchUncheckedUpdateWithoutProjectsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isMain?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  parentBranchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserUncheckedUpdateManyWithoutBranchNestedInput
+  subBranchUsers?: Prisma.UserUncheckedUpdateManyWithoutSubBranchNestedInput
   employees?: Prisma.EmployeeUncheckedUpdateManyWithoutBranchNestedInput
   payrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutBranchNestedInput
   payrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutBranchNestedInput
   payrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutBranchNestedInput
+  subBranches?: Prisma.BranchUncheckedUpdateManyWithoutParentBranchNestedInput
 }
 
 export type BranchCreateWithoutPayrollSectionsInput = {
   nameEn: string
   nameAr?: string | null
+  isMain?: boolean
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   users?: Prisma.UserCreateNestedManyWithoutBranchInput
+  subBranchUsers?: Prisma.UserCreateNestedManyWithoutSubBranchInput
   employees?: Prisma.EmployeeCreateNestedManyWithoutBranchInput
   projects?: Prisma.ProjectCreateNestedManyWithoutBranchInput
   payrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutBranchInput
   payrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutBranchInput
+  parentBranch?: Prisma.BranchCreateNestedOneWithoutSubBranchesInput
+  subBranches?: Prisma.BranchCreateNestedManyWithoutParentBranchInput
 }
 
 export type BranchUncheckedCreateWithoutPayrollSectionsInput = {
   id?: number
   nameEn: string
   nameAr?: string | null
+  isMain?: boolean
+  parentBranchId?: number | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   users?: Prisma.UserUncheckedCreateNestedManyWithoutBranchInput
+  subBranchUsers?: Prisma.UserUncheckedCreateNestedManyWithoutSubBranchInput
   employees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutBranchInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutBranchInput
   payrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutBranchInput
   payrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutBranchInput
+  subBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutParentBranchInput
 }
 
 export type BranchCreateOrConnectWithoutPayrollSectionsInput = {
@@ -767,55 +1220,71 @@ export type BranchUpdateToOneWithWhereWithoutPayrollSectionsInput = {
 export type BranchUpdateWithoutPayrollSectionsInput = {
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isMain?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserUpdateManyWithoutBranchNestedInput
+  subBranchUsers?: Prisma.UserUpdateManyWithoutSubBranchNestedInput
   employees?: Prisma.EmployeeUpdateManyWithoutBranchNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutBranchNestedInput
   payrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutBranchNestedInput
   payrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutBranchNestedInput
+  parentBranch?: Prisma.BranchUpdateOneWithoutSubBranchesNestedInput
+  subBranches?: Prisma.BranchUpdateManyWithoutParentBranchNestedInput
 }
 
 export type BranchUncheckedUpdateWithoutPayrollSectionsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isMain?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  parentBranchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserUncheckedUpdateManyWithoutBranchNestedInput
+  subBranchUsers?: Prisma.UserUncheckedUpdateManyWithoutSubBranchNestedInput
   employees?: Prisma.EmployeeUncheckedUpdateManyWithoutBranchNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutBranchNestedInput
   payrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutBranchNestedInput
   payrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutBranchNestedInput
+  subBranches?: Prisma.BranchUncheckedUpdateManyWithoutParentBranchNestedInput
 }
 
 export type BranchCreateWithoutPayrollSummariesInput = {
   nameEn: string
   nameAr?: string | null
+  isMain?: boolean
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   users?: Prisma.UserCreateNestedManyWithoutBranchInput
+  subBranchUsers?: Prisma.UserCreateNestedManyWithoutSubBranchInput
   employees?: Prisma.EmployeeCreateNestedManyWithoutBranchInput
   projects?: Prisma.ProjectCreateNestedManyWithoutBranchInput
   payrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutBranchInput
   payrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutBranchInput
+  parentBranch?: Prisma.BranchCreateNestedOneWithoutSubBranchesInput
+  subBranches?: Prisma.BranchCreateNestedManyWithoutParentBranchInput
 }
 
 export type BranchUncheckedCreateWithoutPayrollSummariesInput = {
   id?: number
   nameEn: string
   nameAr?: string | null
+  isMain?: boolean
+  parentBranchId?: number | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   users?: Prisma.UserUncheckedCreateNestedManyWithoutBranchInput
+  subBranchUsers?: Prisma.UserUncheckedCreateNestedManyWithoutSubBranchInput
   employees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutBranchInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutBranchInput
   payrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutBranchInput
   payrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutBranchInput
+  subBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutParentBranchInput
 }
 
 export type BranchCreateOrConnectWithoutPayrollSummariesInput = {
@@ -837,55 +1306,71 @@ export type BranchUpdateToOneWithWhereWithoutPayrollSummariesInput = {
 export type BranchUpdateWithoutPayrollSummariesInput = {
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isMain?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserUpdateManyWithoutBranchNestedInput
+  subBranchUsers?: Prisma.UserUpdateManyWithoutSubBranchNestedInput
   employees?: Prisma.EmployeeUpdateManyWithoutBranchNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutBranchNestedInput
   payrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutBranchNestedInput
   payrollSections?: Prisma.PayrollSectionUpdateManyWithoutBranchNestedInput
+  parentBranch?: Prisma.BranchUpdateOneWithoutSubBranchesNestedInput
+  subBranches?: Prisma.BranchUpdateManyWithoutParentBranchNestedInput
 }
 
 export type BranchUncheckedUpdateWithoutPayrollSummariesInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isMain?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  parentBranchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserUncheckedUpdateManyWithoutBranchNestedInput
+  subBranchUsers?: Prisma.UserUncheckedUpdateManyWithoutSubBranchNestedInput
   employees?: Prisma.EmployeeUncheckedUpdateManyWithoutBranchNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutBranchNestedInput
   payrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutBranchNestedInput
   payrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutBranchNestedInput
+  subBranches?: Prisma.BranchUncheckedUpdateManyWithoutParentBranchNestedInput
 }
 
 export type BranchCreateWithoutPayrollDetailsInput = {
   nameEn: string
   nameAr?: string | null
+  isMain?: boolean
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   users?: Prisma.UserCreateNestedManyWithoutBranchInput
+  subBranchUsers?: Prisma.UserCreateNestedManyWithoutSubBranchInput
   employees?: Prisma.EmployeeCreateNestedManyWithoutBranchInput
   projects?: Prisma.ProjectCreateNestedManyWithoutBranchInput
   payrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutBranchInput
   payrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutBranchInput
+  parentBranch?: Prisma.BranchCreateNestedOneWithoutSubBranchesInput
+  subBranches?: Prisma.BranchCreateNestedManyWithoutParentBranchInput
 }
 
 export type BranchUncheckedCreateWithoutPayrollDetailsInput = {
   id?: number
   nameEn: string
   nameAr?: string | null
+  isMain?: boolean
+  parentBranchId?: number | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   users?: Prisma.UserUncheckedCreateNestedManyWithoutBranchInput
+  subBranchUsers?: Prisma.UserUncheckedCreateNestedManyWithoutSubBranchInput
   employees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutBranchInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutBranchInput
   payrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutBranchInput
   payrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutBranchInput
+  subBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutParentBranchInput
 }
 
 export type BranchCreateOrConnectWithoutPayrollDetailsInput = {
@@ -907,28 +1392,91 @@ export type BranchUpdateToOneWithWhereWithoutPayrollDetailsInput = {
 export type BranchUpdateWithoutPayrollDetailsInput = {
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isMain?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserUpdateManyWithoutBranchNestedInput
+  subBranchUsers?: Prisma.UserUpdateManyWithoutSubBranchNestedInput
   employees?: Prisma.EmployeeUpdateManyWithoutBranchNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutBranchNestedInput
   payrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutBranchNestedInput
   payrollSections?: Prisma.PayrollSectionUpdateManyWithoutBranchNestedInput
+  parentBranch?: Prisma.BranchUpdateOneWithoutSubBranchesNestedInput
+  subBranches?: Prisma.BranchUpdateManyWithoutParentBranchNestedInput
 }
 
 export type BranchUncheckedUpdateWithoutPayrollDetailsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isMain?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  parentBranchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserUncheckedUpdateManyWithoutBranchNestedInput
+  subBranchUsers?: Prisma.UserUncheckedUpdateManyWithoutSubBranchNestedInput
   employees?: Prisma.EmployeeUncheckedUpdateManyWithoutBranchNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutBranchNestedInput
   payrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutBranchNestedInput
   payrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutBranchNestedInput
+  subBranches?: Prisma.BranchUncheckedUpdateManyWithoutParentBranchNestedInput
+}
+
+export type BranchCreateManyParentBranchInput = {
+  id?: number
+  nameEn: string
+  nameAr?: string | null
+  isMain?: boolean
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type BranchUpdateWithoutParentBranchInput = {
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isMain?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserUpdateManyWithoutBranchNestedInput
+  subBranchUsers?: Prisma.UserUpdateManyWithoutSubBranchNestedInput
+  employees?: Prisma.EmployeeUpdateManyWithoutBranchNestedInput
+  projects?: Prisma.ProjectUpdateManyWithoutBranchNestedInput
+  payrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutBranchNestedInput
+  payrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutBranchNestedInput
+  payrollSections?: Prisma.PayrollSectionUpdateManyWithoutBranchNestedInput
+  subBranches?: Prisma.BranchUpdateManyWithoutParentBranchNestedInput
+}
+
+export type BranchUncheckedUpdateWithoutParentBranchInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isMain?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserUncheckedUpdateManyWithoutBranchNestedInput
+  subBranchUsers?: Prisma.UserUncheckedUpdateManyWithoutSubBranchNestedInput
+  employees?: Prisma.EmployeeUncheckedUpdateManyWithoutBranchNestedInput
+  projects?: Prisma.ProjectUncheckedUpdateManyWithoutBranchNestedInput
+  payrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutBranchNestedInput
+  payrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutBranchNestedInput
+  payrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutBranchNestedInput
+  subBranches?: Prisma.BranchUncheckedUpdateManyWithoutParentBranchNestedInput
+}
+
+export type BranchUncheckedUpdateManyWithoutParentBranchInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isMain?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -938,20 +1486,24 @@ export type BranchUncheckedUpdateWithoutPayrollDetailsInput = {
 
 export type BranchCountOutputType = {
   users: number
+  subBranchUsers: number
   employees: number
   projects: number
   payrollSummaries: number
   payrollDetails: number
   payrollSections: number
+  subBranches: number
 }
 
 export type BranchCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   users?: boolean | BranchCountOutputTypeCountUsersArgs
+  subBranchUsers?: boolean | BranchCountOutputTypeCountSubBranchUsersArgs
   employees?: boolean | BranchCountOutputTypeCountEmployeesArgs
   projects?: boolean | BranchCountOutputTypeCountProjectsArgs
   payrollSummaries?: boolean | BranchCountOutputTypeCountPayrollSummariesArgs
   payrollDetails?: boolean | BranchCountOutputTypeCountPayrollDetailsArgs
   payrollSections?: boolean | BranchCountOutputTypeCountPayrollSectionsArgs
+  subBranches?: boolean | BranchCountOutputTypeCountSubBranchesArgs
 }
 
 /**
@@ -968,6 +1520,13 @@ export type BranchCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Exten
  * BranchCountOutputType without action
  */
 export type BranchCountOutputTypeCountUsersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UserWhereInput
+}
+
+/**
+ * BranchCountOutputType without action
+ */
+export type BranchCountOutputTypeCountSubBranchUsersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.UserWhereInput
 }
 
@@ -1006,20 +1565,32 @@ export type BranchCountOutputTypeCountPayrollSectionsArgs<ExtArgs extends runtim
   where?: Prisma.PayrollSectionWhereInput
 }
 
+/**
+ * BranchCountOutputType without action
+ */
+export type BranchCountOutputTypeCountSubBranchesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BranchWhereInput
+}
+
 
 export type BranchSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   nameEn?: boolean
   nameAr?: boolean
+  isMain?: boolean
+  parentBranchId?: boolean
   isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   users?: boolean | Prisma.Branch$usersArgs<ExtArgs>
+  subBranchUsers?: boolean | Prisma.Branch$subBranchUsersArgs<ExtArgs>
   employees?: boolean | Prisma.Branch$employeesArgs<ExtArgs>
   projects?: boolean | Prisma.Branch$projectsArgs<ExtArgs>
   payrollSummaries?: boolean | Prisma.Branch$payrollSummariesArgs<ExtArgs>
   payrollDetails?: boolean | Prisma.Branch$payrollDetailsArgs<ExtArgs>
   payrollSections?: boolean | Prisma.Branch$payrollSectionsArgs<ExtArgs>
+  parentBranch?: boolean | Prisma.Branch$parentBranchArgs<ExtArgs>
+  subBranches?: boolean | Prisma.Branch$subBranchesArgs<ExtArgs>
   _count?: boolean | Prisma.BranchCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["branch"]>
 
@@ -1027,56 +1598,76 @@ export type BranchSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   id?: boolean
   nameEn?: boolean
   nameAr?: boolean
+  isMain?: boolean
+  parentBranchId?: boolean
   isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  parentBranch?: boolean | Prisma.Branch$parentBranchArgs<ExtArgs>
 }, ExtArgs["result"]["branch"]>
 
 export type BranchSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   nameEn?: boolean
   nameAr?: boolean
+  isMain?: boolean
+  parentBranchId?: boolean
   isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  parentBranch?: boolean | Prisma.Branch$parentBranchArgs<ExtArgs>
 }, ExtArgs["result"]["branch"]>
 
 export type BranchSelectScalar = {
   id?: boolean
   nameEn?: boolean
   nameAr?: boolean
+  isMain?: boolean
+  parentBranchId?: boolean
   isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type BranchOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nameEn" | "nameAr" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["branch"]>
+export type BranchOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nameEn" | "nameAr" | "isMain" | "parentBranchId" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["branch"]>
 export type BranchInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   users?: boolean | Prisma.Branch$usersArgs<ExtArgs>
+  subBranchUsers?: boolean | Prisma.Branch$subBranchUsersArgs<ExtArgs>
   employees?: boolean | Prisma.Branch$employeesArgs<ExtArgs>
   projects?: boolean | Prisma.Branch$projectsArgs<ExtArgs>
   payrollSummaries?: boolean | Prisma.Branch$payrollSummariesArgs<ExtArgs>
   payrollDetails?: boolean | Prisma.Branch$payrollDetailsArgs<ExtArgs>
   payrollSections?: boolean | Prisma.Branch$payrollSectionsArgs<ExtArgs>
+  parentBranch?: boolean | Prisma.Branch$parentBranchArgs<ExtArgs>
+  subBranches?: boolean | Prisma.Branch$subBranchesArgs<ExtArgs>
   _count?: boolean | Prisma.BranchCountOutputTypeDefaultArgs<ExtArgs>
 }
-export type BranchIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
-export type BranchIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type BranchIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  parentBranch?: boolean | Prisma.Branch$parentBranchArgs<ExtArgs>
+}
+export type BranchIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  parentBranch?: boolean | Prisma.Branch$parentBranchArgs<ExtArgs>
+}
 
 export type $BranchPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Branch"
   objects: {
     users: Prisma.$UserPayload<ExtArgs>[]
+    subBranchUsers: Prisma.$UserPayload<ExtArgs>[]
     employees: Prisma.$EmployeePayload<ExtArgs>[]
     projects: Prisma.$ProjectPayload<ExtArgs>[]
     payrollSummaries: Prisma.$PayrollSummaryPayload<ExtArgs>[]
     payrollDetails: Prisma.$PayrollDetailsPayload<ExtArgs>[]
     payrollSections: Prisma.$PayrollSectionPayload<ExtArgs>[]
+    parentBranch: Prisma.$BranchPayload<ExtArgs> | null
+    subBranches: Prisma.$BranchPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     nameEn: string
     nameAr: string | null
+    isMain: boolean
+    parentBranchId: number | null
     isActive: boolean
     createdAt: Date
     updatedAt: Date
@@ -1475,11 +2066,14 @@ readonly fields: BranchFieldRefs;
 export interface Prisma__BranchClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   users<T extends Prisma.Branch$usersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Branch$usersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  subBranchUsers<T extends Prisma.Branch$subBranchUsersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Branch$subBranchUsersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   employees<T extends Prisma.Branch$employeesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Branch$employeesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   projects<T extends Prisma.Branch$projectsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Branch$projectsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   payrollSummaries<T extends Prisma.Branch$payrollSummariesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Branch$payrollSummariesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PayrollSummaryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   payrollDetails<T extends Prisma.Branch$payrollDetailsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Branch$payrollDetailsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PayrollDetailsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   payrollSections<T extends Prisma.Branch$payrollSectionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Branch$payrollSectionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PayrollSectionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  parentBranch<T extends Prisma.Branch$parentBranchArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Branch$parentBranchArgs<ExtArgs>>): Prisma.Prisma__BranchClient<runtime.Types.Result.GetResult<Prisma.$BranchPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  subBranches<T extends Prisma.Branch$subBranchesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Branch$subBranchesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BranchPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1512,6 +2106,8 @@ export interface BranchFieldRefs {
   readonly id: Prisma.FieldRef<"Branch", 'Int'>
   readonly nameEn: Prisma.FieldRef<"Branch", 'String'>
   readonly nameAr: Prisma.FieldRef<"Branch", 'String'>
+  readonly isMain: Prisma.FieldRef<"Branch", 'Boolean'>
+  readonly parentBranchId: Prisma.FieldRef<"Branch", 'Int'>
   readonly isActive: Prisma.FieldRef<"Branch", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"Branch", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Branch", 'DateTime'>
@@ -1764,6 +2360,10 @@ export type BranchCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensio
    */
   data: Prisma.BranchCreateManyInput | Prisma.BranchCreateManyInput[]
   skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BranchIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1834,6 +2434,10 @@ export type BranchUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensio
    * Limit how many Branches to update.
    */
   limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BranchIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1906,6 +2510,30 @@ export type BranchDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Intern
  * Branch.users
  */
 export type Branch$usersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
+  orderBy?: Prisma.UserOrderByWithRelationInput | Prisma.UserOrderByWithRelationInput[]
+  cursor?: Prisma.UserWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.UserScalarFieldEnum | Prisma.UserScalarFieldEnum[]
+}
+
+/**
+ * Branch.subBranchUsers
+ */
+export type Branch$subBranchUsersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the User
    */
@@ -2044,6 +2672,49 @@ export type Branch$payrollSectionsArgs<ExtArgs extends runtime.Types.Extensions.
   take?: number
   skip?: number
   distinct?: Prisma.PayrollSectionScalarFieldEnum | Prisma.PayrollSectionScalarFieldEnum[]
+}
+
+/**
+ * Branch.parentBranch
+ */
+export type Branch$parentBranchArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Branch
+   */
+  select?: Prisma.BranchSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Branch
+   */
+  omit?: Prisma.BranchOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BranchInclude<ExtArgs> | null
+  where?: Prisma.BranchWhereInput
+}
+
+/**
+ * Branch.subBranches
+ */
+export type Branch$subBranchesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Branch
+   */
+  select?: Prisma.BranchSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Branch
+   */
+  omit?: Prisma.BranchOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BranchInclude<ExtArgs> | null
+  where?: Prisma.BranchWhereInput
+  orderBy?: Prisma.BranchOrderByWithRelationInput | Prisma.BranchOrderByWithRelationInput[]
+  cursor?: Prisma.BranchWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BranchScalarFieldEnum | Prisma.BranchScalarFieldEnum[]
 }
 
 /**

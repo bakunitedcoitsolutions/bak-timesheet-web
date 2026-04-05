@@ -20,22 +20,24 @@ datasource db {
 // you'll need to add back the Account model.
 
 model User {
-  id         Int      @id @default(autoincrement())
-  nameEn     String
-  nameAr     String?
-  email      String   @unique
-  password   String? // Hashed password
-  userRoleId Int
-  branchId   Int? // Required for Branch Manager (roleId: 3), optional for others
-  isActive   Boolean  @default(true)
-  createdBy  Int? // ID of user who created this record
-  updatedBy  Int? // ID of user who last updated this record
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  id          Int      @id @default(autoincrement())
+  nameEn      String
+  nameAr      String?
+  email       String   @unique
+  password    String? // Hashed password
+  userRoleId  Int
+  branchId    Int? // Required for Branch Manager (roleId: 3), optional for others
+  subBranchId Int? // Optional
+  isActive    Boolean  @default(true)
+  createdBy   Int? // ID of user who created this record
+  updatedBy   Int? // ID of user who last updated this record
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
   // Relations: User → Other Tables (User has foreign keys)
   userRole   UserRole       @relation(fields: [userRoleId], references: [id])
-  branch     Branch?        @relation(fields: [branchId], references: [id])
+  branch     Branch?        @relation("UserBranch", fields: [branchId], references: [id])
+  subBranch  Branch?        @relation("UserSubBranch", fields: [subBranchId], references: [id])
   privileges UserPrivilege?
   creator    User?          @relation("UserCreatedBy", fields: [createdBy], references: [id])
   updater    User?          @relation("UserUpdatedBy", fields: [updatedBy], references: [id])
@@ -53,6 +55,7 @@ model User {
   @@index([email])
   @@index([userRoleId])
   @@index([branchId])
+  @@index([subBranchId])
   @@index([createdBy])
   @@index([updatedBy])
 }
@@ -89,20 +92,29 @@ model UserPrivilege {
 // ============================================
 
 model Branch {
-  id        Int      @id @default(autoincrement())
-  nameEn    String
-  nameAr    String?
-  isActive  Boolean  @default(true)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id             Int      @id @default(autoincrement())
+  nameEn         String
+  nameAr         String?
+  isMain         Boolean  @default(false)
+  parentBranchId Int?
+  isActive       Boolean  @default(true)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 
   // Relations: Other Tables → Branch (Other tables have foreign keys pointing to Branch)
-  users            User[]
+  users            User[]           @relation("UserBranch")
+  subBranchUsers   User[]           @relation("UserSubBranch")
   employees        Employee[]
   projects         Project[]
   payrollSummaries PayrollSummary[]
   payrollDetails   PayrollDetails[]
   payrollSections  PayrollSection[]
+
+  // Self Relation: Branch hierarchy
+  parentBranch Branch?  @relation("BranchToSubBranch", fields: [parentBranchId], references: [id])
+  subBranches  Branch[] @relation("BranchToSubBranch")
+
+  @@index([parentBranchId])
 }
 
 model City {
@@ -172,7 +184,7 @@ model Employee {
   isDeductable       Boolean   @default(false)
   isFixed            Boolean   @default(false)
   workingDays        Int?
-  hourlyRate         Decimal  @db.Decimal(10, 2)
+  hourlyRate         Decimal   @db.Decimal(10, 2)
   salary             Int?
   breakfastAllowance Boolean   @default(false)
   foodAllowance      Int?
@@ -205,7 +217,7 @@ model Employee {
   gosiCityId Int?
 
   // Step 5 - Loan & Bank Card Details
-  isCardDelivered Boolean  @default(false)
+  isCardDelivered Boolean @default(false)
   cardDocument    String?
 
   createdAt DateTime @default(now())
@@ -334,7 +346,7 @@ model PayrollSection {
   branch Branch? @relation(fields: [branchId], references: [id])
 
   // Relations: Other Tables → PayrollSection (Other tables have foreign keys pointing to PayrollSection)
-  employees      Employee[]
+  employees Employee[]
 }
 
 model PayrollStatus {

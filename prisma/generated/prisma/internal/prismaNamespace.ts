@@ -2025,6 +2025,7 @@ export const UserScalarFieldEnum = {
   password: 'password',
   userRoleId: 'userRoleId',
   branchId: 'branchId',
+  subBranchId: 'subBranchId',
   isActive: 'isActive',
   createdBy: 'createdBy',
   updatedBy: 'updatedBy',
@@ -2063,6 +2064,8 @@ export const BranchScalarFieldEnum = {
   id: 'id',
   nameEn: 'nameEn',
   nameAr: 'nameAr',
+  isMain: 'isMain',
+  parentBranchId: 'parentBranchId',
   isActive: 'isActive',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
