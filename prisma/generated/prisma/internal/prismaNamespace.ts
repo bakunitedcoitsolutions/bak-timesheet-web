@@ -2065,7 +2065,6 @@ export const BranchScalarFieldEnum = {
   nameEn: 'nameEn',
   nameAr: 'nameAr',
   isMain: 'isMain',
-  parentBranchId: 'parentBranchId',
   isActive: 'isActive',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'

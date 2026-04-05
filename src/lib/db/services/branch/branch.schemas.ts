@@ -9,6 +9,7 @@ import { z } from "zod";
 export const CreateBranchSchema = z.object({
   nameEn: z.string().min(2, "Name is required"),
   nameAr: z.string().min(2, "Arabic name is required").optional(),
+  isMain: z.boolean().default(true).optional(),
   isActive: z.boolean().default(true).optional(),
 });
 
@@ -16,6 +17,7 @@ export const UpdateBranchSchema = z.object({
   id: z.number().int().positive(),
   nameEn: z.string().min(2, "Name is required").optional(),
   nameAr: z.string().min(2, "Arabic name is required").optional(),
+  isMain: z.boolean().optional(),
   isActive: z.boolean().optional(),
 });
 
@@ -23,8 +25,9 @@ export const ListBranchesParamsSchema = z.object({
   page: z.number().int().positive().optional(),
   limit: z.number().int().positive().optional(),
   search: z.string().optional(),
+  isMain: z.boolean().optional(),
   sortOrder: z.enum(["asc", "desc"]).optional(),
-  sortBy: z.enum(["nameEn", "nameAr", "isActive"]).optional(),
+  sortBy: z.enum(["nameEn", "nameAr", "isActive", "isMain"]).optional(),
 });
 
 export const GetBranchByIdSchema = z.object({

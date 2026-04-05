@@ -10,21 +10,28 @@
 export interface CreateBranchData {
   nameEn: string;
   nameAr?: string;
+  isMain?: boolean;
   isActive?: boolean;
 }
 
 export interface UpdateBranchData {
   nameEn?: string;
   nameAr?: string;
+  isMain?: boolean;
   isActive?: boolean;
 }
 
-export type ListBranchesSortableField = "nameEn" | "nameAr" | "isActive";
+export type ListBranchesSortableField =
+  | "nameEn"
+  | "nameAr"
+  | "isActive"
+  | "isMain";
 
 export interface ListBranchesParams {
   page?: number;
   limit?: number;
   search?: string;
+  isMain?: boolean;
   sortOrder?: "asc" | "desc";
   sortBy?: ListBranchesSortableField;
 }
@@ -33,6 +40,7 @@ export interface BranchInterface {
   id: number;
   nameEn: string;
   nameAr: string | null;
+  isMain: boolean;
   isActive: boolean;
   createdAt: Date | any;
   updatedAt: Date | any;

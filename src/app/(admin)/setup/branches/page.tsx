@@ -31,6 +31,7 @@ import {
 const SORTABLE_FIELDS = {
   nameEn: "nameEn",
   nameAr: "nameAr",
+  isMain: "isMain",
   isActive: "isActive",
 } as const;
 
@@ -85,6 +86,20 @@ const columns = (
           {rowData.nameAr || ""}
         </span>
       </div>
+    ),
+  },
+  {
+    field: "isMain",
+    header: "Type",
+    sortable: true,
+    filterable: false,
+    style: { minWidth: 130 },
+    align: "center",
+    body: (rowData: ListedBranch) => (
+      <TypeBadge
+        text={rowData.isMain ? "Main" : "Sub"}
+        variant={rowData.isMain ? "primary" : "warning"}
+      />
     ),
   },
   {

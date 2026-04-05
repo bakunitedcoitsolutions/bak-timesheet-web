@@ -96,7 +96,6 @@ model Branch {
   nameEn         String
   nameAr         String?
   isMain         Boolean  @default(false)
-  parentBranchId Int?
   isActive       Boolean  @default(true)
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
@@ -109,12 +108,6 @@ model Branch {
   payrollSummaries PayrollSummary[]
   payrollDetails   PayrollDetails[]
   payrollSections  PayrollSection[]
-
-  // Self Relation: Branch hierarchy
-  parentBranch Branch?  @relation("BranchToSubBranch", fields: [parentBranchId], references: [id])
-  subBranches  Branch[] @relation("BranchToSubBranch")
-
-  @@index([parentBranchId])
 }
 
 model City {

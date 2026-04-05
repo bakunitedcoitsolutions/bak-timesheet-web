@@ -20,7 +20,14 @@ import { toastService } from "@/lib/toast";
 import { getEntityModeFromParam } from "@/helpers";
 import { getErrorMessage } from "@/utils/helpers";
 import { FORM_FIELD_WIDTHS, STATUS_OPTIONS } from "@/utils/constants";
-import { Input, Button, Dropdown, Form, FormItem } from "@/components/forms";
+import {
+  Input,
+  Button,
+  Dropdown,
+  Form,
+  FormItem,
+  RadioGroup,
+} from "@/components/forms";
 import { StepperFormHeading } from "@/components";
 
 const UpsertBranchPage = () => {
@@ -46,6 +53,7 @@ const UpsertBranchPage = () => {
     ...(isEditMode ? { id: 0 } : {}),
     nameEn: "",
     nameAr: "",
+    isMain: true,
     isActive: true,
   };
 
@@ -75,6 +83,7 @@ const UpsertBranchPage = () => {
         ...(isEditMode ? { id: foundBranch?.id ?? 0 } : {}),
         nameEn: foundBranch?.nameEn,
         nameAr: foundBranch?.nameAr,
+        isMain: foundBranch?.isMain ?? true,
         isActive: foundBranch?.isActive,
       };
       reset(setBranch);
@@ -157,6 +166,17 @@ const UpsertBranchPage = () => {
                       label="Arabic Name"
                       className="w-full text-right"
                       placeholder="أدخل الاسم بالعربية"
+                    />
+                  </FormItem>
+                </div>
+                <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
+                  <FormItem name="isMain">
+                    <RadioGroup
+                      label="Branch Type"
+                      options={[
+                        { label: "Main Branch", value: true },
+                        { label: "Sub Branch", value: false },
+                      ]}
                     />
                   </FormItem>
                 </div>

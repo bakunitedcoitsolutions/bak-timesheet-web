@@ -22,6 +22,7 @@ const branchSelect = {
   id: true,
   nameEn: true,
   nameAr: true,
+  isMain: true,
   isActive: true,
   createdAt: true,
   updatedAt: true,
@@ -45,6 +46,7 @@ export const createBranch = async (data: CreateBranchData) => {
     data: {
       nameEn: data.nameEn,
       nameAr: data.nameAr,
+      isMain: data.isMain ?? true,
       isActive: data.isActive ?? true,
     },
     select: branchSelect,
@@ -97,6 +99,7 @@ export const updateBranch = async (id: number, data: UpdateBranchData) => {
 
     if (data.nameEn !== undefined) updateData.nameEn = data.nameEn;
     if (data.nameAr !== undefined) updateData.nameAr = data.nameAr;
+    if (data.isMain !== undefined) updateData.isMain = data.isMain;
     if (data.isActive !== undefined) updateData.isActive = data.isActive;
 
     const updatedBranch = await tx.branch.update({
@@ -183,6 +186,10 @@ export const listBranches = async (
     ];
   }
 
+  if (params.isMain !== undefined) {
+    where.isMain = params.isMain;
+  }
+
   // Determine sort order (default: desc)
   const sortOrder = params.sortOrder || "desc";
 
@@ -192,7 +199,7 @@ export const listBranches = async (
 
   if (params.sortBy) {
     const sortBy = params.sortBy;
-    const validFields = ["nameEn", "nameAr", "isActive"] as const;
+    const validFields = ["nameEn", "nameAr", "isActive", "isMain"] as const;
 
     // Only allow sorting by the specified valid fields
     if (validFields.includes(sortBy)) {
