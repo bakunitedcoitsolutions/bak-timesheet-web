@@ -11,6 +11,7 @@ export interface CreateExitReentryData {
   date: Date | string;
   type: ExitReentryType;
   remarks?: string;
+  branchId?: number;
 }
 
 export interface UpdateExitReentryData {
@@ -19,12 +20,10 @@ export interface UpdateExitReentryData {
   date?: Date | string;
   type?: ExitReentryType;
   remarks?: string;
+  branchId?: number;
 }
 
-export type ListExitReentriesSortableField =
-  | "date"
-  | "type"
-  | "createdAt";
+export type ListExitReentriesSortableField = "date" | "type" | "createdAt";
 
 export interface ListExitReentriesParams {
   page?: number;
@@ -35,6 +34,7 @@ export interface ListExitReentriesParams {
   employeeId?: number;
   designationId?: number;
   type?: ExitReentryType;
+  branchId?: number;
   startDate?: Date | string;
   endDate?: Date | string;
 }

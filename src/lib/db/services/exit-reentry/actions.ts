@@ -1,5 +1,6 @@
 "use server";
 import { serverAction } from "@/lib/zsa/zsa-action";
+import { getServerAccessContext } from "@/lib/auth/helpers";
 import {
   createExitReentry,
   updateExitReentry,
@@ -23,7 +24,12 @@ import {
 export const createExitReentryAction = serverAction
   .input(CreateExitReentrySchema)
   .handler(async ({ input }: { input: CreateExitReentryInput }) => {
-    const response = await createExitReentry(input);
+    const { isBranchScoped, userBranchId } = await getServerAccessContext();
+
+    const response = await createExitReentry({
+      ...input,
+      branchId: isBranchScoped ? userBranchId : undefined,
+    });
     return response;
   });
 
@@ -31,8 +37,13 @@ export const createExitReentryAction = serverAction
 export const updateExitReentryAction = serverAction
   .input(UpdateExitReentrySchema)
   .handler(async ({ input }: { input: UpdateExitReentryInput }) => {
+    const { isBranchScoped, userBranchId } = await getServerAccessContext();
+
     const { id, ...rest } = input;
-    const response = await updateExitReentry(id, rest);
+    const response = await updateExitReentry(id, {
+      ...rest,
+      branchId: isBranchScoped ? userBranchId : undefined,
+    });
     return response;
   });
 
@@ -40,7 +51,12 @@ export const updateExitReentryAction = serverAction
 export const listExitReentriesAction = serverAction
   .input(ListExitReentriesParamsSchema)
   .handler(async ({ input }) => {
-    const response = await listExitReentries(input);
+    const { isBranchScoped, userBranchId } = await getServerAccessContext();
+
+    const response = await listExitReentries({
+      ...input,
+      branchId: isBranchScoped ? userBranchId : undefined,
+    });
     return response;
   });
 

@@ -10,6 +10,7 @@ import {
   Button,
   TableRef,
   TypeBadge,
+  useAccess,
   TableColumn,
   TableActions,
   ExportOptions,
@@ -28,8 +29,8 @@ import {
   ListExitReentriesSortableField,
 } from "@/lib/db/services/exit-reentry/exit-reentry.dto";
 import {
-  useDeleteExitReentry,
   useGetExitReentries,
+  useDeleteExitReentry,
 } from "@/lib/db/services/exit-reentry/requests";
 import { useGlobalData, GlobalDataEmployee } from "@/context/GlobalDataContext";
 // Constants
@@ -53,7 +54,10 @@ type SortableField = keyof typeof SORTABLE_FIELDS;
 const columns = (
   handleEdit: (entry: ListedExitReentry) => void,
   handleDelete: (entry: ListedExitReentry) => void,
-  employeesMap: Map<number, GlobalDataEmployee>
+  employeesMap: Map<number, GlobalDataEmployee>,
+  canEdit: boolean,
+  canDelete: boolean,
+  role: number | string | undefined
 ): TableColumn<ListedExitReentry>[] => [
   {
     field: "id",
@@ -119,21 +123,27 @@ const columns = (
       <span className="text-sm line-clamp-2">{rowData.remarks || "-"}</span>
     ),
   },
-  {
-    field: "actions",
-    header: "Actions",
-    sortable: false,
-    filterable: false,
-    align: "center",
-    style: { minWidth: 150 },
-    body: (rowData: ListedExitReentry) => (
-      <TableActions
-        rowData={rowData}
-        onEdit={handleEdit}
-        onDelete={handleDelete}
-      />
-    ),
-  },
+  ...(canEdit || canDelete
+    ? [
+        {
+          field: "actions",
+          header: "Actions",
+          sortable: false,
+          filterable: false,
+          align: "center",
+          style: { minWidth: 150 },
+          body: (rowData: ListedExitReentry) => (
+            <TableActions
+              rowData={rowData}
+              onEdit={canEdit ? handleEdit : undefined}
+              onDelete={
+                canDelete && Number(role) !== 4 ? handleDelete : undefined
+              }
+            />
+          ),
+        } as TableColumn<ListedExitReentry>,
+      ]
+    : []),
 ];
 
 const ExitReentryPage = () => {
@@ -148,6 +158,11 @@ const ExitReentryPage = () => {
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
   const tableRef = useRef<TableRef>(null);
   const { mutateAsync: deleteExitReentry } = useDeleteExitReentry();
+
+  const { can, role } = useAccess();
+  const canEdit = can("exitReentry", "edit");
+  const canDelete = can("exitReentry", "full"); // Usually 'full' or 'delete' if defined
+  const canAdd = can("exitReentry", "add");
 
   // Debounce search input
   const debouncedSearch = useDebounce(searchValue, 500);
@@ -292,19 +307,20 @@ const ExitReentryPage = () => {
   const sortHandler = useMemo(
     () =>
       createSortHandler({
-        fieldMap: SORTABLE_FIELDS,
         currentPage: page,
+        fieldMap: SORTABLE_FIELDS,
+        onPageReset: handlePageReset,
         onSortByChange: handleSortByChange,
         onSortOrderChange: handleSortOrderChange,
-        onPageReset: handlePageReset,
       }),
     [page, handlePageReset, handleSortByChange, handleSortOrderChange]
   );
 
   // Memoized columns
   const tableColumns = useMemo(
-    () => columns(handleEdit, handleDelete, employeesMap),
-    [handleEdit, handleDelete, employeesMap]
+    () =>
+      columns(handleEdit, handleDelete, employeesMap, canEdit, canDelete, role),
+    [handleEdit, handleDelete, employeesMap, canEdit, canDelete, role]
   );
 
   // Memoized header renderer
@@ -359,13 +375,15 @@ const ExitReentryPage = () => {
           </p>
         </div>
         <div className="w-full md:w-auto">
-          <Button
-            size="small"
-            variant="solid"
-            icon="pi pi-plus"
-            label="Add Exit Re-Entry"
-            onClick={() => router.push("/exit-reentry/new")}
-          />
+          {canAdd && (
+            <Button
+              size="small"
+              variant="solid"
+              icon="pi pi-plus"
+              label="Add Exit Re-Entry"
+              onClick={() => router.push("/exit-reentry/new")}
+            />
+          )}
         </div>
       </div>
       <div className="bg-white flex-1 rounded-xl overflow-hidden min-h-0">

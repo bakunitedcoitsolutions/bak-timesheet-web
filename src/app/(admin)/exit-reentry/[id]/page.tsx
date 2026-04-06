@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { classNames } from "primereact/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -32,9 +32,9 @@ import {
 } from "@/components/forms";
 import { toastService } from "@/lib/toast";
 import { getErrorMessage } from "@/utils/helpers";
-import { StepperFormHeading } from "@/components";
 import { getEntityModeFromParam } from "@/helpers";
 import { FORM_FIELD_WIDTHS } from "@/utils/constants";
+import { StepperFormHeading, useAccess } from "@/components";
 
 const exitReentryTypeOptions = [
   { label: "Exit", value: "EXIT" },
@@ -59,6 +59,12 @@ const UpsertExitReentryPage = () => {
   const { data: foundExitReentry, isLoading } = useGetExitReentryById({
     id: exitReentryId ? Number(exitReentryId) : 0,
   });
+
+  const { can, isLoading: isAccessLoading } = useAccess();
+  const canEdit = can("exitReentry", "edit");
+  const canAdd = can("exitReentry", "add");
+  const hasPermission = isAddMode ? canAdd : canEdit;
+  const toastShownRef = useRef(false);
 
   // Fetch global data
   const { data: globalData } = useGlobalData();
@@ -116,6 +122,30 @@ const UpsertExitReentryPage = () => {
       router.replace("/404");
     }
   }, [isInvalid, router]);
+
+  // Redirect if insufficient permissions
+  useEffect(() => {
+    if (isAccessLoading || toastShownRef.current) return;
+    if (isAddMode && !canAdd) {
+      toastShownRef.current = true;
+      toastService.showError(
+        "Access Denied",
+        "You do not have permission to add exit/re-entries."
+      );
+      setTimeout(() => {
+        router.replace("/exit-reentry");
+      }, 100);
+    } else if (isEditMode && !canEdit) {
+      toastShownRef.current = true;
+      toastService.showError(
+        "Access Denied",
+        "You do not have permission to edit exit/re-entries."
+      );
+      setTimeout(() => {
+        router.replace("/exit-reentry");
+      }, 100);
+    }
+  }, [isAddMode, isEditMode, canAdd, canEdit, isAccessLoading, router]);
 
   useEffect(() => {
     if (foundExitReentry) {
@@ -276,16 +306,18 @@ const UpsertExitReentryPage = () => {
               >
                 Cancel
               </Button>
-              <Button
-                size="small"
-                variant="solid"
-                onClick={onFormSubmit}
-                loading={isSubmitting}
-                disabled={isSubmitting}
-                className="w-28 justify-center! gap-1"
-              >
-                Save
-              </Button>
+              {hasPermission && (
+                <Button
+                  size="small"
+                  variant="solid"
+                  onClick={onFormSubmit}
+                  loading={isSubmitting}
+                  disabled={isSubmitting}
+                  className="w-28 justify-center! gap-1"
+                >
+                  Save
+                </Button>
+              )}
             </div>
           </>
         )}

@@ -37,11 +37,16 @@ export const createExitReentry = async (data: CreateExitReentryData) => {
     // Validate employee exists
     const employee = await tx.employee.findUnique({
       where: { id: data.employeeId },
-      select: { id: true },
+      select: { id: true, branchId: true },
     });
 
     if (!employee) {
       throw new Error(`Employee with ID ${data.employeeId} does not exist`);
+    }
+
+    // Security validation: verify branch assignment for branch-scoped users
+    if (data.branchId && employee?.branchId !== data.branchId) {
+      throw new Error("Employee does not belong to your branch");
     }
 
     // Validate designation if provided
@@ -113,11 +118,27 @@ export const updateExitReentry = async (
     // Check if exit reentry exists and get current data
     const existingExitReentry = await tx.exitReentry.findUnique({
       where: { id },
-      select: { id: true, employeeId: true, type: true, date: true },
+      select: {
+        id: true,
+        employeeId: true,
+        type: true,
+        date: true,
+        employee: { select: { branchId: true } },
+      },
     });
 
     if (!existingExitReentry) {
       throw new Error("Exit reentry not found");
+    }
+
+    // Security validation: verify branch assignment for branch-scoped users
+    if (
+      data.branchId &&
+      existingExitReentry.employee?.branchId !== data.branchId
+    ) {
+      throw new Error(
+        "Access Denied: Exit/Re-entry belongs to another branch."
+      );
     }
 
     // Validate employee if provided
@@ -246,6 +267,14 @@ export const listExitReentries = async (
     if (params.endDate) {
       where.date.lte = dayjs(params.endDate).toDate();
     }
+  }
+
+  // Filter by branchId via employee relation
+  if (params.branchId) {
+    where.employee = {
+      ...(where?.employee || {}),
+      branchId: params.branchId,
+    };
   }
 
   // Build orderBy clause
