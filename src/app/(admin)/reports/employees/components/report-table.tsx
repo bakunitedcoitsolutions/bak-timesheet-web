@@ -74,7 +74,9 @@ export const ReportTable = ({
         body: (rowData) => (
           <div className="flex flex-col gap-1">
             <span className="text-sm">{rowData.nameEn}</span>
-            <span className="text-sm text-gray-600">{rowData.nameAr}</span>
+            <span className="text-sm text-gray-600 font-arabic! text-right!">
+              {rowData.nameAr}
+            </span>
           </div>
         ),
       },
@@ -451,6 +453,15 @@ export const ReportTable = ({
         style: { minWidth: 120 },
         body: (rowData) => (
           <span className="text-sm">{rowData.bankCode || "-"}</span>
+        ),
+      },
+      {
+        field: "iban",
+        header: "IBAN",
+        ...tableCommonProps,
+        style: { minWidth: 200 },
+        body: (rowData) => (
+          <span className="text-sm">{rowData.iban || "-"}</span>
         ),
       },
       {

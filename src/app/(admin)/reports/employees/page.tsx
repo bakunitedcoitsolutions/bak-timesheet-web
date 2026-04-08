@@ -166,6 +166,7 @@ const EmployeesReportPage = () => {
     { label: "Bank Code", value: "bankCode" },
     { label: "GOSI Salary", value: "gosiSalary" },
     { label: "GOSI City", value: "gosiCityName" },
+    { label: "IBAN", value: "iban" },
     { label: "Card Delivered?", value: "isCardDelivered" },
     { label: "Card Doc", value: "cardDocument" },
   ];
@@ -173,31 +174,50 @@ const EmployeesReportPage = () => {
   const handlePrint = async () => {
     const allData = await fetchAllEmployees();
     if (allData && allData.length > 0) {
-      const columns = [
+      const exportCols = [
         { header: "Code", field: "employeeCode", style: { minWidth: "70px" } },
-        { header: "Name (EN)", field: "nameEn", style: { minWidth: "280px" } },
-        { header: "Designation", field: "designationName" },
-        { header: "Branch", field: "branchName" },
-        { header: "Sub Branch", field: "subBranchName" },
-        { header: "Section", field: "sectionName" },
-        { header: "Mobile No", field: "phone" },
-        { header: "Status", field: "statusName" },
+        {
+          header: "Name",
+          field: "nameEn",
+          style: { minWidth: "280px" },
+          body: (rowData: any) => (
+            <div className="flex flex-col gap-1">
+              <div className="text-xs font-normal!">{rowData.nameEn}</div>
+              <div className="text-sm font-arabic! text-right">
+                {rowData.nameAr}
+              </div>
+            </div>
+          ),
+        },
+        ...selectedColumns
+          .filter(
+            (col) =>
+              col !== "employeeCode" && col !== "nameEn" && col !== "nameAr"
+          )
+          .map((colKey) => ({
+            header:
+              availableColumns.find((c) => c.value === colKey)?.label || colKey,
+            field: colKey,
+          })),
       ];
 
+      const isLandscape = exportCols.length > 5;
       if (!hasActiveFilter) {
         printGroupedTable({
           data: allData,
-          columns,
+          columns: exportCols,
           groupBy: "sectionName",
           printTitle: "EMPLOYEES REPORT",
           printSubTitle: `${allData?.length} Employee(s)`,
+          landscape: isLandscape,
         });
       } else {
         printTable({
           data: allData,
-          columns,
+          columns: exportCols,
           printTitle: "EMPLOYEES REPORT",
           printSubTitle: `${allData?.length} Employee(s)`,
+          landscape: isLandscape,
         });
       }
     }
