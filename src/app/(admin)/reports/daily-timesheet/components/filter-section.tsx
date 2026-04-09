@@ -1,6 +1,5 @@
 "use client";
 
-import dayjs from "@/lib/dayjs";
 import { memo, useState, useMemo } from "react";
 import { classNames } from "primereact/utils";
 import { Checkbox } from "primereact/checkbox";
@@ -16,8 +15,8 @@ import { useGlobalData, GlobalDataGeneral } from "@/context/GlobalDataContext";
 
 interface FilterSectionProps {
   onSearch: (params: any) => void;
-  selectedDate: Date;
-  onDateChange: (date: Date) => void;
+  selectedDate: string;
+  onDateChange: (date: string) => void;
   isLoading: boolean;
 }
 
@@ -69,10 +68,10 @@ export const FilterSection = memo(
               <div className="w-full">
                 <Input
                   type="date"
-                  value={dayjs(selectedDate).format("YYYY-MM-DD")}
+                  value={selectedDate}
                   onChange={(e) => {
                     if (e.target.value) {
-                      onDateChange(dayjs(e.target.value).toDate());
+                      onDateChange(e.target.value);
                     }
                   }}
                   onKeyDown={(e) => {

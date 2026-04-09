@@ -10,7 +10,7 @@ import { TimesheetPageRow } from "@/lib/db/services/timesheet/timesheet.dto";
 interface ReportTableProps {
   data: TimesheetPageRow[];
   isLoading: boolean;
-  selectedDate: Date;
+  selectedDate: string;
   selectedProject?: GlobalDataGeneral | null;
 }
 

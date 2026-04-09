@@ -23,14 +23,14 @@ import type {
  * preventing timezone shifts (e.g. +5 hours becoming previous day in UTC).
  */
 function startOfDayUTC(date: Date): Date {
-  return dayjs.utc(dayjs(date).format("YYYY-MM-DD")).startOf("day").toDate();
+  return dayjs.utc(dayjs(date).tz().format("YYYY-MM-DD")).startOf("day").toDate();
 }
 
 /**
  * Build start and end of day in UTC from a given Date.
  */
 function getDayRange(date: Date): { startOfDay: Date; endOfDay: Date } {
-  const d = dayjs.utc(dayjs(date).format("YYYY-MM-DD"));
+  const d = dayjs.utc(dayjs(date).tz().format("YYYY-MM-DD"));
   return {
     startOfDay: d.startOf("day").toDate(),
     endOfDay: d.endOf("day").toDate(),

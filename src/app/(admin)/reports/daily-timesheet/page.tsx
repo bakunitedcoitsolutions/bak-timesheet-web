@@ -4,6 +4,7 @@ import { useState, useRef, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { Paginator } from "primereact/paginator";
 
+import dayjs from "@/lib/dayjs";
 import { TitleHeader, Button } from "@/components";
 import { parseGroupDropdownFilter } from "@/utils/helpers";
 import { centuryGothic, tanseekArabic } from "@/app/fonts";
@@ -11,7 +12,6 @@ import { useGlobalData } from "@/context/GlobalDataContext";
 import { TimesheetPageRow } from "@/lib/db/services/timesheet/timesheet.dto";
 import { useGetDailyTimesheetReport } from "@/lib/db/services/timesheet/requests";
 import { printDailyTimesheetReport } from "@/utils/helpers/print-daily-timesheet";
-import dayjs from "@/lib/dayjs";
 
 // Extracted Components
 import { ReportTable } from "./components/report-table";
@@ -24,8 +24,12 @@ const DailyTimesheetReportPage = () => {
   const { data: globalData } = useGlobalData();
 
   // Filter states
-  const [selectedDate, setSelectedDate] = useState<Date>(dayjs().toDate());
-  const [queryDate, setQueryDate] = useState<Date>(dayjs().toDate());
+  const [selectedDate, setSelectedDate] = useState<string>(
+    dayjs().format("YYYY-MM-DD")
+  );
+  const [queryDate, setQueryDate] = useState<string>(
+    dayjs().format("YYYY-MM-DD")
+  );
   const [isFirstLoad, setIsFirstLoad] = useState(true);
   const [filter, setFilter] = useState({
     employeeCodes: null as string[] | null,
@@ -43,7 +47,7 @@ const DailyTimesheetReportPage = () => {
   // Data fetching
   const { data: reportResponse, isLoading } = useGetDailyTimesheetReport(
     {
-      date: queryDate,
+      date: new Date(queryDate),
       employeeCodes: filter.employeeCodes,
       projectId: filter.projectId,
       designationId: filter.designationId,
@@ -95,7 +99,7 @@ const DailyTimesheetReportPage = () => {
     if (reportData.length === 0) return;
     printDailyTimesheetReport(
       reportData,
-      selectedDate,
+      new Date(selectedDate),
       selectedProject?.nameEn,
       globalData.payrollSections
     );
