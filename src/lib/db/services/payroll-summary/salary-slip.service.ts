@@ -296,6 +296,8 @@ export const getSalarySlipData = async (
       isDeductable: emp.isDeductable,
       isCardDelivered: emp.isCardDelivered,
       paymentMethodName: "",
+      tripAllowance: 0,
+      overtimeAllowance: 0,
     };
 
     results.push(entry);
