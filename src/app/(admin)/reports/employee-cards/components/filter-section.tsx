@@ -21,9 +21,9 @@ export const FilterSection = memo(({ onSearch }: FilterSectionProps) => {
   const isAllowedAllFilters = canAccessFilter("employee-cards");
 
   const [employeeCodes, setEmployeeCodes] = useState<string[]>([]);
-  const [selectedFilter, setSelectedFilter] = useState<
-    string | number | null
-  >("all");
+  const [selectedFilter, setSelectedFilter] = useState<string | number | null>(
+    "all"
+  );
 
   const handleSearch = () => {
     onSearch(employeeCodes.length > 0 ? employeeCodes : null, selectedFilter);
@@ -43,7 +43,6 @@ export const FilterSection = memo(({ onSearch }: FilterSectionProps) => {
               <AutoScrollChips
                 value={employeeCodes}
                 onChange={(e) => setEmployeeCodes(e.value ?? [])}
-                keyfilter="int"
                 allowDuplicate={false}
                 placeholder="Employee Codes"
                 className="w-full h-10!"

@@ -77,7 +77,6 @@ export const FilterSection = ({
             onChange={(e) => setEmployeeCodeChips(e.value || [])}
             placeholder="Emp. Code"
             className="w-full h-10!"
-            keyfilter="int"
           />
         </div>
         <div className="w-full">

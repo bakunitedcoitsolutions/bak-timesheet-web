@@ -36,10 +36,12 @@ export const FilterSection = memo(
     const [paymentMethodId, setPaymentMethodId] = useState<number | null>(null);
 
     const { data: globalData } = useGlobalData();
-    const paymentMethodOptions = (globalData?.paymentMethods || []).map((p) => ({
-      label: p.nameEn,
-      value: p.id,
-    }));
+    const paymentMethodOptions = (globalData?.paymentMethods || []).map(
+      (p) => ({
+        label: p.nameEn,
+        value: p.id,
+      })
+    );
 
     const handleSearch = () => {
       const codes =
@@ -49,7 +51,9 @@ export const FilterSection = memo(
       onSearch(codes, selectedFilter, paymentMethodId);
     };
 
-    const monthValue = selectedDate ? dayjs(selectedDate).format("YYYY-MM") : "";
+    const monthValue = selectedDate
+      ? dayjs(selectedDate).format("YYYY-MM")
+      : "";
 
     return (
       <div className="bg-[#F5E6E8] w-full flex flex-col xl:flex-row justify-between gap-x-10 gap-y-4 px-6 py-6 print:hidden">
@@ -99,7 +103,6 @@ export const FilterSection = memo(
                 <AutoScrollChips
                   value={employeeCodes}
                   onChange={(e) => setEmployeeCodes(e.value ?? [])}
-                  keyfilter="int"
                   allowDuplicate={false}
                   placeholder="Employee Codes"
                   className="w-full h-10!"

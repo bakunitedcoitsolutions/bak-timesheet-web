@@ -88,7 +88,6 @@ export const FilterSection = memo(
                 <>
                   <div className="w-full">
                     <AutoScrollChips
-                      keyfilter="int"
                       value={employeeCodes}
                       allowDuplicate={false}
                       placeholder="Employee Codes"

@@ -40,6 +40,8 @@ export const AutoScrollChips = (props: AutoScrollChipsProps) => {
         token: { className: "bg-primary text-white text-xs " },
         ...pt,
       }}
+      separator=","
+      keyfilter={/[0-9,]/}
       {...rest}
     />
   );

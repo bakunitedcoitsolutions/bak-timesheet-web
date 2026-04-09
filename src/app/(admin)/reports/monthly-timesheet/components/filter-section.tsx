@@ -22,12 +22,7 @@ interface FilterSectionProps {
 }
 
 export const FilterSection = memo(
-  ({
-    onSearch,
-    selectedDate,
-    onDateChange,
-    isLoading,
-  }: FilterSectionProps) => {
+  ({ onSearch, selectedDate, onDateChange, isLoading }: FilterSectionProps) => {
     const { canAccessFilter, isLoading: isLoadingAccess } = useAccess();
     const isAllowedAllFilters = canAccessFilter("monthly-timesheet");
 
@@ -98,7 +93,6 @@ export const FilterSection = memo(
               </div>
               <div className="w-full">
                 <AutoScrollChips
-                  keyfilter="int"
                   value={employeeCodes}
                   allowDuplicate={false}
                   placeholder="Employee Codes"
