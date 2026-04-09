@@ -218,6 +218,21 @@ export const savePayrollDetailsBatch = async (
           if (data.netChallan !== undefined && data.netChallan !== null)
             updateData.netChallan = data.netChallan;
 
+          if (data.tripAllowance !== undefined && data.tripAllowance !== null)
+            updateData.tripAllowance = data.tripAllowance;
+
+          if (
+            data.overtimeAllowance !== undefined &&
+            data.overtimeAllowance !== null
+          )
+            updateData.overtimeAllowance = data.overtimeAllowance;
+
+          if (data.salary !== undefined && data.salary !== null)
+            updateData.salary = data.salary;
+
+          if (data.totalAllowances !== undefined && data.totalAllowances !== null)
+            updateData.totalAllowances = data.totalAllowances;
+
           if (Object.keys(updateData).length > 0) {
             await tx.payrollDetails.update({
               where: {

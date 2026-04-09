@@ -82,6 +82,10 @@ export const SavePayrollDetailsEntrySchema = z.object({
   netSalaryPayable: z.number().optional().nullable(),
   netLoan: z.number().optional().nullable(),
   netChallan: z.number().optional().nullable(),
+  tripAllowance: z.number().optional().nullable(),
+  overtimeAllowance: z.number().optional().nullable(),
+  salary: z.number().optional().nullable(),
+  totalAllowances: z.number().optional().nullable(),
 });
 
 export const SavePayrollDetailsBatchSchema = z.object({

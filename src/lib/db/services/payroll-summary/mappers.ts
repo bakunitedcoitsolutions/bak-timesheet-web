@@ -41,6 +41,8 @@ export interface PayrollDetailEntry {
   isFixed: boolean;
   isDeductable: boolean;
   isCardDelivered: boolean;
+  tripAllowance: number;
+  overtimeAllowance: number;
 }
 
 import { PayrollDetailWithRelations } from "./payroll-summary.dto";
@@ -96,5 +98,7 @@ export const mapPayrollDetailToEntry = (
     isFixed: d?.employee?.isFixed ?? false,
     isDeductable: d?.employee?.isDeductable ?? false,
     isCardDelivered: d?.employee?.isCardDelivered ?? false,
+    tripAllowance: d?.tripAllowance || 0,
+    overtimeAllowance: d?.overtimeAllowance || 0,
   };
 };

@@ -4,6 +4,7 @@ import { useMemo } from "react";
 
 import {
   calculateNetLoan,
+  calculateTotalAllowances,
   calculateNetSalaryPayable,
   calculateNetTrafficChallan,
 } from "../utils";
@@ -26,6 +27,7 @@ const tableCommonProps = {
 
 interface UsePayrollTableColumnsProps {
   payrollData: PayrollDetailEntry[];
+  payrollSectionId?: number | null;
   isSavingAll: boolean;
   isLoading: boolean;
   isSavingRow: boolean;
@@ -51,6 +53,7 @@ interface UsePayrollTableColumnsProps {
 
 export const usePayrollTableColumns = ({
   payrollData,
+  payrollSectionId,
   isSavingAll,
   isLoading,
   isSavingRow,
@@ -182,30 +185,83 @@ export const usePayrollTableColumns = ({
           </div>
         ),
       },
-      {
-        field: "breakfastAllowance",
-        header: "Brkfst. Allow.",
-        ...tableCommonProps,
-        body: (rowData: PayrollDetailEntry) => (
-          <div className="flex justify-center">
-            <span className="text-[15px] font-semibold!">
-              {formatNum(rowData.breakfastAllowance ?? 0)}
-            </span>
-          </div>
-        ),
-      },
-      {
-        field: "otherAllowances",
-        header: "Other Allow.",
-        ...tableCommonProps,
-        body: (rowData: PayrollDetailEntry) => (
-          <div className="flex justify-center">
-            <span className="text-[15px] font-semibold!">
-              {formatNum(rowData.otherAllowances ?? 0)}
-            </span>
-          </div>
-        ),
-      },
+      ...(payrollSectionId === 6 || payrollSectionId === 15
+        ? [
+            {
+              field: "tripAllowance",
+              header: "Trip Allow.",
+              ...tableCommonProps,
+              body: (rowData: PayrollDetailEntry) => (
+                <div className="flex justify-center">
+                  <NumberInput
+                    useGrouping={false}
+                    disabled={rowData.payrollSummaryStatusId === 3}
+                    value={rowData.tripAllowance}
+                    onValueChange={(e) =>
+                      updatePayrollEntry(
+                        rowData.id,
+                        "tripAllowance",
+                        e.value || 0
+                      )
+                    }
+                    className="timesheet-number-input payroll-input"
+                    min={0}
+                    showButtons={false}
+                  />
+                </div>
+              ),
+            },
+            {
+              field: "overtimeAllowance",
+              header: "OT Allow.",
+              ...tableCommonProps,
+              body: (rowData: PayrollDetailEntry) => (
+                <div className="flex justify-center">
+                  <NumberInput
+                    useGrouping={false}
+                    disabled={rowData.payrollSummaryStatusId === 3}
+                    value={rowData.overtimeAllowance}
+                    onValueChange={(e) =>
+                      updatePayrollEntry(
+                        rowData.id,
+                        "overtimeAllowance",
+                        e.value || 0
+                      )
+                    }
+                    className="timesheet-number-input payroll-input"
+                    min={0}
+                    showButtons={false}
+                  />
+                </div>
+              ),
+            },
+          ]
+        : [
+            {
+              field: "breakfastAllowance",
+              header: "Brkfst. Allow.",
+              ...tableCommonProps,
+              body: (rowData: PayrollDetailEntry) => (
+                <div className="flex justify-center">
+                  <span className="text-[15px] font-semibold!">
+                    {formatNum(rowData.breakfastAllowance ?? 0)}
+                  </span>
+                </div>
+              ),
+            },
+            {
+              field: "otherAllowances",
+              header: "Other Allow.",
+              ...tableCommonProps,
+              body: (rowData: PayrollDetailEntry) => (
+                <div className="flex justify-center">
+                  <span className="text-[15px] font-semibold!">
+                    {formatNum(rowData.otherAllowances ?? 0)}
+                  </span>
+                </div>
+              ),
+            },
+          ]),
       {
         field: "totalAllowances",
         header: "Total Allow.",
@@ -213,7 +269,7 @@ export const usePayrollTableColumns = ({
         body: (rowData: PayrollDetailEntry) => (
           <div className="flex justify-center">
             <span className="text-[15px] font-semibold!">
-              {formatNum(rowData.totalAllowances ?? 0)}
+              {formatNum(calculateTotalAllowances(rowData))}
             </span>
           </div>
         ),

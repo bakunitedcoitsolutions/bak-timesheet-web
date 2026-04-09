@@ -2303,6 +2303,8 @@ export const PayrollDetailsScalarFieldEnum = {
   totalHours: 'totalHours',
   hourlyRate: 'hourlyRate',
   breakfastAllowance: 'breakfastAllowance',
+  tripAllowance: 'tripAllowance',
+  overtimeAllowance: 'overtimeAllowance',
   otherAllowances: 'otherAllowances',
   totalAllowances: 'totalAllowances',
   salary: 'salary',

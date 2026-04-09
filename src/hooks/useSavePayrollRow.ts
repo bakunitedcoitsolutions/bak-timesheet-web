@@ -1,13 +1,19 @@
 import { useState } from "react";
+
+import { toastService } from "@/lib/toast";
 import { useSavePayrollDetailsBatch } from "@/lib/db/services/payroll-summary";
 import { PayrollDetailEntry } from "@/lib/db/services/payroll-summary/mappers";
-import { toastService } from "@/lib/toast";
 
 const buildRowEntry = (row: PayrollDetailEntry) => ({
   id: row.id,
   loanDeduction: row.loanDeduction,
   challanDeduction: row.challanDeduction,
-  netSalaryPayable: row.totalSalary - row.loanDeduction - row.challanDeduction,
+  netSalaryPayable:
+    (row.totalSalary ?? 0) -
+    (row.loanDeduction ?? 0) -
+    (row.challanDeduction ?? 0) +
+    (row.tripAllowance ?? 0) +
+    (row.overtimeAllowance ?? 0),
   netLoan:
     (row.previousAdvance ?? 0) +
     (row.currentAdvance ?? 0) -
@@ -21,6 +27,10 @@ const buildRowEntry = (row: PayrollDetailEntry) => ({
   remarks: row.remarks,
   paymentMethodId: row.paymentMethodId,
   payrollStatusId: row.payrollStatusId,
+  tripAllowance: row.tripAllowance,
+  overtimeAllowance: row.overtimeAllowance,
+  salary: row.totalSalary,
+  totalAllowances: row.totalAllowances,
 });
 
 export const useSavePayrollRow = () => {

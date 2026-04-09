@@ -1,6 +1,6 @@
 "use client";
 import { Button } from "@/components";
-import { ReactNode } from "react";
+import { CustomButtonProps } from "../button";
 
 export interface TableAction {
   icon: string;
@@ -28,6 +28,8 @@ interface TableActionsProps<T = any> {
   showDelete?: boolean; // Default: true if onDelete is provided
   editTooltip?: string;
   deleteTooltip?: string;
+  editProps?: CustomButtonProps;
+  deleteProps?: CustomButtonProps;
 }
 
 const commonButtonProps = {
@@ -47,6 +49,8 @@ export default function TableActions<T = any>({
   showDelete,
   editTooltip = "Edit",
   deleteTooltip = "Delete",
+  editProps,
+  deleteProps,
 }: TableActionsProps<T>) {
   // Default showEdit/showDelete to true if handlers are provided, false otherwise
   const shouldShowEdit = showEdit !== undefined ? showEdit : !!onEdit;
@@ -99,6 +103,7 @@ export default function TableActions<T = any>({
           tooltip={editTooltip}
           tooltipOptions={{ position: "top" }}
           aria-label="Edit"
+          {...editProps}
         />
       )}
 
@@ -115,6 +120,7 @@ export default function TableActions<T = any>({
           style={commonButtonProps.style}
           tooltipOptions={{ position: "top" }}
           aria-label="Delete"
+          {...deleteProps}
         />
       )}
 

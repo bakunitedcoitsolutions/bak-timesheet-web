@@ -418,6 +418,8 @@ model PayrollDetails {
   totalHours                Int
   hourlyRate                Decimal  @db.Decimal(10, 2)
   breakfastAllowance        Int
+  tripAllowance             Int      @default(0)
+  overtimeAllowance         Int      @default(0)
   otherAllowances           Int
   totalAllowances           Int
   salary                    Int

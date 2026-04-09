@@ -81,6 +81,8 @@ export interface PayrollDetailWithRelations {
   paymentMethodId: number | null;
   payrollStatusId: number | null;
   overTime: number;
+  tripAllowance: number;
+  overtimeAllowance: number;
 
   employee: {
     id: number;

@@ -36,6 +36,8 @@ export type PayrollDetailsAvgAggregateOutputType = {
   totalHours: number | null
   hourlyRate: runtime.Decimal | null
   breakfastAllowance: number | null
+  tripAllowance: number | null
+  overtimeAllowance: number | null
   otherAllowances: number | null
   totalAllowances: number | null
   salary: number | null
@@ -69,6 +71,8 @@ export type PayrollDetailsSumAggregateOutputType = {
   totalHours: number | null
   hourlyRate: runtime.Decimal | null
   breakfastAllowance: number | null
+  tripAllowance: number | null
+  overtimeAllowance: number | null
   otherAllowances: number | null
   totalAllowances: number | null
   salary: number | null
@@ -102,6 +106,8 @@ export type PayrollDetailsMinAggregateOutputType = {
   totalHours: number | null
   hourlyRate: runtime.Decimal | null
   breakfastAllowance: number | null
+  tripAllowance: number | null
+  overtimeAllowance: number | null
   otherAllowances: number | null
   totalAllowances: number | null
   salary: number | null
@@ -139,6 +145,8 @@ export type PayrollDetailsMaxAggregateOutputType = {
   totalHours: number | null
   hourlyRate: runtime.Decimal | null
   breakfastAllowance: number | null
+  tripAllowance: number | null
+  overtimeAllowance: number | null
   otherAllowances: number | null
   totalAllowances: number | null
   salary: number | null
@@ -176,6 +184,8 @@ export type PayrollDetailsCountAggregateOutputType = {
   totalHours: number
   hourlyRate: number
   breakfastAllowance: number
+  tripAllowance: number
+  overtimeAllowance: number
   otherAllowances: number
   totalAllowances: number
   salary: number
@@ -215,6 +225,8 @@ export type PayrollDetailsAvgAggregateInputType = {
   totalHours?: true
   hourlyRate?: true
   breakfastAllowance?: true
+  tripAllowance?: true
+  overtimeAllowance?: true
   otherAllowances?: true
   totalAllowances?: true
   salary?: true
@@ -248,6 +260,8 @@ export type PayrollDetailsSumAggregateInputType = {
   totalHours?: true
   hourlyRate?: true
   breakfastAllowance?: true
+  tripAllowance?: true
+  overtimeAllowance?: true
   otherAllowances?: true
   totalAllowances?: true
   salary?: true
@@ -281,6 +295,8 @@ export type PayrollDetailsMinAggregateInputType = {
   totalHours?: true
   hourlyRate?: true
   breakfastAllowance?: true
+  tripAllowance?: true
+  overtimeAllowance?: true
   otherAllowances?: true
   totalAllowances?: true
   salary?: true
@@ -318,6 +334,8 @@ export type PayrollDetailsMaxAggregateInputType = {
   totalHours?: true
   hourlyRate?: true
   breakfastAllowance?: true
+  tripAllowance?: true
+  overtimeAllowance?: true
   otherAllowances?: true
   totalAllowances?: true
   salary?: true
@@ -355,6 +373,8 @@ export type PayrollDetailsCountAggregateInputType = {
   totalHours?: true
   hourlyRate?: true
   breakfastAllowance?: true
+  tripAllowance?: true
+  overtimeAllowance?: true
   otherAllowances?: true
   totalAllowances?: true
   salary?: true
@@ -479,6 +499,8 @@ export type PayrollDetailsGroupByOutputType = {
   totalHours: number
   hourlyRate: runtime.Decimal
   breakfastAllowance: number
+  tripAllowance: number
+  overtimeAllowance: number
   otherAllowances: number
   totalAllowances: number
   salary: number
@@ -539,6 +561,8 @@ export type PayrollDetailsWhereInput = {
   totalHours?: Prisma.IntFilter<"PayrollDetails"> | number
   hourlyRate?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   breakfastAllowance?: Prisma.IntFilter<"PayrollDetails"> | number
+  tripAllowance?: Prisma.IntFilter<"PayrollDetails"> | number
+  overtimeAllowance?: Prisma.IntFilter<"PayrollDetails"> | number
   otherAllowances?: Prisma.IntFilter<"PayrollDetails"> | number
   totalAllowances?: Prisma.IntFilter<"PayrollDetails"> | number
   salary?: Prisma.IntFilter<"PayrollDetails"> | number
@@ -584,6 +608,8 @@ export type PayrollDetailsOrderByWithRelationInput = {
   totalHours?: Prisma.SortOrder
   hourlyRate?: Prisma.SortOrder
   breakfastAllowance?: Prisma.SortOrder
+  tripAllowance?: Prisma.SortOrder
+  overtimeAllowance?: Prisma.SortOrder
   otherAllowances?: Prisma.SortOrder
   totalAllowances?: Prisma.SortOrder
   salary?: Prisma.SortOrder
@@ -632,6 +658,8 @@ export type PayrollDetailsWhereUniqueInput = Prisma.AtLeast<{
   totalHours?: Prisma.IntFilter<"PayrollDetails"> | number
   hourlyRate?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   breakfastAllowance?: Prisma.IntFilter<"PayrollDetails"> | number
+  tripAllowance?: Prisma.IntFilter<"PayrollDetails"> | number
+  overtimeAllowance?: Prisma.IntFilter<"PayrollDetails"> | number
   otherAllowances?: Prisma.IntFilter<"PayrollDetails"> | number
   totalAllowances?: Prisma.IntFilter<"PayrollDetails"> | number
   salary?: Prisma.IntFilter<"PayrollDetails"> | number
@@ -677,6 +705,8 @@ export type PayrollDetailsOrderByWithAggregationInput = {
   totalHours?: Prisma.SortOrder
   hourlyRate?: Prisma.SortOrder
   breakfastAllowance?: Prisma.SortOrder
+  tripAllowance?: Prisma.SortOrder
+  overtimeAllowance?: Prisma.SortOrder
   otherAllowances?: Prisma.SortOrder
   totalAllowances?: Prisma.SortOrder
   salary?: Prisma.SortOrder
@@ -722,6 +752,8 @@ export type PayrollDetailsScalarWhereWithAggregatesInput = {
   totalHours?: Prisma.IntWithAggregatesFilter<"PayrollDetails"> | number
   hourlyRate?: Prisma.DecimalWithAggregatesFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   breakfastAllowance?: Prisma.IntWithAggregatesFilter<"PayrollDetails"> | number
+  tripAllowance?: Prisma.IntWithAggregatesFilter<"PayrollDetails"> | number
+  overtimeAllowance?: Prisma.IntWithAggregatesFilter<"PayrollDetails"> | number
   otherAllowances?: Prisma.IntWithAggregatesFilter<"PayrollDetails"> | number
   totalAllowances?: Prisma.IntWithAggregatesFilter<"PayrollDetails"> | number
   salary?: Prisma.IntWithAggregatesFilter<"PayrollDetails"> | number
@@ -756,6 +788,8 @@ export type PayrollDetailsCreateInput = {
   totalHours: number
   hourlyRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   breakfastAllowance: number
+  tripAllowance?: number
+  overtimeAllowance?: number
   otherAllowances: number
   totalAllowances: number
   salary: number
@@ -795,6 +829,8 @@ export type PayrollDetailsUncheckedCreateInput = {
   totalHours: number
   hourlyRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   breakfastAllowance: number
+  tripAllowance?: number
+  overtimeAllowance?: number
   otherAllowances: number
   totalAllowances: number
   salary: number
@@ -829,6 +865,8 @@ export type PayrollDetailsUpdateInput = {
   totalHours?: Prisma.IntFieldUpdateOperationsInput | number
   hourlyRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   breakfastAllowance?: Prisma.IntFieldUpdateOperationsInput | number
+  tripAllowance?: Prisma.IntFieldUpdateOperationsInput | number
+  overtimeAllowance?: Prisma.IntFieldUpdateOperationsInput | number
   otherAllowances?: Prisma.IntFieldUpdateOperationsInput | number
   totalAllowances?: Prisma.IntFieldUpdateOperationsInput | number
   salary?: Prisma.IntFieldUpdateOperationsInput | number
@@ -868,6 +906,8 @@ export type PayrollDetailsUncheckedUpdateInput = {
   totalHours?: Prisma.IntFieldUpdateOperationsInput | number
   hourlyRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   breakfastAllowance?: Prisma.IntFieldUpdateOperationsInput | number
+  tripAllowance?: Prisma.IntFieldUpdateOperationsInput | number
+  overtimeAllowance?: Prisma.IntFieldUpdateOperationsInput | number
   otherAllowances?: Prisma.IntFieldUpdateOperationsInput | number
   totalAllowances?: Prisma.IntFieldUpdateOperationsInput | number
   salary?: Prisma.IntFieldUpdateOperationsInput | number
@@ -905,6 +945,8 @@ export type PayrollDetailsCreateManyInput = {
   totalHours: number
   hourlyRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   breakfastAllowance: number
+  tripAllowance?: number
+  overtimeAllowance?: number
   otherAllowances: number
   totalAllowances: number
   salary: number
@@ -939,6 +981,8 @@ export type PayrollDetailsUpdateManyMutationInput = {
   totalHours?: Prisma.IntFieldUpdateOperationsInput | number
   hourlyRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   breakfastAllowance?: Prisma.IntFieldUpdateOperationsInput | number
+  tripAllowance?: Prisma.IntFieldUpdateOperationsInput | number
+  overtimeAllowance?: Prisma.IntFieldUpdateOperationsInput | number
   otherAllowances?: Prisma.IntFieldUpdateOperationsInput | number
   totalAllowances?: Prisma.IntFieldUpdateOperationsInput | number
   salary?: Prisma.IntFieldUpdateOperationsInput | number
@@ -970,6 +1014,8 @@ export type PayrollDetailsUncheckedUpdateManyInput = {
   totalHours?: Prisma.IntFieldUpdateOperationsInput | number
   hourlyRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   breakfastAllowance?: Prisma.IntFieldUpdateOperationsInput | number
+  tripAllowance?: Prisma.IntFieldUpdateOperationsInput | number
+  overtimeAllowance?: Prisma.IntFieldUpdateOperationsInput | number
   otherAllowances?: Prisma.IntFieldUpdateOperationsInput | number
   totalAllowances?: Prisma.IntFieldUpdateOperationsInput | number
   salary?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1017,6 +1063,8 @@ export type PayrollDetailsCountOrderByAggregateInput = {
   totalHours?: Prisma.SortOrder
   hourlyRate?: Prisma.SortOrder
   breakfastAllowance?: Prisma.SortOrder
+  tripAllowance?: Prisma.SortOrder
+  overtimeAllowance?: Prisma.SortOrder
   otherAllowances?: Prisma.SortOrder
   totalAllowances?: Prisma.SortOrder
   salary?: Prisma.SortOrder
@@ -1054,6 +1102,8 @@ export type PayrollDetailsAvgOrderByAggregateInput = {
   totalHours?: Prisma.SortOrder
   hourlyRate?: Prisma.SortOrder
   breakfastAllowance?: Prisma.SortOrder
+  tripAllowance?: Prisma.SortOrder
+  overtimeAllowance?: Prisma.SortOrder
   otherAllowances?: Prisma.SortOrder
   totalAllowances?: Prisma.SortOrder
   salary?: Prisma.SortOrder
@@ -1087,6 +1137,8 @@ export type PayrollDetailsMaxOrderByAggregateInput = {
   totalHours?: Prisma.SortOrder
   hourlyRate?: Prisma.SortOrder
   breakfastAllowance?: Prisma.SortOrder
+  tripAllowance?: Prisma.SortOrder
+  overtimeAllowance?: Prisma.SortOrder
   otherAllowances?: Prisma.SortOrder
   totalAllowances?: Prisma.SortOrder
   salary?: Prisma.SortOrder
@@ -1124,6 +1176,8 @@ export type PayrollDetailsMinOrderByAggregateInput = {
   totalHours?: Prisma.SortOrder
   hourlyRate?: Prisma.SortOrder
   breakfastAllowance?: Prisma.SortOrder
+  tripAllowance?: Prisma.SortOrder
+  overtimeAllowance?: Prisma.SortOrder
   otherAllowances?: Prisma.SortOrder
   totalAllowances?: Prisma.SortOrder
   salary?: Prisma.SortOrder
@@ -1161,6 +1215,8 @@ export type PayrollDetailsSumOrderByAggregateInput = {
   totalHours?: Prisma.SortOrder
   hourlyRate?: Prisma.SortOrder
   breakfastAllowance?: Prisma.SortOrder
+  tripAllowance?: Prisma.SortOrder
+  overtimeAllowance?: Prisma.SortOrder
   otherAllowances?: Prisma.SortOrder
   totalAllowances?: Prisma.SortOrder
   salary?: Prisma.SortOrder
@@ -1527,6 +1583,8 @@ export type PayrollDetailsCreateWithoutCreatorInput = {
   totalHours: number
   hourlyRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   breakfastAllowance: number
+  tripAllowance?: number
+  overtimeAllowance?: number
   otherAllowances: number
   totalAllowances: number
   salary: number
@@ -1565,6 +1623,8 @@ export type PayrollDetailsUncheckedCreateWithoutCreatorInput = {
   totalHours: number
   hourlyRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   breakfastAllowance: number
+  tripAllowance?: number
+  overtimeAllowance?: number
   otherAllowances: number
   totalAllowances: number
   salary: number
@@ -1608,6 +1668,8 @@ export type PayrollDetailsCreateWithoutModifierInput = {
   totalHours: number
   hourlyRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   breakfastAllowance: number
+  tripAllowance?: number
+  overtimeAllowance?: number
   otherAllowances: number
   totalAllowances: number
   salary: number
@@ -1646,6 +1708,8 @@ export type PayrollDetailsUncheckedCreateWithoutModifierInput = {
   totalHours: number
   hourlyRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   breakfastAllowance: number
+  tripAllowance?: number
+  overtimeAllowance?: number
   otherAllowances: number
   totalAllowances: number
   salary: number
@@ -1711,6 +1775,8 @@ export type PayrollDetailsScalarWhereInput = {
   totalHours?: Prisma.IntFilter<"PayrollDetails"> | number
   hourlyRate?: Prisma.DecimalFilter<"PayrollDetails"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   breakfastAllowance?: Prisma.IntFilter<"PayrollDetails"> | number
+  tripAllowance?: Prisma.IntFilter<"PayrollDetails"> | number
+  overtimeAllowance?: Prisma.IntFilter<"PayrollDetails"> | number
   otherAllowances?: Prisma.IntFilter<"PayrollDetails"> | number
   totalAllowances?: Prisma.IntFilter<"PayrollDetails"> | number
   salary?: Prisma.IntFilter<"PayrollDetails"> | number
@@ -1761,6 +1827,8 @@ export type PayrollDetailsCreateWithoutBranchInput = {
   totalHours: number
   hourlyRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   breakfastAllowance: number
+  tripAllowance?: number
+  overtimeAllowance?: number
   otherAllowances: number
   totalAllowances: number
   salary: number
@@ -1799,6 +1867,8 @@ export type PayrollDetailsUncheckedCreateWithoutBranchInput = {
   totalHours: number
   hourlyRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   breakfastAllowance: number
+  tripAllowance?: number
+  overtimeAllowance?: number
   otherAllowances: number
   totalAllowances: number
   salary: number
@@ -1858,6 +1928,8 @@ export type PayrollDetailsCreateWithoutEmployeeInput = {
   totalHours: number
   hourlyRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   breakfastAllowance: number
+  tripAllowance?: number
+  overtimeAllowance?: number
   otherAllowances: number
   totalAllowances: number
   salary: number
@@ -1895,6 +1967,8 @@ export type PayrollDetailsUncheckedCreateWithoutEmployeeInput = {
   totalHours: number
   hourlyRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   breakfastAllowance: number
+  tripAllowance?: number
+  overtimeAllowance?: number
   otherAllowances: number
   totalAllowances: number
   salary: number
@@ -1955,6 +2029,8 @@ export type PayrollDetailsCreateWithoutPayrollStatusInput = {
   totalHours: number
   hourlyRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   breakfastAllowance: number
+  tripAllowance?: number
+  overtimeAllowance?: number
   otherAllowances: number
   totalAllowances: number
   salary: number
@@ -1993,6 +2069,8 @@ export type PayrollDetailsUncheckedCreateWithoutPayrollStatusInput = {
   totalHours: number
   hourlyRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   breakfastAllowance: number
+  tripAllowance?: number
+  overtimeAllowance?: number
   otherAllowances: number
   totalAllowances: number
   salary: number
@@ -2052,6 +2130,8 @@ export type PayrollDetailsCreateWithoutPayrollSummaryInput = {
   totalHours: number
   hourlyRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   breakfastAllowance: number
+  tripAllowance?: number
+  overtimeAllowance?: number
   otherAllowances: number
   totalAllowances: number
   salary: number
@@ -2089,6 +2169,8 @@ export type PayrollDetailsUncheckedCreateWithoutPayrollSummaryInput = {
   totalHours: number
   hourlyRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   breakfastAllowance: number
+  tripAllowance?: number
+  overtimeAllowance?: number
   otherAllowances: number
   totalAllowances: number
   salary: number
@@ -2149,6 +2231,8 @@ export type PayrollDetailsCreateWithoutPaymentMethodInput = {
   totalHours: number
   hourlyRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   breakfastAllowance: number
+  tripAllowance?: number
+  overtimeAllowance?: number
   otherAllowances: number
   totalAllowances: number
   salary: number
@@ -2187,6 +2271,8 @@ export type PayrollDetailsUncheckedCreateWithoutPaymentMethodInput = {
   totalHours: number
   hourlyRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   breakfastAllowance: number
+  tripAllowance?: number
+  overtimeAllowance?: number
   otherAllowances: number
   totalAllowances: number
   salary: number
@@ -2246,6 +2332,8 @@ export type PayrollDetailsCreateWithoutAllowanceNotAvailableInput = {
   totalHours: number
   hourlyRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   breakfastAllowance: number
+  tripAllowance?: number
+  overtimeAllowance?: number
   otherAllowances: number
   totalAllowances: number
   salary: number
@@ -2284,6 +2372,8 @@ export type PayrollDetailsUncheckedCreateWithoutAllowanceNotAvailableInput = {
   totalHours: number
   hourlyRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   breakfastAllowance: number
+  tripAllowance?: number
+  overtimeAllowance?: number
   otherAllowances: number
   totalAllowances: number
   salary: number
@@ -2346,6 +2436,8 @@ export type PayrollDetailsCreateManyCreatorInput = {
   totalHours: number
   hourlyRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   breakfastAllowance: number
+  tripAllowance?: number
+  overtimeAllowance?: number
   otherAllowances: number
   totalAllowances: number
   salary: number
@@ -2382,6 +2474,8 @@ export type PayrollDetailsCreateManyModifierInput = {
   totalHours: number
   hourlyRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   breakfastAllowance: number
+  tripAllowance?: number
+  overtimeAllowance?: number
   otherAllowances: number
   totalAllowances: number
   salary: number
@@ -2415,6 +2509,8 @@ export type PayrollDetailsUpdateWithoutCreatorInput = {
   totalHours?: Prisma.IntFieldUpdateOperationsInput | number
   hourlyRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   breakfastAllowance?: Prisma.IntFieldUpdateOperationsInput | number
+  tripAllowance?: Prisma.IntFieldUpdateOperationsInput | number
+  overtimeAllowance?: Prisma.IntFieldUpdateOperationsInput | number
   otherAllowances?: Prisma.IntFieldUpdateOperationsInput | number
   totalAllowances?: Prisma.IntFieldUpdateOperationsInput | number
   salary?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2453,6 +2549,8 @@ export type PayrollDetailsUncheckedUpdateWithoutCreatorInput = {
   totalHours?: Prisma.IntFieldUpdateOperationsInput | number
   hourlyRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   breakfastAllowance?: Prisma.IntFieldUpdateOperationsInput | number
+  tripAllowance?: Prisma.IntFieldUpdateOperationsInput | number
+  overtimeAllowance?: Prisma.IntFieldUpdateOperationsInput | number
   otherAllowances?: Prisma.IntFieldUpdateOperationsInput | number
   totalAllowances?: Prisma.IntFieldUpdateOperationsInput | number
   salary?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2489,6 +2587,8 @@ export type PayrollDetailsUncheckedUpdateManyWithoutCreatorInput = {
   totalHours?: Prisma.IntFieldUpdateOperationsInput | number
   hourlyRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   breakfastAllowance?: Prisma.IntFieldUpdateOperationsInput | number
+  tripAllowance?: Prisma.IntFieldUpdateOperationsInput | number
+  overtimeAllowance?: Prisma.IntFieldUpdateOperationsInput | number
   otherAllowances?: Prisma.IntFieldUpdateOperationsInput | number
   totalAllowances?: Prisma.IntFieldUpdateOperationsInput | number
   salary?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2522,6 +2622,8 @@ export type PayrollDetailsUpdateWithoutModifierInput = {
   totalHours?: Prisma.IntFieldUpdateOperationsInput | number
   hourlyRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   breakfastAllowance?: Prisma.IntFieldUpdateOperationsInput | number
+  tripAllowance?: Prisma.IntFieldUpdateOperationsInput | number
+  overtimeAllowance?: Prisma.IntFieldUpdateOperationsInput | number
   otherAllowances?: Prisma.IntFieldUpdateOperationsInput | number
   totalAllowances?: Prisma.IntFieldUpdateOperationsInput | number
   salary?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2560,6 +2662,8 @@ export type PayrollDetailsUncheckedUpdateWithoutModifierInput = {
   totalHours?: Prisma.IntFieldUpdateOperationsInput | number
   hourlyRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   breakfastAllowance?: Prisma.IntFieldUpdateOperationsInput | number
+  tripAllowance?: Prisma.IntFieldUpdateOperationsInput | number
+  overtimeAllowance?: Prisma.IntFieldUpdateOperationsInput | number
   otherAllowances?: Prisma.IntFieldUpdateOperationsInput | number
   totalAllowances?: Prisma.IntFieldUpdateOperationsInput | number
   salary?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2596,6 +2700,8 @@ export type PayrollDetailsUncheckedUpdateManyWithoutModifierInput = {
   totalHours?: Prisma.IntFieldUpdateOperationsInput | number
   hourlyRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   breakfastAllowance?: Prisma.IntFieldUpdateOperationsInput | number
+  tripAllowance?: Prisma.IntFieldUpdateOperationsInput | number
+  overtimeAllowance?: Prisma.IntFieldUpdateOperationsInput | number
   otherAllowances?: Prisma.IntFieldUpdateOperationsInput | number
   totalAllowances?: Prisma.IntFieldUpdateOperationsInput | number
   salary?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2632,6 +2738,8 @@ export type PayrollDetailsCreateManyBranchInput = {
   totalHours: number
   hourlyRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   breakfastAllowance: number
+  tripAllowance?: number
+  overtimeAllowance?: number
   otherAllowances: number
   totalAllowances: number
   salary: number
@@ -2665,6 +2773,8 @@ export type PayrollDetailsUpdateWithoutBranchInput = {
   totalHours?: Prisma.IntFieldUpdateOperationsInput | number
   hourlyRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   breakfastAllowance?: Prisma.IntFieldUpdateOperationsInput | number
+  tripAllowance?: Prisma.IntFieldUpdateOperationsInput | number
+  overtimeAllowance?: Prisma.IntFieldUpdateOperationsInput | number
   otherAllowances?: Prisma.IntFieldUpdateOperationsInput | number
   totalAllowances?: Prisma.IntFieldUpdateOperationsInput | number
   salary?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2703,6 +2813,8 @@ export type PayrollDetailsUncheckedUpdateWithoutBranchInput = {
   totalHours?: Prisma.IntFieldUpdateOperationsInput | number
   hourlyRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   breakfastAllowance?: Prisma.IntFieldUpdateOperationsInput | number
+  tripAllowance?: Prisma.IntFieldUpdateOperationsInput | number
+  overtimeAllowance?: Prisma.IntFieldUpdateOperationsInput | number
   otherAllowances?: Prisma.IntFieldUpdateOperationsInput | number
   totalAllowances?: Prisma.IntFieldUpdateOperationsInput | number
   salary?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2739,6 +2851,8 @@ export type PayrollDetailsUncheckedUpdateManyWithoutBranchInput = {
   totalHours?: Prisma.IntFieldUpdateOperationsInput | number
   hourlyRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   breakfastAllowance?: Prisma.IntFieldUpdateOperationsInput | number
+  tripAllowance?: Prisma.IntFieldUpdateOperationsInput | number
+  overtimeAllowance?: Prisma.IntFieldUpdateOperationsInput | number
   otherAllowances?: Prisma.IntFieldUpdateOperationsInput | number
   totalAllowances?: Prisma.IntFieldUpdateOperationsInput | number
   salary?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2774,6 +2888,8 @@ export type PayrollDetailsCreateManyEmployeeInput = {
   totalHours: number
   hourlyRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   breakfastAllowance: number
+  tripAllowance?: number
+  overtimeAllowance?: number
   otherAllowances: number
   totalAllowances: number
   salary: number
@@ -2808,6 +2924,8 @@ export type PayrollDetailsUpdateWithoutEmployeeInput = {
   totalHours?: Prisma.IntFieldUpdateOperationsInput | number
   hourlyRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   breakfastAllowance?: Prisma.IntFieldUpdateOperationsInput | number
+  tripAllowance?: Prisma.IntFieldUpdateOperationsInput | number
+  overtimeAllowance?: Prisma.IntFieldUpdateOperationsInput | number
   otherAllowances?: Prisma.IntFieldUpdateOperationsInput | number
   totalAllowances?: Prisma.IntFieldUpdateOperationsInput | number
   salary?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2845,6 +2963,8 @@ export type PayrollDetailsUncheckedUpdateWithoutEmployeeInput = {
   totalHours?: Prisma.IntFieldUpdateOperationsInput | number
   hourlyRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   breakfastAllowance?: Prisma.IntFieldUpdateOperationsInput | number
+  tripAllowance?: Prisma.IntFieldUpdateOperationsInput | number
+  overtimeAllowance?: Prisma.IntFieldUpdateOperationsInput | number
   otherAllowances?: Prisma.IntFieldUpdateOperationsInput | number
   totalAllowances?: Prisma.IntFieldUpdateOperationsInput | number
   salary?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2881,6 +3001,8 @@ export type PayrollDetailsUncheckedUpdateManyWithoutEmployeeInput = {
   totalHours?: Prisma.IntFieldUpdateOperationsInput | number
   hourlyRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   breakfastAllowance?: Prisma.IntFieldUpdateOperationsInput | number
+  tripAllowance?: Prisma.IntFieldUpdateOperationsInput | number
+  overtimeAllowance?: Prisma.IntFieldUpdateOperationsInput | number
   otherAllowances?: Prisma.IntFieldUpdateOperationsInput | number
   totalAllowances?: Prisma.IntFieldUpdateOperationsInput | number
   salary?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2918,6 +3040,8 @@ export type PayrollDetailsCreateManyPayrollStatusInput = {
   totalHours: number
   hourlyRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   breakfastAllowance: number
+  tripAllowance?: number
+  overtimeAllowance?: number
   otherAllowances: number
   totalAllowances: number
   salary: number
@@ -2951,6 +3075,8 @@ export type PayrollDetailsUpdateWithoutPayrollStatusInput = {
   totalHours?: Prisma.IntFieldUpdateOperationsInput | number
   hourlyRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   breakfastAllowance?: Prisma.IntFieldUpdateOperationsInput | number
+  tripAllowance?: Prisma.IntFieldUpdateOperationsInput | number
+  overtimeAllowance?: Prisma.IntFieldUpdateOperationsInput | number
   otherAllowances?: Prisma.IntFieldUpdateOperationsInput | number
   totalAllowances?: Prisma.IntFieldUpdateOperationsInput | number
   salary?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2989,6 +3115,8 @@ export type PayrollDetailsUncheckedUpdateWithoutPayrollStatusInput = {
   totalHours?: Prisma.IntFieldUpdateOperationsInput | number
   hourlyRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   breakfastAllowance?: Prisma.IntFieldUpdateOperationsInput | number
+  tripAllowance?: Prisma.IntFieldUpdateOperationsInput | number
+  overtimeAllowance?: Prisma.IntFieldUpdateOperationsInput | number
   otherAllowances?: Prisma.IntFieldUpdateOperationsInput | number
   totalAllowances?: Prisma.IntFieldUpdateOperationsInput | number
   salary?: Prisma.IntFieldUpdateOperationsInput | number
@@ -3025,6 +3153,8 @@ export type PayrollDetailsUncheckedUpdateManyWithoutPayrollStatusInput = {
   totalHours?: Prisma.IntFieldUpdateOperationsInput | number
   hourlyRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   breakfastAllowance?: Prisma.IntFieldUpdateOperationsInput | number
+  tripAllowance?: Prisma.IntFieldUpdateOperationsInput | number
+  overtimeAllowance?: Prisma.IntFieldUpdateOperationsInput | number
   otherAllowances?: Prisma.IntFieldUpdateOperationsInput | number
   totalAllowances?: Prisma.IntFieldUpdateOperationsInput | number
   salary?: Prisma.IntFieldUpdateOperationsInput | number
@@ -3060,6 +3190,8 @@ export type PayrollDetailsCreateManyPayrollSummaryInput = {
   totalHours: number
   hourlyRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   breakfastAllowance: number
+  tripAllowance?: number
+  overtimeAllowance?: number
   otherAllowances: number
   totalAllowances: number
   salary: number
@@ -3094,6 +3226,8 @@ export type PayrollDetailsUpdateWithoutPayrollSummaryInput = {
   totalHours?: Prisma.IntFieldUpdateOperationsInput | number
   hourlyRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   breakfastAllowance?: Prisma.IntFieldUpdateOperationsInput | number
+  tripAllowance?: Prisma.IntFieldUpdateOperationsInput | number
+  overtimeAllowance?: Prisma.IntFieldUpdateOperationsInput | number
   otherAllowances?: Prisma.IntFieldUpdateOperationsInput | number
   totalAllowances?: Prisma.IntFieldUpdateOperationsInput | number
   salary?: Prisma.IntFieldUpdateOperationsInput | number
@@ -3131,6 +3265,8 @@ export type PayrollDetailsUncheckedUpdateWithoutPayrollSummaryInput = {
   totalHours?: Prisma.IntFieldUpdateOperationsInput | number
   hourlyRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   breakfastAllowance?: Prisma.IntFieldUpdateOperationsInput | number
+  tripAllowance?: Prisma.IntFieldUpdateOperationsInput | number
+  overtimeAllowance?: Prisma.IntFieldUpdateOperationsInput | number
   otherAllowances?: Prisma.IntFieldUpdateOperationsInput | number
   totalAllowances?: Prisma.IntFieldUpdateOperationsInput | number
   salary?: Prisma.IntFieldUpdateOperationsInput | number
@@ -3167,6 +3303,8 @@ export type PayrollDetailsUncheckedUpdateManyWithoutPayrollSummaryInput = {
   totalHours?: Prisma.IntFieldUpdateOperationsInput | number
   hourlyRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   breakfastAllowance?: Prisma.IntFieldUpdateOperationsInput | number
+  tripAllowance?: Prisma.IntFieldUpdateOperationsInput | number
+  overtimeAllowance?: Prisma.IntFieldUpdateOperationsInput | number
   otherAllowances?: Prisma.IntFieldUpdateOperationsInput | number
   totalAllowances?: Prisma.IntFieldUpdateOperationsInput | number
   salary?: Prisma.IntFieldUpdateOperationsInput | number
@@ -3204,6 +3342,8 @@ export type PayrollDetailsCreateManyPaymentMethodInput = {
   totalHours: number
   hourlyRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   breakfastAllowance: number
+  tripAllowance?: number
+  overtimeAllowance?: number
   otherAllowances: number
   totalAllowances: number
   salary: number
@@ -3237,6 +3377,8 @@ export type PayrollDetailsUpdateWithoutPaymentMethodInput = {
   totalHours?: Prisma.IntFieldUpdateOperationsInput | number
   hourlyRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   breakfastAllowance?: Prisma.IntFieldUpdateOperationsInput | number
+  tripAllowance?: Prisma.IntFieldUpdateOperationsInput | number
+  overtimeAllowance?: Prisma.IntFieldUpdateOperationsInput | number
   otherAllowances?: Prisma.IntFieldUpdateOperationsInput | number
   totalAllowances?: Prisma.IntFieldUpdateOperationsInput | number
   salary?: Prisma.IntFieldUpdateOperationsInput | number
@@ -3275,6 +3417,8 @@ export type PayrollDetailsUncheckedUpdateWithoutPaymentMethodInput = {
   totalHours?: Prisma.IntFieldUpdateOperationsInput | number
   hourlyRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   breakfastAllowance?: Prisma.IntFieldUpdateOperationsInput | number
+  tripAllowance?: Prisma.IntFieldUpdateOperationsInput | number
+  overtimeAllowance?: Prisma.IntFieldUpdateOperationsInput | number
   otherAllowances?: Prisma.IntFieldUpdateOperationsInput | number
   totalAllowances?: Prisma.IntFieldUpdateOperationsInput | number
   salary?: Prisma.IntFieldUpdateOperationsInput | number
@@ -3311,6 +3455,8 @@ export type PayrollDetailsUncheckedUpdateManyWithoutPaymentMethodInput = {
   totalHours?: Prisma.IntFieldUpdateOperationsInput | number
   hourlyRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   breakfastAllowance?: Prisma.IntFieldUpdateOperationsInput | number
+  tripAllowance?: Prisma.IntFieldUpdateOperationsInput | number
+  overtimeAllowance?: Prisma.IntFieldUpdateOperationsInput | number
   otherAllowances?: Prisma.IntFieldUpdateOperationsInput | number
   totalAllowances?: Prisma.IntFieldUpdateOperationsInput | number
   salary?: Prisma.IntFieldUpdateOperationsInput | number
@@ -3347,6 +3493,8 @@ export type PayrollDetailsCreateManyAllowanceNotAvailableInput = {
   totalHours: number
   hourlyRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   breakfastAllowance: number
+  tripAllowance?: number
+  overtimeAllowance?: number
   otherAllowances: number
   totalAllowances: number
   salary: number
@@ -3380,6 +3528,8 @@ export type PayrollDetailsUpdateWithoutAllowanceNotAvailableInput = {
   totalHours?: Prisma.IntFieldUpdateOperationsInput | number
   hourlyRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   breakfastAllowance?: Prisma.IntFieldUpdateOperationsInput | number
+  tripAllowance?: Prisma.IntFieldUpdateOperationsInput | number
+  overtimeAllowance?: Prisma.IntFieldUpdateOperationsInput | number
   otherAllowances?: Prisma.IntFieldUpdateOperationsInput | number
   totalAllowances?: Prisma.IntFieldUpdateOperationsInput | number
   salary?: Prisma.IntFieldUpdateOperationsInput | number
@@ -3418,6 +3568,8 @@ export type PayrollDetailsUncheckedUpdateWithoutAllowanceNotAvailableInput = {
   totalHours?: Prisma.IntFieldUpdateOperationsInput | number
   hourlyRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   breakfastAllowance?: Prisma.IntFieldUpdateOperationsInput | number
+  tripAllowance?: Prisma.IntFieldUpdateOperationsInput | number
+  overtimeAllowance?: Prisma.IntFieldUpdateOperationsInput | number
   otherAllowances?: Prisma.IntFieldUpdateOperationsInput | number
   totalAllowances?: Prisma.IntFieldUpdateOperationsInput | number
   salary?: Prisma.IntFieldUpdateOperationsInput | number
@@ -3454,6 +3606,8 @@ export type PayrollDetailsUncheckedUpdateManyWithoutAllowanceNotAvailableInput =
   totalHours?: Prisma.IntFieldUpdateOperationsInput | number
   hourlyRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   breakfastAllowance?: Prisma.IntFieldUpdateOperationsInput | number
+  tripAllowance?: Prisma.IntFieldUpdateOperationsInput | number
+  overtimeAllowance?: Prisma.IntFieldUpdateOperationsInput | number
   otherAllowances?: Prisma.IntFieldUpdateOperationsInput | number
   totalAllowances?: Prisma.IntFieldUpdateOperationsInput | number
   salary?: Prisma.IntFieldUpdateOperationsInput | number
@@ -3492,6 +3646,8 @@ export type PayrollDetailsSelect<ExtArgs extends runtime.Types.Extensions.Intern
   totalHours?: boolean
   hourlyRate?: boolean
   breakfastAllowance?: boolean
+  tripAllowance?: boolean
+  overtimeAllowance?: boolean
   otherAllowances?: boolean
   totalAllowances?: boolean
   salary?: boolean
@@ -3537,6 +3693,8 @@ export type PayrollDetailsSelectCreateManyAndReturn<ExtArgs extends runtime.Type
   totalHours?: boolean
   hourlyRate?: boolean
   breakfastAllowance?: boolean
+  tripAllowance?: boolean
+  overtimeAllowance?: boolean
   otherAllowances?: boolean
   totalAllowances?: boolean
   salary?: boolean
@@ -3582,6 +3740,8 @@ export type PayrollDetailsSelectUpdateManyAndReturn<ExtArgs extends runtime.Type
   totalHours?: boolean
   hourlyRate?: boolean
   breakfastAllowance?: boolean
+  tripAllowance?: boolean
+  overtimeAllowance?: boolean
   otherAllowances?: boolean
   totalAllowances?: boolean
   salary?: boolean
@@ -3627,6 +3787,8 @@ export type PayrollDetailsSelectScalar = {
   totalHours?: boolean
   hourlyRate?: boolean
   breakfastAllowance?: boolean
+  tripAllowance?: boolean
+  overtimeAllowance?: boolean
   otherAllowances?: boolean
   totalAllowances?: boolean
   salary?: boolean
@@ -3654,7 +3816,7 @@ export type PayrollDetailsSelectScalar = {
   isLocked?: boolean
 }
 
-export type PayrollDetailsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "payrollId" | "payrollMonth" | "payrollYear" | "employeeId" | "workDays" | "totalHours" | "hourlyRate" | "breakfastAllowance" | "otherAllowances" | "totalAllowances" | "salary" | "previousLoan" | "currentLoan" | "loanDeduction" | "netLoan" | "previousChallan" | "currentChallan" | "challanDeduction" | "netChallan" | "netSalaryPayable" | "cardSalary" | "cashSalary" | "overTime" | "remarks" | "paymentMethodId" | "payrollStatusId" | "branchId" | "allowanceNotAvailableId" | "createdDate" | "createdBy" | "modifiedDate" | "modifiedBy" | "isLocked", ExtArgs["result"]["payrollDetails"]>
+export type PayrollDetailsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "payrollId" | "payrollMonth" | "payrollYear" | "employeeId" | "workDays" | "totalHours" | "hourlyRate" | "breakfastAllowance" | "tripAllowance" | "overtimeAllowance" | "otherAllowances" | "totalAllowances" | "salary" | "previousLoan" | "currentLoan" | "loanDeduction" | "netLoan" | "previousChallan" | "currentChallan" | "challanDeduction" | "netChallan" | "netSalaryPayable" | "cardSalary" | "cashSalary" | "overTime" | "remarks" | "paymentMethodId" | "payrollStatusId" | "branchId" | "allowanceNotAvailableId" | "createdDate" | "createdBy" | "modifiedDate" | "modifiedBy" | "isLocked", ExtArgs["result"]["payrollDetails"]>
 export type PayrollDetailsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   payrollSummary?: boolean | Prisma.PayrollSummaryDefaultArgs<ExtArgs>
   employee?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
@@ -3708,6 +3870,8 @@ export type $PayrollDetailsPayload<ExtArgs extends runtime.Types.Extensions.Inte
     totalHours: number
     hourlyRate: runtime.Decimal
     breakfastAllowance: number
+    tripAllowance: number
+    overtimeAllowance: number
     otherAllowances: number
     totalAllowances: number
     salary: number
@@ -4173,6 +4337,8 @@ export interface PayrollDetailsFieldRefs {
   readonly totalHours: Prisma.FieldRef<"PayrollDetails", 'Int'>
   readonly hourlyRate: Prisma.FieldRef<"PayrollDetails", 'Decimal'>
   readonly breakfastAllowance: Prisma.FieldRef<"PayrollDetails", 'Int'>
+  readonly tripAllowance: Prisma.FieldRef<"PayrollDetails", 'Int'>
+  readonly overtimeAllowance: Prisma.FieldRef<"PayrollDetails", 'Int'>
   readonly otherAllowances: Prisma.FieldRef<"PayrollDetails", 'Int'>
   readonly totalAllowances: Prisma.FieldRef<"PayrollDetails", 'Int'>
   readonly salary: Prisma.FieldRef<"PayrollDetails", 'Int'>

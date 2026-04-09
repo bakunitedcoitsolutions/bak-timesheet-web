@@ -138,6 +138,9 @@ const columns = (
         rowData={rowData}
         onEdit={handleEdit}
         onDelete={handleDelete}
+        deleteProps={{
+          disabled: rowData.id === 6 || rowData.id === 15,
+        }}
       />
     ),
   },

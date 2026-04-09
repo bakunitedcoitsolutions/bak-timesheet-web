@@ -363,6 +363,8 @@ const calculateAndSavePayroll = async (
       netSalaryPayable: Number(netSalaryPayable),
       ...getSalarySplit(netSalaryPayable),
       overTime: Number(totalOTHours),
+      tripAllowance: 0,
+      overtimeAllowance: 0,
       remarks: "",
       payrollStatusId: statusId,
       branchId: emp.branchId,
@@ -826,11 +828,23 @@ export const repostPayroll = async ({
         ? Math.min(totalDutyHours / designationHours, 31)
         : 0;
 
-    const fixedAllowances =
-      Number(emp.foodAllowance || 0) +
-      Number(emp.mobileAllowance || 0) +
-      Number(emp.otherAllowance || 0);
-    const totalAllowances = totalBreakfastAllowance + fixedAllowances;
+    const existingRow = existingDetailMap.get(emp.id);
+
+    const foodAllowance = Number(emp.foodAllowance || 0);
+    const mobileAllowance = Number(emp.mobileAllowance || 0);
+    const otherAllowance = Number(emp.otherAllowance || 0);
+    const fixedAllowances = foodAllowance + mobileAllowance + otherAllowance;
+
+    const preservedTripAllowance = Number(existingRow?.tripAllowance || 0);
+    const preservedOvertimeAllowance = Number(
+      existingRow?.overtimeAllowance || 0
+    );
+
+    const totalAllowances =
+      totalBreakfastAllowance +
+      fixedAllowances +
+      preservedTripAllowance +
+      preservedOvertimeAllowance;
 
     const hourlyRate = Number(emp.hourlyRate || 0);
     const baseSalary =
@@ -861,8 +875,6 @@ export const repostPayroll = async ({
         .filter((c) => c.employeeId === emp.id && c.type === "RETURN")
         .reduce((s, c) => s + Number(c.amount), 0);
 
-    const existingRow = existingDetailMap.get(emp.id);
-
     if (existingRow) {
       // Preserve user-editable fields; update only calculated ones
       const preservedLoanDeduction = Number(existingRow.loanDeduction || 0);
@@ -889,6 +901,8 @@ export const repostPayroll = async ({
           breakfastAllowance: Number(totalBreakfastAllowance),
           otherAllowances: Number(fixedAllowances),
           totalAllowances: Number(totalAllowances),
+          tripAllowance: preservedTripAllowance,
+          overtimeAllowance: preservedOvertimeAllowance,
           salary: Number(totalSalary),
           previousLoan: Number(previousLoanBalance),
           currentLoan: Number(currentNetLoan),
@@ -919,6 +933,8 @@ export const repostPayroll = async ({
           breakfastAllowance: Number(totalBreakfastAllowance),
           otherAllowances: Number(fixedAllowances),
           totalAllowances: Number(totalAllowances),
+          tripAllowance: 0,
+          overtimeAllowance: 0,
           salary: Number(totalSalary),
           previousLoan: Number(previousLoanBalance),
           currentLoan: Number(currentNetLoan),
@@ -988,7 +1004,10 @@ export const recalculatePayrollSummary = async ({
       totalBreakfastAllowance:
         acc.totalBreakfastAllowance + Number(curr.breakfastAllowance || 0),
       totalOtherAllowances:
-        acc.totalOtherAllowances + Number(curr.otherAllowances || 0),
+        acc.totalOtherAllowances +
+        Number(curr.otherAllowances || 0) +
+        Number(curr.tripAllowance || 0) +
+        Number(curr.overtimeAllowance || 0),
       totalPreviousLoan: acc.totalPreviousLoan + Number(curr.previousLoan || 0),
       totalCurrentLoan: acc.totalCurrentLoan + Number(curr.currentLoan || 0),
       totalLoanDeduction:
@@ -1214,7 +1233,17 @@ export const refreshPayrollDetailRow = async ({
   const mobileAllowance = Number(emp.mobileAllowance || 0);
   const otherAllowance = Number(emp.otherAllowance || 0);
   const fixedAllowances = foodAllowance + mobileAllowance + otherAllowance;
-  const totalAllowances = totalBreakfastAllowance + fixedAllowances;
+
+  const preservedTripAllowance = Number(existingDetail.tripAllowance || 0);
+  const preservedOvertimeAllowance = Number(
+    existingDetail.overtimeAllowance || 0
+  );
+
+  const totalAllowances =
+    totalBreakfastAllowance +
+    fixedAllowances +
+    preservedTripAllowance +
+    preservedOvertimeAllowance;
 
   const hourlyRate = Number(emp.hourlyRate || 0);
   let baseSalary = 0;
@@ -1272,6 +1301,8 @@ export const refreshPayrollDetailRow = async ({
       breakfastAllowance: Number(totalBreakfastAllowance),
       otherAllowances: Number(fixedAllowances),
       totalAllowances: Number(totalAllowances),
+      tripAllowance: preservedTripAllowance,
+      overtimeAllowance: preservedOvertimeAllowance,
       salary: Number(totalSalary),
       // Recalculated display-only loan/challan running totals
       previousLoan: Number(previousLoanBalance),

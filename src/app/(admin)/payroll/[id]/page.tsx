@@ -24,6 +24,7 @@ import {
   calculateNetLoan,
   calculateNetSalaryPayable,
   calculateNetTrafficChallan,
+  calculateTotalAllowances,
 } from "./utils";
 import { PayrollHeader } from "./components/PayrollHeader";
 import { usePayrollTableColumns } from "./components/PayrollTableColumns";
@@ -126,6 +127,10 @@ const PayrollDetailPage = () => {
         remarks: row.remarks,
         paymentMethodId: row.paymentMethodId,
         payrollStatusId: row.payrollStatusId,
+        tripAllowance: row.tripAllowance,
+        overtimeAllowance: row.overtimeAllowance,
+        salary: row.totalSalary,
+        totalAllowances: row.totalAllowances,
       }));
 
       const result = await savePayrollDetails({ entries });
@@ -181,9 +186,28 @@ const PayrollDetailPage = () => {
     value: any
   ) => {
     setPayrollData((prev) =>
-      prev.map((entry) =>
-        entry.id === id ? { ...entry, [field]: value } : entry
-      )
+      prev.map((entry) => {
+        if (entry.id !== id) return entry;
+
+        const updatedEntry = { ...entry, [field]: value };
+
+        // Real-time calculation for allowances and total salary
+        if (
+          [
+            "breakfastAllowance",
+            "otherAllowances",
+            "tripAllowance",
+            "overtimeAllowance",
+          ].includes(field as string)
+        ) {
+          const newTotalAllowances = calculateTotalAllowances(updatedEntry);
+          const allowanceDiff = newTotalAllowances - entry.totalAllowances;
+          updatedEntry.totalAllowances = newTotalAllowances;
+          updatedEntry.totalSalary = entry.totalSalary + allowanceDiff;
+        }
+
+        return updatedEntry;
+      })
     );
   };
 
@@ -243,6 +267,10 @@ const PayrollDetailPage = () => {
         remarks: updatedRow.remarks,
         paymentMethodId: updatedRow.paymentMethodId,
         payrollStatusId: updatedRow.payrollStatusId,
+        tripAllowance: updatedRow.tripAllowance,
+        overtimeAllowance: updatedRow.overtimeAllowance,
+        salary: updatedRow.totalSalary,
+        totalAllowances: updatedRow.totalAllowances,
       };
 
       setIsSavingRow(true);
@@ -257,11 +285,12 @@ const PayrollDetailPage = () => {
     isSavingAll,
     isSavingRow,
     statusOptions,
-    updateSalaryPair,
-    updatePayrollEntry,
     paymentMethodOptions,
-    handleRowRefreshComplete,
+    updatePayrollEntry,
+    updateSalaryPair,
     handleSaveSingleRowOnEnter,
+    handleRowRefreshComplete,
+    payrollSectionId: filterParams.payrollSectionId,
   });
 
   const { data: dateData } = useGetPayrollDate({

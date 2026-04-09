@@ -5,7 +5,7 @@ import { classNames } from "primereact/utils";
 type ButtonVariant = "solid" | "outlined" | "text";
 type IconPosition = "left" | "right";
 
-interface CustomButtonProps extends Omit<
+export interface CustomButtonProps extends Omit<
   ButtonProps,
   "outlined" | "text" | "icon" | "iconPos"
 > {
