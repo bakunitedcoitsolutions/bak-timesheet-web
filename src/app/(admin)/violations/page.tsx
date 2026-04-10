@@ -22,9 +22,7 @@ import {
   ListedTrafficChallan,
   ListTrafficChallansSortableField,
 } from "@/lib/db/services/traffic-challan/traffic-challan.dto";
-import {
-  listAllTrafficChallansAction,
-} from "@/lib/db/services/traffic-challan/actions";
+import { listAllTrafficChallansAction } from "@/lib/db/services/traffic-challan/actions";
 import {
   exportTrafficChallansToExcel,
   exportTrafficChallansToCSV,
@@ -184,14 +182,20 @@ const ChallansPage = () => {
       });
 
       if (error) {
-        toastService.showError("Error", "Failed to fetch violations for export");
+        toastService.showError(
+          "Error",
+          "Failed to fetch violations for export"
+        );
         return;
       }
 
       exportTrafficChallansToCSV(result?.trafficChallans ?? [], monthLabel);
     } catch (err) {
       console.log("Export CSV failed:", err);
-      toastService.showError("Error", "An unexpected error occurred during export");
+      toastService.showError(
+        "Error",
+        "An unexpected error occurred during export"
+      );
     }
   }, [selectedDate, dateFilter, debouncedSearch]);
 
@@ -209,14 +213,23 @@ const ChallansPage = () => {
       });
 
       if (error) {
-        toastService.showError("Error", "Failed to fetch violations for export");
+        toastService.showError(
+          "Error",
+          "Failed to fetch violations for export"
+        );
         return;
       }
 
-      await exportTrafficChallansToExcel(result?.trafficChallans ?? [], monthLabel);
+      await exportTrafficChallansToExcel(
+        result?.trafficChallans ?? [],
+        monthLabel
+      );
     } catch (err) {
       console.log("Export Excel failed:", err);
-      toastService.showError("Error", "An unexpected error occurred during export");
+      toastService.showError(
+        "Error",
+        "An unexpected error occurred during export"
+      );
     }
   }, [selectedDate, dateFilter, debouncedSearch]);
 

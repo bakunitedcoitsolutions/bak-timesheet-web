@@ -5,14 +5,14 @@
 
 import { prisma } from "@/lib/db/prisma";
 import type {
+  ListedTrafficChallan,
   CreateTrafficChallanData,
   UpdateTrafficChallanData,
   ListTrafficChallansParams,
+  ListAllTrafficChallanParams,
   ListTrafficChallansResponse,
   BulkUploadTrafficChallanData,
   BulkUploadTrafficChallanResult,
-  ListedTrafficChallan,
-  ListAllTrafficChallanParams,
 } from "./traffic-challan.dto";
 import dayjs from "@/lib/dayjs";
 import { refreshPayrollForEmployeesIfActive } from "../payroll-summary/payroll-actions.service";
@@ -80,38 +80,40 @@ async function createTrafficChallanInternal(
  * Create a new traffic challan
  */
 export const createTrafficChallan = async (data: CreateTrafficChallanData) => {
-  const result = await prisma.$transaction(async (tx: PrismaTransactionClient) => {
-    // Validate employee exists and check branch assignment
-    const employee = await tx.employee.findUnique({
-      where: { id: data.employeeId },
-      select: { id: true, branchId: true },
-    });
+  const result = await prisma.$transaction(
+    async (tx: PrismaTransactionClient) => {
+      // Validate employee exists and check branch assignment
+      const employee = await tx.employee.findUnique({
+        where: { id: data.employeeId },
+        select: { id: true, branchId: true },
+      });
 
-    if (!employee) {
-      throw new Error(`Employee with ID ${data.employeeId} does not exist`);
+      if (!employee) {
+        throw new Error(`Employee with ID ${data.employeeId} does not exist`);
+      }
+
+      // Security validation: verify branch assignment for branch-scoped users
+      if (data.branchId && employee.branchId !== data.branchId) {
+        throw new Error(
+          "Access Denied: The selected employee belongs to another branch."
+        );
+      }
+
+      const trafficChallan = await createTrafficChallanInternal(tx, {
+        employeeId: data.employeeId,
+        date: data.date,
+        type: data.type,
+        amount: data.amount,
+        description: data.description,
+      });
+
+      // Convert Decimal to number for client serialization
+      return {
+        ...trafficChallan,
+        amount: Number(trafficChallan.amount),
+      };
     }
-
-    // Security validation: verify branch assignment for branch-scoped users
-    if (data.branchId && employee.branchId !== data.branchId) {
-      throw new Error(
-        "Access Denied: The selected employee belongs to another branch."
-      );
-    }
-
-    const trafficChallan = await createTrafficChallanInternal(tx, {
-      employeeId: data.employeeId,
-      date: data.date,
-      type: data.type,
-      amount: data.amount,
-      description: data.description,
-    });
-
-    // Convert Decimal to number for client serialization
-    return {
-      ...trafficChallan,
-      amount: Number(trafficChallan.amount),
-    };
-  });
+  );
 
   // Trigger payroll refresh if active
   await refreshPayrollForEmployeesIfActive([data.employeeId], data.date);
@@ -146,65 +148,73 @@ export const updateTrafficChallan = async (
   id: number,
   data: UpdateTrafficChallanData
 ) => {
-  const result = await prisma.$transaction(async (tx: PrismaTransactionClient) => {
-    // Check if traffic challan exists and get current data
-    const existingTrafficChallan = await tx.trafficChallan.findUnique({
-      where: { id },
-      select: {
-        id: true,
-        employee: { select: { branchId: true } },
-      },
-    });
-
-    if (!existingTrafficChallan) {
-      throw new Error("Traffic challan not found");
-    }
-
-    // Security validation: verify branch assignment for branch-scoped users
-    if (data.branchId && existingTrafficChallan.employee?.branchId !== data.branchId) {
-      throw new Error("Access Denied: Traffic violation belongs to another branch.");
-    }
-
-    // Validate employee if provided
-    if (data.employeeId !== undefined) {
-      const employee = await tx.employee.findUnique({
-        where: { id: data.employeeId },
-        select: { id: true, branchId: true },
+  const result = await prisma.$transaction(
+    async (tx: PrismaTransactionClient) => {
+      // Check if traffic challan exists and get current data
+      const existingTrafficChallan = await tx.trafficChallan.findUnique({
+        where: { id },
+        select: {
+          id: true,
+          employee: { select: { branchId: true } },
+        },
       });
 
-      if (!employee) {
-        throw new Error(`Employee with ID ${data.employeeId} does not exist`);
+      if (!existingTrafficChallan) {
+        throw new Error("Traffic challan not found");
       }
 
-      // Security validation: verify branch assignment for new employee
-      if (data.branchId && employee.branchId !== data.branchId) {
+      // Security validation: verify branch assignment for branch-scoped users
+      if (
+        data.branchId &&
+        existingTrafficChallan.employee?.branchId !== data.branchId
+      ) {
         throw new Error(
-          "Access Denied: The selected employee belongs to another branch."
+          "Access Denied: Traffic violation belongs to another branch."
         );
       }
+
+      // Validate employee if provided
+      if (data.employeeId !== undefined) {
+        const employee = await tx.employee.findUnique({
+          where: { id: data.employeeId },
+          select: { id: true, branchId: true },
+        });
+
+        if (!employee) {
+          throw new Error(`Employee with ID ${data.employeeId} does not exist`);
+        }
+
+        // Security validation: verify branch assignment for new employee
+        if (data.branchId && employee.branchId !== data.branchId) {
+          throw new Error(
+            "Access Denied: The selected employee belongs to another branch."
+          );
+        }
+      }
+
+      const updateData: any = {};
+
+      if (data.employeeId !== undefined)
+        updateData.employeeId = data.employeeId;
+      if (data.date !== undefined) updateData.date = dayjs(data.date).toDate();
+      if (data.type !== undefined) updateData.type = data.type;
+      if (data.amount !== undefined) updateData.amount = data.amount;
+      if (data.description !== undefined)
+        updateData.description = data.description;
+
+      const trafficChallan = await tx.trafficChallan.update({
+        where: { id },
+        data: updateData,
+        select: trafficChallanSelect,
+      });
+
+      // Convert Decimal to number for client serialization
+      return {
+        ...trafficChallan,
+        amount: Number(trafficChallan.amount),
+      };
     }
-
-    const updateData: any = {};
-
-    if (data.employeeId !== undefined) updateData.employeeId = data.employeeId;
-    if (data.date !== undefined) updateData.date = dayjs(data.date).toDate();
-    if (data.type !== undefined) updateData.type = data.type;
-    if (data.amount !== undefined) updateData.amount = data.amount;
-    if (data.description !== undefined)
-      updateData.description = data.description;
-
-    const trafficChallan = await tx.trafficChallan.update({
-      where: { id },
-      data: updateData,
-      select: trafficChallanSelect,
-    });
-
-    // Convert Decimal to number for client serialization
-    return {
-      ...trafficChallan,
-      amount: Number(trafficChallan.amount),
-    };
-  });
+  );
 
   // Trigger payroll refresh if active
   await refreshPayrollForEmployeesIfActive([result.employeeId], result.date);
@@ -215,7 +225,10 @@ export const updateTrafficChallan = async (
 /**
  * Delete traffic challan
  */
-export const deleteTrafficChallan = async (id: number, branchId?: number | null) => {
+export const deleteTrafficChallan = async (
+  id: number,
+  branchId?: number | null
+) => {
   return prisma.$transaction(async (tx: PrismaTransactionClient) => {
     // Check if traffic challan exists
     const existingTrafficChallan = await tx.trafficChallan.findUnique({
@@ -234,7 +247,9 @@ export const deleteTrafficChallan = async (id: number, branchId?: number | null)
 
     // Security validation: verify branch assignment for branch-scoped users
     if (branchId && existingTrafficChallan.employee?.branchId !== branchId) {
-      throw new Error("Access Denied: Traffic violation belongs to another branch.");
+      throw new Error(
+        "Access Denied: Traffic violation belongs to another branch."
+      );
     }
 
     await tx.trafficChallan.delete({
@@ -383,7 +398,7 @@ export const listAllTrafficChallans = async (
   if (params.startDate || params.endDate) {
     where.date = {};
     if (params.startDate) {
-      where.date.gte = dayjs(params.startDate).toDate();
+      where.date.gt = dayjs(params.startDate).toDate();
     }
     if (params.endDate) {
       where.date.lte = dayjs(params.endDate).toDate();
@@ -480,7 +495,10 @@ export const bulkUploadTrafficChallans = async (
   // Trigger payroll refresh for all affected months/employees
   for (const [dateKey, employeeIds] of refreshDetails.entries()) {
     const [year, month] = dateKey.split("-").map(Number);
-    const dateObj = dayjs().year(year).month(month - 1).toDate();
+    const dateObj = dayjs()
+      .year(year)
+      .month(month - 1)
+      .toDate();
     await refreshPayrollForEmployeesIfActive(Array.from(employeeIds), dateObj);
   }
 
