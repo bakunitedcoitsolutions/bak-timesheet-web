@@ -76,6 +76,7 @@ export const getSalarySlipData = async (
         iban: true,
         bankCode: true,
         gender: true,
+        payrollSectionId: true,
         nationality: { select: { id: true, nameEn: true, nameAr: true } },
         designation: { select: { id: true, nameEn: true, nameAr: true } },
       },
@@ -298,6 +299,7 @@ export const getSalarySlipData = async (
       paymentMethodName: "",
       tripAllowance: 0,
       overtimeAllowance: 0,
+      payrollSectionId: emp.payrollSectionId,
     };
 
     results.push(entry);

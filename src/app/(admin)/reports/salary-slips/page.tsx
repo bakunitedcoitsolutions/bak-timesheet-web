@@ -101,10 +101,10 @@ const SalarySlipsPage = () => {
         />
         <div className="bg-theme-primary-light">
           <FilterSection
+            isLoading={isLoading}
             onSearch={handleSearch}
             selectedDate={selectedDate}
             onDateChange={setSelectedDate}
-            isLoading={isLoading}
           />
         </div>
       </div>

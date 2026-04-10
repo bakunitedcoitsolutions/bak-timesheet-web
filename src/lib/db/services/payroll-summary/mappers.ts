@@ -43,6 +43,7 @@ export interface PayrollDetailEntry {
   isCardDelivered: boolean;
   tripAllowance: number;
   overtimeAllowance: number;
+  payrollSectionId: number | null;
 }
 
 import { PayrollDetailWithRelations } from "./payroll-summary.dto";
@@ -100,5 +101,6 @@ export const mapPayrollDetailToEntry = (
     isCardDelivered: d?.employee?.isCardDelivered ?? false,
     tripAllowance: d?.tripAllowance || 0,
     overtimeAllowance: d?.overtimeAllowance || 0,
+    payrollSectionId: d?.employee?.payrollSectionId || null,
   };
 };

@@ -1,6 +1,6 @@
 "use client";
-import { PayrollDetailEntry } from "@/lib/db/services/payroll-summary/mappers";
 import { formatNum } from "@/utils/helpers";
+import { PayrollDetailEntry } from "@/lib/db/services/payroll-summary/mappers";
 
 interface SalarySlipProps {
   entry: PayrollDetailEntry;
@@ -11,6 +11,8 @@ export const SalarySlip = ({
   entry,
   monthYear = "December 2025",
 }: SalarySlipProps) => {
+  const isForTruckHouse =
+    entry?.payrollSectionId === 6 || entry?.payrollSectionId === 15;
   return (
     <div
       className="w-full bg-white border border-gray-300 p-3 mb-0 text-[10px] relative mx-auto"
@@ -91,10 +93,10 @@ export const SalarySlip = ({
                     Rate/Hour
                   </th>
                   <th className="border border-gray-300 py-0.5 px-1 font-bold text-gray-700 w-[11%]">
-                    Breakfast Alw.
+                    {isForTruckHouse ? "Trip Alw." : "Breakfast Alw."}
                   </th>
                   <th className="border border-gray-300 py-0.5 px-1 font-bold text-gray-700 w-[11%]">
-                    Allowance
+                    {isForTruckHouse ? "Overtime Alw." : "Allowance"}
                   </th>
                   <th className="border border-gray-300 py-0.5 px-1 font-bold text-gray-700 w-[11%]">
                     Salary
@@ -116,10 +118,17 @@ export const SalarySlip = ({
                     {formatNum(entry.hourlyRate, 2)}
                   </td>
                   <td className="border border-gray-300 py-0.5 px-1">
-                    {formatNum(entry.breakfastAllowance)}
+                    {isForTruckHouse
+                      ? formatNum(entry.tripAllowance)
+                      : formatNum(entry.breakfastAllowance)}
                   </td>
                   <td className="border border-gray-300 py-0.5 px-1">
-                    {formatNum(entry.otherAllowances)}
+                    {isForTruckHouse
+                      ? formatNum(
+                          Number(entry.overtimeAllowance || 0) +
+                            Number(entry.otherAllowances || 0)
+                        )
+                      : formatNum(entry.otherAllowances || 0)}
                   </td>
                   <td className="border border-gray-300 py-0.5 px-1 font-bold">
                     {formatNum(entry.totalSalary)}

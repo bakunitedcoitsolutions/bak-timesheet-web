@@ -195,9 +195,10 @@ const PayrollReportPage = () => {
         <ReportTable
           data={visibleData}
           isLoading={isLoading}
-          month={appliedQuery.month}
           year={appliedQuery.year}
+          month={appliedQuery.month}
           allSectionsCount={sections.length}
+          payrollSectionIds={appliedQuery.payrollSectionIds}
         />
       </div>
     </div>

@@ -101,6 +101,7 @@ export interface PayrollDetailWithRelations {
     isFixed?: boolean | null;
     isDeductable?: boolean | null;
     isCardDelivered?: boolean | null;
+    payrollSectionId: number | null;
     nationality?: {
       id: number;
       nameEn: string;

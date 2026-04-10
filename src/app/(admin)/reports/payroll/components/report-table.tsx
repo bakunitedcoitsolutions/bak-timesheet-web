@@ -13,8 +13,8 @@ import {
   calculateGrandTotals,
   calculateSectionTotals,
 } from "../utils/payroll-report.utils";
-import { formatPayrollPeriod } from "@/utils/helpers";
 import { Table, TableColumn, Badge } from "@/components";
+import { formatNum, formatPayrollPeriod } from "@/utils/helpers";
 
 interface ReportTableProps {
   year: number;
@@ -22,6 +22,7 @@ interface ReportTableProps {
   isLoading: boolean;
   data: PayrollReportRow[];
   allSectionsCount: number;
+  payrollSectionIds: number[] | null;
 }
 
 const tableCommonProps: TableColumn<PayrollReportRow> = {
@@ -43,7 +44,16 @@ export const ReportTable = ({
   month,
   isLoading,
   allSectionsCount,
+  payrollSectionIds,
 }: ReportTableProps) => {
+  const isForTruckHouse =
+    payrollSectionIds && payrollSectionIds?.length > 0
+      ? payrollSectionIds?.length === 1
+        ? payrollSectionIds[0] === 6 || payrollSectionIds[0] === 15
+        : payrollSectionIds?.includes?.(6) && payrollSectionIds?.includes?.(15)
+      : false;
+  console;
+
   const columns = useMemo(
     (): TableColumn<PayrollReportRow>[] => [
       {
@@ -134,26 +144,55 @@ export const ReportTable = ({
           </span>
         ),
       },
-      {
-        ...tableCommonProps,
-        field: "breakfastAllowance",
-        header: "Brf. Alw.",
-        body: (r) => (
-          <span className="text-sm text-center font-semibold block">
-            {fmt(r.breakfastAllowance)}
-          </span>
-        ),
-      },
-      {
-        ...tableCommonProps,
-        field: "otherAllowances",
-        header: "Alw.",
-        body: (r) => (
-          <span className="text-sm text-center font-semibold block">
-            {fmt(r.otherAllowances)}
-          </span>
-        ),
-      },
+      ...(isForTruckHouse
+        ? [
+            {
+              ...tableCommonProps,
+              field: "tripAllowance",
+              header: "Trip Alw.",
+              body: (r: PayrollReportRow) => (
+                <span className="text-sm text-center font-semibold block">
+                  {fmt(r.tripAllowance)}
+                </span>
+              ),
+            },
+            {
+              ...tableCommonProps,
+              field: "overtimeAllowance",
+              header: "OT Alw.",
+              body: (r: PayrollReportRow) => (
+                <span className="text-sm text-center font-semibold block">
+                  {fmt(
+                    Number(r.overtimeAllowance || 0) +
+                      Number(r.otherAllowances || 0)
+                  )}
+                </span>
+              ),
+            },
+          ]
+        : [
+            {
+              ...tableCommonProps,
+              field: "breakfastAllowance",
+              header: "Brf. Alw.",
+              body: (r: PayrollReportRow) => (
+                <span className="text-sm text-center font-semibold block">
+                  {fmt(r.breakfastAllowance)}
+                </span>
+              ),
+            },
+            {
+              ...tableCommonProps,
+              field: "otherAllowances",
+              header: "Alw.",
+              body: (r: PayrollReportRow) => (
+                <span className="text-sm text-center font-semibold block">
+                  {fmt(r.otherAllowances)}
+                </span>
+              ),
+            },
+          ]),
+
       {
         ...tableCommonProps,
         field: "totalAllowances",
@@ -298,7 +337,7 @@ export const ReportTable = ({
         ),
       },
     ],
-    []
+    [isForTruckHouse]
   );
 
   const grandTotals = useMemo(() => calculateGrandTotals(data), [data]);
