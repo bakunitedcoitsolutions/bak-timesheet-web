@@ -4,6 +4,7 @@ import { ListedProject } from "@/lib/db/services/project/project.dto";
 
 export interface ProjectExportRow {
   groupSerial: number;
+  id: number;
   nameEn: string;
   nameAr: string;
   branchName: string;
@@ -13,6 +14,7 @@ export interface ProjectExportRow {
 function mapToExportRow(p: ListedProject, index: number): ProjectExportRow {
   return {
     groupSerial: index + 1,
+    id: p.id,
     nameEn: p.nameEn,
     nameAr: p.nameAr || "",
     branchName: p.branch?.nameEn || "Global",
@@ -22,6 +24,7 @@ function mapToExportRow(p: ListedProject, index: number): ProjectExportRow {
 
 const HEADERS = [
   "#",
+  "Project Id",
   "Project Name (EN)",
   "Project Name (AR)",
   "Branch",
@@ -29,7 +32,7 @@ const HEADERS = [
 ];
 
 function buildRow(r: ProjectExportRow): (string | number)[] {
-  return [r.groupSerial, r.nameEn, r.nameAr, r.branchName, r.status];
+  return [r.groupSerial, r.id, r.nameEn, r.nameAr, r.branchName, r.status];
 }
 
 function buildSheetData(data: ProjectExportRow[]): (string | number)[][] {
@@ -49,7 +52,8 @@ export function exportProjectsExcel(projects: ListedProject[]) {
 
   // Set column widths
   ws["!cols"] = [
-    { wch: 5 },  // #
+    { wch: 5 }, // #
+    { wch: 20 }, // Id
     { wch: 35 }, // Name EN
     { wch: 35 }, // Name AR
     { wch: 20 }, // Branch
@@ -71,7 +75,7 @@ export function exportProjectsExcel(projects: ListedProject[]) {
 export function exportProjectsCSV(projects: ListedProject[]) {
   const exportData = projects.map((p, i) => mapToExportRow(p, i));
   const rows = buildSheetData(exportData);
-  
+
   const escape = (v: string | number) => {
     const s = String(v);
     if (s.includes(",") || s.includes('"') || s.includes("\n")) {

@@ -25,7 +25,7 @@ export const getProjectTableColumns = (
   isAccessEnabledUser: boolean
 ): TableColumn<ListedProject>[] => [
   {
-    field: "id",
+    field: "index",
     header: "#",
     sortable: false,
     filterable: false,
@@ -37,6 +37,20 @@ export const getProjectTableColumns = (
         <span className="text-sm font-medium">
           {Number(options?.rowIndex) + 1}
         </span>
+      </div>
+    ),
+  },
+  {
+    field: "id",
+    header: "Project Id",
+    sortable: false,
+    filterable: false,
+    align: "center",
+    style: { minWidth: "100px" },
+    headerStyle: { minWidth: "100px" },
+    body: (rowData: ListedProject) => (
+      <div className={"flex items-center justify-center gap-1.5 w-[40px]"}>
+        <span className="text-sm font-medium text-primary">{rowData.id}</span>
       </div>
     ),
   },
