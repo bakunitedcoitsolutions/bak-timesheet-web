@@ -8,8 +8,8 @@ import {
   Button,
   Dropdown,
   useAccess,
+  MultiEmpInput,
   GroupDropdown,
-  AutoScrollChips,
 } from "@/components";
 import { useGlobalData } from "@/context/GlobalDataContext";
 
@@ -100,12 +100,11 @@ export const FilterSection = memo(
 
               {/* Employee codes */}
               <div className="w-full">
-                <AutoScrollChips
+                <MultiEmpInput
                   value={employeeCodes}
-                  onChange={(e) => setEmployeeCodes(e.value ?? [])}
-                  allowDuplicate={false}
-                  placeholder="Employee Codes"
                   className="w-full h-10!"
+                  placeholder="Employee Codes"
+                  onChange={(codes) => setEmployeeCodes(codes)}
                 />
               </div>
 

@@ -8,7 +8,7 @@ import {
   Button,
   Dropdown,
   useAccess,
-  AutoScrollChips,
+  MultiEmpInput,
 } from "@/components";
 import { useGlobalData } from "@/context/GlobalDataContext";
 import ModifiedMultiSelect from "@/components/forms/multi-select";
@@ -99,12 +99,11 @@ export const FilterSection = memo(
                 }
               }}
             />
-            <AutoScrollChips
+            <MultiEmpInput
               value={employeeCodeChips}
-              allowDuplicate={false}
-              placeholder="Employee Codes"
               className="w-full h-10!"
-              onChange={(e) => setEmployeeCodeChips(e.value ?? [])}
+              placeholder="Employee Codes"
+              onChange={(codes) => setEmployeeCodeChips(codes)}
             />
             {isAllowedAllFilters && (
               <>

@@ -8,7 +8,7 @@ export * from "./bulk-upload-report-dialog";
 export { default as Badge } from "./badge";
 export { default as TypeBadge } from "./type-badge";
 export { default as GroupDropdown } from "./group-dropdown";
-export * from "./AutoScrollChips";
+export * from "./MultiEmpInput";
 export { default as Access, useAccess } from "./access";
 export type {
   AccessProps,

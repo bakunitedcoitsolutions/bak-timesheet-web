@@ -2,12 +2,7 @@
 
 import { memo, useState } from "react";
 import { classNames } from "primereact/utils";
-import {
-  Button,
-  GroupDropdown,
-  AutoScrollChips,
-  useAccess,
-} from "@/components";
+import { Button, useAccess, GroupDropdown, MultiEmpInput } from "@/components";
 
 interface FilterSectionProps {
   onSearch: (
@@ -40,12 +35,11 @@ export const FilterSection = memo(({ onSearch }: FilterSectionProps) => {
         {!isLoadingAccess && (
           <>
             <div className="w-full">
-              <AutoScrollChips
+              <MultiEmpInput
                 value={employeeCodes}
-                onChange={(e) => setEmployeeCodes(e.value ?? [])}
-                allowDuplicate={false}
-                placeholder="Employee Codes"
                 className="w-full h-10!"
+                placeholder="Employee Codes"
+                onChange={(codes) => setEmployeeCodes(codes)}
               />
             </div>
             {isAllowedAllFilters && (

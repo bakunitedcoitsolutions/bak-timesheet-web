@@ -8,8 +8,8 @@ import {
   Button,
   Dropdown,
   useAccess,
+  MultiEmpInput,
   GroupDropdown,
-  AutoScrollChips,
 } from "@/components";
 import { useGlobalData, GlobalDataGeneral } from "@/context/GlobalDataContext";
 
@@ -87,16 +87,14 @@ export const FilterSection = memo(
               {isAllowedAllFilters && (
                 <>
                   <div className="w-full">
-                    <AutoScrollChips
+                    <MultiEmpInput
                       value={employeeCodes}
-                      allowDuplicate={false}
-                      placeholder="Employee Codes"
                       className="w-full h-10!"
-                      onChange={(e) => {
-                        const codes = e.value ?? [];
+                      placeholder="Employee Codes"
+                      onChange={(codes) => {
                         setEmployeeCodes(codes);
                         // If employee code is present, clear other filters
-                        if (codes.length > 0) {
+                        if (codes?.length > 0) {
                           setSelectedFilter("all");
                           setProjectId(null);
                           setShowAbsents(false);

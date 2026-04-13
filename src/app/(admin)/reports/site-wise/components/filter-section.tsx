@@ -6,7 +6,7 @@ import {
   Button,
   Checkbox,
   MultiSelect,
-  AutoScrollChips,
+  MultiEmpInput,
 } from "@/components";
 
 interface FilterSectionProps {
@@ -72,11 +72,11 @@ export const FilterSection = ({
           />
         </div>
         <div className="w-full">
-          <AutoScrollChips
+          <MultiEmpInput
             value={employeeCodeChips}
-            onChange={(e) => setEmployeeCodeChips(e.value || [])}
-            placeholder="Emp. Code"
             className="w-full h-10!"
+            placeholder="Employee Codes"
+            onChange={(codes) => setEmployeeCodeChips(codes)}
           />
         </div>
         <div className="w-full">

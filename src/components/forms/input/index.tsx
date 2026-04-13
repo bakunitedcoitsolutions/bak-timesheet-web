@@ -1,10 +1,9 @@
 "use client";
-import { InputText, InputTextProps } from "primereact/inputtext";
 import { IconField } from "primereact/iconfield";
 import { InputIcon } from "primereact/inputicon";
-import { ReactNode } from "react";
+import { InputText, InputTextProps } from "primereact/inputtext";
 
-interface ModifiedInputProps extends Omit<InputTextProps, "className"> {
+export interface ModifiedInputProps extends Omit<InputTextProps, "className"> {
   label?: string;
   icon?: string;
   iconPosition?: "left" | "right";
@@ -32,8 +31,8 @@ export default function ModifiedInput({
   const inputElement = <InputText className={finalClassName} {...rest} />;
 
   const iconElement = onIconClick ? (
-    <InputIcon 
-      className={icon} 
+    <InputIcon
+      className={icon}
       onClick={onIconClick}
       style={{ cursor: "pointer" }}
     />
