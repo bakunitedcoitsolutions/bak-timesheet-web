@@ -23,6 +23,7 @@ export const StatusRowFilter = ({
         showClear
         placeholder={placeholder}
         options={dataSource}
+        optionValue="value"
         value={options.value}
         className="p-column-filter"
         style={{

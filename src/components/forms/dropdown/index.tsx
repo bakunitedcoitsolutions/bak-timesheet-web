@@ -58,6 +58,7 @@ export default function ModifiedDropdown({
         options={options}
         filterDelay={400}
         optionLabel="label"
+        optionValue="value"
         className={className}
         placeholder={placeholder}
         itemTemplate={itemTemplate}

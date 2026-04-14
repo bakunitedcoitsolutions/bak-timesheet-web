@@ -46,6 +46,10 @@ export const useSavePayrollRow = () => {
         `Row saved successfully for ${row.empCode} - ${row.name}`
       );
     } catch (error: any) {
+      console.error("Single Row Save Error:", {
+        message: error.message,
+        error,
+      });
       toastService.showError(
         "Error",
         error.message || "Failed to save payroll details"

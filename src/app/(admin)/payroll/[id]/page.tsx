@@ -65,10 +65,19 @@ const PayrollDetailPage = () => {
     value: s.id,
   }));
 
-  const paymentMethodOptions = globalData.paymentMethods.map((p) => ({
-    label: p.nameEn || "Unknown",
-    value: p.id.toString(),
-  }));
+  const paymentMethodOptions =
+    globalData.paymentMethods?.length > 0
+      ? [
+          {
+            label: "Select",
+            value: null,
+          },
+          ...globalData.paymentMethods.map((p) => ({
+            label: p.nameEn || "Unknown",
+            value: p.id.toString(),
+          })),
+        ]
+      : [];
 
   // Map individual column filters to search if multiple are present
   const getSearchValue = () => {
@@ -117,22 +126,23 @@ const PayrollDetailPage = () => {
     try {
       const entries = payrollData.map((row) => ({
         id: row.id,
-        loanDeduction: row.loanDeduction,
-        challanDeduction: row.challanDeduction,
+        loanDeduction: row.loanDeduction || 0,
+        challanDeduction: row.challanDeduction || 0,
         netSalaryPayable: calculateNetSalaryPayable(row),
         netLoan: calculateNetLoan(row),
         netChallan: calculateNetTrafficChallan(row),
-        cardSalary: row.cardSalary,
-        cashSalary: row.cashSalary,
-        remarks: row.remarks,
+        cardSalary: row.cardSalary || 0,
+        cashSalary: row.cashSalary || 0,
+        remarks: row.remarks || null,
         paymentMethodId: row.paymentMethodId,
         payrollStatusId: row.payrollStatusId,
-        tripAllowance: row.tripAllowance,
-        overtimeAllowance: row.overtimeAllowance,
-        salary: row.totalSalary,
-        totalAllowances: row.totalAllowances,
+        tripAllowance: row.tripAllowance || 0,
+        overtimeAllowance: row.overtimeAllowance || 0,
+        salary: row.totalSalary || 0,
+        totalAllowances: row.totalAllowances || 0,
       }));
 
+      console.log("Saving payroll entries:", entries);
       const result = await savePayrollDetails({ entries });
       queryClient.invalidateQueries({ queryKey: ["payroll-details"] });
       queryClient.invalidateQueries({ queryKey: ["payroll-summaries"] });
@@ -141,6 +151,10 @@ const PayrollDetailPage = () => {
         `${result.saved} payroll entr${result.saved === 1 ? "y" : "ies"} saved successfully`
       );
     } catch (error: any) {
+      console.error("Payroll Save Error:", {
+        message: error.message,
+        error,
+      });
       toastService.showError(
         "Error",
         error.message || "Failed to save payroll details"
@@ -257,22 +271,21 @@ const PayrollDetailPage = () => {
       const updatedRow = fieldName ? { ...row, [fieldName]: value } : row;
       const payloadToSave = {
         id: updatedRow.id,
-        loanDeduction: updatedRow.loanDeduction,
-        challanDeduction: updatedRow.challanDeduction,
+        loanDeduction: updatedRow.loanDeduction || 0,
+        challanDeduction: updatedRow.challanDeduction || 0,
         netSalaryPayable: calculateNetSalaryPayable(updatedRow),
         netLoan: calculateNetLoan(updatedRow),
         netChallan: calculateNetTrafficChallan(updatedRow),
-        cardSalary: updatedRow.cardSalary,
-        cashSalary: updatedRow.cashSalary,
-        remarks: updatedRow.remarks,
+        cardSalary: updatedRow.cardSalary || 0,
+        cashSalary: updatedRow.cashSalary || 0,
+        remarks: updatedRow.remarks || null,
         paymentMethodId: updatedRow.paymentMethodId,
         payrollStatusId: updatedRow.payrollStatusId,
-        tripAllowance: updatedRow.tripAllowance,
-        overtimeAllowance: updatedRow.overtimeAllowance,
-        salary: updatedRow.totalSalary,
-        totalAllowances: updatedRow.totalAllowances,
+        tripAllowance: updatedRow.tripAllowance || 0,
+        overtimeAllowance: updatedRow.overtimeAllowance || 0,
+        salary: updatedRow.totalSalary || 0,
+        totalAllowances: updatedRow.totalAllowances || 0,
       };
-
       setIsSavingRow(true);
       await saveRowOnEnter(payloadToSave as any);
       setIsSavingRow(false);

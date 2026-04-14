@@ -23,7 +23,10 @@ import type {
  * preventing timezone shifts (e.g. +5 hours becoming previous day in UTC).
  */
 function startOfDayUTC(date: Date): Date {
-  return dayjs.utc(dayjs(date).tz().format("YYYY-MM-DD")).startOf("day").toDate();
+  return dayjs
+    .utc(dayjs(date).tz().format("YYYY-MM-DD"))
+    .startOf("day")
+    .toDate();
 }
 
 /**

@@ -32,7 +32,7 @@ interface UsePayrollTableColumnsProps {
   isLoading: boolean;
   isSavingRow: boolean;
   statusOptions: { label: string; value: number }[];
-  paymentMethodOptions: { label: string; value: string }[];
+  paymentMethodOptions: { label: string; value: string | null }[];
   updatePayrollEntry: (
     id: number,
     field: keyof PayrollDetailEntry,
@@ -489,12 +489,17 @@ export const usePayrollTableColumns = ({
             disabled={rowData.payrollSummaryStatusId === 3}
             className="w-[200px]! h-10!"
             placeholder="Choose Method"
-            value={rowData.paymentMethodId?.toString()}
+            optionValue="value"
+            value={
+              rowData.paymentMethodId === null
+                ? null
+                : rowData.paymentMethodId?.toString()
+            }
             onChange={(e) =>
               updatePayrollEntry(
                 rowData.id,
                 "paymentMethodId",
-                e.value ? Number(e.value) : null
+                e.value === null ? null : Number(e.value)
               )
             }
           />
@@ -512,6 +517,7 @@ export const usePayrollTableColumns = ({
             disabled={rowData.payrollSummaryStatusId === 3}
             className="w-[150px]! h-10!"
             placeholder="Pending"
+            optionValue="value"
             value={rowData.payrollStatusId}
             onChange={(e) =>
               updatePayrollEntry(rowData.id, "payrollStatusId", e.value)

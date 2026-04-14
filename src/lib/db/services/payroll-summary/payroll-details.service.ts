@@ -194,10 +194,7 @@ export const savePayrollDetailsBatch = async (
 
           if (data.remarks !== undefined) updateData.remarks = data.remarks;
 
-          if (
-            data.paymentMethodId !== undefined &&
-            data.paymentMethodId !== null
-          )
+          if (data.paymentMethodId !== undefined)
             updateData.paymentMethodId = data.paymentMethodId;
 
           if (
@@ -230,7 +227,10 @@ export const savePayrollDetailsBatch = async (
           if (data.salary !== undefined && data.salary !== null)
             updateData.salary = data.salary;
 
-          if (data.totalAllowances !== undefined && data.totalAllowances !== null)
+          if (
+            data.totalAllowances !== undefined &&
+            data.totalAllowances !== null
+          )
             updateData.totalAllowances = data.totalAllowances;
 
           if (Object.keys(updateData).length > 0) {
