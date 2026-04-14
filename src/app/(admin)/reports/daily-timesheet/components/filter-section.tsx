@@ -11,6 +11,8 @@ import {
   MultiEmpInput,
   GroupDropdown,
 } from "@/components";
+import { toastService } from "@/lib/toast";
+import { USER_ROLES } from "@/utils/user.utility";
 import { useGlobalData, GlobalDataGeneral } from "@/context/GlobalDataContext";
 
 interface FilterSectionProps {
@@ -22,8 +24,17 @@ interface FilterSectionProps {
 
 export const FilterSection = memo(
   ({ onSearch, selectedDate, onDateChange, isLoading }: FilterSectionProps) => {
-    const { canAccessFilter, isLoading: isLoadingAccess } = useAccess();
+    const {
+      canAccessFilter,
+      isLoading: isLoadingAccess,
+      isBranchUser,
+      role,
+    } = useAccess();
     const isAllowedAllFilters = canAccessFilter("daily-timesheet");
+
+    const isRestricted =
+      (isBranchUser || role === USER_ROLES.ACCESS_ENABLED) &&
+      !isAllowedAllFilters;
 
     const [employeeCodes, setEmployeeCodes] = useState<string[]>([]);
     const [selectedFilter, setSelectedFilter] = useState<
@@ -46,6 +57,13 @@ export const FilterSection = memo(
     }, [projects]);
 
     const handleRefresh = () => {
+      if (isRestricted && employeeCodes.length === 0) {
+        toastService.showError(
+          "Access Restricted",
+          "Employee code field is mandatory for your account to view the report."
+        );
+        return;
+      }
       onSearch({
         employeeCodes: employeeCodes.length > 0 ? employeeCodes : null,
         selectedFilter,
@@ -84,25 +102,27 @@ export const FilterSection = memo(
                   placeholder="Select Date"
                 />
               </div>
+              <div className="w-full">
+                <MultiEmpInput
+                  value={employeeCodes}
+                  className="w-full h-10!"
+                  placeholder={
+                    isRestricted ? "Employee Codes *" : "Employee Codes"
+                  }
+                  onChange={(codes) => {
+                    setEmployeeCodes(codes);
+                    // If employee code is present, clear other filters
+                    if (codes?.length > 0) {
+                      setSelectedFilter("all");
+                      setProjectId(null);
+                      setShowAbsents(false);
+                      setShowFixedSalary(false);
+                    }
+                  }}
+                />
+              </div>
               {isAllowedAllFilters && (
                 <>
-                  <div className="w-full">
-                    <MultiEmpInput
-                      value={employeeCodes}
-                      className="w-full h-10!"
-                      placeholder="Employee Codes"
-                      onChange={(codes) => {
-                        setEmployeeCodes(codes);
-                        // If employee code is present, clear other filters
-                        if (codes?.length > 0) {
-                          setSelectedFilter("all");
-                          setProjectId(null);
-                          setShowAbsents(false);
-                          setShowFixedSalary(false);
-                        }
-                      }}
-                    />
-                  </div>
                   <div className="w-full">
                     <GroupDropdown
                       value={selectedFilter}
@@ -112,19 +132,19 @@ export const FilterSection = memo(
                       disabled={employeeCodes.length > 0}
                     />
                   </div>
+                  <div className="w-full">
+                    <Dropdown
+                      filter
+                      options={projectOptions}
+                      value={projectId}
+                      onChange={(e) => setProjectId(e.value)}
+                      className="w-full h-10!"
+                      placeholder="Select Project"
+                      disabled={employeeCodes.length > 0}
+                    />
+                  </div>
                 </>
               )}
-              <div className="w-full">
-                <Dropdown
-                  filter
-                  options={projectOptions}
-                  value={projectId}
-                  onChange={(e) => setProjectId(e.value)}
-                  className="w-full h-10!"
-                  placeholder="Select Project"
-                  disabled={employeeCodes.length > 0}
-                />
-              </div>
               {isAllowedAllFilters && (
                 <div className="w-full">
                   <div className="flex items-center gap-4">
