@@ -2,7 +2,7 @@
 
 import { memo, useState } from "react";
 import { classNames } from "primereact/utils";
-import dayjs from "@/lib/dayjs";
+
 import {
   Input,
   Button,
@@ -11,6 +11,9 @@ import {
   MultiEmpInput,
   GroupDropdown,
 } from "@/components";
+import dayjs from "@/lib/dayjs";
+import { toastService } from "@/lib/toast";
+import { USER_ROLES } from "@/utils/user.utility";
 import { useGlobalData } from "@/context/GlobalDataContext";
 
 interface FilterSectionProps {
@@ -26,8 +29,17 @@ interface FilterSectionProps {
 
 export const FilterSection = memo(
   ({ onSearch, selectedDate, onDateChange, isLoading }: FilterSectionProps) => {
-    const { canAccessFilter, isLoading: isLoadingAccess } = useAccess();
+    const {
+      canAccessFilter,
+      isLoading: isLoadingAccess,
+      isBranchUser,
+      role,
+    } = useAccess();
     const isAllowedAllFilters = canAccessFilter("salary-slips");
+
+    const isRestricted =
+      (isBranchUser || role === USER_ROLES.ACCESS_ENABLED) &&
+      !isAllowedAllFilters;
 
     const [employeeCodes, setEmployeeCodes] = useState<string[]>([]);
     const [selectedFilter, setSelectedFilter] = useState<
@@ -44,6 +56,13 @@ export const FilterSection = memo(
     );
 
     const handleSearch = () => {
+      if (isRestricted && employeeCodes.length === 0) {
+        toastService.showError(
+          "Access Restricted",
+          "Employee code field is mandatory for your account to view salary slips."
+        );
+        return;
+      }
       const codes =
         employeeCodes.length > 0
           ? employeeCodes.map((c) => parseInt(c, 10)).filter((n) => !isNaN(n))
@@ -103,7 +122,9 @@ export const FilterSection = memo(
                 <MultiEmpInput
                   value={employeeCodes}
                   className="w-full h-10!"
-                  placeholder="Employee Codes"
+                  placeholder={
+                    isRestricted ? "Employee Codes *" : "Employee Codes"
+                  }
                   onChange={(codes) => setEmployeeCodes(codes)}
                 />
               </div>
