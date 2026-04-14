@@ -3,6 +3,8 @@
 import { memo, useState } from "react";
 import { classNames } from "primereact/utils";
 import { Button, useAccess, GroupDropdown, MultiEmpInput } from "@/components";
+import { toastService } from "@/lib/toast";
+import { USER_ROLES } from "@/utils/user.utility";
 
 interface FilterSectionProps {
   onSearch: (
@@ -12,8 +14,17 @@ interface FilterSectionProps {
 }
 
 export const FilterSection = memo(({ onSearch }: FilterSectionProps) => {
-  const { canAccessFilter, isLoading: isLoadingAccess } = useAccess();
+  const {
+    canAccessFilter,
+    isLoading: isLoadingAccess,
+    isBranchUser,
+    role,
+  } = useAccess();
   const isAllowedAllFilters = canAccessFilter("employee-cards");
+
+  const isRestricted =
+    (isBranchUser || role === USER_ROLES.ACCESS_ENABLED) &&
+    !isAllowedAllFilters;
 
   const [employeeCodes, setEmployeeCodes] = useState<string[]>([]);
   const [selectedFilter, setSelectedFilter] = useState<string | number | null>(
@@ -21,6 +32,13 @@ export const FilterSection = memo(({ onSearch }: FilterSectionProps) => {
   );
 
   const handleSearch = () => {
+    if (isRestricted && employeeCodes.length === 0) {
+      toastService.showError(
+        "Access Restricted",
+        "Employee code field is mandatory for your account to view employee cards."
+      );
+      return;
+    }
     onSearch(employeeCodes.length > 0 ? employeeCodes : null, selectedFilter);
   };
 
@@ -38,7 +56,9 @@ export const FilterSection = memo(({ onSearch }: FilterSectionProps) => {
               <MultiEmpInput
                 value={employeeCodes}
                 className="w-full h-10!"
-                placeholder="Employee Codes"
+                placeholder={
+                  isRestricted ? "Employee Codes *" : "Employee Codes"
+                }
                 onChange={(codes) => setEmployeeCodes(codes)}
               />
             </div>
