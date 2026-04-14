@@ -13,6 +13,8 @@ import {
   GroupDropdown,
 } from "@/components";
 import { useGlobalData, GlobalDataGeneral } from "@/context/GlobalDataContext";
+import { toastService } from "@/lib/toast";
+import { USER_ROLES } from "@/utils/user.utility";
 
 interface FilterSectionProps {
   onSearch: (params: any) => void;
@@ -23,8 +25,17 @@ interface FilterSectionProps {
 
 export const FilterSection = memo(
   ({ onSearch, selectedDate, onDateChange, isLoading }: FilterSectionProps) => {
-    const { canAccessFilter, isLoading: isLoadingAccess } = useAccess();
+    const {
+      canAccessFilter,
+      isLoading: isLoadingAccess,
+      isBranchUser,
+      role,
+    } = useAccess();
     const isAllowedAllFilters = canAccessFilter("monthly-timesheet");
+
+    const isRestricted =
+      (isBranchUser || role === USER_ROLES.ACCESS_ENABLED) &&
+      !isAllowedAllFilters;
 
     const [employeeCodes, setEmployeeCodes] = useState<string[]>([]);
     const [selectedFilter, setSelectedFilter] = useState<
@@ -47,6 +58,13 @@ export const FilterSection = memo(
     }, [projects]);
 
     const handleRefresh = () => {
+      if (isRestricted && employeeCodes.length === 0) {
+        toastService.showError(
+          "Access Restricted",
+          "Employee code field is mandatory for your account to view the report."
+        );
+        return;
+      }
       onSearch({
         employeeCodes: employeeCodes.length > 0 ? employeeCodes : null,
         selectedFilter,
@@ -95,7 +113,9 @@ export const FilterSection = memo(
                 <MultiEmpInput
                   value={employeeCodes}
                   className="w-full h-10!"
-                  placeholder="Employee Codes"
+                  placeholder={
+                    isRestricted ? "Employee Codes *" : "Employee Codes"
+                  }
                   onChange={(codes) => {
                     setEmployeeCodes(codes);
                     // If employee code is present, clear other filters
