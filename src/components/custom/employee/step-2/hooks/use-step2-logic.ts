@@ -48,7 +48,6 @@ export const useStep2Logic = ({ employeeId }: UseStep2LogicProps) => {
     cityId: undefined,
     statusId: undefined,
     branchId: undefined,
-    subBranchId: undefined,
     designationId: 0,
     payrollSectionId: 0,
     isDeductable: false,
@@ -109,7 +108,6 @@ export const useStep2Logic = ({ employeeId }: UseStep2LogicProps) => {
         cityId: foundEmployee.cityId || undefined,
         statusId: foundEmployee.statusId || undefined,
         branchId: foundEmployee?.branchId || undefined,
-        subBranchId: foundEmployee?.subBranchId || undefined,
         designationId: foundEmployee.designationId ?? 0,
         payrollSectionId: foundEmployee.payrollSectionId ?? 0,
         isDeductable: foundEmployee.isDeductable ?? false,
@@ -209,7 +207,6 @@ export const useStep2Logic = ({ employeeId }: UseStep2LogicProps) => {
           : contractDocUpload.selectedFile
             ? ""
             : data.contractDocument || "",
-        subBranchId: data?.subBranchId || null,
         contractStartDate: data.contractStartDate || undefined,
         contractEndDate: data.contractEndDate || undefined,
         joiningDate: data.joiningDate || undefined,
@@ -237,7 +234,6 @@ export const useStep2Logic = ({ employeeId }: UseStep2LogicProps) => {
               cityId: data.cityId,
               statusId: data.statusId,
               branchId: data.branchId,
-              subBranchId: data.subBranchId,
               isDeductable: data.isDeductable,
               isFixed: data.isFixed,
               workingDays: data.workingDays,

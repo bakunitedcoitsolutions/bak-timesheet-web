@@ -42,7 +42,6 @@ export const UpdateEmployeeStep2Schema = z.object({
   cityId: z.number().int().positive().optional(),
   statusId: z.number().int().positive().optional(),
   branchId: z.number().int().positive().optional(),
-  subBranchId: z.number().int().positive().nullable().optional(),
   designationId: z.number().int().positive("Designation is required"),
   payrollSectionId: z.number().int().positive("Payroll section is required"),
   isDeductable: z.boolean().optional(),
@@ -129,7 +128,6 @@ export const ListEmployeesParamsSchema = z.object({
   statusId: z.number().int().positive().optional(),
   designationId: z.number().int().positive().optional(),
   payrollSectionId: z.number().int().positive().optional(),
-  subBranchId: z.number().int().positive().optional(),
   // Column filters
   employeeCodes: z.array(z.string()).optional(),
   employeeCode: z.string().optional(),

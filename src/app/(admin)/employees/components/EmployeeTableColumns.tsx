@@ -201,14 +201,6 @@ export const getEmployeeTableColumns = ({
     ),
   },
   {
-    field: "subBranch",
-    header: "Sub Branch",
-    ...commonColumnProps,
-    body: (rowData: ListedEmployee) => (
-      <span className="text-sm">{rowData?.subBranch?.nameEn || "-"}</span>
-    ),
-  },
-  {
     field: "nationality",
     header: "Nationality",
     ...commonColumnProps,

@@ -1,7 +1,9 @@
 import dayjs from "@/lib/dayjs";
 import { ListedEmployee } from "@/lib/db/services/employee/employee.dto";
 
-export const calculateContractRemainingDays = (endDateString: string | Date | null) => {
+export const calculateContractRemainingDays = (
+  endDateString: string | Date | null
+) => {
   if (!endDateString) return null;
   const today = dayjs().startOf("day");
   const endDate = dayjs(endDateString).startOf("day");
@@ -24,7 +26,9 @@ export const mapEmployeesData = (employees: ListedEmployee[]) => {
       (Number(emp.otherAllowance) || 0);
 
     // Calculate contract remaining days
-    const contractRemainingDays = calculateContractRemainingDays(emp.contractEndDate);
+    const contractRemainingDays = calculateContractRemainingDays(
+      emp.contractEndDate
+    );
 
     return {
       ...emp,
@@ -34,7 +38,6 @@ export const mapEmployeesData = (employees: ListedEmployee[]) => {
       countryName: emp.country?.nameEn || "-",
       cityName: emp.city?.nameEn || "-",
       branchName: emp.branch?.nameEn || "-",
-      subBranchName: emp.subBranch?.nameEn || "-",
       gosiCityName: emp.gosiCity?.nameEn || "-",
       nationalityName: emp.nationality?.nameEn || "-",
       totalAllowance,

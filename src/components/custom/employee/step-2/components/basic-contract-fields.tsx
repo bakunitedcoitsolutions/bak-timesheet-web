@@ -67,21 +67,6 @@ const BasicContractFields: React.FC<BasicContractFieldsProps> = ({
         />
       </FormItem>
       <FormItem
-        name="subBranchId"
-        className={classNames(FORM_FIELD_WIDTHS["4"])}
-      >
-        <Dropdown
-          filter
-          showClear
-          label="Sub Branch"
-          className="w-full"
-          placeholder="Choose"
-          options={
-            options.branches?.filter?.((branch: any) => !branch?.isMain) || []
-          }
-        />
-      </FormItem>
-      <FormItem
         name="designationId"
         className={classNames(FORM_FIELD_WIDTHS["4"])}
       >

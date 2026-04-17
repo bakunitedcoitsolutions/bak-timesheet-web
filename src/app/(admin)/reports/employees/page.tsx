@@ -136,7 +136,6 @@ const EmployeesReportPage = () => {
     { label: "City", value: "cityName" },
     { label: "Status", value: "statusName" },
     { label: "Branch", value: "branchName" },
-    { label: "Sub Branch", value: "subBranchName" },
     { label: "Designation", value: "designationName" },
     { label: "Payroll Section", value: "sectionName" },
     { label: "Is Fixed?", value: "isFixed" },

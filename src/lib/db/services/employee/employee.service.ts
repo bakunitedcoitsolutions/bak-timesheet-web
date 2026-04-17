@@ -32,7 +32,6 @@ const employeeSelect = {
   cityId: true,
   statusId: true,
   branchId: true,
-  subBranchId: true,
   designationId: true,
   payrollSectionId: true,
   isDeductable: true,
@@ -296,15 +295,15 @@ export const updateEmployeeStep2 = async (
     }
   }
 
-  if (data.subBranchId !== undefined && data.subBranchId !== null) {
-    const subBranchExists = await prisma.branch.findUnique({
-      where: { id: data.subBranchId },
-      select: { id: true },
-    });
-    if (!subBranchExists) {
-      throw new Error(`Sub Branch with ID ${data.subBranchId} does not exist`);
-    }
-  }
+  // if (data.subBranchId !== undefined && data.subBranchId !== null) {
+  //   const subBranchExists = await prisma.branch.findUnique({
+  //     where: { id: data.subBranchId },
+  //     select: { id: true },
+  //   });
+  //   if (!subBranchExists) {
+  //     throw new Error(`Sub Branch with ID ${data.subBranchId} does not exist`);
+  //   }
+  // }
 
   // Validate designationId (required)
   const designationExists = await prisma.designation.findUnique({
@@ -334,8 +333,8 @@ export const updateEmployeeStep2 = async (
   if (data.cityId !== undefined) updateData.cityId = data.cityId ?? null;
   if (data.statusId !== undefined) updateData.statusId = data.statusId ?? null;
   if (data.branchId !== undefined) updateData.branchId = data.branchId ?? null;
-  if (data.subBranchId !== undefined)
-    updateData.subBranchId = data.subBranchId ?? null;
+  // if (data.subBranchId !== undefined)
+  //   updateData.subBranchId = data.subBranchId ?? null;
   // designationId and payrollSectionId are required
   updateData.designationId = data.designationId;
   updateData.payrollSectionId = data.payrollSectionId;
@@ -653,11 +652,6 @@ export const listEmployees = async (
     whereConditions.push({ branchId: branchId });
   }
 
-  // Filter by subBranchId
-  if (params.subBranchId !== undefined) {
-    whereConditions.push({ subBranchId: params.subBranchId });
-  }
-
   // Filter by Zero Rate
   if (params.zeroRate) {
     whereConditions.push({
@@ -734,11 +728,6 @@ export const listEmployees = async (
         },
       },
       branch: {
-        select: {
-          nameEn: true,
-        },
-      },
-      subBranch: {
         select: {
           nameEn: true,
         },

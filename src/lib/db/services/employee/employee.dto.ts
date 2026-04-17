@@ -39,7 +39,6 @@ export interface UpdateEmployeeStep2Data {
   cityId?: number;
   statusId?: number;
   branchId?: number;
-  subBranchId?: number | null;
   designationId: number;
   payrollSectionId: number;
   isDeductable?: boolean;
@@ -123,7 +122,6 @@ export interface ListEmployeesParams {
   statusId?: number;
   designationId?: number;
   payrollSectionId?: number;
-  subBranchId?: number;
   // Column filters
   employeeCodes?: string[];
   employeeCode?: string;
@@ -151,7 +149,6 @@ export interface EmployeeInterface {
   cityId: number | null;
   statusId: number | null;
   branchId: number | null;
-  subBranchId: number | null;
   designationId: number | null;
   payrollSectionId: number | null;
   isDeductable: boolean;
@@ -202,9 +199,6 @@ export interface ListedEmployee extends EmployeeInterface {
     nameEn: string;
   } | null;
   branch: {
-    nameEn: string;
-  } | null;
-  subBranch: {
     nameEn: string;
   } | null;
   designation: {
