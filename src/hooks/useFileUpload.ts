@@ -127,7 +127,7 @@ export const useFileUpload = (
         !existingFilePath.startsWith("http")
       ) {
         // It's a file path, generate signed URL
-        getSignedUrl(bucket, existingFilePath)
+        getSignedUrl(bucket, existingFilePath, 31536000)
           .then((signedUrl) => {
             setDisplayUrl(signedUrl);
           })
@@ -219,7 +219,11 @@ export const useFileUpload = (
         });
 
         // Get signed URL for viewing
-        const signedUrl = await getSignedUrl(bucket, uploadResult.path);
+        const signedUrl = await getSignedUrl(
+          bucket,
+          uploadResult.path,
+          31536000
+        );
 
         // Update entity with file path
         const updateData = {
