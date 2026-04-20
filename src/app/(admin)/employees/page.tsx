@@ -188,7 +188,7 @@ const EmployeesPage = () => {
   const handleViewCard = useCallback((employee: ListedEmployee) => {
     if (employee.cardDocument) {
       // Generate signed URL and open in new tab
-      getSignedUrl(STORAGE_CONFIG.EMPLOYEES_BUCKET, employee.cardDocument, 3600)
+      getSignedUrl(STORAGE_CONFIG.EMPLOYEES_BUCKET, employee.cardDocument)
         .then((signedUrl) => {
           window.open(signedUrl, "_blank");
         })

@@ -204,18 +204,23 @@ export const uploadMultipleFiles = async (
  */
 export const getSignedUrl = async (
   bucket: string,
-  filePath: string,
-  expiresIn: number = 3600
+  filePath: string
 ): Promise<string> => {
-  const { data, error } = await supabase.storage
-    .from(bucket)
-    .createSignedUrl(filePath, expiresIn);
+  // const { data, error } = await supabase.storage
+  //   .from(bucket)
+  //   .createSignedUrl(filePath, expiresIn);
 
-  if (error) {
-    throw new Error(`Failed to generate signed URL: ${error.message}`);
-  }
+  // if (error) {
+  //   throw new Error(`Failed to generate signed URL: ${error.message}`);
+  // }
 
-  return data.signedUrl;
+  // return data.signedUrl;
+  const SUPABASE_URL = (process.env.NEXT_PUBLIC_SUPABASE_URL ?? "")?.replace?.(
+    ":8000",
+    ""
+  );
+  const STORAGE_PATH = "/storage/v1/object/public/";
+  return `${SUPABASE_URL}${STORAGE_PATH}${bucket}/${filePath}`;
 };
 
 /**
