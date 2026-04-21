@@ -29,10 +29,10 @@ const payrollSummarySelect = {
   totalCardSalary: true,
   totalCashSalary: true,
   payrollStatusId: true,
-  createdDate: true,
+  createdAt: true,
   createdBy: true,
-  modifiedDate: true,
-  modifiedBy: true,
+  updatedAt: true,
+  updatedBy: true,
   payrollStatus: {
     select: {
       id: true,
@@ -70,31 +70,24 @@ export const getPayrollSummariesByYear = async (
     payrollMonth: summary.payrollMonth,
     payrollYear: summary.payrollYear,
     totalSalary: summary.totalSalary || 0,
-    totalBreakfastAllowance:
-      summary.totalBreakfastAllowance || 0,
-    totalOtherAllowances:
-      summary.totalOtherAllowances || 0,
-    totalPreviousAdvance:
-      summary.totalPreviousLoan || 0,
+    totalBreakfastAllowance: summary.totalBreakfastAllowance || 0,
+    totalOtherAllowances: summary.totalOtherAllowances || 0,
+    totalPreviousAdvance: summary.totalPreviousLoan || 0,
     totalCurrentAdvance: summary.totalCurrentLoan || 0,
     totalDeduction: summary.totalLoanDeduction || 0,
     totalNetLoan: summary.totalNetLoan || 0,
-    totalPreviousChallan:
-      summary.totalPreviousChallan || 0,
-    totalCurrentChallan:
-      summary.totalCurrentChallan || 0,
-    totalChallanDeduction:
-      summary.totalChallanDeduction || 0,
+    totalPreviousChallan: summary.totalPreviousChallan || 0,
+    totalCurrentChallan: summary.totalCurrentChallan || 0,
+    totalChallanDeduction: summary.totalChallanDeduction || 0,
     totalNetChallan: summary.totalNetChallan || 0,
-    totalNetSalaryPayable:
-      summary.totalNetSalaryPayable || 0,
+    totalNetSalaryPayable: summary.totalNetSalaryPayable || 0,
     totalCardSalary: summary.totalCardSalary || 0,
     totalCashSalary: summary.totalCashSalary || 0,
     payrollStatusId: summary.payrollStatusId,
-    createdDate: summary.createdDate,
+    createdAt: summary.createdAt,
     createdBy: summary.createdBy,
-    modifiedDate: summary.modifiedDate,
-    modifiedBy: summary.modifiedBy,
+    updatedAt: summary.updatedAt,
+    updatedBy: summary.updatedBy,
     payrollStatus: summary.payrollStatus,
   }));
 };

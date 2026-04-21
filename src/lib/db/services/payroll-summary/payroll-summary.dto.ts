@@ -27,10 +27,10 @@ export interface PayrollSummaryInterface {
   totalCardSalary: number;
   totalCashSalary: number;
   payrollStatusId: number | null;
-  createdDate: Date;
+  createdAt: Date;
   createdBy: number | null;
-  modifiedDate: Date;
-  modifiedBy: number | null;
+  updatedAt: Date;
+  updatedBy: number | null;
 }
 
 export interface PayrollSummaryWithRelations extends PayrollSummaryInterface {
