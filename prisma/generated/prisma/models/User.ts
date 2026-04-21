@@ -295,10 +295,46 @@ export type UserWhereInput = {
   updater?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   createdUsers?: Prisma.UserListRelationFilter
   updatedUsers?: Prisma.UserListRelationFilter
+  createdUserRoles?: Prisma.UserRoleListRelationFilter
+  updatedUserRoles?: Prisma.UserRoleListRelationFilter
+  createdUserPrivileges?: Prisma.UserPrivilegeListRelationFilter
+  updatedUserPrivileges?: Prisma.UserPrivilegeListRelationFilter
+  createdBranches?: Prisma.BranchListRelationFilter
+  updatedBranches?: Prisma.BranchListRelationFilter
+  createdCities?: Prisma.CityListRelationFilter
+  updatedCities?: Prisma.CityListRelationFilter
+  createdCountries?: Prisma.CountryListRelationFilter
+  updatedCountries?: Prisma.CountryListRelationFilter
+  createdGosiCities?: Prisma.GosiCityListRelationFilter
+  updatedGosiCities?: Prisma.GosiCityListRelationFilter
+  createdEmployees?: Prisma.EmployeeListRelationFilter
+  updatedEmployees?: Prisma.EmployeeListRelationFilter
+  createdDesignations?: Prisma.DesignationListRelationFilter
+  updatedDesignations?: Prisma.DesignationListRelationFilter
+  createdEmployeeStatuses?: Prisma.EmployeeStatusListRelationFilter
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusListRelationFilter
+  createdProjects?: Prisma.ProjectListRelationFilter
+  updatedProjects?: Prisma.ProjectListRelationFilter
+  createdTimesheets?: Prisma.TimesheetListRelationFilter
+  updatedTimesheets?: Prisma.TimesheetListRelationFilter
+  createdPayrollSections?: Prisma.PayrollSectionListRelationFilter
+  updatedPayrollSections?: Prisma.PayrollSectionListRelationFilter
+  createdPayrollStatuses?: Prisma.PayrollStatusListRelationFilter
+  updatedPayrollStatuses?: Prisma.PayrollStatusListRelationFilter
   createdPayrollSummaries?: Prisma.PayrollSummaryListRelationFilter
-  modifiedPayrollSummaries?: Prisma.PayrollSummaryListRelationFilter
+  updatedPayrollSummaries?: Prisma.PayrollSummaryListRelationFilter
+  createdPaymentMethods?: Prisma.PaymentMethodListRelationFilter
+  updatedPaymentMethods?: Prisma.PaymentMethodListRelationFilter
   createdPayrollDetails?: Prisma.PayrollDetailsListRelationFilter
-  modifiedPayrollDetails?: Prisma.PayrollDetailsListRelationFilter
+  updatedPayrollDetails?: Prisma.PayrollDetailsListRelationFilter
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableListRelationFilter
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableListRelationFilter
+  createdLoans?: Prisma.LoanListRelationFilter
+  updatedLoans?: Prisma.LoanListRelationFilter
+  createdTrafficChallans?: Prisma.TrafficChallanListRelationFilter
+  updatedTrafficChallans?: Prisma.TrafficChallanListRelationFilter
+  createdExitReentries?: Prisma.ExitReentryListRelationFilter
+  updatedExitReentries?: Prisma.ExitReentryListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -321,10 +357,46 @@ export type UserOrderByWithRelationInput = {
   updater?: Prisma.UserOrderByWithRelationInput
   createdUsers?: Prisma.UserOrderByRelationAggregateInput
   updatedUsers?: Prisma.UserOrderByRelationAggregateInput
+  createdUserRoles?: Prisma.UserRoleOrderByRelationAggregateInput
+  updatedUserRoles?: Prisma.UserRoleOrderByRelationAggregateInput
+  createdUserPrivileges?: Prisma.UserPrivilegeOrderByRelationAggregateInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeOrderByRelationAggregateInput
+  createdBranches?: Prisma.BranchOrderByRelationAggregateInput
+  updatedBranches?: Prisma.BranchOrderByRelationAggregateInput
+  createdCities?: Prisma.CityOrderByRelationAggregateInput
+  updatedCities?: Prisma.CityOrderByRelationAggregateInput
+  createdCountries?: Prisma.CountryOrderByRelationAggregateInput
+  updatedCountries?: Prisma.CountryOrderByRelationAggregateInput
+  createdGosiCities?: Prisma.GosiCityOrderByRelationAggregateInput
+  updatedGosiCities?: Prisma.GosiCityOrderByRelationAggregateInput
+  createdEmployees?: Prisma.EmployeeOrderByRelationAggregateInput
+  updatedEmployees?: Prisma.EmployeeOrderByRelationAggregateInput
+  createdDesignations?: Prisma.DesignationOrderByRelationAggregateInput
+  updatedDesignations?: Prisma.DesignationOrderByRelationAggregateInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusOrderByRelationAggregateInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusOrderByRelationAggregateInput
+  createdProjects?: Prisma.ProjectOrderByRelationAggregateInput
+  updatedProjects?: Prisma.ProjectOrderByRelationAggregateInput
+  createdTimesheets?: Prisma.TimesheetOrderByRelationAggregateInput
+  updatedTimesheets?: Prisma.TimesheetOrderByRelationAggregateInput
+  createdPayrollSections?: Prisma.PayrollSectionOrderByRelationAggregateInput
+  updatedPayrollSections?: Prisma.PayrollSectionOrderByRelationAggregateInput
+  createdPayrollStatuses?: Prisma.PayrollStatusOrderByRelationAggregateInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusOrderByRelationAggregateInput
   createdPayrollSummaries?: Prisma.PayrollSummaryOrderByRelationAggregateInput
-  modifiedPayrollSummaries?: Prisma.PayrollSummaryOrderByRelationAggregateInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryOrderByRelationAggregateInput
+  createdPaymentMethods?: Prisma.PaymentMethodOrderByRelationAggregateInput
+  updatedPaymentMethods?: Prisma.PaymentMethodOrderByRelationAggregateInput
   createdPayrollDetails?: Prisma.PayrollDetailsOrderByRelationAggregateInput
-  modifiedPayrollDetails?: Prisma.PayrollDetailsOrderByRelationAggregateInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsOrderByRelationAggregateInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableOrderByRelationAggregateInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableOrderByRelationAggregateInput
+  createdLoans?: Prisma.LoanOrderByRelationAggregateInput
+  updatedLoans?: Prisma.LoanOrderByRelationAggregateInput
+  createdTrafficChallans?: Prisma.TrafficChallanOrderByRelationAggregateInput
+  updatedTrafficChallans?: Prisma.TrafficChallanOrderByRelationAggregateInput
+  createdExitReentries?: Prisma.ExitReentryOrderByRelationAggregateInput
+  updatedExitReentries?: Prisma.ExitReentryOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -350,10 +422,46 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   updater?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   createdUsers?: Prisma.UserListRelationFilter
   updatedUsers?: Prisma.UserListRelationFilter
+  createdUserRoles?: Prisma.UserRoleListRelationFilter
+  updatedUserRoles?: Prisma.UserRoleListRelationFilter
+  createdUserPrivileges?: Prisma.UserPrivilegeListRelationFilter
+  updatedUserPrivileges?: Prisma.UserPrivilegeListRelationFilter
+  createdBranches?: Prisma.BranchListRelationFilter
+  updatedBranches?: Prisma.BranchListRelationFilter
+  createdCities?: Prisma.CityListRelationFilter
+  updatedCities?: Prisma.CityListRelationFilter
+  createdCountries?: Prisma.CountryListRelationFilter
+  updatedCountries?: Prisma.CountryListRelationFilter
+  createdGosiCities?: Prisma.GosiCityListRelationFilter
+  updatedGosiCities?: Prisma.GosiCityListRelationFilter
+  createdEmployees?: Prisma.EmployeeListRelationFilter
+  updatedEmployees?: Prisma.EmployeeListRelationFilter
+  createdDesignations?: Prisma.DesignationListRelationFilter
+  updatedDesignations?: Prisma.DesignationListRelationFilter
+  createdEmployeeStatuses?: Prisma.EmployeeStatusListRelationFilter
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusListRelationFilter
+  createdProjects?: Prisma.ProjectListRelationFilter
+  updatedProjects?: Prisma.ProjectListRelationFilter
+  createdTimesheets?: Prisma.TimesheetListRelationFilter
+  updatedTimesheets?: Prisma.TimesheetListRelationFilter
+  createdPayrollSections?: Prisma.PayrollSectionListRelationFilter
+  updatedPayrollSections?: Prisma.PayrollSectionListRelationFilter
+  createdPayrollStatuses?: Prisma.PayrollStatusListRelationFilter
+  updatedPayrollStatuses?: Prisma.PayrollStatusListRelationFilter
   createdPayrollSummaries?: Prisma.PayrollSummaryListRelationFilter
-  modifiedPayrollSummaries?: Prisma.PayrollSummaryListRelationFilter
+  updatedPayrollSummaries?: Prisma.PayrollSummaryListRelationFilter
+  createdPaymentMethods?: Prisma.PaymentMethodListRelationFilter
+  updatedPaymentMethods?: Prisma.PaymentMethodListRelationFilter
   createdPayrollDetails?: Prisma.PayrollDetailsListRelationFilter
-  modifiedPayrollDetails?: Prisma.PayrollDetailsListRelationFilter
+  updatedPayrollDetails?: Prisma.PayrollDetailsListRelationFilter
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableListRelationFilter
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableListRelationFilter
+  createdLoans?: Prisma.LoanListRelationFilter
+  updatedLoans?: Prisma.LoanListRelationFilter
+  createdTrafficChallans?: Prisma.TrafficChallanListRelationFilter
+  updatedTrafficChallans?: Prisma.TrafficChallanListRelationFilter
+  createdExitReentries?: Prisma.ExitReentryListRelationFilter
+  updatedExitReentries?: Prisma.ExitReentryListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -409,10 +517,46 @@ export type UserCreateInput = {
   updater?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput
   createdUsers?: Prisma.UserCreateNestedManyWithoutCreatorInput
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutUpdaterInput
   createdPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutCreatorInput
-  modifiedPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutModifierInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutUpdaterInput
   createdPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutCreatorInput
-  modifiedPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutModifierInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutUpdaterInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -431,10 +575,46 @@ export type UserUncheckedCreateInput = {
   privileges?: Prisma.UserPrivilegeUncheckedCreateNestedOneWithoutUserInput
   createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatorInput
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutUpdaterInput
   createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutCreatorInput
-  modifiedPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutModifierInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutUpdaterInput
   createdPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutCreatorInput
-  modifiedPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutModifierInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutUpdaterInput
 }
 
 export type UserUpdateInput = {
@@ -452,10 +632,46 @@ export type UserUpdateInput = {
   updater?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput
   createdUsers?: Prisma.UserUpdateManyWithoutCreatorNestedInput
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutUpdaterNestedInput
   createdPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutCreatorNestedInput
-  modifiedPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutModifierNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutUpdaterNestedInput
   createdPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutCreatorNestedInput
-  modifiedPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutModifierNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUpdateManyWithoutUpdaterNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -474,10 +690,46 @@ export type UserUncheckedUpdateInput = {
   privileges?: Prisma.UserPrivilegeUncheckedUpdateOneWithoutUserNestedInput
   createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatorNestedInput
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutUpdaterNestedInput
   createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutCreatorNestedInput
-  modifiedPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutModifierNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutUpdaterNestedInput
   createdPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutCreatorNestedInput
-  modifiedPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutModifierNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutUpdaterNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -756,6 +1008,18 @@ export type UserCreateNestedManyWithoutUserRoleInput = {
   connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
 }
 
+export type UserCreateNestedOneWithoutCreatedUserRolesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedUserRolesInput, Prisma.UserUncheckedCreateWithoutCreatedUserRolesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedUserRolesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutUpdatedUserRolesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUpdatedUserRolesInput, Prisma.UserUncheckedCreateWithoutUpdatedUserRolesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedUserRolesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
 export type UserUncheckedCreateNestedManyWithoutUserRoleInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutUserRoleInput, Prisma.UserUncheckedCreateWithoutUserRoleInput> | Prisma.UserCreateWithoutUserRoleInput[] | Prisma.UserUncheckedCreateWithoutUserRoleInput[]
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutUserRoleInput | Prisma.UserCreateOrConnectWithoutUserRoleInput[]
@@ -775,6 +1039,26 @@ export type UserUpdateManyWithoutUserRoleNestedInput = {
   update?: Prisma.UserUpdateWithWhereUniqueWithoutUserRoleInput | Prisma.UserUpdateWithWhereUniqueWithoutUserRoleInput[]
   updateMany?: Prisma.UserUpdateManyWithWhereWithoutUserRoleInput | Prisma.UserUpdateManyWithWhereWithoutUserRoleInput[]
   deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+}
+
+export type UserUpdateOneWithoutCreatedUserRolesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedUserRolesInput, Prisma.UserUncheckedCreateWithoutCreatedUserRolesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedUserRolesInput
+  upsert?: Prisma.UserUpsertWithoutCreatedUserRolesInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCreatedUserRolesInput, Prisma.UserUpdateWithoutCreatedUserRolesInput>, Prisma.UserUncheckedUpdateWithoutCreatedUserRolesInput>
+}
+
+export type UserUpdateOneWithoutUpdatedUserRolesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUpdatedUserRolesInput, Prisma.UserUncheckedCreateWithoutUpdatedUserRolesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedUserRolesInput
+  upsert?: Prisma.UserUpsertWithoutUpdatedUserRolesInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutUpdatedUserRolesInput, Prisma.UserUpdateWithoutUpdatedUserRolesInput>, Prisma.UserUncheckedUpdateWithoutUpdatedUserRolesInput>
 }
 
 export type UserUncheckedUpdateManyWithoutUserRoleNestedInput = {
@@ -797,6 +1081,18 @@ export type UserCreateNestedOneWithoutPrivilegesInput = {
   connect?: Prisma.UserWhereUniqueInput
 }
 
+export type UserCreateNestedOneWithoutCreatedUserPrivilegesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedUserPrivilegesInput, Prisma.UserUncheckedCreateWithoutCreatedUserPrivilegesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedUserPrivilegesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutUpdatedUserPrivilegesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUpdatedUserPrivilegesInput, Prisma.UserUncheckedCreateWithoutUpdatedUserPrivilegesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedUserPrivilegesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
 export type UserUpdateOneRequiredWithoutPrivilegesNestedInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutPrivilegesInput, Prisma.UserUncheckedCreateWithoutPrivilegesInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutPrivilegesInput
@@ -805,11 +1101,43 @@ export type UserUpdateOneRequiredWithoutPrivilegesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPrivilegesInput, Prisma.UserUpdateWithoutPrivilegesInput>, Prisma.UserUncheckedUpdateWithoutPrivilegesInput>
 }
 
+export type UserUpdateOneWithoutCreatedUserPrivilegesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedUserPrivilegesInput, Prisma.UserUncheckedCreateWithoutCreatedUserPrivilegesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedUserPrivilegesInput
+  upsert?: Prisma.UserUpsertWithoutCreatedUserPrivilegesInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCreatedUserPrivilegesInput, Prisma.UserUpdateWithoutCreatedUserPrivilegesInput>, Prisma.UserUncheckedUpdateWithoutCreatedUserPrivilegesInput>
+}
+
+export type UserUpdateOneWithoutUpdatedUserPrivilegesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUpdatedUserPrivilegesInput, Prisma.UserUncheckedCreateWithoutUpdatedUserPrivilegesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedUserPrivilegesInput
+  upsert?: Prisma.UserUpsertWithoutUpdatedUserPrivilegesInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutUpdatedUserPrivilegesInput, Prisma.UserUpdateWithoutUpdatedUserPrivilegesInput>, Prisma.UserUncheckedUpdateWithoutUpdatedUserPrivilegesInput>
+}
+
 export type UserCreateNestedManyWithoutBranchInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutBranchInput, Prisma.UserUncheckedCreateWithoutBranchInput> | Prisma.UserCreateWithoutBranchInput[] | Prisma.UserUncheckedCreateWithoutBranchInput[]
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutBranchInput | Prisma.UserCreateOrConnectWithoutBranchInput[]
   createMany?: Prisma.UserCreateManyBranchInputEnvelope
   connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+}
+
+export type UserCreateNestedOneWithoutCreatedBranchesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedBranchesInput, Prisma.UserUncheckedCreateWithoutCreatedBranchesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedBranchesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutUpdatedBranchesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUpdatedBranchesInput, Prisma.UserUncheckedCreateWithoutUpdatedBranchesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedBranchesInput
+  connect?: Prisma.UserWhereUniqueInput
 }
 
 export type UserUncheckedCreateNestedManyWithoutBranchInput = {
@@ -833,6 +1161,26 @@ export type UserUpdateManyWithoutBranchNestedInput = {
   deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
 }
 
+export type UserUpdateOneWithoutCreatedBranchesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedBranchesInput, Prisma.UserUncheckedCreateWithoutCreatedBranchesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedBranchesInput
+  upsert?: Prisma.UserUpsertWithoutCreatedBranchesInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCreatedBranchesInput, Prisma.UserUpdateWithoutCreatedBranchesInput>, Prisma.UserUncheckedUpdateWithoutCreatedBranchesInput>
+}
+
+export type UserUpdateOneWithoutUpdatedBranchesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUpdatedBranchesInput, Prisma.UserUncheckedCreateWithoutUpdatedBranchesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedBranchesInput
+  upsert?: Prisma.UserUpsertWithoutUpdatedBranchesInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutUpdatedBranchesInput, Prisma.UserUpdateWithoutUpdatedBranchesInput>, Prisma.UserUncheckedUpdateWithoutUpdatedBranchesInput>
+}
+
 export type UserUncheckedUpdateManyWithoutBranchNestedInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutBranchInput, Prisma.UserUncheckedCreateWithoutBranchInput> | Prisma.UserCreateWithoutBranchInput[] | Prisma.UserUncheckedCreateWithoutBranchInput[]
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutBranchInput | Prisma.UserCreateOrConnectWithoutBranchInput[]
@@ -847,15 +1195,335 @@ export type UserUncheckedUpdateManyWithoutBranchNestedInput = {
   deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
 }
 
+export type UserCreateNestedOneWithoutCreatedCitiesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedCitiesInput, Prisma.UserUncheckedCreateWithoutCreatedCitiesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedCitiesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutUpdatedCitiesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUpdatedCitiesInput, Prisma.UserUncheckedCreateWithoutUpdatedCitiesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedCitiesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutCreatedCitiesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedCitiesInput, Prisma.UserUncheckedCreateWithoutCreatedCitiesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedCitiesInput
+  upsert?: Prisma.UserUpsertWithoutCreatedCitiesInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCreatedCitiesInput, Prisma.UserUpdateWithoutCreatedCitiesInput>, Prisma.UserUncheckedUpdateWithoutCreatedCitiesInput>
+}
+
+export type UserUpdateOneWithoutUpdatedCitiesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUpdatedCitiesInput, Prisma.UserUncheckedCreateWithoutUpdatedCitiesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedCitiesInput
+  upsert?: Prisma.UserUpsertWithoutUpdatedCitiesInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutUpdatedCitiesInput, Prisma.UserUpdateWithoutUpdatedCitiesInput>, Prisma.UserUncheckedUpdateWithoutUpdatedCitiesInput>
+}
+
+export type UserCreateNestedOneWithoutCreatedCountriesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedCountriesInput, Prisma.UserUncheckedCreateWithoutCreatedCountriesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedCountriesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutUpdatedCountriesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUpdatedCountriesInput, Prisma.UserUncheckedCreateWithoutUpdatedCountriesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedCountriesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutCreatedCountriesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedCountriesInput, Prisma.UserUncheckedCreateWithoutCreatedCountriesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedCountriesInput
+  upsert?: Prisma.UserUpsertWithoutCreatedCountriesInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCreatedCountriesInput, Prisma.UserUpdateWithoutCreatedCountriesInput>, Prisma.UserUncheckedUpdateWithoutCreatedCountriesInput>
+}
+
+export type UserUpdateOneWithoutUpdatedCountriesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUpdatedCountriesInput, Prisma.UserUncheckedCreateWithoutUpdatedCountriesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedCountriesInput
+  upsert?: Prisma.UserUpsertWithoutUpdatedCountriesInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutUpdatedCountriesInput, Prisma.UserUpdateWithoutUpdatedCountriesInput>, Prisma.UserUncheckedUpdateWithoutUpdatedCountriesInput>
+}
+
+export type UserCreateNestedOneWithoutCreatedGosiCitiesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedGosiCitiesInput, Prisma.UserUncheckedCreateWithoutCreatedGosiCitiesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedGosiCitiesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutUpdatedGosiCitiesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUpdatedGosiCitiesInput, Prisma.UserUncheckedCreateWithoutUpdatedGosiCitiesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedGosiCitiesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutCreatedGosiCitiesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedGosiCitiesInput, Prisma.UserUncheckedCreateWithoutCreatedGosiCitiesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedGosiCitiesInput
+  upsert?: Prisma.UserUpsertWithoutCreatedGosiCitiesInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCreatedGosiCitiesInput, Prisma.UserUpdateWithoutCreatedGosiCitiesInput>, Prisma.UserUncheckedUpdateWithoutCreatedGosiCitiesInput>
+}
+
+export type UserUpdateOneWithoutUpdatedGosiCitiesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUpdatedGosiCitiesInput, Prisma.UserUncheckedCreateWithoutUpdatedGosiCitiesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedGosiCitiesInput
+  upsert?: Prisma.UserUpsertWithoutUpdatedGosiCitiesInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutUpdatedGosiCitiesInput, Prisma.UserUpdateWithoutUpdatedGosiCitiesInput>, Prisma.UserUncheckedUpdateWithoutUpdatedGosiCitiesInput>
+}
+
+export type UserCreateNestedOneWithoutCreatedEmployeesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedEmployeesInput, Prisma.UserUncheckedCreateWithoutCreatedEmployeesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedEmployeesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutUpdatedEmployeesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUpdatedEmployeesInput, Prisma.UserUncheckedCreateWithoutUpdatedEmployeesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedEmployeesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutCreatedEmployeesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedEmployeesInput, Prisma.UserUncheckedCreateWithoutCreatedEmployeesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedEmployeesInput
+  upsert?: Prisma.UserUpsertWithoutCreatedEmployeesInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCreatedEmployeesInput, Prisma.UserUpdateWithoutCreatedEmployeesInput>, Prisma.UserUncheckedUpdateWithoutCreatedEmployeesInput>
+}
+
+export type UserUpdateOneWithoutUpdatedEmployeesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUpdatedEmployeesInput, Prisma.UserUncheckedCreateWithoutUpdatedEmployeesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedEmployeesInput
+  upsert?: Prisma.UserUpsertWithoutUpdatedEmployeesInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutUpdatedEmployeesInput, Prisma.UserUpdateWithoutUpdatedEmployeesInput>, Prisma.UserUncheckedUpdateWithoutUpdatedEmployeesInput>
+}
+
+export type UserCreateNestedOneWithoutCreatedDesignationsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedDesignationsInput, Prisma.UserUncheckedCreateWithoutCreatedDesignationsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedDesignationsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutUpdatedDesignationsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUpdatedDesignationsInput, Prisma.UserUncheckedCreateWithoutUpdatedDesignationsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedDesignationsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutCreatedDesignationsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedDesignationsInput, Prisma.UserUncheckedCreateWithoutCreatedDesignationsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedDesignationsInput
+  upsert?: Prisma.UserUpsertWithoutCreatedDesignationsInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCreatedDesignationsInput, Prisma.UserUpdateWithoutCreatedDesignationsInput>, Prisma.UserUncheckedUpdateWithoutCreatedDesignationsInput>
+}
+
+export type UserUpdateOneWithoutUpdatedDesignationsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUpdatedDesignationsInput, Prisma.UserUncheckedCreateWithoutUpdatedDesignationsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedDesignationsInput
+  upsert?: Prisma.UserUpsertWithoutUpdatedDesignationsInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutUpdatedDesignationsInput, Prisma.UserUpdateWithoutUpdatedDesignationsInput>, Prisma.UserUncheckedUpdateWithoutUpdatedDesignationsInput>
+}
+
+export type UserCreateNestedOneWithoutCreatedEmployeeStatusesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedEmployeeStatusesInput, Prisma.UserUncheckedCreateWithoutCreatedEmployeeStatusesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedEmployeeStatusesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutUpdatedEmployeeStatusesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUpdatedEmployeeStatusesInput, Prisma.UserUncheckedCreateWithoutUpdatedEmployeeStatusesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedEmployeeStatusesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutCreatedEmployeeStatusesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedEmployeeStatusesInput, Prisma.UserUncheckedCreateWithoutCreatedEmployeeStatusesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedEmployeeStatusesInput
+  upsert?: Prisma.UserUpsertWithoutCreatedEmployeeStatusesInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCreatedEmployeeStatusesInput, Prisma.UserUpdateWithoutCreatedEmployeeStatusesInput>, Prisma.UserUncheckedUpdateWithoutCreatedEmployeeStatusesInput>
+}
+
+export type UserUpdateOneWithoutUpdatedEmployeeStatusesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUpdatedEmployeeStatusesInput, Prisma.UserUncheckedCreateWithoutUpdatedEmployeeStatusesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedEmployeeStatusesInput
+  upsert?: Prisma.UserUpsertWithoutUpdatedEmployeeStatusesInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutUpdatedEmployeeStatusesInput, Prisma.UserUpdateWithoutUpdatedEmployeeStatusesInput>, Prisma.UserUncheckedUpdateWithoutUpdatedEmployeeStatusesInput>
+}
+
+export type UserCreateNestedOneWithoutCreatedProjectsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedProjectsInput, Prisma.UserUncheckedCreateWithoutCreatedProjectsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedProjectsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutUpdatedProjectsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUpdatedProjectsInput, Prisma.UserUncheckedCreateWithoutUpdatedProjectsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedProjectsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutCreatedProjectsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedProjectsInput, Prisma.UserUncheckedCreateWithoutCreatedProjectsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedProjectsInput
+  upsert?: Prisma.UserUpsertWithoutCreatedProjectsInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCreatedProjectsInput, Prisma.UserUpdateWithoutCreatedProjectsInput>, Prisma.UserUncheckedUpdateWithoutCreatedProjectsInput>
+}
+
+export type UserUpdateOneWithoutUpdatedProjectsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUpdatedProjectsInput, Prisma.UserUncheckedCreateWithoutUpdatedProjectsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedProjectsInput
+  upsert?: Prisma.UserUpsertWithoutUpdatedProjectsInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutUpdatedProjectsInput, Prisma.UserUpdateWithoutUpdatedProjectsInput>, Prisma.UserUncheckedUpdateWithoutUpdatedProjectsInput>
+}
+
+export type UserCreateNestedOneWithoutCreatedTimesheetsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedTimesheetsInput, Prisma.UserUncheckedCreateWithoutCreatedTimesheetsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedTimesheetsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutUpdatedTimesheetsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUpdatedTimesheetsInput, Prisma.UserUncheckedCreateWithoutUpdatedTimesheetsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedTimesheetsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutCreatedTimesheetsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedTimesheetsInput, Prisma.UserUncheckedCreateWithoutCreatedTimesheetsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedTimesheetsInput
+  upsert?: Prisma.UserUpsertWithoutCreatedTimesheetsInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCreatedTimesheetsInput, Prisma.UserUpdateWithoutCreatedTimesheetsInput>, Prisma.UserUncheckedUpdateWithoutCreatedTimesheetsInput>
+}
+
+export type UserUpdateOneWithoutUpdatedTimesheetsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUpdatedTimesheetsInput, Prisma.UserUncheckedCreateWithoutUpdatedTimesheetsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedTimesheetsInput
+  upsert?: Prisma.UserUpsertWithoutUpdatedTimesheetsInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutUpdatedTimesheetsInput, Prisma.UserUpdateWithoutUpdatedTimesheetsInput>, Prisma.UserUncheckedUpdateWithoutUpdatedTimesheetsInput>
+}
+
+export type UserCreateNestedOneWithoutCreatedPayrollSectionsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedPayrollSectionsInput, Prisma.UserUncheckedCreateWithoutCreatedPayrollSectionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedPayrollSectionsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutUpdatedPayrollSectionsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUpdatedPayrollSectionsInput, Prisma.UserUncheckedCreateWithoutUpdatedPayrollSectionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedPayrollSectionsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutCreatedPayrollSectionsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedPayrollSectionsInput, Prisma.UserUncheckedCreateWithoutCreatedPayrollSectionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedPayrollSectionsInput
+  upsert?: Prisma.UserUpsertWithoutCreatedPayrollSectionsInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCreatedPayrollSectionsInput, Prisma.UserUpdateWithoutCreatedPayrollSectionsInput>, Prisma.UserUncheckedUpdateWithoutCreatedPayrollSectionsInput>
+}
+
+export type UserUpdateOneWithoutUpdatedPayrollSectionsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUpdatedPayrollSectionsInput, Prisma.UserUncheckedCreateWithoutUpdatedPayrollSectionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedPayrollSectionsInput
+  upsert?: Prisma.UserUpsertWithoutUpdatedPayrollSectionsInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutUpdatedPayrollSectionsInput, Prisma.UserUpdateWithoutUpdatedPayrollSectionsInput>, Prisma.UserUncheckedUpdateWithoutUpdatedPayrollSectionsInput>
+}
+
+export type UserCreateNestedOneWithoutCreatedPayrollStatusesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedPayrollStatusesInput, Prisma.UserUncheckedCreateWithoutCreatedPayrollStatusesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedPayrollStatusesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutUpdatedPayrollStatusesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUpdatedPayrollStatusesInput, Prisma.UserUncheckedCreateWithoutUpdatedPayrollStatusesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedPayrollStatusesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutCreatedPayrollStatusesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedPayrollStatusesInput, Prisma.UserUncheckedCreateWithoutCreatedPayrollStatusesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedPayrollStatusesInput
+  upsert?: Prisma.UserUpsertWithoutCreatedPayrollStatusesInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCreatedPayrollStatusesInput, Prisma.UserUpdateWithoutCreatedPayrollStatusesInput>, Prisma.UserUncheckedUpdateWithoutCreatedPayrollStatusesInput>
+}
+
+export type UserUpdateOneWithoutUpdatedPayrollStatusesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUpdatedPayrollStatusesInput, Prisma.UserUncheckedCreateWithoutUpdatedPayrollStatusesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedPayrollStatusesInput
+  upsert?: Prisma.UserUpsertWithoutUpdatedPayrollStatusesInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutUpdatedPayrollStatusesInput, Prisma.UserUpdateWithoutUpdatedPayrollStatusesInput>, Prisma.UserUncheckedUpdateWithoutUpdatedPayrollStatusesInput>
+}
+
 export type UserCreateNestedOneWithoutCreatedPayrollSummariesInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedPayrollSummariesInput, Prisma.UserUncheckedCreateWithoutCreatedPayrollSummariesInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedPayrollSummariesInput
   connect?: Prisma.UserWhereUniqueInput
 }
 
-export type UserCreateNestedOneWithoutModifiedPayrollSummariesInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutModifiedPayrollSummariesInput, Prisma.UserUncheckedCreateWithoutModifiedPayrollSummariesInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutModifiedPayrollSummariesInput
+export type UserCreateNestedOneWithoutUpdatedPayrollSummariesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUpdatedPayrollSummariesInput, Prisma.UserUncheckedCreateWithoutUpdatedPayrollSummariesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedPayrollSummariesInput
   connect?: Prisma.UserWhereUniqueInput
 }
 
@@ -869,14 +1537,46 @@ export type UserUpdateOneWithoutCreatedPayrollSummariesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCreatedPayrollSummariesInput, Prisma.UserUpdateWithoutCreatedPayrollSummariesInput>, Prisma.UserUncheckedUpdateWithoutCreatedPayrollSummariesInput>
 }
 
-export type UserUpdateOneWithoutModifiedPayrollSummariesNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutModifiedPayrollSummariesInput, Prisma.UserUncheckedCreateWithoutModifiedPayrollSummariesInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutModifiedPayrollSummariesInput
-  upsert?: Prisma.UserUpsertWithoutModifiedPayrollSummariesInput
+export type UserUpdateOneWithoutUpdatedPayrollSummariesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUpdatedPayrollSummariesInput, Prisma.UserUncheckedCreateWithoutUpdatedPayrollSummariesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedPayrollSummariesInput
+  upsert?: Prisma.UserUpsertWithoutUpdatedPayrollSummariesInput
   disconnect?: Prisma.UserWhereInput | boolean
   delete?: Prisma.UserWhereInput | boolean
   connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutModifiedPayrollSummariesInput, Prisma.UserUpdateWithoutModifiedPayrollSummariesInput>, Prisma.UserUncheckedUpdateWithoutModifiedPayrollSummariesInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutUpdatedPayrollSummariesInput, Prisma.UserUpdateWithoutUpdatedPayrollSummariesInput>, Prisma.UserUncheckedUpdateWithoutUpdatedPayrollSummariesInput>
+}
+
+export type UserCreateNestedOneWithoutCreatedPaymentMethodsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedPaymentMethodsInput, Prisma.UserUncheckedCreateWithoutCreatedPaymentMethodsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedPaymentMethodsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutUpdatedPaymentMethodsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUpdatedPaymentMethodsInput, Prisma.UserUncheckedCreateWithoutUpdatedPaymentMethodsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedPaymentMethodsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutCreatedPaymentMethodsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedPaymentMethodsInput, Prisma.UserUncheckedCreateWithoutCreatedPaymentMethodsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedPaymentMethodsInput
+  upsert?: Prisma.UserUpsertWithoutCreatedPaymentMethodsInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCreatedPaymentMethodsInput, Prisma.UserUpdateWithoutCreatedPaymentMethodsInput>, Prisma.UserUncheckedUpdateWithoutCreatedPaymentMethodsInput>
+}
+
+export type UserUpdateOneWithoutUpdatedPaymentMethodsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUpdatedPaymentMethodsInput, Prisma.UserUncheckedCreateWithoutUpdatedPaymentMethodsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedPaymentMethodsInput
+  upsert?: Prisma.UserUpsertWithoutUpdatedPaymentMethodsInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutUpdatedPaymentMethodsInput, Prisma.UserUpdateWithoutUpdatedPaymentMethodsInput>, Prisma.UserUncheckedUpdateWithoutUpdatedPaymentMethodsInput>
 }
 
 export type UserCreateNestedOneWithoutCreatedPayrollDetailsInput = {
@@ -885,9 +1585,9 @@ export type UserCreateNestedOneWithoutCreatedPayrollDetailsInput = {
   connect?: Prisma.UserWhereUniqueInput
 }
 
-export type UserCreateNestedOneWithoutModifiedPayrollDetailsInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutModifiedPayrollDetailsInput, Prisma.UserUncheckedCreateWithoutModifiedPayrollDetailsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutModifiedPayrollDetailsInput
+export type UserCreateNestedOneWithoutUpdatedPayrollDetailsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUpdatedPayrollDetailsInput, Prisma.UserUncheckedCreateWithoutUpdatedPayrollDetailsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedPayrollDetailsInput
   connect?: Prisma.UserWhereUniqueInput
 }
 
@@ -901,14 +1601,142 @@ export type UserUpdateOneWithoutCreatedPayrollDetailsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCreatedPayrollDetailsInput, Prisma.UserUpdateWithoutCreatedPayrollDetailsInput>, Prisma.UserUncheckedUpdateWithoutCreatedPayrollDetailsInput>
 }
 
-export type UserUpdateOneWithoutModifiedPayrollDetailsNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutModifiedPayrollDetailsInput, Prisma.UserUncheckedCreateWithoutModifiedPayrollDetailsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutModifiedPayrollDetailsInput
-  upsert?: Prisma.UserUpsertWithoutModifiedPayrollDetailsInput
+export type UserUpdateOneWithoutUpdatedPayrollDetailsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUpdatedPayrollDetailsInput, Prisma.UserUncheckedCreateWithoutUpdatedPayrollDetailsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedPayrollDetailsInput
+  upsert?: Prisma.UserUpsertWithoutUpdatedPayrollDetailsInput
   disconnect?: Prisma.UserWhereInput | boolean
   delete?: Prisma.UserWhereInput | boolean
   connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutModifiedPayrollDetailsInput, Prisma.UserUpdateWithoutModifiedPayrollDetailsInput>, Prisma.UserUncheckedUpdateWithoutModifiedPayrollDetailsInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutUpdatedPayrollDetailsInput, Prisma.UserUpdateWithoutUpdatedPayrollDetailsInput>, Prisma.UserUncheckedUpdateWithoutUpdatedPayrollDetailsInput>
+}
+
+export type UserCreateNestedOneWithoutCreatedLoansInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedLoansInput, Prisma.UserUncheckedCreateWithoutCreatedLoansInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedLoansInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutUpdatedLoansInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUpdatedLoansInput, Prisma.UserUncheckedCreateWithoutUpdatedLoansInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedLoansInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutCreatedLoansNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedLoansInput, Prisma.UserUncheckedCreateWithoutCreatedLoansInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedLoansInput
+  upsert?: Prisma.UserUpsertWithoutCreatedLoansInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCreatedLoansInput, Prisma.UserUpdateWithoutCreatedLoansInput>, Prisma.UserUncheckedUpdateWithoutCreatedLoansInput>
+}
+
+export type UserUpdateOneWithoutUpdatedLoansNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUpdatedLoansInput, Prisma.UserUncheckedCreateWithoutUpdatedLoansInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedLoansInput
+  upsert?: Prisma.UserUpsertWithoutUpdatedLoansInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutUpdatedLoansInput, Prisma.UserUpdateWithoutUpdatedLoansInput>, Prisma.UserUncheckedUpdateWithoutUpdatedLoansInput>
+}
+
+export type UserCreateNestedOneWithoutCreatedTrafficChallansInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedTrafficChallansInput, Prisma.UserUncheckedCreateWithoutCreatedTrafficChallansInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedTrafficChallansInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutUpdatedTrafficChallansInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUpdatedTrafficChallansInput, Prisma.UserUncheckedCreateWithoutUpdatedTrafficChallansInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedTrafficChallansInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutCreatedTrafficChallansNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedTrafficChallansInput, Prisma.UserUncheckedCreateWithoutCreatedTrafficChallansInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedTrafficChallansInput
+  upsert?: Prisma.UserUpsertWithoutCreatedTrafficChallansInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCreatedTrafficChallansInput, Prisma.UserUpdateWithoutCreatedTrafficChallansInput>, Prisma.UserUncheckedUpdateWithoutCreatedTrafficChallansInput>
+}
+
+export type UserUpdateOneWithoutUpdatedTrafficChallansNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUpdatedTrafficChallansInput, Prisma.UserUncheckedCreateWithoutUpdatedTrafficChallansInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedTrafficChallansInput
+  upsert?: Prisma.UserUpsertWithoutUpdatedTrafficChallansInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutUpdatedTrafficChallansInput, Prisma.UserUpdateWithoutUpdatedTrafficChallansInput>, Prisma.UserUncheckedUpdateWithoutUpdatedTrafficChallansInput>
+}
+
+export type UserCreateNestedOneWithoutCreatedExitReentriesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedExitReentriesInput, Prisma.UserUncheckedCreateWithoutCreatedExitReentriesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedExitReentriesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutUpdatedExitReentriesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUpdatedExitReentriesInput, Prisma.UserUncheckedCreateWithoutUpdatedExitReentriesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedExitReentriesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutCreatedExitReentriesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedExitReentriesInput, Prisma.UserUncheckedCreateWithoutCreatedExitReentriesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedExitReentriesInput
+  upsert?: Prisma.UserUpsertWithoutCreatedExitReentriesInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCreatedExitReentriesInput, Prisma.UserUpdateWithoutCreatedExitReentriesInput>, Prisma.UserUncheckedUpdateWithoutCreatedExitReentriesInput>
+}
+
+export type UserUpdateOneWithoutUpdatedExitReentriesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUpdatedExitReentriesInput, Prisma.UserUncheckedCreateWithoutUpdatedExitReentriesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedExitReentriesInput
+  upsert?: Prisma.UserUpsertWithoutUpdatedExitReentriesInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutUpdatedExitReentriesInput, Prisma.UserUpdateWithoutUpdatedExitReentriesInput>, Prisma.UserUncheckedUpdateWithoutUpdatedExitReentriesInput>
+}
+
+export type UserCreateNestedOneWithoutCreatedAllowancesNotAvailableInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedAllowancesNotAvailableInput, Prisma.UserUncheckedCreateWithoutCreatedAllowancesNotAvailableInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedAllowancesNotAvailableInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutUpdatedAllowancesNotAvailableInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUpdatedAllowancesNotAvailableInput, Prisma.UserUncheckedCreateWithoutUpdatedAllowancesNotAvailableInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedAllowancesNotAvailableInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutCreatedAllowancesNotAvailableNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedAllowancesNotAvailableInput, Prisma.UserUncheckedCreateWithoutCreatedAllowancesNotAvailableInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedAllowancesNotAvailableInput
+  upsert?: Prisma.UserUpsertWithoutCreatedAllowancesNotAvailableInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCreatedAllowancesNotAvailableInput, Prisma.UserUpdateWithoutCreatedAllowancesNotAvailableInput>, Prisma.UserUncheckedUpdateWithoutCreatedAllowancesNotAvailableInput>
+}
+
+export type UserUpdateOneWithoutUpdatedAllowancesNotAvailableNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUpdatedAllowancesNotAvailableInput, Prisma.UserUncheckedCreateWithoutUpdatedAllowancesNotAvailableInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedAllowancesNotAvailableInput
+  upsert?: Prisma.UserUpsertWithoutUpdatedAllowancesNotAvailableInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutUpdatedAllowancesNotAvailableInput, Prisma.UserUpdateWithoutUpdatedAllowancesNotAvailableInput>, Prisma.UserUncheckedUpdateWithoutUpdatedAllowancesNotAvailableInput>
 }
 
 export type UserCreateWithoutCreatedUsersInput = {
@@ -925,10 +1753,46 @@ export type UserCreateWithoutCreatedUsersInput = {
   creator?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput
   updater?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutUpdaterInput
   createdPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutCreatorInput
-  modifiedPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutModifierInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutUpdaterInput
   createdPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutCreatorInput
-  modifiedPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutModifierInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutUpdaterInput
 }
 
 export type UserUncheckedCreateWithoutCreatedUsersInput = {
@@ -946,10 +1810,46 @@ export type UserUncheckedCreateWithoutCreatedUsersInput = {
   updatedAt?: Date | string
   privileges?: Prisma.UserPrivilegeUncheckedCreateNestedOneWithoutUserInput
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutUpdaterInput
   createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutCreatorInput
-  modifiedPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutModifierInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutUpdaterInput
   createdPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutCreatorInput
-  modifiedPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutModifierInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutUpdaterInput
 }
 
 export type UserCreateOrConnectWithoutCreatedUsersInput = {
@@ -971,10 +1871,46 @@ export type UserCreateWithoutUpdatedUsersInput = {
   creator?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput
   updater?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput
   createdUsers?: Prisma.UserCreateNestedManyWithoutCreatorInput
+  createdUserRoles?: Prisma.UserRoleCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutUpdaterInput
   createdPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutCreatorInput
-  modifiedPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutModifierInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutUpdaterInput
   createdPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutCreatorInput
-  modifiedPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutModifierInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutUpdaterInput
 }
 
 export type UserUncheckedCreateWithoutUpdatedUsersInput = {
@@ -992,10 +1928,46 @@ export type UserUncheckedCreateWithoutUpdatedUsersInput = {
   updatedAt?: Date | string
   privileges?: Prisma.UserPrivilegeUncheckedCreateNestedOneWithoutUserInput
   createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatorInput
+  createdUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutUpdaterInput
   createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutCreatorInput
-  modifiedPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutModifierInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutUpdaterInput
   createdPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutCreatorInput
-  modifiedPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutModifierInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutUpdaterInput
 }
 
 export type UserCreateOrConnectWithoutUpdatedUsersInput = {
@@ -1017,10 +1989,46 @@ export type UserCreateWithoutCreatorInput = {
   updater?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput
   createdUsers?: Prisma.UserCreateNestedManyWithoutCreatorInput
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutUpdaterInput
   createdPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutCreatorInput
-  modifiedPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutModifierInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutUpdaterInput
   createdPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutCreatorInput
-  modifiedPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutModifierInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutUpdaterInput
 }
 
 export type UserUncheckedCreateWithoutCreatorInput = {
@@ -1038,10 +2046,46 @@ export type UserUncheckedCreateWithoutCreatorInput = {
   privileges?: Prisma.UserPrivilegeUncheckedCreateNestedOneWithoutUserInput
   createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatorInput
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutUpdaterInput
   createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutCreatorInput
-  modifiedPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutModifierInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutUpdaterInput
   createdPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutCreatorInput
-  modifiedPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutModifierInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutUpdaterInput
 }
 
 export type UserCreateOrConnectWithoutCreatorInput = {
@@ -1068,10 +2112,46 @@ export type UserCreateWithoutUpdaterInput = {
   creator?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput
   createdUsers?: Prisma.UserCreateNestedManyWithoutCreatorInput
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutUpdaterInput
   createdPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutCreatorInput
-  modifiedPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutModifierInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutUpdaterInput
   createdPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutCreatorInput
-  modifiedPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutModifierInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutUpdaterInput
 }
 
 export type UserUncheckedCreateWithoutUpdaterInput = {
@@ -1089,10 +2169,46 @@ export type UserUncheckedCreateWithoutUpdaterInput = {
   privileges?: Prisma.UserPrivilegeUncheckedCreateNestedOneWithoutUserInput
   createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatorInput
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutUpdaterInput
   createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutCreatorInput
-  modifiedPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutModifierInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutUpdaterInput
   createdPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutCreatorInput
-  modifiedPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutModifierInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutUpdaterInput
 }
 
 export type UserCreateOrConnectWithoutUpdaterInput = {
@@ -1130,10 +2246,46 @@ export type UserUpdateWithoutCreatedUsersInput = {
   creator?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput
   updater?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutUpdaterNestedInput
   createdPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutCreatorNestedInput
-  modifiedPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutModifierNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutUpdaterNestedInput
   createdPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutCreatorNestedInput
-  modifiedPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutModifierNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUpdateManyWithoutUpdaterNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCreatedUsersInput = {
@@ -1151,10 +2303,46 @@ export type UserUncheckedUpdateWithoutCreatedUsersInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   privileges?: Prisma.UserPrivilegeUncheckedUpdateOneWithoutUserNestedInput
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutUpdaterNestedInput
   createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutCreatorNestedInput
-  modifiedPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutModifierNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutUpdaterNestedInput
   createdPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutCreatorNestedInput
-  modifiedPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutModifierNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutUpdaterNestedInput
 }
 
 export type UserUpsertWithoutUpdatedUsersInput = {
@@ -1182,10 +2370,46 @@ export type UserUpdateWithoutUpdatedUsersInput = {
   creator?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput
   updater?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput
   createdUsers?: Prisma.UserUpdateManyWithoutCreatorNestedInput
+  createdUserRoles?: Prisma.UserRoleUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutUpdaterNestedInput
   createdPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutCreatorNestedInput
-  modifiedPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutModifierNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutUpdaterNestedInput
   createdPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutCreatorNestedInput
-  modifiedPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutModifierNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUpdateManyWithoutUpdaterNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUpdatedUsersInput = {
@@ -1203,10 +2427,46 @@ export type UserUncheckedUpdateWithoutUpdatedUsersInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   privileges?: Prisma.UserPrivilegeUncheckedUpdateOneWithoutUserNestedInput
   createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatorNestedInput
+  createdUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutUpdaterNestedInput
   createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutCreatorNestedInput
-  modifiedPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutModifierNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutUpdaterNestedInput
   createdPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutCreatorNestedInput
-  modifiedPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutModifierNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutUpdaterNestedInput
 }
 
 export type UserUpsertWithWhereUniqueWithoutCreatorInput = {
@@ -1273,10 +2533,46 @@ export type UserCreateWithoutUserRoleInput = {
   updater?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput
   createdUsers?: Prisma.UserCreateNestedManyWithoutCreatorInput
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutUpdaterInput
   createdPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutCreatorInput
-  modifiedPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutModifierInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutUpdaterInput
   createdPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutCreatorInput
-  modifiedPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutModifierInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutUpdaterInput
 }
 
 export type UserUncheckedCreateWithoutUserRoleInput = {
@@ -1294,10 +2590,46 @@ export type UserUncheckedCreateWithoutUserRoleInput = {
   privileges?: Prisma.UserPrivilegeUncheckedCreateNestedOneWithoutUserInput
   createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatorInput
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutUpdaterInput
   createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutCreatorInput
-  modifiedPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutModifierInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutUpdaterInput
   createdPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutCreatorInput
-  modifiedPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutModifierInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutUpdaterInput
 }
 
 export type UserCreateOrConnectWithoutUserRoleInput = {
@@ -1308,6 +2640,242 @@ export type UserCreateOrConnectWithoutUserRoleInput = {
 export type UserCreateManyUserRoleInputEnvelope = {
   data: Prisma.UserCreateManyUserRoleInput | Prisma.UserCreateManyUserRoleInput[]
   skipDuplicates?: boolean
+}
+
+export type UserCreateWithoutCreatedUserRolesInput = {
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userRole: Prisma.UserRoleCreateNestedOneWithoutUsersInput
+  branch?: Prisma.BranchCreateNestedOneWithoutUsersInput
+  privileges?: Prisma.UserPrivilegeCreateNestedOneWithoutUserInput
+  creator?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdaterInput
+  updatedUserRoles?: Prisma.UserRoleCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutUpdaterInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutUpdaterInput
+  createdPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutUpdaterInput
+}
+
+export type UserUncheckedCreateWithoutCreatedUserRolesInput = {
+  id?: number
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  userRoleId: number
+  branchId?: number | null
+  isActive?: boolean
+  createdBy?: number | null
+  updatedBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedCreateNestedOneWithoutUserInput
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdaterInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutUpdaterInput
+}
+
+export type UserCreateOrConnectWithoutCreatedUserRolesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedUserRolesInput, Prisma.UserUncheckedCreateWithoutCreatedUserRolesInput>
+}
+
+export type UserCreateWithoutUpdatedUserRolesInput = {
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userRole: Prisma.UserRoleCreateNestedOneWithoutUsersInput
+  branch?: Prisma.BranchCreateNestedOneWithoutUsersInput
+  privileges?: Prisma.UserPrivilegeCreateNestedOneWithoutUserInput
+  creator?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleCreateNestedManyWithoutCreatorInput
+  createdUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutUpdaterInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutUpdaterInput
+  createdPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutUpdaterInput
+}
+
+export type UserUncheckedCreateWithoutUpdatedUserRolesInput = {
+  id?: number
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  userRoleId: number
+  branchId?: number | null
+  isActive?: boolean
+  createdBy?: number | null
+  updatedBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedCreateNestedOneWithoutUserInput
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutCreatorInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutUpdaterInput
+}
+
+export type UserCreateOrConnectWithoutUpdatedUserRolesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutUpdatedUserRolesInput, Prisma.UserUncheckedCreateWithoutUpdatedUserRolesInput>
 }
 
 export type UserUpsertWithWhereUniqueWithoutUserRoleInput = {
@@ -1326,6 +2894,254 @@ export type UserUpdateManyWithWhereWithoutUserRoleInput = {
   data: Prisma.XOR<Prisma.UserUpdateManyMutationInput, Prisma.UserUncheckedUpdateManyWithoutUserRoleInput>
 }
 
+export type UserUpsertWithoutCreatedUserRolesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutCreatedUserRolesInput, Prisma.UserUncheckedUpdateWithoutCreatedUserRolesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedUserRolesInput, Prisma.UserUncheckedCreateWithoutCreatedUserRolesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutCreatedUserRolesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutCreatedUserRolesInput, Prisma.UserUncheckedUpdateWithoutCreatedUserRolesInput>
+}
+
+export type UserUpdateWithoutCreatedUserRolesInput = {
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userRole?: Prisma.UserRoleUpdateOneRequiredWithoutUsersNestedInput
+  branch?: Prisma.BranchUpdateOneWithoutUsersNestedInput
+  privileges?: Prisma.UserPrivilegeUpdateOneWithoutUserNestedInput
+  creator?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdaterNestedInput
+  updatedUserRoles?: Prisma.UserRoleUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutUpdaterNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUpdateManyWithoutUpdaterNestedInput
+}
+
+export type UserUncheckedUpdateWithoutCreatedUserRolesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userRoleId?: Prisma.IntFieldUpdateOperationsInput | number
+  branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedUpdateOneWithoutUserNestedInput
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdaterNestedInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutUpdaterNestedInput
+}
+
+export type UserUpsertWithoutUpdatedUserRolesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutUpdatedUserRolesInput, Prisma.UserUncheckedUpdateWithoutUpdatedUserRolesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutUpdatedUserRolesInput, Prisma.UserUncheckedCreateWithoutUpdatedUserRolesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutUpdatedUserRolesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutUpdatedUserRolesInput, Prisma.UserUncheckedUpdateWithoutUpdatedUserRolesInput>
+}
+
+export type UserUpdateWithoutUpdatedUserRolesInput = {
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userRole?: Prisma.UserRoleUpdateOneRequiredWithoutUsersNestedInput
+  branch?: Prisma.BranchUpdateOneWithoutUsersNestedInput
+  privileges?: Prisma.UserPrivilegeUpdateOneWithoutUserNestedInput
+  creator?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUpdateManyWithoutCreatorNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutUpdaterNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUpdateManyWithoutUpdaterNestedInput
+}
+
+export type UserUncheckedUpdateWithoutUpdatedUserRolesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userRoleId?: Prisma.IntFieldUpdateOperationsInput | number
+  branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedUpdateOneWithoutUserNestedInput
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutCreatorNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutUpdaterNestedInput
+}
+
 export type UserCreateWithoutPrivilegesInput = {
   nameEn: string
   nameAr?: string | null
@@ -1340,10 +3156,46 @@ export type UserCreateWithoutPrivilegesInput = {
   updater?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput
   createdUsers?: Prisma.UserCreateNestedManyWithoutCreatorInput
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutUpdaterInput
   createdPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutCreatorInput
-  modifiedPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutModifierInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutUpdaterInput
   createdPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutCreatorInput
-  modifiedPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutModifierInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutUpdaterInput
 }
 
 export type UserUncheckedCreateWithoutPrivilegesInput = {
@@ -1361,15 +3213,287 @@ export type UserUncheckedCreateWithoutPrivilegesInput = {
   updatedAt?: Date | string
   createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatorInput
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutUpdaterInput
   createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutCreatorInput
-  modifiedPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutModifierInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutUpdaterInput
   createdPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutCreatorInput
-  modifiedPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutModifierInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutUpdaterInput
 }
 
 export type UserCreateOrConnectWithoutPrivilegesInput = {
   where: Prisma.UserWhereUniqueInput
   create: Prisma.XOR<Prisma.UserCreateWithoutPrivilegesInput, Prisma.UserUncheckedCreateWithoutPrivilegesInput>
+}
+
+export type UserCreateWithoutCreatedUserPrivilegesInput = {
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userRole: Prisma.UserRoleCreateNestedOneWithoutUsersInput
+  branch?: Prisma.BranchCreateNestedOneWithoutUsersInput
+  privileges?: Prisma.UserPrivilegeCreateNestedOneWithoutUserInput
+  creator?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleCreateNestedManyWithoutUpdaterInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutUpdaterInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutUpdaterInput
+  createdPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutUpdaterInput
+}
+
+export type UserUncheckedCreateWithoutCreatedUserPrivilegesInput = {
+  id?: number
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  userRoleId: number
+  branchId?: number | null
+  isActive?: boolean
+  createdBy?: number | null
+  updatedBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedCreateNestedOneWithoutUserInput
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUpdaterInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutUpdaterInput
+}
+
+export type UserCreateOrConnectWithoutCreatedUserPrivilegesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedUserPrivilegesInput, Prisma.UserUncheckedCreateWithoutCreatedUserPrivilegesInput>
+}
+
+export type UserCreateWithoutUpdatedUserPrivilegesInput = {
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userRole: Prisma.UserRoleCreateNestedOneWithoutUsersInput
+  branch?: Prisma.BranchCreateNestedOneWithoutUsersInput
+  privileges?: Prisma.UserPrivilegeCreateNestedOneWithoutUserInput
+  creator?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutCreatorInput
+  createdBranches?: Prisma.BranchCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutUpdaterInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutUpdaterInput
+  createdPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutUpdaterInput
+}
+
+export type UserUncheckedCreateWithoutUpdatedUserPrivilegesInput = {
+  id?: number
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  userRoleId: number
+  branchId?: number | null
+  isActive?: boolean
+  createdBy?: number | null
+  updatedBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedCreateNestedOneWithoutUserInput
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutCreatorInput
+  createdBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutUpdaterInput
+}
+
+export type UserCreateOrConnectWithoutUpdatedUserPrivilegesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutUpdatedUserPrivilegesInput, Prisma.UserUncheckedCreateWithoutUpdatedUserPrivilegesInput>
 }
 
 export type UserUpsertWithoutPrivilegesInput = {
@@ -1397,10 +3521,46 @@ export type UserUpdateWithoutPrivilegesInput = {
   updater?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput
   createdUsers?: Prisma.UserUpdateManyWithoutCreatorNestedInput
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutUpdaterNestedInput
   createdPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutCreatorNestedInput
-  modifiedPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutModifierNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutUpdaterNestedInput
   createdPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutCreatorNestedInput
-  modifiedPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutModifierNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUpdateManyWithoutUpdaterNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPrivilegesInput = {
@@ -1418,10 +3578,294 @@ export type UserUncheckedUpdateWithoutPrivilegesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatorNestedInput
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutUpdaterNestedInput
   createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutCreatorNestedInput
-  modifiedPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutModifierNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutUpdaterNestedInput
   createdPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutCreatorNestedInput
-  modifiedPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutModifierNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutUpdaterNestedInput
+}
+
+export type UserUpsertWithoutCreatedUserPrivilegesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutCreatedUserPrivilegesInput, Prisma.UserUncheckedUpdateWithoutCreatedUserPrivilegesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedUserPrivilegesInput, Prisma.UserUncheckedCreateWithoutCreatedUserPrivilegesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutCreatedUserPrivilegesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutCreatedUserPrivilegesInput, Prisma.UserUncheckedUpdateWithoutCreatedUserPrivilegesInput>
+}
+
+export type UserUpdateWithoutCreatedUserPrivilegesInput = {
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userRole?: Prisma.UserRoleUpdateOneRequiredWithoutUsersNestedInput
+  branch?: Prisma.BranchUpdateOneWithoutUsersNestedInput
+  privileges?: Prisma.UserPrivilegeUpdateOneWithoutUserNestedInput
+  creator?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUpdateManyWithoutUpdaterNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutUpdaterNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUpdateManyWithoutUpdaterNestedInput
+}
+
+export type UserUncheckedUpdateWithoutCreatedUserPrivilegesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userRoleId?: Prisma.IntFieldUpdateOperationsInput | number
+  branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedUpdateOneWithoutUserNestedInput
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUpdaterNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutUpdaterNestedInput
+}
+
+export type UserUpsertWithoutUpdatedUserPrivilegesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutUpdatedUserPrivilegesInput, Prisma.UserUncheckedUpdateWithoutUpdatedUserPrivilegesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutUpdatedUserPrivilegesInput, Prisma.UserUncheckedCreateWithoutUpdatedUserPrivilegesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutUpdatedUserPrivilegesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutUpdatedUserPrivilegesInput, Prisma.UserUncheckedUpdateWithoutUpdatedUserPrivilegesInput>
+}
+
+export type UserUpdateWithoutUpdatedUserPrivilegesInput = {
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userRole?: Prisma.UserRoleUpdateOneRequiredWithoutUsersNestedInput
+  branch?: Prisma.BranchUpdateOneWithoutUsersNestedInput
+  privileges?: Prisma.UserPrivilegeUpdateOneWithoutUserNestedInput
+  creator?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutCreatorNestedInput
+  createdBranches?: Prisma.BranchUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutUpdaterNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUpdateManyWithoutUpdaterNestedInput
+}
+
+export type UserUncheckedUpdateWithoutUpdatedUserPrivilegesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userRoleId?: Prisma.IntFieldUpdateOperationsInput | number
+  branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedUpdateOneWithoutUserNestedInput
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutCreatorNestedInput
+  createdBranches?: Prisma.BranchUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutUpdaterNestedInput
 }
 
 export type UserCreateWithoutBranchInput = {
@@ -1438,10 +3882,46 @@ export type UserCreateWithoutBranchInput = {
   updater?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput
   createdUsers?: Prisma.UserCreateNestedManyWithoutCreatorInput
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutUpdaterInput
   createdPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutCreatorInput
-  modifiedPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutModifierInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutUpdaterInput
   createdPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutCreatorInput
-  modifiedPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutModifierInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutUpdaterInput
 }
 
 export type UserUncheckedCreateWithoutBranchInput = {
@@ -1459,10 +3939,46 @@ export type UserUncheckedCreateWithoutBranchInput = {
   privileges?: Prisma.UserPrivilegeUncheckedCreateNestedOneWithoutUserInput
   createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatorInput
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutUpdaterInput
   createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutCreatorInput
-  modifiedPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutModifierInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutUpdaterInput
   createdPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutCreatorInput
-  modifiedPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutModifierInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutUpdaterInput
 }
 
 export type UserCreateOrConnectWithoutBranchInput = {
@@ -1473,6 +3989,242 @@ export type UserCreateOrConnectWithoutBranchInput = {
 export type UserCreateManyBranchInputEnvelope = {
   data: Prisma.UserCreateManyBranchInput | Prisma.UserCreateManyBranchInput[]
   skipDuplicates?: boolean
+}
+
+export type UserCreateWithoutCreatedBranchesInput = {
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userRole: Prisma.UserRoleCreateNestedOneWithoutUsersInput
+  branch?: Prisma.BranchCreateNestedOneWithoutUsersInput
+  privileges?: Prisma.UserPrivilegeCreateNestedOneWithoutUserInput
+  creator?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutUpdaterInput
+  updatedBranches?: Prisma.BranchCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutUpdaterInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutUpdaterInput
+  createdPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutUpdaterInput
+}
+
+export type UserUncheckedCreateWithoutCreatedBranchesInput = {
+  id?: number
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  userRoleId: number
+  branchId?: number | null
+  isActive?: boolean
+  createdBy?: number | null
+  updatedBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedCreateNestedOneWithoutUserInput
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutUpdaterInput
+  updatedBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutUpdaterInput
+}
+
+export type UserCreateOrConnectWithoutCreatedBranchesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedBranchesInput, Prisma.UserUncheckedCreateWithoutCreatedBranchesInput>
+}
+
+export type UserCreateWithoutUpdatedBranchesInput = {
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userRole: Prisma.UserRoleCreateNestedOneWithoutUsersInput
+  branch?: Prisma.BranchCreateNestedOneWithoutUsersInput
+  privileges?: Prisma.UserPrivilegeCreateNestedOneWithoutUserInput
+  creator?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchCreateNestedManyWithoutCreatorInput
+  createdCities?: Prisma.CityCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutUpdaterInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutUpdaterInput
+  createdPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutUpdaterInput
+}
+
+export type UserUncheckedCreateWithoutUpdatedBranchesInput = {
+  id?: number
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  userRoleId: number
+  branchId?: number | null
+  isActive?: boolean
+  createdBy?: number | null
+  updatedBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedCreateNestedOneWithoutUserInput
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutCreatorInput
+  createdCities?: Prisma.CityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutUpdaterInput
+}
+
+export type UserCreateOrConnectWithoutUpdatedBranchesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutUpdatedBranchesInput, Prisma.UserUncheckedCreateWithoutUpdatedBranchesInput>
 }
 
 export type UserUpsertWithWhereUniqueWithoutBranchInput = {
@@ -1491,6 +4243,5094 @@ export type UserUpdateManyWithWhereWithoutBranchInput = {
   data: Prisma.XOR<Prisma.UserUpdateManyMutationInput, Prisma.UserUncheckedUpdateManyWithoutBranchInput>
 }
 
+export type UserUpsertWithoutCreatedBranchesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutCreatedBranchesInput, Prisma.UserUncheckedUpdateWithoutCreatedBranchesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedBranchesInput, Prisma.UserUncheckedCreateWithoutCreatedBranchesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutCreatedBranchesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutCreatedBranchesInput, Prisma.UserUncheckedUpdateWithoutCreatedBranchesInput>
+}
+
+export type UserUpdateWithoutCreatedBranchesInput = {
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userRole?: Prisma.UserRoleUpdateOneRequiredWithoutUsersNestedInput
+  branch?: Prisma.BranchUpdateOneWithoutUsersNestedInput
+  privileges?: Prisma.UserPrivilegeUpdateOneWithoutUserNestedInput
+  creator?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutUpdaterNestedInput
+  updatedBranches?: Prisma.BranchUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutUpdaterNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUpdateManyWithoutUpdaterNestedInput
+}
+
+export type UserUncheckedUpdateWithoutCreatedBranchesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userRoleId?: Prisma.IntFieldUpdateOperationsInput | number
+  branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedUpdateOneWithoutUserNestedInput
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutUpdaterNestedInput
+  updatedBranches?: Prisma.BranchUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutUpdaterNestedInput
+}
+
+export type UserUpsertWithoutUpdatedBranchesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutUpdatedBranchesInput, Prisma.UserUncheckedUpdateWithoutUpdatedBranchesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutUpdatedBranchesInput, Prisma.UserUncheckedCreateWithoutUpdatedBranchesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutUpdatedBranchesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutUpdatedBranchesInput, Prisma.UserUncheckedUpdateWithoutUpdatedBranchesInput>
+}
+
+export type UserUpdateWithoutUpdatedBranchesInput = {
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userRole?: Prisma.UserRoleUpdateOneRequiredWithoutUsersNestedInput
+  branch?: Prisma.BranchUpdateOneWithoutUsersNestedInput
+  privileges?: Prisma.UserPrivilegeUpdateOneWithoutUserNestedInput
+  creator?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUpdateManyWithoutCreatorNestedInput
+  createdCities?: Prisma.CityUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutUpdaterNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUpdateManyWithoutUpdaterNestedInput
+}
+
+export type UserUncheckedUpdateWithoutUpdatedBranchesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userRoleId?: Prisma.IntFieldUpdateOperationsInput | number
+  branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedUpdateOneWithoutUserNestedInput
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUncheckedUpdateManyWithoutCreatorNestedInput
+  createdCities?: Prisma.CityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutUpdaterNestedInput
+}
+
+export type UserCreateWithoutCreatedCitiesInput = {
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userRole: Prisma.UserRoleCreateNestedOneWithoutUsersInput
+  branch?: Prisma.BranchCreateNestedOneWithoutUsersInput
+  privileges?: Prisma.UserPrivilegeCreateNestedOneWithoutUserInput
+  creator?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchCreateNestedManyWithoutUpdaterInput
+  updatedCities?: Prisma.CityCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutUpdaterInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutUpdaterInput
+  createdPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutUpdaterInput
+}
+
+export type UserUncheckedCreateWithoutCreatedCitiesInput = {
+  id?: number
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  userRoleId: number
+  branchId?: number | null
+  isActive?: boolean
+  createdBy?: number | null
+  updatedBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedCreateNestedOneWithoutUserInput
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutUpdaterInput
+  updatedCities?: Prisma.CityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutUpdaterInput
+}
+
+export type UserCreateOrConnectWithoutCreatedCitiesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedCitiesInput, Prisma.UserUncheckedCreateWithoutCreatedCitiesInput>
+}
+
+export type UserCreateWithoutUpdatedCitiesInput = {
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userRole: Prisma.UserRoleCreateNestedOneWithoutUsersInput
+  branch?: Prisma.BranchCreateNestedOneWithoutUsersInput
+  privileges?: Prisma.UserPrivilegeCreateNestedOneWithoutUserInput
+  creator?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityCreateNestedManyWithoutCreatorInput
+  createdCountries?: Prisma.CountryCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutUpdaterInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutUpdaterInput
+  createdPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutUpdaterInput
+}
+
+export type UserUncheckedCreateWithoutUpdatedCitiesInput = {
+  id?: number
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  userRoleId: number
+  branchId?: number | null
+  isActive?: boolean
+  createdBy?: number | null
+  updatedBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedCreateNestedOneWithoutUserInput
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityUncheckedCreateNestedManyWithoutCreatorInput
+  createdCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutUpdaterInput
+}
+
+export type UserCreateOrConnectWithoutUpdatedCitiesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutUpdatedCitiesInput, Prisma.UserUncheckedCreateWithoutUpdatedCitiesInput>
+}
+
+export type UserUpsertWithoutCreatedCitiesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutCreatedCitiesInput, Prisma.UserUncheckedUpdateWithoutCreatedCitiesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedCitiesInput, Prisma.UserUncheckedCreateWithoutCreatedCitiesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutCreatedCitiesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutCreatedCitiesInput, Prisma.UserUncheckedUpdateWithoutCreatedCitiesInput>
+}
+
+export type UserUpdateWithoutCreatedCitiesInput = {
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userRole?: Prisma.UserRoleUpdateOneRequiredWithoutUsersNestedInput
+  branch?: Prisma.BranchUpdateOneWithoutUsersNestedInput
+  privileges?: Prisma.UserPrivilegeUpdateOneWithoutUserNestedInput
+  creator?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUpdateManyWithoutUpdaterNestedInput
+  updatedCities?: Prisma.CityUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutUpdaterNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUpdateManyWithoutUpdaterNestedInput
+}
+
+export type UserUncheckedUpdateWithoutCreatedCitiesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userRoleId?: Prisma.IntFieldUpdateOperationsInput | number
+  branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedUpdateOneWithoutUserNestedInput
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUncheckedUpdateManyWithoutUpdaterNestedInput
+  updatedCities?: Prisma.CityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutUpdaterNestedInput
+}
+
+export type UserUpsertWithoutUpdatedCitiesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutUpdatedCitiesInput, Prisma.UserUncheckedUpdateWithoutUpdatedCitiesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutUpdatedCitiesInput, Prisma.UserUncheckedCreateWithoutUpdatedCitiesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutUpdatedCitiesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutUpdatedCitiesInput, Prisma.UserUncheckedUpdateWithoutUpdatedCitiesInput>
+}
+
+export type UserUpdateWithoutUpdatedCitiesInput = {
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userRole?: Prisma.UserRoleUpdateOneRequiredWithoutUsersNestedInput
+  branch?: Prisma.BranchUpdateOneWithoutUsersNestedInput
+  privileges?: Prisma.UserPrivilegeUpdateOneWithoutUserNestedInput
+  creator?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUpdateManyWithoutCreatorNestedInput
+  createdCountries?: Prisma.CountryUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutUpdaterNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUpdateManyWithoutUpdaterNestedInput
+}
+
+export type UserUncheckedUpdateWithoutUpdatedCitiesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userRoleId?: Prisma.IntFieldUpdateOperationsInput | number
+  branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedUpdateOneWithoutUserNestedInput
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUncheckedUpdateManyWithoutCreatorNestedInput
+  createdCountries?: Prisma.CountryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutUpdaterNestedInput
+}
+
+export type UserCreateWithoutCreatedCountriesInput = {
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userRole: Prisma.UserRoleCreateNestedOneWithoutUsersInput
+  branch?: Prisma.BranchCreateNestedOneWithoutUsersInput
+  privileges?: Prisma.UserPrivilegeCreateNestedOneWithoutUserInput
+  creator?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityCreateNestedManyWithoutUpdaterInput
+  updatedCountries?: Prisma.CountryCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutUpdaterInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutUpdaterInput
+  createdPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutUpdaterInput
+}
+
+export type UserUncheckedCreateWithoutCreatedCountriesInput = {
+  id?: number
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  userRoleId: number
+  branchId?: number | null
+  isActive?: boolean
+  createdBy?: number | null
+  updatedBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedCreateNestedOneWithoutUserInput
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityUncheckedCreateNestedManyWithoutUpdaterInput
+  updatedCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutUpdaterInput
+}
+
+export type UserCreateOrConnectWithoutCreatedCountriesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedCountriesInput, Prisma.UserUncheckedCreateWithoutCreatedCountriesInput>
+}
+
+export type UserCreateWithoutUpdatedCountriesInput = {
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userRole: Prisma.UserRoleCreateNestedOneWithoutUsersInput
+  branch?: Prisma.BranchCreateNestedOneWithoutUsersInput
+  privileges?: Prisma.UserPrivilegeCreateNestedOneWithoutUserInput
+  creator?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryCreateNestedManyWithoutCreatorInput
+  createdGosiCities?: Prisma.GosiCityCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutUpdaterInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutUpdaterInput
+  createdPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutUpdaterInput
+}
+
+export type UserUncheckedCreateWithoutUpdatedCountriesInput = {
+  id?: number
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  userRoleId: number
+  branchId?: number | null
+  isActive?: boolean
+  createdBy?: number | null
+  updatedBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedCreateNestedOneWithoutUserInput
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutCreatorInput
+  createdGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutUpdaterInput
+}
+
+export type UserCreateOrConnectWithoutUpdatedCountriesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutUpdatedCountriesInput, Prisma.UserUncheckedCreateWithoutUpdatedCountriesInput>
+}
+
+export type UserUpsertWithoutCreatedCountriesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutCreatedCountriesInput, Prisma.UserUncheckedUpdateWithoutCreatedCountriesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedCountriesInput, Prisma.UserUncheckedCreateWithoutCreatedCountriesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutCreatedCountriesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutCreatedCountriesInput, Prisma.UserUncheckedUpdateWithoutCreatedCountriesInput>
+}
+
+export type UserUpdateWithoutCreatedCountriesInput = {
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userRole?: Prisma.UserRoleUpdateOneRequiredWithoutUsersNestedInput
+  branch?: Prisma.BranchUpdateOneWithoutUsersNestedInput
+  privileges?: Prisma.UserPrivilegeUpdateOneWithoutUserNestedInput
+  creator?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUpdateManyWithoutUpdaterNestedInput
+  updatedCountries?: Prisma.CountryUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutUpdaterNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUpdateManyWithoutUpdaterNestedInput
+}
+
+export type UserUncheckedUpdateWithoutCreatedCountriesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userRoleId?: Prisma.IntFieldUpdateOperationsInput | number
+  branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedUpdateOneWithoutUserNestedInput
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUncheckedUpdateManyWithoutUpdaterNestedInput
+  updatedCountries?: Prisma.CountryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutUpdaterNestedInput
+}
+
+export type UserUpsertWithoutUpdatedCountriesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutUpdatedCountriesInput, Prisma.UserUncheckedUpdateWithoutUpdatedCountriesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutUpdatedCountriesInput, Prisma.UserUncheckedCreateWithoutUpdatedCountriesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutUpdatedCountriesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutUpdatedCountriesInput, Prisma.UserUncheckedUpdateWithoutUpdatedCountriesInput>
+}
+
+export type UserUpdateWithoutUpdatedCountriesInput = {
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userRole?: Prisma.UserRoleUpdateOneRequiredWithoutUsersNestedInput
+  branch?: Prisma.BranchUpdateOneWithoutUsersNestedInput
+  privileges?: Prisma.UserPrivilegeUpdateOneWithoutUserNestedInput
+  creator?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUpdateManyWithoutCreatorNestedInput
+  createdGosiCities?: Prisma.GosiCityUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutUpdaterNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUpdateManyWithoutUpdaterNestedInput
+}
+
+export type UserUncheckedUpdateWithoutUpdatedCountriesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userRoleId?: Prisma.IntFieldUpdateOperationsInput | number
+  branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedUpdateOneWithoutUserNestedInput
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUncheckedUpdateManyWithoutCreatorNestedInput
+  createdGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutUpdaterNestedInput
+}
+
+export type UserCreateWithoutCreatedGosiCitiesInput = {
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userRole: Prisma.UserRoleCreateNestedOneWithoutUsersInput
+  branch?: Prisma.BranchCreateNestedOneWithoutUsersInput
+  privileges?: Prisma.UserPrivilegeCreateNestedOneWithoutUserInput
+  creator?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryCreateNestedManyWithoutUpdaterInput
+  updatedGosiCities?: Prisma.GosiCityCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutUpdaterInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutUpdaterInput
+  createdPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutUpdaterInput
+}
+
+export type UserUncheckedCreateWithoutCreatedGosiCitiesInput = {
+  id?: number
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  userRoleId: number
+  branchId?: number | null
+  isActive?: boolean
+  createdBy?: number | null
+  updatedBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedCreateNestedOneWithoutUserInput
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutUpdaterInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutUpdaterInput
+}
+
+export type UserCreateOrConnectWithoutCreatedGosiCitiesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedGosiCitiesInput, Prisma.UserUncheckedCreateWithoutCreatedGosiCitiesInput>
+}
+
+export type UserCreateWithoutUpdatedGosiCitiesInput = {
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userRole: Prisma.UserRoleCreateNestedOneWithoutUsersInput
+  branch?: Prisma.BranchCreateNestedOneWithoutUsersInput
+  privileges?: Prisma.UserPrivilegeCreateNestedOneWithoutUserInput
+  creator?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityCreateNestedManyWithoutCreatorInput
+  createdEmployees?: Prisma.EmployeeCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutUpdaterInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutUpdaterInput
+  createdPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutUpdaterInput
+}
+
+export type UserUncheckedCreateWithoutUpdatedGosiCitiesInput = {
+  id?: number
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  userRoleId: number
+  branchId?: number | null
+  isActive?: boolean
+  createdBy?: number | null
+  updatedBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedCreateNestedOneWithoutUserInput
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutCreatorInput
+  createdEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutUpdaterInput
+}
+
+export type UserCreateOrConnectWithoutUpdatedGosiCitiesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutUpdatedGosiCitiesInput, Prisma.UserUncheckedCreateWithoutUpdatedGosiCitiesInput>
+}
+
+export type UserUpsertWithoutCreatedGosiCitiesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutCreatedGosiCitiesInput, Prisma.UserUncheckedUpdateWithoutCreatedGosiCitiesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedGosiCitiesInput, Prisma.UserUncheckedCreateWithoutCreatedGosiCitiesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutCreatedGosiCitiesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutCreatedGosiCitiesInput, Prisma.UserUncheckedUpdateWithoutCreatedGosiCitiesInput>
+}
+
+export type UserUpdateWithoutCreatedGosiCitiesInput = {
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userRole?: Prisma.UserRoleUpdateOneRequiredWithoutUsersNestedInput
+  branch?: Prisma.BranchUpdateOneWithoutUsersNestedInput
+  privileges?: Prisma.UserPrivilegeUpdateOneWithoutUserNestedInput
+  creator?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUpdateManyWithoutUpdaterNestedInput
+  updatedGosiCities?: Prisma.GosiCityUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutUpdaterNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUpdateManyWithoutUpdaterNestedInput
+}
+
+export type UserUncheckedUpdateWithoutCreatedGosiCitiesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userRoleId?: Prisma.IntFieldUpdateOperationsInput | number
+  branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedUpdateOneWithoutUserNestedInput
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUncheckedUpdateManyWithoutUpdaterNestedInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutUpdaterNestedInput
+}
+
+export type UserUpsertWithoutUpdatedGosiCitiesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutUpdatedGosiCitiesInput, Prisma.UserUncheckedUpdateWithoutUpdatedGosiCitiesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutUpdatedGosiCitiesInput, Prisma.UserUncheckedCreateWithoutUpdatedGosiCitiesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutUpdatedGosiCitiesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutUpdatedGosiCitiesInput, Prisma.UserUncheckedUpdateWithoutUpdatedGosiCitiesInput>
+}
+
+export type UserUpdateWithoutUpdatedGosiCitiesInput = {
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userRole?: Prisma.UserRoleUpdateOneRequiredWithoutUsersNestedInput
+  branch?: Prisma.BranchUpdateOneWithoutUsersNestedInput
+  privileges?: Prisma.UserPrivilegeUpdateOneWithoutUserNestedInput
+  creator?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUpdateManyWithoutCreatorNestedInput
+  createdEmployees?: Prisma.EmployeeUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutUpdaterNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUpdateManyWithoutUpdaterNestedInput
+}
+
+export type UserUncheckedUpdateWithoutUpdatedGosiCitiesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userRoleId?: Prisma.IntFieldUpdateOperationsInput | number
+  branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedUpdateOneWithoutUserNestedInput
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutCreatorNestedInput
+  createdEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutUpdaterNestedInput
+}
+
+export type UserCreateWithoutCreatedEmployeesInput = {
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userRole: Prisma.UserRoleCreateNestedOneWithoutUsersInput
+  branch?: Prisma.BranchCreateNestedOneWithoutUsersInput
+  privileges?: Prisma.UserPrivilegeCreateNestedOneWithoutUserInput
+  creator?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityCreateNestedManyWithoutUpdaterInput
+  updatedEmployees?: Prisma.EmployeeCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutUpdaterInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutUpdaterInput
+  createdPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutUpdaterInput
+}
+
+export type UserUncheckedCreateWithoutCreatedEmployeesInput = {
+  id?: number
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  userRoleId: number
+  branchId?: number | null
+  isActive?: boolean
+  createdBy?: number | null
+  updatedBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedCreateNestedOneWithoutUserInput
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutUpdaterInput
+  updatedEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutUpdaterInput
+}
+
+export type UserCreateOrConnectWithoutCreatedEmployeesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedEmployeesInput, Prisma.UserUncheckedCreateWithoutCreatedEmployeesInput>
+}
+
+export type UserCreateWithoutUpdatedEmployeesInput = {
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userRole: Prisma.UserRoleCreateNestedOneWithoutUsersInput
+  branch?: Prisma.BranchCreateNestedOneWithoutUsersInput
+  privileges?: Prisma.UserPrivilegeCreateNestedOneWithoutUserInput
+  creator?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeCreateNestedManyWithoutCreatorInput
+  createdDesignations?: Prisma.DesignationCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutUpdaterInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutUpdaterInput
+  createdPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutUpdaterInput
+}
+
+export type UserUncheckedCreateWithoutUpdatedEmployeesInput = {
+  id?: number
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  userRoleId: number
+  branchId?: number | null
+  isActive?: boolean
+  createdBy?: number | null
+  updatedBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedCreateNestedOneWithoutUserInput
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutCreatorInput
+  createdDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutUpdaterInput
+}
+
+export type UserCreateOrConnectWithoutUpdatedEmployeesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutUpdatedEmployeesInput, Prisma.UserUncheckedCreateWithoutUpdatedEmployeesInput>
+}
+
+export type UserUpsertWithoutCreatedEmployeesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutCreatedEmployeesInput, Prisma.UserUncheckedUpdateWithoutCreatedEmployeesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedEmployeesInput, Prisma.UserUncheckedCreateWithoutCreatedEmployeesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutCreatedEmployeesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutCreatedEmployeesInput, Prisma.UserUncheckedUpdateWithoutCreatedEmployeesInput>
+}
+
+export type UserUpdateWithoutCreatedEmployeesInput = {
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userRole?: Prisma.UserRoleUpdateOneRequiredWithoutUsersNestedInput
+  branch?: Prisma.BranchUpdateOneWithoutUsersNestedInput
+  privileges?: Prisma.UserPrivilegeUpdateOneWithoutUserNestedInput
+  creator?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUpdateManyWithoutUpdaterNestedInput
+  updatedEmployees?: Prisma.EmployeeUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutUpdaterNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUpdateManyWithoutUpdaterNestedInput
+}
+
+export type UserUncheckedUpdateWithoutCreatedEmployeesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userRoleId?: Prisma.IntFieldUpdateOperationsInput | number
+  branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedUpdateOneWithoutUserNestedInput
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutUpdaterNestedInput
+  updatedEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutUpdaterNestedInput
+}
+
+export type UserUpsertWithoutUpdatedEmployeesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutUpdatedEmployeesInput, Prisma.UserUncheckedUpdateWithoutUpdatedEmployeesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutUpdatedEmployeesInput, Prisma.UserUncheckedCreateWithoutUpdatedEmployeesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutUpdatedEmployeesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutUpdatedEmployeesInput, Prisma.UserUncheckedUpdateWithoutUpdatedEmployeesInput>
+}
+
+export type UserUpdateWithoutUpdatedEmployeesInput = {
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userRole?: Prisma.UserRoleUpdateOneRequiredWithoutUsersNestedInput
+  branch?: Prisma.BranchUpdateOneWithoutUsersNestedInput
+  privileges?: Prisma.UserPrivilegeUpdateOneWithoutUserNestedInput
+  creator?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUpdateManyWithoutCreatorNestedInput
+  createdDesignations?: Prisma.DesignationUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutUpdaterNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUpdateManyWithoutUpdaterNestedInput
+}
+
+export type UserUncheckedUpdateWithoutUpdatedEmployeesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userRoleId?: Prisma.IntFieldUpdateOperationsInput | number
+  branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedUpdateOneWithoutUserNestedInput
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutCreatorNestedInput
+  createdDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutUpdaterNestedInput
+}
+
+export type UserCreateWithoutCreatedDesignationsInput = {
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userRole: Prisma.UserRoleCreateNestedOneWithoutUsersInput
+  branch?: Prisma.BranchCreateNestedOneWithoutUsersInput
+  privileges?: Prisma.UserPrivilegeCreateNestedOneWithoutUserInput
+  creator?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeCreateNestedManyWithoutUpdaterInput
+  updatedDesignations?: Prisma.DesignationCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutUpdaterInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutUpdaterInput
+  createdPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutUpdaterInput
+}
+
+export type UserUncheckedCreateWithoutCreatedDesignationsInput = {
+  id?: number
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  userRoleId: number
+  branchId?: number | null
+  isActive?: boolean
+  createdBy?: number | null
+  updatedBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedCreateNestedOneWithoutUserInput
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutUpdaterInput
+  updatedDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutUpdaterInput
+}
+
+export type UserCreateOrConnectWithoutCreatedDesignationsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedDesignationsInput, Prisma.UserUncheckedCreateWithoutCreatedDesignationsInput>
+}
+
+export type UserCreateWithoutUpdatedDesignationsInput = {
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userRole: Prisma.UserRoleCreateNestedOneWithoutUsersInput
+  branch?: Prisma.BranchCreateNestedOneWithoutUsersInput
+  privileges?: Prisma.UserPrivilegeCreateNestedOneWithoutUserInput
+  creator?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationCreateNestedManyWithoutCreatorInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutUpdaterInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutUpdaterInput
+  createdPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutUpdaterInput
+}
+
+export type UserUncheckedCreateWithoutUpdatedDesignationsInput = {
+  id?: number
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  userRoleId: number
+  branchId?: number | null
+  isActive?: boolean
+  createdBy?: number | null
+  updatedBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedCreateNestedOneWithoutUserInput
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutCreatorInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutUpdaterInput
+}
+
+export type UserCreateOrConnectWithoutUpdatedDesignationsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutUpdatedDesignationsInput, Prisma.UserUncheckedCreateWithoutUpdatedDesignationsInput>
+}
+
+export type UserUpsertWithoutCreatedDesignationsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutCreatedDesignationsInput, Prisma.UserUncheckedUpdateWithoutCreatedDesignationsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedDesignationsInput, Prisma.UserUncheckedCreateWithoutCreatedDesignationsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutCreatedDesignationsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutCreatedDesignationsInput, Prisma.UserUncheckedUpdateWithoutCreatedDesignationsInput>
+}
+
+export type UserUpdateWithoutCreatedDesignationsInput = {
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userRole?: Prisma.UserRoleUpdateOneRequiredWithoutUsersNestedInput
+  branch?: Prisma.BranchUpdateOneWithoutUsersNestedInput
+  privileges?: Prisma.UserPrivilegeUpdateOneWithoutUserNestedInput
+  creator?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUpdateManyWithoutUpdaterNestedInput
+  updatedDesignations?: Prisma.DesignationUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutUpdaterNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUpdateManyWithoutUpdaterNestedInput
+}
+
+export type UserUncheckedUpdateWithoutCreatedDesignationsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userRoleId?: Prisma.IntFieldUpdateOperationsInput | number
+  branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedUpdateOneWithoutUserNestedInput
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutUpdaterNestedInput
+  updatedDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutUpdaterNestedInput
+}
+
+export type UserUpsertWithoutUpdatedDesignationsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutUpdatedDesignationsInput, Prisma.UserUncheckedUpdateWithoutUpdatedDesignationsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutUpdatedDesignationsInput, Prisma.UserUncheckedCreateWithoutUpdatedDesignationsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutUpdatedDesignationsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutUpdatedDesignationsInput, Prisma.UserUncheckedUpdateWithoutUpdatedDesignationsInput>
+}
+
+export type UserUpdateWithoutUpdatedDesignationsInput = {
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userRole?: Prisma.UserRoleUpdateOneRequiredWithoutUsersNestedInput
+  branch?: Prisma.BranchUpdateOneWithoutUsersNestedInput
+  privileges?: Prisma.UserPrivilegeUpdateOneWithoutUserNestedInput
+  creator?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUpdateManyWithoutCreatorNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutUpdaterNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUpdateManyWithoutUpdaterNestedInput
+}
+
+export type UserUncheckedUpdateWithoutUpdatedDesignationsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userRoleId?: Prisma.IntFieldUpdateOperationsInput | number
+  branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedUpdateOneWithoutUserNestedInput
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutCreatorNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutUpdaterNestedInput
+}
+
+export type UserCreateWithoutCreatedEmployeeStatusesInput = {
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userRole: Prisma.UserRoleCreateNestedOneWithoutUsersInput
+  branch?: Prisma.BranchCreateNestedOneWithoutUsersInput
+  privileges?: Prisma.UserPrivilegeCreateNestedOneWithoutUserInput
+  creator?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationCreateNestedManyWithoutUpdaterInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutUpdaterInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutUpdaterInput
+  createdPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutUpdaterInput
+}
+
+export type UserUncheckedCreateWithoutCreatedEmployeeStatusesInput = {
+  id?: number
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  userRoleId: number
+  branchId?: number | null
+  isActive?: boolean
+  createdBy?: number | null
+  updatedBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedCreateNestedOneWithoutUserInput
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutUpdaterInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutUpdaterInput
+}
+
+export type UserCreateOrConnectWithoutCreatedEmployeeStatusesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedEmployeeStatusesInput, Prisma.UserUncheckedCreateWithoutCreatedEmployeeStatusesInput>
+}
+
+export type UserCreateWithoutUpdatedEmployeeStatusesInput = {
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userRole: Prisma.UserRoleCreateNestedOneWithoutUsersInput
+  branch?: Prisma.BranchCreateNestedOneWithoutUsersInput
+  privileges?: Prisma.UserPrivilegeCreateNestedOneWithoutUserInput
+  creator?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutCreatorInput
+  createdProjects?: Prisma.ProjectCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutUpdaterInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutUpdaterInput
+  createdPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutUpdaterInput
+}
+
+export type UserUncheckedCreateWithoutUpdatedEmployeeStatusesInput = {
+  id?: number
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  userRoleId: number
+  branchId?: number | null
+  isActive?: boolean
+  createdBy?: number | null
+  updatedBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedCreateNestedOneWithoutUserInput
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutCreatorInput
+  createdProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutUpdaterInput
+}
+
+export type UserCreateOrConnectWithoutUpdatedEmployeeStatusesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutUpdatedEmployeeStatusesInput, Prisma.UserUncheckedCreateWithoutUpdatedEmployeeStatusesInput>
+}
+
+export type UserUpsertWithoutCreatedEmployeeStatusesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutCreatedEmployeeStatusesInput, Prisma.UserUncheckedUpdateWithoutCreatedEmployeeStatusesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedEmployeeStatusesInput, Prisma.UserUncheckedCreateWithoutCreatedEmployeeStatusesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutCreatedEmployeeStatusesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutCreatedEmployeeStatusesInput, Prisma.UserUncheckedUpdateWithoutCreatedEmployeeStatusesInput>
+}
+
+export type UserUpdateWithoutCreatedEmployeeStatusesInput = {
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userRole?: Prisma.UserRoleUpdateOneRequiredWithoutUsersNestedInput
+  branch?: Prisma.BranchUpdateOneWithoutUsersNestedInput
+  privileges?: Prisma.UserPrivilegeUpdateOneWithoutUserNestedInput
+  creator?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUpdateManyWithoutUpdaterNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutUpdaterNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUpdateManyWithoutUpdaterNestedInput
+}
+
+export type UserUncheckedUpdateWithoutCreatedEmployeeStatusesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userRoleId?: Prisma.IntFieldUpdateOperationsInput | number
+  branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedUpdateOneWithoutUserNestedInput
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutUpdaterNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutUpdaterNestedInput
+}
+
+export type UserUpsertWithoutUpdatedEmployeeStatusesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutUpdatedEmployeeStatusesInput, Prisma.UserUncheckedUpdateWithoutUpdatedEmployeeStatusesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutUpdatedEmployeeStatusesInput, Prisma.UserUncheckedCreateWithoutUpdatedEmployeeStatusesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutUpdatedEmployeeStatusesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutUpdatedEmployeeStatusesInput, Prisma.UserUncheckedUpdateWithoutUpdatedEmployeeStatusesInput>
+}
+
+export type UserUpdateWithoutUpdatedEmployeeStatusesInput = {
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userRole?: Prisma.UserRoleUpdateOneRequiredWithoutUsersNestedInput
+  branch?: Prisma.BranchUpdateOneWithoutUsersNestedInput
+  privileges?: Prisma.UserPrivilegeUpdateOneWithoutUserNestedInput
+  creator?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutCreatorNestedInput
+  createdProjects?: Prisma.ProjectUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutUpdaterNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUpdateManyWithoutUpdaterNestedInput
+}
+
+export type UserUncheckedUpdateWithoutUpdatedEmployeeStatusesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userRoleId?: Prisma.IntFieldUpdateOperationsInput | number
+  branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedUpdateOneWithoutUserNestedInput
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  createdProjects?: Prisma.ProjectUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutUpdaterNestedInput
+}
+
+export type UserCreateWithoutCreatedProjectsInput = {
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userRole: Prisma.UserRoleCreateNestedOneWithoutUsersInput
+  branch?: Prisma.BranchCreateNestedOneWithoutUsersInput
+  privileges?: Prisma.UserPrivilegeCreateNestedOneWithoutUserInput
+  creator?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutUpdaterInput
+  updatedProjects?: Prisma.ProjectCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutUpdaterInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutUpdaterInput
+  createdPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutUpdaterInput
+}
+
+export type UserUncheckedCreateWithoutCreatedProjectsInput = {
+  id?: number
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  userRoleId: number
+  branchId?: number | null
+  isActive?: boolean
+  createdBy?: number | null
+  updatedBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedCreateNestedOneWithoutUserInput
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  updatedProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutUpdaterInput
+}
+
+export type UserCreateOrConnectWithoutCreatedProjectsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedProjectsInput, Prisma.UserUncheckedCreateWithoutCreatedProjectsInput>
+}
+
+export type UserCreateWithoutUpdatedProjectsInput = {
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userRole: Prisma.UserRoleCreateNestedOneWithoutUsersInput
+  branch?: Prisma.BranchCreateNestedOneWithoutUsersInput
+  privileges?: Prisma.UserPrivilegeCreateNestedOneWithoutUserInput
+  creator?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectCreateNestedManyWithoutCreatorInput
+  createdTimesheets?: Prisma.TimesheetCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutUpdaterInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutUpdaterInput
+  createdPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutUpdaterInput
+}
+
+export type UserUncheckedCreateWithoutUpdatedProjectsInput = {
+  id?: number
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  userRoleId: number
+  branchId?: number | null
+  isActive?: boolean
+  createdBy?: number | null
+  updatedBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedCreateNestedOneWithoutUserInput
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutCreatorInput
+  createdTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutUpdaterInput
+}
+
+export type UserCreateOrConnectWithoutUpdatedProjectsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutUpdatedProjectsInput, Prisma.UserUncheckedCreateWithoutUpdatedProjectsInput>
+}
+
+export type UserUpsertWithoutCreatedProjectsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutCreatedProjectsInput, Prisma.UserUncheckedUpdateWithoutCreatedProjectsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedProjectsInput, Prisma.UserUncheckedCreateWithoutCreatedProjectsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutCreatedProjectsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutCreatedProjectsInput, Prisma.UserUncheckedUpdateWithoutCreatedProjectsInput>
+}
+
+export type UserUpdateWithoutCreatedProjectsInput = {
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userRole?: Prisma.UserRoleUpdateOneRequiredWithoutUsersNestedInput
+  branch?: Prisma.BranchUpdateOneWithoutUsersNestedInput
+  privileges?: Prisma.UserPrivilegeUpdateOneWithoutUserNestedInput
+  creator?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutUpdaterNestedInput
+  updatedProjects?: Prisma.ProjectUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutUpdaterNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUpdateManyWithoutUpdaterNestedInput
+}
+
+export type UserUncheckedUpdateWithoutCreatedProjectsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userRoleId?: Prisma.IntFieldUpdateOperationsInput | number
+  branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedUpdateOneWithoutUserNestedInput
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  updatedProjects?: Prisma.ProjectUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutUpdaterNestedInput
+}
+
+export type UserUpsertWithoutUpdatedProjectsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutUpdatedProjectsInput, Prisma.UserUncheckedUpdateWithoutUpdatedProjectsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutUpdatedProjectsInput, Prisma.UserUncheckedCreateWithoutUpdatedProjectsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutUpdatedProjectsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutUpdatedProjectsInput, Prisma.UserUncheckedUpdateWithoutUpdatedProjectsInput>
+}
+
+export type UserUpdateWithoutUpdatedProjectsInput = {
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userRole?: Prisma.UserRoleUpdateOneRequiredWithoutUsersNestedInput
+  branch?: Prisma.BranchUpdateOneWithoutUsersNestedInput
+  privileges?: Prisma.UserPrivilegeUpdateOneWithoutUserNestedInput
+  creator?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUpdateManyWithoutCreatorNestedInput
+  createdTimesheets?: Prisma.TimesheetUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutUpdaterNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUpdateManyWithoutUpdaterNestedInput
+}
+
+export type UserUncheckedUpdateWithoutUpdatedProjectsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userRoleId?: Prisma.IntFieldUpdateOperationsInput | number
+  branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedUpdateOneWithoutUserNestedInput
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUncheckedUpdateManyWithoutCreatorNestedInput
+  createdTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutUpdaterNestedInput
+}
+
+export type UserCreateWithoutCreatedTimesheetsInput = {
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userRole: Prisma.UserRoleCreateNestedOneWithoutUsersInput
+  branch?: Prisma.BranchCreateNestedOneWithoutUsersInput
+  privileges?: Prisma.UserPrivilegeCreateNestedOneWithoutUserInput
+  creator?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectCreateNestedManyWithoutUpdaterInput
+  updatedTimesheets?: Prisma.TimesheetCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutUpdaterInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutUpdaterInput
+  createdPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutUpdaterInput
+}
+
+export type UserUncheckedCreateWithoutCreatedTimesheetsInput = {
+  id?: number
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  userRoleId: number
+  branchId?: number | null
+  isActive?: boolean
+  createdBy?: number | null
+  updatedBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedCreateNestedOneWithoutUserInput
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUpdaterInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutUpdaterInput
+}
+
+export type UserCreateOrConnectWithoutCreatedTimesheetsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedTimesheetsInput, Prisma.UserUncheckedCreateWithoutCreatedTimesheetsInput>
+}
+
+export type UserCreateWithoutUpdatedTimesheetsInput = {
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userRole: Prisma.UserRoleCreateNestedOneWithoutUsersInput
+  branch?: Prisma.BranchCreateNestedOneWithoutUsersInput
+  privileges?: Prisma.UserPrivilegeCreateNestedOneWithoutUserInput
+  creator?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetCreateNestedManyWithoutCreatorInput
+  createdPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutUpdaterInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutUpdaterInput
+  createdPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutUpdaterInput
+}
+
+export type UserUncheckedCreateWithoutUpdatedTimesheetsInput = {
+  id?: number
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  userRoleId: number
+  branchId?: number | null
+  isActive?: boolean
+  createdBy?: number | null
+  updatedBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedCreateNestedOneWithoutUserInput
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutCreatorInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutUpdaterInput
+}
+
+export type UserCreateOrConnectWithoutUpdatedTimesheetsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutUpdatedTimesheetsInput, Prisma.UserUncheckedCreateWithoutUpdatedTimesheetsInput>
+}
+
+export type UserUpsertWithoutCreatedTimesheetsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutCreatedTimesheetsInput, Prisma.UserUncheckedUpdateWithoutCreatedTimesheetsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedTimesheetsInput, Prisma.UserUncheckedCreateWithoutCreatedTimesheetsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutCreatedTimesheetsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutCreatedTimesheetsInput, Prisma.UserUncheckedUpdateWithoutCreatedTimesheetsInput>
+}
+
+export type UserUpdateWithoutCreatedTimesheetsInput = {
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userRole?: Prisma.UserRoleUpdateOneRequiredWithoutUsersNestedInput
+  branch?: Prisma.BranchUpdateOneWithoutUsersNestedInput
+  privileges?: Prisma.UserPrivilegeUpdateOneWithoutUserNestedInput
+  creator?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUpdateManyWithoutUpdaterNestedInput
+  updatedTimesheets?: Prisma.TimesheetUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutUpdaterNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUpdateManyWithoutUpdaterNestedInput
+}
+
+export type UserUncheckedUpdateWithoutCreatedTimesheetsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userRoleId?: Prisma.IntFieldUpdateOperationsInput | number
+  branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedUpdateOneWithoutUserNestedInput
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUncheckedUpdateManyWithoutUpdaterNestedInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutUpdaterNestedInput
+}
+
+export type UserUpsertWithoutUpdatedTimesheetsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutUpdatedTimesheetsInput, Prisma.UserUncheckedUpdateWithoutUpdatedTimesheetsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutUpdatedTimesheetsInput, Prisma.UserUncheckedCreateWithoutUpdatedTimesheetsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutUpdatedTimesheetsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutUpdatedTimesheetsInput, Prisma.UserUncheckedUpdateWithoutUpdatedTimesheetsInput>
+}
+
+export type UserUpdateWithoutUpdatedTimesheetsInput = {
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userRole?: Prisma.UserRoleUpdateOneRequiredWithoutUsersNestedInput
+  branch?: Prisma.BranchUpdateOneWithoutUsersNestedInput
+  privileges?: Prisma.UserPrivilegeUpdateOneWithoutUserNestedInput
+  creator?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUpdateManyWithoutCreatorNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutUpdaterNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUpdateManyWithoutUpdaterNestedInput
+}
+
+export type UserUncheckedUpdateWithoutUpdatedTimesheetsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userRoleId?: Prisma.IntFieldUpdateOperationsInput | number
+  branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedUpdateOneWithoutUserNestedInput
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutCreatorNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutUpdaterNestedInput
+}
+
+export type UserCreateWithoutCreatedPayrollSectionsInput = {
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userRole: Prisma.UserRoleCreateNestedOneWithoutUsersInput
+  branch?: Prisma.BranchCreateNestedOneWithoutUsersInput
+  privileges?: Prisma.UserPrivilegeCreateNestedOneWithoutUserInput
+  creator?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetCreateNestedManyWithoutUpdaterInput
+  updatedPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutUpdaterInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutUpdaterInput
+  createdPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutUpdaterInput
+}
+
+export type UserUncheckedCreateWithoutCreatedPayrollSectionsInput = {
+  id?: number
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  userRoleId: number
+  branchId?: number | null
+  isActive?: boolean
+  createdBy?: number | null
+  updatedBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedCreateNestedOneWithoutUserInput
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutUpdaterInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutUpdaterInput
+}
+
+export type UserCreateOrConnectWithoutCreatedPayrollSectionsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedPayrollSectionsInput, Prisma.UserUncheckedCreateWithoutCreatedPayrollSectionsInput>
+}
+
+export type UserCreateWithoutUpdatedPayrollSectionsInput = {
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userRole: Prisma.UserRoleCreateNestedOneWithoutUsersInput
+  branch?: Prisma.BranchCreateNestedOneWithoutUsersInput
+  privileges?: Prisma.UserPrivilegeCreateNestedOneWithoutUserInput
+  creator?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutCreatorInput
+  createdPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutUpdaterInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutUpdaterInput
+  createdPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutUpdaterInput
+}
+
+export type UserUncheckedCreateWithoutUpdatedPayrollSectionsInput = {
+  id?: number
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  userRoleId: number
+  branchId?: number | null
+  isActive?: boolean
+  createdBy?: number | null
+  updatedBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedCreateNestedOneWithoutUserInput
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutCreatorInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutUpdaterInput
+}
+
+export type UserCreateOrConnectWithoutUpdatedPayrollSectionsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutUpdatedPayrollSectionsInput, Prisma.UserUncheckedCreateWithoutUpdatedPayrollSectionsInput>
+}
+
+export type UserUpsertWithoutCreatedPayrollSectionsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutCreatedPayrollSectionsInput, Prisma.UserUncheckedUpdateWithoutCreatedPayrollSectionsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedPayrollSectionsInput, Prisma.UserUncheckedCreateWithoutCreatedPayrollSectionsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutCreatedPayrollSectionsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutCreatedPayrollSectionsInput, Prisma.UserUncheckedUpdateWithoutCreatedPayrollSectionsInput>
+}
+
+export type UserUpdateWithoutCreatedPayrollSectionsInput = {
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userRole?: Prisma.UserRoleUpdateOneRequiredWithoutUsersNestedInput
+  branch?: Prisma.BranchUpdateOneWithoutUsersNestedInput
+  privileges?: Prisma.UserPrivilegeUpdateOneWithoutUserNestedInput
+  creator?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUpdateManyWithoutUpdaterNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutUpdaterNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUpdateManyWithoutUpdaterNestedInput
+}
+
+export type UserUncheckedUpdateWithoutCreatedPayrollSectionsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userRoleId?: Prisma.IntFieldUpdateOperationsInput | number
+  branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedUpdateOneWithoutUserNestedInput
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutUpdaterNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutUpdaterNestedInput
+}
+
+export type UserUpsertWithoutUpdatedPayrollSectionsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutUpdatedPayrollSectionsInput, Prisma.UserUncheckedUpdateWithoutUpdatedPayrollSectionsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutUpdatedPayrollSectionsInput, Prisma.UserUncheckedCreateWithoutUpdatedPayrollSectionsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutUpdatedPayrollSectionsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutUpdatedPayrollSectionsInput, Prisma.UserUncheckedUpdateWithoutUpdatedPayrollSectionsInput>
+}
+
+export type UserUpdateWithoutUpdatedPayrollSectionsInput = {
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userRole?: Prisma.UserRoleUpdateOneRequiredWithoutUsersNestedInput
+  branch?: Prisma.BranchUpdateOneWithoutUsersNestedInput
+  privileges?: Prisma.UserPrivilegeUpdateOneWithoutUserNestedInput
+  creator?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutCreatorNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutUpdaterNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUpdateManyWithoutUpdaterNestedInput
+}
+
+export type UserUncheckedUpdateWithoutUpdatedPayrollSectionsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userRoleId?: Prisma.IntFieldUpdateOperationsInput | number
+  branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedUpdateOneWithoutUserNestedInput
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutCreatorNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutUpdaterNestedInput
+}
+
+export type UserCreateWithoutCreatedPayrollStatusesInput = {
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userRole: Prisma.UserRoleCreateNestedOneWithoutUsersInput
+  branch?: Prisma.BranchCreateNestedOneWithoutUsersInput
+  privileges?: Prisma.UserPrivilegeCreateNestedOneWithoutUserInput
+  creator?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutUpdaterInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutUpdaterInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutUpdaterInput
+  createdPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutUpdaterInput
+}
+
+export type UserUncheckedCreateWithoutCreatedPayrollStatusesInput = {
+  id?: number
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  userRoleId: number
+  branchId?: number | null
+  isActive?: boolean
+  createdBy?: number | null
+  updatedBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedCreateNestedOneWithoutUserInput
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutUpdaterInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutUpdaterInput
+}
+
+export type UserCreateOrConnectWithoutCreatedPayrollStatusesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedPayrollStatusesInput, Prisma.UserUncheckedCreateWithoutCreatedPayrollStatusesInput>
+}
+
+export type UserCreateWithoutUpdatedPayrollStatusesInput = {
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userRole: Prisma.UserRoleCreateNestedOneWithoutUsersInput
+  branch?: Prisma.BranchCreateNestedOneWithoutUsersInput
+  privileges?: Prisma.UserPrivilegeCreateNestedOneWithoutUserInput
+  creator?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutCreatorInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutUpdaterInput
+  createdPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutUpdaterInput
+}
+
+export type UserUncheckedCreateWithoutUpdatedPayrollStatusesInput = {
+  id?: number
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  userRoleId: number
+  branchId?: number | null
+  isActive?: boolean
+  createdBy?: number | null
+  updatedBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedCreateNestedOneWithoutUserInput
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutCreatorInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutUpdaterInput
+}
+
+export type UserCreateOrConnectWithoutUpdatedPayrollStatusesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutUpdatedPayrollStatusesInput, Prisma.UserUncheckedCreateWithoutUpdatedPayrollStatusesInput>
+}
+
+export type UserUpsertWithoutCreatedPayrollStatusesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutCreatedPayrollStatusesInput, Prisma.UserUncheckedUpdateWithoutCreatedPayrollStatusesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedPayrollStatusesInput, Prisma.UserUncheckedCreateWithoutCreatedPayrollStatusesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutCreatedPayrollStatusesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutCreatedPayrollStatusesInput, Prisma.UserUncheckedUpdateWithoutCreatedPayrollStatusesInput>
+}
+
+export type UserUpdateWithoutCreatedPayrollStatusesInput = {
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userRole?: Prisma.UserRoleUpdateOneRequiredWithoutUsersNestedInput
+  branch?: Prisma.BranchUpdateOneWithoutUsersNestedInput
+  privileges?: Prisma.UserPrivilegeUpdateOneWithoutUserNestedInput
+  creator?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutUpdaterNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutUpdaterNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUpdateManyWithoutUpdaterNestedInput
+}
+
+export type UserUncheckedUpdateWithoutCreatedPayrollStatusesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userRoleId?: Prisma.IntFieldUpdateOperationsInput | number
+  branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedUpdateOneWithoutUserNestedInput
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutUpdaterNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutUpdaterNestedInput
+}
+
+export type UserUpsertWithoutUpdatedPayrollStatusesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutUpdatedPayrollStatusesInput, Prisma.UserUncheckedUpdateWithoutUpdatedPayrollStatusesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutUpdatedPayrollStatusesInput, Prisma.UserUncheckedCreateWithoutUpdatedPayrollStatusesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutUpdatedPayrollStatusesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutUpdatedPayrollStatusesInput, Prisma.UserUncheckedUpdateWithoutUpdatedPayrollStatusesInput>
+}
+
+export type UserUpdateWithoutUpdatedPayrollStatusesInput = {
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userRole?: Prisma.UserRoleUpdateOneRequiredWithoutUsersNestedInput
+  branch?: Prisma.BranchUpdateOneWithoutUsersNestedInput
+  privileges?: Prisma.UserPrivilegeUpdateOneWithoutUserNestedInput
+  creator?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutCreatorNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutUpdaterNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUpdateManyWithoutUpdaterNestedInput
+}
+
+export type UserUncheckedUpdateWithoutUpdatedPayrollStatusesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userRoleId?: Prisma.IntFieldUpdateOperationsInput | number
+  branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedUpdateOneWithoutUserNestedInput
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutUpdaterNestedInput
+}
+
 export type UserCreateWithoutCreatedPayrollSummariesInput = {
   nameEn: string
   nameAr?: string | null
@@ -1506,9 +9346,45 @@ export type UserCreateWithoutCreatedPayrollSummariesInput = {
   updater?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput
   createdUsers?: Prisma.UserCreateNestedManyWithoutCreatorInput
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdaterInput
-  modifiedPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutModifierInput
+  createdUserRoles?: Prisma.UserRoleCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutUpdaterInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutUpdaterInput
   createdPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutCreatorInput
-  modifiedPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutModifierInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutUpdaterInput
 }
 
 export type UserUncheckedCreateWithoutCreatedPayrollSummariesInput = {
@@ -1527,9 +9403,45 @@ export type UserUncheckedCreateWithoutCreatedPayrollSummariesInput = {
   privileges?: Prisma.UserPrivilegeUncheckedCreateNestedOneWithoutUserInput
   createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatorInput
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdaterInput
-  modifiedPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutModifierInput
+  createdUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutUpdaterInput
   createdPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutCreatorInput
-  modifiedPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutModifierInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutUpdaterInput
 }
 
 export type UserCreateOrConnectWithoutCreatedPayrollSummariesInput = {
@@ -1537,7 +9449,7 @@ export type UserCreateOrConnectWithoutCreatedPayrollSummariesInput = {
   create: Prisma.XOR<Prisma.UserCreateWithoutCreatedPayrollSummariesInput, Prisma.UserUncheckedCreateWithoutCreatedPayrollSummariesInput>
 }
 
-export type UserCreateWithoutModifiedPayrollSummariesInput = {
+export type UserCreateWithoutUpdatedPayrollSummariesInput = {
   nameEn: string
   nameAr?: string | null
   email: string
@@ -1552,12 +9464,48 @@ export type UserCreateWithoutModifiedPayrollSummariesInput = {
   updater?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput
   createdUsers?: Prisma.UserCreateNestedManyWithoutCreatorInput
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutUpdaterInput
   createdPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutCreatorInput
+  createdPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutUpdaterInput
   createdPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutCreatorInput
-  modifiedPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutModifierInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutUpdaterInput
 }
 
-export type UserUncheckedCreateWithoutModifiedPayrollSummariesInput = {
+export type UserUncheckedCreateWithoutUpdatedPayrollSummariesInput = {
   id?: number
   nameEn: string
   nameAr?: string | null
@@ -1573,14 +9521,50 @@ export type UserUncheckedCreateWithoutModifiedPayrollSummariesInput = {
   privileges?: Prisma.UserPrivilegeUncheckedCreateNestedOneWithoutUserInput
   createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatorInput
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutUpdaterInput
   createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutCreatorInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutUpdaterInput
   createdPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutCreatorInput
-  modifiedPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutModifierInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutUpdaterInput
 }
 
-export type UserCreateOrConnectWithoutModifiedPayrollSummariesInput = {
+export type UserCreateOrConnectWithoutUpdatedPayrollSummariesInput = {
   where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutModifiedPayrollSummariesInput, Prisma.UserUncheckedCreateWithoutModifiedPayrollSummariesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutUpdatedPayrollSummariesInput, Prisma.UserUncheckedCreateWithoutUpdatedPayrollSummariesInput>
 }
 
 export type UserUpsertWithoutCreatedPayrollSummariesInput = {
@@ -1609,9 +9593,45 @@ export type UserUpdateWithoutCreatedPayrollSummariesInput = {
   updater?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput
   createdUsers?: Prisma.UserUpdateManyWithoutCreatorNestedInput
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdaterNestedInput
-  modifiedPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutModifierNestedInput
+  createdUserRoles?: Prisma.UserRoleUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutUpdaterNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutUpdaterNestedInput
   createdPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutCreatorNestedInput
-  modifiedPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutModifierNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUpdateManyWithoutUpdaterNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCreatedPayrollSummariesInput = {
@@ -1630,23 +9650,59 @@ export type UserUncheckedUpdateWithoutCreatedPayrollSummariesInput = {
   privileges?: Prisma.UserPrivilegeUncheckedUpdateOneWithoutUserNestedInput
   createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatorNestedInput
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdaterNestedInput
-  modifiedPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutModifierNestedInput
+  createdUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutUpdaterNestedInput
   createdPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutCreatorNestedInput
-  modifiedPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutModifierNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutUpdaterNestedInput
 }
 
-export type UserUpsertWithoutModifiedPayrollSummariesInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutModifiedPayrollSummariesInput, Prisma.UserUncheckedUpdateWithoutModifiedPayrollSummariesInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutModifiedPayrollSummariesInput, Prisma.UserUncheckedCreateWithoutModifiedPayrollSummariesInput>
+export type UserUpsertWithoutUpdatedPayrollSummariesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutUpdatedPayrollSummariesInput, Prisma.UserUncheckedUpdateWithoutUpdatedPayrollSummariesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutUpdatedPayrollSummariesInput, Prisma.UserUncheckedCreateWithoutUpdatedPayrollSummariesInput>
   where?: Prisma.UserWhereInput
 }
 
-export type UserUpdateToOneWithWhereWithoutModifiedPayrollSummariesInput = {
+export type UserUpdateToOneWithWhereWithoutUpdatedPayrollSummariesInput = {
   where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutModifiedPayrollSummariesInput, Prisma.UserUncheckedUpdateWithoutModifiedPayrollSummariesInput>
+  data: Prisma.XOR<Prisma.UserUpdateWithoutUpdatedPayrollSummariesInput, Prisma.UserUncheckedUpdateWithoutUpdatedPayrollSummariesInput>
 }
 
-export type UserUpdateWithoutModifiedPayrollSummariesInput = {
+export type UserUpdateWithoutUpdatedPayrollSummariesInput = {
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1661,12 +9717,48 @@ export type UserUpdateWithoutModifiedPayrollSummariesInput = {
   updater?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput
   createdUsers?: Prisma.UserUpdateManyWithoutCreatorNestedInput
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutUpdaterNestedInput
   createdPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutCreatorNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutUpdaterNestedInput
   createdPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutCreatorNestedInput
-  modifiedPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutModifierNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUpdateManyWithoutUpdaterNestedInput
 }
 
-export type UserUncheckedUpdateWithoutModifiedPayrollSummariesInput = {
+export type UserUncheckedUpdateWithoutUpdatedPayrollSummariesInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1682,9 +9774,529 @@ export type UserUncheckedUpdateWithoutModifiedPayrollSummariesInput = {
   privileges?: Prisma.UserPrivilegeUncheckedUpdateOneWithoutUserNestedInput
   createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatorNestedInput
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutUpdaterNestedInput
   createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutCreatorNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutUpdaterNestedInput
   createdPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutCreatorNestedInput
-  modifiedPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutModifierNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutUpdaterNestedInput
+}
+
+export type UserCreateWithoutCreatedPaymentMethodsInput = {
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userRole: Prisma.UserRoleCreateNestedOneWithoutUsersInput
+  branch?: Prisma.BranchCreateNestedOneWithoutUsersInput
+  privileges?: Prisma.UserPrivilegeCreateNestedOneWithoutUserInput
+  creator?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutUpdaterInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutUpdaterInput
+  updatedPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutUpdaterInput
+  createdPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutUpdaterInput
+}
+
+export type UserUncheckedCreateWithoutCreatedPaymentMethodsInput = {
+  id?: number
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  userRoleId: number
+  branchId?: number | null
+  isActive?: boolean
+  createdBy?: number | null
+  updatedBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedCreateNestedOneWithoutUserInput
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutUpdaterInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutUpdaterInput
+}
+
+export type UserCreateOrConnectWithoutCreatedPaymentMethodsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedPaymentMethodsInput, Prisma.UserUncheckedCreateWithoutCreatedPaymentMethodsInput>
+}
+
+export type UserCreateWithoutUpdatedPaymentMethodsInput = {
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userRole: Prisma.UserRoleCreateNestedOneWithoutUsersInput
+  branch?: Prisma.BranchCreateNestedOneWithoutUsersInput
+  privileges?: Prisma.UserPrivilegeCreateNestedOneWithoutUserInput
+  creator?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutUpdaterInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutCreatorInput
+  createdPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutUpdaterInput
+}
+
+export type UserUncheckedCreateWithoutUpdatedPaymentMethodsInput = {
+  id?: number
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  userRoleId: number
+  branchId?: number | null
+  isActive?: boolean
+  createdBy?: number | null
+  updatedBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedCreateNestedOneWithoutUserInput
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutCreatorInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutUpdaterInput
+}
+
+export type UserCreateOrConnectWithoutUpdatedPaymentMethodsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutUpdatedPaymentMethodsInput, Prisma.UserUncheckedCreateWithoutUpdatedPaymentMethodsInput>
+}
+
+export type UserUpsertWithoutCreatedPaymentMethodsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutCreatedPaymentMethodsInput, Prisma.UserUncheckedUpdateWithoutCreatedPaymentMethodsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedPaymentMethodsInput, Prisma.UserUncheckedCreateWithoutCreatedPaymentMethodsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutCreatedPaymentMethodsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutCreatedPaymentMethodsInput, Prisma.UserUncheckedUpdateWithoutCreatedPaymentMethodsInput>
+}
+
+export type UserUpdateWithoutCreatedPaymentMethodsInput = {
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userRole?: Prisma.UserRoleUpdateOneRequiredWithoutUsersNestedInput
+  branch?: Prisma.BranchUpdateOneWithoutUsersNestedInput
+  privileges?: Prisma.UserPrivilegeUpdateOneWithoutUserNestedInput
+  creator?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutUpdaterNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutUpdaterNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUpdateManyWithoutUpdaterNestedInput
+}
+
+export type UserUncheckedUpdateWithoutCreatedPaymentMethodsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userRoleId?: Prisma.IntFieldUpdateOperationsInput | number
+  branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedUpdateOneWithoutUserNestedInput
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutUpdaterNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutUpdaterNestedInput
+}
+
+export type UserUpsertWithoutUpdatedPaymentMethodsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutUpdatedPaymentMethodsInput, Prisma.UserUncheckedUpdateWithoutUpdatedPaymentMethodsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutUpdatedPaymentMethodsInput, Prisma.UserUncheckedCreateWithoutUpdatedPaymentMethodsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutUpdatedPaymentMethodsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutUpdatedPaymentMethodsInput, Prisma.UserUncheckedUpdateWithoutUpdatedPaymentMethodsInput>
+}
+
+export type UserUpdateWithoutUpdatedPaymentMethodsInput = {
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userRole?: Prisma.UserRoleUpdateOneRequiredWithoutUsersNestedInput
+  branch?: Prisma.BranchUpdateOneWithoutUsersNestedInput
+  privileges?: Prisma.UserPrivilegeUpdateOneWithoutUserNestedInput
+  creator?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutCreatorNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUpdateManyWithoutUpdaterNestedInput
+}
+
+export type UserUncheckedUpdateWithoutUpdatedPaymentMethodsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userRoleId?: Prisma.IntFieldUpdateOperationsInput | number
+  branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedUpdateOneWithoutUserNestedInput
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutCreatorNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutUpdaterNestedInput
 }
 
 export type UserCreateWithoutCreatedPayrollDetailsInput = {
@@ -1702,9 +10314,45 @@ export type UserCreateWithoutCreatedPayrollDetailsInput = {
   updater?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput
   createdUsers?: Prisma.UserCreateNestedManyWithoutCreatorInput
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutUpdaterInput
   createdPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutCreatorInput
-  modifiedPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutModifierInput
-  modifiedPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutModifierInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutUpdaterInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutUpdaterInput
 }
 
 export type UserUncheckedCreateWithoutCreatedPayrollDetailsInput = {
@@ -1723,9 +10371,45 @@ export type UserUncheckedCreateWithoutCreatedPayrollDetailsInput = {
   privileges?: Prisma.UserPrivilegeUncheckedCreateNestedOneWithoutUserInput
   createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatorInput
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutUpdaterInput
   createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutCreatorInput
-  modifiedPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutModifierInput
-  modifiedPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutModifierInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutUpdaterInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutUpdaterInput
 }
 
 export type UserCreateOrConnectWithoutCreatedPayrollDetailsInput = {
@@ -1733,7 +10417,7 @@ export type UserCreateOrConnectWithoutCreatedPayrollDetailsInput = {
   create: Prisma.XOR<Prisma.UserCreateWithoutCreatedPayrollDetailsInput, Prisma.UserUncheckedCreateWithoutCreatedPayrollDetailsInput>
 }
 
-export type UserCreateWithoutModifiedPayrollDetailsInput = {
+export type UserCreateWithoutUpdatedPayrollDetailsInput = {
   nameEn: string
   nameAr?: string | null
   email: string
@@ -1748,12 +10432,48 @@ export type UserCreateWithoutModifiedPayrollDetailsInput = {
   updater?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput
   createdUsers?: Prisma.UserCreateNestedManyWithoutCreatorInput
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutUpdaterInput
   createdPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutCreatorInput
-  modifiedPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutModifierInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutUpdaterInput
   createdPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutCreatorInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutUpdaterInput
 }
 
-export type UserUncheckedCreateWithoutModifiedPayrollDetailsInput = {
+export type UserUncheckedCreateWithoutUpdatedPayrollDetailsInput = {
   id?: number
   nameEn: string
   nameAr?: string | null
@@ -1769,14 +10489,50 @@ export type UserUncheckedCreateWithoutModifiedPayrollDetailsInput = {
   privileges?: Prisma.UserPrivilegeUncheckedCreateNestedOneWithoutUserInput
   createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatorInput
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutUpdaterInput
   createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutCreatorInput
-  modifiedPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutModifierInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutUpdaterInput
   createdPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutCreatorInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutUpdaterInput
 }
 
-export type UserCreateOrConnectWithoutModifiedPayrollDetailsInput = {
+export type UserCreateOrConnectWithoutUpdatedPayrollDetailsInput = {
   where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutModifiedPayrollDetailsInput, Prisma.UserUncheckedCreateWithoutModifiedPayrollDetailsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutUpdatedPayrollDetailsInput, Prisma.UserUncheckedCreateWithoutUpdatedPayrollDetailsInput>
 }
 
 export type UserUpsertWithoutCreatedPayrollDetailsInput = {
@@ -1805,9 +10561,45 @@ export type UserUpdateWithoutCreatedPayrollDetailsInput = {
   updater?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput
   createdUsers?: Prisma.UserUpdateManyWithoutCreatorNestedInput
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutUpdaterNestedInput
   createdPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutCreatorNestedInput
-  modifiedPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutModifierNestedInput
-  modifiedPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutModifierNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutUpdaterNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUpdateManyWithoutUpdaterNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCreatedPayrollDetailsInput = {
@@ -1826,23 +10618,59 @@ export type UserUncheckedUpdateWithoutCreatedPayrollDetailsInput = {
   privileges?: Prisma.UserPrivilegeUncheckedUpdateOneWithoutUserNestedInput
   createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatorNestedInput
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutUpdaterNestedInput
   createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutCreatorNestedInput
-  modifiedPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutModifierNestedInput
-  modifiedPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutModifierNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutUpdaterNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutUpdaterNestedInput
 }
 
-export type UserUpsertWithoutModifiedPayrollDetailsInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutModifiedPayrollDetailsInput, Prisma.UserUncheckedUpdateWithoutModifiedPayrollDetailsInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutModifiedPayrollDetailsInput, Prisma.UserUncheckedCreateWithoutModifiedPayrollDetailsInput>
+export type UserUpsertWithoutUpdatedPayrollDetailsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutUpdatedPayrollDetailsInput, Prisma.UserUncheckedUpdateWithoutUpdatedPayrollDetailsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutUpdatedPayrollDetailsInput, Prisma.UserUncheckedCreateWithoutUpdatedPayrollDetailsInput>
   where?: Prisma.UserWhereInput
 }
 
-export type UserUpdateToOneWithWhereWithoutModifiedPayrollDetailsInput = {
+export type UserUpdateToOneWithWhereWithoutUpdatedPayrollDetailsInput = {
   where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutModifiedPayrollDetailsInput, Prisma.UserUncheckedUpdateWithoutModifiedPayrollDetailsInput>
+  data: Prisma.XOR<Prisma.UserUpdateWithoutUpdatedPayrollDetailsInput, Prisma.UserUncheckedUpdateWithoutUpdatedPayrollDetailsInput>
 }
 
-export type UserUpdateWithoutModifiedPayrollDetailsInput = {
+export type UserUpdateWithoutUpdatedPayrollDetailsInput = {
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1857,12 +10685,48 @@ export type UserUpdateWithoutModifiedPayrollDetailsInput = {
   updater?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput
   createdUsers?: Prisma.UserUpdateManyWithoutCreatorNestedInput
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutUpdaterNestedInput
   createdPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutCreatorNestedInput
-  modifiedPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutModifierNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutUpdaterNestedInput
   createdPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutCreatorNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUpdateManyWithoutUpdaterNestedInput
 }
 
-export type UserUncheckedUpdateWithoutModifiedPayrollDetailsInput = {
+export type UserUncheckedUpdateWithoutUpdatedPayrollDetailsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1878,9 +10742,1981 @@ export type UserUncheckedUpdateWithoutModifiedPayrollDetailsInput = {
   privileges?: Prisma.UserPrivilegeUncheckedUpdateOneWithoutUserNestedInput
   createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatorNestedInput
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutUpdaterNestedInput
   createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutCreatorNestedInput
-  modifiedPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutModifierNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutUpdaterNestedInput
   createdPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutCreatorNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutUpdaterNestedInput
+}
+
+export type UserCreateWithoutCreatedLoansInput = {
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userRole: Prisma.UserRoleCreateNestedOneWithoutUsersInput
+  branch?: Prisma.BranchCreateNestedOneWithoutUsersInput
+  privileges?: Prisma.UserPrivilegeCreateNestedOneWithoutUserInput
+  creator?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutUpdaterInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutUpdaterInput
+  createdPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutUpdaterInput
+  updatedLoans?: Prisma.LoanCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutUpdaterInput
+}
+
+export type UserUncheckedCreateWithoutCreatedLoansInput = {
+  id?: number
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  userRoleId: number
+  branchId?: number | null
+  isActive?: boolean
+  createdBy?: number | null
+  updatedBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedCreateNestedOneWithoutUserInput
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutUpdaterInput
+  updatedLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutUpdaterInput
+}
+
+export type UserCreateOrConnectWithoutCreatedLoansInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedLoansInput, Prisma.UserUncheckedCreateWithoutCreatedLoansInput>
+}
+
+export type UserCreateWithoutUpdatedLoansInput = {
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userRole: Prisma.UserRoleCreateNestedOneWithoutUsersInput
+  branch?: Prisma.BranchCreateNestedOneWithoutUsersInput
+  privileges?: Prisma.UserPrivilegeCreateNestedOneWithoutUserInput
+  creator?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutUpdaterInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutUpdaterInput
+  createdPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanCreateNestedManyWithoutCreatorInput
+  createdTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutUpdaterInput
+}
+
+export type UserUncheckedCreateWithoutUpdatedLoansInput = {
+  id?: number
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  userRoleId: number
+  branchId?: number | null
+  isActive?: boolean
+  createdBy?: number | null
+  updatedBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedCreateNestedOneWithoutUserInput
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutCreatorInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutUpdaterInput
+}
+
+export type UserCreateOrConnectWithoutUpdatedLoansInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutUpdatedLoansInput, Prisma.UserUncheckedCreateWithoutUpdatedLoansInput>
+}
+
+export type UserUpsertWithoutCreatedLoansInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutCreatedLoansInput, Prisma.UserUncheckedUpdateWithoutCreatedLoansInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedLoansInput, Prisma.UserUncheckedCreateWithoutCreatedLoansInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutCreatedLoansInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutCreatedLoansInput, Prisma.UserUncheckedUpdateWithoutCreatedLoansInput>
+}
+
+export type UserUpdateWithoutCreatedLoansInput = {
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userRole?: Prisma.UserRoleUpdateOneRequiredWithoutUsersNestedInput
+  branch?: Prisma.BranchUpdateOneWithoutUsersNestedInput
+  privileges?: Prisma.UserPrivilegeUpdateOneWithoutUserNestedInput
+  creator?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutUpdaterNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutUpdaterNestedInput
+  updatedLoans?: Prisma.LoanUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUpdateManyWithoutUpdaterNestedInput
+}
+
+export type UserUncheckedUpdateWithoutCreatedLoansInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userRoleId?: Prisma.IntFieldUpdateOperationsInput | number
+  branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedUpdateOneWithoutUserNestedInput
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutUpdaterNestedInput
+  updatedLoans?: Prisma.LoanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutUpdaterNestedInput
+}
+
+export type UserUpsertWithoutUpdatedLoansInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutUpdatedLoansInput, Prisma.UserUncheckedUpdateWithoutUpdatedLoansInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutUpdatedLoansInput, Prisma.UserUncheckedCreateWithoutUpdatedLoansInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutUpdatedLoansInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutUpdatedLoansInput, Prisma.UserUncheckedUpdateWithoutUpdatedLoansInput>
+}
+
+export type UserUpdateWithoutUpdatedLoansInput = {
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userRole?: Prisma.UserRoleUpdateOneRequiredWithoutUsersNestedInput
+  branch?: Prisma.BranchUpdateOneWithoutUsersNestedInput
+  privileges?: Prisma.UserPrivilegeUpdateOneWithoutUserNestedInput
+  creator?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutUpdaterNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUpdateManyWithoutCreatorNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUpdateManyWithoutUpdaterNestedInput
+}
+
+export type UserUncheckedUpdateWithoutUpdatedLoansInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userRoleId?: Prisma.IntFieldUpdateOperationsInput | number
+  branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedUpdateOneWithoutUserNestedInput
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUncheckedUpdateManyWithoutCreatorNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutUpdaterNestedInput
+}
+
+export type UserCreateWithoutCreatedTrafficChallansInput = {
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userRole: Prisma.UserRoleCreateNestedOneWithoutUsersInput
+  branch?: Prisma.BranchCreateNestedOneWithoutUsersInput
+  privileges?: Prisma.UserPrivilegeCreateNestedOneWithoutUserInput
+  creator?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutUpdaterInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutUpdaterInput
+  createdPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanCreateNestedManyWithoutUpdaterInput
+  updatedTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutUpdaterInput
+}
+
+export type UserUncheckedCreateWithoutCreatedTrafficChallansInput = {
+  id?: number
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  userRoleId: number
+  branchId?: number | null
+  isActive?: boolean
+  createdBy?: number | null
+  updatedBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedCreateNestedOneWithoutUserInput
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutUpdaterInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutUpdaterInput
+}
+
+export type UserCreateOrConnectWithoutCreatedTrafficChallansInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedTrafficChallansInput, Prisma.UserUncheckedCreateWithoutCreatedTrafficChallansInput>
+}
+
+export type UserCreateWithoutUpdatedTrafficChallansInput = {
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userRole: Prisma.UserRoleCreateNestedOneWithoutUsersInput
+  branch?: Prisma.BranchCreateNestedOneWithoutUsersInput
+  privileges?: Prisma.UserPrivilegeCreateNestedOneWithoutUserInput
+  creator?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutUpdaterInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutUpdaterInput
+  createdPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutCreatorInput
+  createdExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutUpdaterInput
+}
+
+export type UserUncheckedCreateWithoutUpdatedTrafficChallansInput = {
+  id?: number
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  userRoleId: number
+  branchId?: number | null
+  isActive?: boolean
+  createdBy?: number | null
+  updatedBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedCreateNestedOneWithoutUserInput
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutCreatorInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutUpdaterInput
+}
+
+export type UserCreateOrConnectWithoutUpdatedTrafficChallansInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutUpdatedTrafficChallansInput, Prisma.UserUncheckedCreateWithoutUpdatedTrafficChallansInput>
+}
+
+export type UserUpsertWithoutCreatedTrafficChallansInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutCreatedTrafficChallansInput, Prisma.UserUncheckedUpdateWithoutCreatedTrafficChallansInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedTrafficChallansInput, Prisma.UserUncheckedCreateWithoutCreatedTrafficChallansInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutCreatedTrafficChallansInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutCreatedTrafficChallansInput, Prisma.UserUncheckedUpdateWithoutCreatedTrafficChallansInput>
+}
+
+export type UserUpdateWithoutCreatedTrafficChallansInput = {
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userRole?: Prisma.UserRoleUpdateOneRequiredWithoutUsersNestedInput
+  branch?: Prisma.BranchUpdateOneWithoutUsersNestedInput
+  privileges?: Prisma.UserPrivilegeUpdateOneWithoutUserNestedInput
+  creator?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutUpdaterNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUpdateManyWithoutUpdaterNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUpdateManyWithoutUpdaterNestedInput
+}
+
+export type UserUncheckedUpdateWithoutCreatedTrafficChallansInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userRoleId?: Prisma.IntFieldUpdateOperationsInput | number
+  branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedUpdateOneWithoutUserNestedInput
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUncheckedUpdateManyWithoutUpdaterNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutUpdaterNestedInput
+}
+
+export type UserUpsertWithoutUpdatedTrafficChallansInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutUpdatedTrafficChallansInput, Prisma.UserUncheckedUpdateWithoutUpdatedTrafficChallansInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutUpdatedTrafficChallansInput, Prisma.UserUncheckedCreateWithoutUpdatedTrafficChallansInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutUpdatedTrafficChallansInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutUpdatedTrafficChallansInput, Prisma.UserUncheckedUpdateWithoutUpdatedTrafficChallansInput>
+}
+
+export type UserUpdateWithoutUpdatedTrafficChallansInput = {
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userRole?: Prisma.UserRoleUpdateOneRequiredWithoutUsersNestedInput
+  branch?: Prisma.BranchUpdateOneWithoutUsersNestedInput
+  privileges?: Prisma.UserPrivilegeUpdateOneWithoutUserNestedInput
+  creator?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutUpdaterNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutCreatorNestedInput
+  createdExitReentries?: Prisma.ExitReentryUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUpdateManyWithoutUpdaterNestedInput
+}
+
+export type UserUncheckedUpdateWithoutUpdatedTrafficChallansInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userRoleId?: Prisma.IntFieldUpdateOperationsInput | number
+  branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedUpdateOneWithoutUserNestedInput
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutCreatorNestedInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutUpdaterNestedInput
+}
+
+export type UserCreateWithoutCreatedExitReentriesInput = {
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userRole: Prisma.UserRoleCreateNestedOneWithoutUsersInput
+  branch?: Prisma.BranchCreateNestedOneWithoutUsersInput
+  privileges?: Prisma.UserPrivilegeCreateNestedOneWithoutUserInput
+  creator?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutUpdaterInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutUpdaterInput
+  createdPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutUpdaterInput
+  updatedExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutUpdaterInput
+}
+
+export type UserUncheckedCreateWithoutCreatedExitReentriesInput = {
+  id?: number
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  userRoleId: number
+  branchId?: number | null
+  isActive?: boolean
+  createdBy?: number | null
+  updatedBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedCreateNestedOneWithoutUserInput
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutUpdaterInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutUpdaterInput
+}
+
+export type UserCreateOrConnectWithoutCreatedExitReentriesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedExitReentriesInput, Prisma.UserUncheckedCreateWithoutCreatedExitReentriesInput>
+}
+
+export type UserCreateWithoutUpdatedExitReentriesInput = {
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userRole: Prisma.UserRoleCreateNestedOneWithoutUsersInput
+  branch?: Prisma.BranchCreateNestedOneWithoutUsersInput
+  privileges?: Prisma.UserPrivilegeCreateNestedOneWithoutUserInput
+  creator?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutUpdaterInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutUpdaterInput
+  createdPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutCreatorInput
+}
+
+export type UserUncheckedCreateWithoutUpdatedExitReentriesInput = {
+  id?: number
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  userRoleId: number
+  branchId?: number | null
+  isActive?: boolean
+  createdBy?: number | null
+  updatedBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedCreateNestedOneWithoutUserInput
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutCreatorInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutCreatorInput
+}
+
+export type UserCreateOrConnectWithoutUpdatedExitReentriesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutUpdatedExitReentriesInput, Prisma.UserUncheckedCreateWithoutUpdatedExitReentriesInput>
+}
+
+export type UserUpsertWithoutCreatedExitReentriesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutCreatedExitReentriesInput, Prisma.UserUncheckedUpdateWithoutCreatedExitReentriesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedExitReentriesInput, Prisma.UserUncheckedCreateWithoutCreatedExitReentriesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutCreatedExitReentriesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutCreatedExitReentriesInput, Prisma.UserUncheckedUpdateWithoutCreatedExitReentriesInput>
+}
+
+export type UserUpdateWithoutCreatedExitReentriesInput = {
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userRole?: Prisma.UserRoleUpdateOneRequiredWithoutUsersNestedInput
+  branch?: Prisma.BranchUpdateOneWithoutUsersNestedInput
+  privileges?: Prisma.UserPrivilegeUpdateOneWithoutUserNestedInput
+  creator?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutUpdaterNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutUpdaterNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUpdateManyWithoutUpdaterNestedInput
+}
+
+export type UserUncheckedUpdateWithoutCreatedExitReentriesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userRoleId?: Prisma.IntFieldUpdateOperationsInput | number
+  branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedUpdateOneWithoutUserNestedInput
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutUpdaterNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutUpdaterNestedInput
+}
+
+export type UserUpsertWithoutUpdatedExitReentriesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutUpdatedExitReentriesInput, Prisma.UserUncheckedUpdateWithoutUpdatedExitReentriesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutUpdatedExitReentriesInput, Prisma.UserUncheckedCreateWithoutUpdatedExitReentriesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutUpdatedExitReentriesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutUpdatedExitReentriesInput, Prisma.UserUncheckedUpdateWithoutUpdatedExitReentriesInput>
+}
+
+export type UserUpdateWithoutUpdatedExitReentriesInput = {
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userRole?: Prisma.UserRoleUpdateOneRequiredWithoutUsersNestedInput
+  branch?: Prisma.BranchUpdateOneWithoutUsersNestedInput
+  privileges?: Prisma.UserPrivilegeUpdateOneWithoutUserNestedInput
+  creator?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutUpdaterNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUpdateManyWithoutCreatorNestedInput
+}
+
+export type UserUncheckedUpdateWithoutUpdatedExitReentriesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userRoleId?: Prisma.IntFieldUpdateOperationsInput | number
+  branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedUpdateOneWithoutUserNestedInput
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutCreatorNestedInput
+}
+
+export type UserCreateWithoutCreatedAllowancesNotAvailableInput = {
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userRole: Prisma.UserRoleCreateNestedOneWithoutUsersInput
+  branch?: Prisma.BranchCreateNestedOneWithoutUsersInput
+  privileges?: Prisma.UserPrivilegeCreateNestedOneWithoutUserInput
+  creator?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutUpdaterInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutUpdaterInput
+  createdPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutUpdaterInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutUpdaterInput
+}
+
+export type UserUncheckedCreateWithoutCreatedAllowancesNotAvailableInput = {
+  id?: number
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  userRoleId: number
+  branchId?: number | null
+  isActive?: boolean
+  createdBy?: number | null
+  updatedBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedCreateNestedOneWithoutUserInput
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutUpdaterInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutUpdaterInput
+  createdLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutUpdaterInput
+}
+
+export type UserCreateOrConnectWithoutCreatedAllowancesNotAvailableInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedAllowancesNotAvailableInput, Prisma.UserUncheckedCreateWithoutCreatedAllowancesNotAvailableInput>
+}
+
+export type UserCreateWithoutUpdatedAllowancesNotAvailableInput = {
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userRole: Prisma.UserRoleCreateNestedOneWithoutUsersInput
+  branch?: Prisma.BranchCreateNestedOneWithoutUsersInput
+  privileges?: Prisma.UserPrivilegeCreateNestedOneWithoutUserInput
+  creator?: Prisma.UserCreateNestedOneWithoutCreatedUsersInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput
+  createdUsers?: Prisma.UserCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusCreateNestedManyWithoutUpdaterInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodCreateNestedManyWithoutUpdaterInput
+  createdPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedManyWithoutCreatorInput
+  createdLoans?: Prisma.LoanCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryCreateNestedManyWithoutUpdaterInput
+}
+
+export type UserUncheckedCreateWithoutUpdatedAllowancesNotAvailableInput = {
+  id?: number
+  nameEn: string
+  nameAr?: string | null
+  email: string
+  password?: string | null
+  userRoleId: number
+  branchId?: number | null
+  isActive?: boolean
+  createdBy?: number | null
+  updatedBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedCreateNestedOneWithoutUserInput
+  createdUsers?: Prisma.UserUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUpdaterInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutCreatorInput
+  updatedBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCities?: Prisma.CityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCities?: Prisma.CityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedCountries?: Prisma.CountryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutCreatorInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutUpdaterInput
+  createdDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutCreatorInput
+  updatedDesignations?: Prisma.DesignationUncheckedCreateNestedManyWithoutUpdaterInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutCreatorInput
+  updatedProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedCreateNestedManyWithoutUpdaterInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutCreatorInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutUpdaterInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedCreateNestedManyWithoutCreatorInput
+  createdLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedLoans?: Prisma.LoanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutCreatorInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutUpdaterInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutCreatorInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutUpdaterInput
+}
+
+export type UserCreateOrConnectWithoutUpdatedAllowancesNotAvailableInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutUpdatedAllowancesNotAvailableInput, Prisma.UserUncheckedCreateWithoutUpdatedAllowancesNotAvailableInput>
+}
+
+export type UserUpsertWithoutCreatedAllowancesNotAvailableInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutCreatedAllowancesNotAvailableInput, Prisma.UserUncheckedUpdateWithoutCreatedAllowancesNotAvailableInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedAllowancesNotAvailableInput, Prisma.UserUncheckedCreateWithoutCreatedAllowancesNotAvailableInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutCreatedAllowancesNotAvailableInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutCreatedAllowancesNotAvailableInput, Prisma.UserUncheckedUpdateWithoutCreatedAllowancesNotAvailableInput>
+}
+
+export type UserUpdateWithoutCreatedAllowancesNotAvailableInput = {
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userRole?: Prisma.UserRoleUpdateOneRequiredWithoutUsersNestedInput
+  branch?: Prisma.BranchUpdateOneWithoutUsersNestedInput
+  privileges?: Prisma.UserPrivilegeUpdateOneWithoutUserNestedInput
+  creator?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutUpdaterNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutUpdaterNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUpdateManyWithoutUpdaterNestedInput
+}
+
+export type UserUncheckedUpdateWithoutCreatedAllowancesNotAvailableInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userRoleId?: Prisma.IntFieldUpdateOperationsInput | number
+  branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedUpdateOneWithoutUserNestedInput
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutUpdaterNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutUpdaterNestedInput
+}
+
+export type UserUpsertWithoutUpdatedAllowancesNotAvailableInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutUpdatedAllowancesNotAvailableInput, Prisma.UserUncheckedUpdateWithoutUpdatedAllowancesNotAvailableInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutUpdatedAllowancesNotAvailableInput, Prisma.UserUncheckedCreateWithoutUpdatedAllowancesNotAvailableInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutUpdatedAllowancesNotAvailableInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutUpdatedAllowancesNotAvailableInput, Prisma.UserUncheckedUpdateWithoutUpdatedAllowancesNotAvailableInput>
+}
+
+export type UserUpdateWithoutUpdatedAllowancesNotAvailableInput = {
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userRole?: Prisma.UserRoleUpdateOneRequiredWithoutUsersNestedInput
+  branch?: Prisma.BranchUpdateOneWithoutUsersNestedInput
+  privileges?: Prisma.UserPrivilegeUpdateOneWithoutUserNestedInput
+  creator?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput
+  createdUsers?: Prisma.UserUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutUpdaterNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutCreatorNestedInput
+  createdLoans?: Prisma.LoanUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUpdateManyWithoutUpdaterNestedInput
+}
+
+export type UserUncheckedUpdateWithoutUpdatedAllowancesNotAvailableInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userRoleId?: Prisma.IntFieldUpdateOperationsInput | number
+  branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  privileges?: Prisma.UserPrivilegeUncheckedUpdateOneWithoutUserNestedInput
+  createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutCreatorNestedInput
+  createdLoans?: Prisma.LoanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutUpdaterNestedInput
 }
 
 export type UserCreateManyCreatorInput = {
@@ -1925,10 +12761,46 @@ export type UserUpdateWithoutCreatorInput = {
   updater?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput
   createdUsers?: Prisma.UserUpdateManyWithoutCreatorNestedInput
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutUpdaterNestedInput
   createdPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutCreatorNestedInput
-  modifiedPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutModifierNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutUpdaterNestedInput
   createdPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutCreatorNestedInput
-  modifiedPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutModifierNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUpdateManyWithoutUpdaterNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCreatorInput = {
@@ -1946,10 +12818,46 @@ export type UserUncheckedUpdateWithoutCreatorInput = {
   privileges?: Prisma.UserPrivilegeUncheckedUpdateOneWithoutUserNestedInput
   createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatorNestedInput
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutUpdaterNestedInput
   createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutCreatorNestedInput
-  modifiedPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutModifierNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutUpdaterNestedInput
   createdPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutCreatorNestedInput
-  modifiedPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutModifierNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutUpdaterNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutCreatorInput = {
@@ -1980,10 +12888,46 @@ export type UserUpdateWithoutUpdaterInput = {
   creator?: Prisma.UserUpdateOneWithoutCreatedUsersNestedInput
   createdUsers?: Prisma.UserUpdateManyWithoutCreatorNestedInput
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutUpdaterNestedInput
   createdPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutCreatorNestedInput
-  modifiedPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutModifierNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutUpdaterNestedInput
   createdPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutCreatorNestedInput
-  modifiedPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutModifierNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUpdateManyWithoutUpdaterNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUpdaterInput = {
@@ -2001,10 +12945,46 @@ export type UserUncheckedUpdateWithoutUpdaterInput = {
   privileges?: Prisma.UserPrivilegeUncheckedUpdateOneWithoutUserNestedInput
   createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatorNestedInput
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutUpdaterNestedInput
   createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutCreatorNestedInput
-  modifiedPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutModifierNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutUpdaterNestedInput
   createdPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutCreatorNestedInput
-  modifiedPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutModifierNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutUpdaterNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutUpdaterInput = {
@@ -2049,10 +13029,46 @@ export type UserUpdateWithoutUserRoleInput = {
   updater?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput
   createdUsers?: Prisma.UserUpdateManyWithoutCreatorNestedInput
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutUpdaterNestedInput
   createdPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutCreatorNestedInput
-  modifiedPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutModifierNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutUpdaterNestedInput
   createdPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutCreatorNestedInput
-  modifiedPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutModifierNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUpdateManyWithoutUpdaterNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUserRoleInput = {
@@ -2070,10 +13086,46 @@ export type UserUncheckedUpdateWithoutUserRoleInput = {
   privileges?: Prisma.UserPrivilegeUncheckedUpdateOneWithoutUserNestedInput
   createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatorNestedInput
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutUpdaterNestedInput
   createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutCreatorNestedInput
-  modifiedPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutModifierNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutUpdaterNestedInput
   createdPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutCreatorNestedInput
-  modifiedPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutModifierNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutUpdaterNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutUserRoleInput = {
@@ -2118,10 +13170,46 @@ export type UserUpdateWithoutBranchInput = {
   updater?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput
   createdUsers?: Prisma.UserUpdateManyWithoutCreatorNestedInput
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUpdateManyWithoutUpdaterNestedInput
   createdPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutCreatorNestedInput
-  modifiedPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutModifierNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUpdateManyWithoutUpdaterNestedInput
   createdPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutCreatorNestedInput
-  modifiedPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutModifierNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUpdateManyWithoutUpdaterNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBranchInput = {
@@ -2139,10 +13227,46 @@ export type UserUncheckedUpdateWithoutBranchInput = {
   privileges?: Prisma.UserPrivilegeUncheckedUpdateOneWithoutUserNestedInput
   createdUsers?: Prisma.UserUncheckedUpdateManyWithoutCreatorNestedInput
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedUserPrivileges?: Prisma.UserPrivilegeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdBranches?: Prisma.BranchUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedBranches?: Prisma.BranchUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCities?: Prisma.CityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCities?: Prisma.CityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdCountries?: Prisma.CountryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedCountries?: Prisma.CountryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedGosiCities?: Prisma.GosiCityUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedDesignations?: Prisma.DesignationUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedEmployeeStatuses?: Prisma.EmployeeStatusUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdProjects?: Prisma.ProjectUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedProjects?: Prisma.ProjectUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTimesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollSections?: Prisma.PayrollSectionUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPayrollStatuses?: Prisma.PayrollStatusUncheckedUpdateManyWithoutUpdaterNestedInput
   createdPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutCreatorNestedInput
-  modifiedPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutModifierNestedInput
+  updatedPayrollSummaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedPaymentMethods?: Prisma.PaymentMethodUncheckedUpdateManyWithoutUpdaterNestedInput
   createdPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutCreatorNestedInput
-  modifiedPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutModifierNestedInput
+  updatedPayrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedAllowancesNotAvailable?: Prisma.AllowanceNotAvailableUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdLoans?: Prisma.LoanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedLoans?: Prisma.LoanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedTrafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutUpdaterNestedInput
+  createdExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutCreatorNestedInput
+  updatedExitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutUpdaterNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutBranchInput = {
@@ -2167,19 +13291,91 @@ export type UserUncheckedUpdateManyWithoutBranchInput = {
 export type UserCountOutputType = {
   createdUsers: number
   updatedUsers: number
+  createdUserRoles: number
+  updatedUserRoles: number
+  createdUserPrivileges: number
+  updatedUserPrivileges: number
+  createdBranches: number
+  updatedBranches: number
+  createdCities: number
+  updatedCities: number
+  createdCountries: number
+  updatedCountries: number
+  createdGosiCities: number
+  updatedGosiCities: number
+  createdEmployees: number
+  updatedEmployees: number
+  createdDesignations: number
+  updatedDesignations: number
+  createdEmployeeStatuses: number
+  updatedEmployeeStatuses: number
+  createdProjects: number
+  updatedProjects: number
+  createdTimesheets: number
+  updatedTimesheets: number
+  createdPayrollSections: number
+  updatedPayrollSections: number
+  createdPayrollStatuses: number
+  updatedPayrollStatuses: number
   createdPayrollSummaries: number
-  modifiedPayrollSummaries: number
+  updatedPayrollSummaries: number
+  createdPaymentMethods: number
+  updatedPaymentMethods: number
   createdPayrollDetails: number
-  modifiedPayrollDetails: number
+  updatedPayrollDetails: number
+  createdAllowancesNotAvailable: number
+  updatedAllowancesNotAvailable: number
+  createdLoans: number
+  updatedLoans: number
+  createdTrafficChallans: number
+  updatedTrafficChallans: number
+  createdExitReentries: number
+  updatedExitReentries: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   createdUsers?: boolean | UserCountOutputTypeCountCreatedUsersArgs
   updatedUsers?: boolean | UserCountOutputTypeCountUpdatedUsersArgs
+  createdUserRoles?: boolean | UserCountOutputTypeCountCreatedUserRolesArgs
+  updatedUserRoles?: boolean | UserCountOutputTypeCountUpdatedUserRolesArgs
+  createdUserPrivileges?: boolean | UserCountOutputTypeCountCreatedUserPrivilegesArgs
+  updatedUserPrivileges?: boolean | UserCountOutputTypeCountUpdatedUserPrivilegesArgs
+  createdBranches?: boolean | UserCountOutputTypeCountCreatedBranchesArgs
+  updatedBranches?: boolean | UserCountOutputTypeCountUpdatedBranchesArgs
+  createdCities?: boolean | UserCountOutputTypeCountCreatedCitiesArgs
+  updatedCities?: boolean | UserCountOutputTypeCountUpdatedCitiesArgs
+  createdCountries?: boolean | UserCountOutputTypeCountCreatedCountriesArgs
+  updatedCountries?: boolean | UserCountOutputTypeCountUpdatedCountriesArgs
+  createdGosiCities?: boolean | UserCountOutputTypeCountCreatedGosiCitiesArgs
+  updatedGosiCities?: boolean | UserCountOutputTypeCountUpdatedGosiCitiesArgs
+  createdEmployees?: boolean | UserCountOutputTypeCountCreatedEmployeesArgs
+  updatedEmployees?: boolean | UserCountOutputTypeCountUpdatedEmployeesArgs
+  createdDesignations?: boolean | UserCountOutputTypeCountCreatedDesignationsArgs
+  updatedDesignations?: boolean | UserCountOutputTypeCountUpdatedDesignationsArgs
+  createdEmployeeStatuses?: boolean | UserCountOutputTypeCountCreatedEmployeeStatusesArgs
+  updatedEmployeeStatuses?: boolean | UserCountOutputTypeCountUpdatedEmployeeStatusesArgs
+  createdProjects?: boolean | UserCountOutputTypeCountCreatedProjectsArgs
+  updatedProjects?: boolean | UserCountOutputTypeCountUpdatedProjectsArgs
+  createdTimesheets?: boolean | UserCountOutputTypeCountCreatedTimesheetsArgs
+  updatedTimesheets?: boolean | UserCountOutputTypeCountUpdatedTimesheetsArgs
+  createdPayrollSections?: boolean | UserCountOutputTypeCountCreatedPayrollSectionsArgs
+  updatedPayrollSections?: boolean | UserCountOutputTypeCountUpdatedPayrollSectionsArgs
+  createdPayrollStatuses?: boolean | UserCountOutputTypeCountCreatedPayrollStatusesArgs
+  updatedPayrollStatuses?: boolean | UserCountOutputTypeCountUpdatedPayrollStatusesArgs
   createdPayrollSummaries?: boolean | UserCountOutputTypeCountCreatedPayrollSummariesArgs
-  modifiedPayrollSummaries?: boolean | UserCountOutputTypeCountModifiedPayrollSummariesArgs
+  updatedPayrollSummaries?: boolean | UserCountOutputTypeCountUpdatedPayrollSummariesArgs
+  createdPaymentMethods?: boolean | UserCountOutputTypeCountCreatedPaymentMethodsArgs
+  updatedPaymentMethods?: boolean | UserCountOutputTypeCountUpdatedPaymentMethodsArgs
   createdPayrollDetails?: boolean | UserCountOutputTypeCountCreatedPayrollDetailsArgs
-  modifiedPayrollDetails?: boolean | UserCountOutputTypeCountModifiedPayrollDetailsArgs
+  updatedPayrollDetails?: boolean | UserCountOutputTypeCountUpdatedPayrollDetailsArgs
+  createdAllowancesNotAvailable?: boolean | UserCountOutputTypeCountCreatedAllowancesNotAvailableArgs
+  updatedAllowancesNotAvailable?: boolean | UserCountOutputTypeCountUpdatedAllowancesNotAvailableArgs
+  createdLoans?: boolean | UserCountOutputTypeCountCreatedLoansArgs
+  updatedLoans?: boolean | UserCountOutputTypeCountUpdatedLoansArgs
+  createdTrafficChallans?: boolean | UserCountOutputTypeCountCreatedTrafficChallansArgs
+  updatedTrafficChallans?: boolean | UserCountOutputTypeCountUpdatedTrafficChallansArgs
+  createdExitReentries?: boolean | UserCountOutputTypeCountCreatedExitReentriesArgs
+  updatedExitReentries?: boolean | UserCountOutputTypeCountUpdatedExitReentriesArgs
 }
 
 /**
@@ -2209,6 +13405,188 @@ export type UserCountOutputTypeCountUpdatedUsersArgs<ExtArgs extends runtime.Typ
 /**
  * UserCountOutputType without action
  */
+export type UserCountOutputTypeCountCreatedUserRolesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UserRoleWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountUpdatedUserRolesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UserRoleWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCreatedUserPrivilegesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UserPrivilegeWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountUpdatedUserPrivilegesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UserPrivilegeWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCreatedBranchesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BranchWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountUpdatedBranchesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BranchWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCreatedCitiesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CityWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountUpdatedCitiesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CityWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCreatedCountriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CountryWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountUpdatedCountriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CountryWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCreatedGosiCitiesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.GosiCityWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountUpdatedGosiCitiesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.GosiCityWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCreatedEmployeesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.EmployeeWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountUpdatedEmployeesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.EmployeeWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCreatedDesignationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DesignationWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountUpdatedDesignationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DesignationWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCreatedEmployeeStatusesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.EmployeeStatusWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountUpdatedEmployeeStatusesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.EmployeeStatusWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCreatedProjectsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ProjectWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountUpdatedProjectsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ProjectWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCreatedTimesheetsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TimesheetWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountUpdatedTimesheetsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TimesheetWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCreatedPayrollSectionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PayrollSectionWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountUpdatedPayrollSectionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PayrollSectionWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCreatedPayrollStatusesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PayrollStatusWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountUpdatedPayrollStatusesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PayrollStatusWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
 export type UserCountOutputTypeCountCreatedPayrollSummariesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.PayrollSummaryWhereInput
 }
@@ -2216,8 +13594,22 @@ export type UserCountOutputTypeCountCreatedPayrollSummariesArgs<ExtArgs extends 
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountModifiedPayrollSummariesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type UserCountOutputTypeCountUpdatedPayrollSummariesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.PayrollSummaryWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCreatedPaymentMethodsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PaymentMethodWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountUpdatedPaymentMethodsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PaymentMethodWhereInput
 }
 
 /**
@@ -2230,8 +13622,64 @@ export type UserCountOutputTypeCountCreatedPayrollDetailsArgs<ExtArgs extends ru
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountModifiedPayrollDetailsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type UserCountOutputTypeCountUpdatedPayrollDetailsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.PayrollDetailsWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCreatedAllowancesNotAvailableArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AllowanceNotAvailableWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountUpdatedAllowancesNotAvailableArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AllowanceNotAvailableWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCreatedLoansArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LoanWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountUpdatedLoansArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LoanWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCreatedTrafficChallansArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TrafficChallanWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountUpdatedTrafficChallansArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TrafficChallanWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCreatedExitReentriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ExitReentryWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountUpdatedExitReentriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ExitReentryWhereInput
 }
 
 
@@ -2255,10 +13703,46 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   updater?: boolean | Prisma.User$updaterArgs<ExtArgs>
   createdUsers?: boolean | Prisma.User$createdUsersArgs<ExtArgs>
   updatedUsers?: boolean | Prisma.User$updatedUsersArgs<ExtArgs>
+  createdUserRoles?: boolean | Prisma.User$createdUserRolesArgs<ExtArgs>
+  updatedUserRoles?: boolean | Prisma.User$updatedUserRolesArgs<ExtArgs>
+  createdUserPrivileges?: boolean | Prisma.User$createdUserPrivilegesArgs<ExtArgs>
+  updatedUserPrivileges?: boolean | Prisma.User$updatedUserPrivilegesArgs<ExtArgs>
+  createdBranches?: boolean | Prisma.User$createdBranchesArgs<ExtArgs>
+  updatedBranches?: boolean | Prisma.User$updatedBranchesArgs<ExtArgs>
+  createdCities?: boolean | Prisma.User$createdCitiesArgs<ExtArgs>
+  updatedCities?: boolean | Prisma.User$updatedCitiesArgs<ExtArgs>
+  createdCountries?: boolean | Prisma.User$createdCountriesArgs<ExtArgs>
+  updatedCountries?: boolean | Prisma.User$updatedCountriesArgs<ExtArgs>
+  createdGosiCities?: boolean | Prisma.User$createdGosiCitiesArgs<ExtArgs>
+  updatedGosiCities?: boolean | Prisma.User$updatedGosiCitiesArgs<ExtArgs>
+  createdEmployees?: boolean | Prisma.User$createdEmployeesArgs<ExtArgs>
+  updatedEmployees?: boolean | Prisma.User$updatedEmployeesArgs<ExtArgs>
+  createdDesignations?: boolean | Prisma.User$createdDesignationsArgs<ExtArgs>
+  updatedDesignations?: boolean | Prisma.User$updatedDesignationsArgs<ExtArgs>
+  createdEmployeeStatuses?: boolean | Prisma.User$createdEmployeeStatusesArgs<ExtArgs>
+  updatedEmployeeStatuses?: boolean | Prisma.User$updatedEmployeeStatusesArgs<ExtArgs>
+  createdProjects?: boolean | Prisma.User$createdProjectsArgs<ExtArgs>
+  updatedProjects?: boolean | Prisma.User$updatedProjectsArgs<ExtArgs>
+  createdTimesheets?: boolean | Prisma.User$createdTimesheetsArgs<ExtArgs>
+  updatedTimesheets?: boolean | Prisma.User$updatedTimesheetsArgs<ExtArgs>
+  createdPayrollSections?: boolean | Prisma.User$createdPayrollSectionsArgs<ExtArgs>
+  updatedPayrollSections?: boolean | Prisma.User$updatedPayrollSectionsArgs<ExtArgs>
+  createdPayrollStatuses?: boolean | Prisma.User$createdPayrollStatusesArgs<ExtArgs>
+  updatedPayrollStatuses?: boolean | Prisma.User$updatedPayrollStatusesArgs<ExtArgs>
   createdPayrollSummaries?: boolean | Prisma.User$createdPayrollSummariesArgs<ExtArgs>
-  modifiedPayrollSummaries?: boolean | Prisma.User$modifiedPayrollSummariesArgs<ExtArgs>
+  updatedPayrollSummaries?: boolean | Prisma.User$updatedPayrollSummariesArgs<ExtArgs>
+  createdPaymentMethods?: boolean | Prisma.User$createdPaymentMethodsArgs<ExtArgs>
+  updatedPaymentMethods?: boolean | Prisma.User$updatedPaymentMethodsArgs<ExtArgs>
   createdPayrollDetails?: boolean | Prisma.User$createdPayrollDetailsArgs<ExtArgs>
-  modifiedPayrollDetails?: boolean | Prisma.User$modifiedPayrollDetailsArgs<ExtArgs>
+  updatedPayrollDetails?: boolean | Prisma.User$updatedPayrollDetailsArgs<ExtArgs>
+  createdAllowancesNotAvailable?: boolean | Prisma.User$createdAllowancesNotAvailableArgs<ExtArgs>
+  updatedAllowancesNotAvailable?: boolean | Prisma.User$updatedAllowancesNotAvailableArgs<ExtArgs>
+  createdLoans?: boolean | Prisma.User$createdLoansArgs<ExtArgs>
+  updatedLoans?: boolean | Prisma.User$updatedLoansArgs<ExtArgs>
+  createdTrafficChallans?: boolean | Prisma.User$createdTrafficChallansArgs<ExtArgs>
+  updatedTrafficChallans?: boolean | Prisma.User$updatedTrafficChallansArgs<ExtArgs>
+  createdExitReentries?: boolean | Prisma.User$createdExitReentriesArgs<ExtArgs>
+  updatedExitReentries?: boolean | Prisma.User$updatedExitReentriesArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -2324,10 +13808,46 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   updater?: boolean | Prisma.User$updaterArgs<ExtArgs>
   createdUsers?: boolean | Prisma.User$createdUsersArgs<ExtArgs>
   updatedUsers?: boolean | Prisma.User$updatedUsersArgs<ExtArgs>
+  createdUserRoles?: boolean | Prisma.User$createdUserRolesArgs<ExtArgs>
+  updatedUserRoles?: boolean | Prisma.User$updatedUserRolesArgs<ExtArgs>
+  createdUserPrivileges?: boolean | Prisma.User$createdUserPrivilegesArgs<ExtArgs>
+  updatedUserPrivileges?: boolean | Prisma.User$updatedUserPrivilegesArgs<ExtArgs>
+  createdBranches?: boolean | Prisma.User$createdBranchesArgs<ExtArgs>
+  updatedBranches?: boolean | Prisma.User$updatedBranchesArgs<ExtArgs>
+  createdCities?: boolean | Prisma.User$createdCitiesArgs<ExtArgs>
+  updatedCities?: boolean | Prisma.User$updatedCitiesArgs<ExtArgs>
+  createdCountries?: boolean | Prisma.User$createdCountriesArgs<ExtArgs>
+  updatedCountries?: boolean | Prisma.User$updatedCountriesArgs<ExtArgs>
+  createdGosiCities?: boolean | Prisma.User$createdGosiCitiesArgs<ExtArgs>
+  updatedGosiCities?: boolean | Prisma.User$updatedGosiCitiesArgs<ExtArgs>
+  createdEmployees?: boolean | Prisma.User$createdEmployeesArgs<ExtArgs>
+  updatedEmployees?: boolean | Prisma.User$updatedEmployeesArgs<ExtArgs>
+  createdDesignations?: boolean | Prisma.User$createdDesignationsArgs<ExtArgs>
+  updatedDesignations?: boolean | Prisma.User$updatedDesignationsArgs<ExtArgs>
+  createdEmployeeStatuses?: boolean | Prisma.User$createdEmployeeStatusesArgs<ExtArgs>
+  updatedEmployeeStatuses?: boolean | Prisma.User$updatedEmployeeStatusesArgs<ExtArgs>
+  createdProjects?: boolean | Prisma.User$createdProjectsArgs<ExtArgs>
+  updatedProjects?: boolean | Prisma.User$updatedProjectsArgs<ExtArgs>
+  createdTimesheets?: boolean | Prisma.User$createdTimesheetsArgs<ExtArgs>
+  updatedTimesheets?: boolean | Prisma.User$updatedTimesheetsArgs<ExtArgs>
+  createdPayrollSections?: boolean | Prisma.User$createdPayrollSectionsArgs<ExtArgs>
+  updatedPayrollSections?: boolean | Prisma.User$updatedPayrollSectionsArgs<ExtArgs>
+  createdPayrollStatuses?: boolean | Prisma.User$createdPayrollStatusesArgs<ExtArgs>
+  updatedPayrollStatuses?: boolean | Prisma.User$updatedPayrollStatusesArgs<ExtArgs>
   createdPayrollSummaries?: boolean | Prisma.User$createdPayrollSummariesArgs<ExtArgs>
-  modifiedPayrollSummaries?: boolean | Prisma.User$modifiedPayrollSummariesArgs<ExtArgs>
+  updatedPayrollSummaries?: boolean | Prisma.User$updatedPayrollSummariesArgs<ExtArgs>
+  createdPaymentMethods?: boolean | Prisma.User$createdPaymentMethodsArgs<ExtArgs>
+  updatedPaymentMethods?: boolean | Prisma.User$updatedPaymentMethodsArgs<ExtArgs>
   createdPayrollDetails?: boolean | Prisma.User$createdPayrollDetailsArgs<ExtArgs>
-  modifiedPayrollDetails?: boolean | Prisma.User$modifiedPayrollDetailsArgs<ExtArgs>
+  updatedPayrollDetails?: boolean | Prisma.User$updatedPayrollDetailsArgs<ExtArgs>
+  createdAllowancesNotAvailable?: boolean | Prisma.User$createdAllowancesNotAvailableArgs<ExtArgs>
+  updatedAllowancesNotAvailable?: boolean | Prisma.User$updatedAllowancesNotAvailableArgs<ExtArgs>
+  createdLoans?: boolean | Prisma.User$createdLoansArgs<ExtArgs>
+  updatedLoans?: boolean | Prisma.User$updatedLoansArgs<ExtArgs>
+  createdTrafficChallans?: boolean | Prisma.User$createdTrafficChallansArgs<ExtArgs>
+  updatedTrafficChallans?: boolean | Prisma.User$updatedTrafficChallansArgs<ExtArgs>
+  createdExitReentries?: boolean | Prisma.User$createdExitReentriesArgs<ExtArgs>
+  updatedExitReentries?: boolean | Prisma.User$updatedExitReentriesArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2353,10 +13873,46 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     updater: Prisma.$UserPayload<ExtArgs> | null
     createdUsers: Prisma.$UserPayload<ExtArgs>[]
     updatedUsers: Prisma.$UserPayload<ExtArgs>[]
+    createdUserRoles: Prisma.$UserRolePayload<ExtArgs>[]
+    updatedUserRoles: Prisma.$UserRolePayload<ExtArgs>[]
+    createdUserPrivileges: Prisma.$UserPrivilegePayload<ExtArgs>[]
+    updatedUserPrivileges: Prisma.$UserPrivilegePayload<ExtArgs>[]
+    createdBranches: Prisma.$BranchPayload<ExtArgs>[]
+    updatedBranches: Prisma.$BranchPayload<ExtArgs>[]
+    createdCities: Prisma.$CityPayload<ExtArgs>[]
+    updatedCities: Prisma.$CityPayload<ExtArgs>[]
+    createdCountries: Prisma.$CountryPayload<ExtArgs>[]
+    updatedCountries: Prisma.$CountryPayload<ExtArgs>[]
+    createdGosiCities: Prisma.$GosiCityPayload<ExtArgs>[]
+    updatedGosiCities: Prisma.$GosiCityPayload<ExtArgs>[]
+    createdEmployees: Prisma.$EmployeePayload<ExtArgs>[]
+    updatedEmployees: Prisma.$EmployeePayload<ExtArgs>[]
+    createdDesignations: Prisma.$DesignationPayload<ExtArgs>[]
+    updatedDesignations: Prisma.$DesignationPayload<ExtArgs>[]
+    createdEmployeeStatuses: Prisma.$EmployeeStatusPayload<ExtArgs>[]
+    updatedEmployeeStatuses: Prisma.$EmployeeStatusPayload<ExtArgs>[]
+    createdProjects: Prisma.$ProjectPayload<ExtArgs>[]
+    updatedProjects: Prisma.$ProjectPayload<ExtArgs>[]
+    createdTimesheets: Prisma.$TimesheetPayload<ExtArgs>[]
+    updatedTimesheets: Prisma.$TimesheetPayload<ExtArgs>[]
+    createdPayrollSections: Prisma.$PayrollSectionPayload<ExtArgs>[]
+    updatedPayrollSections: Prisma.$PayrollSectionPayload<ExtArgs>[]
+    createdPayrollStatuses: Prisma.$PayrollStatusPayload<ExtArgs>[]
+    updatedPayrollStatuses: Prisma.$PayrollStatusPayload<ExtArgs>[]
     createdPayrollSummaries: Prisma.$PayrollSummaryPayload<ExtArgs>[]
-    modifiedPayrollSummaries: Prisma.$PayrollSummaryPayload<ExtArgs>[]
+    updatedPayrollSummaries: Prisma.$PayrollSummaryPayload<ExtArgs>[]
+    createdPaymentMethods: Prisma.$PaymentMethodPayload<ExtArgs>[]
+    updatedPaymentMethods: Prisma.$PaymentMethodPayload<ExtArgs>[]
     createdPayrollDetails: Prisma.$PayrollDetailsPayload<ExtArgs>[]
-    modifiedPayrollDetails: Prisma.$PayrollDetailsPayload<ExtArgs>[]
+    updatedPayrollDetails: Prisma.$PayrollDetailsPayload<ExtArgs>[]
+    createdAllowancesNotAvailable: Prisma.$AllowanceNotAvailablePayload<ExtArgs>[]
+    updatedAllowancesNotAvailable: Prisma.$AllowanceNotAvailablePayload<ExtArgs>[]
+    createdLoans: Prisma.$LoanPayload<ExtArgs>[]
+    updatedLoans: Prisma.$LoanPayload<ExtArgs>[]
+    createdTrafficChallans: Prisma.$TrafficChallanPayload<ExtArgs>[]
+    updatedTrafficChallans: Prisma.$TrafficChallanPayload<ExtArgs>[]
+    createdExitReentries: Prisma.$ExitReentryPayload<ExtArgs>[]
+    updatedExitReentries: Prisma.$ExitReentryPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -2772,10 +14328,46 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   updater<T extends Prisma.User$updaterArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$updaterArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   createdUsers<T extends Prisma.User$createdUsersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$createdUsersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   updatedUsers<T extends Prisma.User$updatedUsersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$updatedUsersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  createdUserRoles<T extends Prisma.User$createdUserRolesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$createdUserRolesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserRolePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  updatedUserRoles<T extends Prisma.User$updatedUserRolesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$updatedUserRolesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserRolePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  createdUserPrivileges<T extends Prisma.User$createdUserPrivilegesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$createdUserPrivilegesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPrivilegePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  updatedUserPrivileges<T extends Prisma.User$updatedUserPrivilegesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$updatedUserPrivilegesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPrivilegePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  createdBranches<T extends Prisma.User$createdBranchesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$createdBranchesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BranchPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  updatedBranches<T extends Prisma.User$updatedBranchesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$updatedBranchesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BranchPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  createdCities<T extends Prisma.User$createdCitiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$createdCitiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  updatedCities<T extends Prisma.User$updatedCitiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$updatedCitiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  createdCountries<T extends Prisma.User$createdCountriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$createdCountriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CountryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  updatedCountries<T extends Prisma.User$updatedCountriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$updatedCountriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CountryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  createdGosiCities<T extends Prisma.User$createdGosiCitiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$createdGosiCitiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GosiCityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  updatedGosiCities<T extends Prisma.User$updatedGosiCitiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$updatedGosiCitiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GosiCityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  createdEmployees<T extends Prisma.User$createdEmployeesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$createdEmployeesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  updatedEmployees<T extends Prisma.User$updatedEmployeesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$updatedEmployeesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  createdDesignations<T extends Prisma.User$createdDesignationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$createdDesignationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DesignationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  updatedDesignations<T extends Prisma.User$updatedDesignationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$updatedDesignationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DesignationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  createdEmployeeStatuses<T extends Prisma.User$createdEmployeeStatusesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$createdEmployeeStatusesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EmployeeStatusPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  updatedEmployeeStatuses<T extends Prisma.User$updatedEmployeeStatusesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$updatedEmployeeStatusesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EmployeeStatusPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  createdProjects<T extends Prisma.User$createdProjectsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$createdProjectsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  updatedProjects<T extends Prisma.User$updatedProjectsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$updatedProjectsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  createdTimesheets<T extends Prisma.User$createdTimesheetsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$createdTimesheetsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TimesheetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  updatedTimesheets<T extends Prisma.User$updatedTimesheetsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$updatedTimesheetsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TimesheetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  createdPayrollSections<T extends Prisma.User$createdPayrollSectionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$createdPayrollSectionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PayrollSectionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  updatedPayrollSections<T extends Prisma.User$updatedPayrollSectionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$updatedPayrollSectionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PayrollSectionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  createdPayrollStatuses<T extends Prisma.User$createdPayrollStatusesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$createdPayrollStatusesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PayrollStatusPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  updatedPayrollStatuses<T extends Prisma.User$updatedPayrollStatusesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$updatedPayrollStatusesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PayrollStatusPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   createdPayrollSummaries<T extends Prisma.User$createdPayrollSummariesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$createdPayrollSummariesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PayrollSummaryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  modifiedPayrollSummaries<T extends Prisma.User$modifiedPayrollSummariesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$modifiedPayrollSummariesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PayrollSummaryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  updatedPayrollSummaries<T extends Prisma.User$updatedPayrollSummariesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$updatedPayrollSummariesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PayrollSummaryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  createdPaymentMethods<T extends Prisma.User$createdPaymentMethodsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$createdPaymentMethodsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PaymentMethodPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  updatedPaymentMethods<T extends Prisma.User$updatedPaymentMethodsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$updatedPaymentMethodsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PaymentMethodPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   createdPayrollDetails<T extends Prisma.User$createdPayrollDetailsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$createdPayrollDetailsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PayrollDetailsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  modifiedPayrollDetails<T extends Prisma.User$modifiedPayrollDetailsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$modifiedPayrollDetailsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PayrollDetailsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  updatedPayrollDetails<T extends Prisma.User$updatedPayrollDetailsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$updatedPayrollDetailsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PayrollDetailsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  createdAllowancesNotAvailable<T extends Prisma.User$createdAllowancesNotAvailableArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$createdAllowancesNotAvailableArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AllowanceNotAvailablePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  updatedAllowancesNotAvailable<T extends Prisma.User$updatedAllowancesNotAvailableArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$updatedAllowancesNotAvailableArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AllowanceNotAvailablePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  createdLoans<T extends Prisma.User$createdLoansArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$createdLoansArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LoanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  updatedLoans<T extends Prisma.User$updatedLoansArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$updatedLoansArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LoanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  createdTrafficChallans<T extends Prisma.User$createdTrafficChallansArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$createdTrafficChallansArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TrafficChallanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  updatedTrafficChallans<T extends Prisma.User$updatedTrafficChallansArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$updatedTrafficChallansArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TrafficChallanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  createdExitReentries<T extends Prisma.User$createdExitReentriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$createdExitReentriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ExitReentryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  updatedExitReentries<T extends Prisma.User$updatedExitReentriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$updatedExitReentriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ExitReentryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3337,6 +14929,630 @@ export type User$updatedUsersArgs<ExtArgs extends runtime.Types.Extensions.Inter
 }
 
 /**
+ * User.createdUserRoles
+ */
+export type User$createdUserRolesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UserRole
+   */
+  select?: Prisma.UserRoleSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UserRole
+   */
+  omit?: Prisma.UserRoleOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserRoleInclude<ExtArgs> | null
+  where?: Prisma.UserRoleWhereInput
+  orderBy?: Prisma.UserRoleOrderByWithRelationInput | Prisma.UserRoleOrderByWithRelationInput[]
+  cursor?: Prisma.UserRoleWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.UserRoleScalarFieldEnum | Prisma.UserRoleScalarFieldEnum[]
+}
+
+/**
+ * User.updatedUserRoles
+ */
+export type User$updatedUserRolesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UserRole
+   */
+  select?: Prisma.UserRoleSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UserRole
+   */
+  omit?: Prisma.UserRoleOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserRoleInclude<ExtArgs> | null
+  where?: Prisma.UserRoleWhereInput
+  orderBy?: Prisma.UserRoleOrderByWithRelationInput | Prisma.UserRoleOrderByWithRelationInput[]
+  cursor?: Prisma.UserRoleWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.UserRoleScalarFieldEnum | Prisma.UserRoleScalarFieldEnum[]
+}
+
+/**
+ * User.createdUserPrivileges
+ */
+export type User$createdUserPrivilegesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UserPrivilege
+   */
+  select?: Prisma.UserPrivilegeSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UserPrivilege
+   */
+  omit?: Prisma.UserPrivilegeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserPrivilegeInclude<ExtArgs> | null
+  where?: Prisma.UserPrivilegeWhereInput
+  orderBy?: Prisma.UserPrivilegeOrderByWithRelationInput | Prisma.UserPrivilegeOrderByWithRelationInput[]
+  cursor?: Prisma.UserPrivilegeWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.UserPrivilegeScalarFieldEnum | Prisma.UserPrivilegeScalarFieldEnum[]
+}
+
+/**
+ * User.updatedUserPrivileges
+ */
+export type User$updatedUserPrivilegesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UserPrivilege
+   */
+  select?: Prisma.UserPrivilegeSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UserPrivilege
+   */
+  omit?: Prisma.UserPrivilegeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserPrivilegeInclude<ExtArgs> | null
+  where?: Prisma.UserPrivilegeWhereInput
+  orderBy?: Prisma.UserPrivilegeOrderByWithRelationInput | Prisma.UserPrivilegeOrderByWithRelationInput[]
+  cursor?: Prisma.UserPrivilegeWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.UserPrivilegeScalarFieldEnum | Prisma.UserPrivilegeScalarFieldEnum[]
+}
+
+/**
+ * User.createdBranches
+ */
+export type User$createdBranchesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Branch
+   */
+  select?: Prisma.BranchSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Branch
+   */
+  omit?: Prisma.BranchOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BranchInclude<ExtArgs> | null
+  where?: Prisma.BranchWhereInput
+  orderBy?: Prisma.BranchOrderByWithRelationInput | Prisma.BranchOrderByWithRelationInput[]
+  cursor?: Prisma.BranchWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BranchScalarFieldEnum | Prisma.BranchScalarFieldEnum[]
+}
+
+/**
+ * User.updatedBranches
+ */
+export type User$updatedBranchesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Branch
+   */
+  select?: Prisma.BranchSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Branch
+   */
+  omit?: Prisma.BranchOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BranchInclude<ExtArgs> | null
+  where?: Prisma.BranchWhereInput
+  orderBy?: Prisma.BranchOrderByWithRelationInput | Prisma.BranchOrderByWithRelationInput[]
+  cursor?: Prisma.BranchWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BranchScalarFieldEnum | Prisma.BranchScalarFieldEnum[]
+}
+
+/**
+ * User.createdCities
+ */
+export type User$createdCitiesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the City
+   */
+  select?: Prisma.CitySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the City
+   */
+  omit?: Prisma.CityOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CityInclude<ExtArgs> | null
+  where?: Prisma.CityWhereInput
+  orderBy?: Prisma.CityOrderByWithRelationInput | Prisma.CityOrderByWithRelationInput[]
+  cursor?: Prisma.CityWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CityScalarFieldEnum | Prisma.CityScalarFieldEnum[]
+}
+
+/**
+ * User.updatedCities
+ */
+export type User$updatedCitiesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the City
+   */
+  select?: Prisma.CitySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the City
+   */
+  omit?: Prisma.CityOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CityInclude<ExtArgs> | null
+  where?: Prisma.CityWhereInput
+  orderBy?: Prisma.CityOrderByWithRelationInput | Prisma.CityOrderByWithRelationInput[]
+  cursor?: Prisma.CityWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CityScalarFieldEnum | Prisma.CityScalarFieldEnum[]
+}
+
+/**
+ * User.createdCountries
+ */
+export type User$createdCountriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Country
+   */
+  select?: Prisma.CountrySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Country
+   */
+  omit?: Prisma.CountryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CountryInclude<ExtArgs> | null
+  where?: Prisma.CountryWhereInput
+  orderBy?: Prisma.CountryOrderByWithRelationInput | Prisma.CountryOrderByWithRelationInput[]
+  cursor?: Prisma.CountryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CountryScalarFieldEnum | Prisma.CountryScalarFieldEnum[]
+}
+
+/**
+ * User.updatedCountries
+ */
+export type User$updatedCountriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Country
+   */
+  select?: Prisma.CountrySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Country
+   */
+  omit?: Prisma.CountryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CountryInclude<ExtArgs> | null
+  where?: Prisma.CountryWhereInput
+  orderBy?: Prisma.CountryOrderByWithRelationInput | Prisma.CountryOrderByWithRelationInput[]
+  cursor?: Prisma.CountryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CountryScalarFieldEnum | Prisma.CountryScalarFieldEnum[]
+}
+
+/**
+ * User.createdGosiCities
+ */
+export type User$createdGosiCitiesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the GosiCity
+   */
+  select?: Prisma.GosiCitySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the GosiCity
+   */
+  omit?: Prisma.GosiCityOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.GosiCityInclude<ExtArgs> | null
+  where?: Prisma.GosiCityWhereInput
+  orderBy?: Prisma.GosiCityOrderByWithRelationInput | Prisma.GosiCityOrderByWithRelationInput[]
+  cursor?: Prisma.GosiCityWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.GosiCityScalarFieldEnum | Prisma.GosiCityScalarFieldEnum[]
+}
+
+/**
+ * User.updatedGosiCities
+ */
+export type User$updatedGosiCitiesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the GosiCity
+   */
+  select?: Prisma.GosiCitySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the GosiCity
+   */
+  omit?: Prisma.GosiCityOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.GosiCityInclude<ExtArgs> | null
+  where?: Prisma.GosiCityWhereInput
+  orderBy?: Prisma.GosiCityOrderByWithRelationInput | Prisma.GosiCityOrderByWithRelationInput[]
+  cursor?: Prisma.GosiCityWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.GosiCityScalarFieldEnum | Prisma.GosiCityScalarFieldEnum[]
+}
+
+/**
+ * User.createdEmployees
+ */
+export type User$createdEmployeesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Employee
+   */
+  select?: Prisma.EmployeeSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Employee
+   */
+  omit?: Prisma.EmployeeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EmployeeInclude<ExtArgs> | null
+  where?: Prisma.EmployeeWhereInput
+  orderBy?: Prisma.EmployeeOrderByWithRelationInput | Prisma.EmployeeOrderByWithRelationInput[]
+  cursor?: Prisma.EmployeeWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.EmployeeScalarFieldEnum | Prisma.EmployeeScalarFieldEnum[]
+}
+
+/**
+ * User.updatedEmployees
+ */
+export type User$updatedEmployeesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Employee
+   */
+  select?: Prisma.EmployeeSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Employee
+   */
+  omit?: Prisma.EmployeeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EmployeeInclude<ExtArgs> | null
+  where?: Prisma.EmployeeWhereInput
+  orderBy?: Prisma.EmployeeOrderByWithRelationInput | Prisma.EmployeeOrderByWithRelationInput[]
+  cursor?: Prisma.EmployeeWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.EmployeeScalarFieldEnum | Prisma.EmployeeScalarFieldEnum[]
+}
+
+/**
+ * User.createdDesignations
+ */
+export type User$createdDesignationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Designation
+   */
+  select?: Prisma.DesignationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Designation
+   */
+  omit?: Prisma.DesignationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DesignationInclude<ExtArgs> | null
+  where?: Prisma.DesignationWhereInput
+  orderBy?: Prisma.DesignationOrderByWithRelationInput | Prisma.DesignationOrderByWithRelationInput[]
+  cursor?: Prisma.DesignationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DesignationScalarFieldEnum | Prisma.DesignationScalarFieldEnum[]
+}
+
+/**
+ * User.updatedDesignations
+ */
+export type User$updatedDesignationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Designation
+   */
+  select?: Prisma.DesignationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Designation
+   */
+  omit?: Prisma.DesignationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DesignationInclude<ExtArgs> | null
+  where?: Prisma.DesignationWhereInput
+  orderBy?: Prisma.DesignationOrderByWithRelationInput | Prisma.DesignationOrderByWithRelationInput[]
+  cursor?: Prisma.DesignationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DesignationScalarFieldEnum | Prisma.DesignationScalarFieldEnum[]
+}
+
+/**
+ * User.createdEmployeeStatuses
+ */
+export type User$createdEmployeeStatusesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the EmployeeStatus
+   */
+  select?: Prisma.EmployeeStatusSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the EmployeeStatus
+   */
+  omit?: Prisma.EmployeeStatusOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EmployeeStatusInclude<ExtArgs> | null
+  where?: Prisma.EmployeeStatusWhereInput
+  orderBy?: Prisma.EmployeeStatusOrderByWithRelationInput | Prisma.EmployeeStatusOrderByWithRelationInput[]
+  cursor?: Prisma.EmployeeStatusWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.EmployeeStatusScalarFieldEnum | Prisma.EmployeeStatusScalarFieldEnum[]
+}
+
+/**
+ * User.updatedEmployeeStatuses
+ */
+export type User$updatedEmployeeStatusesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the EmployeeStatus
+   */
+  select?: Prisma.EmployeeStatusSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the EmployeeStatus
+   */
+  omit?: Prisma.EmployeeStatusOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EmployeeStatusInclude<ExtArgs> | null
+  where?: Prisma.EmployeeStatusWhereInput
+  orderBy?: Prisma.EmployeeStatusOrderByWithRelationInput | Prisma.EmployeeStatusOrderByWithRelationInput[]
+  cursor?: Prisma.EmployeeStatusWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.EmployeeStatusScalarFieldEnum | Prisma.EmployeeStatusScalarFieldEnum[]
+}
+
+/**
+ * User.createdProjects
+ */
+export type User$createdProjectsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Project
+   */
+  select?: Prisma.ProjectSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Project
+   */
+  omit?: Prisma.ProjectOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProjectInclude<ExtArgs> | null
+  where?: Prisma.ProjectWhereInput
+  orderBy?: Prisma.ProjectOrderByWithRelationInput | Prisma.ProjectOrderByWithRelationInput[]
+  cursor?: Prisma.ProjectWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ProjectScalarFieldEnum | Prisma.ProjectScalarFieldEnum[]
+}
+
+/**
+ * User.updatedProjects
+ */
+export type User$updatedProjectsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Project
+   */
+  select?: Prisma.ProjectSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Project
+   */
+  omit?: Prisma.ProjectOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProjectInclude<ExtArgs> | null
+  where?: Prisma.ProjectWhereInput
+  orderBy?: Prisma.ProjectOrderByWithRelationInput | Prisma.ProjectOrderByWithRelationInput[]
+  cursor?: Prisma.ProjectWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ProjectScalarFieldEnum | Prisma.ProjectScalarFieldEnum[]
+}
+
+/**
+ * User.createdTimesheets
+ */
+export type User$createdTimesheetsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Timesheet
+   */
+  select?: Prisma.TimesheetSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Timesheet
+   */
+  omit?: Prisma.TimesheetOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TimesheetInclude<ExtArgs> | null
+  where?: Prisma.TimesheetWhereInput
+  orderBy?: Prisma.TimesheetOrderByWithRelationInput | Prisma.TimesheetOrderByWithRelationInput[]
+  cursor?: Prisma.TimesheetWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TimesheetScalarFieldEnum | Prisma.TimesheetScalarFieldEnum[]
+}
+
+/**
+ * User.updatedTimesheets
+ */
+export type User$updatedTimesheetsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Timesheet
+   */
+  select?: Prisma.TimesheetSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Timesheet
+   */
+  omit?: Prisma.TimesheetOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TimesheetInclude<ExtArgs> | null
+  where?: Prisma.TimesheetWhereInput
+  orderBy?: Prisma.TimesheetOrderByWithRelationInput | Prisma.TimesheetOrderByWithRelationInput[]
+  cursor?: Prisma.TimesheetWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TimesheetScalarFieldEnum | Prisma.TimesheetScalarFieldEnum[]
+}
+
+/**
+ * User.createdPayrollSections
+ */
+export type User$createdPayrollSectionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PayrollSection
+   */
+  select?: Prisma.PayrollSectionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PayrollSection
+   */
+  omit?: Prisma.PayrollSectionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PayrollSectionInclude<ExtArgs> | null
+  where?: Prisma.PayrollSectionWhereInput
+  orderBy?: Prisma.PayrollSectionOrderByWithRelationInput | Prisma.PayrollSectionOrderByWithRelationInput[]
+  cursor?: Prisma.PayrollSectionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PayrollSectionScalarFieldEnum | Prisma.PayrollSectionScalarFieldEnum[]
+}
+
+/**
+ * User.updatedPayrollSections
+ */
+export type User$updatedPayrollSectionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PayrollSection
+   */
+  select?: Prisma.PayrollSectionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PayrollSection
+   */
+  omit?: Prisma.PayrollSectionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PayrollSectionInclude<ExtArgs> | null
+  where?: Prisma.PayrollSectionWhereInput
+  orderBy?: Prisma.PayrollSectionOrderByWithRelationInput | Prisma.PayrollSectionOrderByWithRelationInput[]
+  cursor?: Prisma.PayrollSectionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PayrollSectionScalarFieldEnum | Prisma.PayrollSectionScalarFieldEnum[]
+}
+
+/**
+ * User.createdPayrollStatuses
+ */
+export type User$createdPayrollStatusesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PayrollStatus
+   */
+  select?: Prisma.PayrollStatusSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PayrollStatus
+   */
+  omit?: Prisma.PayrollStatusOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PayrollStatusInclude<ExtArgs> | null
+  where?: Prisma.PayrollStatusWhereInput
+  orderBy?: Prisma.PayrollStatusOrderByWithRelationInput | Prisma.PayrollStatusOrderByWithRelationInput[]
+  cursor?: Prisma.PayrollStatusWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PayrollStatusScalarFieldEnum | Prisma.PayrollStatusScalarFieldEnum[]
+}
+
+/**
+ * User.updatedPayrollStatuses
+ */
+export type User$updatedPayrollStatusesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PayrollStatus
+   */
+  select?: Prisma.PayrollStatusSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PayrollStatus
+   */
+  omit?: Prisma.PayrollStatusOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PayrollStatusInclude<ExtArgs> | null
+  where?: Prisma.PayrollStatusWhereInput
+  orderBy?: Prisma.PayrollStatusOrderByWithRelationInput | Prisma.PayrollStatusOrderByWithRelationInput[]
+  cursor?: Prisma.PayrollStatusWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PayrollStatusScalarFieldEnum | Prisma.PayrollStatusScalarFieldEnum[]
+}
+
+/**
  * User.createdPayrollSummaries
  */
 export type User$createdPayrollSummariesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3361,9 +15577,9 @@ export type User$createdPayrollSummariesArgs<ExtArgs extends runtime.Types.Exten
 }
 
 /**
- * User.modifiedPayrollSummaries
+ * User.updatedPayrollSummaries
  */
-export type User$modifiedPayrollSummariesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type User$updatedPayrollSummariesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the PayrollSummary
    */
@@ -3382,6 +15598,54 @@ export type User$modifiedPayrollSummariesArgs<ExtArgs extends runtime.Types.Exte
   take?: number
   skip?: number
   distinct?: Prisma.PayrollSummaryScalarFieldEnum | Prisma.PayrollSummaryScalarFieldEnum[]
+}
+
+/**
+ * User.createdPaymentMethods
+ */
+export type User$createdPaymentMethodsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PaymentMethod
+   */
+  select?: Prisma.PaymentMethodSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PaymentMethod
+   */
+  omit?: Prisma.PaymentMethodOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PaymentMethodInclude<ExtArgs> | null
+  where?: Prisma.PaymentMethodWhereInput
+  orderBy?: Prisma.PaymentMethodOrderByWithRelationInput | Prisma.PaymentMethodOrderByWithRelationInput[]
+  cursor?: Prisma.PaymentMethodWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PaymentMethodScalarFieldEnum | Prisma.PaymentMethodScalarFieldEnum[]
+}
+
+/**
+ * User.updatedPaymentMethods
+ */
+export type User$updatedPaymentMethodsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PaymentMethod
+   */
+  select?: Prisma.PaymentMethodSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PaymentMethod
+   */
+  omit?: Prisma.PaymentMethodOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PaymentMethodInclude<ExtArgs> | null
+  where?: Prisma.PaymentMethodWhereInput
+  orderBy?: Prisma.PaymentMethodOrderByWithRelationInput | Prisma.PaymentMethodOrderByWithRelationInput[]
+  cursor?: Prisma.PaymentMethodWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PaymentMethodScalarFieldEnum | Prisma.PaymentMethodScalarFieldEnum[]
 }
 
 /**
@@ -3409,9 +15673,9 @@ export type User$createdPayrollDetailsArgs<ExtArgs extends runtime.Types.Extensi
 }
 
 /**
- * User.modifiedPayrollDetails
+ * User.updatedPayrollDetails
  */
-export type User$modifiedPayrollDetailsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type User$updatedPayrollDetailsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the PayrollDetails
    */
@@ -3430,6 +15694,198 @@ export type User$modifiedPayrollDetailsArgs<ExtArgs extends runtime.Types.Extens
   take?: number
   skip?: number
   distinct?: Prisma.PayrollDetailsScalarFieldEnum | Prisma.PayrollDetailsScalarFieldEnum[]
+}
+
+/**
+ * User.createdAllowancesNotAvailable
+ */
+export type User$createdAllowancesNotAvailableArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AllowanceNotAvailable
+   */
+  select?: Prisma.AllowanceNotAvailableSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AllowanceNotAvailable
+   */
+  omit?: Prisma.AllowanceNotAvailableOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AllowanceNotAvailableInclude<ExtArgs> | null
+  where?: Prisma.AllowanceNotAvailableWhereInput
+  orderBy?: Prisma.AllowanceNotAvailableOrderByWithRelationInput | Prisma.AllowanceNotAvailableOrderByWithRelationInput[]
+  cursor?: Prisma.AllowanceNotAvailableWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AllowanceNotAvailableScalarFieldEnum | Prisma.AllowanceNotAvailableScalarFieldEnum[]
+}
+
+/**
+ * User.updatedAllowancesNotAvailable
+ */
+export type User$updatedAllowancesNotAvailableArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AllowanceNotAvailable
+   */
+  select?: Prisma.AllowanceNotAvailableSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AllowanceNotAvailable
+   */
+  omit?: Prisma.AllowanceNotAvailableOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AllowanceNotAvailableInclude<ExtArgs> | null
+  where?: Prisma.AllowanceNotAvailableWhereInput
+  orderBy?: Prisma.AllowanceNotAvailableOrderByWithRelationInput | Prisma.AllowanceNotAvailableOrderByWithRelationInput[]
+  cursor?: Prisma.AllowanceNotAvailableWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AllowanceNotAvailableScalarFieldEnum | Prisma.AllowanceNotAvailableScalarFieldEnum[]
+}
+
+/**
+ * User.createdLoans
+ */
+export type User$createdLoansArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Loan
+   */
+  select?: Prisma.LoanSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Loan
+   */
+  omit?: Prisma.LoanOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LoanInclude<ExtArgs> | null
+  where?: Prisma.LoanWhereInput
+  orderBy?: Prisma.LoanOrderByWithRelationInput | Prisma.LoanOrderByWithRelationInput[]
+  cursor?: Prisma.LoanWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.LoanScalarFieldEnum | Prisma.LoanScalarFieldEnum[]
+}
+
+/**
+ * User.updatedLoans
+ */
+export type User$updatedLoansArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Loan
+   */
+  select?: Prisma.LoanSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Loan
+   */
+  omit?: Prisma.LoanOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LoanInclude<ExtArgs> | null
+  where?: Prisma.LoanWhereInput
+  orderBy?: Prisma.LoanOrderByWithRelationInput | Prisma.LoanOrderByWithRelationInput[]
+  cursor?: Prisma.LoanWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.LoanScalarFieldEnum | Prisma.LoanScalarFieldEnum[]
+}
+
+/**
+ * User.createdTrafficChallans
+ */
+export type User$createdTrafficChallansArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TrafficChallan
+   */
+  select?: Prisma.TrafficChallanSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the TrafficChallan
+   */
+  omit?: Prisma.TrafficChallanOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TrafficChallanInclude<ExtArgs> | null
+  where?: Prisma.TrafficChallanWhereInput
+  orderBy?: Prisma.TrafficChallanOrderByWithRelationInput | Prisma.TrafficChallanOrderByWithRelationInput[]
+  cursor?: Prisma.TrafficChallanWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TrafficChallanScalarFieldEnum | Prisma.TrafficChallanScalarFieldEnum[]
+}
+
+/**
+ * User.updatedTrafficChallans
+ */
+export type User$updatedTrafficChallansArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TrafficChallan
+   */
+  select?: Prisma.TrafficChallanSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the TrafficChallan
+   */
+  omit?: Prisma.TrafficChallanOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TrafficChallanInclude<ExtArgs> | null
+  where?: Prisma.TrafficChallanWhereInput
+  orderBy?: Prisma.TrafficChallanOrderByWithRelationInput | Prisma.TrafficChallanOrderByWithRelationInput[]
+  cursor?: Prisma.TrafficChallanWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TrafficChallanScalarFieldEnum | Prisma.TrafficChallanScalarFieldEnum[]
+}
+
+/**
+ * User.createdExitReentries
+ */
+export type User$createdExitReentriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ExitReentry
+   */
+  select?: Prisma.ExitReentrySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ExitReentry
+   */
+  omit?: Prisma.ExitReentryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ExitReentryInclude<ExtArgs> | null
+  where?: Prisma.ExitReentryWhereInput
+  orderBy?: Prisma.ExitReentryOrderByWithRelationInput | Prisma.ExitReentryOrderByWithRelationInput[]
+  cursor?: Prisma.ExitReentryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ExitReentryScalarFieldEnum | Prisma.ExitReentryScalarFieldEnum[]
+}
+
+/**
+ * User.updatedExitReentries
+ */
+export type User$updatedExitReentriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ExitReentry
+   */
+  select?: Prisma.ExitReentrySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ExitReentry
+   */
+  omit?: Prisma.ExitReentryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ExitReentryInclude<ExtArgs> | null
+  where?: Prisma.ExitReentryWhereInput
+  orderBy?: Prisma.ExitReentryOrderByWithRelationInput | Prisma.ExitReentryOrderByWithRelationInput[]
+  cursor?: Prisma.ExitReentryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ExitReentryScalarFieldEnum | Prisma.ExitReentryScalarFieldEnum[]
 }
 
 /**

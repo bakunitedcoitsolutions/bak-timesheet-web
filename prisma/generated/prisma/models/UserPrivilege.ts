@@ -29,16 +29,22 @@ export type AggregateUserPrivilege = {
 export type UserPrivilegeAvgAggregateOutputType = {
   id: number | null
   userId: number | null
+  createdBy: number | null
+  updatedBy: number | null
 }
 
 export type UserPrivilegeSumAggregateOutputType = {
   id: number | null
   userId: number | null
+  createdBy: number | null
+  updatedBy: number | null
 }
 
 export type UserPrivilegeMinAggregateOutputType = {
   id: number | null
   userId: number | null
+  createdBy: number | null
+  updatedBy: number | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -46,6 +52,8 @@ export type UserPrivilegeMinAggregateOutputType = {
 export type UserPrivilegeMaxAggregateOutputType = {
   id: number | null
   userId: number | null
+  createdBy: number | null
+  updatedBy: number | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -54,6 +62,8 @@ export type UserPrivilegeCountAggregateOutputType = {
   id: number
   userId: number
   privileges: number
+  createdBy: number
+  updatedBy: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -63,16 +73,22 @@ export type UserPrivilegeCountAggregateOutputType = {
 export type UserPrivilegeAvgAggregateInputType = {
   id?: true
   userId?: true
+  createdBy?: true
+  updatedBy?: true
 }
 
 export type UserPrivilegeSumAggregateInputType = {
   id?: true
   userId?: true
+  createdBy?: true
+  updatedBy?: true
 }
 
 export type UserPrivilegeMinAggregateInputType = {
   id?: true
   userId?: true
+  createdBy?: true
+  updatedBy?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -80,6 +96,8 @@ export type UserPrivilegeMinAggregateInputType = {
 export type UserPrivilegeMaxAggregateInputType = {
   id?: true
   userId?: true
+  createdBy?: true
+  updatedBy?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -88,6 +106,8 @@ export type UserPrivilegeCountAggregateInputType = {
   id?: true
   userId?: true
   privileges?: true
+  createdBy?: true
+  updatedBy?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -183,6 +203,8 @@ export type UserPrivilegeGroupByOutputType = {
   id: number
   userId: number
   privileges: runtime.JsonValue
+  createdBy: number | null
+  updatedBy: number | null
   createdAt: Date
   updatedAt: Date
   _count: UserPrivilegeCountAggregateOutputType | null
@@ -214,18 +236,26 @@ export type UserPrivilegeWhereInput = {
   id?: Prisma.IntFilter<"UserPrivilege"> | number
   userId?: Prisma.IntFilter<"UserPrivilege"> | number
   privileges?: Prisma.JsonFilter<"UserPrivilege">
+  createdBy?: Prisma.IntNullableFilter<"UserPrivilege"> | number | null
+  updatedBy?: Prisma.IntNullableFilter<"UserPrivilege"> | number | null
   createdAt?: Prisma.DateTimeFilter<"UserPrivilege"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"UserPrivilege"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  creator?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  updater?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }
 
 export type UserPrivilegeOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   privileges?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrderInput | Prisma.SortOrder
+  updatedBy?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
+  creator?: Prisma.UserOrderByWithRelationInput
+  updater?: Prisma.UserOrderByWithRelationInput
 }
 
 export type UserPrivilegeWhereUniqueInput = Prisma.AtLeast<{
@@ -235,15 +265,21 @@ export type UserPrivilegeWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.UserPrivilegeWhereInput[]
   NOT?: Prisma.UserPrivilegeWhereInput | Prisma.UserPrivilegeWhereInput[]
   privileges?: Prisma.JsonFilter<"UserPrivilege">
+  createdBy?: Prisma.IntNullableFilter<"UserPrivilege"> | number | null
+  updatedBy?: Prisma.IntNullableFilter<"UserPrivilege"> | number | null
   createdAt?: Prisma.DateTimeFilter<"UserPrivilege"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"UserPrivilege"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  creator?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  updater?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }, "id" | "userId">
 
 export type UserPrivilegeOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   privileges?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrderInput | Prisma.SortOrder
+  updatedBy?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.UserPrivilegeCountOrderByAggregateInput
@@ -260,6 +296,8 @@ export type UserPrivilegeScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"UserPrivilege"> | number
   userId?: Prisma.IntWithAggregatesFilter<"UserPrivilege"> | number
   privileges?: Prisma.JsonWithAggregatesFilter<"UserPrivilege">
+  createdBy?: Prisma.IntNullableWithAggregatesFilter<"UserPrivilege"> | number | null
+  updatedBy?: Prisma.IntNullableWithAggregatesFilter<"UserPrivilege"> | number | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"UserPrivilege"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"UserPrivilege"> | Date | string
 }
@@ -269,12 +307,16 @@ export type UserPrivilegeCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutPrivilegesInput
+  creator?: Prisma.UserCreateNestedOneWithoutCreatedUserPrivilegesInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedUserPrivilegesInput
 }
 
 export type UserPrivilegeUncheckedCreateInput = {
   id?: number
   userId: number
   privileges: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  createdBy?: number | null
+  updatedBy?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -284,12 +326,16 @@ export type UserPrivilegeUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutPrivilegesNestedInput
+  creator?: Prisma.UserUpdateOneWithoutCreatedUserPrivilegesNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedUserPrivilegesNestedInput
 }
 
 export type UserPrivilegeUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   privileges?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -298,6 +344,8 @@ export type UserPrivilegeCreateManyInput = {
   id?: number
   userId: number
   privileges: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  createdBy?: number | null
+  updatedBy?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -312,6 +360,8 @@ export type UserPrivilegeUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   privileges?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -321,10 +371,22 @@ export type UserPrivilegeNullableScalarRelationFilter = {
   isNot?: Prisma.UserPrivilegeWhereInput | null
 }
 
+export type UserPrivilegeListRelationFilter = {
+  every?: Prisma.UserPrivilegeWhereInput
+  some?: Prisma.UserPrivilegeWhereInput
+  none?: Prisma.UserPrivilegeWhereInput
+}
+
+export type UserPrivilegeOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
+}
+
 export type UserPrivilegeCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   privileges?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrder
+  updatedBy?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -332,11 +394,15 @@ export type UserPrivilegeCountOrderByAggregateInput = {
 export type UserPrivilegeAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrder
+  updatedBy?: Prisma.SortOrder
 }
 
 export type UserPrivilegeMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrder
+  updatedBy?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -344,6 +410,8 @@ export type UserPrivilegeMaxOrderByAggregateInput = {
 export type UserPrivilegeMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrder
+  updatedBy?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -351,6 +419,8 @@ export type UserPrivilegeMinOrderByAggregateInput = {
 export type UserPrivilegeSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrder
+  updatedBy?: Prisma.SortOrder
 }
 
 export type UserPrivilegeCreateNestedOneWithoutUserInput = {
@@ -359,10 +429,38 @@ export type UserPrivilegeCreateNestedOneWithoutUserInput = {
   connect?: Prisma.UserPrivilegeWhereUniqueInput
 }
 
+export type UserPrivilegeCreateNestedManyWithoutCreatorInput = {
+  create?: Prisma.XOR<Prisma.UserPrivilegeCreateWithoutCreatorInput, Prisma.UserPrivilegeUncheckedCreateWithoutCreatorInput> | Prisma.UserPrivilegeCreateWithoutCreatorInput[] | Prisma.UserPrivilegeUncheckedCreateWithoutCreatorInput[]
+  connectOrCreate?: Prisma.UserPrivilegeCreateOrConnectWithoutCreatorInput | Prisma.UserPrivilegeCreateOrConnectWithoutCreatorInput[]
+  createMany?: Prisma.UserPrivilegeCreateManyCreatorInputEnvelope
+  connect?: Prisma.UserPrivilegeWhereUniqueInput | Prisma.UserPrivilegeWhereUniqueInput[]
+}
+
+export type UserPrivilegeCreateNestedManyWithoutUpdaterInput = {
+  create?: Prisma.XOR<Prisma.UserPrivilegeCreateWithoutUpdaterInput, Prisma.UserPrivilegeUncheckedCreateWithoutUpdaterInput> | Prisma.UserPrivilegeCreateWithoutUpdaterInput[] | Prisma.UserPrivilegeUncheckedCreateWithoutUpdaterInput[]
+  connectOrCreate?: Prisma.UserPrivilegeCreateOrConnectWithoutUpdaterInput | Prisma.UserPrivilegeCreateOrConnectWithoutUpdaterInput[]
+  createMany?: Prisma.UserPrivilegeCreateManyUpdaterInputEnvelope
+  connect?: Prisma.UserPrivilegeWhereUniqueInput | Prisma.UserPrivilegeWhereUniqueInput[]
+}
+
 export type UserPrivilegeUncheckedCreateNestedOneWithoutUserInput = {
   create?: Prisma.XOR<Prisma.UserPrivilegeCreateWithoutUserInput, Prisma.UserPrivilegeUncheckedCreateWithoutUserInput>
   connectOrCreate?: Prisma.UserPrivilegeCreateOrConnectWithoutUserInput
   connect?: Prisma.UserPrivilegeWhereUniqueInput
+}
+
+export type UserPrivilegeUncheckedCreateNestedManyWithoutCreatorInput = {
+  create?: Prisma.XOR<Prisma.UserPrivilegeCreateWithoutCreatorInput, Prisma.UserPrivilegeUncheckedCreateWithoutCreatorInput> | Prisma.UserPrivilegeCreateWithoutCreatorInput[] | Prisma.UserPrivilegeUncheckedCreateWithoutCreatorInput[]
+  connectOrCreate?: Prisma.UserPrivilegeCreateOrConnectWithoutCreatorInput | Prisma.UserPrivilegeCreateOrConnectWithoutCreatorInput[]
+  createMany?: Prisma.UserPrivilegeCreateManyCreatorInputEnvelope
+  connect?: Prisma.UserPrivilegeWhereUniqueInput | Prisma.UserPrivilegeWhereUniqueInput[]
+}
+
+export type UserPrivilegeUncheckedCreateNestedManyWithoutUpdaterInput = {
+  create?: Prisma.XOR<Prisma.UserPrivilegeCreateWithoutUpdaterInput, Prisma.UserPrivilegeUncheckedCreateWithoutUpdaterInput> | Prisma.UserPrivilegeCreateWithoutUpdaterInput[] | Prisma.UserPrivilegeUncheckedCreateWithoutUpdaterInput[]
+  connectOrCreate?: Prisma.UserPrivilegeCreateOrConnectWithoutUpdaterInput | Prisma.UserPrivilegeCreateOrConnectWithoutUpdaterInput[]
+  createMany?: Prisma.UserPrivilegeCreateManyUpdaterInputEnvelope
+  connect?: Prisma.UserPrivilegeWhereUniqueInput | Prisma.UserPrivilegeWhereUniqueInput[]
 }
 
 export type UserPrivilegeUpdateOneWithoutUserNestedInput = {
@@ -375,6 +473,34 @@ export type UserPrivilegeUpdateOneWithoutUserNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserPrivilegeUpdateToOneWithWhereWithoutUserInput, Prisma.UserPrivilegeUpdateWithoutUserInput>, Prisma.UserPrivilegeUncheckedUpdateWithoutUserInput>
 }
 
+export type UserPrivilegeUpdateManyWithoutCreatorNestedInput = {
+  create?: Prisma.XOR<Prisma.UserPrivilegeCreateWithoutCreatorInput, Prisma.UserPrivilegeUncheckedCreateWithoutCreatorInput> | Prisma.UserPrivilegeCreateWithoutCreatorInput[] | Prisma.UserPrivilegeUncheckedCreateWithoutCreatorInput[]
+  connectOrCreate?: Prisma.UserPrivilegeCreateOrConnectWithoutCreatorInput | Prisma.UserPrivilegeCreateOrConnectWithoutCreatorInput[]
+  upsert?: Prisma.UserPrivilegeUpsertWithWhereUniqueWithoutCreatorInput | Prisma.UserPrivilegeUpsertWithWhereUniqueWithoutCreatorInput[]
+  createMany?: Prisma.UserPrivilegeCreateManyCreatorInputEnvelope
+  set?: Prisma.UserPrivilegeWhereUniqueInput | Prisma.UserPrivilegeWhereUniqueInput[]
+  disconnect?: Prisma.UserPrivilegeWhereUniqueInput | Prisma.UserPrivilegeWhereUniqueInput[]
+  delete?: Prisma.UserPrivilegeWhereUniqueInput | Prisma.UserPrivilegeWhereUniqueInput[]
+  connect?: Prisma.UserPrivilegeWhereUniqueInput | Prisma.UserPrivilegeWhereUniqueInput[]
+  update?: Prisma.UserPrivilegeUpdateWithWhereUniqueWithoutCreatorInput | Prisma.UserPrivilegeUpdateWithWhereUniqueWithoutCreatorInput[]
+  updateMany?: Prisma.UserPrivilegeUpdateManyWithWhereWithoutCreatorInput | Prisma.UserPrivilegeUpdateManyWithWhereWithoutCreatorInput[]
+  deleteMany?: Prisma.UserPrivilegeScalarWhereInput | Prisma.UserPrivilegeScalarWhereInput[]
+}
+
+export type UserPrivilegeUpdateManyWithoutUpdaterNestedInput = {
+  create?: Prisma.XOR<Prisma.UserPrivilegeCreateWithoutUpdaterInput, Prisma.UserPrivilegeUncheckedCreateWithoutUpdaterInput> | Prisma.UserPrivilegeCreateWithoutUpdaterInput[] | Prisma.UserPrivilegeUncheckedCreateWithoutUpdaterInput[]
+  connectOrCreate?: Prisma.UserPrivilegeCreateOrConnectWithoutUpdaterInput | Prisma.UserPrivilegeCreateOrConnectWithoutUpdaterInput[]
+  upsert?: Prisma.UserPrivilegeUpsertWithWhereUniqueWithoutUpdaterInput | Prisma.UserPrivilegeUpsertWithWhereUniqueWithoutUpdaterInput[]
+  createMany?: Prisma.UserPrivilegeCreateManyUpdaterInputEnvelope
+  set?: Prisma.UserPrivilegeWhereUniqueInput | Prisma.UserPrivilegeWhereUniqueInput[]
+  disconnect?: Prisma.UserPrivilegeWhereUniqueInput | Prisma.UserPrivilegeWhereUniqueInput[]
+  delete?: Prisma.UserPrivilegeWhereUniqueInput | Prisma.UserPrivilegeWhereUniqueInput[]
+  connect?: Prisma.UserPrivilegeWhereUniqueInput | Prisma.UserPrivilegeWhereUniqueInput[]
+  update?: Prisma.UserPrivilegeUpdateWithWhereUniqueWithoutUpdaterInput | Prisma.UserPrivilegeUpdateWithWhereUniqueWithoutUpdaterInput[]
+  updateMany?: Prisma.UserPrivilegeUpdateManyWithWhereWithoutUpdaterInput | Prisma.UserPrivilegeUpdateManyWithWhereWithoutUpdaterInput[]
+  deleteMany?: Prisma.UserPrivilegeScalarWhereInput | Prisma.UserPrivilegeScalarWhereInput[]
+}
+
 export type UserPrivilegeUncheckedUpdateOneWithoutUserNestedInput = {
   create?: Prisma.XOR<Prisma.UserPrivilegeCreateWithoutUserInput, Prisma.UserPrivilegeUncheckedCreateWithoutUserInput>
   connectOrCreate?: Prisma.UserPrivilegeCreateOrConnectWithoutUserInput
@@ -385,15 +511,47 @@ export type UserPrivilegeUncheckedUpdateOneWithoutUserNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserPrivilegeUpdateToOneWithWhereWithoutUserInput, Prisma.UserPrivilegeUpdateWithoutUserInput>, Prisma.UserPrivilegeUncheckedUpdateWithoutUserInput>
 }
 
+export type UserPrivilegeUncheckedUpdateManyWithoutCreatorNestedInput = {
+  create?: Prisma.XOR<Prisma.UserPrivilegeCreateWithoutCreatorInput, Prisma.UserPrivilegeUncheckedCreateWithoutCreatorInput> | Prisma.UserPrivilegeCreateWithoutCreatorInput[] | Prisma.UserPrivilegeUncheckedCreateWithoutCreatorInput[]
+  connectOrCreate?: Prisma.UserPrivilegeCreateOrConnectWithoutCreatorInput | Prisma.UserPrivilegeCreateOrConnectWithoutCreatorInput[]
+  upsert?: Prisma.UserPrivilegeUpsertWithWhereUniqueWithoutCreatorInput | Prisma.UserPrivilegeUpsertWithWhereUniqueWithoutCreatorInput[]
+  createMany?: Prisma.UserPrivilegeCreateManyCreatorInputEnvelope
+  set?: Prisma.UserPrivilegeWhereUniqueInput | Prisma.UserPrivilegeWhereUniqueInput[]
+  disconnect?: Prisma.UserPrivilegeWhereUniqueInput | Prisma.UserPrivilegeWhereUniqueInput[]
+  delete?: Prisma.UserPrivilegeWhereUniqueInput | Prisma.UserPrivilegeWhereUniqueInput[]
+  connect?: Prisma.UserPrivilegeWhereUniqueInput | Prisma.UserPrivilegeWhereUniqueInput[]
+  update?: Prisma.UserPrivilegeUpdateWithWhereUniqueWithoutCreatorInput | Prisma.UserPrivilegeUpdateWithWhereUniqueWithoutCreatorInput[]
+  updateMany?: Prisma.UserPrivilegeUpdateManyWithWhereWithoutCreatorInput | Prisma.UserPrivilegeUpdateManyWithWhereWithoutCreatorInput[]
+  deleteMany?: Prisma.UserPrivilegeScalarWhereInput | Prisma.UserPrivilegeScalarWhereInput[]
+}
+
+export type UserPrivilegeUncheckedUpdateManyWithoutUpdaterNestedInput = {
+  create?: Prisma.XOR<Prisma.UserPrivilegeCreateWithoutUpdaterInput, Prisma.UserPrivilegeUncheckedCreateWithoutUpdaterInput> | Prisma.UserPrivilegeCreateWithoutUpdaterInput[] | Prisma.UserPrivilegeUncheckedCreateWithoutUpdaterInput[]
+  connectOrCreate?: Prisma.UserPrivilegeCreateOrConnectWithoutUpdaterInput | Prisma.UserPrivilegeCreateOrConnectWithoutUpdaterInput[]
+  upsert?: Prisma.UserPrivilegeUpsertWithWhereUniqueWithoutUpdaterInput | Prisma.UserPrivilegeUpsertWithWhereUniqueWithoutUpdaterInput[]
+  createMany?: Prisma.UserPrivilegeCreateManyUpdaterInputEnvelope
+  set?: Prisma.UserPrivilegeWhereUniqueInput | Prisma.UserPrivilegeWhereUniqueInput[]
+  disconnect?: Prisma.UserPrivilegeWhereUniqueInput | Prisma.UserPrivilegeWhereUniqueInput[]
+  delete?: Prisma.UserPrivilegeWhereUniqueInput | Prisma.UserPrivilegeWhereUniqueInput[]
+  connect?: Prisma.UserPrivilegeWhereUniqueInput | Prisma.UserPrivilegeWhereUniqueInput[]
+  update?: Prisma.UserPrivilegeUpdateWithWhereUniqueWithoutUpdaterInput | Prisma.UserPrivilegeUpdateWithWhereUniqueWithoutUpdaterInput[]
+  updateMany?: Prisma.UserPrivilegeUpdateManyWithWhereWithoutUpdaterInput | Prisma.UserPrivilegeUpdateManyWithWhereWithoutUpdaterInput[]
+  deleteMany?: Prisma.UserPrivilegeScalarWhereInput | Prisma.UserPrivilegeScalarWhereInput[]
+}
+
 export type UserPrivilegeCreateWithoutUserInput = {
   privileges: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
+  creator?: Prisma.UserCreateNestedOneWithoutCreatedUserPrivilegesInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedUserPrivilegesInput
 }
 
 export type UserPrivilegeUncheckedCreateWithoutUserInput = {
   id?: number
   privileges: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  createdBy?: number | null
+  updatedBy?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -401,6 +559,60 @@ export type UserPrivilegeUncheckedCreateWithoutUserInput = {
 export type UserPrivilegeCreateOrConnectWithoutUserInput = {
   where: Prisma.UserPrivilegeWhereUniqueInput
   create: Prisma.XOR<Prisma.UserPrivilegeCreateWithoutUserInput, Prisma.UserPrivilegeUncheckedCreateWithoutUserInput>
+}
+
+export type UserPrivilegeCreateWithoutCreatorInput = {
+  privileges: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutPrivilegesInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedUserPrivilegesInput
+}
+
+export type UserPrivilegeUncheckedCreateWithoutCreatorInput = {
+  id?: number
+  userId: number
+  privileges: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  updatedBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type UserPrivilegeCreateOrConnectWithoutCreatorInput = {
+  where: Prisma.UserPrivilegeWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserPrivilegeCreateWithoutCreatorInput, Prisma.UserPrivilegeUncheckedCreateWithoutCreatorInput>
+}
+
+export type UserPrivilegeCreateManyCreatorInputEnvelope = {
+  data: Prisma.UserPrivilegeCreateManyCreatorInput | Prisma.UserPrivilegeCreateManyCreatorInput[]
+  skipDuplicates?: boolean
+}
+
+export type UserPrivilegeCreateWithoutUpdaterInput = {
+  privileges: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutPrivilegesInput
+  creator?: Prisma.UserCreateNestedOneWithoutCreatedUserPrivilegesInput
+}
+
+export type UserPrivilegeUncheckedCreateWithoutUpdaterInput = {
+  id?: number
+  userId: number
+  privileges: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  createdBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type UserPrivilegeCreateOrConnectWithoutUpdaterInput = {
+  where: Prisma.UserPrivilegeWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserPrivilegeCreateWithoutUpdaterInput, Prisma.UserPrivilegeUncheckedCreateWithoutUpdaterInput>
+}
+
+export type UserPrivilegeCreateManyUpdaterInputEnvelope = {
+  data: Prisma.UserPrivilegeCreateManyUpdaterInput | Prisma.UserPrivilegeCreateManyUpdaterInput[]
+  skipDuplicates?: boolean
 }
 
 export type UserPrivilegeUpsertWithoutUserInput = {
@@ -418,11 +630,130 @@ export type UserPrivilegeUpdateWithoutUserInput = {
   privileges?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  creator?: Prisma.UserUpdateOneWithoutCreatedUserPrivilegesNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedUserPrivilegesNestedInput
 }
 
 export type UserPrivilegeUncheckedUpdateWithoutUserInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   privileges?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type UserPrivilegeUpsertWithWhereUniqueWithoutCreatorInput = {
+  where: Prisma.UserPrivilegeWhereUniqueInput
+  update: Prisma.XOR<Prisma.UserPrivilegeUpdateWithoutCreatorInput, Prisma.UserPrivilegeUncheckedUpdateWithoutCreatorInput>
+  create: Prisma.XOR<Prisma.UserPrivilegeCreateWithoutCreatorInput, Prisma.UserPrivilegeUncheckedCreateWithoutCreatorInput>
+}
+
+export type UserPrivilegeUpdateWithWhereUniqueWithoutCreatorInput = {
+  where: Prisma.UserPrivilegeWhereUniqueInput
+  data: Prisma.XOR<Prisma.UserPrivilegeUpdateWithoutCreatorInput, Prisma.UserPrivilegeUncheckedUpdateWithoutCreatorInput>
+}
+
+export type UserPrivilegeUpdateManyWithWhereWithoutCreatorInput = {
+  where: Prisma.UserPrivilegeScalarWhereInput
+  data: Prisma.XOR<Prisma.UserPrivilegeUpdateManyMutationInput, Prisma.UserPrivilegeUncheckedUpdateManyWithoutCreatorInput>
+}
+
+export type UserPrivilegeScalarWhereInput = {
+  AND?: Prisma.UserPrivilegeScalarWhereInput | Prisma.UserPrivilegeScalarWhereInput[]
+  OR?: Prisma.UserPrivilegeScalarWhereInput[]
+  NOT?: Prisma.UserPrivilegeScalarWhereInput | Prisma.UserPrivilegeScalarWhereInput[]
+  id?: Prisma.IntFilter<"UserPrivilege"> | number
+  userId?: Prisma.IntFilter<"UserPrivilege"> | number
+  privileges?: Prisma.JsonFilter<"UserPrivilege">
+  createdBy?: Prisma.IntNullableFilter<"UserPrivilege"> | number | null
+  updatedBy?: Prisma.IntNullableFilter<"UserPrivilege"> | number | null
+  createdAt?: Prisma.DateTimeFilter<"UserPrivilege"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"UserPrivilege"> | Date | string
+}
+
+export type UserPrivilegeUpsertWithWhereUniqueWithoutUpdaterInput = {
+  where: Prisma.UserPrivilegeWhereUniqueInput
+  update: Prisma.XOR<Prisma.UserPrivilegeUpdateWithoutUpdaterInput, Prisma.UserPrivilegeUncheckedUpdateWithoutUpdaterInput>
+  create: Prisma.XOR<Prisma.UserPrivilegeCreateWithoutUpdaterInput, Prisma.UserPrivilegeUncheckedCreateWithoutUpdaterInput>
+}
+
+export type UserPrivilegeUpdateWithWhereUniqueWithoutUpdaterInput = {
+  where: Prisma.UserPrivilegeWhereUniqueInput
+  data: Prisma.XOR<Prisma.UserPrivilegeUpdateWithoutUpdaterInput, Prisma.UserPrivilegeUncheckedUpdateWithoutUpdaterInput>
+}
+
+export type UserPrivilegeUpdateManyWithWhereWithoutUpdaterInput = {
+  where: Prisma.UserPrivilegeScalarWhereInput
+  data: Prisma.XOR<Prisma.UserPrivilegeUpdateManyMutationInput, Prisma.UserPrivilegeUncheckedUpdateManyWithoutUpdaterInput>
+}
+
+export type UserPrivilegeCreateManyCreatorInput = {
+  id?: number
+  userId: number
+  privileges: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  updatedBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type UserPrivilegeCreateManyUpdaterInput = {
+  id?: number
+  userId: number
+  privileges: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  createdBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type UserPrivilegeUpdateWithoutCreatorInput = {
+  privileges?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutPrivilegesNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedUserPrivilegesNestedInput
+}
+
+export type UserPrivilegeUncheckedUpdateWithoutCreatorInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  privileges?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type UserPrivilegeUncheckedUpdateManyWithoutCreatorInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  privileges?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type UserPrivilegeUpdateWithoutUpdaterInput = {
+  privileges?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutPrivilegesNestedInput
+  creator?: Prisma.UserUpdateOneWithoutCreatedUserPrivilegesNestedInput
+}
+
+export type UserPrivilegeUncheckedUpdateWithoutUpdaterInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  privileges?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type UserPrivilegeUncheckedUpdateManyWithoutUpdaterInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  privileges?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -433,57 +764,81 @@ export type UserPrivilegeSelect<ExtArgs extends runtime.Types.Extensions.Interna
   id?: boolean
   userId?: boolean
   privileges?: boolean
+  createdBy?: boolean
+  updatedBy?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  creator?: boolean | Prisma.UserPrivilege$creatorArgs<ExtArgs>
+  updater?: boolean | Prisma.UserPrivilege$updaterArgs<ExtArgs>
 }, ExtArgs["result"]["userPrivilege"]>
 
 export type UserPrivilegeSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   userId?: boolean
   privileges?: boolean
+  createdBy?: boolean
+  updatedBy?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  creator?: boolean | Prisma.UserPrivilege$creatorArgs<ExtArgs>
+  updater?: boolean | Prisma.UserPrivilege$updaterArgs<ExtArgs>
 }, ExtArgs["result"]["userPrivilege"]>
 
 export type UserPrivilegeSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   userId?: boolean
   privileges?: boolean
+  createdBy?: boolean
+  updatedBy?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  creator?: boolean | Prisma.UserPrivilege$creatorArgs<ExtArgs>
+  updater?: boolean | Prisma.UserPrivilege$updaterArgs<ExtArgs>
 }, ExtArgs["result"]["userPrivilege"]>
 
 export type UserPrivilegeSelectScalar = {
   id?: boolean
   userId?: boolean
   privileges?: boolean
+  createdBy?: boolean
+  updatedBy?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type UserPrivilegeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "privileges" | "createdAt" | "updatedAt", ExtArgs["result"]["userPrivilege"]>
+export type UserPrivilegeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "privileges" | "createdBy" | "updatedBy" | "createdAt" | "updatedAt", ExtArgs["result"]["userPrivilege"]>
 export type UserPrivilegeInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  creator?: boolean | Prisma.UserPrivilege$creatorArgs<ExtArgs>
+  updater?: boolean | Prisma.UserPrivilege$updaterArgs<ExtArgs>
 }
 export type UserPrivilegeIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  creator?: boolean | Prisma.UserPrivilege$creatorArgs<ExtArgs>
+  updater?: boolean | Prisma.UserPrivilege$updaterArgs<ExtArgs>
 }
 export type UserPrivilegeIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  creator?: boolean | Prisma.UserPrivilege$creatorArgs<ExtArgs>
+  updater?: boolean | Prisma.UserPrivilege$updaterArgs<ExtArgs>
 }
 
 export type $UserPrivilegePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "UserPrivilege"
   objects: {
     user: Prisma.$UserPayload<ExtArgs>
+    creator: Prisma.$UserPayload<ExtArgs> | null
+    updater: Prisma.$UserPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     userId: number
     privileges: runtime.JsonValue
+    createdBy: number | null
+    updatedBy: number | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["userPrivilege"]>
@@ -881,6 +1236,8 @@ readonly fields: UserPrivilegeFieldRefs;
 export interface Prisma__UserPrivilegeClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  creator<T extends Prisma.UserPrivilege$creatorArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserPrivilege$creatorArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  updater<T extends Prisma.UserPrivilege$updaterArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserPrivilege$updaterArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -913,6 +1270,8 @@ export interface UserPrivilegeFieldRefs {
   readonly id: Prisma.FieldRef<"UserPrivilege", 'Int'>
   readonly userId: Prisma.FieldRef<"UserPrivilege", 'Int'>
   readonly privileges: Prisma.FieldRef<"UserPrivilege", 'Json'>
+  readonly createdBy: Prisma.FieldRef<"UserPrivilege", 'Int'>
+  readonly updatedBy: Prisma.FieldRef<"UserPrivilege", 'Int'>
   readonly createdAt: Prisma.FieldRef<"UserPrivilege", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"UserPrivilege", 'DateTime'>
 }
@@ -1308,6 +1667,44 @@ export type UserPrivilegeDeleteManyArgs<ExtArgs extends runtime.Types.Extensions
    * Limit how many UserPrivileges to delete.
    */
   limit?: number
+}
+
+/**
+ * UserPrivilege.creator
+ */
+export type UserPrivilege$creatorArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
+}
+
+/**
+ * UserPrivilege.updater
+ */
+export type UserPrivilege$updaterArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
 }
 
 /**

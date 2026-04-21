@@ -58,7 +58,7 @@ export type PayrollDetailsAvgAggregateOutputType = {
   branchId: number | null
   allowanceNotAvailableId: number | null
   createdBy: number | null
-  modifiedBy: number | null
+  updatedBy: number | null
 }
 
 export type PayrollDetailsSumAggregateOutputType = {
@@ -93,7 +93,7 @@ export type PayrollDetailsSumAggregateOutputType = {
   branchId: number | null
   allowanceNotAvailableId: number | null
   createdBy: number | null
-  modifiedBy: number | null
+  updatedBy: number | null
 }
 
 export type PayrollDetailsMinAggregateOutputType = {
@@ -128,10 +128,10 @@ export type PayrollDetailsMinAggregateOutputType = {
   payrollStatusId: number | null
   branchId: number | null
   allowanceNotAvailableId: number | null
-  createdDate: Date | null
   createdBy: number | null
-  modifiedDate: Date | null
-  modifiedBy: number | null
+  updatedBy: number | null
+  createdAt: Date | null
+  updatedAt: Date | null
   isLocked: boolean | null
 }
 
@@ -167,10 +167,10 @@ export type PayrollDetailsMaxAggregateOutputType = {
   payrollStatusId: number | null
   branchId: number | null
   allowanceNotAvailableId: number | null
-  createdDate: Date | null
   createdBy: number | null
-  modifiedDate: Date | null
-  modifiedBy: number | null
+  updatedBy: number | null
+  createdAt: Date | null
+  updatedAt: Date | null
   isLocked: boolean | null
 }
 
@@ -206,10 +206,10 @@ export type PayrollDetailsCountAggregateOutputType = {
   payrollStatusId: number
   branchId: number
   allowanceNotAvailableId: number
-  createdDate: number
   createdBy: number
-  modifiedDate: number
-  modifiedBy: number
+  updatedBy: number
+  createdAt: number
+  updatedAt: number
   isLocked: number
   _all: number
 }
@@ -247,7 +247,7 @@ export type PayrollDetailsAvgAggregateInputType = {
   branchId?: true
   allowanceNotAvailableId?: true
   createdBy?: true
-  modifiedBy?: true
+  updatedBy?: true
 }
 
 export type PayrollDetailsSumAggregateInputType = {
@@ -282,7 +282,7 @@ export type PayrollDetailsSumAggregateInputType = {
   branchId?: true
   allowanceNotAvailableId?: true
   createdBy?: true
-  modifiedBy?: true
+  updatedBy?: true
 }
 
 export type PayrollDetailsMinAggregateInputType = {
@@ -317,10 +317,10 @@ export type PayrollDetailsMinAggregateInputType = {
   payrollStatusId?: true
   branchId?: true
   allowanceNotAvailableId?: true
-  createdDate?: true
   createdBy?: true
-  modifiedDate?: true
-  modifiedBy?: true
+  updatedBy?: true
+  createdAt?: true
+  updatedAt?: true
   isLocked?: true
 }
 
@@ -356,10 +356,10 @@ export type PayrollDetailsMaxAggregateInputType = {
   payrollStatusId?: true
   branchId?: true
   allowanceNotAvailableId?: true
-  createdDate?: true
   createdBy?: true
-  modifiedDate?: true
-  modifiedBy?: true
+  updatedBy?: true
+  createdAt?: true
+  updatedAt?: true
   isLocked?: true
 }
 
@@ -395,10 +395,10 @@ export type PayrollDetailsCountAggregateInputType = {
   payrollStatusId?: true
   branchId?: true
   allowanceNotAvailableId?: true
-  createdDate?: true
   createdBy?: true
-  modifiedDate?: true
-  modifiedBy?: true
+  updatedBy?: true
+  createdAt?: true
+  updatedAt?: true
   isLocked?: true
   _all?: true
 }
@@ -521,10 +521,10 @@ export type PayrollDetailsGroupByOutputType = {
   payrollStatusId: number | null
   branchId: number | null
   allowanceNotAvailableId: number | null
-  createdDate: Date
   createdBy: number | null
-  modifiedDate: Date
-  modifiedBy: number | null
+  updatedBy: number | null
+  createdAt: Date
+  updatedAt: Date
   isLocked: boolean
   _count: PayrollDetailsCountAggregateOutputType | null
   _avg: PayrollDetailsAvgAggregateOutputType | null
@@ -583,10 +583,10 @@ export type PayrollDetailsWhereInput = {
   payrollStatusId?: Prisma.IntNullableFilter<"PayrollDetails"> | number | null
   branchId?: Prisma.IntNullableFilter<"PayrollDetails"> | number | null
   allowanceNotAvailableId?: Prisma.IntNullableFilter<"PayrollDetails"> | number | null
-  createdDate?: Prisma.DateTimeFilter<"PayrollDetails"> | Date | string
   createdBy?: Prisma.IntNullableFilter<"PayrollDetails"> | number | null
-  modifiedDate?: Prisma.DateTimeFilter<"PayrollDetails"> | Date | string
-  modifiedBy?: Prisma.IntNullableFilter<"PayrollDetails"> | number | null
+  updatedBy?: Prisma.IntNullableFilter<"PayrollDetails"> | number | null
+  createdAt?: Prisma.DateTimeFilter<"PayrollDetails"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"PayrollDetails"> | Date | string
   isLocked?: Prisma.BoolFilter<"PayrollDetails"> | boolean
   payrollSummary?: Prisma.XOR<Prisma.PayrollSummaryScalarRelationFilter, Prisma.PayrollSummaryWhereInput>
   employee?: Prisma.XOR<Prisma.EmployeeScalarRelationFilter, Prisma.EmployeeWhereInput>
@@ -595,7 +595,7 @@ export type PayrollDetailsWhereInput = {
   branch?: Prisma.XOR<Prisma.BranchNullableScalarRelationFilter, Prisma.BranchWhereInput> | null
   allowanceNotAvailable?: Prisma.XOR<Prisma.AllowanceNotAvailableNullableScalarRelationFilter, Prisma.AllowanceNotAvailableWhereInput> | null
   creator?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
-  modifier?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  updater?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }
 
 export type PayrollDetailsOrderByWithRelationInput = {
@@ -630,10 +630,10 @@ export type PayrollDetailsOrderByWithRelationInput = {
   payrollStatusId?: Prisma.SortOrderInput | Prisma.SortOrder
   branchId?: Prisma.SortOrderInput | Prisma.SortOrder
   allowanceNotAvailableId?: Prisma.SortOrderInput | Prisma.SortOrder
-  createdDate?: Prisma.SortOrder
   createdBy?: Prisma.SortOrderInput | Prisma.SortOrder
-  modifiedDate?: Prisma.SortOrder
-  modifiedBy?: Prisma.SortOrderInput | Prisma.SortOrder
+  updatedBy?: Prisma.SortOrderInput | Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   isLocked?: Prisma.SortOrder
   payrollSummary?: Prisma.PayrollSummaryOrderByWithRelationInput
   employee?: Prisma.EmployeeOrderByWithRelationInput
@@ -642,7 +642,7 @@ export type PayrollDetailsOrderByWithRelationInput = {
   branch?: Prisma.BranchOrderByWithRelationInput
   allowanceNotAvailable?: Prisma.AllowanceNotAvailableOrderByWithRelationInput
   creator?: Prisma.UserOrderByWithRelationInput
-  modifier?: Prisma.UserOrderByWithRelationInput
+  updater?: Prisma.UserOrderByWithRelationInput
 }
 
 export type PayrollDetailsWhereUniqueInput = Prisma.AtLeast<{
@@ -680,10 +680,10 @@ export type PayrollDetailsWhereUniqueInput = Prisma.AtLeast<{
   payrollStatusId?: Prisma.IntNullableFilter<"PayrollDetails"> | number | null
   branchId?: Prisma.IntNullableFilter<"PayrollDetails"> | number | null
   allowanceNotAvailableId?: Prisma.IntNullableFilter<"PayrollDetails"> | number | null
-  createdDate?: Prisma.DateTimeFilter<"PayrollDetails"> | Date | string
   createdBy?: Prisma.IntNullableFilter<"PayrollDetails"> | number | null
-  modifiedDate?: Prisma.DateTimeFilter<"PayrollDetails"> | Date | string
-  modifiedBy?: Prisma.IntNullableFilter<"PayrollDetails"> | number | null
+  updatedBy?: Prisma.IntNullableFilter<"PayrollDetails"> | number | null
+  createdAt?: Prisma.DateTimeFilter<"PayrollDetails"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"PayrollDetails"> | Date | string
   isLocked?: Prisma.BoolFilter<"PayrollDetails"> | boolean
   payrollSummary?: Prisma.XOR<Prisma.PayrollSummaryScalarRelationFilter, Prisma.PayrollSummaryWhereInput>
   employee?: Prisma.XOR<Prisma.EmployeeScalarRelationFilter, Prisma.EmployeeWhereInput>
@@ -692,7 +692,7 @@ export type PayrollDetailsWhereUniqueInput = Prisma.AtLeast<{
   branch?: Prisma.XOR<Prisma.BranchNullableScalarRelationFilter, Prisma.BranchWhereInput> | null
   allowanceNotAvailable?: Prisma.XOR<Prisma.AllowanceNotAvailableNullableScalarRelationFilter, Prisma.AllowanceNotAvailableWhereInput> | null
   creator?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
-  modifier?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  updater?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }, "id">
 
 export type PayrollDetailsOrderByWithAggregationInput = {
@@ -727,10 +727,10 @@ export type PayrollDetailsOrderByWithAggregationInput = {
   payrollStatusId?: Prisma.SortOrderInput | Prisma.SortOrder
   branchId?: Prisma.SortOrderInput | Prisma.SortOrder
   allowanceNotAvailableId?: Prisma.SortOrderInput | Prisma.SortOrder
-  createdDate?: Prisma.SortOrder
   createdBy?: Prisma.SortOrderInput | Prisma.SortOrder
-  modifiedDate?: Prisma.SortOrder
-  modifiedBy?: Prisma.SortOrderInput | Prisma.SortOrder
+  updatedBy?: Prisma.SortOrderInput | Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   isLocked?: Prisma.SortOrder
   _count?: Prisma.PayrollDetailsCountOrderByAggregateInput
   _avg?: Prisma.PayrollDetailsAvgOrderByAggregateInput
@@ -774,10 +774,10 @@ export type PayrollDetailsScalarWhereWithAggregatesInput = {
   payrollStatusId?: Prisma.IntNullableWithAggregatesFilter<"PayrollDetails"> | number | null
   branchId?: Prisma.IntNullableWithAggregatesFilter<"PayrollDetails"> | number | null
   allowanceNotAvailableId?: Prisma.IntNullableWithAggregatesFilter<"PayrollDetails"> | number | null
-  createdDate?: Prisma.DateTimeWithAggregatesFilter<"PayrollDetails"> | Date | string
   createdBy?: Prisma.IntNullableWithAggregatesFilter<"PayrollDetails"> | number | null
-  modifiedDate?: Prisma.DateTimeWithAggregatesFilter<"PayrollDetails"> | Date | string
-  modifiedBy?: Prisma.IntNullableWithAggregatesFilter<"PayrollDetails"> | number | null
+  updatedBy?: Prisma.IntNullableWithAggregatesFilter<"PayrollDetails"> | number | null
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"PayrollDetails"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"PayrollDetails"> | Date | string
   isLocked?: Prisma.BoolWithAggregatesFilter<"PayrollDetails"> | boolean
 }
 
@@ -806,8 +806,8 @@ export type PayrollDetailsCreateInput = {
   cashSalary: number
   overTime: number
   remarks?: string | null
-  createdDate?: Date | string
-  modifiedDate?: Date | string
+  createdAt?: Date | string
+  updatedAt?: Date | string
   isLocked?: boolean
   payrollSummary: Prisma.PayrollSummaryCreateNestedOneWithoutDetailsInput
   employee: Prisma.EmployeeCreateNestedOneWithoutPayrollDetailsInput
@@ -816,7 +816,7 @@ export type PayrollDetailsCreateInput = {
   branch?: Prisma.BranchCreateNestedOneWithoutPayrollDetailsInput
   allowanceNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedOneWithoutPayrollDetailsInput
   creator?: Prisma.UserCreateNestedOneWithoutCreatedPayrollDetailsInput
-  modifier?: Prisma.UserCreateNestedOneWithoutModifiedPayrollDetailsInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedPayrollDetailsInput
 }
 
 export type PayrollDetailsUncheckedCreateInput = {
@@ -851,10 +851,10 @@ export type PayrollDetailsUncheckedCreateInput = {
   payrollStatusId?: number | null
   branchId?: number | null
   allowanceNotAvailableId?: number | null
-  createdDate?: Date | string
   createdBy?: number | null
-  modifiedDate?: Date | string
-  modifiedBy?: number | null
+  updatedBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
   isLocked?: boolean
 }
 
@@ -883,8 +883,8 @@ export type PayrollDetailsUpdateInput = {
   cashSalary?: Prisma.IntFieldUpdateOperationsInput | number
   overTime?: Prisma.IntFieldUpdateOperationsInput | number
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  modifiedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
   payrollSummary?: Prisma.PayrollSummaryUpdateOneRequiredWithoutDetailsNestedInput
   employee?: Prisma.EmployeeUpdateOneRequiredWithoutPayrollDetailsNestedInput
@@ -893,7 +893,7 @@ export type PayrollDetailsUpdateInput = {
   branch?: Prisma.BranchUpdateOneWithoutPayrollDetailsNestedInput
   allowanceNotAvailable?: Prisma.AllowanceNotAvailableUpdateOneWithoutPayrollDetailsNestedInput
   creator?: Prisma.UserUpdateOneWithoutCreatedPayrollDetailsNestedInput
-  modifier?: Prisma.UserUpdateOneWithoutModifiedPayrollDetailsNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedPayrollDetailsNestedInput
 }
 
 export type PayrollDetailsUncheckedUpdateInput = {
@@ -928,10 +928,10 @@ export type PayrollDetailsUncheckedUpdateInput = {
   payrollStatusId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   allowanceNotAvailableId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  modifiedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  modifiedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
@@ -967,10 +967,10 @@ export type PayrollDetailsCreateManyInput = {
   payrollStatusId?: number | null
   branchId?: number | null
   allowanceNotAvailableId?: number | null
-  createdDate?: Date | string
   createdBy?: number | null
-  modifiedDate?: Date | string
-  modifiedBy?: number | null
+  updatedBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
   isLocked?: boolean
 }
 
@@ -999,8 +999,8 @@ export type PayrollDetailsUpdateManyMutationInput = {
   cashSalary?: Prisma.IntFieldUpdateOperationsInput | number
   overTime?: Prisma.IntFieldUpdateOperationsInput | number
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  modifiedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
@@ -1036,10 +1036,10 @@ export type PayrollDetailsUncheckedUpdateManyInput = {
   payrollStatusId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   allowanceNotAvailableId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  modifiedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  modifiedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
@@ -1085,10 +1085,10 @@ export type PayrollDetailsCountOrderByAggregateInput = {
   payrollStatusId?: Prisma.SortOrder
   branchId?: Prisma.SortOrder
   allowanceNotAvailableId?: Prisma.SortOrder
-  createdDate?: Prisma.SortOrder
   createdBy?: Prisma.SortOrder
-  modifiedDate?: Prisma.SortOrder
-  modifiedBy?: Prisma.SortOrder
+  updatedBy?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   isLocked?: Prisma.SortOrder
 }
 
@@ -1124,7 +1124,7 @@ export type PayrollDetailsAvgOrderByAggregateInput = {
   branchId?: Prisma.SortOrder
   allowanceNotAvailableId?: Prisma.SortOrder
   createdBy?: Prisma.SortOrder
-  modifiedBy?: Prisma.SortOrder
+  updatedBy?: Prisma.SortOrder
 }
 
 export type PayrollDetailsMaxOrderByAggregateInput = {
@@ -1159,10 +1159,10 @@ export type PayrollDetailsMaxOrderByAggregateInput = {
   payrollStatusId?: Prisma.SortOrder
   branchId?: Prisma.SortOrder
   allowanceNotAvailableId?: Prisma.SortOrder
-  createdDate?: Prisma.SortOrder
   createdBy?: Prisma.SortOrder
-  modifiedDate?: Prisma.SortOrder
-  modifiedBy?: Prisma.SortOrder
+  updatedBy?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   isLocked?: Prisma.SortOrder
 }
 
@@ -1198,10 +1198,10 @@ export type PayrollDetailsMinOrderByAggregateInput = {
   payrollStatusId?: Prisma.SortOrder
   branchId?: Prisma.SortOrder
   allowanceNotAvailableId?: Prisma.SortOrder
-  createdDate?: Prisma.SortOrder
   createdBy?: Prisma.SortOrder
-  modifiedDate?: Prisma.SortOrder
-  modifiedBy?: Prisma.SortOrder
+  updatedBy?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   isLocked?: Prisma.SortOrder
 }
 
@@ -1237,7 +1237,7 @@ export type PayrollDetailsSumOrderByAggregateInput = {
   branchId?: Prisma.SortOrder
   allowanceNotAvailableId?: Prisma.SortOrder
   createdBy?: Prisma.SortOrder
-  modifiedBy?: Prisma.SortOrder
+  updatedBy?: Prisma.SortOrder
 }
 
 export type PayrollDetailsCreateNestedManyWithoutCreatorInput = {
@@ -1247,10 +1247,10 @@ export type PayrollDetailsCreateNestedManyWithoutCreatorInput = {
   connect?: Prisma.PayrollDetailsWhereUniqueInput | Prisma.PayrollDetailsWhereUniqueInput[]
 }
 
-export type PayrollDetailsCreateNestedManyWithoutModifierInput = {
-  create?: Prisma.XOR<Prisma.PayrollDetailsCreateWithoutModifierInput, Prisma.PayrollDetailsUncheckedCreateWithoutModifierInput> | Prisma.PayrollDetailsCreateWithoutModifierInput[] | Prisma.PayrollDetailsUncheckedCreateWithoutModifierInput[]
-  connectOrCreate?: Prisma.PayrollDetailsCreateOrConnectWithoutModifierInput | Prisma.PayrollDetailsCreateOrConnectWithoutModifierInput[]
-  createMany?: Prisma.PayrollDetailsCreateManyModifierInputEnvelope
+export type PayrollDetailsCreateNestedManyWithoutUpdaterInput = {
+  create?: Prisma.XOR<Prisma.PayrollDetailsCreateWithoutUpdaterInput, Prisma.PayrollDetailsUncheckedCreateWithoutUpdaterInput> | Prisma.PayrollDetailsCreateWithoutUpdaterInput[] | Prisma.PayrollDetailsUncheckedCreateWithoutUpdaterInput[]
+  connectOrCreate?: Prisma.PayrollDetailsCreateOrConnectWithoutUpdaterInput | Prisma.PayrollDetailsCreateOrConnectWithoutUpdaterInput[]
+  createMany?: Prisma.PayrollDetailsCreateManyUpdaterInputEnvelope
   connect?: Prisma.PayrollDetailsWhereUniqueInput | Prisma.PayrollDetailsWhereUniqueInput[]
 }
 
@@ -1261,10 +1261,10 @@ export type PayrollDetailsUncheckedCreateNestedManyWithoutCreatorInput = {
   connect?: Prisma.PayrollDetailsWhereUniqueInput | Prisma.PayrollDetailsWhereUniqueInput[]
 }
 
-export type PayrollDetailsUncheckedCreateNestedManyWithoutModifierInput = {
-  create?: Prisma.XOR<Prisma.PayrollDetailsCreateWithoutModifierInput, Prisma.PayrollDetailsUncheckedCreateWithoutModifierInput> | Prisma.PayrollDetailsCreateWithoutModifierInput[] | Prisma.PayrollDetailsUncheckedCreateWithoutModifierInput[]
-  connectOrCreate?: Prisma.PayrollDetailsCreateOrConnectWithoutModifierInput | Prisma.PayrollDetailsCreateOrConnectWithoutModifierInput[]
-  createMany?: Prisma.PayrollDetailsCreateManyModifierInputEnvelope
+export type PayrollDetailsUncheckedCreateNestedManyWithoutUpdaterInput = {
+  create?: Prisma.XOR<Prisma.PayrollDetailsCreateWithoutUpdaterInput, Prisma.PayrollDetailsUncheckedCreateWithoutUpdaterInput> | Prisma.PayrollDetailsCreateWithoutUpdaterInput[] | Prisma.PayrollDetailsUncheckedCreateWithoutUpdaterInput[]
+  connectOrCreate?: Prisma.PayrollDetailsCreateOrConnectWithoutUpdaterInput | Prisma.PayrollDetailsCreateOrConnectWithoutUpdaterInput[]
+  createMany?: Prisma.PayrollDetailsCreateManyUpdaterInputEnvelope
   connect?: Prisma.PayrollDetailsWhereUniqueInput | Prisma.PayrollDetailsWhereUniqueInput[]
 }
 
@@ -1282,17 +1282,17 @@ export type PayrollDetailsUpdateManyWithoutCreatorNestedInput = {
   deleteMany?: Prisma.PayrollDetailsScalarWhereInput | Prisma.PayrollDetailsScalarWhereInput[]
 }
 
-export type PayrollDetailsUpdateManyWithoutModifierNestedInput = {
-  create?: Prisma.XOR<Prisma.PayrollDetailsCreateWithoutModifierInput, Prisma.PayrollDetailsUncheckedCreateWithoutModifierInput> | Prisma.PayrollDetailsCreateWithoutModifierInput[] | Prisma.PayrollDetailsUncheckedCreateWithoutModifierInput[]
-  connectOrCreate?: Prisma.PayrollDetailsCreateOrConnectWithoutModifierInput | Prisma.PayrollDetailsCreateOrConnectWithoutModifierInput[]
-  upsert?: Prisma.PayrollDetailsUpsertWithWhereUniqueWithoutModifierInput | Prisma.PayrollDetailsUpsertWithWhereUniqueWithoutModifierInput[]
-  createMany?: Prisma.PayrollDetailsCreateManyModifierInputEnvelope
+export type PayrollDetailsUpdateManyWithoutUpdaterNestedInput = {
+  create?: Prisma.XOR<Prisma.PayrollDetailsCreateWithoutUpdaterInput, Prisma.PayrollDetailsUncheckedCreateWithoutUpdaterInput> | Prisma.PayrollDetailsCreateWithoutUpdaterInput[] | Prisma.PayrollDetailsUncheckedCreateWithoutUpdaterInput[]
+  connectOrCreate?: Prisma.PayrollDetailsCreateOrConnectWithoutUpdaterInput | Prisma.PayrollDetailsCreateOrConnectWithoutUpdaterInput[]
+  upsert?: Prisma.PayrollDetailsUpsertWithWhereUniqueWithoutUpdaterInput | Prisma.PayrollDetailsUpsertWithWhereUniqueWithoutUpdaterInput[]
+  createMany?: Prisma.PayrollDetailsCreateManyUpdaterInputEnvelope
   set?: Prisma.PayrollDetailsWhereUniqueInput | Prisma.PayrollDetailsWhereUniqueInput[]
   disconnect?: Prisma.PayrollDetailsWhereUniqueInput | Prisma.PayrollDetailsWhereUniqueInput[]
   delete?: Prisma.PayrollDetailsWhereUniqueInput | Prisma.PayrollDetailsWhereUniqueInput[]
   connect?: Prisma.PayrollDetailsWhereUniqueInput | Prisma.PayrollDetailsWhereUniqueInput[]
-  update?: Prisma.PayrollDetailsUpdateWithWhereUniqueWithoutModifierInput | Prisma.PayrollDetailsUpdateWithWhereUniqueWithoutModifierInput[]
-  updateMany?: Prisma.PayrollDetailsUpdateManyWithWhereWithoutModifierInput | Prisma.PayrollDetailsUpdateManyWithWhereWithoutModifierInput[]
+  update?: Prisma.PayrollDetailsUpdateWithWhereUniqueWithoutUpdaterInput | Prisma.PayrollDetailsUpdateWithWhereUniqueWithoutUpdaterInput[]
+  updateMany?: Prisma.PayrollDetailsUpdateManyWithWhereWithoutUpdaterInput | Prisma.PayrollDetailsUpdateManyWithWhereWithoutUpdaterInput[]
   deleteMany?: Prisma.PayrollDetailsScalarWhereInput | Prisma.PayrollDetailsScalarWhereInput[]
 }
 
@@ -1310,17 +1310,17 @@ export type PayrollDetailsUncheckedUpdateManyWithoutCreatorNestedInput = {
   deleteMany?: Prisma.PayrollDetailsScalarWhereInput | Prisma.PayrollDetailsScalarWhereInput[]
 }
 
-export type PayrollDetailsUncheckedUpdateManyWithoutModifierNestedInput = {
-  create?: Prisma.XOR<Prisma.PayrollDetailsCreateWithoutModifierInput, Prisma.PayrollDetailsUncheckedCreateWithoutModifierInput> | Prisma.PayrollDetailsCreateWithoutModifierInput[] | Prisma.PayrollDetailsUncheckedCreateWithoutModifierInput[]
-  connectOrCreate?: Prisma.PayrollDetailsCreateOrConnectWithoutModifierInput | Prisma.PayrollDetailsCreateOrConnectWithoutModifierInput[]
-  upsert?: Prisma.PayrollDetailsUpsertWithWhereUniqueWithoutModifierInput | Prisma.PayrollDetailsUpsertWithWhereUniqueWithoutModifierInput[]
-  createMany?: Prisma.PayrollDetailsCreateManyModifierInputEnvelope
+export type PayrollDetailsUncheckedUpdateManyWithoutUpdaterNestedInput = {
+  create?: Prisma.XOR<Prisma.PayrollDetailsCreateWithoutUpdaterInput, Prisma.PayrollDetailsUncheckedCreateWithoutUpdaterInput> | Prisma.PayrollDetailsCreateWithoutUpdaterInput[] | Prisma.PayrollDetailsUncheckedCreateWithoutUpdaterInput[]
+  connectOrCreate?: Prisma.PayrollDetailsCreateOrConnectWithoutUpdaterInput | Prisma.PayrollDetailsCreateOrConnectWithoutUpdaterInput[]
+  upsert?: Prisma.PayrollDetailsUpsertWithWhereUniqueWithoutUpdaterInput | Prisma.PayrollDetailsUpsertWithWhereUniqueWithoutUpdaterInput[]
+  createMany?: Prisma.PayrollDetailsCreateManyUpdaterInputEnvelope
   set?: Prisma.PayrollDetailsWhereUniqueInput | Prisma.PayrollDetailsWhereUniqueInput[]
   disconnect?: Prisma.PayrollDetailsWhereUniqueInput | Prisma.PayrollDetailsWhereUniqueInput[]
   delete?: Prisma.PayrollDetailsWhereUniqueInput | Prisma.PayrollDetailsWhereUniqueInput[]
   connect?: Prisma.PayrollDetailsWhereUniqueInput | Prisma.PayrollDetailsWhereUniqueInput[]
-  update?: Prisma.PayrollDetailsUpdateWithWhereUniqueWithoutModifierInput | Prisma.PayrollDetailsUpdateWithWhereUniqueWithoutModifierInput[]
-  updateMany?: Prisma.PayrollDetailsUpdateManyWithWhereWithoutModifierInput | Prisma.PayrollDetailsUpdateManyWithWhereWithoutModifierInput[]
+  update?: Prisma.PayrollDetailsUpdateWithWhereUniqueWithoutUpdaterInput | Prisma.PayrollDetailsUpdateWithWhereUniqueWithoutUpdaterInput[]
+  updateMany?: Prisma.PayrollDetailsUpdateManyWithWhereWithoutUpdaterInput | Prisma.PayrollDetailsUpdateManyWithWhereWithoutUpdaterInput[]
   deleteMany?: Prisma.PayrollDetailsScalarWhereInput | Prisma.PayrollDetailsScalarWhereInput[]
 }
 
@@ -1601,8 +1601,8 @@ export type PayrollDetailsCreateWithoutCreatorInput = {
   cashSalary: number
   overTime: number
   remarks?: string | null
-  createdDate?: Date | string
-  modifiedDate?: Date | string
+  createdAt?: Date | string
+  updatedAt?: Date | string
   isLocked?: boolean
   payrollSummary: Prisma.PayrollSummaryCreateNestedOneWithoutDetailsInput
   employee: Prisma.EmployeeCreateNestedOneWithoutPayrollDetailsInput
@@ -1610,7 +1610,7 @@ export type PayrollDetailsCreateWithoutCreatorInput = {
   payrollStatus?: Prisma.PayrollStatusCreateNestedOneWithoutPayrollDetailsInput
   branch?: Prisma.BranchCreateNestedOneWithoutPayrollDetailsInput
   allowanceNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedOneWithoutPayrollDetailsInput
-  modifier?: Prisma.UserCreateNestedOneWithoutModifiedPayrollDetailsInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedPayrollDetailsInput
 }
 
 export type PayrollDetailsUncheckedCreateWithoutCreatorInput = {
@@ -1645,9 +1645,9 @@ export type PayrollDetailsUncheckedCreateWithoutCreatorInput = {
   payrollStatusId?: number | null
   branchId?: number | null
   allowanceNotAvailableId?: number | null
-  createdDate?: Date | string
-  modifiedDate?: Date | string
-  modifiedBy?: number | null
+  updatedBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
   isLocked?: boolean
 }
 
@@ -1661,7 +1661,7 @@ export type PayrollDetailsCreateManyCreatorInputEnvelope = {
   skipDuplicates?: boolean
 }
 
-export type PayrollDetailsCreateWithoutModifierInput = {
+export type PayrollDetailsCreateWithoutUpdaterInput = {
   payrollMonth: number
   payrollYear: number
   workDays: number
@@ -1686,8 +1686,8 @@ export type PayrollDetailsCreateWithoutModifierInput = {
   cashSalary: number
   overTime: number
   remarks?: string | null
-  createdDate?: Date | string
-  modifiedDate?: Date | string
+  createdAt?: Date | string
+  updatedAt?: Date | string
   isLocked?: boolean
   payrollSummary: Prisma.PayrollSummaryCreateNestedOneWithoutDetailsInput
   employee: Prisma.EmployeeCreateNestedOneWithoutPayrollDetailsInput
@@ -1698,7 +1698,7 @@ export type PayrollDetailsCreateWithoutModifierInput = {
   creator?: Prisma.UserCreateNestedOneWithoutCreatedPayrollDetailsInput
 }
 
-export type PayrollDetailsUncheckedCreateWithoutModifierInput = {
+export type PayrollDetailsUncheckedCreateWithoutUpdaterInput = {
   id?: number
   payrollId: number
   payrollMonth: number
@@ -1730,19 +1730,19 @@ export type PayrollDetailsUncheckedCreateWithoutModifierInput = {
   payrollStatusId?: number | null
   branchId?: number | null
   allowanceNotAvailableId?: number | null
-  createdDate?: Date | string
   createdBy?: number | null
-  modifiedDate?: Date | string
+  createdAt?: Date | string
+  updatedAt?: Date | string
   isLocked?: boolean
 }
 
-export type PayrollDetailsCreateOrConnectWithoutModifierInput = {
+export type PayrollDetailsCreateOrConnectWithoutUpdaterInput = {
   where: Prisma.PayrollDetailsWhereUniqueInput
-  create: Prisma.XOR<Prisma.PayrollDetailsCreateWithoutModifierInput, Prisma.PayrollDetailsUncheckedCreateWithoutModifierInput>
+  create: Prisma.XOR<Prisma.PayrollDetailsCreateWithoutUpdaterInput, Prisma.PayrollDetailsUncheckedCreateWithoutUpdaterInput>
 }
 
-export type PayrollDetailsCreateManyModifierInputEnvelope = {
-  data: Prisma.PayrollDetailsCreateManyModifierInput | Prisma.PayrollDetailsCreateManyModifierInput[]
+export type PayrollDetailsCreateManyUpdaterInputEnvelope = {
+  data: Prisma.PayrollDetailsCreateManyUpdaterInput | Prisma.PayrollDetailsCreateManyUpdaterInput[]
   skipDuplicates?: boolean
 }
 
@@ -1797,27 +1797,27 @@ export type PayrollDetailsScalarWhereInput = {
   payrollStatusId?: Prisma.IntNullableFilter<"PayrollDetails"> | number | null
   branchId?: Prisma.IntNullableFilter<"PayrollDetails"> | number | null
   allowanceNotAvailableId?: Prisma.IntNullableFilter<"PayrollDetails"> | number | null
-  createdDate?: Prisma.DateTimeFilter<"PayrollDetails"> | Date | string
   createdBy?: Prisma.IntNullableFilter<"PayrollDetails"> | number | null
-  modifiedDate?: Prisma.DateTimeFilter<"PayrollDetails"> | Date | string
-  modifiedBy?: Prisma.IntNullableFilter<"PayrollDetails"> | number | null
+  updatedBy?: Prisma.IntNullableFilter<"PayrollDetails"> | number | null
+  createdAt?: Prisma.DateTimeFilter<"PayrollDetails"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"PayrollDetails"> | Date | string
   isLocked?: Prisma.BoolFilter<"PayrollDetails"> | boolean
 }
 
-export type PayrollDetailsUpsertWithWhereUniqueWithoutModifierInput = {
+export type PayrollDetailsUpsertWithWhereUniqueWithoutUpdaterInput = {
   where: Prisma.PayrollDetailsWhereUniqueInput
-  update: Prisma.XOR<Prisma.PayrollDetailsUpdateWithoutModifierInput, Prisma.PayrollDetailsUncheckedUpdateWithoutModifierInput>
-  create: Prisma.XOR<Prisma.PayrollDetailsCreateWithoutModifierInput, Prisma.PayrollDetailsUncheckedCreateWithoutModifierInput>
+  update: Prisma.XOR<Prisma.PayrollDetailsUpdateWithoutUpdaterInput, Prisma.PayrollDetailsUncheckedUpdateWithoutUpdaterInput>
+  create: Prisma.XOR<Prisma.PayrollDetailsCreateWithoutUpdaterInput, Prisma.PayrollDetailsUncheckedCreateWithoutUpdaterInput>
 }
 
-export type PayrollDetailsUpdateWithWhereUniqueWithoutModifierInput = {
+export type PayrollDetailsUpdateWithWhereUniqueWithoutUpdaterInput = {
   where: Prisma.PayrollDetailsWhereUniqueInput
-  data: Prisma.XOR<Prisma.PayrollDetailsUpdateWithoutModifierInput, Prisma.PayrollDetailsUncheckedUpdateWithoutModifierInput>
+  data: Prisma.XOR<Prisma.PayrollDetailsUpdateWithoutUpdaterInput, Prisma.PayrollDetailsUncheckedUpdateWithoutUpdaterInput>
 }
 
-export type PayrollDetailsUpdateManyWithWhereWithoutModifierInput = {
+export type PayrollDetailsUpdateManyWithWhereWithoutUpdaterInput = {
   where: Prisma.PayrollDetailsScalarWhereInput
-  data: Prisma.XOR<Prisma.PayrollDetailsUpdateManyMutationInput, Prisma.PayrollDetailsUncheckedUpdateManyWithoutModifierInput>
+  data: Prisma.XOR<Prisma.PayrollDetailsUpdateManyMutationInput, Prisma.PayrollDetailsUncheckedUpdateManyWithoutUpdaterInput>
 }
 
 export type PayrollDetailsCreateWithoutBranchInput = {
@@ -1845,8 +1845,8 @@ export type PayrollDetailsCreateWithoutBranchInput = {
   cashSalary: number
   overTime: number
   remarks?: string | null
-  createdDate?: Date | string
-  modifiedDate?: Date | string
+  createdAt?: Date | string
+  updatedAt?: Date | string
   isLocked?: boolean
   payrollSummary: Prisma.PayrollSummaryCreateNestedOneWithoutDetailsInput
   employee: Prisma.EmployeeCreateNestedOneWithoutPayrollDetailsInput
@@ -1854,7 +1854,7 @@ export type PayrollDetailsCreateWithoutBranchInput = {
   payrollStatus?: Prisma.PayrollStatusCreateNestedOneWithoutPayrollDetailsInput
   allowanceNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedOneWithoutPayrollDetailsInput
   creator?: Prisma.UserCreateNestedOneWithoutCreatedPayrollDetailsInput
-  modifier?: Prisma.UserCreateNestedOneWithoutModifiedPayrollDetailsInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedPayrollDetailsInput
 }
 
 export type PayrollDetailsUncheckedCreateWithoutBranchInput = {
@@ -1888,10 +1888,10 @@ export type PayrollDetailsUncheckedCreateWithoutBranchInput = {
   paymentMethodId?: number | null
   payrollStatusId?: number | null
   allowanceNotAvailableId?: number | null
-  createdDate?: Date | string
   createdBy?: number | null
-  modifiedDate?: Date | string
-  modifiedBy?: number | null
+  updatedBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
   isLocked?: boolean
 }
 
@@ -1946,8 +1946,8 @@ export type PayrollDetailsCreateWithoutEmployeeInput = {
   cashSalary: number
   overTime: number
   remarks?: string | null
-  createdDate?: Date | string
-  modifiedDate?: Date | string
+  createdAt?: Date | string
+  updatedAt?: Date | string
   isLocked?: boolean
   payrollSummary: Prisma.PayrollSummaryCreateNestedOneWithoutDetailsInput
   paymentMethod?: Prisma.PaymentMethodCreateNestedOneWithoutPayrollDetailsInput
@@ -1955,7 +1955,7 @@ export type PayrollDetailsCreateWithoutEmployeeInput = {
   branch?: Prisma.BranchCreateNestedOneWithoutPayrollDetailsInput
   allowanceNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedOneWithoutPayrollDetailsInput
   creator?: Prisma.UserCreateNestedOneWithoutCreatedPayrollDetailsInput
-  modifier?: Prisma.UserCreateNestedOneWithoutModifiedPayrollDetailsInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedPayrollDetailsInput
 }
 
 export type PayrollDetailsUncheckedCreateWithoutEmployeeInput = {
@@ -1989,10 +1989,10 @@ export type PayrollDetailsUncheckedCreateWithoutEmployeeInput = {
   payrollStatusId?: number | null
   branchId?: number | null
   allowanceNotAvailableId?: number | null
-  createdDate?: Date | string
   createdBy?: number | null
-  modifiedDate?: Date | string
-  modifiedBy?: number | null
+  updatedBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
   isLocked?: boolean
 }
 
@@ -2047,8 +2047,8 @@ export type PayrollDetailsCreateWithoutPayrollStatusInput = {
   cashSalary: number
   overTime: number
   remarks?: string | null
-  createdDate?: Date | string
-  modifiedDate?: Date | string
+  createdAt?: Date | string
+  updatedAt?: Date | string
   isLocked?: boolean
   payrollSummary: Prisma.PayrollSummaryCreateNestedOneWithoutDetailsInput
   employee: Prisma.EmployeeCreateNestedOneWithoutPayrollDetailsInput
@@ -2056,7 +2056,7 @@ export type PayrollDetailsCreateWithoutPayrollStatusInput = {
   branch?: Prisma.BranchCreateNestedOneWithoutPayrollDetailsInput
   allowanceNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedOneWithoutPayrollDetailsInput
   creator?: Prisma.UserCreateNestedOneWithoutCreatedPayrollDetailsInput
-  modifier?: Prisma.UserCreateNestedOneWithoutModifiedPayrollDetailsInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedPayrollDetailsInput
 }
 
 export type PayrollDetailsUncheckedCreateWithoutPayrollStatusInput = {
@@ -2090,10 +2090,10 @@ export type PayrollDetailsUncheckedCreateWithoutPayrollStatusInput = {
   paymentMethodId?: number | null
   branchId?: number | null
   allowanceNotAvailableId?: number | null
-  createdDate?: Date | string
   createdBy?: number | null
-  modifiedDate?: Date | string
-  modifiedBy?: number | null
+  updatedBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
   isLocked?: boolean
 }
 
@@ -2148,8 +2148,8 @@ export type PayrollDetailsCreateWithoutPayrollSummaryInput = {
   cashSalary: number
   overTime: number
   remarks?: string | null
-  createdDate?: Date | string
-  modifiedDate?: Date | string
+  createdAt?: Date | string
+  updatedAt?: Date | string
   isLocked?: boolean
   employee: Prisma.EmployeeCreateNestedOneWithoutPayrollDetailsInput
   paymentMethod?: Prisma.PaymentMethodCreateNestedOneWithoutPayrollDetailsInput
@@ -2157,7 +2157,7 @@ export type PayrollDetailsCreateWithoutPayrollSummaryInput = {
   branch?: Prisma.BranchCreateNestedOneWithoutPayrollDetailsInput
   allowanceNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedOneWithoutPayrollDetailsInput
   creator?: Prisma.UserCreateNestedOneWithoutCreatedPayrollDetailsInput
-  modifier?: Prisma.UserCreateNestedOneWithoutModifiedPayrollDetailsInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedPayrollDetailsInput
 }
 
 export type PayrollDetailsUncheckedCreateWithoutPayrollSummaryInput = {
@@ -2191,10 +2191,10 @@ export type PayrollDetailsUncheckedCreateWithoutPayrollSummaryInput = {
   payrollStatusId?: number | null
   branchId?: number | null
   allowanceNotAvailableId?: number | null
-  createdDate?: Date | string
   createdBy?: number | null
-  modifiedDate?: Date | string
-  modifiedBy?: number | null
+  updatedBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
   isLocked?: boolean
 }
 
@@ -2249,8 +2249,8 @@ export type PayrollDetailsCreateWithoutPaymentMethodInput = {
   cashSalary: number
   overTime: number
   remarks?: string | null
-  createdDate?: Date | string
-  modifiedDate?: Date | string
+  createdAt?: Date | string
+  updatedAt?: Date | string
   isLocked?: boolean
   payrollSummary: Prisma.PayrollSummaryCreateNestedOneWithoutDetailsInput
   employee: Prisma.EmployeeCreateNestedOneWithoutPayrollDetailsInput
@@ -2258,7 +2258,7 @@ export type PayrollDetailsCreateWithoutPaymentMethodInput = {
   branch?: Prisma.BranchCreateNestedOneWithoutPayrollDetailsInput
   allowanceNotAvailable?: Prisma.AllowanceNotAvailableCreateNestedOneWithoutPayrollDetailsInput
   creator?: Prisma.UserCreateNestedOneWithoutCreatedPayrollDetailsInput
-  modifier?: Prisma.UserCreateNestedOneWithoutModifiedPayrollDetailsInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedPayrollDetailsInput
 }
 
 export type PayrollDetailsUncheckedCreateWithoutPaymentMethodInput = {
@@ -2292,10 +2292,10 @@ export type PayrollDetailsUncheckedCreateWithoutPaymentMethodInput = {
   payrollStatusId?: number | null
   branchId?: number | null
   allowanceNotAvailableId?: number | null
-  createdDate?: Date | string
   createdBy?: number | null
-  modifiedDate?: Date | string
-  modifiedBy?: number | null
+  updatedBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
   isLocked?: boolean
 }
 
@@ -2350,8 +2350,8 @@ export type PayrollDetailsCreateWithoutAllowanceNotAvailableInput = {
   cashSalary: number
   overTime: number
   remarks?: string | null
-  createdDate?: Date | string
-  modifiedDate?: Date | string
+  createdAt?: Date | string
+  updatedAt?: Date | string
   isLocked?: boolean
   payrollSummary: Prisma.PayrollSummaryCreateNestedOneWithoutDetailsInput
   employee: Prisma.EmployeeCreateNestedOneWithoutPayrollDetailsInput
@@ -2359,7 +2359,7 @@ export type PayrollDetailsCreateWithoutAllowanceNotAvailableInput = {
   payrollStatus?: Prisma.PayrollStatusCreateNestedOneWithoutPayrollDetailsInput
   branch?: Prisma.BranchCreateNestedOneWithoutPayrollDetailsInput
   creator?: Prisma.UserCreateNestedOneWithoutCreatedPayrollDetailsInput
-  modifier?: Prisma.UserCreateNestedOneWithoutModifiedPayrollDetailsInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedPayrollDetailsInput
 }
 
 export type PayrollDetailsUncheckedCreateWithoutAllowanceNotAvailableInput = {
@@ -2393,10 +2393,10 @@ export type PayrollDetailsUncheckedCreateWithoutAllowanceNotAvailableInput = {
   paymentMethodId?: number | null
   payrollStatusId?: number | null
   branchId?: number | null
-  createdDate?: Date | string
   createdBy?: number | null
-  modifiedDate?: Date | string
-  modifiedBy?: number | null
+  updatedBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
   isLocked?: boolean
 }
 
@@ -2458,13 +2458,13 @@ export type PayrollDetailsCreateManyCreatorInput = {
   payrollStatusId?: number | null
   branchId?: number | null
   allowanceNotAvailableId?: number | null
-  createdDate?: Date | string
-  modifiedDate?: Date | string
-  modifiedBy?: number | null
+  updatedBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
   isLocked?: boolean
 }
 
-export type PayrollDetailsCreateManyModifierInput = {
+export type PayrollDetailsCreateManyUpdaterInput = {
   id?: number
   payrollId: number
   payrollMonth: number
@@ -2496,9 +2496,9 @@ export type PayrollDetailsCreateManyModifierInput = {
   payrollStatusId?: number | null
   branchId?: number | null
   allowanceNotAvailableId?: number | null
-  createdDate?: Date | string
   createdBy?: number | null
-  modifiedDate?: Date | string
+  createdAt?: Date | string
+  updatedAt?: Date | string
   isLocked?: boolean
 }
 
@@ -2527,8 +2527,8 @@ export type PayrollDetailsUpdateWithoutCreatorInput = {
   cashSalary?: Prisma.IntFieldUpdateOperationsInput | number
   overTime?: Prisma.IntFieldUpdateOperationsInput | number
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  modifiedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
   payrollSummary?: Prisma.PayrollSummaryUpdateOneRequiredWithoutDetailsNestedInput
   employee?: Prisma.EmployeeUpdateOneRequiredWithoutPayrollDetailsNestedInput
@@ -2536,7 +2536,7 @@ export type PayrollDetailsUpdateWithoutCreatorInput = {
   payrollStatus?: Prisma.PayrollStatusUpdateOneWithoutPayrollDetailsNestedInput
   branch?: Prisma.BranchUpdateOneWithoutPayrollDetailsNestedInput
   allowanceNotAvailable?: Prisma.AllowanceNotAvailableUpdateOneWithoutPayrollDetailsNestedInput
-  modifier?: Prisma.UserUpdateOneWithoutModifiedPayrollDetailsNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedPayrollDetailsNestedInput
 }
 
 export type PayrollDetailsUncheckedUpdateWithoutCreatorInput = {
@@ -2571,9 +2571,9 @@ export type PayrollDetailsUncheckedUpdateWithoutCreatorInput = {
   payrollStatusId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   allowanceNotAvailableId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  modifiedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  modifiedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
@@ -2609,13 +2609,13 @@ export type PayrollDetailsUncheckedUpdateManyWithoutCreatorInput = {
   payrollStatusId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   allowanceNotAvailableId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  modifiedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  modifiedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
-export type PayrollDetailsUpdateWithoutModifierInput = {
+export type PayrollDetailsUpdateWithoutUpdaterInput = {
   payrollMonth?: Prisma.IntFieldUpdateOperationsInput | number
   payrollYear?: Prisma.IntFieldUpdateOperationsInput | number
   workDays?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2640,8 +2640,8 @@ export type PayrollDetailsUpdateWithoutModifierInput = {
   cashSalary?: Prisma.IntFieldUpdateOperationsInput | number
   overTime?: Prisma.IntFieldUpdateOperationsInput | number
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  modifiedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
   payrollSummary?: Prisma.PayrollSummaryUpdateOneRequiredWithoutDetailsNestedInput
   employee?: Prisma.EmployeeUpdateOneRequiredWithoutPayrollDetailsNestedInput
@@ -2652,7 +2652,7 @@ export type PayrollDetailsUpdateWithoutModifierInput = {
   creator?: Prisma.UserUpdateOneWithoutCreatedPayrollDetailsNestedInput
 }
 
-export type PayrollDetailsUncheckedUpdateWithoutModifierInput = {
+export type PayrollDetailsUncheckedUpdateWithoutUpdaterInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   payrollId?: Prisma.IntFieldUpdateOperationsInput | number
   payrollMonth?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2684,13 +2684,13 @@ export type PayrollDetailsUncheckedUpdateWithoutModifierInput = {
   payrollStatusId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   allowanceNotAvailableId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  modifiedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
-export type PayrollDetailsUncheckedUpdateManyWithoutModifierInput = {
+export type PayrollDetailsUncheckedUpdateManyWithoutUpdaterInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   payrollId?: Prisma.IntFieldUpdateOperationsInput | number
   payrollMonth?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2722,9 +2722,9 @@ export type PayrollDetailsUncheckedUpdateManyWithoutModifierInput = {
   payrollStatusId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   allowanceNotAvailableId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  modifiedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
@@ -2759,10 +2759,10 @@ export type PayrollDetailsCreateManyBranchInput = {
   paymentMethodId?: number | null
   payrollStatusId?: number | null
   allowanceNotAvailableId?: number | null
-  createdDate?: Date | string
   createdBy?: number | null
-  modifiedDate?: Date | string
-  modifiedBy?: number | null
+  updatedBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
   isLocked?: boolean
 }
 
@@ -2791,8 +2791,8 @@ export type PayrollDetailsUpdateWithoutBranchInput = {
   cashSalary?: Prisma.IntFieldUpdateOperationsInput | number
   overTime?: Prisma.IntFieldUpdateOperationsInput | number
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  modifiedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
   payrollSummary?: Prisma.PayrollSummaryUpdateOneRequiredWithoutDetailsNestedInput
   employee?: Prisma.EmployeeUpdateOneRequiredWithoutPayrollDetailsNestedInput
@@ -2800,7 +2800,7 @@ export type PayrollDetailsUpdateWithoutBranchInput = {
   payrollStatus?: Prisma.PayrollStatusUpdateOneWithoutPayrollDetailsNestedInput
   allowanceNotAvailable?: Prisma.AllowanceNotAvailableUpdateOneWithoutPayrollDetailsNestedInput
   creator?: Prisma.UserUpdateOneWithoutCreatedPayrollDetailsNestedInput
-  modifier?: Prisma.UserUpdateOneWithoutModifiedPayrollDetailsNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedPayrollDetailsNestedInput
 }
 
 export type PayrollDetailsUncheckedUpdateWithoutBranchInput = {
@@ -2834,10 +2834,10 @@ export type PayrollDetailsUncheckedUpdateWithoutBranchInput = {
   paymentMethodId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   payrollStatusId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   allowanceNotAvailableId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  modifiedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  modifiedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
@@ -2872,10 +2872,10 @@ export type PayrollDetailsUncheckedUpdateManyWithoutBranchInput = {
   paymentMethodId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   payrollStatusId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   allowanceNotAvailableId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  modifiedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  modifiedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
@@ -2910,10 +2910,10 @@ export type PayrollDetailsCreateManyEmployeeInput = {
   payrollStatusId?: number | null
   branchId?: number | null
   allowanceNotAvailableId?: number | null
-  createdDate?: Date | string
   createdBy?: number | null
-  modifiedDate?: Date | string
-  modifiedBy?: number | null
+  updatedBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
   isLocked?: boolean
 }
 
@@ -2942,8 +2942,8 @@ export type PayrollDetailsUpdateWithoutEmployeeInput = {
   cashSalary?: Prisma.IntFieldUpdateOperationsInput | number
   overTime?: Prisma.IntFieldUpdateOperationsInput | number
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  modifiedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
   payrollSummary?: Prisma.PayrollSummaryUpdateOneRequiredWithoutDetailsNestedInput
   paymentMethod?: Prisma.PaymentMethodUpdateOneWithoutPayrollDetailsNestedInput
@@ -2951,7 +2951,7 @@ export type PayrollDetailsUpdateWithoutEmployeeInput = {
   branch?: Prisma.BranchUpdateOneWithoutPayrollDetailsNestedInput
   allowanceNotAvailable?: Prisma.AllowanceNotAvailableUpdateOneWithoutPayrollDetailsNestedInput
   creator?: Prisma.UserUpdateOneWithoutCreatedPayrollDetailsNestedInput
-  modifier?: Prisma.UserUpdateOneWithoutModifiedPayrollDetailsNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedPayrollDetailsNestedInput
 }
 
 export type PayrollDetailsUncheckedUpdateWithoutEmployeeInput = {
@@ -2985,10 +2985,10 @@ export type PayrollDetailsUncheckedUpdateWithoutEmployeeInput = {
   payrollStatusId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   allowanceNotAvailableId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  modifiedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  modifiedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
@@ -3023,10 +3023,10 @@ export type PayrollDetailsUncheckedUpdateManyWithoutEmployeeInput = {
   payrollStatusId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   allowanceNotAvailableId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  modifiedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  modifiedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
@@ -3061,10 +3061,10 @@ export type PayrollDetailsCreateManyPayrollStatusInput = {
   paymentMethodId?: number | null
   branchId?: number | null
   allowanceNotAvailableId?: number | null
-  createdDate?: Date | string
   createdBy?: number | null
-  modifiedDate?: Date | string
-  modifiedBy?: number | null
+  updatedBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
   isLocked?: boolean
 }
 
@@ -3093,8 +3093,8 @@ export type PayrollDetailsUpdateWithoutPayrollStatusInput = {
   cashSalary?: Prisma.IntFieldUpdateOperationsInput | number
   overTime?: Prisma.IntFieldUpdateOperationsInput | number
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  modifiedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
   payrollSummary?: Prisma.PayrollSummaryUpdateOneRequiredWithoutDetailsNestedInput
   employee?: Prisma.EmployeeUpdateOneRequiredWithoutPayrollDetailsNestedInput
@@ -3102,7 +3102,7 @@ export type PayrollDetailsUpdateWithoutPayrollStatusInput = {
   branch?: Prisma.BranchUpdateOneWithoutPayrollDetailsNestedInput
   allowanceNotAvailable?: Prisma.AllowanceNotAvailableUpdateOneWithoutPayrollDetailsNestedInput
   creator?: Prisma.UserUpdateOneWithoutCreatedPayrollDetailsNestedInput
-  modifier?: Prisma.UserUpdateOneWithoutModifiedPayrollDetailsNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedPayrollDetailsNestedInput
 }
 
 export type PayrollDetailsUncheckedUpdateWithoutPayrollStatusInput = {
@@ -3136,10 +3136,10 @@ export type PayrollDetailsUncheckedUpdateWithoutPayrollStatusInput = {
   paymentMethodId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   allowanceNotAvailableId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  modifiedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  modifiedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
@@ -3174,10 +3174,10 @@ export type PayrollDetailsUncheckedUpdateManyWithoutPayrollStatusInput = {
   paymentMethodId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   allowanceNotAvailableId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  modifiedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  modifiedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
@@ -3212,10 +3212,10 @@ export type PayrollDetailsCreateManyPayrollSummaryInput = {
   payrollStatusId?: number | null
   branchId?: number | null
   allowanceNotAvailableId?: number | null
-  createdDate?: Date | string
   createdBy?: number | null
-  modifiedDate?: Date | string
-  modifiedBy?: number | null
+  updatedBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
   isLocked?: boolean
 }
 
@@ -3244,8 +3244,8 @@ export type PayrollDetailsUpdateWithoutPayrollSummaryInput = {
   cashSalary?: Prisma.IntFieldUpdateOperationsInput | number
   overTime?: Prisma.IntFieldUpdateOperationsInput | number
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  modifiedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
   employee?: Prisma.EmployeeUpdateOneRequiredWithoutPayrollDetailsNestedInput
   paymentMethod?: Prisma.PaymentMethodUpdateOneWithoutPayrollDetailsNestedInput
@@ -3253,7 +3253,7 @@ export type PayrollDetailsUpdateWithoutPayrollSummaryInput = {
   branch?: Prisma.BranchUpdateOneWithoutPayrollDetailsNestedInput
   allowanceNotAvailable?: Prisma.AllowanceNotAvailableUpdateOneWithoutPayrollDetailsNestedInput
   creator?: Prisma.UserUpdateOneWithoutCreatedPayrollDetailsNestedInput
-  modifier?: Prisma.UserUpdateOneWithoutModifiedPayrollDetailsNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedPayrollDetailsNestedInput
 }
 
 export type PayrollDetailsUncheckedUpdateWithoutPayrollSummaryInput = {
@@ -3287,10 +3287,10 @@ export type PayrollDetailsUncheckedUpdateWithoutPayrollSummaryInput = {
   payrollStatusId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   allowanceNotAvailableId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  modifiedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  modifiedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
@@ -3325,10 +3325,10 @@ export type PayrollDetailsUncheckedUpdateManyWithoutPayrollSummaryInput = {
   payrollStatusId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   allowanceNotAvailableId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  modifiedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  modifiedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
@@ -3363,10 +3363,10 @@ export type PayrollDetailsCreateManyPaymentMethodInput = {
   payrollStatusId?: number | null
   branchId?: number | null
   allowanceNotAvailableId?: number | null
-  createdDate?: Date | string
   createdBy?: number | null
-  modifiedDate?: Date | string
-  modifiedBy?: number | null
+  updatedBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
   isLocked?: boolean
 }
 
@@ -3395,8 +3395,8 @@ export type PayrollDetailsUpdateWithoutPaymentMethodInput = {
   cashSalary?: Prisma.IntFieldUpdateOperationsInput | number
   overTime?: Prisma.IntFieldUpdateOperationsInput | number
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  modifiedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
   payrollSummary?: Prisma.PayrollSummaryUpdateOneRequiredWithoutDetailsNestedInput
   employee?: Prisma.EmployeeUpdateOneRequiredWithoutPayrollDetailsNestedInput
@@ -3404,7 +3404,7 @@ export type PayrollDetailsUpdateWithoutPaymentMethodInput = {
   branch?: Prisma.BranchUpdateOneWithoutPayrollDetailsNestedInput
   allowanceNotAvailable?: Prisma.AllowanceNotAvailableUpdateOneWithoutPayrollDetailsNestedInput
   creator?: Prisma.UserUpdateOneWithoutCreatedPayrollDetailsNestedInput
-  modifier?: Prisma.UserUpdateOneWithoutModifiedPayrollDetailsNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedPayrollDetailsNestedInput
 }
 
 export type PayrollDetailsUncheckedUpdateWithoutPaymentMethodInput = {
@@ -3438,10 +3438,10 @@ export type PayrollDetailsUncheckedUpdateWithoutPaymentMethodInput = {
   payrollStatusId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   allowanceNotAvailableId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  modifiedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  modifiedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
@@ -3476,10 +3476,10 @@ export type PayrollDetailsUncheckedUpdateManyWithoutPaymentMethodInput = {
   payrollStatusId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   allowanceNotAvailableId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  modifiedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  modifiedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
@@ -3514,10 +3514,10 @@ export type PayrollDetailsCreateManyAllowanceNotAvailableInput = {
   paymentMethodId?: number | null
   payrollStatusId?: number | null
   branchId?: number | null
-  createdDate?: Date | string
   createdBy?: number | null
-  modifiedDate?: Date | string
-  modifiedBy?: number | null
+  updatedBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
   isLocked?: boolean
 }
 
@@ -3546,8 +3546,8 @@ export type PayrollDetailsUpdateWithoutAllowanceNotAvailableInput = {
   cashSalary?: Prisma.IntFieldUpdateOperationsInput | number
   overTime?: Prisma.IntFieldUpdateOperationsInput | number
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  modifiedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
   payrollSummary?: Prisma.PayrollSummaryUpdateOneRequiredWithoutDetailsNestedInput
   employee?: Prisma.EmployeeUpdateOneRequiredWithoutPayrollDetailsNestedInput
@@ -3555,7 +3555,7 @@ export type PayrollDetailsUpdateWithoutAllowanceNotAvailableInput = {
   payrollStatus?: Prisma.PayrollStatusUpdateOneWithoutPayrollDetailsNestedInput
   branch?: Prisma.BranchUpdateOneWithoutPayrollDetailsNestedInput
   creator?: Prisma.UserUpdateOneWithoutCreatedPayrollDetailsNestedInput
-  modifier?: Prisma.UserUpdateOneWithoutModifiedPayrollDetailsNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedPayrollDetailsNestedInput
 }
 
 export type PayrollDetailsUncheckedUpdateWithoutAllowanceNotAvailableInput = {
@@ -3589,10 +3589,10 @@ export type PayrollDetailsUncheckedUpdateWithoutAllowanceNotAvailableInput = {
   paymentMethodId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   payrollStatusId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  modifiedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  modifiedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
@@ -3627,10 +3627,10 @@ export type PayrollDetailsUncheckedUpdateManyWithoutAllowanceNotAvailableInput =
   paymentMethodId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   payrollStatusId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  modifiedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  modifiedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
@@ -3668,10 +3668,10 @@ export type PayrollDetailsSelect<ExtArgs extends runtime.Types.Extensions.Intern
   payrollStatusId?: boolean
   branchId?: boolean
   allowanceNotAvailableId?: boolean
-  createdDate?: boolean
   createdBy?: boolean
-  modifiedDate?: boolean
-  modifiedBy?: boolean
+  updatedBy?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   isLocked?: boolean
   payrollSummary?: boolean | Prisma.PayrollSummaryDefaultArgs<ExtArgs>
   employee?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
@@ -3680,7 +3680,7 @@ export type PayrollDetailsSelect<ExtArgs extends runtime.Types.Extensions.Intern
   branch?: boolean | Prisma.PayrollDetails$branchArgs<ExtArgs>
   allowanceNotAvailable?: boolean | Prisma.PayrollDetails$allowanceNotAvailableArgs<ExtArgs>
   creator?: boolean | Prisma.PayrollDetails$creatorArgs<ExtArgs>
-  modifier?: boolean | Prisma.PayrollDetails$modifierArgs<ExtArgs>
+  updater?: boolean | Prisma.PayrollDetails$updaterArgs<ExtArgs>
 }, ExtArgs["result"]["payrollDetails"]>
 
 export type PayrollDetailsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -3715,10 +3715,10 @@ export type PayrollDetailsSelectCreateManyAndReturn<ExtArgs extends runtime.Type
   payrollStatusId?: boolean
   branchId?: boolean
   allowanceNotAvailableId?: boolean
-  createdDate?: boolean
   createdBy?: boolean
-  modifiedDate?: boolean
-  modifiedBy?: boolean
+  updatedBy?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   isLocked?: boolean
   payrollSummary?: boolean | Prisma.PayrollSummaryDefaultArgs<ExtArgs>
   employee?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
@@ -3727,7 +3727,7 @@ export type PayrollDetailsSelectCreateManyAndReturn<ExtArgs extends runtime.Type
   branch?: boolean | Prisma.PayrollDetails$branchArgs<ExtArgs>
   allowanceNotAvailable?: boolean | Prisma.PayrollDetails$allowanceNotAvailableArgs<ExtArgs>
   creator?: boolean | Prisma.PayrollDetails$creatorArgs<ExtArgs>
-  modifier?: boolean | Prisma.PayrollDetails$modifierArgs<ExtArgs>
+  updater?: boolean | Prisma.PayrollDetails$updaterArgs<ExtArgs>
 }, ExtArgs["result"]["payrollDetails"]>
 
 export type PayrollDetailsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -3762,10 +3762,10 @@ export type PayrollDetailsSelectUpdateManyAndReturn<ExtArgs extends runtime.Type
   payrollStatusId?: boolean
   branchId?: boolean
   allowanceNotAvailableId?: boolean
-  createdDate?: boolean
   createdBy?: boolean
-  modifiedDate?: boolean
-  modifiedBy?: boolean
+  updatedBy?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   isLocked?: boolean
   payrollSummary?: boolean | Prisma.PayrollSummaryDefaultArgs<ExtArgs>
   employee?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
@@ -3774,7 +3774,7 @@ export type PayrollDetailsSelectUpdateManyAndReturn<ExtArgs extends runtime.Type
   branch?: boolean | Prisma.PayrollDetails$branchArgs<ExtArgs>
   allowanceNotAvailable?: boolean | Prisma.PayrollDetails$allowanceNotAvailableArgs<ExtArgs>
   creator?: boolean | Prisma.PayrollDetails$creatorArgs<ExtArgs>
-  modifier?: boolean | Prisma.PayrollDetails$modifierArgs<ExtArgs>
+  updater?: boolean | Prisma.PayrollDetails$updaterArgs<ExtArgs>
 }, ExtArgs["result"]["payrollDetails"]>
 
 export type PayrollDetailsSelectScalar = {
@@ -3809,14 +3809,14 @@ export type PayrollDetailsSelectScalar = {
   payrollStatusId?: boolean
   branchId?: boolean
   allowanceNotAvailableId?: boolean
-  createdDate?: boolean
   createdBy?: boolean
-  modifiedDate?: boolean
-  modifiedBy?: boolean
+  updatedBy?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   isLocked?: boolean
 }
 
-export type PayrollDetailsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "payrollId" | "payrollMonth" | "payrollYear" | "employeeId" | "workDays" | "totalHours" | "hourlyRate" | "breakfastAllowance" | "tripAllowance" | "overtimeAllowance" | "otherAllowances" | "totalAllowances" | "salary" | "previousLoan" | "currentLoan" | "loanDeduction" | "netLoan" | "previousChallan" | "currentChallan" | "challanDeduction" | "netChallan" | "netSalaryPayable" | "cardSalary" | "cashSalary" | "overTime" | "remarks" | "paymentMethodId" | "payrollStatusId" | "branchId" | "allowanceNotAvailableId" | "createdDate" | "createdBy" | "modifiedDate" | "modifiedBy" | "isLocked", ExtArgs["result"]["payrollDetails"]>
+export type PayrollDetailsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "payrollId" | "payrollMonth" | "payrollYear" | "employeeId" | "workDays" | "totalHours" | "hourlyRate" | "breakfastAllowance" | "tripAllowance" | "overtimeAllowance" | "otherAllowances" | "totalAllowances" | "salary" | "previousLoan" | "currentLoan" | "loanDeduction" | "netLoan" | "previousChallan" | "currentChallan" | "challanDeduction" | "netChallan" | "netSalaryPayable" | "cardSalary" | "cashSalary" | "overTime" | "remarks" | "paymentMethodId" | "payrollStatusId" | "branchId" | "allowanceNotAvailableId" | "createdBy" | "updatedBy" | "createdAt" | "updatedAt" | "isLocked", ExtArgs["result"]["payrollDetails"]>
 export type PayrollDetailsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   payrollSummary?: boolean | Prisma.PayrollSummaryDefaultArgs<ExtArgs>
   employee?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
@@ -3825,7 +3825,7 @@ export type PayrollDetailsInclude<ExtArgs extends runtime.Types.Extensions.Inter
   branch?: boolean | Prisma.PayrollDetails$branchArgs<ExtArgs>
   allowanceNotAvailable?: boolean | Prisma.PayrollDetails$allowanceNotAvailableArgs<ExtArgs>
   creator?: boolean | Prisma.PayrollDetails$creatorArgs<ExtArgs>
-  modifier?: boolean | Prisma.PayrollDetails$modifierArgs<ExtArgs>
+  updater?: boolean | Prisma.PayrollDetails$updaterArgs<ExtArgs>
 }
 export type PayrollDetailsIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   payrollSummary?: boolean | Prisma.PayrollSummaryDefaultArgs<ExtArgs>
@@ -3835,7 +3835,7 @@ export type PayrollDetailsIncludeCreateManyAndReturn<ExtArgs extends runtime.Typ
   branch?: boolean | Prisma.PayrollDetails$branchArgs<ExtArgs>
   allowanceNotAvailable?: boolean | Prisma.PayrollDetails$allowanceNotAvailableArgs<ExtArgs>
   creator?: boolean | Prisma.PayrollDetails$creatorArgs<ExtArgs>
-  modifier?: boolean | Prisma.PayrollDetails$modifierArgs<ExtArgs>
+  updater?: boolean | Prisma.PayrollDetails$updaterArgs<ExtArgs>
 }
 export type PayrollDetailsIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   payrollSummary?: boolean | Prisma.PayrollSummaryDefaultArgs<ExtArgs>
@@ -3845,7 +3845,7 @@ export type PayrollDetailsIncludeUpdateManyAndReturn<ExtArgs extends runtime.Typ
   branch?: boolean | Prisma.PayrollDetails$branchArgs<ExtArgs>
   allowanceNotAvailable?: boolean | Prisma.PayrollDetails$allowanceNotAvailableArgs<ExtArgs>
   creator?: boolean | Prisma.PayrollDetails$creatorArgs<ExtArgs>
-  modifier?: boolean | Prisma.PayrollDetails$modifierArgs<ExtArgs>
+  updater?: boolean | Prisma.PayrollDetails$updaterArgs<ExtArgs>
 }
 
 export type $PayrollDetailsPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3858,7 +3858,7 @@ export type $PayrollDetailsPayload<ExtArgs extends runtime.Types.Extensions.Inte
     branch: Prisma.$BranchPayload<ExtArgs> | null
     allowanceNotAvailable: Prisma.$AllowanceNotAvailablePayload<ExtArgs> | null
     creator: Prisma.$UserPayload<ExtArgs> | null
-    modifier: Prisma.$UserPayload<ExtArgs> | null
+    updater: Prisma.$UserPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -3892,10 +3892,10 @@ export type $PayrollDetailsPayload<ExtArgs extends runtime.Types.Extensions.Inte
     payrollStatusId: number | null
     branchId: number | null
     allowanceNotAvailableId: number | null
-    createdDate: Date
     createdBy: number | null
-    modifiedDate: Date
-    modifiedBy: number | null
+    updatedBy: number | null
+    createdAt: Date
+    updatedAt: Date
     isLocked: boolean
   }, ExtArgs["result"]["payrollDetails"]>
   composites: {}
@@ -4298,7 +4298,7 @@ export interface Prisma__PayrollDetailsClient<T, Null = never, ExtArgs extends r
   branch<T extends Prisma.PayrollDetails$branchArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PayrollDetails$branchArgs<ExtArgs>>): Prisma.Prisma__BranchClient<runtime.Types.Result.GetResult<Prisma.$BranchPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   allowanceNotAvailable<T extends Prisma.PayrollDetails$allowanceNotAvailableArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PayrollDetails$allowanceNotAvailableArgs<ExtArgs>>): Prisma.Prisma__AllowanceNotAvailableClient<runtime.Types.Result.GetResult<Prisma.$AllowanceNotAvailablePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   creator<T extends Prisma.PayrollDetails$creatorArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PayrollDetails$creatorArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  modifier<T extends Prisma.PayrollDetails$modifierArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PayrollDetails$modifierArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  updater<T extends Prisma.PayrollDetails$updaterArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PayrollDetails$updaterArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4359,10 +4359,10 @@ export interface PayrollDetailsFieldRefs {
   readonly payrollStatusId: Prisma.FieldRef<"PayrollDetails", 'Int'>
   readonly branchId: Prisma.FieldRef<"PayrollDetails", 'Int'>
   readonly allowanceNotAvailableId: Prisma.FieldRef<"PayrollDetails", 'Int'>
-  readonly createdDate: Prisma.FieldRef<"PayrollDetails", 'DateTime'>
   readonly createdBy: Prisma.FieldRef<"PayrollDetails", 'Int'>
-  readonly modifiedDate: Prisma.FieldRef<"PayrollDetails", 'DateTime'>
-  readonly modifiedBy: Prisma.FieldRef<"PayrollDetails", 'Int'>
+  readonly updatedBy: Prisma.FieldRef<"PayrollDetails", 'Int'>
+  readonly createdAt: Prisma.FieldRef<"PayrollDetails", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"PayrollDetails", 'DateTime'>
   readonly isLocked: Prisma.FieldRef<"PayrollDetails", 'Boolean'>
 }
     
@@ -4855,9 +4855,9 @@ export type PayrollDetails$creatorArgs<ExtArgs extends runtime.Types.Extensions.
 }
 
 /**
- * PayrollDetails.modifier
+ * PayrollDetails.updater
  */
-export type PayrollDetails$modifierArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type PayrollDetails$updaterArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the User
    */

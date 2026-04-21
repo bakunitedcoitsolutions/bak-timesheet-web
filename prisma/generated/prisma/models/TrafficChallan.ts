@@ -30,12 +30,16 @@ export type TrafficChallanAvgAggregateOutputType = {
   id: number | null
   employeeId: number | null
   amount: number | null
+  createdBy: number | null
+  updatedBy: number | null
 }
 
 export type TrafficChallanSumAggregateOutputType = {
   id: number | null
   employeeId: number | null
   amount: number | null
+  createdBy: number | null
+  updatedBy: number | null
 }
 
 export type TrafficChallanMinAggregateOutputType = {
@@ -45,6 +49,8 @@ export type TrafficChallanMinAggregateOutputType = {
   type: $Enums.TrafficChallanType | null
   amount: number | null
   description: string | null
+  createdBy: number | null
+  updatedBy: number | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -56,6 +62,8 @@ export type TrafficChallanMaxAggregateOutputType = {
   type: $Enums.TrafficChallanType | null
   amount: number | null
   description: string | null
+  createdBy: number | null
+  updatedBy: number | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -67,6 +75,8 @@ export type TrafficChallanCountAggregateOutputType = {
   type: number
   amount: number
   description: number
+  createdBy: number
+  updatedBy: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -77,12 +87,16 @@ export type TrafficChallanAvgAggregateInputType = {
   id?: true
   employeeId?: true
   amount?: true
+  createdBy?: true
+  updatedBy?: true
 }
 
 export type TrafficChallanSumAggregateInputType = {
   id?: true
   employeeId?: true
   amount?: true
+  createdBy?: true
+  updatedBy?: true
 }
 
 export type TrafficChallanMinAggregateInputType = {
@@ -92,6 +106,8 @@ export type TrafficChallanMinAggregateInputType = {
   type?: true
   amount?: true
   description?: true
+  createdBy?: true
+  updatedBy?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -103,6 +119,8 @@ export type TrafficChallanMaxAggregateInputType = {
   type?: true
   amount?: true
   description?: true
+  createdBy?: true
+  updatedBy?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -114,6 +132,8 @@ export type TrafficChallanCountAggregateInputType = {
   type?: true
   amount?: true
   description?: true
+  createdBy?: true
+  updatedBy?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -212,6 +232,8 @@ export type TrafficChallanGroupByOutputType = {
   type: $Enums.TrafficChallanType
   amount: number
   description: string | null
+  createdBy: number | null
+  updatedBy: number | null
   createdAt: Date
   updatedAt: Date
   _count: TrafficChallanCountAggregateOutputType | null
@@ -246,9 +268,13 @@ export type TrafficChallanWhereInput = {
   type?: Prisma.EnumTrafficChallanTypeFilter<"TrafficChallan"> | $Enums.TrafficChallanType
   amount?: Prisma.IntFilter<"TrafficChallan"> | number
   description?: Prisma.StringNullableFilter<"TrafficChallan"> | string | null
+  createdBy?: Prisma.IntNullableFilter<"TrafficChallan"> | number | null
+  updatedBy?: Prisma.IntNullableFilter<"TrafficChallan"> | number | null
   createdAt?: Prisma.DateTimeFilter<"TrafficChallan"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"TrafficChallan"> | Date | string
   employee?: Prisma.XOR<Prisma.EmployeeScalarRelationFilter, Prisma.EmployeeWhereInput>
+  creator?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  updater?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }
 
 export type TrafficChallanOrderByWithRelationInput = {
@@ -258,9 +284,13 @@ export type TrafficChallanOrderByWithRelationInput = {
   type?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
+  createdBy?: Prisma.SortOrderInput | Prisma.SortOrder
+  updatedBy?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   employee?: Prisma.EmployeeOrderByWithRelationInput
+  creator?: Prisma.UserOrderByWithRelationInput
+  updater?: Prisma.UserOrderByWithRelationInput
 }
 
 export type TrafficChallanWhereUniqueInput = Prisma.AtLeast<{
@@ -273,9 +303,13 @@ export type TrafficChallanWhereUniqueInput = Prisma.AtLeast<{
   type?: Prisma.EnumTrafficChallanTypeFilter<"TrafficChallan"> | $Enums.TrafficChallanType
   amount?: Prisma.IntFilter<"TrafficChallan"> | number
   description?: Prisma.StringNullableFilter<"TrafficChallan"> | string | null
+  createdBy?: Prisma.IntNullableFilter<"TrafficChallan"> | number | null
+  updatedBy?: Prisma.IntNullableFilter<"TrafficChallan"> | number | null
   createdAt?: Prisma.DateTimeFilter<"TrafficChallan"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"TrafficChallan"> | Date | string
   employee?: Prisma.XOR<Prisma.EmployeeScalarRelationFilter, Prisma.EmployeeWhereInput>
+  creator?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  updater?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }, "id">
 
 export type TrafficChallanOrderByWithAggregationInput = {
@@ -285,6 +319,8 @@ export type TrafficChallanOrderByWithAggregationInput = {
   type?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
+  createdBy?: Prisma.SortOrderInput | Prisma.SortOrder
+  updatedBy?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.TrafficChallanCountOrderByAggregateInput
@@ -304,6 +340,8 @@ export type TrafficChallanScalarWhereWithAggregatesInput = {
   type?: Prisma.EnumTrafficChallanTypeWithAggregatesFilter<"TrafficChallan"> | $Enums.TrafficChallanType
   amount?: Prisma.IntWithAggregatesFilter<"TrafficChallan"> | number
   description?: Prisma.StringNullableWithAggregatesFilter<"TrafficChallan"> | string | null
+  createdBy?: Prisma.IntNullableWithAggregatesFilter<"TrafficChallan"> | number | null
+  updatedBy?: Prisma.IntNullableWithAggregatesFilter<"TrafficChallan"> | number | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"TrafficChallan"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"TrafficChallan"> | Date | string
 }
@@ -316,6 +354,8 @@ export type TrafficChallanCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   employee: Prisma.EmployeeCreateNestedOneWithoutTrafficChallansInput
+  creator?: Prisma.UserCreateNestedOneWithoutCreatedTrafficChallansInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedTrafficChallansInput
 }
 
 export type TrafficChallanUncheckedCreateInput = {
@@ -325,6 +365,8 @@ export type TrafficChallanUncheckedCreateInput = {
   type: $Enums.TrafficChallanType
   amount: number
   description?: string | null
+  createdBy?: number | null
+  updatedBy?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -337,6 +379,8 @@ export type TrafficChallanUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   employee?: Prisma.EmployeeUpdateOneRequiredWithoutTrafficChallansNestedInput
+  creator?: Prisma.UserUpdateOneWithoutCreatedTrafficChallansNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedTrafficChallansNestedInput
 }
 
 export type TrafficChallanUncheckedUpdateInput = {
@@ -346,6 +390,8 @@ export type TrafficChallanUncheckedUpdateInput = {
   type?: Prisma.EnumTrafficChallanTypeFieldUpdateOperationsInput | $Enums.TrafficChallanType
   amount?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -357,6 +403,8 @@ export type TrafficChallanCreateManyInput = {
   type: $Enums.TrafficChallanType
   amount: number
   description?: string | null
+  createdBy?: number | null
+  updatedBy?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -377,6 +425,8 @@ export type TrafficChallanUncheckedUpdateManyInput = {
   type?: Prisma.EnumTrafficChallanTypeFieldUpdateOperationsInput | $Enums.TrafficChallanType
   amount?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -398,6 +448,8 @@ export type TrafficChallanCountOrderByAggregateInput = {
   type?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrder
+  updatedBy?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -406,6 +458,8 @@ export type TrafficChallanAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   employeeId?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrder
+  updatedBy?: Prisma.SortOrder
 }
 
 export type TrafficChallanMaxOrderByAggregateInput = {
@@ -415,6 +469,8 @@ export type TrafficChallanMaxOrderByAggregateInput = {
   type?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrder
+  updatedBy?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -426,6 +482,8 @@ export type TrafficChallanMinOrderByAggregateInput = {
   type?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrder
+  updatedBy?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -434,6 +492,92 @@ export type TrafficChallanSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   employeeId?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrder
+  updatedBy?: Prisma.SortOrder
+}
+
+export type TrafficChallanCreateNestedManyWithoutCreatorInput = {
+  create?: Prisma.XOR<Prisma.TrafficChallanCreateWithoutCreatorInput, Prisma.TrafficChallanUncheckedCreateWithoutCreatorInput> | Prisma.TrafficChallanCreateWithoutCreatorInput[] | Prisma.TrafficChallanUncheckedCreateWithoutCreatorInput[]
+  connectOrCreate?: Prisma.TrafficChallanCreateOrConnectWithoutCreatorInput | Prisma.TrafficChallanCreateOrConnectWithoutCreatorInput[]
+  createMany?: Prisma.TrafficChallanCreateManyCreatorInputEnvelope
+  connect?: Prisma.TrafficChallanWhereUniqueInput | Prisma.TrafficChallanWhereUniqueInput[]
+}
+
+export type TrafficChallanCreateNestedManyWithoutUpdaterInput = {
+  create?: Prisma.XOR<Prisma.TrafficChallanCreateWithoutUpdaterInput, Prisma.TrafficChallanUncheckedCreateWithoutUpdaterInput> | Prisma.TrafficChallanCreateWithoutUpdaterInput[] | Prisma.TrafficChallanUncheckedCreateWithoutUpdaterInput[]
+  connectOrCreate?: Prisma.TrafficChallanCreateOrConnectWithoutUpdaterInput | Prisma.TrafficChallanCreateOrConnectWithoutUpdaterInput[]
+  createMany?: Prisma.TrafficChallanCreateManyUpdaterInputEnvelope
+  connect?: Prisma.TrafficChallanWhereUniqueInput | Prisma.TrafficChallanWhereUniqueInput[]
+}
+
+export type TrafficChallanUncheckedCreateNestedManyWithoutCreatorInput = {
+  create?: Prisma.XOR<Prisma.TrafficChallanCreateWithoutCreatorInput, Prisma.TrafficChallanUncheckedCreateWithoutCreatorInput> | Prisma.TrafficChallanCreateWithoutCreatorInput[] | Prisma.TrafficChallanUncheckedCreateWithoutCreatorInput[]
+  connectOrCreate?: Prisma.TrafficChallanCreateOrConnectWithoutCreatorInput | Prisma.TrafficChallanCreateOrConnectWithoutCreatorInput[]
+  createMany?: Prisma.TrafficChallanCreateManyCreatorInputEnvelope
+  connect?: Prisma.TrafficChallanWhereUniqueInput | Prisma.TrafficChallanWhereUniqueInput[]
+}
+
+export type TrafficChallanUncheckedCreateNestedManyWithoutUpdaterInput = {
+  create?: Prisma.XOR<Prisma.TrafficChallanCreateWithoutUpdaterInput, Prisma.TrafficChallanUncheckedCreateWithoutUpdaterInput> | Prisma.TrafficChallanCreateWithoutUpdaterInput[] | Prisma.TrafficChallanUncheckedCreateWithoutUpdaterInput[]
+  connectOrCreate?: Prisma.TrafficChallanCreateOrConnectWithoutUpdaterInput | Prisma.TrafficChallanCreateOrConnectWithoutUpdaterInput[]
+  createMany?: Prisma.TrafficChallanCreateManyUpdaterInputEnvelope
+  connect?: Prisma.TrafficChallanWhereUniqueInput | Prisma.TrafficChallanWhereUniqueInput[]
+}
+
+export type TrafficChallanUpdateManyWithoutCreatorNestedInput = {
+  create?: Prisma.XOR<Prisma.TrafficChallanCreateWithoutCreatorInput, Prisma.TrafficChallanUncheckedCreateWithoutCreatorInput> | Prisma.TrafficChallanCreateWithoutCreatorInput[] | Prisma.TrafficChallanUncheckedCreateWithoutCreatorInput[]
+  connectOrCreate?: Prisma.TrafficChallanCreateOrConnectWithoutCreatorInput | Prisma.TrafficChallanCreateOrConnectWithoutCreatorInput[]
+  upsert?: Prisma.TrafficChallanUpsertWithWhereUniqueWithoutCreatorInput | Prisma.TrafficChallanUpsertWithWhereUniqueWithoutCreatorInput[]
+  createMany?: Prisma.TrafficChallanCreateManyCreatorInputEnvelope
+  set?: Prisma.TrafficChallanWhereUniqueInput | Prisma.TrafficChallanWhereUniqueInput[]
+  disconnect?: Prisma.TrafficChallanWhereUniqueInput | Prisma.TrafficChallanWhereUniqueInput[]
+  delete?: Prisma.TrafficChallanWhereUniqueInput | Prisma.TrafficChallanWhereUniqueInput[]
+  connect?: Prisma.TrafficChallanWhereUniqueInput | Prisma.TrafficChallanWhereUniqueInput[]
+  update?: Prisma.TrafficChallanUpdateWithWhereUniqueWithoutCreatorInput | Prisma.TrafficChallanUpdateWithWhereUniqueWithoutCreatorInput[]
+  updateMany?: Prisma.TrafficChallanUpdateManyWithWhereWithoutCreatorInput | Prisma.TrafficChallanUpdateManyWithWhereWithoutCreatorInput[]
+  deleteMany?: Prisma.TrafficChallanScalarWhereInput | Prisma.TrafficChallanScalarWhereInput[]
+}
+
+export type TrafficChallanUpdateManyWithoutUpdaterNestedInput = {
+  create?: Prisma.XOR<Prisma.TrafficChallanCreateWithoutUpdaterInput, Prisma.TrafficChallanUncheckedCreateWithoutUpdaterInput> | Prisma.TrafficChallanCreateWithoutUpdaterInput[] | Prisma.TrafficChallanUncheckedCreateWithoutUpdaterInput[]
+  connectOrCreate?: Prisma.TrafficChallanCreateOrConnectWithoutUpdaterInput | Prisma.TrafficChallanCreateOrConnectWithoutUpdaterInput[]
+  upsert?: Prisma.TrafficChallanUpsertWithWhereUniqueWithoutUpdaterInput | Prisma.TrafficChallanUpsertWithWhereUniqueWithoutUpdaterInput[]
+  createMany?: Prisma.TrafficChallanCreateManyUpdaterInputEnvelope
+  set?: Prisma.TrafficChallanWhereUniqueInput | Prisma.TrafficChallanWhereUniqueInput[]
+  disconnect?: Prisma.TrafficChallanWhereUniqueInput | Prisma.TrafficChallanWhereUniqueInput[]
+  delete?: Prisma.TrafficChallanWhereUniqueInput | Prisma.TrafficChallanWhereUniqueInput[]
+  connect?: Prisma.TrafficChallanWhereUniqueInput | Prisma.TrafficChallanWhereUniqueInput[]
+  update?: Prisma.TrafficChallanUpdateWithWhereUniqueWithoutUpdaterInput | Prisma.TrafficChallanUpdateWithWhereUniqueWithoutUpdaterInput[]
+  updateMany?: Prisma.TrafficChallanUpdateManyWithWhereWithoutUpdaterInput | Prisma.TrafficChallanUpdateManyWithWhereWithoutUpdaterInput[]
+  deleteMany?: Prisma.TrafficChallanScalarWhereInput | Prisma.TrafficChallanScalarWhereInput[]
+}
+
+export type TrafficChallanUncheckedUpdateManyWithoutCreatorNestedInput = {
+  create?: Prisma.XOR<Prisma.TrafficChallanCreateWithoutCreatorInput, Prisma.TrafficChallanUncheckedCreateWithoutCreatorInput> | Prisma.TrafficChallanCreateWithoutCreatorInput[] | Prisma.TrafficChallanUncheckedCreateWithoutCreatorInput[]
+  connectOrCreate?: Prisma.TrafficChallanCreateOrConnectWithoutCreatorInput | Prisma.TrafficChallanCreateOrConnectWithoutCreatorInput[]
+  upsert?: Prisma.TrafficChallanUpsertWithWhereUniqueWithoutCreatorInput | Prisma.TrafficChallanUpsertWithWhereUniqueWithoutCreatorInput[]
+  createMany?: Prisma.TrafficChallanCreateManyCreatorInputEnvelope
+  set?: Prisma.TrafficChallanWhereUniqueInput | Prisma.TrafficChallanWhereUniqueInput[]
+  disconnect?: Prisma.TrafficChallanWhereUniqueInput | Prisma.TrafficChallanWhereUniqueInput[]
+  delete?: Prisma.TrafficChallanWhereUniqueInput | Prisma.TrafficChallanWhereUniqueInput[]
+  connect?: Prisma.TrafficChallanWhereUniqueInput | Prisma.TrafficChallanWhereUniqueInput[]
+  update?: Prisma.TrafficChallanUpdateWithWhereUniqueWithoutCreatorInput | Prisma.TrafficChallanUpdateWithWhereUniqueWithoutCreatorInput[]
+  updateMany?: Prisma.TrafficChallanUpdateManyWithWhereWithoutCreatorInput | Prisma.TrafficChallanUpdateManyWithWhereWithoutCreatorInput[]
+  deleteMany?: Prisma.TrafficChallanScalarWhereInput | Prisma.TrafficChallanScalarWhereInput[]
+}
+
+export type TrafficChallanUncheckedUpdateManyWithoutUpdaterNestedInput = {
+  create?: Prisma.XOR<Prisma.TrafficChallanCreateWithoutUpdaterInput, Prisma.TrafficChallanUncheckedCreateWithoutUpdaterInput> | Prisma.TrafficChallanCreateWithoutUpdaterInput[] | Prisma.TrafficChallanUncheckedCreateWithoutUpdaterInput[]
+  connectOrCreate?: Prisma.TrafficChallanCreateOrConnectWithoutUpdaterInput | Prisma.TrafficChallanCreateOrConnectWithoutUpdaterInput[]
+  upsert?: Prisma.TrafficChallanUpsertWithWhereUniqueWithoutUpdaterInput | Prisma.TrafficChallanUpsertWithWhereUniqueWithoutUpdaterInput[]
+  createMany?: Prisma.TrafficChallanCreateManyUpdaterInputEnvelope
+  set?: Prisma.TrafficChallanWhereUniqueInput | Prisma.TrafficChallanWhereUniqueInput[]
+  disconnect?: Prisma.TrafficChallanWhereUniqueInput | Prisma.TrafficChallanWhereUniqueInput[]
+  delete?: Prisma.TrafficChallanWhereUniqueInput | Prisma.TrafficChallanWhereUniqueInput[]
+  connect?: Prisma.TrafficChallanWhereUniqueInput | Prisma.TrafficChallanWhereUniqueInput[]
+  update?: Prisma.TrafficChallanUpdateWithWhereUniqueWithoutUpdaterInput | Prisma.TrafficChallanUpdateWithWhereUniqueWithoutUpdaterInput[]
+  updateMany?: Prisma.TrafficChallanUpdateManyWithWhereWithoutUpdaterInput | Prisma.TrafficChallanUpdateManyWithWhereWithoutUpdaterInput[]
+  deleteMany?: Prisma.TrafficChallanScalarWhereInput | Prisma.TrafficChallanScalarWhereInput[]
 }
 
 export type TrafficChallanCreateNestedManyWithoutEmployeeInput = {
@@ -482,6 +626,120 @@ export type EnumTrafficChallanTypeFieldUpdateOperationsInput = {
   set?: $Enums.TrafficChallanType
 }
 
+export type TrafficChallanCreateWithoutCreatorInput = {
+  date: Date | string
+  type: $Enums.TrafficChallanType
+  amount: number
+  description?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  employee: Prisma.EmployeeCreateNestedOneWithoutTrafficChallansInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedTrafficChallansInput
+}
+
+export type TrafficChallanUncheckedCreateWithoutCreatorInput = {
+  id?: number
+  employeeId: number
+  date: Date | string
+  type: $Enums.TrafficChallanType
+  amount: number
+  description?: string | null
+  updatedBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type TrafficChallanCreateOrConnectWithoutCreatorInput = {
+  where: Prisma.TrafficChallanWhereUniqueInput
+  create: Prisma.XOR<Prisma.TrafficChallanCreateWithoutCreatorInput, Prisma.TrafficChallanUncheckedCreateWithoutCreatorInput>
+}
+
+export type TrafficChallanCreateManyCreatorInputEnvelope = {
+  data: Prisma.TrafficChallanCreateManyCreatorInput | Prisma.TrafficChallanCreateManyCreatorInput[]
+  skipDuplicates?: boolean
+}
+
+export type TrafficChallanCreateWithoutUpdaterInput = {
+  date: Date | string
+  type: $Enums.TrafficChallanType
+  amount: number
+  description?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  employee: Prisma.EmployeeCreateNestedOneWithoutTrafficChallansInput
+  creator?: Prisma.UserCreateNestedOneWithoutCreatedTrafficChallansInput
+}
+
+export type TrafficChallanUncheckedCreateWithoutUpdaterInput = {
+  id?: number
+  employeeId: number
+  date: Date | string
+  type: $Enums.TrafficChallanType
+  amount: number
+  description?: string | null
+  createdBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type TrafficChallanCreateOrConnectWithoutUpdaterInput = {
+  where: Prisma.TrafficChallanWhereUniqueInput
+  create: Prisma.XOR<Prisma.TrafficChallanCreateWithoutUpdaterInput, Prisma.TrafficChallanUncheckedCreateWithoutUpdaterInput>
+}
+
+export type TrafficChallanCreateManyUpdaterInputEnvelope = {
+  data: Prisma.TrafficChallanCreateManyUpdaterInput | Prisma.TrafficChallanCreateManyUpdaterInput[]
+  skipDuplicates?: boolean
+}
+
+export type TrafficChallanUpsertWithWhereUniqueWithoutCreatorInput = {
+  where: Prisma.TrafficChallanWhereUniqueInput
+  update: Prisma.XOR<Prisma.TrafficChallanUpdateWithoutCreatorInput, Prisma.TrafficChallanUncheckedUpdateWithoutCreatorInput>
+  create: Prisma.XOR<Prisma.TrafficChallanCreateWithoutCreatorInput, Prisma.TrafficChallanUncheckedCreateWithoutCreatorInput>
+}
+
+export type TrafficChallanUpdateWithWhereUniqueWithoutCreatorInput = {
+  where: Prisma.TrafficChallanWhereUniqueInput
+  data: Prisma.XOR<Prisma.TrafficChallanUpdateWithoutCreatorInput, Prisma.TrafficChallanUncheckedUpdateWithoutCreatorInput>
+}
+
+export type TrafficChallanUpdateManyWithWhereWithoutCreatorInput = {
+  where: Prisma.TrafficChallanScalarWhereInput
+  data: Prisma.XOR<Prisma.TrafficChallanUpdateManyMutationInput, Prisma.TrafficChallanUncheckedUpdateManyWithoutCreatorInput>
+}
+
+export type TrafficChallanScalarWhereInput = {
+  AND?: Prisma.TrafficChallanScalarWhereInput | Prisma.TrafficChallanScalarWhereInput[]
+  OR?: Prisma.TrafficChallanScalarWhereInput[]
+  NOT?: Prisma.TrafficChallanScalarWhereInput | Prisma.TrafficChallanScalarWhereInput[]
+  id?: Prisma.IntFilter<"TrafficChallan"> | number
+  employeeId?: Prisma.IntFilter<"TrafficChallan"> | number
+  date?: Prisma.DateTimeFilter<"TrafficChallan"> | Date | string
+  type?: Prisma.EnumTrafficChallanTypeFilter<"TrafficChallan"> | $Enums.TrafficChallanType
+  amount?: Prisma.IntFilter<"TrafficChallan"> | number
+  description?: Prisma.StringNullableFilter<"TrafficChallan"> | string | null
+  createdBy?: Prisma.IntNullableFilter<"TrafficChallan"> | number | null
+  updatedBy?: Prisma.IntNullableFilter<"TrafficChallan"> | number | null
+  createdAt?: Prisma.DateTimeFilter<"TrafficChallan"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"TrafficChallan"> | Date | string
+}
+
+export type TrafficChallanUpsertWithWhereUniqueWithoutUpdaterInput = {
+  where: Prisma.TrafficChallanWhereUniqueInput
+  update: Prisma.XOR<Prisma.TrafficChallanUpdateWithoutUpdaterInput, Prisma.TrafficChallanUncheckedUpdateWithoutUpdaterInput>
+  create: Prisma.XOR<Prisma.TrafficChallanCreateWithoutUpdaterInput, Prisma.TrafficChallanUncheckedCreateWithoutUpdaterInput>
+}
+
+export type TrafficChallanUpdateWithWhereUniqueWithoutUpdaterInput = {
+  where: Prisma.TrafficChallanWhereUniqueInput
+  data: Prisma.XOR<Prisma.TrafficChallanUpdateWithoutUpdaterInput, Prisma.TrafficChallanUncheckedUpdateWithoutUpdaterInput>
+}
+
+export type TrafficChallanUpdateManyWithWhereWithoutUpdaterInput = {
+  where: Prisma.TrafficChallanScalarWhereInput
+  data: Prisma.XOR<Prisma.TrafficChallanUpdateManyMutationInput, Prisma.TrafficChallanUncheckedUpdateManyWithoutUpdaterInput>
+}
+
 export type TrafficChallanCreateWithoutEmployeeInput = {
   date: Date | string
   type: $Enums.TrafficChallanType
@@ -489,6 +747,8 @@ export type TrafficChallanCreateWithoutEmployeeInput = {
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  creator?: Prisma.UserCreateNestedOneWithoutCreatedTrafficChallansInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedTrafficChallansInput
 }
 
 export type TrafficChallanUncheckedCreateWithoutEmployeeInput = {
@@ -497,6 +757,8 @@ export type TrafficChallanUncheckedCreateWithoutEmployeeInput = {
   type: $Enums.TrafficChallanType
   amount: number
   description?: string | null
+  createdBy?: number | null
+  updatedBy?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -527,18 +789,98 @@ export type TrafficChallanUpdateManyWithWhereWithoutEmployeeInput = {
   data: Prisma.XOR<Prisma.TrafficChallanUpdateManyMutationInput, Prisma.TrafficChallanUncheckedUpdateManyWithoutEmployeeInput>
 }
 
-export type TrafficChallanScalarWhereInput = {
-  AND?: Prisma.TrafficChallanScalarWhereInput | Prisma.TrafficChallanScalarWhereInput[]
-  OR?: Prisma.TrafficChallanScalarWhereInput[]
-  NOT?: Prisma.TrafficChallanScalarWhereInput | Prisma.TrafficChallanScalarWhereInput[]
-  id?: Prisma.IntFilter<"TrafficChallan"> | number
-  employeeId?: Prisma.IntFilter<"TrafficChallan"> | number
-  date?: Prisma.DateTimeFilter<"TrafficChallan"> | Date | string
-  type?: Prisma.EnumTrafficChallanTypeFilter<"TrafficChallan"> | $Enums.TrafficChallanType
-  amount?: Prisma.IntFilter<"TrafficChallan"> | number
-  description?: Prisma.StringNullableFilter<"TrafficChallan"> | string | null
-  createdAt?: Prisma.DateTimeFilter<"TrafficChallan"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"TrafficChallan"> | Date | string
+export type TrafficChallanCreateManyCreatorInput = {
+  id?: number
+  employeeId: number
+  date: Date | string
+  type: $Enums.TrafficChallanType
+  amount: number
+  description?: string | null
+  updatedBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type TrafficChallanCreateManyUpdaterInput = {
+  id?: number
+  employeeId: number
+  date: Date | string
+  type: $Enums.TrafficChallanType
+  amount: number
+  description?: string | null
+  createdBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type TrafficChallanUpdateWithoutCreatorInput = {
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  type?: Prisma.EnumTrafficChallanTypeFieldUpdateOperationsInput | $Enums.TrafficChallanType
+  amount?: Prisma.IntFieldUpdateOperationsInput | number
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  employee?: Prisma.EmployeeUpdateOneRequiredWithoutTrafficChallansNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedTrafficChallansNestedInput
+}
+
+export type TrafficChallanUncheckedUpdateWithoutCreatorInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  employeeId?: Prisma.IntFieldUpdateOperationsInput | number
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  type?: Prisma.EnumTrafficChallanTypeFieldUpdateOperationsInput | $Enums.TrafficChallanType
+  amount?: Prisma.IntFieldUpdateOperationsInput | number
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type TrafficChallanUncheckedUpdateManyWithoutCreatorInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  employeeId?: Prisma.IntFieldUpdateOperationsInput | number
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  type?: Prisma.EnumTrafficChallanTypeFieldUpdateOperationsInput | $Enums.TrafficChallanType
+  amount?: Prisma.IntFieldUpdateOperationsInput | number
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type TrafficChallanUpdateWithoutUpdaterInput = {
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  type?: Prisma.EnumTrafficChallanTypeFieldUpdateOperationsInput | $Enums.TrafficChallanType
+  amount?: Prisma.IntFieldUpdateOperationsInput | number
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  employee?: Prisma.EmployeeUpdateOneRequiredWithoutTrafficChallansNestedInput
+  creator?: Prisma.UserUpdateOneWithoutCreatedTrafficChallansNestedInput
+}
+
+export type TrafficChallanUncheckedUpdateWithoutUpdaterInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  employeeId?: Prisma.IntFieldUpdateOperationsInput | number
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  type?: Prisma.EnumTrafficChallanTypeFieldUpdateOperationsInput | $Enums.TrafficChallanType
+  amount?: Prisma.IntFieldUpdateOperationsInput | number
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type TrafficChallanUncheckedUpdateManyWithoutUpdaterInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  employeeId?: Prisma.IntFieldUpdateOperationsInput | number
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  type?: Prisma.EnumTrafficChallanTypeFieldUpdateOperationsInput | $Enums.TrafficChallanType
+  amount?: Prisma.IntFieldUpdateOperationsInput | number
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type TrafficChallanCreateManyEmployeeInput = {
@@ -547,6 +889,8 @@ export type TrafficChallanCreateManyEmployeeInput = {
   type: $Enums.TrafficChallanType
   amount: number
   description?: string | null
+  createdBy?: number | null
+  updatedBy?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -558,6 +902,8 @@ export type TrafficChallanUpdateWithoutEmployeeInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  creator?: Prisma.UserUpdateOneWithoutCreatedTrafficChallansNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedTrafficChallansNestedInput
 }
 
 export type TrafficChallanUncheckedUpdateWithoutEmployeeInput = {
@@ -566,6 +912,8 @@ export type TrafficChallanUncheckedUpdateWithoutEmployeeInput = {
   type?: Prisma.EnumTrafficChallanTypeFieldUpdateOperationsInput | $Enums.TrafficChallanType
   amount?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -576,6 +924,8 @@ export type TrafficChallanUncheckedUpdateManyWithoutEmployeeInput = {
   type?: Prisma.EnumTrafficChallanTypeFieldUpdateOperationsInput | $Enums.TrafficChallanType
   amount?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -589,9 +939,13 @@ export type TrafficChallanSelect<ExtArgs extends runtime.Types.Extensions.Intern
   type?: boolean
   amount?: boolean
   description?: boolean
+  createdBy?: boolean
+  updatedBy?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   employee?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
+  creator?: boolean | Prisma.TrafficChallan$creatorArgs<ExtArgs>
+  updater?: boolean | Prisma.TrafficChallan$updaterArgs<ExtArgs>
 }, ExtArgs["result"]["trafficChallan"]>
 
 export type TrafficChallanSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -601,9 +955,13 @@ export type TrafficChallanSelectCreateManyAndReturn<ExtArgs extends runtime.Type
   type?: boolean
   amount?: boolean
   description?: boolean
+  createdBy?: boolean
+  updatedBy?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   employee?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
+  creator?: boolean | Prisma.TrafficChallan$creatorArgs<ExtArgs>
+  updater?: boolean | Prisma.TrafficChallan$updaterArgs<ExtArgs>
 }, ExtArgs["result"]["trafficChallan"]>
 
 export type TrafficChallanSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -613,9 +971,13 @@ export type TrafficChallanSelectUpdateManyAndReturn<ExtArgs extends runtime.Type
   type?: boolean
   amount?: boolean
   description?: boolean
+  createdBy?: boolean
+  updatedBy?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   employee?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
+  creator?: boolean | Prisma.TrafficChallan$creatorArgs<ExtArgs>
+  updater?: boolean | Prisma.TrafficChallan$updaterArgs<ExtArgs>
 }, ExtArgs["result"]["trafficChallan"]>
 
 export type TrafficChallanSelectScalar = {
@@ -625,25 +987,35 @@ export type TrafficChallanSelectScalar = {
   type?: boolean
   amount?: boolean
   description?: boolean
+  createdBy?: boolean
+  updatedBy?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type TrafficChallanOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "employeeId" | "date" | "type" | "amount" | "description" | "createdAt" | "updatedAt", ExtArgs["result"]["trafficChallan"]>
+export type TrafficChallanOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "employeeId" | "date" | "type" | "amount" | "description" | "createdBy" | "updatedBy" | "createdAt" | "updatedAt", ExtArgs["result"]["trafficChallan"]>
 export type TrafficChallanInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   employee?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
+  creator?: boolean | Prisma.TrafficChallan$creatorArgs<ExtArgs>
+  updater?: boolean | Prisma.TrafficChallan$updaterArgs<ExtArgs>
 }
 export type TrafficChallanIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   employee?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
+  creator?: boolean | Prisma.TrafficChallan$creatorArgs<ExtArgs>
+  updater?: boolean | Prisma.TrafficChallan$updaterArgs<ExtArgs>
 }
 export type TrafficChallanIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   employee?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
+  creator?: boolean | Prisma.TrafficChallan$creatorArgs<ExtArgs>
+  updater?: boolean | Prisma.TrafficChallan$updaterArgs<ExtArgs>
 }
 
 export type $TrafficChallanPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "TrafficChallan"
   objects: {
     employee: Prisma.$EmployeePayload<ExtArgs>
+    creator: Prisma.$UserPayload<ExtArgs> | null
+    updater: Prisma.$UserPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -652,6 +1024,8 @@ export type $TrafficChallanPayload<ExtArgs extends runtime.Types.Extensions.Inte
     type: $Enums.TrafficChallanType
     amount: number
     description: string | null
+    createdBy: number | null
+    updatedBy: number | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["trafficChallan"]>
@@ -1049,6 +1423,8 @@ readonly fields: TrafficChallanFieldRefs;
 export interface Prisma__TrafficChallanClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   employee<T extends Prisma.EmployeeDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.EmployeeDefaultArgs<ExtArgs>>): Prisma.Prisma__EmployeeClient<runtime.Types.Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  creator<T extends Prisma.TrafficChallan$creatorArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TrafficChallan$creatorArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  updater<T extends Prisma.TrafficChallan$updaterArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TrafficChallan$updaterArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1084,6 +1460,8 @@ export interface TrafficChallanFieldRefs {
   readonly type: Prisma.FieldRef<"TrafficChallan", 'TrafficChallanType'>
   readonly amount: Prisma.FieldRef<"TrafficChallan", 'Int'>
   readonly description: Prisma.FieldRef<"TrafficChallan", 'String'>
+  readonly createdBy: Prisma.FieldRef<"TrafficChallan", 'Int'>
+  readonly updatedBy: Prisma.FieldRef<"TrafficChallan", 'Int'>
   readonly createdAt: Prisma.FieldRef<"TrafficChallan", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"TrafficChallan", 'DateTime'>
 }
@@ -1479,6 +1857,44 @@ export type TrafficChallanDeleteManyArgs<ExtArgs extends runtime.Types.Extension
    * Limit how many TrafficChallans to delete.
    */
   limit?: number
+}
+
+/**
+ * TrafficChallan.creator
+ */
+export type TrafficChallan$creatorArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
+}
+
+/**
+ * TrafficChallan.updater
+ */
+export type TrafficChallan$updaterArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
 }
 
 /**

@@ -28,10 +28,14 @@ export type AggregatePayrollStatus = {
 
 export type PayrollStatusAvgAggregateOutputType = {
   id: number | null
+  createdBy: number | null
+  updatedBy: number | null
 }
 
 export type PayrollStatusSumAggregateOutputType = {
   id: number | null
+  createdBy: number | null
+  updatedBy: number | null
 }
 
 export type PayrollStatusMinAggregateOutputType = {
@@ -39,6 +43,8 @@ export type PayrollStatusMinAggregateOutputType = {
   nameEn: string | null
   nameAr: string | null
   isActive: boolean | null
+  createdBy: number | null
+  updatedBy: number | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -48,6 +54,8 @@ export type PayrollStatusMaxAggregateOutputType = {
   nameEn: string | null
   nameAr: string | null
   isActive: boolean | null
+  createdBy: number | null
+  updatedBy: number | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -57,6 +65,8 @@ export type PayrollStatusCountAggregateOutputType = {
   nameEn: number
   nameAr: number
   isActive: number
+  createdBy: number
+  updatedBy: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -65,10 +75,14 @@ export type PayrollStatusCountAggregateOutputType = {
 
 export type PayrollStatusAvgAggregateInputType = {
   id?: true
+  createdBy?: true
+  updatedBy?: true
 }
 
 export type PayrollStatusSumAggregateInputType = {
   id?: true
+  createdBy?: true
+  updatedBy?: true
 }
 
 export type PayrollStatusMinAggregateInputType = {
@@ -76,6 +90,8 @@ export type PayrollStatusMinAggregateInputType = {
   nameEn?: true
   nameAr?: true
   isActive?: true
+  createdBy?: true
+  updatedBy?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -85,6 +101,8 @@ export type PayrollStatusMaxAggregateInputType = {
   nameEn?: true
   nameAr?: true
   isActive?: true
+  createdBy?: true
+  updatedBy?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -94,6 +112,8 @@ export type PayrollStatusCountAggregateInputType = {
   nameEn?: true
   nameAr?: true
   isActive?: true
+  createdBy?: true
+  updatedBy?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -190,6 +210,8 @@ export type PayrollStatusGroupByOutputType = {
   nameEn: string
   nameAr: string | null
   isActive: boolean
+  createdBy: number | null
+  updatedBy: number | null
   createdAt: Date
   updatedAt: Date
   _count: PayrollStatusCountAggregateOutputType | null
@@ -222,10 +244,14 @@ export type PayrollStatusWhereInput = {
   nameEn?: Prisma.StringFilter<"PayrollStatus"> | string
   nameAr?: Prisma.StringNullableFilter<"PayrollStatus"> | string | null
   isActive?: Prisma.BoolFilter<"PayrollStatus"> | boolean
+  createdBy?: Prisma.IntNullableFilter<"PayrollStatus"> | number | null
+  updatedBy?: Prisma.IntNullableFilter<"PayrollStatus"> | number | null
   createdAt?: Prisma.DateTimeFilter<"PayrollStatus"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"PayrollStatus"> | Date | string
   summaries?: Prisma.PayrollSummaryListRelationFilter
   payrollDetails?: Prisma.PayrollDetailsListRelationFilter
+  creator?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  updater?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }
 
 export type PayrollStatusOrderByWithRelationInput = {
@@ -233,10 +259,14 @@ export type PayrollStatusOrderByWithRelationInput = {
   nameEn?: Prisma.SortOrder
   nameAr?: Prisma.SortOrderInput | Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrderInput | Prisma.SortOrder
+  updatedBy?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   summaries?: Prisma.PayrollSummaryOrderByRelationAggregateInput
   payrollDetails?: Prisma.PayrollDetailsOrderByRelationAggregateInput
+  creator?: Prisma.UserOrderByWithRelationInput
+  updater?: Prisma.UserOrderByWithRelationInput
 }
 
 export type PayrollStatusWhereUniqueInput = Prisma.AtLeast<{
@@ -247,10 +277,14 @@ export type PayrollStatusWhereUniqueInput = Prisma.AtLeast<{
   nameEn?: Prisma.StringFilter<"PayrollStatus"> | string
   nameAr?: Prisma.StringNullableFilter<"PayrollStatus"> | string | null
   isActive?: Prisma.BoolFilter<"PayrollStatus"> | boolean
+  createdBy?: Prisma.IntNullableFilter<"PayrollStatus"> | number | null
+  updatedBy?: Prisma.IntNullableFilter<"PayrollStatus"> | number | null
   createdAt?: Prisma.DateTimeFilter<"PayrollStatus"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"PayrollStatus"> | Date | string
   summaries?: Prisma.PayrollSummaryListRelationFilter
   payrollDetails?: Prisma.PayrollDetailsListRelationFilter
+  creator?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  updater?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }, "id">
 
 export type PayrollStatusOrderByWithAggregationInput = {
@@ -258,6 +292,8 @@ export type PayrollStatusOrderByWithAggregationInput = {
   nameEn?: Prisma.SortOrder
   nameAr?: Prisma.SortOrderInput | Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrderInput | Prisma.SortOrder
+  updatedBy?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.PayrollStatusCountOrderByAggregateInput
@@ -275,6 +311,8 @@ export type PayrollStatusScalarWhereWithAggregatesInput = {
   nameEn?: Prisma.StringWithAggregatesFilter<"PayrollStatus"> | string
   nameAr?: Prisma.StringNullableWithAggregatesFilter<"PayrollStatus"> | string | null
   isActive?: Prisma.BoolWithAggregatesFilter<"PayrollStatus"> | boolean
+  createdBy?: Prisma.IntNullableWithAggregatesFilter<"PayrollStatus"> | number | null
+  updatedBy?: Prisma.IntNullableWithAggregatesFilter<"PayrollStatus"> | number | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"PayrollStatus"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"PayrollStatus"> | Date | string
 }
@@ -287,6 +325,8 @@ export type PayrollStatusCreateInput = {
   updatedAt?: Date | string
   summaries?: Prisma.PayrollSummaryCreateNestedManyWithoutPayrollStatusInput
   payrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutPayrollStatusInput
+  creator?: Prisma.UserCreateNestedOneWithoutCreatedPayrollStatusesInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedPayrollStatusesInput
 }
 
 export type PayrollStatusUncheckedCreateInput = {
@@ -294,6 +334,8 @@ export type PayrollStatusUncheckedCreateInput = {
   nameEn: string
   nameAr?: string | null
   isActive?: boolean
+  createdBy?: number | null
+  updatedBy?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   summaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutPayrollStatusInput
@@ -308,6 +350,8 @@ export type PayrollStatusUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   summaries?: Prisma.PayrollSummaryUpdateManyWithoutPayrollStatusNestedInput
   payrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutPayrollStatusNestedInput
+  creator?: Prisma.UserUpdateOneWithoutCreatedPayrollStatusesNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedPayrollStatusesNestedInput
 }
 
 export type PayrollStatusUncheckedUpdateInput = {
@@ -315,6 +359,8 @@ export type PayrollStatusUncheckedUpdateInput = {
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   summaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutPayrollStatusNestedInput
@@ -326,6 +372,8 @@ export type PayrollStatusCreateManyInput = {
   nameEn: string
   nameAr?: string | null
   isActive?: boolean
+  createdBy?: number | null
+  updatedBy?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -343,8 +391,20 @@ export type PayrollStatusUncheckedUpdateManyInput = {
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type PayrollStatusListRelationFilter = {
+  every?: Prisma.PayrollStatusWhereInput
+  some?: Prisma.PayrollStatusWhereInput
+  none?: Prisma.PayrollStatusWhereInput
+}
+
+export type PayrollStatusOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
 }
 
 export type PayrollStatusCountOrderByAggregateInput = {
@@ -352,12 +412,16 @@ export type PayrollStatusCountOrderByAggregateInput = {
   nameEn?: Prisma.SortOrder
   nameAr?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrder
+  updatedBy?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type PayrollStatusAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrder
+  updatedBy?: Prisma.SortOrder
 }
 
 export type PayrollStatusMaxOrderByAggregateInput = {
@@ -365,6 +429,8 @@ export type PayrollStatusMaxOrderByAggregateInput = {
   nameEn?: Prisma.SortOrder
   nameAr?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrder
+  updatedBy?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -374,17 +440,105 @@ export type PayrollStatusMinOrderByAggregateInput = {
   nameEn?: Prisma.SortOrder
   nameAr?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrder
+  updatedBy?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type PayrollStatusSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrder
+  updatedBy?: Prisma.SortOrder
 }
 
 export type PayrollStatusNullableScalarRelationFilter = {
   is?: Prisma.PayrollStatusWhereInput | null
   isNot?: Prisma.PayrollStatusWhereInput | null
+}
+
+export type PayrollStatusCreateNestedManyWithoutCreatorInput = {
+  create?: Prisma.XOR<Prisma.PayrollStatusCreateWithoutCreatorInput, Prisma.PayrollStatusUncheckedCreateWithoutCreatorInput> | Prisma.PayrollStatusCreateWithoutCreatorInput[] | Prisma.PayrollStatusUncheckedCreateWithoutCreatorInput[]
+  connectOrCreate?: Prisma.PayrollStatusCreateOrConnectWithoutCreatorInput | Prisma.PayrollStatusCreateOrConnectWithoutCreatorInput[]
+  createMany?: Prisma.PayrollStatusCreateManyCreatorInputEnvelope
+  connect?: Prisma.PayrollStatusWhereUniqueInput | Prisma.PayrollStatusWhereUniqueInput[]
+}
+
+export type PayrollStatusCreateNestedManyWithoutUpdaterInput = {
+  create?: Prisma.XOR<Prisma.PayrollStatusCreateWithoutUpdaterInput, Prisma.PayrollStatusUncheckedCreateWithoutUpdaterInput> | Prisma.PayrollStatusCreateWithoutUpdaterInput[] | Prisma.PayrollStatusUncheckedCreateWithoutUpdaterInput[]
+  connectOrCreate?: Prisma.PayrollStatusCreateOrConnectWithoutUpdaterInput | Prisma.PayrollStatusCreateOrConnectWithoutUpdaterInput[]
+  createMany?: Prisma.PayrollStatusCreateManyUpdaterInputEnvelope
+  connect?: Prisma.PayrollStatusWhereUniqueInput | Prisma.PayrollStatusWhereUniqueInput[]
+}
+
+export type PayrollStatusUncheckedCreateNestedManyWithoutCreatorInput = {
+  create?: Prisma.XOR<Prisma.PayrollStatusCreateWithoutCreatorInput, Prisma.PayrollStatusUncheckedCreateWithoutCreatorInput> | Prisma.PayrollStatusCreateWithoutCreatorInput[] | Prisma.PayrollStatusUncheckedCreateWithoutCreatorInput[]
+  connectOrCreate?: Prisma.PayrollStatusCreateOrConnectWithoutCreatorInput | Prisma.PayrollStatusCreateOrConnectWithoutCreatorInput[]
+  createMany?: Prisma.PayrollStatusCreateManyCreatorInputEnvelope
+  connect?: Prisma.PayrollStatusWhereUniqueInput | Prisma.PayrollStatusWhereUniqueInput[]
+}
+
+export type PayrollStatusUncheckedCreateNestedManyWithoutUpdaterInput = {
+  create?: Prisma.XOR<Prisma.PayrollStatusCreateWithoutUpdaterInput, Prisma.PayrollStatusUncheckedCreateWithoutUpdaterInput> | Prisma.PayrollStatusCreateWithoutUpdaterInput[] | Prisma.PayrollStatusUncheckedCreateWithoutUpdaterInput[]
+  connectOrCreate?: Prisma.PayrollStatusCreateOrConnectWithoutUpdaterInput | Prisma.PayrollStatusCreateOrConnectWithoutUpdaterInput[]
+  createMany?: Prisma.PayrollStatusCreateManyUpdaterInputEnvelope
+  connect?: Prisma.PayrollStatusWhereUniqueInput | Prisma.PayrollStatusWhereUniqueInput[]
+}
+
+export type PayrollStatusUpdateManyWithoutCreatorNestedInput = {
+  create?: Prisma.XOR<Prisma.PayrollStatusCreateWithoutCreatorInput, Prisma.PayrollStatusUncheckedCreateWithoutCreatorInput> | Prisma.PayrollStatusCreateWithoutCreatorInput[] | Prisma.PayrollStatusUncheckedCreateWithoutCreatorInput[]
+  connectOrCreate?: Prisma.PayrollStatusCreateOrConnectWithoutCreatorInput | Prisma.PayrollStatusCreateOrConnectWithoutCreatorInput[]
+  upsert?: Prisma.PayrollStatusUpsertWithWhereUniqueWithoutCreatorInput | Prisma.PayrollStatusUpsertWithWhereUniqueWithoutCreatorInput[]
+  createMany?: Prisma.PayrollStatusCreateManyCreatorInputEnvelope
+  set?: Prisma.PayrollStatusWhereUniqueInput | Prisma.PayrollStatusWhereUniqueInput[]
+  disconnect?: Prisma.PayrollStatusWhereUniqueInput | Prisma.PayrollStatusWhereUniqueInput[]
+  delete?: Prisma.PayrollStatusWhereUniqueInput | Prisma.PayrollStatusWhereUniqueInput[]
+  connect?: Prisma.PayrollStatusWhereUniqueInput | Prisma.PayrollStatusWhereUniqueInput[]
+  update?: Prisma.PayrollStatusUpdateWithWhereUniqueWithoutCreatorInput | Prisma.PayrollStatusUpdateWithWhereUniqueWithoutCreatorInput[]
+  updateMany?: Prisma.PayrollStatusUpdateManyWithWhereWithoutCreatorInput | Prisma.PayrollStatusUpdateManyWithWhereWithoutCreatorInput[]
+  deleteMany?: Prisma.PayrollStatusScalarWhereInput | Prisma.PayrollStatusScalarWhereInput[]
+}
+
+export type PayrollStatusUpdateManyWithoutUpdaterNestedInput = {
+  create?: Prisma.XOR<Prisma.PayrollStatusCreateWithoutUpdaterInput, Prisma.PayrollStatusUncheckedCreateWithoutUpdaterInput> | Prisma.PayrollStatusCreateWithoutUpdaterInput[] | Prisma.PayrollStatusUncheckedCreateWithoutUpdaterInput[]
+  connectOrCreate?: Prisma.PayrollStatusCreateOrConnectWithoutUpdaterInput | Prisma.PayrollStatusCreateOrConnectWithoutUpdaterInput[]
+  upsert?: Prisma.PayrollStatusUpsertWithWhereUniqueWithoutUpdaterInput | Prisma.PayrollStatusUpsertWithWhereUniqueWithoutUpdaterInput[]
+  createMany?: Prisma.PayrollStatusCreateManyUpdaterInputEnvelope
+  set?: Prisma.PayrollStatusWhereUniqueInput | Prisma.PayrollStatusWhereUniqueInput[]
+  disconnect?: Prisma.PayrollStatusWhereUniqueInput | Prisma.PayrollStatusWhereUniqueInput[]
+  delete?: Prisma.PayrollStatusWhereUniqueInput | Prisma.PayrollStatusWhereUniqueInput[]
+  connect?: Prisma.PayrollStatusWhereUniqueInput | Prisma.PayrollStatusWhereUniqueInput[]
+  update?: Prisma.PayrollStatusUpdateWithWhereUniqueWithoutUpdaterInput | Prisma.PayrollStatusUpdateWithWhereUniqueWithoutUpdaterInput[]
+  updateMany?: Prisma.PayrollStatusUpdateManyWithWhereWithoutUpdaterInput | Prisma.PayrollStatusUpdateManyWithWhereWithoutUpdaterInput[]
+  deleteMany?: Prisma.PayrollStatusScalarWhereInput | Prisma.PayrollStatusScalarWhereInput[]
+}
+
+export type PayrollStatusUncheckedUpdateManyWithoutCreatorNestedInput = {
+  create?: Prisma.XOR<Prisma.PayrollStatusCreateWithoutCreatorInput, Prisma.PayrollStatusUncheckedCreateWithoutCreatorInput> | Prisma.PayrollStatusCreateWithoutCreatorInput[] | Prisma.PayrollStatusUncheckedCreateWithoutCreatorInput[]
+  connectOrCreate?: Prisma.PayrollStatusCreateOrConnectWithoutCreatorInput | Prisma.PayrollStatusCreateOrConnectWithoutCreatorInput[]
+  upsert?: Prisma.PayrollStatusUpsertWithWhereUniqueWithoutCreatorInput | Prisma.PayrollStatusUpsertWithWhereUniqueWithoutCreatorInput[]
+  createMany?: Prisma.PayrollStatusCreateManyCreatorInputEnvelope
+  set?: Prisma.PayrollStatusWhereUniqueInput | Prisma.PayrollStatusWhereUniqueInput[]
+  disconnect?: Prisma.PayrollStatusWhereUniqueInput | Prisma.PayrollStatusWhereUniqueInput[]
+  delete?: Prisma.PayrollStatusWhereUniqueInput | Prisma.PayrollStatusWhereUniqueInput[]
+  connect?: Prisma.PayrollStatusWhereUniqueInput | Prisma.PayrollStatusWhereUniqueInput[]
+  update?: Prisma.PayrollStatusUpdateWithWhereUniqueWithoutCreatorInput | Prisma.PayrollStatusUpdateWithWhereUniqueWithoutCreatorInput[]
+  updateMany?: Prisma.PayrollStatusUpdateManyWithWhereWithoutCreatorInput | Prisma.PayrollStatusUpdateManyWithWhereWithoutCreatorInput[]
+  deleteMany?: Prisma.PayrollStatusScalarWhereInput | Prisma.PayrollStatusScalarWhereInput[]
+}
+
+export type PayrollStatusUncheckedUpdateManyWithoutUpdaterNestedInput = {
+  create?: Prisma.XOR<Prisma.PayrollStatusCreateWithoutUpdaterInput, Prisma.PayrollStatusUncheckedCreateWithoutUpdaterInput> | Prisma.PayrollStatusCreateWithoutUpdaterInput[] | Prisma.PayrollStatusUncheckedCreateWithoutUpdaterInput[]
+  connectOrCreate?: Prisma.PayrollStatusCreateOrConnectWithoutUpdaterInput | Prisma.PayrollStatusCreateOrConnectWithoutUpdaterInput[]
+  upsert?: Prisma.PayrollStatusUpsertWithWhereUniqueWithoutUpdaterInput | Prisma.PayrollStatusUpsertWithWhereUniqueWithoutUpdaterInput[]
+  createMany?: Prisma.PayrollStatusCreateManyUpdaterInputEnvelope
+  set?: Prisma.PayrollStatusWhereUniqueInput | Prisma.PayrollStatusWhereUniqueInput[]
+  disconnect?: Prisma.PayrollStatusWhereUniqueInput | Prisma.PayrollStatusWhereUniqueInput[]
+  delete?: Prisma.PayrollStatusWhereUniqueInput | Prisma.PayrollStatusWhereUniqueInput[]
+  connect?: Prisma.PayrollStatusWhereUniqueInput | Prisma.PayrollStatusWhereUniqueInput[]
+  update?: Prisma.PayrollStatusUpdateWithWhereUniqueWithoutUpdaterInput | Prisma.PayrollStatusUpdateWithWhereUniqueWithoutUpdaterInput[]
+  updateMany?: Prisma.PayrollStatusUpdateManyWithWhereWithoutUpdaterInput | Prisma.PayrollStatusUpdateManyWithWhereWithoutUpdaterInput[]
+  deleteMany?: Prisma.PayrollStatusScalarWhereInput | Prisma.PayrollStatusScalarWhereInput[]
 }
 
 export type PayrollStatusCreateNestedOneWithoutSummariesInput = {
@@ -419,6 +573,118 @@ export type PayrollStatusUpdateOneWithoutPayrollDetailsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.PayrollStatusUpdateToOneWithWhereWithoutPayrollDetailsInput, Prisma.PayrollStatusUpdateWithoutPayrollDetailsInput>, Prisma.PayrollStatusUncheckedUpdateWithoutPayrollDetailsInput>
 }
 
+export type PayrollStatusCreateWithoutCreatorInput = {
+  nameEn: string
+  nameAr?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  summaries?: Prisma.PayrollSummaryCreateNestedManyWithoutPayrollStatusInput
+  payrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutPayrollStatusInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedPayrollStatusesInput
+}
+
+export type PayrollStatusUncheckedCreateWithoutCreatorInput = {
+  id?: number
+  nameEn: string
+  nameAr?: string | null
+  isActive?: boolean
+  updatedBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  summaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutPayrollStatusInput
+  payrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutPayrollStatusInput
+}
+
+export type PayrollStatusCreateOrConnectWithoutCreatorInput = {
+  where: Prisma.PayrollStatusWhereUniqueInput
+  create: Prisma.XOR<Prisma.PayrollStatusCreateWithoutCreatorInput, Prisma.PayrollStatusUncheckedCreateWithoutCreatorInput>
+}
+
+export type PayrollStatusCreateManyCreatorInputEnvelope = {
+  data: Prisma.PayrollStatusCreateManyCreatorInput | Prisma.PayrollStatusCreateManyCreatorInput[]
+  skipDuplicates?: boolean
+}
+
+export type PayrollStatusCreateWithoutUpdaterInput = {
+  nameEn: string
+  nameAr?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  summaries?: Prisma.PayrollSummaryCreateNestedManyWithoutPayrollStatusInput
+  payrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutPayrollStatusInput
+  creator?: Prisma.UserCreateNestedOneWithoutCreatedPayrollStatusesInput
+}
+
+export type PayrollStatusUncheckedCreateWithoutUpdaterInput = {
+  id?: number
+  nameEn: string
+  nameAr?: string | null
+  isActive?: boolean
+  createdBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  summaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutPayrollStatusInput
+  payrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutPayrollStatusInput
+}
+
+export type PayrollStatusCreateOrConnectWithoutUpdaterInput = {
+  where: Prisma.PayrollStatusWhereUniqueInput
+  create: Prisma.XOR<Prisma.PayrollStatusCreateWithoutUpdaterInput, Prisma.PayrollStatusUncheckedCreateWithoutUpdaterInput>
+}
+
+export type PayrollStatusCreateManyUpdaterInputEnvelope = {
+  data: Prisma.PayrollStatusCreateManyUpdaterInput | Prisma.PayrollStatusCreateManyUpdaterInput[]
+  skipDuplicates?: boolean
+}
+
+export type PayrollStatusUpsertWithWhereUniqueWithoutCreatorInput = {
+  where: Prisma.PayrollStatusWhereUniqueInput
+  update: Prisma.XOR<Prisma.PayrollStatusUpdateWithoutCreatorInput, Prisma.PayrollStatusUncheckedUpdateWithoutCreatorInput>
+  create: Prisma.XOR<Prisma.PayrollStatusCreateWithoutCreatorInput, Prisma.PayrollStatusUncheckedCreateWithoutCreatorInput>
+}
+
+export type PayrollStatusUpdateWithWhereUniqueWithoutCreatorInput = {
+  where: Prisma.PayrollStatusWhereUniqueInput
+  data: Prisma.XOR<Prisma.PayrollStatusUpdateWithoutCreatorInput, Prisma.PayrollStatusUncheckedUpdateWithoutCreatorInput>
+}
+
+export type PayrollStatusUpdateManyWithWhereWithoutCreatorInput = {
+  where: Prisma.PayrollStatusScalarWhereInput
+  data: Prisma.XOR<Prisma.PayrollStatusUpdateManyMutationInput, Prisma.PayrollStatusUncheckedUpdateManyWithoutCreatorInput>
+}
+
+export type PayrollStatusScalarWhereInput = {
+  AND?: Prisma.PayrollStatusScalarWhereInput | Prisma.PayrollStatusScalarWhereInput[]
+  OR?: Prisma.PayrollStatusScalarWhereInput[]
+  NOT?: Prisma.PayrollStatusScalarWhereInput | Prisma.PayrollStatusScalarWhereInput[]
+  id?: Prisma.IntFilter<"PayrollStatus"> | number
+  nameEn?: Prisma.StringFilter<"PayrollStatus"> | string
+  nameAr?: Prisma.StringNullableFilter<"PayrollStatus"> | string | null
+  isActive?: Prisma.BoolFilter<"PayrollStatus"> | boolean
+  createdBy?: Prisma.IntNullableFilter<"PayrollStatus"> | number | null
+  updatedBy?: Prisma.IntNullableFilter<"PayrollStatus"> | number | null
+  createdAt?: Prisma.DateTimeFilter<"PayrollStatus"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"PayrollStatus"> | Date | string
+}
+
+export type PayrollStatusUpsertWithWhereUniqueWithoutUpdaterInput = {
+  where: Prisma.PayrollStatusWhereUniqueInput
+  update: Prisma.XOR<Prisma.PayrollStatusUpdateWithoutUpdaterInput, Prisma.PayrollStatusUncheckedUpdateWithoutUpdaterInput>
+  create: Prisma.XOR<Prisma.PayrollStatusCreateWithoutUpdaterInput, Prisma.PayrollStatusUncheckedCreateWithoutUpdaterInput>
+}
+
+export type PayrollStatusUpdateWithWhereUniqueWithoutUpdaterInput = {
+  where: Prisma.PayrollStatusWhereUniqueInput
+  data: Prisma.XOR<Prisma.PayrollStatusUpdateWithoutUpdaterInput, Prisma.PayrollStatusUncheckedUpdateWithoutUpdaterInput>
+}
+
+export type PayrollStatusUpdateManyWithWhereWithoutUpdaterInput = {
+  where: Prisma.PayrollStatusScalarWhereInput
+  data: Prisma.XOR<Prisma.PayrollStatusUpdateManyMutationInput, Prisma.PayrollStatusUncheckedUpdateManyWithoutUpdaterInput>
+}
+
 export type PayrollStatusCreateWithoutSummariesInput = {
   nameEn: string
   nameAr?: string | null
@@ -426,6 +692,8 @@ export type PayrollStatusCreateWithoutSummariesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   payrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutPayrollStatusInput
+  creator?: Prisma.UserCreateNestedOneWithoutCreatedPayrollStatusesInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedPayrollStatusesInput
 }
 
 export type PayrollStatusUncheckedCreateWithoutSummariesInput = {
@@ -433,6 +701,8 @@ export type PayrollStatusUncheckedCreateWithoutSummariesInput = {
   nameEn: string
   nameAr?: string | null
   isActive?: boolean
+  createdBy?: number | null
+  updatedBy?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   payrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutPayrollStatusInput
@@ -461,6 +731,8 @@ export type PayrollStatusUpdateWithoutSummariesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   payrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutPayrollStatusNestedInput
+  creator?: Prisma.UserUpdateOneWithoutCreatedPayrollStatusesNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedPayrollStatusesNestedInput
 }
 
 export type PayrollStatusUncheckedUpdateWithoutSummariesInput = {
@@ -468,6 +740,8 @@ export type PayrollStatusUncheckedUpdateWithoutSummariesInput = {
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   payrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutPayrollStatusNestedInput
@@ -480,6 +754,8 @@ export type PayrollStatusCreateWithoutPayrollDetailsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   summaries?: Prisma.PayrollSummaryCreateNestedManyWithoutPayrollStatusInput
+  creator?: Prisma.UserCreateNestedOneWithoutCreatedPayrollStatusesInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedPayrollStatusesInput
 }
 
 export type PayrollStatusUncheckedCreateWithoutPayrollDetailsInput = {
@@ -487,6 +763,8 @@ export type PayrollStatusUncheckedCreateWithoutPayrollDetailsInput = {
   nameEn: string
   nameAr?: string | null
   isActive?: boolean
+  createdBy?: number | null
+  updatedBy?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   summaries?: Prisma.PayrollSummaryUncheckedCreateNestedManyWithoutPayrollStatusInput
@@ -515,6 +793,8 @@ export type PayrollStatusUpdateWithoutPayrollDetailsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   summaries?: Prisma.PayrollSummaryUpdateManyWithoutPayrollStatusNestedInput
+  creator?: Prisma.UserUpdateOneWithoutCreatedPayrollStatusesNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedPayrollStatusesNestedInput
 }
 
 export type PayrollStatusUncheckedUpdateWithoutPayrollDetailsInput = {
@@ -522,9 +802,97 @@ export type PayrollStatusUncheckedUpdateWithoutPayrollDetailsInput = {
   nameEn?: Prisma.StringFieldUpdateOperationsInput | string
   nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   summaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutPayrollStatusNestedInput
+}
+
+export type PayrollStatusCreateManyCreatorInput = {
+  id?: number
+  nameEn: string
+  nameAr?: string | null
+  isActive?: boolean
+  updatedBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type PayrollStatusCreateManyUpdaterInput = {
+  id?: number
+  nameEn: string
+  nameAr?: string | null
+  isActive?: boolean
+  createdBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type PayrollStatusUpdateWithoutCreatorInput = {
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  summaries?: Prisma.PayrollSummaryUpdateManyWithoutPayrollStatusNestedInput
+  payrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutPayrollStatusNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedPayrollStatusesNestedInput
+}
+
+export type PayrollStatusUncheckedUpdateWithoutCreatorInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  summaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutPayrollStatusNestedInput
+  payrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutPayrollStatusNestedInput
+}
+
+export type PayrollStatusUncheckedUpdateManyWithoutCreatorInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type PayrollStatusUpdateWithoutUpdaterInput = {
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  summaries?: Prisma.PayrollSummaryUpdateManyWithoutPayrollStatusNestedInput
+  payrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutPayrollStatusNestedInput
+  creator?: Prisma.UserUpdateOneWithoutCreatedPayrollStatusesNestedInput
+}
+
+export type PayrollStatusUncheckedUpdateWithoutUpdaterInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  summaries?: Prisma.PayrollSummaryUncheckedUpdateManyWithoutPayrollStatusNestedInput
+  payrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutPayrollStatusNestedInput
+}
+
+export type PayrollStatusUncheckedUpdateManyWithoutUpdaterInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -572,10 +940,14 @@ export type PayrollStatusSelect<ExtArgs extends runtime.Types.Extensions.Interna
   nameEn?: boolean
   nameAr?: boolean
   isActive?: boolean
+  createdBy?: boolean
+  updatedBy?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   summaries?: boolean | Prisma.PayrollStatus$summariesArgs<ExtArgs>
   payrollDetails?: boolean | Prisma.PayrollStatus$payrollDetailsArgs<ExtArgs>
+  creator?: boolean | Prisma.PayrollStatus$creatorArgs<ExtArgs>
+  updater?: boolean | Prisma.PayrollStatus$updaterArgs<ExtArgs>
   _count?: boolean | Prisma.PayrollStatusCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["payrollStatus"]>
 
@@ -584,8 +956,12 @@ export type PayrollStatusSelectCreateManyAndReturn<ExtArgs extends runtime.Types
   nameEn?: boolean
   nameAr?: boolean
   isActive?: boolean
+  createdBy?: boolean
+  updatedBy?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  creator?: boolean | Prisma.PayrollStatus$creatorArgs<ExtArgs>
+  updater?: boolean | Prisma.PayrollStatus$updaterArgs<ExtArgs>
 }, ExtArgs["result"]["payrollStatus"]>
 
 export type PayrollStatusSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -593,8 +969,12 @@ export type PayrollStatusSelectUpdateManyAndReturn<ExtArgs extends runtime.Types
   nameEn?: boolean
   nameAr?: boolean
   isActive?: boolean
+  createdBy?: boolean
+  updatedBy?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  creator?: boolean | Prisma.PayrollStatus$creatorArgs<ExtArgs>
+  updater?: boolean | Prisma.PayrollStatus$updaterArgs<ExtArgs>
 }, ExtArgs["result"]["payrollStatus"]>
 
 export type PayrollStatusSelectScalar = {
@@ -602,30 +982,44 @@ export type PayrollStatusSelectScalar = {
   nameEn?: boolean
   nameAr?: boolean
   isActive?: boolean
+  createdBy?: boolean
+  updatedBy?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type PayrollStatusOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nameEn" | "nameAr" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["payrollStatus"]>
+export type PayrollStatusOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nameEn" | "nameAr" | "isActive" | "createdBy" | "updatedBy" | "createdAt" | "updatedAt", ExtArgs["result"]["payrollStatus"]>
 export type PayrollStatusInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   summaries?: boolean | Prisma.PayrollStatus$summariesArgs<ExtArgs>
   payrollDetails?: boolean | Prisma.PayrollStatus$payrollDetailsArgs<ExtArgs>
+  creator?: boolean | Prisma.PayrollStatus$creatorArgs<ExtArgs>
+  updater?: boolean | Prisma.PayrollStatus$updaterArgs<ExtArgs>
   _count?: boolean | Prisma.PayrollStatusCountOutputTypeDefaultArgs<ExtArgs>
 }
-export type PayrollStatusIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
-export type PayrollStatusIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type PayrollStatusIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  creator?: boolean | Prisma.PayrollStatus$creatorArgs<ExtArgs>
+  updater?: boolean | Prisma.PayrollStatus$updaterArgs<ExtArgs>
+}
+export type PayrollStatusIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  creator?: boolean | Prisma.PayrollStatus$creatorArgs<ExtArgs>
+  updater?: boolean | Prisma.PayrollStatus$updaterArgs<ExtArgs>
+}
 
 export type $PayrollStatusPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "PayrollStatus"
   objects: {
     summaries: Prisma.$PayrollSummaryPayload<ExtArgs>[]
     payrollDetails: Prisma.$PayrollDetailsPayload<ExtArgs>[]
+    creator: Prisma.$UserPayload<ExtArgs> | null
+    updater: Prisma.$UserPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     nameEn: string
     nameAr: string | null
     isActive: boolean
+    createdBy: number | null
+    updatedBy: number | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["payrollStatus"]>
@@ -1024,6 +1418,8 @@ export interface Prisma__PayrollStatusClient<T, Null = never, ExtArgs extends ru
   readonly [Symbol.toStringTag]: "PrismaPromise"
   summaries<T extends Prisma.PayrollStatus$summariesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PayrollStatus$summariesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PayrollSummaryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   payrollDetails<T extends Prisma.PayrollStatus$payrollDetailsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PayrollStatus$payrollDetailsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PayrollDetailsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  creator<T extends Prisma.PayrollStatus$creatorArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PayrollStatus$creatorArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  updater<T extends Prisma.PayrollStatus$updaterArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PayrollStatus$updaterArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1057,6 +1453,8 @@ export interface PayrollStatusFieldRefs {
   readonly nameEn: Prisma.FieldRef<"PayrollStatus", 'String'>
   readonly nameAr: Prisma.FieldRef<"PayrollStatus", 'String'>
   readonly isActive: Prisma.FieldRef<"PayrollStatus", 'Boolean'>
+  readonly createdBy: Prisma.FieldRef<"PayrollStatus", 'Int'>
+  readonly updatedBy: Prisma.FieldRef<"PayrollStatus", 'Int'>
   readonly createdAt: Prisma.FieldRef<"PayrollStatus", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"PayrollStatus", 'DateTime'>
 }
@@ -1308,6 +1706,10 @@ export type PayrollStatusCreateManyAndReturnArgs<ExtArgs extends runtime.Types.E
    */
   data: Prisma.PayrollStatusCreateManyInput | Prisma.PayrollStatusCreateManyInput[]
   skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PayrollStatusIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1378,6 +1780,10 @@ export type PayrollStatusUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.E
    * Limit how many PayrollStatuses to update.
    */
   limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PayrollStatusIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1492,6 +1898,44 @@ export type PayrollStatus$payrollDetailsArgs<ExtArgs extends runtime.Types.Exten
   take?: number
   skip?: number
   distinct?: Prisma.PayrollDetailsScalarFieldEnum | Prisma.PayrollDetailsScalarFieldEnum[]
+}
+
+/**
+ * PayrollStatus.creator
+ */
+export type PayrollStatus$creatorArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
+}
+
+/**
+ * PayrollStatus.updater
+ */
+export type PayrollStatus$updaterArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
 }
 
 /**

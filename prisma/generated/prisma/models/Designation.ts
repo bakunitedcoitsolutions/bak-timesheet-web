@@ -30,12 +30,16 @@ export type DesignationAvgAggregateOutputType = {
   id: number | null
   hoursPerDay: number | null
   displayOrderKey: number | null
+  createdBy: number | null
+  updatedBy: number | null
 }
 
 export type DesignationSumAggregateOutputType = {
   id: number | null
   hoursPerDay: number | null
   displayOrderKey: number | null
+  createdBy: number | null
+  updatedBy: number | null
 }
 
 export type DesignationMinAggregateOutputType = {
@@ -46,6 +50,8 @@ export type DesignationMinAggregateOutputType = {
   displayOrderKey: number | null
   color: string | null
   isActive: boolean | null
+  createdBy: number | null
+  updatedBy: number | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -58,6 +64,8 @@ export type DesignationMaxAggregateOutputType = {
   displayOrderKey: number | null
   color: string | null
   isActive: boolean | null
+  createdBy: number | null
+  updatedBy: number | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -70,6 +78,8 @@ export type DesignationCountAggregateOutputType = {
   displayOrderKey: number
   color: number
   isActive: number
+  createdBy: number
+  updatedBy: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -80,12 +90,16 @@ export type DesignationAvgAggregateInputType = {
   id?: true
   hoursPerDay?: true
   displayOrderKey?: true
+  createdBy?: true
+  updatedBy?: true
 }
 
 export type DesignationSumAggregateInputType = {
   id?: true
   hoursPerDay?: true
   displayOrderKey?: true
+  createdBy?: true
+  updatedBy?: true
 }
 
 export type DesignationMinAggregateInputType = {
@@ -96,6 +110,8 @@ export type DesignationMinAggregateInputType = {
   displayOrderKey?: true
   color?: true
   isActive?: true
+  createdBy?: true
+  updatedBy?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -108,6 +124,8 @@ export type DesignationMaxAggregateInputType = {
   displayOrderKey?: true
   color?: true
   isActive?: true
+  createdBy?: true
+  updatedBy?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -120,6 +138,8 @@ export type DesignationCountAggregateInputType = {
   displayOrderKey?: true
   color?: true
   isActive?: true
+  createdBy?: true
+  updatedBy?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -219,6 +239,8 @@ export type DesignationGroupByOutputType = {
   displayOrderKey: number | null
   color: string | null
   isActive: boolean
+  createdBy: number | null
+  updatedBy: number | null
   createdAt: Date
   updatedAt: Date
   _count: DesignationCountAggregateOutputType | null
@@ -254,10 +276,14 @@ export type DesignationWhereInput = {
   displayOrderKey?: Prisma.IntNullableFilter<"Designation"> | number | null
   color?: Prisma.StringNullableFilter<"Designation"> | string | null
   isActive?: Prisma.BoolFilter<"Designation"> | boolean
+  createdBy?: Prisma.IntNullableFilter<"Designation"> | number | null
+  updatedBy?: Prisma.IntNullableFilter<"Designation"> | number | null
   createdAt?: Prisma.DateTimeFilter<"Designation"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Designation"> | Date | string
   employees?: Prisma.EmployeeListRelationFilter
   exitReentries?: Prisma.ExitReentryListRelationFilter
+  creator?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  updater?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }
 
 export type DesignationOrderByWithRelationInput = {
@@ -268,10 +294,14 @@ export type DesignationOrderByWithRelationInput = {
   displayOrderKey?: Prisma.SortOrderInput | Prisma.SortOrder
   color?: Prisma.SortOrderInput | Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrderInput | Prisma.SortOrder
+  updatedBy?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   employees?: Prisma.EmployeeOrderByRelationAggregateInput
   exitReentries?: Prisma.ExitReentryOrderByRelationAggregateInput
+  creator?: Prisma.UserOrderByWithRelationInput
+  updater?: Prisma.UserOrderByWithRelationInput
 }
 
 export type DesignationWhereUniqueInput = Prisma.AtLeast<{
@@ -285,10 +315,14 @@ export type DesignationWhereUniqueInput = Prisma.AtLeast<{
   displayOrderKey?: Prisma.IntNullableFilter<"Designation"> | number | null
   color?: Prisma.StringNullableFilter<"Designation"> | string | null
   isActive?: Prisma.BoolFilter<"Designation"> | boolean
+  createdBy?: Prisma.IntNullableFilter<"Designation"> | number | null
+  updatedBy?: Prisma.IntNullableFilter<"Designation"> | number | null
   createdAt?: Prisma.DateTimeFilter<"Designation"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Designation"> | Date | string
   employees?: Prisma.EmployeeListRelationFilter
   exitReentries?: Prisma.ExitReentryListRelationFilter
+  creator?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  updater?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }, "id">
 
 export type DesignationOrderByWithAggregationInput = {
@@ -299,6 +333,8 @@ export type DesignationOrderByWithAggregationInput = {
   displayOrderKey?: Prisma.SortOrderInput | Prisma.SortOrder
   color?: Prisma.SortOrderInput | Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrderInput | Prisma.SortOrder
+  updatedBy?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.DesignationCountOrderByAggregateInput
@@ -319,6 +355,8 @@ export type DesignationScalarWhereWithAggregatesInput = {
   displayOrderKey?: Prisma.IntNullableWithAggregatesFilter<"Designation"> | number | null
   color?: Prisma.StringNullableWithAggregatesFilter<"Designation"> | string | null
   isActive?: Prisma.BoolWithAggregatesFilter<"Designation"> | boolean
+  createdBy?: Prisma.IntNullableWithAggregatesFilter<"Designation"> | number | null
+  updatedBy?: Prisma.IntNullableWithAggregatesFilter<"Designation"> | number | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Designation"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Designation"> | Date | string
 }
@@ -334,6 +372,8 @@ export type DesignationCreateInput = {
   updatedAt?: Date | string
   employees?: Prisma.EmployeeCreateNestedManyWithoutDesignationInput
   exitReentries?: Prisma.ExitReentryCreateNestedManyWithoutDesignationInput
+  creator?: Prisma.UserCreateNestedOneWithoutCreatedDesignationsInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedDesignationsInput
 }
 
 export type DesignationUncheckedCreateInput = {
@@ -344,6 +384,8 @@ export type DesignationUncheckedCreateInput = {
   displayOrderKey?: number | null
   color?: string | null
   isActive?: boolean
+  createdBy?: number | null
+  updatedBy?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   employees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutDesignationInput
@@ -361,6 +403,8 @@ export type DesignationUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   employees?: Prisma.EmployeeUpdateManyWithoutDesignationNestedInput
   exitReentries?: Prisma.ExitReentryUpdateManyWithoutDesignationNestedInput
+  creator?: Prisma.UserUpdateOneWithoutCreatedDesignationsNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedDesignationsNestedInput
 }
 
 export type DesignationUncheckedUpdateInput = {
@@ -371,6 +415,8 @@ export type DesignationUncheckedUpdateInput = {
   displayOrderKey?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   employees?: Prisma.EmployeeUncheckedUpdateManyWithoutDesignationNestedInput
@@ -385,6 +431,8 @@ export type DesignationCreateManyInput = {
   displayOrderKey?: number | null
   color?: string | null
   isActive?: boolean
+  createdBy?: number | null
+  updatedBy?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -408,8 +456,20 @@ export type DesignationUncheckedUpdateManyInput = {
   displayOrderKey?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type DesignationListRelationFilter = {
+  every?: Prisma.DesignationWhereInput
+  some?: Prisma.DesignationWhereInput
+  none?: Prisma.DesignationWhereInput
+}
+
+export type DesignationOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
 }
 
 export type DesignationNullableScalarRelationFilter = {
@@ -425,6 +485,8 @@ export type DesignationCountOrderByAggregateInput = {
   displayOrderKey?: Prisma.SortOrder
   color?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrder
+  updatedBy?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -433,6 +495,8 @@ export type DesignationAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   hoursPerDay?: Prisma.SortOrder
   displayOrderKey?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrder
+  updatedBy?: Prisma.SortOrder
 }
 
 export type DesignationMaxOrderByAggregateInput = {
@@ -443,6 +507,8 @@ export type DesignationMaxOrderByAggregateInput = {
   displayOrderKey?: Prisma.SortOrder
   color?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrder
+  updatedBy?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -455,6 +521,8 @@ export type DesignationMinOrderByAggregateInput = {
   displayOrderKey?: Prisma.SortOrder
   color?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrder
+  updatedBy?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -463,6 +531,92 @@ export type DesignationSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   hoursPerDay?: Prisma.SortOrder
   displayOrderKey?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrder
+  updatedBy?: Prisma.SortOrder
+}
+
+export type DesignationCreateNestedManyWithoutCreatorInput = {
+  create?: Prisma.XOR<Prisma.DesignationCreateWithoutCreatorInput, Prisma.DesignationUncheckedCreateWithoutCreatorInput> | Prisma.DesignationCreateWithoutCreatorInput[] | Prisma.DesignationUncheckedCreateWithoutCreatorInput[]
+  connectOrCreate?: Prisma.DesignationCreateOrConnectWithoutCreatorInput | Prisma.DesignationCreateOrConnectWithoutCreatorInput[]
+  createMany?: Prisma.DesignationCreateManyCreatorInputEnvelope
+  connect?: Prisma.DesignationWhereUniqueInput | Prisma.DesignationWhereUniqueInput[]
+}
+
+export type DesignationCreateNestedManyWithoutUpdaterInput = {
+  create?: Prisma.XOR<Prisma.DesignationCreateWithoutUpdaterInput, Prisma.DesignationUncheckedCreateWithoutUpdaterInput> | Prisma.DesignationCreateWithoutUpdaterInput[] | Prisma.DesignationUncheckedCreateWithoutUpdaterInput[]
+  connectOrCreate?: Prisma.DesignationCreateOrConnectWithoutUpdaterInput | Prisma.DesignationCreateOrConnectWithoutUpdaterInput[]
+  createMany?: Prisma.DesignationCreateManyUpdaterInputEnvelope
+  connect?: Prisma.DesignationWhereUniqueInput | Prisma.DesignationWhereUniqueInput[]
+}
+
+export type DesignationUncheckedCreateNestedManyWithoutCreatorInput = {
+  create?: Prisma.XOR<Prisma.DesignationCreateWithoutCreatorInput, Prisma.DesignationUncheckedCreateWithoutCreatorInput> | Prisma.DesignationCreateWithoutCreatorInput[] | Prisma.DesignationUncheckedCreateWithoutCreatorInput[]
+  connectOrCreate?: Prisma.DesignationCreateOrConnectWithoutCreatorInput | Prisma.DesignationCreateOrConnectWithoutCreatorInput[]
+  createMany?: Prisma.DesignationCreateManyCreatorInputEnvelope
+  connect?: Prisma.DesignationWhereUniqueInput | Prisma.DesignationWhereUniqueInput[]
+}
+
+export type DesignationUncheckedCreateNestedManyWithoutUpdaterInput = {
+  create?: Prisma.XOR<Prisma.DesignationCreateWithoutUpdaterInput, Prisma.DesignationUncheckedCreateWithoutUpdaterInput> | Prisma.DesignationCreateWithoutUpdaterInput[] | Prisma.DesignationUncheckedCreateWithoutUpdaterInput[]
+  connectOrCreate?: Prisma.DesignationCreateOrConnectWithoutUpdaterInput | Prisma.DesignationCreateOrConnectWithoutUpdaterInput[]
+  createMany?: Prisma.DesignationCreateManyUpdaterInputEnvelope
+  connect?: Prisma.DesignationWhereUniqueInput | Prisma.DesignationWhereUniqueInput[]
+}
+
+export type DesignationUpdateManyWithoutCreatorNestedInput = {
+  create?: Prisma.XOR<Prisma.DesignationCreateWithoutCreatorInput, Prisma.DesignationUncheckedCreateWithoutCreatorInput> | Prisma.DesignationCreateWithoutCreatorInput[] | Prisma.DesignationUncheckedCreateWithoutCreatorInput[]
+  connectOrCreate?: Prisma.DesignationCreateOrConnectWithoutCreatorInput | Prisma.DesignationCreateOrConnectWithoutCreatorInput[]
+  upsert?: Prisma.DesignationUpsertWithWhereUniqueWithoutCreatorInput | Prisma.DesignationUpsertWithWhereUniqueWithoutCreatorInput[]
+  createMany?: Prisma.DesignationCreateManyCreatorInputEnvelope
+  set?: Prisma.DesignationWhereUniqueInput | Prisma.DesignationWhereUniqueInput[]
+  disconnect?: Prisma.DesignationWhereUniqueInput | Prisma.DesignationWhereUniqueInput[]
+  delete?: Prisma.DesignationWhereUniqueInput | Prisma.DesignationWhereUniqueInput[]
+  connect?: Prisma.DesignationWhereUniqueInput | Prisma.DesignationWhereUniqueInput[]
+  update?: Prisma.DesignationUpdateWithWhereUniqueWithoutCreatorInput | Prisma.DesignationUpdateWithWhereUniqueWithoutCreatorInput[]
+  updateMany?: Prisma.DesignationUpdateManyWithWhereWithoutCreatorInput | Prisma.DesignationUpdateManyWithWhereWithoutCreatorInput[]
+  deleteMany?: Prisma.DesignationScalarWhereInput | Prisma.DesignationScalarWhereInput[]
+}
+
+export type DesignationUpdateManyWithoutUpdaterNestedInput = {
+  create?: Prisma.XOR<Prisma.DesignationCreateWithoutUpdaterInput, Prisma.DesignationUncheckedCreateWithoutUpdaterInput> | Prisma.DesignationCreateWithoutUpdaterInput[] | Prisma.DesignationUncheckedCreateWithoutUpdaterInput[]
+  connectOrCreate?: Prisma.DesignationCreateOrConnectWithoutUpdaterInput | Prisma.DesignationCreateOrConnectWithoutUpdaterInput[]
+  upsert?: Prisma.DesignationUpsertWithWhereUniqueWithoutUpdaterInput | Prisma.DesignationUpsertWithWhereUniqueWithoutUpdaterInput[]
+  createMany?: Prisma.DesignationCreateManyUpdaterInputEnvelope
+  set?: Prisma.DesignationWhereUniqueInput | Prisma.DesignationWhereUniqueInput[]
+  disconnect?: Prisma.DesignationWhereUniqueInput | Prisma.DesignationWhereUniqueInput[]
+  delete?: Prisma.DesignationWhereUniqueInput | Prisma.DesignationWhereUniqueInput[]
+  connect?: Prisma.DesignationWhereUniqueInput | Prisma.DesignationWhereUniqueInput[]
+  update?: Prisma.DesignationUpdateWithWhereUniqueWithoutUpdaterInput | Prisma.DesignationUpdateWithWhereUniqueWithoutUpdaterInput[]
+  updateMany?: Prisma.DesignationUpdateManyWithWhereWithoutUpdaterInput | Prisma.DesignationUpdateManyWithWhereWithoutUpdaterInput[]
+  deleteMany?: Prisma.DesignationScalarWhereInput | Prisma.DesignationScalarWhereInput[]
+}
+
+export type DesignationUncheckedUpdateManyWithoutCreatorNestedInput = {
+  create?: Prisma.XOR<Prisma.DesignationCreateWithoutCreatorInput, Prisma.DesignationUncheckedCreateWithoutCreatorInput> | Prisma.DesignationCreateWithoutCreatorInput[] | Prisma.DesignationUncheckedCreateWithoutCreatorInput[]
+  connectOrCreate?: Prisma.DesignationCreateOrConnectWithoutCreatorInput | Prisma.DesignationCreateOrConnectWithoutCreatorInput[]
+  upsert?: Prisma.DesignationUpsertWithWhereUniqueWithoutCreatorInput | Prisma.DesignationUpsertWithWhereUniqueWithoutCreatorInput[]
+  createMany?: Prisma.DesignationCreateManyCreatorInputEnvelope
+  set?: Prisma.DesignationWhereUniqueInput | Prisma.DesignationWhereUniqueInput[]
+  disconnect?: Prisma.DesignationWhereUniqueInput | Prisma.DesignationWhereUniqueInput[]
+  delete?: Prisma.DesignationWhereUniqueInput | Prisma.DesignationWhereUniqueInput[]
+  connect?: Prisma.DesignationWhereUniqueInput | Prisma.DesignationWhereUniqueInput[]
+  update?: Prisma.DesignationUpdateWithWhereUniqueWithoutCreatorInput | Prisma.DesignationUpdateWithWhereUniqueWithoutCreatorInput[]
+  updateMany?: Prisma.DesignationUpdateManyWithWhereWithoutCreatorInput | Prisma.DesignationUpdateManyWithWhereWithoutCreatorInput[]
+  deleteMany?: Prisma.DesignationScalarWhereInput | Prisma.DesignationScalarWhereInput[]
+}
+
+export type DesignationUncheckedUpdateManyWithoutUpdaterNestedInput = {
+  create?: Prisma.XOR<Prisma.DesignationCreateWithoutUpdaterInput, Prisma.DesignationUncheckedCreateWithoutUpdaterInput> | Prisma.DesignationCreateWithoutUpdaterInput[] | Prisma.DesignationUncheckedCreateWithoutUpdaterInput[]
+  connectOrCreate?: Prisma.DesignationCreateOrConnectWithoutUpdaterInput | Prisma.DesignationCreateOrConnectWithoutUpdaterInput[]
+  upsert?: Prisma.DesignationUpsertWithWhereUniqueWithoutUpdaterInput | Prisma.DesignationUpsertWithWhereUniqueWithoutUpdaterInput[]
+  createMany?: Prisma.DesignationCreateManyUpdaterInputEnvelope
+  set?: Prisma.DesignationWhereUniqueInput | Prisma.DesignationWhereUniqueInput[]
+  disconnect?: Prisma.DesignationWhereUniqueInput | Prisma.DesignationWhereUniqueInput[]
+  delete?: Prisma.DesignationWhereUniqueInput | Prisma.DesignationWhereUniqueInput[]
+  connect?: Prisma.DesignationWhereUniqueInput | Prisma.DesignationWhereUniqueInput[]
+  update?: Prisma.DesignationUpdateWithWhereUniqueWithoutUpdaterInput | Prisma.DesignationUpdateWithWhereUniqueWithoutUpdaterInput[]
+  updateMany?: Prisma.DesignationUpdateManyWithWhereWithoutUpdaterInput | Prisma.DesignationUpdateManyWithWhereWithoutUpdaterInput[]
+  deleteMany?: Prisma.DesignationScalarWhereInput | Prisma.DesignationScalarWhereInput[]
 }
 
 export type DesignationCreateNestedOneWithoutEmployeesInput = {
@@ -497,6 +651,133 @@ export type DesignationUpdateOneWithoutExitReentriesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.DesignationUpdateToOneWithWhereWithoutExitReentriesInput, Prisma.DesignationUpdateWithoutExitReentriesInput>, Prisma.DesignationUncheckedUpdateWithoutExitReentriesInput>
 }
 
+export type DesignationCreateWithoutCreatorInput = {
+  nameEn: string
+  nameAr?: string | null
+  hoursPerDay?: number | null
+  displayOrderKey?: number | null
+  color?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  employees?: Prisma.EmployeeCreateNestedManyWithoutDesignationInput
+  exitReentries?: Prisma.ExitReentryCreateNestedManyWithoutDesignationInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedDesignationsInput
+}
+
+export type DesignationUncheckedCreateWithoutCreatorInput = {
+  id?: number
+  nameEn: string
+  nameAr?: string | null
+  hoursPerDay?: number | null
+  displayOrderKey?: number | null
+  color?: string | null
+  isActive?: boolean
+  updatedBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  employees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutDesignationInput
+  exitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutDesignationInput
+}
+
+export type DesignationCreateOrConnectWithoutCreatorInput = {
+  where: Prisma.DesignationWhereUniqueInput
+  create: Prisma.XOR<Prisma.DesignationCreateWithoutCreatorInput, Prisma.DesignationUncheckedCreateWithoutCreatorInput>
+}
+
+export type DesignationCreateManyCreatorInputEnvelope = {
+  data: Prisma.DesignationCreateManyCreatorInput | Prisma.DesignationCreateManyCreatorInput[]
+  skipDuplicates?: boolean
+}
+
+export type DesignationCreateWithoutUpdaterInput = {
+  nameEn: string
+  nameAr?: string | null
+  hoursPerDay?: number | null
+  displayOrderKey?: number | null
+  color?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  employees?: Prisma.EmployeeCreateNestedManyWithoutDesignationInput
+  exitReentries?: Prisma.ExitReentryCreateNestedManyWithoutDesignationInput
+  creator?: Prisma.UserCreateNestedOneWithoutCreatedDesignationsInput
+}
+
+export type DesignationUncheckedCreateWithoutUpdaterInput = {
+  id?: number
+  nameEn: string
+  nameAr?: string | null
+  hoursPerDay?: number | null
+  displayOrderKey?: number | null
+  color?: string | null
+  isActive?: boolean
+  createdBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  employees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutDesignationInput
+  exitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutDesignationInput
+}
+
+export type DesignationCreateOrConnectWithoutUpdaterInput = {
+  where: Prisma.DesignationWhereUniqueInput
+  create: Prisma.XOR<Prisma.DesignationCreateWithoutUpdaterInput, Prisma.DesignationUncheckedCreateWithoutUpdaterInput>
+}
+
+export type DesignationCreateManyUpdaterInputEnvelope = {
+  data: Prisma.DesignationCreateManyUpdaterInput | Prisma.DesignationCreateManyUpdaterInput[]
+  skipDuplicates?: boolean
+}
+
+export type DesignationUpsertWithWhereUniqueWithoutCreatorInput = {
+  where: Prisma.DesignationWhereUniqueInput
+  update: Prisma.XOR<Prisma.DesignationUpdateWithoutCreatorInput, Prisma.DesignationUncheckedUpdateWithoutCreatorInput>
+  create: Prisma.XOR<Prisma.DesignationCreateWithoutCreatorInput, Prisma.DesignationUncheckedCreateWithoutCreatorInput>
+}
+
+export type DesignationUpdateWithWhereUniqueWithoutCreatorInput = {
+  where: Prisma.DesignationWhereUniqueInput
+  data: Prisma.XOR<Prisma.DesignationUpdateWithoutCreatorInput, Prisma.DesignationUncheckedUpdateWithoutCreatorInput>
+}
+
+export type DesignationUpdateManyWithWhereWithoutCreatorInput = {
+  where: Prisma.DesignationScalarWhereInput
+  data: Prisma.XOR<Prisma.DesignationUpdateManyMutationInput, Prisma.DesignationUncheckedUpdateManyWithoutCreatorInput>
+}
+
+export type DesignationScalarWhereInput = {
+  AND?: Prisma.DesignationScalarWhereInput | Prisma.DesignationScalarWhereInput[]
+  OR?: Prisma.DesignationScalarWhereInput[]
+  NOT?: Prisma.DesignationScalarWhereInput | Prisma.DesignationScalarWhereInput[]
+  id?: Prisma.IntFilter<"Designation"> | number
+  nameEn?: Prisma.StringFilter<"Designation"> | string
+  nameAr?: Prisma.StringNullableFilter<"Designation"> | string | null
+  hoursPerDay?: Prisma.IntNullableFilter<"Designation"> | number | null
+  displayOrderKey?: Prisma.IntNullableFilter<"Designation"> | number | null
+  color?: Prisma.StringNullableFilter<"Designation"> | string | null
+  isActive?: Prisma.BoolFilter<"Designation"> | boolean
+  createdBy?: Prisma.IntNullableFilter<"Designation"> | number | null
+  updatedBy?: Prisma.IntNullableFilter<"Designation"> | number | null
+  createdAt?: Prisma.DateTimeFilter<"Designation"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Designation"> | Date | string
+}
+
+export type DesignationUpsertWithWhereUniqueWithoutUpdaterInput = {
+  where: Prisma.DesignationWhereUniqueInput
+  update: Prisma.XOR<Prisma.DesignationUpdateWithoutUpdaterInput, Prisma.DesignationUncheckedUpdateWithoutUpdaterInput>
+  create: Prisma.XOR<Prisma.DesignationCreateWithoutUpdaterInput, Prisma.DesignationUncheckedCreateWithoutUpdaterInput>
+}
+
+export type DesignationUpdateWithWhereUniqueWithoutUpdaterInput = {
+  where: Prisma.DesignationWhereUniqueInput
+  data: Prisma.XOR<Prisma.DesignationUpdateWithoutUpdaterInput, Prisma.DesignationUncheckedUpdateWithoutUpdaterInput>
+}
+
+export type DesignationUpdateManyWithWhereWithoutUpdaterInput = {
+  where: Prisma.DesignationScalarWhereInput
+  data: Prisma.XOR<Prisma.DesignationUpdateManyMutationInput, Prisma.DesignationUncheckedUpdateManyWithoutUpdaterInput>
+}
+
 export type DesignationCreateWithoutEmployeesInput = {
   nameEn: string
   nameAr?: string | null
@@ -507,6 +788,8 @@ export type DesignationCreateWithoutEmployeesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   exitReentries?: Prisma.ExitReentryCreateNestedManyWithoutDesignationInput
+  creator?: Prisma.UserCreateNestedOneWithoutCreatedDesignationsInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedDesignationsInput
 }
 
 export type DesignationUncheckedCreateWithoutEmployeesInput = {
@@ -517,6 +800,8 @@ export type DesignationUncheckedCreateWithoutEmployeesInput = {
   displayOrderKey?: number | null
   color?: string | null
   isActive?: boolean
+  createdBy?: number | null
+  updatedBy?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   exitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutDesignationInput
@@ -548,6 +833,8 @@ export type DesignationUpdateWithoutEmployeesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   exitReentries?: Prisma.ExitReentryUpdateManyWithoutDesignationNestedInput
+  creator?: Prisma.UserUpdateOneWithoutCreatedDesignationsNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedDesignationsNestedInput
 }
 
 export type DesignationUncheckedUpdateWithoutEmployeesInput = {
@@ -558,6 +845,8 @@ export type DesignationUncheckedUpdateWithoutEmployeesInput = {
   displayOrderKey?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   exitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutDesignationNestedInput
@@ -573,6 +862,8 @@ export type DesignationCreateWithoutExitReentriesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   employees?: Prisma.EmployeeCreateNestedManyWithoutDesignationInput
+  creator?: Prisma.UserCreateNestedOneWithoutCreatedDesignationsInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedDesignationsInput
 }
 
 export type DesignationUncheckedCreateWithoutExitReentriesInput = {
@@ -583,6 +874,8 @@ export type DesignationUncheckedCreateWithoutExitReentriesInput = {
   displayOrderKey?: number | null
   color?: string | null
   isActive?: boolean
+  createdBy?: number | null
+  updatedBy?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   employees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutDesignationInput
@@ -614,6 +907,8 @@ export type DesignationUpdateWithoutExitReentriesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   employees?: Prisma.EmployeeUpdateManyWithoutDesignationNestedInput
+  creator?: Prisma.UserUpdateOneWithoutCreatedDesignationsNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedDesignationsNestedInput
 }
 
 export type DesignationUncheckedUpdateWithoutExitReentriesInput = {
@@ -624,9 +919,121 @@ export type DesignationUncheckedUpdateWithoutExitReentriesInput = {
   displayOrderKey?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   employees?: Prisma.EmployeeUncheckedUpdateManyWithoutDesignationNestedInput
+}
+
+export type DesignationCreateManyCreatorInput = {
+  id?: number
+  nameEn: string
+  nameAr?: string | null
+  hoursPerDay?: number | null
+  displayOrderKey?: number | null
+  color?: string | null
+  isActive?: boolean
+  updatedBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type DesignationCreateManyUpdaterInput = {
+  id?: number
+  nameEn: string
+  nameAr?: string | null
+  hoursPerDay?: number | null
+  displayOrderKey?: number | null
+  color?: string | null
+  isActive?: boolean
+  createdBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type DesignationUpdateWithoutCreatorInput = {
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursPerDay?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  displayOrderKey?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  employees?: Prisma.EmployeeUpdateManyWithoutDesignationNestedInput
+  exitReentries?: Prisma.ExitReentryUpdateManyWithoutDesignationNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedDesignationsNestedInput
+}
+
+export type DesignationUncheckedUpdateWithoutCreatorInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursPerDay?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  displayOrderKey?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  employees?: Prisma.EmployeeUncheckedUpdateManyWithoutDesignationNestedInput
+  exitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutDesignationNestedInput
+}
+
+export type DesignationUncheckedUpdateManyWithoutCreatorInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursPerDay?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  displayOrderKey?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type DesignationUpdateWithoutUpdaterInput = {
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursPerDay?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  displayOrderKey?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  employees?: Prisma.EmployeeUpdateManyWithoutDesignationNestedInput
+  exitReentries?: Prisma.ExitReentryUpdateManyWithoutDesignationNestedInput
+  creator?: Prisma.UserUpdateOneWithoutCreatedDesignationsNestedInput
+}
+
+export type DesignationUncheckedUpdateWithoutUpdaterInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursPerDay?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  displayOrderKey?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  employees?: Prisma.EmployeeUncheckedUpdateManyWithoutDesignationNestedInput
+  exitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutDesignationNestedInput
+}
+
+export type DesignationUncheckedUpdateManyWithoutUpdaterInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursPerDay?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  displayOrderKey?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -677,10 +1084,14 @@ export type DesignationSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   displayOrderKey?: boolean
   color?: boolean
   isActive?: boolean
+  createdBy?: boolean
+  updatedBy?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   employees?: boolean | Prisma.Designation$employeesArgs<ExtArgs>
   exitReentries?: boolean | Prisma.Designation$exitReentriesArgs<ExtArgs>
+  creator?: boolean | Prisma.Designation$creatorArgs<ExtArgs>
+  updater?: boolean | Prisma.Designation$updaterArgs<ExtArgs>
   _count?: boolean | Prisma.DesignationCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["designation"]>
 
@@ -692,8 +1103,12 @@ export type DesignationSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   displayOrderKey?: boolean
   color?: boolean
   isActive?: boolean
+  createdBy?: boolean
+  updatedBy?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  creator?: boolean | Prisma.Designation$creatorArgs<ExtArgs>
+  updater?: boolean | Prisma.Designation$updaterArgs<ExtArgs>
 }, ExtArgs["result"]["designation"]>
 
 export type DesignationSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -704,8 +1119,12 @@ export type DesignationSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   displayOrderKey?: boolean
   color?: boolean
   isActive?: boolean
+  createdBy?: boolean
+  updatedBy?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  creator?: boolean | Prisma.Designation$creatorArgs<ExtArgs>
+  updater?: boolean | Prisma.Designation$updaterArgs<ExtArgs>
 }, ExtArgs["result"]["designation"]>
 
 export type DesignationSelectScalar = {
@@ -716,24 +1135,36 @@ export type DesignationSelectScalar = {
   displayOrderKey?: boolean
   color?: boolean
   isActive?: boolean
+  createdBy?: boolean
+  updatedBy?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type DesignationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nameEn" | "nameAr" | "hoursPerDay" | "displayOrderKey" | "color" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["designation"]>
+export type DesignationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nameEn" | "nameAr" | "hoursPerDay" | "displayOrderKey" | "color" | "isActive" | "createdBy" | "updatedBy" | "createdAt" | "updatedAt", ExtArgs["result"]["designation"]>
 export type DesignationInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   employees?: boolean | Prisma.Designation$employeesArgs<ExtArgs>
   exitReentries?: boolean | Prisma.Designation$exitReentriesArgs<ExtArgs>
+  creator?: boolean | Prisma.Designation$creatorArgs<ExtArgs>
+  updater?: boolean | Prisma.Designation$updaterArgs<ExtArgs>
   _count?: boolean | Prisma.DesignationCountOutputTypeDefaultArgs<ExtArgs>
 }
-export type DesignationIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
-export type DesignationIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type DesignationIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  creator?: boolean | Prisma.Designation$creatorArgs<ExtArgs>
+  updater?: boolean | Prisma.Designation$updaterArgs<ExtArgs>
+}
+export type DesignationIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  creator?: boolean | Prisma.Designation$creatorArgs<ExtArgs>
+  updater?: boolean | Prisma.Designation$updaterArgs<ExtArgs>
+}
 
 export type $DesignationPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Designation"
   objects: {
     employees: Prisma.$EmployeePayload<ExtArgs>[]
     exitReentries: Prisma.$ExitReentryPayload<ExtArgs>[]
+    creator: Prisma.$UserPayload<ExtArgs> | null
+    updater: Prisma.$UserPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -743,6 +1174,8 @@ export type $DesignationPayload<ExtArgs extends runtime.Types.Extensions.Interna
     displayOrderKey: number | null
     color: string | null
     isActive: boolean
+    createdBy: number | null
+    updatedBy: number | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["designation"]>
@@ -1141,6 +1574,8 @@ export interface Prisma__DesignationClient<T, Null = never, ExtArgs extends runt
   readonly [Symbol.toStringTag]: "PrismaPromise"
   employees<T extends Prisma.Designation$employeesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Designation$employeesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   exitReentries<T extends Prisma.Designation$exitReentriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Designation$exitReentriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ExitReentryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  creator<T extends Prisma.Designation$creatorArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Designation$creatorArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  updater<T extends Prisma.Designation$updaterArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Designation$updaterArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1177,6 +1612,8 @@ export interface DesignationFieldRefs {
   readonly displayOrderKey: Prisma.FieldRef<"Designation", 'Int'>
   readonly color: Prisma.FieldRef<"Designation", 'String'>
   readonly isActive: Prisma.FieldRef<"Designation", 'Boolean'>
+  readonly createdBy: Prisma.FieldRef<"Designation", 'Int'>
+  readonly updatedBy: Prisma.FieldRef<"Designation", 'Int'>
   readonly createdAt: Prisma.FieldRef<"Designation", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Designation", 'DateTime'>
 }
@@ -1428,6 +1865,10 @@ export type DesignationCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Ext
    */
   data: Prisma.DesignationCreateManyInput | Prisma.DesignationCreateManyInput[]
   skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DesignationIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1498,6 +1939,10 @@ export type DesignationUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Ext
    * Limit how many Designations to update.
    */
   limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DesignationIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1612,6 +2057,44 @@ export type Designation$exitReentriesArgs<ExtArgs extends runtime.Types.Extensio
   take?: number
   skip?: number
   distinct?: Prisma.ExitReentryScalarFieldEnum | Prisma.ExitReentryScalarFieldEnum[]
+}
+
+/**
+ * Designation.creator
+ */
+export type Designation$creatorArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
+}
+
+/**
+ * Designation.updater
+ */
+export type Designation$updaterArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
 }
 
 /**

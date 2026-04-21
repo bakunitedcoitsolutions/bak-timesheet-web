@@ -31,7 +31,7 @@ model User {
   createdBy   Int? // ID of user who created this record
   updatedBy   Int? // ID of user who last updated this record
   createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  updatedAt   DateTime @default(now()) @updatedAt
 
   // Relations: User → Other Tables (User has foreign keys)
   userRole   UserRole       @relation(fields: [userRoleId], references: [id])
@@ -41,14 +41,59 @@ model User {
   updater    User?          @relation("UserUpdatedBy", fields: [updatedBy], references: [id])
 
   // Relations: Other Tables → User (Other tables have foreign keys pointing to User)
-  createdUsers User[] @relation("UserCreatedBy")
-  updatedUsers User[] @relation("UserUpdatedBy")
+  // Auth & Roles
+  createdUsers     User[]     @relation("UserCreatedBy")
+  updatedUsers     User[]     @relation("UserUpdatedBy")
+  createdUserRoles      UserRole[]      @relation("UserRoleCreatedBy")
+  updatedUserRoles      UserRole[]      @relation("UserRoleUpdatedBy")
+  createdUserPrivileges UserPrivilege[] @relation("UserPrivilegeCreatedBy")
+  updatedUserPrivileges UserPrivilege[] @relation("UserPrivilegeUpdatedBy")
 
-  // Relations: PayrollSummary
-  createdPayrollSummaries  PayrollSummary[] @relation("PayrollSummaryCreatedBy")
-  modifiedPayrollSummaries PayrollSummary[] @relation("PayrollSummaryModifiedBy")
-  createdPayrollDetails    PayrollDetails[] @relation("PayrollDetailsCreatedBy")
-  modifiedPayrollDetails   PayrollDetails[] @relation("PayrollDetailsModifiedBy")
+  // Branches & Locations
+  createdBranches   Branch[]   @relation("BranchCreatedBy")
+  updatedBranches   Branch[]   @relation("BranchUpdatedBy")
+  createdCities     City[]     @relation("CityCreatedBy")
+  updatedCities     City[]     @relation("CityUpdatedBy")
+  createdCountries  Country[]  @relation("CountryCreatedBy")
+  updatedCountries  Country[]  @relation("CountryUpdatedBy")
+  createdGosiCities GosiCity[] @relation("GosiCityCreatedBy")
+  updatedGosiCities GosiCity[] @relation("GosiCityUpdatedBy")
+
+  // Employees
+  createdEmployees        Employee[]       @relation("EmployeeCreatedBy")
+  updatedEmployees        Employee[]       @relation("EmployeeUpdatedBy")
+  createdDesignations     Designation[]    @relation("DesignationCreatedBy")
+  updatedDesignations     Designation[]    @relation("DesignationUpdatedBy")
+  createdEmployeeStatuses EmployeeStatus[] @relation("EmployeeStatusCreatedBy")
+  updatedEmployeeStatuses EmployeeStatus[] @relation("EmployeeStatusUpdatedBy")
+
+  // Projects & Timesheets
+  createdProjects   Project[]   @relation("ProjectCreatedBy")
+  updatedProjects   Project[]   @relation("ProjectUpdatedBy")
+  createdTimesheets Timesheet[] @relation("TimesheetCreatedBy")
+  updatedTimesheets Timesheet[] @relation("TimesheetUpdatedBy")
+
+  // Payroll
+  createdPayrollSections  PayrollSection[]  @relation("PayrollSectionCreatedBy")
+  updatedPayrollSections  PayrollSection[]  @relation("PayrollSectionUpdatedBy")
+  createdPayrollStatuses  PayrollStatus[]   @relation("PayrollStatusCreatedBy")
+  updatedPayrollStatuses  PayrollStatus[]   @relation("PayrollStatusUpdatedBy")
+  createdPayrollSummaries PayrollSummary[]  @relation("PayrollSummaryCreatedBy")
+  updatedPayrollSummaries PayrollSummary[]  @relation("PayrollSummaryUpdatedBy")
+  createdPaymentMethods   PaymentMethod[]   @relation("PaymentMethodCreatedBy")
+  updatedPaymentMethods   PaymentMethod[]   @relation("PaymentMethodUpdatedBy")
+  createdPayrollDetails   PayrollDetails[]  @relation("PayrollDetailsCreatedBy")
+  updatedPayrollDetails   PayrollDetails[]  @relation("PayrollDetailsUpdatedBy")
+  createdAllowancesNotAvailable AllowanceNotAvailable[] @relation("AllowanceNotAvailableCreatedBy")
+  updatedAllowancesNotAvailable AllowanceNotAvailable[] @relation("AllowanceNotAvailableUpdatedBy")
+
+  // Financial & Tracking
+  createdLoans           Loan[]           @relation("LoanCreatedBy")
+  updatedLoans           Loan[]           @relation("LoanUpdatedBy")
+  createdTrafficChallans TrafficChallan[] @relation("TrafficChallanCreatedBy")
+  updatedTrafficChallans TrafficChallan[] @relation("TrafficChallanUpdatedBy")
+  createdExitReentries   ExitReentry[]    @relation("ExitReentryCreatedBy")
+  updatedExitReentries   ExitReentry[]    @relation("ExitReentryUpdatedBy")
 
   @@index([email])
   @@index([userRoleId])
@@ -67,21 +112,35 @@ model UserRole {
   nameAr    String?
   access    String // Admin, Manager, Branch Manager, Access-Enabled User
   isActive  Boolean  @default(true)
+  createdBy Int?
+  updatedBy Int?
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @default(now()) @updatedAt
 
-  users User[]
+  users   User[]
+  creator User?  @relation("UserRoleCreatedBy", fields: [createdBy], references: [id])
+  updater User?  @relation("UserRoleUpdatedBy", fields: [updatedBy], references: [id])
+
+  @@index([createdBy])
+  @@index([updatedBy])
 }
 
 model UserPrivilege {
   id         Int      @id @default(autoincrement())
   userId     Int      @unique
   privileges Json // Stores UserPrivileges structure
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  createdBy Int?
+  updatedBy Int?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
 
   // Relations: UserPrivilege → Other Tables (UserPrivilege has foreign keys)
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user    User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  creator User? @relation("UserPrivilegeCreatedBy", fields: [createdBy], references: [id])
+  updater User? @relation("UserPrivilegeUpdatedBy", fields: [updatedBy], references: [id])
+
+  @@index([createdBy])
+  @@index([updatedBy])
 }
 
 // ============================================
@@ -94,8 +153,10 @@ model Branch {
   nameAr         String?
   isMain         Boolean  @default(false)
   isActive       Boolean  @default(true)
+  createdBy      Int?
+  updatedBy      Int?
   createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+  updatedAt      DateTime @default(now()) @updatedAt
 
   // Relations: Other Tables → Branch (Other tables have foreign keys pointing to Branch)
   users            User[]           @relation("UserBranch")
@@ -105,6 +166,11 @@ model Branch {
   payrollSummaries PayrollSummary[]
   payrollDetails   PayrollDetails[]
   payrollSections  PayrollSection[]
+  creator          User?            @relation("BranchCreatedBy", fields: [createdBy], references: [id])
+  updater          User?            @relation("BranchUpdatedBy", fields: [updatedBy], references: [id])
+
+  @@index([createdBy])
+  @@index([updatedBy])
 }
 
 model City {
@@ -113,15 +179,21 @@ model City {
   nameAr    String?
   countryId Int?
   isActive  Boolean @default(true)
-
+  createdBy Int?
+  updatedBy Int?
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @default(now()) @updatedAt
 
   // Relations: City → Other Tables (City has foreign keys)
   country Country? @relation("CityCountry", fields: [countryId], references: [id])
+  creator User?    @relation("CityCreatedBy", fields: [createdBy], references: [id])
+  updater User?    @relation("CityUpdatedBy", fields: [updatedBy], references: [id])
 
   // Relations: Other Tables → City (Other tables have foreign keys pointing to City)
   employees Employee[]
+
+  @@index([createdBy])
+  @@index([updatedBy])
 }
 
 model Country {
@@ -129,13 +201,21 @@ model Country {
   nameEn    String
   nameAr    String?
   isActive  Boolean  @default(true)
+
+  createdBy Int?
+  updatedBy Int?
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @default(now()) @updatedAt
 
   // Relations: Other Tables → Country (Other tables have foreign keys pointing to Country)
   cities                 City[]     @relation("CityCountry")
   employeesByCountry     Employee[] @relation("EmployeeCountry")
   employeesByNationality Employee[] @relation("EmployeeNationality")
+  creator                User?      @relation("CountryCreatedBy", fields: [createdBy], references: [id])
+  updater                User?      @relation("CountryUpdatedBy", fields: [updatedBy], references: [id])
+
+  @@index([createdBy])
+  @@index([updatedBy])
 }
 
 model GosiCity {
@@ -143,10 +223,17 @@ model GosiCity {
   nameEn    String
   nameAr    String?
   isActive  Boolean  @default(true)
+  createdBy Int?
+  updatedBy Int?
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @default(now()) @updatedAt
 
   employees Employee[]
+  creator   User?      @relation("GosiCityCreatedBy", fields: [createdBy], references: [id])
+  updater   User?      @relation("GosiCityUpdatedBy", fields: [updatedBy], references: [id])
+
+  @@index([createdBy])
+  @@index([updatedBy])
 }
 
 // ============================================
@@ -211,8 +298,10 @@ model Employee {
   isCardDelivered Boolean @default(false)
   cardDocument    String?
 
+  createdBy Int?
+  updatedBy Int?
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @default(now()) @updatedAt
 
   // Relations: Employee → Other Tables (Employee has foreign keys)
   country        Country?        @relation("EmployeeCountry", fields: [countryId], references: [id])
@@ -224,6 +313,8 @@ model Employee {
   designation    Designation?    @relation(fields: [designationId], references: [id])
   payrollSection PayrollSection? @relation(fields: [payrollSectionId], references: [id])
   gosiCity       GosiCity?       @relation(fields: [gosiCityId], references: [id])
+  creator        User?           @relation("EmployeeCreatedBy", fields: [createdBy], references: [id])
+  updater        User?           @relation("EmployeeUpdatedBy", fields: [updatedBy], references: [id])
 
   // Relations: Other Tables → Employee (Other tables have foreign keys pointing to Employee)
   timesheets      Timesheet[]
@@ -236,6 +327,8 @@ model Employee {
   @@index([countryId])
   @@index([branchId])
   @@index([statusId])
+  @@index([createdBy])
+  @@index([updatedBy])
 }
 
 model Designation {
@@ -246,12 +339,19 @@ model Designation {
   displayOrderKey Int?
   color           String? // Hex color code (e.g., #3B82F6)
   isActive        Boolean  @default(true)
+  createdBy       Int?
+  updatedBy       Int?
   createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  updatedAt       DateTime @default(now()) @updatedAt
 
   // Relations: Other Tables → Designation (Other tables have foreign keys pointing to Designation)
   employees     Employee[]
   exitReentries ExitReentry[]
+  creator       User?         @relation("DesignationCreatedBy", fields: [createdBy], references: [id])
+  updater       User?         @relation("DesignationUpdatedBy", fields: [updatedBy], references: [id])
+
+  @@index([createdBy])
+  @@index([updatedBy])
 }
 
 model EmployeeStatus {
@@ -259,11 +359,18 @@ model EmployeeStatus {
   nameEn    String
   nameAr    String?
   isActive  Boolean  @default(true)
+  createdBy Int?
+  updatedBy Int?
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @default(now()) @updatedAt
 
   // Relations: Other Tables → EmployeeStatus (Other tables have foreign keys pointing to EmployeeStatus)
   employees Employee[]
+  creator   User?      @relation("EmployeeStatusCreatedBy", fields: [createdBy], references: [id])
+  updater   User?      @relation("EmployeeStatusUpdatedBy", fields: [updatedBy], references: [id])
+
+  @@index([createdBy])
+  @@index([updatedBy])
 }
 
 // ============================================
@@ -277,15 +384,22 @@ model Project {
   branchId    Int?
   description String?  @db.Text
   isActive    Boolean  @default(true)
+  createdBy   Int?
+  updatedBy   Int?
   createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  updatedAt   DateTime @default(now()) @updatedAt
 
   // Relations: Project → Other Tables (Project has foreign keys)
-  branch Branch? @relation(fields: [branchId], references: [id])
+  branch  Branch? @relation(fields: [branchId], references: [id])
+  creator User?   @relation("ProjectCreatedBy", fields: [createdBy], references: [id])
+  updater User?   @relation("ProjectUpdatedBy", fields: [updatedBy], references: [id])
 
   // Relations: Other Tables → Project (Other tables have foreign keys pointing to Project)
   timesheetsAsProject1 Timesheet[] @relation("TimesheetProject1")
   timesheetsAsProject2 Timesheet[] @relation("TimesheetProject2")
+
+  @@index([createdBy])
+  @@index([updatedBy])
 }
 
 // ============================================
@@ -304,20 +418,26 @@ model Timesheet {
   project2Overtime Int?
   totalHours       Int?
   description      String?  @db.Text
-  createdAt        DateTime @default(now())
-  updatedAt        DateTime @updatedAt
   isLocked         Boolean  @default(false)
   isManual         Boolean  @default(false)
+  createdBy        Int?
+  updatedBy        Int?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @default(now()) @updatedAt
 
   // Relations: Timesheet → Other Tables (Timesheet has foreign keys)
   employee Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
   project1 Project? @relation("TimesheetProject1", fields: [project1Id], references: [id], onDelete: Cascade)
   project2 Project? @relation("TimesheetProject2", fields: [project2Id], references: [id], onDelete: Cascade)
+  creator  User?    @relation("TimesheetCreatedBy", fields: [createdBy], references: [id])
+  updater  User?    @relation("TimesheetUpdatedBy", fields: [updatedBy], references: [id])
 
   @@index([employeeId])
   @@index([date])
   @@index([project1Id])
   @@index([project2Id])
+  @@index([createdBy])
+  @@index([updatedBy])
 }
 
 // ============================================
@@ -331,14 +451,19 @@ model PayrollSection {
   branchId        Int?     @default(1)
   displayOrderKey Int?
   isActive        Boolean  @default(true)
+  createdBy       Int?
+  updatedBy       Int?
   createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  updatedAt       DateTime @default(now()) @updatedAt
 
   // Relations: Project → Other Tables (Project has foreign keys)
-  branch Branch? @relation(fields: [branchId], references: [id])
-
-  // Relations: Other Tables → PayrollSection (Other tables have foreign keys pointing to PayrollSection)
+  branch   Branch? @relation(fields: [branchId], references: [id])
+  creator  User?   @relation("PayrollSectionCreatedBy", fields: [createdBy], references: [id])
+  updater  User?   @relation("PayrollSectionUpdatedBy", fields: [updatedBy], references: [id])
   employees Employee[]
+
+  @@index([createdBy])
+  @@index([updatedBy])
 }
 
 model PayrollStatus {
@@ -346,12 +471,19 @@ model PayrollStatus {
   nameEn    String
   nameAr    String?
   isActive  Boolean  @default(true)
+  createdBy Int?
+  updatedBy Int?
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @default(now()) @updatedAt
 
   // Relations: Other Tables → PayrollStatus (Other tables have foreign keys pointing to PayrollStatus)
   summaries      PayrollSummary[]
   payrollDetails PayrollDetails[]
+  creator        User?            @relation("PayrollStatusCreatedBy", fields: [createdBy], references: [id])
+  updater        User?            @relation("PayrollStatusUpdatedBy", fields: [updatedBy], references: [id])
+
+  @@index([createdBy])
+  @@index([updatedBy])
 }
 
 model PayrollSummary {
@@ -375,16 +507,16 @@ model PayrollSummary {
   remarks                 String?  @db.Text
   payrollStatusId         Int?
   branchId                Int?
-  createdDate             DateTime @default(now())
   createdBy               Int?
-  modifiedDate            DateTime @updatedAt
-  modifiedBy              Int?
+  updatedBy               Int?
+  createdAt               DateTime @default(now())
+  updatedAt               DateTime @default(now()) @updatedAt
 
   // Relations: PayrollSummary → Other Tables (PayrollSummary has foreign keys)
   branch        Branch?        @relation(fields: [branchId], references: [id])
   payrollStatus PayrollStatus? @relation(fields: [payrollStatusId], references: [id])
   creator       User?          @relation("PayrollSummaryCreatedBy", fields: [createdBy], references: [id])
-  modifier      User?          @relation("PayrollSummaryModifiedBy", fields: [modifiedBy], references: [id])
+  updater       User?          @relation("PayrollSummaryUpdatedBy", fields: [updatedBy], references: [id])
 
   // Relations: Other Tables → PayrollSummary
   details PayrollDetails[]
@@ -393,7 +525,7 @@ model PayrollSummary {
   @@index([branchId])
   @@index([payrollStatusId])
   @@index([createdBy])
-  @@index([modifiedBy])
+  @@index([updatedBy])
 }
 
 model PaymentMethod {
@@ -401,11 +533,18 @@ model PaymentMethod {
   nameEn    String
   nameAr    String?
   isActive  Boolean  @default(true)
+  createdBy Int?
+  updatedBy Int?
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @default(now()) @updatedAt
 
   // Relations: Other Tables → PaymentMethod
   payrollDetails PayrollDetails[]
+  creator        User?            @relation("PaymentMethodCreatedBy", fields: [createdBy], references: [id])
+  updater        User?            @relation("PaymentMethodUpdatedBy", fields: [updatedBy], references: [id])
+
+  @@index([createdBy])
+  @@index([updatedBy])
 }
 
 model PayrollDetails {
@@ -440,21 +579,21 @@ model PayrollDetails {
   payrollStatusId           Int?
   branchId                  Int?
   allowanceNotAvailableId   Int?
-  createdDate               DateTime @default(now())
   createdBy                 Int?
-  modifiedDate              DateTime @updatedAt
-  modifiedBy                Int?
+  updatedBy                 Int?
+  createdAt                 DateTime @default(now())
+  updatedAt                 DateTime @default(now()) @updatedAt
   isLocked                  Boolean  @default(false)
 
   // Relations: PayrollDetails → Other Tables
-  payrollSummary            PayrollSummary  @relation(fields: [payrollId], references: [id], onDelete: Cascade)
-  employee                  Employee        @relation(fields: [employeeId], references: [id], onDelete: Cascade)
-  paymentMethod             PaymentMethod?  @relation(fields: [paymentMethodId], references: [id])
-  payrollStatus             PayrollStatus?  @relation(fields: [payrollStatusId], references: [id])
-  branch                    Branch?         @relation(fields: [branchId], references: [id])
-  allowanceNotAvailable     AllowanceNotAvailable? @relation(fields: [allowanceNotAvailableId], references: [id])
-  creator                   User?           @relation("PayrollDetailsCreatedBy", fields: [createdBy], references: [id])
-  modifier                  User?           @relation("PayrollDetailsModifiedBy", fields: [modifiedBy], references: [id])
+  payrollSummary        PayrollSummary         @relation(fields: [payrollId], references: [id], onDelete: Cascade)
+  employee              Employee               @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  paymentMethod         PaymentMethod?         @relation(fields: [paymentMethodId], references: [id])
+  payrollStatus         PayrollStatus?         @relation(fields: [payrollStatusId], references: [id])
+  branch                Branch?                @relation(fields: [branchId], references: [id])
+  allowanceNotAvailable AllowanceNotAvailable? @relation(fields: [allowanceNotAvailableId], references: [id])
+  creator               User?                  @relation("PayrollDetailsCreatedBy", fields: [createdBy], references: [id])
+  updater               User?                  @relation("PayrollDetailsUpdatedBy", fields: [updatedBy], references: [id])
 
   @@index([payrollId])
   @@index([employeeId])
@@ -463,7 +602,7 @@ model PayrollDetails {
   @@index([payrollStatusId])
   @@index([paymentMethodId])
   @@index([createdBy])
-  @@index([modifiedBy])
+  @@index([updatedBy])
 }
 
 // ============================================
@@ -482,15 +621,21 @@ model Loan {
   type       LoanType
   amount     Int
   remarks    String?  @db.Text
+  createdBy  Int?
+  updatedBy  Int?
   createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  updatedAt  DateTime @default(now()) @updatedAt
 
   // Relations: Loan → Other Tables (Loan has foreign keys)
   employee Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  creator  User?    @relation("LoanCreatedBy", fields: [createdBy], references: [id])
+  updater  User?    @relation("LoanUpdatedBy", fields: [updatedBy], references: [id])
 
   @@index([employeeId])
   @@index([date])
   @@index([type])
+  @@index([createdBy])
+  @@index([updatedBy])
 }
 
 // ============================================
@@ -509,15 +654,21 @@ model TrafficChallan {
   type        TrafficChallanType
   amount      Int
   description String?            @db.Text
+  createdBy   Int?
+  updatedBy   Int?
   createdAt   DateTime           @default(now())
-  updatedAt   DateTime           @updatedAt
+  updatedAt   DateTime           @default(now()) @updatedAt
 
   // Relations: TrafficChallan → Other Tables (TrafficChallan has foreign keys)
   employee Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  creator  User?    @relation("TrafficChallanCreatedBy", fields: [createdBy], references: [id])
+  updater  User?    @relation("TrafficChallanUpdatedBy", fields: [updatedBy], references: [id])
 
   @@index([employeeId])
   @@index([date])
   @@index([type])
+  @@index([createdBy])
+  @@index([updatedBy])
 }
 
 // ============================================
@@ -536,17 +687,23 @@ model ExitReentry {
   date          DateTime        @db.Date
   type          ExitReentryType
   remarks       String?         @db.Text
+  createdBy     Int?
+  updatedBy     Int?
   createdAt     DateTime        @default(now())
-  updatedAt     DateTime        @updatedAt
+  updatedAt     DateTime        @default(now()) @updatedAt
 
   // Relations: ExitReentry → Other Tables (ExitReentry has foreign keys)
   employee    Employee     @relation(fields: [employeeId], references: [id], onDelete: Cascade)
   designation Designation? @relation(fields: [designationId], references: [id])
+  creator     User?        @relation("ExitReentryCreatedBy", fields: [createdBy], references: [id])
+  updater     User?        @relation("ExitReentryUpdatedBy", fields: [updatedBy], references: [id])
 
   @@index([employeeId])
   @@index([designationId])
   @@index([date])
   @@index([type])
+  @@index([createdBy])
+  @@index([updatedBy])
 }
 
 enum AllowanceType {
@@ -565,13 +722,19 @@ model AllowanceNotAvailable {
   endDate     DateTime      @db.Date // End date of the exclusion period
   type        AllowanceType // Type of allowance to exclude (BREAKFAST)
   isActive    Boolean       @default(true) // Allow soft disable without deletion
+  createdBy   Int?
+  updatedBy   Int?
   createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
+  updatedAt   DateTime      @default(now()) @updatedAt
 
   payrollDetails PayrollDetails[]
+  creator        User?            @relation("AllowanceNotAvailableCreatedBy", fields: [createdBy], references: [id])
+  updater        User?            @relation("AllowanceNotAvailableUpdatedBy", fields: [updatedBy], references: [id])
 
   @@index([startDate])
   @@index([endDate])
   @@index([type])
   @@index([isActive])
+  @@index([createdBy])
+  @@index([updatedBy])
 }

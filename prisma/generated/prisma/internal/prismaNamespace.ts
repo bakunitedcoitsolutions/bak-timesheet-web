@@ -2041,6 +2041,8 @@ export const UserRoleScalarFieldEnum = {
   nameAr: 'nameAr',
   access: 'access',
   isActive: 'isActive',
+  createdBy: 'createdBy',
+  updatedBy: 'updatedBy',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -2052,6 +2054,8 @@ export const UserPrivilegeScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
   privileges: 'privileges',
+  createdBy: 'createdBy',
+  updatedBy: 'updatedBy',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -2065,6 +2069,8 @@ export const BranchScalarFieldEnum = {
   nameAr: 'nameAr',
   isMain: 'isMain',
   isActive: 'isActive',
+  createdBy: 'createdBy',
+  updatedBy: 'updatedBy',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -2078,6 +2084,8 @@ export const CityScalarFieldEnum = {
   nameAr: 'nameAr',
   countryId: 'countryId',
   isActive: 'isActive',
+  createdBy: 'createdBy',
+  updatedBy: 'updatedBy',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -2090,6 +2098,8 @@ export const CountryScalarFieldEnum = {
   nameEn: 'nameEn',
   nameAr: 'nameAr',
   isActive: 'isActive',
+  createdBy: 'createdBy',
+  updatedBy: 'updatedBy',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -2102,6 +2112,8 @@ export const GosiCityScalarFieldEnum = {
   nameEn: 'nameEn',
   nameAr: 'nameAr',
   isActive: 'isActive',
+  createdBy: 'createdBy',
+  updatedBy: 'updatedBy',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -2156,6 +2168,8 @@ export const EmployeeScalarFieldEnum = {
   gosiCityId: 'gosiCityId',
   isCardDelivered: 'isCardDelivered',
   cardDocument: 'cardDocument',
+  createdBy: 'createdBy',
+  updatedBy: 'updatedBy',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -2171,6 +2185,8 @@ export const DesignationScalarFieldEnum = {
   displayOrderKey: 'displayOrderKey',
   color: 'color',
   isActive: 'isActive',
+  createdBy: 'createdBy',
+  updatedBy: 'updatedBy',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -2183,6 +2199,8 @@ export const EmployeeStatusScalarFieldEnum = {
   nameEn: 'nameEn',
   nameAr: 'nameAr',
   isActive: 'isActive',
+  createdBy: 'createdBy',
+  updatedBy: 'updatedBy',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -2197,6 +2215,8 @@ export const ProjectScalarFieldEnum = {
   branchId: 'branchId',
   description: 'description',
   isActive: 'isActive',
+  createdBy: 'createdBy',
+  updatedBy: 'updatedBy',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -2216,10 +2236,12 @@ export const TimesheetScalarFieldEnum = {
   project2Overtime: 'project2Overtime',
   totalHours: 'totalHours',
   description: 'description',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
   isLocked: 'isLocked',
-  isManual: 'isManual'
+  isManual: 'isManual',
+  createdBy: 'createdBy',
+  updatedBy: 'updatedBy',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type TimesheetScalarFieldEnum = (typeof TimesheetScalarFieldEnum)[keyof typeof TimesheetScalarFieldEnum]
@@ -2232,6 +2254,8 @@ export const PayrollSectionScalarFieldEnum = {
   branchId: 'branchId',
   displayOrderKey: 'displayOrderKey',
   isActive: 'isActive',
+  createdBy: 'createdBy',
+  updatedBy: 'updatedBy',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -2244,6 +2268,8 @@ export const PayrollStatusScalarFieldEnum = {
   nameEn: 'nameEn',
   nameAr: 'nameAr',
   isActive: 'isActive',
+  createdBy: 'createdBy',
+  updatedBy: 'updatedBy',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -2272,10 +2298,10 @@ export const PayrollSummaryScalarFieldEnum = {
   remarks: 'remarks',
   payrollStatusId: 'payrollStatusId',
   branchId: 'branchId',
-  createdDate: 'createdDate',
   createdBy: 'createdBy',
-  modifiedDate: 'modifiedDate',
-  modifiedBy: 'modifiedBy'
+  updatedBy: 'updatedBy',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type PayrollSummaryScalarFieldEnum = (typeof PayrollSummaryScalarFieldEnum)[keyof typeof PayrollSummaryScalarFieldEnum]
@@ -2286,6 +2312,8 @@ export const PaymentMethodScalarFieldEnum = {
   nameEn: 'nameEn',
   nameAr: 'nameAr',
   isActive: 'isActive',
+  createdBy: 'createdBy',
+  updatedBy: 'updatedBy',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -2325,10 +2353,10 @@ export const PayrollDetailsScalarFieldEnum = {
   payrollStatusId: 'payrollStatusId',
   branchId: 'branchId',
   allowanceNotAvailableId: 'allowanceNotAvailableId',
-  createdDate: 'createdDate',
   createdBy: 'createdBy',
-  modifiedDate: 'modifiedDate',
-  modifiedBy: 'modifiedBy',
+  updatedBy: 'updatedBy',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
   isLocked: 'isLocked'
 } as const
 
@@ -2342,6 +2370,8 @@ export const LoanScalarFieldEnum = {
   type: 'type',
   amount: 'amount',
   remarks: 'remarks',
+  createdBy: 'createdBy',
+  updatedBy: 'updatedBy',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -2356,6 +2386,8 @@ export const TrafficChallanScalarFieldEnum = {
   type: 'type',
   amount: 'amount',
   description: 'description',
+  createdBy: 'createdBy',
+  updatedBy: 'updatedBy',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -2370,6 +2402,8 @@ export const ExitReentryScalarFieldEnum = {
   date: 'date',
   type: 'type',
   remarks: 'remarks',
+  createdBy: 'createdBy',
+  updatedBy: 'updatedBy',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -2386,6 +2420,8 @@ export const AllowanceNotAvailableScalarFieldEnum = {
   endDate: 'endDate',
   type: 'type',
   isActive: 'isActive',
+  createdBy: 'createdBy',
+  updatedBy: 'updatedBy',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const

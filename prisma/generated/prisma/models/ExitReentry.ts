@@ -30,12 +30,16 @@ export type ExitReentryAvgAggregateOutputType = {
   id: number | null
   employeeId: number | null
   designationId: number | null
+  createdBy: number | null
+  updatedBy: number | null
 }
 
 export type ExitReentrySumAggregateOutputType = {
   id: number | null
   employeeId: number | null
   designationId: number | null
+  createdBy: number | null
+  updatedBy: number | null
 }
 
 export type ExitReentryMinAggregateOutputType = {
@@ -45,6 +49,8 @@ export type ExitReentryMinAggregateOutputType = {
   date: Date | null
   type: $Enums.ExitReentryType | null
   remarks: string | null
+  createdBy: number | null
+  updatedBy: number | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -56,6 +62,8 @@ export type ExitReentryMaxAggregateOutputType = {
   date: Date | null
   type: $Enums.ExitReentryType | null
   remarks: string | null
+  createdBy: number | null
+  updatedBy: number | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -67,6 +75,8 @@ export type ExitReentryCountAggregateOutputType = {
   date: number
   type: number
   remarks: number
+  createdBy: number
+  updatedBy: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -77,12 +87,16 @@ export type ExitReentryAvgAggregateInputType = {
   id?: true
   employeeId?: true
   designationId?: true
+  createdBy?: true
+  updatedBy?: true
 }
 
 export type ExitReentrySumAggregateInputType = {
   id?: true
   employeeId?: true
   designationId?: true
+  createdBy?: true
+  updatedBy?: true
 }
 
 export type ExitReentryMinAggregateInputType = {
@@ -92,6 +106,8 @@ export type ExitReentryMinAggregateInputType = {
   date?: true
   type?: true
   remarks?: true
+  createdBy?: true
+  updatedBy?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -103,6 +119,8 @@ export type ExitReentryMaxAggregateInputType = {
   date?: true
   type?: true
   remarks?: true
+  createdBy?: true
+  updatedBy?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -114,6 +132,8 @@ export type ExitReentryCountAggregateInputType = {
   date?: true
   type?: true
   remarks?: true
+  createdBy?: true
+  updatedBy?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -212,6 +232,8 @@ export type ExitReentryGroupByOutputType = {
   date: Date
   type: $Enums.ExitReentryType
   remarks: string | null
+  createdBy: number | null
+  updatedBy: number | null
   createdAt: Date
   updatedAt: Date
   _count: ExitReentryCountAggregateOutputType | null
@@ -246,10 +268,14 @@ export type ExitReentryWhereInput = {
   date?: Prisma.DateTimeFilter<"ExitReentry"> | Date | string
   type?: Prisma.EnumExitReentryTypeFilter<"ExitReentry"> | $Enums.ExitReentryType
   remarks?: Prisma.StringNullableFilter<"ExitReentry"> | string | null
+  createdBy?: Prisma.IntNullableFilter<"ExitReentry"> | number | null
+  updatedBy?: Prisma.IntNullableFilter<"ExitReentry"> | number | null
   createdAt?: Prisma.DateTimeFilter<"ExitReentry"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"ExitReentry"> | Date | string
   employee?: Prisma.XOR<Prisma.EmployeeScalarRelationFilter, Prisma.EmployeeWhereInput>
   designation?: Prisma.XOR<Prisma.DesignationNullableScalarRelationFilter, Prisma.DesignationWhereInput> | null
+  creator?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  updater?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }
 
 export type ExitReentryOrderByWithRelationInput = {
@@ -259,10 +285,14 @@ export type ExitReentryOrderByWithRelationInput = {
   date?: Prisma.SortOrder
   type?: Prisma.SortOrder
   remarks?: Prisma.SortOrderInput | Prisma.SortOrder
+  createdBy?: Prisma.SortOrderInput | Prisma.SortOrder
+  updatedBy?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   employee?: Prisma.EmployeeOrderByWithRelationInput
   designation?: Prisma.DesignationOrderByWithRelationInput
+  creator?: Prisma.UserOrderByWithRelationInput
+  updater?: Prisma.UserOrderByWithRelationInput
 }
 
 export type ExitReentryWhereUniqueInput = Prisma.AtLeast<{
@@ -275,10 +305,14 @@ export type ExitReentryWhereUniqueInput = Prisma.AtLeast<{
   date?: Prisma.DateTimeFilter<"ExitReentry"> | Date | string
   type?: Prisma.EnumExitReentryTypeFilter<"ExitReentry"> | $Enums.ExitReentryType
   remarks?: Prisma.StringNullableFilter<"ExitReentry"> | string | null
+  createdBy?: Prisma.IntNullableFilter<"ExitReentry"> | number | null
+  updatedBy?: Prisma.IntNullableFilter<"ExitReentry"> | number | null
   createdAt?: Prisma.DateTimeFilter<"ExitReentry"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"ExitReentry"> | Date | string
   employee?: Prisma.XOR<Prisma.EmployeeScalarRelationFilter, Prisma.EmployeeWhereInput>
   designation?: Prisma.XOR<Prisma.DesignationNullableScalarRelationFilter, Prisma.DesignationWhereInput> | null
+  creator?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  updater?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }, "id">
 
 export type ExitReentryOrderByWithAggregationInput = {
@@ -288,6 +322,8 @@ export type ExitReentryOrderByWithAggregationInput = {
   date?: Prisma.SortOrder
   type?: Prisma.SortOrder
   remarks?: Prisma.SortOrderInput | Prisma.SortOrder
+  createdBy?: Prisma.SortOrderInput | Prisma.SortOrder
+  updatedBy?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.ExitReentryCountOrderByAggregateInput
@@ -307,6 +343,8 @@ export type ExitReentryScalarWhereWithAggregatesInput = {
   date?: Prisma.DateTimeWithAggregatesFilter<"ExitReentry"> | Date | string
   type?: Prisma.EnumExitReentryTypeWithAggregatesFilter<"ExitReentry"> | $Enums.ExitReentryType
   remarks?: Prisma.StringNullableWithAggregatesFilter<"ExitReentry"> | string | null
+  createdBy?: Prisma.IntNullableWithAggregatesFilter<"ExitReentry"> | number | null
+  updatedBy?: Prisma.IntNullableWithAggregatesFilter<"ExitReentry"> | number | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"ExitReentry"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"ExitReentry"> | Date | string
 }
@@ -319,6 +357,8 @@ export type ExitReentryCreateInput = {
   updatedAt?: Date | string
   employee: Prisma.EmployeeCreateNestedOneWithoutExitReentriesInput
   designation?: Prisma.DesignationCreateNestedOneWithoutExitReentriesInput
+  creator?: Prisma.UserCreateNestedOneWithoutCreatedExitReentriesInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedExitReentriesInput
 }
 
 export type ExitReentryUncheckedCreateInput = {
@@ -328,6 +368,8 @@ export type ExitReentryUncheckedCreateInput = {
   date: Date | string
   type: $Enums.ExitReentryType
   remarks?: string | null
+  createdBy?: number | null
+  updatedBy?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -340,6 +382,8 @@ export type ExitReentryUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   employee?: Prisma.EmployeeUpdateOneRequiredWithoutExitReentriesNestedInput
   designation?: Prisma.DesignationUpdateOneWithoutExitReentriesNestedInput
+  creator?: Prisma.UserUpdateOneWithoutCreatedExitReentriesNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedExitReentriesNestedInput
 }
 
 export type ExitReentryUncheckedUpdateInput = {
@@ -349,6 +393,8 @@ export type ExitReentryUncheckedUpdateInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   type?: Prisma.EnumExitReentryTypeFieldUpdateOperationsInput | $Enums.ExitReentryType
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -360,6 +406,8 @@ export type ExitReentryCreateManyInput = {
   date: Date | string
   type: $Enums.ExitReentryType
   remarks?: string | null
+  createdBy?: number | null
+  updatedBy?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -379,6 +427,8 @@ export type ExitReentryUncheckedUpdateManyInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   type?: Prisma.EnumExitReentryTypeFieldUpdateOperationsInput | $Enums.ExitReentryType
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -400,6 +450,8 @@ export type ExitReentryCountOrderByAggregateInput = {
   date?: Prisma.SortOrder
   type?: Prisma.SortOrder
   remarks?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrder
+  updatedBy?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -408,6 +460,8 @@ export type ExitReentryAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   employeeId?: Prisma.SortOrder
   designationId?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrder
+  updatedBy?: Prisma.SortOrder
 }
 
 export type ExitReentryMaxOrderByAggregateInput = {
@@ -417,6 +471,8 @@ export type ExitReentryMaxOrderByAggregateInput = {
   date?: Prisma.SortOrder
   type?: Prisma.SortOrder
   remarks?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrder
+  updatedBy?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -428,6 +484,8 @@ export type ExitReentryMinOrderByAggregateInput = {
   date?: Prisma.SortOrder
   type?: Prisma.SortOrder
   remarks?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrder
+  updatedBy?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -436,6 +494,92 @@ export type ExitReentrySumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   employeeId?: Prisma.SortOrder
   designationId?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrder
+  updatedBy?: Prisma.SortOrder
+}
+
+export type ExitReentryCreateNestedManyWithoutCreatorInput = {
+  create?: Prisma.XOR<Prisma.ExitReentryCreateWithoutCreatorInput, Prisma.ExitReentryUncheckedCreateWithoutCreatorInput> | Prisma.ExitReentryCreateWithoutCreatorInput[] | Prisma.ExitReentryUncheckedCreateWithoutCreatorInput[]
+  connectOrCreate?: Prisma.ExitReentryCreateOrConnectWithoutCreatorInput | Prisma.ExitReentryCreateOrConnectWithoutCreatorInput[]
+  createMany?: Prisma.ExitReentryCreateManyCreatorInputEnvelope
+  connect?: Prisma.ExitReentryWhereUniqueInput | Prisma.ExitReentryWhereUniqueInput[]
+}
+
+export type ExitReentryCreateNestedManyWithoutUpdaterInput = {
+  create?: Prisma.XOR<Prisma.ExitReentryCreateWithoutUpdaterInput, Prisma.ExitReentryUncheckedCreateWithoutUpdaterInput> | Prisma.ExitReentryCreateWithoutUpdaterInput[] | Prisma.ExitReentryUncheckedCreateWithoutUpdaterInput[]
+  connectOrCreate?: Prisma.ExitReentryCreateOrConnectWithoutUpdaterInput | Prisma.ExitReentryCreateOrConnectWithoutUpdaterInput[]
+  createMany?: Prisma.ExitReentryCreateManyUpdaterInputEnvelope
+  connect?: Prisma.ExitReentryWhereUniqueInput | Prisma.ExitReentryWhereUniqueInput[]
+}
+
+export type ExitReentryUncheckedCreateNestedManyWithoutCreatorInput = {
+  create?: Prisma.XOR<Prisma.ExitReentryCreateWithoutCreatorInput, Prisma.ExitReentryUncheckedCreateWithoutCreatorInput> | Prisma.ExitReentryCreateWithoutCreatorInput[] | Prisma.ExitReentryUncheckedCreateWithoutCreatorInput[]
+  connectOrCreate?: Prisma.ExitReentryCreateOrConnectWithoutCreatorInput | Prisma.ExitReentryCreateOrConnectWithoutCreatorInput[]
+  createMany?: Prisma.ExitReentryCreateManyCreatorInputEnvelope
+  connect?: Prisma.ExitReentryWhereUniqueInput | Prisma.ExitReentryWhereUniqueInput[]
+}
+
+export type ExitReentryUncheckedCreateNestedManyWithoutUpdaterInput = {
+  create?: Prisma.XOR<Prisma.ExitReentryCreateWithoutUpdaterInput, Prisma.ExitReentryUncheckedCreateWithoutUpdaterInput> | Prisma.ExitReentryCreateWithoutUpdaterInput[] | Prisma.ExitReentryUncheckedCreateWithoutUpdaterInput[]
+  connectOrCreate?: Prisma.ExitReentryCreateOrConnectWithoutUpdaterInput | Prisma.ExitReentryCreateOrConnectWithoutUpdaterInput[]
+  createMany?: Prisma.ExitReentryCreateManyUpdaterInputEnvelope
+  connect?: Prisma.ExitReentryWhereUniqueInput | Prisma.ExitReentryWhereUniqueInput[]
+}
+
+export type ExitReentryUpdateManyWithoutCreatorNestedInput = {
+  create?: Prisma.XOR<Prisma.ExitReentryCreateWithoutCreatorInput, Prisma.ExitReentryUncheckedCreateWithoutCreatorInput> | Prisma.ExitReentryCreateWithoutCreatorInput[] | Prisma.ExitReentryUncheckedCreateWithoutCreatorInput[]
+  connectOrCreate?: Prisma.ExitReentryCreateOrConnectWithoutCreatorInput | Prisma.ExitReentryCreateOrConnectWithoutCreatorInput[]
+  upsert?: Prisma.ExitReentryUpsertWithWhereUniqueWithoutCreatorInput | Prisma.ExitReentryUpsertWithWhereUniqueWithoutCreatorInput[]
+  createMany?: Prisma.ExitReentryCreateManyCreatorInputEnvelope
+  set?: Prisma.ExitReentryWhereUniqueInput | Prisma.ExitReentryWhereUniqueInput[]
+  disconnect?: Prisma.ExitReentryWhereUniqueInput | Prisma.ExitReentryWhereUniqueInput[]
+  delete?: Prisma.ExitReentryWhereUniqueInput | Prisma.ExitReentryWhereUniqueInput[]
+  connect?: Prisma.ExitReentryWhereUniqueInput | Prisma.ExitReentryWhereUniqueInput[]
+  update?: Prisma.ExitReentryUpdateWithWhereUniqueWithoutCreatorInput | Prisma.ExitReentryUpdateWithWhereUniqueWithoutCreatorInput[]
+  updateMany?: Prisma.ExitReentryUpdateManyWithWhereWithoutCreatorInput | Prisma.ExitReentryUpdateManyWithWhereWithoutCreatorInput[]
+  deleteMany?: Prisma.ExitReentryScalarWhereInput | Prisma.ExitReentryScalarWhereInput[]
+}
+
+export type ExitReentryUpdateManyWithoutUpdaterNestedInput = {
+  create?: Prisma.XOR<Prisma.ExitReentryCreateWithoutUpdaterInput, Prisma.ExitReentryUncheckedCreateWithoutUpdaterInput> | Prisma.ExitReentryCreateWithoutUpdaterInput[] | Prisma.ExitReentryUncheckedCreateWithoutUpdaterInput[]
+  connectOrCreate?: Prisma.ExitReentryCreateOrConnectWithoutUpdaterInput | Prisma.ExitReentryCreateOrConnectWithoutUpdaterInput[]
+  upsert?: Prisma.ExitReentryUpsertWithWhereUniqueWithoutUpdaterInput | Prisma.ExitReentryUpsertWithWhereUniqueWithoutUpdaterInput[]
+  createMany?: Prisma.ExitReentryCreateManyUpdaterInputEnvelope
+  set?: Prisma.ExitReentryWhereUniqueInput | Prisma.ExitReentryWhereUniqueInput[]
+  disconnect?: Prisma.ExitReentryWhereUniqueInput | Prisma.ExitReentryWhereUniqueInput[]
+  delete?: Prisma.ExitReentryWhereUniqueInput | Prisma.ExitReentryWhereUniqueInput[]
+  connect?: Prisma.ExitReentryWhereUniqueInput | Prisma.ExitReentryWhereUniqueInput[]
+  update?: Prisma.ExitReentryUpdateWithWhereUniqueWithoutUpdaterInput | Prisma.ExitReentryUpdateWithWhereUniqueWithoutUpdaterInput[]
+  updateMany?: Prisma.ExitReentryUpdateManyWithWhereWithoutUpdaterInput | Prisma.ExitReentryUpdateManyWithWhereWithoutUpdaterInput[]
+  deleteMany?: Prisma.ExitReentryScalarWhereInput | Prisma.ExitReentryScalarWhereInput[]
+}
+
+export type ExitReentryUncheckedUpdateManyWithoutCreatorNestedInput = {
+  create?: Prisma.XOR<Prisma.ExitReentryCreateWithoutCreatorInput, Prisma.ExitReentryUncheckedCreateWithoutCreatorInput> | Prisma.ExitReentryCreateWithoutCreatorInput[] | Prisma.ExitReentryUncheckedCreateWithoutCreatorInput[]
+  connectOrCreate?: Prisma.ExitReentryCreateOrConnectWithoutCreatorInput | Prisma.ExitReentryCreateOrConnectWithoutCreatorInput[]
+  upsert?: Prisma.ExitReentryUpsertWithWhereUniqueWithoutCreatorInput | Prisma.ExitReentryUpsertWithWhereUniqueWithoutCreatorInput[]
+  createMany?: Prisma.ExitReentryCreateManyCreatorInputEnvelope
+  set?: Prisma.ExitReentryWhereUniqueInput | Prisma.ExitReentryWhereUniqueInput[]
+  disconnect?: Prisma.ExitReentryWhereUniqueInput | Prisma.ExitReentryWhereUniqueInput[]
+  delete?: Prisma.ExitReentryWhereUniqueInput | Prisma.ExitReentryWhereUniqueInput[]
+  connect?: Prisma.ExitReentryWhereUniqueInput | Prisma.ExitReentryWhereUniqueInput[]
+  update?: Prisma.ExitReentryUpdateWithWhereUniqueWithoutCreatorInput | Prisma.ExitReentryUpdateWithWhereUniqueWithoutCreatorInput[]
+  updateMany?: Prisma.ExitReentryUpdateManyWithWhereWithoutCreatorInput | Prisma.ExitReentryUpdateManyWithWhereWithoutCreatorInput[]
+  deleteMany?: Prisma.ExitReentryScalarWhereInput | Prisma.ExitReentryScalarWhereInput[]
+}
+
+export type ExitReentryUncheckedUpdateManyWithoutUpdaterNestedInput = {
+  create?: Prisma.XOR<Prisma.ExitReentryCreateWithoutUpdaterInput, Prisma.ExitReentryUncheckedCreateWithoutUpdaterInput> | Prisma.ExitReentryCreateWithoutUpdaterInput[] | Prisma.ExitReentryUncheckedCreateWithoutUpdaterInput[]
+  connectOrCreate?: Prisma.ExitReentryCreateOrConnectWithoutUpdaterInput | Prisma.ExitReentryCreateOrConnectWithoutUpdaterInput[]
+  upsert?: Prisma.ExitReentryUpsertWithWhereUniqueWithoutUpdaterInput | Prisma.ExitReentryUpsertWithWhereUniqueWithoutUpdaterInput[]
+  createMany?: Prisma.ExitReentryCreateManyUpdaterInputEnvelope
+  set?: Prisma.ExitReentryWhereUniqueInput | Prisma.ExitReentryWhereUniqueInput[]
+  disconnect?: Prisma.ExitReentryWhereUniqueInput | Prisma.ExitReentryWhereUniqueInput[]
+  delete?: Prisma.ExitReentryWhereUniqueInput | Prisma.ExitReentryWhereUniqueInput[]
+  connect?: Prisma.ExitReentryWhereUniqueInput | Prisma.ExitReentryWhereUniqueInput[]
+  update?: Prisma.ExitReentryUpdateWithWhereUniqueWithoutUpdaterInput | Prisma.ExitReentryUpdateWithWhereUniqueWithoutUpdaterInput[]
+  updateMany?: Prisma.ExitReentryUpdateManyWithWhereWithoutUpdaterInput | Prisma.ExitReentryUpdateManyWithWhereWithoutUpdaterInput[]
+  deleteMany?: Prisma.ExitReentryScalarWhereInput | Prisma.ExitReentryScalarWhereInput[]
 }
 
 export type ExitReentryCreateNestedManyWithoutEmployeeInput = {
@@ -526,6 +670,120 @@ export type EnumExitReentryTypeFieldUpdateOperationsInput = {
   set?: $Enums.ExitReentryType
 }
 
+export type ExitReentryCreateWithoutCreatorInput = {
+  date: Date | string
+  type: $Enums.ExitReentryType
+  remarks?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  employee: Prisma.EmployeeCreateNestedOneWithoutExitReentriesInput
+  designation?: Prisma.DesignationCreateNestedOneWithoutExitReentriesInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedExitReentriesInput
+}
+
+export type ExitReentryUncheckedCreateWithoutCreatorInput = {
+  id?: number
+  employeeId: number
+  designationId?: number | null
+  date: Date | string
+  type: $Enums.ExitReentryType
+  remarks?: string | null
+  updatedBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type ExitReentryCreateOrConnectWithoutCreatorInput = {
+  where: Prisma.ExitReentryWhereUniqueInput
+  create: Prisma.XOR<Prisma.ExitReentryCreateWithoutCreatorInput, Prisma.ExitReentryUncheckedCreateWithoutCreatorInput>
+}
+
+export type ExitReentryCreateManyCreatorInputEnvelope = {
+  data: Prisma.ExitReentryCreateManyCreatorInput | Prisma.ExitReentryCreateManyCreatorInput[]
+  skipDuplicates?: boolean
+}
+
+export type ExitReentryCreateWithoutUpdaterInput = {
+  date: Date | string
+  type: $Enums.ExitReentryType
+  remarks?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  employee: Prisma.EmployeeCreateNestedOneWithoutExitReentriesInput
+  designation?: Prisma.DesignationCreateNestedOneWithoutExitReentriesInput
+  creator?: Prisma.UserCreateNestedOneWithoutCreatedExitReentriesInput
+}
+
+export type ExitReentryUncheckedCreateWithoutUpdaterInput = {
+  id?: number
+  employeeId: number
+  designationId?: number | null
+  date: Date | string
+  type: $Enums.ExitReentryType
+  remarks?: string | null
+  createdBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type ExitReentryCreateOrConnectWithoutUpdaterInput = {
+  where: Prisma.ExitReentryWhereUniqueInput
+  create: Prisma.XOR<Prisma.ExitReentryCreateWithoutUpdaterInput, Prisma.ExitReentryUncheckedCreateWithoutUpdaterInput>
+}
+
+export type ExitReentryCreateManyUpdaterInputEnvelope = {
+  data: Prisma.ExitReentryCreateManyUpdaterInput | Prisma.ExitReentryCreateManyUpdaterInput[]
+  skipDuplicates?: boolean
+}
+
+export type ExitReentryUpsertWithWhereUniqueWithoutCreatorInput = {
+  where: Prisma.ExitReentryWhereUniqueInput
+  update: Prisma.XOR<Prisma.ExitReentryUpdateWithoutCreatorInput, Prisma.ExitReentryUncheckedUpdateWithoutCreatorInput>
+  create: Prisma.XOR<Prisma.ExitReentryCreateWithoutCreatorInput, Prisma.ExitReentryUncheckedCreateWithoutCreatorInput>
+}
+
+export type ExitReentryUpdateWithWhereUniqueWithoutCreatorInput = {
+  where: Prisma.ExitReentryWhereUniqueInput
+  data: Prisma.XOR<Prisma.ExitReentryUpdateWithoutCreatorInput, Prisma.ExitReentryUncheckedUpdateWithoutCreatorInput>
+}
+
+export type ExitReentryUpdateManyWithWhereWithoutCreatorInput = {
+  where: Prisma.ExitReentryScalarWhereInput
+  data: Prisma.XOR<Prisma.ExitReentryUpdateManyMutationInput, Prisma.ExitReentryUncheckedUpdateManyWithoutCreatorInput>
+}
+
+export type ExitReentryScalarWhereInput = {
+  AND?: Prisma.ExitReentryScalarWhereInput | Prisma.ExitReentryScalarWhereInput[]
+  OR?: Prisma.ExitReentryScalarWhereInput[]
+  NOT?: Prisma.ExitReentryScalarWhereInput | Prisma.ExitReentryScalarWhereInput[]
+  id?: Prisma.IntFilter<"ExitReentry"> | number
+  employeeId?: Prisma.IntFilter<"ExitReentry"> | number
+  designationId?: Prisma.IntNullableFilter<"ExitReentry"> | number | null
+  date?: Prisma.DateTimeFilter<"ExitReentry"> | Date | string
+  type?: Prisma.EnumExitReentryTypeFilter<"ExitReentry"> | $Enums.ExitReentryType
+  remarks?: Prisma.StringNullableFilter<"ExitReentry"> | string | null
+  createdBy?: Prisma.IntNullableFilter<"ExitReentry"> | number | null
+  updatedBy?: Prisma.IntNullableFilter<"ExitReentry"> | number | null
+  createdAt?: Prisma.DateTimeFilter<"ExitReentry"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"ExitReentry"> | Date | string
+}
+
+export type ExitReentryUpsertWithWhereUniqueWithoutUpdaterInput = {
+  where: Prisma.ExitReentryWhereUniqueInput
+  update: Prisma.XOR<Prisma.ExitReentryUpdateWithoutUpdaterInput, Prisma.ExitReentryUncheckedUpdateWithoutUpdaterInput>
+  create: Prisma.XOR<Prisma.ExitReentryCreateWithoutUpdaterInput, Prisma.ExitReentryUncheckedCreateWithoutUpdaterInput>
+}
+
+export type ExitReentryUpdateWithWhereUniqueWithoutUpdaterInput = {
+  where: Prisma.ExitReentryWhereUniqueInput
+  data: Prisma.XOR<Prisma.ExitReentryUpdateWithoutUpdaterInput, Prisma.ExitReentryUncheckedUpdateWithoutUpdaterInput>
+}
+
+export type ExitReentryUpdateManyWithWhereWithoutUpdaterInput = {
+  where: Prisma.ExitReentryScalarWhereInput
+  data: Prisma.XOR<Prisma.ExitReentryUpdateManyMutationInput, Prisma.ExitReentryUncheckedUpdateManyWithoutUpdaterInput>
+}
+
 export type ExitReentryCreateWithoutEmployeeInput = {
   date: Date | string
   type: $Enums.ExitReentryType
@@ -533,6 +791,8 @@ export type ExitReentryCreateWithoutEmployeeInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   designation?: Prisma.DesignationCreateNestedOneWithoutExitReentriesInput
+  creator?: Prisma.UserCreateNestedOneWithoutCreatedExitReentriesInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedExitReentriesInput
 }
 
 export type ExitReentryUncheckedCreateWithoutEmployeeInput = {
@@ -541,6 +801,8 @@ export type ExitReentryUncheckedCreateWithoutEmployeeInput = {
   date: Date | string
   type: $Enums.ExitReentryType
   remarks?: string | null
+  createdBy?: number | null
+  updatedBy?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -571,20 +833,6 @@ export type ExitReentryUpdateManyWithWhereWithoutEmployeeInput = {
   data: Prisma.XOR<Prisma.ExitReentryUpdateManyMutationInput, Prisma.ExitReentryUncheckedUpdateManyWithoutEmployeeInput>
 }
 
-export type ExitReentryScalarWhereInput = {
-  AND?: Prisma.ExitReentryScalarWhereInput | Prisma.ExitReentryScalarWhereInput[]
-  OR?: Prisma.ExitReentryScalarWhereInput[]
-  NOT?: Prisma.ExitReentryScalarWhereInput | Prisma.ExitReentryScalarWhereInput[]
-  id?: Prisma.IntFilter<"ExitReentry"> | number
-  employeeId?: Prisma.IntFilter<"ExitReentry"> | number
-  designationId?: Prisma.IntNullableFilter<"ExitReentry"> | number | null
-  date?: Prisma.DateTimeFilter<"ExitReentry"> | Date | string
-  type?: Prisma.EnumExitReentryTypeFilter<"ExitReentry"> | $Enums.ExitReentryType
-  remarks?: Prisma.StringNullableFilter<"ExitReentry"> | string | null
-  createdAt?: Prisma.DateTimeFilter<"ExitReentry"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"ExitReentry"> | Date | string
-}
-
 export type ExitReentryCreateWithoutDesignationInput = {
   date: Date | string
   type: $Enums.ExitReentryType
@@ -592,6 +840,8 @@ export type ExitReentryCreateWithoutDesignationInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   employee: Prisma.EmployeeCreateNestedOneWithoutExitReentriesInput
+  creator?: Prisma.UserCreateNestedOneWithoutCreatedExitReentriesInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedExitReentriesInput
 }
 
 export type ExitReentryUncheckedCreateWithoutDesignationInput = {
@@ -600,6 +850,8 @@ export type ExitReentryUncheckedCreateWithoutDesignationInput = {
   date: Date | string
   type: $Enums.ExitReentryType
   remarks?: string | null
+  createdBy?: number | null
+  updatedBy?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -630,12 +882,108 @@ export type ExitReentryUpdateManyWithWhereWithoutDesignationInput = {
   data: Prisma.XOR<Prisma.ExitReentryUpdateManyMutationInput, Prisma.ExitReentryUncheckedUpdateManyWithoutDesignationInput>
 }
 
+export type ExitReentryCreateManyCreatorInput = {
+  id?: number
+  employeeId: number
+  designationId?: number | null
+  date: Date | string
+  type: $Enums.ExitReentryType
+  remarks?: string | null
+  updatedBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type ExitReentryCreateManyUpdaterInput = {
+  id?: number
+  employeeId: number
+  designationId?: number | null
+  date: Date | string
+  type: $Enums.ExitReentryType
+  remarks?: string | null
+  createdBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type ExitReentryUpdateWithoutCreatorInput = {
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  type?: Prisma.EnumExitReentryTypeFieldUpdateOperationsInput | $Enums.ExitReentryType
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  employee?: Prisma.EmployeeUpdateOneRequiredWithoutExitReentriesNestedInput
+  designation?: Prisma.DesignationUpdateOneWithoutExitReentriesNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedExitReentriesNestedInput
+}
+
+export type ExitReentryUncheckedUpdateWithoutCreatorInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  employeeId?: Prisma.IntFieldUpdateOperationsInput | number
+  designationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  type?: Prisma.EnumExitReentryTypeFieldUpdateOperationsInput | $Enums.ExitReentryType
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type ExitReentryUncheckedUpdateManyWithoutCreatorInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  employeeId?: Prisma.IntFieldUpdateOperationsInput | number
+  designationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  type?: Prisma.EnumExitReentryTypeFieldUpdateOperationsInput | $Enums.ExitReentryType
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type ExitReentryUpdateWithoutUpdaterInput = {
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  type?: Prisma.EnumExitReentryTypeFieldUpdateOperationsInput | $Enums.ExitReentryType
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  employee?: Prisma.EmployeeUpdateOneRequiredWithoutExitReentriesNestedInput
+  designation?: Prisma.DesignationUpdateOneWithoutExitReentriesNestedInput
+  creator?: Prisma.UserUpdateOneWithoutCreatedExitReentriesNestedInput
+}
+
+export type ExitReentryUncheckedUpdateWithoutUpdaterInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  employeeId?: Prisma.IntFieldUpdateOperationsInput | number
+  designationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  type?: Prisma.EnumExitReentryTypeFieldUpdateOperationsInput | $Enums.ExitReentryType
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type ExitReentryUncheckedUpdateManyWithoutUpdaterInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  employeeId?: Prisma.IntFieldUpdateOperationsInput | number
+  designationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  type?: Prisma.EnumExitReentryTypeFieldUpdateOperationsInput | $Enums.ExitReentryType
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
 export type ExitReentryCreateManyEmployeeInput = {
   id?: number
   designationId?: number | null
   date: Date | string
   type: $Enums.ExitReentryType
   remarks?: string | null
+  createdBy?: number | null
+  updatedBy?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -647,6 +995,8 @@ export type ExitReentryUpdateWithoutEmployeeInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   designation?: Prisma.DesignationUpdateOneWithoutExitReentriesNestedInput
+  creator?: Prisma.UserUpdateOneWithoutCreatedExitReentriesNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedExitReentriesNestedInput
 }
 
 export type ExitReentryUncheckedUpdateWithoutEmployeeInput = {
@@ -655,6 +1005,8 @@ export type ExitReentryUncheckedUpdateWithoutEmployeeInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   type?: Prisma.EnumExitReentryTypeFieldUpdateOperationsInput | $Enums.ExitReentryType
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -665,6 +1017,8 @@ export type ExitReentryUncheckedUpdateManyWithoutEmployeeInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   type?: Prisma.EnumExitReentryTypeFieldUpdateOperationsInput | $Enums.ExitReentryType
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -675,6 +1029,8 @@ export type ExitReentryCreateManyDesignationInput = {
   date: Date | string
   type: $Enums.ExitReentryType
   remarks?: string | null
+  createdBy?: number | null
+  updatedBy?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -686,6 +1042,8 @@ export type ExitReentryUpdateWithoutDesignationInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   employee?: Prisma.EmployeeUpdateOneRequiredWithoutExitReentriesNestedInput
+  creator?: Prisma.UserUpdateOneWithoutCreatedExitReentriesNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedExitReentriesNestedInput
 }
 
 export type ExitReentryUncheckedUpdateWithoutDesignationInput = {
@@ -694,6 +1052,8 @@ export type ExitReentryUncheckedUpdateWithoutDesignationInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   type?: Prisma.EnumExitReentryTypeFieldUpdateOperationsInput | $Enums.ExitReentryType
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -704,6 +1064,8 @@ export type ExitReentryUncheckedUpdateManyWithoutDesignationInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   type?: Prisma.EnumExitReentryTypeFieldUpdateOperationsInput | $Enums.ExitReentryType
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -717,10 +1079,14 @@ export type ExitReentrySelect<ExtArgs extends runtime.Types.Extensions.InternalA
   date?: boolean
   type?: boolean
   remarks?: boolean
+  createdBy?: boolean
+  updatedBy?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   employee?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
   designation?: boolean | Prisma.ExitReentry$designationArgs<ExtArgs>
+  creator?: boolean | Prisma.ExitReentry$creatorArgs<ExtArgs>
+  updater?: boolean | Prisma.ExitReentry$updaterArgs<ExtArgs>
 }, ExtArgs["result"]["exitReentry"]>
 
 export type ExitReentrySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -730,10 +1096,14 @@ export type ExitReentrySelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   date?: boolean
   type?: boolean
   remarks?: boolean
+  createdBy?: boolean
+  updatedBy?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   employee?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
   designation?: boolean | Prisma.ExitReentry$designationArgs<ExtArgs>
+  creator?: boolean | Prisma.ExitReentry$creatorArgs<ExtArgs>
+  updater?: boolean | Prisma.ExitReentry$updaterArgs<ExtArgs>
 }, ExtArgs["result"]["exitReentry"]>
 
 export type ExitReentrySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -743,10 +1113,14 @@ export type ExitReentrySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   date?: boolean
   type?: boolean
   remarks?: boolean
+  createdBy?: boolean
+  updatedBy?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   employee?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
   designation?: boolean | Prisma.ExitReentry$designationArgs<ExtArgs>
+  creator?: boolean | Prisma.ExitReentry$creatorArgs<ExtArgs>
+  updater?: boolean | Prisma.ExitReentry$updaterArgs<ExtArgs>
 }, ExtArgs["result"]["exitReentry"]>
 
 export type ExitReentrySelectScalar = {
@@ -756,22 +1130,30 @@ export type ExitReentrySelectScalar = {
   date?: boolean
   type?: boolean
   remarks?: boolean
+  createdBy?: boolean
+  updatedBy?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type ExitReentryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "employeeId" | "designationId" | "date" | "type" | "remarks" | "createdAt" | "updatedAt", ExtArgs["result"]["exitReentry"]>
+export type ExitReentryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "employeeId" | "designationId" | "date" | "type" | "remarks" | "createdBy" | "updatedBy" | "createdAt" | "updatedAt", ExtArgs["result"]["exitReentry"]>
 export type ExitReentryInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   employee?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
   designation?: boolean | Prisma.ExitReentry$designationArgs<ExtArgs>
+  creator?: boolean | Prisma.ExitReentry$creatorArgs<ExtArgs>
+  updater?: boolean | Prisma.ExitReentry$updaterArgs<ExtArgs>
 }
 export type ExitReentryIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   employee?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
   designation?: boolean | Prisma.ExitReentry$designationArgs<ExtArgs>
+  creator?: boolean | Prisma.ExitReentry$creatorArgs<ExtArgs>
+  updater?: boolean | Prisma.ExitReentry$updaterArgs<ExtArgs>
 }
 export type ExitReentryIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   employee?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
   designation?: boolean | Prisma.ExitReentry$designationArgs<ExtArgs>
+  creator?: boolean | Prisma.ExitReentry$creatorArgs<ExtArgs>
+  updater?: boolean | Prisma.ExitReentry$updaterArgs<ExtArgs>
 }
 
 export type $ExitReentryPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -779,6 +1161,8 @@ export type $ExitReentryPayload<ExtArgs extends runtime.Types.Extensions.Interna
   objects: {
     employee: Prisma.$EmployeePayload<ExtArgs>
     designation: Prisma.$DesignationPayload<ExtArgs> | null
+    creator: Prisma.$UserPayload<ExtArgs> | null
+    updater: Prisma.$UserPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -787,6 +1171,8 @@ export type $ExitReentryPayload<ExtArgs extends runtime.Types.Extensions.Interna
     date: Date
     type: $Enums.ExitReentryType
     remarks: string | null
+    createdBy: number | null
+    updatedBy: number | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["exitReentry"]>
@@ -1185,6 +1571,8 @@ export interface Prisma__ExitReentryClient<T, Null = never, ExtArgs extends runt
   readonly [Symbol.toStringTag]: "PrismaPromise"
   employee<T extends Prisma.EmployeeDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.EmployeeDefaultArgs<ExtArgs>>): Prisma.Prisma__EmployeeClient<runtime.Types.Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   designation<T extends Prisma.ExitReentry$designationArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ExitReentry$designationArgs<ExtArgs>>): Prisma.Prisma__DesignationClient<runtime.Types.Result.GetResult<Prisma.$DesignationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  creator<T extends Prisma.ExitReentry$creatorArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ExitReentry$creatorArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  updater<T extends Prisma.ExitReentry$updaterArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ExitReentry$updaterArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1220,6 +1608,8 @@ export interface ExitReentryFieldRefs {
   readonly date: Prisma.FieldRef<"ExitReentry", 'DateTime'>
   readonly type: Prisma.FieldRef<"ExitReentry", 'ExitReentryType'>
   readonly remarks: Prisma.FieldRef<"ExitReentry", 'String'>
+  readonly createdBy: Prisma.FieldRef<"ExitReentry", 'Int'>
+  readonly updatedBy: Prisma.FieldRef<"ExitReentry", 'Int'>
   readonly createdAt: Prisma.FieldRef<"ExitReentry", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"ExitReentry", 'DateTime'>
 }
@@ -1634,6 +2024,44 @@ export type ExitReentry$designationArgs<ExtArgs extends runtime.Types.Extensions
    */
   include?: Prisma.DesignationInclude<ExtArgs> | null
   where?: Prisma.DesignationWhereInput
+}
+
+/**
+ * ExitReentry.creator
+ */
+export type ExitReentry$creatorArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
+}
+
+/**
+ * ExitReentry.updater
+ */
+export type ExitReentry$updaterArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
 }
 
 /**

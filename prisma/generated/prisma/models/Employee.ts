@@ -45,6 +45,8 @@ export type EmployeeAvgAggregateOutputType = {
   nationalityId: number | null
   gosiSalary: number | null
   gosiCityId: number | null
+  createdBy: number | null
+  updatedBy: number | null
 }
 
 export type EmployeeSumAggregateOutputType = {
@@ -66,6 +68,8 @@ export type EmployeeSumAggregateOutputType = {
   nationalityId: number | null
   gosiSalary: number | null
   gosiCityId: number | null
+  createdBy: number | null
+  updatedBy: number | null
 }
 
 export type EmployeeMinAggregateOutputType = {
@@ -115,6 +119,8 @@ export type EmployeeMinAggregateOutputType = {
   gosiCityId: number | null
   isCardDelivered: boolean | null
   cardDocument: string | null
+  createdBy: number | null
+  updatedBy: number | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -166,6 +172,8 @@ export type EmployeeMaxAggregateOutputType = {
   gosiCityId: number | null
   isCardDelivered: boolean | null
   cardDocument: string | null
+  createdBy: number | null
+  updatedBy: number | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -217,6 +225,8 @@ export type EmployeeCountAggregateOutputType = {
   gosiCityId: number
   isCardDelivered: number
   cardDocument: number
+  createdBy: number
+  updatedBy: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -242,6 +252,8 @@ export type EmployeeAvgAggregateInputType = {
   nationalityId?: true
   gosiSalary?: true
   gosiCityId?: true
+  createdBy?: true
+  updatedBy?: true
 }
 
 export type EmployeeSumAggregateInputType = {
@@ -263,6 +275,8 @@ export type EmployeeSumAggregateInputType = {
   nationalityId?: true
   gosiSalary?: true
   gosiCityId?: true
+  createdBy?: true
+  updatedBy?: true
 }
 
 export type EmployeeMinAggregateInputType = {
@@ -312,6 +326,8 @@ export type EmployeeMinAggregateInputType = {
   gosiCityId?: true
   isCardDelivered?: true
   cardDocument?: true
+  createdBy?: true
+  updatedBy?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -363,6 +379,8 @@ export type EmployeeMaxAggregateInputType = {
   gosiCityId?: true
   isCardDelivered?: true
   cardDocument?: true
+  createdBy?: true
+  updatedBy?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -414,6 +432,8 @@ export type EmployeeCountAggregateInputType = {
   gosiCityId?: true
   isCardDelivered?: true
   cardDocument?: true
+  createdBy?: true
+  updatedBy?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -552,6 +572,8 @@ export type EmployeeGroupByOutputType = {
   gosiCityId: number | null
   isCardDelivered: boolean
   cardDocument: string | null
+  createdBy: number | null
+  updatedBy: number | null
   createdAt: Date
   updatedAt: Date
   _count: EmployeeCountAggregateOutputType | null
@@ -626,6 +648,8 @@ export type EmployeeWhereInput = {
   gosiCityId?: Prisma.IntNullableFilter<"Employee"> | number | null
   isCardDelivered?: Prisma.BoolFilter<"Employee"> | boolean
   cardDocument?: Prisma.StringNullableFilter<"Employee"> | string | null
+  createdBy?: Prisma.IntNullableFilter<"Employee"> | number | null
+  updatedBy?: Prisma.IntNullableFilter<"Employee"> | number | null
   createdAt?: Prisma.DateTimeFilter<"Employee"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Employee"> | Date | string
   country?: Prisma.XOR<Prisma.CountryNullableScalarRelationFilter, Prisma.CountryWhereInput> | null
@@ -637,6 +661,8 @@ export type EmployeeWhereInput = {
   designation?: Prisma.XOR<Prisma.DesignationNullableScalarRelationFilter, Prisma.DesignationWhereInput> | null
   payrollSection?: Prisma.XOR<Prisma.PayrollSectionNullableScalarRelationFilter, Prisma.PayrollSectionWhereInput> | null
   gosiCity?: Prisma.XOR<Prisma.GosiCityNullableScalarRelationFilter, Prisma.GosiCityWhereInput> | null
+  creator?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  updater?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   timesheets?: Prisma.TimesheetListRelationFilter
   loans?: Prisma.LoanListRelationFilter
   trafficChallans?: Prisma.TrafficChallanListRelationFilter
@@ -691,6 +717,8 @@ export type EmployeeOrderByWithRelationInput = {
   gosiCityId?: Prisma.SortOrderInput | Prisma.SortOrder
   isCardDelivered?: Prisma.SortOrder
   cardDocument?: Prisma.SortOrderInput | Prisma.SortOrder
+  createdBy?: Prisma.SortOrderInput | Prisma.SortOrder
+  updatedBy?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   country?: Prisma.CountryOrderByWithRelationInput
@@ -702,6 +730,8 @@ export type EmployeeOrderByWithRelationInput = {
   designation?: Prisma.DesignationOrderByWithRelationInput
   payrollSection?: Prisma.PayrollSectionOrderByWithRelationInput
   gosiCity?: Prisma.GosiCityOrderByWithRelationInput
+  creator?: Prisma.UserOrderByWithRelationInput
+  updater?: Prisma.UserOrderByWithRelationInput
   timesheets?: Prisma.TimesheetOrderByRelationAggregateInput
   loans?: Prisma.LoanOrderByRelationAggregateInput
   trafficChallans?: Prisma.TrafficChallanOrderByRelationAggregateInput
@@ -759,6 +789,8 @@ export type EmployeeWhereUniqueInput = Prisma.AtLeast<{
   gosiCityId?: Prisma.IntNullableFilter<"Employee"> | number | null
   isCardDelivered?: Prisma.BoolFilter<"Employee"> | boolean
   cardDocument?: Prisma.StringNullableFilter<"Employee"> | string | null
+  createdBy?: Prisma.IntNullableFilter<"Employee"> | number | null
+  updatedBy?: Prisma.IntNullableFilter<"Employee"> | number | null
   createdAt?: Prisma.DateTimeFilter<"Employee"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Employee"> | Date | string
   country?: Prisma.XOR<Prisma.CountryNullableScalarRelationFilter, Prisma.CountryWhereInput> | null
@@ -770,6 +802,8 @@ export type EmployeeWhereUniqueInput = Prisma.AtLeast<{
   designation?: Prisma.XOR<Prisma.DesignationNullableScalarRelationFilter, Prisma.DesignationWhereInput> | null
   payrollSection?: Prisma.XOR<Prisma.PayrollSectionNullableScalarRelationFilter, Prisma.PayrollSectionWhereInput> | null
   gosiCity?: Prisma.XOR<Prisma.GosiCityNullableScalarRelationFilter, Prisma.GosiCityWhereInput> | null
+  creator?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  updater?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   timesheets?: Prisma.TimesheetListRelationFilter
   loans?: Prisma.LoanListRelationFilter
   trafficChallans?: Prisma.TrafficChallanListRelationFilter
@@ -824,6 +858,8 @@ export type EmployeeOrderByWithAggregationInput = {
   gosiCityId?: Prisma.SortOrderInput | Prisma.SortOrder
   isCardDelivered?: Prisma.SortOrder
   cardDocument?: Prisma.SortOrderInput | Prisma.SortOrder
+  createdBy?: Prisma.SortOrderInput | Prisma.SortOrder
+  updatedBy?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.EmployeeCountOrderByAggregateInput
@@ -883,6 +919,8 @@ export type EmployeeScalarWhereWithAggregatesInput = {
   gosiCityId?: Prisma.IntNullableWithAggregatesFilter<"Employee"> | number | null
   isCardDelivered?: Prisma.BoolWithAggregatesFilter<"Employee"> | boolean
   cardDocument?: Prisma.StringNullableWithAggregatesFilter<"Employee"> | string | null
+  createdBy?: Prisma.IntNullableWithAggregatesFilter<"Employee"> | number | null
+  updatedBy?: Prisma.IntNullableWithAggregatesFilter<"Employee"> | number | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Employee"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Employee"> | Date | string
 }
@@ -935,6 +973,8 @@ export type EmployeeCreateInput = {
   designation?: Prisma.DesignationCreateNestedOneWithoutEmployeesInput
   payrollSection?: Prisma.PayrollSectionCreateNestedOneWithoutEmployeesInput
   gosiCity?: Prisma.GosiCityCreateNestedOneWithoutEmployeesInput
+  creator?: Prisma.UserCreateNestedOneWithoutCreatedEmployeesInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedEmployeesInput
   timesheets?: Prisma.TimesheetCreateNestedManyWithoutEmployeeInput
   loans?: Prisma.LoanCreateNestedManyWithoutEmployeeInput
   trafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutEmployeeInput
@@ -989,6 +1029,8 @@ export type EmployeeUncheckedCreateInput = {
   gosiCityId?: number | null
   isCardDelivered?: boolean
   cardDocument?: string | null
+  createdBy?: number | null
+  updatedBy?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   timesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutEmployeeInput
@@ -1046,6 +1088,8 @@ export type EmployeeUpdateInput = {
   designation?: Prisma.DesignationUpdateOneWithoutEmployeesNestedInput
   payrollSection?: Prisma.PayrollSectionUpdateOneWithoutEmployeesNestedInput
   gosiCity?: Prisma.GosiCityUpdateOneWithoutEmployeesNestedInput
+  creator?: Prisma.UserUpdateOneWithoutCreatedEmployeesNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedEmployeesNestedInput
   timesheets?: Prisma.TimesheetUpdateManyWithoutEmployeeNestedInput
   loans?: Prisma.LoanUpdateManyWithoutEmployeeNestedInput
   trafficChallans?: Prisma.TrafficChallanUpdateManyWithoutEmployeeNestedInput
@@ -1100,6 +1144,8 @@ export type EmployeeUncheckedUpdateInput = {
   gosiCityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   timesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutEmployeeNestedInput
@@ -1156,6 +1202,8 @@ export type EmployeeCreateManyInput = {
   gosiCityId?: number | null
   isCardDelivered?: boolean
   cardDocument?: string | null
+  createdBy?: number | null
+  updatedBy?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1248,6 +1296,8 @@ export type EmployeeUncheckedUpdateManyInput = {
   gosiCityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1309,6 +1359,8 @@ export type EmployeeCountOrderByAggregateInput = {
   gosiCityId?: Prisma.SortOrder
   isCardDelivered?: Prisma.SortOrder
   cardDocument?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrder
+  updatedBy?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -1332,6 +1384,8 @@ export type EmployeeAvgOrderByAggregateInput = {
   nationalityId?: Prisma.SortOrder
   gosiSalary?: Prisma.SortOrder
   gosiCityId?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrder
+  updatedBy?: Prisma.SortOrder
 }
 
 export type EmployeeMaxOrderByAggregateInput = {
@@ -1381,6 +1435,8 @@ export type EmployeeMaxOrderByAggregateInput = {
   gosiCityId?: Prisma.SortOrder
   isCardDelivered?: Prisma.SortOrder
   cardDocument?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrder
+  updatedBy?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -1432,6 +1488,8 @@ export type EmployeeMinOrderByAggregateInput = {
   gosiCityId?: Prisma.SortOrder
   isCardDelivered?: Prisma.SortOrder
   cardDocument?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrder
+  updatedBy?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -1455,11 +1513,97 @@ export type EmployeeSumOrderByAggregateInput = {
   nationalityId?: Prisma.SortOrder
   gosiSalary?: Prisma.SortOrder
   gosiCityId?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrder
+  updatedBy?: Prisma.SortOrder
 }
 
 export type EmployeeScalarRelationFilter = {
   is?: Prisma.EmployeeWhereInput
   isNot?: Prisma.EmployeeWhereInput
+}
+
+export type EmployeeCreateNestedManyWithoutCreatorInput = {
+  create?: Prisma.XOR<Prisma.EmployeeCreateWithoutCreatorInput, Prisma.EmployeeUncheckedCreateWithoutCreatorInput> | Prisma.EmployeeCreateWithoutCreatorInput[] | Prisma.EmployeeUncheckedCreateWithoutCreatorInput[]
+  connectOrCreate?: Prisma.EmployeeCreateOrConnectWithoutCreatorInput | Prisma.EmployeeCreateOrConnectWithoutCreatorInput[]
+  createMany?: Prisma.EmployeeCreateManyCreatorInputEnvelope
+  connect?: Prisma.EmployeeWhereUniqueInput | Prisma.EmployeeWhereUniqueInput[]
+}
+
+export type EmployeeCreateNestedManyWithoutUpdaterInput = {
+  create?: Prisma.XOR<Prisma.EmployeeCreateWithoutUpdaterInput, Prisma.EmployeeUncheckedCreateWithoutUpdaterInput> | Prisma.EmployeeCreateWithoutUpdaterInput[] | Prisma.EmployeeUncheckedCreateWithoutUpdaterInput[]
+  connectOrCreate?: Prisma.EmployeeCreateOrConnectWithoutUpdaterInput | Prisma.EmployeeCreateOrConnectWithoutUpdaterInput[]
+  createMany?: Prisma.EmployeeCreateManyUpdaterInputEnvelope
+  connect?: Prisma.EmployeeWhereUniqueInput | Prisma.EmployeeWhereUniqueInput[]
+}
+
+export type EmployeeUncheckedCreateNestedManyWithoutCreatorInput = {
+  create?: Prisma.XOR<Prisma.EmployeeCreateWithoutCreatorInput, Prisma.EmployeeUncheckedCreateWithoutCreatorInput> | Prisma.EmployeeCreateWithoutCreatorInput[] | Prisma.EmployeeUncheckedCreateWithoutCreatorInput[]
+  connectOrCreate?: Prisma.EmployeeCreateOrConnectWithoutCreatorInput | Prisma.EmployeeCreateOrConnectWithoutCreatorInput[]
+  createMany?: Prisma.EmployeeCreateManyCreatorInputEnvelope
+  connect?: Prisma.EmployeeWhereUniqueInput | Prisma.EmployeeWhereUniqueInput[]
+}
+
+export type EmployeeUncheckedCreateNestedManyWithoutUpdaterInput = {
+  create?: Prisma.XOR<Prisma.EmployeeCreateWithoutUpdaterInput, Prisma.EmployeeUncheckedCreateWithoutUpdaterInput> | Prisma.EmployeeCreateWithoutUpdaterInput[] | Prisma.EmployeeUncheckedCreateWithoutUpdaterInput[]
+  connectOrCreate?: Prisma.EmployeeCreateOrConnectWithoutUpdaterInput | Prisma.EmployeeCreateOrConnectWithoutUpdaterInput[]
+  createMany?: Prisma.EmployeeCreateManyUpdaterInputEnvelope
+  connect?: Prisma.EmployeeWhereUniqueInput | Prisma.EmployeeWhereUniqueInput[]
+}
+
+export type EmployeeUpdateManyWithoutCreatorNestedInput = {
+  create?: Prisma.XOR<Prisma.EmployeeCreateWithoutCreatorInput, Prisma.EmployeeUncheckedCreateWithoutCreatorInput> | Prisma.EmployeeCreateWithoutCreatorInput[] | Prisma.EmployeeUncheckedCreateWithoutCreatorInput[]
+  connectOrCreate?: Prisma.EmployeeCreateOrConnectWithoutCreatorInput | Prisma.EmployeeCreateOrConnectWithoutCreatorInput[]
+  upsert?: Prisma.EmployeeUpsertWithWhereUniqueWithoutCreatorInput | Prisma.EmployeeUpsertWithWhereUniqueWithoutCreatorInput[]
+  createMany?: Prisma.EmployeeCreateManyCreatorInputEnvelope
+  set?: Prisma.EmployeeWhereUniqueInput | Prisma.EmployeeWhereUniqueInput[]
+  disconnect?: Prisma.EmployeeWhereUniqueInput | Prisma.EmployeeWhereUniqueInput[]
+  delete?: Prisma.EmployeeWhereUniqueInput | Prisma.EmployeeWhereUniqueInput[]
+  connect?: Prisma.EmployeeWhereUniqueInput | Prisma.EmployeeWhereUniqueInput[]
+  update?: Prisma.EmployeeUpdateWithWhereUniqueWithoutCreatorInput | Prisma.EmployeeUpdateWithWhereUniqueWithoutCreatorInput[]
+  updateMany?: Prisma.EmployeeUpdateManyWithWhereWithoutCreatorInput | Prisma.EmployeeUpdateManyWithWhereWithoutCreatorInput[]
+  deleteMany?: Prisma.EmployeeScalarWhereInput | Prisma.EmployeeScalarWhereInput[]
+}
+
+export type EmployeeUpdateManyWithoutUpdaterNestedInput = {
+  create?: Prisma.XOR<Prisma.EmployeeCreateWithoutUpdaterInput, Prisma.EmployeeUncheckedCreateWithoutUpdaterInput> | Prisma.EmployeeCreateWithoutUpdaterInput[] | Prisma.EmployeeUncheckedCreateWithoutUpdaterInput[]
+  connectOrCreate?: Prisma.EmployeeCreateOrConnectWithoutUpdaterInput | Prisma.EmployeeCreateOrConnectWithoutUpdaterInput[]
+  upsert?: Prisma.EmployeeUpsertWithWhereUniqueWithoutUpdaterInput | Prisma.EmployeeUpsertWithWhereUniqueWithoutUpdaterInput[]
+  createMany?: Prisma.EmployeeCreateManyUpdaterInputEnvelope
+  set?: Prisma.EmployeeWhereUniqueInput | Prisma.EmployeeWhereUniqueInput[]
+  disconnect?: Prisma.EmployeeWhereUniqueInput | Prisma.EmployeeWhereUniqueInput[]
+  delete?: Prisma.EmployeeWhereUniqueInput | Prisma.EmployeeWhereUniqueInput[]
+  connect?: Prisma.EmployeeWhereUniqueInput | Prisma.EmployeeWhereUniqueInput[]
+  update?: Prisma.EmployeeUpdateWithWhereUniqueWithoutUpdaterInput | Prisma.EmployeeUpdateWithWhereUniqueWithoutUpdaterInput[]
+  updateMany?: Prisma.EmployeeUpdateManyWithWhereWithoutUpdaterInput | Prisma.EmployeeUpdateManyWithWhereWithoutUpdaterInput[]
+  deleteMany?: Prisma.EmployeeScalarWhereInput | Prisma.EmployeeScalarWhereInput[]
+}
+
+export type EmployeeUncheckedUpdateManyWithoutCreatorNestedInput = {
+  create?: Prisma.XOR<Prisma.EmployeeCreateWithoutCreatorInput, Prisma.EmployeeUncheckedCreateWithoutCreatorInput> | Prisma.EmployeeCreateWithoutCreatorInput[] | Prisma.EmployeeUncheckedCreateWithoutCreatorInput[]
+  connectOrCreate?: Prisma.EmployeeCreateOrConnectWithoutCreatorInput | Prisma.EmployeeCreateOrConnectWithoutCreatorInput[]
+  upsert?: Prisma.EmployeeUpsertWithWhereUniqueWithoutCreatorInput | Prisma.EmployeeUpsertWithWhereUniqueWithoutCreatorInput[]
+  createMany?: Prisma.EmployeeCreateManyCreatorInputEnvelope
+  set?: Prisma.EmployeeWhereUniqueInput | Prisma.EmployeeWhereUniqueInput[]
+  disconnect?: Prisma.EmployeeWhereUniqueInput | Prisma.EmployeeWhereUniqueInput[]
+  delete?: Prisma.EmployeeWhereUniqueInput | Prisma.EmployeeWhereUniqueInput[]
+  connect?: Prisma.EmployeeWhereUniqueInput | Prisma.EmployeeWhereUniqueInput[]
+  update?: Prisma.EmployeeUpdateWithWhereUniqueWithoutCreatorInput | Prisma.EmployeeUpdateWithWhereUniqueWithoutCreatorInput[]
+  updateMany?: Prisma.EmployeeUpdateManyWithWhereWithoutCreatorInput | Prisma.EmployeeUpdateManyWithWhereWithoutCreatorInput[]
+  deleteMany?: Prisma.EmployeeScalarWhereInput | Prisma.EmployeeScalarWhereInput[]
+}
+
+export type EmployeeUncheckedUpdateManyWithoutUpdaterNestedInput = {
+  create?: Prisma.XOR<Prisma.EmployeeCreateWithoutUpdaterInput, Prisma.EmployeeUncheckedCreateWithoutUpdaterInput> | Prisma.EmployeeCreateWithoutUpdaterInput[] | Prisma.EmployeeUncheckedCreateWithoutUpdaterInput[]
+  connectOrCreate?: Prisma.EmployeeCreateOrConnectWithoutUpdaterInput | Prisma.EmployeeCreateOrConnectWithoutUpdaterInput[]
+  upsert?: Prisma.EmployeeUpsertWithWhereUniqueWithoutUpdaterInput | Prisma.EmployeeUpsertWithWhereUniqueWithoutUpdaterInput[]
+  createMany?: Prisma.EmployeeCreateManyUpdaterInputEnvelope
+  set?: Prisma.EmployeeWhereUniqueInput | Prisma.EmployeeWhereUniqueInput[]
+  disconnect?: Prisma.EmployeeWhereUniqueInput | Prisma.EmployeeWhereUniqueInput[]
+  delete?: Prisma.EmployeeWhereUniqueInput | Prisma.EmployeeWhereUniqueInput[]
+  connect?: Prisma.EmployeeWhereUniqueInput | Prisma.EmployeeWhereUniqueInput[]
+  update?: Prisma.EmployeeUpdateWithWhereUniqueWithoutUpdaterInput | Prisma.EmployeeUpdateWithWhereUniqueWithoutUpdaterInput[]
+  updateMany?: Prisma.EmployeeUpdateManyWithWhereWithoutUpdaterInput | Prisma.EmployeeUpdateManyWithWhereWithoutUpdaterInput[]
+  deleteMany?: Prisma.EmployeeScalarWhereInput | Prisma.EmployeeScalarWhereInput[]
 }
 
 export type EmployeeCreateNestedManyWithoutSubBranchInput = {
@@ -1922,6 +2066,340 @@ export type EmployeeUpdateOneRequiredWithoutExitReentriesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.EmployeeUpdateToOneWithWhereWithoutExitReentriesInput, Prisma.EmployeeUpdateWithoutExitReentriesInput>, Prisma.EmployeeUncheckedUpdateWithoutExitReentriesInput>
 }
 
+export type EmployeeCreateWithoutCreatorInput = {
+  profilePicture?: string | null
+  employeeCode: number
+  nameEn: string
+  nameAr?: string | null
+  dob?: Date | string | null
+  phone?: string | null
+  gender?: string | null
+  isDeductable?: boolean
+  isFixed?: boolean
+  workingDays?: number | null
+  hourlyRate: runtime.Decimal | runtime.DecimalJsLike | number | string
+  salary?: number | null
+  breakfastAllowance?: boolean
+  foodAllowance?: number | null
+  mobileAllowance?: number | null
+  otherAllowance?: number | null
+  contractStartDate?: Date | string | null
+  contractEndDate?: Date | string | null
+  contractDocument?: string | null
+  contractEndReason?: string | null
+  joiningDate?: Date | string | null
+  idCardNo?: string | null
+  idCardExpiryDate?: Date | string | null
+  idCardDocument?: string | null
+  profession?: string | null
+  passportNo?: string | null
+  passportExpiryDate?: Date | string | null
+  passportDocument?: string | null
+  lastExitDate?: Date | string | null
+  lastEntryDate?: Date | string | null
+  bankName?: string | null
+  bankCode?: string | null
+  iban?: string | null
+  gosiSalary?: number | null
+  isCardDelivered?: boolean
+  cardDocument?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  country?: Prisma.CountryCreateNestedOneWithoutEmployeesByCountryInput
+  nationality?: Prisma.CountryCreateNestedOneWithoutEmployeesByNationalityInput
+  city?: Prisma.CityCreateNestedOneWithoutEmployeesInput
+  status?: Prisma.EmployeeStatusCreateNestedOneWithoutEmployeesInput
+  branch?: Prisma.BranchCreateNestedOneWithoutEmployeesInput
+  subBranch?: Prisma.BranchCreateNestedOneWithoutSubBranchUsersInput
+  designation?: Prisma.DesignationCreateNestedOneWithoutEmployeesInput
+  payrollSection?: Prisma.PayrollSectionCreateNestedOneWithoutEmployeesInput
+  gosiCity?: Prisma.GosiCityCreateNestedOneWithoutEmployeesInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedEmployeesInput
+  timesheets?: Prisma.TimesheetCreateNestedManyWithoutEmployeeInput
+  loans?: Prisma.LoanCreateNestedManyWithoutEmployeeInput
+  trafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutEmployeeInput
+  exitReentries?: Prisma.ExitReentryCreateNestedManyWithoutEmployeeInput
+  payrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutEmployeeInput
+}
+
+export type EmployeeUncheckedCreateWithoutCreatorInput = {
+  id?: number
+  profilePicture?: string | null
+  employeeCode: number
+  nameEn: string
+  nameAr?: string | null
+  dob?: Date | string | null
+  phone?: string | null
+  gender?: string | null
+  countryId?: number | null
+  cityId?: number | null
+  statusId?: number | null
+  branchId?: number | null
+  subBranchId?: number | null
+  designationId?: number | null
+  payrollSectionId?: number | null
+  isDeductable?: boolean
+  isFixed?: boolean
+  workingDays?: number | null
+  hourlyRate: runtime.Decimal | runtime.DecimalJsLike | number | string
+  salary?: number | null
+  breakfastAllowance?: boolean
+  foodAllowance?: number | null
+  mobileAllowance?: number | null
+  otherAllowance?: number | null
+  contractStartDate?: Date | string | null
+  contractEndDate?: Date | string | null
+  contractDocument?: string | null
+  contractEndReason?: string | null
+  joiningDate?: Date | string | null
+  idCardNo?: string | null
+  idCardExpiryDate?: Date | string | null
+  idCardDocument?: string | null
+  profession?: string | null
+  nationalityId?: number | null
+  passportNo?: string | null
+  passportExpiryDate?: Date | string | null
+  passportDocument?: string | null
+  lastExitDate?: Date | string | null
+  lastEntryDate?: Date | string | null
+  bankName?: string | null
+  bankCode?: string | null
+  iban?: string | null
+  gosiSalary?: number | null
+  gosiCityId?: number | null
+  isCardDelivered?: boolean
+  cardDocument?: string | null
+  updatedBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  timesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutEmployeeInput
+  loans?: Prisma.LoanUncheckedCreateNestedManyWithoutEmployeeInput
+  trafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutEmployeeInput
+  exitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutEmployeeInput
+  payrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutEmployeeInput
+}
+
+export type EmployeeCreateOrConnectWithoutCreatorInput = {
+  where: Prisma.EmployeeWhereUniqueInput
+  create: Prisma.XOR<Prisma.EmployeeCreateWithoutCreatorInput, Prisma.EmployeeUncheckedCreateWithoutCreatorInput>
+}
+
+export type EmployeeCreateManyCreatorInputEnvelope = {
+  data: Prisma.EmployeeCreateManyCreatorInput | Prisma.EmployeeCreateManyCreatorInput[]
+  skipDuplicates?: boolean
+}
+
+export type EmployeeCreateWithoutUpdaterInput = {
+  profilePicture?: string | null
+  employeeCode: number
+  nameEn: string
+  nameAr?: string | null
+  dob?: Date | string | null
+  phone?: string | null
+  gender?: string | null
+  isDeductable?: boolean
+  isFixed?: boolean
+  workingDays?: number | null
+  hourlyRate: runtime.Decimal | runtime.DecimalJsLike | number | string
+  salary?: number | null
+  breakfastAllowance?: boolean
+  foodAllowance?: number | null
+  mobileAllowance?: number | null
+  otherAllowance?: number | null
+  contractStartDate?: Date | string | null
+  contractEndDate?: Date | string | null
+  contractDocument?: string | null
+  contractEndReason?: string | null
+  joiningDate?: Date | string | null
+  idCardNo?: string | null
+  idCardExpiryDate?: Date | string | null
+  idCardDocument?: string | null
+  profession?: string | null
+  passportNo?: string | null
+  passportExpiryDate?: Date | string | null
+  passportDocument?: string | null
+  lastExitDate?: Date | string | null
+  lastEntryDate?: Date | string | null
+  bankName?: string | null
+  bankCode?: string | null
+  iban?: string | null
+  gosiSalary?: number | null
+  isCardDelivered?: boolean
+  cardDocument?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  country?: Prisma.CountryCreateNestedOneWithoutEmployeesByCountryInput
+  nationality?: Prisma.CountryCreateNestedOneWithoutEmployeesByNationalityInput
+  city?: Prisma.CityCreateNestedOneWithoutEmployeesInput
+  status?: Prisma.EmployeeStatusCreateNestedOneWithoutEmployeesInput
+  branch?: Prisma.BranchCreateNestedOneWithoutEmployeesInput
+  subBranch?: Prisma.BranchCreateNestedOneWithoutSubBranchUsersInput
+  designation?: Prisma.DesignationCreateNestedOneWithoutEmployeesInput
+  payrollSection?: Prisma.PayrollSectionCreateNestedOneWithoutEmployeesInput
+  gosiCity?: Prisma.GosiCityCreateNestedOneWithoutEmployeesInput
+  creator?: Prisma.UserCreateNestedOneWithoutCreatedEmployeesInput
+  timesheets?: Prisma.TimesheetCreateNestedManyWithoutEmployeeInput
+  loans?: Prisma.LoanCreateNestedManyWithoutEmployeeInput
+  trafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutEmployeeInput
+  exitReentries?: Prisma.ExitReentryCreateNestedManyWithoutEmployeeInput
+  payrollDetails?: Prisma.PayrollDetailsCreateNestedManyWithoutEmployeeInput
+}
+
+export type EmployeeUncheckedCreateWithoutUpdaterInput = {
+  id?: number
+  profilePicture?: string | null
+  employeeCode: number
+  nameEn: string
+  nameAr?: string | null
+  dob?: Date | string | null
+  phone?: string | null
+  gender?: string | null
+  countryId?: number | null
+  cityId?: number | null
+  statusId?: number | null
+  branchId?: number | null
+  subBranchId?: number | null
+  designationId?: number | null
+  payrollSectionId?: number | null
+  isDeductable?: boolean
+  isFixed?: boolean
+  workingDays?: number | null
+  hourlyRate: runtime.Decimal | runtime.DecimalJsLike | number | string
+  salary?: number | null
+  breakfastAllowance?: boolean
+  foodAllowance?: number | null
+  mobileAllowance?: number | null
+  otherAllowance?: number | null
+  contractStartDate?: Date | string | null
+  contractEndDate?: Date | string | null
+  contractDocument?: string | null
+  contractEndReason?: string | null
+  joiningDate?: Date | string | null
+  idCardNo?: string | null
+  idCardExpiryDate?: Date | string | null
+  idCardDocument?: string | null
+  profession?: string | null
+  nationalityId?: number | null
+  passportNo?: string | null
+  passportExpiryDate?: Date | string | null
+  passportDocument?: string | null
+  lastExitDate?: Date | string | null
+  lastEntryDate?: Date | string | null
+  bankName?: string | null
+  bankCode?: string | null
+  iban?: string | null
+  gosiSalary?: number | null
+  gosiCityId?: number | null
+  isCardDelivered?: boolean
+  cardDocument?: string | null
+  createdBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  timesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutEmployeeInput
+  loans?: Prisma.LoanUncheckedCreateNestedManyWithoutEmployeeInput
+  trafficChallans?: Prisma.TrafficChallanUncheckedCreateNestedManyWithoutEmployeeInput
+  exitReentries?: Prisma.ExitReentryUncheckedCreateNestedManyWithoutEmployeeInput
+  payrollDetails?: Prisma.PayrollDetailsUncheckedCreateNestedManyWithoutEmployeeInput
+}
+
+export type EmployeeCreateOrConnectWithoutUpdaterInput = {
+  where: Prisma.EmployeeWhereUniqueInput
+  create: Prisma.XOR<Prisma.EmployeeCreateWithoutUpdaterInput, Prisma.EmployeeUncheckedCreateWithoutUpdaterInput>
+}
+
+export type EmployeeCreateManyUpdaterInputEnvelope = {
+  data: Prisma.EmployeeCreateManyUpdaterInput | Prisma.EmployeeCreateManyUpdaterInput[]
+  skipDuplicates?: boolean
+}
+
+export type EmployeeUpsertWithWhereUniqueWithoutCreatorInput = {
+  where: Prisma.EmployeeWhereUniqueInput
+  update: Prisma.XOR<Prisma.EmployeeUpdateWithoutCreatorInput, Prisma.EmployeeUncheckedUpdateWithoutCreatorInput>
+  create: Prisma.XOR<Prisma.EmployeeCreateWithoutCreatorInput, Prisma.EmployeeUncheckedCreateWithoutCreatorInput>
+}
+
+export type EmployeeUpdateWithWhereUniqueWithoutCreatorInput = {
+  where: Prisma.EmployeeWhereUniqueInput
+  data: Prisma.XOR<Prisma.EmployeeUpdateWithoutCreatorInput, Prisma.EmployeeUncheckedUpdateWithoutCreatorInput>
+}
+
+export type EmployeeUpdateManyWithWhereWithoutCreatorInput = {
+  where: Prisma.EmployeeScalarWhereInput
+  data: Prisma.XOR<Prisma.EmployeeUpdateManyMutationInput, Prisma.EmployeeUncheckedUpdateManyWithoutCreatorInput>
+}
+
+export type EmployeeScalarWhereInput = {
+  AND?: Prisma.EmployeeScalarWhereInput | Prisma.EmployeeScalarWhereInput[]
+  OR?: Prisma.EmployeeScalarWhereInput[]
+  NOT?: Prisma.EmployeeScalarWhereInput | Prisma.EmployeeScalarWhereInput[]
+  id?: Prisma.IntFilter<"Employee"> | number
+  profilePicture?: Prisma.StringNullableFilter<"Employee"> | string | null
+  employeeCode?: Prisma.IntFilter<"Employee"> | number
+  nameEn?: Prisma.StringFilter<"Employee"> | string
+  nameAr?: Prisma.StringNullableFilter<"Employee"> | string | null
+  dob?: Prisma.DateTimeNullableFilter<"Employee"> | Date | string | null
+  phone?: Prisma.StringNullableFilter<"Employee"> | string | null
+  gender?: Prisma.StringNullableFilter<"Employee"> | string | null
+  countryId?: Prisma.IntNullableFilter<"Employee"> | number | null
+  cityId?: Prisma.IntNullableFilter<"Employee"> | number | null
+  statusId?: Prisma.IntNullableFilter<"Employee"> | number | null
+  branchId?: Prisma.IntNullableFilter<"Employee"> | number | null
+  subBranchId?: Prisma.IntNullableFilter<"Employee"> | number | null
+  designationId?: Prisma.IntNullableFilter<"Employee"> | number | null
+  payrollSectionId?: Prisma.IntNullableFilter<"Employee"> | number | null
+  isDeductable?: Prisma.BoolFilter<"Employee"> | boolean
+  isFixed?: Prisma.BoolFilter<"Employee"> | boolean
+  workingDays?: Prisma.IntNullableFilter<"Employee"> | number | null
+  hourlyRate?: Prisma.DecimalFilter<"Employee"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  salary?: Prisma.IntNullableFilter<"Employee"> | number | null
+  breakfastAllowance?: Prisma.BoolFilter<"Employee"> | boolean
+  foodAllowance?: Prisma.IntNullableFilter<"Employee"> | number | null
+  mobileAllowance?: Prisma.IntNullableFilter<"Employee"> | number | null
+  otherAllowance?: Prisma.IntNullableFilter<"Employee"> | number | null
+  contractStartDate?: Prisma.DateTimeNullableFilter<"Employee"> | Date | string | null
+  contractEndDate?: Prisma.DateTimeNullableFilter<"Employee"> | Date | string | null
+  contractDocument?: Prisma.StringNullableFilter<"Employee"> | string | null
+  contractEndReason?: Prisma.StringNullableFilter<"Employee"> | string | null
+  joiningDate?: Prisma.DateTimeNullableFilter<"Employee"> | Date | string | null
+  idCardNo?: Prisma.StringNullableFilter<"Employee"> | string | null
+  idCardExpiryDate?: Prisma.DateTimeNullableFilter<"Employee"> | Date | string | null
+  idCardDocument?: Prisma.StringNullableFilter<"Employee"> | string | null
+  profession?: Prisma.StringNullableFilter<"Employee"> | string | null
+  nationalityId?: Prisma.IntNullableFilter<"Employee"> | number | null
+  passportNo?: Prisma.StringNullableFilter<"Employee"> | string | null
+  passportExpiryDate?: Prisma.DateTimeNullableFilter<"Employee"> | Date | string | null
+  passportDocument?: Prisma.StringNullableFilter<"Employee"> | string | null
+  lastExitDate?: Prisma.DateTimeNullableFilter<"Employee"> | Date | string | null
+  lastEntryDate?: Prisma.DateTimeNullableFilter<"Employee"> | Date | string | null
+  bankName?: Prisma.StringNullableFilter<"Employee"> | string | null
+  bankCode?: Prisma.StringNullableFilter<"Employee"> | string | null
+  iban?: Prisma.StringNullableFilter<"Employee"> | string | null
+  gosiSalary?: Prisma.IntNullableFilter<"Employee"> | number | null
+  gosiCityId?: Prisma.IntNullableFilter<"Employee"> | number | null
+  isCardDelivered?: Prisma.BoolFilter<"Employee"> | boolean
+  cardDocument?: Prisma.StringNullableFilter<"Employee"> | string | null
+  createdBy?: Prisma.IntNullableFilter<"Employee"> | number | null
+  updatedBy?: Prisma.IntNullableFilter<"Employee"> | number | null
+  createdAt?: Prisma.DateTimeFilter<"Employee"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Employee"> | Date | string
+}
+
+export type EmployeeUpsertWithWhereUniqueWithoutUpdaterInput = {
+  where: Prisma.EmployeeWhereUniqueInput
+  update: Prisma.XOR<Prisma.EmployeeUpdateWithoutUpdaterInput, Prisma.EmployeeUncheckedUpdateWithoutUpdaterInput>
+  create: Prisma.XOR<Prisma.EmployeeCreateWithoutUpdaterInput, Prisma.EmployeeUncheckedCreateWithoutUpdaterInput>
+}
+
+export type EmployeeUpdateWithWhereUniqueWithoutUpdaterInput = {
+  where: Prisma.EmployeeWhereUniqueInput
+  data: Prisma.XOR<Prisma.EmployeeUpdateWithoutUpdaterInput, Prisma.EmployeeUncheckedUpdateWithoutUpdaterInput>
+}
+
+export type EmployeeUpdateManyWithWhereWithoutUpdaterInput = {
+  where: Prisma.EmployeeScalarWhereInput
+  data: Prisma.XOR<Prisma.EmployeeUpdateManyMutationInput, Prisma.EmployeeUncheckedUpdateManyWithoutUpdaterInput>
+}
+
 export type EmployeeCreateWithoutSubBranchInput = {
   profilePicture?: string | null
   employeeCode: number
@@ -1969,6 +2447,8 @@ export type EmployeeCreateWithoutSubBranchInput = {
   designation?: Prisma.DesignationCreateNestedOneWithoutEmployeesInput
   payrollSection?: Prisma.PayrollSectionCreateNestedOneWithoutEmployeesInput
   gosiCity?: Prisma.GosiCityCreateNestedOneWithoutEmployeesInput
+  creator?: Prisma.UserCreateNestedOneWithoutCreatedEmployeesInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedEmployeesInput
   timesheets?: Prisma.TimesheetCreateNestedManyWithoutEmployeeInput
   loans?: Prisma.LoanCreateNestedManyWithoutEmployeeInput
   trafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutEmployeeInput
@@ -2022,6 +2502,8 @@ export type EmployeeUncheckedCreateWithoutSubBranchInput = {
   gosiCityId?: number | null
   isCardDelivered?: boolean
   cardDocument?: string | null
+  createdBy?: number | null
+  updatedBy?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   timesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutEmployeeInput
@@ -2088,6 +2570,8 @@ export type EmployeeCreateWithoutBranchInput = {
   designation?: Prisma.DesignationCreateNestedOneWithoutEmployeesInput
   payrollSection?: Prisma.PayrollSectionCreateNestedOneWithoutEmployeesInput
   gosiCity?: Prisma.GosiCityCreateNestedOneWithoutEmployeesInput
+  creator?: Prisma.UserCreateNestedOneWithoutCreatedEmployeesInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedEmployeesInput
   timesheets?: Prisma.TimesheetCreateNestedManyWithoutEmployeeInput
   loans?: Prisma.LoanCreateNestedManyWithoutEmployeeInput
   trafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutEmployeeInput
@@ -2141,6 +2625,8 @@ export type EmployeeUncheckedCreateWithoutBranchInput = {
   gosiCityId?: number | null
   isCardDelivered?: boolean
   cardDocument?: string | null
+  createdBy?: number | null
+  updatedBy?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   timesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutEmployeeInput
@@ -2174,60 +2660,6 @@ export type EmployeeUpdateWithWhereUniqueWithoutSubBranchInput = {
 export type EmployeeUpdateManyWithWhereWithoutSubBranchInput = {
   where: Prisma.EmployeeScalarWhereInput
   data: Prisma.XOR<Prisma.EmployeeUpdateManyMutationInput, Prisma.EmployeeUncheckedUpdateManyWithoutSubBranchInput>
-}
-
-export type EmployeeScalarWhereInput = {
-  AND?: Prisma.EmployeeScalarWhereInput | Prisma.EmployeeScalarWhereInput[]
-  OR?: Prisma.EmployeeScalarWhereInput[]
-  NOT?: Prisma.EmployeeScalarWhereInput | Prisma.EmployeeScalarWhereInput[]
-  id?: Prisma.IntFilter<"Employee"> | number
-  profilePicture?: Prisma.StringNullableFilter<"Employee"> | string | null
-  employeeCode?: Prisma.IntFilter<"Employee"> | number
-  nameEn?: Prisma.StringFilter<"Employee"> | string
-  nameAr?: Prisma.StringNullableFilter<"Employee"> | string | null
-  dob?: Prisma.DateTimeNullableFilter<"Employee"> | Date | string | null
-  phone?: Prisma.StringNullableFilter<"Employee"> | string | null
-  gender?: Prisma.StringNullableFilter<"Employee"> | string | null
-  countryId?: Prisma.IntNullableFilter<"Employee"> | number | null
-  cityId?: Prisma.IntNullableFilter<"Employee"> | number | null
-  statusId?: Prisma.IntNullableFilter<"Employee"> | number | null
-  branchId?: Prisma.IntNullableFilter<"Employee"> | number | null
-  subBranchId?: Prisma.IntNullableFilter<"Employee"> | number | null
-  designationId?: Prisma.IntNullableFilter<"Employee"> | number | null
-  payrollSectionId?: Prisma.IntNullableFilter<"Employee"> | number | null
-  isDeductable?: Prisma.BoolFilter<"Employee"> | boolean
-  isFixed?: Prisma.BoolFilter<"Employee"> | boolean
-  workingDays?: Prisma.IntNullableFilter<"Employee"> | number | null
-  hourlyRate?: Prisma.DecimalFilter<"Employee"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  salary?: Prisma.IntNullableFilter<"Employee"> | number | null
-  breakfastAllowance?: Prisma.BoolFilter<"Employee"> | boolean
-  foodAllowance?: Prisma.IntNullableFilter<"Employee"> | number | null
-  mobileAllowance?: Prisma.IntNullableFilter<"Employee"> | number | null
-  otherAllowance?: Prisma.IntNullableFilter<"Employee"> | number | null
-  contractStartDate?: Prisma.DateTimeNullableFilter<"Employee"> | Date | string | null
-  contractEndDate?: Prisma.DateTimeNullableFilter<"Employee"> | Date | string | null
-  contractDocument?: Prisma.StringNullableFilter<"Employee"> | string | null
-  contractEndReason?: Prisma.StringNullableFilter<"Employee"> | string | null
-  joiningDate?: Prisma.DateTimeNullableFilter<"Employee"> | Date | string | null
-  idCardNo?: Prisma.StringNullableFilter<"Employee"> | string | null
-  idCardExpiryDate?: Prisma.DateTimeNullableFilter<"Employee"> | Date | string | null
-  idCardDocument?: Prisma.StringNullableFilter<"Employee"> | string | null
-  profession?: Prisma.StringNullableFilter<"Employee"> | string | null
-  nationalityId?: Prisma.IntNullableFilter<"Employee"> | number | null
-  passportNo?: Prisma.StringNullableFilter<"Employee"> | string | null
-  passportExpiryDate?: Prisma.DateTimeNullableFilter<"Employee"> | Date | string | null
-  passportDocument?: Prisma.StringNullableFilter<"Employee"> | string | null
-  lastExitDate?: Prisma.DateTimeNullableFilter<"Employee"> | Date | string | null
-  lastEntryDate?: Prisma.DateTimeNullableFilter<"Employee"> | Date | string | null
-  bankName?: Prisma.StringNullableFilter<"Employee"> | string | null
-  bankCode?: Prisma.StringNullableFilter<"Employee"> | string | null
-  iban?: Prisma.StringNullableFilter<"Employee"> | string | null
-  gosiSalary?: Prisma.IntNullableFilter<"Employee"> | number | null
-  gosiCityId?: Prisma.IntNullableFilter<"Employee"> | number | null
-  isCardDelivered?: Prisma.BoolFilter<"Employee"> | boolean
-  cardDocument?: Prisma.StringNullableFilter<"Employee"> | string | null
-  createdAt?: Prisma.DateTimeFilter<"Employee"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"Employee"> | Date | string
 }
 
 export type EmployeeUpsertWithWhereUniqueWithoutBranchInput = {
@@ -2293,6 +2725,8 @@ export type EmployeeCreateWithoutCityInput = {
   designation?: Prisma.DesignationCreateNestedOneWithoutEmployeesInput
   payrollSection?: Prisma.PayrollSectionCreateNestedOneWithoutEmployeesInput
   gosiCity?: Prisma.GosiCityCreateNestedOneWithoutEmployeesInput
+  creator?: Prisma.UserCreateNestedOneWithoutCreatedEmployeesInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedEmployeesInput
   timesheets?: Prisma.TimesheetCreateNestedManyWithoutEmployeeInput
   loans?: Prisma.LoanCreateNestedManyWithoutEmployeeInput
   trafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutEmployeeInput
@@ -2346,6 +2780,8 @@ export type EmployeeUncheckedCreateWithoutCityInput = {
   gosiCityId?: number | null
   isCardDelivered?: boolean
   cardDocument?: string | null
+  createdBy?: number | null
+  updatedBy?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   timesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutEmployeeInput
@@ -2428,6 +2864,8 @@ export type EmployeeCreateWithoutCountryInput = {
   designation?: Prisma.DesignationCreateNestedOneWithoutEmployeesInput
   payrollSection?: Prisma.PayrollSectionCreateNestedOneWithoutEmployeesInput
   gosiCity?: Prisma.GosiCityCreateNestedOneWithoutEmployeesInput
+  creator?: Prisma.UserCreateNestedOneWithoutCreatedEmployeesInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedEmployeesInput
   timesheets?: Prisma.TimesheetCreateNestedManyWithoutEmployeeInput
   loans?: Prisma.LoanCreateNestedManyWithoutEmployeeInput
   trafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutEmployeeInput
@@ -2481,6 +2919,8 @@ export type EmployeeUncheckedCreateWithoutCountryInput = {
   gosiCityId?: number | null
   isCardDelivered?: boolean
   cardDocument?: string | null
+  createdBy?: number | null
+  updatedBy?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   timesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutEmployeeInput
@@ -2547,6 +2987,8 @@ export type EmployeeCreateWithoutNationalityInput = {
   designation?: Prisma.DesignationCreateNestedOneWithoutEmployeesInput
   payrollSection?: Prisma.PayrollSectionCreateNestedOneWithoutEmployeesInput
   gosiCity?: Prisma.GosiCityCreateNestedOneWithoutEmployeesInput
+  creator?: Prisma.UserCreateNestedOneWithoutCreatedEmployeesInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedEmployeesInput
   timesheets?: Prisma.TimesheetCreateNestedManyWithoutEmployeeInput
   loans?: Prisma.LoanCreateNestedManyWithoutEmployeeInput
   trafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutEmployeeInput
@@ -2600,6 +3042,8 @@ export type EmployeeUncheckedCreateWithoutNationalityInput = {
   gosiCityId?: number | null
   isCardDelivered?: boolean
   cardDocument?: string | null
+  createdBy?: number | null
+  updatedBy?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   timesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutEmployeeInput
@@ -2698,6 +3142,8 @@ export type EmployeeCreateWithoutGosiCityInput = {
   subBranch?: Prisma.BranchCreateNestedOneWithoutSubBranchUsersInput
   designation?: Prisma.DesignationCreateNestedOneWithoutEmployeesInput
   payrollSection?: Prisma.PayrollSectionCreateNestedOneWithoutEmployeesInput
+  creator?: Prisma.UserCreateNestedOneWithoutCreatedEmployeesInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedEmployeesInput
   timesheets?: Prisma.TimesheetCreateNestedManyWithoutEmployeeInput
   loans?: Prisma.LoanCreateNestedManyWithoutEmployeeInput
   trafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutEmployeeInput
@@ -2751,6 +3197,8 @@ export type EmployeeUncheckedCreateWithoutGosiCityInput = {
   gosiSalary?: number | null
   isCardDelivered?: boolean
   cardDocument?: string | null
+  createdBy?: number | null
+  updatedBy?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   timesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutEmployeeInput
@@ -2833,6 +3281,8 @@ export type EmployeeCreateWithoutDesignationInput = {
   subBranch?: Prisma.BranchCreateNestedOneWithoutSubBranchUsersInput
   payrollSection?: Prisma.PayrollSectionCreateNestedOneWithoutEmployeesInput
   gosiCity?: Prisma.GosiCityCreateNestedOneWithoutEmployeesInput
+  creator?: Prisma.UserCreateNestedOneWithoutCreatedEmployeesInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedEmployeesInput
   timesheets?: Prisma.TimesheetCreateNestedManyWithoutEmployeeInput
   loans?: Prisma.LoanCreateNestedManyWithoutEmployeeInput
   trafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutEmployeeInput
@@ -2886,6 +3336,8 @@ export type EmployeeUncheckedCreateWithoutDesignationInput = {
   gosiCityId?: number | null
   isCardDelivered?: boolean
   cardDocument?: string | null
+  createdBy?: number | null
+  updatedBy?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   timesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutEmployeeInput
@@ -2968,6 +3420,8 @@ export type EmployeeCreateWithoutStatusInput = {
   designation?: Prisma.DesignationCreateNestedOneWithoutEmployeesInput
   payrollSection?: Prisma.PayrollSectionCreateNestedOneWithoutEmployeesInput
   gosiCity?: Prisma.GosiCityCreateNestedOneWithoutEmployeesInput
+  creator?: Prisma.UserCreateNestedOneWithoutCreatedEmployeesInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedEmployeesInput
   timesheets?: Prisma.TimesheetCreateNestedManyWithoutEmployeeInput
   loans?: Prisma.LoanCreateNestedManyWithoutEmployeeInput
   trafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutEmployeeInput
@@ -3021,6 +3475,8 @@ export type EmployeeUncheckedCreateWithoutStatusInput = {
   gosiCityId?: number | null
   isCardDelivered?: boolean
   cardDocument?: string | null
+  createdBy?: number | null
+  updatedBy?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   timesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutEmployeeInput
@@ -3104,6 +3560,8 @@ export type EmployeeCreateWithoutTimesheetsInput = {
   designation?: Prisma.DesignationCreateNestedOneWithoutEmployeesInput
   payrollSection?: Prisma.PayrollSectionCreateNestedOneWithoutEmployeesInput
   gosiCity?: Prisma.GosiCityCreateNestedOneWithoutEmployeesInput
+  creator?: Prisma.UserCreateNestedOneWithoutCreatedEmployeesInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedEmployeesInput
   loans?: Prisma.LoanCreateNestedManyWithoutEmployeeInput
   trafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutEmployeeInput
   exitReentries?: Prisma.ExitReentryCreateNestedManyWithoutEmployeeInput
@@ -3157,6 +3615,8 @@ export type EmployeeUncheckedCreateWithoutTimesheetsInput = {
   gosiCityId?: number | null
   isCardDelivered?: boolean
   cardDocument?: string | null
+  createdBy?: number | null
+  updatedBy?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   loans?: Prisma.LoanUncheckedCreateNestedManyWithoutEmployeeInput
@@ -3229,6 +3689,8 @@ export type EmployeeUpdateWithoutTimesheetsInput = {
   designation?: Prisma.DesignationUpdateOneWithoutEmployeesNestedInput
   payrollSection?: Prisma.PayrollSectionUpdateOneWithoutEmployeesNestedInput
   gosiCity?: Prisma.GosiCityUpdateOneWithoutEmployeesNestedInput
+  creator?: Prisma.UserUpdateOneWithoutCreatedEmployeesNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedEmployeesNestedInput
   loans?: Prisma.LoanUpdateManyWithoutEmployeeNestedInput
   trafficChallans?: Prisma.TrafficChallanUpdateManyWithoutEmployeeNestedInput
   exitReentries?: Prisma.ExitReentryUpdateManyWithoutEmployeeNestedInput
@@ -3282,6 +3744,8 @@ export type EmployeeUncheckedUpdateWithoutTimesheetsInput = {
   gosiCityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   loans?: Prisma.LoanUncheckedUpdateManyWithoutEmployeeNestedInput
@@ -3337,6 +3801,8 @@ export type EmployeeCreateWithoutPayrollSectionInput = {
   subBranch?: Prisma.BranchCreateNestedOneWithoutSubBranchUsersInput
   designation?: Prisma.DesignationCreateNestedOneWithoutEmployeesInput
   gosiCity?: Prisma.GosiCityCreateNestedOneWithoutEmployeesInput
+  creator?: Prisma.UserCreateNestedOneWithoutCreatedEmployeesInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedEmployeesInput
   timesheets?: Prisma.TimesheetCreateNestedManyWithoutEmployeeInput
   loans?: Prisma.LoanCreateNestedManyWithoutEmployeeInput
   trafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutEmployeeInput
@@ -3390,6 +3856,8 @@ export type EmployeeUncheckedCreateWithoutPayrollSectionInput = {
   gosiCityId?: number | null
   isCardDelivered?: boolean
   cardDocument?: string | null
+  createdBy?: number | null
+  updatedBy?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   timesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutEmployeeInput
@@ -3473,6 +3941,8 @@ export type EmployeeCreateWithoutPayrollDetailsInput = {
   designation?: Prisma.DesignationCreateNestedOneWithoutEmployeesInput
   payrollSection?: Prisma.PayrollSectionCreateNestedOneWithoutEmployeesInput
   gosiCity?: Prisma.GosiCityCreateNestedOneWithoutEmployeesInput
+  creator?: Prisma.UserCreateNestedOneWithoutCreatedEmployeesInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedEmployeesInput
   timesheets?: Prisma.TimesheetCreateNestedManyWithoutEmployeeInput
   loans?: Prisma.LoanCreateNestedManyWithoutEmployeeInput
   trafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutEmployeeInput
@@ -3526,6 +3996,8 @@ export type EmployeeUncheckedCreateWithoutPayrollDetailsInput = {
   gosiCityId?: number | null
   isCardDelivered?: boolean
   cardDocument?: string | null
+  createdBy?: number | null
+  updatedBy?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   timesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutEmployeeInput
@@ -3598,6 +4070,8 @@ export type EmployeeUpdateWithoutPayrollDetailsInput = {
   designation?: Prisma.DesignationUpdateOneWithoutEmployeesNestedInput
   payrollSection?: Prisma.PayrollSectionUpdateOneWithoutEmployeesNestedInput
   gosiCity?: Prisma.GosiCityUpdateOneWithoutEmployeesNestedInput
+  creator?: Prisma.UserUpdateOneWithoutCreatedEmployeesNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedEmployeesNestedInput
   timesheets?: Prisma.TimesheetUpdateManyWithoutEmployeeNestedInput
   loans?: Prisma.LoanUpdateManyWithoutEmployeeNestedInput
   trafficChallans?: Prisma.TrafficChallanUpdateManyWithoutEmployeeNestedInput
@@ -3651,6 +4125,8 @@ export type EmployeeUncheckedUpdateWithoutPayrollDetailsInput = {
   gosiCityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   timesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutEmployeeNestedInput
@@ -3707,6 +4183,8 @@ export type EmployeeCreateWithoutLoansInput = {
   designation?: Prisma.DesignationCreateNestedOneWithoutEmployeesInput
   payrollSection?: Prisma.PayrollSectionCreateNestedOneWithoutEmployeesInput
   gosiCity?: Prisma.GosiCityCreateNestedOneWithoutEmployeesInput
+  creator?: Prisma.UserCreateNestedOneWithoutCreatedEmployeesInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedEmployeesInput
   timesheets?: Prisma.TimesheetCreateNestedManyWithoutEmployeeInput
   trafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutEmployeeInput
   exitReentries?: Prisma.ExitReentryCreateNestedManyWithoutEmployeeInput
@@ -3760,6 +4238,8 @@ export type EmployeeUncheckedCreateWithoutLoansInput = {
   gosiCityId?: number | null
   isCardDelivered?: boolean
   cardDocument?: string | null
+  createdBy?: number | null
+  updatedBy?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   timesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutEmployeeInput
@@ -3832,6 +4312,8 @@ export type EmployeeUpdateWithoutLoansInput = {
   designation?: Prisma.DesignationUpdateOneWithoutEmployeesNestedInput
   payrollSection?: Prisma.PayrollSectionUpdateOneWithoutEmployeesNestedInput
   gosiCity?: Prisma.GosiCityUpdateOneWithoutEmployeesNestedInput
+  creator?: Prisma.UserUpdateOneWithoutCreatedEmployeesNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedEmployeesNestedInput
   timesheets?: Prisma.TimesheetUpdateManyWithoutEmployeeNestedInput
   trafficChallans?: Prisma.TrafficChallanUpdateManyWithoutEmployeeNestedInput
   exitReentries?: Prisma.ExitReentryUpdateManyWithoutEmployeeNestedInput
@@ -3885,6 +4367,8 @@ export type EmployeeUncheckedUpdateWithoutLoansInput = {
   gosiCityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   timesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutEmployeeNestedInput
@@ -3941,6 +4425,8 @@ export type EmployeeCreateWithoutTrafficChallansInput = {
   designation?: Prisma.DesignationCreateNestedOneWithoutEmployeesInput
   payrollSection?: Prisma.PayrollSectionCreateNestedOneWithoutEmployeesInput
   gosiCity?: Prisma.GosiCityCreateNestedOneWithoutEmployeesInput
+  creator?: Prisma.UserCreateNestedOneWithoutCreatedEmployeesInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedEmployeesInput
   timesheets?: Prisma.TimesheetCreateNestedManyWithoutEmployeeInput
   loans?: Prisma.LoanCreateNestedManyWithoutEmployeeInput
   exitReentries?: Prisma.ExitReentryCreateNestedManyWithoutEmployeeInput
@@ -3994,6 +4480,8 @@ export type EmployeeUncheckedCreateWithoutTrafficChallansInput = {
   gosiCityId?: number | null
   isCardDelivered?: boolean
   cardDocument?: string | null
+  createdBy?: number | null
+  updatedBy?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   timesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutEmployeeInput
@@ -4066,6 +4554,8 @@ export type EmployeeUpdateWithoutTrafficChallansInput = {
   designation?: Prisma.DesignationUpdateOneWithoutEmployeesNestedInput
   payrollSection?: Prisma.PayrollSectionUpdateOneWithoutEmployeesNestedInput
   gosiCity?: Prisma.GosiCityUpdateOneWithoutEmployeesNestedInput
+  creator?: Prisma.UserUpdateOneWithoutCreatedEmployeesNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedEmployeesNestedInput
   timesheets?: Prisma.TimesheetUpdateManyWithoutEmployeeNestedInput
   loans?: Prisma.LoanUpdateManyWithoutEmployeeNestedInput
   exitReentries?: Prisma.ExitReentryUpdateManyWithoutEmployeeNestedInput
@@ -4119,6 +4609,8 @@ export type EmployeeUncheckedUpdateWithoutTrafficChallansInput = {
   gosiCityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   timesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutEmployeeNestedInput
@@ -4175,6 +4667,8 @@ export type EmployeeCreateWithoutExitReentriesInput = {
   designation?: Prisma.DesignationCreateNestedOneWithoutEmployeesInput
   payrollSection?: Prisma.PayrollSectionCreateNestedOneWithoutEmployeesInput
   gosiCity?: Prisma.GosiCityCreateNestedOneWithoutEmployeesInput
+  creator?: Prisma.UserCreateNestedOneWithoutCreatedEmployeesInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedEmployeesInput
   timesheets?: Prisma.TimesheetCreateNestedManyWithoutEmployeeInput
   loans?: Prisma.LoanCreateNestedManyWithoutEmployeeInput
   trafficChallans?: Prisma.TrafficChallanCreateNestedManyWithoutEmployeeInput
@@ -4228,6 +4722,8 @@ export type EmployeeUncheckedCreateWithoutExitReentriesInput = {
   gosiCityId?: number | null
   isCardDelivered?: boolean
   cardDocument?: string | null
+  createdBy?: number | null
+  updatedBy?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   timesheets?: Prisma.TimesheetUncheckedCreateNestedManyWithoutEmployeeInput
@@ -4300,6 +4796,8 @@ export type EmployeeUpdateWithoutExitReentriesInput = {
   designation?: Prisma.DesignationUpdateOneWithoutEmployeesNestedInput
   payrollSection?: Prisma.PayrollSectionUpdateOneWithoutEmployeesNestedInput
   gosiCity?: Prisma.GosiCityUpdateOneWithoutEmployeesNestedInput
+  creator?: Prisma.UserUpdateOneWithoutCreatedEmployeesNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedEmployeesNestedInput
   timesheets?: Prisma.TimesheetUpdateManyWithoutEmployeeNestedInput
   loans?: Prisma.LoanUpdateManyWithoutEmployeeNestedInput
   trafficChallans?: Prisma.TrafficChallanUpdateManyWithoutEmployeeNestedInput
@@ -4353,12 +4851,448 @@ export type EmployeeUncheckedUpdateWithoutExitReentriesInput = {
   gosiCityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   timesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutEmployeeNestedInput
   loans?: Prisma.LoanUncheckedUpdateManyWithoutEmployeeNestedInput
   trafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutEmployeeNestedInput
   payrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutEmployeeNestedInput
+}
+
+export type EmployeeCreateManyCreatorInput = {
+  id?: number
+  profilePicture?: string | null
+  employeeCode: number
+  nameEn: string
+  nameAr?: string | null
+  dob?: Date | string | null
+  phone?: string | null
+  gender?: string | null
+  countryId?: number | null
+  cityId?: number | null
+  statusId?: number | null
+  branchId?: number | null
+  subBranchId?: number | null
+  designationId?: number | null
+  payrollSectionId?: number | null
+  isDeductable?: boolean
+  isFixed?: boolean
+  workingDays?: number | null
+  hourlyRate: runtime.Decimal | runtime.DecimalJsLike | number | string
+  salary?: number | null
+  breakfastAllowance?: boolean
+  foodAllowance?: number | null
+  mobileAllowance?: number | null
+  otherAllowance?: number | null
+  contractStartDate?: Date | string | null
+  contractEndDate?: Date | string | null
+  contractDocument?: string | null
+  contractEndReason?: string | null
+  joiningDate?: Date | string | null
+  idCardNo?: string | null
+  idCardExpiryDate?: Date | string | null
+  idCardDocument?: string | null
+  profession?: string | null
+  nationalityId?: number | null
+  passportNo?: string | null
+  passportExpiryDate?: Date | string | null
+  passportDocument?: string | null
+  lastExitDate?: Date | string | null
+  lastEntryDate?: Date | string | null
+  bankName?: string | null
+  bankCode?: string | null
+  iban?: string | null
+  gosiSalary?: number | null
+  gosiCityId?: number | null
+  isCardDelivered?: boolean
+  cardDocument?: string | null
+  updatedBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type EmployeeCreateManyUpdaterInput = {
+  id?: number
+  profilePicture?: string | null
+  employeeCode: number
+  nameEn: string
+  nameAr?: string | null
+  dob?: Date | string | null
+  phone?: string | null
+  gender?: string | null
+  countryId?: number | null
+  cityId?: number | null
+  statusId?: number | null
+  branchId?: number | null
+  subBranchId?: number | null
+  designationId?: number | null
+  payrollSectionId?: number | null
+  isDeductable?: boolean
+  isFixed?: boolean
+  workingDays?: number | null
+  hourlyRate: runtime.Decimal | runtime.DecimalJsLike | number | string
+  salary?: number | null
+  breakfastAllowance?: boolean
+  foodAllowance?: number | null
+  mobileAllowance?: number | null
+  otherAllowance?: number | null
+  contractStartDate?: Date | string | null
+  contractEndDate?: Date | string | null
+  contractDocument?: string | null
+  contractEndReason?: string | null
+  joiningDate?: Date | string | null
+  idCardNo?: string | null
+  idCardExpiryDate?: Date | string | null
+  idCardDocument?: string | null
+  profession?: string | null
+  nationalityId?: number | null
+  passportNo?: string | null
+  passportExpiryDate?: Date | string | null
+  passportDocument?: string | null
+  lastExitDate?: Date | string | null
+  lastEntryDate?: Date | string | null
+  bankName?: string | null
+  bankCode?: string | null
+  iban?: string | null
+  gosiSalary?: number | null
+  gosiCityId?: number | null
+  isCardDelivered?: boolean
+  cardDocument?: string | null
+  createdBy?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type EmployeeUpdateWithoutCreatorInput = {
+  profilePicture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeCode?: Prisma.IntFieldUpdateOperationsInput | number
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDeductable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isFixed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  workingDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  hourlyRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  salary?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  breakfastAllowance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  foodAllowance?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  mobileAllowance?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  otherAllowance?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  contractStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  contractEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  contractDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contractEndReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  joiningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  idCardNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardExpiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  idCardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profession?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passportNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passportExpiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExitDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastEntryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gosiSalary?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  country?: Prisma.CountryUpdateOneWithoutEmployeesByCountryNestedInput
+  nationality?: Prisma.CountryUpdateOneWithoutEmployeesByNationalityNestedInput
+  city?: Prisma.CityUpdateOneWithoutEmployeesNestedInput
+  status?: Prisma.EmployeeStatusUpdateOneWithoutEmployeesNestedInput
+  branch?: Prisma.BranchUpdateOneWithoutEmployeesNestedInput
+  subBranch?: Prisma.BranchUpdateOneWithoutSubBranchUsersNestedInput
+  designation?: Prisma.DesignationUpdateOneWithoutEmployeesNestedInput
+  payrollSection?: Prisma.PayrollSectionUpdateOneWithoutEmployeesNestedInput
+  gosiCity?: Prisma.GosiCityUpdateOneWithoutEmployeesNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedEmployeesNestedInput
+  timesheets?: Prisma.TimesheetUpdateManyWithoutEmployeeNestedInput
+  loans?: Prisma.LoanUpdateManyWithoutEmployeeNestedInput
+  trafficChallans?: Prisma.TrafficChallanUpdateManyWithoutEmployeeNestedInput
+  exitReentries?: Prisma.ExitReentryUpdateManyWithoutEmployeeNestedInput
+  payrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutEmployeeNestedInput
+}
+
+export type EmployeeUncheckedUpdateWithoutCreatorInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  profilePicture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeCode?: Prisma.IntFieldUpdateOperationsInput | number
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  countryId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  cityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  statusId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subBranchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  designationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  payrollSectionId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isDeductable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isFixed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  workingDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  hourlyRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  salary?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  breakfastAllowance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  foodAllowance?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  mobileAllowance?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  otherAllowance?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  contractStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  contractEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  contractDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contractEndReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  joiningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  idCardNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardExpiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  idCardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profession?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  passportNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passportExpiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExitDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastEntryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gosiSalary?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gosiCityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  timesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutEmployeeNestedInput
+  loans?: Prisma.LoanUncheckedUpdateManyWithoutEmployeeNestedInput
+  trafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutEmployeeNestedInput
+  exitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutEmployeeNestedInput
+  payrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutEmployeeNestedInput
+}
+
+export type EmployeeUncheckedUpdateManyWithoutCreatorInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  profilePicture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeCode?: Prisma.IntFieldUpdateOperationsInput | number
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  countryId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  cityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  statusId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subBranchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  designationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  payrollSectionId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isDeductable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isFixed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  workingDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  hourlyRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  salary?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  breakfastAllowance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  foodAllowance?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  mobileAllowance?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  otherAllowance?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  contractStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  contractEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  contractDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contractEndReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  joiningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  idCardNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardExpiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  idCardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profession?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  passportNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passportExpiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExitDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastEntryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gosiSalary?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gosiCityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type EmployeeUpdateWithoutUpdaterInput = {
+  profilePicture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeCode?: Prisma.IntFieldUpdateOperationsInput | number
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDeductable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isFixed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  workingDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  hourlyRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  salary?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  breakfastAllowance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  foodAllowance?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  mobileAllowance?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  otherAllowance?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  contractStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  contractEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  contractDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contractEndReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  joiningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  idCardNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardExpiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  idCardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profession?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passportNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passportExpiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExitDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastEntryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gosiSalary?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  country?: Prisma.CountryUpdateOneWithoutEmployeesByCountryNestedInput
+  nationality?: Prisma.CountryUpdateOneWithoutEmployeesByNationalityNestedInput
+  city?: Prisma.CityUpdateOneWithoutEmployeesNestedInput
+  status?: Prisma.EmployeeStatusUpdateOneWithoutEmployeesNestedInput
+  branch?: Prisma.BranchUpdateOneWithoutEmployeesNestedInput
+  subBranch?: Prisma.BranchUpdateOneWithoutSubBranchUsersNestedInput
+  designation?: Prisma.DesignationUpdateOneWithoutEmployeesNestedInput
+  payrollSection?: Prisma.PayrollSectionUpdateOneWithoutEmployeesNestedInput
+  gosiCity?: Prisma.GosiCityUpdateOneWithoutEmployeesNestedInput
+  creator?: Prisma.UserUpdateOneWithoutCreatedEmployeesNestedInput
+  timesheets?: Prisma.TimesheetUpdateManyWithoutEmployeeNestedInput
+  loans?: Prisma.LoanUpdateManyWithoutEmployeeNestedInput
+  trafficChallans?: Prisma.TrafficChallanUpdateManyWithoutEmployeeNestedInput
+  exitReentries?: Prisma.ExitReentryUpdateManyWithoutEmployeeNestedInput
+  payrollDetails?: Prisma.PayrollDetailsUpdateManyWithoutEmployeeNestedInput
+}
+
+export type EmployeeUncheckedUpdateWithoutUpdaterInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  profilePicture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeCode?: Prisma.IntFieldUpdateOperationsInput | number
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  countryId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  cityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  statusId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subBranchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  designationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  payrollSectionId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isDeductable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isFixed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  workingDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  hourlyRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  salary?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  breakfastAllowance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  foodAllowance?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  mobileAllowance?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  otherAllowance?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  contractStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  contractEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  contractDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contractEndReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  joiningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  idCardNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardExpiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  idCardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profession?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  passportNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passportExpiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExitDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastEntryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gosiSalary?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gosiCityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  timesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutEmployeeNestedInput
+  loans?: Prisma.LoanUncheckedUpdateManyWithoutEmployeeNestedInput
+  trafficChallans?: Prisma.TrafficChallanUncheckedUpdateManyWithoutEmployeeNestedInput
+  exitReentries?: Prisma.ExitReentryUncheckedUpdateManyWithoutEmployeeNestedInput
+  payrollDetails?: Prisma.PayrollDetailsUncheckedUpdateManyWithoutEmployeeNestedInput
+}
+
+export type EmployeeUncheckedUpdateManyWithoutUpdaterInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  profilePicture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeCode?: Prisma.IntFieldUpdateOperationsInput | number
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  nameAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  countryId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  cityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  statusId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  branchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subBranchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  designationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  payrollSectionId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isDeductable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isFixed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  workingDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  hourlyRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  salary?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  breakfastAllowance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  foodAllowance?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  mobileAllowance?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  otherAllowance?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  contractStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  contractEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  contractDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contractEndReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  joiningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  idCardNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardExpiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  idCardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profession?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  passportNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passportExpiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExitDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastEntryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  iban?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gosiSalary?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gosiCityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type EmployeeCreateManySubBranchInput = {
@@ -4407,6 +5341,8 @@ export type EmployeeCreateManySubBranchInput = {
   gosiCityId?: number | null
   isCardDelivered?: boolean
   cardDocument?: string | null
+  createdBy?: number | null
+  updatedBy?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -4457,6 +5393,8 @@ export type EmployeeCreateManyBranchInput = {
   gosiCityId?: number | null
   isCardDelivered?: boolean
   cardDocument?: string | null
+  createdBy?: number | null
+  updatedBy?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -4508,6 +5446,8 @@ export type EmployeeUpdateWithoutSubBranchInput = {
   designation?: Prisma.DesignationUpdateOneWithoutEmployeesNestedInput
   payrollSection?: Prisma.PayrollSectionUpdateOneWithoutEmployeesNestedInput
   gosiCity?: Prisma.GosiCityUpdateOneWithoutEmployeesNestedInput
+  creator?: Prisma.UserUpdateOneWithoutCreatedEmployeesNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedEmployeesNestedInput
   timesheets?: Prisma.TimesheetUpdateManyWithoutEmployeeNestedInput
   loans?: Prisma.LoanUpdateManyWithoutEmployeeNestedInput
   trafficChallans?: Prisma.TrafficChallanUpdateManyWithoutEmployeeNestedInput
@@ -4561,6 +5501,8 @@ export type EmployeeUncheckedUpdateWithoutSubBranchInput = {
   gosiCityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   timesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutEmployeeNestedInput
@@ -4616,6 +5558,8 @@ export type EmployeeUncheckedUpdateManyWithoutSubBranchInput = {
   gosiCityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -4667,6 +5611,8 @@ export type EmployeeUpdateWithoutBranchInput = {
   designation?: Prisma.DesignationUpdateOneWithoutEmployeesNestedInput
   payrollSection?: Prisma.PayrollSectionUpdateOneWithoutEmployeesNestedInput
   gosiCity?: Prisma.GosiCityUpdateOneWithoutEmployeesNestedInput
+  creator?: Prisma.UserUpdateOneWithoutCreatedEmployeesNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedEmployeesNestedInput
   timesheets?: Prisma.TimesheetUpdateManyWithoutEmployeeNestedInput
   loans?: Prisma.LoanUpdateManyWithoutEmployeeNestedInput
   trafficChallans?: Prisma.TrafficChallanUpdateManyWithoutEmployeeNestedInput
@@ -4720,6 +5666,8 @@ export type EmployeeUncheckedUpdateWithoutBranchInput = {
   gosiCityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   timesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutEmployeeNestedInput
@@ -4775,6 +5723,8 @@ export type EmployeeUncheckedUpdateManyWithoutBranchInput = {
   gosiCityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -4825,6 +5775,8 @@ export type EmployeeCreateManyCityInput = {
   gosiCityId?: number | null
   isCardDelivered?: boolean
   cardDocument?: string | null
+  createdBy?: number | null
+  updatedBy?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -4876,6 +5828,8 @@ export type EmployeeUpdateWithoutCityInput = {
   designation?: Prisma.DesignationUpdateOneWithoutEmployeesNestedInput
   payrollSection?: Prisma.PayrollSectionUpdateOneWithoutEmployeesNestedInput
   gosiCity?: Prisma.GosiCityUpdateOneWithoutEmployeesNestedInput
+  creator?: Prisma.UserUpdateOneWithoutCreatedEmployeesNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedEmployeesNestedInput
   timesheets?: Prisma.TimesheetUpdateManyWithoutEmployeeNestedInput
   loans?: Prisma.LoanUpdateManyWithoutEmployeeNestedInput
   trafficChallans?: Prisma.TrafficChallanUpdateManyWithoutEmployeeNestedInput
@@ -4929,6 +5883,8 @@ export type EmployeeUncheckedUpdateWithoutCityInput = {
   gosiCityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   timesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutEmployeeNestedInput
@@ -4984,6 +5940,8 @@ export type EmployeeUncheckedUpdateManyWithoutCityInput = {
   gosiCityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -5034,6 +5992,8 @@ export type EmployeeCreateManyCountryInput = {
   gosiCityId?: number | null
   isCardDelivered?: boolean
   cardDocument?: string | null
+  createdBy?: number | null
+  updatedBy?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -5084,6 +6044,8 @@ export type EmployeeCreateManyNationalityInput = {
   gosiCityId?: number | null
   isCardDelivered?: boolean
   cardDocument?: string | null
+  createdBy?: number | null
+  updatedBy?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -5135,6 +6097,8 @@ export type EmployeeUpdateWithoutCountryInput = {
   designation?: Prisma.DesignationUpdateOneWithoutEmployeesNestedInput
   payrollSection?: Prisma.PayrollSectionUpdateOneWithoutEmployeesNestedInput
   gosiCity?: Prisma.GosiCityUpdateOneWithoutEmployeesNestedInput
+  creator?: Prisma.UserUpdateOneWithoutCreatedEmployeesNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedEmployeesNestedInput
   timesheets?: Prisma.TimesheetUpdateManyWithoutEmployeeNestedInput
   loans?: Prisma.LoanUpdateManyWithoutEmployeeNestedInput
   trafficChallans?: Prisma.TrafficChallanUpdateManyWithoutEmployeeNestedInput
@@ -5188,6 +6152,8 @@ export type EmployeeUncheckedUpdateWithoutCountryInput = {
   gosiCityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   timesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutEmployeeNestedInput
@@ -5243,6 +6209,8 @@ export type EmployeeUncheckedUpdateManyWithoutCountryInput = {
   gosiCityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -5294,6 +6262,8 @@ export type EmployeeUpdateWithoutNationalityInput = {
   designation?: Prisma.DesignationUpdateOneWithoutEmployeesNestedInput
   payrollSection?: Prisma.PayrollSectionUpdateOneWithoutEmployeesNestedInput
   gosiCity?: Prisma.GosiCityUpdateOneWithoutEmployeesNestedInput
+  creator?: Prisma.UserUpdateOneWithoutCreatedEmployeesNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedEmployeesNestedInput
   timesheets?: Prisma.TimesheetUpdateManyWithoutEmployeeNestedInput
   loans?: Prisma.LoanUpdateManyWithoutEmployeeNestedInput
   trafficChallans?: Prisma.TrafficChallanUpdateManyWithoutEmployeeNestedInput
@@ -5347,6 +6317,8 @@ export type EmployeeUncheckedUpdateWithoutNationalityInput = {
   gosiCityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   timesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutEmployeeNestedInput
@@ -5402,6 +6374,8 @@ export type EmployeeUncheckedUpdateManyWithoutNationalityInput = {
   gosiCityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -5452,6 +6426,8 @@ export type EmployeeCreateManyGosiCityInput = {
   gosiSalary?: number | null
   isCardDelivered?: boolean
   cardDocument?: string | null
+  createdBy?: number | null
+  updatedBy?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -5503,6 +6479,8 @@ export type EmployeeUpdateWithoutGosiCityInput = {
   subBranch?: Prisma.BranchUpdateOneWithoutSubBranchUsersNestedInput
   designation?: Prisma.DesignationUpdateOneWithoutEmployeesNestedInput
   payrollSection?: Prisma.PayrollSectionUpdateOneWithoutEmployeesNestedInput
+  creator?: Prisma.UserUpdateOneWithoutCreatedEmployeesNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedEmployeesNestedInput
   timesheets?: Prisma.TimesheetUpdateManyWithoutEmployeeNestedInput
   loans?: Prisma.LoanUpdateManyWithoutEmployeeNestedInput
   trafficChallans?: Prisma.TrafficChallanUpdateManyWithoutEmployeeNestedInput
@@ -5556,6 +6534,8 @@ export type EmployeeUncheckedUpdateWithoutGosiCityInput = {
   gosiSalary?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   timesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutEmployeeNestedInput
@@ -5611,6 +6591,8 @@ export type EmployeeUncheckedUpdateManyWithoutGosiCityInput = {
   gosiSalary?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -5661,6 +6643,8 @@ export type EmployeeCreateManyDesignationInput = {
   gosiCityId?: number | null
   isCardDelivered?: boolean
   cardDocument?: string | null
+  createdBy?: number | null
+  updatedBy?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -5712,6 +6696,8 @@ export type EmployeeUpdateWithoutDesignationInput = {
   subBranch?: Prisma.BranchUpdateOneWithoutSubBranchUsersNestedInput
   payrollSection?: Prisma.PayrollSectionUpdateOneWithoutEmployeesNestedInput
   gosiCity?: Prisma.GosiCityUpdateOneWithoutEmployeesNestedInput
+  creator?: Prisma.UserUpdateOneWithoutCreatedEmployeesNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedEmployeesNestedInput
   timesheets?: Prisma.TimesheetUpdateManyWithoutEmployeeNestedInput
   loans?: Prisma.LoanUpdateManyWithoutEmployeeNestedInput
   trafficChallans?: Prisma.TrafficChallanUpdateManyWithoutEmployeeNestedInput
@@ -5765,6 +6751,8 @@ export type EmployeeUncheckedUpdateWithoutDesignationInput = {
   gosiCityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   timesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutEmployeeNestedInput
@@ -5820,6 +6808,8 @@ export type EmployeeUncheckedUpdateManyWithoutDesignationInput = {
   gosiCityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -5870,6 +6860,8 @@ export type EmployeeCreateManyStatusInput = {
   gosiCityId?: number | null
   isCardDelivered?: boolean
   cardDocument?: string | null
+  createdBy?: number | null
+  updatedBy?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -5921,6 +6913,8 @@ export type EmployeeUpdateWithoutStatusInput = {
   designation?: Prisma.DesignationUpdateOneWithoutEmployeesNestedInput
   payrollSection?: Prisma.PayrollSectionUpdateOneWithoutEmployeesNestedInput
   gosiCity?: Prisma.GosiCityUpdateOneWithoutEmployeesNestedInput
+  creator?: Prisma.UserUpdateOneWithoutCreatedEmployeesNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedEmployeesNestedInput
   timesheets?: Prisma.TimesheetUpdateManyWithoutEmployeeNestedInput
   loans?: Prisma.LoanUpdateManyWithoutEmployeeNestedInput
   trafficChallans?: Prisma.TrafficChallanUpdateManyWithoutEmployeeNestedInput
@@ -5974,6 +6968,8 @@ export type EmployeeUncheckedUpdateWithoutStatusInput = {
   gosiCityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   timesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutEmployeeNestedInput
@@ -6029,6 +7025,8 @@ export type EmployeeUncheckedUpdateManyWithoutStatusInput = {
   gosiCityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -6079,6 +7077,8 @@ export type EmployeeCreateManyPayrollSectionInput = {
   gosiCityId?: number | null
   isCardDelivered?: boolean
   cardDocument?: string | null
+  createdBy?: number | null
+  updatedBy?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -6130,6 +7130,8 @@ export type EmployeeUpdateWithoutPayrollSectionInput = {
   subBranch?: Prisma.BranchUpdateOneWithoutSubBranchUsersNestedInput
   designation?: Prisma.DesignationUpdateOneWithoutEmployeesNestedInput
   gosiCity?: Prisma.GosiCityUpdateOneWithoutEmployeesNestedInput
+  creator?: Prisma.UserUpdateOneWithoutCreatedEmployeesNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedEmployeesNestedInput
   timesheets?: Prisma.TimesheetUpdateManyWithoutEmployeeNestedInput
   loans?: Prisma.LoanUpdateManyWithoutEmployeeNestedInput
   trafficChallans?: Prisma.TrafficChallanUpdateManyWithoutEmployeeNestedInput
@@ -6183,6 +7185,8 @@ export type EmployeeUncheckedUpdateWithoutPayrollSectionInput = {
   gosiCityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   timesheets?: Prisma.TimesheetUncheckedUpdateManyWithoutEmployeeNestedInput
@@ -6238,6 +7242,8 @@ export type EmployeeUncheckedUpdateManyWithoutPayrollSectionInput = {
   gosiCityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isCardDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -6356,6 +7362,8 @@ export type EmployeeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   gosiCityId?: boolean
   isCardDelivered?: boolean
   cardDocument?: boolean
+  createdBy?: boolean
+  updatedBy?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   country?: boolean | Prisma.Employee$countryArgs<ExtArgs>
@@ -6367,6 +7375,8 @@ export type EmployeeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   designation?: boolean | Prisma.Employee$designationArgs<ExtArgs>
   payrollSection?: boolean | Prisma.Employee$payrollSectionArgs<ExtArgs>
   gosiCity?: boolean | Prisma.Employee$gosiCityArgs<ExtArgs>
+  creator?: boolean | Prisma.Employee$creatorArgs<ExtArgs>
+  updater?: boolean | Prisma.Employee$updaterArgs<ExtArgs>
   timesheets?: boolean | Prisma.Employee$timesheetsArgs<ExtArgs>
   loans?: boolean | Prisma.Employee$loansArgs<ExtArgs>
   trafficChallans?: boolean | Prisma.Employee$trafficChallansArgs<ExtArgs>
@@ -6422,6 +7432,8 @@ export type EmployeeSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   gosiCityId?: boolean
   isCardDelivered?: boolean
   cardDocument?: boolean
+  createdBy?: boolean
+  updatedBy?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   country?: boolean | Prisma.Employee$countryArgs<ExtArgs>
@@ -6433,6 +7445,8 @@ export type EmployeeSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   designation?: boolean | Prisma.Employee$designationArgs<ExtArgs>
   payrollSection?: boolean | Prisma.Employee$payrollSectionArgs<ExtArgs>
   gosiCity?: boolean | Prisma.Employee$gosiCityArgs<ExtArgs>
+  creator?: boolean | Prisma.Employee$creatorArgs<ExtArgs>
+  updater?: boolean | Prisma.Employee$updaterArgs<ExtArgs>
 }, ExtArgs["result"]["employee"]>
 
 export type EmployeeSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -6482,6 +7496,8 @@ export type EmployeeSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   gosiCityId?: boolean
   isCardDelivered?: boolean
   cardDocument?: boolean
+  createdBy?: boolean
+  updatedBy?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   country?: boolean | Prisma.Employee$countryArgs<ExtArgs>
@@ -6493,6 +7509,8 @@ export type EmployeeSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   designation?: boolean | Prisma.Employee$designationArgs<ExtArgs>
   payrollSection?: boolean | Prisma.Employee$payrollSectionArgs<ExtArgs>
   gosiCity?: boolean | Prisma.Employee$gosiCityArgs<ExtArgs>
+  creator?: boolean | Prisma.Employee$creatorArgs<ExtArgs>
+  updater?: boolean | Prisma.Employee$updaterArgs<ExtArgs>
 }, ExtArgs["result"]["employee"]>
 
 export type EmployeeSelectScalar = {
@@ -6542,11 +7560,13 @@ export type EmployeeSelectScalar = {
   gosiCityId?: boolean
   isCardDelivered?: boolean
   cardDocument?: boolean
+  createdBy?: boolean
+  updatedBy?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type EmployeeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "profilePicture" | "employeeCode" | "nameEn" | "nameAr" | "dob" | "phone" | "gender" | "countryId" | "cityId" | "statusId" | "branchId" | "subBranchId" | "designationId" | "payrollSectionId" | "isDeductable" | "isFixed" | "workingDays" | "hourlyRate" | "salary" | "breakfastAllowance" | "foodAllowance" | "mobileAllowance" | "otherAllowance" | "contractStartDate" | "contractEndDate" | "contractDocument" | "contractEndReason" | "joiningDate" | "idCardNo" | "idCardExpiryDate" | "idCardDocument" | "profession" | "nationalityId" | "passportNo" | "passportExpiryDate" | "passportDocument" | "lastExitDate" | "lastEntryDate" | "bankName" | "bankCode" | "iban" | "gosiSalary" | "gosiCityId" | "isCardDelivered" | "cardDocument" | "createdAt" | "updatedAt", ExtArgs["result"]["employee"]>
+export type EmployeeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "profilePicture" | "employeeCode" | "nameEn" | "nameAr" | "dob" | "phone" | "gender" | "countryId" | "cityId" | "statusId" | "branchId" | "subBranchId" | "designationId" | "payrollSectionId" | "isDeductable" | "isFixed" | "workingDays" | "hourlyRate" | "salary" | "breakfastAllowance" | "foodAllowance" | "mobileAllowance" | "otherAllowance" | "contractStartDate" | "contractEndDate" | "contractDocument" | "contractEndReason" | "joiningDate" | "idCardNo" | "idCardExpiryDate" | "idCardDocument" | "profession" | "nationalityId" | "passportNo" | "passportExpiryDate" | "passportDocument" | "lastExitDate" | "lastEntryDate" | "bankName" | "bankCode" | "iban" | "gosiSalary" | "gosiCityId" | "isCardDelivered" | "cardDocument" | "createdBy" | "updatedBy" | "createdAt" | "updatedAt", ExtArgs["result"]["employee"]>
 export type EmployeeInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   country?: boolean | Prisma.Employee$countryArgs<ExtArgs>
   nationality?: boolean | Prisma.Employee$nationalityArgs<ExtArgs>
@@ -6557,6 +7577,8 @@ export type EmployeeInclude<ExtArgs extends runtime.Types.Extensions.InternalArg
   designation?: boolean | Prisma.Employee$designationArgs<ExtArgs>
   payrollSection?: boolean | Prisma.Employee$payrollSectionArgs<ExtArgs>
   gosiCity?: boolean | Prisma.Employee$gosiCityArgs<ExtArgs>
+  creator?: boolean | Prisma.Employee$creatorArgs<ExtArgs>
+  updater?: boolean | Prisma.Employee$updaterArgs<ExtArgs>
   timesheets?: boolean | Prisma.Employee$timesheetsArgs<ExtArgs>
   loans?: boolean | Prisma.Employee$loansArgs<ExtArgs>
   trafficChallans?: boolean | Prisma.Employee$trafficChallansArgs<ExtArgs>
@@ -6574,6 +7596,8 @@ export type EmployeeIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   designation?: boolean | Prisma.Employee$designationArgs<ExtArgs>
   payrollSection?: boolean | Prisma.Employee$payrollSectionArgs<ExtArgs>
   gosiCity?: boolean | Prisma.Employee$gosiCityArgs<ExtArgs>
+  creator?: boolean | Prisma.Employee$creatorArgs<ExtArgs>
+  updater?: boolean | Prisma.Employee$updaterArgs<ExtArgs>
 }
 export type EmployeeIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   country?: boolean | Prisma.Employee$countryArgs<ExtArgs>
@@ -6585,6 +7609,8 @@ export type EmployeeIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
   designation?: boolean | Prisma.Employee$designationArgs<ExtArgs>
   payrollSection?: boolean | Prisma.Employee$payrollSectionArgs<ExtArgs>
   gosiCity?: boolean | Prisma.Employee$gosiCityArgs<ExtArgs>
+  creator?: boolean | Prisma.Employee$creatorArgs<ExtArgs>
+  updater?: boolean | Prisma.Employee$updaterArgs<ExtArgs>
 }
 
 export type $EmployeePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -6599,6 +7625,8 @@ export type $EmployeePayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     designation: Prisma.$DesignationPayload<ExtArgs> | null
     payrollSection: Prisma.$PayrollSectionPayload<ExtArgs> | null
     gosiCity: Prisma.$GosiCityPayload<ExtArgs> | null
+    creator: Prisma.$UserPayload<ExtArgs> | null
+    updater: Prisma.$UserPayload<ExtArgs> | null
     timesheets: Prisma.$TimesheetPayload<ExtArgs>[]
     loans: Prisma.$LoanPayload<ExtArgs>[]
     trafficChallans: Prisma.$TrafficChallanPayload<ExtArgs>[]
@@ -6652,6 +7680,8 @@ export type $EmployeePayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     gosiCityId: number | null
     isCardDelivered: boolean
     cardDocument: string | null
+    createdBy: number | null
+    updatedBy: number | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["employee"]>
@@ -7057,6 +8087,8 @@ export interface Prisma__EmployeeClient<T, Null = never, ExtArgs extends runtime
   designation<T extends Prisma.Employee$designationArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Employee$designationArgs<ExtArgs>>): Prisma.Prisma__DesignationClient<runtime.Types.Result.GetResult<Prisma.$DesignationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   payrollSection<T extends Prisma.Employee$payrollSectionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Employee$payrollSectionArgs<ExtArgs>>): Prisma.Prisma__PayrollSectionClient<runtime.Types.Result.GetResult<Prisma.$PayrollSectionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   gosiCity<T extends Prisma.Employee$gosiCityArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Employee$gosiCityArgs<ExtArgs>>): Prisma.Prisma__GosiCityClient<runtime.Types.Result.GetResult<Prisma.$GosiCityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  creator<T extends Prisma.Employee$creatorArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Employee$creatorArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  updater<T extends Prisma.Employee$updaterArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Employee$updaterArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   timesheets<T extends Prisma.Employee$timesheetsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Employee$timesheetsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TimesheetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   loans<T extends Prisma.Employee$loansArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Employee$loansArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LoanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   trafficChallans<T extends Prisma.Employee$trafficChallansArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Employee$trafficChallansArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TrafficChallanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -7137,6 +8169,8 @@ export interface EmployeeFieldRefs {
   readonly gosiCityId: Prisma.FieldRef<"Employee", 'Int'>
   readonly isCardDelivered: Prisma.FieldRef<"Employee", 'Boolean'>
   readonly cardDocument: Prisma.FieldRef<"Employee", 'String'>
+  readonly createdBy: Prisma.FieldRef<"Employee", 'Int'>
+  readonly updatedBy: Prisma.FieldRef<"Employee", 'Int'>
   readonly createdAt: Prisma.FieldRef<"Employee", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Employee", 'DateTime'>
 }
@@ -7703,6 +8737,44 @@ export type Employee$gosiCityArgs<ExtArgs extends runtime.Types.Extensions.Inter
    */
   include?: Prisma.GosiCityInclude<ExtArgs> | null
   where?: Prisma.GosiCityWhereInput
+}
+
+/**
+ * Employee.creator
+ */
+export type Employee$creatorArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
+}
+
+/**
+ * Employee.updater
+ */
+export type Employee$updaterArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
 }
 
 /**
