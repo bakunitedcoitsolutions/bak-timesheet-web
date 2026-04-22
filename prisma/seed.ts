@@ -15,7 +15,7 @@
 
 import { Pool } from "pg";
 import { PrismaPg } from "@prisma/adapter-pg";
-import { seedEmployees } from "./seed-employees";
+// import { seedEmployees } from "./seed-employees";
 import { PrismaClient } from "./generated/prisma/client";
 
 const prisma = new PrismaClient({
@@ -27,10 +27,9 @@ const prisma = new PrismaClient({
 });
 
 async function main() {
-  console.log("🌱 Starting database seed...");
-  await seedEmployees(prisma);
+  console.log("🌱 Starting targeted update...");
   console.log("✅ Main seeding completed.");
-  await resetSequences();
+  // await resetSequences();
 }
 
 async function resetSequences() {
