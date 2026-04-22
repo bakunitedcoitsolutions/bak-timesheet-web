@@ -10,6 +10,7 @@ import {
   invalidateUserSessions,
   updateUserActiveStatusCache,
 } from "@/lib/auth/security";
+import { getCurrentUser } from "@/lib/auth/helpers";
 import {
   determineBranchIdForUpdate,
   validateBranchManagerBranchId,
@@ -138,9 +139,10 @@ export const createUser = async (data: CreateUserData) => {
         userData.branchId = normalizedBranchId;
       }
 
-      // Set createdBy if provided
-      if (data.createdBy) {
-        userData.createdBy = data.createdBy;
+      // Set createdBy from current session
+      const user = await getCurrentUser();
+      if (user?.id) {
+        userData.createdBy = user.id;
       }
 
       const newUser = await tx.user.create({
@@ -154,6 +156,9 @@ export const createUser = async (data: CreateUserData) => {
           data: {
             userId: newUser.id,
             privileges: data.privileges as any,
+            ...(user?.id && {
+              createdBy: user?.id,
+            }),
           },
         });
       }
@@ -216,9 +221,10 @@ export const updateUser = async (id: number, data: UpdateUserData) => {
     if (data.userRoleId !== undefined) updateData.userRoleId = data.userRoleId;
     if (data.isActive !== undefined) updateData.isActive = data.isActive;
 
-    // Set updatedBy if provided
-    if (data.updatedBy) {
-      updateData.updatedBy = data.updatedBy;
+    // Set updatedBy from current session
+    const user = await getCurrentUser();
+    if (user?.id) {
+      updateData.updatedBy = user.id;
     }
 
     // Hash password if provided
@@ -316,9 +322,15 @@ export const updateUser = async (id: number, data: UpdateUserData) => {
         create: {
           userId: id,
           privileges: data.privileges as any,
+          ...(user?.id && {
+            createdBy: user?.id,
+          }),
         },
         update: {
           privileges: data.privileges as any,
+          ...(user?.id && {
+            updatedBy: user?.id,
+          }),
         },
       });
     } else if (

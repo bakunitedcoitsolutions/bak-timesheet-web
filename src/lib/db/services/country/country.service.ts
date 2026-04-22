@@ -4,6 +4,7 @@
  */
 
 import { prisma } from "@/lib/db/prisma";
+import { getCurrentUser } from "@/lib/auth/helpers";
 import type {
   CreateCountryData,
   UpdateCountryData,
@@ -40,11 +41,15 @@ export const createCountry = async (data: CreateCountryData) => {
     throw new Error("Country name already exists");
   }
 
+  const user = await getCurrentUser();
+  const userId = user?.id;
+
   const country = await prisma.country.create({
     data: {
       nameEn: data.nameEn,
       nameAr: data.nameAr,
       isActive: data.isActive ?? true,
+      ...(userId && { createdBy: userId }),
     },
     select: countrySelect,
   });
@@ -66,6 +71,9 @@ export const findCountryById = async (id: number) => {
  * Update country
  */
 export const updateCountry = async (id: number, data: UpdateCountryData) => {
+  const user = await getCurrentUser();
+  const userId = user?.id;
+
   return prisma.$transaction(async (tx: PrismaTransactionClient) => {
     // Check if country exists
     const existingCountry = await tx.country.findUnique({
@@ -100,7 +108,7 @@ export const updateCountry = async (id: number, data: UpdateCountryData) => {
 
     const updatedCountry = await tx.country.update({
       where: { id },
-      data: updateData,
+      data: { ...updateData, ...(userId && { updatedBy: userId }) },
       select: countrySelect,
     });
 

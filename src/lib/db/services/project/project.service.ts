@@ -4,7 +4,7 @@
  */
 
 import { prisma } from "@/lib/db/prisma";
-import { getServerAccessContext } from "@/lib/auth/helpers";
+import { getServerAccessContext, getCurrentUser } from "@/lib/auth/helpers";
 import type {
   CreateProjectData,
   UpdateProjectData,
@@ -38,6 +38,9 @@ const projectSelect = {
  * Create a new project
  */
 export const createProject = async (data: CreateProjectData) => {
+  const user = await getCurrentUser();
+  const userId = user?.id;
+
   return prisma.$transaction(async (tx: PrismaTransactionClient) => {
     // Validate: nameEn must be unique
     const existingProject = await tx.project.findFirst({
@@ -68,6 +71,7 @@ export const createProject = async (data: CreateProjectData) => {
         branchId: data.branchId ?? null,
         description: data.description ?? null,
         isActive: data.isActive ?? true,
+        ...(userId && { createdBy: userId }),
       },
       select: projectSelect,
     });
@@ -96,6 +100,9 @@ export const findProjectById = async (id: number) => {
  * Update project
  */
 export const updateProject = async (id: number, data: UpdateProjectData) => {
+  const user = await getCurrentUser();
+  const userId = user?.id;
+
   return prisma.$transaction(async (tx: PrismaTransactionClient) => {
     // Check if project exists
     const existingProject = await tx.project.findUnique({
@@ -146,7 +153,7 @@ export const updateProject = async (id: number, data: UpdateProjectData) => {
 
     const project = await tx.project.update({
       where: { id },
-      data: updateData,
+      data: { ...updateData, ...(userId && { updatedBy: userId }) },
       select: projectSelect,
     });
 

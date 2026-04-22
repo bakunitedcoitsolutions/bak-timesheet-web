@@ -3,7 +3,7 @@ import {
   GetPayrollReportInput,
   SavePayrollDetailsBatchInput,
 } from "./payroll-summary.schemas";
-import { getServerAccessContext } from "@/lib/auth/helpers";
+import { getServerAccessContext, getCurrentUser } from "@/lib/auth/helpers";
 import type { GetPayrollDetailsParams } from "./payroll-summary.dto";
 import { mapPayrollDetailToEntry, PayrollDetailEntry } from "./mappers";
 
@@ -165,6 +165,8 @@ export const savePayrollDetailsBatch = async (
   const { entries } = input;
   const batchSize = 50;
   let saved = 0;
+  const user = await getCurrentUser();
+  const userId = user?.id;
 
   const { isBranchScoped, userBranchId } = await getServerAccessContext();
 
@@ -239,7 +241,7 @@ export const savePayrollDetailsBatch = async (
                 id,
                 ...(isBranchScoped ? { branchId: userBranchId } : {}),
               },
-              data: updateData,
+              data: { ...updateData, ...(userId && { updatedBy: userId }) },
             });
           }
           saved++;

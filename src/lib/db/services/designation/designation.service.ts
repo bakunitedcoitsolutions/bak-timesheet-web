@@ -4,6 +4,7 @@
  */
 
 import { prisma } from "@/lib/db/prisma";
+import { getCurrentUser } from "@/lib/auth/helpers";
 import type {
   CreateDesignationData,
   UpdateDesignationData,
@@ -33,6 +34,9 @@ const designationSelect = {
  * Create a new designation
  */
 export const createDesignation = async (data: CreateDesignationData) => {
+  const user = await getCurrentUser();
+  const userId = user?.id;
+
   return prisma.$transaction(async (tx: PrismaTransactionClient) => {
     // Validate: nameEn must be unique
     const existingDesignation = await tx.designation.findFirst({
@@ -84,6 +88,7 @@ export const createDesignation = async (data: CreateDesignationData) => {
             where: { id: record.id },
             data: {
               displayOrderKey: record.displayOrderKey + 1,
+              ...(userId && { updatedBy: userId }),
             },
           });
         }
@@ -98,6 +103,7 @@ export const createDesignation = async (data: CreateDesignationData) => {
         displayOrderKey: finalDisplayOrderKey,
         color: data.color ?? "#FFFFFF", // Default to white
         isActive: data.isActive ?? true,
+        ...(userId && { createdBy: userId }),
       },
       select: designationSelect,
     });
@@ -130,6 +136,9 @@ export const updateDesignation = async (
   id: number,
   data: UpdateDesignationData
 ) => {
+  const user = await getCurrentUser();
+  const userId = user?.id;
+
   return prisma.$transaction(async (tx: PrismaTransactionClient) => {
     // Check if designation exists and get its displayOrderKey
     const existingDesignation = await tx.designation.findUnique({
@@ -180,6 +189,7 @@ export const updateDesignation = async (
                 where: { id: record.id },
                 data: {
                   displayOrderKey: record.displayOrderKey + 1,
+                  ...(userId && { updatedBy: userId }),
                 },
               });
             }
@@ -202,6 +212,7 @@ export const updateDesignation = async (
                 where: { id: record.id },
                 data: {
                   displayOrderKey: record.displayOrderKey - 1,
+                  ...(userId && { updatedBy: userId }),
                 },
               });
             }
@@ -227,6 +238,7 @@ export const updateDesignation = async (
                   where: { id: record.id },
                   data: {
                     displayOrderKey: record.displayOrderKey - 1,
+                    ...(userId && { updatedBy: userId }),
                   },
                 });
               }
@@ -250,6 +262,7 @@ export const updateDesignation = async (
                   where: { id: record.id },
                   data: {
                     displayOrderKey: record.displayOrderKey + 1,
+                    ...(userId && { updatedBy: userId }),
                   },
                 });
               }
@@ -272,7 +285,7 @@ export const updateDesignation = async (
 
     const updatedDesignation = await tx.designation.update({
       where: { id },
-      data: updateData,
+      data: { ...updateData, ...(userId && { updatedBy: userId }) },
       select: designationSelect,
     });
 
@@ -284,6 +297,9 @@ export const updateDesignation = async (
  * Delete designation
  */
 export const deleteDesignation = async (id: number): Promise<void> => {
+  const user = await getCurrentUser();
+  const userId = user?.id;
+
   return prisma.$transaction(async (tx: PrismaTransactionClient) => {
     // Check if designation exists and get its displayOrderKey
     const existingDesignation = await tx.designation.findUnique({
@@ -347,6 +363,7 @@ export const deleteDesignation = async (id: number): Promise<void> => {
               where: { id: record.id },
               data: {
                 displayOrderKey: record.displayOrderKey - 1,
+                ...(userId && { updatedBy: userId }),
               },
             });
           }

@@ -4,6 +4,7 @@
  */
 
 import { prisma } from "@/lib/db/prisma";
+import { getCurrentUser } from "@/lib/auth/helpers";
 import type {
   CreateEmployeeStatusData,
   UpdateEmployeeStatusData,
@@ -40,11 +41,15 @@ export const createEmployeeStatus = async (data: CreateEmployeeStatusData) => {
     throw new Error("Employee Status name already exists");
   }
 
+  const user = await getCurrentUser();
+  const userId = user?.id;
+
   const employeeStatus = await prisma.employeeStatus.create({
     data: {
       nameEn: data.nameEn,
       nameAr: data.nameAr,
       isActive: data.isActive ?? true,
+      ...(userId && { createdBy: userId }),
     },
     select: employeeStatusSelect,
   });
@@ -66,6 +71,9 @@ export const findEmployeeStatusById = async (id: number) => {
  * Update employee status
  */
 export const updateEmployeeStatus = async (id: number, data: UpdateEmployeeStatusData) => {
+  const user = await getCurrentUser();
+  const userId = user?.id;
+
   return prisma.$transaction(async (tx: PrismaTransactionClient) => {
     // Check if employee status exists
     const existingEmployeeStatus = await tx.employeeStatus.findUnique({
@@ -100,7 +108,7 @@ export const updateEmployeeStatus = async (id: number, data: UpdateEmployeeStatu
 
     const updatedEmployeeStatus = await tx.employeeStatus.update({
       where: { id },
-      data: updateData,
+      data: { ...updateData, ...(userId && { updatedBy: userId }) },
       select: employeeStatusSelect,
     });
 

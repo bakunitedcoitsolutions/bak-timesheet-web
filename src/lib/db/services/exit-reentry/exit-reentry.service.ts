@@ -5,6 +5,7 @@
 
 import dayjs from "@/lib/dayjs";
 import { prisma } from "@/lib/db/prisma";
+import { getCurrentUser } from "@/lib/auth/helpers";
 import type {
   CreateExitReentryData,
   UpdateExitReentryData,
@@ -33,6 +34,9 @@ const exitReentrySelect = {
  * Create a new exit reentry
  */
 export const createExitReentry = async (data: CreateExitReentryData) => {
+  const user = await getCurrentUser();
+  const userId = user?.id;
+
   return prisma.$transaction(async (tx: PrismaTransactionClient) => {
     // Validate employee exists
     const employee = await tx.employee.findUnique({
@@ -70,6 +74,7 @@ export const createExitReentry = async (data: CreateExitReentryData) => {
         date: dayjs(data.date).toDate(),
         type: data.type,
         remarks: data.remarks ?? null,
+        ...(userId && { createdBy: userId }),
       },
       select: exitReentrySelect,
     });
@@ -77,14 +82,23 @@ export const createExitReentry = async (data: CreateExitReentryData) => {
     // Update employee status and dates based on type
     const exitReentryDate = dayjs(data.date).toDate();
 
+    const employeeUpdateData: any = {
+      ...(data.type === "EXIT" && {
+        statusId: 4,
+        lastExitDate: exitReentryDate,
+      }),
+      ...(data.type === "ENTRY" && {
+        statusId: 1,
+        lastEntryDate: exitReentryDate,
+      }),
+      ...(userId && {
+        updatedBy: userId,
+      }),
+    };
+
     await tx.employee.update({
       where: { id: data.employeeId },
-      data:
-        data.type === "EXIT"
-          ? // 4 is vacation status
-            { statusId: 4, lastExitDate: exitReentryDate }
-          : // 1 is active status
-            { statusId: 1, lastEntryDate: exitReentryDate },
+      data: employeeUpdateData,
     });
 
     return exitReentry;
@@ -114,6 +128,9 @@ export const updateExitReentry = async (
   id: number,
   data: UpdateExitReentryData
 ) => {
+  const user = await getCurrentUser();
+  const userId = user?.id;
+
   return prisma.$transaction(async (tx: PrismaTransactionClient) => {
     // Check if exit reentry exists and get current data
     const existingExitReentry = await tx.exitReentry.findUnique({
@@ -178,7 +195,12 @@ export const updateExitReentry = async (
 
     const exitReentry = await tx.exitReentry.update({
       where: { id },
-      data: updateData,
+      data: {
+        ...updateData,
+        ...(userId && {
+          updatedBy: userId,
+        }),
+      },
       select: exitReentrySelect,
     });
 
@@ -188,14 +210,24 @@ export const updateExitReentry = async (
     const exitReentryDate = data.date
       ? dayjs(data.date).toDate()
       : dayjs(existingExitReentry.date).toDate();
+
+    const employeeUpdateData: any = {
+      ...(exitReentryType === "EXIT" && {
+        statusId: 4,
+        lastExitDate: exitReentryDate,
+      }),
+      ...(exitReentryType === "ENTRY" && {
+        statusId: 1,
+        lastEntryDate: exitReentryDate,
+      }),
+      ...(userId && {
+        updatedBy: userId,
+      }),
+    };
+
     await tx.employee.update({
       where: { id: employeeId },
-      data:
-        exitReentryType === "EXIT"
-          ? // 4 is vacation status
-            { statusId: 4, lastExitDate: exitReentryDate }
-          : // 1 is active status
-            { statusId: 1, lastEntryDate: exitReentryDate },
+      data: employeeUpdateData,
     });
 
     return exitReentry;

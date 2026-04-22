@@ -4,6 +4,7 @@
  */
 
 import { prisma } from "@/lib/db/prisma";
+import { getCurrentUser } from "@/lib/auth/helpers";
 import type {
   ListedLoan,
   CreateLoanData,
@@ -49,7 +50,7 @@ const loanSelect = {
  * Internal reusable function to create a loan with ledger entry
  * This function handles the creation of both loan and ledger entry with balance calculation
  */
-async function createLoanWithLedger(
+async function createLoanHelper(
   tx: PrismaTransactionClient,
   data: {
     employeeId: number;
@@ -57,6 +58,7 @@ async function createLoanWithLedger(
     type: "LOAN" | "RETURN";
     amount: number | any;
     remarks?: string;
+    userId?: number;
   }
 ) {
   const remarks = data.remarks ?? "";
@@ -69,6 +71,9 @@ async function createLoanWithLedger(
       type: data.type,
       amount: data.amount,
       remarks: remarks,
+      ...(data.userId && {
+        createdBy: data.userId,
+      }),
     },
     select: loanSelect,
   });
@@ -80,6 +85,9 @@ async function createLoanWithLedger(
  * Create a new loan
  */
 export const createLoan = async (data: CreateLoanData) => {
+  const user = await getCurrentUser();
+  const userId = user?.id;
+
   const result = await prisma.$transaction(
     async (tx: PrismaTransactionClient) => {
       // Validate employee exists
@@ -103,12 +111,13 @@ export const createLoan = async (data: CreateLoanData) => {
         }
       }
 
-      const loan = await createLoanWithLedger(tx, {
+      const loan = await createLoanHelper(tx, {
         employeeId: data.employeeId,
         date: data.date,
         type: data.type,
         amount: data.amount,
         remarks: data.remarks,
+        userId,
       });
 
       // Convert Decimal to number for client serialization
@@ -149,6 +158,9 @@ export const findLoanById = async (id: number) => {
  * Update loan
  */
 export const updateLoan = async (id: number, data: UpdateLoanData) => {
+  const user = await getCurrentUser();
+  const userId = user?.id;
+
   const result = await prisma.$transaction(
     async (tx: PrismaTransactionClient) => {
       // Check if loan exists and get current data
@@ -192,7 +204,10 @@ export const updateLoan = async (id: number, data: UpdateLoanData) => {
 
       const loan = await tx.loan.update({
         where: { id },
-        data: updateData,
+        data: {
+          ...updateData,
+          ...(userId && { updatedBy: userId }),
+        },
         select: loanSelect,
       });
 
@@ -422,6 +437,9 @@ export const listAllLoans = async (
 export const bulkUploadLoans = async (
   data: BulkUploadLoanData
 ): Promise<BulkUploadLoanResult> => {
+  const user = await getCurrentUser();
+  const userId = user?.id;
+
   const refreshDetails: Map<string, Set<number>> = new Map();
   const res: BulkUploadLoanResult = {
     success: 0,
@@ -460,12 +478,13 @@ export const bulkUploadLoans = async (
         }
 
         // Create loan with ledger entry using reusable function
-        await createLoanWithLedger(tx, {
+        await createLoanHelper(tx, {
           employeeId: employee.id,
           date: row.date,
           type: row.type,
           amount: row.amount,
           remarks: row.remarks,
+          userId,
         });
 
         // Collect info for batch refresh

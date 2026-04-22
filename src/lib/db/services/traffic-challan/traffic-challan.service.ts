@@ -4,6 +4,7 @@
  */
 
 import { prisma } from "@/lib/db/prisma";
+import { getCurrentUser } from "@/lib/auth/helpers";
 import type {
   ListedTrafficChallan,
   CreateTrafficChallanData,
@@ -57,6 +58,7 @@ async function createTrafficChallanInternal(
     type: "CHALLAN" | "RETURN";
     amount: number | any;
     description?: string;
+    userId?: number;
   }
 ) {
   const description = data.description ?? "";
@@ -69,6 +71,7 @@ async function createTrafficChallanInternal(
       type: data.type,
       amount: data.amount,
       description: description,
+      ...(data.userId && { createdBy: data.userId }),
     },
     select: trafficChallanSelect,
   });
@@ -80,6 +83,9 @@ async function createTrafficChallanInternal(
  * Create a new traffic challan
  */
 export const createTrafficChallan = async (data: CreateTrafficChallanData) => {
+  const user = await getCurrentUser();
+  const userId = user?.id;
+
   const result = await prisma.$transaction(
     async (tx: PrismaTransactionClient) => {
       // Validate employee exists and check branch assignment
@@ -105,6 +111,7 @@ export const createTrafficChallan = async (data: CreateTrafficChallanData) => {
         type: data.type,
         amount: data.amount,
         description: data.description,
+        userId,
       });
 
       // Convert Decimal to number for client serialization
@@ -148,6 +155,9 @@ export const updateTrafficChallan = async (
   id: number,
   data: UpdateTrafficChallanData
 ) => {
+  const user = await getCurrentUser();
+  const userId = user?.id;
+
   const result = await prisma.$transaction(
     async (tx: PrismaTransactionClient) => {
       // Check if traffic challan exists and get current data
@@ -204,7 +214,7 @@ export const updateTrafficChallan = async (
 
       const trafficChallan = await tx.trafficChallan.update({
         where: { id },
-        data: updateData,
+        data: { ...updateData, ...(userId && { updatedBy: userId }) },
         select: trafficChallanSelect,
       });
 
@@ -433,6 +443,9 @@ export const listAllTrafficChallans = async (
 export const bulkUploadTrafficChallans = async (
   data: BulkUploadTrafficChallanData
 ): Promise<BulkUploadTrafficChallanResult> => {
+  const user = await getCurrentUser();
+  const userId = user?.id;
+
   const refreshDetails: Map<string, Set<number>> = new Map();
   const res: BulkUploadTrafficChallanResult = {
     success: 0,
@@ -471,6 +484,7 @@ export const bulkUploadTrafficChallans = async (
           type: row.type,
           amount: row.amount,
           description: row.description,
+          userId,
         });
 
         // Collect info for batch refresh

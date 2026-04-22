@@ -1,7 +1,7 @@
 import dayjs from "@/lib/dayjs";
 import { refreshPayrollForEmployeesIfActive } from "../payroll-summary/payroll-actions.service";
 import { prisma } from "@/lib/db/prisma";
-import { getServerAccessContext } from "@/lib/auth/helpers";
+import { getServerAccessContext, getCurrentUser } from "@/lib/auth/helpers";
 import type {
   GetTimesheetPageDataParams,
   GetTimesheetPageDataResponse,
@@ -250,6 +250,8 @@ export const saveTimesheetEntries = async (
 ): Promise<SaveTimesheetEntriesResponse> => {
   const { date, entries } = params;
   const dateNormalized = startOfDayUTC(date);
+  const user = await getCurrentUser();
+  const userId = user?.id;
 
   let saved = 0;
   for (let i = 0; i < entries.length; i += SAVE_BATCH_SIZE) {
@@ -273,7 +275,7 @@ export const saveTimesheetEntries = async (
           if (entry.timesheetId != null && entry.timesheetId > 0) {
             await tx.timesheet.update({
               where: { id: entry.timesheetId },
-              data,
+              data: { ...data, ...(userId && { updatedBy: userId }) },
             });
           } else {
             await tx.timesheet.create({
@@ -281,6 +283,7 @@ export const saveTimesheetEntries = async (
                 employeeId: entry.employeeId,
                 date: dateNormalized,
                 ...data,
+                ...(userId && { createdBy: userId }),
               },
             });
           }
@@ -336,6 +339,9 @@ async function withRetry<T>(
 export const bulkUploadTimesheets = async (
   data: BulkUploadTimesheetData
 ): Promise<BulkUploadTimesheetResult> => {
+  const user = await getCurrentUser();
+  const userId = user?.id;
+
   console.log("Service: bulkUploadTimesheets started", {
     entriesCount: data.entries.length,
     uniqueEmployeeCodes: new Set(data.entries.map((e) => e.employeeCode)).size,
@@ -574,7 +580,7 @@ export const bulkUploadTimesheets = async (
         await withRetry(() =>
           prisma.timesheet.update({
             where: { id: existing.id },
-            data: payload,
+            data: { ...payload, ...(userId && { updatedBy: userId }) },
           })
         );
         console.log(
@@ -599,6 +605,7 @@ export const bulkUploadTimesheets = async (
             employeeId: employee.id,
             date: dateNormalized,
             ...payload,
+            ...(userId && { createdBy: userId }),
           },
         })
       );

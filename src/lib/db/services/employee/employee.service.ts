@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/db/prisma";
-import { getServerAccessContext } from "@/lib/auth/helpers";
+import { getServerAccessContext, getCurrentUser } from "@/lib/auth/helpers";
 import type {
   ListEmployeesParams,
   ListEmployeesResponse,
@@ -113,6 +113,9 @@ const generateRandomEmployeeCode = (): number => {
 export const createEmployeeStep1 = async (data: CreateEmployeeStep1Data) => {
   return prisma.$transaction(
     async (tx: PrismaTransactionClient) => {
+      const user = await getCurrentUser();
+      const userId = user?.id;
+
       // Handle employee code assignment
       const existingEmployee = await tx.employee.findUnique({
         where: { employeeCode: data.employeeCode },
@@ -141,6 +144,7 @@ export const createEmployeeStep1 = async (data: CreateEmployeeStep1Data) => {
           dob: normalizeDate(data.dob),
           phone: data.phone ?? null,
           hourlyRate: 0,
+          ...(userId && { createdBy: userId }),
         },
         select: employeeSelect,
       });
@@ -172,6 +176,9 @@ export const updateEmployeeStep1 = async (
 ) => {
   return prisma.$transaction(
     async (tx: PrismaTransactionClient) => {
+      const user = await getCurrentUser();
+      const userId = user?.id;
+
       // Validate employee exists
       const existingEmployee = await tx.employee.findUnique({
         where: { id },
@@ -210,6 +217,7 @@ export const updateEmployeeStep1 = async (
       if (data.nameAr !== undefined) updateData.nameAr = data.nameAr ?? null;
       if (data.dob !== undefined) updateData.dob = normalizeDate(data.dob);
       if (data.phone !== undefined) updateData.phone = data.phone ?? null;
+      if (userId) updateData.updatedBy = userId;
 
       const employee = await tx.employee.update({
         where: { id },
@@ -242,6 +250,9 @@ export const updateEmployeeStep2 = async (
   id: number,
   data: UpdateEmployeeStep2Data
 ) => {
+  const user = await getCurrentUser();
+  const userId = user?.id;
+
   // Validate employee exists
   const existingEmployee = await prisma.employee.findUnique({
     where: { id },
@@ -367,7 +378,7 @@ export const updateEmployeeStep2 = async (
 
   const employee = await prisma.employee.update({
     where: { id },
-    data: updateData,
+    data: { ...updateData, ...(userId && { updatedBy: userId }) },
     select: employeeSelect,
   });
 
@@ -390,6 +401,9 @@ export const updateEmployeeStep3 = async (
   id: number,
   data: UpdateEmployeeStep3Data
 ) => {
+  const user = await getCurrentUser();
+  const userId = user?.id;
+
   // Validate employee exists
   const existingEmployee = await prisma.employee.findUnique({
     where: { id },
@@ -420,7 +434,7 @@ export const updateEmployeeStep3 = async (
 
   const employee = await prisma.employee.update({
     where: { id },
-    data: updateData,
+    data: { ...updateData, ...(userId && { updatedBy: userId }) },
     select: employeeSelect,
   });
 
@@ -443,6 +457,9 @@ export const updateEmployeeStep4 = async (
   id: number,
   data: UpdateEmployeeStep4Data
 ) => {
+  const user = await getCurrentUser();
+  const userId = user?.id;
+
   // Validate employee exists
   const existingEmployee = await prisma.employee.findUnique({
     where: { id },
@@ -476,7 +493,7 @@ export const updateEmployeeStep4 = async (
 
   const employee = await prisma.employee.update({
     where: { id },
-    data: updateData,
+    data: { ...updateData, ...(userId && { updatedBy: userId }) },
     select: employeeSelect,
   });
 
@@ -499,6 +516,9 @@ export const updateEmployeeStep5 = async (
   id: number,
   data: UpdateEmployeeStep5Data
 ) => {
+  const user = await getCurrentUser();
+  const userId = user?.id;
+
   // Validate employee exists
   const existingEmployee = await prisma.employee.findUnique({
     where: { id },
@@ -518,7 +538,7 @@ export const updateEmployeeStep5 = async (
 
   const employee = await prisma.employee.update({
     where: { id },
-    data: updateData,
+    data: { ...updateData, ...(userId && { updatedBy: userId }) },
     select: employeeSelect,
   });
 

@@ -18,7 +18,17 @@ export async function getSession() {
  */
 export async function getCurrentUser() {
   const session = await getSession();
-  return session?.user || null;
+  if (!session?.user) return null;
+
+  const userId =
+    !!session.user?.id && !isNaN(Number(session.user.id))
+      ? Number(session.user.id)
+      : undefined;
+
+  return {
+    ...session.user,
+    id: userId,
+  };
 }
 
 /**
@@ -103,7 +113,9 @@ export async function getCachedUserSession<T>(
  */
 export async function getServerAccessContext() {
   const session = await auth();
-  const roleId = session?.user?.roleId ? Number(session.user.roleId) : undefined;
+  const roleId = session?.user?.roleId
+    ? Number(session.user.roleId)
+    : undefined;
   const userBranchId = session?.user?.branchId
     ? Number(session.user.branchId)
     : undefined;

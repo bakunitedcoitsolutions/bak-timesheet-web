@@ -4,6 +4,7 @@
  */
 
 import { prisma } from "@/lib/db/prisma";
+import { getCurrentUser } from "@/lib/auth/helpers";
 import type {
   CreatePayrollSectionData,
   UpdatePayrollSectionData,
@@ -39,6 +40,9 @@ const payrollSectionSelect = {
  * Create a new payroll section
  */
 export const createPayrollSection = async (data: CreatePayrollSectionData) => {
+  const user = await getCurrentUser();
+  const userId = user?.id;
+
   return prisma.$transaction(async (tx: PrismaTransactionClient) => {
     // Validate: nameEn must be unique
     const existingPayrollSection = await tx.payrollSection.findFirst({
@@ -90,6 +94,7 @@ export const createPayrollSection = async (data: CreatePayrollSectionData) => {
             where: { id: record.id },
             data: {
               displayOrderKey: record.displayOrderKey + 1,
+              ...(userId && { updatedBy: userId }),
             },
           });
         }
@@ -103,6 +108,7 @@ export const createPayrollSection = async (data: CreatePayrollSectionData) => {
         displayOrderKey: finalDisplayOrderKey,
         branchId: data.branchId ?? null,
         isActive: data.isActive ?? true,
+        ...(userId && { createdBy: userId }),
       },
       select: payrollSectionSelect,
     });
@@ -128,6 +134,9 @@ export const updatePayrollSection = async (
   id: number,
   data: UpdatePayrollSectionData
 ) => {
+  const user = await getCurrentUser();
+  const userId = user?.id;
+
   return prisma.$transaction(async (tx: PrismaTransactionClient) => {
     // Check if payroll section exists
     const existingPayrollSection = await tx.payrollSection.findUnique({
@@ -178,6 +187,7 @@ export const updatePayrollSection = async (
                 where: { id: record.id },
                 data: {
                   displayOrderKey: record.displayOrderKey + 1,
+                  ...(userId && { updatedBy: userId }),
                 },
               });
             }
@@ -200,6 +210,7 @@ export const updatePayrollSection = async (
                 where: { id: record.id },
                 data: {
                   displayOrderKey: record.displayOrderKey - 1,
+                  ...(userId && { updatedBy: userId }),
                 },
               });
             }
@@ -225,6 +236,7 @@ export const updatePayrollSection = async (
                   where: { id: record.id },
                   data: {
                     displayOrderKey: record.displayOrderKey - 1,
+                    ...(userId && { updatedBy: userId }),
                   },
                 });
               }
@@ -248,6 +260,7 @@ export const updatePayrollSection = async (
                   where: { id: record.id },
                   data: {
                     displayOrderKey: record.displayOrderKey + 1,
+                    ...(userId && { updatedBy: userId }),
                   },
                 });
               }
@@ -268,7 +281,7 @@ export const updatePayrollSection = async (
 
     const updatedPayrollSection = await tx.payrollSection.update({
       where: { id },
-      data: updateData,
+      data: { ...updateData, ...(userId && { updatedBy: userId }) },
       select: payrollSectionSelect,
     });
 
@@ -280,6 +293,9 @@ export const updatePayrollSection = async (
  * Delete payroll section
  */
 export const deletePayrollSection = async (id: number): Promise<void> => {
+  const user = await getCurrentUser();
+  const userId = user?.id;
+
   return prisma.$transaction(async (tx: PrismaTransactionClient) => {
     // Check if payroll section exists and get its displayOrderKey
     const existingPayrollSection = await tx.payrollSection.findUnique({
@@ -332,6 +348,7 @@ export const deletePayrollSection = async (id: number): Promise<void> => {
               where: { id: record.id },
               data: {
                 displayOrderKey: record.displayOrderKey - 1,
+                ...(userId && { updatedBy: userId }),
               },
             });
           }

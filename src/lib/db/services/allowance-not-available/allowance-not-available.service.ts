@@ -3,8 +3,9 @@
  * Business logic for allowance not allowed operations
  */
 
-import { prisma } from "@/lib/db/prisma";
 import dayjs from "@/lib/dayjs";
+import { prisma } from "@/lib/db/prisma";
+import { getCurrentUser } from "@/lib/auth/helpers";
 import { AllowanceType } from "../../../../../prisma/generated/prisma/enums";
 import {
   CreateAllowanceNotAvailableData,
@@ -42,6 +43,8 @@ const normalizeDate = (date: Date | string | undefined): Date | null => {
 export const createAllowanceNotAvailable = async (
   data: CreateAllowanceNotAvailableData
 ) => {
+  const user = await getCurrentUser();
+  const userId = user?.id;
   // Validate date range
   const startDate = normalizeDate(data.startDate);
   const endDate = normalizeDate(data.endDate);
@@ -59,6 +62,7 @@ export const createAllowanceNotAvailable = async (
       endDate: endDate!,
       type: data.type as AllowanceType,
       isActive: data.isActive ?? true,
+      ...(userId && { createdBy: userId }),
     },
     select: allowanceNotAvailableSelect,
   });
@@ -73,6 +77,8 @@ export const updateAllowanceNotAvailable = async (
   id: number,
   data: UpdateAllowanceNotAvailableData
 ) => {
+  const user = await getCurrentUser();
+  const userId = user?.id;
   // Validate allowance not available exists
   const existingAllowanceNotAvailable =
     await prisma.allowanceNotAvailable.findUnique({
@@ -110,7 +116,7 @@ export const updateAllowanceNotAvailable = async (
   const updatedAllowanceNotAvailable =
     await prisma.allowanceNotAvailable.update({
       where: { id },
-      data: updateData,
+      data: { ...updateData, ...(userId && { updatedBy: userId }) },
       select: allowanceNotAvailableSelect,
     });
 

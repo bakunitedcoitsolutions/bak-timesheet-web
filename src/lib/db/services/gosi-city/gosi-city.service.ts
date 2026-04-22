@@ -4,6 +4,7 @@
  */
 
 import { prisma } from "@/lib/db/prisma";
+import { getCurrentUser } from "@/lib/auth/helpers";
 import type {
   CreateGosiCityData,
   UpdateGosiCityData,
@@ -40,11 +41,15 @@ export const createGosiCity = async (data: CreateGosiCityData) => {
     throw new Error("GOSI City name already exists");
   }
 
+  const user = await getCurrentUser();
+  const userId = user?.id;
+
   const gosiCity = await prisma.gosiCity.create({
     data: {
       nameEn: data.nameEn,
       nameAr: data.nameAr,
       isActive: data.isActive ?? true,
+      ...(userId && { createdBy: userId }),
     },
     select: gosiCitySelect,
   });
@@ -66,6 +71,9 @@ export const findGosiCityById = async (id: number) => {
  * Update GOSI city
  */
 export const updateGosiCity = async (id: number, data: UpdateGosiCityData) => {
+  const user = await getCurrentUser();
+  const userId = user?.id;
+
   return prisma.$transaction(async (tx: PrismaTransactionClient) => {
     // Check if GOSI city exists
     const existingGosiCity = await tx.gosiCity.findUnique({
@@ -100,7 +108,7 @@ export const updateGosiCity = async (id: number, data: UpdateGosiCityData) => {
 
     const updatedGosiCity = await tx.gosiCity.update({
       where: { id },
-      data: updateData,
+      data: { ...updateData, ...(userId && { updatedBy: userId }) },
       select: gosiCitySelect,
     });
 

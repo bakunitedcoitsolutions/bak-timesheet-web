@@ -9,7 +9,7 @@ import {
 } from "./payroll-summary.schemas";
 import dayjs from "dayjs";
 import { mapPayrollDetailToEntry } from "./mappers";
-import { getServerAccessContext } from "@/lib/auth/helpers";
+import { getCurrentUser, getServerAccessContext } from "@/lib/auth/helpers";
 import { AllowanceType } from "../../../../../prisma/generated/prisma/enums";
 
 // Helper to getting start/end of month
@@ -58,6 +58,8 @@ const calculateAndSavePayroll = async (
   statusId: number,
   allowanceNotAvailableId?: number | null
 ) => {
+  const user = await getCurrentUser();
+  const userId = user?.id;
   console.log(
     `[calculateAndSavePayroll] Starting — payrollId=${payrollId}, year=${payrollYear}, month=${payrollMonth}, statusId=${statusId}, allowanceNotAvailableId=${allowanceNotAvailableId ?? "none"}`
   );
@@ -369,6 +371,7 @@ const calculateAndSavePayroll = async (
       payrollStatusId: statusId,
       branchId: emp.branchId,
       allowanceNotAvailableId: allowanceNotAvailableId || null,
+      ...(userId && { createdBy: userId }),
     };
   });
 
@@ -429,6 +432,7 @@ const calculateAndSavePayroll = async (
     data: {
       ...totals,
       payrollStatusId: statusId,
+      ...(userId && { updatedBy: userId }),
     },
   });
   console.log(
@@ -444,6 +448,8 @@ export const updateMonthlyPayrollValues = async (
   input: UpdateMonthlyPayrollValuesInput
 ) => {
   const { payrollYear, payrollMonth, isPosted } = input;
+  const user = await getCurrentUser();
+  const userId = user?.id;
 
   // 1. Fetch all details for the month/year
   const payrollDetails = await prisma.payrollDetails.findMany({
@@ -548,13 +554,14 @@ export const updateMonthlyPayrollValues = async (
   if (payrollSummary) {
     payrollSummary = await prisma.payrollSummary.update({
       where: { id: payrollSummary.id },
-      data: payrollData,
+      data: { ...payrollData, ...(userId && { updatedBy: userId }) },
     });
   } else {
     payrollSummary = await prisma.payrollSummary.create({
       data: {
         ...payrollData,
         payrollStatusId: isPosted ? 3 : 1,
+        ...(userId && { createdBy: userId }),
       },
     });
   }
@@ -567,6 +574,8 @@ export const runPayroll = async ({
   payrollMonth,
   allowanceNotAvailableId,
 }: RunPayrollInput) => {
+  const user = await getCurrentUser();
+  const userId = user?.id;
   console.log(
     `[runPayroll] Starting — year=${payrollYear}, month=${payrollMonth}, allowanceNotAvailableId=${allowanceNotAvailableId ?? "none"}`
   );
@@ -636,6 +645,7 @@ export const runPayroll = async ({
       totalNetSalaryPayable: 0,
       totalCardSalary: 0,
       totalCashSalary: 0,
+      ...(userId && { createdBy: userId }),
     },
   });
   console.log(
@@ -663,6 +673,8 @@ export const repostPayroll = async ({
   payrollSectionId,
 }: RepostPayrollInput) => {
   const { isBranchScoped, userBranchId } = await getServerAccessContext();
+  const user = await getCurrentUser();
+  const userId = user?.id;
 
   // Check if there is any active payroll (Pending) that is NOT this one
   const activePayroll = await prisma.payrollSummary.findFirst({
@@ -913,6 +925,7 @@ export const repostPayroll = async ({
           cashSalary: split.cashSalary,
           // loanDeduction, netLoan, challanDeduction, netChallan,
           // remarks, paymentMethodId, payrollStatusId preserved
+          ...(userId && { updatedBy: userId }),
         },
       });
     } else {
@@ -950,6 +963,7 @@ export const repostPayroll = async ({
           payrollStatusId: 1, // Pending
           branchId: emp.branchId,
           allowanceNotAvailableId: allowanceNotAvailableId,
+          ...(userId && { createdBy: userId }),
         },
       });
     }
@@ -958,20 +972,29 @@ export const repostPayroll = async ({
   // Set payroll status to Revision (4) and recalculate summary totals
   await prisma.payrollSummary.update({
     where: { id },
-    data: { payrollStatusId: 4 },
+    data: {
+      payrollStatusId: 4,
+      ...(userId && { updatedBy: userId }),
+    },
   });
 
   return await recalculatePayrollSummary({ id });
 };
 
 export const postPayroll = async ({ id }: PostPayrollInput) => {
+  const user = await getCurrentUser();
+  const userId = user?.id;
+
   // Reuse recalculatePayrollSummary with statusId 3 (Posted)
   await recalculatePayrollSummary({ id, statusId: 3 });
 
   // Update all related payroll details status to 2 (Done)
   await prisma.payrollDetails.updateMany({
     where: { payrollId: id },
-    data: { payrollStatusId: 2 },
+    data: {
+      payrollStatusId: 2,
+      ...(userId && { updatedBy: userId }),
+    },
   });
 
   return { id };
@@ -981,6 +1004,8 @@ export const recalculatePayrollSummary = async ({
   id,
   statusId,
 }: RecalculatePayrollSummaryInput) => {
+  const user = await getCurrentUser();
+  const userId = user?.id;
   // 1. Verify existence
   const existingPayroll = await prisma.payrollSummary.findUnique({
     where: { id },
@@ -1049,6 +1074,7 @@ export const recalculatePayrollSummary = async ({
     data: {
       ...totals,
       ...(statusId !== undefined ? { payrollStatusId: statusId } : {}),
+      ...(userId && { updatedBy: userId }),
     },
   });
 };
@@ -1062,6 +1088,8 @@ export const refreshPayrollDetailRow = async ({
   payrollDetailId,
 }: RefreshPayrollDetailRowInput) => {
   const { isBranchScoped, userBranchId } = await getServerAccessContext();
+  const user = await getCurrentUser();
+  const userId = user?.id;
   // 1. Fetch the existing PayrollDetails row with its parent summary
   const existingDetail = await prisma.payrollDetails.findUnique({
     where: {
@@ -1319,6 +1347,7 @@ export const refreshPayrollDetailRow = async ({
       // Preserved — loanDeduction, netLoan, challanDeduction, netChallan,
       // remarks, paymentMethodId, payrollStatusId
       // are intentionally NOT updated here.
+      ...(userId && { updatedBy: userId }),
     },
   });
 

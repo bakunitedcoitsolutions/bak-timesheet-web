@@ -4,6 +4,7 @@
  */
 
 import { prisma } from "@/lib/db/prisma";
+import { getCurrentUser } from "@/lib/auth/helpers";
 import type {
   CreateCityData,
   UpdateCityData,
@@ -54,12 +55,16 @@ export const createCity = async (data: CreateCityData) => {
     }
   }
 
+  const user = await getCurrentUser();
+  const userId = user?.id;
+
   const city = await prisma.city.create({
     data: {
       nameEn: data.nameEn,
       nameAr: data.nameAr,
       countryId: data.countryId || null,
       isActive: data.isActive ?? true,
+      ...(userId && { createdBy: userId }),
     },
     select: citySelect,
   });
@@ -89,6 +94,9 @@ export const findCityById = async (id: number) => {
  * Update city
  */
 export const updateCity = async (id: number, data: UpdateCityData) => {
+  const user = await getCurrentUser();
+  const userId = user?.id;
+
   return prisma.$transaction(async (tx: PrismaTransactionClient) => {
     // Check if city exists
     const existingCity = await tx.city.findUnique({
@@ -137,7 +145,7 @@ export const updateCity = async (id: number, data: UpdateCityData) => {
 
     const updatedCity = await tx.city.update({
       where: { id },
-      data: updateData,
+      data: { ...updateData, ...(userId && { updatedBy: userId }) },
       select: citySelect,
     });
 

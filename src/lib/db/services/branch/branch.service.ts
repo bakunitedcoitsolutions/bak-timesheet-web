@@ -4,6 +4,7 @@
  */
 
 import { prisma } from "@/lib/db/prisma";
+import { getCurrentUser } from "@/lib/auth/helpers";
 import type {
   CreateBranchData,
   UpdateBranchData,
@@ -42,12 +43,16 @@ export const createBranch = async (data: CreateBranchData) => {
     throw new Error("Branch name already exists");
   }
 
+  const user = await getCurrentUser();
+  const userId = user?.id;
+
   const branch = await prisma.branch.create({
     data: {
       nameEn: data.nameEn,
       nameAr: data.nameAr,
       isMain: data.isMain ?? true,
       isActive: data.isActive ?? true,
+      ...(userId && { createdBy: userId }),
     },
     select: branchSelect,
   });
@@ -69,6 +74,9 @@ export const findBranchById = async (id: number) => {
  * Update branch
  */
 export const updateBranch = async (id: number, data: UpdateBranchData) => {
+  const user = await getCurrentUser();
+  const userId = user?.id;
+
   return prisma.$transaction(async (tx: PrismaTransactionClient) => {
     // Check if branch exists
     const existingBranch = await tx.branch.findUnique({
@@ -104,7 +112,7 @@ export const updateBranch = async (id: number, data: UpdateBranchData) => {
 
     const updatedBranch = await tx.branch.update({
       where: { id },
-      data: updateData,
+      data: { ...updateData, ...(userId && { updatedBy: userId }) },
       select: branchSelect,
     });
 

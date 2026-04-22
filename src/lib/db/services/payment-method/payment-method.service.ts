@@ -4,6 +4,7 @@
  */
 
 import { prisma } from "@/lib/db/prisma";
+import { getCurrentUser } from "@/lib/auth/helpers";
 import type {
   CreatePaymentMethodData,
   UpdatePaymentMethodData,
@@ -40,11 +41,15 @@ export const createPaymentMethod = async (data: CreatePaymentMethodData) => {
     throw new Error("Payment Method name already exists");
   }
 
+  const user = await getCurrentUser();
+  const userId = user?.id;
+
   const paymentMethod = await prisma.paymentMethod.create({
     data: {
       nameEn: data.nameEn,
-      nameAr: data.nameAr,
+      nameAr: data.nameAr ?? null,
       isActive: data.isActive ?? true,
+      ...(userId && { createdBy: userId }),
     },
     select: paymentMethodSelect,
   });
@@ -69,6 +74,8 @@ export const updatePaymentMethod = async (
   id: number,
   data: UpdatePaymentMethodData
 ) => {
+  const user = await getCurrentUser();
+  const userId = user?.id;
   // Check if payment method exists
   const existingPaymentMethod = await prisma.paymentMethod.findUnique({
     where: { id },
@@ -101,7 +108,7 @@ export const updatePaymentMethod = async (
 
   const updatedPaymentMethod = await prisma.paymentMethod.update({
     where: { id },
-    data: updateData,
+    data: { ...updateData, ...(userId && { updatedBy: userId }) },
     select: paymentMethodSelect,
   });
 
