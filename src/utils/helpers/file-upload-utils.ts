@@ -207,6 +207,9 @@ export const getSignedUrl = async (
   filePath: string,
   expiresIn: number = 3600
 ): Promise<string> => {
+  if (!filePath) return "";
+  if (filePath?.includes("http")) return filePath;
+
   const { data, error } = await supabase.storage
     .from(bucket)
     .createSignedUrl(filePath, expiresIn);
@@ -223,15 +226,9 @@ export const getSignedUrl = async (
 //   bucket: string,
 //   filePath: string
 // ): Promise<string> => {
-//   // const { data, error } = await supabase.storage
-//   //   .from(bucket)
-//   //   .createSignedUrl(filePath, expiresIn);
+//   if (!filePath) return "";
+//   if (filePath?.includes("http")) return filePath;
 
-//   // if (error) {
-//   //   throw new Error(`Failed to generate signed URL: ${error.message}`);
-//   // }
-
-//   // return data.signedUrl;
 //   const SUPABASE_URL = (process.env.NEXT_PUBLIC_SUPABASE_URL ?? "")?.replace?.(
 //     ":8000",
 //     ""
