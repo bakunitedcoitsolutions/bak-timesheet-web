@@ -1,15 +1,14 @@
 "use client";
-import React from "react";
 import { classNames } from "primereact/utils";
 
 interface LedgerEmployeeInfoProps {
-  isLoading: boolean;
   employee: any;
+  isLoading: boolean;
   employeeName: string;
-  employeeDesignation: string;
   idCardNumber: string;
-  searchEmployeeCode: number | null;
   isPrinting?: boolean;
+  employeeDesignation: string;
+  searchEmployeeCode: number | null;
 }
 
 export const LedgerEmployeeInfo = ({
