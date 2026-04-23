@@ -1,10 +1,10 @@
 "use client";
 import { useMemo } from "react";
-import { classNames } from "primereact/utils";
-import { ProgressSpinner } from "primereact/progressspinner";
 import { Row } from "primereact/row";
 import { Column } from "primereact/column";
+import { classNames } from "primereact/utils";
 import { ColumnGroup } from "primereact/columngroup";
+import { ProgressSpinner } from "primereact/progressspinner";
 
 import { Table } from "@/components";
 import { getLeaveEligibilityTableColumns } from "../helpers";
@@ -12,9 +12,9 @@ import { LeaveEligibilityReport } from "@/lib/db/services/leave-eligibility";
 
 interface LeaveEligibilityTableProps {
   isLoading: boolean;
+  isPrinting?: boolean;
   searchEmployeeCode: number | null;
   report: LeaveEligibilityReport | null;
-  isPrinting?: boolean;
 }
 
 export const LeaveEligibilityTable = ({
@@ -117,7 +117,7 @@ export const LeaveEligibilityTable = ({
     return (
       <div
         className={classNames("bg-white p-8 rounded-xl text-center", {
-          "text-theme-red": searchEmployeeCode,
+          "text-primary": searchEmployeeCode,
           "text-gray-500": !searchEmployeeCode,
         })}
       >
@@ -184,6 +184,26 @@ export const LeaveEligibilityTable = ({
             </span>
           </div>
         </div>
+      </div>
+
+      <div
+        className={classNames("border-[0.5px] rounded-xl py-4 px-4", {
+          "bg-theme-light-green border-theme-green":
+            report.eligibilityStatus.isEligible,
+          "bg-primary-light border-primary":
+            !report.eligibilityStatus.isEligible,
+          "hidden lg:block": !isPrinting,
+          inline: isPrinting,
+        })}
+      >
+        <p
+          className={classNames("font-bold text-center w-full tracking-tight", {
+            "text-green-600": report.eligibilityStatus.isEligible,
+            "text-primary": !report.eligibilityStatus.isEligible,
+          })}
+        >
+          {report.eligibilityStatus.message}
+        </p>
       </div>
 
       <div className="flex flex-col gap-1.5">
