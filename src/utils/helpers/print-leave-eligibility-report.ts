@@ -86,7 +86,7 @@ export const printLeaveEligibilityReport = (report: LeaveEligibilityReport) => {
             color: ${report.eligibilityStatus.isEligible ? "#059669" : "#b91c1c"};
           }
 
-          .cycle-container { margin-bottom: 30px; page-break-inside: avoid; }
+          .cycle-container { margin-bottom: 30px; }
 
           .statement-title {
             display: flex;
@@ -120,6 +120,7 @@ export const printLeaveEligibilityReport = (report: LeaveEligibilityReport) => {
               print-color-adjust: exact;
             }
             body { padding: 0 10px; }
+            tr { page-break-inside: avoid; }
           }
         </style>
       </head>
