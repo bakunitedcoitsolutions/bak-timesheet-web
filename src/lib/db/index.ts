@@ -3,5 +3,5 @@
  */
 
 export { prisma, default as db } from "./prisma";
-export { supabase, supabaseAdmin } from "./supabase";
+export { supabase } from "./supabase";
 export * from "./services";

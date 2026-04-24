@@ -1,6 +1,6 @@
 /**
  * Supabase Client Singleton
- * 
+ *
  * For direct Supabase operations (Storage, Realtime, Auth, etc.)
  * Note: We're using Prisma for database operations via API routes.
  *
@@ -9,10 +9,6 @@
  *   - File storage (Supabase Storage)
  *   - Real-time subscriptions
  *   - Client-side auth operations
- * 
- * - `supabaseAdmin`: SERVER-SIDE ONLY (uses service role key, bypasses RLS)
- *   - Server-side operations that need admin access
- *   - Only use in API routes or Server Components
  */
 
 import { createClient } from "@supabase/supabase-js";
@@ -39,28 +35,5 @@ export const supabase = createClient(
     },
   }
 );
-
-// Server-side Supabase admin client (SERVER-SIDE ONLY)
-// Uses service role key and bypasses RLS - only use in API routes or Server Components
-export const supabaseAdmin = process.env.SUPABASE_SERVICE_ROLE_KEY
-  ? (() => {
-      // Ensure this is only used server-side
-      if (typeof window !== "undefined") {
-        throw new Error(
-          "supabaseAdmin cannot be used in client components. Use API routes or Server Components instead."
-        );
-      }
-      return createClient(
-        process.env.NEXT_PUBLIC_SUPABASE_URL!,
-        process.env.SUPABASE_SERVICE_ROLE_KEY,
-        {
-          auth: {
-            autoRefreshToken: false,
-            persistSession: false,
-          },
-        }
-      );
-    })()
-  : null;
 
 export default supabase;
