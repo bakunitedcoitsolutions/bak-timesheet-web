@@ -52,7 +52,9 @@ const EmployeeLeaveEligibilityPage = () => {
   // Print handler
   const handlePrint = useCallback(() => {
     if (!report) return;
-    window.print();
+    import("@/utils/helpers/print-leave-eligibility-report").then((module) => {
+      module.printLeaveEligibilityReport(report);
+    });
   }, [report]);
 
   return (
