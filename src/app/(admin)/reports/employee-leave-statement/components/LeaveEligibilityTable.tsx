@@ -25,76 +25,103 @@ export const LeaveEligibilityTable = ({
 }: LeaveEligibilityTableProps) => {
   const columns = useMemo(() => getLeaveEligibilityTableColumns(), []);
 
-  const getFooterGroup = (totalDays: number) => (
-    <ColumnGroup>
-      <Row>
-        <Column
-          footer="Total Work Days:"
-          colSpan={2}
-          footerStyle={{
-            textAlign: "right",
-            fontWeight: "700",
-            paddingRight: "20px",
-            fontSize: "15px",
-            color: "#6b7280",
-          }}
-        />
-        <Column
-          footer={totalDays}
-          footerStyle={{
-            textAlign: "center",
-            fontWeight: "700",
-            fontSize: "16px",
-            color: "var(--primary-color, #f43f5e)",
-          }}
-        />
-      </Row>
-      <Row>
-        <Column
-          footer="Work Days Required for eligible to vacation:"
-          colSpan={2}
-          footerStyle={{
-            textAlign: "right",
-            fontWeight: "700",
-            paddingRight: "20px",
-            fontSize: "15px",
-            color: "#6b7280",
-          }}
-        />
-        <Column
-          footer="624"
-          footerStyle={{
-            textAlign: "center",
-            fontWeight: "700",
-            fontSize: "16px",
-            color: "var(--primary-color, #f43f5e)",
-          }}
-        />
-      </Row>
-      <Row>
-        <Column
-          footer="Work Days remaining for Vacation:"
-          colSpan={2}
-          footerStyle={{
-            textAlign: "right",
-            fontWeight: "700",
-            paddingRight: "20px",
-            fontSize: "15px",
-            color: "#6b7280",
-          }}
-        />
-        <Column
-          footer={624 - totalDays}
-          footerStyle={{
-            textAlign: "center",
-            fontWeight: "700",
-            fontSize: "16px",
-            color: 624 - totalDays > 0 ? "red" : "green",
-          }}
-        />
-      </Row>
-    </ColumnGroup>
-  );
+  const getFooterGroup = (totalDays: number, isPrevious?: boolean) => {
+    const gender = (report?.employee.gender || "Male").toLowerCase();
+    const pronoun = gender === "male" ? "He" : "She";
+    const pronounSmall = gender === "male" ? "he" : "she";
+    const isEligible = totalDays >= 624;
+    const diffDays = Math.abs(totalDays - 624);
+
+    const message = isEligible
+      ? `${pronoun} was eligible to go on vacation, ${pronounSmall} exceeded ${diffDays} day(s).`
+      : `${pronoun} wasn't eligible for vacation, ${diffDays} day(s) were remaining.`;
+
+    return (
+      <ColumnGroup>
+        {isPrevious && (
+          <Row>
+            <Column
+              footer={message}
+              colSpan={3}
+              footerStyle={{
+                textAlign: "center",
+                fontWeight: "700",
+                padding: "10px",
+                fontSize: "14px",
+                color: isEligible ? "#16a34a" : "var(--primary-color, #af1e2e)",
+              }}
+            />
+          </Row>
+        )}
+        <Row>
+          <Column
+            footer="Total Work Days:"
+            colSpan={2}
+            footerStyle={{
+              textAlign: "right",
+              fontWeight: "700",
+              paddingRight: "20px",
+              fontSize: "15px",
+              color: "#6b7280",
+            }}
+          />
+          <Column
+            footer={totalDays}
+            footerStyle={{
+              textAlign: "center",
+              fontWeight: "700",
+              fontSize: "16px",
+              color: "var(--primary-color, #af1e2e)",
+            }}
+          />
+        </Row>
+        <Row>
+          <Column
+            footer="Work Days Required for eligible to vacation:"
+            colSpan={2}
+            footerStyle={{
+              textAlign: "right",
+              fontWeight: "700",
+              paddingRight: "20px",
+              fontSize: "15px",
+              color: "#6b7280",
+            }}
+          />
+          <Column
+            footer="624"
+            footerStyle={{
+              textAlign: "center",
+              fontWeight: "700",
+              fontSize: "16px",
+              color: "var(--primary-color, #af1e2e)",
+            }}
+          />
+        </Row>
+        <Row>
+          <Column
+            footer="Work Days remaining for Vacation:"
+            colSpan={2}
+            footerStyle={{
+              textAlign: "right",
+              fontWeight: "700",
+              paddingRight: "20px",
+              fontSize: "15px",
+              color: "#6b7280",
+            }}
+          />
+          <Column
+            footer={624 - totalDays}
+            footerStyle={{
+              textAlign: "center",
+              fontWeight: "700",
+              fontSize: "16px",
+              color: 624 - totalDays > 0 ? "#f43f5e" : "#16a34a",
+            }}
+          />
+        </Row>
+      </ColumnGroup>
+    );
+  };
 
   const renderCycleTable = (
     cycle: {
@@ -103,7 +130,8 @@ export const LeaveEligibilityTable = ({
       startDate: string;
       endDate?: string | null;
     },
-    title: string
+    title: string,
+    isPrevious?: boolean
   ) => {
     const data = (cycle.monthlyStats || []).map((item, index) => ({
       ...item,
@@ -141,7 +169,10 @@ export const LeaveEligibilityTable = ({
             filterDisplay={undefined}
             sortMode={undefined}
             showGridlines
-            footerColumnGroup={getFooterGroup(cycle.totalWorkingDays)}
+            footerColumnGroup={getFooterGroup(
+              cycle.totalWorkingDays,
+              isPrevious
+            )}
             groupRowsBy="group"
             tableClassName="report-table"
           />
@@ -262,7 +293,8 @@ export const LeaveEligibilityTable = ({
             startDate: report.startDate,
             endDate: null,
           },
-          "Current Working Period"
+          "Current Working Period",
+          false
         )}
 
         {/* Previous Working Cycles */}
@@ -271,7 +303,8 @@ export const LeaveEligibilityTable = ({
             {report.previousCycles.map((cycle, index) =>
               renderCycleTable(
                 cycle,
-                `Previous Working Period ${report.previousCycles.length - index}`
+                `Previous Working Period ${report.previousCycles.length - index}`,
+                true
               )
             )}
           </div>

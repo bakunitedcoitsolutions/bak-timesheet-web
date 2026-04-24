@@ -1,4 +1,7 @@
-import { LeaveEligibilityReport, LeaveCycle } from "@/lib/db/services/leave-eligibility/leave-eligibility.dto";
+import {
+  LeaveEligibilityReport,
+  LeaveCycle,
+} from "@/lib/db/services/leave-eligibility/leave-eligibility.dto";
 
 export const printLeaveEligibilityReport = (report: LeaveEligibilityReport) => {
   if (typeof window === "undefined") return;
@@ -7,12 +10,32 @@ export const printLeaveEligibilityReport = (report: LeaveEligibilityReport) => {
 
   const employee = report.employee;
 
-  const renderTableHtml = (cycle: { monthlyStats: any[], totalWorkingDays: number, startDate: string, endDate?: string | null }, title: string) => {
+  const renderTableHtml = (
+    cycle: {
+      monthlyStats: any[];
+      totalWorkingDays: number;
+      startDate: string;
+      endDate?: string | null;
+    },
+    title: string,
+    isPrevious?: boolean
+  ) => {
     const data = cycle.monthlyStats.map((item, index) => ({
       ...item,
       id: index + 1,
     }));
     const remainingDays = 624 - cycle.totalWorkingDays;
+
+    // Gender-based eligibility message
+    const gender = (employee.gender || "Male").toLowerCase();
+    const pronoun = gender === "male" ? "He" : "She";
+    const pronounSmall = gender === "male" ? "he" : "she";
+    const isEligible = cycle.totalWorkingDays >= 624;
+    const diffDays = Math.abs(cycle.totalWorkingDays - 624);
+
+    const statusMessage = isEligible
+      ? `${pronoun} was eligible to go on vacation, ${pronounSmall} exceeded ${diffDays} day(s).`
+      : `${pronoun} wasn't eligible for vacation, ${diffDays} day(s) were remaining.`;
 
     return `
       <div class="cycle-container">
@@ -37,13 +60,28 @@ export const printLeaveEligibilityReport = (report: LeaveEligibilityReport) => {
             </tr>
           </thead>
           <tbody>
-            ${data.map((row) => `
+            ${
+              isPrevious
+                ? `
+              <tr class="bg-footer">
+                <td colspan="3" style="text-align: center; font-size: 11px; padding: 10px; color: ${isEligible ? "#16a34a" : "#af1e2e"}; font-weight: bold;">
+                  ${statusMessage}
+                </td>
+              </tr>
+            `
+                : ""
+            }
+            ${data
+              .map(
+                (row) => `
               <tr>
                 <td style="color: #6b7280;">${row.id}</td>
                 <td class="text-left font-bold" style="color: #4b5563;">${row.month}</td>
                 <td class="font-bold text-primary">${row.workingDays}</td>
               </tr>
-            `).join("")}
+            `
+              )
+              .join("")}
             
             <tr class="bg-footer">
               <td colspan="2" class="text-right" style="padding-right: 20px; font-size: 12px; color: #4b5563;">Total Work Days:</td>
@@ -83,7 +121,7 @@ export const printLeaveEligibilityReport = (report: LeaveEligibilityReport) => {
             text-align: center;
             font-size: 14px;
             font-weight: bold;
-            color: ${report.eligibilityStatus.isEligible ? "#059669" : "#b91c1c"};
+            color: ${report.eligibilityStatus.isEligible ? "#16a34a" : "#af1e2e"};
           }
 
           .cycle-container { margin-bottom: 30px; }
@@ -95,7 +133,7 @@ export const printLeaveEligibilityReport = (report: LeaveEligibilityReport) => {
             margin-bottom: 8px;
             padding: 0 4px;
           }
-          .statement-title h3 { font-size: 12px; font-weight: bold; text-transform: uppercase; color: #b91c1c; }
+          .statement-title h3 { font-size: 12px; font-weight: bold; text-transform: uppercase; color: #af1e2e; }
           .period-text { font-size: 11px; color: #666; font-weight: bold; }
 
           table { width: 100%; border-collapse: collapse; border: 1px solid #ddd; font-size: 11px; table-layout: fixed; }
@@ -105,9 +143,9 @@ export const printLeaveEligibilityReport = (report: LeaveEligibilityReport) => {
           .text-left { text-align: left; }
           .text-right { text-align: right; }
           .font-bold { font-weight: bold; }
-          .text-primary { color: #b91c1c; }
-          .text-red { color: #dc2626; }
-          .text-green { color: #059669; }
+          .text-primary { color: #af1e2e; }
+          .text-red { color: #f43f5e; }
+          .text-green { color: #16a34a; }
           .bg-footer { background-color: #f9fafb; font-weight: bold; }
 
           @media print {
@@ -148,14 +186,16 @@ export const printLeaveEligibilityReport = (report: LeaveEligibilityReport) => {
             startDate: report.startDate,
             endDate: null,
           },
-          "Current Working Period"
+          "Current Working Period",
+          false
         )}
 
         ${(report.previousCycles || [])
           .map((cycle, index) =>
             renderTableHtml(
               cycle,
-              `Previous Working Period ${report.previousCycles.length - index}`
+              `Previous Working Period ${report.previousCycles.length - index}`,
+              true
             )
           )
           .join("")}
