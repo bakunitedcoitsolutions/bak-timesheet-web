@@ -1,4 +1,4 @@
-import { LeaveEligibilityReport } from "@/lib/db/services/leave-eligibility/leave-eligibility.dto";
+import { LeaveEligibilityReport, LeaveCycle } from "@/lib/db/services/leave-eligibility/leave-eligibility.dto";
 
 export const printLeaveEligibilityReport = (report: LeaveEligibilityReport) => {
   if (typeof window === "undefined") return;
@@ -6,12 +6,62 @@ export const printLeaveEligibilityReport = (report: LeaveEligibilityReport) => {
   if (!printWindow) return;
 
   const employee = report.employee;
-  const data = report.monthlyStats.map((item, index) => ({
-    ...item,
-    id: index + 1,
-  }));
 
-  const remainingDays = 624 - report.totalWorkingDays;
+  const renderTableHtml = (cycle: { monthlyStats: any[], totalWorkingDays: number, startDate: string, endDate?: string | null }, title: string) => {
+    const data = cycle.monthlyStats.map((item, index) => ({
+      ...item,
+      id: index + 1,
+    }));
+    const remainingDays = 624 - cycle.totalWorkingDays;
+
+    return `
+      <div class="cycle-container">
+        <div class="statement-title">
+          <h3>${title}</h3>
+          <span class="period-text">
+            <span class="text-primary">${cycle.startDate}</span> - <span class="text-primary">${cycle.endDate ? cycle.endDate : "Today"}</span>
+          </span>
+        </div>
+        
+        <table>
+          <colgroup>
+            <col style="width: 10%;" />
+            <col style="width: 60%;" />
+            <col style="width: 30%;" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th class="text-left">Month</th>
+              <th>Work Days</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${data.map((row) => `
+              <tr>
+                <td style="color: #6b7280;">${row.id}</td>
+                <td class="text-left font-bold" style="color: #4b5563;">${row.month}</td>
+                <td class="font-bold text-primary">${row.workingDays}</td>
+              </tr>
+            `).join("")}
+            
+            <tr class="bg-footer">
+              <td colspan="2" class="text-right" style="padding-right: 20px; font-size: 12px; color: #4b5563;">Total Work Days:</td>
+              <td class="text-primary" style="font-size: 13px;">${cycle.totalWorkingDays}</td>
+            </tr>
+            <tr class="bg-footer">
+              <td colspan="2" class="text-right" style="padding-right: 20px; font-size: 12px; color: #4b5563;">Work Days Required for eligible to vacation:</td>
+              <td class="text-primary" style="font-size: 13px;">624</td>
+            </tr>
+            <tr class="bg-footer">
+              <td colspan="2" class="text-right" style="padding-right: 20px; font-size: 12px; color: #4b5563;">Work Days remaining for Vacation:</td>
+              <td class="${remainingDays > 0 ? "text-red" : "text-green"}" style="font-size: 13px;">${remainingDays}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    `;
+  };
 
   const printContent = `
     <!DOCTYPE html>
@@ -29,12 +79,14 @@ export const printLeaveEligibilityReport = (report: LeaveEligibilityReport) => {
           
           .eligibility-box { 
             width: 100%; 
-            margin-bottom: 15px; 
+            margin-bottom: 20px; 
             text-align: center;
             font-size: 14px;
             font-weight: bold;
             color: ${report.eligibilityStatus.isEligible ? "#059669" : "#b91c1c"};
           }
+
+          .cycle-container { margin-bottom: 30px; page-break-inside: avoid; }
 
           .statement-title {
             display: flex;
@@ -44,7 +96,7 @@ export const printLeaveEligibilityReport = (report: LeaveEligibilityReport) => {
             padding: 0 4px;
           }
           .statement-title h3 { font-size: 12px; font-weight: bold; text-transform: uppercase; color: #b91c1c; }
-          .statement-title span { font-size: 10px; color: #666; font-weight: bold; }
+          .period-text { font-size: 11px; color: #666; font-weight: bold; }
 
           table { width: 100%; border-collapse: collapse; border: 1px solid #ddd; font-size: 11px; table-layout: fixed; }
           th, td { border: 1px solid #ddd; padding: 8px 6px; text-align: center; word-wrap: break-word; }
@@ -68,7 +120,6 @@ export const printLeaveEligibilityReport = (report: LeaveEligibilityReport) => {
               print-color-adjust: exact;
             }
             body { padding: 0 10px; }
-            tr { page-break-inside: avoid; }
           }
         </style>
       </head>
@@ -89,51 +140,24 @@ export const printLeaveEligibilityReport = (report: LeaveEligibilityReport) => {
           ${report.eligibilityStatus.message}
         </div>
 
-        <div class="statement-title">
-          <h3>Working Days Statement</h3>
-          <span>Calculation Start Date: ${report.startDate}</span>
-        </div>
-        
-        <table>
-          <colgroup>
-            <col style="width: 10%;" />
-            <col style="width: 60%;" />
-            <col style="width: 30%;" />
-          </colgroup>
-          <thead>
-            <tr>
-              <th>#</th>
-              <th class="text-left">Month</th>
-              <th>Work Days</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${data
-              .map(
-                (row) => `
-              <tr>
-                <td style="color: #6b7280;">${row.id}</td>
-                <td class="text-left font-bold" style="color: #4b5563;">${row.month}</td>
-                <td class="font-bold text-primary">${row.workingDays}</td>
-              </tr>
-            `
-              )
-              .join("")}
-            
-            <tr class="bg-footer">
-              <td colspan="2" class="text-right" style="padding-right: 20px; font-size: 12px; color: #4b5563;">Total Work Days:</td>
-              <td class="text-primary" style="font-size: 13px;">${report.totalWorkingDays}</td>
-            </tr>
-            <tr class="bg-footer">
-              <td colspan="2" class="text-right" style="padding-right: 20px; font-size: 12px; color: #4b5563;">Work Days Required for eligible to vacation:</td>
-              <td class="text-primary" style="font-size: 13px;">624</td>
-            </tr>
-            <tr class="bg-footer">
-              <td colspan="2" class="text-right" style="padding-right: 20px; font-size: 12px; color: #4b5563;">Work Days remaining for Vacation:</td>
-              <td class="${remainingDays > 0 ? "text-red" : "text-green"}" style="font-size: 13px;">${remainingDays}</td>
-            </tr>
-          </tbody>
-        </table>
+        ${renderTableHtml(
+          {
+            monthlyStats: report.monthlyStats,
+            totalWorkingDays: report.totalWorkingDays,
+            startDate: report.startDate,
+            endDate: null,
+          },
+          "Current Working Period"
+        )}
+
+        ${(report.previousCycles || [])
+          .map((cycle, index) =>
+            renderTableHtml(
+              cycle,
+              `Previous Working Period ${report.previousCycles.length - index}`
+            )
+          )
+          .join("")}
 
         <script>
           window.onload = function() {

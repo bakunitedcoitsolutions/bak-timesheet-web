@@ -23,17 +23,9 @@ export const LeaveEligibilityTable = ({
   searchEmployeeCode,
   isPrinting = false,
 }: LeaveEligibilityTableProps) => {
-  const data = useMemo(() => {
-    return (report?.monthlyStats || []).map((item, index) => ({
-      ...item,
-      index: index + 1,
-      group: "all",
-    }));
-  }, [report]);
-
   const columns = useMemo(() => getLeaveEligibilityTableColumns(), []);
 
-  const footerColumnGroup = (
+  const getFooterGroup = (totalDays: number) => (
     <ColumnGroup>
       <Row>
         <Column
@@ -44,16 +36,16 @@ export const LeaveEligibilityTable = ({
             fontWeight: "700",
             paddingRight: "20px",
             fontSize: "15px",
-            color: "#6b7280", // text-gray-500 equivalent
+            color: "#6b7280",
           }}
         />
         <Column
-          footer={report?.totalWorkingDays || 0}
+          footer={totalDays}
           footerStyle={{
             textAlign: "center",
             fontWeight: "700",
             fontSize: "16px",
-            color: "var(--primary-color, #f43f5e)", // use primary color
+            color: "var(--primary-color, #f43f5e)",
           }}
         />
       </Row>
@@ -92,18 +84,71 @@ export const LeaveEligibilityTable = ({
           }}
         />
         <Column
-          footer={report ? 624 - report.totalWorkingDays : 0}
+          footer={624 - totalDays}
           footerStyle={{
             textAlign: "center",
             fontWeight: "700",
             fontSize: "16px",
-            color:
-              report && 624 - report.totalWorkingDays > 0 ? "red" : "green",
+            color: 624 - totalDays > 0 ? "red" : "green",
           }}
         />
       </Row>
     </ColumnGroup>
   );
+
+  const renderCycleTable = (
+    cycle: {
+      monthlyStats: any[];
+      totalWorkingDays: number;
+      startDate: string;
+      endDate?: string | null;
+    },
+    title: string
+  ) => {
+    const data = (cycle.monthlyStats || []).map((item, index) => ({
+      ...item,
+      index: index + 1,
+      group: "all",
+    }));
+
+    if (data.length === 0 && !cycle.endDate) return null;
+
+    return (
+      <div
+        className="flex flex-col gap-1.5"
+        key={`${cycle.startDate}-${cycle.endDate}`}
+      >
+        <div className="px-1 flex justify-between items-end">
+          <h3 className="text-sm font-semibold text-primary uppercase tracking-wider">
+            {title}
+          </h3>
+          <span className="text-sm font-semibold text-theme-text-gray">
+            <span className="text-primary">{cycle.startDate}</span>{" "}
+            <span>-</span>{" "}
+            <span className="text-primary">
+              {cycle.endDate ? cycle.endDate : "Today"}
+            </span>
+          </span>
+        </div>
+
+        <div className="bg-white overflow-hidden border border-gray-100">
+          <Table
+            dataKey="index"
+            data={data}
+            columns={columns}
+            pagination={false}
+            globalSearch={false}
+            filterDisplay={undefined}
+            sortMode={undefined}
+            showGridlines
+            footerColumnGroup={getFooterGroup(cycle.totalWorkingDays)}
+            groupRowsBy="group"
+            tableClassName="report-table"
+          />
+        </div>
+      </div>
+    );
+  };
 
   if (isLoading) {
     return (
@@ -129,9 +174,9 @@ export const LeaveEligibilityTable = ({
   }
 
   return (
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-col gap-8 pb-10">
       {/* Standard Employee Info Header */}
-      <div className="bg-white rounded-xl py-4 px-4">
+      <div className="bg-white rounded-xl py-4 px-4 sticky top-0 z-10">
         <div
           className={classNames("flex flex-1 gap-3 justify-between", {
             "flex-row items-center": isPrinting,
@@ -186,6 +231,7 @@ export const LeaveEligibilityTable = ({
         </div>
       </div>
 
+      {/* Current Eligibility Status */}
       <div
         className={classNames("border-[0.5px] rounded-xl py-4 px-4", {
           "bg-theme-light-green border-theme-green":
@@ -206,32 +252,30 @@ export const LeaveEligibilityTable = ({
         </p>
       </div>
 
-      <div className="flex flex-col gap-1.5">
-        <div className="px-1 flex justify-between items-end">
-          <h3 className="text-sm font-semibold text-primary uppercase tracking-wider">
-            Working Days Statement
-          </h3>
-          <span className="text-xs font-semibold text-theme-text-gray">
-            Calculation Start Date: {report.startDate}
-          </span>
-        </div>
+      {/* Tables Section */}
+      <div className="flex flex-col gap-10">
+        {/* Current Working Cycle */}
+        {renderCycleTable(
+          {
+            monthlyStats: report.monthlyStats,
+            totalWorkingDays: report.totalWorkingDays,
+            startDate: report.startDate,
+            endDate: null,
+          },
+          "Current Working Period"
+        )}
 
-        {/* Main Table */}
-        <div className="bg-white overflow-hidden">
-          <Table
-            dataKey="index"
-            data={data}
-            columns={columns}
-            pagination={false}
-            globalSearch={false}
-            filterDisplay={undefined}
-            sortMode={undefined}
-            showGridlines
-            footerColumnGroup={footerColumnGroup}
-            groupRowsBy="group"
-            tableClassName="report-table"
-          />
-        </div>
+        {/* Previous Working Cycles */}
+        {report.previousCycles && report.previousCycles.length > 0 && (
+          <div className="flex flex-col gap-10">
+            {report.previousCycles.map((cycle, index) =>
+              renderCycleTable(
+                cycle,
+                `Previous Working Period ${report.previousCycles.length - index}`
+              )
+            )}
+          </div>
+        )}
       </div>
     </div>
   );
