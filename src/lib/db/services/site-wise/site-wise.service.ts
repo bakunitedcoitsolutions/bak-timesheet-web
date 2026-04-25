@@ -201,20 +201,37 @@ export const getSiteWiseReport = async (
     const payrollOT = Number(pd.overTime) || 0;
     const payrollNormalHours = Math.max(0, payrollTotalHours - payrollOT);
     const hourlyRate = Number(pd.hourlyRate) || 0;
-    const totalOtherAllowance = Number(pd.otherAllowances) || 0;
+
+    // Source of truth for totals from PayrollDetails to match report exactly
+    const payrollSalary = Number(pd.salary) || 0;
+    const payrollTotalAllowances = Number(pd.totalAllowances) || 0;
+    const payrollOvertimeAllowance = Number(pd.overtimeAllowance) || 0;
+    const payrollTripAllowance = Number(pd.tripAllowance) || 0;
+    const payrollOtherAllowances = Number(pd.otherAllowances) || 0;
+
+    // Formula matching mappers.ts for Base Salary
+    const employeeBaseSalary = payrollSalary - payrollTotalAllowances;
 
     projectMap.forEach((agg, projectId) => {
       const projectInfo = projectInfoMap.get(projectId)!;
 
-      // Proportional split of payroll hours
+      // Ratios for distribution
+      const totalTsHours = totalTs.hours + totalTs.ot;
+      const projectTsHours = agg.hours + agg.ot;
+
+      const baseRatio = totalTsHours > 0 ? projectTsHours / totalTsHours : 0;
       const hourRatio = totalTs.hours > 0 ? agg.hours / totalTs.hours : 0;
       const otRatio = totalTs.ot > 0 ? agg.ot / totalTs.ot : 0;
 
       const distributedHours = payrollNormalHours * hourRatio;
       const distributedOT = payrollOT * otRatio;
-      const distributedOtherAllowance = totalOtherAllowance * hourRatio;
 
-      const baseSalary = (distributedHours + distributedOT) * hourlyRate;
+      // Distribute Base Salary using total hours ratio
+      const distributedBaseSalary = employeeBaseSalary * baseRatio;
+
+      // Distribute non-breakfast allowances
+      const distributedOtherAllowance = payrollOtherAllowances * hourRatio;
+
       const totalAllowance = agg.breakfast + distributedOtherAllowance;
 
       rawRows.push({
@@ -227,11 +244,11 @@ export const getSiteWiseReport = async (
         breakfastAllowance: agg.breakfast,
         otherAllowance: distributedOtherAllowance,
         totalAllowance: totalAllowance,
-        baseSalary: baseSalary,
+        baseSalary: distributedBaseSalary,
         empCode: pd.employee.employeeCode,
         employeeName: pd.employee.nameEn,
         hourlyRate: hourlyRate,
-        totalSalary: baseSalary + totalAllowance,
+        totalSalary: distributedBaseSalary + totalAllowance,
       });
     });
   });
