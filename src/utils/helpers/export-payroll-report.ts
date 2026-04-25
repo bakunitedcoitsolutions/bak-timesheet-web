@@ -19,9 +19,11 @@ const HEADERS = [
   "ID Number",
   "Designation",
   "Work Days",
+  "Project Hours",
   "Over Time",
   "Total Hours",
   "Hourly Rate",
+  "Base Salary",
   "Breakfast Allowance",
   "Other Allowances",
   "Total Allowances",
@@ -52,9 +54,11 @@ function buildRow(r: PayrollReportRow, index: number): (string | number)[] {
     r.idNumber ?? "",
     r.designation ?? "",
     r.workDays ?? 0,
+    r.projectHours ?? 0,
     r.overTime ?? 0,
     r.totalHours ?? 0,
     Number(fmtHR(r.hourlyRate)),
+    r.baseSalary ?? 0,
     r.breakfastAllowance ?? 0,
     r.otherAllowances ?? 0,
     r.totalAllowances ?? 0,
@@ -91,9 +95,11 @@ function buildSubtotalRow(
     "",
     "",
     sumKey(rows, "workDays"),
+    sumKey(rows, "projectHours"),
     sumKey(rows, "overTime"),
     sumKey(rows, "totalHours"),
     "-",
+    sumKey(rows, "baseSalary"),
     sumKey(rows, "breakfastAllowance"),
     sumKey(rows, "otherAllowances"),
     sumKey(rows, "totalAllowances"),
@@ -196,9 +202,11 @@ export function exportPayrollExcel(
     { wch: 18 }, // ID Number
     { wch: 26 }, // Designation
     { wch: 12 }, // Work Days
+    { wch: 12 }, // Project Hours
     { wch: 12 }, // Over Time
     { wch: 13 }, // Total Hours
     { wch: 13 }, // Hourly Rate
+    { wch: 14 }, // Base Salary
     { wch: 20 }, // Breakfast Allowance
     { wch: 18 }, // Other Allowances
     { wch: 18 }, // Total Allowances

@@ -56,7 +56,8 @@ export const printPayrollReport = (
       <col style="width: 55px;" />
       <col style="width: 55px;" />
       <col style="width: 32px;" />
-      <col style="width: 32px;" />
+      <col style="width: 36px;" />
+      <col style="width: 36px;" />
       <col style="width: 36px;" />
       <col style="width: 36px;" />
       <col style="width: 36px;" />
@@ -127,7 +128,6 @@ export const printPayrollReport = (
           <h1>PAYROLL REPORT</h1>
           <p>
             ${formattedPeriod.toUpperCase()}
-            ${filters.sectionOrDesignationName ? ` | ${filters.sectionOrDesignationName}` : ""}
             ${filters.employeeCodes?.length ? ` | ${filters.employeeCodes.join(", ")}` : ""}
             ${filters.paymentMethodName ? ` | ${filters.paymentMethodName}` : ""}
           </p>
@@ -158,6 +158,7 @@ export const printPayrollReport = (
                   <th>O.T</th>
                   <th>T.Hrs</th>
                   <th>H.R</th>
+                  <th>B.Sal</th>
                   <th>B.Alw</th>
                   <th>O.Alw</th>
                   <th>T.Alw</th>
@@ -190,6 +191,7 @@ export const printPayrollReport = (
                     <td>${fmt(row.overTime)}</td>
                     <td>${fmt(row.totalHours)}</td>
                     <td>${fmtHR(row.hourlyRate)}</td>
+                    <td>${fmt(row.baseSalary)}</td>
                     <td>${fmt(row.breakfastAllowance)}</td>
                     <td>${fmt(row.otherAllowances)}</td>
                     <td>${fmt(row.totalAllowances)}</td>
@@ -223,6 +225,7 @@ export const printPayrollReport = (
                     <td class="bg-footer text-primary text-center">${s("overTime")}</td>
                     <td class="bg-footer text-primary text-center">${s("totalHours")}</td>
                     <td class="bg-footer text-primary text-center">-</td>
+                    <td class="bg-footer text-primary text-center">${s("baseSalary")}</td>
                     <td class="bg-footer text-primary text-center">${s("breakfastAllowance")}</td>
                     <td class="bg-footer text-primary text-center">${s("otherAllowances")}</td>
                     <td class="bg-footer text-primary text-center">${s("totalAllowances")}</td>
@@ -264,6 +267,7 @@ export const printPayrollReport = (
                  <td class="bg-footer text-center" style="font-size: 8.5px;">${fmt(data.reduce((sum, r) => sum + (r.overTime || 0), 0))}</td>
                  <td class="bg-footer text-center" style="font-size: 8.5px;">${fmt(data.reduce((sum, r) => sum + (r.totalHours || 0), 0))}</td>
                  <td class="bg-footer text-center" style="font-size: 8.5px;">-</td>
+                 <td class="bg-footer text-center" style="font-size: 8.5px;">${fmt(data.reduce((sum, r) => sum + (r.baseSalary || 0), 0))}</td>
                  <td class="bg-footer text-center" style="font-size: 8.5px;">${fmt(data.reduce((sum, r) => sum + (r.breakfastAllowance || 0), 0))}</td>
                  <td class="bg-footer text-center" style="font-size: 8.5px;">${fmt(data.reduce((sum, r) => sum + (r.otherAllowances || 0), 0))}</td>
                  <td class="bg-footer text-center" style="font-size: 8.5px;">${fmt(data.reduce((sum, r) => sum + (r.totalAllowances || 0), 0))}</td>

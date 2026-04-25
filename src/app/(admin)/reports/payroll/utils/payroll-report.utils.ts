@@ -12,9 +12,11 @@ export const fmtHR = (v: number) => Number(v || 0).toFixed(2);
 
 export const NUMERIC_KEYS: (keyof PayrollDetailEntry)[] = [
   "workDays",
+  "projectHours",
   "overTime",
   "totalHours",
   "hourlyRate",
+  "baseSalary",
   "breakfastAllowance",
   "otherAllowances",
   "totalAllowances",

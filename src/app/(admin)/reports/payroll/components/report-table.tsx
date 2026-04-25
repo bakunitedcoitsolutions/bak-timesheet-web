@@ -14,7 +14,7 @@ import {
   calculateSectionTotals,
 } from "../utils/payroll-report.utils";
 import { Table, TableColumn, Badge } from "@/components";
-import { formatNum, formatPayrollPeriod } from "@/utils/helpers";
+import { formatPayrollPeriod } from "@/utils/helpers";
 
 interface ReportTableProps {
   year: number;
@@ -52,7 +52,6 @@ export const ReportTable = ({
         ? payrollSectionIds[0] === 6 || payrollSectionIds[0] === 15
         : payrollSectionIds?.includes?.(6) && payrollSectionIds?.includes?.(15)
       : false;
-  console;
 
   const columns = useMemo(
     (): TableColumn<PayrollReportRow>[] => [
@@ -116,6 +115,16 @@ export const ReportTable = ({
       },
       {
         ...tableCommonProps,
+        field: "projectHours",
+        header: "Project Hours",
+        body: (r) => (
+          <span className="text-sm font-semibold text-center block">
+            {fmt(r.projectHours)}
+          </span>
+        ),
+      },
+      {
+        ...tableCommonProps,
         field: "overTime",
         header: "Over Time",
         body: (r) => (
@@ -139,8 +148,18 @@ export const ReportTable = ({
         field: "hourlyRate",
         header: "Hourly Rate",
         body: (r) => (
-          <span className="text-sm text-center font-semibold bold">
+          <span className="text-sm text-center font-bold">
             {fmtHR(r.hourlyRate)}
+          </span>
+        ),
+      },
+      {
+        ...tableCommonProps,
+        field: "baseSalary",
+        header: "Base Salary",
+        body: (r) => (
+          <span className="text-sm font-semibold text-center block">
+            {fmt(r.baseSalary)}
           </span>
         ),
       },
@@ -192,7 +211,6 @@ export const ReportTable = ({
               ),
             },
           ]),
-
       {
         ...tableCommonProps,
         field: "totalAllowances",

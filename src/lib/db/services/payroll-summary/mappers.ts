@@ -43,6 +43,8 @@ export interface PayrollDetailEntry {
   isCardDelivered: boolean;
   tripAllowance: number;
   overtimeAllowance: number;
+  projectHours: number;
+  baseSalary: number;
   payrollSectionId: number | null;
 }
 
@@ -101,6 +103,12 @@ export const mapPayrollDetailToEntry = (
     isCardDelivered: d?.employee?.isCardDelivered ?? false,
     tripAllowance: d?.tripAllowance || 0,
     overtimeAllowance: d?.overtimeAllowance || 0,
+    projectHours: (d.totalHours || 0) - (d.overTime || 0),
+    baseSalary:
+      (d.salary || 0) -
+      (d.totalAllowances || 0) -
+      (d.overtimeAllowance || 0) -
+      (d.tripAllowance || 0),
     payrollSectionId: d?.employee?.payrollSectionId || null,
   };
 };
