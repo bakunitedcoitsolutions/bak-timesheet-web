@@ -239,7 +239,7 @@ export const deleteTrafficChallan = async (
   id: number,
   branchId?: number | null
 ) => {
-  return prisma.$transaction(async (tx: PrismaTransactionClient) => {
+  const existingTrafficChallan = await prisma.$transaction(async (tx: PrismaTransactionClient) => {
     // Check if traffic challan exists
     const existingTrafficChallan = await tx.trafficChallan.findUnique({
       where: { id },
@@ -266,14 +266,16 @@ export const deleteTrafficChallan = async (
       where: { id },
     });
 
-    // Trigger payroll refresh if active
-    await refreshPayrollForEmployeesIfActive(
-      [existingTrafficChallan.employeeId],
-      existingTrafficChallan.date
-    );
-
-    return { success: true };
+    return existingTrafficChallan;
   });
+
+  // Trigger payroll refresh if active
+  await refreshPayrollForEmployeesIfActive(
+    [existingTrafficChallan.employeeId],
+    existingTrafficChallan.date
+  );
+
+  return { success: true };
 };
 
 /**

@@ -229,7 +229,7 @@ export const updateLoan = async (id: number, data: UpdateLoanData) => {
  * Delete loan
  */
 export const deleteLoan = async (id: number, branchId?: number) => {
-  return prisma.$transaction(async (tx: PrismaTransactionClient) => {
+  const existingLoan = await prisma.$transaction(async (tx: PrismaTransactionClient) => {
     // Check if loan exists
     const existingLoan = await tx.loan.findUnique({
       where: { id },
@@ -254,14 +254,16 @@ export const deleteLoan = async (id: number, branchId?: number) => {
       where: { id },
     });
 
-    // Trigger payroll refresh if active
-    await refreshPayrollForEmployeesIfActive(
-      [existingLoan.employeeId],
-      existingLoan.date
-    );
-
-    return { success: true };
+    return existingLoan;
   });
+
+  // Trigger payroll refresh if active
+  await refreshPayrollForEmployeesIfActive(
+    [existingLoan.employeeId],
+    existingLoan.date
+  );
+
+  return { success: true };
 };
 
 /**
