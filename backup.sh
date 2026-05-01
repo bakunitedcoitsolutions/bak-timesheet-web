@@ -3,10 +3,10 @@
 # ==============================
 # CONFIG
 # ==============================
-DB_URL="postgresql://postgres.xvawguznlgvlfygfexfz:[PASSWORD]@aws-1-ap-southeast-2.pooler.supabase.com:5432/postgres"
+DB_URL="postgresql://postgres.xvawguznlgvlfygfexfz:u4jEd8Jx2zm2NOo0@aws-1-ap-southeast-2.pooler.supabase.com:5432/postgres"
 
 # Output file
-DUMP_FILE="full_db_supabase_dump.sql"
+DUMP_FILE="test_full_db_supabase_dump.sql"
 
 # ==============================
 # START BACKUP
