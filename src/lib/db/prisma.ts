@@ -68,12 +68,23 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 // Check connection and log status
-prisma.$connect()
+prisma
+  .$connect()
   .then(() => {
     console.log("Prisma connected successfully");
   })
   .catch((err) => {
     console.error("Prisma connection error:", err.message);
+  });
+
+// Check connection and log status
+prisma
+  .$disconnect()
+  .then(() => {
+    console.log("Prisma disconnected successfully");
+  })
+  .catch((err) => {
+    console.error("Prisma disconnection error:", err.message);
   });
 
 export default prisma;
