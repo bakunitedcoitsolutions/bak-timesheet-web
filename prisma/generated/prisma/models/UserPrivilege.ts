@@ -214,7 +214,7 @@ export type UserPrivilegeGroupByOutputType = {
   _max: UserPrivilegeMaxAggregateOutputType | null
 }
 
-type GetUserPrivilegeGroupByPayload<T extends UserPrivilegeGroupByArgs> = Prisma.PrismaPromise<
+export type GetUserPrivilegeGroupByPayload<T extends UserPrivilegeGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<UserPrivilegeGroupByOutputType, T['by']> &
       {
@@ -1470,6 +1470,11 @@ export type UserPrivilegeFindManyArgs<ExtArgs extends runtime.Types.Extensions.I
    * Skip the first `n` UserPrivileges.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of UserPrivileges.
+   */
   distinct?: Prisma.UserPrivilegeScalarFieldEnum | Prisma.UserPrivilegeScalarFieldEnum[]
 }
 

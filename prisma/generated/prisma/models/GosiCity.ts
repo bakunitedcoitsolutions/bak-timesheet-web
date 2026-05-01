@@ -221,7 +221,7 @@ export type GosiCityGroupByOutputType = {
   _max: GosiCityMaxAggregateOutputType | null
 }
 
-type GetGosiCityGroupByPayload<T extends GosiCityGroupByArgs> = Prisma.PrismaPromise<
+export type GetGosiCityGroupByPayload<T extends GosiCityGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<GosiCityGroupByOutputType, T['by']> &
       {
@@ -1543,6 +1543,11 @@ export type GosiCityFindManyArgs<ExtArgs extends runtime.Types.Extensions.Intern
    * Skip the first `n` GosiCities.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of GosiCities.
+   */
   distinct?: Prisma.GosiCityScalarFieldEnum | Prisma.GosiCityScalarFieldEnum[]
 }
 

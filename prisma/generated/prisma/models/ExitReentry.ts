@@ -243,7 +243,7 @@ export type ExitReentryGroupByOutputType = {
   _max: ExitReentryMaxAggregateOutputType | null
 }
 
-type GetExitReentryGroupByPayload<T extends ExitReentryGroupByArgs> = Prisma.PrismaPromise<
+export type GetExitReentryGroupByPayload<T extends ExitReentryGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<ExitReentryGroupByOutputType, T['by']> &
       {
@@ -1808,6 +1808,11 @@ export type ExitReentryFindManyArgs<ExtArgs extends runtime.Types.Extensions.Int
    * Skip the first `n` ExitReentries.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of ExitReentries.
+   */
   distinct?: Prisma.ExitReentryScalarFieldEnum | Prisma.ExitReentryScalarFieldEnum[]
 }
 

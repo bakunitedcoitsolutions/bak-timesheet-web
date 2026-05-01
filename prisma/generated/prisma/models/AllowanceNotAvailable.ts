@@ -249,7 +249,7 @@ export type AllowanceNotAvailableGroupByOutputType = {
   _max: AllowanceNotAvailableMaxAggregateOutputType | null
 }
 
-type GetAllowanceNotAvailableGroupByPayload<T extends AllowanceNotAvailableGroupByArgs> = Prisma.PrismaPromise<
+export type GetAllowanceNotAvailableGroupByPayload<T extends AllowanceNotAvailableGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<AllowanceNotAvailableGroupByOutputType, T['by']> &
       {
@@ -1727,6 +1727,11 @@ export type AllowanceNotAvailableFindManyArgs<ExtArgs extends runtime.Types.Exte
    * Skip the first `n` AllowanceNotAvailables.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of AllowanceNotAvailables.
+   */
   distinct?: Prisma.AllowanceNotAvailableScalarFieldEnum | Prisma.AllowanceNotAvailableScalarFieldEnum[]
 }
 

@@ -250,7 +250,7 @@ export type DesignationGroupByOutputType = {
   _max: DesignationMaxAggregateOutputType | null
 }
 
-type GetDesignationGroupByPayload<T extends DesignationGroupByArgs> = Prisma.PrismaPromise<
+export type GetDesignationGroupByPayload<T extends DesignationGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<DesignationGroupByOutputType, T['by']> &
       {
@@ -1812,6 +1812,11 @@ export type DesignationFindManyArgs<ExtArgs extends runtime.Types.Extensions.Int
    * Skip the first `n` Designations.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of Designations.
+   */
   distinct?: Prisma.DesignationScalarFieldEnum | Prisma.DesignationScalarFieldEnum[]
 }
 

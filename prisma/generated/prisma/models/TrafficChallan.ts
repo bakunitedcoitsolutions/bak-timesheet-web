@@ -243,7 +243,7 @@ export type TrafficChallanGroupByOutputType = {
   _max: TrafficChallanMaxAggregateOutputType | null
 }
 
-type GetTrafficChallanGroupByPayload<T extends TrafficChallanGroupByArgs> = Prisma.PrismaPromise<
+export type GetTrafficChallanGroupByPayload<T extends TrafficChallanGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<TrafficChallanGroupByOutputType, T['by']> &
       {
@@ -1660,6 +1660,11 @@ export type TrafficChallanFindManyArgs<ExtArgs extends runtime.Types.Extensions.
    * Skip the first `n` TrafficChallans.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of TrafficChallans.
+   */
   distinct?: Prisma.TrafficChallanScalarFieldEnum | Prisma.TrafficChallanScalarFieldEnum[]
 }
 
