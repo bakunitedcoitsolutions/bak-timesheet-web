@@ -2,4 +2,4 @@
  * Redis/Cache Exports
  */
 
-export { redis, cache } from "./upstash";
+export { redis, cache } from "./ioredis";

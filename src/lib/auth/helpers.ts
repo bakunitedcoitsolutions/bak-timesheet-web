@@ -3,7 +3,7 @@
  */
 
 import { auth } from "./auth";
-import { cache } from "@/lib/redis/upstash";
+import { cache } from "@/lib/redis/ioredis";
 import { USER_ROLES } from "@/utils/user.utility";
 
 /**
