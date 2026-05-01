@@ -35,10 +35,12 @@ export default function Header({ collapsed, setCollapsed }: HeaderProps) {
 
   const handleLogout = async () => {
     try {
-      await signOut(undefined as any);
-      queryClient.clear();
       router.replace("/login");
-    } catch {}
+      await signOut(undefined as any);
+    } catch {
+    } finally {
+      queryClient.clear();
+    }
   };
 
   const getPageTitle = (path: string) => {
