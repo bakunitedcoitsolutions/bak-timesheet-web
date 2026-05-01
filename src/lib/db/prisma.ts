@@ -67,4 +67,13 @@ if (process.env.NODE_ENV !== "production") {
   globalForPrisma.prisma = prisma;
 }
 
+// Check connection and log status
+prisma.$connect()
+  .then(() => {
+    console.log("Prisma connected successfully");
+  })
+  .catch((err) => {
+    console.error("Prisma connection error:", err.message);
+  });
+
 export default prisma;
