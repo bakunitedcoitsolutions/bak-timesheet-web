@@ -19,6 +19,7 @@ import {
   months,
   flattenMonthlyReportData,
 } from "./utils/monthly-timesheet.utils";
+import { PrintViewModal } from "./components/print-view-modal";
 
 const MonthlyTimesheetReportPage = () => {
   const router = useRouter();
@@ -44,6 +45,7 @@ const MonthlyTimesheetReportPage = () => {
   // Pagination states
   const [first, setFirst] = useState(0);
   const [rows, setRows] = useState(10);
+  const [isPrintModalVisible, setIsPrintModalVisible] = useState(false);
 
   // Data fetching
   const { data: reportResponse, isLoading } = useGetMonthlyTimesheetReport(
@@ -129,7 +131,7 @@ const MonthlyTimesheetReportPage = () => {
         className={`bg-white mt-4 overflow-hidden ${centuryGothic.variable} ${tanseekArabic.variable}`}
       >
         <div className="mb-4 px-6 print:hidden flex flex-col md:flex-row justify-between items-center gap-4">
-          <span className="text-sm text-gray-600 font-medium order-2 md:order-1">
+          <span className="text-sm text-gray-600 font-medium ">
             Showing <span className="text-primary font-bold">{first + 1}</span>{" "}
             to{" "}
             <span className="text-primary font-bold">
@@ -138,22 +140,33 @@ const MonthlyTimesheetReportPage = () => {
             of <span className="text-primary font-bold">{reports.length}</span>{" "}
             employees
           </span>
-          <Paginator
-            rows={rows}
-            first={first}
-            totalRecords={reports.length}
-            rowsPerPageOptions={[10, 20, 50]}
-            onPageChange={(e) => {
-              setFirst(e.first);
-              setRows(e.rows);
-              const tableWrapper = contentRef.current?.querySelector(
-                ".p-datatable-wrapper"
-              );
-              tableWrapper?.scrollTo({ top: 0, behavior: "smooth" });
-            }}
-            template="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
-            className="paginator-sm border-none! p-0! order-1 md:order-2 bg-transparent!"
-          />
+          <div className="flex items-center flex-col-reverse gap-4 md:flex-row">
+            <Button
+              size="small"
+              variant="text"
+              label="See Print View"
+              onClick={() => setIsPrintModalVisible(true)}
+              disabled={reports.length === 0}
+              className="py-0! h-10!"
+            />
+
+            <Paginator
+              rows={rows}
+              first={first}
+              totalRecords={reports.length}
+              rowsPerPageOptions={[10, 20, 50]}
+              onPageChange={(e) => {
+                setFirst(e.first);
+                setRows(e.rows);
+                const tableWrapper = contentRef.current?.querySelector(
+                  ".p-datatable-wrapper"
+                );
+                tableWrapper?.scrollTo({ top: 0, behavior: "smooth" });
+              }}
+              template="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
+              className="paginator-sm border-none! p-0! order-1 md:order-2 bg-transparent!"
+            />
+          </div>
         </div>
 
         <ReportTable
@@ -163,6 +176,14 @@ const MonthlyTimesheetReportPage = () => {
           year={year}
         />
       </div>
+
+      <PrintViewModal
+        visible={isPrintModalVisible}
+        onHide={() => setIsPrintModalVisible(false)}
+        reports={reports}
+        monthName={monthName}
+        year={year}
+      />
     </div>
   );
 };
