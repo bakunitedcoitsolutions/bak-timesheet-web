@@ -108,6 +108,7 @@ export const useStep4Logic = ({ employeeId }: UseStep4LogicProps) => {
     { label: "Al Rajhi Bank", value: "Al Rajhi Bank" },
     { label: "Alinma Bank", value: "Alinma Bank" },
     { label: "Saudi British Bank", value: "Saudi British Bank" },
+    { label: "Al Jazira Bank", value: "Al Jazira Bank" },
     { label: "Other", value: "Other" },
   ];
 

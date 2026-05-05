@@ -104,6 +104,7 @@ export const ProjectForm = ({
           <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
             <FormItem name="branchId">
               <Dropdown
+                filter
                 showClear
                 label="Branch"
                 className="w-full"

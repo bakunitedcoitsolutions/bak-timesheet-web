@@ -52,6 +52,7 @@ export const UserForm = ({
       <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
         <FormItem name="userRoleId">
           <Dropdown
+            filter
             label="User Role"
             className="w-full"
             placeholder="Choose"
@@ -85,6 +86,7 @@ export const UserForm = ({
         <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
           <FormItem name="branchId">
             <Dropdown
+              filter
               label="Branch"
               className="w-full"
               options={branchOptions}

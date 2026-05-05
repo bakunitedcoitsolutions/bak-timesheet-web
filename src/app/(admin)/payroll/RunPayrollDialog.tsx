@@ -102,21 +102,23 @@ export const RunPayrollDialog = ({
         <div className="flex flex-col gap-2">
           <label className="font-medium text-sm">Year</label>
           <Dropdown
+            filter
             value={year}
-            options={yearOptions}
-            onChange={(e) => setYear(e.value)}
             className="w-full"
+            options={yearOptions}
             placeholder="Select Year"
+            onChange={(e) => setYear(e.value)}
           />
         </div>
         <div className="flex flex-col gap-2">
           <label className="font-medium text-sm">Month</label>
           <Dropdown
+            filter
             value={month}
-            options={monthOptions}
-            onChange={(e) => setMonth(e.value)}
             className="w-full"
+            options={monthOptions}
             placeholder="Select Month"
+            onChange={(e) => setMonth(e.value)}
           />
         </div>
         <div className="flex flex-col gap-2">

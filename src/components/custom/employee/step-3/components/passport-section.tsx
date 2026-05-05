@@ -22,6 +22,7 @@ const PassportSection: React.FC<PassportSectionProps> = ({
         className={classNames(FORM_FIELD_WIDTHS["2"])}
       >
         <Dropdown
+          filter
           label="Nationality"
           className="w-full"
           options={nationalityOptions}

@@ -29,6 +29,7 @@ const GosiDetailsSection: React.FC<GosiDetailsSectionProps> = ({
         className={classNames(FORM_FIELD_WIDTHS["2"])}
       >
         <Dropdown
+          filter
           label="City"
           className="w-full"
           options={gosiCityOptions}
