@@ -18,12 +18,28 @@ export const PrintViewModal = ({
   visible,
   onHide,
   reports,
+  monthName,
+  year,
 }: PrintViewModalProps) => {
   const [zoom, setZoom] = useState(0.7);
 
   useEffect(() => {
     const handleResize = () => {
-      setZoom(window.innerWidth < 786 ? 0.5 : 0.7);
+      if (window.innerWidth > 1100) {
+        setZoom(1);
+      } else if (window.innerWidth > 900 && window.innerWidth <= 1100) {
+        setZoom(0.9);
+      } else if (window.innerWidth > 786 && window.innerWidth <= 900) {
+        setZoom(0.7);
+      } else if (window.innerWidth > 600 && window.innerWidth <= 786) {
+        setZoom(0.6);
+      } else if (window.innerWidth > 500 && window.innerWidth <= 600) {
+        setZoom(0.5);
+      } else if (window.innerWidth > 400 && window.innerWidth <= 500) {
+        setZoom(0.4);
+      } else {
+        setZoom(0.3);
+      }
     };
 
     handleResize();
@@ -77,10 +93,10 @@ export const PrintViewModal = ({
               })}
             >
               <div className="bg-gray-50 p-2 w-full border border-gray-300 border-b-0 flex justify-between items-center">
-                <div className="flex flex-col">
+                <div className="flex flex-1 flex-col">
                   <div className="font-bold text-primary-700 flex items-center gap-2">
-                    <span className="text-base">
-                      {report.employeeCode} - {report.nameEn}
+                    <span className="text-xs">
+                      {report.employeeCode || ""} - {report.nameEn}
                     </span>
                     {report.isFixed && (
                       <span className="px-1.5 py-0.5 bg-gray-200 rounded text-[9px] font-bold uppercase">
@@ -89,9 +105,13 @@ export const PrintViewModal = ({
                     )}
                   </div>
                   <div className="text-xs text-gray-600">
-                    {report.designationName || "No Designation"}
+                    {report.designationName || "No Designation"} -{" "}
+                    <span className="text-xs font-medium text-primary uppercase">
+                      {monthName} {year}
+                    </span>
                   </div>
                 </div>
+
                 <div className="text-right flex flex-col items-end">
                   <div className="text-[10px] text-gray-500 font-semibold uppercase tracking-wider">
                     ID Card No
@@ -107,11 +127,11 @@ export const PrintViewModal = ({
                     <th className="border border-gray-300 p-2 w-10 text-center">
                       #
                     </th>
-                    <th className="border border-gray-300 p-2 w-28 text-center">
+                    <th className="border border-gray-300 p-2 w-14 text-center">
                       Date
                     </th>
-                    <th className="border border-gray-300 p-2 text-left">
-                      Project 1
+                    <th className="border border-gray-300 p-2 min-w-14 text-left">
+                      Prj. 1
                     </th>
                     <th className="border border-gray-300 p-2 w-14 text-center">
                       Hrs
@@ -119,8 +139,8 @@ export const PrintViewModal = ({
                     <th className="border border-gray-300 p-2 w-14 text-center">
                       OT
                     </th>
-                    <th className="border border-gray-300 p-2 text-left">
-                      Project 2
+                    <th className="border border-gray-300 p-2 min-w-14 text-left">
+                      Prj. 2
                     </th>
                     <th className="border border-gray-300 p-2 w-14 text-center">
                       Hrs
@@ -143,7 +163,7 @@ export const PrintViewModal = ({
                         {record.day}
                       </td>
                       <td className="border border-gray-300 p-1.5 text-center font-medium">
-                        {record.date}
+                        {record.date.split("-")[0]}
                       </td>
                       <td className="border border-gray-300 p-1.5 text-left truncate max-w-[150px]">
                         {record.project1Name || "-"}
