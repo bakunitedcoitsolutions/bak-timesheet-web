@@ -52,7 +52,7 @@ export const EmployeeProfilePicture = ({
     }
 
     // Generate signed URL for private file
-    getSignedUrl(STORAGE_CONFIG.EMPLOYEES_BUCKET, profilePicture, 31536000)
+    getSignedUrl(STORAGE_CONFIG.EMPLOYEES_BUCKET, profilePicture)
       .then((signedUrl) => {
         setImageUrl(signedUrl);
       })
