@@ -10,6 +10,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "connect": "./connect-vps.sh",
     "lint:fix": "eslint --fix",
     "format": "prettier --write .",
     "db:generate": "prisma generate",

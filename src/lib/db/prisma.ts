@@ -78,13 +78,13 @@ prisma
   });
 
 // Check connection and log status
-prisma
-  .$disconnect()
-  .then(() => {
-    console.log("Prisma disconnected successfully");
-  })
-  .catch((err) => {
-    console.error("Prisma disconnection error:", err.message);
-  });
+// prisma
+//   .$disconnect()
+//   .then(() => {
+//     console.log("Prisma disconnected successfully");
+//   })
+//   .catch((err) => {
+//     console.error("Prisma disconnection error:", err.message);
+//   });
 
 export default prisma;
