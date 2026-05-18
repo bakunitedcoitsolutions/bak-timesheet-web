@@ -15,6 +15,8 @@ export interface SiteWiseReportRow {
   employeeName?: string;
   hourlyRate?: number;
   totalSalary: number;
+  branchId?: number | null;
+  isActive?: boolean;
 }
 
 export const GetSiteWiseReportSchema = z.object({

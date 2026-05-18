@@ -104,7 +104,10 @@ export const getSiteWiseReport = async (
     Map<number, { hours: number; ot: number; breakfast: number }>
   >();
   const empTotalTimesheet = new Map<number, { hours: number; ot: number }>();
-  const projectInfoMap = new Map<number, { id: number; nameEn: string }>();
+  const projectInfoMap = new Map<
+    number,
+    { id: number; nameEn: string; branchId: number | null; isActive: boolean }
+  >();
 
   // Track remaining breakfast allowance per employee for daily calculation
   const empRemainingBreakfast = new Map<number, number>(
@@ -129,6 +132,8 @@ export const getSiteWiseReport = async (
         projectInfoMap.set(ts.project1Id, {
           id: ts.project1Id,
           nameEn: ts.project1.nameEn,
+          branchId: ts.project1.branchId,
+          isActive: ts.project1.isActive,
         });
 
         const current = projectMap.get(ts.project1Id) || {
@@ -161,6 +166,8 @@ export const getSiteWiseReport = async (
         projectInfoMap.set(ts.project2Id, {
           id: ts.project2Id,
           nameEn: ts.project2.nameEn,
+          branchId: ts.project2.branchId,
+          isActive: ts.project2.isActive,
         });
 
         const current = projectMap.get(ts.project2Id) || {
@@ -249,6 +256,8 @@ export const getSiteWiseReport = async (
         employeeName: pd.employee.nameEn,
         hourlyRate: hourlyRate,
         totalSalary: distributedBaseSalary + totalAllowance,
+        branchId: projectInfo.branchId,
+        isActive: projectInfo.isActive,
       });
     });
   });
@@ -280,6 +289,8 @@ export const getSiteWiseReport = async (
           totalAllowance: row.totalAllowance,
           baseSalary: row.baseSalary,
           totalSalary: row.totalSalary,
+          branchId: row.branchId,
+          isActive: row.isActive,
         });
       }
     });

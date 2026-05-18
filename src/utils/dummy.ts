@@ -31,6 +31,7 @@ interface ProjectExpense {
   image: string;
   status: "active" | "inactive";
   expenses: number;
+  branchId?: number | null;
 }
 
 const expensesByProject: ProjectExpense[] = [
