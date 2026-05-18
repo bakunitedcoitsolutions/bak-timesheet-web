@@ -202,25 +202,6 @@ export const uploadMultipleFiles = async (
  * // Use signedUrl to display the image
  * ```
  */
-// export const getSignedUrl = async (
-//   bucket: string,
-//   filePath: string,
-//   expiresIn: number = 3600
-// ): Promise<string> => {
-//   if (!filePath) return "";
-//   if (filePath?.includes("http")) return filePath;
-
-//   const { data, error } = await supabase.storage
-//     .from(bucket)
-//     .createSignedUrl(filePath, expiresIn);
-
-//   if (error) {
-//     throw new Error(`Failed to generate signed URL: ${error.message}`);
-//   }
-
-//   return data.signedUrl;
-// };
-
 // When self hosted
 export const getSignedUrl = async (
   bucket: string,

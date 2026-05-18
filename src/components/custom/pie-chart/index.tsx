@@ -3,8 +3,13 @@ import { Chart } from "primereact/chart";
 import { useState, useEffect } from "react";
 import { ChartData, ChartOptions } from "chart.js";
 import ChartDataLabels from "chartjs-plugin-datalabels";
+import { EmployeeBreakdownDTO } from "@/lib/db/services/dashboard";
 
-export default function PieChart() {
+export default function PieChart({
+  employeeBreakdown,
+}: {
+  employeeBreakdown: EmployeeBreakdownDTO | null | undefined;
+}) {
   const [chartData, setChartData] = useState({});
   const [chartOptions, setChartOptions] = useState({});
 
@@ -14,7 +19,11 @@ export default function PieChart() {
       datasets: [
         {
           label: "Employee Distribution",
-          data: [45, 45, 10],
+          data: [
+            employeeBreakdown?.salaried || 0,
+            employeeBreakdown?.salariedDeductable || 0,
+            employeeBreakdown?.labor || 0,
+          ],
           backgroundColor: [
             "#8B1A1A", // Dark red/maroon for Salaried
             "#FFD4C4", // Light peach/pink for Salaried (Deducted)
@@ -88,7 +97,7 @@ export default function PieChart() {
 
     setChartData(data);
     setChartOptions(options);
-  }, []);
+  }, [employeeBreakdown]);
 
   return (
     <div className="w-full h-full min-w-0 overflow-x-auto relative flex items-center justify-center">
