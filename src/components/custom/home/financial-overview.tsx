@@ -1,11 +1,24 @@
 "use client";
 
 import { useState } from "react";
+import numeral from "numeral";
+import { Skeleton } from "primereact/skeleton";
+
 import { BarChart, Dropdown } from "@/components";
-import { projects } from "@/utils/dummy";
+import { useGetFinancialOverview } from "@/lib/db/services/dashboard";
 
 const FinancialOverview = () => {
-  const [selectedProject, setSelectedProject] = useState<string>("0");
+  const currentYear = new Date().getFullYear();
+  const [selectedYear, setSelectedYear] = useState<number>(currentYear);
+
+  const yearOptions = Array.from({ length: currentYear - 2023 + 1 }, (_, i) => {
+    const year = currentYear - i;
+    return { label: year.toString(), value: year };
+  });
+
+  const { data: overview, isLoading } = useGetFinancialOverview({
+    year: selectedYear,
+  });
 
   return (
     <div className="bg-white rounded-xl w-full p-6 col-span-1 xl:col-span-2">
@@ -18,17 +31,24 @@ const FinancialOverview = () => {
             Track your income and expenses over time
           </p>
         </div>
-        <Dropdown
-          small
-          filter
-          options={projects}
-          value={selectedProject}
-          placeholder="Select Project"
-          onChange={(e) => setSelectedProject(e.value)}
-        />
+        <div className="w-36">
+          <Dropdown
+            small
+            filter
+            options={yearOptions}
+            value={selectedYear}
+            placeholder="Select Year"
+            className="w-full"
+            onChange={(e) => setSelectedYear(e.value)}
+          />
+        </div>
       </div>
       <div className="h-[500px] w-full min-w-0 mt-6 relative">
-        <BarChart />
+        {isLoading ? (
+          <Skeleton width="100%" height="95%" />
+        ) : (
+          <BarChart monthlyExpenses={overview?.monthlyExpenses} />
+        )}
       </div>
       <div className="flex items-center gap-2 justify-center">
         <div
@@ -38,7 +58,13 @@ const FinancialOverview = () => {
         </div>
         <div>
           <p className="text-gray-500 text-sm font-normal">Total Expenses</p>
-          <p className="text-base font-semibold">SAR 96,640</p>
+          {isLoading ? (
+            <Skeleton width="6rem" height="1.5rem" className="mt-1" />
+          ) : (
+            <p className="text-base font-semibold uppercase">
+              SAR {numeral(overview?.totalExpenses ?? 0).format("0,0")}
+            </p>
+          )}
         </div>
       </div>
     </div>

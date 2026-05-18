@@ -4,7 +4,11 @@
  */
 
 import { prisma } from "../../prisma";
-import { DashboardStatsDTO, EmployeeBreakdownDTO } from "./dashboard.dto";
+import {
+  DashboardStatsDTO,
+  EmployeeBreakdownDTO,
+  FinancialOverviewDTO,
+} from "./dashboard.dto";
 
 export const getDashboardStats = async (
   branchId?: number
@@ -135,5 +139,42 @@ export const getEmployeeBreakdown = async (
     salaried,
     salariedDeductable,
     total: salariedDeductable + salaried + labor,
+  };
+};
+
+export const getFinancialOverview = async (
+  year: number,
+  branchId?: number
+): Promise<FinancialOverviewDTO> => {
+  const branchFilter = branchId ? { branchId } : {};
+
+  const summaries = await prisma.payrollSummary.findMany({
+    where: {
+      payrollYear: year,
+      ...branchFilter,
+    },
+    select: {
+      payrollMonth: true,
+      totalCashSalary: true,
+      totalCardSalary: true,
+    },
+  });
+
+  const monthlyExpenses = Array(12).fill(0);
+  let totalExpenses = 0;
+
+  summaries.forEach((summary) => {
+    // payrollMonth is 1-12
+    const monthIndex = summary.payrollMonth - 1;
+    if (monthIndex >= 0 && monthIndex < 12) {
+      const amount = (summary.totalCashSalary || 0) + (summary.totalCardSalary || 0);
+      monthlyExpenses[monthIndex] += amount;
+      totalExpenses += amount;
+    }
+  });
+
+  return {
+    monthlyExpenses,
+    totalExpenses,
   };
 };

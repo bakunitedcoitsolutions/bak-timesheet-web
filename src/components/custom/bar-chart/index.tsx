@@ -2,8 +2,13 @@
 import { Chart } from "primereact/chart";
 import { useState, useEffect } from "react";
 import { ChartData, ChartOptions } from "chart.js";
+import numeral from "numeral";
 
-export default function BarChart() {
+export default function BarChart({
+  monthlyExpenses,
+}: {
+  monthlyExpenses?: number[];
+}) {
   const [chartData, setChartData] = useState({});
   const [chartOptions, setChartOptions] = useState({});
 
@@ -61,7 +66,7 @@ export default function BarChart() {
       datasets: [
         {
           label: "Salary Expenses",
-          data: [65, 59, 80, 81, 56, 55, 40, 30, 20, 59, 15, 81],
+          data: monthlyExpenses || Array(12).fill(0),
           borderColor: "#FAE7E9",
           backgroundColor: "#FAE7E9",
           borderRadius: 6,
@@ -81,7 +86,7 @@ export default function BarChart() {
         tooltip: {
           callbacks: {
             label: (context) => {
-              return ` ${context.dataset.label}: SAR ${context.raw}`;
+              return ` ${context.dataset.label}: SAR ${numeral(context.raw ?? 0).format("0,0")}`;
             },
             title: (context) => {
               return `${monthNames.full[context[0].dataIndex]}`;
@@ -89,7 +94,6 @@ export default function BarChart() {
           },
         },
       },
-
       scales: {
         x: {
           ticks: {
@@ -121,7 +125,7 @@ export default function BarChart() {
 
     setChartData(data);
     setChartOptions(options);
-  }, []);
+  }, [monthlyExpenses]);
 
   return (
     <div className="w-full h-full min-w-0 overflow-x-auto relative">

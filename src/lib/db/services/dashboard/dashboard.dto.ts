@@ -15,3 +15,8 @@ export type EmployeeBreakdownDTO = {
   labor: number;
   total: number;
 };
+
+export type FinancialOverviewDTO = {
+  monthlyExpenses: number[];
+  totalExpenses: number;
+};

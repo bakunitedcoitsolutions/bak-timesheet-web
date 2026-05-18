@@ -17,3 +17,10 @@ export const GetEmployeeBreakdownSchema = z.object({
 });
 
 export type GetEmployeeBreakdownInput = z.infer<typeof GetEmployeeBreakdownSchema>;
+
+export const GetFinancialOverviewSchema = z.object({
+  year: z.number().int().positive(),
+  branchId: z.number().int().positive().optional(),
+});
+
+export type GetFinancialOverviewInput = z.infer<typeof GetFinancialOverviewSchema>;
