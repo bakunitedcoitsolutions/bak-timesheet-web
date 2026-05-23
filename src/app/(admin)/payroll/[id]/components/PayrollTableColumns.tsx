@@ -8,10 +8,10 @@ import {
   calculateNetSalaryPayable,
   calculateNetTrafficChallan,
 } from "../utils";
-import { formatNum } from "@/utils/helpers";
 import { ActionButtons } from "./ActionButtons";
 import { StatusRowFilter } from "./StatusRowFilter";
 import { useGlobalData } from "@/context/GlobalDataContext";
+import { formatNum, isTruckHouseSection } from "@/utils/helpers";
 import { PayrollDetailEntry } from "@/lib/db/services/payroll-summary/mappers";
 import { Input, Badge, Dropdown, TableColumn, NumberInput } from "@/components";
 
@@ -185,7 +185,7 @@ export const usePayrollTableColumns = ({
           </div>
         ),
       },
-      ...(payrollSectionId === 6 || payrollSectionId === 15
+      ...(isTruckHouseSection(payrollSectionId)
         ? [
             {
               field: "tripAllowance",
@@ -487,7 +487,7 @@ export const usePayrollTableColumns = ({
             filter
             options={paymentMethodOptions}
             disabled={rowData.payrollSummaryStatusId === 3}
-            className="w-[200px]! h-10!"
+            className="w-50! h-10!"
             placeholder="Choose Method"
             optionValue="value"
             value={
@@ -515,7 +515,7 @@ export const usePayrollTableColumns = ({
             small
             options={statusOptions.slice(0, 2)}
             disabled={rowData.payrollSummaryStatusId === 3}
-            className="w-[150px]! h-10!"
+            className="w-37.5! h-10!"
             placeholder="Pending"
             optionValue="value"
             value={rowData.payrollStatusId}

@@ -3,18 +3,21 @@
 import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { useReactToPrint } from "react-to-print";
-import { ProgressSpinner } from "primereact/progressspinner";
 import { centuryGothic, tanseekArabic } from "@/app/fonts";
+import { ProgressSpinner } from "primereact/progressspinner";
 
+import {
+  useGlobalData,
+  GlobalDataDesignation,
+} from "@/context/GlobalDataContext";
 import { Button, TitleHeader } from "@/components";
-import { useGlobalData, GlobalDataDesignation } from "@/context/GlobalDataContext";
 import { parseGroupDropdownFilter } from "@/utils/helpers";
 import { useGetEmployees } from "@/lib/db/services/employee";
 import { ListedEmployee } from "@/lib/db/services/employee/employee.dto";
 
 // Extracted Components
-import { FilterSection } from "./components/filter-section";
 import { EmployeeGrid } from "./components/employee-grid";
+import { FilterSection } from "./components/filter-section";
 
 const EmployeesCardReportPage = () => {
   const router = useRouter();
@@ -22,7 +25,9 @@ const EmployeesCardReportPage = () => {
   const reactToPrintFn = useReactToPrint({ contentRef });
 
   // Query states
-  const [queryEmployeeCodes, setQueryEmployeeCodes] = useState<string[] | null>(null);
+  const [queryEmployeeCodes, setQueryEmployeeCodes] = useState<string[] | null>(
+    null
+  );
   const [queryFilter, setQueryFilter] = useState<string | number | null>("all");
   const [hasSearched, setHasSearched] = useState(false);
 
@@ -104,7 +109,8 @@ const EmployeesCardReportPage = () => {
             <i className="fa-light fa-magnifying-glass text-4xl text-gray-300" />
             <p className="text-lg font-medium">Ready to search</p>
             <p className="text-sm">
-              Use the filters above to search for employees and view their cards.
+              Use the filters above to search for employees and view their
+              cards.
             </p>
           </div>
         ) : employees.length === 0 ? (

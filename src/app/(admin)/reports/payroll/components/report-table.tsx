@@ -12,6 +12,7 @@ import {
   PayrollReportRow,
   calculateGrandTotals,
   calculateSectionTotals,
+  checkIsForTruckHouseFromArray,
 } from "../utils/payroll-report.utils";
 import { Table, TableColumn, Badge } from "@/components";
 import { formatPayrollPeriod } from "@/utils/helpers";
@@ -46,12 +47,7 @@ export const ReportTable = ({
   allSectionsCount,
   payrollSectionIds,
 }: ReportTableProps) => {
-  const isForTruckHouse =
-    payrollSectionIds && payrollSectionIds?.length > 0
-      ? payrollSectionIds?.length === 1
-        ? payrollSectionIds[0] === 6 || payrollSectionIds[0] === 15
-        : payrollSectionIds?.includes?.(6) && payrollSectionIds?.includes?.(15)
-      : false;
+  const isForTruckHouse = checkIsForTruckHouseFromArray(payrollSectionIds);
 
   const columns = useMemo(
     (): TableColumn<PayrollReportRow>[] => [

@@ -16,6 +16,7 @@ import {
   getErrorMessage,
   createSortHandler,
   toPrimeReactSortOrder,
+  isTruckHouseSection,
 } from "@/utils/helpers";
 import { useDebounce } from "@/hooks";
 import { toastService } from "@/lib/toast";
@@ -139,7 +140,7 @@ const columns = (
         onEdit={handleEdit}
         onDelete={handleDelete}
         deleteProps={{
-          disabled: rowData.id === 6 || rowData.id === 15,
+          disabled: isTruckHouseSection(rowData.id),
         }}
       />
     ),

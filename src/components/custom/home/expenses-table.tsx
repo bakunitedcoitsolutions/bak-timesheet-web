@@ -17,9 +17,11 @@ const ExpensesTable = () => {
   >("all");
   const [selectedBranch, setSelectedBranch] = useState<any>("all");
 
-  // Set default month to current month
+  // Set default month to previous month
   const [selectedMonth, setSelectedMonth] = useState<string>(() => {
     const d = new Date();
+    d.setDate(1); // Set to the 1st of the month to avoid rollover bugs on 31st
+    d.setMonth(d.getMonth() - 1);
     const y = d.getFullYear();
     const m = String(d.getMonth() + 1).padStart(2, "0");
     return `${y}-${m}`;
@@ -91,10 +93,10 @@ const ExpensesTable = () => {
 
   // Format expenses to SAR format
   const formatExpenses = (amount: number) => {
-    if (amount >= 1000) {
-      return `SAR ${numeral(amount).format("0.0a")}`;
-    }
-    return `SAR ${numeral(amount).format("0,0")}`;
+    // if (amount >= 1000) {
+    //   return `SAR ${numeral(amount).format("0.0a")}`;
+    // }
+    return numeral(amount).format("0,0");
   };
 
   // Define table columns

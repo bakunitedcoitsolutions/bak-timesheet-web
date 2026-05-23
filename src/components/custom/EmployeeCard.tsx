@@ -48,9 +48,9 @@ export const EmployeeCard = ({
         </div>
 
         {/* Divider with Red Dot */}
-        <div className="flex items-center w-full max-w-[150px] gap-2 mt-2 mb-2">
+        <div className="flex items-center w-full max-w-37.5 gap-2 mt-2 mb-2">
           <div className="h-px bg-gray-200 flex-1"></div>
-          <div className="w-1 h-1 rounded-full bg-[#C0202E]"></div>
+          <div className="w-1 h-1 rounded-full bg-primary"></div>
           <div className="h-px bg-gray-200 flex-1"></div>
         </div>
 

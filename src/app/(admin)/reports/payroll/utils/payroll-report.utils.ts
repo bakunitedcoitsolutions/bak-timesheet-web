@@ -42,7 +42,7 @@ export const groupBySection = (allRows: PayrollReportRow[]) => {
     if (!map.has(sn)) map.set(sn, { rows: [], order: so });
     map.get(sn)!.rows.push(r);
   });
-  return [...map.entries()]
+  return Array.from(map.entries())
     .sort((a, b) => a[1].order - b[1].order)
     .map(([name, { rows }]) => ({
       name,
@@ -80,4 +80,14 @@ export const calculateSectionTotals = (
     }),
     {} as Record<string, number>
   );
+};
+
+export const checkIsForTruckHouseFromArray = (
+  payrollSectionIds: number[] | null | undefined
+): boolean => {
+  if (!payrollSectionIds || payrollSectionIds.length === 0) return false;
+  if (payrollSectionIds.length === 1) {
+    return payrollSectionIds[0] === 6 || payrollSectionIds[0] === 15;
+  }
+  return payrollSectionIds.includes(6) && payrollSectionIds.includes(15);
 };

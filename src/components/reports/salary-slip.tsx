@@ -1,6 +1,7 @@
 "use client";
-import { formatNum } from "@/utils/helpers";
+import { formatNum, isTruckHouseSection } from "@/utils/helpers";
 import { PayrollDetailEntry } from "@/lib/db/services/payroll-summary/mappers";
+import { classNames } from "primereact/utils";
 
 interface SalarySlipProps {
   entry: PayrollDetailEntry;
@@ -11,8 +12,7 @@ export const SalarySlip = ({
   entry,
   monthYear = "December 2025",
 }: SalarySlipProps) => {
-  const isForTruckHouse =
-    entry?.payrollSectionId === 6 || entry?.payrollSectionId === 15;
+  const isForTruckHouse = isTruckHouseSection(entry?.payrollSectionId);
   return (
     <div
       className="w-full bg-white border border-gray-300 p-3 mb-0 text-[10px] relative mx-auto"
@@ -21,57 +21,106 @@ export const SalarySlip = ({
       {/* Header Section */}
       <div className="flex justify-between items-start mb-2">
         <div className="w-full">
-          <h1 className="text-xl font-bold text-primary mb-2">Salary Slip</h1>
+          <h1
+            className={classNames(
+              "text-xl font-bold mb-2",
+              isForTruckHouse ? "text-albarq-primary" : "text-primary"
+            )}
+          >
+            Salary Slip
+          </h1>
 
           {/* Employee Info Grid */}
           <div className="grid grid-cols-[auto_1fr_auto_100px] gap-x-2 gap-y-1 items-center w-full max-w-[78%]">
             {/* Row 1 */}
             <span className="font-bold text-gray-800">Employee:</span>
-            <div className="bg-primary-light/50 border border-gray-200 px-2 py-0.5 uppercase whitespace-nowrap overflow-hidden text-ellipsis text-black font-semibold">
+            <div
+              className={classNames(
+                "border border-gray-200 px-2 py-0.5 uppercase whitespace-nowrap overflow-hidden text-ellipsis text-black font-semibold",
+                isForTruckHouse ? "bg-albarq-primary/5" : "bg-primary-light/50"
+              )}
+            >
               {entry.name || "N/A"}
             </div>
             <span className="font-bold text-gray-800 text-right">Code:</span>
-            <div className="bg-primary-light/50 border border-gray-200 px-2 py-0.5 text-center text-black font-semibold">
+            <div
+              className={classNames(
+                "border border-gray-200 px-2 py-0.5 text-center text-black font-semibold",
+                isForTruckHouse ? "bg-albarq-primary/5" : "bg-primary-light/50"
+              )}
+            >
               {entry.empCode}
             </div>
 
             {/* Row 2 */}
             <span className="font-bold text-gray-800">Designation:</span>
-            <div className="bg-primary-light/50 border border-gray-200 px-2 py-0.5 col-span-3 text-black font-semibold">
+            <div
+              className={classNames(
+                "border border-gray-200 px-2 py-0.5 col-span-3 text-black font-semibold",
+                isForTruckHouse ? "bg-albarq-primary/5" : "bg-primary-light/50"
+              )}
+            >
               {entry.designation || "N/A"}
             </div>
 
             {/* Row 3 */}
             <span className="font-bold text-gray-800">Month:</span>
-            <div className="bg-primary-light/50 border border-gray-200 px-2 py-0.5 text-black font-semibold">
+            <div
+              className={classNames(
+                "border border-gray-200 px-2 py-0.5 text-black font-semibold",
+                isForTruckHouse ? "bg-albarq-primary/5" : "bg-primary-light/50"
+              )}
+            >
               {monthYear}
             </div>
             <span className="font-bold text-gray-800 text-right">ID No:</span>
-            <div className="bg-primary-light/50 border text-black font-semibold border-gray-200 px-2 py-0.5 text-center">
+            <div
+              className={classNames(
+                "border text-black font-semibold border-gray-200 px-2 py-0.5 text-center",
+                isForTruckHouse ? "bg-albarq-primary/5" : "bg-primary-light/50"
+              )}
+            >
               {entry.idNumber || "N/A"}
             </div>
           </div>
         </div>
 
         {/* Logo Section */}
-        <div className="absolute right-9 top-5 flex flex-col items-center justify-start w-[120px]">
+        <div className="absolute right-9 top-5 flex flex-col items-center justify-start w-30">
           <div className="w-16 h-16 mb-1">
             <img
-              alt="BAK Logo"
+              alt={isForTruckHouse ? "Al-Barq Logo" : "BAK Logo"}
               className="w-full h-full object-contain"
-              src="/assets/images/bak_transparent_logo.png"
+              src={
+                isForTruckHouse
+                  ? "/assets/images/albarq_transparent_logo.png"
+                  : "/assets/images/bak_transparent_logo.png"
+              }
             />
           </div>
-          <h2 className="font-bold text-black text-[10px] text-center leading-tight">
-            BAK United
-            <br />
-            Contracting Co.
-          </h2>
+          {isForTruckHouse ? (
+            <h2 className="font-bold text-black text-[10px] text-center leading-tight">
+              Al-Barq
+              <br />
+              Transport Co.
+            </h2>
+          ) : (
+            <h2 className="font-bold text-black text-[10px] text-center leading-tight">
+              BAK United
+              <br />
+              Contracting Co.
+            </h2>
+          )}
         </div>
       </div>
 
       {/* Red Divider Line */}
-      <div className="w-full h-0.5 bg-primary mt-0.5 mb-2.5"></div>
+      <div
+        className={classNames(
+          "w-full h-0.5 mt-0.5 mb-2.5",
+          isForTruckHouse ? "bg-albarq-primary" : "bg-primary"
+        )}
+      ></div>
 
       <div className="w-full flex gap-2.5">
         <div className="w-[78%]">
@@ -141,7 +190,14 @@ export const SalarySlip = ({
             <div className="grid grid-cols-2 gap-2.5 mt-2.5">
               {/* Loans */}
               <div className="border border-gray-300 flex flex-col h-full">
-                <div className="bg-primary-light/50 border-b border-gray-300 py-0.5 px-1 font-bold text-center text-primary text-[9px]">
+                <div
+                  className={classNames(
+                    "border-b border-gray-300 py-0.5 px-1 font-bold text-center text-[9px]",
+                    isForTruckHouse
+                      ? "bg-albarq-secondary/10 text-albarq-primary"
+                      : "bg-primary-light text-primary"
+                  )}
+                >
                   Advances / Loans
                 </div>
                 <div className="grid grid-cols-3 text-center border-b border-gray-300 bg-gray-50 text-[9px]">
@@ -178,7 +234,14 @@ export const SalarySlip = ({
 
               {/* Traffic Violations */}
               <div className="border border-gray-300 flex flex-col h-full">
-                <div className="bg-primary-light/50 border-b border-gray-300 py-0.5 px-1 font-bold text-center text-primary text-[9px]">
+                <div
+                  className={classNames(
+                    " border-b border-gray-300 py-0.5 px-1 font-bold text-center text-[9px]",
+                    isForTruckHouse
+                      ? "bg-albarq-secondary/10 text-albarq-primary"
+                      : "text-primary bg-primary-light/50"
+                  )}
+                >
                   Traffic Violations
                 </div>
                 <div className="grid grid-cols-3 text-center border-b border-gray-300 bg-gray-50 text-[9px]">

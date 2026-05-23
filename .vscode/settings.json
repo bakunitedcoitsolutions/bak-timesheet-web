@@ -2,15 +2,24 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
   "cSpell.words": [
+    "albarq",
+    "Barq",
+    "Brkfst",
     "Challan",
     "Challans",
+    "datatable",
     "Deductable",
     "entr",
+    "fontawesome",
     "Gosi",
     "Gridlines",
+    "primereact",
+    "progressspinner",
+    "sitewise",
     "Supabase",
     "tanseek",
     "Timesheet",
-    "timesheets"
+    "timesheets",
+    "Traff"
   ]
 }

@@ -57,6 +57,9 @@
   --color-theme-text-gray: #6a7282;
 
   --color-table-header-footer: #f3f4f6;
+
+  --color-albarq-primary: #0e4563;
+  --color-albarq-secondary: #15b5e5;
 }
 
 @media (prefers-color-scheme: dark) {
