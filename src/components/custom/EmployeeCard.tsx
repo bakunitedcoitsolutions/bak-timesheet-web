@@ -1,3 +1,4 @@
+import { isTruckHouseSection } from "@/utils/helpers";
 import { ListedEmployee } from "@/lib/db/services/employee/employee.dto";
 
 // Card Component for individual employee
@@ -8,6 +9,8 @@ export const EmployeeCard = ({
   employee: ListedEmployee;
   designationName?: string;
 }) => {
+  const isForTruckHouse = isTruckHouseSection(employee.payrollSectionId);
+
   return (
     <div className="bg-white rounded-xl overflow-hidden flex flex-col items-center  w-[2.4in] h-[3.1in] relative border border-gray-100">
       {/* Content Container */}
@@ -16,21 +19,35 @@ export const EmployeeCard = ({
         <div className="w-full flex flex-col items-center py-2 px-2 bg-gray-100">
           <div className="relative w-12 h-12">
             <img
-              alt="BAK Logo"
+              alt={isForTruckHouse ? "Al-Barq Logo" : "BAK Logo"}
               className="w-full h-full object-contain"
-              src="/assets/images/bak_transparent_logo.png"
+              src={
+                isForTruckHouse
+                  ? "/assets/images/albarq_transparent_logo.png"
+                  : "/assets/images/bak_transparent_logo.png"
+              }
             />
           </div>
           {/* Company Name */}
-          <h3 className="text-primary font-bold text-xs mt-1 text-center whitespace-nowrap">
-            BAK United Contracting Co.
+          <h3
+            className={`font-bold text-xs mt-1 text-center whitespace-nowrap ${
+              isForTruckHouse ? "text-albarq-primary" : "text-primary"
+            }`}
+          >
+            {isForTruckHouse
+              ? "Al-Barq Transport Co."
+              : "BAK United Contracting Co."}
           </h3>
         </div>
 
         {/* Employee Code Pill */}
         <div className="bg-gray-100 rounded-full px-3 py-0.5 mt-2.5 mb-1.5">
           <span className="text-gray-600 font-semibold text-[10px]">Emp# </span>
-          <span className="text-primary font-bold text-xs">
+          <span
+            className={`font-bold text-xs ${
+              isForTruckHouse ? "text-albarq-primary" : "text-primary"
+            }`}
+          >
             {employee.employeeCode}
           </span>
         </div>
@@ -50,7 +67,11 @@ export const EmployeeCard = ({
         {/* Divider with Red Dot */}
         <div className="flex items-center w-full max-w-37.5 gap-2 mt-2 mb-2">
           <div className="h-px bg-gray-200 flex-1"></div>
-          <div className="w-1 h-1 rounded-full bg-primary"></div>
+          <div
+            className={`w-1 h-1 rounded-full ${
+              isForTruckHouse ? "bg-albarq-primary" : "bg-primary"
+            }`}
+          ></div>
           <div className="h-px bg-gray-200 flex-1"></div>
         </div>
 
