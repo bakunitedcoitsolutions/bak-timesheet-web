@@ -62,5 +62,8 @@ export const deleteGosiCityAction = serverAction
   .input(DeleteGosiCitySchema)
   .handler(async ({ input }: { input: DeleteGosiCityInput }) => {
     const response = await deleteGosiCity(input.id);
+    await cache.delete(CACHE_KEYS.GOSI_CITIES);
+    getSharedGosiCitiesAction();
+    getGlobalDataAction();
     return response;
   });

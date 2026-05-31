@@ -61,5 +61,8 @@ export const deleteBranchAction = serverAction
   .input(DeleteBranchSchema)
   .handler(async ({ input }) => {
     const response = await deleteBranch(input.id);
+    await cache.delete(CACHE_KEYS.BRANCHES);
+    getSharedBranchesAction();
+    getGlobalDataAction();
     return response;
   });

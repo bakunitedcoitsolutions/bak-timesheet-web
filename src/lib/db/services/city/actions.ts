@@ -58,5 +58,8 @@ export const deleteCityAction = serverAction
   .input(DeleteCitySchema)
   .handler(async ({ input }) => {
     const response = await deleteCity(input.id);
+    await cache.delete(CACHE_KEYS.CITIES);
+    getSharedCitiesAction();
+    getGlobalDataAction();
     return response;
   });

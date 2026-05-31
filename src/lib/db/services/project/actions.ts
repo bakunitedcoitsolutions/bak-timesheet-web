@@ -85,5 +85,8 @@ export const deleteProjectAction = serverAction
   .input(DeleteProjectSchema)
   .handler(async ({ input }: { input: DeleteProjectInput }) => {
     const response = await deleteProject(input.id);
+    await cache.delete(CACHE_KEYS.PROJECTS);
+    getSharedProjectsAction();
+    getGlobalDataAction();
     return response;
   });

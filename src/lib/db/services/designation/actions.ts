@@ -62,5 +62,8 @@ export const deleteDesignationAction = serverAction
   .input(DeleteDesignationSchema)
   .handler(async ({ input }: { input: DeleteDesignationInput }) => {
     const response = await deleteDesignation(input.id);
+    await cache.delete(CACHE_KEYS.DESIGNATIONS);
+    getSharedDesignationsAction();
+    getGlobalDataAction();
     return response;
   });

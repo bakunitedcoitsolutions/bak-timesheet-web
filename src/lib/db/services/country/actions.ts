@@ -62,5 +62,8 @@ export const deleteCountryAction = serverAction
   .input(DeleteCountrySchema)
   .handler(async ({ input }: { input: DeleteCountryInput }) => {
     const response = await deleteCountry(input.id);
+    await cache.delete(CACHE_KEYS.COUNTRIES);
+    getSharedCountriesAction();
+    getGlobalDataAction();
     return response;
   });

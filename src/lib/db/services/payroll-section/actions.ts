@@ -62,5 +62,8 @@ export const deletePayrollSectionAction = serverAction
   .input(DeletePayrollSectionSchema)
   .handler(async ({ input }: { input: DeletePayrollSectionInput }) => {
     const response = await deletePayrollSection(input.id);
+    await cache.delete(CACHE_KEYS.PAYROLL_SECTIONS);
+    getSharedPayrollSectionsAction();
+    getGlobalDataAction();
     return response;
   });
