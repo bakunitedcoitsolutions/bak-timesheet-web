@@ -43,7 +43,7 @@ export const getLedgerByEmployeeCode = async (
   }
 
   const targetYear = 2026;
-  const startDate = new Date(targetYear, 0, 1); // Jan 1st, 2026
+  const startDate = new Date(`${targetYear}-01-01T00:00:00.000Z`); // Timezone-independent Jan 1st, 2026 UTC to ensure calendar date is exactly '2026-01-01'
 
   // 1. Get Opening Balance from Jan 2026 Payroll
   const janPayroll = await prisma.payrollDetails.findFirst({
