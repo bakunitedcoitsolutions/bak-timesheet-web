@@ -13,6 +13,7 @@ import { UpdateEmployeeStep4Schema } from "@/lib/db/services/employee/employee.s
 import { useStepperForm } from "@/context";
 import { GlobalDataGeneral, useGlobalData } from "@/context/GlobalDataContext";
 import { devError } from "@/utils/helpers/functions";
+import { BANK_OPTIONS } from "@/utils/constants";
 
 interface UseStep4LogicProps {
   employeeId?: number | null;
@@ -103,15 +104,6 @@ export const useStep4Logic = ({ employeeId }: UseStep4LogicProps) => {
 
   const onFormSubmit = handleSubmit(handleFormSubmit);
 
-  const bankOptions = [
-    { label: "Saudi National Bank", value: "Saudi National Bank" },
-    { label: "Al Rajhi Bank", value: "Al Rajhi Bank" },
-    { label: "Alinma Bank", value: "Alinma Bank" },
-    { label: "Saudi British Bank", value: "Saudi British Bank" },
-    { label: "Al Jazira Bank", value: "Al Jazira Bank" },
-    { label: "Other", value: "Other" },
-  ];
-
   const gosiCityOptions = useMemo(() => {
     return globalData.gosiCities.map((city: GlobalDataGeneral) => ({
       label: city.nameEn,
@@ -123,7 +115,7 @@ export const useStep4Logic = ({ employeeId }: UseStep4LogicProps) => {
     form,
     errors,
     isLoadingEmployee,
-    bankOptions,
+    bankOptions: BANK_OPTIONS,
     gosiCityOptions,
     handleFormSubmit,
     onFormSubmit,

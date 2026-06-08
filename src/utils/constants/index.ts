@@ -24,3 +24,24 @@ export const COMMON_QUERY_INPUT = {
   sortBy: "displayOrderKey" as const,
   sortOrder: "asc" as const,
 };
+
+export const BANK_OPTIONS = [
+  { label: "Saudi National Bank", value: "Saudi National Bank" },
+  { label: "Al Rajhi Bank", value: "Al Rajhi Bank" },
+  { label: "Alinma Bank", value: "Alinma Bank" },
+  { label: "Saudi British Bank", value: "Saudi British Bank" },
+  { label: "Saudi British Bank (SABB)", value: "Saudi British Bank (SABB)" },
+  { label: "Al Jazira Bank", value: "Al Jazira Bank" },
+  { label: "Arab National Bank", value: "Arab National Bank" },
+  { label: "Bank Al Jazira", value: "Bank Al Jazira" },
+  { label: "Banque Saudi Fransi", value: "Banque Saudi Fransi" },
+  {
+    label: "National Commercial Bank (NCB)",
+    value: "National Commercial Bank (NCB)",
+  },
+  {
+    label: "Saudi Investment Bank (SAIB)",
+    value: "Saudi Investment Bank (SAIB)",
+  },
+  { label: "Other", value: "Other" },
+];
