@@ -121,7 +121,7 @@ export const GetPayrollReportSchema = z.object({
   payrollSectionIds: z.array(z.number().int()).optional().nullable(),
   designationId: z.number().int().optional().nullable(),
   employeeCodes: z.array(z.number().int()).optional().nullable(),
-  paymentMethodId: z.number().int().optional().nullable(),
+  paymentMethodIds: z.array(z.number().int()).optional().nullable(),
 });
 export type GetPayrollReportInput = z.infer<typeof GetPayrollReportSchema>;
 

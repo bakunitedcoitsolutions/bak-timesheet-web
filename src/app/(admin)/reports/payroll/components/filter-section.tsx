@@ -41,17 +41,15 @@ export const FilterSection = memo(
     const [selectedDate, setSelectedDate] = useState<Date>(dayjs().toDate());
     const [selectedSections, setSelectedSections] = useState<number[]>([]);
     const [employeeCodeChips, setEmployeeCodeChips] = useState<string[]>([]);
-    const [paymentMethodId, setPaymentMethodId] = useState<number | null>(0);
+    const [paymentMethodIds, setPaymentMethodIds] = useState<number[]>([]);
 
     // options
     const paymentMethodOptions = useMemo(
-      () => [
-        { label: "All Methods", value: 0 },
-        ...(globalData?.paymentMethods || []).map((p) => ({
+      () =>
+        (globalData?.paymentMethods || []).map((p) => ({
           label: p.nameEn,
           value: p.id,
         })),
-      ],
       [globalData?.paymentMethods]
     );
 
@@ -82,8 +80,8 @@ export const FilterSection = memo(
           employeeCodeChips.length > 0
             ? employeeCodeChips.map(Number).filter(Boolean)
             : null,
-        paymentMethodId:
-          paymentMethodId === 0 ? null : (paymentMethodId ?? null),
+        paymentMethodIds:
+          paymentMethodIds.length > 0 ? paymentMethodIds : null,
       });
     };
 
@@ -136,14 +134,24 @@ export const FilterSection = memo(
                   small
                   showClear
                 />
-                <Dropdown
+                <ModifiedMultiSelect
+                  options={paymentMethodOptions}
+                  selectedItem={paymentMethodIds}
+                  setSelectedItem={setPaymentMethodIds}
+                  placeholder="Select Payment Methods"
+                  className="w-full h-10.5!"
+                  filter
+                  small
+                  showClear
+                />
+                {/* <Dropdown
                   filter
                   options={paymentMethodOptions}
                   value={paymentMethodId}
                   onChange={(e) => setPaymentMethodId(e.value ?? null)}
                   className="w-full h-10!"
                   placeholder="Payment Method"
-                />
+                /> */}
               </>
             )}
 

@@ -269,7 +269,7 @@ export const getPayrollReport = async (
     payrollSectionIds,
     designationId,
     employeeCodes,
-    paymentMethodId,
+    paymentMethodIds,
   } = params;
   const { isBranchScoped, userBranchId } = await getServerAccessContext();
 
@@ -291,7 +291,9 @@ export const getPayrollReport = async (
     where.employee = employeeFilter;
   }
 
-  if (paymentMethodId) where.paymentMethodId = paymentMethodId;
+  if (paymentMethodIds && paymentMethodIds.length > 0) {
+    where.paymentMethodId = { in: paymentMethodIds };
+  }
 
   const details = await prisma.payrollDetails.findMany({
     where,
