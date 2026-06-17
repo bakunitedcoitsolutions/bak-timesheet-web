@@ -5,11 +5,18 @@
  */
 
 import { compare } from "bcryptjs";
-import { NextAuthConfig } from "next-auth";
+import { NextAuthConfig, CredentialsSignin } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
 import { prisma } from "@/lib/db/prisma";
 import { getUserActiveStatus } from "./security";
+
+class CustomAuthError extends CredentialsSignin {
+  constructor(msg: string) {
+    super();
+    this.code = msg;
+  }
+}
 
 /**
  * Edge-Compatible NextAuth Configuration
@@ -60,7 +67,7 @@ const authConfig: NextAuthConfig = {
         const userId = token.id as number;
         const isActive = await getUserActiveStatus(userId);
         if (!isActive) {
-          throw new Error("Account is inactive");
+          throw new CustomAuthError("Account is inactive");
         }
       }
 
@@ -96,7 +103,7 @@ export const authOptions: NextAuthConfig = {
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
-          throw new Error("Email and password are required");
+          throw new CustomAuthError("Email and password are required");
         }
 
         // Find user by email
@@ -110,12 +117,14 @@ export const authOptions: NextAuthConfig = {
         });
 
         if (!user || !user.password) {
-          throw new Error("Invalid email or password");
+          throw new CustomAuthError("No user found with this email");
         }
 
         // Check if user is active
         if (!user.isActive) {
-          throw new Error("Account is inactive");
+          throw new CustomAuthError(
+            "Your account is deactivated. Please contact administrator."
+          );
         }
 
         // Verify password
@@ -125,7 +134,7 @@ export const authOptions: NextAuthConfig = {
         );
 
         if (!isPasswordValid) {
-          throw new Error("Invalid email or password");
+          throw new CustomAuthError("Invalid email or password");
         }
 
         // Return entire user object except password

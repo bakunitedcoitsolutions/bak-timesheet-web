@@ -1,4 +1,11 @@
-import { NextAuthConfig } from "next-auth";
+import { NextAuthConfig, CredentialsSignin } from "next-auth";
+
+class CustomAuthError extends CredentialsSignin {
+  constructor(msg: string) {
+    super();
+    this.code = msg;
+  }
+}
 import { getUserActiveStatus } from "./security";
 
 /**
@@ -50,7 +57,7 @@ export const authConfig: NextAuthConfig = {
         const userId = token.id as number;
         const isActive = await getUserActiveStatus(userId);
         if (!isActive) {
-          throw new Error("Account is inactive");
+          throw new CustomAuthError("Account is inactive");
         }
       }
 

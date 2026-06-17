@@ -45,7 +45,7 @@ const AuthPageContent = () => {
       });
 
       if (result?.error) {
-        setAuthError("Invalid email or password");
+        setAuthError(result.code ?? "Invalid email or password");
       } else {
         const callbackUrl = searchParams?.get("callbackUrl") || "/";
         reset(defaultValues);

@@ -3,8 +3,9 @@
  * Handles authentication and authorization for protected routes
  */
 
-import { NextResponse } from "next/server";
 import NextAuth from "next-auth";
+import { NextResponse } from "next/server";
+
 import { authConfig } from "@/lib/auth/auth.config";
 
 const { auth } = NextAuth(authConfig);
@@ -116,6 +117,6 @@ export const proxy = auth((req) => {
 // Configure matcher to limit the scope of the middleware
 export const config = {
   matcher: [
-    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
+    "/((?!api|_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
   ],
 };
