@@ -10,7 +10,7 @@ import {
   PayrollReportRow as ExportPayrollReportRow,
 } from "@/utils/helpers/export-payroll-report";
 import dayjs from "@/lib/dayjs";
-// import { useGlobalData } from "@/context/GlobalDataContext";
+import { useGlobalData } from "@/context/GlobalDataContext";
 import { TitleHeader, Button, ExportOptions } from "@/components";
 import { printPayrollReport } from "@/utils/helpers/print-payroll-report";
 import { useGetPayrollReport } from "@/lib/db/services/payroll-summary/requests";
@@ -23,7 +23,7 @@ import { PayrollReportRow, groupBySection } from "./utils/payroll-report.utils";
 const PayrollReportPage = () => {
   const router = useRouter();
   const contentRef = useRef<HTMLDivElement>(null);
-  // const { data: globalData } = useGlobalData();
+  const { data: globalData } = useGlobalData();
 
   // applied query (only updated on Refresh)
   const [appliedQuery, setAppliedQuery] = useState({
@@ -80,40 +80,23 @@ const PayrollReportPage = () => {
   const handlePrint = () => {
     if (allRows.length === 0) return;
 
-    // const paymentMethodOptions = (globalData?.paymentMethods || []).map(
-    //   (p) => ({
-    //     label: p.nameEn,
-    //     value: p.id,
-    //   })
-    // );
+    const paymentMethodOptions = (globalData?.paymentMethods || []).map(
+      (p) => ({
+        label: p.nameEn,
+        value: p.id,
+      })
+    );
 
-    // const appliedPaymentMethodName =
-    //   appliedQuery.paymentMethodIds && appliedQuery.paymentMethodIds.length > 0
-    //     ? paymentMethodOptions
-    //         .filter((p) => appliedQuery.paymentMethodIds!.includes(p.value))
-    //         .map((p) => p.label)
-    //         .join(", ") || null
-    //     : null;
-
-    // let sectionOrDesignationName = null;
-    // if (
-    //   appliedQuery.payrollSectionIds &&
-    //   appliedQuery.payrollSectionIds.length > 0
-    // ) {
-    //   const sectionNames = (globalData?.payrollSections || [])
-    //     .filter((s) => appliedQuery.payrollSectionIds!.includes(s.id))
-    //     .map((s) => s.nameEn)
-    //     .join(", ");
-    //   sectionOrDesignationName = sectionNames || null;
-    // } else if (appliedQuery.designationId) {
-    //   sectionOrDesignationName = (globalData?.designations || []).find(
-    //     (d) => d.id === appliedQuery.designationId
-    //   )?.nameEn;
-    // }
+    const appliedPaymentMethodName =
+      appliedQuery.paymentMethodIds && appliedQuery.paymentMethodIds.length > 0
+        ? paymentMethodOptions
+            .filter((p) => appliedQuery.paymentMethodIds!.includes(p.value))
+            .map((p) => p.label)
+            .join(" • ") || null
+        : null;
 
     printPayrollReport(allRows, appliedQuery.month, appliedQuery.year, {
-      // paymentMethodName: appliedPaymentMethodName,
-      // sectionOrDesignationName,
+      paymentMethodName: appliedPaymentMethodName,
       employeeCodes: appliedQuery.employeeCodes?.map(String) || null,
     });
   };

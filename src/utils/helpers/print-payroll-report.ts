@@ -17,7 +17,7 @@ export const printPayrollReport = (
   month: number,
   year: number,
   filters: {
-    // paymentMethodName?: string | null;
+    paymentMethodName?: string | null;
     // sectionOrDesignationName?: string | null;
     employeeCodes?: string[] | null;
   } = {}
@@ -125,10 +125,10 @@ export const printPayrollReport = (
       </head>
       <body>
         <div class="print-header">
-          <h1>PAYROLL REPORT</h1>
+          <h1>PAYROLL REPORT <span style="font-weight: normal; color: #555; font-size: 12px">(${formattedPeriod.toUpperCase()})</span></h1>
           <p>
-            ${formattedPeriod.toUpperCase()}
-            ${filters.employeeCodes?.length ? ` | ${filters.employeeCodes.join(", ")}` : ""}
+            ${filters.employeeCodes?.length ? filters.employeeCodes.join(", ") : ""}
+            ${filters.paymentMethodName?.length ? `${filters.employeeCodes?.length ? " | " : ""}${filters.paymentMethodName}` : ""}
           </p>
         </div>
         
