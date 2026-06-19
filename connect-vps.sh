@@ -10,4 +10,8 @@
 # # To get the container names with ips
 # docker ps -q | xargs docker inspect --format '{{printf "%-40s" .Name}} | {{range .NetworkSettings.Networks}}{{.IPAddress}} {{end}}' | sed 's/^\///'
 
-ssh -N -L 6379:10.0.1.23:6379 -L 5432:10.0.2.6:5432 root@45.88.189.43
+# # Production
+# ssh -N -L 6379:10.0.1.23:6379 -L 5432:10.0.2.6:5432 root@45.88.189.43
+
+# Dev
+ssh -N -L 6379:10.0.1.42:6379 -L 5432:10.0.1.79:5432 root@45.88.189.43
