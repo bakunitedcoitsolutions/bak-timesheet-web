@@ -345,8 +345,8 @@ export const updateEmployeeStep2 = async (
   if (data.cityId !== undefined) updateData.cityId = data.cityId ?? null;
   if (data.statusId !== undefined) updateData.statusId = data.statusId ?? null;
   if (data.branchId !== undefined) updateData.branchId = data.branchId ?? null;
-  if (data.subBranchId !== undefined)
-    updateData.subBranchId = data.subBranchId ?? null;
+  // null always if not subBranchId
+  updateData.subBranchId = data.subBranchId ?? null;
   // designationId and payrollSectionId are required
   updateData.designationId = data.designationId;
   updateData.payrollSectionId = data.payrollSectionId;
