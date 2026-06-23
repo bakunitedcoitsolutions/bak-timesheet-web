@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import { useFormContext } from "react-hook-form";
 import { classNames } from "primereact/utils";
 import { FORM_FIELD_WIDTHS } from "@/utils/constants";
 import { FormItem, Dropdown } from "@/components/forms";
@@ -13,11 +14,14 @@ const BasicContractFields: React.FC<BasicContractFieldsProps> = ({
   options,
   isBranchScoped,
 }) => {
+  const { watch } = useFormContext();
+  const selectedBranchId = watch("branchId");
   return (
     <>
       {/* First Row */}
       <FormItem name="gender" className={classNames(FORM_FIELD_WIDTHS["4"])}>
         <Dropdown
+          small
           label="Gender"
           className="w-full"
           options={options.gender}
@@ -27,15 +31,17 @@ const BasicContractFields: React.FC<BasicContractFieldsProps> = ({
       <FormItem name="countryId" className={classNames(FORM_FIELD_WIDTHS["4"])}>
         <Dropdown
           filter
+          small
           label="Country"
           className="w-full"
-          options={options.countries}
           placeholder="Choose"
+          options={options.countries}
         />
       </FormItem>
       <FormItem name="cityId" className={classNames(FORM_FIELD_WIDTHS["4"])}>
         <Dropdown
           filter
+          small
           label="City"
           className="w-full"
           options={options.cities}
@@ -45,6 +51,7 @@ const BasicContractFields: React.FC<BasicContractFieldsProps> = ({
       <FormItem name="statusId" className={classNames(FORM_FIELD_WIDTHS["4"])}>
         <Dropdown
           filter
+          small
           label="Employee Status"
           className="w-full"
           options={options.employeeStatuses}
@@ -59,6 +66,7 @@ const BasicContractFields: React.FC<BasicContractFieldsProps> = ({
       <FormItem name="branchId" className={classNames(FORM_FIELD_WIDTHS["4"])}>
         <Dropdown
           filter
+          small
           label="Branch"
           className="w-full"
           placeholder="Choose"
@@ -67,11 +75,27 @@ const BasicContractFields: React.FC<BasicContractFieldsProps> = ({
         />
       </FormItem>
       <FormItem
+        name="subBranchId"
+        className={classNames(FORM_FIELD_WIDTHS["4"])}
+      >
+        <Dropdown
+          filter
+          small
+          showClear
+          label="Sub Branch"
+          className="w-full"
+          placeholder="Choose"
+          disabled={!selectedBranchId}
+          options={options.subBranches}
+        />
+      </FormItem>
+      <FormItem
         name="designationId"
         className={classNames(FORM_FIELD_WIDTHS["4"])}
       >
         <Dropdown
           filter
+          small
           label="Designation"
           className="w-full"
           options={options.designations}
@@ -84,6 +108,7 @@ const BasicContractFields: React.FC<BasicContractFieldsProps> = ({
       >
         <Dropdown
           filter
+          small
           label="Payroll Section"
           className="w-full"
           options={options.payrollSections}

@@ -42,6 +42,7 @@ export const UpdateEmployeeStep2Schema = z.object({
   cityId: z.number().int().positive().optional(),
   statusId: z.number().int().positive().optional(),
   branchId: z.number().int().positive().optional(),
+  subBranchId: z.number().int().positive().optional().nullable(),
   designationId: z.number().int().positive("Designation is required"),
   payrollSectionId: z.number().int().positive("Payroll section is required"),
   isDeductable: z.boolean().optional(),

@@ -91,7 +91,6 @@ const UpsertCountryPage = () => {
 
   const handleAddCountry = async (data: Record<string, any>) => {
     try {
-      console.log("Form submitted: Add Country", data);
       await createCountry(data, {
         onSuccess: () => {
           toastService.showSuccess("Success", "Country created successfully");
@@ -110,7 +109,6 @@ const UpsertCountryPage = () => {
   };
 
   const handleUpdateCountry = async (data: Record<string, any>) => {
-    console.log("Form submitted: Update Country", data);
     try {
       await updateCountry(data, {
         onSuccess: () => {
@@ -130,7 +128,9 @@ const UpsertCountryPage = () => {
   return (
     <div className="flex flex-col h-full gap-6 px-6 py-6">
       <div className="flex h-full justify-between flex-1 md:flex-none flex-col gap-4 py-6 bg-white rounded-lg">
-        <StepperFormHeading title={isAddMode ? "Add Country" : "Edit Country"} />
+        <StepperFormHeading
+          title={isAddMode ? "Add Country" : "Edit Country"}
+        />
         {isLoading ? (
           <div className="flex justify-center items-center h-full">
             <ProgressSpinner style={{ width: "50px", height: "50px" }} />

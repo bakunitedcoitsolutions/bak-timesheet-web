@@ -39,6 +39,7 @@ export interface UpdateEmployeeStep2Data {
   cityId?: number;
   statusId?: number;
   branchId?: number;
+  subBranchId?: number | null;
   designationId: number;
   payrollSectionId: number;
   isDeductable?: boolean;
@@ -149,6 +150,7 @@ export interface EmployeeInterface {
   cityId: number | null;
   statusId: number | null;
   branchId: number | null;
+  subBranchId: number | null;
   designationId: number | null;
   payrollSectionId: number | null;
   isDeductable: boolean;

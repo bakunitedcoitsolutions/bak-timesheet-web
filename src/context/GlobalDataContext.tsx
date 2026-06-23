@@ -14,6 +14,7 @@ export interface GlobalDataGeneral {
   id: number;
   nameEn: string;
   branchId?: number | null;
+  parentBranchId?: number | null;
   displayOrderKey?: number | null;
   isMain?: boolean;
 }

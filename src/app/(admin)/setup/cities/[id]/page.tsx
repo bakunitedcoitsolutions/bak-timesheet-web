@@ -109,7 +109,6 @@ const UpsertCityPage = () => {
 
   const handleAddCity = async (data: Record<string, any>) => {
     try {
-      console.log("Form submitted: Add City", data);
       await createCity(data, {
         onSuccess: () => {
           toastService.showSuccess("Success", "City created successfully");
@@ -125,7 +124,6 @@ const UpsertCityPage = () => {
   };
 
   const handleUpdateCity = async (data: Record<string, any>) => {
-    console.log("Form submitted: Update City", data);
     try {
       await updateCity(data, {
         onSuccess: () => {

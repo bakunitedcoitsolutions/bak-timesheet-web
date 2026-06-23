@@ -93,7 +93,6 @@ const UpsertEmployeeStatusPage = () => {
 
   const handleAddEmployeeStatus = async (data: Record<string, any>) => {
     try {
-      console.log("Form submitted: Add Employee Status", data);
       await createEmployeeStatus(data, {
         onSuccess: () => {
           toastService.showSuccess(
@@ -115,7 +114,6 @@ const UpsertEmployeeStatusPage = () => {
   };
 
   const handleUpdateEmployeeStatus = async (data: Record<string, any>) => {
-    console.log("Form submitted: Update Employee Status", data);
     try {
       await updateEmployeeStatus(data, {
         onSuccess: () => {

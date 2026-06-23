@@ -19,6 +19,7 @@ const FinancialFields: React.FC<FinancialFieldsProps> = ({
     <>
       <FormItem name="isFixed" className={classNames(FORM_FIELD_WIDTHS["4"])}>
         <Dropdown
+          small
           label="Is Fixed?"
           className="w-full"
           options={options.isFixed}
@@ -30,6 +31,7 @@ const FinancialFields: React.FC<FinancialFieldsProps> = ({
         className={classNames(FORM_FIELD_WIDTHS["4"])}
       >
         <Dropdown
+          small
           className="w-full"
           placeholder="Choose"
           label="Is Deductable?"
@@ -84,6 +86,7 @@ const FinancialFields: React.FC<FinancialFieldsProps> = ({
         className={classNames(FORM_FIELD_WIDTHS["4"])}
       >
         <Dropdown
+          small
           label="Breakfast Allowance"
           className="w-full"
           options={options.isFixed}

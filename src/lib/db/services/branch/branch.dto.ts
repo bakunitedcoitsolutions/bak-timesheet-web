@@ -11,6 +11,7 @@ export interface CreateBranchData {
   nameEn: string;
   nameAr?: string;
   isMain?: boolean;
+  parentBranchId?: number | null;
   isActive?: boolean;
 }
 
@@ -18,6 +19,7 @@ export interface UpdateBranchData {
   nameEn?: string;
   nameAr?: string;
   isMain?: boolean;
+  parentBranchId?: number | null;
   isActive?: boolean;
 }
 
@@ -41,6 +43,7 @@ export interface BranchInterface {
   nameEn: string;
   nameAr: string | null;
   isMain: boolean;
+  parentBranchId: number | null;
   isActive: boolean;
   createdAt: Date | any;
   updatedAt: Date | any;

@@ -158,6 +158,10 @@ model Branch {
   createdAt      DateTime @default(now())
   updatedAt      DateTime @default(now()) @updatedAt
 
+  parentBranchId Int?
+  parentBranch   Branch?   @relation("BranchSubBranches", fields: [parentBranchId], references: [id])
+  subBranches    Branch[]  @relation("BranchSubBranches")
+
   // Relations: Other Tables → Branch (Other tables have foreign keys pointing to Branch)
   users            User[]           @relation("UserBranch")
   subBranchUsers   Employee[]       @relation("EmployeeSubBranch")
@@ -171,6 +175,7 @@ model Branch {
 
   @@index([createdBy])
   @@index([updatedBy])
+  @@index([parentBranchId])
 }
 
 model City {

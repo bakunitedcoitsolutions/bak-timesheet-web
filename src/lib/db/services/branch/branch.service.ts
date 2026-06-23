@@ -24,6 +24,7 @@ const branchSelect = {
   nameEn: true,
   nameAr: true,
   isMain: true,
+  parentBranchId: true,
   isActive: true,
   createdAt: true,
   updatedAt: true,
@@ -51,6 +52,7 @@ export const createBranch = async (data: CreateBranchData) => {
       nameEn: data.nameEn,
       nameAr: data.nameAr,
       isMain: data.isMain ?? true,
+      parentBranchId: data.parentBranchId,
       isActive: data.isActive ?? true,
       ...(userId && { createdBy: userId }),
     },
@@ -108,6 +110,8 @@ export const updateBranch = async (id: number, data: UpdateBranchData) => {
     if (data.nameEn !== undefined) updateData.nameEn = data.nameEn;
     if (data.nameAr !== undefined) updateData.nameAr = data.nameAr;
     if (data.isMain !== undefined) updateData.isMain = data.isMain;
+    if (data.parentBranchId !== undefined)
+      updateData.parentBranchId = data.parentBranchId;
     if (data.isActive !== undefined) updateData.isActive = data.isActive;
 
     const updatedBranch = await tx.branch.update({

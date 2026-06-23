@@ -140,7 +140,7 @@ export const getSharedBranchesAction = serverAction
   .handler(async () => {
     return getOrFetch(CACHE_KEYS.BRANCHES, () =>
       prisma.branch.findMany({
-        select: { id: true, nameEn: true, isMain: true },
+        select: { id: true, nameEn: true, isMain: true, parentBranchId: true },
         where: { isActive: true },
         orderBy: { nameEn: "asc" },
       })

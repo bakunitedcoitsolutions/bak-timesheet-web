@@ -10,7 +10,16 @@ export const CreateBranchSchema = z.object({
   nameEn: z.string().min(2, "Name is required"),
   nameAr: z.string().min(2, "Arabic name is required").optional(),
   isMain: z.boolean().default(true).optional(),
+  parentBranchId: z.number().int().positive().optional().nullable(),
   isActive: z.boolean().default(true).optional(),
+}).refine(data => {
+  if (data.isMain === false && !data.parentBranchId) {
+    return false;
+  }
+  return true;
+}, {
+  message: "Parent branch is required for sub branch",
+  path: ["parentBranchId"],
 });
 
 export const UpdateBranchSchema = z.object({
@@ -18,7 +27,16 @@ export const UpdateBranchSchema = z.object({
   nameEn: z.string().min(2, "Name is required").optional(),
   nameAr: z.string().min(2, "Arabic name is required").optional(),
   isMain: z.boolean().optional(),
+  parentBranchId: z.number().int().positive().optional().nullable(),
   isActive: z.boolean().optional(),
+}).refine(data => {
+  if (data.isMain === false && !data.parentBranchId) {
+    return false;
+  }
+  return true;
+}, {
+  message: "Parent branch is required for sub branch",
+  path: ["parentBranchId"],
 });
 
 export const ListBranchesParamsSchema = z.object({

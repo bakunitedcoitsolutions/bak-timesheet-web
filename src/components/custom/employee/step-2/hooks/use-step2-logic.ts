@@ -48,6 +48,7 @@ export const useStep2Logic = ({ employeeId }: UseStep2LogicProps) => {
     cityId: undefined,
     statusId: undefined,
     branchId: undefined,
+    subBranchId: undefined,
     designationId: 0,
     payrollSectionId: 0,
     isDeductable: false,
@@ -84,6 +85,8 @@ export const useStep2Logic = ({ employeeId }: UseStep2LogicProps) => {
   const contractEndDate = watch("contractEndDate");
   const selectedCountryId = watch("countryId");
   const currentCityId = watch("cityId");
+  const selectedBranchId = watch("branchId");
+  const currentSubBranchId = watch("subBranchId");
 
   // File upload hook for contract document
   const contractDocUpload = useFileUpload({
@@ -108,6 +111,7 @@ export const useStep2Logic = ({ employeeId }: UseStep2LogicProps) => {
         cityId: foundEmployee.cityId || undefined,
         statusId: foundEmployee.statusId || undefined,
         branchId: foundEmployee?.branchId || undefined,
+        subBranchId: foundEmployee?.subBranchId || undefined,
         designationId: foundEmployee.designationId ?? 0,
         payrollSectionId: foundEmployee.payrollSectionId ?? 0,
         isDeductable: foundEmployee.isDeductable ?? false,
@@ -175,6 +179,20 @@ export const useStep2Logic = ({ employeeId }: UseStep2LogicProps) => {
     }
   }, [selectedCountryId, globalData.cities, currentCityId, setValue]);
 
+  // Clear subBranchId when branchId changes to a branch that does not match
+  useEffect(() => {
+    if (selectedBranchId && currentSubBranchId) {
+      const subBranch = globalData.branches?.find?.(
+        (b: GlobalDataGeneral) => b.id === currentSubBranchId
+      );
+      if (subBranch && subBranch.parentBranchId !== selectedBranchId) {
+        setValue("subBranchId", null);
+      }
+    } else if (!selectedBranchId && currentSubBranchId) {
+      setValue("subBranchId", null);
+    }
+  }, [selectedBranchId, currentSubBranchId, globalData.branches, setValue]);
+
   const handleSalaryBlur = () => {
     const currentSalary = form.getValues("salary");
     const currentWorkingDays = form.getValues("workingDays");
@@ -234,6 +252,7 @@ export const useStep2Logic = ({ employeeId }: UseStep2LogicProps) => {
               cityId: data.cityId,
               statusId: data.statusId,
               branchId: data.branchId,
+              subBranchId: data.subBranchId,
               isDeductable: data.isDeductable,
               isFixed: data.isFixed,
               workingDays: data.workingDays,
@@ -300,6 +319,18 @@ export const useStep2Logic = ({ employeeId }: UseStep2LogicProps) => {
         value: branch.id,
         isMain: branch.isMain,
       })),
+      subBranches: globalData.branches
+        .filter((branch: any) => {
+          if (branch.isMain) return false;
+          if (selectedBranchId) {
+            return branch.parentBranchId === selectedBranchId;
+          }
+          return true;
+        })
+        .map((branch: any) => ({
+          label: branch.nameEn,
+          value: branch.id,
+        })),
       designations: globalData.designations.map(
         (designation: GlobalDataDesignation) => ({
           label: designation.nameEn,
@@ -327,7 +358,7 @@ export const useStep2Logic = ({ employeeId }: UseStep2LogicProps) => {
         { label: "No", value: false },
       ],
     };
-  }, [globalData, selectedCountryId]);
+  }, [globalData, selectedCountryId, selectedBranchId]);
 
   const remainingDays = useMemo(() => {
     if (!contractStartDate || !contractEndDate) return "N/A";

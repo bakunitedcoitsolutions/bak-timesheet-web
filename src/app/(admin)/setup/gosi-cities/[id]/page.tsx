@@ -91,7 +91,6 @@ const UpsertGosiCityPage = () => {
 
   const handleAddGosiCity = async (data: Record<string, any>) => {
     try {
-      console.log("Form submitted: Add GOSI City", data);
       await createGosiCity(data, {
         onSuccess: () => {
           toastService.showSuccess("Success", "GOSI City created successfully");
@@ -110,7 +109,6 @@ const UpsertGosiCityPage = () => {
   };
 
   const handleUpdateGosiCity = async (data: Record<string, any>) => {
-    console.log("Form submitted: Update GOSI City", data);
     try {
       await updateGosiCity(data, {
         onSuccess: () => {

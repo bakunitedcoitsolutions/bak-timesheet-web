@@ -8,6 +8,7 @@ import { useParams, useRouter } from "next/navigation";
 import { ProgressSpinner } from "primereact/progressspinner";
 
 import {
+  useGetBranches,
   useUpdateBranch,
   useCreateBranch,
   useGetBranchById,
@@ -16,19 +17,19 @@ import {
   CreateBranchSchema,
   UpdateBranchSchema,
 } from "@/lib/db/services/branch/branch.schemas";
-import { toastService } from "@/lib/toast";
-import { getEntityModeFromParam } from "@/helpers";
-import { getErrorMessage } from "@/utils/helpers";
-import { FORM_FIELD_WIDTHS, STATUS_OPTIONS } from "@/utils/constants";
 import {
+  Form,
   Input,
   Button,
   Dropdown,
-  Form,
   FormItem,
   RadioGroup,
 } from "@/components/forms";
+import { toastService } from "@/lib/toast";
 import { StepperFormHeading } from "@/components";
+import { getErrorMessage } from "@/utils/helpers";
+import { getEntityModeFromParam } from "@/helpers";
+import { FORM_FIELD_WIDTHS, STATUS_OPTIONS } from "@/utils/constants";
 
 const UpsertBranchPage = () => {
   const router = useRouter();
@@ -49,11 +50,18 @@ const UpsertBranchPage = () => {
     id: branchId ? Number(branchId) : 0,
   });
 
+  const { data: mainBranchesResponse } = useGetBranches({
+    limit: 1000,
+    isMain: true,
+  });
+  const mainBranches = mainBranchesResponse?.branches || [];
+
   const defaultValues = {
     ...(isEditMode ? { id: 0 } : {}),
     nameEn: "",
     nameAr: "",
     isMain: true,
+    parentBranchId: null,
     isActive: true,
   };
 
@@ -84,11 +92,19 @@ const UpsertBranchPage = () => {
         nameEn: foundBranch?.nameEn,
         nameAr: foundBranch?.nameAr,
         isMain: foundBranch?.isMain ?? true,
+        parentBranchId: foundBranch?.parentBranchId ?? null,
         isActive: foundBranch?.isActive,
       };
       reset(setBranch);
     }
   }, [foundBranch, isEditMode, reset]);
+
+  const watchedIsMain = form.watch("isMain");
+  useEffect(() => {
+    if (watchedIsMain === true) {
+      form.setValue("parentBranchId", null);
+    }
+  }, [watchedIsMain, form]);
 
   const onFormSubmit = handleSubmit(async (data) => {
     if (isAddMode) {
@@ -100,7 +116,6 @@ const UpsertBranchPage = () => {
 
   const handleAddBranch = async (data: Record<string, any>) => {
     try {
-      console.log("Form submitted: Add Branch", data);
       await createBranch(data, {
         onSuccess: () => {
           toastService.showSuccess("Success", "Branch created successfully");
@@ -119,7 +134,6 @@ const UpsertBranchPage = () => {
   };
 
   const handleUpdateBranch = async (data: Record<string, any>) => {
-    console.log("Form submitted: Update Branch", data);
     try {
       await updateBranch(data, {
         onSuccess: () => {
@@ -180,6 +194,24 @@ const UpsertBranchPage = () => {
                     />
                   </FormItem>
                 </div>
+                {watchedIsMain === false && (
+                  <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
+                    <FormItem name="parentBranchId">
+                      <Dropdown
+                        filter
+                        label="Parent Branch"
+                        className="w-full"
+                        placeholder="Choose parent branch"
+                        options={mainBranches
+                          ?.filter((b: any) => b.id !== Number(branchId))
+                          ?.map((b: any) => ({
+                            label: b.nameEn,
+                            value: b.id,
+                          }))}
+                      />
+                    </FormItem>
+                  </div>
+                )}
                 <div className={classNames(FORM_FIELD_WIDTHS["2"])}>
                   <FormItem name="isActive">
                     <Dropdown

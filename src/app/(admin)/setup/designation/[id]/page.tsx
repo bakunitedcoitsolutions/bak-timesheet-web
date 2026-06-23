@@ -106,7 +106,6 @@ const UpsertDesignationPage = () => {
 
   const handleAddDesignation = async (data: Record<string, any>) => {
     try {
-      console.log("Form submitted: Add Designation", data);
       await createDesignation(data, {
         onSuccess: () => {
           toastService.showSuccess(
@@ -128,7 +127,6 @@ const UpsertDesignationPage = () => {
   };
 
   const handleUpdateDesignation = async (data: Record<string, any>) => {
-    console.log("Form submitted: Update Designation", data);
     try {
       await updateDesignation(data, {
         onSuccess: () => {

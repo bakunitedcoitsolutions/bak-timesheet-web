@@ -116,7 +116,6 @@ const UpsertPayrollSectionPage = () => {
 
   const handleAddPayrollSection = async (data: Record<string, any>) => {
     try {
-      console.log("Form submitted: Add Payroll Section", data);
       await createPayrollSection(data, {
         onSuccess: () => {
           toastService.showSuccess(
@@ -138,7 +137,6 @@ const UpsertPayrollSectionPage = () => {
   };
 
   const handleUpdatePayrollSection = async (data: Record<string, any>) => {
-    console.log("Form submitted: Update Payroll Section", data);
     try {
       await updatePayrollSection(data, {
         onSuccess: () => {

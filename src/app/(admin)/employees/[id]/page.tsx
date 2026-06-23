@@ -129,7 +129,6 @@ const UpsertEmployeePage = () => {
   };
 
   const handleSubmit = async (data: Record<string, any>) => {
-    devConsole("Form submitted:", data);
     router.replace(`/employees`);
   };
 
