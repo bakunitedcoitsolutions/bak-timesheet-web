@@ -147,6 +147,15 @@ export const ReportTable = ({
         ),
       },
       {
+        field: "subBranchName",
+        header: "Sub Branch",
+        ...tableCommonProps,
+        style: { minWidth: 150 },
+        body: (rowData) => (
+          <span className="text-sm">{rowData.subBranchName}</span>
+        ),
+      },
+      {
         field: "designationName",
         header: "Designation",
         ...tableCommonProps,

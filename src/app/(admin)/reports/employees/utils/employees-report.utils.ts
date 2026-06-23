@@ -38,6 +38,7 @@ export const mapEmployeesData = (employees: ListedEmployee[]) => {
       countryName: emp.country?.nameEn || "-",
       cityName: emp.city?.nameEn || "-",
       branchName: emp.branch?.nameEn || "-",
+      subBranchName: emp.subBranch?.nameEn || "-",
       gosiCityName: emp.gosiCity?.nameEn || "-",
       nationalityName: emp.nationality?.nameEn || "-",
       totalAllowance,
