@@ -753,6 +753,11 @@ export const listEmployees = async (
           nameEn: true,
         },
       },
+      subBranch: {
+        select: {
+          nameEn: true,
+        },
+      },
       designation: {
         select: {
           nameEn: true,

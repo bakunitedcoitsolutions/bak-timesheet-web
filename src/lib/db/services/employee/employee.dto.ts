@@ -203,6 +203,9 @@ export interface ListedEmployee extends EmployeeInterface {
   branch: {
     nameEn: string;
   } | null;
+  subBranch: {
+    nameEn: string;
+  } | null;
   designation: {
     nameEn: string;
     nameAr: string | null;
