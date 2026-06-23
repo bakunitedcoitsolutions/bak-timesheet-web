@@ -20,9 +20,9 @@ const getAccessDefinition = (access: string): string => {
 };
 
 const commonColumnProps = {
-  sortable: true,
-  filterable: true,
-  smallFilter: true,
+  sortable: false,
+  filterable: false,
+  smallFilter: false,
   showFilterMenu: false,
   showClearButton: false,
   style: { minWidth: 200 },
@@ -82,7 +82,7 @@ const columns = (): TableColumn<UserRoleInterface>[] => [
   {
     field: "isActive",
     header: "Status",
-    sortable: true,
+    sortable: false,
     filterable: false,
     style: { minWidth: 130 },
     align: "center",
@@ -159,8 +159,8 @@ const UserRolesPage = () => {
           }
           customHeader={renderHeader}
           columns={tableColumns}
-          pagination={true}
-          lazy={true}
+          pagination={false}
+          lazy={false}
           rowsPerPageOptions={[10, 25, 50]}
           rows={10}
           globalSearch={true}

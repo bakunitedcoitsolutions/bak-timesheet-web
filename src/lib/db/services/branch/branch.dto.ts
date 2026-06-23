@@ -49,7 +49,12 @@ export interface BranchInterface {
   updatedAt: Date | any;
 }
 
-export interface ListedBranch extends BranchInterface {}
+export interface ListedBranch extends BranchInterface {
+  parentBranch: {
+    nameEn: string;
+    nameAr: string | null;
+  } | null;
+}
 
 export interface ListBranchesResponse {
   branches: ListedBranch[];

@@ -25,6 +25,12 @@ const branchSelect = {
   nameAr: true,
   isMain: true,
   parentBranchId: true,
+  parentBranch: {
+    select: {
+      nameEn: true,
+      nameAr: true,
+    }
+  },
   isActive: true,
   createdAt: true,
   updatedAt: true,

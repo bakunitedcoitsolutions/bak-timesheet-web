@@ -36,8 +36,8 @@ const SORTABLE_FIELDS = {
 
 const commonColumnProps = {
   sortable: true,
-  filterable: true,
-  smallFilter: true,
+  filterable: false,
+  smallFilter: false,
   showFilterMenu: false,
   showClearButton: false,
   style: { minWidth: 200 },
@@ -99,6 +99,16 @@ const columns = (
         text={rowData.isMain ? "Main" : "Sub"}
         variant={rowData.isMain ? "primary" : "warning"}
       />
+    ),
+  },
+  {
+    field: "parentBranch.nameEn",
+    header: "Parent Branch",
+    sortable: false,
+    filterable: false,
+    style: { minWidth: 180 },
+    body: (rowData: ListedBranch) => (
+      <span className="text-sm">{rowData.parentBranch?.nameEn || "-"}</span>
     ),
   },
   {

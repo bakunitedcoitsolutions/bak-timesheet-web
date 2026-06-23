@@ -32,8 +32,8 @@ const SORTABLE_FIELDS = {
 
 const commonColumnProps = {
   sortable: true,
-  filterable: true,
-  smallFilter: true,
+  filterable: false,
+  smallFilter: false,
   showFilterMenu: false,
   showClearButton: false,
   style: { minWidth: 200 },
