@@ -3,18 +3,12 @@
 import { memo, useState, useMemo } from "react";
 import { classNames } from "primereact/utils";
 
-import {
-  Input,
-  Button,
-  Dropdown,
-  useAccess,
-  MultiEmpInput,
-} from "@/components";
 import dayjs from "@/lib/dayjs";
 import { toastService } from "@/lib/toast";
 import { USER_ROLES } from "@/utils/user.utility";
 import { useGlobalData } from "@/context/GlobalDataContext";
 import ModifiedMultiSelect from "@/components/forms/multi-select";
+import { Input, Button, useAccess, MultiEmpInput } from "@/components";
 
 interface FilterSectionProps {
   onSearch: (params: any) => void;
@@ -80,8 +74,7 @@ export const FilterSection = memo(
           employeeCodeChips.length > 0
             ? employeeCodeChips.map(Number).filter(Boolean)
             : null,
-        paymentMethodIds:
-          paymentMethodIds.length > 0 ? paymentMethodIds : null,
+        paymentMethodIds: paymentMethodIds.length > 0 ? paymentMethodIds : null,
       });
     };
 

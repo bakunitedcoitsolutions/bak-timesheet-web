@@ -16,21 +16,14 @@ import {
   CreateCitySchema,
   UpdateCitySchema,
 } from "@/lib/db/services/city/city.schemas";
+import { toastService } from "@/lib/toast";
+import { StepperFormHeading } from "@/components";
+import { getErrorMessage } from "@/utils/helpers";
+import { getEntityModeFromParam } from "@/helpers";
 import { useGetCountries } from "@/lib/db/services/country/requests";
 import { ListedCountry } from "@/lib/db/services/country/country.dto";
-import { toastService } from "@/lib/toast";
-import { getEntityModeFromParam } from "@/helpers";
-import { getErrorMessage } from "@/utils/helpers";
 import { FORM_FIELD_WIDTHS, STATUS_OPTIONS } from "@/utils/constants";
-import {
-  Input,
-  Button,
-  Dropdown,
-  Form,
-  FormItem,
-  Checkbox,
-} from "@/components/forms";
-import { StepperFormHeading } from "@/components";
+import { Input, Button, Dropdown, Form, FormItem } from "@/components/forms";
 
 const UpsertCityPage = () => {
   const router = useRouter();

@@ -1,7 +1,4 @@
-import {
-  LeaveEligibilityReport,
-  LeaveCycle,
-} from "@/lib/db/services/leave-eligibility/leave-eligibility.dto";
+import { LeaveEligibilityReport } from "@/lib/db/services/leave-eligibility/leave-eligibility.dto";
 
 export const printLeaveEligibilityReport = (report: LeaveEligibilityReport) => {
   if (typeof window === "undefined") return;

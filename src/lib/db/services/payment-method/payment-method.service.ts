@@ -12,11 +12,6 @@ import type {
   ListPaymentMethodsResponse,
 } from "./payment-method.dto";
 
-// Type helper for Prisma transaction client
-type PrismaTransactionClient = Parameters<
-  Parameters<typeof prisma.$transaction>[0]
->[0];
-
 // Reusable select object
 const paymentMethodSelect = {
   id: true,
