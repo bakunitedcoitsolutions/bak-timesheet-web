@@ -229,33 +229,35 @@ export const updateLoan = async (id: number, data: UpdateLoanData) => {
  * Delete loan
  */
 export const deleteLoan = async (id: number, branchId?: number) => {
-  const existingLoan = await prisma.$transaction(async (tx: PrismaTransactionClient) => {
-    // Check if loan exists
-    const existingLoan = await tx.loan.findUnique({
-      where: { id },
-      select: {
-        id: true,
-        employeeId: true,
-        date: true,
-        employee: { select: { branchId: true } },
-      },
-    });
+  const existingLoan = await prisma.$transaction(
+    async (tx: PrismaTransactionClient) => {
+      // Check if loan exists
+      const existingLoan = await tx.loan.findUnique({
+        where: { id },
+        select: {
+          id: true,
+          employeeId: true,
+          date: true,
+          employee: { select: { branchId: true } },
+        },
+      });
 
-    if (!existingLoan) {
-      throw new Error("Loan not found");
+      if (!existingLoan) {
+        throw new Error("Loan not found");
+      }
+
+      // Security validation: verify branch assignment for branch-scoped users
+      if (branchId && existingLoan.employee?.branchId !== branchId) {
+        throw new Error("Access Denied: Loan belongs to another branch.");
+      }
+
+      await tx.loan.delete({
+        where: { id },
+      });
+
+      return existingLoan;
     }
-
-    // Security validation: verify branch assignment for branch-scoped users
-    if (branchId && existingLoan.employee?.branchId !== branchId) {
-      throw new Error("Access Denied: Loan belongs to another branch.");
-    }
-
-    await tx.loan.delete({
-      where: { id },
-    });
-
-    return existingLoan;
-  });
+  );
 
   // Trigger payroll refresh if active
   await refreshPayrollForEmployeesIfActive(
@@ -446,6 +448,8 @@ export const bulkUploadLoans = async (
   const res: BulkUploadLoanResult = {
     success: 0,
     failed: 0,
+    skipped: 0,
+    details: [],
     errors: [],
   };
 
@@ -498,9 +502,23 @@ export const bulkUploadLoans = async (
       });
 
       res.success++;
+      res.details.push({
+        row: rowNumber,
+        employeeCode: row.employeeCode,
+        date: row.date,
+        status: "success",
+        message: "Uploaded successfully",
+      });
     } catch (error: any) {
       console.error(error);
       res.failed++;
+      res.details.push({
+        row: rowNumber,
+        employeeCode: row.employeeCode,
+        date: row.date,
+        status: "failed",
+        message: error.message || "Unknown error",
+      });
       res.errors.push({
         row: rowNumber,
         data: row,
@@ -510,6 +528,7 @@ export const bulkUploadLoans = async (
   }
 
   // Trigger payroll refresh for all affected months/employees
+  // @ts-ignore
   for (const [dateKey, employeeIds] of refreshDetails.entries()) {
     const [year, month] = dateKey.split("-").map(Number);
     const dateObj = dayjs()

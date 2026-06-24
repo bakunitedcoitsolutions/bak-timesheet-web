@@ -2,7 +2,7 @@
 import { useRouter } from "next/navigation";
 import { useRef, useState, useEffect, useMemo, useCallback } from "react";
 
-import { TableRef, useAccess, BulkUploadDialog } from "@/components";
+import { TableRef, useAccess, BulkUploadDialog, BulkUploadReportDialog } from "@/components";
 import { getErrorMessage, createSortHandler } from "@/utils/helpers";
 import { useDebounce } from "@/hooks";
 import { toastService } from "@/lib/toast";
@@ -55,6 +55,9 @@ const LoansPage = () => {
   );
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
   const [showFilePicker, setShowFilePicker] = useState<boolean>(false);
+  const [showReportDialog, setShowReportDialog] = useState<boolean>(false);
+  const [uploadResult, setUploadResult] = useState<BulkUploadLoanResult | null>(null);
+  const [uploadedFileName, setUploadedFileName] = useState<string>("");
   const tableRef = useRef<TableRef>(null);
 
   const { mutateAsync: deleteLoan } = useDeleteLoan();
@@ -256,6 +259,7 @@ const LoansPage = () => {
     async (file: File) => {
       try {
         const fileName = file.name.toLowerCase();
+        setUploadedFileName(file.name);
         const isCSV = fileName.endsWith(".csv") || file.type === "text/csv";
 
         let parseResult;
@@ -266,15 +270,9 @@ const LoansPage = () => {
         }
 
         if (parseResult.errors.length > 0) {
-          const errorSummary =
-            parseResult.errors.length > 3
-              ? parseResult.errors.slice(0, 3).join("; ") +
-                ` and ${parseResult.errors.length - 3} more...`
-              : parseResult.errors.join("; ");
-
           toastService.showWarn(
             "Parse Warnings",
-            `Valid: ${parseResult.data.length}, Errors: ${parseResult.errors.length}. Reasons: ${errorSummary}`
+            `${parseResult.errors.length} row(s) had errors. Check console for details.`
           );
         }
 
@@ -287,26 +285,24 @@ const LoansPage = () => {
           { loans: parseResult.data },
           {
             onSuccess: (result: BulkUploadLoanResult) => {
-              const message =
-                result.success > 0
-                  ? `Successfully uploaded ${result.success} loan(s)`
-                  : "Upload completed";
+              setUploadResult(result);
+              setShowReportDialog(true);
+              setShowFilePicker(false); // Close picker on success
 
-              if (result.failed > 0) {
-                const errorSummary =
-                  result.errors.length > 3
-                    ? result.errors.slice(0, 3).join("; ") +
-                      ` and ${result.errors.length - 3} more...`
-                    : result.errors
-                        ?.map((error: any) => error?.error ?? "")
-                        .join("; ");
-
-                toastService.showWarn(
-                  "Upload Complete",
-                  `Done: ${result.success}, Errors: ${result.failed}. Reasons: ${errorSummary}`
+              if (
+                result.success === 0 &&
+                result.failed > 0 &&
+                result.skipped === 0
+              ) {
+                toastService.showError(
+                  "Upload Failed",
+                  "All rows failed. See report for details."
                 );
               } else {
-                toastService.showSuccess("Success", message);
+                toastService.showSuccess(
+                  "Upload Processed",
+                  "Check report for details."
+                );
               }
             },
             onError: (error: any) => {
@@ -381,6 +377,17 @@ const LoansPage = () => {
           ],
           "application/vnd.ms-excel": [".xls"],
         }}
+      />
+
+      <BulkUploadReportDialog
+        visible={showReportDialog}
+        onHide={() => {
+          setShowReportDialog(false);
+          setUploadResult(null);
+          setUploadedFileName("");
+        }}
+        result={uploadResult}
+        fileName={uploadedFileName}
       />
     </>
   );

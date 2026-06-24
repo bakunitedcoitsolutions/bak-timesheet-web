@@ -251,8 +251,8 @@ const TimesheetPage = () => {
         body: (rowData: TimesheetPageRow) => (
           <div
             className={classNames("flex items-center justify-center gap-1.5", {
-              "w-[40px]": isLocked(rowData),
-              "w-[35px]": !isLocked(rowData),
+              "w-10": isLocked(rowData),
+              "w-8.75": !isLocked(rowData),
             })}
           >
             <span className="text-sm font-medium">{rowData.rowNumber}</span>
@@ -270,7 +270,7 @@ const TimesheetPage = () => {
         align: "left",
         style: { width: "50px" },
         body: (rowData: TimesheetPageRow) => (
-          <div className="w-[50px]">
+          <div className="w-12.5">
             <span className="text-sm font-medium">{rowData.employeeCode}</span>
           </div>
         ),
@@ -526,7 +526,13 @@ const TimesheetPage = () => {
         ),
       },
     ],
-    [projectOptions, isLoadingTimesheet, isLocked, saveSingleRow, updateTimesheetEntry]
+    [
+      projectOptions,
+      isLoadingTimesheet,
+      isLocked,
+      saveSingleRow,
+      updateTimesheetEntry,
+    ]
   );
 
   const updateTimesheetEntries = async () => {

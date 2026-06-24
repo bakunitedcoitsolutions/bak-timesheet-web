@@ -90,6 +90,14 @@ export interface BulkUploadLoanData {
 export interface BulkUploadLoanResult {
   success: number;
   failed: number;
+  skipped: number;
+  details: Array<{
+    row: number;
+    employeeCode: number;
+    date: string | Date;
+    status: "success" | "failed" | "skipped";
+    message?: string;
+  }>;
   errors: Array<{
     row: number;
     data: BulkUploadLoanRow;

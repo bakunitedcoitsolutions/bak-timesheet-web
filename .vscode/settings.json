@@ -22,6 +22,7 @@
     "tanseek",
     "Timesheet",
     "timesheets",
-    "Traff"
+    "Traff",
+    "upserts"
   ]
 }

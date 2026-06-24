@@ -6,11 +6,12 @@ import { Column } from "primereact/column";
 import { Dialog } from "primereact/dialog";
 import { DataTable } from "primereact/datatable";
 import type { BulkUploadTimesheetResult } from "@/lib/db/services/timesheet/timesheet.dto";
+import type { BulkUploadLoanResult } from "@/lib/db/services/loan/loan.dto";
 
 interface BulkUploadReportDialogProps {
   visible: boolean;
   onHide: () => void;
-  result: BulkUploadTimesheetResult | null;
+  result: BulkUploadTimesheetResult | BulkUploadLoanResult | null;
   fileName?: string;
 }
 
