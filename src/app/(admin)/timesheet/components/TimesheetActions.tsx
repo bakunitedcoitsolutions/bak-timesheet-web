@@ -1,12 +1,5 @@
 "use client";
-import React from "react";
-import {
-  Input,
-  Button,
-  GroupDropdown,
-  BulkUploadOptions,
-  CustomHeaderProps,
-} from "@/components";
+import { Input, Button, GroupDropdown, BulkUploadOptions } from "@/components";
 
 interface TimesheetActionsProps {
   selectedDate: string;

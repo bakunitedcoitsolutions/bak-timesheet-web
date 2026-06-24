@@ -15,6 +15,7 @@
     "fontawesome",
     "Gosi",
     "Gridlines",
+    "inputtext",
     "primereact",
     "progressspinner",
     "sitewise",
@@ -23,6 +24,7 @@
     "Timesheet",
     "timesheets",
     "Traff",
+    "tristatecheckbox",
     "upserts"
   ]
 }

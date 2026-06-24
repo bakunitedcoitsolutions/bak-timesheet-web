@@ -21,6 +21,7 @@ import { useGetPayrollSummaryStatus } from "@/lib/db/services/payroll-summary/re
 import {
   ListedTrafficChallan,
   ListTrafficChallansSortableField,
+  BulkUploadTrafficChallanResult,
 } from "@/lib/db/services/traffic-challan/traffic-challan.dto";
 import { listAllTrafficChallansAction } from "@/lib/db/services/traffic-challan/actions";
 import {
@@ -54,6 +55,9 @@ const ChallansPage = () => {
   >("createdAt");
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
   const [showFilePicker, setShowFilePicker] = useState<boolean>(false);
+  const [showReportDialog, setShowReportDialog] = useState<boolean>(false);
+  const [uploadResult, setUploadResult] = useState<BulkUploadTrafficChallanResult | null>(null);
+  const [uploadedFileName, setUploadedFileName] = useState<string>("");
   const tableRef = useRef<TableRef>(null);
 
   const { mutateAsync: deleteTrafficChallan } = useDeleteTrafficChallan();
@@ -290,6 +294,7 @@ const ChallansPage = () => {
       try {
         // Detect file type from file extension or MIME type
         const fileName = file.name.toLowerCase();
+        setUploadedFileName(file.name);
         const isCSV = fileName.endsWith(".csv") || file.type === "text/csv";
 
         let parseResult;
@@ -300,15 +305,9 @@ const ChallansPage = () => {
         }
 
         if (parseResult.errors.length > 0) {
-          const errorSummary =
-            parseResult.errors.length > 3
-              ? parseResult.errors.slice(0, 3).join("; ") +
-                ` and ${parseResult.errors.length - 3} more...`
-              : parseResult.errors.join("; ");
-
           toastService.showWarn(
             "Parse Warnings",
-            `Valid: ${parseResult.data.length}, Errors: ${parseResult.errors.length}. Reasons: ${errorSummary}`
+            `${parseResult.errors.length} row(s) had errors. Check console for details.`
           );
           console.log("Parse errors:", parseResult.errors);
         }
@@ -322,23 +321,25 @@ const ChallansPage = () => {
         await bulkUploadTrafficChallans(
           { trafficChallans: parseResult.data },
           {
-            onSuccess: (result) => {
-              if (result.failed > 0) {
-                const errorSummary =
-                  result.errors.length > 3
-                    ? result.errors.slice(0, 3).join("; ") +
-                      ` and ${result.errors.length - 3} more...`
-                    : result.errors
-                        ?.map((error: any) => error?.error ?? "")
-                        .join("; ");
+            onSuccess: (result: BulkUploadTrafficChallanResult) => {
+              setUploadResult(result);
+              setShowReportDialog(true);
+              setShowFilePicker(false); // Close picker on success
 
-                toastService.showWarn(
-                  "Upload Complete",
-                  `Done: ${result.success}, Errors: ${result.failed}. Reasons: ${errorSummary}`
+              if (
+                result.success === 0 &&
+                result.failed > 0 &&
+                result.skipped === 0
+              ) {
+                toastService.showError(
+                  "Upload Failed",
+                  "All rows failed. See report for details."
                 );
               } else {
-                const message = `Successfully uploaded ${result.success} traffic violation(s)`;
-                toastService.showSuccess("Success", message);
+                toastService.showSuccess(
+                  "Upload Processed",
+                  "Check report for details."
+                );
               }
             },
             onError: (error: any) => {
@@ -410,8 +411,16 @@ const ChallansPage = () => {
 
       <ViolationsDialogs
         showFilePicker={showFilePicker}
-        onHide={() => setShowFilePicker(false)}
+        onHideFilePicker={() => setShowFilePicker(false)}
         onUpload={handleUpload}
+        showReportDialog={showReportDialog}
+        onHideReportDialog={() => {
+          setShowReportDialog(false);
+          setUploadResult(null);
+          setUploadedFileName("");
+        }}
+        uploadResult={uploadResult}
+        uploadedFileName={uploadedFileName}
       />
     </div>
   );

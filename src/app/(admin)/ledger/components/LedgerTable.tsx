@@ -1,7 +1,8 @@
 "use client";
 import React from "react";
 import { ProgressSpinner } from "primereact/progressspinner";
-import { Table, TableRef } from "@/components";
+
+import { Table } from "@/components";
 import { LedgerEntry } from "../helpers";
 
 interface LedgerTableProps {

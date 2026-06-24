@@ -1,15 +1,29 @@
 "use client";
-import React from "react";
-import { UserPrivileges, FeaturePermissions, ReportsPrivileges } from "@/utils/user.utility";
+import {
+  UserPrivileges,
+  FeaturePermissions,
+  ReportsPrivileges,
+} from "@/utils/user.utility";
 import { Privileges, ReportsSection } from "@/components";
 
 interface UserPrivilegesSectionProps {
   privileges: UserPrivileges;
   isFeatureEnabled: (featureKey: keyof UserPrivileges) => boolean;
-  handleFeatureToggle: (featureKey: keyof UserPrivileges, enabled: boolean) => void;
-  handlePrivilegeChange: (featureKey: keyof UserPrivileges, permissionKey: keyof FeaturePermissions, checked: boolean) => void;
+  handleFeatureToggle: (
+    featureKey: keyof UserPrivileges,
+    enabled: boolean
+  ) => void;
+  handlePrivilegeChange: (
+    featureKey: keyof UserPrivileges,
+    permissionKey: keyof FeaturePermissions,
+    checked: boolean
+  ) => void;
   handleReportToggle: (reportId: string, enabled: boolean) => void;
-  handleReportFilterToggle: (reportId: string, filterKey: string, enabled: boolean) => void;
+  handleReportFilterToggle: (
+    reportId: string,
+    filterKey: string,
+    enabled: boolean
+  ) => void;
   selectedUserRoleId: number;
 }
 

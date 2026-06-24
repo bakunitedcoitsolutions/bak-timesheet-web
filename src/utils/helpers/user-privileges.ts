@@ -255,6 +255,7 @@ export const handleReportToggle = (
         reportsPrivileges.items[existingReportIndex].enabled = false;
         // Disable all filters when report is disabled
         if (reportsPrivileges.items[existingReportIndex].filters) {
+          // @ts-ignore
           reportsPrivileges.items[existingReportIndex].filters.forEach(
             (filter) => {
               filter.enabled = false;

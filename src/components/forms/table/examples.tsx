@@ -1,18 +1,16 @@
 "use client";
 /**
  * Example usage of the CustomTable component
- * 
+ *
  * This file demonstrates various ways to use the CustomTable component
  * with different filter types, sorting, and custom templates.
  */
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { Table, TableColumn } from "@/components";
 import {
   dropdownFilterTemplate,
-  multiSelectFilterTemplate,
   booleanFilterTemplate,
-  textFilterTemplate,
   statusFilterTemplate,
 } from "./filter-templates";
 import { Tag } from "primereact/tag";
@@ -30,8 +28,22 @@ interface ExampleData {
 // Example 1: Basic table with text filters
 export const BasicTableExample = () => {
   const [data] = useState<ExampleData[]>([
-    { id: 1, name: "John Doe", status: "active", country: "USA", verified: true, amount: 1000 },
-    { id: 2, name: "Jane Smith", status: "inactive", country: "UK", verified: false, amount: 2000 },
+    {
+      id: 1,
+      name: "John Doe",
+      status: "active",
+      country: "USA",
+      verified: true,
+      amount: 1000,
+    },
+    {
+      id: 2,
+      name: "Jane Smith",
+      status: "inactive",
+      country: "UK",
+      verified: false,
+      amount: 2000,
+    },
   ]);
 
   const columns: TableColumn<ExampleData>[] = [
@@ -61,8 +73,22 @@ export const BasicTableExample = () => {
 // Example 2: Table with custom body templates and status filter
 export const StatusTableExample = () => {
   const [data] = useState<ExampleData[]>([
-    { id: 1, name: "John Doe", status: "active", country: "USA", verified: true, amount: 1000 },
-    { id: 2, name: "Jane Smith", status: "inactive", country: "UK", verified: false, amount: 2000 },
+    {
+      id: 1,
+      name: "John Doe",
+      status: "active",
+      country: "USA",
+      verified: true,
+      amount: 1000,
+    },
+    {
+      id: 2,
+      name: "Jane Smith",
+      status: "inactive",
+      country: "UK",
+      verified: false,
+      amount: 2000,
+    },
   ]);
 
   const getSeverity = (status: string) => {
@@ -77,7 +103,9 @@ export const StatusTableExample = () => {
   };
 
   const statusBodyTemplate = (rowData: ExampleData) => {
-    return <Tag value={rowData.status} severity={getSeverity(rowData.status)} />;
+    return (
+      <Tag value={rowData.status} severity={getSeverity(rowData.status)} />
+    );
   };
 
   const columns: TableColumn<ExampleData>[] = [
@@ -104,15 +132,31 @@ export const StatusTableExample = () => {
 // Example 3: Table with boolean filter
 export const BooleanFilterTableExample = () => {
   const [data] = useState<ExampleData[]>([
-    { id: 1, name: "John Doe", status: "active", country: "USA", verified: true, amount: 1000 },
-    { id: 2, name: "Jane Smith", status: "inactive", country: "UK", verified: false, amount: 2000 },
+    {
+      id: 1,
+      name: "John Doe",
+      status: "active",
+      country: "USA",
+      verified: true,
+      amount: 1000,
+    },
+    {
+      id: 2,
+      name: "Jane Smith",
+      status: "inactive",
+      country: "UK",
+      verified: false,
+      amount: 2000,
+    },
   ]);
 
   const verifiedBodyTemplate = (rowData: ExampleData) => {
     return (
       <i
         className={`pi ${
-          rowData.verified ? "pi-check-circle text-green-500" : "pi-times-circle text-red-500"
+          rowData.verified
+            ? "pi-check-circle text-green-500"
+            : "pi-times-circle text-red-500"
         }`}
       />
     );
@@ -141,8 +185,22 @@ export const BooleanFilterTableExample = () => {
 // Example 4: Table with dropdown filter
 export const DropdownFilterTableExample = () => {
   const [data] = useState<ExampleData[]>([
-    { id: 1, name: "John Doe", status: "active", country: "USA", verified: true, amount: 1000 },
-    { id: 2, name: "Jane Smith", status: "inactive", country: "UK", verified: false, amount: 2000 },
+    {
+      id: 1,
+      name: "John Doe",
+      status: "active",
+      country: "USA",
+      verified: true,
+      amount: 1000,
+    },
+    {
+      id: 2,
+      name: "Jane Smith",
+      status: "inactive",
+      country: "UK",
+      verified: false,
+      amount: 2000,
+    },
   ]);
 
   const statusOptions = [
@@ -162,7 +220,8 @@ export const DropdownFilterTableExample = () => {
       sortable: true,
       filterable: true,
       filterType: "dropdown",
-      filterElement: (options) => dropdownFilterTemplate(options, statusOptions),
+      filterElement: (options) =>
+        dropdownFilterTemplate(options, statusOptions),
     },
   ];
 
@@ -172,8 +231,22 @@ export const DropdownFilterTableExample = () => {
 // Example 5: Table with multiple sorting
 export const MultipleSortTableExample = () => {
   const [data] = useState<ExampleData[]>([
-    { id: 1, name: "John Doe", status: "active", country: "USA", verified: true, amount: 1000 },
-    { id: 2, name: "Jane Smith", status: "inactive", country: "UK", verified: false, amount: 2000 },
+    {
+      id: 1,
+      name: "John Doe",
+      status: "active",
+      country: "USA",
+      verified: true,
+      amount: 1000,
+    },
+    {
+      id: 2,
+      name: "Jane Smith",
+      status: "inactive",
+      country: "UK",
+      verified: false,
+      amount: 2000,
+    },
   ]);
 
   const columns: TableColumn<ExampleData>[] = [
@@ -200,8 +273,22 @@ export const MultipleSortTableExample = () => {
 // Example 6: Table with row selection
 export const SelectionTableExample = () => {
   const [data] = useState<ExampleData[]>([
-    { id: 1, name: "John Doe", status: "active", country: "USA", verified: true, amount: 1000 },
-    { id: 2, name: "Jane Smith", status: "inactive", country: "UK", verified: false, amount: 2000 },
+    {
+      id: 1,
+      name: "John Doe",
+      status: "active",
+      country: "USA",
+      verified: true,
+      amount: 1000,
+    },
+    {
+      id: 2,
+      name: "Jane Smith",
+      status: "inactive",
+      country: "UK",
+      verified: false,
+      amount: 2000,
+    },
   ]);
   const [selectedRows, setSelectedRows] = useState<ExampleData[]>([]);
 
@@ -224,8 +311,9 @@ export const SelectionTableExample = () => {
       columns={columns}
       selectionMode="multiple"
       selection={selectedRows}
-      onSelectionChange={(selection) => setSelectedRows(selection as ExampleData[])}
+      onSelectionChange={(selection) =>
+        setSelectedRows(selection as ExampleData[])
+      }
     />
   );
 };
-

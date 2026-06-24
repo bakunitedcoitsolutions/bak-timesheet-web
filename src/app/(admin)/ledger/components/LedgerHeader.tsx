@@ -1,5 +1,4 @@
 "use client";
-import React from "react";
 import { Button, TitleHeader } from "@/components";
 
 interface LedgerHeaderProps {
@@ -7,7 +6,10 @@ interface LedgerHeaderProps {
   isPrintDisabled: boolean;
 }
 
-export const LedgerHeader = ({ onPrint, isPrintDisabled }: LedgerHeaderProps) => {
+export const LedgerHeader = ({
+  onPrint,
+  isPrintDisabled,
+}: LedgerHeaderProps) => {
   return (
     <TitleHeader
       showBack={false}

@@ -239,35 +239,37 @@ export const deleteTrafficChallan = async (
   id: number,
   branchId?: number | null
 ) => {
-  const existingTrafficChallan = await prisma.$transaction(async (tx: PrismaTransactionClient) => {
-    // Check if traffic challan exists
-    const existingTrafficChallan = await tx.trafficChallan.findUnique({
-      where: { id },
-      select: {
-        id: true,
-        employeeId: true,
-        date: true,
-        employee: { select: { branchId: true } },
-      },
-    });
+  const existingTrafficChallan = await prisma.$transaction(
+    async (tx: PrismaTransactionClient) => {
+      // Check if traffic challan exists
+      const existingTrafficChallan = await tx.trafficChallan.findUnique({
+        where: { id },
+        select: {
+          id: true,
+          employeeId: true,
+          date: true,
+          employee: { select: { branchId: true } },
+        },
+      });
 
-    if (!existingTrafficChallan) {
-      throw new Error("Traffic challan not found");
+      if (!existingTrafficChallan) {
+        throw new Error("Traffic challan not found");
+      }
+
+      // Security validation: verify branch assignment for branch-scoped users
+      if (branchId && existingTrafficChallan.employee?.branchId !== branchId) {
+        throw new Error(
+          "Access Denied: Traffic violation belongs to another branch."
+        );
+      }
+
+      await tx.trafficChallan.delete({
+        where: { id },
+      });
+
+      return existingTrafficChallan;
     }
-
-    // Security validation: verify branch assignment for branch-scoped users
-    if (branchId && existingTrafficChallan.employee?.branchId !== branchId) {
-      throw new Error(
-        "Access Denied: Traffic violation belongs to another branch."
-      );
-    }
-
-    await tx.trafficChallan.delete({
-      where: { id },
-    });
-
-    return existingTrafficChallan;
-  });
+  );
 
   // Trigger payroll refresh if active
   await refreshPayrollForEmployeesIfActive(
@@ -452,6 +454,8 @@ export const bulkUploadTrafficChallans = async (
   const res: BulkUploadTrafficChallanResult = {
     success: 0,
     failed: 0,
+    skipped: 0,
+    details: [],
     errors: [],
   };
 
@@ -498,8 +502,22 @@ export const bulkUploadTrafficChallans = async (
       });
 
       res.success++;
+      res.details.push({
+        row: rowNumber,
+        employeeCode: row.employeeCode,
+        date: row.date,
+        status: "success",
+        message: "Uploaded successfully",
+      });
     } catch (error: any) {
       res.failed++;
+      res.details.push({
+        row: rowNumber,
+        employeeCode: row.employeeCode,
+        date: row.date,
+        status: "failed",
+        message: error.message || "Unknown error",
+      });
       res.errors.push({
         row: rowNumber,
         data: row,
@@ -509,6 +527,7 @@ export const bulkUploadTrafficChallans = async (
   }
 
   // Trigger payroll refresh for all affected months/employees
+  // @ts-ignore
   for (const [dateKey, employeeIds] of refreshDetails.entries()) {
     const [year, month] = dateKey.split("-").map(Number);
     const dateObj = dayjs()

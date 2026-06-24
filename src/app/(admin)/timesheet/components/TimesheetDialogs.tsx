@@ -1,5 +1,4 @@
 "use client";
-import React from "react";
 import { BulkUploadDialog, BulkUploadReportDialog } from "@/components";
 import { BulkUploadTimesheetResult } from "@/lib/db/services/timesheet/timesheet.dto";
 

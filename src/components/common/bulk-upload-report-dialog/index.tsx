@@ -7,11 +7,12 @@ import { Dialog } from "primereact/dialog";
 import { DataTable } from "primereact/datatable";
 import type { BulkUploadTimesheetResult } from "@/lib/db/services/timesheet/timesheet.dto";
 import type { BulkUploadLoanResult } from "@/lib/db/services/loan/loan.dto";
+import type { BulkUploadTrafficChallanResult } from "@/lib/db/services/traffic-challan/traffic-challan.dto";
 
 interface BulkUploadReportDialogProps {
   visible: boolean;
   onHide: () => void;
-  result: BulkUploadTimesheetResult | BulkUploadLoanResult | null;
+  result: BulkUploadTimesheetResult | BulkUploadLoanResult | BulkUploadTrafficChallanResult | null;
   fileName?: string;
 }
 
