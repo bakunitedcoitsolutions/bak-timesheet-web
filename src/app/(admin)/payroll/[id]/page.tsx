@@ -22,9 +22,9 @@ import { formatPayrollPeriod, parseGroupDropdownFilter } from "@/utils/helpers";
 // Extracted components and utilities
 import {
   calculateNetLoan,
+  calculateTotalAllowances,
   calculateNetSalaryPayable,
   calculateNetTrafficChallan,
-  calculateTotalAllowances,
 } from "./utils";
 import { PayrollHeader } from "./components/PayrollHeader";
 import { usePayrollTableColumns } from "./components/PayrollTableColumns";
@@ -347,6 +347,7 @@ const PayrollDetailPage = () => {
           setSelectedFilter={setSelectedFilter}
           isPosted={dateData?.payrollStatusId === 3}
           payrollId={payrollId}
+          payrollSectionId={filterParams.payrollSectionId}
           onBulkUploadComplete={() => {
             queryClient.invalidateQueries({ queryKey: ["payroll-details"] });
             queryClient.invalidateQueries({ queryKey: ["payroll-summaries"] });

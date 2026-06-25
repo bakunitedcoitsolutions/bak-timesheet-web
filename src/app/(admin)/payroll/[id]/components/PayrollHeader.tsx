@@ -13,7 +13,7 @@ import {
 } from "@/lib/db/services/payroll-summary/payroll-allowance-bulk-upload-utils";
 import { toastService } from "@/lib/toast";
 import { useState, useCallback } from "react";
-import { getErrorMessage } from "@/utils/helpers";
+import { getErrorMessage, isTruckHouseSection } from "@/utils/helpers";
 import GroupDropdown from "@/components/common/group-dropdown";
 import { useBulkUploadPayrollAllowances } from "@/lib/db/services/payroll-summary/requests";
 import { BulkUploadPayrollAllowanceResult } from "@/lib/db/services/payroll-summary/payroll-allowance-bulk-upload.dto";
@@ -28,6 +28,7 @@ interface PayrollHeaderProps {
   selectedFilter: string | number | null;
   setSelectedFilter: (value: string | number | null) => void;
   payrollId: number;
+  payrollSectionId: number | null | undefined;
   onBulkUploadComplete?: () => void;
 }
 
@@ -37,6 +38,7 @@ export const PayrollHeader = ({
   handleSave,
   isSavingAll,
   selectedFilter,
+  payrollSectionId,
   isRefreshingAll,
   isPosted = false,
   handleRefreshAll,
@@ -172,14 +174,16 @@ export const PayrollHeader = ({
               disabled={isLoading || isSavingAll || isRefreshingAll}
               className="flex-1 lg:flex-none lg:w-28 h-10! bg-primary-light! text-primary! border-primary-light!"
             />
-            <div className="flex-1 lg:flex-none">
-              <BulkUploadOptions
-                uploadCSV={() => setShowFilePicker(true)}
-                uploadExcel={() => setShowFilePicker(true)}
-                downloadTemplate={downloadSampleTemplate}
-                buttonClassName="w-full lg:w-auto h-10!"
-              />
-            </div>
+            {isTruckHouseSection(payrollSectionId) && (
+              <div className="flex-1 lg:flex-none">
+                <BulkUploadOptions
+                  uploadCSV={() => setShowFilePicker(true)}
+                  uploadExcel={() => setShowFilePicker(true)}
+                  downloadTemplate={downloadSampleTemplate}
+                  buttonClassName="w-full lg:w-auto h-10!"
+                />
+              </div>
+            )}
           </div>
         )}
       </div>
