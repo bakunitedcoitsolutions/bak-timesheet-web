@@ -10,6 +10,7 @@ import { usePathname } from "next/navigation";
 import { MenuItem, MenuItemOptions } from "primereact/menuitem";
 
 import { useAccess } from "../common";
+import Breadcrumb from "../common/bread-crumb";
 import { queryClient } from "@/lib/react-query";
 import { USER_ROLES } from "@/utils/user.utility";
 import { useSignOut } from "@/lib/db/services/user/requests";
@@ -137,9 +138,14 @@ export default function Header({ collapsed, setCollapsed }: HeaderProps) {
                 </button>
 
                 <div className="h-6 w-px bg-gray-200 mx-1"></div>
-                <h1 className="text-lg font-semibold tracking-wide">
-                  {pageTitle}
-                </h1>
+                <div className="hidden md:block">
+                  <Breadcrumb />
+                </div>
+                <div className="block md:hidden">
+                  <h1 className="text-lg font-semibold tracking-wide leading-tight">
+                    {pageTitle}
+                  </h1>
+                </div>
               </>
             ) : (
               <Link
@@ -168,10 +174,13 @@ export default function Header({ collapsed, setCollapsed }: HeaderProps) {
       </div>
 
       {isAccessEnabled && !isLoading && (
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex justify-center pointer-events-none">
-          <h1 className="text-lg font-semibold tracking-wide pointer-events-auto">
-            {pageTitle}
-          </h1>
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex justify-center pointer-events-none mt-1">
+          <div className="flex flex-col items-center pointer-events-auto">
+            <h1 className="text-lg font-semibold tracking-wide leading-tight">
+              {pageTitle}
+            </h1>
+            <Breadcrumb className="mt-0.5!" />
+          </div>
         </div>
       )}
 

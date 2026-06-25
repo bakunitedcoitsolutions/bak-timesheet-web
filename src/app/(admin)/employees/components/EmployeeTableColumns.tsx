@@ -196,6 +196,8 @@ export const getEmployeeTableColumns = ({
     field: "branch",
     header: "Branch",
     ...commonColumnProps,
+    sortable: false,
+    filterable: false,
     body: (rowData: ListedEmployee) => (
       <span className="text-sm">{rowData?.branch?.nameEn || "-"}</span>
     ),
@@ -204,6 +206,8 @@ export const getEmployeeTableColumns = ({
     field: "subBranch",
     header: "Sub Branch",
     ...commonColumnProps,
+    sortable: false,
+    filterable: false,
     body: (rowData: ListedEmployee) => (
       <span className="text-sm">{rowData?.subBranch?.nameEn || "-"}</span>
     ),
@@ -212,6 +216,8 @@ export const getEmployeeTableColumns = ({
     field: "nationality",
     header: "Nationality",
     ...commonColumnProps,
+    sortable: false,
+    filterable: false,
     body: (rowData: ListedEmployee) => (
       <span className="text-sm">{rowData?.nationality?.nameEn || "-"}</span>
     ),

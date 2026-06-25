@@ -42,8 +42,8 @@ const SORTABLE_FIELDS = {
 
 const commonColumnProps = {
   sortable: true,
-  filterable: true,
-  smallFilter: true,
+  filterable: false,
+  smallFilter: false,
   showFilterMenu: false,
   showClearButton: false,
   style: { minWidth: 200 },
@@ -77,6 +77,7 @@ const columns = (
     field: "employeeId",
     header: "Employee",
     ...commonColumnProps,
+    sortable: false,
     style: { minWidth: 250 },
     body: (rowData: ListedExitReentry) => {
       const employee = employeesMap.get(rowData.employeeId);
@@ -118,6 +119,7 @@ const columns = (
     field: "remarks",
     header: "Remarks",
     ...commonColumnProps,
+    sortable: false,
     style: { minWidth: 200 },
     body: (rowData: ListedExitReentry) => (
       <span className="text-sm line-clamp-2">{rowData.remarks || "-"}</span>

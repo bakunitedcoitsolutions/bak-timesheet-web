@@ -388,3 +388,39 @@ body .p-datatable .p-datatable-thead > .row > th.p-frozen-column {
     transform: rotate(1turn);
   }
 }
+
+.app-breadcrumb.p-breadcrumb {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+.app-breadcrumb .p-breadcrumb-list li:last-child .p-menuitem-text,
+.app-breadcrumb .p-breadcrumb-list li:last-child .p-menuitem-link {
+  color: var(--color-primary);
+  opacity: 1 !important;
+  font-weight: 600;
+  cursor: default;
+}
+
+.app-breadcrumb .p-breadcrumb-list li:not(:last-child) .p-menuitem-text,
+.app-breadcrumb .p-breadcrumb-list li:not(:last-child) .p-menuitem-link {
+  color: #323239;
+  opacity: 1 !important;
+  font-weight: 600;
+}
+
+.app-breadcrumb .p-breadcrumb-chevron,
+.app-breadcrumb .p-menuitem-separator .pi {
+  display: none;
+}
+
+.app-breadcrumb .app-breadcrumb-separator,
+.app-breadcrumb .p-menuitem-separator .app-breadcrumb-separator {
+  color: #323239;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1;
+  opacity: 1 !important;
+}
