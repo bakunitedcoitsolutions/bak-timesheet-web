@@ -346,6 +346,11 @@ const PayrollDetailPage = () => {
           handleRefreshAll={handleRefreshAll}
           setSelectedFilter={setSelectedFilter}
           isPosted={dateData?.payrollStatusId === 3}
+          payrollId={payrollId}
+          onBulkUploadComplete={() => {
+            queryClient.invalidateQueries({ queryKey: ["payroll-details"] });
+            queryClient.invalidateQueries({ queryKey: ["payroll-summaries"] });
+          }}
         />
         <div className="bg-white h-full rounded-xl overflow-hidden">
           <Table

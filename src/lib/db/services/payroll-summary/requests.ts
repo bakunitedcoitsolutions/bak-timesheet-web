@@ -3,35 +3,36 @@ import { useMutation, useQuery } from "@/lib/zsa/zsa-query";
 import { GetPayrollSummaryByYearParamsInput } from "./payroll-summary.schemas";
 
 import {
-  updateMonthlyPayrollValuesAction,
-  getPayrollSummariesByYearAction,
   runPayrollAction,
-  repostPayrollAction,
   postPayrollAction,
-  recalculatePayrollSummaryAction,
-  getPayrollSummaryStatusByMonthYearAction,
+  repostPayrollAction,
   getPayrollReportAction,
+  getPayrollSummariesByYearAction,
+  recalculatePayrollSummaryAction,
+  updateMonthlyPayrollValuesAction,
+  getPayrollSummaryStatusByMonthYearAction,
 } from "./actions";
 
 // Manually defining input type since schema is defined inside actions.ts for now
 import {
-  getPayrollDetailsAction,
   getPayrollDateAction,
+  getPayrollDetailsAction,
+  getSalarySlipDataAction,
   savePayrollDetailsBatchAction,
   refreshPayrollDetailRowAction,
-  getSalarySlipDataAction,
+  bulkUploadPayrollAllowancesAction,
 } from "./actions";
 import {
-  GetPayrollDetailsInput,
   GetPayrollDateInput,
-  GetPayrollSummaryByMonthYearInput,
   GetPayrollReportInput,
+  GetPayrollDetailsInput,
+  GetPayrollSummaryByMonthYearInput,
 } from "./payroll-summary.schemas";
 
 export const useUpdateMonthlyPayrollValues = () =>
   useMutation(updateMonthlyPayrollValuesAction, {
     mutationKey: ["update-monthly-payroll-values"],
-    onSuccess: (_, variables) => {
+    onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ["payroll-summaries"],
       });
@@ -136,10 +137,22 @@ export const useGetPayrollSummaryStatus = (
     enabled: !!input.month && !!input.year,
   });
 
-export const useGetPayrollReport = (input: GetPayrollReportInput, enabled: boolean = true) =>
+export const useGetPayrollReport = (
+  input: GetPayrollReportInput,
+  enabled: boolean = true
+) =>
   useQuery(getPayrollReportAction, {
     queryKey: ["payroll-report", input],
     input,
     enabled: enabled && !!input.month && !!input.year,
     staleTime: 60 * 1000,
+  });
+
+export const useBulkUploadPayrollAllowances = () =>
+  useMutation(bulkUploadPayrollAllowancesAction, {
+    mutationKey: ["bulk-upload-payroll-allowances"],
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["payroll-details"] });
+      queryClient.invalidateQueries({ queryKey: ["payroll-summaries"] });
+    },
   });

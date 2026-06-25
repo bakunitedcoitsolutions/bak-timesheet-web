@@ -8,11 +8,12 @@ import { DataTable } from "primereact/datatable";
 import type { BulkUploadTimesheetResult } from "@/lib/db/services/timesheet/timesheet.dto";
 import type { BulkUploadLoanResult } from "@/lib/db/services/loan/loan.dto";
 import type { BulkUploadTrafficChallanResult } from "@/lib/db/services/traffic-challan/traffic-challan.dto";
+import type { BulkUploadPayrollAllowanceResult } from "@/lib/db/services/payroll-summary/payroll-allowance-bulk-upload.dto";
 
 interface BulkUploadReportDialogProps {
   visible: boolean;
   onHide: () => void;
-  result: BulkUploadTimesheetResult | BulkUploadLoanResult | BulkUploadTrafficChallanResult | null;
+  result: BulkUploadTimesheetResult | BulkUploadLoanResult | BulkUploadTrafficChallanResult | BulkUploadPayrollAllowanceResult | null;
   fileName?: string;
 }
 
@@ -23,6 +24,9 @@ export const BulkUploadReportDialog = ({
   fileName,
 }: BulkUploadReportDialogProps) => {
   if (!result) return null;
+
+  // Check if any detail rows have a date field (payroll allowance uploads don't)
+  const hasDateColumn = result.details.some((d: any) => d.date !== undefined);
 
   const statusBodyTemplate = (rowData: any) => {
     return (
@@ -46,13 +50,18 @@ export const BulkUploadReportDialog = ({
   const handleDownload = () => {
     if (!result.details || result.details.length === 0) return;
 
-    const dataToExport = result.details.map((row) => ({
-      "Row #": row.row,
-      "Emp Code": row.employeeCode,
-      Date: dayjs(row.date).format("YYYY-MM-DD"),
-      Status: row.status.toUpperCase(),
-      Message: row.message || "",
-    }));
+    const dataToExport = result.details.map((row: any) => {
+      const exportRow: any = {
+        "Row #": row.row,
+        "Emp Code": row.employeeCode,
+      };
+      if (hasDateColumn) {
+        exportRow["Date"] = row.date ? dayjs(row.date).format("YYYY-MM-DD") : "";
+      }
+      exportRow["Status"] = row.status.toUpperCase();
+      exportRow["Message"] = row.message || "";
+      return exportRow;
+    });
 
     const ws = XLSX.utils.json_to_sheet(dataToExport);
     const wb = XLSX.utils.book_new();
@@ -137,13 +146,15 @@ export const BulkUploadReportDialog = ({
           sortable
           style={{ minWidth: "8rem" }}
         />
-        <Column
-          field="date"
-          header="Date"
-          sortable
-          body={dateBodyTemplate}
-          style={{ minWidth: "8rem" }}
-        />
+        {hasDateColumn && (
+          <Column
+            field="date"
+            header="Date"
+            sortable
+            body={dateBodyTemplate}
+            style={{ minWidth: "8rem" }}
+          />
+        )}
         <Column
           field="status"
           header="Status"

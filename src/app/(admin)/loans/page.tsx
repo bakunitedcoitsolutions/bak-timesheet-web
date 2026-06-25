@@ -2,7 +2,12 @@
 import { useRouter } from "next/navigation";
 import { useRef, useState, useEffect, useMemo, useCallback } from "react";
 
-import { TableRef, useAccess, BulkUploadDialog, BulkUploadReportDialog } from "@/components";
+import {
+  TableRef,
+  useAccess,
+  BulkUploadDialog,
+  BulkUploadReportDialog,
+} from "@/components";
 import { getErrorMessage, createSortHandler } from "@/utils/helpers";
 import { useDebounce } from "@/hooks";
 import { toastService } from "@/lib/toast";
@@ -56,7 +61,9 @@ const LoansPage = () => {
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
   const [showFilePicker, setShowFilePicker] = useState<boolean>(false);
   const [showReportDialog, setShowReportDialog] = useState<boolean>(false);
-  const [uploadResult, setUploadResult] = useState<BulkUploadLoanResult | null>(null);
+  const [uploadResult, setUploadResult] = useState<BulkUploadLoanResult | null>(
+    null
+  );
   const [uploadedFileName, setUploadedFileName] = useState<string>("");
   const tableRef = useRef<TableRef>(null);
 
@@ -366,10 +373,10 @@ const LoansPage = () => {
       </div>
 
       <BulkUploadDialog
-        visible={showFilePicker}
         title="Upload Loans"
-        onHide={() => setShowFilePicker(false)}
         onUpload={handleUpload}
+        visible={showFilePicker}
+        onHide={() => setShowFilePicker(false)}
         accept={{
           "text/csv": [".csv"],
           "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": [

@@ -114,3 +114,12 @@ export const getPayrollReportAction = serverAction
   .handler(async ({ input }) => {
     return await getPayrollReport(input);
   });
+
+import { BulkUploadPayrollAllowanceSchema } from "./payroll-allowance-bulk-upload.schemas";
+import { bulkUploadPayrollAllowances } from "./payroll-allowance-bulk-upload.service";
+
+export const bulkUploadPayrollAllowancesAction = serverAction
+  .input(BulkUploadPayrollAllowanceSchema)
+  .handler(async ({ input }) => {
+    return await bulkUploadPayrollAllowances(input);
+  });
