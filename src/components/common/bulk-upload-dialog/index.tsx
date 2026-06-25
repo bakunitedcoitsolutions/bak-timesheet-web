@@ -5,19 +5,19 @@ import { Dialog } from "primereact/dialog";
 import { FilePicker, Button } from "@/components";
 
 export interface BulkUploadDialogProps {
+  title?: string;
   visible: boolean;
   onHide: () => void;
-  onUpload: (file: File) => Promise<void>;
   accept: Record<string, string[]>;
-  title?: string;
+  onUpload: (file: File) => Promise<void>;
 }
 
 const BulkUploadDialog = ({
-  visible,
-  onHide,
-  onUpload,
-  accept,
   title,
+  onHide,
+  accept,
+  visible,
+  onUpload,
 }: BulkUploadDialogProps) => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [isUploading, setIsUploading] = useState(false);

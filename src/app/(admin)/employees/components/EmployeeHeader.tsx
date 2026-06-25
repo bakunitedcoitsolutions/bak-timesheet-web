@@ -46,10 +46,10 @@ export const EmployeeHeader = ({
               severity="success"
               icon="pi pi-cloud-upload text-lg!"
               className={classNames("h-10! rounded-lg!")}
-              onClick={() => router.push("/employees/bulk-upload")}
+              onClick={() => router.push("/employees/bulk-update")}
             >
               <span className="text-center font-semibold px-2">
-                Bulk Upload
+                Bulk Update
               </span>
             </Button>
           </div>

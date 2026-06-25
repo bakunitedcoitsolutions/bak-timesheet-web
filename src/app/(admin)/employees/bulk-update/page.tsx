@@ -1,16 +1,16 @@
 "use client";
-import { useRouter } from "next/navigation";
-import { useState, useCallback } from "react";
 import * as XLSX from "xlsx";
 import { Dialog } from "primereact/dialog";
+import { useRouter } from "next/navigation";
+import { useState, useCallback } from "react";
 import { Checkbox } from "primereact/checkbox";
 
-import { Button, FilePicker, Input } from "@/components";
 import { toastService } from "@/lib/toast";
+import { Button, FilePicker, Input } from "@/components";
 
 import { EMPLOYEE_COLUMNS } from "@/utils/helpers/export-employees-report";
 
-const EmployeeBulkUploadPage = () => {
+const EmployeeBulkUpdatePage = () => {
   const router = useRouter();
 
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -107,7 +107,7 @@ const EmployeeBulkUploadPage = () => {
       <div className="flex flex-col md:flex-row justify-between items-center gap-3 shrink-0">
         <div className="w-full md:w-auto flex flex-1 flex-col gap-1">
           <h1 className="text-2xl font-semibold text-gray-900">
-            Bulk Upload Employees
+            Bulk Update Employees
           </h1>
           <p className="text-sm text-gray-600 mt-1">
             Upload a file containing multiple employee records.
@@ -124,18 +124,18 @@ const EmployeeBulkUploadPage = () => {
           />
         </div>
       </div>
-
-      <div className="flex-1 flex items-start justify-center pt-10 min-h-0">
-        <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 w-full max-w-xl space-y-6">
-          <div>
-            <h2 className="text-lg font-medium text-gray-900">Upload Data</h2>
+      <div className="bg-white flex-1 rounded-xl overflow-hidden min-h-0 px-6 py-6">
+        <div className="w-full flex flex-col mx-auto justify-center h-full flex-1 max-w-4xl">
+          <div className="mb-6">
+            <h2 className="text-lg font-semibold text-gray-900">
+              Upload Data File
+            </h2>
             <p className="text-sm text-gray-500 mt-1">
-              Select a CSV or Excel file to bulk upload.
+              Select a CSV or Excel file to bulk update employee information.
             </p>
           </div>
-
           <FilePicker
-            className="h-32"
+            className="h-48!"
             accept={accept}
             multiple={false}
             disabled={isUploading}
@@ -143,7 +143,7 @@ const EmployeeBulkUploadPage = () => {
             value={selectedFile ? [selectedFile] : []}
           />
 
-          <div className="flex items-center justify-end gap-3 pt-2">
+          <div className="flex items-center justify-end gap-3 pt-2 mt-5">
             <Button
               size="small"
               variant="text"
@@ -165,7 +165,6 @@ const EmployeeBulkUploadPage = () => {
           </div>
         </div>
       </div>
-
       <Dialog
         draggable={true}
         resizable={false}
@@ -255,4 +254,4 @@ const EmployeeBulkUploadPage = () => {
   );
 };
 
-export default EmployeeBulkUploadPage;
+export default EmployeeBulkUpdatePage;

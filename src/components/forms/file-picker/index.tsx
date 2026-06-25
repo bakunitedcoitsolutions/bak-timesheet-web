@@ -126,7 +126,7 @@ export default function FilePicker({
       <div
         {...getRootProps()}
         className={classNames(
-          "border border-dashed w-full rounded-xl h-[44px] px-1 md:px-5 cursor-pointer transition-all duration-200 flex flex-col items-center justify-center gap-3",
+          "border border-dashed w-full rounded-xl h-11 px-1 md:px-5 cursor-pointer transition-all duration-200 flex flex-col items-center justify-center gap-3",
           {
             "border-primary bg-primary-light": isDragActive,
             "border-primary bg-primary-light/40": !isDragActive,
@@ -156,7 +156,7 @@ export default function FilePicker({
           <div
             key={`${file.name}-${index}`}
             className={classNames(
-              "flex w-full items-center justify-between rounded-xl h-[44px] pl-2 pr-3 border border-primary/30  gap-x-2",
+              "flex w-full items-center justify-between rounded-xl h-11 pl-2 pr-3 border border-primary/30  gap-x-2",
               fileClassName
             )}
           >
