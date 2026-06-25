@@ -143,6 +143,7 @@ function buildSheetData(
       sections.set(key, { rows: [], order: r.sectionOrder ?? 9999 });
     sections.get(key)!.rows.push(r);
   });
+  // @ts-ignore
   const sorted = [...sections.entries()].sort(
     (a, b) => a[1].order - b[1].order
   );
@@ -162,6 +163,7 @@ function buildSheetData(
     rows.push([sectionName.toUpperCase()]);
 
     // Data rows
+    // @ts-ignore
     sRows.forEach((r, i) => {
       rows.push(buildRow(r, i + 1));
     });

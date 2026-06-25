@@ -187,3 +187,56 @@ export function exportEmployeesCSV(
     `Employees_Report_${new Date().toISOString().split("T")[0]}.csv`
   );
 }
+
+export const EMPLOYEE_COLUMNS = [
+  { id: 1, label: "Employee Code", value: "employeeCode" },
+  { id: 2, label: "Name (En)", value: "nameEn" },
+  { id: 3, label: "Name (Ar)", value: "nameAr" },
+  { id: 4, label: "Birth Date", value: "dob" },
+  { id: 5, label: "Mobile No.", value: "phone" },
+  { id: 6, label: "Gender", value: "gender" },
+  { id: 7, label: "Country", value: "countryName" },
+  { id: 8, label: "City", value: "cityName" },
+  { id: 9, label: "Status", value: "statusName" },
+  { id: 10, label: "Branch", value: "branchName" },
+  { id: 11, label: "Sub Branch", value: "subBranchName" },
+  { id: 12, label: "Designation", value: "designationName" },
+  { id: 13, label: "Payroll Section", value: "sectionName" },
+  { id: 14, label: "Is Fixed?", value: "isFixed" },
+  { id: 15, label: "Is Deductable?", value: "isDeductable" },
+  { id: 16, label: "Working Days", value: "workingDays" },
+  { id: 17, label: "Salary", value: "salary" },
+  { id: 18, label: "Hourly Rate", value: "hourlyRate" },
+  { id: 19, label: "Breakfast All.", value: "breakfastAllowance" },
+  { id: 20, label: "Food Allowance", value: "foodAllowance" },
+  { id: 21, label: "Mobile Allowance", value: "mobileAllowance" },
+  { id: 22, label: "Other Allowance", value: "otherAllowance" },
+  { id: 23, label: "Contract Start", value: "contractStartDate" },
+  { id: 24, label: "Contract End", value: "contractEndDate" },
+  { id: 25, label: "Contract Rem. Days", value: "contractRemainingDays" },
+  { id: 26, label: "Joining Date", value: "joiningDate" },
+  { id: 27, label: "End Reason", value: "contractEndReason" },
+  { id: 28, label: "Contract Doc", value: "contractDocument" },
+  { id: 29, label: "ID Card No.", value: "idCardNo" },
+  { id: 30, label: "ID Card Expiry", value: "idCardExpiryDate" },
+  { id: 31, label: "Profession", value: "profession" },
+  { id: 32, label: "ID Card Doc", value: "idCardDocument" },
+  { id: 33, label: "Nationality", value: "nationalityName" },
+  { id: 34, label: "Passport No.", value: "passportNo" },
+  { id: 35, label: "Passport Expiry", value: "passportExpiryDate" },
+  { id: 36, label: "Passport Doc", value: "passportDocument" },
+  { id: 37, label: "Bank Name", value: "bankName" },
+  { id: 38, label: "Bank Code", value: "bankCode" },
+  { id: 39, label: "GOSI Salary", value: "gosiSalary" },
+  { id: 40, label: "GOSI City", value: "gosiCityName" },
+  { id: 41, label: "IBAN", value: "iban" },
+  { id: 42, label: "Card Delivered?", value: "isCardDelivered" },
+  { id: 43, label: "Card Doc", value: "cardDocument" },
+  { id: 44, label: "Last Exit Date", value: "lastExitDate" },
+  { id: 45, label: "Last Entry Date", value: "lastEntryDate" },
+  { id: 46, label: "Profile Picture", value: "profilePicture" },
+];
+
+export const EMPLOYEE_COLUMNS_FOR_REPORT = EMPLOYEE_COLUMNS.filter((col) => {
+  return ![1, 2, 3, 44, 45, 46].includes(col.id);
+});

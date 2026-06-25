@@ -12,6 +12,7 @@ import {
   exportEmployeesCSV,
   exportEmployeesExcel,
   mapEmployeeToExportRow,
+  EMPLOYEE_COLUMNS_FOR_REPORT,
 } from "@/utils/helpers/export-employees-report";
 import { toastService } from "@/lib/toast";
 import { parseGroupDropdownFilter } from "@/utils/helpers";
@@ -128,48 +129,10 @@ const EmployeesReportPage = () => {
 
   // Define column options for MultiSelect based on table column keys
   // This list should match the available fields in ReportTable (excluding frozen)
-  const availableColumns = [
-    { label: "Birth Date", value: "dob" },
-    { label: "Mobile No.", value: "phone" },
-    { label: "Gender", value: "gender" },
-    { label: "Country", value: "countryName" },
-    { label: "City", value: "cityName" },
-    { label: "Status", value: "statusName" },
-    { label: "Branch", value: "branchName" },
-    { label: "Sub Branch", value: "subBranchName" },
-    { label: "Designation", value: "designationName" },
-    { label: "Payroll Section", value: "sectionName" },
-    { label: "Is Fixed?", value: "isFixed" },
-    { label: "Is Deductable?", value: "isDeductable" },
-    { label: "Working Days", value: "workingDays" },
-    { label: "Salary", value: "salary" },
-    { label: "Hourly Rate", value: "hourlyRate" },
-    { label: "Breakfast All.", value: "breakfastAllowance" },
-    { label: "Food Allowance", value: "foodAllowance" },
-    { label: "Mobile Allowance", value: "mobileAllowance" },
-    { label: "Other Allowance", value: "otherAllowance" },
-    { label: "Contract Start", value: "contractStartDate" },
-    { label: "Contract End", value: "contractEndDate" },
-    { label: "Contract Rem. Days", value: "contractRemainingDays" },
-    { label: "Joining Date", value: "joiningDate" },
-    { label: "End Reason", value: "contractEndReason" },
-    { label: "Contract Doc", value: "contractDocument" },
-    { label: "ID Card No.", value: "idCardNo" },
-    { label: "ID Card Expiry", value: "idCardExpiryDate" },
-    { label: "Profession", value: "profession" },
-    { label: "ID Card Doc", value: "idCardDocument" },
-    { label: "Nationality", value: "nationalityName" },
-    { label: "Passport No.", value: "passportNo" },
-    { label: "Passport Expiry", value: "passportExpiryDate" },
-    { label: "Passport Doc", value: "passportDocument" },
-    { label: "Bank Name", value: "bankName" },
-    { label: "Bank Code", value: "bankCode" },
-    { label: "GOSI Salary", value: "gosiSalary" },
-    { label: "GOSI City", value: "gosiCityName" },
-    { label: "IBAN", value: "iban" },
-    { label: "Card Delivered?", value: "isCardDelivered" },
-    { label: "Card Doc", value: "cardDocument" },
-  ];
+  const availableColumns = EMPLOYEE_COLUMNS_FOR_REPORT.map(col => ({
+    label: col.label,
+    value: col.value
+  }));
 
   const handlePrint = async () => {
     const allData = await fetchAllEmployees();

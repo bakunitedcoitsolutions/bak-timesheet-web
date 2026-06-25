@@ -302,6 +302,7 @@ const EmployeesPage = () => {
     <div className="flex h-full flex-col gap-6 px-6 py-6">
       <EmployeeHeader
         canAdd={canAdd}
+        canEdit={canEdit}
         onNewEmployee={() => router.push("/employees/new")}
       />
       <div className="bg-white flex-1 rounded-xl overflow-hidden min-h-0">

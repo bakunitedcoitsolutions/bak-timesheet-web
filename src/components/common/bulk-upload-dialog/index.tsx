@@ -68,7 +68,7 @@ const BulkUploadDialog = ({
     >
       <div className="p-4 space-y-4">
         <FilePicker
-          className="h-[90px]"
+          className="h-22.5"
           accept={accept}
           multiple={false}
           disabled={isUploading}
