@@ -12,6 +12,7 @@ import { useBulkUpdateEmployees } from "@/lib/db/services/employee";
 import { EMPLOYEE_COLUMNS } from "@/utils/helpers/export-employees-report";
 import { validateBulkEmployeeData, mapBulkEmployeeDataToIds } from "./helpers";
 import { BulkUploadReportDialog } from "@/components/common/bulk-upload-report-dialog";
+import type { BulkUpdateEmployeeResult } from "@/lib/db/services/employee/employee.dto";
 
 const EmployeeBulkUpdatePage = () => {
   const router = useRouter();
@@ -63,7 +64,12 @@ const EmployeeBulkUpdatePage = () => {
       );
 
       const { beforeReportDetails, successCount, failedCount } =
-        validateBulkEmployeeData(rawData, linkedColumns, globalData);
+        validateBulkEmployeeData(
+          rawData,
+          linkedColumns,
+          globalData,
+          EMPLOYEE_COLUMNS
+        );
 
       if (beforeReportDetails.length > 0) {
         // Validation failed, show Before Upload Report
@@ -88,20 +94,37 @@ const EmployeeBulkUpdatePage = () => {
       );
 
       // Call the actual bulk update action
-      const [result, err] = await bulkUpdateEmployees({
-        employees: mappedData,
-      });
+      await bulkUpdateEmployees(
+        { employees: mappedData },
+        {
+          onSuccess: (result: BulkUpdateEmployeeResult) => {
+            setIsUploading(false);
+            setReportType("after");
+            setReportResult(result);
+            setShowReportDialog(true);
 
-      setIsUploading(false);
-
-      if (err) {
-        toastService.showError("Error", "Failed to bulk update employees.");
-        return;
-      }
-
-      setReportType("after");
-      setReportResult(result);
-      setShowReportDialog(true);
+            if (
+              result.success === 0 &&
+              result.failed > 0 &&
+              result.skipped === 0
+            ) {
+              toastService.showError(
+                "Upload Failed",
+                "All rows failed. See report for details."
+              );
+            } else {
+              toastService.showSuccess(
+                "Upload Processed",
+                "Check report for details."
+              );
+            }
+          },
+          onError: (error: any) => {
+            setIsUploading(false);
+            toastService.showError("Error", "Failed to bulk update employees.");
+          },
+        }
+      );
     } catch (error) {
       setIsUploading(false);
       toastService.showError("Error", "Failed to process the file.");

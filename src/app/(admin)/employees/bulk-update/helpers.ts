@@ -1,9 +1,51 @@
 import { GlobalData } from "@/context/GlobalDataContext";
 
+const normalizeHeader = (header: string) =>
+  header.toLowerCase().replace(/[^a-z0-9]/g, "");
+
+// Aliases mapping normalized headers to actual Prisma field names
+const HEADER_ALIASES: Record<string, string> = {
+  code: "employeeCode",
+  empcode: "employeeCode",
+  employeecode: "employeeCode",
+};
+
+/**
+ * Given a normalized header string, tries to resolve the Prisma field name.
+ */
+const resolveFieldName = (normalizedKey: string, allColumns: any[]) => {
+  if (HEADER_ALIASES[normalizedKey]) {
+    return HEADER_ALIASES[normalizedKey];
+  }
+  const match = allColumns.find(
+    (c) => normalizeHeader(c.label) === normalizedKey
+  );
+  return match ? match.value : undefined;
+};
+
+/**
+ * Utility to find a cell value in a row by its Prisma field name
+ * (checks all possible column labels that resolve to this field).
+ */
+const getCellValueByField = (
+  row: any,
+  fieldName: string,
+  allColumns: any[]
+) => {
+  for (const [key, value] of Object.entries(row)) {
+    const normKey = normalizeHeader(key);
+    if (resolveFieldName(normKey, allColumns) === fieldName) {
+      return value;
+    }
+  }
+  return undefined;
+};
+
 export const validateBulkEmployeeData = (
   rawData: any[],
   linkedColumns: any[],
-  globalData: GlobalData
+  globalData: GlobalData,
+  allColumns: any[]
 ) => {
   const beforeReportDetails: any[] = [];
   let successCount = 0;
@@ -11,7 +53,13 @@ export const validateBulkEmployeeData = (
 
   rawData.forEach((row, index) => {
     const rowNum = index + 2; // +1 for 0-index, +1 for header
-    const employeeCodeValue = row["Employee Code"] || row["Emp Code"];
+
+    // Use the robust fetcher to get employee code
+    const employeeCodeValue = getCellValueByField(
+      row,
+      "employeeCode",
+      allColumns
+    );
     const employeeCode = employeeCodeValue || `Row ${rowNum}`;
     let hasError = false;
     const rowErrors: string[] = [];
@@ -22,7 +70,9 @@ export const validateBulkEmployeeData = (
     }
 
     linkedColumns.forEach((col) => {
-      const cellValue = row[col.label];
+      // Use the robust fetcher to get the cell value
+      const cellValue = getCellValueByField(row, col.value, allColumns);
+
       if (cellValue && cellValue.toString().trim() !== "") {
         const val = cellValue.toString().trim();
         let isValid = false;
@@ -107,18 +157,14 @@ export const mapBulkEmployeeDataToIds = (
   globalData: GlobalData,
   allColumns: any[]
 ) => {
-  // Build a map: label -> value (field name) for ALL columns
-  const labelToFieldMap: Record<string, string> = {};
-  allColumns.forEach((col) => {
-    labelToFieldMap[col.label] = col.value;
-  });
-
   return rawData.map((row) => {
     const newRow: Record<string, any> = {};
 
     // First, convert all label-keyed fields to field-keyed fields
     for (const [key, value] of Object.entries(row)) {
-      const fieldName = labelToFieldMap[key];
+      const normKey = normalizeHeader(key);
+      const fieldName = resolveFieldName(normKey, allColumns);
+
       if (fieldName) {
         newRow[fieldName] = value;
       } else {
