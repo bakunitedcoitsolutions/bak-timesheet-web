@@ -1,4 +1,4 @@
-# Using the IP copy your dump file to the VPS and run this command without loggin into vps
+# Using the IP copy your dump file to the VPS and run this command without login into vps
 scp new_full_db_supabase_dump.sql root@45.88.189.43:/root/new_full_db_supabase_dump.sql
 
 # Use this to get the supabase container name
