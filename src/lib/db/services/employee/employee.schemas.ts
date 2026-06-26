@@ -176,3 +176,19 @@ export type ListEmployeesParamsInput = z.infer<
 >;
 export type GetEmployeeByIdInput = z.infer<typeof GetEmployeeByIdSchema>;
 export type DeleteEmployeeInput = z.infer<typeof DeleteEmployeeSchema>;
+
+// ---------------------------------------------------------------------------
+// Bulk Update
+// ---------------------------------------------------------------------------
+
+export const BulkUpdateEmployeeRowSchema = z.object({
+  employeeCode: z.number().int().positive("Employee code is required"),
+}).passthrough(); // Allow dynamic fields from the spreadsheet
+
+export const BulkUpdateEmployeeSchema = z.object({
+  employees: z
+    .array(BulkUpdateEmployeeRowSchema)
+    .min(1, "At least one employee is required"),
+});
+
+export type BulkUpdateEmployeeInput = z.infer<typeof BulkUpdateEmployeeSchema>;

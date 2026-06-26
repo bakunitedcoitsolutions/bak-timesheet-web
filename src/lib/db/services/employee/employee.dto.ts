@@ -231,3 +231,33 @@ export interface ListEmployeesResponse {
     totalPages: number;
   };
 }
+
+// ---------------------------------------------------------------------------
+// Bulk Update
+// ---------------------------------------------------------------------------
+
+export interface BulkUpdateEmployeeRow {
+  employeeCode: number;
+  [key: string]: any; // Dynamic fields from spreadsheet
+}
+
+export interface BulkUpdateEmployeeData {
+  employees: BulkUpdateEmployeeRow[];
+}
+
+export interface BulkUpdateEmployeeResult {
+  success: number;
+  failed: number;
+  skipped: number;
+  details: Array<{
+    row: number;
+    employeeCode: number;
+    status: "success" | "failed" | "skipped";
+    message?: string;
+  }>;
+  errors: Array<{
+    row: number;
+    data: BulkUpdateEmployeeRow;
+    error: string;
+  }>;
+}

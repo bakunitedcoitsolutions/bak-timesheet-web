@@ -1,21 +1,21 @@
-import { queryClient } from "@/lib/react-query";
-import { useMutation, useQuery } from "@/lib/zsa/zsa-query";
-
 import {
-  GetEmployeeByIdInput,
-  ListEmployeesParamsInput,
-} from "./employee.schemas";
-import {
+  listEmployeesAction,
+  deleteEmployeeAction,
+  getEmployeeByIdAction,
   createEmployeeStep1Action,
   updateEmployeeStep1Action,
   updateEmployeeStep2Action,
   updateEmployeeStep3Action,
   updateEmployeeStep4Action,
   updateEmployeeStep5Action,
-  listEmployeesAction,
-  getEmployeeByIdAction,
-  deleteEmployeeAction,
+  bulkUpdateEmployeesAction,
 } from "./actions";
+import {
+  GetEmployeeByIdInput,
+  ListEmployeesParamsInput,
+} from "./employee.schemas";
+import { queryClient } from "@/lib/react-query";
+import { useMutation, useQuery } from "@/lib/zsa/zsa-query";
 
 // Step 1: Create Employee
 export const useCreateEmployeeStep1 = () =>
@@ -127,6 +127,20 @@ export const useGetEmployeeById = (input: GetEmployeeByIdInput) =>
 export const useDeleteEmployee = () =>
   useMutation(deleteEmployeeAction, {
     mutationKey: ["delete-employee"],
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["employees"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["employee"],
+      });
+    },
+  });
+
+// Bulk Update Employees
+export const useBulkUpdateEmployees = () =>
+  useMutation(bulkUpdateEmployeesAction, {
+    mutationKey: ["bulk-update-employees"],
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ["employees"],

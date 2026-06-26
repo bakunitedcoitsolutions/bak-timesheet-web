@@ -1,24 +1,31 @@
 "use server";
-import { serverAction } from "@/lib/zsa/zsa-action";
-import { getServerAccessContext } from "@/lib/auth/helpers";
 import {
+  listEmployees,
+  deleteEmployee,
+  findEmployeeById,
   createEmployeeStep1,
   updateEmployeeStep1,
   updateEmployeeStep2,
   updateEmployeeStep3,
   updateEmployeeStep4,
   updateEmployeeStep5,
-  findEmployeeById,
-  listEmployees,
-  deleteEmployee,
 } from "./employee.service";
-import { cache } from "@/lib/redis";
 import {
   getGlobalDataAction,
   getSharedEmployeesAction,
 } from "../shared/actions";
-import { CACHE_KEYS } from "../shared/constants";
 import {
+  DeleteEmployeeInput,
+  DeleteEmployeeSchema,
+  GetEmployeeByIdInput,
+  GetEmployeeByIdSchema,
+  BulkUpdateEmployeeInput,
+  BulkUpdateEmployeeSchema,
+  UpdateEmployeeStep1Input,
+  UpdateEmployeeStep2Input,
+  UpdateEmployeeStep3Input,
+  UpdateEmployeeStep4Input,
+  UpdateEmployeeStep5Input,
   CreateEmployeeStep1Schema,
   UpdateEmployeeStep1Schema,
   UpdateEmployeeStep2Schema,
@@ -26,16 +33,12 @@ import {
   UpdateEmployeeStep4Schema,
   UpdateEmployeeStep5Schema,
   ListEmployeesParamsSchema,
-  GetEmployeeByIdSchema,
-  DeleteEmployeeSchema,
-  UpdateEmployeeStep1Input,
-  UpdateEmployeeStep2Input,
-  UpdateEmployeeStep3Input,
-  UpdateEmployeeStep4Input,
-  UpdateEmployeeStep5Input,
-  GetEmployeeByIdInput,
-  DeleteEmployeeInput,
 } from "./employee.schemas";
+import { cache } from "@/lib/redis";
+import { CACHE_KEYS } from "../shared/constants";
+import { serverAction } from "@/lib/zsa/zsa-action";
+import { getServerAccessContext } from "@/lib/auth/helpers";
+import { bulkUpdateEmployees } from "./bulk-update.service";
 
 // Step 1: Create Employee
 export const createEmployeeStep1Action = serverAction
@@ -134,6 +137,18 @@ export const deleteEmployeeAction = serverAction
   .input(DeleteEmployeeSchema)
   .handler(async ({ input }: { input: DeleteEmployeeInput }) => {
     const response = await deleteEmployee(input.id);
+    // Invalidate and refresh cache
+    await cache.delete(CACHE_KEYS.EMPLOYEES);
+    getSharedEmployeesAction();
+    getGlobalDataAction();
+    return response;
+  });
+
+// Bulk Update Employees
+export const bulkUpdateEmployeesAction = serverAction
+  .input(BulkUpdateEmployeeSchema)
+  .handler(async ({ input }: { input: BulkUpdateEmployeeInput }) => {
+    const response = await bulkUpdateEmployees(input);
     // Invalidate and refresh cache
     await cache.delete(CACHE_KEYS.EMPLOYEES);
     getSharedEmployeesAction();

@@ -7,16 +7,24 @@ import { Checkbox } from "primereact/checkbox";
 
 import { toastService } from "@/lib/toast";
 import { Button, FilePicker, Input } from "@/components";
-
+import { useGlobalData } from "@/context/GlobalDataContext";
+import { useBulkUpdateEmployees } from "@/lib/db/services/employee";
 import { EMPLOYEE_COLUMNS } from "@/utils/helpers/export-employees-report";
+import { validateBulkEmployeeData, mapBulkEmployeeDataToIds } from "./helpers";
+import { BulkUploadReportDialog } from "@/components/common/bulk-upload-report-dialog";
 
 const EmployeeBulkUpdatePage = () => {
   const router = useRouter();
+  const { data: globalData } = useGlobalData();
+  const { mutateAsync: bulkUpdateEmployees } = useBulkUpdateEmployees();
 
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [isUploading, setIsUploading] = useState(false);
-  const [showDownloadDialog, setShowDownloadDialog] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [isUploading, setIsUploading] = useState(false);
+  const [reportResult, setReportResult] = useState<any>(null);
+  const [showReportDialog, setShowReportDialog] = useState(false);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [showDownloadDialog, setShowDownloadDialog] = useState(false);
+  const [reportType, setReportType] = useState<"before" | "after">("before");
   const [selectedCols, setSelectedCols] = useState<number[]>(
     EMPLOYEE_COLUMNS.map((c) => c.id as number)
   );
@@ -40,12 +48,64 @@ const EmployeeBulkUpdatePage = () => {
   const handleUpload = async () => {
     if (!selectedFile) return;
     setIsUploading(true);
-    // Simulate upload
-    setTimeout(() => {
+
+    try {
+      const arrayBuffer = await selectedFile.arrayBuffer();
+      const workbook = XLSX.read(arrayBuffer, { type: "buffer" });
+      const worksheetName = workbook.SheetNames[0];
+      const worksheet = workbook.Sheets[worksheetName];
+      const rawData = XLSX.utils.sheet_to_json(worksheet, {
+        defval: "",
+      }) as any[];
+
+      const linkedColumns = EMPLOYEE_COLUMNS.filter(
+        (col) => col.type === "linked"
+      );
+
+      const { beforeReportDetails, successCount, failedCount } =
+        validateBulkEmployeeData(rawData, linkedColumns, globalData);
+
+      if (beforeReportDetails.length > 0) {
+        // Validation failed, show Before Upload Report
+        setIsUploading(false);
+        setReportType("before");
+        setReportResult({
+          success: 0,
+          skipped: successCount,
+          failed: failedCount,
+          details: beforeReportDetails,
+        });
+        setShowReportDialog(true);
+        return;
+      }
+
+      // If no validation errors, map names to IDs
+      const mappedData = mapBulkEmployeeDataToIds(
+        rawData,
+        linkedColumns,
+        globalData,
+        EMPLOYEE_COLUMNS
+      );
+
+      // Call the actual bulk update action
+      const [result, err] = await bulkUpdateEmployees({
+        employees: mappedData,
+      });
+
       setIsUploading(false);
-      toastService.showSuccess("Success", "File uploaded successfully!");
-      router.push("/employees");
-    }, 1500);
+
+      if (err) {
+        toastService.showError("Error", "Failed to bulk update employees.");
+        return;
+      }
+
+      setReportType("after");
+      setReportResult(result);
+      setShowReportDialog(true);
+    } catch (error) {
+      setIsUploading(false);
+      toastService.showError("Error", "Failed to process the file.");
+    }
   };
 
   const handleClose = () => {
@@ -166,16 +226,16 @@ const EmployeeBulkUpdatePage = () => {
         </div>
       </div>
       <Dialog
-        draggable={true}
-        resizable={false}
-        header="Download Template"
-        visible={showDownloadDialog}
         style={{
           width: "90vw",
           height: "80vh",
           maxWidth: "700px",
           background: "white",
         }}
+        draggable={true}
+        resizable={false}
+        header="Download Template"
+        visible={showDownloadDialog}
         onHide={() => setShowDownloadDialog(false)}
         footer={
           <div className="flex justify-end gap-3">
@@ -250,6 +310,17 @@ const EmployeeBulkUpdatePage = () => {
           </div>
         </div>
       </Dialog>
+      <BulkUploadReportDialog
+        result={reportResult}
+        visible={showReportDialog}
+        fileName={selectedFile?.name}
+        onHide={() => {
+          setShowReportDialog(false);
+          if (reportType === "after") {
+            router.push("/employees");
+          }
+        }}
+      />
     </div>
   );
 };

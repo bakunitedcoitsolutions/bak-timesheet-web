@@ -9,11 +9,12 @@ import type { BulkUploadTimesheetResult } from "@/lib/db/services/timesheet/time
 import type { BulkUploadLoanResult } from "@/lib/db/services/loan/loan.dto";
 import type { BulkUploadTrafficChallanResult } from "@/lib/db/services/traffic-challan/traffic-challan.dto";
 import type { BulkUploadPayrollAllowanceResult } from "@/lib/db/services/payroll-summary/payroll-allowance-bulk-upload.dto";
+import type { BulkUpdateEmployeeResult } from "@/lib/db/services/employee/employee.dto";
 
 interface BulkUploadReportDialogProps {
   visible: boolean;
   onHide: () => void;
-  result: BulkUploadTimesheetResult | BulkUploadLoanResult | BulkUploadTrafficChallanResult | BulkUploadPayrollAllowanceResult | null;
+  result: BulkUploadTimesheetResult | BulkUploadLoanResult | BulkUploadTrafficChallanResult | BulkUploadPayrollAllowanceResult | BulkUpdateEmployeeResult | null;
   fileName?: string;
 }
 
