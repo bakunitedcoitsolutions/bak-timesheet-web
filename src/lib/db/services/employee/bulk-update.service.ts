@@ -163,7 +163,11 @@ const buildUpdateData = (row: any) => {
       updateData[key] = id;
     } else {
       // String fields
-      updateData[key] = String(value);
+      let strVal = String(value);
+      if (key === "phone" && !strVal.startsWith("0")) {
+        strVal = "0" + strVal;
+      }
+      updateData[key] = strVal;
     }
   }
 
