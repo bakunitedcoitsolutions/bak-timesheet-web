@@ -202,7 +202,7 @@ export const EMPLOYEE_COLUMNS: EmployeeColumns[] = [
     type: "text",
     label: "Employee Code",
     value: "employeeCode",
-    example: "10001",
+    example: "10024",
   },
   {
     id: 2,
@@ -223,7 +223,7 @@ export const EMPLOYEE_COLUMNS: EmployeeColumns[] = [
     type: "date",
     label: "Birth Date",
     value: "dob",
-    example: "1990-01-01",
+    example: "01-Jan-1990",
   },
   {
     id: 5,
@@ -259,28 +259,28 @@ export const EMPLOYEE_COLUMNS: EmployeeColumns[] = [
     type: "linked",
     label: "Branch",
     value: "branchName",
-    example: "Main Branch",
+    example: "BAK Construction",
   },
   {
     id: 11,
     type: "linked",
     label: "Sub Branch",
     value: "subBranchName",
-    example: "HQ",
+    example: "Abdul Aziz Est",
   },
   {
     id: 12,
     type: "linked",
     label: "Designation",
     value: "designationName",
-    example: "Software Engineer",
+    example: "Steel Fixer",
   },
   {
     id: 13,
     type: "linked",
     label: "Payroll Section",
     value: "sectionName",
-    example: "IT Department",
+    example: "Steel Fixers (Construction)",
   },
   {
     id: 14,
@@ -344,14 +344,14 @@ export const EMPLOYEE_COLUMNS: EmployeeColumns[] = [
     type: "date",
     label: "Contract Start",
     value: "contractStartDate",
-    example: "2023-01-01",
+    example: "01-Jan-2023",
   },
   {
     id: 24,
     type: "date",
     label: "Contract End",
     value: "contractEndDate",
-    example: "2025-01-01",
+    example: "01-Jan-2025",
   },
   {
     id: 25,
@@ -365,21 +365,21 @@ export const EMPLOYEE_COLUMNS: EmployeeColumns[] = [
     type: "date",
     label: "Joining Date",
     value: "joiningDate",
-    example: "2023-01-01",
+    example: "01-Jan-2023",
   },
   {
     id: 27,
     type: "text",
     label: "End Reason",
     value: "contractEndReason",
-    example: "N/A",
+    example: "",
   },
   {
     id: 28,
     type: "text",
     label: "Contract Doc",
     value: "contractDocument",
-    example: "https://example.com/contract.pdf",
+    example: "§",
   },
   {
     id: 29,
@@ -393,7 +393,7 @@ export const EMPLOYEE_COLUMNS: EmployeeColumns[] = [
     type: "date",
     label: "ID Card Expiry",
     value: "idCardExpiryDate",
-    example: "2028-01-01",
+    example: "01-Jan-2028",
   },
   {
     id: 31,
@@ -407,15 +407,14 @@ export const EMPLOYEE_COLUMNS: EmployeeColumns[] = [
     type: "text",
     label: "ID Card Doc",
     value: "idCardDocument",
-    example:
-      "https://example.com/id_card.jpg",
+    example: "https://example.com/id_card.jpg",
   },
   {
     id: 33,
     type: "linked",
     label: "Nationality",
     value: "nationalityName",
-    example: "United States",
+    example: "Pakistan",
   },
   {
     id: 34,
@@ -429,7 +428,7 @@ export const EMPLOYEE_COLUMNS: EmployeeColumns[] = [
     type: "date",
     label: "Passport Expiry",
     value: "passportExpiryDate",
-    example: "2030-01-01",
+    example: "01-Jan-2030",
   },
   {
     id: 36,
@@ -443,14 +442,14 @@ export const EMPLOYEE_COLUMNS: EmployeeColumns[] = [
     type: "text",
     label: "Bank Name",
     value: "bankName",
-    example: "Example Bank",
+    example: "National Commercial Bank (NCB)",
   },
   {
     id: 38,
     type: "text",
     label: "Bank Code",
     value: "bankCode",
-    example: "EXBK",
+    example: "NCBK",
   },
   {
     id: 39,
@@ -464,7 +463,7 @@ export const EMPLOYEE_COLUMNS: EmployeeColumns[] = [
     type: "linked",
     label: "GOSI City",
     value: "gosiCityName",
-    example: "Riyadh",
+    example: "Jeddah",
   },
   {
     id: 41,
@@ -505,3 +504,30 @@ export const EMPLOYEE_COLUMNS_FOR_BULK_UPDATE = EMPLOYEE_COLUMNS.filter(
 export const EMPLOYEE_COLUMNS_FOR_REPORT = EMPLOYEE_COLUMNS.filter((col) => {
   return ![1, 2, 3, 44].includes(col.id);
 });
+
+export function exportBulkUpdateTemplate(selectedCols: number[]) {
+  const activeCols = EMPLOYEE_COLUMNS_FOR_BULK_UPDATE.filter((c) =>
+    selectedCols.includes(c.id as number)
+  );
+
+  const sampleRow: Record<string, string | number> = {};
+  activeCols.forEach((col) => {
+    sampleRow[col.label] = col.example || "";
+  });
+
+  const worksheet = XLSX.utils.json_to_sheet([sampleRow]);
+
+  // Set column widths
+  worksheet["!cols"] = activeCols.map((col) => {
+    if (col.value === "nameEn" || col.value === "nameAr") return { wch: 30 };
+    return { wch: 20 };
+  });
+
+  const workbook = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(workbook, worksheet, "Employees");
+
+  XLSX.writeFile(
+    workbook,
+    `employee_bulk_update_template_${new Date().toISOString().split("T")[0]}.xlsx`
+  );
+}

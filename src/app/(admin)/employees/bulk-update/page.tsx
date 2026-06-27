@@ -1,10 +1,13 @@
 "use client";
 import * as XLSX from "xlsx";
 import { Dialog } from "primereact/dialog";
-import { useRouter } from "next/navigation";
 import { useState, useCallback } from "react";
 import { Checkbox } from "primereact/checkbox";
 
+import {
+  exportBulkUpdateTemplate,
+  EMPLOYEE_COLUMNS_FOR_BULK_UPDATE,
+} from "@/utils/helpers/export-employees-report";
 import { toastService } from "@/lib/toast";
 import { Button, FilePicker, Input } from "@/components";
 import { useGlobalData } from "@/context/GlobalDataContext";
@@ -12,10 +15,8 @@ import { useBulkUpdateEmployees } from "@/lib/db/services/employee";
 import { validateBulkEmployeeData, mapBulkEmployeeDataToIds } from "./helpers";
 import { BulkUploadReportDialog } from "@/components/common/bulk-upload-report-dialog";
 import type { BulkUpdateEmployeeResult } from "@/lib/db/services/employee/employee.dto";
-import { EMPLOYEE_COLUMNS_FOR_BULK_UPDATE } from "@/utils/helpers/export-employees-report";
 
 const EmployeeBulkUpdatePage = () => {
-  const router = useRouter();
   const { data: globalData } = useGlobalData();
   const { mutateAsync: bulkUpdateEmployees } = useBulkUpdateEmployees();
 
@@ -51,13 +52,29 @@ const EmployeeBulkUpdatePage = () => {
     setIsUploading(true);
 
     try {
-      const arrayBuffer = await selectedFile.arrayBuffer();
-      const workbook = XLSX.read(arrayBuffer, { type: "buffer" });
-      const worksheetName = workbook.SheetNames[0];
-      const worksheet = workbook.Sheets[worksheetName];
-      const rawData = XLSX.utils.sheet_to_json(worksheet, {
-        defval: "",
-      }) as any[];
+      let rawData: any[] = [];
+
+      if (selectedFile.name.toLowerCase().endsWith(".csv")) {
+        const text = await selectedFile.text();
+        const workbook = XLSX.read(text, { type: "string" });
+        const worksheetName = workbook.SheetNames[0];
+        const worksheet = workbook.Sheets[worksheetName];
+        rawData = XLSX.utils.sheet_to_json(worksheet, {
+          defval: "",
+          raw: false,
+          dateNF: "dd-mmm-yyyy",
+        }) as any[];
+      } else {
+        const arrayBuffer = await selectedFile.arrayBuffer();
+        const workbook = XLSX.read(arrayBuffer, { type: "array" });
+        const worksheetName = workbook.SheetNames[0];
+        const worksheet = workbook.Sheets[worksheetName];
+        rawData = XLSX.utils.sheet_to_json(worksheet, {
+          defval: "",
+          raw: false,
+          dateNF: "dd-mmm-yyyy",
+        }) as any[];
+      }
 
       const linkedColumns = EMPLOYEE_COLUMNS_FOR_BULK_UPDATE.filter(
         (col) => col.type === "linked"
@@ -131,10 +148,6 @@ const EmployeeBulkUpdatePage = () => {
     }
   };
 
-  const handleClose = () => {
-    router.push("/employees");
-  };
-
   const handleColToggle = (colId: number) => {
     if (colId === 1) return; // Prevent unselecting Employee Code
     setSelectedCols((prev) =>
@@ -155,26 +168,7 @@ const EmployeeBulkUpdatePage = () => {
   };
 
   const handleDownloadTemplate = () => {
-    // Filter the actual objects based on selected IDs (preserving order of EMPLOYEE_COLUMNS_FOR_BULK_UPDATE)
-    const activeCols = EMPLOYEE_COLUMNS_FOR_BULK_UPDATE.filter((c) =>
-      selectedCols.includes(c.id as number)
-    );
-
-    // Create a single empty/sample row to generate the headers
-    const sampleRow: Record<string, string | number> = {};
-    activeCols.forEach((col) => {
-      // Add some dummy text for Employee Code, empty otherwise
-      sampleRow[col.label] = col.id === 1 ? 1001 : "";
-    });
-
-    const worksheet = XLSX.utils.json_to_sheet([sampleRow]);
-    const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, "Employees");
-
-    XLSX.writeFile(
-      workbook,
-      `employee_bulk_upload_template_${new Date().toISOString().split("T")[0]}.xlsx`
-    );
+    exportBulkUpdateTemplate(selectedCols);
 
     setTimeout(
       () =>
@@ -231,18 +225,10 @@ const EmployeeBulkUpdatePage = () => {
           <div className="flex items-center justify-end gap-3 pt-2 mt-5">
             <Button
               size="small"
-              variant="text"
-              disabled={isUploading}
-              onClick={handleClose}
-            >
-              Cancel
-            </Button>
-            <Button
-              size="small"
               variant="solid"
-              disabled={!selectedFile || isUploading}
               loading={isUploading}
               onClick={handleUpload}
+              disabled={!selectedFile || isUploading}
               className="w-28 justify-center! gap-1"
             >
               Upload
@@ -342,10 +328,11 @@ const EmployeeBulkUpdatePage = () => {
         result={reportResult}
         visible={showReportDialog}
         fileName={selectedFile?.name}
+        reportTitlePrefix="Employee Bulk Update Report"
         onHide={() => {
           setShowReportDialog(false);
           if (reportType === "after") {
-            router.push("/employees");
+            setSelectedFile(null);
           }
         }}
       />

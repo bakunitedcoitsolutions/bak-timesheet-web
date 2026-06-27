@@ -7,6 +7,7 @@ import type {
   BulkUpdateEmployeeData,
   BulkUpdateEmployeeResult,
 } from "./employee.dto";
+import dayjs from "@/lib/dayjs";
 import { prisma } from "@/lib/db/prisma";
 import { getCurrentUser } from "@/lib/auth/helpers";
 
@@ -16,12 +17,25 @@ type PrismaTransactionClient = Parameters<
 >[0];
 
 /**
+
  * Helper function to normalize date strings to Date objects
  */
 const normalizeDate = (date: Date | string | undefined): Date | null => {
   if (!date) return null;
   if (date instanceof Date) return date;
-  return new Date(date);
+
+  if (
+    typeof date === "string" &&
+    !date.includes("T") &&
+    !date.includes("Z") &&
+    !date.includes(":")
+  ) {
+    const parsed = new Date(`${date} UTC`);
+    if (!isNaN(parsed.getTime())) return parsed;
+  }
+
+  const parsed = dayjs(date);
+  return parsed.isValid() ? parsed.toDate() : null;
 };
 
 // Fields that are date type in the DB

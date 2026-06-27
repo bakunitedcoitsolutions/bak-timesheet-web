@@ -14,7 +14,14 @@ import type { BulkUpdateEmployeeResult } from "@/lib/db/services/employee/employ
 interface BulkUploadReportDialogProps {
   visible: boolean;
   onHide: () => void;
-  result: BulkUploadTimesheetResult | BulkUploadLoanResult | BulkUploadTrafficChallanResult | BulkUploadPayrollAllowanceResult | BulkUpdateEmployeeResult | null;
+  reportTitlePrefix?: string;
+  result:
+    | BulkUploadTimesheetResult
+    | BulkUploadLoanResult
+    | BulkUploadTrafficChallanResult
+    | BulkUploadPayrollAllowanceResult
+    | BulkUpdateEmployeeResult
+    | null;
   fileName?: string;
 }
 
@@ -23,6 +30,7 @@ export const BulkUploadReportDialog = ({
   onHide,
   result,
   fileName,
+  reportTitlePrefix,
 }: BulkUploadReportDialogProps) => {
   if (!result) return null;
 
@@ -44,6 +52,10 @@ export const BulkUploadReportDialog = ({
     );
   };
 
+  const baseTitle = !!reportTitlePrefix
+    ? reportTitlePrefix
+    : "Bulk Upload Report";
+
   const dateBodyTemplate = (rowData: any) => {
     return dayjs(rowData.date).format("DD MMMM, YYYY");
   };
@@ -57,7 +69,9 @@ export const BulkUploadReportDialog = ({
         "Emp Code": row.employeeCode,
       };
       if (hasDateColumn) {
-        exportRow["Date"] = row.date ? dayjs(row.date).format("YYYY-MM-DD") : "";
+        exportRow["Date"] = row.date
+          ? dayjs(row.date).format("YYYY-MM-DD")
+          : "";
       }
       exportRow["Status"] = row.status.toUpperCase();
       exportRow["Message"] = row.message || "";
@@ -66,11 +80,11 @@ export const BulkUploadReportDialog = ({
 
     const ws = XLSX.utils.json_to_sheet(dataToExport);
     const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, "Upload Report");
+    XLSX.utils.book_append_sheet(wb, ws, baseTitle);
 
     const exportFileName = fileName
-      ? `Bulk_Upload_Report_${fileName.replace(/\.[^/.]+$/, "")}_${dayjs().format("YYYYMMDD_HHmmss")}.xlsx`
-      : `Bulk_Upload_Report_${dayjs().format("YYYYMMDD_HHmmss")}.xlsx`;
+      ? `${baseTitle.replaceAll(" ", "_")}_${fileName.replace(/\.[^/.]+$/, "")}_${dayjs().format("YYYYMMDD_HHmmss")}.xlsx`
+      : `${baseTitle.replaceAll(" ", "_")}_${dayjs().format("YYYYMMDD_HHmmss")}.xlsx`;
 
     XLSX.writeFile(wb, exportFileName);
   };
@@ -78,7 +92,7 @@ export const BulkUploadReportDialog = ({
   const header = (
     <div className="flex flex-col gap-2">
       <div className="flex flex-wrap items-center justify-between gap-2">
-        <span className="text-xl font-bold">Upload Report</span>
+        <span className="text-xl font-bold">{baseTitle}</span>
         {fileName && (
           <span className="text-sm text-gray-500 font-normal border border-gray-300 rounded px-2 py-1 bg-gray-50">
             File:{" "}
