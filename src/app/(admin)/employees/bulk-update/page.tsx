@@ -9,10 +9,10 @@ import { toastService } from "@/lib/toast";
 import { Button, FilePicker, Input } from "@/components";
 import { useGlobalData } from "@/context/GlobalDataContext";
 import { useBulkUpdateEmployees } from "@/lib/db/services/employee";
-import { EMPLOYEE_COLUMNS } from "@/utils/helpers/export-employees-report";
 import { validateBulkEmployeeData, mapBulkEmployeeDataToIds } from "./helpers";
 import { BulkUploadReportDialog } from "@/components/common/bulk-upload-report-dialog";
 import type { BulkUpdateEmployeeResult } from "@/lib/db/services/employee/employee.dto";
+import { EMPLOYEE_COLUMNS_FOR_BULK_UPDATE } from "@/utils/helpers/export-employees-report";
 
 const EmployeeBulkUpdatePage = () => {
   const router = useRouter();
@@ -27,7 +27,7 @@ const EmployeeBulkUpdatePage = () => {
   const [showDownloadDialog, setShowDownloadDialog] = useState(false);
   const [reportType, setReportType] = useState<"before" | "after">("before");
   const [selectedCols, setSelectedCols] = useState<number[]>(
-    EMPLOYEE_COLUMNS.map((c) => c.id as number)
+    EMPLOYEE_COLUMNS_FOR_BULK_UPDATE.map((c) => c.id as number)
   );
 
   const accept = {
@@ -59,7 +59,7 @@ const EmployeeBulkUpdatePage = () => {
         defval: "",
       }) as any[];
 
-      const linkedColumns = EMPLOYEE_COLUMNS.filter(
+      const linkedColumns = EMPLOYEE_COLUMNS_FOR_BULK_UPDATE.filter(
         (col) => col.type === "linked"
       );
 
@@ -68,7 +68,7 @@ const EmployeeBulkUpdatePage = () => {
           rawData,
           linkedColumns,
           globalData,
-          EMPLOYEE_COLUMNS
+          EMPLOYEE_COLUMNS_FOR_BULK_UPDATE
         );
 
       if (beforeReportDetails.length > 0) {
@@ -90,7 +90,7 @@ const EmployeeBulkUpdatePage = () => {
         rawData,
         linkedColumns,
         globalData,
-        EMPLOYEE_COLUMNS
+        EMPLOYEE_COLUMNS_FOR_BULK_UPDATE
       );
 
       // Call the actual bulk update action
@@ -145,16 +145,18 @@ const EmployeeBulkUpdatePage = () => {
   };
 
   const handleSelectAll = () => {
-    if (selectedCols.length === EMPLOYEE_COLUMNS.length) {
+    if (selectedCols.length === EMPLOYEE_COLUMNS_FOR_BULK_UPDATE.length) {
       setSelectedCols([1]); // Only keep Employee Code
     } else {
-      setSelectedCols(EMPLOYEE_COLUMNS.map((c) => c.id as number));
+      setSelectedCols(
+        EMPLOYEE_COLUMNS_FOR_BULK_UPDATE.map((c) => c.id as number)
+      );
     }
   };
 
   const handleDownloadTemplate = () => {
-    // Filter the actual objects based on selected IDs (preserving order of EMPLOYEE_COLUMNS)
-    const activeCols = EMPLOYEE_COLUMNS.filter((c) =>
+    // Filter the actual objects based on selected IDs (preserving order of EMPLOYEE_COLUMNS_FOR_BULK_UPDATE)
+    const activeCols = EMPLOYEE_COLUMNS_FOR_BULK_UPDATE.filter((c) =>
       selectedCols.includes(c.id as number)
     );
 
@@ -289,7 +291,10 @@ const EmployeeBulkUpdatePage = () => {
               <div className="flex items-center gap-2 shrink-0">
                 <Checkbox
                   inputId="selectAll"
-                  checked={selectedCols.length === EMPLOYEE_COLUMNS.length}
+                  checked={
+                    selectedCols.length ===
+                    EMPLOYEE_COLUMNS_FOR_BULK_UPDATE.length
+                  }
                   onChange={handleSelectAll}
                 />
                 <label
@@ -311,7 +316,7 @@ const EmployeeBulkUpdatePage = () => {
             />
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-y-4 gap-x-2 p-1 flex-1 overflow-y-auto content-start">
-            {EMPLOYEE_COLUMNS.filter((col) =>
+            {EMPLOYEE_COLUMNS_FOR_BULK_UPDATE.filter((col) =>
               col.label.toLowerCase().includes(searchQuery.toLowerCase())
             ).map((col) => (
               <div key={col.id} className="flex items-center gap-2">
