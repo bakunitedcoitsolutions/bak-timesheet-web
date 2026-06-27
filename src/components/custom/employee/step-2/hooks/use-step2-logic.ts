@@ -46,7 +46,7 @@ export const useStep2Logic = ({ employeeId }: UseStep2LogicProps) => {
     gender: undefined,
     countryId: undefined,
     cityId: undefined,
-    statusId: undefined,
+    statusId: 1,
     branchId: undefined,
     subBranchId: null,
     designationId: 0,

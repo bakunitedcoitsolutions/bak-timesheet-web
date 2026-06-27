@@ -69,6 +69,22 @@ export const validateBulkEmployeeData = (
       rowErrors.push('Missing "Employee Code"');
     }
 
+    // Check required conditionally: If column exists in file, it cannot be empty
+    const conditionalRequiredFields = [
+      { field: "nameEn", label: "Name (En)" },
+      { field: "designationName", label: "Designation" },
+      { field: "sectionName", label: "Payroll Section" },
+      { field: "statusName", label: "Status" },
+    ];
+
+    conditionalRequiredFields.forEach(({ field, label }) => {
+      const val = getCellValueByField(row, field, allColumns);
+      if (val !== undefined && val !== null && val.toString().trim() === "") {
+        hasError = true;
+        rowErrors.push(`Missing "${label}"`);
+      }
+    });
+
     linkedColumns.forEach((col) => {
       // Use the robust fetcher to get the cell value
       const cellValue = getCellValueByField(row, col.value, allColumns);
