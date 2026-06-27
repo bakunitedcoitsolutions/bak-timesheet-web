@@ -151,6 +151,43 @@ export const validateBulkEmployeeData = (
       }
     });
 
+    // Cross-validation for Country and City
+    const countryValue = getCellValueByField(row, "countryName", allColumns);
+    const cityValue = getCellValueByField(row, "cityName", allColumns);
+
+    const isCountryColPresent = countryValue !== undefined;
+    const isCityColPresent = cityValue !== undefined;
+
+    const countryStr =
+      isCountryColPresent && countryValue !== null
+        ? countryValue.toString().trim()
+        : "";
+    const cityStr =
+      isCityColPresent && cityValue !== null ? cityValue.toString().trim() : "";
+
+    if (cityStr && !countryStr) {
+      hasError = true;
+      rowErrors.push("Country name must be provided in order to add a City");
+    } else if (cityStr && countryStr) {
+      const countryObj = globalData.countries.find(
+        (c) => c.nameEn.toLowerCase() === countryStr.toLowerCase()
+      );
+
+      if (countryObj) {
+        const cityObj = globalData.cities.find(
+          (c) =>
+            c.nameEn.toLowerCase() === cityStr.toLowerCase() &&
+            c.countryId === countryObj.id
+        );
+        if (!cityObj) {
+          hasError = true;
+          rowErrors.push(
+            `City "${cityStr}" does not belong to Country "${countryStr}"`
+          );
+        }
+      }
+    }
+
     if (hasError) {
       failedCount++;
       beforeReportDetails.push({
