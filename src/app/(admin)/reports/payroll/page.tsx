@@ -162,7 +162,13 @@ const PayrollReportPage = () => {
             rows={sectionsPerPage}
             first={firstSection}
             totalRecords={sections.length}
-            rowsPerPageOptions={[1, 3, 5, 10]}
+            rowsPerPageOptions={[
+              1,
+              3,
+              5,
+              10,
+              ...(sections?.length > 10 ? [sections.length] : []),
+            ]}
             onPageChange={(e) => {
               setFirstSection(e.first);
               setSectionsPerPage(e.rows);

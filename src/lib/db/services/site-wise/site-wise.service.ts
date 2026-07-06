@@ -1,5 +1,6 @@
 import dayjs from "@/lib/dayjs";
 import { prisma } from "@/lib/db/prisma";
+import { SITE_WISE_PAYROLL_SECTION_IDS_ARRAY } from "@/utils/constants";
 import { GetSiteWiseReportInput, SiteWiseReportRow } from "./site-wise.schemas";
 
 export const getSiteWiseReport = async (
@@ -36,7 +37,9 @@ export const getSiteWiseReport = async (
       payrollYear: year,
       ...(branchId ? { branchId } : {}),
       employee: {
-        payrollSectionId: { in: [1, 2, 7, 16, 8, 9, 12, 13, 10, 19, 20, 11] },
+        payrollSectionId: {
+          in: SITE_WISE_PAYROLL_SECTION_IDS_ARRAY,
+        },
         ...(employeeCodes && employeeCodes.length > 0
           ? { employeeCode: { in: employeeCodes } }
           : {}),

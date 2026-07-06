@@ -45,3 +45,22 @@ export const BANK_OPTIONS = [
   },
   { label: "Other", value: "Other" },
 ];
+
+export const SITE_WISE_PAYROLL_SECTION_IDS = {
+  "1": "Office Staff",
+  "2": "Formans (Construction)",
+  "7": "Drivers (Construction)",
+  "8": "Steel Fixers (Construction)",
+  "9": "Carpenters (Construction)",
+  "10": "BD, Labour (Construction)",
+  "11": "OS, Labour (Construction)",
+  "12": "Masons (Construction)",
+  "13": "Electrician (Construction)",
+  "16": "Scaffolder (Construction)",
+  "19": "Al Barkah Development",
+  "20": "OS, Establishments",
+};
+
+export const SITE_WISE_PAYROLL_SECTION_IDS_ARRAY = Object.keys(
+  SITE_WISE_PAYROLL_SECTION_IDS
+).map((id) => Number(id));
