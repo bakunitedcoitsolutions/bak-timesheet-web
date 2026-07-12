@@ -1,20 +1,20 @@
 "use client";
-import { Button } from "@/components";
 import { useRouter } from "next/navigation";
 import { classNames } from "primereact/utils";
 
+import { Button, useAccess } from "@/components";
+
 interface EmployeeHeaderProps {
   canAdd: boolean;
-  canEdit: boolean;
   onNewEmployee: () => void;
 }
 
 export const EmployeeHeader = ({
   canAdd,
-  canEdit,
   onNewEmployee,
 }: EmployeeHeaderProps) => {
   const router = useRouter();
+  const { isAdmin } = useAccess();
   return (
     <div className="flex flex-col md:flex-row justify-between items-center gap-3 shrink-0">
       <div className="w-full md:w-auto flex flex-1 flex-col gap-1">
@@ -38,7 +38,7 @@ export const EmployeeHeader = ({
             />
           </div>
         )}
-        {canAdd && canEdit && (
+        {isAdmin && (
           <div className="w-auto">
             <Button
               size="small"
