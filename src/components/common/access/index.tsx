@@ -157,6 +157,7 @@ export function checkRoleAccess(
 // ---------------------------------------------------------------------------
 
 export interface UseAccessReturn {
+  userId: number;
   /** Current user's role */
   role: UserRole | undefined;
   /** Whether the session is still loading */
@@ -193,7 +194,9 @@ export function useAccess(): UseAccessReturn {
   const isLoading = status === "loading";
 
   // Consistently treat IDs as numbers (handles potential string values in tokens)
-  const roleId = session?.user?.roleId ? Number(session.user.roleId) : undefined;
+  const roleId = session?.user?.roleId
+    ? Number(session.user.roleId)
+    : undefined;
   const privileges = session?.user?.privileges;
   const canAccess = (feature: Feature): boolean => {
     if (isLoading || !roleId) return false;
@@ -216,6 +219,7 @@ export function useAccess(): UseAccessReturn {
   };
 
   return {
+    userId: session?.user?.id || 0,
     role: roleId as UserRole | undefined,
     isLoading,
     isAdmin: roleId === USER_ROLES.ADMIN,
@@ -224,7 +228,9 @@ export function useAccess(): UseAccessReturn {
     isBranchUser: roleId === USER_ROLES.BRANCH_USER,
     isBranchScoped:
       roleId === USER_ROLES.BRANCH_MANAGER || roleId === USER_ROLES.BRANCH_USER,
-    branchId: session?.user?.branchId ? Number(session.user.branchId) : undefined,
+    branchId: session?.user?.branchId
+      ? Number(session.user.branchId)
+      : undefined,
     canAccess,
     can,
     hasRole,

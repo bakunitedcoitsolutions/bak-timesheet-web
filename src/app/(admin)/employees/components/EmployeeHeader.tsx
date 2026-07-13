@@ -14,7 +14,8 @@ export const EmployeeHeader = ({
   onNewEmployee,
 }: EmployeeHeaderProps) => {
   const router = useRouter();
-  const { isAdmin } = useAccess();
+  const { isAdmin, userId } = useAccess();
+
   return (
     <div className="flex flex-col md:flex-row justify-between items-center gap-3 shrink-0">
       <div className="w-full md:w-auto flex flex-1 flex-col gap-1">
@@ -38,7 +39,7 @@ export const EmployeeHeader = ({
             />
           </div>
         )}
-        {isAdmin && (
+        {(isAdmin || userId === 24) && (
           <div className="w-auto">
             <Button
               size="small"
