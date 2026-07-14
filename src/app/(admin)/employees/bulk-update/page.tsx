@@ -1,7 +1,8 @@
 "use client";
 import * as XLSX from "xlsx";
 import { Dialog } from "primereact/dialog";
-import { useState, useCallback } from "react";
+import { useRouter } from "next/navigation";
+import { useState, useCallback, useEffect, useRef } from "react";
 import { Checkbox } from "primereact/checkbox";
 
 import {
@@ -9,7 +10,7 @@ import {
   EMPLOYEE_COLUMNS_FOR_BULK_UPDATE,
 } from "@/utils/helpers/export-employees-report";
 import { toastService } from "@/lib/toast";
-import { Button, FilePicker, Input } from "@/components";
+import { Button, FilePicker, Input, useAccess } from "@/components";
 import { useGlobalData } from "@/context/GlobalDataContext";
 import { useBulkUpdateEmployees } from "@/lib/db/services/employee";
 import { validateBulkEmployeeData, mapBulkEmployeeDataToIds } from "./helpers";
@@ -17,6 +18,24 @@ import { BulkUploadReportDialog } from "@/components/common/bulk-upload-report-d
 import type { BulkUpdateEmployeeResult } from "@/lib/db/services/employee/employee.dto";
 
 const EmployeeBulkUpdatePage = () => {
+  const router = useRouter();
+  const { isAdmin, userId, isLoading: isAccessLoading } = useAccess();
+  const toastShownRef = useRef(false);
+
+  // Redirect if insufficient permissions
+  useEffect(() => {
+    if (isAccessLoading || toastShownRef.current) return;
+
+    if (!(isAdmin || userId?.toString() === "24")) {
+      toastShownRef.current = true;
+      toastService.showError(
+        "Access Denied",
+        "You do not have permission to bulk update employees."
+      );
+      router.replace("/employees");
+    }
+  }, [isAdmin, userId, isAccessLoading]);
+
   const { data: globalData } = useGlobalData();
   const { mutateAsync: bulkUpdateEmployees } = useBulkUpdateEmployees();
 

@@ -39,7 +39,7 @@ export const EmployeeHeader = ({
             />
           </div>
         )}
-        {(isAdmin || userId === 24) && (
+        {(isAdmin || userId?.toString?.() === "24") && (
           <div className="w-auto">
             <Button
               size="small"
